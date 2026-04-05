@@ -1,0 +1,171 @@
+/**
+ * Timeless Resurfacing — Main JavaScript
+ * Mobile menu, FAQ accordion, scroll reveal, smooth scrolling
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* ── Before/After Slider ── */
+    (function(){
+        var slider = document.getElementById('hero-slider');
+        if(!slider) return;
+        var clip   = document.getElementById('ba-clip');
+        var line   = document.getElementById('ba-line');
+        var handle = document.getElementById('ba-handle');
+        var bImg   = document.getElementById('ba-before-img');
+        var active = false;
+
+        function syncWidth(){
+            var w = slider.offsetWidth + 'px';
+            bImg.style.width = w;
+            bImg.style.minWidth = w;
+            bImg.style.maxWidth = w;
+        }
+        syncWidth();
+        window.addEventListener('resize', syncWidth);
+
+        function move(x){
+            var r = slider.getBoundingClientRect();
+            var pct = ((x - r.left) / r.width) * 100;
+            pct = Math.max(3, Math.min(97, pct));
+            clip.style.width   = pct + '%';
+            line.style.left    = pct + '%';
+            handle.style.left  = pct + '%';
+        }
+
+        slider.addEventListener('mousedown',  function(e){ active=true; move(e.clientX); e.preventDefault(); });
+        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
+        document.addEventListener('mouseup',   function(){ active=false; });
+
+        slider.addEventListener('touchstart',  function(e){ active=true; move(e.touches[0].clientX); }, {passive:true});
+        document.addEventListener('touchmove', function(e){ if(active) move(e.touches[0].clientX); }, {passive:true});
+        document.addEventListener('touchend',  function(){ active=false; });
+    })();
+
+    /* ── Mobile Menu ── */
+    const menuBtn = document.getElementById('menu-btn');
+    const menuClose = document.getElementById('menu-close');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', function () {
+            mobileNav.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (menuClose && mobileNav) {
+        menuClose.addEventListener('click', closeMobile);
+    }
+
+    window.closeMobile = function () {
+        if (mobileNav) {
+            mobileNav.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    };
+
+    /* ── FAQ Accordion ── */
+    window.toggleFaq = function (btn) {
+        var item = btn.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (el) {
+            el.classList.remove('open');
+        });
+        if (!isOpen) item.classList.add('open');
+    };
+
+    /* ── Scroll Reveal ── */
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+    });
+
+    /* ── Quote Form AJAX Submission ── */
+    document.querySelectorAll('.timeless-quote-form').forEach(function (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var btn = form.querySelector('button[type="submit"]');
+            var originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            var formData = new FormData(form);
+            formData.append('action', 'timeless_quote');
+            formData.append('timeless_quote_nonce', timelessAjax.nonce);
+            formData.append('source_page', document.title);
+
+            // Collect checkbox values as array
+            var services = [];
+            form.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+                services.push(cb.parentElement.textContent.trim());
+            });
+            formData.append('services', services.join(', '));
+
+            fetch(timelessAjax.url, {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin'
+            })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (data.success) {
+                    // Replace form with success message using safe DOM methods
+                    while (form.firstChild) form.removeChild(form.firstChild);
+                    var successDiv = document.createElement('div');
+                    successDiv.className = 'text-center py-8';
+                    var icon = document.createElement('span');
+                    icon.className = 'material-symbols-outlined text-4xl text-green-600 block mb-3';
+                    icon.setAttribute('aria-hidden', 'true');
+                    icon.textContent = 'check_circle';
+                    var heading = document.createElement('p');
+                    heading.className = 'text-lg font-bold text-primary mb-2';
+                    heading.textContent = 'Quote Request Sent!';
+                    var msg = document.createElement('p');
+                    msg.className = 'text-sm text-secondary';
+                    msg.textContent = data.data.message;
+                    successDiv.appendChild(icon);
+                    successDiv.appendChild(heading);
+                    successDiv.appendChild(msg);
+                    form.appendChild(successDiv);
+                } else {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    alert(data.data.message || 'Something went wrong. Please call us directly.');
+                }
+            })
+            .catch(function () {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                alert('Network error. Please check your connection or call us directly.');
+            });
+        });
+    });
+
+    /* ── Smooth Scroll for #anchor links ── */
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+            var targetSelector = this.getAttribute('href');
+            if (targetSelector && targetSelector !== '#') {
+                var target = document.querySelector(targetSelector);
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: target.getBoundingClientRect().top + window.pageYOffset - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+});

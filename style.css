@@ -1,0 +1,62 @@
+/*
+Theme Name: Timeless Resurfacing
+Theme URI: https://timelessresurfacing.com.au
+Author: Timeless Resurfacing Pty Ltd
+Author URI: https://timelessresurfacing.com.au
+Description: Custom WordPress theme for Timeless Resurfacing — Sydney's bathroom resurfacing specialists. Features SEO-optimised service pages, hub-and-spoke architecture, and Australian trades compliance.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: timeless
+Tags: one-column, custom-menu, featured-images, threaded-comments, translation-ready
+*/
+
+/* Tailwind CDN handles all styling. This file is required by WordPress for theme metadata only. */
+
+/* Material Symbols icon font settings */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Scroll reveal animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FAQ accordion */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.faq-item.open .faq-answer {
+    max-height: 400px;
+}
+.faq-item.open .faq-chevron {
+    transform: rotate(180deg);
+}
+.faq-chevron {
+    transition: transform 0.25s ease;
+}
+
+/* Mobile menu */
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+/* Before/After Slider */
+#hero-slider img { pointer-events: none; -webkit-user-drag: none; }
+#ba-handle { transition: none; }

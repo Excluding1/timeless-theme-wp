@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# WordPress uploads (managed via wp-admin, not git)
+uploads/
+
+# Node (if ever needed for build tools)
+node_modules/
