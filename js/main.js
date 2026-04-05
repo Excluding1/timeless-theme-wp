@@ -54,16 +54,16 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    if (menuClose && mobileNav) {
-        menuClose.addEventListener('click', closeMobile);
-    }
-
     window.closeMobile = function () {
         if (mobileNav) {
             mobileNav.classList.remove('open');
             document.body.style.overflow = '';
         }
     };
+
+    if (menuClose && mobileNav) {
+        menuClose.addEventListener('click', closeMobile);
+    }
 
     /* ── Mega Menu (Desktop) ── */
     var megaMenu = document.getElementById('mega-menu');
