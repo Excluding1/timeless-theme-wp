@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 $phone_link = timeless_phone_link();
 $phone      = timeless_phone();
-$licence    = timeless_licence();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="scroll-smooth">

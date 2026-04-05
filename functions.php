@@ -82,7 +82,7 @@ function timeless_customizer( $wp_customize ) {
 
     // Phone Number
     $wp_customize->add_setting( 'timeless_phone', array(
-        'default'           => '0400 000 000',
+        'default'           => '0451 110 154',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'timeless_phone', array(
@@ -93,7 +93,7 @@ function timeless_customizer( $wp_customize ) {
 
     // Phone Number (tel: link format)
     $wp_customize->add_setting( 'timeless_phone_link', array(
-        'default'           => '+61400000000',
+        'default'           => '+61451110154',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'timeless_phone_link', array(

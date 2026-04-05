@@ -89,6 +89,15 @@ document.addEventListener('DOMContentLoaded', function () {
         observer.observe(el);
     });
 
+    /* ── GCLID Capture for Google Ads tracking ── */
+    (function () {
+        var params = new URLSearchParams(window.location.search);
+        var gclid = params.get('gclid');
+        if (gclid) {
+            try { sessionStorage.setItem('timeless_gclid', gclid); } catch (e) {}
+        }
+    })();
+
     /* ── Quote Form AJAX Submission ── */
     document.querySelectorAll('.timeless-quote-form').forEach(function (form) {
         form.addEventListener('submit', function (e) {
@@ -103,6 +112,15 @@ document.addEventListener('DOMContentLoaded', function () {
             formData.append('action', 'timeless_quote');
             formData.append('timeless_quote_nonce', timelessAjax.nonce);
             formData.append('source_page', document.title);
+
+            // Append GCLID if available (Google Ads click tracking)
+            var gclid = null;
+            try { gclid = sessionStorage.getItem('timeless_gclid'); } catch (e) {}
+            if (!gclid) {
+                var params = new URLSearchParams(window.location.search);
+                gclid = params.get('gclid');
+            }
+            if (gclid) formData.append('gclid', gclid);
 
             // Collect checkbox values as array
             var services = [];

@@ -13,7 +13,7 @@
         "url": "https://timelessresurfacing.com.au",
         "telephone": "<?php echo timeless_phone_link(); ?>",
         "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressRegion": "NSW", "addressCountry": "AU" },
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "47" }
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23" }
     },
     "areaServed": { "@type": "City", "name": "Sydney" },
     "serviceType": "Tile Resurfacing"
@@ -71,24 +71,25 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Outdated pink, green, or brown tiles? We transform them into a clean, modern finish using the <strong>Hawk Glass-Tech professional coating system</strong> &mdash; no demolition, no dust, no weeks of disruption. Most jobs completed in 1-2 days.
             </p>
+            <p class="text-2xl font-extrabold text-primary mb-4">From $1,210 <span class="text-sm font-normal text-secondary">inc GST</span></p>
             <div class="flex items-center gap-6 mb-8">
                 <div class="text-center">
                     <p class="text-3xl font-extrabold text-primary">70%</p>
-                    <p class="text-xs text-secondary">Save up to</p>
+                    <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">4-8h</p>
-                    <p class="text-xs text-secondary">Completion</p>
+                    <p class="text-3xl font-extrabold text-primary">1-2 Days</p>
+                    <p class="text-xs text-secondary">Most jobs</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">2yr</p>
-                    <p class="text-xs text-secondary">Warranty</p>
+                    <p class="text-3xl font-extrabold text-primary">3yr</p>
+                    <p class="text-xs text-secondary">Coating warranty</p>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
-                <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get a Free Quote</a>
+                <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
@@ -101,9 +102,9 @@
 <!-- TRUST BAR -->
 <section class="bg-primary text-white py-4">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">NSW Licence <?php echo timeless_licence(); ?></span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">$20M Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">3-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Completed in 1-2 Days</span></div>
     </div>
 </section>
@@ -175,6 +176,24 @@
     </div>
 </section>
 
+<!-- Mid-page CTA -->
+<section class="py-12 bg-primary text-white">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to Transform Your Bathroom?</h2>
+        <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="#quote" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
+                <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                Get a Free Quote
+            </a>
+            <a href="tel:<?php echo timeless_phone_link(); ?>" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-[20px]">call</span>
+                Call Now
+            </a>
+        </div>
+    </div>
+</section>
+
 <!-- VALUE PROPOSITION -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
@@ -194,8 +213,8 @@
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">verified_user</span>
-                <h3 class="font-bold text-primary mb-2">2-Year Warranty</h3>
-                <p class="text-sm text-secondary leading-relaxed">Every job backed by our workmanship warranty. $20M public liability insured. NSW licensed.</p>
+                <h3 class="font-bold text-primary mb-2">3-Year Warranty</h3>
+                <p class="text-sm text-secondary leading-relaxed">Every resurfacing job backed by our 3-year workmanship warranty. Fully insured with public liability cover.</p>
             </div>
         </div>
 
@@ -264,12 +283,12 @@
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div><label for="name" class="text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
-                    <div><label for="phone" class="text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
+                    <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
+                    <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
                 </div>
-                <div><label for="address" class="text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
+                <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
                 <div>
-                    <label class="text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs resurfacing?</label>
+                    <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs resurfacing?</label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                         <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Shower wall tiles</label>
                         <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Shower floor tiles</label>
@@ -279,7 +298,7 @@
                         <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Kitchen splashback</label>
                     </div>
                 </div>
-                <div><label for="notes" class="text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. tiles are pink/green, want white finish, apartment building, need anti-slip on floor..."></textarea></div>
+                <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. tiles are pink/green, want white finish, apartment building, need anti-slip on floor..."></textarea></div>
                 <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Tile Resurfacing Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
                 <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
             </form>

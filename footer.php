@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 $phone_link = timeless_phone_link();
 $phone      = timeless_phone();
-$licence    = timeless_licence();
 ?>
 
 </main>
@@ -20,8 +19,8 @@ $licence    = timeless_licence();
         <div>
             <span class="text-xl font-bold block mb-4">Timeless Resurfacing</span>
             <p class="text-slate-300 text-xs mb-6 max-w-xs leading-relaxed">Sydney's bathroom resurfacing specialists. Trade qualified, fully insured, locally owned.</p>
-            <p class="text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest">NSW Licence</p>
-            <p class="text-sm font-bold">No. <?php echo $licence; ?></p>
+            <p class="text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest">Fully Insured</p>
+            <p class="text-sm font-bold">Sydney, NSW</p>
         </div>
         <div>
             <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Services</h4>
@@ -54,7 +53,7 @@ $licence    = timeless_licence();
         </div>
     </div>
     <div class="max-w-7xl mx-auto px-6 sm:px-8 mt-12 pt-8 border-t border-white/10">
-        <p class="text-[0.65rem] text-slate-400 text-center">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing Pty Ltd. NSW Contractor Licence No. <?php echo $licence; ?>.</p>
+        <p class="text-[0.65rem] text-slate-400 text-center">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing. Sydney, NSW Australia.</p>
     </div>
 </footer>
 

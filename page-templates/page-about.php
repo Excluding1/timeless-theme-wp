@@ -23,7 +23,7 @@
             { "@type": "City", "name": "Central Coast" },
             { "@type": "City", "name": "Blue Mountains" }
         ],
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "47", "bestRating": "5" }
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23", "bestRating": "5" }
     }
 }
 </script>
@@ -98,7 +98,7 @@
                 <div class="bg-primary-container p-7 rounded-xl">
                     <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block" aria-hidden="true">verified_user</span>
                     <h4 class="font-bold text-white text-lg mb-2">Fully Backed</h4>
-                    <p class="text-sm text-on-primary-container leading-relaxed">2-year workmanship warranty. $20M public liability. NSW licensed.</p>
+                    <p class="text-sm text-on-primary-container leading-relaxed">Workmanship warranty. Public liability insured. Qualified &amp; insured.</p>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@
                     <span class="material-symbols-outlined text-primary" aria-hidden="true">shield</span>
                     Stand Behind Our Work
                 </h3>
-                <p class="text-secondary leading-relaxed">Every job is warranty-backed and fully insured. We hold an NSW Contractor Licence and operate compliant with NSW Fair Trading regulations.</p>
+                <p class="text-secondary leading-relaxed">Every job is warranty-backed and fully insured. We operate with full public liability insurance and comply with all NSW regulations.</p>
             </div>
         </div>
     </div>
@@ -168,8 +168,8 @@
                 <div class="p-5 bg-surface-container-low rounded-lg inline-flex items-center gap-4">
                     <span class="material-symbols-outlined text-3xl text-primary" aria-hidden="true">gavel</span>
                     <div>
-                        <p class="text-[0.65rem] font-bold tracking-widest text-secondary uppercase">Compliance</p>
-                        <p class="text-sm font-bold text-primary">NSW Fair Trading Verified &middot; Licence #<?php echo timeless_licence(); ?></p>
+                        <p class="text-[0.65rem] font-bold tracking-widest text-secondary uppercase">Insured &amp; Compliant</p>
+                        <p class="text-sm font-bold text-primary">Fully Insured &middot; Warranty on Every Job</p>
                     </div>
                 </div>
             </div>
@@ -192,8 +192,8 @@
                 <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Google Rating</p>
             </div>
             <div class="reveal">
-                <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">2<span class="text-tertiary-fixed-dim">yr</span></p>
-                <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Workmanship Warranty</p>
+                <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">3<span class="text-tertiary-fixed-dim">yr</span></p>
+                <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Up to 3-Year Warranty</p>
             </div>
             <div class="reveal">
                 <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">$20<span class="text-tertiary-fixed-dim">M</span></p>
@@ -222,10 +222,10 @@
 <!-- TRUST BAR -->
 <section class="bg-primary text-white py-5">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4 sm:gap-6">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">NSW Licence No. <?php echo timeless_licence(); ?></span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">$20M Public Liability</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">gavel</span><span class="text-xs font-bold">NSW Fair Trading Compliant</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
     </div>
 </section>
 
