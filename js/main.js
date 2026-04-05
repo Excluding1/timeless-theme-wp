@@ -65,6 +65,46 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
+    /* ── Mega Menu (Desktop) ── */
+    var megaMenu = document.getElementById('mega-menu');
+    var servicesBtn = document.getElementById('services-btn');
+    var megaTimeout;
+
+    window.showMega = function () {
+        clearTimeout(megaTimeout);
+        if (megaMenu) megaMenu.classList.add('open');
+    };
+
+    window.hideMega = function () {
+        megaTimeout = setTimeout(function () {
+            if (megaMenu) megaMenu.classList.remove('open');
+        }, 200);
+    };
+
+    window.toggleMega = function () {
+        if (megaMenu) megaMenu.classList.toggle('open');
+    };
+
+    if (servicesBtn) {
+        servicesBtn.addEventListener('mouseleave', function () {
+            megaTimeout = setTimeout(function () {
+                if (megaMenu && !megaMenu.matches(':hover')) {
+                    megaMenu.classList.remove('open');
+                }
+            }, 200);
+        });
+    }
+
+    /* ── Mobile Nav Accordions ── */
+    window.toggleMobileAccordion = function (btn) {
+        var content = btn.nextElementSibling;
+        var chevron = btn.querySelector('.mobile-chevron');
+        content.classList.toggle('open');
+        if (chevron) {
+            chevron.style.transform = content.classList.contains('open') ? 'rotate(0deg)' : 'rotate(-90deg)';
+        }
+    };
+
     /* ── FAQ Accordion ── */
     window.toggleFaq = function (btn) {
         var item = btn.parentElement;

@@ -23,14 +23,18 @@ $phone      = timeless_phone();
             <p class="text-sm font-bold">Sydney, NSW</p>
         </div>
         <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Services</h4>
+            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Resurfacing</h4>
             <ul class="space-y-2 text-xs">
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>">Shower Regrouting</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>">Bath Resurfacing</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>">Tile Resurfacing</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>">Vanity Refinishing</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>">Basin Restoration</a></li>
+            </ul>
+            <h4 class="font-bold text-tertiary-fixed-dim mb-3 mt-5 uppercase tracking-widest text-[0.65rem]">Regrouting</h4>
+            <ul class="space-y-2 text-xs">
+                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>">Shower Regrouting</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>">Shower Sealing</a></li>
+                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/epoxy-grout-upgrade-sydney/' ) ); ?>">Epoxy Grout Upgrade</a></li>
             </ul>
         </div>
         <div>

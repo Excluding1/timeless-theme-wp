@@ -48,6 +48,18 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
     transition: transform 0.25s ease;
 }
 
+/* Mega menu dropdown */
+.mega-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+.mega-dropdown.open {
+    max-height: 500px;
+    opacity: 1;
+}
+
 /* Mobile menu */
 .mobile-menu {
     transform: translateX(100%);
@@ -55,6 +67,19 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
 }
 .mobile-menu.open {
     transform: translateX(0);
+}
+
+/* Mobile nav accordions */
+.mobile-accordion {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+.mobile-accordion.open {
+    max-height: 500px;
+}
+.mobile-chevron {
+    transition: transform 0.25s ease;
 }
 
 /* Before/After Slider */
