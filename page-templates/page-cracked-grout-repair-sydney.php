@@ -101,7 +101,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Cracked and crumbling shower grout between bathroom tiles in Sydney — before professional regrouting repair" src="https://images.unsplash.com/photo-1552177416-64cdc5dd3b27?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Cracked and crumbling shower grout between bathroom tiles in Sydney — before professional regrouting repair" src="<?php echo get_template_directory_uri(); ?>/images/services/cracked-grout-repair/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

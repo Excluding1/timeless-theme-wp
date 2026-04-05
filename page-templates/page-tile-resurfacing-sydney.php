@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Professional tile resurfacing in Sydney - bathroom tiles transformed with Hawk Glass-Tech coating system" src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Professional tile resurfacing in Sydney - bathroom tiles transformed with Hawk Glass-Tech coating system" src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

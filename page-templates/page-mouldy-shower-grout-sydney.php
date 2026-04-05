@@ -101,7 +101,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Black mouldy shower grout between white tiles — before professional regrouting in Sydney" src="https://images.unsplash.com/photo-1519710164239-da7a2a1cbc28?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Black mouldy shower grout between white tiles — before professional regrouting in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/mouldy-shower-grout/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

@@ -81,9 +81,9 @@ get_header(); ?>
         <div class="md:col-span-5">
             <!-- BEFORE / AFTER SLIDER -->
             <div id="hero-slider" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:3/4;cursor:ew-resize;">
-                <img src="<?php echo get_template_directory_uri(); ?>/images/after-bath.jpg" alt="After bathroom resurfacing Sydney - gleaming white bathtub and clean tiles" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
+                <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney - gleaming white bathtub and clean tiles" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/before-bath.jpg" alt="Before bathroom resurfacing Sydney - peeling stained bathtub with dirty grout" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney - peeling stained bathtub with dirty grout" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
                 <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -248,7 +248,7 @@ get_header(); ?>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bathroom resurfacing Surry Hills apartment - resurfaced white bathtub" src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bathroom resurfacing Surry Hills apartment - resurfaced white bathtub" src="<?php echo get_template_directory_uri(); ?>/images/homepage/gallery-1.jpg" loading="lazy" width="600" height="338" />
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary">Surry Hills Apartment</h3><span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Bath &amp; Wall</span></div>
@@ -258,7 +258,7 @@ get_header(); ?>
             </article>
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting Bondi Beach - restored white subway tiles" src="https://images.unsplash.com/photo-1507652313519-a3ecf64b1e48?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting Bondi Beach - restored white subway tiles" src="<?php echo get_template_directory_uri(); ?>/images/homepage/gallery-2.jpg" loading="lazy" width="600" height="338" />
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary">Bondi Beach House</h3><span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Shower &amp; Basin</span></div>
@@ -268,7 +268,7 @@ get_header(); ?>
             </article>
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Full bathroom resurfacing Parramatta - resurfaced vanity and bath" src="https://images.unsplash.com/photo-1584622650806-aa5c5c78b7f3?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Full bathroom resurfacing Parramatta - resurfaced vanity and bath" src="<?php echo get_template_directory_uri(); ?>/images/homepage/gallery-3.jpg" loading="lazy" width="600" height="338" />
                 </div>
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary">Parramatta Family Home</h3><span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Bathroom</span></div>

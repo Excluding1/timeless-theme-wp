@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Chipped bathroom basin with visible damage before professional chip repair in Sydney" src="https://images.unsplash.com/photo-1507652313519-a3ecf64b1e48?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Chipped bathroom basin with visible damage before professional chip repair in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/basin-chip-repair/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

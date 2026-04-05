@@ -98,7 +98,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Professional bathroom resurfacing for property managers and landlords in Sydney — rental property bathroom restoration" src="https://images.unsplash.com/photo-1604014237800-b5f4bcbe1bf0?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Professional bathroom resurfacing for property managers and landlords in Sydney — rental property bathroom restoration" src="<?php echo get_template_directory_uri(); ?>/images/services/property-manager/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Professional shower regrouting in Sydney - technician applying fresh epoxy grout to shower tiles" src="https://images.unsplash.com/photo-1629079447777-1e605162dc8d?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Professional shower regrouting in Sydney - technician applying fresh epoxy grout to shower tiles" src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

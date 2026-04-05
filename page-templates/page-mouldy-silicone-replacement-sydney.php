@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Black mouldy silicone in shower corner where wall meets floor — before professional silicone replacement in Sydney" src="https://images.unsplash.com/photo-1629079447777-1e605162dc8d?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Black mouldy silicone in shower corner where wall meets floor — before professional silicone replacement in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/mouldy-silicone/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

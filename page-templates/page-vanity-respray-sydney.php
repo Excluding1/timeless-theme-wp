@@ -100,7 +100,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Dated bathroom vanity cabinet before professional respray refinishing in Sydney" src="https://images.unsplash.com/photo-1584622650806-aa5c5c78b7f3?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Dated bathroom vanity cabinet before professional respray refinishing in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-respray/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

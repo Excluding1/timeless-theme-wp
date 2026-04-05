@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Chipped bathtub enamel repair in Sydney — before professional chip fix by Timeless Resurfacing" src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Chipped bathtub enamel repair in Sydney — before professional chip fix by Timeless Resurfacing" src="<?php echo get_template_directory_uri(); ?>/images/services/chipped-bathtub/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

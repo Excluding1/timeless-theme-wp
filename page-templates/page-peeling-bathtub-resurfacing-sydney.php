@@ -104,7 +104,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Peeling bathtub coating flaking off bath surface in Sydney — before professional resurfacing" src="https://images.unsplash.com/photo-1519710164239-da7a2a1cbc28?w=800&h=600&fit=crop&auto=format&q=80" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Peeling bathtub coating flaking off bath surface in Sydney — before professional resurfacing" src="<?php echo get_template_directory_uri(); ?>/images/services/peeling-bathtub/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>

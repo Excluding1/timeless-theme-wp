@@ -68,7 +68,7 @@
             <!-- Card 1: Surry Hills -->
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bathroom resurfacing Surry Hills apartment - resurfaced white bathtub and wall tiles" src="https://images.unsplash.com/photo-1552177416-64cdc5dd3b27?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bathroom resurfacing Surry Hills apartment - resurfaced white bathtub and wall tiles" src="<?php echo get_template_directory_uri(); ?>/images/gallery/surry-hills.jpg" loading="lazy" width="600" height="338" />
                     <div class="absolute top-3 left-3 flex gap-1.5">
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Bath Resurfacing</span>
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Tile Resurfacing</span>
@@ -90,7 +90,7 @@
             <!-- Card 2: Bondi Beach -->
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting Bondi Beach - restored white subway tiles and basin" src="https://images.unsplash.com/photo-1604014237800-b5f4bcbe1bf0?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting Bondi Beach - restored white subway tiles and basin" src="<?php echo get_template_directory_uri(); ?>/images/gallery/bondi-beach.jpg" loading="lazy" width="600" height="338" />
                     <div class="absolute top-3 left-3 flex gap-1.5">
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Shower Regrouting</span>
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Basin Restoration</span>
@@ -112,7 +112,7 @@
             <!-- Card 3: Parramatta -->
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Full bathroom resurfacing Parramatta - resurfaced vanity and bath" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Full bathroom resurfacing Parramatta - resurfaced vanity and bath" src="<?php echo get_template_directory_uri(); ?>/images/gallery/parramatta.jpg" loading="lazy" width="600" height="338" />
                     <div class="absolute top-3 left-3 flex gap-1.5">
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Full Bathroom Package</span>
                     </div>
@@ -133,7 +133,7 @@
             <!-- Card 4: North Shore -->
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting North Shore unit - epoxy regrouting to stop leak" src="https://images.unsplash.com/photo-1519710164239-da7a2a1cbc28?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting North Shore unit - epoxy regrouting to stop leak" src="<?php echo get_template_directory_uri(); ?>/images/gallery/north-shore.jpg" loading="lazy" width="600" height="338" />
                     <div class="absolute top-3 left-3 flex gap-1.5">
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Shower Regrouting</span>
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Leak Repair</span>
@@ -155,7 +155,7 @@
             <!-- Card 5: Wollongong -->
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bath and vanity resurfacing Wollongong rental - pre-sale cosmetic refresh" src="https://images.unsplash.com/photo-1629079447777-1e605162dc8d?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bath and vanity resurfacing Wollongong rental - pre-sale cosmetic refresh" src="<?php echo get_template_directory_uri(); ?>/images/gallery/wollongong.jpg" loading="lazy" width="600" height="338" />
                     <div class="absolute top-3 left-3 flex gap-1.5">
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Bath Resurfacing</span>
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Vanity Refinishing</span>
@@ -177,7 +177,7 @@
             <!-- Card 6: Hills District -->
             <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
                 <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Tile resurfacing Hills District - outdated brown tiles transformed to white" src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&h=338&fit=crop&auto=format&q=80" loading="lazy" width="600" height="338" />
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Tile resurfacing Hills District - outdated brown tiles transformed to white" src="<?php echo get_template_directory_uri(); ?>/images/gallery/hills-district.jpg" loading="lazy" width="600" height="338" />
                     <div class="absolute top-3 left-3 flex gap-1.5">
                         <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Tile Resurfacing</span>
                     </div>
