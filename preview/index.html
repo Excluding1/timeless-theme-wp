@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeless Resurfacing — Nav Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#041534',
+                    secondary: '#595e6d',
+                    'tertiary-fixed-dim': '#e7c08b',
+                    surface: '#f7f9fb',
+                    'surface-container': '#e8edf2',
+                    'surface-container-low': '#f1f4f8',
+                    'surface-container-high': '#dce2e8',
+                    outline: '#72787e',
+                },
+                fontFamily: { body: ['Inter', 'system-ui', 'sans-serif'] },
+            },
+        },
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        /* Mega menu */
+        .mega-menu { max-height: 0; overflow: hidden; transition: max-height 0.25s ease, opacity 0.2s ease; opacity: 0; }
+        .mega-menu.open { max-height: 500px; opacity: 1; }
+        /* Mobile */
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .mobile-accordion-content.open { max-height: 500px; }
+    </style>
+</head>
+<body class="bg-surface text-[#191c1e] font-body">
+
+<!-- ============ DESKTOP NAV ============ -->
+<header>
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl shadow-sm" id="main-nav">
+        <div class="flex justify-between items-center px-6 sm:px-8 py-4 max-w-7xl mx-auto">
+            <a class="text-2xl font-black tracking-tighter text-[#1B2A4A]" href="/">Timeless Resurfacing</a>
+
+            <!-- Desktop menu -->
+            <div class="hidden lg:flex items-center space-x-8 font-medium text-sm">
+                <button id="services-btn" class="text-slate-500 hover:text-[#1B2A4A] transition-colors flex items-center gap-1 py-2"
+                    onmouseenter="showMega()" onclick="toggleMega()">
+                    Services <span class="material-symbols-outlined text-sm">expand_more</span>
+                </button>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="/gallery/">Before &amp; After</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="/areas/">Service Areas</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="/about/">About</a>
+                <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="/contact/">Get a Free Quote</a>
+            </div>
+
+            <!-- Mobile hamburger -->
+            <button id="menu-btn" class="lg:hidden p-2" onclick="document.getElementById('mobile-nav').classList.add('open')">
+                <span class="material-symbols-outlined text-2xl text-primary">menu</span>
+            </button>
+        </div>
+
+        <!-- MEGA MENU — full-width dropdown under nav bar -->
+        <div id="mega-menu" class="mega-menu bg-white border-t border-surface-container shadow-xl"
+             onmouseenter="showMega()" onmouseleave="hideMega()">
+            <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 grid grid-cols-3 gap-8">
+
+                <!-- Column 1: Resurfacing -->
+                <div>
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-tertiary-fixed-dim">format_paint</span> Resurfacing
+                    </h3>
+                    <div class="space-y-0.5">
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/bath-resurfacing-sydney/">
+                            <span class="font-semibold text-primary block">Bath Resurfacing</span>
+                            <span class="text-xs text-secondary">Restore chipped or stained baths</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/tile-resurfacing-sydney/">
+                            <span class="font-semibold text-primary block">Tile Resurfacing</span>
+                            <span class="text-xs text-secondary">Transform outdated wall tiles</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/vanity-refinishing-sydney/">
+                            <span class="font-semibold text-primary block">Vanity Refinishing</span>
+                            <span class="text-xs text-secondary">Benchtop & cabinet respray</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/basin-restoration-sydney/">
+                            <span class="font-semibold text-primary block">Basin Restoration</span>
+                            <span class="text-xs text-secondary">Chip repair & full resurface</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Regrouting & Sealing -->
+                <div>
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-tertiary-fixed-dim">plumbing</span> Regrouting & Sealing
+                    </h3>
+                    <div class="space-y-0.5">
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/shower-regrouting-sydney/">
+                            <span class="font-semibold text-primary block">Shower Regrouting</span>
+                            <span class="text-xs text-secondary">Full grout removal & replacement</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/shower-leak-repair-sydney/">
+                            <span class="font-semibold text-primary block">Shower Sealing</span>
+                            <span class="text-xs text-secondary">Silicone replacement & leak fix</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/epoxy-grout-upgrade-sydney/">
+                            <span class="font-semibold text-primary block">Epoxy Grout Upgrade</span>
+                            <span class="text-xs text-secondary">Waterproof, mould-resistant grout</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/floor-tile-regrouting-sydney/">
+                            <span class="font-semibold text-primary block">Floor Tile Regrouting</span>
+                            <span class="text-xs text-secondary">Bathroom & laundry floor grout</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 3: Repairs & Packages -->
+                <div>
+                    <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-tertiary-fixed-dim">build</span> Repairs & Packages
+                    </h3>
+                    <div class="space-y-0.5">
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/chipped-bathtub-repair-sydney/">
+                            <span class="font-semibold text-primary block">Chip Repair</span>
+                            <span class="text-xs text-secondary">Bath & basin chip fixes</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/full-bathroom-makeover-sydney/">
+                            <span class="font-semibold text-primary block">Full Bathroom Makeover</span>
+                            <span class="text-xs text-secondary">Complete resurface package</span>
+                        </a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="/services/property-manager-bathroom-services-sydney/">
+                            <span class="font-semibold text-primary block">Property Managers</span>
+                            <span class="text-xs text-secondary">Multi-unit & rental turnarounds</span>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-surface-container">
+                        <a class="flex items-center gap-2 px-3 py-2.5 bg-primary text-white rounded-lg text-sm font-bold hover:opacity-90 transition-all justify-center" href="/contact/">
+                            <span class="material-symbols-outlined text-base">arrow_forward</span> View All Services
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ MOBILE NAV ============ -->
+    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto">
+        <div class="flex justify-between items-center px-6 py-4">
+            <span class="text-2xl font-black tracking-tighter text-[#1B2A4A]">Timeless Resurfacing</span>
+            <button class="p-2" onclick="document.getElementById('mobile-nav').classList.remove('open')">
+                <span class="material-symbols-outlined text-2xl text-primary">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col px-6 pt-2 pb-8">
+
+            <!-- Resurfacing accordion -->
+            <button class="flex justify-between items-center py-3 text-left" onclick="toggleAccordion(this)">
+                <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">format_paint</span> Resurfacing
+                </span>
+                <span class="material-symbols-outlined text-sm text-secondary accordion-chevron transition-transform">expand_more</span>
+            </button>
+            <div class="mobile-accordion-content open">
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/bath-resurfacing-sydney/">Bath Resurfacing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/tile-resurfacing-sydney/">Tile Resurfacing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/vanity-refinishing-sydney/">Vanity Refinishing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/basin-restoration-sydney/">Basin Restoration</a>
+            </div>
+
+            <!-- Regrouting accordion -->
+            <button class="flex justify-between items-center py-3 text-left" onclick="toggleAccordion(this)">
+                <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">plumbing</span> Regrouting & Sealing
+                </span>
+                <span class="material-symbols-outlined text-sm text-secondary accordion-chevron transition-transform">expand_more</span>
+            </button>
+            <div class="mobile-accordion-content open">
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/shower-regrouting-sydney/">Shower Regrouting</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/shower-leak-repair-sydney/">Shower Sealing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/epoxy-grout-upgrade-sydney/">Epoxy Grout Upgrade</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/floor-tile-regrouting-sydney/">Floor Tile Regrouting</a>
+            </div>
+
+            <!-- Repairs accordion -->
+            <button class="flex justify-between items-center py-3 text-left" onclick="toggleAccordion(this)">
+                <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">build</span> Repairs & Packages
+                </span>
+                <span class="material-symbols-outlined text-sm text-secondary accordion-chevron transition-transform">expand_more</span>
+            </button>
+            <div class="mobile-accordion-content open">
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/chipped-bathtub-repair-sydney/">Chip Repair</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/full-bathroom-makeover-sydney/">Full Bathroom Makeover</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="/services/property-manager-bathroom-services-sydney/">Property Managers</a>
+            </div>
+
+            <div class="h-px bg-surface-container my-3"></div>
+            <a class="text-primary py-3 text-lg font-semibold" href="/gallery/">Before &amp; After</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="/areas/">Service Areas</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="/about/">About</a>
+            <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="/contact/">Get a Free Quote</a>
+            <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:+61451110154">
+                <span class="material-symbols-outlined text-base">call</span> Call 0451 110 154
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- SPACER for fixed nav -->
+<div class="h-20"></div>
+
+<!-- DEMO PAGE CONTENT — shows what the nav looks like on a real page -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter mb-6">
+            Bathroom Resurfacing <br><span class="text-[#3a4a6a]">Sydney Specialists</span>
+        </h1>
+        <p class="text-lg text-secondary max-w-2xl leading-relaxed mb-8">
+            One-day bathroom transformations across Greater Sydney. Save up to <strong>70% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
+        </p>
+        <div class="flex gap-4">
+            <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
+            <a class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg hover:shadow-xl transition-all flex items-center gap-2" href="tel:+61451110154">
+                <span class="material-symbols-outlined text-base">call</span> Call Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Trust bar -->
+<section class="bg-primary text-white py-4">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-sm">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-sm">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-sm">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-sm">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
+    </div>
+</section>
+
+<!-- Services grid preview -->
+<section class="py-16 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-8 text-center">Our Services</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Resurfacing -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-surface-container">
+                <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block">format_paint</span>
+                <h3 class="font-bold text-primary text-lg mb-2">Resurfacing</h3>
+                <p class="text-sm text-secondary mb-4">Bath, tile, vanity & basin resurfacing. Factory-new finish in a single day.</p>
+                <p class="text-xs text-tertiary-fixed-dim font-bold">3-Year Warranty &bull; From $320</p>
+            </div>
+            <!-- Regrouting -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-surface-container">
+                <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block">plumbing</span>
+                <h3 class="font-bold text-primary text-lg mb-2">Regrouting & Sealing</h3>
+                <p class="text-sm text-secondary mb-4">Shower regrouting, silicone replacement, epoxy upgrades & floor grout.</p>
+                <p class="text-xs text-tertiary-fixed-dim font-bold">2-Year Warranty &bull; From $270</p>
+            </div>
+            <!-- Repairs -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-surface-container">
+                <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block">build</span>
+                <h3 class="font-bold text-primary text-lg mb-2">Repairs & Packages</h3>
+                <p class="text-sm text-secondary mb-4">Chip repairs, full bathroom makeovers, and property manager turnarounds.</p>
+                <p class="text-xs text-tertiary-fixed-dim font-bold">Up to 3-Year Warranty</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Mega menu hover/click
+let megaTimeout;
+function showMega() { clearTimeout(megaTimeout); document.getElementById('mega-menu').classList.add('open'); }
+function hideMega() { megaTimeout = setTimeout(() => document.getElementById('mega-menu').classList.remove('open'), 200); }
+document.getElementById('services-btn').addEventListener('mouseleave', () => { megaTimeout = setTimeout(() => { if (!document.getElementById('mega-menu').matches(':hover')) document.getElementById('mega-menu').classList.remove('open'); }, 200); });
+function toggleMega() { document.getElementById('mega-menu').classList.toggle('open'); }
+
+function toggleAccordion(btn) {
+    const content = btn.nextElementSibling;
+    const chevron = btn.querySelector('.accordion-chevron');
+    content.classList.toggle('open');
+    chevron.style.transform = content.classList.contains('open') ? 'rotate(0deg)' : 'rotate(-90deg)';
+}
+</script>
+
+</body>
+</html>
