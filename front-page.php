@@ -44,7 +44,7 @@ get_header(); ?>
     "mainEntity": [
         { "@type": "Question", "name": "How long does bathroom resurfacing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most jobs are completed in a single day (6-8 hours). Your bathroom is ready to use again 24 hours after completion." } },
         { "@type": "Question", "name": "How much does bathroom resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different, so we provide fixed-price quotes based on your photos. A complete bathroom resurfacing package typically saves up to 70% compared to a full renovation. Send us photos for an accurate quote within hours." } },
-        { "@type": "Question", "name": "How long does resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "With proper care, 10-15 years. We use commercial-grade two-part epoxy coatings resistant to chipping, peeling, and yellowing. All work backed by our workmanship warranty." } },
+        { "@type": "Question", "name": "How long does resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "With proper care, up to 10 years. We use commercial-grade two-part epoxy coatings resistant to chipping, peeling, and yellowing. All work backed by our workmanship warranty." } },
         { "@type": "Question", "name": "Is resurfacing worth it vs full renovation?", "acceptedAnswer": { "@type": "Answer", "text": "For most homeowners, yes. 70% cheaper, 1 day instead of 2-4 weeks, zero demolition, no construction waste. Ideal for rentals, pre-sale upgrades, and structurally sound bathrooms." } },
         { "@type": "Question", "name": "Do you check for asbestos?", "acceptedAnswer": { "@type": "Answer", "text": "If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed." } },
         { "@type": "Question", "name": "What areas do you service?", "acceptedAnswer": { "@type": "Answer", "text": "Entire Greater Sydney — Inner West, Eastern Suburbs, North Shore, Northern Beaches, Western Sydney, Sutherland Shire, Hills District. Plus Wollongong, Central Coast, Blue Mountains." } },
@@ -65,10 +65,7 @@ get_header(); ?>
             <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-8 sm:mb-10">
                 One-day bathroom transformations across Greater Sydney. Save up to <strong>70% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all" href="#services">View Our Services</a>
-            </div>
+            <a class="inline-block px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
             <div class="mt-8 flex items-center gap-3">
                 <div class="flex -space-x-2" aria-hidden="true">
                     <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
@@ -80,7 +77,7 @@ get_header(); ?>
         </div>
         <div class="md:col-span-5">
             <!-- BEFORE / AFTER SLIDER -->
-            <div id="hero-slider" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:3/4;cursor:ew-resize;">
+            <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:5/6;cursor:ew-resize;">
                 <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney - gleaming white bathtub and clean tiles" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney - peeling stained bathtub with dirty grout" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;" />
@@ -110,19 +107,6 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- AGENCY LOGOS -->
-<section class="py-10 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <p class="text-center text-[0.7rem] font-bold text-outline-variant uppercase tracking-widest mb-8">Trusted By Sydney's Leading Property Agencies</p>
-        <div class="flex flex-wrap justify-center items-center gap-8 sm:gap-12 opacity-40 grayscale" aria-hidden="true">
-            <span class="text-xl font-black text-primary italic">McGrath</span>
-            <span class="text-xl font-black text-primary italic">Ray White.</span>
-            <span class="text-xl font-black text-primary italic">Belle Property</span>
-            <span class="text-xl font-black text-primary italic">LJ Hooker</span>
-            <span class="text-xl font-black text-primary italic">The Agency</span>
-        </div>
-    </div>
-</section>
 
 <!-- SERVICES -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="services">
@@ -142,7 +126,7 @@ get_header(); ?>
             <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">bathtub</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Bath Resurfacing</h3>
-                <p class="text-secondary text-sm mb-6 leading-relaxed">Restore chipped, faded, or stained bathtubs to their original brilliant shine. Lasts 10-15 years.</p>
+                <p class="text-secondary text-sm mb-6 leading-relaxed">Restore chipped, faded, or stained bathtubs to their original brilliant shine. Lasts up to 10 years.</p>
                 <div class="flex justify-between items-center"><span class="text-sm font-bold text-on-primary-container">One-day transformation</span><span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span></div>
             </a>
             <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
@@ -177,7 +161,7 @@ get_header(); ?>
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Resurfacing vs Renovation</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Renovation vs Resurfacing</h2>
             <p class="text-secondary">Why thousands of Sydney homeowners choose resurfacing.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -206,31 +190,48 @@ get_header(); ?>
 <!-- PROCESS -->
 <section class="py-16 sm:py-24 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">How It Works</h2>
-            <p class="text-secondary max-w-2xl mx-auto">From photo to perfection in four simple steps.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 relative">
-            <div class="hidden md:block absolute top-12 left-[12%] w-[76%] h-px bg-surface-container-highest" aria-hidden="true"></div>
-            <div class="flex flex-col items-center text-center reveal">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl mb-6 relative z-10 border-4 border-surface-container-low">1</div>
-                <h3 class="font-bold text-primary mb-2">Send Us Photos</h3>
-                <p class="text-sm text-secondary">Snap photos of your bathroom on your phone and upload via our quote form.</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left: Process image placeholder -->
+            <div class="hidden lg:block reveal">
+                <div class="rounded-2xl overflow-hidden aspect-[4/3] max-w-md mx-auto">
+                    <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/images/homepage/process.jpg" alt="Tradesperson resurfacing a bathtub in Sydney" loading="lazy" width="600" height="450" />
+                </div>
             </div>
-            <div class="flex flex-col items-center text-center reveal">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl mb-6 relative z-10 border-4 border-surface-container-low">2</div>
-                <h3 class="font-bold text-primary mb-2">Fixed-Price Quote</h3>
-                <p class="text-sm text-secondary">Transparent quote within hours. The price you see is the price you pay.</p>
-            </div>
-            <div class="flex flex-col items-center text-center reveal">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl mb-6 relative z-10 border-4 border-surface-container-low">3</div>
-                <h3 class="font-bold text-primary mb-2">Book Your Day</h3>
-                <p class="text-sm text-secondary">Available 6 days a week across Greater Sydney and NSW.</p>
-            </div>
-            <div class="flex flex-col items-center text-center reveal">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl mb-6 relative z-10 border-4 border-surface-container-low">4</div>
-                <h3 class="font-bold text-primary mb-2">One-Day Transform</h3>
-                <p class="text-sm text-secondary">Most jobs done in 6-8 hours. Ready to use next day.</p>
+            <!-- Right: Steps -->
+            <div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-3">How It Works</h2>
+                <p class="text-secondary mb-10">From photo to perfection in four simple steps.</p>
+                <div class="space-y-4">
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">photo_camera</span></div>
+                        <div>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 1: Send Us Photos</h3>
+                            <p class="text-sm text-secondary leading-relaxed">Snap photos of your bathroom on your phone and upload via our quote form. Takes 2 minutes.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">request_quote</span></div>
+                        <div>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 2: Quote Next Business Day</h3>
+                            <p class="text-sm text-secondary leading-relaxed">We review your photos and send a transparent fixed-price quote. No hidden fees.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">calendar_month</span></div>
+                        <div>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 3: Book Your Day</h3>
+                            <p class="text-sm text-secondary leading-relaxed">Available Monday to Friday across Greater Sydney and NSW. We work around your schedule.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">celebration</span></div>
+                        <div>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 4: One-Day Transformation</h3>
+                            <p class="text-sm text-secondary leading-relaxed">Most jobs done in 6-8 hours. Your bathroom is ready to use the next day.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#quote" class="inline-flex items-center gap-2 mt-10 px-8 py-4 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all">Send Photos Now <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
             </div>
         </div>
     </div>
@@ -345,67 +346,41 @@ get_header(); ?>
 </section>
 
 <!-- WARRANTY -->
-<section class="py-16 sm:py-24 bg-white" id="warranty">
+<section class="py-16 sm:py-24 bg-primary" id="warranty">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-6">Up to 3-Year Workmanship Warranty</h2>
-            <p class="text-secondary leading-relaxed mb-8">Every job is backed by our comprehensive warranty. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service — we&rsquo;ll confirm the exact coverage in your quote.</p>
-            <div class="space-y-4">
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">shield</span><div><h3 class="font-bold text-primary text-sm mb-1">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-secondary">Coating peels or bubbles? We resurface again, free.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">verified_user</span><div><h3 class="font-bold text-primary text-sm mb-1">Adhesion Guarantee</h3><p class="text-xs text-secondary">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">security</span><div><h3 class="font-bold text-primary text-sm mb-1">Fully Insured</h3><p class="text-xs text-secondary">Public liability insured on every job for your peace of mind.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">handshake</span><div><h3 class="font-bold text-primary text-sm mb-1">No Obligation Quotes</h3><p class="text-xs text-secondary">Send us photos and get a fixed-price quote. No surprises, no hidden costs.</p></div></div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tighter mb-6">Up to 3-Year Workmanship Warranty</h2>
+            <p class="text-white/70 leading-relaxed mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last 5 to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
+            <div class="space-y-3">
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">security</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Fully Insured</h3><p class="text-xs text-white/60">Public liability insured on every job for your peace of mind.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">handshake</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">No Obligation Quotes</h3><p class="text-xs text-white/60">Send us photos and get a fixed-price quote. No surprises, no hidden costs.</p></div></div>
             </div>
         </div>
         <div class="hidden lg:flex items-center justify-center">
-            <div class="w-72 h-72 rounded-full bg-primary/5 flex items-center justify-center">
-                <div class="w-56 h-56 rounded-full bg-primary/10 flex items-center justify-center text-center">
-                    <div><span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><p class="text-3xl font-extrabold text-primary mt-2">Up to 3 Years</p><p class="text-sm font-bold text-secondary">Warranty</p></div>
+            <div class="w-72 h-72 rounded-full bg-white/5 flex items-center justify-center" style="box-shadow: 0 0 80px rgba(231,192,139,0.15);">
+                <div class="w-56 h-56 rounded-full bg-white/10 flex items-center justify-center text-center border border-white/10">
+                    <div><span class="material-symbols-outlined text-6xl text-[#e7c08b]" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><p class="text-3xl font-extrabold text-white mt-2">Up to 3 Years</p><p class="text-sm font-bold text-white/60">Warranty</p></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SERVICE AREAS -->
-<section class="py-16 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Serving All of Greater Sydney &amp; NSW</h2>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Sydney CBD</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Eastern Suburbs</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Inner West</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">North Shore</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Northern Beaches</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Western Sydney</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Parramatta</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Hills District</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Sutherland Shire</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Wollongong</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Central Coast</p></div>
-            <div class="bg-white rounded-lg p-4 text-center hover:shadow-md transition-shadow"><span class="material-symbols-outlined text-primary mb-1" aria-hidden="true">location_on</span><p class="text-sm font-bold text-primary">Blue Mountains</p></div>
-        </div>
-    </div>
-</section>
 
-<!-- FAQS -->
-<section class="py-16 sm:py-24 bg-white" id="faqs">
-    <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Frequently Asked Questions</h2>
-            <p class="text-secondary">Everything you need to know about bathroom resurfacing in Sydney.</p>
-        </div>
-        <div class="space-y-3" id="faq-list">
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does bathroom resurfacing take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most jobs complete in a single day (6-8 hours). Your bathroom is ready to use 24 hours after. Compare that to 2-4 weeks for a traditional renovation.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does it cost in Sydney?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Every bathroom is different, so we provide fixed-price quotes based on your photos. A complete bathroom resurfacing package typically costs a fraction of the $25,000-$50,000 you'd spend on a full renovation &mdash; saving you up to 70%. Send us photos for an accurate quote within hours.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does resurfacing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">10-15 years with proper care. We use commercial-grade two-part epoxy coatings resistant to chipping, peeling, and yellowing. Workmanship warranty included.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is it worth it vs full renovation?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">For most homeowners, yes. 70% cheaper, 1 day vs 2-4 weeks, zero demolition, no waste. Ideal for rentals, pre-sale prep, and bathrooms with solid structure but dated aesthetics.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you check for asbestos?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What areas do you service?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">All of Greater Sydney &mdash; Inner West, Eastern Suburbs, North Shore, Northern Beaches, Western Sydney, Sutherland Shire, Hills District. Plus Wollongong, Central Coast, Blue Mountains.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface coloured tiles?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Works on all tile types &mdash; coloured, textured, patterned, mosaic. We transform outdated pink, green, or brown tiles into clean, modern finishes.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What warranty do you provide?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Workmanship warranty on every job — covering peeling, bubbling, and adhesion failure. Fully insured with public liability cover.</p></div></div>
+<!-- FAQ LINK -->
+<section class="py-8 sm:py-10 bg-white">
+    <div class="max-w-4xl mx-auto px-6 sm:px-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-surface rounded-xl border border-surface-container">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-2xl text-tertiary-fixed-dim" aria-hidden="true">help</span>
+                <div>
+                    <p class="font-bold text-primary text-sm">Have questions about resurfacing?</p>
+                    <p class="text-xs text-secondary">Cost, timing, durability, warranty &mdash; we&rsquo;ve answered them all.</p>
+                </div>
+            </div>
+            <a href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:opacity-90 transition-all whitespace-nowrap">View FAQs <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
         </div>
     </div>
 </section>

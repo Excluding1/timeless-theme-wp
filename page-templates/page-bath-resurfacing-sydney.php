@@ -37,7 +37,7 @@
     "mainEntity": [
         { "@type": "Question", "name": "How much does bath resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different. We provide fixed-price quotes based on your photos — no hidden fees, no surprises. Send us photos for a quote within hours." } },
         { "@type": "Question", "name": "How long does bath resurfacing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most baths are completed in 5-8.5 hours (one day). Freestanding baths may take a full day due to extra prep for stripping old coatings. Your bath is usable 24-48 hours after completion." } },
-        { "@type": "Question", "name": "How long does a resurfaced bath last?", "acceptedAnswer": { "@type": "Answer", "text": "10-15 years with the Hawk Glass-Tech system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing." } },
+        { "@type": "Question", "name": "How long does a resurfaced bath last?", "acceptedAnswer": { "@type": "Answer", "text": "up to 10 years with the Hawk Glass-Tech system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing." } },
         { "@type": "Question", "name": "Can you resurface any type of bath?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: porcelain, enamel steel, cast iron, acrylic, fibreglass, and spa baths. We cannot resurface natural stone (marble/granite) baths — those need specialist stone restoration." } },
         { "@type": "Question", "name": "Can you change the bath colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Hawk system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge." } }
     ]
@@ -69,7 +69,7 @@
                 Bath Resurfacing <span class="text-on-primary-container">Sydney</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using the professional <strong>Hawk Glass-Tech system</strong> &mdash; a commercial-grade coating that lasts 10-15 years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
+                Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using the professional <strong>Hawk Glass-Tech system</strong> &mdash; a commercial-grade coating that lasts up to 10 years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
             </p>
             <p class="text-2xl font-extrabold text-primary mb-4">From $800 <span class="text-sm font-normal text-secondary">inc GST</span></p>
             <div class="flex items-center gap-6 mb-8">
@@ -144,7 +144,7 @@
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Resurface Your Bath</h2>
-        <p class="text-secondary max-w-3xl mb-10">Our 5-step Hawk Glass-Tech process ensures a factory-quality finish that lasts 10-15 years.</p>
+        <p class="text-secondary max-w-3xl mb-10">Our 5-step Hawk Glass-Tech process ensures a factory-quality finish that lasts up to 10 years.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             <div class="bg-white rounded-xl p-6 text-center reveal">
@@ -264,7 +264,7 @@
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does bath resurfacing take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most baths are completed in 5-8.5 hours (one day). Freestanding baths may take a full day due to extra prep for stripping old coatings. Your bath is usable 24-48 hours after completion.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a resurfaced bath last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">10-15 years with the Hawk Glass-Tech system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a resurfaced bath last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">up to 10 years with the Hawk Glass-Tech system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of bath?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes: porcelain, enamel steel, cast iron, acrylic, fibreglass, and spa baths. We cannot resurface natural stone (marble/granite) baths &mdash; those need specialist stone restoration.</p></div></div>
 

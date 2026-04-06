@@ -38,7 +38,7 @@
         { "@type": "Question", "name": "How much does vanity refinishing cost?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different. We provide fixed-price quotes based on your photos — no hidden fees, no surprises. Send us photos for a quote within hours." } },
         { "@type": "Question", "name": "Can you respray any vanity cabinet?", "acceptedAnswer": { "@type": "Answer", "text": "Most solid timber, MDF, and melamine cabinets can be resprayed. We cannot respray if the laminate wrap is peeling — that indicates moisture-damaged MDF underneath." } },
         { "@type": "Question", "name": "What finishes are available?", "acceptedAnswer": { "@type": "Answer", "text": "Satin, semi-gloss, high-gloss, and stone-fleck (granite/marble look). 900+ colours available. White and grey are most popular." } },
-        { "@type": "Question", "name": "How long does it last?", "acceptedAnswer": { "@type": "Answer", "text": "Benchtop resurfacing lasts 10-15 years. Cabinet respray with 2-pack polyurethane lasts 10+ years. Both are moisture and chemical resistant." } }
+        { "@type": "Question", "name": "How long does it last?", "acceptedAnswer": { "@type": "Answer", "text": "Benchtop resurfacing lasts up to 10 years. Cabinet respray with 2-pack polyurethane lasts 10+ years. Both are moisture and chemical resistant." } }
     ]
 }
 </script>
@@ -229,7 +229,7 @@
 
             <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What finishes are available?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Satin, semi-gloss, high-gloss, and stone-fleck (granite/marble look). 900+ colours available. White and grey are most popular.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Benchtop resurfacing lasts 10-15 years. Cabinet respray with 2-pack polyurethane lasts 10+ years. Both are moisture and chemical resistant.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Benchtop resurfacing lasts up to 10 years. Cabinet respray with 2-pack polyurethane lasts 10+ years. Both are moisture and chemical resistant.</p></div></div>
         </div>
     </div>
 </section>
