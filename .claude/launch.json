@@ -2,12 +2,6 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "timeless-preview",
-      "runtimeExecutable": "/usr/local/bin/node",
-      "runtimeArgs": [".preview-server.mjs"],
-      "port": 8787
-    },
-    {
       "name": "prototype",
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["preview/server.mjs"],
