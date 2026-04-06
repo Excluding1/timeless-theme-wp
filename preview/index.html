@@ -267,7 +267,6 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all" href="#services">View Our Services</a>
             </div>
             <div class="mt-8 flex items-center gap-3">
                 <div class="flex -space-x-2" aria-hidden="true">
@@ -280,15 +279,15 @@
         </div>
         <div class="md:col-span-5">
             <!-- BEFORE / AFTER SLIDER -->
-            <div id="hero-slider" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:3/4;cursor:ew-resize;">
+            <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
                 <!-- After image (background) — REPLACE: images/homepage/after.jpg -->
                 <div class="absolute inset-0 w-full h-full bg-emerald-100 flex items-center justify-center text-center p-4">
-                    <div><span class="material-symbols-outlined text-4xl text-emerald-600 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">after.jpg</p><p class="text-[0.6rem] text-emerald-600 mt-1">Gleaming white bathtub &amp; clean tiles<br/>images/homepage/after.jpg<br/>Ratio: 3:4 portrait</p></div>
+                    <div><span class="material-symbols-outlined text-4xl text-emerald-600 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">after.jpg</p><p class="text-[0.6rem] text-emerald-600 mt-1">Gleaming white bathtub &amp; clean tiles<br/>images/homepage/after.jpg<br/>Ratio: 4:3 landscape</p></div>
                 </div>
                 <!-- Before image (clipped) — REPLACE: images/homepage/before.jpg -->
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                     <div id="ba-before-img" class="bg-rose-100 flex items-center justify-center text-center p-4" style="position:absolute;top:0;left:0;height:100%;width:100%;">
-                        <div><span class="material-symbols-outlined text-4xl text-rose-600 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-rose-800 uppercase tracking-wider">before.jpg</p><p class="text-[0.6rem] text-rose-600 mt-1">Peeling stained bathtub &amp; dirty grout<br/>images/homepage/before.jpg<br/>Ratio: 3:4 portrait</p></div>
+                        <div><span class="material-symbols-outlined text-4xl text-rose-600 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-rose-800 uppercase tracking-wider">before.jpg</p><p class="text-[0.6rem] text-rose-600 mt-1">Peeling stained bathtub &amp; dirty grout<br/>images/homepage/before.jpg<br/>Ratio: 4:3 landscape</p></div>
                     </div>
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
@@ -404,7 +403,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Resurfacing vs Renovation</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Renovation vs Resurfacing</h2>
             <p class="text-secondary">Why thousands of Sydney homeowners choose resurfacing.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -437,7 +436,7 @@
             <!-- Left: Process image placeholder -->
             <div class="hidden lg:block reveal">
                 <!-- REPLACE: images/homepage/process.jpg — tradesperson working on bathroom -->
-                <div class="rounded-2xl overflow-hidden aspect-[4/5] bg-sky-50 flex items-center justify-center">
+                <div class="rounded-2xl overflow-hidden aspect-[4/3] max-w-md mx-auto bg-sky-50 flex items-center justify-center">
                     <div class="text-center p-8"><span class="material-symbols-outlined text-5xl text-sky-400 block mb-3" aria-hidden="true">photo_camera</span><p class="text-sm font-bold text-sky-700">process.jpg</p><p class="text-xs text-sky-500 mt-2">Tradesperson resurfacing a bathtub<br/>images/homepage/process.jpg<br/>Ratio: 4:5 portrait</p></div>
                 </div>
             </div>
@@ -445,36 +444,32 @@
             <div>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-3">How It Works</h2>
                 <p class="text-secondary mb-10">From photo to perfection in four simple steps.</p>
-                <div class="space-y-8">
-                    <div class="flex gap-5 items-start reveal">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">photo_camera</span></div>
+                <div class="space-y-4">
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">photo_camera</span></div>
                         <div>
-                            <div class="flex items-center gap-2 mb-1"><span class="text-xs font-black text-tertiary-fixed-dim">STEP 1</span></div>
-                            <h3 class="font-bold text-primary text-lg mb-1">Send Us Photos</h3>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 1: Send Us Photos</h3>
                             <p class="text-sm text-secondary leading-relaxed">Snap photos of your bathroom on your phone and upload via our quote form. Takes 2 minutes.</p>
                         </div>
                     </div>
-                    <div class="flex gap-5 items-start reveal">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">request_quote</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">request_quote</span></div>
                         <div>
-                            <div class="flex items-center gap-2 mb-1"><span class="text-xs font-black text-tertiary-fixed-dim">STEP 2</span></div>
-                            <h3 class="font-bold text-primary text-lg mb-1">Quote Next Business Day</h3>
-                            <p class="text-sm text-secondary leading-relaxed">We review your photos and send a transparent fixed-price quote. The price you see is the price you pay.</p>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 2: Quote Next Business Day</h3>
+                            <p class="text-sm text-secondary leading-relaxed">We review your photos and send a transparent fixed-price quote. No hidden fees.</p>
                         </div>
                     </div>
-                    <div class="flex gap-5 items-start reveal">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">calendar_month</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">calendar_month</span></div>
                         <div>
-                            <div class="flex items-center gap-2 mb-1"><span class="text-xs font-black text-tertiary-fixed-dim">STEP 3</span></div>
-                            <h3 class="font-bold text-primary text-lg mb-1">Book Your Day</h3>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 3: Book Your Day</h3>
                             <p class="text-sm text-secondary leading-relaxed">Available Monday to Friday across Greater Sydney and NSW. We work around your schedule.</p>
                         </div>
                     </div>
-                    <div class="flex gap-5 items-start reveal">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">celebration</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">celebration</span></div>
                         <div>
-                            <div class="flex items-center gap-2 mb-1"><span class="text-xs font-black text-tertiary-fixed-dim">STEP 4</span></div>
-                            <h3 class="font-bold text-primary text-lg mb-1">One-Day Transformation</h3>
+                            <h3 class="font-bold text-primary text-base mb-0.5">Step 4: One-Day Transformation</h3>
                             <p class="text-sm text-secondary leading-relaxed">Most jobs done in 6-8 hours. Your bathroom is ready to use the next day.</p>
                         </div>
                     </div>
@@ -488,46 +483,93 @@
 <!-- PORTFOLIO -->
 <section class="py-16 sm:py-24 bg-surface" id="portfolio">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
+        <div class="flex justify-between items-end mb-10">
             <div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Recent Transformations</h2>
-                <p class="text-secondary">Before and after resurfacing across Sydney and NSW.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Transformations</h2>
+                <p class="text-secondary text-sm">Before and after resurfacing across Sydney and NSW.</p>
+            </div>
+            <!-- Desktop arrows -->
+            <div class="hidden sm:flex items-center gap-2">
+                <button onclick="movePortfolio(-1)" class="w-10 h-10 rounded-full border border-surface-container hover:bg-surface-container-low flex items-center justify-center transition-colors" aria-label="Previous projects"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_left</span></button>
+                <button onclick="movePortfolio(1)" class="w-10 h-10 rounded-full border border-surface-container hover:bg-surface-container-low flex items-center justify-center transition-colors" aria-label="Next projects"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_right</span></button>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <!-- REPLACE: images/homepage/gallery-1.jpg — 600x338 landscape -->
-                <div class="aspect-video overflow-hidden bg-sky-50 flex items-center justify-center">
-                    <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-1.jpg</p><p class="text-[0.6rem] text-sky-500">Surry Hills bath &amp; wall resurfacing<br/>600x338px landscape</p></div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary">Surry Hills Apartment</h3><span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Bath &amp; Wall</span></div>
-                    <p class="text-xs text-secondary italic">"Tenant was back in 24 hours. Looks brand new."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Property Manager, Inner Sydney</p>
-                </div>
-            </article>
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <!-- REPLACE: images/homepage/gallery-2.jpg — 600x338 landscape -->
-                <div class="aspect-video overflow-hidden bg-sky-50 flex items-center justify-center">
-                    <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-2.jpg</p><p class="text-[0.6rem] text-sky-500">Bondi Beach shower &amp; basin regrouting<br/>600x338px landscape</p></div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary">Bondi Beach House</h3><span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Shower &amp; Basin</span></div>
-                    <p class="text-xs text-secondary italic">"Restored our 1920s bathroom without the $20k price tag."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Homeowner, Eastern Suburbs</p>
-                </div>
-            </article>
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <!-- REPLACE: images/homepage/gallery-3.jpg — 600x338 landscape -->
-                <div class="aspect-video overflow-hidden bg-sky-50 flex items-center justify-center">
-                    <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-3.jpg</p><p class="text-[0.6rem] text-sky-500">Parramatta full bathroom makeover<br/>600x338px landscape</p></div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary">Parramatta Family Home</h3><span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Bathroom</span></div>
-                    <p class="text-xs text-secondary italic">"Workmanship is second to none in Western Sydney."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Homeowner, Western Sydney</p>
-                </div>
-            </article>
+        <!-- Carousel container -->
+        <div class="overflow-hidden" id="portfolio-carousel">
+            <div class="flex gap-6 transition-transform duration-300 ease-out" id="portfolio-track" style="transform: translateX(0)">
+                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all">
+                    <!-- REPLACE: images/homepage/gallery-1.jpg — 600x450 (4:3) -->
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
+                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-1.jpg</p><p class="text-[0.6rem] text-sky-500">Surry Hills bath &amp; wall resurfacing<br/>600x450px · 4:3</p></div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Surry Hills Apartment</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Bath &amp; Wall</span></div>
+                        <p class="text-xs text-secondary italic">&ldquo;Tenant was back in 24 hours. Looks brand new.&rdquo;</p>
+                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Property Manager, Inner Sydney</p>
+                    </div>
+                </article>
+                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all">
+                    <!-- REPLACE: images/homepage/gallery-2.jpg — 600x450 (4:3) -->
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
+                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-2.jpg</p><p class="text-[0.6rem] text-sky-500">Bondi Beach shower &amp; basin regrouting<br/>600x450px · 4:3</p></div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Bondi Beach House</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Shower &amp; Basin</span></div>
+                        <p class="text-xs text-secondary italic">&ldquo;Restored our 1920s bathroom without the $20k price tag.&rdquo;</p>
+                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, Eastern Suburbs</p>
+                    </div>
+                </article>
+                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all">
+                    <!-- REPLACE: images/homepage/gallery-3.jpg — 600x450 (4:3) -->
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
+                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-3.jpg</p><p class="text-[0.6rem] text-sky-500">Parramatta full bathroom makeover<br/>600x450px · 4:3</p></div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Parramatta Family Home</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Bathroom</span></div>
+                        <p class="text-xs text-secondary italic">&ldquo;Workmanship is second to none in Western Sydney.&rdquo;</p>
+                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, Western Sydney</p>
+                    </div>
+                </article>
+                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all">
+                    <!-- REPLACE: images/homepage/gallery-4.jpg — 600x450 (4:3) -->
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
+                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-4.jpg</p><p class="text-[0.6rem] text-sky-500">Manly vanity &amp; basin refinishing<br/>600x450px · 4:3</p></div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Manly Beach Unit</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Vanity &amp; Basin</span></div>
+                        <p class="text-xs text-secondary italic">&ldquo;Vanity looks like we bought a new one. Amazing result.&rdquo;</p>
+                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, Northern Beaches</p>
+                    </div>
+                </article>
+                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all">
+                    <!-- REPLACE: images/homepage/gallery-5.jpg — 600x450 (4:3) -->
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
+                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-5.jpg</p><p class="text-[0.6rem] text-sky-500">Mosman epoxy grout upgrade<br/>600x450px · 4:3</p></div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Mosman Townhouse</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Epoxy Regrout</span></div>
+                        <p class="text-xs text-secondary italic">&ldquo;No more scrubbing mouldy grout. Should have done this years ago.&rdquo;</p>
+                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, North Shore</p>
+                    </div>
+                </article>
+                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all">
+                    <!-- REPLACE: images/homepage/gallery-6.jpg — 600x450 (4:3) -->
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
+                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-6.jpg</p><p class="text-[0.6rem] text-sky-500">Cronulla rental turnover resurfacing<br/>600x450px · 4:3</p></div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Cronulla Rental</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Rental Turnover</span></div>
+                        <p class="text-xs text-secondary italic">&ldquo;Turned over 3 units in one week. Tenants love them.&rdquo;</p>
+                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Property Manager, Sutherland Shire</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <!-- Mobile arrows (below cards) -->
+        <div class="flex sm:hidden items-center justify-center gap-3 mt-4">
+            <button onclick="movePortfolio(-1)" class="w-10 h-10 rounded-full border border-surface-container flex items-center justify-center" aria-label="Previous project"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_left</span></button>
+            <span class="text-xs text-secondary" id="portfolio-counter">1 / 6</span>
+            <button onclick="movePortfolio(1)" class="w-10 h-10 rounded-full border border-surface-container flex items-center justify-center" aria-label="Next project"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_right</span></button>
         </div>
     </div>
 </section>
@@ -613,43 +655,40 @@
 </section>
 
 <!-- WARRANTY -->
-<section class="py-16 sm:py-24 bg-white" id="warranty">
+<section class="py-16 sm:py-24 bg-primary" id="warranty">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-6">Up to 3-Year Workmanship Warranty</h2>
-            <p class="text-secondary leading-relaxed mb-8">Every job is backed by our comprehensive warranty. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
-            <div class="space-y-4">
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">shield</span><div><h3 class="font-bold text-primary text-sm mb-1">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-secondary">Coating peels or bubbles? We resurface again, free.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">verified_user</span><div><h3 class="font-bold text-primary text-sm mb-1">Adhesion Guarantee</h3><p class="text-xs text-secondary">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">security</span><div><h3 class="font-bold text-primary text-sm mb-1">Fully Insured</h3><p class="text-xs text-secondary">Public liability insured on every job for your peace of mind.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-surface-container-low rounded-lg"><span class="material-symbols-outlined text-primary mt-0.5" aria-hidden="true">handshake</span><div><h3 class="font-bold text-primary text-sm mb-1">No Obligation Quotes</h3><p class="text-xs text-secondary">Send us photos and get a fixed-price quote. No surprises, no hidden costs.</p></div></div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tighter mb-6">Up to 3-Year Workmanship Warranty</h2>
+            <p class="text-white/70 leading-relaxed mb-8">Every job is backed by our comprehensive warranty. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
+            <div class="space-y-3">
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">security</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Fully Insured</h3><p class="text-xs text-white/60">Public liability insured on every job for your peace of mind.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">handshake</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">No Obligation Quotes</h3><p class="text-xs text-white/60">Send us photos and get a fixed-price quote. No surprises, no hidden costs.</p></div></div>
             </div>
         </div>
         <div class="hidden lg:flex items-center justify-center">
-            <div class="w-72 h-72 rounded-full bg-primary/5 flex items-center justify-center">
-                <div class="w-56 h-56 rounded-full bg-primary/10 flex items-center justify-center text-center">
-                    <div><span class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><p class="text-3xl font-extrabold text-primary mt-2">Up to 3 Years</p><p class="text-sm font-bold text-secondary">Warranty</p></div>
+            <div class="w-72 h-72 rounded-full bg-white/5 flex items-center justify-center" style="box-shadow: 0 0 80px rgba(231,192,139,0.15);">
+                <div class="w-56 h-56 rounded-full bg-white/10 flex items-center justify-center text-center border border-white/10">
+                    <div><span class="material-symbols-outlined text-6xl text-[#e7c08b]" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><p class="text-3xl font-extrabold text-white mt-2">Up to 3 Years</p><p class="text-sm font-bold text-white/60">Warranty</p></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FAQS -->
-<section class="py-16 sm:py-24 bg-white" id="faqs">
-    <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 flex items-center justify-center gap-3"><span class="material-symbols-outlined text-4xl sm:text-5xl text-tertiary-fixed-dim" aria-hidden="true">help</span> Frequently Asked Questions</h2>
-            <p class="text-secondary">Everything you need to know about bathroom resurfacing in Sydney.</p>
-        </div>
-        <div class="space-y-3" id="faq-list">
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4 flex items-center gap-2"><span class="material-symbols-outlined text-lg text-tertiary-fixed-dim flex-shrink-0" aria-hidden="true">help</span> How long does bathroom resurfacing take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most jobs complete in a single day (6-8 hours). Your bathroom is ready to use 24 hours after. Compare that to 2-4 weeks for a traditional renovation.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4 flex items-center gap-2"><span class="material-symbols-outlined text-lg text-tertiary-fixed-dim flex-shrink-0" aria-hidden="true">help</span> How much does it cost in Sydney?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Every bathroom is different, so we provide fixed-price quotes based on your photos. A complete bathroom resurfacing package typically costs a fraction of the $25,000-$50,000 you'd spend on a full renovation &mdash; saving you up to 70%. Send us photos for an accurate quote within hours.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4 flex items-center gap-2"><span class="material-symbols-outlined text-lg text-tertiary-fixed-dim flex-shrink-0" aria-hidden="true">help</span> How long does resurfacing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">10-15 years with proper care. We use commercial-grade two-part epoxy coatings resistant to chipping, peeling, and yellowing. Workmanship warranty included.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4 flex items-center gap-2"><span class="material-symbols-outlined text-lg text-tertiary-fixed-dim flex-shrink-0" aria-hidden="true">help</span> Is it worth it vs full renovation?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">For most homeowners, yes. 70% cheaper, 1 day vs 2-4 weeks, zero demolition, no waste. Ideal for rentals, pre-sale prep, and bathrooms with solid structure but dated aesthetics.</p></div></div>
-        </div>
-        <div class="text-center mt-8">
-            <a href="faqs.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all">View All FAQs <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+<!-- FAQ LINK -->
+<section class="py-8 sm:py-10 bg-white">
+    <div class="max-w-4xl mx-auto px-6 sm:px-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-surface rounded-xl border border-surface-container">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-2xl text-tertiary-fixed-dim" aria-hidden="true">help</span>
+                <div>
+                    <p class="font-bold text-primary text-sm">Have questions about resurfacing?</p>
+                    <p class="text-xs text-secondary">Cost, timing, durability, warranty &mdash; we&rsquo;ve answered them all.</p>
+                </div>
+            </div>
+            <a href="faqs.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:opacity-90 transition-all whitespace-nowrap">View FAQs <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
         </div>
     </div>
 </section>
@@ -917,6 +956,40 @@ document.addEventListener('DOMContentLoaded', function () {
         if (counter) counter.textContent = (tSlide + 1) + ' / ' + tTotal;
     };
 
+    /* -- Portfolio Carousel -- */
+    var pSlide = 0;
+    var pTotal = 6;
+    var P_GAP = 24;
+
+    function sizePortfolioCards() {
+        var container = document.getElementById('portfolio-carousel');
+        var track = document.getElementById('portfolio-track');
+        if (!container || !track) return;
+        var w = container.offsetWidth;
+        var isMobile = window.innerWidth < 640;
+        var perView = isMobile ? 1 : 3;
+        var cardW = (w - P_GAP * (perView - 1)) / perView;
+        Array.from(track.querySelectorAll('.p-card')).forEach(function(c) {
+            c.style.width = cardW + 'px';
+            c.style.minWidth = cardW + 'px';
+        });
+    }
+    sizePortfolioCards();
+
+    window.movePortfolio = function(dir) {
+        var track = document.getElementById('portfolio-track');
+        var counter = document.getElementById('portfolio-counter');
+        if (!track) return;
+        var isMobile = window.innerWidth < 640;
+        var perView = isMobile ? 1 : 3;
+        var maxSlide = pTotal - perView;
+        pSlide = Math.max(0, Math.min(maxSlide, pSlide + dir));
+        var card = track.querySelector('.p-card');
+        var cardWidth = card.offsetWidth + P_GAP;
+        track.style.transform = 'translateX(-' + (pSlide * cardWidth) + 'px)';
+        if (counter) counter.textContent = (pSlide + 1) + ' / ' + pTotal;
+    };
+
     var resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
@@ -927,6 +1000,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (track) track.style.transform = 'translateX(0)';
             var counter = document.getElementById('testimonial-counter');
             if (counter) counter.textContent = '1 / ' + tTotal;
+
+            pSlide = 0;
+            sizePortfolioCards();
+            var pTrack = document.getElementById('portfolio-track');
+            if (pTrack) pTrack.style.transform = 'translateX(0)';
+            var pCounter = document.getElementById('portfolio-counter');
+            if (pCounter) pCounter.textContent = '1 / ' + pTotal;
         }, 100);
     });
 
