@@ -140,36 +140,65 @@
 </section>
 
 <!-- OUR PROCESS -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Resurface Your Tiles</h2>
-        <p class="text-secondary max-w-3xl mb-10">Our 5-step Hawk Glass-Tech process ensures a lasting, professional finish. No shortcuts, no mess.</p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">1</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Deep Clean</h3>
-                <p class="text-xs text-secondary">Hawk Micro Clean 2-step system removes soap scum, silicone residue, and contaminants.</p>
+        <div class="max-w-3xl mb-10">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Process</span>
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">How We Resurface Your Tiles</h2>
+            <p class="text-secondary">Every step exists for a reason. Here&rsquo;s exactly what we do and why &mdash; from surface prep to that factory-fresh finish.</p>
+        </div>
+        <div class="space-y-4 max-w-3xl">
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">search</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 1</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Assessment &amp; Surface Check</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">We inspect every tile for cracks, loose edges, and adhesion. We check grout condition too &mdash; if grout needs replacing, we recommend doing both at once.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Resurfacing over cracked or loose tiles means the coating cracks too. We fix the foundation first.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">2</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Etch Surface</h3>
-                <p class="text-xs text-secondary">Hawk Extra Strength concentrated acid etch breaks down factory tile glaze for primer adhesion.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">cleaning_services</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 2</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Deep Clean &amp; Etch</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Tiles degreased, cleaned of soap scum, mould, and mineral buildup. Then chemically etched to create a surface the coating can grip &mdash; especially important on glazed tiles.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Glazed ceramic tiles are the hardest surface to bond to. Without etching, any coating will peel. This step makes or breaks the job.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">3</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Epoxy Primer</h3>
-                <p class="text-xs text-secondary">Hawk Ultra-Grip 4000 two-component epoxy primer. High build, fills minor imperfections.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">build</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 3</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Repair &amp; Fill</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Cracked tiles, chipped edges, or damaged grout lines repaired with epoxy filler and sanded flush. Surface needs to be perfectly smooth before coating.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: A resurfaced tile is only as good as the surface underneath. Filling imperfections now prevents them showing through.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">4</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Topcoat Spray</h3>
-                <p class="text-xs text-secondary">Hawk Glass-Tech 9200 acrylic urethane topcoat in 2-3 coats. Deep gloss or satin finish.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">format_paint</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 4</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Primer &amp; Colour Coat</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Specialist bonding primer applied, followed by architectural-grade colour coat in your chosen finish. Spray-applied using HVLP equipment for an even, professional result.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: This is where your dated brown tiles become clean, modern white. Spray technique gives a factory finish that brush or roller can&rsquo;t match.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">5</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Cure</h3>
-                <p class="text-xs text-secondary">4-hour return-to-service with Glass-Tech. Hawk Bio Zapp odour eliminator for apartment work.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">verified</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 5</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Clear Coat &amp; Seal</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Protective clear coat for extra durability and UV resistance. Grout lines sealed. 24-48 hour cure, then bathroom is ready.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: The clear coat adds a protective shell that resists scratches, stains, and yellowing. Keeps the finish looking fresh for years.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 max-w-3xl p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary flex-shrink-0" aria-hidden="true">cleaning_services</span>
+            <div>
+                <p class="font-bold text-primary text-sm mb-1">No Mess Guarantee</p>
+                <p class="text-xs text-secondary">We contain the work area with drop sheets, vacuum all dust as we go, and leave your bathroom cleaner than we found it.</p>
             </div>
         </div>
     </div>
@@ -241,7 +270,7 @@
             <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" aria-hidden="true">construction</span> Retiling</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Cost: $5,000 &ndash; $15,000</li>
+                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Cost: thousands more &mdash; <a href="#quote" class="underline">get a free quote</a></li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Timeframe: 2-4 weeks</li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Demolition required</li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> New waterproofing needed</li>

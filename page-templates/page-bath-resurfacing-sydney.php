@@ -133,43 +133,72 @@
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">payments</span>
                 <h3 class="font-bold text-primary mb-2">Cost of Replacement</h3>
-                <p class="text-sm text-secondary leading-relaxed">Removing and replacing a bath costs $3,000-$8,000 including plumbing. Resurfacing achieves a like-new result for a fraction.</p>
+                <p class="text-sm text-secondary leading-relaxed">Removing and replacing a bath costs thousands including plumbing. Resurfacing achieves a like-new result for a fraction.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- OUR PROCESS -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Resurface Your Bath</h2>
-        <p class="text-secondary max-w-3xl mb-10">Our 5-step Hawk Glass-Tech process ensures a factory-quality finish that lasts up to 10 years.</p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">1</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Surface Prep</h3>
-                <p class="text-xs text-secondary">Deep clean with Hawk Micro Clean system. Remove all soap scum, oils, and contaminants.</p>
+        <div class="max-w-3xl mb-10">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Process</span>
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">How We Resurface Your Bath</h2>
+            <p class="text-secondary">Every step exists for a reason. Here&rsquo;s exactly what we do and why &mdash; from preparation to that factory-smooth finish.</p>
+        </div>
+        <div class="space-y-4 max-w-3xl">
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">search</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 1</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Assessment &amp; Repair</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">We inspect for chips, cracks, rust spots, and coating condition. Any damage is repaired with two-part epoxy filler and sanded smooth.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Coating over unfixed chips creates weak points that peel within months. Proper repair means a smooth, lasting finish.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">2</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Etch &amp; Prime</h3>
-                <p class="text-xs text-secondary">Acid etch creates a micro-rough surface. Hawk Ultra-Grip 4000 epoxy primer bonds permanently.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">construction</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 2</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Surface Preparation</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">The entire surface is chemically etched and degreased. This creates microscopic grooves the coating bonds to &mdash; like sanding before painting, but at a molecular level.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: This step separates a $50 DIY kit from a professional job. Without proper etching, coatings peel within 6-12 months.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">3</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Repair</h3>
-                <p class="text-xs text-secondary">Fill chips, cracks, and imperfections with fibreglass or epoxy filler. Sand smooth.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">layers</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 3</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Priming</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Specialist adhesion primer bonds to both the original bath material and the top coat &mdash; creating a bridge between old and new.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Skipping primer is why DIY bath paint kits from Bunnings fail. The top coat needs something to grip to.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">4</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Topcoat</h3>
-                <p class="text-xs text-secondary">Hawk Glass-Tech 9200 acrylic urethane topcoat sprayed in 2-3 coats. Deep resin-rich gloss finish.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">format_paint</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 4</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Top Coat Application</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Hawk Glass-Tech two-part acrylic urethane coating spray-applied in multiple thin layers using professional HVLP equipment. Factory-smooth, glass-like finish.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Spray application is the difference between &ldquo;looks painted&rdquo; and &ldquo;looks brand new.&rdquo; Multiple thin coats build durability without drips.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">5</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Cure &amp; Seal</h3>
-                <p class="text-xs text-secondary">4-hour return to service with Glass-Tech. Silicone sealed at wall junctions. Ready to use next day.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">verified</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 5</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Cure &amp; Quality Check</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Coating cures for 24 hours. Final inspection for consistency, coverage, and finish quality. Bath ready to use the next day.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Rushing the cure is the #1 cause of coating failure. 24 hours gives the chemical bond time to fully harden.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 max-w-3xl p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary flex-shrink-0" aria-hidden="true">cleaning_services</span>
+            <div>
+                <p class="font-bold text-primary text-sm mb-1">No Mess Guarantee</p>
+                <p class="text-xs text-secondary">We contain the work area with drop sheets, vacuum all dust as we go, and leave your bathroom cleaner than we found it.</p>
             </div>
         </div>
     </div>
@@ -241,7 +270,7 @@
             <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" aria-hidden="true">construction</span> Full Replacement</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Cost: $3,000 &ndash; $8,000</li>
+                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Cost: thousands more &mdash; <a href="#quote" class="underline">get a free quote</a></li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Takes 3-5 days</li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Plumber required</li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Demolition needed</li>
