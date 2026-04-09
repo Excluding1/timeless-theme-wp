@@ -86,7 +86,7 @@
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">70%</p>
+                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
                     <p class="text-xs text-secondary">Save vs new bath</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>

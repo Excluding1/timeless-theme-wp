@@ -263,7 +263,7 @@ function timeless_seo_meta() {
     /* Per-page meta descriptions — unique for each service page */
     $desc_map = array(
         'shower-regrouting-sydney'              => 'Professional shower regrouting in Sydney. Full grout removal and waterproof epoxy replacement. Same-day service, free quotes.',
-        'bath-resurfacing-sydney'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, up to 70% cheaper than replacement.',
+        'bath-resurfacing-sydney'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, 80–90% cheaper than replacement.',
         'tile-resurfacing-sydney'               => 'Tile resurfacing Sydney. Transform outdated bathroom tiles with durable high-gloss finish. No demolition, one-day turnaround.',
         'vanity-refinishing-sydney'             => 'Vanity refinishing Sydney. Benchtop resurfacing and cabinet respray with 900+ colour options. Same-day service.',
         'basin-restoration-sydney'              => 'Basin restoration Sydney. Expert chip repair and full resurface for porcelain, acrylic, and cast iron basins.',
@@ -291,7 +291,7 @@ function timeless_seo_meta() {
 
     if ( is_front_page() ) {
         $title = 'Bathroom Resurfacing Sydney | ' . $site;
-        $desc  = 'Sydney\'s specialist bathroom resurfacing and shower regrouting service. One-day transformations, up to 70% cheaper than renovation. Free quotes.';
+        $desc  = 'Sydney\'s specialist bathroom resurfacing and shower regrouting service. One-day transformations, 80–90% cheaper than renovation. Free quotes.';
     } elseif ( is_singular() ) {
         $title = get_the_title() . ' | ' . $site;
         $slug  = get_post_field( 'post_name', get_post() );

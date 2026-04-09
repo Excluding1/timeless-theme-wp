@@ -71,10 +71,9 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Outdated pink, green, or brown tiles? We transform them into a clean, modern finish using the <strong>Hawk Glass-Tech professional coating system</strong> &mdash; no demolition, no dust, no weeks of disruption. Most jobs completed in 1-2 days.
             </p>
-            <p class="text-2xl font-extrabold text-primary mb-4">From $1,210 <span class="text-sm font-normal text-secondary">inc GST</span></p>
             <div class="flex items-center gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">70%</p>
+                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
                     <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
@@ -208,7 +207,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save Up to 70%</h3>
+                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">

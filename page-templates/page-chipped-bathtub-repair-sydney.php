@@ -87,7 +87,7 @@
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">70%</p>
+                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
                     <p class="text-xs text-secondary">Save vs replace</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
@@ -253,7 +253,7 @@
                 <ul class="space-y-3 text-sm text-secondary">
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Whole bath is worn, stained, or peeling</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Completed in 1 day</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Saves up to 70% vs new bath</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Saves 80–90% vs new bath</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Brand new finish and colour</li>
                 </ul>
                 <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="inline-block mt-4 text-sm text-primary underline font-medium hover:text-primary-container">Learn about resurfacing &rarr;</a>
