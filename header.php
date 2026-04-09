@@ -40,6 +40,7 @@ $phone      = timeless_phone();
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Before &amp; After</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>">Service Areas</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>">FAQs</a>
                 <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Get a Free Quote</a>
             </div>
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
@@ -127,6 +128,7 @@ $phone      = timeless_phone();
             <a class="text-primary py-3 text-lg font-semibold" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" onclick="closeMobile()">Before &amp; After</a>
             <a class="text-primary py-3 text-lg font-semibold" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>" onclick="closeMobile()">Service Areas</a>
             <a class="text-primary py-3 text-lg font-semibold" href="<?php echo esc_url( home_url( '/about/' ) ); ?>" onclick="closeMobile()">About</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>" onclick="closeMobile()">FAQs</a>
             <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" onclick="closeMobile()">Get a Free Quote</a>
             <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:<?php echo $phone_link; ?>" onclick="closeMobile()"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call <?php echo $phone; ?></a>
         </div>

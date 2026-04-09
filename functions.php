@@ -187,6 +187,123 @@ remove_action( 'wp_head', 'rel_canonical' );
 add_action( 'wp_head', 'timeless_canonical_url', 1 );
 
 /* ─────────────────────────────────────────────
+   5b. SEO — Meta descriptions + Open Graph tags
+   ───────────────────────────────────────────── */
+function timeless_seo_meta() {
+    $site  = 'Timeless Resurfacing';
+    $img   = get_template_directory_uri() . '/images/homepage/after.jpg';
+
+    if ( is_front_page() ) {
+        $title = 'Bathroom Resurfacing Sydney | ' . $site;
+        $desc  = 'Sydney\'s specialist bathroom resurfacing and shower regrouting service. One-day transformations, up to 70% cheaper than renovation. Free quotes.';
+    } elseif ( is_singular() ) {
+        $title = get_the_title() . ' | ' . $site;
+        $post  = get_post();
+        $raw   = wp_strip_all_tags( $post->post_content );
+        $desc  = wp_trim_words( $raw, 25, '...' );
+        if ( strlen( $desc ) < 50 ) {
+            $desc = get_the_title() . ' — professional bathroom resurfacing services in Sydney. Free quotes, same-day service. ' . $site;
+        }
+    } else {
+        $title = wp_title( '|', false, 'right' ) . $site;
+        $desc  = 'Professional bathroom resurfacing and shower regrouting across Greater Sydney. Free photo-based quotes. ' . $site;
+    }
+
+    $desc = substr( $desc, 0, 160 );
+    $url  = is_front_page() ? home_url( '/' ) : get_permalink();
+    $url  = strtok( $url, '?' );
+
+    echo '<meta name="description" content="' . esc_attr( $desc ) . '" />' . "\n";
+    echo '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />' . "\n";
+    echo '<meta property="og:type" content="website" />' . "\n";
+    echo '<meta property="og:title" content="' . esc_attr( $title ) . '" />' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr( $desc ) . '" />' . "\n";
+    echo '<meta property="og:url" content="' . esc_url( $url ) . '" />' . "\n";
+    echo '<meta property="og:image" content="' . esc_url( $img ) . '" />' . "\n";
+    echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+}
+add_action( 'wp_head', 'timeless_seo_meta', 2 );
+
+/* ─────────────────────────────────────────────
+   5c. XML SITEMAP — Auto-generated at /sitemap.xml
+   ───────────────────────────────────────────── */
+function timeless_sitemap_xml() {
+    global $wp;
+    $request = $wp->request;
+
+    if ( $request !== 'sitemap.xml' ) return;
+
+    header( 'Content-Type: application/xml; charset=UTF-8' );
+    header( 'X-Robots-Tag: noindex' );
+
+    echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+    // Homepage
+    echo '<url><loc>' . esc_url( home_url( '/' ) ) . '</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>' . "\n";
+
+    // All published pages
+    $pages = get_posts( array(
+        'post_type'   => 'page',
+        'post_status' => 'publish',
+        'numberposts' => -1,
+        'orderby'     => 'menu_order',
+        'order'       => 'ASC',
+    ) );
+
+    foreach ( $pages as $page ) {
+        $url      = get_permalink( $page );
+        $modified = get_the_modified_date( 'Y-m-d', $page );
+        $slug     = $page->post_name;
+
+        // Higher priority for service pages
+        if ( strpos( $slug, 'sydney' ) !== false ) {
+            $priority = '0.8';
+            $freq     = 'monthly';
+        } elseif ( in_array( $slug, array( 'about', 'contact', 'gallery', 'faqs' ), true ) ) {
+            $priority = '0.7';
+            $freq     = 'monthly';
+        } else {
+            $priority = '0.5';
+            $freq     = 'monthly';
+        }
+
+        echo '<url>';
+        echo '<loc>' . esc_url( $url ) . '</loc>';
+        echo '<lastmod>' . $modified . '</lastmod>';
+        echo '<changefreq>' . $freq . '</changefreq>';
+        echo '<priority>' . $priority . '</priority>';
+        echo '</url>' . "\n";
+    }
+
+    echo '</urlset>';
+    exit;
+}
+add_action( 'template_redirect', 'timeless_sitemap_xml' );
+
+/* Register /sitemap.xml rewrite rule */
+function timeless_sitemap_rewrite() {
+    add_rewrite_rule( 'sitemap\.xml$', 'index.php?sitemap=1', 'top' );
+}
+add_action( 'init', 'timeless_sitemap_rewrite' );
+
+function timeless_sitemap_query_var( $vars ) {
+    $vars[] = 'sitemap';
+    return $vars;
+}
+add_filter( 'query_vars', 'timeless_sitemap_query_var' );
+
+/* Disable WordPress default sitemaps (wp-sitemap.xml) to avoid duplicates */
+add_filter( 'wp_sitemaps_enabled', '__return_false' );
+
+/* Add sitemap link to robots.txt */
+function timeless_robots_txt( $output, $public ) {
+    $output .= "\nSitemap: " . home_url( '/sitemap.xml' ) . "\n";
+    return $output;
+}
+add_filter( 'robots_txt', 'timeless_robots_txt', 10, 2 );
+
+/* ─────────────────────────────────────────────
    6. DISABLE COMMENTS (not needed for trades site)
    ────────────────��──────────────────────────── */
 function timeless_disable_comments() {

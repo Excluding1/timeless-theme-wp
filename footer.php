@@ -44,6 +44,7 @@ $phone      = timeless_phone();
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Before &amp; After</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>">Service Areas</a></li>
+                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>">FAQs</a></li>
             </ul>
         </div>
         <div>
