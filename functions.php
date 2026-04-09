@@ -169,6 +169,23 @@ remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 
+/* Self-referencing canonical URL — fixes "Duplicate without user-selected canonical" */
+function timeless_canonical_url() {
+    if ( is_front_page() ) {
+        $url = home_url( '/' );
+    } elseif ( is_singular() ) {
+        $url = get_permalink();
+    } else {
+        $url = home_url( $_SERVER['REQUEST_URI'] );
+    }
+    $url = strtok( $url, '?' );
+    $url = preg_replace( '#^http://#', 'https://', $url );
+    $url = trailingslashit( $url );
+    echo '<link rel="canonical" href="' . esc_url( $url ) . '" />' . "\n";
+}
+remove_action( 'wp_head', 'rel_canonical' );
+add_action( 'wp_head', 'timeless_canonical_url', 1 );
+
 /* ─────────────────────────────────────────────
    6. DISABLE COMMENTS (not needed for trades site)
    ────────────────��──────────────────────────── */
