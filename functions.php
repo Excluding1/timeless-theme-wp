@@ -25,7 +25,73 @@ function timeless_setup() {
 }
 add_action( 'after_setup_theme', 'timeless_setup' );
 
-/* ────��────────────────────��───────────────────
+/* Auto-create all pages on theme activation (skips existing ones) */
+function timeless_create_pages() {
+    $pages = array(
+        array( 'title' => 'About',   'slug' => 'about',   'template' => 'page-templates/page-about.php' ),
+        array( 'title' => 'Contact', 'slug' => 'contact', 'template' => 'page-templates/page-contact.php' ),
+        array( 'title' => 'Gallery', 'slug' => 'gallery', 'template' => 'page-templates/page-gallery.php' ),
+        array( 'title' => 'Service Areas', 'slug' => 'areas', 'template' => 'page-templates/page-areas.php' ),
+        array( 'title' => 'FAQs',    'slug' => 'faqs',    'template' => 'page-templates/page-faqs.php' ),
+        array( 'title' => 'Privacy Policy', 'slug' => 'privacy', 'template' => 'page-templates/page-privacy.php' ),
+        // Service pages
+        array( 'title' => 'Shower Regrouting Sydney',  'slug' => 'services/shower-regrouting-sydney',  'template' => 'page-templates/page-shower-regrouting-sydney.php' ),
+        array( 'title' => 'Bath Resurfacing Sydney',   'slug' => 'services/bath-resurfacing-sydney',   'template' => 'page-templates/page-bath-resurfacing-sydney.php' ),
+        array( 'title' => 'Tile Resurfacing Sydney',   'slug' => 'services/tile-resurfacing-sydney',   'template' => 'page-templates/page-tile-resurfacing-sydney.php' ),
+        array( 'title' => 'Vanity Refinishing Sydney',  'slug' => 'services/vanity-refinishing-sydney',  'template' => 'page-templates/page-vanity-refinishing-sydney.php' ),
+        array( 'title' => 'Basin Restoration Sydney',   'slug' => 'services/basin-restoration-sydney',   'template' => 'page-templates/page-basin-restoration-sydney.php' ),
+        array( 'title' => 'Shower Sealing Sydney',      'slug' => 'services/shower-leak-repair-sydney',  'template' => 'page-templates/page-shower-leak-repair-sydney.php' ),
+        array( 'title' => 'Epoxy Grout Upgrade Sydney',  'slug' => 'services/epoxy-grout-upgrade-sydney',  'template' => 'page-templates/page-epoxy-grout-upgrade-sydney.php' ),
+        array( 'title' => 'Floor Tile Regrouting Sydney', 'slug' => 'services/floor-tile-regrouting-sydney', 'template' => 'page-templates/page-floor-tile-regrouting-sydney.php' ),
+        array( 'title' => 'Chip Repair Sydney',          'slug' => 'services/chipped-bathtub-repair-sydney', 'template' => 'page-templates/page-chipped-bathtub-repair-sydney.php' ),
+        array( 'title' => 'Full Bathroom Makeover Sydney', 'slug' => 'services/full-bathroom-makeover-sydney', 'template' => 'page-templates/page-full-bathroom-makeover-sydney.php' ),
+        array( 'title' => 'Property Manager Services Sydney', 'slug' => 'services/property-manager-bathroom-services-sydney', 'template' => 'page-templates/page-property-manager-bathroom-services-sydney.php' ),
+        array( 'title' => 'Stained Bathtub Resurfacing Sydney', 'slug' => 'services/stained-bathtub-resurfacing-sydney', 'template' => 'page-templates/page-stained-bathtub-resurfacing-sydney.php' ),
+        array( 'title' => 'Peeling Bathtub Resurfacing Sydney', 'slug' => 'services/peeling-bathtub-resurfacing-sydney', 'template' => 'page-templates/page-peeling-bathtub-resurfacing-sydney.php' ),
+        array( 'title' => 'Bathroom Tile Resurfacing Sydney',   'slug' => 'services/bathroom-tile-resurfacing-sydney', 'template' => 'page-templates/page-bathroom-tile-resurfacing-sydney.php' ),
+        array( 'title' => 'Mouldy Shower Grout Sydney',  'slug' => 'services/mouldy-shower-grout-sydney', 'template' => 'page-templates/page-mouldy-shower-grout-sydney.php' ),
+        array( 'title' => 'Cracked Grout Repair Sydney', 'slug' => 'services/cracked-grout-repair-sydney', 'template' => 'page-templates/page-cracked-grout-repair-sydney.php' ),
+        array( 'title' => 'Mouldy Silicone Replacement Sydney', 'slug' => 'services/mouldy-silicone-replacement-sydney', 'template' => 'page-templates/page-mouldy-silicone-replacement-sydney.php' ),
+        array( 'title' => 'Basin Chip Repair Sydney',    'slug' => 'services/basin-chip-repair-sydney', 'template' => 'page-templates/page-basin-chip-repair-sydney.php' ),
+        array( 'title' => 'Vanity Respray Sydney',       'slug' => 'services/vanity-respray-sydney', 'template' => 'page-templates/page-vanity-respray-sydney.php' ),
+    );
+
+    foreach ( $pages as $p ) {
+        $slug_parts = explode( '/', $p['slug'] );
+        $page_slug  = end( $slug_parts );
+        $existing   = get_page_by_path( $p['slug'] );
+        if ( $existing ) continue;
+
+        $parent_id = 0;
+        if ( count( $slug_parts ) > 1 ) {
+            $parent = get_page_by_path( $slug_parts[0] );
+            if ( ! $parent ) {
+                $parent_id = wp_insert_post( array(
+                    'post_title'  => 'Services',
+                    'post_name'   => 'services',
+                    'post_status' => 'publish',
+                    'post_type'   => 'page',
+                ) );
+            } else {
+                $parent_id = $parent->ID;
+            }
+        }
+
+        wp_insert_post( array(
+            'post_title'  => $p['title'],
+            'post_name'   => $page_slug,
+            'post_status' => 'publish',
+            'post_type'   => 'page',
+            'post_parent' => $parent_id,
+            'meta_input'  => array( '_wp_page_template' => $p['template'] ),
+        ) );
+    }
+
+    flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'timeless_create_pages' );
+
+/* ────��──────────────────────────────────────
    2. ENQUEUE SCRIPTS & STYLES
    ───────────────────────────────────────────── */
 function timeless_scripts() {
