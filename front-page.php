@@ -117,37 +117,37 @@ get_header(); ?>
             <div class="h-1 w-20 bg-tertiary-fixed-dim mt-4"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
+            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">shower</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Shower Regrouting</h3>
                 <p class="text-secondary text-sm mb-6 leading-relaxed">Full removal of old, cracked grout and replacement with premium waterproof epoxy. Prevents leaks and stops mould.</p>
                 <div class="flex justify-between items-center"><span class="text-sm font-bold text-on-primary-container">Same-day service</span><span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span></div>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
+            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">bathtub</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Bath Resurfacing</h3>
                 <p class="text-secondary text-sm mb-6 leading-relaxed">Restore chipped, faded, or stained bathtubs to their original brilliant shine. Lasts up to 10 years.</p>
                 <div class="flex justify-between items-center"><span class="text-sm font-bold text-on-primary-container">One-day transformation</span><span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span></div>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
+            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">grid_view</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Tile Resurfacing</h3>
                 <p class="text-secondary text-sm mb-6 leading-relaxed">Transform outdated pink, green, or brown tiles into a clean, modern finish. No demolition required.</p>
                 <div class="flex justify-between items-center"><span class="text-sm font-bold text-on-primary-container">No demolition needed</span><span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span></div>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
+            <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">countertops</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Vanity Refinishing</h3>
                 <p class="text-secondary text-sm mb-6 leading-relaxed">Stone-fleck or sleek satin finish without the cost of replacement. Perfect for investment properties.</p>
                 <div class="flex justify-between items-center"><span class="text-sm font-bold text-on-primary-container">900+ colour options</span><span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span></div>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
+            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">faucet</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Basin Restoration</h3>
                 <p class="text-secondary text-sm mb-6 leading-relaxed">Expert repair and resurfacing of porcelain, cast iron, and acrylic bathroom basins.</p>
                 <div class="flex justify-between items-center"><span class="text-sm font-bold text-on-primary-container">Chip repair &amp; full resurface</span><span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span></div>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all group reveal block">
+            <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="bg-white p-6 sm:p-8 rounded-xl hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block">
                 <span class="material-symbols-outlined text-4xl text-primary mb-4 block" aria-hidden="true">water_damage</span>
                 <h3 class="text-xl font-bold text-primary mb-2">Shower Sealing</h3>
                 <p class="text-secondary text-sm mb-6 leading-relaxed">Leaking shower? We locate the source and seal with precision waterproof silicone and epoxy grout.</p>
@@ -165,22 +165,30 @@ get_header(); ?>
             <p class="text-secondary">Why thousands of Sydney homeowners choose resurfacing.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="bg-surface-container-low rounded-xl p-8 border-2 border-surface-container relative">
-                <div class="absolute -top-3 left-6 bg-surface-container-low px-3"><span class="text-xs font-bold text-outline uppercase tracking-widest">Full Renovation</span></div>
-                <div class="space-y-4 mt-2">
-                    <div class="flex justify-between py-2 border-b border-surface-container"><span class="text-sm text-secondary">Cost</span><span class="text-lg font-bold text-error">$25,000 - $50,000</span></div>
-                    <div class="flex justify-between py-2 border-b border-surface-container"><span class="text-sm text-secondary">Timeline</span><span class="text-sm font-bold">2 - 4 weeks</span></div>
-                    <div class="flex justify-between py-2 border-b border-surface-container"><span class="text-sm text-secondary">Demolition</span><span class="text-sm font-bold text-error">Required</span></div>
-                    <div class="flex justify-between py-2"><span class="text-sm text-secondary">Usable</span><span class="text-sm font-bold text-error">After 2+ weeks</span></div>
+            <div class="bg-red-50/50 rounded-2xl p-8 border-2 border-red-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-red-100 text-red-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Expensive</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-red-600" aria-hidden="true">delete</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Full Renovation</h3>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center py-2 border-b border-red-200/60"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-red-400 text-base" aria-hidden="true">close</span> Cost</span><span class="text-lg font-bold text-error">$25,000 - $50,000</span></div>
+                    <div class="flex justify-between items-center py-2 border-b border-red-200/60"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-red-400 text-base" aria-hidden="true">close</span> Timeline</span><span class="text-sm font-bold text-red-700">2 - 4 weeks</span></div>
+                    <div class="flex justify-between items-center py-2 border-b border-red-200/60"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-red-400 text-base" aria-hidden="true">close</span> Demolition</span><span class="text-sm font-bold text-error">Required</span></div>
+                    <div class="flex justify-between items-center py-2"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-red-400 text-base" aria-hidden="true">close</span> Usable</span><span class="text-sm font-bold text-error">After 2+ weeks</span></div>
                 </div>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary relative ring-2 ring-primary/10">
-                <div class="absolute -top-3 left-6 bg-surface px-3"><span class="text-xs font-bold text-primary uppercase tracking-widest">Resurfacing &#10003;</span></div>
-                <div class="space-y-4 mt-2">
-                    <div class="flex justify-between py-2 border-b border-primary/10"><span class="text-sm text-secondary">Cost</span><span class="text-lg font-bold text-primary">Up to 70% less</span></div>
-                    <div class="flex justify-between py-2 border-b border-primary/10"><span class="text-sm text-secondary">Timeline</span><span class="text-sm font-bold text-primary">1-3 days</span></div>
-                    <div class="flex justify-between py-2 border-b border-primary/10"><span class="text-sm text-secondary">Demolition</span><span class="text-sm font-bold text-primary">None</span></div>
-                    <div class="flex justify-between py-2"><span class="text-sm text-secondary">Usable</span><span class="text-sm font-bold text-primary">Next Day</span></div>
+            <div class="bg-primary/[0.03] rounded-2xl p-8 border-2 border-primary relative overflow-hidden ring-2 ring-primary/10 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-tertiary-fixed-dim text-on-tertiary-fixed text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Recommended</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-emerald-600" aria-hidden="true">check_circle</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Resurfacing</h3>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Cost</span><span class="text-lg font-bold text-primary">Up to 70% less</span></div>
+                    <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Timeline</span><span class="text-sm font-bold text-primary">1-3 days</span></div>
+                    <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Demolition</span><span class="text-sm font-bold text-primary">None</span></div>
+                    <div class="flex justify-between items-center py-2"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Usable</span><span class="text-sm font-bold text-primary">Next Day</span></div>
                 </div>
             </div>
         </div>
@@ -247,7 +255,7 @@ get_header(); ?>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
+            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="aspect-video overflow-hidden">
                     <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bathroom resurfacing Surry Hills apartment - resurfaced white bathtub" src="<?php echo get_template_directory_uri(); ?>/images/homepage/gallery-1.jpg" loading="lazy" width="600" height="338" />
                 </div>
@@ -257,7 +265,7 @@ get_header(); ?>
                     <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Property Manager, Inner Sydney</p>
                 </div>
             </article>
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
+            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="aspect-video overflow-hidden">
                     <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting Bondi Beach - restored white subway tiles" src="<?php echo get_template_directory_uri(); ?>/images/homepage/gallery-2.jpg" loading="lazy" width="600" height="338" />
                 </div>
@@ -267,7 +275,7 @@ get_header(); ?>
                     <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Homeowner, Eastern Suburbs</p>
                 </div>
             </article>
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
+            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="aspect-video overflow-hidden">
                     <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Full bathroom resurfacing Parramatta - resurfaced vanity and bath" src="<?php echo get_template_directory_uri(); ?>/images/homepage/gallery-3.jpg" loading="lazy" width="600" height="338" />
                 </div>
