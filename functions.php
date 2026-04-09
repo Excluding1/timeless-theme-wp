@@ -190,36 +190,69 @@ add_action( 'wp_head', 'timeless_canonical_url', 1 );
    5b. SEO — Meta descriptions + Open Graph tags
    ───────────────────────────────────────────── */
 function timeless_seo_meta() {
-    $site  = 'Timeless Resurfacing';
-    $img   = get_template_directory_uri() . '/images/homepage/after.jpg';
+    $site = 'Timeless Resurfacing';
+    $tpl  = get_template_directory_uri();
+    $img  = $tpl . '/images/homepage/after.jpg';
+
+    /* Per-page meta descriptions — unique for each service page */
+    $desc_map = array(
+        'shower-regrouting-sydney'              => 'Professional shower regrouting in Sydney. Full grout removal and waterproof epoxy replacement. Same-day service, free quotes.',
+        'bath-resurfacing-sydney'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, up to 70% cheaper than replacement.',
+        'tile-resurfacing-sydney'               => 'Tile resurfacing Sydney. Transform outdated bathroom tiles with durable high-gloss finish. No demolition, one-day turnaround.',
+        'vanity-refinishing-sydney'             => 'Vanity refinishing Sydney. Benchtop resurfacing and cabinet respray with 900+ colour options. Same-day service.',
+        'basin-restoration-sydney'              => 'Basin restoration Sydney. Expert chip repair and full resurface for porcelain, acrylic, and cast iron basins.',
+        'shower-leak-repair-sydney'             => 'Shower sealing and leak repair Sydney. Silicone replacement and waterproof epoxy regrouting to stop leaks permanently.',
+        'epoxy-grout-upgrade-sydney'            => 'Epoxy grout upgrade Sydney. Waterproof, mould-resistant grout for showers, bathrooms, and wet areas.',
+        'floor-tile-regrouting-sydney'          => 'Floor tile regrouting Sydney. Bathroom and laundry floor grout removal and replacement. Anti-slip finish available.',
+        'chipped-bathtub-repair-sydney'         => 'Chipped bathtub repair Sydney. Professional chip repair for baths and basins. Same-day fix, invisible results.',
+        'full-bathroom-makeover-sydney'         => 'Full bathroom makeover Sydney. Complete resurface package — bath, tiles, basin, and grout. 1-2 days, fraction of renovation cost.',
+        'property-manager-bathroom-services-sydney' => 'Property manager bathroom services Sydney. Multi-unit turnarounds, rental refreshes, and strata work. Volume pricing available.',
+        'stained-bathtub-resurfacing-sydney'    => 'Stained bathtub resurfacing Sydney. Remove yellow, brown, and rust stains permanently with professional recoating.',
+        'peeling-bathtub-resurfacing-sydney'    => 'Peeling bathtub resurfacing Sydney. Fix failed DIY kits and peeling coatings with professional two-part acrylic system.',
+        'bathroom-tile-resurfacing-sydney'      => 'Bathroom tile resurfacing Sydney. Change tile colour without removal. High-gloss or matte finish options.',
+        'mouldy-shower-grout-sydney'            => 'Mouldy shower grout removal Sydney. Strip black mould grout and replace with waterproof epoxy. Stops mould permanently.',
+        'cracked-grout-repair-sydney'           => 'Cracked grout repair Sydney. Fix crumbling, cracked shower and bathroom grout before water damage occurs.',
+        'mouldy-silicone-replacement-sydney'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',
+        'basin-chip-repair-sydney'              => 'Basin chip repair Sydney. Invisible repairs for chipped porcelain and ceramic basins. Same-day service.',
+        'vanity-respray-sydney'                 => 'Vanity respray Sydney. Cabinet door and drawer front respray with 2-pack polyurethane. 900+ colours.',
+        'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Qualified, insured, up to 3-year warranty on every job.',
+        'contact'  => 'Contact Timeless Resurfacing for a free bathroom resurfacing quote in Sydney. Send photos, get a fixed-price quote next business day.',
+        'gallery'  => 'Before and after bathroom resurfacing photos across Sydney. Real transformations by Timeless Resurfacing.',
+        'areas'    => 'Bathroom resurfacing service areas across Greater Sydney, Wollongong, Central Coast, and Blue Mountains.',
+        'faqs'     => 'Frequently asked questions about bathroom resurfacing in Sydney. Cost, timing, durability, warranty, and process explained.',
+        'privacy'  => 'Privacy policy for Timeless Resurfacing. How we collect, use, and protect your personal information.',
+    );
 
     if ( is_front_page() ) {
         $title = 'Bathroom Resurfacing Sydney | ' . $site;
         $desc  = 'Sydney\'s specialist bathroom resurfacing and shower regrouting service. One-day transformations, up to 70% cheaper than renovation. Free quotes.';
     } elseif ( is_singular() ) {
         $title = get_the_title() . ' | ' . $site;
-        $post  = get_post();
-        $raw   = wp_strip_all_tags( $post->post_content );
-        $desc  = wp_trim_words( $raw, 25, '...' );
-        if ( strlen( $desc ) < 50 ) {
-            $desc = get_the_title() . ' — professional bathroom resurfacing services in Sydney. Free quotes, same-day service. ' . $site;
-        }
+        $slug  = get_post_field( 'post_name', get_post() );
+        $desc  = isset( $desc_map[ $slug ] ) ? $desc_map[ $slug ] : get_the_title() . ' — professional bathroom resurfacing in Sydney. Free quotes. ' . $site;
     } else {
         $title = wp_title( '|', false, 'right' ) . $site;
         $desc  = 'Professional bathroom resurfacing and shower regrouting across Greater Sydney. Free photo-based quotes. ' . $site;
     }
 
     $desc = substr( $desc, 0, 160 );
-    $url  = is_front_page() ? home_url( '/' ) : get_permalink();
-    $url  = strtok( $url, '?' );
+
+    /* Build canonical-matching URL (HTTPS, trailing slash, no query params) */
+    $url = is_front_page() ? home_url( '/' ) : get_permalink();
+    $url = strtok( $url, '?' );
+    $url = preg_replace( '#^http://#', 'https://', $url );
+    $url = trailingslashit( $url );
 
     echo '<meta name="description" content="' . esc_attr( $desc ) . '" />' . "\n";
     echo '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />' . "\n";
+    echo '<link rel="alternate" hreflang="en-au" href="' . esc_url( $url ) . '" />' . "\n";
     echo '<meta property="og:type" content="website" />' . "\n";
     echo '<meta property="og:title" content="' . esc_attr( $title ) . '" />' . "\n";
     echo '<meta property="og:description" content="' . esc_attr( $desc ) . '" />' . "\n";
     echo '<meta property="og:url" content="' . esc_url( $url ) . '" />' . "\n";
     echo '<meta property="og:image" content="' . esc_url( $img ) . '" />' . "\n";
+    echo '<meta property="og:image:width" content="1200" />' . "\n";
+    echo '<meta property="og:image:height" content="630" />' . "\n";
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
 }
 add_action( 'wp_head', 'timeless_seo_meta', 2 );

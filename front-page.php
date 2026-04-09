@@ -194,7 +194,7 @@ get_header(); ?>
             <!-- Left: Process image placeholder -->
             <div class="hidden lg:block reveal">
                 <div class="rounded-2xl overflow-hidden aspect-[4/3] max-w-md mx-auto">
-                    <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/images/homepage/process.jpg" alt="Tradesperson resurfacing a bathtub in Sydney" loading="lazy" width="600" height="450" />
+                    <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/images/about/process.jpg" alt="Tradesperson resurfacing a bathtub in Sydney" loading="lazy" width="600" height="450" />
                 </div>
             </div>
             <!-- Right: Steps -->
@@ -350,7 +350,7 @@ get_header(); ?>
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tighter mb-6">Up to 3-Year Workmanship Warranty</h2>
-            <p class="text-white/70 leading-relaxed mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last 5 to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
+            <p class="text-white/70 leading-relaxed mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last up to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
             <div class="space-y-3">
                 <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
                 <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>

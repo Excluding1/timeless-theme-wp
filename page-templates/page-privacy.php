@@ -1,8 +1,6 @@
 <?php /* Template Name: Privacy Policy */ ?>
 <?php get_header(); ?>
 
-<main>
-
 <!-- BREADCRUMB -->
 <div class="pt-24 pb-2 px-6 sm:px-8 max-w-7xl mx-auto">
     <nav class="text-xs text-secondary" aria-label="Breadcrumb">
@@ -135,7 +133,5 @@
         </div>
     </div>
 </section>
-
-</main>
 
 <?php get_footer(); ?>

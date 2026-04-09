@@ -6,7 +6,7 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Bath Resurfacing Sydney",
-    "description": "Professional bath resurfacing and reglazing service in Sydney. Restore chipped, faded, or stained bathtubs to factory-new condition using the Hawk Glass-Tech system. 10-15 year lifespan.",
+    "description": "Professional bath resurfacing and reglazing service in Sydney. Restore chipped, faded, or stained bathtubs to factory-new condition using the Hawk Glass-Tech system. Up to 10 year lifespan.",
     "provider": {
         "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",

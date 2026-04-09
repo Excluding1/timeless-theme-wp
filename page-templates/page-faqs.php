@@ -17,8 +17,6 @@
 }
 </script>
 
-<main id="main-content">
-
 <!-- BREADCRUMB -->
 <div class="pt-24 pb-2 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
