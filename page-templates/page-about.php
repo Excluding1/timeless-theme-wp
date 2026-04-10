@@ -87,7 +87,7 @@
                 </div>
                 <div class="bg-primary-container p-7 rounded-xl">
                     <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block" aria-hidden="true">savings</span>
-                    <h4 class="font-bold text-white text-lg mb-2">Save Up to 70%</h4>
+                    <h4 class="font-bold text-white text-lg mb-2">Save 80–90%</h4>
                     <p class="text-sm text-on-primary-container leading-relaxed">A fraction of the cost of a full renovation. No demolition, no plumber, no weeks of disruption.</p>
                 </div>
                 <div class="bg-surface-container-low p-7 rounded-xl border-l-4 border-tertiary-fixed-dim">
@@ -222,7 +222,7 @@
 <!-- TRUST BAR -->
 <section class="bg-primary text-white py-5">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4 sm:gap-6">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">gavel</span><span class="text-xs font-bold">NSW Fair Trading Compliant</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>

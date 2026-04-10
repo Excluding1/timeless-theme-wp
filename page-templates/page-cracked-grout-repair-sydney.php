@@ -86,7 +86,7 @@
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">70%</p>
+                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
                     <p class="text-xs text-secondary">Save vs reno</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
@@ -109,7 +109,7 @@
 <!-- TRUST BAR -->
 <section class="bg-primary text-white py-4">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Fully Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Completed in 1 Day</span></div>
@@ -272,7 +272,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
             <div class="bg-surface-container-low rounded-xl p-8 text-center reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save Up to 70%</h3>
+                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of full renovation cost. No demolition, single-trade job, no weeks of disruption.</p>
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 reveal">
@@ -362,7 +362,7 @@
 <!-- TRUST BAR (BOTTOM) -->
 <section class="bg-primary text-white py-4">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Fully Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Completed in 1 Day</span></div>

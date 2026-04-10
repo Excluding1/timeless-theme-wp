@@ -71,10 +71,9 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Cracked, mouldy, or missing grout? We remove all old grout and replace it with premium <strong>waterproof epoxy grout</strong> that seals your shower, stops leaks, and prevents mould &mdash; most jobs completed in a single day (larger showers may take 2 days).
             </p>
-            <p class="text-2xl font-extrabold text-primary mb-4">From $1,080 <span class="text-sm font-normal text-secondary">inc GST</span></p>
             <div class="flex items-center gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">70%</p>
+                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
                     <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
@@ -102,7 +101,7 @@
 <!-- TRUST BAR -->
 <section class="bg-primary text-white py-4">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Qualified &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
@@ -141,36 +140,65 @@
 </section>
 
 <!-- OUR PROCESS -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Regrout Your Shower</h2>
-        <p class="text-secondary max-w-3xl mb-10">Our 5-step process ensures a lasting, watertight result. No shortcuts, no mess.</p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">1</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Assessment</h3>
-                <p class="text-xs text-secondary">We inspect the grout condition, check for leaks, and identify any underlying issues.</p>
+        <div class="max-w-3xl mb-10">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Process</span>
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">How We Regrout Your Shower</h2>
+            <p class="text-secondary">Every step exists for a reason. Here&rsquo;s exactly what we do and why it matters for a lasting, watertight result.</p>
+        </div>
+        <div class="space-y-4 max-w-3xl">
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">search</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 1</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Assessment &amp; Inspection</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">We check every grout line, corner joint, and silicone seal for cracks, hollow spots, mould penetration, and signs of water behind tiles.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Skipping this step is how water damage goes undetected until it becomes a $10,000+ problem.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">2</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Grout Removal</h3>
-                <p class="text-xs text-secondary">All old grout is carefully removed using oscillating tools. No damage to your tiles.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">construction</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 2</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Full Grout Removal</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Every millimetre of old grout is removed using oscillating multi-tools &mdash; not just scraped over the top. We go right down to the tile edge so new grout bonds directly to tile.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Grouting over old grout is the #1 reason DIY jobs fail within months. New grout can&rsquo;t bond to old grout.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">3</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Clean &amp; Prep</h3>
-                <p class="text-xs text-secondary">Tile edges cleaned, dust removed, and joints prepped for optimal grout adhesion.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">cleaning_services</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 3</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Deep Clean &amp; Surface Prep</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Tile edges cleaned of dust, debris, and residue. We treat for mould and mildew to kill spores at the source. Joints dried and prepped for maximum adhesion.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Mould spores left behind will grow back through the new grout within weeks. Proper kill treatment prevents this.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">4</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Epoxy Application</h3>
-                <p class="text-xs text-secondary">Premium epoxy grout applied with precision. Waterproof, stain-proof, mould-resistant.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">format_paint</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 4</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Epoxy Grout Application</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Commercial-grade epoxy grout applied &mdash; the same product used in hospitals and commercial kitchens. 100% waterproof, stain-proof, and naturally resists mould. No sealing needed, ever.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Regular cement grout is porous &mdash; it absorbs water and grows mould. Epoxy doesn&rsquo;t. That&rsquo;s the difference between a 2-year fix and a 10-year fix.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal">
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">5</div>
-                <h3 class="font-bold text-primary text-sm mb-2">Final Seal</h3>
-                <p class="text-xs text-secondary">Silicone sealed at all corners and junctions. 24-hour cure, then ready to use.</p>
+            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">verified</span></div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 5</span></div>
+                    <h3 class="font-bold text-primary text-base mb-1">Silicone Seal &amp; Final Check</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">All corners, edges, and fixtures sealed with premium anti-mould silicone. Final inspection of every joint. Shower ready to use in 24 hours.</p>
+                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Corners are where most showers leak. Silicone flexes with building movement &mdash; grout alone would crack at these junctions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 max-w-3xl p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary flex-shrink-0" aria-hidden="true">cleaning_services</span>
+            <div>
+                <p class="font-bold text-primary text-sm mb-1">No Mess Guarantee</p>
+                <p class="text-xs text-secondary">We contain the work area with drop sheets, vacuum all dust as we go, and leave your bathroom cleaner than we found it.</p>
             </div>
         </div>
     </div>
@@ -208,7 +236,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save Up to 70%</h3>
+                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
