@@ -71,19 +71,19 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Leaking shower? Most shower leaks are caused by failed silicone or cracked grout &mdash; not broken waterproofing. We fix the cause with professional <strong>silicone replacement</strong> and <strong>waterproof regrouting</strong>, stopping the leak and preventing further damage.
             </p>
-            <div class="flex items-center gap-6 mb-8">
+            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
                     <p class="text-xs text-secondary">Cheaper than plumber</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">1 Day</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">1 Day</p>
                     <p class="text-xs text-secondary">Same-day service</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">2yr</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">2yr</p>
                     <p class="text-xs text-secondary">Workmanship warranty</p>
                 </div>
             </div>

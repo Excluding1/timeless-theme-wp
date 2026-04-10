@@ -76,19 +76,19 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 No full renovation needed. We resurface, regrout, and restore what's already there &mdash; typically in 1-3 days &mdash; and provide fixed-price quotes from photos so you can approve jobs without site visits or back-and-forth.
             </p>
-            <div class="flex items-center gap-6 mb-8">
+            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">1-3 Days</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">1-3 Days</p>
                     <p class="text-xs text-secondary">Completion</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">Quick Quote</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">Quick Quote</p>
                     <p class="text-xs text-secondary">From photos</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">2yr</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">2yr</p>
                     <p class="text-xs text-secondary">Warranty</p>
                 </div>
             </div>

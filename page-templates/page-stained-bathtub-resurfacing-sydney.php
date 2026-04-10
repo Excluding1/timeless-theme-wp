@@ -79,19 +79,19 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Replacing the bath means $3,000&ndash;$8,000+ for demolition, plumbing, a new tub, and retiling. Our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional bath resurfacing</a> gives you a factory-smooth, brilliant white finish over the existing bath &mdash; in just one day, at a fraction of that cost.
             </p>
-            <div class="flex items-center gap-6 mb-8">
+            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">1 Day</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">1 Day</p>
                     <p class="text-xs text-secondary">Resurfacing time</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
                     <p class="text-xs text-secondary">Save vs new bath</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">2yr</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">2yr</p>
                     <p class="text-xs text-secondary">Warranty</p>
                 </div>
             </div>

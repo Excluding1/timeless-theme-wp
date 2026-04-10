@@ -71,19 +71,19 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Cracked, mouldy, or missing grout? We remove all old grout and replace it with premium <strong>waterproof epoxy grout</strong> that seals your shower, stops leaks, and prevents mould &mdash; most jobs completed in a single day (larger showers may take 2 days).
             </p>
-            <div class="flex items-center gap-6 mb-8">
+            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
                     <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">1 Day</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">1 Day</p>
                     <p class="text-xs text-secondary">Most jobs</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">2yr</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">2yr</p>
                     <p class="text-xs text-secondary">Grout warranty</p>
                 </div>
             </div>

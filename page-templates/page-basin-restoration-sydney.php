@@ -70,19 +70,19 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Chipped, stained, or worn basin? From quick chip repairs to full resurface, we restore porcelain, acrylic, and cast iron basins to like-new condition. Best value when combined with other bathroom work.
             </p>
-            <div class="flex items-center gap-6 mb-8">
+            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
                     <p class="text-xs text-secondary">Cheaper than new</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">1-3h</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">1-3h</p>
                     <p class="text-xs text-secondary">Quick turnaround</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">3yr</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">3yr</p>
                     <p class="text-xs text-secondary">Resurface warranty</p>
                 </div>
             </div>

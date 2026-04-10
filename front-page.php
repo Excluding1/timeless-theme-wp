@@ -99,11 +99,11 @@ get_header(); ?>
 
 <!-- TRUST BAR -->
 <section class="bg-primary text-white py-5">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4 sm:gap-6">
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-between items-center gap-3 sm:gap-6">
+        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">verified_user</span><span class="text-[0.65rem] sm:text-xs font-bold">Experienced &amp; Insured</span></div>
+        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">security</span><span class="text-[0.65rem] sm:text-xs font-bold">Public Liability Insured</span></div>
+        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">schedule</span><span class="text-[0.65rem] sm:text-xs font-bold">Same-Day Service</span></div>
+        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">verified</span><span class="text-[0.65rem] sm:text-xs font-bold">Up to 3-Year Warranty</span></div>
     </div>
 </section>
 
@@ -357,8 +357,8 @@ get_header(); ?>
 <section class="py-16 sm:py-24 bg-primary" id="warranty">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tighter mb-6">Up to 3-Year Workmanship Warranty</h2>
-            <p class="text-white/70 leading-relaxed mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last up to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tighter mb-4 sm:mb-6">Up to 3-Year Workmanship Warranty</h2>
+            <p class="text-sm sm:text-base text-white/70 leading-relaxed mb-6 sm:mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last up to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
             <div class="space-y-3">
                 <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
                 <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>

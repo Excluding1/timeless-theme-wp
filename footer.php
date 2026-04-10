@@ -15,7 +15,7 @@ $phone      = timeless_phone();
 
 <!-- FOOTER -->
 <footer class="bg-[#1B2A4A] pt-16 pb-8 text-white text-sm">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 px-6 sm:px-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 px-6 sm:px-8 max-w-7xl mx-auto">
         <div>
             <span class="text-xl font-bold block mb-4">Timeless Resurfacing</span>
             <p class="text-slate-300 text-xs mb-6 max-w-xs leading-relaxed">Sydney's bathroom resurfacing specialists. Experienced team, fully insured, locally owned.</p>

@@ -70,19 +70,19 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Tired-looking vanity dragging down your bathroom? We refinish benchtops, resurface vanity tops, and respray cabinets with professional-grade coatings. Transform your vanity in hours, not weeks &mdash; no replacement needed.
             </p>
-            <div class="flex items-center gap-6 mb-8">
+            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
                     <p class="text-xs text-secondary">Cheaper than new</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">1 Day</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">1 Day</p>
                     <p class="text-xs text-secondary">Most jobs</p>
                 </div>
-                <div class="h-10 w-px bg-surface-container"></div>
+                <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">3yr</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">3yr</p>
                     <p class="text-xs text-secondary">Refinish warranty</p>
                 </div>
             </div>
