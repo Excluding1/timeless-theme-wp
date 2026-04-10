@@ -525,6 +525,293 @@ function timeless_form_scripts() {
 add_action( 'wp_enqueue_scripts', 'timeless_form_scripts' );
 
 /* ─────────────────────────────────────────────
+   8b. CHAT WIDGET — Floating "Have a Question?" bubble
+   Separate from quote form so we can track widget leads
+   distinctly in the inbox and tune each flow independently.
+   ───────────────────────────────────────────── */
+
+/** Valid customer types — validates against dropdown options */
+function timeless_chat_widget_customer_types() {
+    return array( 'Home Owner', 'Renter', 'Construction', 'Real Estate', 'Business' );
+}
+
+/** AJAX handler for chat widget submissions */
+function timeless_handle_chat_widget() {
+    // Nonce check
+    if ( ! isset( $_POST['cw_nonce'] ) || ! wp_verify_nonce( $_POST['cw_nonce'], 'timeless_chat_widget' ) ) {
+        wp_send_json_error( array( 'message' => 'Security check failed. Please refresh the page.' ) );
+    }
+
+    // Rate limit — max 5 submissions per IP per hour
+    $ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+    $rate_key = 'cw_rate_' . md5( $ip );
+    $submissions = get_transient( $rate_key );
+    if ( $submissions !== false && $submissions >= 5 ) {
+        wp_send_json_error( array( 'message' => 'Too many messages. Please try again in an hour.' ) );
+    }
+
+    // Sanitise inputs
+    $name    = sanitize_text_field( $_POST['cw_name'] ?? '' );
+    $phone   = sanitize_text_field( $_POST['cw_phone'] ?? '' );
+    $email   = sanitize_email( $_POST['cw_email'] ?? '' );
+    $ctype   = sanitize_text_field( $_POST['cw_customer_type'] ?? '' );
+    $message = sanitize_textarea_field( $_POST['cw_message'] ?? '' );
+    $consent = isset( $_POST['cw_consent'] ) && ! empty( $_POST['cw_consent'] );
+    $page    = esc_url_raw( $_POST['cw_source_page'] ?? '' );
+
+    // Validate required fields
+    if ( empty( $name ) || empty( $phone ) || empty( $email ) || empty( $ctype ) || empty( $message ) ) {
+        wp_send_json_error( array( 'message' => 'Please fill in all required fields.' ) );
+    }
+    if ( ! is_email( $email ) ) {
+        wp_send_json_error( array( 'message' => 'Please provide a valid email address.' ) );
+    }
+    if ( ! in_array( $ctype, timeless_chat_widget_customer_types(), true ) ) {
+        wp_send_json_error( array( 'message' => 'Invalid customer type.' ) );
+    }
+    if ( ! $consent ) {
+        wp_send_json_error( array( 'message' => 'Please agree to the contact terms.' ) );
+    }
+
+    // Build email notification
+    $to      = timeless_email();
+    $subject = '[Chat Widget] ' . $name . ' — ' . $ctype;
+    $body    = "NEW CHAT WIDGET MESSAGE\n";
+    $body   .= "═══════════════════════════\n\n";
+    $body   .= "Name:          {$name}\n";
+    $body   .= "Phone:         {$phone}\n";
+    $body   .= "Email:         {$email}\n";
+    $body   .= "Customer Type: {$ctype}\n\n";
+    $body   .= "Message:\n{$message}\n\n";
+    $body   .= "═══════════════════════════\n";
+    $body   .= "Submitted from: " . ( $page ?: 'Unknown page' ) . "\n";
+    $body   .= "IP:             {$ip}\n";
+    $body   .= "Time:           " . current_time( 'D j M Y, g:i a' ) . "\n";
+
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+    $sent = wp_mail( $to, $subject, $body, $headers );
+
+    // Update rate limit counter regardless of mail success
+    if ( $submissions === false ) {
+        set_transient( $rate_key, 1, HOUR_IN_SECONDS );
+    } else {
+        set_transient( $rate_key, (int) $submissions + 1, HOUR_IN_SECONDS );
+    }
+
+    if ( $sent ) {
+        wp_send_json_success( array( 'message' => 'Thanks! We\'ll reply shortly.' ) );
+    } else {
+        wp_send_json_error( array( 'message' => 'Something went wrong. Please try again or call us.' ) );
+    }
+}
+add_action( 'wp_ajax_timeless_chat_widget', 'timeless_handle_chat_widget' );
+add_action( 'wp_ajax_nopriv_timeless_chat_widget', 'timeless_handle_chat_widget' );
+
+/**
+ * Render the chat widget HTML at the end of every frontend page.
+ * Hooked to wp_footer so it survives footer.php refactors.
+ */
+function timeless_render_chat_widget() {
+    if ( is_admin() ) {
+        return;
+    }
+    $customer_types = timeless_chat_widget_customer_types();
+    ?>
+    <!-- CHAT WIDGET — Floating "Have a Question?" bubble -->
+    <div id="chat-widget-container">
+        <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="<?php esc_attr_e( 'Open chat', 'timeless' ); ?>">
+            <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;" aria-hidden="true">chat</span>
+        </button>
+
+        <div id="chat-widget-panel" class="fixed bottom-24 md:bottom-24 right-4 md:right-6 z-[70] w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden hidden transform origin-bottom-right transition-all duration-200" style="max-height: calc(100vh - 8rem);">
+            <div class="bg-teal-700 text-white px-5 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;" aria-hidden="true">chat</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-sm"><?php esc_html_e( 'Have a Question?', 'timeless' ); ?></p>
+                        <p class="text-[0.65rem] text-white/70"><?php esc_html_e( 'We reply within hours', 'timeless' ); ?></p>
+                    </div>
+                </div>
+                <button id="chat-widget-close" class="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="<?php esc_attr_e( 'Close chat', 'timeless' ); ?>">
+                    <span class="material-symbols-outlined text-xl" aria-hidden="true">close</span>
+                </button>
+            </div>
+            <div class="p-5 overflow-y-auto" style="max-height: calc(100vh - 16rem);">
+                <div class="bg-surface-container-low rounded-2xl rounded-tl-sm p-3 mb-5 max-w-[85%]">
+                    <p class="text-xs text-secondary leading-relaxed"><?php esc_html_e( "Hi! 👋 Share your contact details and we'll reply shortly with a quote.", 'timeless' ); ?></p>
+                </div>
+                <form id="chat-widget-form" class="space-y-3">
+                    <input type="text" name="cw_name" placeholder="<?php esc_attr_e( 'Name *', 'timeless' ); ?>" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none" />
+                    <div class="flex gap-2">
+                        <span class="flex items-center px-3 bg-surface-container-low border border-surface-container rounded-lg text-sm font-medium text-secondary">🇦🇺 +61</span>
+                        <input type="tel" name="cw_phone" placeholder="<?php esc_attr_e( 'Phone *', 'timeless' ); ?>" required class="flex-1 px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none" />
+                    </div>
+                    <input type="email" name="cw_email" placeholder="<?php esc_attr_e( 'Email *', 'timeless' ); ?>" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none" />
+                    <select name="cw_customer_type" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none bg-white">
+                        <option value=""><?php esc_html_e( 'What customer are you? *', 'timeless' ); ?></option>
+                        <?php foreach ( $customer_types as $type ) : ?>
+                            <option value="<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $type ); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <textarea name="cw_message" placeholder="<?php esc_attr_e( 'Message *', 'timeless' ); ?>" required rows="3" class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none resize-none"></textarea>
+                    <label class="flex items-start gap-2 text-[0.65rem] text-secondary leading-relaxed cursor-pointer">
+                        <input type="checkbox" name="cw_consent" required checked class="mt-0.5 text-teal-700 rounded" />
+                        <span><?php esc_html_e( 'By submitting you agree to receive SMS or emails for the provided channel. Rates may apply.', 'timeless' ); ?></span>
+                    </label>
+                    <?php wp_nonce_field( 'timeless_chat_widget', 'cw_nonce' ); ?>
+                    <input type="hidden" name="action" value="timeless_chat_widget" />
+                    <input type="hidden" name="cw_source_page" value="<?php echo esc_url( home_url( add_query_arg( null, null ) ) ); ?>" />
+                    <button type="submit" id="cw-submit-btn" class="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                        <?php esc_html_e( 'Send', 'timeless' ); ?> <span class="material-symbols-outlined text-base" aria-hidden="true">send</span>
+                    </button>
+                </form>
+                <div id="cw-success" class="hidden text-center py-6">
+                    <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-3xl text-emerald-600" aria-hidden="true">check_circle</span>
+                    </div>
+                    <p class="font-bold text-primary mb-2"><?php esc_html_e( 'Message sent!', 'timeless' ); ?></p>
+                    <p class="text-xs text-secondary"><?php esc_html_e( "We'll reply within hours during business hours.", 'timeless' ); ?></p>
+                </div>
+                <div id="cw-error" class="hidden p-3 mt-3 bg-red-50 border border-red-200 rounded-lg">
+                    <p class="text-xs text-red-700 text-center" id="cw-error-message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+add_action( 'wp_footer', 'timeless_render_chat_widget', 5 );
+
+/**
+ * Inline JS for the chat widget — open/close behaviour + real AJAX submission.
+ * Hooked after the HTML so DOM elements exist when the script runs.
+ */
+function timeless_chat_widget_script() {
+    if ( is_admin() ) {
+        return;
+    }
+    $ajax_url = esc_url( admin_url( 'admin-ajax.php' ) );
+    ?>
+    <script>
+    (function() {
+        var toggle  = document.getElementById('chat-widget-toggle');
+        var closeBtn = document.getElementById('chat-widget-close');
+        var panel   = document.getElementById('chat-widget-panel');
+        var form    = document.getElementById('chat-widget-form');
+        var success = document.getElementById('cw-success');
+        var errorBox = document.getElementById('cw-error');
+        var errorMsg = document.getElementById('cw-error-message');
+        var submitBtn = document.getElementById('cw-submit-btn');
+
+        if (!toggle || !panel || !form) return;
+
+        // Clone original submit button state so we can safely restore it after submission
+        var submitOriginal = submitBtn ? submitBtn.cloneNode(true) : null;
+
+        function openPanel() {
+            panel.classList.remove('hidden');
+            panel.style.transform = 'scale(0.9) translateY(10px)';
+            panel.style.opacity = '0';
+            requestAnimationFrame(function() {
+                panel.style.transform = 'scale(1) translateY(0)';
+                panel.style.opacity = '1';
+            });
+            toggle.style.display = 'none';
+        }
+
+        function closePanel() {
+            panel.style.transform = 'scale(0.9) translateY(10px)';
+            panel.style.opacity = '0';
+            setTimeout(function() {
+                panel.classList.add('hidden');
+                toggle.style.display = 'flex';
+            }, 200);
+        }
+
+        function setSubmitSending() {
+            if (!submitBtn) return;
+            submitBtn.disabled = true;
+            while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
+            submitBtn.textContent = 'Sending...';
+        }
+
+        function restoreSubmitBtn() {
+            if (!submitBtn || !submitOriginal) return;
+            submitBtn.disabled = false;
+            while (submitBtn.firstChild) submitBtn.removeChild(submitBtn.firstChild);
+            var clone = submitOriginal.cloneNode(true);
+            while (clone.firstChild) submitBtn.appendChild(clone.firstChild);
+        }
+
+        function showError(msg) {
+            if (!errorBox || !errorMsg) return;
+            errorMsg.textContent = msg;
+            errorBox.classList.remove('hidden');
+            setTimeout(function() { errorBox.classList.add('hidden'); }, 5000);
+        }
+
+        toggle.addEventListener('click', openPanel);
+        if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+        // Close on outside click (desktop only)
+        document.addEventListener('click', function(e) {
+            if (panel.classList.contains('hidden')) return;
+            if (!panel.contains(e.target) && !toggle.contains(e.target)) {
+                if (window.innerWidth >= 640) closePanel();
+            }
+        });
+
+        // Real AJAX submission to WordPress admin-ajax.php
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (errorBox) errorBox.classList.add('hidden');
+            setSubmitSending();
+
+            var formData = new FormData(form);
+
+            fetch(<?php echo wp_json_encode( $ajax_url ); ?>, {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: formData
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data && data.success) {
+                    form.classList.add('hidden');
+                    if (success) success.classList.remove('hidden');
+                    setTimeout(function() {
+                        closePanel();
+                        setTimeout(function() {
+                            form.reset();
+                            form.classList.remove('hidden');
+                            if (success) success.classList.add('hidden');
+                            restoreSubmitBtn();
+                        }, 300);
+                    }, 4000);
+                } else {
+                    var msg = (data && data.data && data.data.message) ? data.data.message : 'Something went wrong. Please try again.';
+                    showError(msg);
+                    restoreSubmitBtn();
+                }
+            })
+            .catch(function() {
+                showError('Network error. Please check your connection and try again.');
+                restoreSubmitBtn();
+            });
+        });
+    })();
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'timeless_chat_widget_script', 10 );
+
+/* ─────────────────────────────────────────────
    9. SECURITY HARDENING — Anti brute-force + lockdown
    ───────────────────────────────────────────── */
 

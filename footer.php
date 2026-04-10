@@ -51,7 +51,6 @@ $phone      = timeless_phone();
             <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Legal</h4>
             <ul class="space-y-2 text-xs">
                 <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="#">Terms of Service</a></li>
                 <li><a class="text-slate-300 hover:text-white" href="https://www.fairtrading.nsw.gov.au" rel="noopener" target="_blank">NSW Fair Trading</a></li>
             </ul>
             <a href="tel:<?php echo $phone_link; ?>" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-xs font-bold mt-4"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call Us</a>
