@@ -108,6 +108,82 @@
     </div>
 </section>
 
+<!-- RECENT WORK GALLERY -->
+<section class="py-16 sm:py-20 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="max-w-3xl mb-10">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Real Results</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Bath Resurfacing Projects</h2>
+            <p class="text-secondary">Real bathtubs, real customers, real transformations across Sydney &mdash; drag the slider to see each before and after.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <!-- REPLACE: images/services/bath-resurfacing/project-1.jpg — before/after split, 600x450 -->
+                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
+                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
+                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
+                    </div>
+                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-bold text-primary text-sm">Surry Hills Apartment</h3>
+                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Acrylic Bath</span>
+                    </div>
+                    <p class="text-xs text-secondary italic">"Looks brand new &mdash; can't believe we didn't have to rip it out."</p>
+                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Sarah K. &middot; Inner Sydney</p>
+                </div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <!-- REPLACE: images/services/bath-resurfacing/project-2.jpg — before/after split, 600x450 -->
+                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
+                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
+                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
+                    </div>
+                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-bold text-primary text-sm">Bondi Beach House</h3>
+                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Cast Iron</span>
+                    </div>
+                    <p class="text-xs text-secondary italic">"Restored our 1920s clawfoot without the $5k replacement cost."</p>
+                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; David M. &middot; Eastern Suburbs</p>
+                </div>
+            </article>
+            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <!-- REPLACE: images/services/bath-resurfacing/project-3.jpg — before/after split, 600x450 -->
+                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
+                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
+                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
+                    </div>
+                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-bold text-primary text-sm">Parramatta Family Home</h3>
+                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Porcelain</span>
+                    </div>
+                    <p class="text-xs text-secondary italic">"Yellow stains gone, finish feels brand new to the touch."</p>
+                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Rachel T. &middot; Western Sydney</p>
+                </div>
+            </article>
+        </div>
+        <div class="mt-8 text-center">
+            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all text-sm">Get Your Own Transformation <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+        </div>
+    </div>
+</section>
+
 <!-- WHY RESURFACE -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
