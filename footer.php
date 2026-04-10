@@ -58,7 +58,16 @@ $phone      = timeless_phone();
         </div>
     </div>
     <div class="max-w-7xl mx-auto px-6 sm:px-8 mt-12 pt-8 border-t border-white/10">
-        <p class="text-[0.65rem] text-slate-400 text-center">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing. Sydney, NSW Australia.</p>
+        <p class="text-[0.65rem] text-slate-400 text-center">
+            &copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing. Sydney, NSW Australia.
+            <span class="mx-2 text-slate-500">&middot;</span>
+            ABN <?php echo timeless_abn(); ?>
+            <?php if ( timeless_has_licence() ) : ?>
+            <span class="mx-2 text-slate-500">&middot;</span>
+            NSW Licence <?php echo timeless_licence(); ?>
+            <?php endif; ?>
+        </p>
+        <p class="text-[0.6rem] text-slate-500 text-center mt-2">Our services come with guarantees that cannot be excluded under Australian Consumer Law.</p>
     </div>
 </footer>
 

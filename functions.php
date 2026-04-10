@@ -168,15 +168,18 @@ function timeless_customizer( $wp_customize ) {
         'type'        => 'text',
     ) );
 
-    // NSW Licence Number
+    // NSW Licence Number — leave empty until you hold a contractor licence.
+    // Under NSW Home Building Act 1989, residential work $5,000 or less does
+    // not require a licence. Only display a licence number once you hold one.
     $wp_customize->add_setting( 'timeless_licence', array(
-        'default'           => '345678C',
+        'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'timeless_licence', array(
-        'label'   => __( 'NSW Licence Number', 'timeless' ),
-        'section' => 'timeless_business',
-        'type'    => 'text',
+        'label'       => __( 'NSW Licence Number (leave blank if unlicensed)', 'timeless' ),
+        'description' => __( 'Only fill in once you hold a valid NSW contractor licence. Required for residential work over $5,000.', 'timeless' ),
+        'section'     => 'timeless_business',
+        'type'        => 'text',
     ) );
 
     // Email Address
@@ -192,11 +195,11 @@ function timeless_customizer( $wp_customize ) {
 
     // ABN
     $wp_customize->add_setting( 'timeless_abn', array(
-        'default'           => '',
+        'default'           => '30 412 161 602',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'timeless_abn', array(
-        'label'   => __( 'ABN (optional)', 'timeless' ),
+        'label'   => __( 'ABN', 'timeless' ),
         'section' => 'timeless_business',
         'type'    => 'text',
     ) );
@@ -217,9 +220,19 @@ function timeless_phone_link() {
     return esc_attr( get_theme_mod( 'timeless_phone_link', '+61400000000' ) );
 }
 
-/** Get NSW licence */
+/** Get NSW licence number (empty string if unlicensed) */
 function timeless_licence() {
-    return esc_html( get_theme_mod( 'timeless_licence', '345678C' ) );
+    return esc_html( get_theme_mod( 'timeless_licence', '' ) );
+}
+
+/** Check if business has a licence configured */
+function timeless_has_licence() {
+    return ! empty( trim( get_theme_mod( 'timeless_licence', '' ) ) );
+}
+
+/** Get business ABN */
+function timeless_abn() {
+    return esc_html( get_theme_mod( 'timeless_abn', '30 412 161 602' ) );
 }
 
 /** Get email */
@@ -281,7 +294,7 @@ function timeless_seo_meta() {
         'mouldy-silicone-replacement-sydney'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',
         'basin-chip-repair-sydney'              => 'Basin chip repair Sydney. Invisible repairs for chipped porcelain and ceramic basins. Same-day service.',
         'vanity-respray-sydney'                 => 'Vanity respray Sydney. Cabinet door and drawer front respray with 2-pack polyurethane. 900+ colours.',
-        'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Qualified, insured, up to 3-year warranty on every job.',
+        'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Fully insured, experienced team, up to 3-year warranty on every job.',
         'contact'  => 'Contact Timeless Resurfacing for a free bathroom resurfacing quote in Sydney. Send photos, get a fixed-price quote next business day.',
         'gallery'  => 'Before and after bathroom resurfacing photos across Sydney. Real transformations by Timeless Resurfacing.',
         'areas'    => 'Bathroom resurfacing service areas across Greater Sydney, Wollongong, Central Coast, and Blue Mountains.',
