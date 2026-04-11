@@ -53,11 +53,16 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.25s ease, opacity 0.2s ease;
+    pointer-events: none; /* Block hover/click when collapsed (border line was catching hover) */
+    border-top-width: 0 !important; /* Hide border in collapsed state */
+    transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0.25s;
 }
 .mega-dropdown.open {
     max-height: 500px;
     opacity: 1;
+    pointer-events: auto;
+    border-top-width: 1px !important;
+    transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0s;
 }
 
 /* Mobile menu */

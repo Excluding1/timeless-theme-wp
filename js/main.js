@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var megaTimeout;
 
     window.showMega = function () {
+        if (window.innerWidth < 1024) return; // Safety net: never open on mobile
         clearTimeout(megaTimeout);
         if (megaMenu) megaMenu.classList.add('open');
     };
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     window.toggleMega = function () {
+        if (window.innerWidth < 1024) return; // Safety net: never toggle on mobile
         if (megaMenu) megaMenu.classList.toggle('open');
     };
 

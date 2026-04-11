@@ -108,78 +108,109 @@
     </div>
 </section>
 
-<!-- RECENT WORK GALLERY -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<!-- SECTION 2B: SERVICE DETAIL BLOCKS — 4 inline before/afters -->
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-10">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Real Results</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Shower Sealing Projects</h2>
-            <p class="text-secondary">Leaks stopped, mould eliminated, silicone replaced &mdash; real before/afters from Sydney homes.</p>
+        <div class="max-w-3xl mb-12">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Shower Sealing in Sydney</h2>
+            <p class="text-secondary">Stop leaks before they become disasters &mdash; here&rsquo;s what we fix, how we seal, and how we guarantee it.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/shower-leak-repair/project-1.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+
+        <!-- BLOCK 1: Leaking Shower Silicone -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Leaking Shower Silicone</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Black mould creeping along the silicone? Water getting behind the screen? We remove ALL old silicone, kill the mould, treat the surface, and reseal with premium anti-mould silicone. No leaks, no mould regrowth.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full silicone removal (not painted over)</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Mould killed at the source</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Anti-mould silicone for 5+ year life</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Rose Bay Apartment</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Reseal</span>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-leak-repair/leaking-silicone-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
                     </div>
-                    <p class="text-xs text-secondary italic">"No more leaks into the flat below. Peace of mind."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Peter L. &middot; Eastern Suburbs</p>
                 </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/shower-leak-repair/project-2.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Paddington Terrace</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Silicone</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Clean white silicone instead of black mould. Huge difference."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Samantha D. &middot; Inner Sydney</p>
-                </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/shower-leak-repair/project-3.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Epping Family Home</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Waterproof</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Shower finally dry after years of dampness."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Mark R. &middot; Hills District</p>
-                </div>
-            </article>
+            </div>
         </div>
-        <div class="mt-8 text-center">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all text-sm">Stop Your Shower Leaking <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+
+        <!-- BLOCK 2: Water Damage Behind Tiles -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Water Damage Behind Tiles</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Tiles feel hollow? Grout lines cracked? Water stains appearing on the ceiling below? These are signs of failing grout letting water behind the tile bed. We regrout with waterproof epoxy to stop damage getting worse.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water damage progression</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Waterproof epoxy grout</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Cheaper than waterproofing reno</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-leak-repair/water-damage-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3: Mouldy & Dirty Corners -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Mouldy &amp; Dirty Corners</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">The corners where your shower meets the wall or floor are the hardest to clean and the first place mould appears. We strip and reseal every corner junction with fresh anti-mould silicone. Clean white lines, no more scrubbing.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> All corners and junctions resealed</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Bright white finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Mould resistance for years</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-leak-repair/mouldy-corners-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 4: Full Shower Waterproof Refresh -->
+        <div class="mb-4 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Full Shower Waterproof Refresh</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete shower sealing package &mdash; every silicone line, every grout joint, every corner. Combines grout upgrade and silicone reseal in one visit. Your shower is fully waterproofed and ready to use in 24 hours.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Complete grout + silicone reseal</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> One visit, 24-hour cure</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 3-year workmanship warranty</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-leak-repair/full-reseal-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -292,6 +323,73 @@
     </div>
 </section>
 
+<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="flex items-end justify-between mb-10 gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            </div>
+            <!-- Desktop arrow buttons -->
+            <div class="hidden sm:flex gap-2 flex-shrink-0">
+                <button type="button" onclick="moveShowerSealWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+                <button type="button" onclick="moveShowerSealWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+            </div>
+        </div>
+        <div id="shower-seal-wp-testimonial-carousel" class="overflow-hidden">
+            <div id="shower-seal-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
+                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;No more leaks into the flat below. Peace of mind at last after 2 years of stress.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">P</div>
+                        <div><p class="text-sm font-bold text-primary">Peter L.</p><p class="text-[0.65rem] text-outline">Rose Bay &middot; Full Reseal</p></div>
+                    </div>
+                </div>
+                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Clean white silicone instead of black mould. Huge difference to how the bathroom feels.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">S</div>
+                        <div><p class="text-sm font-bold text-primary">Samantha D.</p><p class="text-[0.65rem] text-outline">Paddington &middot; Silicone</p></div>
+                    </div>
+                </div>
+                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Shower finally dry after years of dampness. Thank you for the professional work.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
+                        <div><p class="text-sm font-bold text-primary">Mark R.</p><p class="text-[0.65rem] text-outline">Hills District &middot; Waterproof</p></div>
+                    </div>
+                </div>
+                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Stripped all the mouldy silicone and resealed perfectly. No more scrubbing every week.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
+                        <div><p class="text-sm font-bold text-primary">Jennifer H.</p><p class="text-[0.65rem] text-outline">North Shore &middot; Mouldy Corners</p></div>
+                    </div>
+                </div>
+                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Water damage stopped in its tracks. Saved us from a full waterproofing reno.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">T</div>
+                        <div><p class="text-sm font-bold text-primary">Tom W.</p><p class="text-[0.65rem] text-outline">Inner West &middot; Shower Grout Repair</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile pagination + arrows -->
+        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
+            <button type="button" onclick="moveShowerSealWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+            <span id="shower-seal-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
+            <button type="button" onclick="moveShowerSealWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+        </div>
+    </div>
+</section>
+
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
@@ -345,35 +443,65 @@
     </div>
 </section>
 
-<!-- OTHER SERVICES -->
-<section class="py-16 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">shower</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
-                <p class="text-xs text-secondary mt-1">Stop leaks and mould</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Bath Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your bathtub like new</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">New look without retiling</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">faucet</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
-                <p class="text-xs text-secondary mt-1">Refinish chips and stains</p>
-            </a>
-        </div>
-    </div>
-</section>
-
 </main>
+
+<script>
+/* -- Testimonial Carousel (JS-measured widths) -- */
+(function(){
+    var container = document.getElementById('shower-seal-wp-testimonial-carousel');
+    var track = document.getElementById('shower-seal-wp-testimonial-track');
+    var counter = document.getElementById('shower-seal-wp-testimonial-counter');
+    if (!container || !track) return;
+
+    var GAP = 24; // gap-6 in Tailwind
+    var cards = track.querySelectorAll('.shower-seal-wp-t-card');
+    var total = cards.length;
+    var index = 0;
+
+    function perView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+    }
+
+    function sizeCards() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        cards.forEach(function(c) {
+            c.style.width = cardW + 'px';
+            c.style.minWidth = cardW + 'px';
+        });
+        var maxIndex = Math.max(0, total - view);
+        if (index > maxIndex) index = maxIndex;
+        applyTransform();
+    }
+
+    function applyTransform() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        var offset = index * (cardW + GAP);
+        track.style.transform = 'translateX(-' + offset + 'px)';
+        if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    }
+
+    window.moveShowerSealWpTestimonials = function(dir) {
+        var view = perView();
+        var maxIndex = Math.max(0, total - view);
+        index += dir;
+        if (index < 0) index = maxIndex;
+        if (index > maxIndex) index = 0;
+        applyTransform();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sizeCards);
+    } else {
+        sizeCards();
+    }
+    window.addEventListener('resize', sizeCards);
+})();
+</script>
 
 <?php get_footer(); ?>

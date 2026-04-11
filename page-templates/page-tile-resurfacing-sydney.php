@@ -108,78 +108,109 @@
     </div>
 </section>
 
-<!-- RECENT WORK GALLERY -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<!-- SECTION 2B: SERVICE DETAIL BLOCKS — 4 inline before/afters -->
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-10">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Real Results</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Tile Resurfacing Projects</h2>
-            <p class="text-secondary">Dated tiles transformed into modern finishes &mdash; no demolition, no new tiling, just professional resurfacing.</p>
+        <div class="max-w-3xl mb-12">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Tile Resurfacing in Sydney</h2>
+            <p class="text-secondary">Transform dated tiles without demolition &mdash; here&rsquo;s what we do and what the results look like.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/tile-resurfacing/project-1.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+
+        <!-- BLOCK 1: Outdated Colour Tiles -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Outdated Colour Tiles</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Brown tiles from the 80s? Pink tiles from the 70s? Green tiles you&rsquo;ve hated since you moved in? We resurface tile walls and floors in any modern colour &mdash; no demolition, no re-tiling cost, no mess.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on any tile colour or pattern</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose white, ivory, or custom colours</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Done in 1-2 days</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Newtown Apartment</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Wall Tiles</span>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/tile-resurfacing/dated-colour-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
                     </div>
-                    <p class="text-xs text-secondary italic">"Went from brown 80s tiles to modern white. Night and day."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Emma K. &middot; Inner West</p>
                 </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/tile-resurfacing/project-2.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Chatswood Townhouse</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Floor Tiles</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Feels like a new bathroom without the renovation."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Andrew H. &middot; North Shore</p>
-                </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/tile-resurfacing/project-3.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Hornsby Family Home</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Bathroom</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Saved thousands vs re-tiling."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Linda W. &middot; Northern Suburbs</p>
-                </div>
-            </article>
+            </div>
         </div>
-        <div class="mt-8 text-center">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all text-sm">Transform Your Tiles <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+
+        <!-- BLOCK 2: Wall Tile Resurfacing -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Wall Tile Resurfacing</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Shower walls, splashbacks, bathroom walls &mdash; any ceramic or porcelain wall tile can be resurfaced. We etch, prime, and spray-apply architectural-grade coating for a factory-smooth modern finish.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Glazed ceramic and porcelain</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> No texture lines or brush marks</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 years lifespan</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/tile-resurfacing/wall-tiles-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3: Floor Tile Resurfacing -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Floor Tile Resurfacing</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Floor tiles take more abuse than walls &mdash; we add anti-slip additive to the coating so your floor stays safe and looks brand new. Perfect for dated bathroom and laundry floors.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Anti-slip additive included</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Warranty covers foot traffic wear</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Dries hard in 24 hours</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/tile-resurfacing/floor-tiles-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 4: Full Bathroom Tile Resurface -->
+        <div class="mb-4 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Full Bathroom Tile Resurface</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete tile transformation &mdash; walls, floors, even the shower base. We prep every surface, protect fixtures, and spray-coat the entire bathroom in a consistent colour. Looks like a full renovation at a fraction of the cost.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Whole-bathroom uniform finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 1-2 day job, no demolition</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Saves 80-90% vs full retile</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/tile-resurfacing/full-bathroom-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -357,8 +388,75 @@
     </div>
 </section>
 
+<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="flex items-end justify-between mb-10 gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            </div>
+            <!-- Desktop arrow buttons -->
+            <div class="hidden sm:flex gap-2 flex-shrink-0">
+                <button type="button" onclick="moveTileWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+                <button type="button" onclick="moveTileWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+            </div>
+        </div>
+        <div id="tile-wp-testimonial-carousel" class="overflow-hidden">
+            <div id="tile-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
+                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Went from brown 80s tiles to modern white. Night and day transformation without the cost of new tiles.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">E</div>
+                        <div><p class="text-sm font-bold text-primary">Emma K.</p><p class="text-[0.65rem] text-outline">Newtown &middot; Wall Tile Resurface</p></div>
+                    </div>
+                </div>
+                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Feels like a new bathroom without the renovation. The anti-slip finish on the floor tiles is great &mdash; no slipping.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">A</div>
+                        <div><p class="text-sm font-bold text-primary">Andrew H.</p><p class="text-[0.65rem] text-outline">Chatswood &middot; Floor Tiles</p></div>
+                    </div>
+                </div>
+                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Saved thousands vs re-tiling. Perfect match to our d&eacute;cor and done in 2 days.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">L</div>
+                        <div><p class="text-sm font-bold text-primary">Linda W.</p><p class="text-[0.65rem] text-outline">Hornsby &middot; Full Bathroom</p></div>
+                    </div>
+                </div>
+                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Glazed tiles I was told couldn&rsquo;t be coated came out factory-smooth. Zero peeling after 12 months.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">D</div>
+                        <div><p class="text-sm font-bold text-primary">David M.</p><p class="text-[0.65rem] text-outline">Eastern Suburbs &middot; Shower Walls</p></div>
+                    </div>
+                </div>
+                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;From dated peach to fresh white. Can&rsquo;t believe the transformation. Friends thought we renovated the whole bathroom.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">K</div>
+                        <div><p class="text-sm font-bold text-primary">Karen B.</p><p class="text-[0.65rem] text-outline">Western Sydney &middot; Colour Change</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile pagination + arrows -->
+        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
+            <button type="button" onclick="moveTileWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+            <span id="tile-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
+            <button type="button" onclick="moveTileWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+        </div>
+    </div>
+</section>
+
 <!-- FAQ -->
-<section class="py-16 sm:py-20 bg-white" id="faqs">
+<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Tile Resurfacing FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about tile resurfacing in Sydney.</p>
@@ -410,35 +508,65 @@
     </div>
 </section>
 
-<!-- OTHER SERVICES -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">plumbing</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
-                <p class="text-xs text-secondary mt-1">Stop leaks and mould</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Bath Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your bathtub like new</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">countertops</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Vanity Refinishing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your vanity top</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">faucet</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
-                <p class="text-xs text-secondary mt-1">Refinish chips and stains</p>
-            </a>
-        </div>
-    </div>
-</section>
-
 </main>
+
+<script>
+/* -- Testimonial Carousel (JS-measured widths) -- */
+(function(){
+    var container = document.getElementById('tile-wp-testimonial-carousel');
+    var track = document.getElementById('tile-wp-testimonial-track');
+    var counter = document.getElementById('tile-wp-testimonial-counter');
+    if (!container || !track) return;
+
+    var GAP = 24; // gap-6 in Tailwind
+    var cards = track.querySelectorAll('.tile-wp-t-card');
+    var total = cards.length;
+    var index = 0;
+
+    function perView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+    }
+
+    function sizeCards() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        cards.forEach(function(c) {
+            c.style.width = cardW + 'px';
+            c.style.minWidth = cardW + 'px';
+        });
+        var maxIndex = Math.max(0, total - view);
+        if (index > maxIndex) index = maxIndex;
+        applyTransform();
+    }
+
+    function applyTransform() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        var offset = index * (cardW + GAP);
+        track.style.transform = 'translateX(-' + offset + 'px)';
+        if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    }
+
+    window.moveTileWpTestimonials = function(dir) {
+        var view = perView();
+        var maxIndex = Math.max(0, total - view);
+        index += dir;
+        if (index < 0) index = maxIndex;
+        if (index > maxIndex) index = 0;
+        applyTransform();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sizeCards);
+    } else {
+        sizeCards();
+    }
+    window.addEventListener('resize', sizeCards);
+})();
+</script>
 
 <?php get_footer(); ?>

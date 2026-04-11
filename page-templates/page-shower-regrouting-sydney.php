@@ -108,78 +108,109 @@
     </div>
 </section>
 
-<!-- RECENT WORK GALLERY -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<!-- SECTION 2B: SERVICE DETAIL BLOCKS — 4 inline before/afters -->
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-10">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Real Results</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Shower Regrouting Projects</h2>
-            <p class="text-secondary">Real showers, real customers, real transformations across Sydney &mdash; see the difference fresh grout makes.</p>
+        <div class="max-w-3xl mb-12">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Shower Regrouting in Sydney</h2>
+            <p class="text-secondary">From cracked old grout to fresh waterproof epoxy &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/shower-regrouting/project-1.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+
+        <!-- BLOCK 1: Mouldy Shower Grout -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Mouldy Shower Grout</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Black mould growing in your grout? We remove all the old cement grout (not just scrub it), treat the surface to kill mould at the source, then replace with anti-mould epoxy grout. No bleach, no shortcuts.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full grout removal to tile edge</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Anti-mould treatment included</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy grout never grows mould again</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Marrickville Unit</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Epoxy Grout</span>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-regrouting/mouldy-grout-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
                     </div>
-                    <p class="text-xs text-secondary italic">"Black mould gone, looks brand new."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Michelle T. &middot; Inner West</p>
                 </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/shower-regrouting/project-2.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Mosman Townhouse</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Cement Grout</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Tiles I thought needed replacing look perfect now."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; James P. &middot; North Shore</p>
-                </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/shower-regrouting/project-3.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Penrith Family Home</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Epoxy Grout</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"No more mould, no more scrubbing. Worth every dollar."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Rachel M. &middot; Western Sydney</p>
-                </div>
-            </article>
+            </div>
         </div>
-        <div class="mt-8 text-center">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all text-sm">Get Your Shower Quoted <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+
+        <!-- BLOCK 2: Cracked & Crumbling Grout -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Cracked &amp; Crumbling Grout</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Grout falling out in chunks? Cracks letting water behind your tiles? We remove every crumbling grout line and replace with premium epoxy &mdash; the same grout used in hospitals and commercial kitchens. 100% waterproof.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water damage before it starts</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy doesn&rsquo;t crack or shrink</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Matches existing tile colour</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-regrouting/cracked-grout-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3: Epoxy Grout Upgrade -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Epoxy Grout Upgrade</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Still have cement grout from when your bathroom was built? Upgrade to epoxy grout &mdash; it&rsquo;s waterproof, stain-proof, never needs sealing, and lasts twice as long. Works on any existing tile.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 100% waterproof &mdash; zero absorption</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Never needs sealing, ever</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Lasts up to 10 years vs 2-3 for cement</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-regrouting/epoxy-upgrade-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 4: Full Regrout + Silicone Reseal -->
+        <div class="mb-4 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Full Regrout + Silicone Reseal</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete shower refresh &mdash; every grout line, every silicone corner, every junction. Fresh epoxy grout plus anti-mould silicone at all edges. Your shower looks brand new and stays that way.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Grout + silicone in one visit</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Shower ready to use in 24 hours</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 3-year workmanship warranty</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/shower-regrouting/full-refresh-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -359,8 +390,75 @@
     </div>
 </section>
 
+<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="flex items-end justify-between mb-10 gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            </div>
+            <!-- Desktop arrow buttons -->
+            <div class="hidden sm:flex gap-2 flex-shrink-0">
+                <button type="button" onclick="moveShowerRegroutWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+                <button type="button" onclick="moveShowerRegroutWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+            </div>
+        </div>
+        <div id="shower-regrout-wp-testimonial-carousel" class="overflow-hidden">
+            <div id="shower-regrout-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
+                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Our shower grout was black and disgusting. They stripped it all out and regrouted in one day. Looks brand new &mdash; honestly better than when the house was built.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
+                        <div><p class="text-sm font-bold text-primary">Michelle T.</p><p class="text-[0.65rem] text-outline">Marrickville &middot; Shower Regrouting</p></div>
+                    </div>
+                </div>
+                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Tiles I thought needed replacing look perfect now. The epoxy grout they used is amazing &mdash; never staining, never mouldy.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
+                        <div><p class="text-sm font-bold text-primary">James P.</p><p class="text-[0.65rem] text-outline">Mosman &middot; Epoxy Upgrade</p></div>
+                    </div>
+                </div>
+                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;No more mould, no more scrubbing. Worth every dollar. The team was clean, professional, and finished in 6 hours.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">R</div>
+                        <div><p class="text-sm font-bold text-primary">Rachel M.</p><p class="text-[0.65rem] text-outline">Penrith &middot; Full Regrout</p></div>
+                    </div>
+                </div>
+                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;We manage 12 rental units and Timeless does all our regrouting. Tenants love it, turnovers are faster, and the epoxy grout lasts forever.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">S</div>
+                        <div><p class="text-sm font-bold text-primary">Sarah K.</p><p class="text-[0.65rem] text-outline">Inner West &middot; Property Manager</p></div>
+                    </div>
+                </div>
+                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Water was getting behind my tiles. They fixed the grout and stopped the leak before it became a bigger problem. Great preventative work.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">P</div>
+                        <div><p class="text-sm font-bold text-primary">Peter L.</p><p class="text-[0.65rem] text-outline">North Shore &middot; Cracked Grout Repair</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile pagination + arrows -->
+        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
+            <button type="button" onclick="moveShowerRegroutWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+            <span id="shower-regrout-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
+            <button type="button" onclick="moveShowerRegroutWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+        </div>
+    </div>
+</section>
+
 <!-- FAQ -->
-<section class="py-16 sm:py-20 bg-white" id="faqs">
+<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Shower Regrouting FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about shower regrouting in Sydney.</p>
@@ -412,35 +510,65 @@
     </div>
 </section>
 
-<!-- OTHER SERVICES -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Bath Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your bathtub like new</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">New look without retiling</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">water_damage</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Sealing</h3>
-                <p class="text-xs text-secondary mt-1">Stop leaks without demolition</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">faucet</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
-                <p class="text-xs text-secondary mt-1">Refinish chips and stains</p>
-            </a>
-        </div>
-    </div>
-</section>
-
 </main>
+
+<script>
+/* -- Testimonial Carousel (JS-measured widths) -- */
+(function(){
+    var container = document.getElementById('shower-regrout-wp-testimonial-carousel');
+    var track = document.getElementById('shower-regrout-wp-testimonial-track');
+    var counter = document.getElementById('shower-regrout-wp-testimonial-counter');
+    if (!container || !track) return;
+
+    var GAP = 24; // gap-6 in Tailwind
+    var cards = track.querySelectorAll('.shower-regrout-wp-t-card');
+    var total = cards.length;
+    var index = 0;
+
+    function perView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+    }
+
+    function sizeCards() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        cards.forEach(function(c) {
+            c.style.width = cardW + 'px';
+            c.style.minWidth = cardW + 'px';
+        });
+        var maxIndex = Math.max(0, total - view);
+        if (index > maxIndex) index = maxIndex;
+        applyTransform();
+    }
+
+    function applyTransform() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        var offset = index * (cardW + GAP);
+        track.style.transform = 'translateX(-' + offset + 'px)';
+        if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    }
+
+    window.moveShowerRegroutWpTestimonials = function(dir) {
+        var view = perView();
+        var maxIndex = Math.max(0, total - view);
+        index += dir;
+        if (index < 0) index = maxIndex;
+        if (index > maxIndex) index = 0;
+        applyTransform();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sizeCards);
+    } else {
+        sizeCards();
+    }
+    window.addEventListener('resize', sizeCards);
+})();
+</script>
 
 <?php get_footer(); ?>

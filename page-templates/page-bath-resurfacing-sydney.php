@@ -108,78 +108,109 @@
     </div>
 </section>
 
-<!-- RECENT WORK GALLERY -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
+<!-- SECTION 2B: SERVICE DETAIL BLOCKS — 4 inline before/afters -->
+<section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-10">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Real Results</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Bath Resurfacing Projects</h2>
-            <p class="text-secondary">Real bathtubs, real customers, real transformations across Sydney &mdash; drag the slider to see each before and after.</p>
+        <div class="max-w-3xl mb-12">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Bath Resurfacing in Sydney</h2>
+            <p class="text-secondary">From single chip repairs to full tub restoration &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/bath-resurfacing/project-1.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+
+        <!-- BLOCK 1: Chip & Crack Repairs -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Chip &amp; Crack Repairs</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Dropped a shampoo bottle? Missing chunk of enamel? We repair chips, cracks, and holes in bathtubs using a two-part epoxy filler that matches your existing finish &mdash; no visible patch lines, no weak spots.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Single chip or multi-chip repairs available</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Invisible colour-matched finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Most repairs done in under 2 hours</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Surry Hills Apartment</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Acrylic Bath</span>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/bath-resurfacing/chip-repair-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
                     </div>
-                    <p class="text-xs text-secondary italic">"Looks brand new &mdash; can't believe we didn't have to rip it out."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Sarah K. &middot; Inner Sydney</p>
                 </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/bath-resurfacing/project-2.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Bondi Beach House</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Cast Iron</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Restored our 1920s clawfoot without the $5k replacement cost."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; David M. &middot; Eastern Suburbs</p>
-                </div>
-            </article>
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <!-- REPLACE: images/services/bath-resurfacing/project-3.jpg — before/after split, 600x450 -->
-                <div class="aspect-[4/3] bg-gradient-to-r from-rose-100 to-emerald-100 flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">Before</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center">
-                        <span class="text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-2 py-1 rounded">After</span>
-                    </div>
-                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-2">
-                        <h3 class="font-bold text-primary text-sm">Parramatta Family Home</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Porcelain</span>
-                    </div>
-                    <p class="text-xs text-secondary italic">"Yellow stains gone, finish feels brand new to the touch."</p>
-                    <p class="text-[0.65rem] text-outline mt-2 font-medium">&#8212; Rachel T. &middot; Western Sydney</p>
-                </div>
-            </article>
+            </div>
         </div>
-        <div class="mt-8 text-center">
-            <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all text-sm">Get Your Own Transformation <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+
+        <!-- BLOCK 2: Stain Removal & Polishing -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Stain &amp; Yellowing Removal</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Yellow rust stains from a dripping tap? Brown hard-water deposits? Old enamel gone dull and grey? We strip decades of stains and restore the original white finish &mdash; no abrasive cleaning, no bleach damage.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Removes rust, calcium, soap scum buildup</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Restores factory-smooth surface feel</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Cheaper than full resurface for surface-only stains</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/bath-resurfacing/stain-removal-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3: Peeling DIY Coating Repair -->
+        <div class="mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Peeling &amp; Failed DIY Repair</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Tried a Bunnings kit and it&rsquo;s peeling within 6 months? We strip ALL the old coating back to the original surface, properly etch and prime, then apply a professional two-part acrylic urethane. No shortcuts, no peeling.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full strip and restart &mdash; not coating over</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Hawk Glass-Tech commercial-grade coating</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 year finish with proper care</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/bath-resurfacing/peeling-repair-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 4: Full Bath Resurface -->
+        <div class="mb-4 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-2">
+                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Full Bath Resurface</h3>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete restoration for acrylic, porcelain, cast iron, or fibreglass baths. Even freestanding and clawfoot tubs. Full prep, chip repair, primer, and multi-layer spray coating for a factory-new finish. Done in one day.</p>
+                    <ul class="space-y-2 mb-5">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on all bath materials &amp; shapes</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose from white, ivory, or 900+ custom colours</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 3-year workmanship warranty</li>
+                    </ul>
+                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="lg:col-span-3">
+                    <!-- REPLACE: images/services/bath-resurfacing/full-resurface-before-after.jpg — before/after split, 900x600 (3:2) -->
+                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
+                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
+                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -357,8 +388,75 @@
     </div>
 </section>
 
+<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="flex items-end justify-between mb-10 gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            </div>
+            <!-- Desktop arrow buttons -->
+            <div class="hidden sm:flex gap-2 flex-shrink-0">
+                <button type="button" onclick="moveBathWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+                <button type="button" onclick="moveBathWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+            </div>
+        </div>
+        <div id="bath-wp-testimonial-carousel" class="overflow-hidden">
+            <div id="bath-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
+                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Our bath was chipped everywhere and stained yellow. They resurfaced it in one day and it looks factory new. Should have done this years ago instead of staring at those chips!&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">K</div>
+                        <div><p class="text-sm font-bold text-primary">Karen W.</p><p class="text-[0.65rem] text-outline">Surry Hills &middot; Bath Resurfacing</p></div>
+                    </div>
+                </div>
+                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Had an ugly pink bath from the 80s. They changed it to white and it looks like a brand new install. My partner couldn&rsquo;t believe it was the same bath. Amazing value for money.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
+                        <div><p class="text-sm font-bold text-primary">James L.</p><p class="text-[0.65rem] text-outline">Bondi Beach &middot; Colour Change</p></div>
+                    </div>
+                </div>
+                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;We manage 8 rental properties and Timeless handles all our bath resurfacing. Quick turnarounds, fair pricing, and the tenants love the result. Highly recommend for property managers.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">D</div>
+                        <div><p class="text-sm font-bold text-primary">David C.</p><p class="text-[0.65rem] text-outline">Property Manager &middot; Western Sydney</p></div>
+                    </div>
+                </div>
+                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Restored our 1920s cast iron clawfoot bath. I was told the only option was replacement for $5,000+. Timeless brought it back to life for a fraction of that. Absolutely stunning result.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
+                        <div><p class="text-sm font-bold text-primary">Margaret S.</p><p class="text-[0.65rem] text-outline">Paddington &middot; Cast Iron Restoration</p></div>
+                    </div>
+                </div>
+                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
+                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Peeling DIY paint mess turned into a perfect factory-smooth finish. Should have called Timeless from the start instead of wasting money on Bunnings kits that failed.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">T</div>
+                        <div><p class="text-sm font-bold text-primary">Tom R.</p><p class="text-[0.65rem] text-outline">Marrickville &middot; DIY Strip &amp; Resurface</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile pagination + arrows -->
+        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
+            <button type="button" onclick="moveBathWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+            <span id="bath-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
+            <button type="button" onclick="moveBathWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+        </div>
+    </div>
+</section>
+
 <!-- FAQ -->
-<section class="py-16 sm:py-20 bg-white" id="faqs">
+<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Bath Resurfacing FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about bath resurfacing in Sydney.</p>
@@ -410,35 +508,65 @@
     </div>
 </section>
 
-<!-- OTHER SERVICES -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">shower</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
-                <p class="text-xs text-secondary mt-1">Stop leaks and mould</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">New look without retiling</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">countertops</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Vanity Refinishing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your vanity top</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">faucet</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
-                <p class="text-xs text-secondary mt-1">Refinish chips and stains</p>
-            </a>
-        </div>
-    </div>
-</section>
-
 </main>
+
+<script>
+/* -- Testimonial Carousel (JS-measured widths) -- */
+(function(){
+    var container = document.getElementById('bath-wp-testimonial-carousel');
+    var track = document.getElementById('bath-wp-testimonial-track');
+    var counter = document.getElementById('bath-wp-testimonial-counter');
+    if (!container || !track) return;
+
+    var GAP = 24; // gap-6 in Tailwind
+    var cards = track.querySelectorAll('.bath-wp-t-card');
+    var total = cards.length;
+    var index = 0;
+
+    function perView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+    }
+
+    function sizeCards() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        cards.forEach(function(c) {
+            c.style.width = cardW + 'px';
+            c.style.minWidth = cardW + 'px';
+        });
+        var maxIndex = Math.max(0, total - view);
+        if (index > maxIndex) index = maxIndex;
+        applyTransform();
+    }
+
+    function applyTransform() {
+        var w = container.offsetWidth;
+        var view = perView();
+        var cardW = (w - GAP * (view - 1)) / view;
+        var offset = index * (cardW + GAP);
+        track.style.transform = 'translateX(-' + offset + 'px)';
+        if (counter) counter.textContent = (index + 1) + ' / ' + total;
+    }
+
+    window.moveBathWpTestimonials = function(dir) {
+        var view = perView();
+        var maxIndex = Math.max(0, total - view);
+        index += dir;
+        if (index < 0) index = maxIndex;
+        if (index > maxIndex) index = 0;
+        applyTransform();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', sizeCards);
+    } else {
+        sizeCards();
+    }
+    window.addEventListener('resize', sizeCards);
+})();
+</script>
 
 <?php get_footer(); ?>

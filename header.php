@@ -46,8 +46,8 @@ $phone      = timeless_phone();
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
         </div>
 
-        <!-- MEGA MENU -->
-        <div id="mega-menu" class="mega-dropdown bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
+        <!-- MEGA MENU (desktop only — mobile uses hamburger nav) -->
+        <div id="mega-menu" class="mega-dropdown hidden lg:block bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
             <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 grid grid-cols-3 gap-8">
                 <!-- Resurfacing -->
                 <div>
