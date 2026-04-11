@@ -338,13 +338,17 @@ add_action( 'wp_head', 'timeless_seo_meta', 2 );
 
 /* ─────────────────────────────────────────────
    5c. XML SITEMAP — Auto-generated at /sitemap.xml
+   Defense in depth: runs via rewrite rule AND early URI check
    ───────────────────────────────────────────── */
-function timeless_sitemap_xml() {
-    global $wp;
-    $request = $wp->request;
 
-    if ( $request !== 'sitemap.xml' ) return;
+/** Render the XML sitemap body and exit */
+function timeless_output_sitemap() {
+    // Prevent any buffered output from corrupting XML
+    if ( ob_get_level() ) {
+        ob_end_clean();
+    }
 
+    status_header( 200 );
     header( 'Content-Type: application/xml; charset=UTF-8' );
     header( 'X-Robots-Tag: noindex' );
 
@@ -352,7 +356,7 @@ function timeless_sitemap_xml() {
     echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
     // Homepage
-    echo '<url><loc>' . esc_url( home_url( '/' ) ) . '</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>' . "\n";
+    echo '<url><loc>' . esc_url( home_url( '/' ) ) . '</loc><lastmod>' . current_time( 'Y-m-d' ) . '</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>' . "\n";
 
     // All published pages
     $pages = get_posts( array(
@@ -368,34 +372,63 @@ function timeless_sitemap_xml() {
         $modified = get_the_modified_date( 'Y-m-d', $page );
         $slug     = $page->post_name;
 
+        // Skip if URL is empty
+        if ( empty( $url ) ) continue;
+
         // Higher priority for service pages
         if ( strpos( $slug, 'sydney' ) !== false ) {
             $priority = '0.8';
             $freq     = 'monthly';
-        } elseif ( in_array( $slug, array( 'about', 'contact', 'gallery', 'faqs' ), true ) ) {
+        } elseif ( in_array( $slug, array( 'about', 'contact', 'gallery', 'faqs', 'areas' ), true ) ) {
             $priority = '0.7';
             $freq     = 'monthly';
         } else {
             $priority = '0.5';
-            $freq     = 'monthly';
+            $freq     = 'yearly';
         }
 
         echo '<url>';
         echo '<loc>' . esc_url( $url ) . '</loc>';
-        echo '<lastmod>' . $modified . '</lastmod>';
-        echo '<changefreq>' . $freq . '</changefreq>';
-        echo '<priority>' . $priority . '</priority>';
+        echo '<lastmod>' . esc_html( $modified ) . '</lastmod>';
+        echo '<changefreq>' . esc_html( $freq ) . '</changefreq>';
+        echo '<priority>' . esc_html( $priority ) . '</priority>';
         echo '</url>' . "\n";
     }
 
     echo '</urlset>';
     exit;
 }
-add_action( 'template_redirect', 'timeless_sitemap_xml' );
+
+/**
+ * Intercept /sitemap.xml early — before WordPress tries to route it.
+ * This runs on 'parse_request' which fires BEFORE template_redirect AND
+ * before any 404 routing. Works even if rewrite rules haven't been flushed.
+ */
+function timeless_sitemap_early_intercept( $wp ) {
+    // Match /sitemap.xml (with or without query string)
+    $uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
+    $path = parse_url( $uri, PHP_URL_PATH );
+
+    if ( $path === '/sitemap.xml' || $path === '/sitemap.xml/' ) {
+        timeless_output_sitemap();
+    }
+}
+add_action( 'parse_request', 'timeless_sitemap_early_intercept' );
+
+/**
+ * Secondary handler via rewrite rule for cache-friendly serving.
+ * If rewrite rules were flushed, this is the primary path.
+ */
+function timeless_sitemap_via_rewrite() {
+    if ( get_query_var( 'sitemap' ) === '1' ) {
+        timeless_output_sitemap();
+    }
+}
+add_action( 'template_redirect', 'timeless_sitemap_via_rewrite' );
 
 /* Register /sitemap.xml rewrite rule */
 function timeless_sitemap_rewrite() {
-    add_rewrite_rule( 'sitemap\.xml$', 'index.php?sitemap=1', 'top' );
+    add_rewrite_rule( '^sitemap\.xml$', 'index.php?sitemap=1', 'top' );
 }
 add_action( 'init', 'timeless_sitemap_rewrite' );
 
@@ -404,6 +437,13 @@ function timeless_sitemap_query_var( $vars ) {
     return $vars;
 }
 add_filter( 'query_vars', 'timeless_sitemap_query_var' );
+
+/* Flush rewrite rules on theme activation (so /sitemap.xml works immediately) */
+function timeless_flush_rewrites_on_activation() {
+    timeless_sitemap_rewrite();
+    flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'timeless_flush_rewrites_on_activation' );
 
 /* Disable WordPress default sitemaps (wp-sitemap.xml) to avoid duplicates */
 add_filter( 'wp_sitemaps_enabled', '__return_false' );
