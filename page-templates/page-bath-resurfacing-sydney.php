@@ -108,106 +108,142 @@
     </div>
 </section>
 
-<!-- SECTION 2B: SERVICE DETAIL BLOCKS — 4 inline before/afters -->
+<!-- SECTION 2B: SERVICE DETAIL BLOCKS — Alternating zig-zag with branded before/after cards -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-12">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Bath Resurfacing in Sydney</h2>
             <p class="text-secondary">From single chip repairs to full tub restoration &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
 
-        <!-- BLOCK 1: Chip & Crack Repairs -->
-        <div class="mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Chip &amp; Crack Repairs</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Dropped a shampoo bottle? Missing chunk of enamel? We repair chips, cracks, and holes in bathtubs using a two-part epoxy filler that matches your existing finish &mdash; no visible patch lines, no weak spots.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 1: Chip & Crack Repairs — text-left, image-right -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Chip &amp; Crack Repairs</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Dropped a shampoo bottle? Missing chunk of enamel? We repair chips, cracks, and holes in bathtubs using a two-part epoxy filler that matches your existing finish &mdash; no visible patch lines, no weak spots.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Single chip or multi-chip repairs available</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Invisible colour-matched finish</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Most repairs done in under 2 hours</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/bath-resurfacing/chip-repair-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div>
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">broken_image</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- BLOCK 2: Stain Removal & Polishing -->
-        <div class="mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Stain &amp; Yellowing Removal</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Yellow rust stains from a dripping tap? Brown hard-water deposits? Old enamel gone dull and grey? We strip decades of stains and restore the original white finish &mdash; no abrasive cleaning, no bleach damage.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 2: Stain & Yellowing Removal — image-left, text-right (alternated) -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Stain &amp; Yellowing Removal</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Yellow rust stains from a dripping tap? Brown hard-water deposits? Old enamel gone dull and grey? We strip decades of stains and restore the original white finish &mdash; no abrasive cleaning, no bleach damage.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Removes rust, calcium, soap scum buildup</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Restores factory-smooth surface feel</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Cheaper than full resurface for surface-only stains</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/bath-resurfacing/stain-removal-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div class="lg:order-1">
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">water_drop</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- BLOCK 3: Peeling DIY Coating Repair -->
-        <div class="mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Peeling &amp; Failed DIY Repair</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Tried a Bunnings kit and it&rsquo;s peeling within 6 months? We strip ALL the old coating back to the original surface, properly etch and prime, then apply a professional two-part acrylic urethane. No shortcuts, no peeling.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 3: Peeling & Failed DIY Repair — text-left, image-right -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Peeling &amp; Failed DIY Repair</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Tried a Bunnings kit and it&rsquo;s peeling within 6 months? We strip ALL the old coating back to the original surface, properly etch and prime, then apply a professional two-part acrylic urethane. No shortcuts, no peeling.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full strip and restart &mdash; not coating over</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Hawk Glass-Tech commercial-grade coating</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 year finish with proper care</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/bath-resurfacing/peeling-repair-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div>
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">error</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">restart_alt</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- BLOCK 4: Full Bath Resurface -->
-        <div class="mb-4 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Full Bath Resurface</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete restoration for acrylic, porcelain, cast iron, or fibreglass baths. Even freestanding and clawfoot tubs. Full prep, chip repair, primer, and multi-layer spray coating for a factory-new finish. Done in one day.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 4: Full Bath Resurface — image-left, text-right (alternated) -->
+        <div class="reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Full Bath Resurface</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Complete restoration for acrylic, porcelain, cast iron, or fibreglass baths. Even freestanding and clawfoot tubs. Full prep, chip repair, primer, and multi-layer spray coating for a factory-new finish. Done in one day.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on all bath materials &amp; shapes</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose from white, ivory, or 900+ custom colours</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 3-year workmanship warranty</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/bath-resurfacing/full-resurface-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div class="lg:order-1">
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">bathtub</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>

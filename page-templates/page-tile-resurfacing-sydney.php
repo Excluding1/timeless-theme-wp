@@ -108,106 +108,142 @@
     </div>
 </section>
 
-<!-- SECTION 2B: SERVICE DETAIL BLOCKS — 4 inline before/afters -->
+<!-- SECTION 2B: SERVICE DETAIL BLOCKS — Alternating zig-zag with branded before/after cards -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-12">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Tile Resurfacing in Sydney</h2>
             <p class="text-secondary">Transform dated tiles without demolition &mdash; here&rsquo;s what we do and what the results look like.</p>
         </div>
 
-        <!-- BLOCK 1: Outdated Colour Tiles -->
-        <div class="mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Outdated Colour Tiles</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Brown tiles from the 80s? Pink tiles from the 70s? Green tiles you&rsquo;ve hated since you moved in? We resurface tile walls and floors in any modern colour &mdash; no demolition, no re-tiling cost, no mess.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 1: Outdated Colour Tiles — text-left, image-right -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Outdated Colour Tiles</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Brown tiles from the 80s? Pink tiles from the 70s? Green tiles you&rsquo;ve hated since you moved in? We resurface tile walls and floors in any modern colour &mdash; no demolition, no re-tiling cost, no mess.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on any tile colour or pattern</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose white, ivory, or custom colours</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Done in 1-2 days</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/tile-resurfacing/dated-colour-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div>
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">palette</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- BLOCK 2: Wall Tile Resurfacing -->
-        <div class="mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Wall Tile Resurfacing</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Shower walls, splashbacks, bathroom walls &mdash; any ceramic or porcelain wall tile can be resurfaced. We etch, prime, and spray-apply architectural-grade coating for a factory-smooth modern finish.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 2: Wall Tile Resurfacing — image-left, text-right (alternated) -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Wall Tile Resurfacing</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Shower walls, splashbacks, bathroom walls &mdash; any ceramic or porcelain wall tile can be resurfaced. We etch, prime, and spray-apply architectural-grade coating for a factory-smooth modern finish.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Glazed ceramic and porcelain</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> No texture lines or brush marks</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 years lifespan</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/tile-resurfacing/wall-tiles-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div class="lg:order-1">
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">view_quilt</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- BLOCK 3: Floor Tile Resurfacing -->
-        <div class="mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Floor Tile Resurfacing</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Floor tiles take more abuse than walls &mdash; we add anti-slip additive to the coating so your floor stays safe and looks brand new. Perfect for dated bathroom and laundry floors.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 3: Floor Tile Resurfacing — text-left, image-right -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Floor Tile Resurfacing</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Floor tiles take more abuse than walls &mdash; we add anti-slip additive to the coating so your floor stays safe and looks brand new. Perfect for dated bathroom and laundry floors.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Anti-slip additive included</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Warranty covers foot traffic wear</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Dries hard in 24 hours</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/tile-resurfacing/floor-tiles-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div>
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">grid_view</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- BLOCK 4: Full Bathroom Tile Resurface -->
-        <div class="mb-4 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-                <div class="lg:col-span-2">
-                    <h3 class="text-2xl font-extrabold text-primary tracking-tight mb-3">Full Bathroom Tile Resurface</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete tile transformation &mdash; walls, floors, even the shower base. We prep every surface, protect fixtures, and spray-coat the entire bathroom in a consistent colour. Looks like a full renovation at a fraction of the cost.</p>
-                    <ul class="space-y-2 mb-5">
+        <!-- BLOCK 4: Full Bathroom Tile Resurface — image-left, text-right (alternated) -->
+        <div class="reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Full Bathroom Tile Resurface</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Complete tile transformation &mdash; walls, floors, even the shower base. We prep every surface, protect fixtures, and spray-coat the entire bathroom in a consistent colour. Looks like a full renovation at a fraction of the cost.</p>
+                    <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Whole-bathroom uniform finish</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 1-2 day job, no demolition</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Saves 80-90% vs full retile</li>
                     </ul>
                     <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:col-span-3">
-                    <!-- REPLACE: images/services/tile-resurfacing/full-bathroom-before-after.jpg — before/after split, 900x600 (3:2) -->
-                    <div class="aspect-[3/2] bg-gradient-to-r from-rose-100 to-emerald-100 rounded-2xl overflow-hidden relative shadow-sm">
-                        <div class="absolute inset-y-0 left-0 w-1/2 bg-rose-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-rose-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">Before</span></div>
-                        <div class="absolute inset-y-0 right-0 w-1/2 bg-emerald-100 flex items-center justify-center"><span class="text-[0.65rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/80 px-3 py-1.5 rounded">After</span></div>
-                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white -ml-px"></div>
+                <div class="lg:order-1">
+                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                        <div class="grid grid-cols-2 h-full">
+                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">bathroom</span>
+                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
+                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
+                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        </div>
                     </div>
                 </div>
             </div>

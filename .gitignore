@@ -14,3 +14,6 @@ uploads/
 
 # Node (if ever needed for build tools)
 node_modules/
+
+# Playwright test artifacts
+.playwright-mcp/
