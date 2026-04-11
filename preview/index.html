@@ -148,7 +148,7 @@
         </div>
 
         <!-- MEGA MENU -->
-        <div id="mega-menu" class="mega-dropdown bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
+        <div id="mega-menu" class="mega-dropdown hidden lg:block bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
             <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 grid grid-cols-3 gap-8">
                 <!-- Resurfacing -->
                 <div>
@@ -946,7 +946,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var servicesBtn = document.getElementById('services-btn');
     var megaTimeout;
 
-    window.showMega = function () {
+    window.showMega = function () { if (window.innerWidth < 1024) return;
         clearTimeout(megaTimeout);
         if (megaMenu) megaMenu.classList.add('open');
     };
@@ -957,7 +957,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 200);
     };
 
-    window.toggleMega = function () {
+    window.toggleMega = function () { if (window.innerWidth < 1024) return;
         if (megaMenu) megaMenu.classList.toggle('open');
     };
 

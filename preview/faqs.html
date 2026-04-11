@@ -128,7 +128,7 @@
         </div>
 
         <!-- MEGA MENU -->
-        <div id="mega-menu" class="mega-dropdown bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
+        <div id="mega-menu" class="mega-dropdown hidden lg:block bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
             <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 grid grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurfacing</h3>
@@ -482,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var servicesBtn = document.getElementById('services-btn');
     var megaTimeout;
 
-    window.showMega = function () {
+    window.showMega = function () { if (window.innerWidth < 1024) return;
         clearTimeout(megaTimeout);
         if (megaMenu) megaMenu.classList.add('open');
     };
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 200);
     };
 
-    window.toggleMega = function () {
+    window.toggleMega = function () { if (window.innerWidth < 1024) return;
         if (megaMenu) megaMenu.classList.toggle('open');
     };
 
