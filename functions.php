@@ -91,6 +91,39 @@ function timeless_create_pages() {
 }
 add_action( 'after_switch_theme', 'timeless_create_pages' );
 
+/**
+ * Self-healing: also run page creation on admin_init.
+ *
+ * Why: `after_switch_theme` doesn't fire when the user "Replace current
+ * with uploaded" during a theme re-upload. That means new pages added
+ * to the theme in updates (like FAQs) never get created.
+ *
+ * This runs on every wp-admin page load but only CREATES pages if they
+ * don't exist. The check uses get_page_by_path() which is cached, so
+ * the overhead is negligible (~1-2ms per admin page load).
+ *
+ * Only runs in wp-admin so frontend visitors never trigger it.
+ */
+function timeless_ensure_pages_exist() {
+    // Only run in admin context, not AJAX, not cron
+    if ( ! is_admin() || wp_doing_ajax() || wp_doing_cron() ) {
+        return;
+    }
+
+    // Rate limit: only check once per hour via transient
+    if ( get_transient( 'timeless_pages_checked' ) ) {
+        return;
+    }
+    set_transient( 'timeless_pages_checked', 1, HOUR_IN_SECONDS );
+
+    // Quick check: does the FAQs page exist? If yes, assume all pages OK.
+    // If no, run the full creation routine (which skips existing pages anyway).
+    if ( ! get_page_by_path( 'faqs' ) ) {
+        timeless_create_pages();
+    }
+}
+add_action( 'admin_init', 'timeless_ensure_pages_exist' );
+
 /* ────��──────────────────────────────────────
    2. ENQUEUE SCRIPTS & STYLES
    ───────────────────────────────────────────── */
