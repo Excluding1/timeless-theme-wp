@@ -80,11 +80,16 @@
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 0.25s ease, opacity 0.2s ease;
+            pointer-events: none;
+            border-top-width: 0 !important;
+            transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0.25s;
         }
         .mega-dropdown.open {
             max-height: 600px;
             opacity: 1;
+            pointer-events: auto;
+            border-top-width: 1px !important;
+            transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0s;
         }
 
         /* Mobile menu */
