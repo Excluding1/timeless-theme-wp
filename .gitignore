@@ -17,3 +17,8 @@ node_modules/
 
 # Playwright test artifacts
 .playwright-mcp/
+
+# Claude Code preview/test artifacts (not part of the theme)
+.claude/preview/
+# Local Claude Code permission grants (per-machine, not for repo)
+.claude/settings.local.json

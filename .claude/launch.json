@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-preview",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd /Users/angelapham/Downloads/timeless-theme-wp/.claude/preview && exec python3 -m http.server 8765"],
+      "port": 8765
+    }
+  ]
+}
