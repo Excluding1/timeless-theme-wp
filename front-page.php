@@ -27,7 +27,7 @@ get_header(); ?>
         "@type": "OfferCatalog", "name": "Bathroom Resurfacing Services",
         "itemListElement": [
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shower Regrouting", "description": "Full grout removal and replacement with premium waterproof epoxy grout." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bath Resurfacing", "description": "Restore chipped or stained bathtubs to factory-new condition with Hawk Glass-Tech system." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bath Resurfacing", "description": "Restore chipped or stained bathtubs to factory-new condition with professional-grade system." } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tile Resurfacing", "description": "Transform outdated bathroom tiles with durable high-gloss architectural finish." } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vanity Refinishing", "description": "Benchtop resurfacing and cabinet respray with stone-fleck or satin finish options." } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Basin Restoration", "description": "Chip repair and full resurface for porcelain, acrylic, and cast iron basins." } },
@@ -45,7 +45,7 @@ get_header(); ?>
         { "@type": "Question", "name": "How long does bathroom resurfacing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most jobs are completed in a single day (6-8 hours). Your bathroom is ready to use again 24 hours after completion." } },
         { "@type": "Question", "name": "How much does bathroom resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different, so we provide fixed-price quotes based on your photos. A complete bathroom resurfacing package typically saves 80–90% compared to a full renovation. Send us photos for an accurate quote within hours." } },
         { "@type": "Question", "name": "How long does resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "With proper care, up to 10 years. We use commercial-grade two-part epoxy coatings resistant to chipping, peeling, and yellowing. All work backed by our workmanship warranty." } },
-        { "@type": "Question", "name": "Is resurfacing worth it vs full renovation?", "acceptedAnswer": { "@type": "Answer", "text": "For most homeowners, yes. 80–90% cheaper, 1 day instead of 2-4 weeks, zero demolition, no construction waste. Ideal for rentals, pre-sale upgrades, and structurally sound bathrooms." } },
+        { "@type": "Question", "name": "Is resurfacing worth it vs full renovation?", "acceptedAnswer": { "@type": "Answer", "text": "For most homeowners, yes. up to 80% cheaper, 1 day instead of 2-4 weeks, zero demolition, no construction waste. Ideal for rentals, pre-sale upgrades, and structurally sound bathrooms." } },
         { "@type": "Question", "name": "Do you check for asbestos?", "acceptedAnswer": { "@type": "Answer", "text": "If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed." } },
         { "@type": "Question", "name": "What areas do you service?", "acceptedAnswer": { "@type": "Answer", "text": "Entire Greater Sydney — Inner West, Eastern Suburbs, North Shore, Northern Beaches, Western Sydney, Sutherland Shire, Hills District. Plus Wollongong, Central Coast, Blue Mountains." } },
         { "@type": "Question", "name": "Can you resurface coloured tiles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Works on all tile types including coloured, textured, patterned, and mosaic. We transform outdated tiles into clean, modern finishes." } },
@@ -63,7 +63,7 @@ get_header(); ?>
                 Bathroom Resurfacing <br class="hidden sm:block" /><span class="text-on-primary-container">Sydney Specialists</span>
             </h1>
             <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-8 sm:mb-10">
-                One-day bathroom transformations across Greater Sydney. Save <strong>80–90% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
+                One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
             </p>
             <a class="inline-block px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
             <div class="mt-8 flex items-center gap-3">
@@ -185,7 +185,7 @@ get_header(); ?>
                     <h3 class="text-xl font-extrabold text-primary">Resurfacing</h3>
                 </div>
                 <div class="space-y-4">
-                    <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Cost</span><span class="text-lg font-bold text-primary">80–90% less</span></div>
+                    <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Cost</span><span class="text-lg font-bold text-primary">up to 80% less</span></div>
                     <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Timeline</span><span class="text-sm font-bold text-primary">1-3 days</span></div>
                     <div class="flex justify-between items-center py-2 border-b border-primary/10"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Demolition</span><span class="text-sm font-bold text-primary">None</span></div>
                     <div class="flex justify-between items-center py-2"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500 text-base" aria-hidden="true">check</span> Usable</span><span class="text-sm font-bold text-primary">Next Day</span></div>

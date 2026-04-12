@@ -39,7 +39,7 @@
         { "@type": "Question", "name": "How long does shower regrouting take?", "acceptedAnswer": { "@type": "Answer", "text": "Most shower regrouting jobs are completed in a single day (4-10 hours depending on size). Walk-in showers or full bathroom regrouts may require a second day. Your shower is ready to use 24 hours after completion to allow the grout to fully cure." } },
         { "@type": "Question", "name": "What is the difference between epoxy and cement grout?", "acceptedAnswer": { "@type": "Answer", "text": "Epoxy grout is waterproof, stain-resistant, and doesn't need sealing — it lasts 15-20 years. Cement-based grout is cheaper but porous, requires sealing, and typically lasts 8-10 years. We recommend epoxy for showers due to constant water exposure." } },
         { "@type": "Question", "name": "Can regrouting fix a leaking shower?", "acceptedAnswer": { "@type": "Answer", "text": "In many cases, yes. Cracked or missing grout is one of the most common causes of shower leaks. Regrouting with waterproof epoxy grout seals the joints between tiles and prevents water penetration. If the leak is caused by failed waterproofing membrane underneath, additional repairs may be needed." } },
-        { "@type": "Question", "name": "Do I need to regrout or retile my shower?", "acceptedAnswer": { "@type": "Answer", "text": "If your tiles are still in good condition (no cracks, not loose), regrouting is almost always the better option. It costs 80-90% less than retiling, takes hours instead of days, and produces no demolition waste. Only retile if tiles themselves are damaged." } }
+        { "@type": "Question", "name": "Do I need to regrout or retile my shower?", "acceptedAnswer": { "@type": "Answer", "text": "If your tiles are still in good condition (no cracks, not loose), regrouting is almost always the better option. It costs up to 80% less than retiling, takes hours instead of days, and produces no demolition waste. Only retile if tiles themselves are damaged." } }
     ]
 }
 </script>
@@ -73,7 +73,7 @@
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">Up to 80%</p>
                     <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
                 <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
@@ -89,7 +89,6 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
@@ -110,7 +109,7 @@
 
 <!-- SECTION 2B: SERVICE DETAIL BLOCKS — Alternating zig-zag with branded before/after cards -->
 <section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Shower Regrouting in Sydney</h2>
@@ -119,26 +118,26 @@
 
         <!-- BLOCK 1: Mouldy Shower Grout — text-left, image-right -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Mouldy Shower Grout</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Mouldy Shower Grout</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Black mould growing in your grout? We remove all the old cement grout (not just scrub it), treat the surface to kill mould at the source, then replace with anti-mould epoxy grout. No bleach, no shortcuts.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full grout removal to tile edge</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Anti-mould treatment included</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy grout never grows mould again</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div>
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">biotech</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">biotech</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -152,26 +151,26 @@
 
         <!-- BLOCK 2: Cracked & Crumbling Grout — image-left, text-right (alternated) -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div class="lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Cracked &amp; Crumbling Grout</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Cracked &amp; Crumbling Grout</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Grout falling out in chunks? Cracks letting water behind your tiles? We remove every crumbling grout line and replace with premium epoxy &mdash; the same grout used in hospitals and commercial kitchens. 100% waterproof.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water damage before it starts</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy doesn&rsquo;t crack or shrink</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Matches existing tile colour</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:order-1">
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-1">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">broken_image</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -185,26 +184,26 @@
 
         <!-- BLOCK 3: Epoxy Grout Upgrade — text-left, image-right -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Epoxy Grout Upgrade</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Epoxy Grout Upgrade</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Still have cement grout from when your bathroom was built? Upgrade to epoxy grout &mdash; it&rsquo;s waterproof, stain-proof, never needs sealing, and lasts twice as long. Works on any existing tile.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 100% waterproof &mdash; zero absorption</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Never needs sealing, ever</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Lasts up to 10 years vs 2-3 for cement</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div>
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">schedule</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">schedule</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">shield</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">shield</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -218,26 +217,26 @@
 
         <!-- BLOCK 4: Full Regrout + Silicone Reseal — image-left, text-right (alternated) -->
         <div class="reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div class="lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Full Regrout + Silicone Reseal</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Full Regrout + Silicone Reseal</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Complete shower refresh &mdash; every grout line, every silicone corner, every junction. Fresh epoxy grout plus anti-mould silicone at all edges. Your shower looks brand new and stays that way.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Grout + silicone in one visit</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Shower ready to use in 24 hours</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 3-year workmanship warranty</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:order-1">
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-1">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">shower</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">shower</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -379,7 +378,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
+                <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
@@ -508,7 +507,7 @@
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can regrouting fix a leaking shower?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">In many cases, yes. Cracked or missing grout is one of the most common causes of shower leaks. Regrouting with waterproof epoxy seals the joints and prevents water penetration. If the leak is from a failed waterproofing membrane underneath, additional repairs may be needed &mdash; we'll advise you during the quote.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I need to regrout or retile?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">If your tiles are still in good condition (not cracked or loose), regrouting is the better option. It costs 80-90% less than retiling, takes hours instead of days, and produces no demolition waste. Only retile if tiles themselves are damaged.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I need to regrout or retile?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">If your tiles are still in good condition (not cracked or loose), regrouting is the better option. It costs up to 80% less than retiling, takes hours instead of days, and produces no demolition waste. Only retile if tiles themselves are damaged.</p></div></div>
         </div>
     </div>
 </section>

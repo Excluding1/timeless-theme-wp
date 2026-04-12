@@ -87,6 +87,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (megaMenu) megaMenu.classList.toggle('open');
     };
 
+    // Close mega menu when clicking outside
+    document.addEventListener("click", function(e) {
+        if (megaMenu && megaMenu.classList.contains("open")) {
+            if (!megaMenu.contains(e.target) && e.target !== servicesBtn && !servicesBtn.contains(e.target)) {
+                megaMenu.classList.remove("open");
+            }
+        }
+    });
+
     if (servicesBtn) {
         servicesBtn.addEventListener('mouseleave', function () {
             megaTimeout = setTimeout(function () {

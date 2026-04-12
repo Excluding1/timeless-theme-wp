@@ -6,7 +6,7 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Bath Resurfacing Sydney",
-    "description": "Professional bath resurfacing and reglazing service in Sydney. Restore chipped, faded, or stained bathtubs to factory-new condition using the Hawk Glass-Tech system. Up to 10 year lifespan.",
+    "description": "Professional bath resurfacing and reglazing service in Sydney. Restore chipped, faded, or stained bathtubs to factory-new condition using a professional-grade system. Up to 10 year lifespan.",
     "provider": {
         "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",
@@ -37,9 +37,9 @@
     "mainEntity": [
         { "@type": "Question", "name": "How much does bath resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different. We provide fixed-price quotes based on your photos — no hidden fees, no surprises. Send us photos for a quote within hours." } },
         { "@type": "Question", "name": "How long does bath resurfacing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most baths are completed in 5-8.5 hours (one day). Freestanding baths may take a full day due to extra prep for stripping old coatings. Your bath is usable 24-48 hours after completion." } },
-        { "@type": "Question", "name": "How long does a resurfaced bath last?", "acceptedAnswer": { "@type": "Answer", "text": "up to 10 years with the Hawk Glass-Tech system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing." } },
+        { "@type": "Question", "name": "How long does a resurfaced bath last?", "acceptedAnswer": { "@type": "Answer", "text": "up to 10 years with the professional-grade system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing." } },
         { "@type": "Question", "name": "Can you resurface any type of bath?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: porcelain, enamel steel, cast iron, acrylic, fibreglass, and spa baths. We cannot resurface natural stone (marble/granite) baths — those need specialist stone restoration." } },
-        { "@type": "Question", "name": "Can you change the bath colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Hawk system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge." } }
+        { "@type": "Question", "name": "Can you change the bath colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge." } }
     ]
 }
 </script>
@@ -69,11 +69,11 @@
                 Bath Resurfacing <span class="text-on-primary-container">Sydney</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using the professional <strong>Hawk Glass-Tech system</strong> &mdash; a commercial-grade coating that lasts up to 10 years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
+                Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using a <strong>professional-grade system</strong> &mdash; a commercial-grade coating that lasts up to 10 years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">Up to 80%</p>
                     <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
                 <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
@@ -89,7 +89,6 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
@@ -110,7 +109,7 @@
 
 <!-- SECTION 2B: SERVICE DETAIL BLOCKS — Alternating zig-zag with branded before/after cards -->
 <section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Bath Resurfacing in Sydney</h2>
@@ -119,26 +118,26 @@
 
         <!-- BLOCK 1: Chip & Crack Repairs — text-left, image-right -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Chip &amp; Crack Repairs</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Chip &amp; Crack Repairs</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Dropped a shampoo bottle? Missing chunk of enamel? We repair chips, cracks, and holes in bathtubs using a two-part epoxy filler that matches your existing finish &mdash; no visible patch lines, no weak spots.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Single chip or multi-chip repairs available</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Invisible colour-matched finish</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Most repairs done in under 2 hours</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div>
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">broken_image</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -152,26 +151,26 @@
 
         <!-- BLOCK 2: Stain & Yellowing Removal — image-left, text-right (alternated) -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div class="lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Stain &amp; Yellowing Removal</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Stain &amp; Yellowing Removal</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Yellow rust stains from a dripping tap? Brown hard-water deposits? Old enamel gone dull and grey? We strip decades of stains and restore the original white finish &mdash; no abrasive cleaning, no bleach damage.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Removes rust, calcium, soap scum buildup</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Restores factory-smooth surface feel</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Cheaper than full resurface for surface-only stains</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:order-1">
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-1">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">water_drop</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">water_drop</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -185,26 +184,26 @@
 
         <!-- BLOCK 3: Peeling & Failed DIY Repair — text-left, image-right -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Peeling &amp; Failed DIY Repair</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Peeling &amp; Failed DIY Repair</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Tried a Bunnings kit and it&rsquo;s peeling within 6 months? We strip ALL the old coating back to the original surface, properly etch and prime, then apply a professional two-part acrylic urethane. No shortcuts, no peeling.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full strip and restart &mdash; not coating over</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Hawk Glass-Tech commercial-grade coating</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Professional commercial-grade coating</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 year finish with proper care</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div>
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">error</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">error</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">restart_alt</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">restart_alt</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -218,26 +217,26 @@
 
         <!-- BLOCK 4: Full Bath Resurface — image-left, text-right (alternated) -->
         <div class="reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div class="lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Full Bath Resurface</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Full Bath Resurface</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Complete restoration for acrylic, porcelain, cast iron, or fibreglass baths. Even freestanding and clawfoot tubs. Full prep, chip repair, primer, and multi-layer spray coating for a factory-new finish. Done in one day.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on all bath materials &amp; shapes</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose from white, ivory, or 900+ custom colours</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 3-year workmanship warranty</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:order-1">
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-1">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">bathtub</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">bathtub</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -323,7 +322,7 @@
                 <div class="flex-1">
                     <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 4</span></div>
                     <h3 class="font-bold text-primary text-base mb-1">Top Coat Application</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-2">Hawk Glass-Tech two-part acrylic urethane coating spray-applied in multiple thin layers using professional HVLP equipment. Factory-smooth, glass-like finish.</p>
+                    <p class="text-sm text-secondary leading-relaxed mb-2">Professional two-part acrylic urethane coating spray-applied in multiple thin layers using professional HVLP equipment. Factory-smooth, glass-like finish.</p>
                     <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Spray application is the difference between &ldquo;looks painted&rdquo; and &ldquo;looks brand new.&rdquo; Multiple thin coats build durability without drips.</p>
                 </div>
             </div>
@@ -379,7 +378,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
+                <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
@@ -411,7 +410,7 @@
                 </ul>
             </div>
             <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" aria-hidden="true">construction</span> Full Replacement</h3>
+                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" aria-hidden="true">cancel</span> Full Replacement</h3>
                 <ul class="space-y-3 text-sm text-secondary">
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Cost: thousands more &mdash; <a href="#quote" class="underline">get a free quote</a></li>
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Takes 3-5 days</li>
@@ -502,11 +501,11 @@
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does bath resurfacing take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most baths are completed in 5-8.5 hours (one day). Freestanding baths may take a full day due to extra prep for stripping old coatings. Your bath is usable 24-48 hours after completion.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a resurfaced bath last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">up to 10 years with the Hawk Glass-Tech system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a resurfaced bath last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">up to 10 years with the professional-grade system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of bath?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes: porcelain, enamel steel, cast iron, acrylic, fibreglass, and spa baths. We cannot resurface natural stone (marble/granite) baths &mdash; those need specialist stone restoration.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the bath colour?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. The Hawk system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the bath colour?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Our system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge.</p></div></div>
         </div>
     </div>
 </section>

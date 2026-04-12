@@ -85,7 +85,7 @@
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>
                 <div class="text-center">
-                    <p class="text-3xl font-extrabold text-primary">Save 80–90%</p>
+                    <p class="text-3xl font-extrabold text-primary">Save up to 80%</p>
                     <p class="text-xs text-secondary">vs replacement</p>
                 </div>
                 <div class="h-10 w-px bg-surface-container"></div>

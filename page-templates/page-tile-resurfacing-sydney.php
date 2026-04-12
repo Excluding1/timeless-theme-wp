@@ -6,7 +6,7 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Tile Resurfacing Sydney",
-    "description": "Professional bathroom tile resurfacing service in Sydney. Transform outdated tiles into a clean, modern finish using the Hawk Glass-Tech professional coating system — no demolition, completed in a single day.",
+    "description": "Professional bathroom tile resurfacing service in Sydney. Transform outdated tiles into a clean, modern finish using the professional-grade coating system — no demolition, completed in a single day.",
     "provider": {
         "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",
@@ -37,8 +37,8 @@
     "mainEntity": [
         { "@type": "Question", "name": "How much does tile resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different. We provide fixed-price quotes based on your photos — no hidden fees, no surprises. Send us photos for a quote within hours." } },
         { "@type": "Question", "name": "Can you resurface any type of tile?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: ceramic, porcelain, textured, patterned, and mosaic tiles. Small mosaic tiles have a surcharge due to extra masking. We cannot resurface natural stone (marble/travertine) — those need specialist treatment." } },
-        { "@type": "Question", "name": "How long does tile resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "up to 10 years with the Hawk Glass-Tech system on wall tiles. Floor tiles last 5-7 years due to foot traffic. Anti-slip additive included on all floor surfaces." } },
-        { "@type": "Question", "name": "Can you change the tile colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Most customers choose white or light neutral to modernise. The Hawk system offers 900+ colours including custom matches. Stone-fleck granite look also available." } },
+        { "@type": "Question", "name": "How long does tile resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "up to 10 years with the professional-grade system on wall tiles. Floor tiles last 5-7 years due to foot traffic. Anti-slip additive included on all floor surfaces." } },
+        { "@type": "Question", "name": "Can you change the tile colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Most customers choose white or light neutral to modernise. Our system offers 900+ colours including custom matches. Stone-fleck granite look also available." } },
         { "@type": "Question", "name": "Does tile resurfacing work over existing grout?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We resurface over both tiles and grout lines, creating a seamless finish. If grout is cracked/failing, we recommend regrouting first for longevity." } }
     ]
 }
@@ -69,11 +69,11 @@
                 Tile Resurfacing <span class="text-on-primary-container">Sydney</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                Outdated pink, green, or brown tiles? We transform them into a clean, modern finish using the <strong>Hawk Glass-Tech professional coating system</strong> &mdash; no demolition, no dust, no weeks of disruption. Most jobs completed in 1-2 days.
+                Outdated pink, green, or brown tiles? We transform them into a clean, modern finish using the <strong>professional-grade coating system</strong> &mdash; no demolition, no dust, no weeks of disruption. Most jobs completed in 1-2 days.
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">Up to 80%</p>
                     <p class="text-xs text-secondary">Cheaper than reno</p>
                 </div>
                 <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
@@ -89,11 +89,10 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Professional tile resurfacing in Sydney - bathroom tiles transformed with Hawk Glass-Tech coating system" src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/hero.jpg" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Professional tile resurfacing in Sydney - bathroom tiles transformed with professional-grade coating system" src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>
@@ -110,7 +109,7 @@
 
 <!-- SECTION 2B: SERVICE DETAIL BLOCKS — Alternating zig-zag with branded before/after cards -->
 <section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Tile Resurfacing in Sydney</h2>
@@ -119,26 +118,26 @@
 
         <!-- BLOCK 1: Outdated Colour Tiles — text-left, image-right -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Outdated Colour Tiles</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Outdated Colour Tiles</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Brown tiles from the 80s? Pink tiles from the 70s? Green tiles you&rsquo;ve hated since you moved in? We resurface tile walls and floors in any modern colour &mdash; no demolition, no re-tiling cost, no mess.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on any tile colour or pattern</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose white, ivory, or custom colours</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Done in 1-2 days</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div>
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">palette</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">palette</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -152,26 +151,26 @@
 
         <!-- BLOCK 2: Wall Tile Resurfacing — image-left, text-right (alternated) -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div class="lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Wall Tile Resurfacing</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Wall Tile Resurfacing</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Shower walls, splashbacks, bathroom walls &mdash; any ceramic or porcelain wall tile can be resurfaced. We etch, prime, and spray-apply architectural-grade coating for a factory-smooth modern finish.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Glazed ceramic and porcelain</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> No texture lines or brush marks</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 years lifespan</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:order-1">
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-1">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">view_quilt</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">view_quilt</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -185,26 +184,26 @@
 
         <!-- BLOCK 3: Floor Tile Resurfacing — text-left, image-right -->
         <div class="mb-12 lg:mb-16 reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Floor Tile Resurfacing</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Floor Tile Resurfacing</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Floor tiles take more abuse than walls &mdash; we add anti-slip additive to the coating so your floor stays safe and looks brand new. Perfect for dated bathroom and laundry floors.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Anti-slip additive included</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Warranty covers foot traffic wear</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Dries hard in 24 hours</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div>
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-2">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">grid_view</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">grid_view</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">verified</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -218,26 +217,26 @@
 
         <!-- BLOCK 4: Full Bathroom Tile Resurface — image-left, text-right (alternated) -->
         <div class="reveal">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-                <div class="lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Full Bathroom Tile Resurface</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Full Bathroom Tile Resurface</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Complete tile transformation &mdash; walls, floors, even the shower base. We prep every surface, protect fixtures, and spray-coat the entire bathroom in a consistent colour. Looks like a full renovation at a fraction of the cost.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Whole-bathroom uniform finish</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 1-2 day job, no demolition</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Saves 80-90% vs full retile</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Saves up to 80% vs full retile</li>
                     </ul>
-                    <a href="#quote" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="lg:order-1">
-                    <div class="aspect-[4/3] max-w-lg mx-auto rounded-2xl overflow-hidden relative shadow-md">
+                <div class="order-1 lg:order-1">
+                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
                         <div class="grid grid-cols-2 h-full">
                             <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-slate-400" aria-hidden="true">bathroom</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">bathroom</span>
                                 <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
                             </div>
                             <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-5xl sm:text-6xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
                                 <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
@@ -379,7 +378,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
+                <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
@@ -502,9 +501,9 @@
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of tile?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes: ceramic, porcelain, textured, patterned, and mosaic tiles. Small mosaic tiles have a surcharge due to extra masking. We cannot resurface natural stone (marble/travertine) &mdash; those need specialist treatment.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does tile resurfacing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">up to 10 years with the Hawk Glass-Tech system on wall tiles. Floor tiles last 5-7 years due to foot traffic. Anti-slip additive included on all floor surfaces.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does tile resurfacing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">up to 10 years with the professional-grade system on wall tiles. Floor tiles last 5-7 years due to foot traffic. Anti-slip additive included on all floor surfaces.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the tile colour?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Most customers choose white or light neutral to modernise. The Hawk system offers 900+ colours including custom matches. Stone-fleck granite look also available.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the tile colour?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Most customers choose white or light neutral to modernise. Our system offers 900+ colours including custom matches. Stone-fleck granite look also available.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Does tile resurfacing work over existing grout?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. We resurface over both tiles and grout lines, creating a seamless finish. If grout is cracked or failing, we recommend regrouting first for longevity.</p></div></div>
         </div>

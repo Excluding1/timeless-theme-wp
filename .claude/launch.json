@@ -3,9 +3,14 @@
   "configurations": [
     {
       "name": "static-preview",
-      "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "cd /Users/angelapham/Downloads/timeless-theme-wp/.claude/preview && exec python3 -m http.server 8765"],
-      "port": 8765
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-I",
+        "-c",
+        "import http.server,socketserver,os;H=type('H',(http.server.SimpleHTTPRequestHandler,),{'__init__':lambda s,*a,**k:http.server.SimpleHTTPRequestHandler.__init__(s,*a,directory='/tmp/timeless-preview',**k)});socketserver.TCPServer(('',int(os.environ.get('PORT',8000))),H).serve_forever()"
+      ],
+      "port": 8765,
+      "autoPort": true
     }
   ]
 }

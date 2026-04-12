@@ -72,7 +72,7 @@
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">Up to 80%</p>
                     <p class="text-xs text-secondary">Cheaper than new</p>
                 </div>
                 <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
@@ -132,7 +132,7 @@
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">diamond</span>
                 <h3 class="font-bold text-primary mb-2">Stone-Fleck Upgrade</h3>
-                <p class="text-sm text-secondary leading-relaxed">Want a granite or marble look? Our Hawk StoneFlecks system creates stunning multi-colour finishes on any surface.</p>
+                <p class="text-sm text-secondary leading-relaxed">Want a granite or marble look? Our StoneFlecks system creates stunning multi-colour finishes on any surface.</p>
             </div>
         </div>
     </div>
@@ -153,12 +153,12 @@
             <div class="bg-white rounded-xl p-6 text-center reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">2</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Prime</h3>
-                <p class="text-xs text-secondary">Hawk Ultra-Grip 4000 epoxy primer for benchtops. 2-pack primer for cabinets.</p>
+                <p class="text-xs text-secondary">Ultra-Grip 4000 epoxy primer for benchtops. 2-pack primer for cabinets.</p>
             </div>
             <div class="bg-white rounded-xl p-6 text-center reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">3</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Coat</h3>
-                <p class="text-xs text-secondary">Hawk Glass-Tech or Countercote for benchtops. 2-pack polyurethane spray for cabinets.</p>
+                <p class="text-xs text-secondary">Professional coating or Countercote for benchtops. 2-pack polyurethane spray for cabinets.</p>
             </div>
             <div class="bg-white rounded-xl p-6 text-center reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">4</div>
@@ -201,7 +201,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
+                <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">

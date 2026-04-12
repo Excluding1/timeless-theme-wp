@@ -72,7 +72,7 @@
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
-                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">80–90%</p>
+                    <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">Up to 80%</p>
                     <p class="text-xs text-secondary">Cheaper than new</p>
                 </div>
                 <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
@@ -142,7 +142,7 @@
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Restore Your Basin</h2>
-        <p class="text-secondary max-w-3xl mb-10">Same proven 5-step Hawk system as bath resurfacing, simplified for basins. Professional results every time.</p>
+        <p class="text-secondary max-w-3xl mb-10">Same proven 5-step professional system as bath resurfacing, simplified for basins. Professional results every time.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             <div class="bg-white rounded-xl p-6 text-center reveal">
@@ -163,7 +163,7 @@
             <div class="bg-white rounded-xl p-6 text-center reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">4</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Resurface</h3>
-                <p class="text-xs text-secondary">Apply premium Hawk coating system for a smooth, glossy, durable finish.</p>
+                <p class="text-xs text-secondary">Apply premium coating system for a smooth, glossy, durable finish.</p>
             </div>
             <div class="bg-white rounded-xl p-6 text-center reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4">5</div>
@@ -206,7 +206,7 @@
             </div>
             <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save 80–90%</h3>
+                <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">

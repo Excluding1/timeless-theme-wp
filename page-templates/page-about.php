@@ -87,13 +87,13 @@
                 </div>
                 <div class="bg-primary-container p-7 rounded-xl">
                     <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block" aria-hidden="true">savings</span>
-                    <h4 class="font-bold text-white text-lg mb-2">Save 80–90%</h4>
+                    <h4 class="font-bold text-white text-lg mb-2">Save up to 80%</h4>
                     <p class="text-sm text-on-primary-container leading-relaxed">A fraction of the cost of a full renovation. No demolition, no plumber, no weeks of disruption.</p>
                 </div>
                 <div class="bg-surface-container-low p-7 rounded-xl border-l-4 border-tertiary-fixed-dim">
                     <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">workspace_premium</span>
                     <h4 class="font-bold text-primary text-lg mb-2">Premium Coatings</h4>
-                    <p class="text-sm text-secondary leading-relaxed">Hawk Glass-Tech professional system &mdash; commercial-grade coatings that last 10&ndash;15 years.</p>
+                    <p class="text-sm text-secondary leading-relaxed">professional-grade system &mdash; commercial-grade coatings that last 10&ndash;15 years.</p>
                 </div>
                 <div class="bg-primary-container p-7 rounded-xl">
                     <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block" aria-hidden="true">verified_user</span>
