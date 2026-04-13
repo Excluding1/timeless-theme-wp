@@ -14,67 +14,53 @@ $phone      = timeless_phone();
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-[#1B2A4A] pt-16 pb-8 text-white text-sm">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 px-6 sm:px-8 max-w-7xl mx-auto">
-        <div>
-            <span class="text-xl font-bold block mb-4">Timeless Resurfacing</span>
-            <p class="text-slate-300 text-xs mb-6 max-w-xs leading-relaxed">Sydney's bathroom resurfacing specialists. Experienced team, fully insured, locally owned.</p>
-            <p class="text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest">Fully Insured</p>
-            <p class="text-sm font-bold">Sydney, NSW</p>
+<footer class="bg-primary pt-14 pb-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-12">
+            <!-- Brand -->
+            <div class="col-span-2 md:col-span-1">
+                <span class="text-2xl font-black tracking-tighter text-white block mb-4">Timeless Resurfacing</span>
+                <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney&rsquo;s bathroom resurfacing specialists.</p>
+            </div>
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm">Quick Links</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <!-- Services -->
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm">Services</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>">Bath Resurfacing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>">Tile Resurfacing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>">Shower Regrouting</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>">Shower Sealing</a></li>
+                </ul>
+            </div>
+            <!-- Useful Information -->
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm">Useful Information</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-white/70 text-lg" aria-hidden="true">mail</span>
+                        <a href="mailto:<?php echo timeless_email(); ?>" class="text-sm text-white/60 hover:text-white transition-colors"><?php echo timeless_email(); ?></a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-white/70 text-lg" aria-hidden="true">call</span>
+                        <a href="tel:<?php echo $phone_link; ?>" class="text-sm text-white/60 hover:text-white transition-colors"><?php echo $phone; ?></a>
+                    </li>
+                </ul>
+                <p class="text-xs text-white/30 mt-6">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing.<br>All Rights Reserved.</p>
+            </div>
         </div>
-        <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Resurfacing</h4>
-            <ul class="space-y-2 text-xs">
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>">Bath Resurfacing</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>">Tile Resurfacing</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>">Vanity Refinishing</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>">Basin Restoration</a></li>
-            </ul>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-3 mt-5 uppercase tracking-widest text-[0.65rem]">Regrouting</h4>
-            <ul class="space-y-2 text-xs">
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>">Shower Regrouting</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>">Shower Sealing</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/services/epoxy-grout-upgrade-sydney/' ) ); ?>">Epoxy Grout Upgrade</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Company</h4>
-            <ul class="space-y-2 text-xs">
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Before &amp; After</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>">Service Areas</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>">FAQs</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Legal</h4>
-            <ul class="space-y-2 text-xs">
-                <li><a class="text-slate-300 hover:text-white" href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
-                <li><a class="text-slate-300 hover:text-white" href="https://www.fairtrading.nsw.gov.au" rel="noopener" target="_blank">NSW Fair Trading</a></li>
-            </ul>
-            <a href="tel:<?php echo $phone_link; ?>" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-xs font-bold mt-4"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call Us</a>
-        </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 mt-12 pt-8 border-t border-white/10">
-        <p class="text-[0.65rem] text-slate-400 text-center">
-            &copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing. Sydney, NSW Australia.
-            <span class="mx-2 text-slate-500">&middot;</span>
-            ABN <?php echo timeless_abn(); ?>
-            <?php if ( timeless_has_licence() ) : ?>
-            <span class="mx-2 text-slate-500">&middot;</span>
-            NSW Licence <?php echo timeless_licence(); ?>
-            <?php endif; ?>
-        </p>
-        <p class="text-[0.6rem] text-slate-500 text-center mt-2">Our services come with guarantees that cannot be excluded under Australian Consumer Law.</p>
     </div>
 </footer>
 
-<!-- MOBILE STICKY CTA -->
-<div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-lg border-t border-surface-container px-4 py-3 flex gap-3">
-    <a href="tel:<?php echo $phone_link; ?>" class="flex-1 py-3 bg-surface-container-high text-primary font-bold rounded-lg text-center text-sm flex items-center justify-center gap-2"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call</a>
-    <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="flex-1 py-3 bg-primary text-white font-bold rounded-lg text-center text-sm">Free Quote</a>
-</div>
 
 <?php wp_footer(); ?>
 </body>

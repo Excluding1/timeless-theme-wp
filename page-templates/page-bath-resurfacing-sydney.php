@@ -55,7 +55,7 @@
             <li><span class="mx-1">/</span></li>
             <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
             <li><span class="mx-1">/</span></li>
-            <li class="text-primary font-medium">Bath Resurfacing Sydney</li>
+            <li class="text-primary font-medium">Bath Resurfacing</li>
         </ol>
     </nav>
 </div>
@@ -65,8 +65,8 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
             <span class="inline-block py-1 px-3 bg-tertiary-fixed-dim/30 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Service</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Bath Resurfacing <span class="text-on-primary-container">Sydney</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+                Bath <span class="text-on-primary-container">Resurfacing</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using a <strong>professional-grade system</strong> &mdash; a commercial-grade coating that lasts up to 10 years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
@@ -112,7 +112,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Bath Resurfacing in Sydney</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Bath Resurfacing</h2>
             <p class="text-secondary">From single chip repairs to full tub restoration &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
 
@@ -130,20 +130,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -163,20 +164,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">water_drop</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -196,20 +198,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">restart_alt</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">error</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">restart_alt</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -229,20 +232,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">bathtub</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -284,63 +288,55 @@
 <!-- OUR PROCESS -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mb-10">
+        <div class="max-w-3xl mx-auto text-center mb-12">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Process</span>
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">How We Resurface Your Bath</h2>
-            <p class="text-secondary">Every step exists for a reason. Here&rsquo;s exactly what we do and why &mdash; from preparation to that factory-smooth finish.</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How We Resurface Your Bath</h2>
+            <p class="text-secondary">Every step exists for a reason. Here&rsquo;s exactly what we do and why.</p>
         </div>
-        <div class="space-y-4 max-w-3xl">
-            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
-                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">search</span></div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 1</span></div>
-                    <h3 class="font-bold text-primary text-base mb-1">Assessment &amp; Repair</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-2">We inspect for chips, cracks, rust spots, and coating condition. Any damage is repaired with two-part epoxy filler and sanded smooth.</p>
-                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Coating over unfixed chips creates weak points that peel within months. Proper repair means a smooth, lasting finish.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+            <div class="bg-surface-container-low rounded-2xl p-6 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#c99a55]">1</span></div>
+                    <h3 class="font-bold text-primary">Assessment &amp; Repair</h3>
                 </div>
+                <p class="text-sm text-secondary leading-relaxed">Inspect for chips, cracks, and damage. Fill and sand any defects with two-part epoxy so the surface is completely smooth.</p>
             </div>
-            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
-                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">construction</span></div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 2</span></div>
-                    <h3 class="font-bold text-primary text-base mb-1">Surface Preparation</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-2">The entire surface is chemically etched and degreased. This creates microscopic grooves the coating bonds to &mdash; like sanding before painting, but at a molecular level.</p>
-                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: This step separates a $50 DIY kit from a professional job. Without proper etching, coatings peel within 6-12 months.</p>
+            <div class="bg-surface-container-low rounded-2xl p-6 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#c99a55]">2</span></div>
+                    <h3 class="font-bold text-primary">Surface Preparation</h3>
                 </div>
+                <p class="text-sm text-secondary leading-relaxed">Chemical etching and degreasing creates microscopic grooves for the coating to bond to. This separates professional work from DIY kits.</p>
             </div>
-            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
-                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">layers</span></div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 3</span></div>
-                    <h3 class="font-bold text-primary text-base mb-1">Priming</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-2">Specialist adhesion primer bonds to both the original bath material and the top coat &mdash; creating a bridge between old and new.</p>
-                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Skipping primer is why DIY bath paint kits from Bunnings fail. The top coat needs something to grip to.</p>
+            <div class="bg-surface-container-low rounded-2xl p-6 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#c99a55]">3</span></div>
+                    <h3 class="font-bold text-primary">Priming</h3>
                 </div>
-            </div>
-            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
-                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">format_paint</span></div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 4</span></div>
-                    <h3 class="font-bold text-primary text-base mb-1">Top Coat Application</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-2">Professional two-part acrylic urethane coating spray-applied in multiple thin layers using professional HVLP equipment. Factory-smooth, glass-like finish.</p>
-                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Spray application is the difference between &ldquo;looks painted&rdquo; and &ldquo;looks brand new.&rdquo; Multiple thin coats build durability without drips.</p>
-                </div>
-            </div>
-            <div class="flex gap-4 items-start bg-surface-container-low rounded-xl p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 reveal">
-                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-xl text-[#c99a55]" aria-hidden="true">verified</span></div>
-                <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-1"><span class="text-[0.6rem] font-black text-[#c99a55] uppercase tracking-widest">Step 5</span></div>
-                    <h3 class="font-bold text-primary text-base mb-1">Cure &amp; Quality Check</h3>
-                    <p class="text-sm text-secondary leading-relaxed mb-2">Coating cures for 24 hours. Final inspection for consistency, coverage, and finish quality. Bath ready to use the next day.</p>
-                    <p class="text-xs text-[#c99a55] font-medium flex items-center gap-1"><span class="material-symbols-outlined text-sm" aria-hidden="true">priority_high</span> Why it matters: Rushing the cure is the #1 cause of coating failure. 24 hours gives the chemical bond time to fully harden.</p>
-                </div>
+                <p class="text-sm text-secondary leading-relaxed">Specialist adhesion primer bonds to both the original surface and the top coat, creating a bridge between old and new.</p>
             </div>
         </div>
-        <div class="mt-8 max-w-3xl p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto lg:max-w-[calc(66.666%+0.75rem)]">
+            <div class="bg-surface-container-low rounded-2xl p-6 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#c99a55]">4</span></div>
+                    <h3 class="font-bold text-primary">Top Coat Application</h3>
+                </div>
+                <p class="text-sm text-secondary leading-relaxed">Professional spray-applied coating in multiple thin layers. Factory-smooth, glass-like finish with no brush marks.</p>
+            </div>
+            <div class="bg-surface-container-low rounded-2xl p-6 reveal">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#c99a55]">5</span></div>
+                    <h3 class="font-bold text-primary">Cure &amp; Quality Check</h3>
+                </div>
+                <p class="text-sm text-secondary leading-relaxed">24-hour cure at room temperature. Final inspection for consistency and finish quality. Bath ready to use the next day.</p>
+            </div>
+        </div>
+        <div class="mt-8 max-w-2xl mx-auto p-4 bg-primary/5 rounded-xl border border-primary/10 flex items-start gap-3">
             <span class="material-symbols-outlined text-primary flex-shrink-0" aria-hidden="true">cleaning_services</span>
             <div>
-                <p class="font-bold text-primary text-sm mb-1">No Mess Guarantee</p>
-                <p class="text-xs text-secondary">We contain the work area with drop sheets, vacuum all dust as we go, and leave your bathroom cleaner than we found it.</p>
+                <h4 class="font-bold text-primary text-sm">No Mess Guarantee</h4>
+                <p class="text-xs text-secondary">We contain the work area, vacuum all dust, and leave your bathroom cleaner than we found it.</p>
             </div>
         </div>
     </div>
@@ -395,7 +391,7 @@
 <!-- RESURFACING vs REPLACEMENT -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Resurfacing vs Replacement: Which Should You Choose?</h2>
+        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Full Replacement vs Our Resurfacing</h2>
         <p class="text-secondary max-w-3xl mb-10">Why spend thousands removing and replacing your bath when resurfacing delivers a like-new result for a fraction of the cost?</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">

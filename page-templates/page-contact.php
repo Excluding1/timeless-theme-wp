@@ -21,7 +21,6 @@
     ],
     "openingHoursSpecification": [
         { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "17:00" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "15:00" }
     ],
     "priceRange": "$$",
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23", "bestRating": "5" },
@@ -72,7 +71,7 @@
                 </div>
                 <h2 class="font-bold text-primary text-lg mb-2">Phone</h2>
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-xl font-extrabold text-primary hover:text-on-primary-container transition-colors block mb-2"><?php echo timeless_phone(); ?></a>
-                <p class="text-xs text-secondary">Call us Mon&ndash;Sat 7am&ndash;5pm</p>
+                <p class="text-xs text-secondary">Call us Mon&ndash;Fri 7am&ndash;5pm</p>
             </div>
             <!-- Email -->
             <div class="bg-white rounded-xl p-8 text-center hover:shadow-lg transition-all border border-surface-container">
@@ -111,7 +110,7 @@
                 </div>
                 <div class="flex justify-between items-center py-3 border-b border-surface-container">
                     <span class="text-sm font-bold text-primary">Saturday</span>
-                    <span class="text-sm font-bold text-on-primary-container">8:00am &ndash; 3:00pm</span>
+                    <span class="text-sm font-bold text-error">Closed</span>
                 </div>
                 <div class="flex justify-between items-center py-3 border-b border-surface-container">
                     <span class="text-sm font-bold text-primary">Sunday</span>

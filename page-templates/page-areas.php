@@ -236,13 +236,6 @@
 <!-- TRAVEL INFO -->
 <section class="py-10 bg-white">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
-        <div class="flex items-start gap-4 p-6 bg-surface-container-low rounded-xl border border-surface-container">
-            <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">local_shipping</span>
-            <div>
-                <h3 class="font-bold text-primary mb-1">No Extra Travel Charges</h3>
-                <p class="text-sm text-secondary leading-relaxed">We dispatch the nearest available technician to your suburb. Most jobs across Greater Sydney are covered with no additional travel charge.</p>
-            </div>
-        </div>
     </div>
 </section>
 

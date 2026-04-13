@@ -55,7 +55,7 @@
             <li><span class="mx-1">/</span></li>
             <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
             <li><span class="mx-1">/</span></li>
-            <li class="text-primary font-medium">Shower Regrouting Sydney</li>
+            <li class="text-primary font-medium">Shower Regrouting</li>
         </ol>
     </nav>
 </div>
@@ -65,8 +65,8 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
             <span class="inline-block py-1 px-3 bg-tertiary-fixed-dim/30 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Service</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Shower Regrouting <span class="text-on-primary-container">Sydney</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+                Shower Regrouting
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Cracked, mouldy, or missing grout? We remove all old grout and replace it with premium <strong>waterproof epoxy grout</strong> that seals your shower, stops leaks, and prevents mould &mdash; most jobs completed in a single day (larger showers may take 2 days).
@@ -112,7 +112,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Shower Regrouting in Sydney</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Shower Regrouting</h2>
             <p class="text-secondary">From cracked old grout to fresh waterproof epoxy &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
 
@@ -130,20 +130,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">biotech</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -163,20 +164,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">auto_awesome</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -196,20 +198,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">shield</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">schedule</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">shield</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -229,20 +232,21 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
-                    <div class="aspect-[3/2] w-full rounded-2xl overflow-hidden relative shadow-md">
-                        <div class="grid grid-cols-2 h-full">
-                            <div class="bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center relative">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
+                        </div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">shower</span>
-                                <span class="absolute top-3 left-3 text-[0.6rem] font-bold text-slate-600 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">Before</span>
-                            </div>
-                            <div class="bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center relative">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
-                                <span class="absolute top-3 right-3 text-[0.6rem] font-bold text-emerald-700 uppercase tracking-widest bg-white/95 px-2.5 py-1 rounded-full shadow-sm">After</span>
                             </div>
                         </div>
-                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border-2 border-[#e7c08b]">
-                            <span class="material-symbols-outlined text-[#c99a55]" aria-hidden="true">arrow_forward</span>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -395,7 +399,7 @@
 <!-- EPOXY vs CEMENT -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Epoxy vs Cement Grout: Which Should You Choose?</h2>
+        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Cement Grout vs Our Epoxy Upgrade</h2>
         <p class="text-secondary max-w-3xl mb-10">We offer both options, but for showers we almost always recommend epoxy. Here's why:</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
