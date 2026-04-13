@@ -56,7 +56,7 @@
         /* Vertical timeline */
         .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #e7c08b; transform: translateX(-50%); }
         @media (max-width: 767px) { .timeline-line { left: 24px; } }
-    </style>
+    .mega-dropdown { max-height: 0; overflow: hidden; opacity: 0; pointer-events: none; border-top-width: 0 !important; transition: max-height 0.25s ease, opacity 0.2s ease; } .mega-dropdown.open { max-height: 500px; opacity: 1; pointer-events: auto; border-top-width: 1px !important; } </style>
 </head>
 
 <body class="bg-surface text-[#191c1e] font-body">
@@ -174,41 +174,28 @@
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurfacing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="tile-resurfacing.html"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="vanity-refinishing.html"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="basin-restoration.html"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="tile-resurfacing.html"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="vanity-refinishing.html"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="basin-restoration.html"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="shower-regrouting.html"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors bg-surface-container-low" href="shower-sealing.html"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="epoxy-grout-upgrade.html"><span class="font-semibold text-primary block">Epoxy Grout Upgrade</span><span class="text-xs text-secondary">Waterproof, mould-resistant grout</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="floor-tile-regrouting.html"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-regrouting.html"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors bg-surface-container-low" onclick="hideMega()" href="shower-sealing.html"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="epoxy-grout-upgrade.html"><span class="font-semibold text-primary block">Epoxy Grout Upgrade</span><span class="text-xs text-secondary">Waterproof, mould-resistant grout</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="floor-tile-regrouting.html"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">build</span> Repairs &amp; Packages</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="chip-repair.html"><span class="font-semibold text-primary block">Chip Repair</span><span class="text-xs text-secondary">Bath &amp; basin chip fixes</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="full-bathroom-makeover.html"><span class="font-semibold text-primary block">Full Bathroom Makeover</span><span class="text-xs text-secondary">Complete resurface package</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" href="property-managers.html"><span class="font-semibold text-primary block">Property Managers</span><span class="text-xs text-secondary">Multi-unit &amp; rental turnarounds</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="chip-repair.html"><span class="font-semibold text-primary block">Chip Repair</span><span class="text-xs text-secondary">Bath &amp; basin chip fixes</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="full-bathroom-makeover.html"><span class="font-semibold text-primary block">Full Bathroom Makeover</span><span class="text-xs text-secondary">Complete resurface package</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="property-managers.html"><span class="font-semibold text-primary block">Property Managers</span><span class="text-xs text-secondary">Multi-unit &amp; rental turnarounds</span></a>
                     </div>
-                </div>
-            </div>
-            <div class="max-w-7xl mx-auto px-6 sm:px-8 pb-5 pt-1">
-                <div class="border-t border-surface-container pt-4 flex flex-wrap items-center gap-x-1 gap-y-1">
-                    <span class="text-[0.6rem] font-bold text-outline uppercase tracking-widest mr-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs text-tertiary-fixed-dim" aria-hidden="true">location_on</span> Areas</span>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">Sydney CBD</a>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">Eastern Suburbs</a>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">Inner West</a>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">North Shore</a>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">Western Sydney</a>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">Parramatta</a>
-                    <a href="index.html#services" class="text-[0.65rem] text-secondary hover:text-primary px-2 py-1 rounded hover:bg-surface-container-low transition-colors">Wollongong</a>
-                    <a href="index.html#services" class="ml-auto text-[0.65rem] font-bold text-primary hover:text-on-primary-container flex items-center gap-1 transition-colors">All Areas <span class="material-symbols-outlined text-xs" aria-hidden="true">arrow_forward</span></a>
                 </div>
             </div>
         </div>
@@ -277,7 +264,7 @@
             <li><span class="mx-1">/</span></li>
             <li><a href="index.html#services" class="hover:text-primary transition-colors">Services</a></li>
             <li><span class="mx-1">/</span></li>
-            <li class="text-primary font-medium">Shower Sealing Sydney</li>
+            <li class="text-primary font-medium">Shower Sealing</li>
         </ol>
     </nav>
 </div>
@@ -742,41 +729,48 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-[#1B2A4A] pt-16 pb-8 text-white text-sm">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 px-6 sm:px-8 max-w-7xl mx-auto">
-        <div>
-            <span class="text-xl font-bold block mb-4">Timeless Resurfacing</span>
-            <p class="text-slate-300 text-xs mb-6 max-w-xs leading-relaxed">Sydney&rsquo;s bathroom resurfacing specialists. Experienced team, fully insured, locally owned.</p>
-            <p class="text-[0.65rem] font-bold text-slate-400 uppercase tracking-widest">Fully Insured</p>
-            <p class="text-sm font-bold">Sydney, NSW</p>
+<footer class="bg-primary pt-14 pb-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-12">
+            <div class="col-span-2 md:col-span-1">
+                <span class="text-2xl font-black tracking-tighter text-white block mb-4">Timeless Resurfacing</span>
+                <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney\&rsquo;s bathroom resurfacing specialists.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm">Quick Links</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="index.html">Home</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="index.html#portfolio">Gallery</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="index.html#quote">Contact Us</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="index.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm">Services</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="bath-resurfacing.html">Bath Resurfacing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="tile-resurfacing.html">Tile Resurfacing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="shower-regrouting.html">Shower Regrouting</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="shower-leak-repair.html">Shower Sealing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-4 text-sm">Useful Information</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-white/70 text-lg" aria-hidden="true">mail</span>
+                        <a href="mailto:hello@timelessresurfacing.com.au" class="text-sm text-white/60 hover:text-white transition-colors">hello@timelessresurfacing.com.au</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-white/70 text-lg" aria-hidden="true">call</span>
+                        <a href="tel:+61451110154" class="text-sm text-white/60 hover:text-white transition-colors">0451 110 154</a>
+                    </li>
+                </ul>
+                <p class="text-xs text-white/30 mt-6">&copy; 2026 Timeless Resurfacing.<br>All Rights Reserved.</p>
+            </div>
         </div>
-        <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Resurfacing</h4>
-            <ul class="space-y-2 text-xs"><li><a class="text-slate-300 hover:text-white" href="bath-resurfacing.html">Bath Resurfacing</a></li><li><a class="text-slate-300 hover:text-white" href="tile-resurfacing.html">Tile Resurfacing</a></li><li><a class="text-slate-300 hover:text-white" href="vanity-refinishing.html">Vanity Refinishing</a></li><li><a class="text-slate-300 hover:text-white" href="basin-restoration.html">Basin Restoration</a></li></ul>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-3 mt-5 uppercase tracking-widest text-[0.65rem]">Regrouting</h4>
-            <ul class="space-y-2 text-xs"><li><a class="text-slate-300 hover:text-white" href="shower-regrouting.html">Shower Regrouting</a></li><li><a class="text-slate-300 hover:text-white" href="shower-sealing.html">Shower Sealing</a></li><li><a class="text-slate-300 hover:text-white" href="epoxy-grout-upgrade.html">Epoxy Grout Upgrade</a></li></ul>
-        </div>
-        <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Company</h4>
-            <ul class="space-y-2 text-xs"><li><a class="text-slate-300 hover:text-white" href="index.html">About</a></li><li><a class="text-slate-300 hover:text-white" href="index.html#portfolio">Before &amp; After</a></li><li><a class="text-slate-300 hover:text-white" href="index.html#quote">Contact</a></li><li><a class="text-slate-300 hover:text-white" href="index.html#services">Service Areas</a></li></ul>
-        </div>
-        <div>
-            <h4 class="font-bold text-tertiary-fixed-dim mb-4 uppercase tracking-widest text-[0.65rem]">Legal</h4>
-            <ul class="space-y-2 text-xs"><li><a class="text-slate-300 hover:text-white" href="index.html">Privacy Policy</a></li><li><a class="text-slate-300 hover:text-white" href="index.html">Terms of Service</a></li><li><a class="text-slate-300 hover:text-white" href="https://www.fairtrading.nsw.gov.au" rel="noopener" target="_blank">NSW Fair Trading</a></li></ul>
-            <a href="tel:+61451110154" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-xs font-bold mt-4"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call Us</a>
-        </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 mt-12 pt-8 border-t border-white/10">
-        <p class="text-[0.65rem] text-slate-400 text-center">&copy; 2026 Timeless Resurfacing. Sydney, NSW Australia. <span class="mx-2 text-slate-500">&middot;</span> ABN 30 412 161 602</p>
-        <p class="text-[0.6rem] text-slate-500 text-center mt-2">Our services come with guarantees that cannot be excluded under Australian Consumer Law.</p>
     </div>
 </footer>
-
-<!-- MOBILE STICKY CTA -->
-<div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-lg border-t border-surface-container px-4 py-3 flex gap-3">
-    <a href="tel:+61451110154" class="flex-1 py-3 bg-surface-container-high text-primary font-bold rounded-lg text-center text-sm flex items-center justify-center gap-2"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call</a>
-    <a href="#quote" class="flex-1 py-3 bg-primary text-white font-bold rounded-lg text-center text-sm">Free Quote</a>
-</div>
 
 <!-- JAVASCRIPT -->
 <script>
