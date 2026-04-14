@@ -35,7 +35,7 @@
 
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal { opacity: 1 !important; transform: none !important; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
         .faq-item.open .faq-answer { max-height: 400px; }
@@ -170,7 +170,7 @@
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurfacing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors bg-surface-container-low" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="tile-resurfacing.html"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="vanity-refinishing.html"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="basin-restoration.html"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
@@ -198,7 +198,7 @@
     </nav>
 
     <!-- MOBILE NAV -->
-    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto" style="display:none" style="display:none">
+    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto" style="display:none" style="display:none" style="display:none">
         <div class="flex justify-between items-center px-6 py-4">
             <span class="text-2xl font-black tracking-tighter text-[#1B2A4A]">Timeless Resurfacing</span>
             <button id="menu-close" class="p-2" aria-label="Close menu"><span class="material-symbols-outlined text-2xl text-primary">close</span></button>
@@ -209,7 +209,7 @@
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
-                <a class="text-primary py-2.5 pl-4 text-base font-medium bg-tertiary-fixed/20 rounded-lg block" href="bath-resurfacing.html" onclick="closeMobile()">Bath Resurfacing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="bath-resurfacing.html" onclick="closeMobile()">Bath Resurfacing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="tile-resurfacing.html" onclick="closeMobile()">Tile Resurfacing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="vanity-refinishing.html" onclick="closeMobile()">Vanity Refinishing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="basin-restoration.html" onclick="closeMobile()">Basin Restoration</a>
@@ -461,7 +461,7 @@
                     <li><a class="text-white/60 hover:text-white transition-colors" href="index.html">Home</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="gallery.html">Gallery</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="contact.html">Contact Us</a></li>
-                    <li><a class="text-white/60 hover:text-white transition-colors" href="index.html#privacy">Privacy Policy</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="privacy.html">Privacy Policy</a></li>
                 </ul>
             </div>
             <div>
@@ -491,5 +491,111 @@
     </div>
 </footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    /* -- Before/After Slider -- */
+    (function(){
+        var slider = document.getElementById('hero-slider');
+        if(!slider) return;
+        var clip = document.getElementById('ba-clip');
+        var line = document.getElementById('ba-line');
+        var handle = document.getElementById('ba-handle');
+        var bImg = document.getElementById('ba-before-img');
+        var active = false;
+        function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
+        syncWidth(); window.addEventListener('resize', syncWidth);
+        function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
+        slider.addEventListener('mousedown', function(e){ active=true; move(e.clientX); e.preventDefault(); });
+        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
+        document.addEventListener('mouseup', function(){ active=false; });
+        slider.addEventListener('touchstart', function(e){ active=true; move(e.touches[0].clientX); }, {passive:true});
+        document.addEventListener('touchmove', function(e){ if(active) move(e.touches[0].clientX); }, {passive:true});
+        document.addEventListener('touchend', function(){ active=false; });
+    })();
+
+    /* -- Mobile Menu -- */
+    var menuBtn = document.getElementById('menu-btn');
+    var menuClose = document.getElementById('menu-close');
+    var mobileNav = document.getElementById('mobile-nav');
+    window.closeMobile = function(){ if(mobileNav){ mobileNav.classList.remove('open'); mobileNav.style.display='none'; document.body.style.overflow=''; } };
+    if(menuBtn && mobileNav){ menuBtn.addEventListener('click', function(){ mobileNav.style.display='block'; mobileNav.style.display='block'; mobileNav.classList.add('open'); document.body.style.overflow='hidden'; }); }
+    if(menuClose && mobileNav){ menuClose.addEventListener('click', closeMobile); }
+
+    /* -- Mega Menu -- */
+    var megaMenu = document.getElementById('mega-menu'); var megaTimeout;
+    window.showMega = function(){ clearTimeout(megaTimeout); if(megaMenu) megaMenu.classList.add('open'); };
+    window.hideMega = function(){ megaTimeout = setTimeout(function(){ if(megaMenu) megaMenu.classList.remove('open'); }, 200); };
+    window.toggleMega = function(){ if(megaMenu) megaMenu.classList.toggle('open'); };
+    var servicesBtn = document.getElementById('services-btn');
+    if(servicesBtn){ servicesBtn.addEventListener('mouseleave', function(){ megaTimeout = setTimeout(function(){ if(megaMenu && !megaMenu.matches(':hover')) megaMenu.classList.remove('open'); }, 200); }); }
+
+    /* -- Mobile Accordions -- */
+    window.toggleMobileAccordion = function(btn){ var c = btn.nextElementSibling; var ch = btn.querySelector('.mobile-chevron'); c.classList.toggle('open'); if(ch) ch.style.transform = c.classList.contains('open') ? 'rotate(0deg)' : 'rotate(-90deg)'; };
+
+    /* -- FAQ -- */
+    window.toggleFaq = function(btn){ var item = btn.parentElement; var isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(function(el){ el.classList.remove('open'); }); if(!isOpen) item.classList.add('open'); };
+
+    /* -- Scroll Reveal -- */
+    var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+    /* -- Smooth Scroll -- */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = this.getAttribute('href'); if(t && t !== '#'){ var el = document.querySelector(t); if(el){ e.preventDefault(); window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' }); } } }); });
+
+    /* -- Testimonial Carousel (JS-measured widths like homepage pattern) -- */
+    (function(){
+        var container = document.getElementById('bath-testimonial-carousel');
+        var track = document.getElementById('bath-testimonial-track');
+        var counter = document.getElementById('bath-testimonial-counter');
+        if (!container || !track) return;
+
+        var GAP = 24; // gap-6 in Tailwind
+        var cards = track.querySelectorAll('.bath-t-card');
+        var total = cards.length;
+        var index = 0;
+
+        function perView() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        }
+
+        function sizeCards() {
+            var w = container.offsetWidth;
+            var view = perView();
+            var cardW = (w - GAP * (view - 1)) / view;
+            cards.forEach(function(c) {
+                c.style.width = cardW + 'px';
+                c.style.minWidth = cardW + 'px';
+            });
+            // Clamp index in case of resize
+            var maxIndex = Math.max(0, total - view);
+            if (index > maxIndex) index = maxIndex;
+            applyTransform();
+        }
+
+        function applyTransform() {
+            var w = container.offsetWidth;
+            var view = perView();
+            var cardW = (w - GAP * (view - 1)) / view;
+            var offset = index * (cardW + GAP);
+            track.style.transform = 'translateX(-' + offset + 'px)';
+            if (counter) counter.textContent = (index + 1) + ' / ' + total;
+        }
+
+        window.moveBathTestimonials = function(dir) {
+            var view = perView();
+            var maxIndex = Math.max(0, total - view);
+            index += dir;
+            if (index < 0) index = maxIndex;
+            if (index > maxIndex) index = 0;
+            applyTransform();
+        };
+
+        sizeCards();
+        window.addEventListener('resize', sizeCards);
+    })();
+});
+</script>
 </body>
 </html>

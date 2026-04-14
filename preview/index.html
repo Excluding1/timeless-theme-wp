@@ -237,7 +237,7 @@
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurfacing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors bg-surface-container-low" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="tile-resurfacing.html"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="vanity-refinishing.html"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="basin-restoration.html"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
@@ -276,7 +276,7 @@
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
-                <a class="text-primary py-2.5 pl-4 text-base font-medium bg-tertiary-fixed/20 rounded-lg block" href="bath-resurfacing.html" onclick="closeMobile()">Bath Resurfacing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="bath-resurfacing.html" onclick="closeMobile()">Bath Resurfacing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="tile-resurfacing.html" onclick="closeMobile()">Tile Resurfacing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="vanity-refinishing.html" onclick="closeMobile()">Vanity Refinishing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="basin-restoration.html" onclick="closeMobile()">Basin Restoration</a>
@@ -305,7 +305,6 @@
             <a class="text-primary py-3 text-lg font-semibold" href="areas.html" onclick="closeMobile()">Service Areas</a>
             <a class="text-primary py-3 text-lg font-semibold" href="about.html" onclick="closeMobile()">About</a>
             <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="#quote" onclick="closeMobile()">Get a Free Quote</a>
-            <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:+61451110154"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call 0451 110 154</a>
         </div>
     </div>
 </header>
@@ -338,15 +337,13 @@
         <div class="md:col-span-5">
             <!-- BEFORE / AFTER SLIDER -->
             <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none max-h-[420px] md:max-h-none" style="aspect-ratio:5/6;cursor:ew-resize;">
-                <!-- After image (background) — REPLACE: images/homepage/after.jpg -->
-                <div class="absolute inset-0 w-full h-full bg-emerald-100 flex items-center justify-center text-center p-4">
-                    <div><span class="material-symbols-outlined text-4xl text-emerald-600 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-emerald-800 uppercase tracking-wider">after.jpg</p><p class="text-[0.6rem] text-emerald-600 mt-1">Gleaming white bathtub &amp; clean tiles<br/>images/homepage/after.jpg<br/>Ratio: 4:3 landscape</p></div>
+                <!-- After image (background) -->
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="images/homepage/after.jpg" alt="Gleaming white resurfaced bathtub and clean tiles" class="w-full h-full object-cover" />
                 </div>
-                <!-- Before image (clipped) — REPLACE: images/homepage/before.jpg -->
+                <!-- Before image (clipped) -->
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                    <div id="ba-before-img" class="bg-rose-100 flex items-center justify-center text-center p-4" style="position:absolute;top:0;left:0;height:100%;width:100%;">
-                        <div><span class="material-symbols-outlined text-4xl text-rose-600 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-rose-800 uppercase tracking-wider">before.jpg</p><p class="text-[0.6rem] text-rose-600 mt-1">Peeling stained bathtub &amp; dirty grout<br/>images/homepage/before.jpg<br/>Ratio: 4:3 landscape</p></div>
-                    </div>
+                    <img id="ba-before-img" src="images/homepage/before.jpg" alt="Peeling stained bathtub and dirty grout" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
                 <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -388,7 +385,7 @@
             <a href="shower-regrouting.html" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
                 <!-- REPLACE: images/services/shower-regrouting/thumb.jpg — 120x120 circle crop -->
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <span class="material-symbols-outlined text-2xl text-emerald-500" aria-hidden="true">photo_camera</span>
+                    <img src="images/homepage/shower-regrouting.jpg" alt="Shower regrouting service" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Shower Regrouting</h3>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Full grout removal &amp; replacement with premium waterproof epoxy. Same-day service.</p>
@@ -397,7 +394,7 @@
             <a href="bath-resurfacing.html" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
                 <!-- REPLACE: images/services/bath-resurfacing/thumb.jpg — 120x120 circle crop -->
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <span class="material-symbols-outlined text-2xl text-emerald-500" aria-hidden="true">photo_camera</span>
+                    <img src="images/homepage/bath-resurfacing.png" alt="Bath resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Bath Resurfacing</h3>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Restore chipped or stained bathtubs to brilliant shine. Lasts up to 10 years.</p>
@@ -406,7 +403,7 @@
             <a href="tile-resurfacing.html" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
                 <!-- REPLACE: images/services/tile-resurfacing/thumb.jpg — 120x120 circle crop -->
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <span class="material-symbols-outlined text-2xl text-emerald-500" aria-hidden="true">photo_camera</span>
+                    <img src="images/homepage/tile-resurfacing.png" alt="Tile resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Tile Resurfacing</h3>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Transform outdated tiles into a clean, modern finish. No demolition required.</p>
@@ -415,7 +412,7 @@
             <a href="vanity-refinishing.html" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
                 <!-- REPLACE: images/services/vanity-refinishing/thumb.jpg — 120x120 circle crop -->
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <span class="material-symbols-outlined text-2xl text-emerald-500" aria-hidden="true">photo_camera</span>
+                    <img src="images/homepage/vanity-resurfacing.png" alt="Vanity resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Vanity Refinishing</h3>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Stone-fleck or sleek satin finish. 900+ colours available.</p>
@@ -424,7 +421,7 @@
             <a href="basin-restoration.html" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
                 <!-- REPLACE: images/services/basin-restoration/thumb.jpg — 120x120 circle crop -->
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <span class="material-symbols-outlined text-2xl text-emerald-500" aria-hidden="true">photo_camera</span>
+                    <img src="images/homepage/basin-resurfacing.png" alt="Basin resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Basin Restoration</h3>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Chip repair &amp; full resurface for porcelain, cast iron, and acrylic basins.</p>
@@ -433,7 +430,7 @@
             <a href="shower-sealing.html" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
                 <!-- REPLACE: images/services/shower-sealing/thumb.jpg — 120x120 circle crop -->
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
-                    <span class="material-symbols-outlined text-2xl text-emerald-500" aria-hidden="true">photo_camera</span>
+                    <img src="images/homepage/shower-sealing.png" alt="Shower sealing service" class="w-full h-full object-cover rounded-full" />
                 </div>
                 <h3 class="text-lg font-bold text-primary mb-2">Shower Sealing</h3>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Leaking shower? Precision waterproof silicone &amp; epoxy sealing.</p>
@@ -452,7 +449,6 @@
         <p class="text-on-primary-container text-sm sm:text-base mb-6">Send us photos of your bathroom &mdash; we reply with a fixed-price quote next business day.</p>
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#quote" class="px-8 py-4 bg-tertiary-fixed-dim text-on-tertiary-fixed font-bold rounded-lg hover:opacity-90 transition-all">Get Your Free Quote</a>
-            <a href="tel:+61451110154" class="px-8 py-4 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call 0451 110 154</a>
         </div>
     </div>
 </section>
@@ -502,8 +498,8 @@
             <!-- Left: Process image placeholder -->
             <div class="hidden lg:block reveal">
                 <!-- REPLACE: images/homepage/process.jpg — tradesperson working on bathroom -->
-                <div class="rounded-2xl overflow-hidden aspect-[4/3] max-w-md mx-auto bg-sky-50 flex items-center justify-center">
-                    <div class="text-center p-8"><span class="material-symbols-outlined text-5xl text-sky-400 block mb-3" aria-hidden="true">photo_camera</span><p class="text-sm font-bold text-sky-700">process.jpg</p><p class="text-xs text-sky-500 mt-2">Tradesperson resurfacing a bathtub<br/>images/homepage/process.jpg<br/>Ratio: 4:5 portrait</p></div>
+                <div class="rounded-2xl overflow-hidden aspect-[3/4] max-w-md mx-auto shadow-xl">
+                    <img src="images/homepage/how-it-works.png" alt="Professional bathroom resurfacing process" class="w-full h-full object-cover" />
                 </div>
             </div>
             <!-- Right: Steps -->
@@ -820,7 +816,7 @@
                     <li><a class="text-white/60 hover:text-white transition-colors" href="index.html">Home</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="gallery.html">Gallery</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="contact.html">Contact Us</a></li>
-                    <li><a class="text-white/60 hover:text-white transition-colors" href="index.html#privacy">Privacy Policy</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="privacy.html">Privacy Policy</a></li>
                 </ul>
             </div>
             <div>
