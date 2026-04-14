@@ -115,6 +115,87 @@
 
 <body class="bg-surface text-[#191c1e] font-body">
 
+<!-- Schema: Service + BreadcrumbList + FAQPage -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Bath Resurfacing Sydney",
+    "description": "Professional bath resurfacing with Professional commercial-grade coating. Same-day service, 3-year warranty.",
+    "provider": {
+        "@type": "LocalBusiness",
+        "name": "Timeless Resurfacing",
+        "telephone": "0451110154",
+        "areaServed": {
+            "@type": "City",
+            "name": "Sydney"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Sydney",
+            "addressRegion": "NSW",
+            "addressCountry": "AU"
+        }
+    },
+    "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AUD",
+        "price": "800",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "23"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
+        { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing Sydney", "item": "https://timelessresurfacing.com.au/bath-resurfacing-sydney/" }
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How much does bath resurfacing cost in Sydney?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Bath resurfacing starts from $800 inc GST for a standard bathtub. We provide fixed-price quotes based on your photos — no hidden fees, no surprises." }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does bath resurfacing take?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most standard bath resurfacing jobs are completed in 5-8.5 hours. The bath can be used again 24-48 hours after completion to allow the coating to fully cure." }
+        },
+        {
+            "@type": "Question",
+            "name": "How long does a resurfaced bath last?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A professionally resurfaced bath using the professional-grade system lasts up to 10 years with proper care. We back every job with a 3-year resurface warranty." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can you resurface any type of bath?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes — we resurface porcelain, enamel steel, cast iron, acrylic, and fibreglass baths. The only exception is natural stone (marble, granite) which requires different treatment." }
+        },
+        {
+            "@type": "Question",
+            "name": "Can you change the bath colour?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We have over 900 colours available, so you can keep your existing colour or transform it completely. White and ivory are the most popular choices." }
+        }
+    ]
+}
+</script>
+
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
 <!-- NAV -->
@@ -125,20 +206,19 @@
             <div class="hidden lg:flex items-center space-x-8 font-medium text-sm">
                 <button id="services-btn" class="text-slate-500 hover:text-[#1B2A4A] transition-colors flex items-center gap-1 py-2" onmouseenter="showMega()" onclick="toggleMega()">Services <span class="material-symbols-outlined text-sm" aria-hidden="true">expand_more</span></button>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="gallery.html">Before &amp; After</a>
-                <a class="text-[#1B2A4A] font-bold transition-colors" href="faqs.html">FAQs</a>
-                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="index.html#warranty">About</a>
-                <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="contact.html">Get a Free Quote</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="areas.html">Service Areas</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="about.html">About</a>
+                <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="#quote">Get a Free Quote</a>
             </div>
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
         </div>
-
         <!-- MEGA MENU -->
         <div id="mega-menu" class="mega-dropdown hidden lg:block bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
             <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 grid grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurfacing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors bg-surface-container-low" onclick="hideMega()" href="bath-resurfacing.html"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="tile-resurfacing.html"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="vanity-refinishing.html"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="basin-restoration.html"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
@@ -166,7 +246,7 @@
     </nav>
 
     <!-- MOBILE NAV -->
-    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto">
+    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto" style="display:none" style="display:none">
         <div class="flex justify-between items-center px-6 py-4">
             <span class="text-2xl font-black tracking-tighter text-[#1B2A4A]">Timeless Resurfacing</span>
             <button id="menu-close" class="p-2" aria-label="Close menu"><span class="material-symbols-outlined text-2xl text-primary">close</span></button>
@@ -174,19 +254,19 @@
         <div class="flex flex-col px-6 pt-2 pb-8">
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
                 <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">format_paint</span> Resurfacing</span>
-                <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
+                <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
             </button>
-            <div class="mobile-accordion">
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="bath-resurfacing.html" onclick="closeMobile()">Bath Resurfacing</a>
+            <div class="mobile-accordion open">
+                <a class="text-primary py-2.5 pl-4 text-base font-medium bg-tertiary-fixed/20 rounded-lg block" href="bath-resurfacing.html" onclick="closeMobile()">Bath Resurfacing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="tile-resurfacing.html" onclick="closeMobile()">Tile Resurfacing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="vanity-refinishing.html" onclick="closeMobile()">Vanity Refinishing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="basin-restoration.html" onclick="closeMobile()">Basin Restoration</a>
             </div>
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
                 <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</span>
-                <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
+                <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
             </button>
-            <div class="mobile-accordion">
+            <div class="mobile-accordion open">
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-regrouting.html" onclick="closeMobile()">Shower Regrouting</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-sealing.html" onclick="closeMobile()">Shower Sealing</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="epoxy-grout-upgrade.html" onclick="closeMobile()">Epoxy Grout Upgrade</a>
@@ -194,19 +274,19 @@
             </div>
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
                 <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">build</span> Repairs &amp; Packages</span>
-                <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
+                <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
             </button>
-            <div class="mobile-accordion">
+            <div class="mobile-accordion open">
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="chip-repair.html" onclick="closeMobile()">Chip Repair</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="full-bathroom-makeover.html" onclick="closeMobile()">Full Bathroom Makeover</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="property-managers.html" onclick="closeMobile()">Property Managers</a>
             </div>
             <div class="h-px bg-surface-container my-3"></div>
             <a class="text-primary py-3 text-lg font-semibold" href="gallery.html" onclick="closeMobile()">Before &amp; After</a>
-            <a class="text-primary py-3 text-lg font-semibold bg-surface-container-low rounded-lg pl-4" href="faqs.html" onclick="closeMobile()">FAQs</a>
-            <a class="text-primary py-3 text-lg font-semibold" href="index.html#warranty" onclick="closeMobile()">About</a>
-            <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="index.html#quote" onclick="closeMobile()">Get a Free Quote</a>
-            <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:+61451110154" onclick="closeMobile()"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call 0451 110 154</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="areas.html" onclick="closeMobile()">Service Areas</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="about.html" onclick="closeMobile()">About</a>
+            <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="#quote" onclick="closeMobile()">Get a Free Quote</a>
+            <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:+61451110154"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call 0451 110 154</a>
         </div>
     </div>
 </header>
