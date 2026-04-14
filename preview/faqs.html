@@ -639,5 +639,92 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<div id="chat-widget-container">
+    <!-- Floating bubble button (chat icon, teal green) -->
+    <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="Open chat">
+        <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;" aria-hidden="true">chat</span>
+    </button>
+
+    <!-- Chat panel (hidden by default) -->
+    <div id="chat-widget-panel" class="fixed bottom-24 md:bottom-24 right-4 md:right-6 z-[70] w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden hidden transform origin-bottom-right transition-all duration-200" style="max-height: calc(100vh - 8rem);">
+        <!-- Header -->
+        <div class="bg-teal-700 text-white px-5 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;" aria-hidden="true">chat</span>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">Have a Question?</p>
+                    <p class="text-[0.65rem] text-white/70">We reply within hours</p>
+                </div>
+            </div>
+            <button id="chat-widget-close" class="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="Close chat">
+                <span class="material-symbols-outlined text-xl" aria-hidden="true">close</span>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-5 overflow-y-auto" style="max-height: calc(100vh - 16rem);">
+            <!-- Greeting bubble -->
+            <div class="bg-surface-container-low rounded-2xl rounded-tl-sm p-3 mb-5 max-w-[85%]">
+                <p class="text-xs text-secondary leading-relaxed">Hi! 👋 Share your contact details and we'll reply shortly with a quote.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="chat-widget-form" class="space-y-3">
+                <input type="text" name="cw_name" placeholder="Name *" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                <div class="flex gap-2">
+                    <span class="flex items-center px-3 bg-surface-container-low border border-surface-container rounded-lg text-sm font-medium text-secondary">🇦🇺 +61</span>
+                    <input type="tel" name="cw_phone" placeholder="Phone *" required pattern="[0-9 ]{8,15}" class="flex-1 px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                </div>
+                <input type="email" name="cw_email" placeholder="Email *" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                <select name="cw_customer_type" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none bg-white">
+                    <option value="">What customer are you? *</option>
+                    <option value="Home Owner">Home Owner</option>
+                    <option value="Renter">Renter</option>
+                    <option value="Construction">Construction</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Business">Business</option>
+                </select>
+                <textarea name="cw_message" placeholder="Message *" required rows="3" class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none"></textarea>
+
+                <!-- Consent -->
+                <label class="flex items-start gap-2 text-[0.65rem] text-secondary leading-relaxed cursor-pointer">
+                    <input type="checkbox" name="cw_consent" required checked class="mt-0.5 text-primary rounded" />
+                    <span>By submitting you agree to receive SMS or emails for the provided channel. Rates may apply.</span>
+                </label>
+
+                <button type="submit" id="cw-submit-btn" class="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                    Send <span class="material-symbols-outlined text-base" aria-hidden="true">send</span>
+                </button>
+            </form>
+
+            <!-- Success state (hidden by default) -->
+            <div id="cw-success" class="hidden text-center py-6">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
+                    <span class="material-symbols-outlined text-3xl text-emerald-600" aria-hidden="true">check_circle</span>
+                </div>
+                <p class="font-bold text-primary mb-2">Message sent!</p>
+                <p class="text-xs text-secondary">We'll reply within hours during business hours.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Chat widget toggle
+    var cwToggle = document.getElementById('chat-widget-toggle');
+    var cwClose  = document.getElementById('chat-widget-close');
+    var cwPanel  = document.getElementById('chat-widget-panel');
+    if(cwToggle && cwPanel){
+        cwToggle.addEventListener('click', function(){
+            cwPanel.classList.toggle('hidden');
+        });
+    }
+    if(cwClose && cwPanel){
+        cwClose.addEventListener('click', function(){
+            cwPanel.classList.add('hidden');
+        });
+    }
+</script>
 </body>
 </html>
