@@ -69,7 +69,7 @@
                 Bath <span class="text-on-primary-container">Resurfacing</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using a <strong>professional-grade system</strong> &mdash; a commercial-grade coating that lasts up to 10 years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
+                Chipped, stained, or yellowed bathtub? We restore it to factory-new condition using a <strong>professional-grade system</strong> &mdash; a commercial-grade coating that lasts up to 10+ years. Most jobs completed in a single day (freestanding baths may take 2-3 days), no demolition needed.
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
@@ -216,11 +216,11 @@
         <div class="mb-12 lg:mb-16 reveal">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="order-2 lg:order-1">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Peeling &amp; Failed DIY Repair</h3>
-                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Tried a Bunnings kit and it&rsquo;s peeling within 6 months? We strip ALL the old coating back to the original surface, properly etch and prime, then apply a professional two-part acrylic urethane. No shortcuts, no peeling.</p>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Faded or Outdated Colour</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Avocado green, baby pink, powder blue? Dated bath colours make your whole bathroom look old. We spray any colour you want over the existing surface. White, ivory, or choose from hundreds of modern shades.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full strip and restart &mdash; not coating over</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Professional commercial-grade coating</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Any colour you want, including custom matches</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> White and ivory are most popular</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 10 year finish with proper care</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
@@ -246,15 +246,15 @@
             </div>
         </div>
 
-        <!-- BLOCK 4: Full Bath Resurface — image-left, text-right (alternated) -->
+        <!-- BLOCK 4: Worn &amp; Rough Finish — image-left, text-right (alternated) -->
         <div class="reveal">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="order-2 lg:order-2">
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Full Bath Resurface</h3>
-                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Complete restoration for acrylic, porcelain, cast iron, or fibreglass baths. Even freestanding and clawfoot tubs. Full prep, chip repair, primer, and multi-layer spray coating for a factory-new finish. Done in one day.</p>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Worn &amp; Rough Finish</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Bath feels rough when you run your hand across it? Lost its gloss years ago? The enamel wears down over time, trapping dirt and making it impossible to keep clean. We restore the surface to smooth, glossy, factory-new condition.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on all bath materials &amp; shapes</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Choose from white, ivory, or 900+ custom colours</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on porcelain, acrylic, cast iron, and fibreglass</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Smooth, glossy finish that stays clean</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Up to 3-year workmanship warranty</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
@@ -496,7 +496,7 @@
             <div class="space-y-2">
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does bath resurfacing cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every bath is different. Send us photos and we&rsquo;ll have a fixed-price quote back within hours &mdash; no hidden fees, no obligation.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it take?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Most baths are done in 5&ndash;8 hours. Your bath is ready to use again the next day.</p></div></div>
-                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">10&ndash;15 years with proper care. Every job comes with a 3-year workmanship warranty.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">up to 10+ years. Every job comes with a 3-year workmanship warranty.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of bath?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes &mdash; porcelain, enamel, cast iron, acrylic, and fibreglass. The only exception is natural stone.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the colour?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes &mdash; 900+ colours available. White and ivory are most popular, but we can match anything.</p></div></div>
             </div>
