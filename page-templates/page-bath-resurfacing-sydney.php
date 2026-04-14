@@ -107,13 +107,41 @@
     </div>
 </section>
 
+<!-- TRUST LOGO BAR -->
+<section class="py-8 sm:py-10 bg-surface-container-low/50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians &mdash; from Homeowners to Major Brands</p>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
+        <div class="flex items-center gap-8 sm:gap-12 w-max px-8" id="logo-inner">
+            <span class="text-xl sm:text-2xl italic text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Ray White.</span>
+            <span class="text-2xl sm:text-3xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">McGrath</span>
+            <span class="text-[0.65rem] sm:text-xs font-light tracking-[0.25em] uppercase text-slate-400/70 whitespace-nowrap select-none">The Agency</span>
+            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">LJ Hooker</span>
+            <span class="text-lg sm:text-xl text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Raine &amp; Horne</span>
+            <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">Metricon</span>
+            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">Meriton</span>
+            <span class="text-[0.7rem] sm:text-sm font-light tracking-[0.15em] uppercase text-slate-400/70 whitespace-nowrap select-none">Mirvac</span>
+            <span class="text-xl sm:text-2xl italic text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Ray White.</span>
+            <span class="text-2xl sm:text-3xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">McGrath</span>
+            <span class="text-[0.65rem] sm:text-xs font-light tracking-[0.25em] uppercase text-slate-400/70 whitespace-nowrap select-none">The Agency</span>
+            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">LJ Hooker</span>
+            <span class="text-lg sm:text-xl text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Raine &amp; Horne</span>
+            <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">Metricon</span>
+            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">Meriton</span>
+            <span class="text-[0.7rem] sm:text-sm font-light tracking-[0.15em] uppercase text-slate-400/70 whitespace-nowrap select-none">Mirvac</span>
+        </div>
+    </div>
+    <div id="logo-dots" class="flex justify-center gap-1.5 mt-4"></div>
+</section>
+
 <!-- SECTION 2B: SERVICE DETAIL BLOCKS — Alternating zig-zag with branded before/after cards -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Expert Bath Resurfacing</h2>
-            <p class="text-secondary">From single chip repairs to full tub restoration &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
+            <p class="text-secondary">Whatever's wrong with your bath &mdash; we've seen it and we've fixed it. From single chip repairs to full tub restoration &mdash; here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
 
         <!-- BLOCK 1: Chip & Crack Repairs — text-left, image-right -->
@@ -254,37 +282,6 @@
     </div>
 </section>
 
-<!-- WHY RESURFACE -->
-<section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Why Your Bath Needs Resurfacing</h2>
-        <p class="text-secondary max-w-3xl mb-10">A damaged or discoloured bathtub drags down the look of your entire bathroom. Resurfacing restores it to like-new condition for a fraction of the cost of replacement.</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">opacity</span>
-                <h3 class="font-bold text-primary mb-2">Yellowed &amp; Stained</h3>
-                <p class="text-sm text-secondary leading-relaxed">Years of soap scum, hard water, and cleaning chemicals dull the original finish. No amount of scrubbing brings it back.</p>
-            </div>
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">broken_image</span>
-                <h3 class="font-bold text-primary mb-2">Chips &amp; Cracks</h3>
-                <p class="text-sm text-secondary leading-relaxed">Dropped items cause chips that trap dirt and moisture. Left untreated, chips spread and expose the substrate.</p>
-            </div>
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">palette</span>
-                <h3 class="font-bold text-primary mb-2">Outdated Colour</h3>
-                <p class="text-sm text-secondary leading-relaxed">Avocado green, baby pink, powder blue &mdash; dated bath colours drag down the entire bathroom's look and property value.</p>
-            </div>
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">payments</span>
-                <h3 class="font-bold text-primary mb-2">Cost of Replacement</h3>
-                <p class="text-sm text-secondary leading-relaxed">Removing and replacing a bath costs thousands including plumbing. Resurfacing achieves a like-new result for a fraction.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- OUR PROCESS -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
@@ -342,49 +339,48 @@
     </div>
 </section>
 
-<!-- Mid-page CTA -->
-<section class="py-12 bg-primary text-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to Transform Your Bathroom?</h2>
-        <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation.</p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="#quote" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
-                <span class="material-symbols-outlined text-[20px]">photo_camera</span>
-                Get a Free Quote
-            </a>
-            <a href="tel:<?php echo timeless_phone_link(); ?>" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
-                <span class="material-symbols-outlined text-[20px]">call</span>
-                Call Now
-            </a>
+<!-- VALUE PROPOSITION — Compact horizontal strip -->
+<section class="py-10 sm:py-12 bg-surface">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter text-center mb-8">Why Choose Timeless?</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
+            <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary text-sm">Same-Day Service</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Most baths done in one day. Ready to use the next morning.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
-
-<!-- VALUE PROPOSITION -->
-<section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Why Choose Timeless Resurfacing?</h2>
-        <p class="text-secondary max-w-3xl mb-10">Quality workmanship, transparent pricing, and a result that lasts. Get a free quote today &mdash; no obligation.</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
-            <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
-                <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">schedule</span>
-                <h3 class="font-bold text-primary mb-2">Same-Day Service</h3>
-                <p class="text-sm text-secondary leading-relaxed">Most jobs completed in a single day. Your bathroom ready to use again next day.</p>
-            </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10">
-                <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
-                <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
-                <p class="text-sm text-secondary leading-relaxed">A fraction of the cost of full renovation. No demolition, no plumber, no weeks of disruption.</p>
-            </div>
-            <div class="bg-surface-container-low rounded-xl p-8 text-center border-2 border-surface-container">
-                <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">verified_user</span>
-                <h3 class="font-bold text-primary mb-2">3-Year Warranty</h3>
-                <p class="text-sm text-secondary leading-relaxed">Every resurfacing job backed by our 3-year workmanship warranty. Fully insured with public liability cover.</p>
-            </div>
-        </div>
-
-        <div class="text-center mt-8"><a class="px-8 py-4 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all inline-block" href="#quote">Get a Free Quote</a></div>
     </div>
 </section>
 
@@ -419,19 +415,20 @@
     </div>
 </section>
 
+<!-- COMPACT MID-PAGE CTA -->
+<div class="bg-primary py-5 sm:py-6">
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white font-bold text-sm sm:text-base text-center sm:text-left">Ready to get started? Send us photos for a free quote in hours.</p>
+        <a href="#quote" class="flex-shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
+    </div>
+</div>
+
 <!-- TESTIMONIALS — Horizontal carousel with arrows -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex items-end justify-between mb-10 gap-4">
-            <div>
+        <div class="text-center mb-10">
                 <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
-            </div>
-            <!-- Desktop arrow buttons -->
-            <div class="hidden sm:flex gap-2 flex-shrink-0">
-                <button type="button" onclick="moveBathWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-                <button type="button" onclick="moveBathWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-            </div>
+                <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <div id="bath-wp-testimonial-carousel" class="overflow-hidden">
             <div id="bath-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
@@ -477,31 +474,32 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile pagination + arrows -->
-        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
-            <button type="button" onclick="moveBathWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-            <span id="bath-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
-            <button type="button" onclick="moveBathWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
+        <!-- Arrow navigation below reviews -->
+        <div class="flex justify-center items-center gap-3 mt-8">
+            <button type="button" onclick="moveBathWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
+            <button type="button" onclick="moveBathWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
         </div>
     </div>
 </section>
 
 <!-- FAQ -->
-<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
-    <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Bath Resurfacing FAQs</h2>
-        <p class="text-secondary text-center mb-10">Common questions about bath resurfacing in Sydney.</p>
-
-        <div class="space-y-3">
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does bath resurfacing cost in Sydney?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Every bathroom is different. We provide fixed-price quotes based on your photos &mdash; no hidden fees, no surprises. Send us photos for a quote within hours.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does bath resurfacing take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most baths are completed in 5-8.5 hours (one day). Freestanding baths may take a full day due to extra prep for stripping old coatings. Your bath is usable 24-48 hours after completion.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a resurfaced bath last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">up to 10 years with the professional-grade system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of bath?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes: porcelain, enamel steel, cast iron, acrylic, fibreglass, and spa baths. We cannot resurface natural stone (marble/granite) baths &mdash; those need specialist stone restoration.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the bath colour?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Our system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge.</p></div></div>
+<section class="py-14 sm:py-16 bg-surface-container-low" id="faqs">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <!-- Left: intro -->
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3">Questions? We&rsquo;ve Got Answers</h2>
+                <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if resurfacing is right for your bathroom? Wondering about cost, timing, or what&rsquo;s involved? These are the questions we hear most from Sydney homeowners. If you don&rsquo;t see yours here, send us a message or call &mdash; we&rsquo;re always happy to chat through your options, no pressure.</p>
+                <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+            </div>
+            <!-- Right: accordion -->
+            <div class="space-y-2">
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does bath resurfacing cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every bath is different. Send us photos and we&rsquo;ll have a fixed-price quote back within hours &mdash; no hidden fees, no obligation.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it take?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Most baths are done in 5&ndash;8 hours. Your bath is ready to use again the next day.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">10&ndash;15 years with proper care. Every job comes with a 3-year workmanship warranty.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of bath?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes &mdash; porcelain, enamel, cast iron, acrylic, and fibreglass. The only exception is natural stone.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the colour?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes &mdash; 900+ colours available. White and ivory are most popular, but we can match anything.</p></div></div>
+            </div>
         </div>
     </div>
 </section>
@@ -546,7 +544,6 @@
 (function(){
     var container = document.getElementById('bath-wp-testimonial-carousel');
     var track = document.getElementById('bath-wp-testimonial-track');
-    var counter = document.getElementById('bath-wp-testimonial-counter');
     if (!container || !track) return;
 
     var GAP = 24; // gap-6 in Tailwind
@@ -579,7 +576,6 @@
         var cardW = (w - GAP * (view - 1)) / view;
         var offset = index * (cardW + GAP);
         track.style.transform = 'translateX(-' + offset + 'px)';
-        if (counter) counter.textContent = (index + 1) + ' / ' + total;
     }
 
     window.moveBathWpTestimonials = function(dir) {
@@ -597,6 +593,118 @@
         sizeCards();
     }
     window.addEventListener('resize', sizeCards);
+})();
+</script>
+
+<script>
+/* -- Logo Scroller Momentum Carousel -- */
+(function(){
+    var el = document.getElementById('logo-scroller');
+    if(!el) return;
+    el.style.overflow = 'hidden';
+
+    var isDrag = false, startX = 0, scrollStart = 0;
+    var velocity = 0, lastX = 0, lastTime = 0, animFrame = 0;
+    var halfWidth = el.scrollWidth / 2;
+
+    // Build dots
+    var dotsBox = document.getElementById('logo-dots');
+    if(dotsBox && dotsBox.children.length === 0){
+        for(var i=0;i<8;i++){
+            var d=document.createElement('span');
+            d.className='inline-block rounded-full bg-slate-300 transition-all duration-200';
+            d.style.width='8px'; d.style.height='8px';
+            dotsBox.appendChild(d);
+        }
+    }
+
+    // Start centered
+    el.scrollLeft = halfWidth * 0.3;
+
+    function loop(){
+        if(el.scrollLeft <= 0) el.scrollLeft += halfWidth;
+        else if(el.scrollLeft >= halfWidth) el.scrollLeft -= halfWidth;
+    }
+
+    function updateDots(){
+        var dots = document.getElementById('logo-dots');
+        if(!dots) return;
+        var pct = (el.scrollLeft % halfWidth) / halfWidth;
+        var idx = Math.round(pct * 7) % 8;
+        for(var i=0; i<dots.children.length; i++){
+            dots.children[i].style.width = i===idx ? '18px' : '8px';
+            dots.children[i].style.background = i===idx ? '#041534' : '#cbd5e1';
+        }
+    }
+
+    // Momentum coast after release
+    function coast(){
+        if(Math.abs(velocity) < 0.5){ velocity = 0; return; }
+        velocity *= 0.95;
+        el.scrollLeft -= velocity;
+        loop();
+        updateDots();
+        animFrame = requestAnimationFrame(coast);
+    }
+
+    el.addEventListener('mousedown', function(e){
+        isDrag = true;
+        startX = e.pageX;
+        scrollStart = el.scrollLeft;
+        lastX = e.pageX;
+        lastTime = Date.now();
+        velocity = 0;
+        cancelAnimationFrame(animFrame);
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e){
+        if(!isDrag) return;
+        var now = Date.now();
+        var dt = now - lastTime;
+        if(dt > 0) velocity = (e.pageX - lastX) / dt * 16;
+        lastX = e.pageX;
+        lastTime = now;
+        el.scrollLeft = scrollStart - (e.pageX - startX);
+        loop();
+        updateDots();
+    });
+
+    document.addEventListener('mouseup', function(){
+        if(!isDrag) return;
+        isDrag = false;
+        coast();
+    });
+
+    el.addEventListener('touchstart', function(e){
+        isDrag = true;
+        startX = e.touches[0].pageX;
+        scrollStart = el.scrollLeft;
+        lastX = e.touches[0].pageX;
+        lastTime = Date.now();
+        velocity = 0;
+        cancelAnimationFrame(animFrame);
+    }, {passive:true});
+
+    document.addEventListener('touchmove', function(e){
+        if(!isDrag) return;
+        var now = Date.now();
+        var dt = now - lastTime;
+        if(dt > 0) velocity = (e.touches[0].pageX - lastX) / dt * 16;
+        lastX = e.touches[0].pageX;
+        lastTime = now;
+        el.scrollLeft = scrollStart - (e.touches[0].pageX - startX);
+        loop();
+        updateDots();
+    }, {passive:true});
+
+    document.addEventListener('touchend', function(){
+        if(!isDrag) return;
+        isDrag = false;
+        coast();
+    });
+
+    updateDots();
 })();
 </script>
 
