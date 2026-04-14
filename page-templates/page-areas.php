@@ -62,16 +62,43 @@
     </div>
 </section>
 
-<!-- MAP PLACEHOLDER -->
+<!-- SERVICE AREA MAP — Leaflet.js + OpenStreetMap (free, no API key) -->
 <section class="pb-12 sm:pb-16 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="bg-surface-container-highest rounded-2xl h-64 sm:h-80 flex flex-col items-center justify-center gap-3">
-            <span class="material-symbols-outlined text-5xl text-primary/40" aria-hidden="true">location_on</span>
-            <p class="text-lg font-bold text-primary/50">Service Area Map</p>
-            <p class="text-xs text-secondary">Interactive map coming soon</p>
+        <div class="rounded-2xl overflow-hidden shadow-lg">
+            <div id="service-map" class="w-full" style="height:450px; z-index:0;"></div>
         </div>
     </div>
 </section>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+    var map = L.map('service-map', { scrollWheelZoom: false }).setView([-33.75, 150.95], 10);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap',
+        maxZoom: 18
+    }).addTo(map);
+
+    var serviceArea = [
+        [-33.20, 151.10], [-33.25, 151.45], [-33.40, 151.50], [-33.55, 151.45],
+        [-33.75, 151.32], [-33.85, 151.28], [-34.00, 151.22], [-34.08, 151.15],
+        [-34.25, 151.00], [-34.43, 150.90], [-34.58, 150.85], [-34.40, 150.65],
+        [-34.10, 150.60], [-33.85, 150.55], [-33.70, 150.30], [-33.55, 150.25],
+        [-33.45, 150.45], [-33.35, 150.65], [-33.20, 150.75], [-33.15, 150.95],
+        [-33.20, 151.10]
+    ];
+
+    var polygon = L.polygon(serviceArea, {
+        color: '#dc2626', weight: 3, fillColor: '#dc2626', fillOpacity: 0.06, dashArray: null
+    }).addTo(map);
+
+    var marker = L.marker([-33.86, 151.21]).addTo(map);
+    marker.bindPopup('<strong>Timeless Resurfacing</strong><br>Serving all of Greater Sydney<br><span style="color:#e7c08b;">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0').openPopup();
+
+    map.fitBounds(polygon.getBounds().pad(0.05));
+})();
+</script>
 
 <!-- REGIONS GRID -->
 <section class="py-12 sm:py-20 bg-surface-container-low">
