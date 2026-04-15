@@ -156,29 +156,26 @@
 </section>
 
 
+<?php $logo = get_template_directory_uri() . '/images/homepage/logos'; ?>
 <!-- TRUST LOGO BAR -->
 <section class="py-8 sm:py-10 bg-surface-container-low/50">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
     </div>
     <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
-        <div class="flex items-center gap-8 sm:gap-12 w-max px-8" id="logo-inner">
-            <span class="text-xl sm:text-2xl italic text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Ray White.</span>
-            <span class="text-2xl sm:text-3xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">McGrath</span>
-            <span class="text-[0.65rem] sm:text-xs font-light tracking-[0.25em] uppercase text-slate-400/70 whitespace-nowrap select-none">The Agency</span>
-            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">LJ Hooker</span>
-            <span class="text-lg sm:text-xl text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Raine &amp; Horne</span>
-            <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">Metricon</span>
-            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">Meriton</span>
-            <span class="text-[0.7rem] sm:text-sm font-light tracking-[0.15em] uppercase text-slate-400/70 whitespace-nowrap select-none">Mirvac</span>
-            <span class="text-xl sm:text-2xl italic text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Ray White.</span>
-            <span class="text-2xl sm:text-3xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">McGrath</span>
-            <span class="text-[0.65rem] sm:text-xs font-light tracking-[0.25em] uppercase text-slate-400/70 whitespace-nowrap select-none">The Agency</span>
-            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">LJ Hooker</span>
-            <span class="text-lg sm:text-xl text-slate-400/70 whitespace-nowrap select-none" style="font-family:Georgia,serif;">Raine &amp; Horne</span>
-            <span class="text-xl sm:text-2xl font-black tracking-tight text-slate-400/70 whitespace-nowrap select-none">Metricon</span>
-            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-400/70 whitespace-nowrap select-none">Meriton</span>
-            <span class="text-[0.7rem] sm:text-sm font-light tracking-[0.15em] uppercase text-slate-400/70 whitespace-nowrap select-none">Mirvac</span>
+        <div class="flex items-center gap-5 sm:gap-8 w-max px-8" id="logo-inner">
+            <?php for ($i = 0; $i < 2; $i++) : ?>
+            <img src="<?php echo $logo; ?>/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <?php endfor; ?>
         </div>
     </div>
     <div id="logo-dots" class="flex justify-center gap-1.5 mt-4"></div>

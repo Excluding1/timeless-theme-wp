@@ -119,15 +119,39 @@ get_header(); ?>
 </section>
 
 <!-- TRUST BAR -->
-<section class="bg-primary text-white py-5">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-between items-center gap-3 sm:gap-6">
-        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">verified_user</span><span class="text-[0.65rem] sm:text-xs font-bold">Experienced &amp; Insured</span></div>
-        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">security</span><span class="text-[0.65rem] sm:text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">schedule</span><span class="text-[0.65rem] sm:text-xs font-bold">Same-Day Service</span></div>
-        <div class="flex items-center justify-center sm:justify-start gap-2 px-2 sm:px-3 py-2"><span class="material-symbols-outlined text-tertiary-fixed-dim text-base sm:text-xl flex-shrink-0" aria-hidden="true">verified</span><span class="text-[0.65rem] sm:text-xs font-bold">Up to 3-Year Warranty</span></div>
+<section class="bg-primary text-white py-4">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
     </div>
 </section>
 
+<?php $logo = get_template_directory_uri() . '/images/homepage/logos'; ?>
+<!-- TRUST LOGO BAR -->
+<section class="py-8 sm:py-10 bg-surface-container-low/50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="hp-logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
+        <div class="flex items-center gap-5 sm:gap-8 w-max px-8" id="hp-logo-inner">
+            <?php for ($i = 0; $i < 2; $i++) : ?>
+            <img src="<?php echo $logo; ?>/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <img src="<?php echo $logo; ?>/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+            <?php endfor; ?>
+        </div>
+    </div>
+    <div id="hp-logo-dots" class="flex justify-center gap-1.5 mt-4"></div>
+</section>
 
 <!-- SERVICES — Circle images, horizontal scroll on mobile -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="services">
@@ -499,6 +523,32 @@ get_header(); ?>
     line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
     document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
     document.addEventListener('touchend', function(){ active=false; });
+})();
+</script>
+
+<script>
+/* -- Homepage Logo Scroller -- */
+(function(){
+    var el = document.getElementById('hp-logo-scroller');
+    if(!el) return;
+    el.style.overflow = 'hidden';
+    var isDrag=false,startX=0,scrollStart=0,velocity=0,lastX=0,lastTime=0,animFrame=0;
+    var halfWidth = el.scrollWidth / 2;
+    var dotsBox = document.getElementById('hp-logo-dots');
+    if(dotsBox && dotsBox.children.length===0){
+        for(var i=0;i<8;i++){var d=document.createElement('span');d.className='inline-block rounded-full bg-slate-300 transition-all duration-200';d.style.width='8px';d.style.height='8px';dotsBox.appendChild(d);}
+    }
+    el.scrollLeft = halfWidth * 0.3;
+    function loop(){if(el.scrollLeft<=0)el.scrollLeft+=halfWidth;else if(el.scrollLeft>=halfWidth)el.scrollLeft-=halfWidth;}
+    function updateDots(){if(!dotsBox)return;var pct=(el.scrollLeft%halfWidth)/halfWidth;var idx=Math.round(pct*7)%8;for(var i=0;i<dotsBox.children.length;i++){dotsBox.children[i].style.width=i===idx?'18px':'8px';dotsBox.children[i].style.background=i===idx?'#041534':'#cbd5e1';}}
+    function coast(){if(Math.abs(velocity)<0.5){velocity=0;return;}velocity*=0.95;el.scrollLeft-=velocity;loop();updateDots();animFrame=requestAnimationFrame(coast);}
+    el.addEventListener('mousedown',function(e){isDrag=true;startX=e.pageX;scrollStart=el.scrollLeft;lastX=e.pageX;lastTime=Date.now();velocity=0;cancelAnimationFrame(animFrame);e.preventDefault();});
+    document.addEventListener('mousemove',function(e){if(!isDrag)return;var now=Date.now();var dt=now-lastTime;if(dt>0)velocity=(e.pageX-lastX)/dt*16;lastX=e.pageX;lastTime=now;el.scrollLeft=scrollStart-(e.pageX-startX);loop();updateDots();});
+    document.addEventListener('mouseup',function(){if(!isDrag)return;isDrag=false;coast();});
+    el.addEventListener('touchstart',function(e){isDrag=true;startX=e.touches[0].pageX;scrollStart=el.scrollLeft;lastX=e.touches[0].pageX;lastTime=Date.now();velocity=0;cancelAnimationFrame(animFrame);},{passive:true});
+    document.addEventListener('touchmove',function(e){if(!isDrag)return;var now=Date.now();var dt=now-lastTime;if(dt>0)velocity=(e.touches[0].pageX-lastX)/dt*16;lastX=e.touches[0].pageX;lastTime=now;el.scrollLeft=scrollStart-(e.touches[0].pageX-startX);loop();updateDots();},{passive:true});
+    document.addEventListener('touchend',function(){if(!isDrag)return;isDrag=false;coast();});
+    updateDots();
 })();
 </script>
 
