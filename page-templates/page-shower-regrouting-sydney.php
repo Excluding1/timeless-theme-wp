@@ -461,7 +461,6 @@
 </section>
 
 
-<?php timeless_related_services(); ?>
 
 <!-- QUOTE FORM -->
 <section class="py-16 sm:py-20 bg-surface-container-low" id="quote">

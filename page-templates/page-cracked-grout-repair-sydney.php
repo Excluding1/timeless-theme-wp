@@ -358,7 +358,6 @@
 </section>
 
 
-<?php timeless_related_services(); ?>
 
 <!-- QUOTE CTA -->
 <section class="py-16 sm:py-20 bg-surface-container-low" id="quote">

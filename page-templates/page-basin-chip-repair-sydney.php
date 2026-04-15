@@ -324,7 +324,6 @@
 </section>
 
 
-<?php timeless_related_services(); ?>
 
 <!-- QUOTE CTA -->
 <section class="py-16 sm:py-20 bg-white" id="quote">
