@@ -47,157 +47,66 @@
 </section>
 
 <!-- FILTER BUTTONS -->
+<?php $t = get_template_directory_uri(); ?>
+<!-- FILTER BUTTONS — Scrollable row -->
 <section class="bg-surface pb-8">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex flex-wrap gap-2">
-            <button class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg transition-all">All</button>
-            <button class="px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Shower Regrouting</button>
-            <button class="px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Bath Resurfacing</button>
-            <button class="px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Tile Resurfacing</button>
-            <button class="px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Vanity</button>
-            <button class="px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all">Leak Repair</button>
+        <div class="flex gap-2 overflow-x-auto pb-2" id="gallery-filters" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg transition-all whitespace-nowrap" data-filter="all">All</button>
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all whitespace-nowrap" data-filter="bath-resurfacing">Bath Resurfacing</button>
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all whitespace-nowrap" data-filter="tile-resurfacing">Tile Resurfacing</button>
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all whitespace-nowrap" data-filter="shower-regrouting">Shower Regrouting</button>
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all whitespace-nowrap" data-filter="shower-sealing">Shower Sealing</button>
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all whitespace-nowrap" data-filter="floor-tile-regrouting">Floor Tile Regrouting</button>
+            <button class="gallery-filter flex-shrink-0 px-4 py-2 bg-surface-container-high text-secondary text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition-all whitespace-nowrap" data-filter="vanity">Vanity</button>
         </div>
     </div>
 </section>
 
-<!-- GALLERY GRID -->
+<!-- GALLERY GRID — Real before/after images -->
 <section class="py-8 sm:py-12 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <!-- Card 1: Surry Hills -->
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bathroom resurfacing Surry Hills apartment - resurfaced white bathtub and wall tiles" src="<?php echo get_template_directory_uri(); ?>/images/gallery/surry-hills.jpg" loading="lazy" width="600" height="338" />
-                    <div class="absolute top-3 left-3 flex gap-1.5">
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Bath Resurfacing</span>
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Tile Resurfacing</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-primary text-lg">Surry Hills Apartment</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Bath &amp; Wall Tiles</span>
-                    </div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete bath resurfacing and wall tile refresh. Tenant was back in the bathroom within 24 hours.</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-surface-container">
-                        <p class="text-xs text-secondary italic">"Looks brand new. Incredible turnaround."</p>
-                        <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">View Details <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-grid">
+            <article class="gallery-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all" data-category="bath-resurfacing">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-before.png" alt="Bathtub before resurfacing Sydney" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-after.png" alt="Bathtub after professional resurfacing" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+                <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </article>
-
-            <!-- Card 2: Bondi Beach -->
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting Bondi Beach - restored white subway tiles and basin" src="<?php echo get_template_directory_uri(); ?>/images/gallery/bondi-beach.jpg" loading="lazy" width="600" height="338" />
-                    <div class="absolute top-3 left-3 flex gap-1.5">
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Shower Regrouting</span>
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Basin Restoration</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-primary text-lg">Bondi Beach House</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Shower &amp; Basin</span>
-                    </div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Restored the original 1920s character without the $20k renovation price tag.</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-surface-container">
-                        <p class="text-xs text-secondary italic">"Heritage charm preserved beautifully."</p>
-                        <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">View Details <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
-                    </div>
-                </div>
+            <article class="gallery-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all" data-category="bath-resurfacing">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-before.png" alt="Stained yellowed bathtub before resurfacing" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-after.png" alt="Bathtub after stain removal" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+                <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </article>
-
-            <!-- Card 3: Parramatta -->
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Full bathroom resurfacing Parramatta - resurfaced vanity and bath" src="<?php echo get_template_directory_uri(); ?>/images/gallery/parramatta.jpg" loading="lazy" width="600" height="338" />
-                    <div class="absolute top-3 left-3 flex gap-1.5">
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Full Bathroom Package</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-primary text-lg">Parramatta Family Home</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Bathroom</span>
-                    </div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Complete bathroom transformation &mdash; regrout, bath resurface, and basin restoration in two days.</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-surface-container">
-                        <p class="text-xs text-secondary italic">"Second to none in Western Sydney."</p>
-                        <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">View Details <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
-                    </div>
-                </div>
+            <article class="gallery-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all" data-category="bath-resurfacing">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/chips-before.png" alt="Chipped bathtub before repair" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/chips-after.png" alt="Bathtub after chip repair" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+                <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </article>
-
-            <!-- Card 4: North Shore -->
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shower regrouting North Shore unit - epoxy regrouting to stop leak" src="<?php echo get_template_directory_uri(); ?>/images/gallery/north-shore.jpg" loading="lazy" width="600" height="338" />
-                    <div class="absolute top-3 left-3 flex gap-1.5">
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Shower Regrouting</span>
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Leak Repair</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-primary text-lg">North Shore Unit</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Shower Regrouting</span>
-                    </div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Epoxy regrouting stopped a persistent shower leak that was damaging the unit below.</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-surface-container">
-                        <p class="text-xs text-secondary italic">"Finally fixed what two plumbers couldn't."</p>
-                        <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">View Details <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
-                    </div>
-                </div>
+            <article class="gallery-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all" data-category="bath-resurfacing">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/colour-before.png" alt="Faded outdated bath colour" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/colour-after.png" alt="Bathtub after colour change resurfacing" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+                <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </article>
-
-            <!-- Card 5: Wollongong -->
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Bath and vanity resurfacing Wollongong rental - pre-sale cosmetic refresh" src="<?php echo get_template_directory_uri(); ?>/images/gallery/wollongong.jpg" loading="lazy" width="600" height="338" />
-                    <div class="absolute top-3 left-3 flex gap-1.5">
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Bath Resurfacing</span>
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Vanity Refinishing</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-primary text-lg">Wollongong Rental</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Bath &amp; Vanity</span>
-                    </div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Pre-sale cosmetic refresh. Bath resurfacing plus vanity cabinet respray.</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-surface-container">
-                        <p class="text-xs text-secondary italic">"Added real value before auction day."</p>
-                        <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">View Details <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
-                    </div>
-                </div>
+            <article class="gallery-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all" data-category="bath-resurfacing">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/worn-before.png" alt="Worn rough bathtub surface before resurfacing" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/worn-after.png" alt="Bathtub after resurfacing smooth finish" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+                <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </article>
-
-            <!-- Card 6: Hills District -->
-            <article class="group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl transition-all reveal">
-                <div class="aspect-video overflow-hidden relative">
-                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Tile resurfacing Hills District - outdated brown tiles transformed to white" src="<?php echo get_template_directory_uri(); ?>/images/gallery/hills-district.jpg" loading="lazy" width="600" height="338" />
-                    <div class="absolute top-3 left-3 flex gap-1.5">
-                        <span class="text-[0.6rem] bg-primary/90 text-white px-2.5 py-1 rounded font-bold backdrop-blur-sm">Tile Resurfacing</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-primary text-lg">Hills District Home</h3>
-                        <span class="text-[0.6rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Tile Resurfacing</span>
-                    </div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">Outdated brown tiles transformed to clean white finish. Zero demolition.</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-surface-container">
-                        <p class="text-xs text-secondary italic">"Can't believe it's the same bathroom."</p>
-                        <span class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">View Details <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
-                    </div>
-                </div>
+            <article class="gallery-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all" data-category="floor-tile-regrouting">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/floor-tile-before.png" alt="Dirty floor tile grout before regrouting Sydney" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/floor-tile-after.png" alt="Floor tiles after professional regrouting" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+                <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Floor Tile Regrouting</span></div>
             </article>
-
         </div>
+        <p class="text-center text-sm text-secondary mt-10">More transformations added as we complete new jobs across Sydney.</p>
     </div>
 </section>
+
+<!-- Gallery Filter + Lightbox JS -->
+<script>
+document.querySelectorAll('.gallery-filter').forEach(function(btn){
+    btn.addEventListener('click',function(){
+        var filter=this.getAttribute('data-filter');
+        document.querySelectorAll('.gallery-filter').forEach(function(b){b.className=b.className.replace('bg-primary text-white','bg-surface-container-high text-secondary');});
+        this.className=this.className.replace('bg-surface-container-high text-secondary','bg-primary text-white');
+        document.querySelectorAll('.gallery-card').forEach(function(card){card.style.display=(filter==='all'||card.getAttribute('data-category')===filter)?'':'none';});
+    });
+});
+</script>
 
 <!-- CTA -->
 <section class="py-16 sm:py-24 bg-primary text-white">
@@ -220,5 +129,43 @@
 </section>
 
 </main>
+
+<!-- LIGHTBOX POPUP -->
+<div id="lightbox" class="fixed inset-0 z-[9999] hidden" style="background:rgba(0,0,0,0.92);">
+    <button id="lb-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" aria-label="Close"><span class="material-symbols-outlined text-white text-2xl">close</span></button>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl px-4">
+        <div class="relative"><img id="lb-image" src="" alt="" class="w-full rounded-xl shadow-2xl" /><span id="lb-badge" class="absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded">Before</span></div>
+        <div class="flex items-center justify-center gap-4 mt-6">
+            <button id="lb-prev" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Previous"><span class="material-symbols-outlined text-white text-2xl">chevron_left</span></button>
+            <span id="lb-label" class="text-white text-sm font-bold uppercase tracking-wider">Before</span>
+            <button id="lb-next" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Next"><span class="material-symbols-outlined text-white text-2xl">chevron_right</span></button>
+        </div>
+    </div>
+</div>
+<script>
+(function(){
+    var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-image'),lbBadge=document.getElementById('lb-badge'),lbLabel=document.getElementById('lb-label'),images=[],idx=0;
+    document.querySelectorAll('.gallery-card').forEach(function(card){
+        var imgs=card.querySelectorAll('img'); if(imgs.length<2) return;
+        var tag=card.querySelector('span[class*="tertiary-fixed"]'); var label=tag?tag.textContent.trim():'';
+        card.style.cursor='pointer';
+        card.addEventListener('click',function(){
+            images=[{src:imgs[0].src,state:'Before',label:label},{src:imgs[1].src,state:'After',label:label}];
+            idx=0; showImage(); lb.classList.remove('hidden'); document.body.style.overflow='hidden';
+        });
+    });
+    function showImage(){
+        lbImg.src=images[idx].src; lbBadge.textContent=images[idx].state;
+        lbLabel.textContent=images[idx].state+' \u2014 '+images[idx].label;
+        lbBadge.className=idx===0?'absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded':'absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded';
+    }
+    function closeLb(){lb.classList.add('hidden');document.body.style.overflow='';}
+    document.getElementById('lb-close').addEventListener('click',closeLb);
+    lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+    document.addEventListener('keydown',function(e){if(lb.classList.contains('hidden'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft'||e.key==='ArrowRight'){idx=idx===0?1:0;showImage();}});
+    document.getElementById('lb-prev').addEventListener('click',function(){idx=idx===0?1:0;showImage();});
+    document.getElementById('lb-next').addEventListener('click',function(){idx=idx===0?1:0;showImage();});
+})();
+</script>
 
 <?php get_footer(); ?>
