@@ -60,7 +60,7 @@ get_header(); ?>
         <div class="md:col-span-7">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">Sydney&rsquo;s Bathroom Experts</span>
             <h1 class="text-[35px] sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
-                Bathroom Resurfacing <br class="hidden sm:block" /><span class="text-on-primary-container">Sydney Specialists</span>
+                Bathroom<br class="sm:hidden" /> Resurfacing<br /> <span class="text-on-primary-container">Sydney Specialists</span>
             </h1>
             <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
                 One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
@@ -74,7 +74,7 @@ get_header(); ?>
                     <div id="mob-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                         <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;object-position:center 70%;" />
                     </div>
-                    <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
+                    <div id="mob-line" class="absolute top-0 bottom-0 bg-white" style="left:50%;z-index:20;width:3px;margin-left:-1.5px;cursor:ew-resize;"></div>
                     <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
@@ -88,6 +88,11 @@ get_header(); ?>
             </div>
             <a class="inline-block w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
             <div class="mt-6 flex items-center gap-3">
+                <div class="flex -space-x-2" aria-hidden="true">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-1.jpg" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-2.jpg" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-3.jpg" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                </div>
                 <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
         </div>
@@ -485,10 +490,13 @@ get_header(); ?>
     function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
     syncWidth(); window.addEventListener('resize', syncWidth);
     function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
-    slider.addEventListener('mousedown', function(e){ active=true; move(e.clientX); e.preventDefault(); });
+    function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
+    handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+    line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
     document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
     document.addEventListener('mouseup', function(){ active=false; });
-    slider.addEventListener('touchstart', function(e){ active=true; move(e.touches[0].clientX); e.preventDefault(); }, {passive:false});
+    handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+    line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
     document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
     document.addEventListener('touchend', function(){ active=false; });
 })();

@@ -33,51 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
             handle.style.left  = pct + '%';
         }
 
-        slider.addEventListener('mousedown',  function(e){ active=true; move(e.clientX); e.preventDefault(); });
+        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
         document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
-        document.addEventListener('mouseup',   function(){ active=false; });
-
-        slider.addEventListener('touchstart',  function(e){ active=true; move(e.touches[0].clientX); }, {passive:true});
-        document.addEventListener('touchmove', function(e){ if(active) move(e.touches[0].clientX); }, {passive:true});
-        document.addEventListener('touchend',  function(){ active=false; });
-    })();
-
-    /* ── Mobile Hero Before/After Slider ── */
-    (function(){
-        var slider = document.getElementById('hero-slider-mobile');
-        if(!slider) return;
-        var clip   = document.getElementById('mob-clip');
-        var line   = document.getElementById('mob-line');
-        var handle = document.getElementById('mob-handle');
-        var bImg   = document.getElementById('mob-before-img');
-        var active = false;
-
-        function syncWidth(){
-            if(!bImg) return;
-            var w = slider.offsetWidth + 'px';
-            bImg.style.width = w;
-            bImg.style.minWidth = w;
-            bImg.style.maxWidth = w;
-        }
-        syncWidth();
-        window.addEventListener('resize', syncWidth);
-
-        function move(x){
-            var r = slider.getBoundingClientRect();
-            var pct = ((x - r.left) / r.width) * 100;
-            pct = Math.max(3, Math.min(97, pct));
-            clip.style.width   = pct + '%';
-            line.style.left    = pct + '%';
-            handle.style.left  = pct + '%';
-        }
-
-        slider.addEventListener('mousedown',  function(e){ active=true; move(e.clientX); e.preventDefault(); });
-        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
-        document.addEventListener('mouseup',   function(){ active=false; });
-
-        slider.addEventListener('touchstart',  function(e){ active=true; move(e.touches[0].clientX); }, {passive:true});
-        document.addEventListener('touchmove', function(e){ if(active) move(e.touches[0].clientX); }, {passive:true});
-        document.addEventListener('touchend',  function(){ active=false; });
+        document.addEventListener('mouseup', function(){ active=false; });
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
+        document.addEventListener('touchend', function(){ active=false; });
     })();
 
     /* ── Mobile Menu ── */
