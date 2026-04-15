@@ -542,96 +542,77 @@
     </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- RECENT TRANSFORMATIONS — Side-by-side before/after cards -->
 <section class="py-16 sm:py-24 bg-surface" id="portfolio">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex justify-between items-end mb-10">
-            <div>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Transformations</h2>
-                <p class="text-secondary text-sm">Before and after resurfacing across Sydney and NSW.</p>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Recent Transformations</h2>
+            <p class="text-secondary text-sm">Real before and after results from jobs across Sydney.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Card 1: Bathtub Resurfacing -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="grid grid-cols-2">
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="images/homepage/transformations/bathtub-before.png" alt="Chipped stained bathtub before resurfacing" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span>
+                    </div>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="images/homepage/transformations/bathtub-after.png" alt="Bathtub after professional resurfacing" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-bold text-primary text-sm">Bathtub Resurfacing</h3>
+                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
+                    </div>
+                    <p class="text-xs text-secondary">Chipped and stained enamel restored to factory-smooth white finish in one day.</p>
+                </div>
             </div>
-            <!-- Desktop arrows -->
-            <div class="hidden sm:flex items-center gap-2">
-                <button onclick="movePortfolio(-1)" class="w-10 h-10 rounded-full border border-surface-container hover:bg-surface-container-low flex items-center justify-center transition-colors" aria-label="Previous projects"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_left</span></button>
-                <button onclick="movePortfolio(1)" class="w-10 h-10 rounded-full border border-surface-container hover:bg-surface-container-low flex items-center justify-center transition-colors" aria-label="Next projects"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_right</span></button>
+            <!-- Card 2: Stain Removal -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="grid grid-cols-2">
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="images/homepage/transformations/stain-before.png" alt="Yellowed stained bathtub before cleaning" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span>
+                    </div>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="images/homepage/transformations/stain-after.png" alt="Bathtub after stain removal and resurfacing" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-bold text-primary text-sm">Stain &amp; Yellowing Removal</h3>
+                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
+                    </div>
+                    <p class="text-xs text-secondary">Decades of rust and hard-water stains stripped back to a clean white surface.</p>
+                </div>
+            </div>
+            <!-- Card 3: Floor Tile Regrouting -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+                <div class="grid grid-cols-2">
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="images/homepage/transformations/floor-tile-before.png" alt="Dirty cracked floor tile grout before regrouting" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span>
+                    </div>
+                    <div class="relative aspect-square overflow-hidden">
+                        <img src="images/homepage/transformations/floor-tile-after.png" alt="Floor tiles after professional regrouting" class="w-full h-full object-cover" loading="lazy" />
+                        <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-bold text-primary text-sm">Floor Tile Regrouting</h3>
+                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Floor Tiles</span>
+                    </div>
+                    <p class="text-xs text-secondary">Black mouldy grout replaced with fresh epoxy grout. Clean, waterproof, and mould-resistant.</p>
+                </div>
             </div>
         </div>
-        <!-- Carousel container -->
-        <div class="overflow-hidden" id="portfolio-carousel">
-            <div class="flex gap-6 transition-transform duration-300 ease-out" id="portfolio-track" style="transform: translateX(0)">
-                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <!-- REPLACE: images/homepage/gallery-1.jpg — 600x450 (4:3) -->
-                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
-                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-1.jpg</p><p class="text-[0.6rem] text-sky-500">Surry Hills bath &amp; wall resurfacing<br/>600x450px · 4:3</p></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Surry Hills Apartment</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Bath &amp; Wall</span></div>
-                        <p class="text-xs text-secondary italic">&ldquo;Tenant was back in 24 hours. Looks brand new.&rdquo;</p>
-                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Property Manager, Inner Sydney</p>
-                    </div>
-                </article>
-                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <!-- REPLACE: images/homepage/gallery-2.jpg — 600x450 (4:3) -->
-                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
-                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-2.jpg</p><p class="text-[0.6rem] text-sky-500">Bondi Beach shower &amp; basin regrouting<br/>600x450px · 4:3</p></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Bondi Beach House</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Shower &amp; Basin</span></div>
-                        <p class="text-xs text-secondary italic">&ldquo;Restored our 1920s bathroom without the $20k price tag.&rdquo;</p>
-                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, Eastern Suburbs</p>
-                    </div>
-                </article>
-                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <!-- REPLACE: images/homepage/gallery-3.jpg — 600x450 (4:3) -->
-                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
-                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-3.jpg</p><p class="text-[0.6rem] text-sky-500">Parramatta full bathroom makeover<br/>600x450px · 4:3</p></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Parramatta Family Home</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Full Bathroom</span></div>
-                        <p class="text-xs text-secondary italic">&ldquo;Workmanship is second to none in Western Sydney.&rdquo;</p>
-                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, Western Sydney</p>
-                    </div>
-                </article>
-                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <!-- REPLACE: images/homepage/gallery-4.jpg — 600x450 (4:3) -->
-                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
-                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-4.jpg</p><p class="text-[0.6rem] text-sky-500">Manly vanity &amp; basin refinishing<br/>600x450px · 4:3</p></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Manly Beach Unit</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Vanity &amp; Basin</span></div>
-                        <p class="text-xs text-secondary italic">&ldquo;Vanity looks like we bought a new one. Amazing result.&rdquo;</p>
-                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, Northern Beaches</p>
-                    </div>
-                </article>
-                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <!-- REPLACE: images/homepage/gallery-5.jpg — 600x450 (4:3) -->
-                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
-                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-5.jpg</p><p class="text-[0.6rem] text-sky-500">Mosman epoxy grout upgrade<br/>600x450px · 4:3</p></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Mosman Townhouse</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Epoxy Regrout</span></div>
-                        <p class="text-xs text-secondary italic">&ldquo;No more scrubbing mouldy grout. Should have done this years ago.&rdquo;</p>
-                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Homeowner, North Shore</p>
-                    </div>
-                </article>
-                <article class="p-card flex-shrink-0 group overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <!-- REPLACE: images/homepage/gallery-6.jpg — 600x450 (4:3) -->
-                    <div class="aspect-[4/3] overflow-hidden bg-sky-50 flex items-center justify-center">
-                        <div class="text-center"><span class="material-symbols-outlined text-3xl text-sky-400 block mb-1" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-sky-700">gallery-6.jpg</p><p class="text-[0.6rem] text-sky-500">Cronulla rental turnover resurfacing<br/>600x450px · 4:3</p></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-2"><h3 class="font-bold text-primary text-sm">Cronulla Rental</h3><span class="text-[0.55rem] bg-surface-container px-2 py-0.5 rounded font-bold uppercase text-outline">Rental Turnover</span></div>
-                        <p class="text-xs text-secondary italic">&ldquo;Turned over 3 units in one week. Tenants love them.&rdquo;</p>
-                        <p class="text-[0.6rem] text-outline mt-1.5 font-medium">&#8212; Property Manager, Sutherland Shire</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-        <!-- Mobile arrows (below cards) -->
-        <div class="flex sm:hidden items-center justify-center gap-3 mt-4">
-            <button onclick="movePortfolio(-1)" class="w-10 h-10 rounded-full border border-surface-container flex items-center justify-center" aria-label="Previous project"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_left</span></button>
-            <span class="text-xs text-secondary" id="portfolio-counter">1 / 6</span>
-            <button onclick="movePortfolio(1)" class="w-10 h-10 rounded-full border border-surface-container flex items-center justify-center" aria-label="Next project"><span class="material-symbols-outlined text-primary text-xl" aria-hidden="true">chevron_right</span></button>
+        <div class="text-center mt-10">
+            <a href="gallery.html" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary hover:text-white transition-all text-sm">View All Transformations <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span></a>
         </div>
     </div>
 </section>
