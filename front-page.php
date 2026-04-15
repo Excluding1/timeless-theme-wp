@@ -59,7 +59,7 @@ get_header(); ?>
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         <div class="md:col-span-7">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">Sydney&rsquo;s Bathroom Experts</span>
-            <h1 class="text-[2.5rem] sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
+            <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
                 Bathroom Resurfacing <br class="hidden sm:block" /><span class="text-on-primary-container">Sydney Specialists</span>
             </h1>
             <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
@@ -68,9 +68,9 @@ get_header(); ?>
             <!-- MOBILE: Image between text and CTA -->
             <div class="md:hidden mb-6">
                 <div id="hero-slider-mobile" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing" class="absolute inset-0 w-full h-full object-cover object-[center_70%]" draggable="false" />
                     <div class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                        <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;width:200%;" />
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;object-position:center 70%;width:200%;" />
                     </div>
                     <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
                     <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
