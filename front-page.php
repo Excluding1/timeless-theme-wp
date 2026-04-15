@@ -265,7 +265,7 @@ get_header(); ?>
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5 text-center">
+                <div class="p-5 flex justify-center">
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span>
                     </div>
@@ -283,7 +283,7 @@ get_header(); ?>
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5 text-center">
+                <div class="p-5 flex justify-center">
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span>
                     </div>
@@ -301,7 +301,7 @@ get_header(); ?>
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5 text-center">
+                <div class="p-5 flex justify-center">
                     <div class="flex items-center justify-between mb-1">
                         <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Floor Tile Regrouting</span>
                     </div>
