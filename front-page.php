@@ -89,9 +89,9 @@ get_header(); ?>
             <a class="inline-block w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
             <div class="mt-6 flex items-center gap-3">
                 <div class="flex -space-x-2" aria-hidden="true">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-1.jpg" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-2.jpg" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-3.jpg" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-1.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-2.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-3.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
                 </div>
                 <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
