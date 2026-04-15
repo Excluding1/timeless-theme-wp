@@ -235,7 +235,7 @@ get_header(); ?>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Left: Process image placeholder -->
             <div class="hidden lg:block reveal">
-                <div class="rounded-2xl overflow-hidden aspect-[4/3] max-w-md mx-auto">
+                <div class="rounded-2xl overflow-hidden aspect-[3/4] max-w-md mx-auto shadow-xl">
                     <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/images/homepage/how-it-works.png" alt="Professional bathroom resurfacing process in Sydney" loading="lazy" width="600" height="800" />
                 </div>
             </div>
