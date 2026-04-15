@@ -47,7 +47,8 @@
 <style>
     .ba-card { position: relative; overflow: hidden; cursor: ew-resize; }
     .ba-card .ba-overlay { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; }
-    #hero-slider img { pointer-events: none; -webkit-user-drag: none; }
+    #hero-slider img, .ba-slider img { pointer-events: none; -webkit-user-drag: none; }
+    .ba-slider .ba-before img { position:absolute; top:0; left:0; height:100%; object-fit:cover; }
 </style>
 
 <main>
@@ -620,7 +621,8 @@
 <script>
 /* -- Section 2B Before/After Sliders -- */
 document.querySelectorAll(".ba-slider").forEach(function(slider){
-    var clip=slider.querySelector(".ba-clip"),line=slider.querySelector(".ba-line"),handle=slider.querySelector(".ba-handle"),bImg=slider.querySelector(".ba-before"),active=false;
+    var clip=slider.querySelector(".ba-clip"),line=slider.querySelector(".ba-line"),handle=slider.querySelector(".ba-handle"),active=false;
+    var bImg=slider.querySelector(".ba-before img") || slider.querySelector(".ba-before");
     if(!clip||!line||!handle) return;
     function sync(){if(bImg){var w=slider.offsetWidth+"px";bImg.style.width=w;bImg.style.minWidth=w;bImg.style.maxWidth=w;}}
     sync(); window.addEventListener("resize",sync);
