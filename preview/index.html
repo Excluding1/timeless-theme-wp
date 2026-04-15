@@ -562,12 +562,10 @@
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5">
+                <div class="p-5 flex justify-center">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-bold text-primary text-sm">Bathtub Resurfacing</h3>
-                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
+                        <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span>
                     </div>
-                    <p class="text-xs text-secondary">Chipped and stained enamel restored to factory-smooth white finish in one day.</p>
                 </div>
             </div>
             <!-- Card 2: Stain Removal -->
@@ -582,12 +580,10 @@
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5">
+                <div class="p-5 flex justify-center">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-bold text-primary text-sm">Stain &amp; Yellowing Removal</h3>
-                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
+                        <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span>
                     </div>
-                    <p class="text-xs text-secondary">Decades of rust and hard-water stains stripped back to a clean white surface.</p>
                 </div>
             </div>
             <!-- Card 3: Floor Tile Regrouting -->
@@ -602,12 +598,10 @@
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5">
+                <div class="p-5 flex justify-center">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-bold text-primary text-sm">Floor Tile Regrouting</h3>
-                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Floor Tiles</span>
+                        <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Floor Tile Regrouting</span>
                     </div>
-                    <p class="text-xs text-secondary">Black mouldy grout replaced with fresh epoxy grout. Clean, waterproof, and mould-resistant.</p>
                 </div>
             </div>
         </div>
@@ -1154,6 +1148,53 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+</script>
+
+<!-- LIGHTBOX POPUP -->
+<div id="lightbox" class="fixed inset-0 z-[9999] hidden" style="background:rgba(0,0,0,0.92);">
+    <button id="lb-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" aria-label="Close">
+        <span class="material-symbols-outlined text-white text-2xl">close</span>
+    </button>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl px-4">
+        <div class="relative">
+            <img id="lb-image" src="" alt="" class="w-full rounded-xl shadow-2xl" />
+            <span id="lb-badge" class="absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded">Before</span>
+        </div>
+        <div class="flex items-center justify-center gap-4 mt-6">
+            <button id="lb-prev" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Previous">
+                <span class="material-symbols-outlined text-white text-2xl">chevron_left</span>
+            </button>
+            <span id="lb-label" class="text-white text-sm font-bold uppercase tracking-wider">Before</span>
+            <button id="lb-next" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Next">
+                <span class="material-symbols-outlined text-white text-2xl">chevron_right</span>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+(function(){
+    var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-image'),lbBadge=document.getElementById('lb-badge'),lbLabel=document.getElementById('lb-label'),images=[],idx=0;
+    document.querySelectorAll('#portfolio .grid > div').forEach(function(card){
+        var imgs=card.querySelectorAll('img'); if(imgs.length<2) return;
+        var tag=card.querySelector('span[class*="tertiary-fixed"]'); var label=tag?tag.textContent.trim():'';
+        card.style.cursor='pointer';
+        card.addEventListener('click',function(){
+            images=[{src:imgs[0].src,state:'Before',label:label},{src:imgs[1].src,state:'After',label:label}];
+            idx=0; showImage(); lb.classList.remove('hidden'); document.body.style.overflow='hidden';
+        });
+    });
+    function showImage(){
+        lbImg.src=images[idx].src; lbBadge.textContent=images[idx].state;
+        lbLabel.textContent=images[idx].state+' \u2014 '+images[idx].label;
+        lbBadge.className=idx===0?'absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded':'absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded';
+    }
+    function closeLb(){lb.classList.add('hidden');document.body.style.overflow='';}
+    document.getElementById('lb-close').addEventListener('click',closeLb);
+    lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+    document.addEventListener('keydown',function(e){if(lb.classList.contains('hidden'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft'||e.key==='ArrowRight'){idx=idx===0?1:0;showImage();}});
+    document.getElementById('lb-prev').addEventListener('click',function(){idx=idx===0?1:0;showImage();});
+    document.getElementById('lb-next').addEventListener('click',function(){idx=idx===0?1:0;showImage();});
+})();
 </script>
 
 </body>
