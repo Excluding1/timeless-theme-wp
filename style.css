@@ -88,5 +88,5 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
 }
 
 /* Before/After Slider */
-#hero-slider img { pointer-events: none; -webkit-user-drag: none; }
-#ba-handle { transition: none; }
+#hero-slider img, #hero-slider-mobile img { pointer-events: none; -webkit-user-drag: none; }
+#ba-handle, #mob-handle { transition: none; }
