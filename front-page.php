@@ -270,7 +270,6 @@ get_header(); ?>
                         <h3 class="font-bold text-primary text-sm">Bathtub Resurfacing</h3>
                         <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
                     </div>
-                    <p class="text-xs text-secondary">Chipped and stained enamel restored to factory-smooth white finish in one day.</p>
                 </div>
             </div>
             <!-- Card 2: Stain Removal -->
@@ -290,7 +289,6 @@ get_header(); ?>
                         <h3 class="font-bold text-primary text-sm">Stain &amp; Yellowing Removal</h3>
                         <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
                     </div>
-                    <p class="text-xs text-secondary">Decades of rust and hard-water stains stripped back to a clean white surface.</p>
                 </div>
             </div>
             <!-- Card 3: Floor Tile Regrouting -->
@@ -310,7 +308,6 @@ get_header(); ?>
                         <h3 class="font-bold text-primary text-sm">Floor Tile Regrouting</h3>
                         <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Floor Tiles</span>
                     </div>
-                    <p class="text-xs text-secondary">Black mouldy grout replaced with fresh epoxy grout. Clean, waterproof, and mould-resistant.</p>
                 </div>
             </div>
         </div>
