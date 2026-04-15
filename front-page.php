@@ -87,7 +87,7 @@ get_header(); ?>
         </div>
         <!-- DESKTOP: Image in right column -->
         <div class="hidden md:block md:col-span-5">
-            <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
+            <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:5/6;cursor:ew-resize;">
                 <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;" />
