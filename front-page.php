@@ -294,6 +294,7 @@ get_header(); ?>
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Sydney Homeowners Say</h2>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
     </div>
