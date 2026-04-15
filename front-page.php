@@ -265,10 +265,9 @@ get_header(); ?>
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5">
+                <div class="p-5 text-center">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-bold text-primary text-sm">Bathtub Resurfacing</h3>
-                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
+                        <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span>
                     </div>
                 </div>
             </div>
@@ -284,10 +283,9 @@ get_header(); ?>
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5">
+                <div class="p-5 text-center">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-bold text-primary text-sm">Stain &amp; Yellowing Removal</h3>
-                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Bathtub</span>
+                        <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span>
                     </div>
                 </div>
             </div>
@@ -303,10 +301,9 @@ get_header(); ?>
                         <span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span>
                     </div>
                 </div>
-                <div class="p-5">
+                <div class="p-5 text-center">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-bold text-primary text-sm">Floor Tile Regrouting</h3>
-                        <span class="text-[0.55rem] bg-tertiary-fixed-dim/20 text-primary px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Floor Tiles</span>
+                        <span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Floor Tile Regrouting</span>
                     </div>
                 </div>
             </div>
