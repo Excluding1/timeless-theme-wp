@@ -442,11 +442,12 @@ get_header(); ?>
 <script>
 (function(){
     var lb=document.getElementById('lightbox'),lbImg=document.getElementById('lb-image'),lbBadge=document.getElementById('lb-badge'),lbLabel=document.getElementById('lb-label'),images=[],idx=0;
-    document.querySelectorAll('#portfolio .grid > div, #transform-track > div').forEach(function(card){
+    document.querySelectorAll('#portfolio .bg-white.rounded-2xl').forEach(function(card){
         var imgs=card.querySelectorAll('img'); if(imgs.length<2) return;
         var tag=card.querySelector('span[class*="tertiary-fixed"]'); var label=tag?tag.textContent.trim():'';
         card.style.cursor='pointer';
-        card.addEventListener('click',function(){
+        card.addEventListener('click',function(e){
+            if(e.target.closest('a')) return; // don't hijack link clicks
             images=[{src:imgs[0].src,state:'Before',label:label},{src:imgs[1].src,state:'After',label:label}];
             idx=0; showImage(); lb.classList.remove('hidden'); document.body.style.overflow='hidden';
         });
