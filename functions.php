@@ -298,6 +298,9 @@ function timeless_canonical_url() {
 remove_action( 'wp_head', 'rel_canonical' );
 add_action( 'wp_head', 'timeless_canonical_url', 1 );
 
+/* Remove WordPress default robots meta — our timeless_seo_meta() outputs a more complete one */
+remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
+
 /* ─────────────────────────────────────────────
    5b. SEO — Meta descriptions + Open Graph tags
    ───────────────────────────────────────────── */
@@ -405,8 +408,9 @@ function timeless_output_sitemap() {
         $modified = get_the_modified_date( 'Y-m-d', $page );
         $slug     = $page->post_name;
 
-        // Skip if URL is empty
+        // Skip if URL is empty or if this is the front page (already added above)
         if ( empty( $url ) ) continue;
+        if ( (int) $page->ID === (int) get_option( 'page_on_front' ) ) continue;
 
         // Higher priority for service pages
         if ( strpos( $slug, 'sydney' ) !== false ) {
@@ -481,16 +485,70 @@ add_action( 'after_switch_theme', 'timeless_flush_rewrites_on_activation' );
 /* Disable WordPress default sitemaps (wp-sitemap.xml) to avoid duplicates */
 add_filter( 'wp_sitemaps_enabled', '__return_false' );
 
-/* Add sitemap link to robots.txt */
+/* Custom robots.txt — block crawl-budget-wasting URLs */
 function timeless_robots_txt( $output, $public ) {
+    $output  = "User-agent: *\n";
+    $output .= "Disallow: /wp-admin/\n";
+    $output .= "Allow: /wp-admin/admin-ajax.php\n";
+    $output .= "Disallow: /?s=\n";
+    $output .= "Disallow: /search/\n";
+    $output .= "Disallow: /*?replytocom=\n";
+    $output .= "Disallow: /*?preview=true\n";
+    $output .= "Disallow: /wp-json/\n";
+    $output .= "Disallow: /wp-includes/\n";
+    $output .= "Disallow: /wp-content/plugins/\n";
+    $output .= "Disallow: /wp-content/cache/\n";
+    $output .= "Disallow: /author/\n";
+    $output .= "Disallow: /tag/\n";
+    $output .= "Disallow: /category/\n";
     $output .= "\nSitemap: " . home_url( '/sitemap.xml' ) . "\n";
     return $output;
 }
 add_filter( 'robots_txt', 'timeless_robots_txt', 10, 2 );
 
 /* ─────────────────────────────────────────────
+   5d. SEO — Related Services internal links (speeds up crawl discovery)
+   ───────────────────────────────────────────── */
+function timeless_related_services() {
+    if ( ! is_singular( 'page' ) ) return;
+    $slug = get_post_field( 'post_name', get_post() );
+    if ( strpos( $slug, 'sydney' ) === false ) return; // Only on service pages
+
+    $services = array(
+        'shower-regrouting-sydney'     => array( 'label' => 'Shower Regrouting',  'icon' => 'shower' ),
+        'bath-resurfacing-sydney'      => array( 'label' => 'Bath Resurfacing',   'icon' => 'bathtub' ),
+        'tile-resurfacing-sydney'      => array( 'label' => 'Tile Resurfacing',   'icon' => 'grid_view' ),
+        'vanity-refinishing-sydney'    => array( 'label' => 'Vanity Refinishing', 'icon' => 'countertops' ),
+        'basin-restoration-sydney'     => array( 'label' => 'Basin Restoration',  'icon' => 'faucet' ),
+        'shower-leak-repair-sydney'    => array( 'label' => 'Shower Sealing',     'icon' => 'water_damage' ),
+    );
+
+    // Remove current page from list
+    unset( $services[ $slug ] );
+    // Pick 3 random related services
+    $keys = array_rand( $services, min( 3, count( $services ) ) );
+    if ( ! is_array( $keys ) ) $keys = array( $keys );
+
+    echo '<section class="py-12 sm:py-16 bg-surface-container-low">';
+    echo '<div class="max-w-7xl mx-auto px-6 sm:px-8">';
+    echo '<h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-6 text-center">Other Services You Might Need</h2>';
+    echo '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">';
+    foreach ( $keys as $k ) {
+        $s = $services[ $k ];
+        $url = home_url( '/services/' . $k . '/' );
+        echo '<a href="' . esc_url( $url ) . '" class="flex items-center gap-3 bg-white rounded-xl p-4 hover:shadow-lg transition-all group">';
+        echo '<span class="material-symbols-outlined text-2xl text-primary flex-shrink-0" aria-hidden="true">' . esc_html( $s['icon'] ) . '</span>';
+        echo '<div><span class="font-bold text-primary text-sm">' . esc_html( $s['label'] ) . '</span>';
+        echo '<span class="text-xs text-secondary block">Sydney &amp; NSW</span></div>';
+        echo '<span class="material-symbols-outlined text-primary text-sm ml-auto group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>';
+        echo '</a>';
+    }
+    echo '</div></div></section>';
+}
+
+/* ─────────────────────────────────────────────
    6. DISABLE COMMENTS (not needed for trades site)
-   ────────────────��──────────────────────────── */
+   ────────────────────────────────────────────── */
 function timeless_disable_comments() {
     remove_post_type_support( 'page', 'comments' );
     remove_post_type_support( 'post', 'comments' );

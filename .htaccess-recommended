@@ -1,0 +1,28 @@
+# Timeless Resurfacing — Recommended .htaccess
+# Copy this to the WordPress root directory (public_html/)
+# ABOVE the WordPress rewrite block
+
+# ── HTTPS Redirect ──
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── WWW to non-WWW (pick one, stick with it) ──
+RewriteCond %{HTTP_HOST} ^www\.timelessresurfacing\.com\.au [NC]
+RewriteRule ^(.*)$ https://timelessresurfacing.com.au/$1 [L,R=301]
+
+# ── Block parameter URLs that waste crawl budget ──
+RewriteCond %{QUERY_STRING} (replytocom|preview=true) [NC]
+RewriteRule .* - [F,L]
+
+# ── BEGIN WordPress (don't edit below this) ──
+# <IfModule mod_rewrite.c>
+# RewriteEngine On
+# RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# RewriteBase /
+# RewriteRule ^index\.php$ - [L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /index.php [L]
+# </IfModule>
+# ── END WordPress ──
