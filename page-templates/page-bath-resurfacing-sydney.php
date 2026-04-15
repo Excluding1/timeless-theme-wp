@@ -162,13 +162,13 @@
                         <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-500" aria-hidden="true">verified</span>
                         </div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;">
                             <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span>
                             </div>
                         </div>
-                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:66%;z-index:20;pointer-events:none;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -423,62 +423,13 @@
     </div>
 </div>
 
-<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-                <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
         </div>
-        <div id="bath-wp-testimonial-carousel" class="overflow-hidden">
-            <div id="bath-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
-                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Our bath was chipped everywhere and stained yellow. They resurfaced it in one day and it looks factory new. Should have done this years ago instead of staring at those chips!&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">K</div>
-                        <div><p class="text-sm font-bold text-primary">Karen W.</p><p class="text-[0.65rem] text-outline">Surry Hills &middot; Bath Resurfacing</p></div>
-                    </div>
-                </div>
-                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Had an ugly pink bath from the 80s. They changed it to white and it looks like a brand new install. My partner couldn&rsquo;t believe it was the same bath. Amazing value for money.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
-                        <div><p class="text-sm font-bold text-primary">James L.</p><p class="text-[0.65rem] text-outline">Bondi Beach &middot; Colour Change</p></div>
-                    </div>
-                </div>
-                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;We manage 8 rental properties and Timeless handles all our bath resurfacing. Quick turnarounds, fair pricing, and the tenants love the result. Highly recommend for property managers.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">D</div>
-                        <div><p class="text-sm font-bold text-primary">David C.</p><p class="text-[0.65rem] text-outline">Property Manager &middot; Western Sydney</p></div>
-                    </div>
-                </div>
-                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Restored our 1920s cast iron clawfoot bath. I was told the only option was replacement for $5,000+. Timeless brought it back to life for a fraction of that. Absolutely stunning result.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
-                        <div><p class="text-sm font-bold text-primary">Margaret S.</p><p class="text-[0.65rem] text-outline">Paddington &middot; Cast Iron Restoration</p></div>
-                    </div>
-                </div>
-                <div class="bath-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Peeling DIY paint mess turned into a perfect factory-smooth finish. Should have called Timeless from the start instead of wasting money on Bunnings kits that failed.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">T</div>
-                        <div><p class="text-sm font-bold text-primary">Tom R.</p><p class="text-[0.65rem] text-outline">Marrickville &middot; DIY Strip &amp; Resurface</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Arrow navigation below reviews -->
-        <div class="flex justify-center items-center gap-3 mt-8">
-            <button type="button" onclick="moveBathWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-            <button type="button" onclick="moveBathWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-        </div>
+        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
     </div>
 </section>
 
@@ -540,60 +491,20 @@
 </main>
 
 <script>
-/* -- Testimonial Carousel (JS-measured widths) -- */
-(function(){
-    var container = document.getElementById('bath-wp-testimonial-carousel');
-    var track = document.getElementById('bath-wp-testimonial-track');
-    if (!container || !track) return;
-
-    var GAP = 24; // gap-6 in Tailwind
-    var cards = track.querySelectorAll('.bath-wp-t-card');
-    var total = cards.length;
-    var index = 0;
-
-    function perView() {
-        if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 640) return 2;
-        return 1;
-    }
-
-    function sizeCards() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        cards.forEach(function(c) {
-            c.style.width = cardW + 'px';
-            c.style.minWidth = cardW + 'px';
-        });
-        var maxIndex = Math.max(0, total - view);
-        if (index > maxIndex) index = maxIndex;
-        applyTransform();
-    }
-
-    function applyTransform() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        var offset = index * (cardW + GAP);
-        track.style.transform = 'translateX(-' + offset + 'px)';
-    }
-
-    window.moveBathWpTestimonials = function(dir) {
-        var view = perView();
-        var maxIndex = Math.max(0, total - view);
-        index += dir;
-        if (index < 0) index = maxIndex;
-        if (index > maxIndex) index = 0;
-        applyTransform();
-    };
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', sizeCards);
-    } else {
-        sizeCards();
-    }
-    window.addEventListener('resize', sizeCards);
-})();
+/* -- Section 2B Before/After Sliders -- */
+document.querySelectorAll(".ba-slider").forEach(function(slider){
+    var clip=slider.querySelector(".ba-clip"),line=slider.querySelector(".ba-line"),handle=slider.querySelector(".ba-handle"),bImg=slider.querySelector(".ba-before"),active=false;
+    if(!clip||!line||!handle) return;
+    function sync(){if(bImg){var w=slider.offsetWidth+"px";bImg.style.width=w;bImg.style.minWidth=w;bImg.style.maxWidth=w;}}
+    sync(); window.addEventListener("resize",sync);
+    function move(x){var r=slider.getBoundingClientRect();var pct=((x-r.left)/r.width)*100;pct=Math.max(3,Math.min(97,pct));clip.style.width=pct+"%";line.style.left=pct+"%";handle.style.left=pct+"%";}
+    slider.addEventListener("mousedown",function(e){active=true;move(e.clientX);e.preventDefault();});
+    document.addEventListener("mousemove",function(e){if(active)move(e.clientX);});
+    document.addEventListener("mouseup",function(){active=false;});
+    slider.addEventListener("touchstart",function(e){active=true;move(e.touches[0].clientX);},{passive:true});
+    document.addEventListener("touchmove",function(e){if(active)move(e.touches[0].clientX);},{passive:true});
+    document.addEventListener("touchend",function(){active=false;});
+});
 </script>
 
 <script>

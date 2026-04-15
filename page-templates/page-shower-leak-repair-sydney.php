@@ -362,70 +362,13 @@
     </div>
 </section>
 
-<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex items-end justify-between mb-10 gap-4">
-            <div>
-                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
-            </div>
-            <!-- Desktop arrow buttons -->
-            <div class="hidden sm:flex gap-2 flex-shrink-0">
-                <button type="button" onclick="moveShowerSealWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-                <button type="button" onclick="moveShowerSealWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-            </div>
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
         </div>
-        <div id="shower-seal-wp-testimonial-carousel" class="overflow-hidden">
-            <div id="shower-seal-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
-                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;No more leaks into the flat below. Peace of mind at last after 2 years of stress.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">P</div>
-                        <div><p class="text-sm font-bold text-primary">Peter L.</p><p class="text-[0.65rem] text-outline">Rose Bay &middot; Full Reseal</p></div>
-                    </div>
-                </div>
-                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Clean white silicone instead of black mould. Huge difference to how the bathroom feels.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">S</div>
-                        <div><p class="text-sm font-bold text-primary">Samantha D.</p><p class="text-[0.65rem] text-outline">Paddington &middot; Silicone</p></div>
-                    </div>
-                </div>
-                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Shower finally dry after years of dampness. Thank you for the professional work.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
-                        <div><p class="text-sm font-bold text-primary">Mark R.</p><p class="text-[0.65rem] text-outline">Hills District &middot; Waterproof</p></div>
-                    </div>
-                </div>
-                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Stripped all the mouldy silicone and resealed perfectly. No more scrubbing every week.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
-                        <div><p class="text-sm font-bold text-primary">Jennifer H.</p><p class="text-[0.65rem] text-outline">North Shore &middot; Mouldy Corners</p></div>
-                    </div>
-                </div>
-                <div class="shower-seal-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Water damage stopped in its tracks. Saved us from a full waterproofing reno.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">T</div>
-                        <div><p class="text-sm font-bold text-primary">Tom W.</p><p class="text-[0.65rem] text-outline">Inner West &middot; Shower Grout Repair</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile pagination + arrows -->
-        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
-            <button type="button" onclick="moveShowerSealWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-            <span id="shower-seal-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
-            <button type="button" onclick="moveShowerSealWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-        </div>
+        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
     </div>
 </section>
 
@@ -483,64 +426,5 @@
 </section>
 
 </main>
-
-<script>
-/* -- Testimonial Carousel (JS-measured widths) -- */
-(function(){
-    var container = document.getElementById('shower-seal-wp-testimonial-carousel');
-    var track = document.getElementById('shower-seal-wp-testimonial-track');
-    var counter = document.getElementById('shower-seal-wp-testimonial-counter');
-    if (!container || !track) return;
-
-    var GAP = 24; // gap-6 in Tailwind
-    var cards = track.querySelectorAll('.shower-seal-wp-t-card');
-    var total = cards.length;
-    var index = 0;
-
-    function perView() {
-        if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 640) return 2;
-        return 1;
-    }
-
-    function sizeCards() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        cards.forEach(function(c) {
-            c.style.width = cardW + 'px';
-            c.style.minWidth = cardW + 'px';
-        });
-        var maxIndex = Math.max(0, total - view);
-        if (index > maxIndex) index = maxIndex;
-        applyTransform();
-    }
-
-    function applyTransform() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        var offset = index * (cardW + GAP);
-        track.style.transform = 'translateX(-' + offset + 'px)';
-        if (counter) counter.textContent = (index + 1) + ' / ' + total;
-    }
-
-    window.moveShowerSealWpTestimonials = function(dir) {
-        var view = perView();
-        var maxIndex = Math.max(0, total - view);
-        index += dir;
-        if (index < 0) index = maxIndex;
-        if (index > maxIndex) index = 0;
-        applyTransform();
-    };
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', sizeCards);
-    } else {
-        sizeCards();
-    }
-    window.addEventListener('resize', sizeCards);
-})();
-</script>
 
 <?php get_footer(); ?>

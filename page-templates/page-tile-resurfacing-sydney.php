@@ -427,70 +427,13 @@
     </div>
 </section>
 
-<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex items-end justify-between mb-10 gap-4">
-            <div>
-                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
-            </div>
-            <!-- Desktop arrow buttons -->
-            <div class="hidden sm:flex gap-2 flex-shrink-0">
-                <button type="button" onclick="moveTileWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-                <button type="button" onclick="moveTileWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-            </div>
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
         </div>
-        <div id="tile-wp-testimonial-carousel" class="overflow-hidden">
-            <div id="tile-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
-                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Went from brown 80s tiles to modern white. Night and day transformation without the cost of new tiles.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">E</div>
-                        <div><p class="text-sm font-bold text-primary">Emma K.</p><p class="text-[0.65rem] text-outline">Newtown &middot; Wall Tile Resurface</p></div>
-                    </div>
-                </div>
-                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Feels like a new bathroom without the renovation. The anti-slip finish on the floor tiles is great &mdash; no slipping.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">A</div>
-                        <div><p class="text-sm font-bold text-primary">Andrew H.</p><p class="text-[0.65rem] text-outline">Chatswood &middot; Floor Tiles</p></div>
-                    </div>
-                </div>
-                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Saved thousands vs re-tiling. Perfect match to our d&eacute;cor and done in 2 days.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">L</div>
-                        <div><p class="text-sm font-bold text-primary">Linda W.</p><p class="text-[0.65rem] text-outline">Hornsby &middot; Full Bathroom</p></div>
-                    </div>
-                </div>
-                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Glazed tiles I was told couldn&rsquo;t be coated came out factory-smooth. Zero peeling after 12 months.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">D</div>
-                        <div><p class="text-sm font-bold text-primary">David M.</p><p class="text-[0.65rem] text-outline">Eastern Suburbs &middot; Shower Walls</p></div>
-                    </div>
-                </div>
-                <div class="tile-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;From dated peach to fresh white. Can&rsquo;t believe the transformation. Friends thought we renovated the whole bathroom.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">K</div>
-                        <div><p class="text-sm font-bold text-primary">Karen B.</p><p class="text-[0.65rem] text-outline">Western Sydney &middot; Colour Change</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile pagination + arrows -->
-        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
-            <button type="button" onclick="moveTileWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-            <span id="tile-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
-            <button type="button" onclick="moveTileWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-        </div>
+        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
     </div>
 </section>
 
@@ -548,64 +491,5 @@
 </section>
 
 </main>
-
-<script>
-/* -- Testimonial Carousel (JS-measured widths) -- */
-(function(){
-    var container = document.getElementById('tile-wp-testimonial-carousel');
-    var track = document.getElementById('tile-wp-testimonial-track');
-    var counter = document.getElementById('tile-wp-testimonial-counter');
-    if (!container || !track) return;
-
-    var GAP = 24; // gap-6 in Tailwind
-    var cards = track.querySelectorAll('.tile-wp-t-card');
-    var total = cards.length;
-    var index = 0;
-
-    function perView() {
-        if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 640) return 2;
-        return 1;
-    }
-
-    function sizeCards() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        cards.forEach(function(c) {
-            c.style.width = cardW + 'px';
-            c.style.minWidth = cardW + 'px';
-        });
-        var maxIndex = Math.max(0, total - view);
-        if (index > maxIndex) index = maxIndex;
-        applyTransform();
-    }
-
-    function applyTransform() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        var offset = index * (cardW + GAP);
-        track.style.transform = 'translateX(-' + offset + 'px)';
-        if (counter) counter.textContent = (index + 1) + ' / ' + total;
-    }
-
-    window.moveTileWpTestimonials = function(dir) {
-        var view = perView();
-        var maxIndex = Math.max(0, total - view);
-        index += dir;
-        if (index < 0) index = maxIndex;
-        if (index > maxIndex) index = 0;
-        applyTransform();
-    };
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', sizeCards);
-    } else {
-        sizeCards();
-    }
-    window.addEventListener('resize', sizeCards);
-})();
-</script>
 
 <?php get_footer(); ?>

@@ -262,6 +262,17 @@
     </div>
 </section>
 
+
+<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+        </div>
+        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+    </div>
+</section>
+
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-white" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">

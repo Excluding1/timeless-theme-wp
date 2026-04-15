@@ -429,70 +429,13 @@
     </div>
 </section>
 
-<!-- TESTIMONIALS — Horizontal carousel with arrows -->
+<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="flex items-end justify-between mb-10 gap-4">
-            <div>
-                <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-                <div class="flex items-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
-            </div>
-            <!-- Desktop arrow buttons -->
-            <div class="hidden sm:flex gap-2 flex-shrink-0">
-                <button type="button" onclick="moveShowerRegroutWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-                <button type="button" onclick="moveShowerRegroutWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white hover:bg-surface-container-low flex items-center justify-center transition-colors"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-            </div>
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
         </div>
-        <div id="shower-regrout-wp-testimonial-carousel" class="overflow-hidden">
-            <div id="shower-regrout-wp-testimonial-track" class="flex gap-6 transition-transform duration-300 ease-out" style="transform: translateX(0);">
-                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Our shower grout was black and disgusting. They stripped it all out and regrouted in one day. Looks brand new &mdash; honestly better than when the house was built.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
-                        <div><p class="text-sm font-bold text-primary">Michelle T.</p><p class="text-[0.65rem] text-outline">Marrickville &middot; Shower Regrouting</p></div>
-                    </div>
-                </div>
-                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Tiles I thought needed replacing look perfect now. The epoxy grout they used is amazing &mdash; never staining, never mouldy.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
-                        <div><p class="text-sm font-bold text-primary">James P.</p><p class="text-[0.65rem] text-outline">Mosman &middot; Epoxy Upgrade</p></div>
-                    </div>
-                </div>
-                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;No more mould, no more scrubbing. Worth every dollar. The team was clean, professional, and finished in 6 hours.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">R</div>
-                        <div><p class="text-sm font-bold text-primary">Rachel M.</p><p class="text-[0.65rem] text-outline">Penrith &middot; Full Regrout</p></div>
-                    </div>
-                </div>
-                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;We manage 12 rental units and Timeless does all our regrouting. Tenants love it, turnovers are faster, and the epoxy grout lasts forever.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">S</div>
-                        <div><p class="text-sm font-bold text-primary">Sarah K.</p><p class="text-[0.65rem] text-outline">Inner West &middot; Property Manager</p></div>
-                    </div>
-                </div>
-                <div class="shower-regrout-wp-t-card flex-shrink-0 bg-surface-container-low rounded-xl p-6">
-                    <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Water was getting behind my tiles. They fixed the grout and stopped the leak before it became a bigger problem. Great preventative work.&rdquo;</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">P</div>
-                        <div><p class="text-sm font-bold text-primary">Peter L.</p><p class="text-[0.65rem] text-outline">North Shore &middot; Cracked Grout Repair</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile pagination + arrows -->
-        <div class="flex sm:hidden justify-center items-center gap-4 mt-6">
-            <button type="button" onclick="moveShowerRegroutWpTestimonials(-1)" aria-label="Previous testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_left</span></button>
-            <span id="shower-regrout-wp-testimonial-counter" class="text-xs text-secondary font-medium">1 / 5</span>
-            <button type="button" onclick="moveShowerRegroutWpTestimonials(1)" aria-label="Next testimonial" class="w-10 h-10 rounded-full border border-surface-container bg-white flex items-center justify-center"><span class="material-symbols-outlined text-primary" aria-hidden="true">chevron_right</span></button>
-        </div>
+        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
     </div>
 </section>
 
@@ -550,64 +493,5 @@
 </section>
 
 </main>
-
-<script>
-/* -- Testimonial Carousel (JS-measured widths) -- */
-(function(){
-    var container = document.getElementById('shower-regrout-wp-testimonial-carousel');
-    var track = document.getElementById('shower-regrout-wp-testimonial-track');
-    var counter = document.getElementById('shower-regrout-wp-testimonial-counter');
-    if (!container || !track) return;
-
-    var GAP = 24; // gap-6 in Tailwind
-    var cards = track.querySelectorAll('.shower-regrout-wp-t-card');
-    var total = cards.length;
-    var index = 0;
-
-    function perView() {
-        if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 640) return 2;
-        return 1;
-    }
-
-    function sizeCards() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        cards.forEach(function(c) {
-            c.style.width = cardW + 'px';
-            c.style.minWidth = cardW + 'px';
-        });
-        var maxIndex = Math.max(0, total - view);
-        if (index > maxIndex) index = maxIndex;
-        applyTransform();
-    }
-
-    function applyTransform() {
-        var w = container.offsetWidth;
-        var view = perView();
-        var cardW = (w - GAP * (view - 1)) / view;
-        var offset = index * (cardW + GAP);
-        track.style.transform = 'translateX(-' + offset + 'px)';
-        if (counter) counter.textContent = (index + 1) + ' / ' + total;
-    }
-
-    window.moveShowerRegroutWpTestimonials = function(dir) {
-        var view = perView();
-        var maxIndex = Math.max(0, total - view);
-        index += dir;
-        if (index < 0) index = maxIndex;
-        if (index > maxIndex) index = 0;
-        applyTransform();
-    };
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', sizeCards);
-    } else {
-        sizeCards();
-    }
-    window.addEventListener('resize', sizeCards);
-})();
-</script>
 
 <?php get_footer(); ?>

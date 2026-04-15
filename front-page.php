@@ -289,69 +289,16 @@ get_header(); ?>
     </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
 <section class="py-16 sm:py-24 bg-surface-container-lowest">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Sydney Homeowners Say</h2>
-            <div class="flex items-center justify-center gap-2">
-                <div class="flex text-amber-400 text-lg" aria-label="5 star rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <span class="text-sm font-bold text-primary">4.9</span>
-                <span class="text-xs text-secondary">from verified customers</span>
-            </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-xl p-6 border border-surface-container reveal">
-                <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Our shower grout was black and disgusting. They stripped it all out and regrouted in one day. Looks brand new &mdash; honestly better than when the house was built. Very clean workers too.&rdquo;</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">M</div>
-                    <div><p class="text-sm font-bold text-primary">Michelle T.</p><p class="text-[0.65rem] text-outline">Marrickville &middot; Shower Regrouting</p></div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-surface-container reveal">
-                <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Had our old yellow bathtub resurfaced instead of replacing it. Saved us thousands and you genuinely cannot tell it&rsquo;s been done &mdash; the finish is that smooth. Highly recommend.&rdquo;</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">D</div>
-                    <div><p class="text-sm font-bold text-primary">David &amp; Sarah K.</p><p class="text-[0.65rem] text-outline">Epping &middot; Bath Resurfacing</p></div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-surface-container reveal">
-                <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Manage 12 rental units across Sydney. Timeless handles all our bathroom turnovers &mdash; quick, reliable, and the tenants always comment on how fresh everything looks. Great value.&rdquo;</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">R</div>
-                    <div><p class="text-sm font-bold text-primary">Rachel M.</p><p class="text-[0.65rem] text-outline">Property Manager &middot; Inner West</p></div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-surface-container reveal">
-                <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Got our bathroom tiles resurfaced from that awful brown to a clean white. It transformed the whole room for a fraction of what a tiler quoted. Professional job, no mess.&rdquo;</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">J</div>
-                    <div><p class="text-sm font-bold text-primary">James W.</p><p class="text-[0.65rem] text-outline">Bondi &middot; Tile Resurfacing</p></div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-surface-container reveal">
-                <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;<span class="text-slate-300">&#9733;</span></div>
-                <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Needed the shower done before settlement &mdash; they fit us in within days. Regrouted with epoxy which apparently lasts much longer. Buyer was impressed at the inspection. Worth every cent.&rdquo;</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">L</div>
-                    <div><p class="text-sm font-bold text-primary">Linda P.</p><p class="text-[0.65rem] text-outline">Strathfield &middot; Pre-Sale Prep</p></div>
-                </div>
-            </div>
-            <div class="bg-white rounded-xl p-6 border border-surface-container reveal">
-                <div class="flex text-amber-400 text-sm mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="text-sm text-secondary leading-relaxed mb-4">&ldquo;Full bathroom makeover &mdash; regrout, bath resurface, and basin. Two days and it was done. Could not believe the difference. Friends thought we renovated.&rdquo;</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">A</div>
-                    <div><p class="text-sm font-bold text-primary">Andrew &amp; Kim H.</p><p class="text-[0.65rem] text-outline">Castle Hill &middot; Full Bathroom Package</p></div>
-                </div>
-            </div>
-        </div>
+        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
     </div>
 </section>
+
 
 <!-- WARRANTY -->
 <section class="py-16 sm:py-24 bg-primary" id="warranty">
