@@ -59,7 +59,7 @@ get_header(); ?>
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         <div class="md:col-span-7">
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">Sydney&rsquo;s Bathroom Experts</span>
-            <h1 class="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
+            <h1 class="text-[35px] sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
                 Bathroom Resurfacing <br class="hidden sm:block" /><span class="text-on-primary-container">Sydney Specialists</span>
             </h1>
             <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
