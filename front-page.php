@@ -62,25 +62,35 @@ get_header(); ?>
             <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
                 Bathroom Resurfacing <br class="hidden sm:block" /><span class="text-on-primary-container">Sydney Specialists</span>
             </h1>
-            <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-8 sm:mb-10">
+            <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
                 One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
             </p>
-            <a class="inline-block px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-            <div class="mt-8 flex items-center gap-3">
-                <div class="flex -space-x-2" aria-hidden="true">
-                    <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
-                    <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
-                    <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-400"></div>
+            <!-- MOBILE: Image between text and CTA -->
+            <div class="md:hidden mb-6">
+                <div class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
+                    <div class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;width:200%;" />
+                    </div>
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
+                        <span class="text-xs font-bold text-primary">Drag to Compare</span>
+                        <span class="text-xs font-bold text-on-primary-container">Completed in 7 Hours</span>
+                    </div>
                 </div>
+            </div>
+            <a class="inline-block w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
+            <div class="mt-6 flex items-center gap-3">
                 <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
         </div>
-        <div class="md:col-span-5">
-            <!-- BEFORE / AFTER SLIDER -->
-            <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:5/6;cursor:ew-resize;">
-                <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney - gleaming white bathtub and clean tiles" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
+        <!-- DESKTOP: Image in right column -->
+        <div class="hidden md:block md:col-span-5">
+            <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney - peeling stained bathtub with dirty grout" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;object-fit:cover;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;pointer-events:none;"></div>
                 <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
