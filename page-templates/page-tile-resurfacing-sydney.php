@@ -399,6 +399,14 @@
     </div>
 </section>
 
+<!-- COMPACT MID-PAGE CTA -->
+<div class="bg-primary py-5 sm:py-6">
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white font-bold text-sm sm:text-base text-center sm:text-left">Ready to get started? Send us photos for a free quote in hours.</p>
+        <a href="#quote" class="flex-shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
+    </div>
+</div>
+
 <!-- OUR PROCESS -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
