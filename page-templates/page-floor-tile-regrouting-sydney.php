@@ -297,35 +297,6 @@
     </div>
 </section>
 
-<!-- RELATED SERVICES -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Related Services</h2>
-        <p class="text-secondary max-w-3xl mb-10">If your floor grout needs attention, chances are other areas of your bathroom could benefit from a refresh too.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">shower</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Regrouting</h3>
-                <p class="text-xs text-secondary">Complete shower regrout for walls and floors</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">cleaning_services</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Mouldy Grout Removal</h3>
-                <p class="text-xs text-secondary">Remove mould at the source with fresh grout</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/cracked-grout-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">broken_image</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Cracked Grout Repair</h3>
-                <p class="text-xs text-secondary">Fix cracking and crumbling grout before it causes damage</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
-            </a>
-        </div>
-    </div>
-</section>
 
 <!-- QUOTE CTA -->
 <section class="py-16 sm:py-20 bg-white" id="quote">

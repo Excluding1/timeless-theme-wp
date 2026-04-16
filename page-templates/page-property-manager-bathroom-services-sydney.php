@@ -286,35 +286,6 @@
     </div>
 </section>
 
-<!-- RELATED SERVICES -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Related Services</h2>
-        <p class="text-secondary max-w-3xl mb-10">Explore our most popular services for rental and investment properties.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">auto_awesome</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Full Bathroom Makeover</h3>
-                <p class="text-xs text-secondary">Complete transformation without renovation</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Bath Resurfacing</h3>
-                <p class="text-xs text-secondary">Restore chipped, stained or peeling bathtubs</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Regrouting</h3>
-                <p class="text-xs text-secondary">Fresh grout to replace mouldy or cracked joints</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
-                <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
-            </a>
-        </div>
-    </div>
-</section>
 
 <!-- QUOTE CTA -->
 <section class="py-16 sm:py-20 bg-white" id="quote">

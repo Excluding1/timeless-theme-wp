@@ -477,22 +477,22 @@
             <p class="text-secondary">No need to rip it out. If your vanity is structurally sound but looks tired, refinishing is the answer.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">door_front</span>
                 <h3 class="font-bold text-primary mb-2">Dated Timber or Oak</h3>
                 <p class="text-sm text-secondary leading-relaxed">Those honey-oak or dark timber vanities from the &rsquo;90s and 2000s. We transform them into a modern finish. White, grey, or custom colour.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">wb_sunny</span>
                 <h3 class="font-bold text-primary mb-2">Yellowed or Faded Laminate</h3>
                 <p class="text-sm text-secondary leading-relaxed">White laminate that&rsquo;s gone yellow over time. We strip, prime, and recoat for a crisp, bright finish.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">texture</span>
                 <h3 class="font-bold text-primary mb-2">Scratched or Worn Surfaces</h3>
                 <p class="text-sm text-secondary leading-relaxed">Surface wear, water marks, and scratches from years of daily use. Sanded back and recoated to perfection.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">apartment</span>
                 <h3 class="font-bold text-primary mb-2">Rental &amp; Landlord Refresh</h3>
                 <p class="text-sm text-secondary leading-relaxed">Quick turnaround between tenants. Refresh a dated vanity in hours instead of replacing it over days.</p>
@@ -504,28 +504,69 @@
 <!-- NEW VANITY vs REFINISHING COMPARISON (decision point before the process) -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mx-auto text-center mb-10 lg:mb-12">
+        <div class="text-center mb-12">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">New Vanity vs Refinishing</h2>
-            <p class="text-secondary">Side-by-side: why refinishing makes more sense for most bathrooms.</p>
+            <p class="text-secondary max-w-2xl mx-auto">Why spend thousands replacing your vanity when refinishing costs up to 80% less?</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" aria-hidden="true">delete</span> Buy a New Vanity</h3>
-                <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> $2,000 &ndash; $5,000+ total cost</li>
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Need a plumber to disconnect/reconnect</li>
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Cabinet maker lead time (weeks)</li>
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Demolition, waste removal, patching</li>
-                    <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> May not fit existing plumbing/layout</li>
+            <!-- LEFT: Buy New Vanity (Red / Bad) -->
+            <div class="bg-red-50/50 rounded-2xl p-8 border-2 border-red-200 relative overflow-hidden reveal">
+                <div class="absolute top-0 right-0 bg-red-100 text-red-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Expensive</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-red-600" aria-hidden="true">close</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Buy a New Vanity</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <div><p class="font-bold text-primary text-sm">$2,000 &ndash; $5,000+</p><p class="text-xs text-secondary">Vanity + plumber + installer + disposal</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <div><p class="font-bold text-primary text-sm">Weeks of waiting</p><p class="text-xs text-secondary">Cabinet maker lead times + install day</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <div><p class="font-bold text-primary text-sm">Plumber required</p><p class="text-xs text-secondary">Disconnect &amp; reconnect taps and waste</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <div><p class="font-bold text-primary text-sm">Demolition and mess</p><p class="text-xs text-secondary">Rip-out, waste removal, wall patching</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <div><p class="font-bold text-primary text-sm">May not fit</p><p class="text-xs text-secondary">New unit may clash with existing plumbing or layout</p></div>
+                    </li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span> Refinish It <span class="text-[0.6rem] bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-bold uppercase">Smart Choice</span></h3>
-                <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="text-primary font-bold">+</span> Done in 1 day</li>
-                    <li class="flex items-start gap-2"><span class="text-primary font-bold">+</span> No plumber needed</li>
-                    <li class="flex items-start gap-2"><span class="text-primary font-bold">+</span> No demolition or mess</li>
-                    <li class="flex items-start gap-2"><span class="text-primary font-bold">+</span> 3-year refinish warranty</li>
+            <!-- RIGHT: Our Refinishing (Green / Good) -->
+            <div class="bg-green-50/50 rounded-2xl p-8 border-2 border-green-300 relative overflow-hidden reveal ring-2 ring-green-200">
+                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Recommended</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-green-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Our Refinishing</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <div><p class="font-bold text-primary text-sm">Fixed-Price Quote</p><p class="text-xs text-secondary">Send photos for your price</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <div><p class="font-bold text-primary text-sm">Done in 1 day</p><p class="text-xs text-secondary">Most vanities completed same day</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <div><p class="font-bold text-primary text-sm">No plumber needed</p><p class="text-xs text-secondary">Taps stay connected, no disconnection</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <div><p class="font-bold text-primary text-sm">Zero demolition</p><p class="text-xs text-secondary">No dust, no noise, no wall damage</p></div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <div><p class="font-bold text-primary text-sm">Usable next day</p><p class="text-xs text-secondary">Light use after 24 hours, full cure in 7 days</p></div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -694,31 +735,6 @@
     </div>
 </section>
 
-<!-- CROSS-SELL -->
-<section class="py-16 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mx-auto text-center mb-8">
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter">Other Services You Might Need</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            <a href="basin-restoration.html" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">wash</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
-                <p class="text-xs text-secondary mt-1">Restore your basin like new.</p>
-            </a>
-            <a href="bath-resurfacing.html" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Bath Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your bathtub like new.</p>
-            </a>
-            <a href="tile-resurfacing.html" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">New look without demolition.</p>
-            </a>
-        </div>
-    </div>
-</section>
 
 </main>
 

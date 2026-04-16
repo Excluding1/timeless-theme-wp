@@ -269,34 +269,6 @@
     </div>
 </section>
 
-<!-- OTHER SERVICES -->
-<section class="py-16 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">shower</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
-                <p class="text-xs text-secondary mt-1">Stop leaks and mould</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Bath Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">Restore your bathtub like new</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Tile Resurfacing</h3>
-                <p class="text-xs text-secondary mt-1">New look without retiling</p>
-            </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">faucet</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
-                <p class="text-xs text-secondary mt-1">Refinish chips and stains</p>
-            </a>
-        </div>
-    </div>
-</section>
 
 </main>
 
