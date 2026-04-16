@@ -859,11 +859,14 @@ document.addEventListener('DOMContentLoaded', function () {
         function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
         syncWidth(); window.addEventListener('resize', syncWidth);
         function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
-        slider.addEventListener('mousedown', function(e){ active=true; move(e.clientX); e.preventDefault(); });
+        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
         document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
         document.addEventListener('mouseup', function(){ active=false; });
-        slider.addEventListener('touchstart', function(e){ active=true; move(e.touches[0].clientX); }, {passive:true});
-        document.addEventListener('touchmove', function(e){ if(active) move(e.touches[0].clientX); }, {passive:true});
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
         document.addEventListener('touchend', function(){ active=false; });
     })();
 
@@ -1039,6 +1042,26 @@ document.querySelectorAll(".ba-slider").forEach(function(slider){
     });
 
     updateDots();
+
+    // Auto-scroll one logo every 10 seconds (pauses during drag)
+    var autoStep = (el.scrollWidth / 2) / 10; // one logo width
+    setInterval(function(){
+        if(isDrag || Math.abs(velocity) > 0.5) return;
+        var target = el.scrollLeft + autoStep;
+        var start = el.scrollLeft;
+        var startTime = Date.now();
+        var duration = 600;
+        function animate(){
+            var elapsed = Date.now() - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var ease = progress < 0.5 ? 2*progress*progress : -1+(4-2*progress)*progress;
+            el.scrollLeft = start + (target - start) * ease;
+            loop();
+            updateDots();
+            if(progress < 1) requestAnimationFrame(animate);
+        }
+        animate();
+    }, 10000);
 })();
 </script>
 <div id="chat-widget-container">
