@@ -16,14 +16,7 @@
         "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23" }
     },
     "areaServed": { "@type": "City", "name": "Sydney" },
-    "serviceType": "Vanity Refinishing",
-    "offers": {
-        "@type": "Offer",
-        "priceCurrency": "AUD",
-        "price": "470",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock"
-    }
+    "serviceType": "Vanity Refinishing"
 }
 </script>
 
@@ -42,7 +35,7 @@
 {
     "@context": "https://schema.org", "@type": "FAQPage",
     "mainEntity": [
-        { "@type": "Question", "name": "How much does vanity refinishing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Vanity refinishing starts from $470 inc GST. The final price depends on the size of the vanity and what's included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. We provide fixed-price quotes from photos." } },
+        { "@type": "Question", "name": "How much does vanity refinishing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every vanity is different. The final price depends on the size of the vanity and what's included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. Send us photos and we'll have a fixed-price quote back within hours. No hidden fees, no obligation." } },
         { "@type": "Question", "name": "What surfaces can you refinish?", "acceptedAnswer": { "@type": "Answer", "text": "We refinish timber, MDF, laminate, melamine, and previously painted vanity surfaces. This includes cabinet doors, benchtops, drawer fronts, and side panels. If it's structurally sound, we can refinish it." } },
         { "@type": "Question", "name": "What finishes are available?", "acceptedAnswer": { "@type": "Answer", "text": "We offer a range of finishes including solid colours (white, grey, navy, black, and custom colours), satin and gloss options, and our premium stone-fleck finish that mimics the look of granite or marble. We can colour-match to any sample you provide." } },
         { "@type": "Question", "name": "How long does the refinishing last?", "acceptedAnswer": { "@type": "Answer", "text": "Our vanity refinishing comes with a 3-year warranty. With normal use and care, a professional refinish will last 7-10+ years before needing attention. The key is proper prep and using professional-grade 2-pack coatings, not consumer paint." } }
@@ -501,7 +494,7 @@
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Vanity Refinishing FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about vanity refinishing in Sydney.</p>
         <div class="space-y-3">
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does vanity refinishing cost in Sydney?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Vanity refinishing starts from $470 inc GST. The final price depends on the size of the vanity and what&rsquo;s included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. We provide fixed-price quotes from photos.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does vanity refinishing cost in Sydney?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Every vanity is different. The final price depends on the size of the vanity and what&rsquo;s included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. Send us photos and we'll have a fixed-price quote back within hours. No hidden fees, no obligation.</p></div></div>
             <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What surfaces can you refinish?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We refinish timber, MDF, laminate, melamine, and previously painted vanity surfaces. This includes cabinet doors, benchtops, drawer fronts, and side panels. If it&rsquo;s structurally sound, we can refinish it.</p></div></div>
             <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What finishes are available?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We offer a range of finishes including solid colours (white, grey, navy, black, and custom colours), satin and gloss options, and our premium stone-fleck finish that mimics the look of granite or marble. We can colour-match to any sample you provide.</p></div></div>
             <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does the refinishing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Our vanity refinishing comes with a 3-year warranty. With normal use and care, a professional refinish will last 7&ndash;10+ years before needing attention. The key is proper prep and using professional-grade 2-pack coatings, not consumer paint.</p></div></div>
