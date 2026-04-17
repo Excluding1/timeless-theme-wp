@@ -63,7 +63,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div>
             <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Transform in a Day</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] mb-6">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] mb-6 underline decoration-[#c9a060] decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
                 Vanity <span class="text-tertiary-fixed-dim">Refinishing</span>
             </h1>
             <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6">
@@ -212,7 +212,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="order-2 lg:order-2">
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Dated &amp; Dull Finish</h3>
-                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Brown oak laminate from the 90s? Beige vanity everyone else replaced years ago? Gloss worn flat so the surface looks tired even when clean? We respray the whole vanity in any modern colour. Crisp white, soft grey, black, stone-fleck texture. Instant 20-year upgrade.</p>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Brown oak laminate from the 90s? Beige vanity everyone else replaced years ago? We respray the whole vanity in any modern colour. Crisp white, soft grey, black, stone-fleck texture. Instant 20-year upgrade.</p>
                     <ul class="space-y-2.5 mb-6">
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 900+ colours including stone-fleck textures</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Factory-smooth gloss or satin finish</li>
@@ -381,33 +381,102 @@
     </div>
 </section>
 
-<!-- PROCESS STEPS (Numbered Flat Cards - 4 steps) -->
+<!-- PROCESS STEPS — Connected Timeline -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="max-w-3xl mx-auto text-center mb-10 lg:mb-12">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How We Refinish Your Vanity</h2>
             <p class="text-secondary">A 4-step professional process for a factory-quality finish.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="text-4xl font-black text-primary/20 block mb-2">01</span>
-                <h3 class="font-bold text-primary text-sm mb-2">Prep &amp; Clean</h3>
-                <p class="text-xs text-secondary leading-relaxed">Surface sanded, degreased, and cleaned. Handles and hardware removed. Surrounding areas masked and protected.</p>
+
+        <!-- DESKTOP: Horizontal connected timeline (hidden on mobile) -->
+        <div class="hidden lg:block">
+            <div class="grid grid-cols-4 gap-0 relative">
+                <!-- Connector line spanning columns 1-4 behind the nodes -->
+                <div class="absolute top-7 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
+
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">1&ndash;2 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Prep &amp; Clean</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Surface sanded, degreased, and cleaned. Handles removed. Areas masked and protected.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">30&ndash;45 min</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Prime</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Bonding primer for maximum adhesion. The key to a finish that lasts years, not months.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">2&ndash;4 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Coat</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Multiple coats of professional-grade 2-pack polyurethane. Satin, semi-gloss, or gloss to your choice.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">4</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">24 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Cure &amp; Handover</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Hardware re-fitted. Light use after 24 hours, full cure in 7 days. Factory-smooth finish that lasts.</p>
+                </div>
             </div>
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="text-4xl font-black text-primary/20 block mb-2">02</span>
-                <h3 class="font-bold text-primary text-sm mb-2">Prime</h3>
-                <p class="text-xs text-secondary leading-relaxed">Bonding primer applied for maximum adhesion. This is the key to a finish that lasts years, not months.</p>
+        </div>
+
+        <!-- MOBILE/TABLET: Vertical timeline with flexbox columns (hidden on desktop) -->
+        <div class="lg:hidden space-y-0">
+            <!-- Step 1 -->
+            <div class="flex gap-4 reveal">
+                <div class="flex flex-col items-center flex-shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div>
+                    <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+                </div>
+                <div class="pb-8 pt-1">
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">1&ndash;2 hrs</span>
+                    <h3 class="font-bold text-primary mb-1">Prep &amp; Clean</h3>
+                    <p class="text-sm text-secondary leading-relaxed">Surface sanded, degreased, and cleaned. Handles removed. Areas masked and protected.</p>
+                </div>
             </div>
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="text-4xl font-black text-primary/20 block mb-2">03</span>
-                <h3 class="font-bold text-primary text-sm mb-2">Coat</h3>
-                <p class="text-xs text-secondary leading-relaxed">Multiple coats of professional-grade 2-pack polyurethane or enamel. Satin, semi-gloss, or gloss finish to your choice.</p>
+            <!-- Step 2 -->
+            <div class="flex gap-4 reveal">
+                <div class="flex flex-col items-center flex-shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div>
+                    <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+                </div>
+                <div class="pb-8 pt-1">
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">30&ndash;45 min</span>
+                    <h3 class="font-bold text-primary mb-1">Prime</h3>
+                    <p class="text-sm text-secondary leading-relaxed">Bonding primer for maximum adhesion. The key to a finish that lasts years, not months.</p>
+                </div>
             </div>
-            <div class="bg-surface-container-low rounded-xl p-6 reveal">
-                <span class="text-4xl font-black text-primary/20 block mb-2">04</span>
-                <h3 class="font-bold text-primary text-sm mb-2">Cure</h3>
-                <p class="text-xs text-secondary leading-relaxed">Hardware re-fitted. Light use after 24 hours, full cure in 7 days. Result: a factory-smooth finish that lasts.</p>
+            <!-- Step 3 -->
+            <div class="flex gap-4 reveal">
+                <div class="flex flex-col items-center flex-shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div>
+                    <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+                </div>
+                <div class="pb-8 pt-1">
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2&ndash;4 hrs</span>
+                    <h3 class="font-bold text-primary mb-1">Coat</h3>
+                    <p class="text-sm text-secondary leading-relaxed">Multiple coats of professional-grade 2-pack polyurethane. Satin, semi-gloss, or gloss to your choice.</p>
+                </div>
+            </div>
+            <!-- Step 4 (last — no connector line below) -->
+            <div class="flex gap-4 reveal">
+                <div class="flex flex-col items-center flex-shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">4</span></div></div>
+                </div>
+                <div class="pt-1">
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">24 hrs</span>
+                    <h3 class="font-bold text-primary mb-1">Cure &amp; Handover</h3>
+                    <p class="text-sm text-secondary leading-relaxed">Hardware re-fitted. Light use after 24 hours, full cure in 7 days. Factory-smooth finish that lasts.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -489,15 +558,22 @@
 </section>
 
 <!-- FAQ -->
-<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
-    <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Vanity Refinishing FAQs</h2>
-        <p class="text-secondary text-center mb-10">Common questions about vanity refinishing in Sydney.</p>
-        <div class="space-y-3">
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does vanity refinishing cost in Sydney?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Every vanity is different. The final price depends on the size of the vanity and what&rsquo;s included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. Send us photos and we'll have a fixed-price quote back within hours. No hidden fees, no obligation.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What surfaces can you refinish?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We refinish timber, MDF, laminate, melamine, and previously painted vanity surfaces. This includes cabinet doors, benchtops, drawer fronts, and side panels. If it&rsquo;s structurally sound, we can refinish it.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What finishes are available?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We offer a range of finishes including solid colours (white, grey, navy, black, and custom colours), satin and gloss options, and our premium stone-fleck finish that mimics the look of granite or marble. We can colour-match to any sample you provide.</p></div></div>
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does the refinishing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Our vanity refinishing comes with a 3-year warranty. With normal use and care, a professional refinish will last 7&ndash;10+ years before needing attention. The key is proper prep and using professional-grade 2-pack coatings, not consumer paint.</p></div></div>
+<section class="py-14 sm:py-16 bg-surface-container-low" id="faqs">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <!-- Left: intro -->
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3">Questions? We&rsquo;ve Got Answers</h2>
+                <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if refinishing is right for your vanity? Wondering about cost, finishes, or what&rsquo;s involved? These are the questions we hear most from Sydney homeowners. If you don&rsquo;t see yours here, send us a message or call. No pressure, no obligation.</p>
+                <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+            </div>
+            <!-- Right: accordion -->
+            <div class="space-y-2">
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does vanity refinishing cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every vanity is different. The final price depends on the size of the vanity and what&rsquo;s included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. Send us photos and we&rsquo;ll have a fixed-price quote back within hours. No hidden fees, no obligation.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What surfaces can you refinish?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Timber, MDF, laminate, melamine, and previously painted vanity surfaces. Cabinet doors, benchtops, drawer fronts, and side panels. If it&rsquo;s structurally sound, we can refinish it.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What finishes are available?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Solid colours (white, grey, navy, black, custom), satin and gloss options, and our premium stone-fleck finish that mimics granite or marble. We can colour-match to any sample.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does the refinishing last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">3-year warranty included. With normal use and care, a professional refinish lasts 7&ndash;10+ years. The key is proper prep and professional-grade 2-pack coatings, not consumer paint.</p></div></div>
+            </div>
         </div>
     </div>
 </section>
