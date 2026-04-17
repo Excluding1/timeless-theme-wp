@@ -64,9 +64,8 @@ $phone      = timeless_phone();
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</h3>
                     <div class="space-y-0.5">
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/epoxy-grout-upgrade-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Epoxy Grout Upgrade</span><span class="text-xs text-secondary">Waterproof, mould-resistant grout</span></a>
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/floor-tile-regrouting-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
                     </div>
                 </div>
                 <!-- Repairs & Packages -->
@@ -110,9 +109,8 @@ $phone      = timeless_phone();
             </button>
             <div class="mobile-accordion open">
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" onclick="closeMobile()">Shower Regrouting</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" onclick="closeMobile()">Shower Sealing</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/epoxy-grout-upgrade-sydney/' ) ); ?>" onclick="closeMobile()">Epoxy Grout Upgrade</a>
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/floor-tile-regrouting-sydney/' ) ); ?>" onclick="closeMobile()">Floor Tile Regrouting</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" onclick="closeMobile()">Shower Sealing</a>
             </div>
             <!-- Repairs & Packages -->
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
