@@ -101,14 +101,12 @@
             <!-- HERO BEFORE/AFTER SLIDER -->
             <div id="hero-slider" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
                 <!-- AFTER image -->
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-5xl text-emerald-400" aria-hidden="true">wash</span>
+                <div class="absolute inset-0 w-full h-full">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/hero-after.png" alt="Restored basin with glossy black finish" class="w-full h-full object-cover" />
                 </div>
                 <!-- BEFORE image -->
                 <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                    <div class="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-300 to-slate-400 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-5xl text-slate-500" aria-hidden="true">wash</span>
-                    </div>
+                    <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/hero-before.png" alt="Worn basin before restoration" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                 <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -192,11 +190,11 @@
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
                         <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">wash</span>
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/chips-after.png" alt="Basin after chip and crack repair" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                             <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span>
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/chips-before.png" alt="Chipped and cracked basin" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -226,11 +224,11 @@
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
                         <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">water_drop</span>
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/stain-after.png" alt="Basin after stain and discolouration removal" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                             <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">opacity</span>
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/stain-before.png" alt="Stained discoloured basin" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -260,11 +258,11 @@
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
                         <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">verified</span>
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/worn-after.png" alt="Basin after worn finish restoration" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
                             <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">texture</span>
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/worn-before.png" alt="Worn scratched basin finish" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
