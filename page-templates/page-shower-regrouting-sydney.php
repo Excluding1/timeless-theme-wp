@@ -83,7 +83,7 @@
                     <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Available</p>
                 </div>
                 <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
-                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">3yr</p>
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 3yr</p>
                     <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Warranty</p>
                 </div>
             </div>
@@ -120,7 +120,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">3-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
     </div>
 </section>
