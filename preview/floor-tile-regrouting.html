@@ -48,99 +48,66 @@
             pointer-events: auto;
             border-top-width: 1px !important;
             transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0s;
-        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
-        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu { transform: translateX(100%); visibility: hidden; opacity: 0; pointer-events: none; transition: transform 0.3s ease, visibility 0s 0.3s, opacity 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); visibility: visible; opacity: 1; pointer-events: auto; transition: transform 0.3s ease, visibility 0s 0s, opacity 0.3s ease; }
         .mobile-accordion { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
         .mobile-accordion.open { max-height: 500px; }
         .mobile-chevron { transition: transform 0.25s ease; }
-        /* Vertical timeline */
-        .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #e7c08b; transform: translateX(-50%); }
-        @media (max-width: 767px) { .timeline-line { left: 24px; } }
+        #hero-slider img { pointer-events: none; -webkit-user-drag: none; }
+        .ba-card { position: relative; overflow: hidden; cursor: ew-resize; }
+        .ba-card .ba-overlay { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; }
+        .timeline-line { position: relative; }
+        .timeline-line::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; border-top: 2px dashed #c5c6cf; z-index: 0; }
     .mega-dropdown { max-height: 0; overflow: hidden; opacity: 0; pointer-events: none; border-top-width: 0 !important; transition: max-height 0.25s ease, opacity 0.2s ease; } .mega-dropdown.open { max-height: 500px; opacity: 1; pointer-events: auto; border-top-width: 1px !important; } </style>
 </head>
 
 <body class="bg-surface text-[#191c1e] font-body">
+
 
 <!-- Schema: Service + BreadcrumbList + FAQPage -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Bath Resurfacing Sydney",
-    "description": "Professional bath resurfacing with Professional commercial-grade coating. Same-day service, 3-year warranty.",
+    "name": "Floor Tile Regrouting Sydney",
+    "description": "Professional floor tile regrouting in Sydney. Bathroom, laundry, and kitchen floor grout removal and replacement. Epoxy and cement options. Same-day service, 3-year warranty.",
     "provider": {
-        "@type": "LocalBusiness",
+        "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",
+        "url": "https://timelessresurfacing.com.au",
         "telephone": "0451110154",
-        "areaServed": {
-            "@type": "City",
-            "name": "Sydney"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Sydney",
-            "addressRegion": "NSW",
-            "addressCountry": "AU"
-        }
+        "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressRegion": "NSW", "addressCountry": "AU" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23" }
     },
-    "offers": {
-        "@type": "Offer",
-        "priceCurrency": "AUD",
-        "price": "800",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock"
-    },
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "23"
-    }
+    "areaServed": { "@type": "City", "name": "Sydney" },
+    "serviceType": "Floor Tile Regrouting"
 }
 </script>
+
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
     "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
         { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
-        { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing Sydney", "item": "https://timelessresurfacing.com.au/bath-resurfacing-sydney/" }
+        { "@type": "ListItem", "position": 3, "name": "Floor Tile Regrouting Sydney", "item": "https://timelessresurfacing.com.au/services/floor-tile-regrouting-sydney/" }
     ]
 }
 </script>
+
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    "@context": "https://schema.org", "@type": "FAQPage",
     "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How much does bath resurfacing cost in Sydney?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Bath resurfacing starts from $800 inc GST for a standard bathtub. We provide fixed-price quotes based on your photos — no hidden fees, no surprises." }
-        },
-        {
-            "@type": "Question",
-            "name": "How long does bath resurfacing take?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Most standard bath resurfacing jobs are completed in 5-8.5 hours. The bath can be used again 24-48 hours after completion to allow the coating to fully cure." }
-        },
-        {
-            "@type": "Question",
-            "name": "How long does a resurfaced bath last?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A professionally resurfaced bath using the professional-grade system lasts up to 10 years with proper care. We back every job with a 3-year resurface warranty." }
-        },
-        {
-            "@type": "Question",
-            "name": "Can you resurface any type of bath?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes — we resurface porcelain, enamel steel, cast iron, acrylic, and fibreglass baths. The only exception is natural stone (marble, granite) which requires different treatment." }
-        },
-        {
-            "@type": "Question",
-            "name": "Can you change the bath colour?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We have over 900 colours available, so you can keep your existing colour or transform it completely. White and ivory are the most popular choices." }
-        }
+        { "@type": "Question", "name": "How much does floor tile regrouting cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every floor is different. The cost depends on floor area, tile size, grout type (epoxy or cement), and current condition. Send us photos and we'll have a fixed-price quote back within hours. No hidden fees." } },
+        { "@type": "Question", "name": "How long does floor regrouting take?", "acceptedAnswer": { "@type": "Answer", "text": "Most bathroom floors are completed in 4-8 hours (one day). Larger areas like combined bathroom and laundry may take a second day. The floor can be walked on 24-48 hours after completion." } },
+        { "@type": "Question", "name": "Can you just clean my floor grout instead of regrouting?", "acceptedAnswer": { "@type": "Answer", "text": "If the grout is still structurally sound but just discoloured, professional cleaning plus sealing may be enough. If the grout is cracked, crumbling, or tiles are moving, full regrout is the only lasting fix. We'll tell you which you need after seeing photos." } },
+        { "@type": "Question", "name": "Should I choose epoxy or cement grout for my floor?", "acceptedAnswer": { "@type": "Answer", "text": "Epoxy is ideal for floors. It's non-porous, never needs resealing, and resists staining from mopping and foot traffic. Cement grout works but needs resealing every 1-2 years. Most homeowners skip resealing, which accelerates failure." } },
+        { "@type": "Question", "name": "Do you regrout laundry and kitchen floors too?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We regrout any tiled floor in wet areas including bathrooms, laundries, kitchens, and entryways. Same process, same warranty." } }
     ]
 }
 </script>
+
 
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
@@ -154,6 +121,7 @@
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="gallery.html">Before &amp; After</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="areas.html">Service Areas</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="about.html">About</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="faqs.html">FAQs</a>
                 <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="#quote">Get a Free Quote</a>
             </div>
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
@@ -174,10 +142,8 @@
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</h3>
                     <div class="space-y-0.5">
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-regrouting.html"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-sealing.html"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="epoxy-grout-upgrade.html"><span class="font-semibold text-primary block">Epoxy Grout Upgrade</span><span class="text-xs text-secondary">Waterproof, mould-resistant grout</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="floor-tile-regrouting.html"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
-                    </div>
+                                                <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="floor-tile-regrouting.html"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
+<a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-sealing.html"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>                    </div>
                 </div>
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">build</span> Repairs &amp; Packages</h3>
@@ -214,10 +180,8 @@
             </button>
             <div class="mobile-accordion open">
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-regrouting.html" onclick="closeMobile()">Shower Regrouting</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-sealing.html" onclick="closeMobile()">Shower Sealing</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="epoxy-grout-upgrade.html" onclick="closeMobile()">Epoxy Grout Upgrade</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="floor-tile-regrouting.html" onclick="closeMobile()">Floor Tile Regrouting</a>
-            </div>
+                                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="floor-tile-regrouting.html" onclick="closeMobile()">Floor Tile Regrouting</a>
+<a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-sealing.html" onclick="closeMobile()">Shower Sealing</a>            </div>
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
                 <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">build</span> Repairs &amp; Packages</span>
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
@@ -231,6 +195,7 @@
             <a class="text-primary py-3 text-lg font-semibold" href="gallery.html" onclick="closeMobile()">Before &amp; After</a>
             <a class="text-primary py-3 text-lg font-semibold" href="areas.html" onclick="closeMobile()">Service Areas</a>
             <a class="text-primary py-3 text-lg font-semibold" href="about.html" onclick="closeMobile()">About</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="faqs.html" onclick="closeMobile()">FAQs</a>
             <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="#quote" onclick="closeMobile()">Get a Free Quote</a>
             <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:+61451110154"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call 0451 110 154</a>
         </div>
@@ -239,81 +204,71 @@
 
 <main id="main-content">
 
-<!-- Gold accent strip -->
-<div class="h-1 bg-gradient-to-r from-tertiary-fixed-dim via-tertiary-fixed to-tertiary-fixed-dim mt-[72px]"></div>
-
 <!-- BREADCRUMB -->
-<div class="pt-6 pb-2 px-6 sm:px-8 max-w-7xl mx-auto">
+<div class="pt-24 pb-2 px-6 sm:px-8 max-w-7xl mx-auto">
     <nav class="text-xs text-secondary" aria-label="Breadcrumb">
         <ol class="flex items-center gap-1">
             <li><a href="index.html" class="hover:text-primary transition-colors">Home</a></li>
             <li><span class="mx-1">/</span></li>
-            <li><a href="areas.html" class="hover:text-primary transition-colors">Services</a></li>
+            <li><a href="index.html#services" class="hover:text-primary transition-colors">Services</a></li>
             <li><span class="mx-1">/</span></li>
             <li class="text-primary font-medium">Floor Tile Regrouting Sydney</li>
         </ol>
     </nav>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 1: HERO
-     ═══════════════════════════════════════════════════ -->
-
-<section class="pt-4 pb-16 sm:pb-20 bg-surface">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div>
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Proper Fix</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Dirty Bathroom Floor Grout?<br/><span class="text-on-primary-container">We Replace It &mdash; Not Just Clean It</span>
+<!-- HERO (Light background) -->
+<section class="pt-4 pb-10 sm:pb-16 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-surface via-transparent to-transparent rounded-3xl -z-10 -m-4"></div>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Bathroom &amp; Laundry</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-3 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+                Floor Tile Regrouting
             </h1>
+            <div class="h-0 mb-3"></div>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                You&rsquo;ve scrubbed on your hands and knees. You&rsquo;ve tried every cleaner. The grout is still brown or black &mdash; because the staining isn&rsquo;t ON the surface, it&rsquo;s <strong>IN the surface</strong>. The lasting fix is to remove and replace it.
+                Cracked, stained, or crumbling grout between your floor tiles? We remove every joint and replace it with fresh sanded grout. Epoxy or cement. No tiles removed, no tiler needed.
             </p>
-            <!-- No price displayed — varies too much -->
-            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-6">
-                <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
-                    <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">1 Day</p>
-                    <p class="text-[0.65rem] text-secondary font-medium">Most jobs</p>
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+                <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">1 Day</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Most floors</p>
                 </div>
-                <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
-                    <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">Fresh</p>
-                    <p class="text-[0.65rem] text-secondary font-medium">Look like new</p>
+                <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Epoxy</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Available</p>
                 </div>
-                <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
-                    <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">2yr</p>
-                    <p class="text-[0.65rem] text-secondary font-medium">Warranty</p>
-                </div>
-            </div>
-
-            <!-- Education Callout -->
-            <div class="bg-tertiary-fixed/20 border border-tertiary-fixed-dim/30 rounded-xl p-4 mb-6">
-                <div class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-2xl text-tertiary-fixed-dim flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">lightbulb</span>
-                    <div>
-                        <p class="text-sm font-bold text-primary mb-1">Floor grout cops more punishment than any other grout</p>
-                        <p class="text-xs text-secondary leading-relaxed">Foot traffic grinds dirt INTO porous cement grout daily. Once staining penetrates below the surface, cleaning can never reach it.</p>
-                    </div>
+                <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 3yr</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Warranty</p>
                 </div>
             </div>
-
             <div class="flex flex-col sm:flex-row gap-3 mb-4">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:+61451110154" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
             <p class="text-xs text-secondary"><span class="material-symbols-outlined text-sm align-text-bottom text-tertiary-fixed-dim" aria-hidden="true">photo_camera</span> Send photos &rarr; quote in hours. No obligation.</p>
             <div class="mt-6 flex items-center gap-3">
-                <div class="flex text-amber-400 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <span class="text-sm font-bold text-primary">4.9</span>
-                <span class="text-xs text-secondary">from 23+ verified reviews</span>
+                <div class="flex -space-x-2" aria-hidden="true">
+                    <img src="images/homepage/reviews/reviewer-1.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="images/homepage/reviews/reviewer-2.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="images/homepage/reviews/reviewer-3.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                </div>
+                <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
         </div>
         <div>
-            <!-- Single problem photo placeholder -->
+            <!-- HERO IMAGE (single before/after composite) -->
             <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
-                <div class="absolute inset-0 bg-red-50 flex items-center justify-center text-center p-4">
-                    <div><span class="material-symbols-outlined text-4xl text-red-400 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-red-700 uppercase tracking-wider">problem-hero.jpg</p><p class="text-[0.6rem] text-red-500 mt-1">Dirty stained bathroom floor grout<br/>images/services/floor-tile-regrouting/<br/>Ratio: 4:3 landscape</p></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-5xl text-emerald-400" aria-hidden="true">grid_view</span>
                 </div>
-                <span class="absolute top-3 left-3 bg-error text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">The Problem</span>
+                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
+                    <span class="text-xs font-bold text-primary">Before &amp; After</span>
+                    <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
+                </div>
             </div>
         </div>
     </div>
@@ -324,273 +279,261 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 3: THE SCIENCE — Why Floor Grout Gets Dirty
-     ═══════════════════════════════════════════════════ -->
+<!-- TRUST LOGO BAR -->
+<section class="py-8 sm:py-10 bg-surface-container-low/50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
+        <div class="flex items-center gap-5 sm:gap-8 w-max px-8" id="logo-inner">
+            <img src="images/homepage/logos/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+        </div>
+    </div>
+    <div id="logo-dots" class="flex justify-center gap-1.5 mt-4"></div>
+</section>
 
+<!-- SECTION 2B — What We Fix -->
 <section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <span class="inline-block py-1 px-3 bg-primary/5 text-primary text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">The Science</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why Your Floor Grout Won&rsquo;t Come Clean</h2>
-            <p class="text-secondary max-w-2xl mx-auto">It&rsquo;s not that you&rsquo;re not cleaning hard enough. It&rsquo;s 4 factors working against you:</p>
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Common Floor Grout Problems</h2>
+            <p class="text-secondary">These are the floor grout issues we fix every week across Sydney. If yours looks like any of these, we can have it sorted in a day.</p>
         </div>
 
-        <div class="space-y-6">
-            <!-- Factor 1 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-tertiary-fixed-dim reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">1</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Foot Traffic Grinds Dirt In</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Every step on your bathroom floor pushes dirt, oils, skin cells, and soap residue into the porous grout surface. This happens hundreds of times a day &mdash; far more than wall grout ever experiences.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Factor 2 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-tertiary-fixed-dim reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">2</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Cement Grout Absorbs Everything</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Cement-based grout is porous. It absorbs water, dirt, body oils, soap scum, and cleaning chemicals. Over time, these substances penetrate deep into the grout body where surface cleaning can&rsquo;t reach.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Factor 3 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-tertiary-fixed-dim reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">3</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Cleaning Doesn&rsquo;t Penetrate Deep Enough</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Even industrial-strength cleaners only affect the top millimetre of grout. The staining that&rsquo;s been building up for years goes much deeper. You get a temporary improvement that darkens again within days.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Factor 4 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-error reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-error text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">4</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Grout Sits LOWER Than Tiles &mdash; Collects Everything</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Floor grout lines are recessed below the tile surface, creating tiny channels that collect water, dirt, and debris. Even mopping pushes dirty water into these channels rather than removing it.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-8 p-5 bg-primary/5 rounded-xl text-center">
-            <p class="text-sm text-primary font-semibold"><span class="material-symbols-outlined text-base align-text-bottom text-error mr-1" aria-hidden="true">warning</span> Once staining penetrates below the surface, <strong>the only lasting fix is to remove and replace the grout entirely</strong>.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 4: MATERIAL COMPARISON
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-5xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Cleaning vs Regrouting &mdash; Which Do You Need?</h2>
-            <p class="text-secondary max-w-2xl mx-auto">The right approach depends on how deep the damage goes:</p>
-        </div>
-
-        <!-- Comparison Table -->
-        <div class="overflow-x-auto mb-8">
-            <table class="w-full bg-white rounded-xl overflow-hidden shadow-sm">
-                <thead>
-                    <tr class="bg-primary text-white text-left">
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest">Feature</th>
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest">Professional Clean</th>
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest bg-tertiary-fixed-dim/20">Full Regrout</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm">
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">When It Works</td>
-                        <td class="p-4 text-secondary">Surface staining only, grout structurally sound</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">Deep staining, cracks, crumbling, or repeated cleaning failures</td>
-                    </tr>
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">What It Involves</td>
-                        <td class="p-4 text-secondary">Deep clean with professional equipment, then seal</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">Remove all old grout, clean joints, apply fresh grout, seal</td>
-                    </tr>
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">Longevity</td>
-                        <td class="p-4 text-secondary">Months to 1-2 years before staining returns</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5 font-bold">8-10 years (cement) or 15-20 years (epoxy)</td>
-                    </tr>
-                    <tr>
-                        <td class="p-4 font-semibold text-primary">Best For</td>
-                        <td class="p-4 text-secondary">Newer grout with light surface staining</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">Permanently stained, aged, or damaged grout</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Secondary comparison: Cement vs Epoxy for floors -->
-        <div class="bg-white rounded-xl p-6 sm:p-8 border-2 border-surface-container">
-            <h3 class="font-bold text-primary text-lg mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span> Cement vs Epoxy for Floors</h3>
-            <p class="text-sm text-secondary mb-4">For high-traffic wet areas (bathrooms, laundries), epoxy grout is the premium choice:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="bg-surface-container-low rounded-lg p-4">
-                    <p class="font-bold text-primary text-sm mb-2">Cement Grout</p>
-                    <ul class="space-y-1 text-xs text-secondary">
-                        <li class="flex items-center gap-2"><span class="text-primary font-bold">+</span> Lower cost</li>
-                        <li class="flex items-center gap-2"><span class="text-error font-bold">&minus;</span> Absorbs stains over time</li>
-                        <li class="flex items-center gap-2"><span class="text-error font-bold">&minus;</span> Needs sealing every 1-2 years</li>
+        <!-- BLOCK 1: Cracked & Crumbling Floor Grout -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Cracked &amp; Crumbling Floor Grout</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Grout cracking between your bathroom or laundry floor tiles? Chunks coming loose when you sweep? Foot traffic, thermal expansion, and building movement cause floor grout to crack faster than wall grout. Every crack lets water through to the substrate. We grind out the damaged joints and fill with fresh sanded grout rated for foot traffic.</p>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Sanded grout rated for heavy foot traffic</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water penetrating to the substrate</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> No tiles removed or replaced</li>
                     </ul>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="bg-primary/[0.03] rounded-lg p-4 border border-primary/10">
-                    <p class="font-bold text-primary text-sm mb-2">Epoxy Grout <span class="text-[0.55rem] bg-tertiary-fixed text-on-tertiary-fixed px-1.5 py-0.5 rounded font-bold uppercase">Best for floors</span></p>
-                    <ul class="space-y-1 text-xs text-secondary">
-                        <li class="flex items-center gap-2"><span class="text-primary font-bold">+</span> 100% stain-proof</li>
-                        <li class="flex items-center gap-2"><span class="text-primary font-bold">+</span> Never needs sealing</li>
-                        <li class="flex items-center gap-2"><span class="text-primary font-bold">+</span> Lasts 15-20 years</li>
+                <div class="order-1 lg:order-2">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">grid_view</span></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span></div></div>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 2: Discoloured & Stained Floor Grout -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Discoloured &amp; Stained Floor Grout</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Floor grout started white but now it&rsquo;s brown, grey, or patchy? Years of mopping pushes dirty water into porous cement grout. Cleaning products leave residue that builds up in the joints. Foot traffic grinds dirt deeper every day. We replace the stained grout entirely so every joint is uniform, bright, and sealed.</p>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Every joint removed and replaced fresh</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Uniform colour across the entire floor</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy option resists future staining permanently</li>
                     </ul>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="order-1 lg:order-1">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">auto_awesome</span></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">opacity</span></div></div>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-6 p-4 bg-tertiary-fixed/20 rounded-xl text-center">
-            <p class="text-sm text-primary font-medium"><span class="material-symbols-outlined text-base align-text-bottom text-tertiary-fixed-dim mr-1" aria-hidden="true">lightbulb</span> Not sure what you need? Send photos and we&rsquo;ll recommend the right approach &mdash; no obligation.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 5: HOW WE FIX IT — Vertical Timeline
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Regrout Your Floor</h2>
-            <p class="text-secondary max-w-2xl mx-auto">Our 6-step process for lasting, clean floor grout.</p>
-        </div>
-
-        <div class="relative">
-            <div class="timeline-line hidden md:block"></div>
-
-            <!-- Step 1 — Left -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Assess Floor Condition</h3>
-                    <p class="text-sm text-secondary leading-relaxed">We inspect the grout and tiles to determine if a regrout, clean, or combination approach is best. We check for cracks, loose tiles, and moisture issues.</p>
+        <!-- BLOCK 3: Mouldy Floor Grout -->
+        <div class="reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Mouldy Floor Grout</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Black spots in your bathroom floor grout that keep coming back after cleaning? Mould grows <em>inside</em> porous cement grout, not just on the surface. In bathrooms and laundries where the floor stays damp, bleach only kills what you can see. The roots survive inside the grout and regrow within weeks. Full regrout is the permanent fix.</p>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full grout removal, not just a surface clean</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy option eliminates future mould growth</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Healthier bathroom environment</li>
+                    </ul>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">1</div>
-                <div class="md:w-1/2 md:pl-12 hidden md:block">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Assessment inspection</span></div>
-                </div>
-            </div>
-
-            <!-- Step 2 — Right -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 hidden md:block md:text-right">
-                    <div class="w-full h-20 bg-red-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-red-400 font-bold">Old grout removal</span></div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">2</div>
-                <div class="md:w-1/2 md:pl-12 mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Remove Old Grout</h3>
-                    <p class="text-sm text-secondary leading-relaxed">All old grout is carefully removed from between floor tiles using oscillating tools. We take care to avoid damaging tile edges &mdash; especially important with porcelain and natural stone.</p>
-                </div>
-            </div>
-
-            <!-- Step 3 — Left -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Clean Joints</h3>
-                    <p class="text-sm text-secondary leading-relaxed">All dust, debris, and old grout residue is vacuumed and cleaned from the joints. Clean joints are essential for proper adhesion of the new grout.</p>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">3</div>
-                <div class="md:w-1/2 md:pl-12 hidden md:block">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Joint cleaning</span></div>
-                </div>
-            </div>
-
-            <!-- Step 4 — Right -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 hidden md:block md:text-right">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Fresh grout application</span></div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">4</div>
-                <div class="md:w-1/2 md:pl-12 mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Apply Fresh Grout</h3>
-                    <p class="text-sm text-secondary leading-relaxed">New grout is applied and pressed firmly into every joint. Colour-matched to your preference &mdash; many customers choose to go lighter for a fresh, clean look. Epoxy grout available for high-traffic areas.</p>
-                </div>
-            </div>
-
-            <!-- Step 5 — Left -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Seal</h3>
-                    <p class="text-sm text-secondary leading-relaxed">For cement grout, a premium penetrating sealer is applied to protect against future staining and moisture absorption. Epoxy grout needs no sealing.</p>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">5</div>
-                <div class="md:w-1/2 md:pl-12 hidden md:block">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Grout sealing</span></div>
-                </div>
-            </div>
-
-            <!-- Step 6 — Right -->
-            <div class="relative flex flex-col md:flex-row items-center reveal">
-                <div class="md:w-1/2 md:pr-12 hidden md:block md:text-right">
-                    <div class="w-full h-20 bg-green-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-green-500 font-bold">After: fresh clean floor</span></div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">6</div>
-                <div class="md:w-1/2 md:pl-12 mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Clean &amp; Inspect</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Tile faces are cleaned of all grout residue. We do a final inspection to ensure every joint is filled, sealed, and finished to a high standard. Floor ready to walk on after 24 hours.</p>
+                <div class="order-1 lg:order-2">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">shower</span></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">mold</span></div></div>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 6: DECISION HELPER
-     ═══════════════════════════════════════════════════ -->
-
+<!-- CLEANING vs REGROUTING — Floor-specific decision section -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Is Floor Regrouting Right for You?</h2>
-            <p class="text-secondary max-w-2xl mx-auto">Use this checklist to see if regrouting is the right call.</p>
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Cleaning vs Regrouting</h2>
+            <p class="text-secondary max-w-2xl mx-auto">Not sure which you need? Here&rsquo;s how to tell. We&rsquo;ll confirm after seeing your photos.</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Right for you -->
-            <div class="bg-white rounded-xl p-6 border-2 border-emerald-200">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Right for you if:</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Floor grout is permanently stained brown or black</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Grout is cracking, crumbling, or missing in spots</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Bathroom, laundry, or kitchen floor grout</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">You&rsquo;ve cleaned the grout multiple times and it won&rsquo;t stay clean</span></li>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl p-8 border-2 border-emerald-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-emerald-100 text-emerald-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Cheaper Option</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-emerald-600" aria-hidden="true">cleaning_services</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Grout Cleaning + Seal</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Grout is stained but structurally sound</p><p class="text-xs text-secondary">No cracks, no crumbling, just discolouration</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Surface-level dirt and soap scum</p><p class="text-xs text-secondary">Professional deep clean can restore colour</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Sealed afterwards for protection</p><p class="text-xs text-secondary">Keeps grout looking clean for 1-2 years</p></div></li>
                 </ul>
             </div>
-
-            <!-- Not right for you -->
-            <div class="bg-white rounded-xl p-6 border-2 border-red-200">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" style="font-variation-settings:'FILL' 1;" aria-hidden="true">cancel</span> May not be needed if:</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-error text-lg flex-shrink-0 mt-0.5" aria-hidden="true">close</span><span class="text-sm text-secondary">Staining is surface-only and grout is structurally sound &rarr; a professional clean and seal may work</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-error text-lg flex-shrink-0 mt-0.5" aria-hidden="true">close</span><span class="text-sm text-secondary">Tiles themselves are cracked, chipped, or loose &rarr; may need retiling rather than regrouting</span></li>
+            <div class="bg-white rounded-2xl p-8 border-2 border-primary relative overflow-hidden ring-2 ring-primary/10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-tertiary-fixed-dim text-on-tertiary-fixed text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Permanent Fix</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">construction</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Full Regrout</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Grout is cracked, crumbling, or missing</p><p class="text-xs text-secondary">Structural failure that cleaning can&rsquo;t fix</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Tiles are loose or moving</p><p class="text-xs text-secondary">Grout has failed and tiles need re-securing</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Mould keeps coming back after cleaning</p><p class="text-xs text-secondary">Mould is inside the grout, not on the surface</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Epoxy upgrade available</p><p class="text-xs text-secondary">Never needs sealing, lasts 15-20 years</p></div></li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- CEMENT vs EPOXY GROUT COMPARISON -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Cement vs Epoxy Floor Grout</h2>
+            <p class="text-secondary max-w-2xl mx-auto">We offer both. Epoxy is especially valuable for floors because of foot traffic and mopping exposure.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-blue-50/50 rounded-2xl border-2 border-blue-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-blue-100 text-blue-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Budget-Friendly</div>
+                <div class="p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-blue-600" aria-hidden="true">construction</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Cement Grout</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lower upfront cost</p><p class="text-xs text-secondary">Great option when budget is the priority</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Wide colour range</p><p class="text-xs text-secondary">Easy to match existing tiles and decor</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Needs resealing every 1-2 years</p><p class="text-xs text-secondary">Most homeowners skip this, accelerating failure</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Lifespan: 5-10 years on floors</p><p class="text-xs text-secondary">Foot traffic wears it faster than wall grout</p></div></li>
+                </ul>
+                </div>
+            </div>
+            <div class="bg-green-50/50 rounded-2xl border-2 border-green-300 relative overflow-hidden ring-2 ring-green-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Recommended</div>
+                <div class="p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-green-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Epoxy Grout</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">100% waterproof</p><p class="text-xs text-secondary">Zero water absorption, even with constant mopping</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Never needs resealing</p><p class="text-xs text-secondary">Set and forget. No annual maintenance.</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Resists foot traffic wear</p><p class="text-xs text-secondary">Harder than cement, doesn&rsquo;t crack or crumble</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lifespan: 15-20 years</p><p class="text-xs text-secondary">Outlasts cement by 2-3x on high-traffic floors</p></div></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS STEPS — Connected Timeline -->
+<section class="py-16 sm:py-20 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How We Regrout Your Floor</h2>
+            <p class="text-secondary">A 4-step process. Most bathroom floors completed in one day.</p>
+        </div>
+        <!-- DESKTOP -->
+        <div class="hidden lg:block">
+            <div class="grid grid-cols-4 gap-0 relative">
+                <div class="absolute top-7 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">~30 min</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Protect &amp; Mask</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Furniture moved, fixtures covered, dust barriers set up. Drain protected from debris.</p>
+                </div>
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">2-4 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Remove Old Grout</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Every joint ground out 2-4mm deep with oscillating tools. Floor joints are wider, so this takes longer than walls.</p>
+                </div>
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">2-3 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Apply New Grout</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Fresh sanded grout (epoxy or cement) pressed into every joint. Excess cleaned off tiles before setting.</p>
+                </div>
+                <div class="flex flex-col items-center text-center px-4 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">4</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">24-48 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Cure &amp; Cleanup</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Area cleaned up, furniture replaced. Light foot traffic after 24 hours, full cure in 48 hours.</p>
+                </div>
+            </div>
+        </div>
+        <!-- MOBILE -->
+        <div class="lg:hidden space-y-0">
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">~30 min</span><h3 class="font-bold text-primary mb-1">Protect &amp; Mask</h3><p class="text-sm text-secondary leading-relaxed">Furniture moved, fixtures covered, dust barriers up. Drain protected from debris.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-4 hrs</span><h3 class="font-bold text-primary mb-1">Remove Old Grout</h3><p class="text-sm text-secondary leading-relaxed">Every joint ground out 2-4mm deep. Floor joints are wider, so this takes longer than walls.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-3 hrs</span><h3 class="font-bold text-primary mb-1">Apply New Grout</h3><p class="text-sm text-secondary leading-relaxed">Fresh sanded grout pressed into every joint. Excess cleaned off before setting.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">4</span></div></div></div><div class="pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">24-48 hrs</span><h3 class="font-bold text-primary mb-1">Cure &amp; Cleanup</h3><p class="text-sm text-secondary leading-relaxed">Area cleaned, furniture replaced. Light foot traffic after 24 hours, full cure in 48.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- MID-PAGE CTA -->
+<div class="bg-primary py-5 sm:py-6">
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white font-bold text-sm sm:text-base text-center sm:text-left">Ready to fix your floor grout? Send us photos for a free quote in hours.</p>
+        <a href="#quote" class="flex-shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
+    </div>
+</div>
+
+<!-- VALUE PROPOSITION -->
+<section class="py-10 sm:py-12 bg-surface">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter text-center mb-8">Why Choose Timeless?</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most bathroom floors regrouted in a single day.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- GOOGLE REVIEWS -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
@@ -601,123 +544,64 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 8: FAQ
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
-    <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Floor Tile Regrouting FAQs</h2>
-        <p class="text-secondary text-center mb-10">Common questions about floor grout replacement.</p>
-        <div class="space-y-3">
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Why does my floor grout get so dirty?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Floor grout takes more abuse than any other grout in your home. Daily foot traffic grinds dirt, oils, and soap scum into the porous cement surface. Because grout lines sit lower than the tiles, they collect everything that washes across the floor. Over months and years, this staining penetrates deep into the grout body where surface cleaning can&rsquo;t reach.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Should I clean my floor grout or replace it?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">If the staining is only surface-level and the grout is structurally sound (no cracks, no crumbling), a professional clean and seal might work. But if you&rsquo;ve already tried cleaning multiple times without lasting results, or if the grout is cracked and deteriorating, full regrouting is the lasting solution. We can assess from photos and recommend the right approach.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does floor regrouting take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most bathroom or laundry floor regrouts are completed in a single day (4-8 hours depending on the floor area and tile size). The new grout needs 24 hours to cure before you can walk on it. We&rsquo;ll advise on the expected timeframe in your quote.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I need to move furniture or fixtures?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">The floor needs to be clear for us to work. Bathroom fixtures like the toilet and vanity stay in place &mdash; we work around them. Loose items (rugs, bins, scales, etc.) should be removed. For laundry or kitchen floors, moveable appliances may need to be shifted temporarily &mdash; we&rsquo;ll advise when quoting.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you match the new grout colour to my existing grout?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes &mdash; we carry a wide range of grout colours and can match your existing colour or choose something new. Many customers take the opportunity to switch to a lighter colour for a brighter, cleaner look. With epoxy grout, the colour is permanent and won&rsquo;t darken over time.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Should I get epoxy grout for my floors?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">For high-traffic wet areas (bathrooms, laundries), epoxy grout is an excellent choice. It&rsquo;s 100% waterproof, stain-proof, and never needs sealing. For lower-traffic areas like hallways or living rooms, cement grout with a quality sealer is often sufficient and more cost-effective. We&rsquo;ll recommend the best option based on your specific situation.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for floor regrouting?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your floor grout via our quote form below. Include close-up shots of the worst areas plus a wider shot showing the overall floor size. We&rsquo;ll assess the condition, recommend the right approach (clean vs regrout, cement vs epoxy), and provide a fixed-price quote within hours &mdash; no obligation.</p></div></div>
+<!-- FAQ -->
+<section class="py-14 sm:py-16 bg-surface-container-low" id="faqs">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3">Questions? We&rsquo;ve Got Answers</h2>
+                <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if your floor grout needs cleaning or full regrout? Wondering about epoxy vs cement for floors? These are the questions we hear most. If yours isn&rsquo;t here, send us a message. No pressure.</p>
+                <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+            </div>
+            <div class="space-y-2">
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does floor regrouting cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every floor is different. The cost depends on floor area, tile size, grout type (epoxy or cement), and current condition. Send us 3-4 photos and we&rsquo;ll have a fixed-price quote back within hours. The number you see is the number you pay.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it take?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Most bathroom floors are completed in 4-8 hours (one day). Larger areas like combined bathroom and laundry may take a second day. The floor can be walked on 24-48 hours after completion.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you just clean my grout instead?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">If the grout is structurally sound but just discoloured, professional cleaning plus sealing may be enough. If it&rsquo;s cracked, crumbling, or tiles are moving, full regrout is the only lasting fix. We&rsquo;ll tell you which you need after seeing photos.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Should I choose epoxy or cement for my floor?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Epoxy is ideal for floors. It&rsquo;s non-porous, never needs resealing, and resists staining from mopping and foot traffic. Cement grout works but needs resealing every 1-2 years. Most homeowners skip resealing, which accelerates failure.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you regrout laundry and kitchen floors too?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes. We regrout any tiled floor in wet areas including bathrooms, laundries, kitchens, and entryways. Same process, same warranty.</p></div></div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 9: SERVICE AREAS
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-12 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-xl font-extrabold text-primary tracking-tighter mb-6 text-center">Floor Tile Regrouting Across Greater Sydney</h2>
-        <div class="flex flex-wrap justify-center gap-3">
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Sydney CBD</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Eastern Suburbs</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Inner West</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">North Shore</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Northern Beaches</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Western Sydney</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Parramatta</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Hills District</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Sutherland Shire</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Wollongong</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Central Coast</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Blue Mountains</span>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 10: QUOTE FORM
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-surface-container-low" id="quote">
+<!-- QUOTE FORM -->
+<section class="py-16 sm:py-20 bg-white" id="quote">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
         <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
             <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
                 <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Floor Regrouting Quote</h2>
                 <p class="text-on-primary-container text-sm">5 minutes. No obligation. Fixed pricing guaranteed.</p>
             </div>
-            <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
-                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your floor</span></div>
-                    <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
-                    <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
+            <div class="p-6 sm:p-8 lg:p-12">
+                <div class="flex items-center justify-between gap-4 mb-8 text-center">
+                    <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">1</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Send photos</strong> of your floor grout</p></div>
+                    <div class="flex-shrink-0 w-8 h-px bg-surface-container"></div>
+                    <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">2</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Fixed-price quote</strong> within hours</p></div>
+                    <div class="flex-shrink-0 w-8 h-px bg-surface-container"></div>
+                    <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">3</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Book a date</strong> that suits you</p></div>
                 </div>
-            </div>
-            <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
-                    <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
-                </div>
-                <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
-                <div>
-                    <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Which floors need regrouting?</label>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Bathroom floor</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Laundry floor</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Kitchen floor</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Hallway/entrance</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Epoxy grout option</label>
+                <form class="space-y-4" id="quote-form">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Full Name *</label><input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="John Citizen" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Phone *</label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="0400 000 000" /></div>
                     </div>
-                </div>
-                <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. grout is permanently stained, crumbling in spots, bathroom floor is about 5sqm..."></textarea></div>
-                <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Floor Regrouting Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
-                <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 11: CROSS-SELL
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <a href="shower-regrouting.html" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">plumbing</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
-                <p class="text-xs text-secondary mt-1">Full wall &amp; floor grout replacement.</p>
-            </a>
-            <a href="epoxy-grout-upgrade.html" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">star</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Epoxy Grout Upgrade</h3>
-                <p class="text-xs text-secondary mt-1">Waterproof grout that never stains.</p>
-            </a>
-            <a href="shower-sealing.html" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">water_drop</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Sealing</h3>
-                <p class="text-xs text-secondary mt-1">Mouldy silicone replacement.</p>
-            </a>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Suburb *</label><input type="text" name="suburb" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="e.g. Bondi, Parramatta" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Email</label><input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="you@email.com" /></div>
+                    </div>
+                    <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">What do you need? *</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Floor Tile Regrouting" checked class="text-primary rounded" /> Floor Regrouting</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Epoxy Grout Upgrade" class="text-primary rounded" /> Epoxy Upgrade</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Grout Cleaning" class="text-primary rounded" /> Grout Cleaning</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Shower Regrouting" class="text-primary rounded" /> Shower Regrouting</label>
+                        </div>
+                    </div>
+                    <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Anything else?</label><textarea name="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" placeholder="e.g. Bathroom floor grout is cracked and stained, interested in epoxy. Also need laundry floor done."></textarea></div>
+                    <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Floor Regrouting Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
+                    <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
+                </form>
+            </div>
         </div>
     </div>
 </section>
@@ -730,7 +614,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-12">
             <div class="col-span-2 md:col-span-1">
                 <span class="text-2xl font-black tracking-tighter text-white block mb-4">Timeless Resurfacing</span>
-                <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney\&rsquo;s bathroom resurfacing specialists.</p>
+                <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney&rsquo;s bathroom resurfacing specialists.</p>
             </div>
             <div>
                 <h4 class="font-bold text-white mb-4 text-sm">Quick Links</h4>
@@ -771,12 +655,35 @@
 <!-- JAVASCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    /* -- Before/After Slider -- */
+    (function(){
+        var slider = document.getElementById('hero-slider');
+        if(!slider) return;
+        var clip = document.getElementById('ba-clip');
+        var line = document.getElementById('ba-line');
+        var handle = document.getElementById('ba-handle');
+        var bImg = document.getElementById('ba-before-img');
+        var active = false;
+        function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
+        syncWidth(); window.addEventListener('resize', syncWidth);
+        function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
+        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
+        document.addEventListener('mouseup', function(){ active=false; });
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
+        document.addEventListener('touchend', function(){ active=false; });
+    })();
+
     /* -- Mobile Menu -- */
     var menuBtn = document.getElementById('menu-btn');
     var menuClose = document.getElementById('menu-close');
     var mobileNav = document.getElementById('mobile-nav');
-    window.closeMobile = function(){ if(mobileNav){ mobileNav.classList.remove('open'); document.body.style.overflow=''; } };
-    if(menuBtn && mobileNav){ menuBtn.addEventListener('click', function(){ mobileNav.classList.add('open'); document.body.style.overflow='hidden'; }); }
+    window.closeMobile = function(){ if(mobileNav){ mobileNav.classList.remove('open'); mobileNav.style.display='none'; document.body.style.overflow=''; } };
+    if(menuBtn && mobileNav){ menuBtn.addEventListener('click', function(){ mobileNav.style.display='block'; mobileNav.classList.add('open'); document.body.style.overflow='hidden'; }); }
     if(menuClose && mobileNav){ menuClose.addEventListener('click', closeMobile); }
 
     /* -- Mega Menu -- */
@@ -797,11 +704,192 @@ document.addEventListener('DOMContentLoaded', function () {
     var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 
+    /* -- Testimonial Carousel (JS-measured widths like homepage pattern) -- */
+    (function(){
+        var container = document.getElementById('tile-testimonial-carousel');
+        var track = document.getElementById('tile-testimonial-track');
+        var counter = document.getElementById('tile-testimonial-counter');
+        if (!container || !track) return;
+
+        var GAP = 24; // gap-6 in Tailwind
+        var cards = track.querySelectorAll('.tile-t-card');
+        var total = cards.length;
+        var index = 0;
+
+        function perView() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        }
+
+        function sizeCards() {
+            var w = container.offsetWidth;
+            var view = perView();
+            var cardW = (w - GAP * (view - 1)) / view;
+            cards.forEach(function(c) {
+                c.style.width = cardW + 'px';
+                c.style.minWidth = cardW + 'px';
+            });
+            // Clamp index in case of resize
+            var maxIndex = Math.max(0, total - view);
+            if (index > maxIndex) index = maxIndex;
+            applyTransform();
+        }
+
+        function applyTransform() {
+            var w = container.offsetWidth;
+            var view = perView();
+            var cardW = (w - GAP * (view - 1)) / view;
+            var offset = index * (cardW + GAP);
+            track.style.transform = 'translateX(-' + offset + 'px)';
+            if (counter) counter.textContent = (index + 1) + ' / ' + total;
+        }
+
+        window.moveTileTestimonials = function(dir) {
+            var view = perView();
+            var maxIndex = Math.max(0, total - view);
+            index += dir;
+            if (index < 0) index = maxIndex;
+            if (index > maxIndex) index = 0;
+            applyTransform();
+        };
+
+        sizeCards();
+        window.addEventListener('resize', sizeCards);
+    })();
+
     /* -- Smooth Scroll -- */
     document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = this.getAttribute('href'); if(t && t !== '#'){ var el = document.querySelector(t); if(el){ e.preventDefault(); window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' }); } } }); });
 });
 </script>
 
+<script>
+document.querySelectorAll(".ba-slider").forEach(function(slider){
+    var clip=slider.querySelector(".ba-clip"),line=slider.querySelector(".ba-line"),handle=slider.querySelector(".ba-handle"),bImg=slider.querySelector(".ba-before"),active=false;
+    function sync(){var w=slider.offsetWidth+"px";bImg.style.width=w;bImg.style.minWidth=w;bImg.style.maxWidth=w;}
+    sync(); window.addEventListener("resize",sync);
+    function move(x){var r=slider.getBoundingClientRect();var pct=((x-r.left)/r.width)*100;pct=Math.max(3,Math.min(97,pct));clip.style.width=pct+"%";line.style.left=pct+"%";handle.style.left=pct+"%";}
+    slider.addEventListener("mousedown",function(e){active=true;move(e.clientX);e.preventDefault();});
+    document.addEventListener("mousemove",function(e){if(active)move(e.clientX);});
+    document.addEventListener("mouseup",function(){active=false;});
+    slider.addEventListener("touchstart",function(e){active=true;move(e.touches[0].clientX);},{passive:true});
+    document.addEventListener("touchmove",function(e){if(active)move(e.touches[0].clientX);},{passive:true});
+    document.addEventListener("touchend",function(){active=false;});
+});
+</script>
+
+<script>
+(function(){
+    var el = document.getElementById('logo-scroller');
+    if(!el) return;
+    el.style.overflow = 'hidden';
+
+    var isDrag = false, startX = 0, scrollStart = 0;
+    var velocity = 0, lastX = 0, lastTime = 0, animFrame = 0;
+    var halfWidth = el.scrollWidth / 2;
+
+    // Build dots
+    var dotsBox = document.getElementById('logo-dots');
+    if(dotsBox && dotsBox.children.length === 0){
+        for(var i=0;i<8;i++){
+            var d=document.createElement('span');
+            d.className='inline-block rounded-full bg-slate-300 transition-all duration-200';
+            d.style.width='8px'; d.style.height='8px';
+            dotsBox.appendChild(d);
+        }
+    }
+
+    // Start centered
+    el.scrollLeft = halfWidth * 0.3;
+
+    function loop(){
+        if(el.scrollLeft <= 0) el.scrollLeft += halfWidth;
+        else if(el.scrollLeft >= halfWidth) el.scrollLeft -= halfWidth;
+    }
+
+    function updateDots(){
+        var dots = document.getElementById('logo-dots');
+        if(!dots) return;
+        var pct = (el.scrollLeft % halfWidth) / halfWidth;
+        var idx = Math.round(pct * 7) % 8;
+        for(var i=0; i<dots.children.length; i++){
+            dots.children[i].style.width = i===idx ? '18px' : '8px';
+            dots.children[i].style.background = i===idx ? '#041534' : '#cbd5e1';
+        }
+    }
+
+    // Momentum coast after release
+    function coast(){
+        if(Math.abs(velocity) < 0.5){ velocity = 0; return; }
+        velocity *= 0.95;
+        el.scrollLeft -= velocity;
+        loop();
+        updateDots();
+        animFrame = requestAnimationFrame(coast);
+    }
+
+    el.addEventListener('mousedown', function(e){
+        isDrag = true;
+        startX = e.pageX;
+        scrollStart = el.scrollLeft;
+        lastX = e.pageX;
+        lastTime = Date.now();
+        velocity = 0;
+        cancelAnimationFrame(animFrame);
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e){
+        if(!isDrag) return;
+        var now = Date.now();
+        var dt = now - lastTime;
+        if(dt > 0) velocity = (e.pageX - lastX) / dt * 16;
+        lastX = e.pageX;
+        lastTime = now;
+        el.scrollLeft = scrollStart - (e.pageX - startX);
+        loop();
+        updateDots();
+    });
+
+    document.addEventListener('mouseup', function(){
+        if(!isDrag) return;
+        isDrag = false;
+        coast();
+    });
+
+    el.addEventListener('touchstart', function(e){
+        isDrag = true;
+        startX = e.touches[0].pageX;
+        scrollStart = el.scrollLeft;
+        lastX = e.touches[0].pageX;
+        lastTime = Date.now();
+        velocity = 0;
+        cancelAnimationFrame(animFrame);
+    }, {passive:true});
+
+    document.addEventListener('touchmove', function(e){
+        if(!isDrag) return;
+        var now = Date.now();
+        var dt = now - lastTime;
+        if(dt > 0) velocity = (e.touches[0].pageX - lastX) / dt * 16;
+        lastX = e.touches[0].pageX;
+        lastTime = now;
+        el.scrollLeft = scrollStart - (e.touches[0].pageX - startX);
+        loop();
+        updateDots();
+    }, {passive:true});
+
+    document.addEventListener('touchend', function(){
+        if(!isDrag) return;
+        isDrag = false;
+        coast();
+    });
+
+    updateDots();
+    var autoStep=(el.scrollWidth/2)/10;
+    setInterval(function(){if(isDrag||Math.abs(velocity)>0.5)return;var target=el.scrollLeft+autoStep,start=el.scrollLeft,startTime=Date.now();function animate(){var p=Math.min((Date.now()-startTime)/600,1);var e=p<0.5?2*p*p:-1+(4-2*p)*p;el.scrollLeft=start+(target-start)*e;loop();updateDots();if(p<1)requestAnimationFrame(animate);}animate();},10000);
+})();
+</script>
 <div id="chat-widget-container">
     <!-- Floating bubble button (chat icon, teal green) -->
     <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="Open chat">
