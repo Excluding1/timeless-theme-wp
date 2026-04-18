@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Mouldy Silicone Replacement Sydney | Timeless Resurfacing</title>
+    <title>Shower Sealing Sydney | Timeless Resurfacing</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -48,99 +48,66 @@
             pointer-events: auto;
             border-top-width: 1px !important;
             transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0s;
-        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
-        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu { transform: translateX(100%); visibility: hidden; opacity: 0; pointer-events: none; transition: transform 0.3s ease, visibility 0s 0.3s, opacity 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); visibility: visible; opacity: 1; pointer-events: auto; transition: transform 0.3s ease, visibility 0s 0s, opacity 0.3s ease; }
         .mobile-accordion { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
         .mobile-accordion.open { max-height: 500px; }
         .mobile-chevron { transition: transform 0.25s ease; }
-        /* Vertical timeline */
-        .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: #e7c08b; transform: translateX(-50%); }
-        @media (max-width: 767px) { .timeline-line { left: 24px; } }
+        #hero-slider img { pointer-events: none; -webkit-user-drag: none; }
+        .ba-card { position: relative; overflow: hidden; cursor: ew-resize; }
+        .ba-card .ba-overlay { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; }
+        .timeline-line { position: relative; }
+        .timeline-line::before { content: ''; position: absolute; top: 32px; left: 10%; right: 10%; height: 2px; border-top: 2px dashed #c5c6cf; z-index: 0; }
     .mega-dropdown { max-height: 0; overflow: hidden; opacity: 0; pointer-events: none; border-top-width: 0 !important; transition: max-height 0.25s ease, opacity 0.2s ease; } .mega-dropdown.open { max-height: 500px; opacity: 1; pointer-events: auto; border-top-width: 1px !important; } </style>
 </head>
 
 <body class="bg-surface text-[#191c1e] font-body">
+
 
 <!-- Schema: Service + BreadcrumbList + FAQPage -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Bath Resurfacing Sydney",
-    "description": "Professional bath resurfacing with Professional commercial-grade coating. Same-day service, 3-year warranty.",
+    "name": "Shower Sealing Sydney",
+    "description": "Professional shower sealing and silicone replacement in Sydney. Fix leaking showers, replace mouldy silicone, prevent water damage. Same-day service, up to 3-year warranty.",
     "provider": {
-        "@type": "LocalBusiness",
+        "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",
+        "url": "https://timelessresurfacing.com.au",
         "telephone": "0451110154",
-        "areaServed": {
-            "@type": "City",
-            "name": "Sydney"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Sydney",
-            "addressRegion": "NSW",
-            "addressCountry": "AU"
-        }
+        "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressRegion": "NSW", "addressCountry": "AU" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23" }
     },
-    "offers": {
-        "@type": "Offer",
-        "priceCurrency": "AUD",
-        "price": "800",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock"
-    },
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "23"
-    }
+    "areaServed": { "@type": "City", "name": "Sydney" },
+    "serviceType": "Shower Sealing"
 }
 </script>
+
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
     "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
         { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
-        { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing Sydney", "item": "https://timelessresurfacing.com.au/bath-resurfacing-sydney/" }
+        { "@type": "ListItem", "position": 3, "name": "Shower Sealing Sydney", "item": "https://timelessresurfacing.com.au/services/shower-leak-repair-sydney/" }
     ]
 }
 </script>
+
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    "@context": "https://schema.org", "@type": "FAQPage",
     "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "How much does bath resurfacing cost in Sydney?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Bath resurfacing starts from $800 inc GST for a standard bathtub. We provide fixed-price quotes based on your photos — no hidden fees, no surprises." }
-        },
-        {
-            "@type": "Question",
-            "name": "How long does bath resurfacing take?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Most standard bath resurfacing jobs are completed in 5-8.5 hours. The bath can be used again 24-48 hours after completion to allow the coating to fully cure." }
-        },
-        {
-            "@type": "Question",
-            "name": "How long does a resurfaced bath last?",
-            "acceptedAnswer": { "@type": "Answer", "text": "A professionally resurfaced bath using the professional-grade system lasts up to 10 years with proper care. We back every job with a 3-year resurface warranty." }
-        },
-        {
-            "@type": "Question",
-            "name": "Can you resurface any type of bath?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes — we resurface porcelain, enamel steel, cast iron, acrylic, and fibreglass baths. The only exception is natural stone (marble, granite) which requires different treatment." }
-        },
-        {
-            "@type": "Question",
-            "name": "Can you change the bath colour?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We have over 900 colours available, so you can keep your existing colour or transform it completely. White and ivory are the most popular choices." }
-        }
+        { "@type": "Question", "name": "How much does shower sealing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every shower is different. The cost depends on the number of junctions, extent of mould damage, and whether grout repair is also needed. Send us photos and we'll have a fixed-price quote back within hours." } },
+        { "@type": "Question", "name": "How long does shower sealing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most shower silicone replacements are completed in 1-2 hours. The silicone needs 24 hours to cure before you can use the shower." } },
+        { "@type": "Question", "name": "How long does new silicone last?", "acceptedAnswer": { "@type": "Answer", "text": "Professional anti-mould silicone lasts 15-20 years when properly applied. We use 100% silicone with embedded fungicide, not the surface-treated type from hardware stores." } },
+        { "@type": "Question", "name": "Can I just do it myself?", "acceptedAnswer": { "@type": "Answer", "text": "You can, but the common DIY failure point is incomplete removal of old silicone. New silicone won't bond to residue from old silicone. Professional removal and surface prep is what makes the seal last." } },
+        { "@type": "Question", "name": "Do you fix the grout too or just the silicone?", "acceptedAnswer": { "@type": "Answer", "text": "We do both. If your grout is also cracked or mouldy, we can regrout and reseal in the same visit. We'll tell you what's needed after seeing your photos." } }
     ]
 }
 </script>
+
 
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
@@ -154,6 +121,7 @@
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="gallery.html">Before &amp; After</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="areas.html">Service Areas</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="about.html">About</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="faqs.html">FAQs</a>
                 <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="#quote">Get a Free Quote</a>
             </div>
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
@@ -174,10 +142,8 @@
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</h3>
                     <div class="space-y-0.5">
                         <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-regrouting.html"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-sealing.html"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="epoxy-grout-upgrade.html"><span class="font-semibold text-primary block">Epoxy Grout Upgrade</span><span class="text-xs text-secondary">Waterproof, mould-resistant grout</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="floor-tile-regrouting.html"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
-                    </div>
+                                                <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="floor-tile-regrouting.html"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
+<a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="shower-sealing.html"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>                    </div>
                 </div>
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">build</span> Repairs &amp; Packages</h3>
@@ -214,10 +180,8 @@
             </button>
             <div class="mobile-accordion open">
                 <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-regrouting.html" onclick="closeMobile()">Shower Regrouting</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-sealing.html" onclick="closeMobile()">Shower Sealing</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="epoxy-grout-upgrade.html" onclick="closeMobile()">Epoxy Grout Upgrade</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="floor-tile-regrouting.html" onclick="closeMobile()">Floor Tile Regrouting</a>
-            </div>
+                                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="floor-tile-regrouting.html" onclick="closeMobile()">Floor Tile Regrouting</a>
+<a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="shower-sealing.html" onclick="closeMobile()">Shower Sealing</a>            </div>
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
                 <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">build</span> Repairs &amp; Packages</span>
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron" aria-hidden="true">expand_more</span>
@@ -231,6 +195,7 @@
             <a class="text-primary py-3 text-lg font-semibold" href="gallery.html" onclick="closeMobile()">Before &amp; After</a>
             <a class="text-primary py-3 text-lg font-semibold" href="areas.html" onclick="closeMobile()">Service Areas</a>
             <a class="text-primary py-3 text-lg font-semibold" href="about.html" onclick="closeMobile()">About</a>
+            <a class="text-primary py-3 text-lg font-semibold" href="faqs.html" onclick="closeMobile()">FAQs</a>
             <a class="bg-primary text-white text-center py-4 rounded-lg font-bold mt-4" href="#quote" onclick="closeMobile()">Get a Free Quote</a>
             <a class="bg-surface-container-high text-primary text-center py-4 rounded-lg font-bold mt-2 flex items-center justify-center gap-2" href="tel:+61451110154"><span class="material-symbols-outlined text-base" aria-hidden="true">call</span> Call 0451 110 154</a>
         </div>
@@ -239,81 +204,71 @@
 
 <main id="main-content">
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 1: HERO — Education-first, single problem photo
-     ═══════════════════════════════════════════════════ -->
-
-<!-- Gold accent strip -->
-<div class="h-1 bg-gradient-to-r from-tertiary-fixed-dim via-tertiary-fixed to-tertiary-fixed-dim mt-[72px]"></div>
-
 <!-- BREADCRUMB -->
-<div class="pt-6 pb-2 px-6 sm:px-8 max-w-7xl mx-auto">
+<div class="pt-24 pb-2 px-6 sm:px-8 max-w-7xl mx-auto">
     <nav class="text-xs text-secondary" aria-label="Breadcrumb">
         <ol class="flex items-center gap-1">
             <li><a href="index.html" class="hover:text-primary transition-colors">Home</a></li>
             <li><span class="mx-1">/</span></li>
-            <li><a href="areas.html" class="hover:text-primary transition-colors">Services</a></li>
+            <li><a href="index.html#services" class="hover:text-primary transition-colors">Services</a></li>
             <li><span class="mx-1">/</span></li>
-            <li class="text-primary font-medium">Shower Sealing</li>
+            <li class="text-primary font-medium">Shower Sealing Sydney</li>
         </ol>
     </nav>
 </div>
 
 <!-- HERO -->
-<section class="pt-4 pb-16 sm:pb-20 bg-surface">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div>
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Same-Day Fix</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Black Mouldy Silicone<br/><span class="text-on-primary-container">in Your Shower?</span>
+<section class="pt-4 pb-10 sm:pb-16 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-surface via-transparent to-transparent rounded-3xl -z-10 -m-4"></div>
+            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Same-Day Fix</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-3 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+                Shower Sealing
             </h1>
+            <div class="h-0 mb-3"></div>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                That black stuff in the corners? That&rsquo;s mould growing <strong>INSIDE</strong> the silicone itself &mdash; cleaning only touches the surface. The only permanent fix is to strip it out and replace with fresh, premium sealant.
+                Leaking shower? Mouldy silicone? Water getting behind the tiles? We strip every old seal and replace it with professional anti-mould silicone. Done in hours, not days.
             </p>
-            <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-6">
-                <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
-                    <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">Same</p>
-                    <p class="text-[0.65rem] text-secondary font-medium">Day service</p>
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+                <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">1-2 hrs</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Most showers</p>
                 </div>
-                <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
-                    <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">25yr+</p>
-                    <p class="text-[0.65rem] text-secondary font-medium">Silicone rated life</p>
+                <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Same Day</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Service</p>
                 </div>
-                <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
-                    <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">2yr</p>
-                    <p class="text-[0.65rem] text-secondary font-medium">Warranty</p>
-                </div>
-            </div>
-
-            <!-- Education Callout -->
-            <div class="bg-tertiary-fixed/20 border border-tertiary-fixed-dim/30 rounded-xl p-4 mb-6">
-                <div class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-2xl text-tertiary-fixed-dim flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">lightbulb</span>
-                    <div>
-                        <p class="text-sm font-bold text-primary mb-1">Silicone is NOT grout</p>
-                        <p class="text-xs text-secondary leading-relaxed">Silicone is the flexible rubber sealant in corners and junctions. Grout is the hard material between tiles. They fail differently and need different fixes.</p>
-                    </div>
+                <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 3yr</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Warranty</p>
                 </div>
             </div>
-
             <div class="flex flex-col sm:flex-row gap-3 mb-4">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:+61451110154" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
             <p class="text-xs text-secondary"><span class="material-symbols-outlined text-sm align-text-bottom text-tertiary-fixed-dim" aria-hidden="true">photo_camera</span> Send photos &rarr; quote in hours. No obligation.</p>
             <div class="mt-6 flex items-center gap-3">
-                <div class="flex text-amber-400 text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <span class="text-sm font-bold text-primary">4.9</span>
-                <span class="text-xs text-secondary">from 23+ verified reviews</span>
+                <div class="flex -space-x-2" aria-hidden="true">
+                    <img src="images/homepage/reviews/reviewer-1.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="images/homepage/reviews/reviewer-2.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                    <img src="images/homepage/reviews/reviewer-3.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                </div>
+                <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
         </div>
         <div>
-            <!-- Single problem photo placeholder -->
+            <!-- HERO IMAGE -->
             <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
-                <div class="absolute inset-0 bg-red-50 flex items-center justify-center text-center p-4">
-                    <div><span class="material-symbols-outlined text-4xl text-red-400 block mb-2" aria-hidden="true">photo_camera</span><p class="text-xs font-bold text-red-700 uppercase tracking-wider">problem-hero.jpg</p><p class="text-[0.6rem] text-red-500 mt-1">Black mouldy silicone in shower corners<br/>images/services/shower-sealing/<br/>Ratio: 4:3 landscape</p></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-5xl text-red-400" aria-hidden="true">water_damage</span>
                 </div>
-                <span class="absolute top-3 left-3 bg-error text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">The Problem</span>
+                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
+                    <span class="text-xs font-bold text-primary">Before &amp; After</span>
+                    <span class="text-xs font-bold text-on-primary-container">Fixed in Hours</span>
+                </div>
             </div>
         </div>
     </div>
@@ -324,239 +279,240 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">2-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 3: THE SCIENCE — Why Silicone Goes Mouldy
-     ═══════════════════════════════════════════════════ -->
+<!-- TRUST LOGO BAR -->
+<section class="py-8 sm:py-10 bg-surface-container-low/50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
+        <div class="flex items-center gap-5 sm:gap-8 w-max px-8" id="logo-inner">
+            <img src="images/homepage/logos/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" /><img src="images/homepage/logos/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" draggable="false" />
+        </div>
+    </div>
+    <div id="logo-dots" class="flex justify-center gap-1.5 mt-4"></div>
+</section>
 
+<!-- SECTION 2B — What We Fix -->
 <section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <span class="inline-block py-1 px-3 bg-primary/5 text-primary text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">The Science</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why Your Silicone Keeps Going Black</h2>
-            <p class="text-secondary max-w-2xl mx-auto">It&rsquo;s not a cleaning problem. It&rsquo;s a material science problem. Here&rsquo;s the 3-step failure cycle:</p>
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
+            <p class="text-secondary">These are the shower sealing problems we fix every week across Sydney. If yours looks like any of these, we can have it sorted today.</p>
         </div>
 
-        <div class="space-y-6">
-            <!-- Step 1 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-tertiary-fixed-dim reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">1</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Constant Moisture + Poor Ventilation</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Shower corners and junctions are the wettest parts of your bathroom. They get drenched daily and rarely dry fully &mdash; especially in enclosed showers with limited airflow. This creates the perfect environment for mould spores.</p>
-                    </div>
+        <!-- BLOCK 1: Leaking Shower Silicone -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Leaking Shower Silicone</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Water pooling at the base of your shower screen? Damp patches appearing on the wall outside the shower? Old silicone shrinks, cracks, and pulls away from the surface over time. Once the seal breaks, water gets behind the tiles with every shower. We strip the old silicone completely, clean the substrate, and apply fresh anti-mould silicone rated for wet areas.</p>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full silicone removal (not applied over old)</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Professional anti-mould silicone</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops the leak at the source</li>
+                    </ul>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
-            </div>
-            <!-- Step 2 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-tertiary-fixed-dim reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">2</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Mould Grows INTO the Silicone Body</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Silicone is microscopically porous. Mould spores don&rsquo;t just sit on the surface &mdash; they colonise inside the silicone itself, sending root-like structures (hyphae) deep into the material. This is why the black staining goes right through.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Step 3 -->
-            <div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-error reveal">
-                <div class="flex items-start gap-4">
-                    <div class="w-10 h-10 rounded-full bg-error text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">3</div>
-                    <div>
-                        <h3 class="font-bold text-primary mb-2">Cleaning Only Kills the Surface &mdash; Roots Survive</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Bleach and mould sprays kill the visible mould on the surface, but the root network inside the silicone is untouched. Within 2-4 weeks, the mould regrows from within. This cycle repeats until the silicone is physically removed and replaced.</p>
+                <div class="order-1 lg:order-2">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">verified</span></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">water_drop</span></div></div>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-8 p-5 bg-primary/5 rounded-xl text-center">
-            <p class="text-sm text-primary font-semibold"><span class="material-symbols-outlined text-base align-text-bottom text-error mr-1" aria-hidden="true">warning</span> The only permanent fix: <strong>strip the old silicone out completely</strong> and replace it with fresh, mould-resistant sealant.</p>
+        <!-- BLOCK 2: Mouldy Corners & Junctions -->
+        <div class="mb-12 lg:mb-16 reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Mouldy Corners &amp; Junctions</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Black mould along the corners where tiles meet the wall, floor, or bath? These are silicone junctions, not grout. Bleach kills what you can see on the surface, but the mould regrows from inside the old silicone within weeks. We strip it all out, treat the area, and reseal with silicone that has fungicide built into the polymer.</p>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> All corners and junctions resealed</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Fungicide embedded in the silicone</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Clean white finish that stays clean</li>
+                    </ul>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="order-1 lg:order-1">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">sanitizer</span></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">mold</span></div></div>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3: Water Damage Warning Signs -->
+        <div class="reveal">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Water Damage Warning Signs</h3>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Tiles feel hollow when you tap them? Paint bubbling on the wall outside the shower? Water stains on the ceiling below? These are signs that water is already getting behind the tiles through failed seals. The longer you wait, the more damage builds. Resealing now can prevent a full waterproofing job later.</p>
+                    <ul class="space-y-2.5 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water penetration immediately</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Prevents expensive waterproofing repairs</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> We assess whether sealing alone is enough</li>
+                    </ul>
+                    <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">shield</span></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">water_damage</span></div></div>
+                        <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 4: MATERIAL COMPARISON
-     ═══════════════════════════════════════════════════ -->
-
+<!-- SEALING vs FULL REGROUT — helps customer decide scope -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-5xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">When to Replace Silicone vs When to Regrout</h2>
-            <p class="text-secondary max-w-2xl mx-auto">Different problems need different fixes. Here&rsquo;s how to tell which service you actually need:</p>
-        </div>
-
-        <!-- Comparison Table -->
-        <div class="overflow-x-auto">
-            <table class="w-full bg-white rounded-xl overflow-hidden shadow-sm">
-                <thead>
-                    <tr class="bg-primary text-white text-left">
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest">Feature</th>
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest">Silicone Only</th>
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest">Regrouting Only</th>
-                        <th class="p-4 text-xs font-bold uppercase tracking-widest bg-tertiary-fixed-dim/20">Both (Most Common)</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm">
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">The Problem</td>
-                        <td class="p-4 text-secondary">Black mould in corners only, grout lines look fine</td>
-                        <td class="p-4 text-secondary">Grout between tiles is cracked or mouldy, corners are fine</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">Mouldy silicone AND damaged grout &mdash; the most common scenario</td>
-                    </tr>
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">Where It Is</td>
-                        <td class="p-4 text-secondary">Corners, floor-wall junction, around fixtures</td>
-                        <td class="p-4 text-secondary">Between tiles on walls and floor</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">Everywhere &mdash; corners, junctions, and tile joints</td>
-                    </tr>
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">Time</td>
-                        <td class="p-4 text-secondary">1&ndash;2 hours</td>
-                        <td class="p-4 text-secondary">4&ndash;6 hours</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">4&ndash;6 hours (done in one visit)</td>
-                    </tr>
-                    <tr class="border-b border-surface-container">
-                        <td class="p-4 font-semibold text-primary">Cost From</td>
-                        <td class="p-4 text-secondary font-bold">$320</td>
-                        <td class="p-4 text-secondary font-bold">$1,080</td>
-                        <td class="p-4 text-secondary font-bold bg-tertiary-fixed/5">Bundle pricing</td>
-                    </tr>
-                    <tr>
-                        <td class="p-4 font-semibold text-primary">Best For</td>
-                        <td class="p-4 text-secondary">Quick fix when only corners are the issue</td>
-                        <td class="p-4 text-secondary">Tile joints failing but silicone is still OK</td>
-                        <td class="p-4 text-secondary bg-tertiary-fixed/5">Complete refresh &mdash; we handle everything in one appointment</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="mt-6 p-4 bg-tertiary-fixed/20 rounded-xl text-center">
-            <p class="text-sm text-primary font-medium"><span class="material-symbols-outlined text-base align-text-bottom text-tertiary-fixed-dim mr-1" aria-hidden="true">lightbulb</span> Not sure which you need? Send us photos and we&rsquo;ll tell you exactly what&rsquo;s required &mdash; no obligation.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 5: HOW WE FIX IT — Vertical Timeline
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Replace Your Silicone</h2>
-            <p class="text-secondary max-w-2xl mx-auto">Our 5-step process guarantees a clean, lasting, mould-resistant seal.</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Sealing vs Full Regrout</h2>
+            <p class="text-secondary max-w-2xl mx-auto">Not sure which you need? Here&rsquo;s the difference. We&rsquo;ll confirm after seeing your photos.</p>
         </div>
-
-        <div class="relative">
-            <!-- Vertical line -->
-            <div class="timeline-line hidden md:block"></div>
-
-            <!-- Step 1 — Left -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Strip Old Silicone</h3>
-                    <p class="text-sm text-secondary leading-relaxed">All existing silicone is carefully cut out and removed from corners, junctions, and around fixtures. Every trace of old sealant and trapped mould is eliminated.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl p-8 border-2 border-emerald-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-emerald-100 text-emerald-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Quick Fix</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Silicone Reseal Only</h3>
                 </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">1</div>
-                <div class="md:w-1/2 md:pl-12 hidden md:block">
-                    <div class="w-full h-20 bg-red-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-red-400 font-bold">Before: old black silicone</span></div>
-                </div>
-            </div>
-
-            <!-- Step 2 — Right -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 hidden md:block md:text-right">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Anti-fungal treatment</span></div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">2</div>
-                <div class="md:w-1/2 md:pl-12 mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Clean &amp; Treat</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Joints are cleaned with an anti-fungal solution to kill any remaining spores on the tile surfaces. This prevents mould from returning behind the new silicone.</p>
-                </div>
-            </div>
-
-            <!-- Step 3 — Left -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Mask Edges</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Professional masking tape is applied along both sides of every joint to ensure perfectly straight, clean silicone lines. This is the step most DIY attempts skip.</p>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">3</div>
-                <div class="md:w-1/2 md:pl-12 hidden md:block">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Precision masking</span></div>
-                </div>
-            </div>
-
-            <!-- Step 4 — Right -->
-            <div class="relative flex flex-col md:flex-row items-center mb-10 reveal">
-                <div class="md:w-1/2 md:pr-12 hidden md:block md:text-right">
-                    <div class="w-full h-20 bg-blue-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-blue-400 font-bold">Premium silicone application</span></div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">4</div>
-                <div class="md:w-1/2 md:pl-12 mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Apply Premium Silicone</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Bathroom-grade, neutral-cure silicone with anti-fungal additives is applied to every joint. Rated for 25+ years in wet areas.</p>
-                </div>
-            </div>
-
-            <!-- Step 5 — Left -->
-            <div class="relative flex flex-col md:flex-row items-center reveal">
-                <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
-                    <h3 class="font-bold text-primary text-lg mb-2">Tool &amp; Finish</h3>
-                    <p class="text-sm text-secondary leading-relaxed">Silicone is tooled to a smooth, professional finish and masking tape is removed. Ready to use after 24 hours of cure time.</p>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg z-10 border-4 border-white shadow-lg flex-shrink-0">5</div>
-                <div class="md:w-1/2 md:pl-12 hidden md:block">
-                    <div class="w-full h-20 bg-green-50 rounded-lg flex items-center justify-center"><span class="text-[0.6rem] text-green-500 font-bold">After: clean white silicone</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 6: DECISION HELPER
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-4xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Is Silicone Replacement Right for You?</h2>
-            <p class="text-secondary max-w-2xl mx-auto">Use this checklist to see if this is the service you need.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Right for you -->
-            <div class="bg-white rounded-xl p-6 border-2 border-emerald-200">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Right for you if:</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Black mould growing in your shower corners</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Mould keeps coming back after cleaning</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Silicone is peeling away or gaps are forming</span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-500 text-lg flex-shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check</span><span class="text-sm text-secondary">Musty smell in the bathroom after showering</span></li>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Silicone is the problem</p><p class="text-xs text-secondary">Mouldy, cracked, or peeling silicone in corners</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Grout is still solid</p><p class="text-xs text-secondary">No cracks or crumbling between tiles</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Done in 1-2 hours</p><p class="text-xs text-secondary">Quick turnaround, minimal disruption</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lower cost</p><p class="text-xs text-secondary">Silicone replacement is less labour than regrouting</p></div></li>
                 </ul>
             </div>
-
-            <!-- Not right for you -->
-            <div class="bg-white rounded-xl p-6 border-2 border-red-200">
-                <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" style="font-variation-settings:'FILL' 1;" aria-hidden="true">cancel</span> Not the right fix if:</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-error text-lg flex-shrink-0 mt-0.5" aria-hidden="true">close</span><span class="text-sm text-secondary">The problem is grout <em>between tiles</em> (not corners) &rarr; you need <a href="shower-regrouting.html" class="text-primary font-semibold underline">regrouting</a></span></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-error text-lg flex-shrink-0 mt-0.5" aria-hidden="true">close</span><span class="text-sm text-secondary">Water is leaking through the floor below &rarr; may need waterproofing assessment first</span></li>
+            <div class="bg-white rounded-2xl p-8 border-2 border-primary relative overflow-hidden ring-2 ring-primary/10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
+                <div class="absolute top-0 right-0 bg-tertiary-fixed-dim text-on-tertiary-fixed text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Complete Fix</div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">construction</span></div>
+                    <h3 class="text-xl font-extrabold text-primary">Full Regrout + Reseal</h3>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Grout is also failing</p><p class="text-xs text-secondary">Cracked, mouldy, or crumbling grout between tiles</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Water getting behind tiles</p><p class="text-xs text-secondary">Both grout and silicone need replacing</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Completed in one day</p><p class="text-xs text-secondary">Full regrout + silicone reseal in a single visit</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Epoxy grout option</p><p class="text-xs text-secondary">Waterproof, mould-resistant, 5-year warranty</p></div></li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- WHY YOU CAN'T WAIT — Urgency section -->
+<section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-10 lg:mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Why You Can&rsquo;t Wait</h2>
+            <p class="text-secondary">A leaking shower isn&rsquo;t a cosmetic problem. It&rsquo;s actively causing damage every time you shower.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">water_damage</span>
+                <h3 class="font-bold text-primary mb-2">Hidden Water Damage</h3>
+                <p class="text-sm text-secondary leading-relaxed">Water seeps behind tiles for months before you see it. By the time paint bubbles or ceiling stains appear, the framing behind the wall may already be saturated.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">coronavirus</span>
+                <h3 class="font-bold text-primary mb-2">Mould Health Risk</h3>
+                <p class="text-sm text-secondary leading-relaxed">Damp wall cavities behind tiles are ideal for mould growth. Airborne mould spores cause respiratory issues, especially for children and people with asthma.</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+                <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">engineering</span>
+                <h3 class="font-bold text-primary mb-2">Escalating Repair Cost</h3>
+                <p class="text-sm text-secondary leading-relaxed">A silicone reseal today costs a fraction of a full waterproofing job later. If water reaches the waterproofing membrane and it fails, you&rsquo;re looking at removing all tiles, re-waterproofing, and retiling.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS STEPS — Connected Timeline (3 steps for sealing) -->
+<section class="py-16 sm:py-20 bg-surface-container-low">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How We Seal Your Shower</h2>
+            <p class="text-secondary">A 3-step process. Most showers sealed in under 2 hours.</p>
+        </div>
+        <!-- DESKTOP -->
+        <div class="hidden lg:block">
+            <div class="grid grid-cols-3 gap-0 relative max-w-4xl mx-auto">
+                <div class="absolute top-7 left-[16%] right-[16%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
+                <div class="flex flex-col items-center text-center px-6 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">~30 min</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Strip Old Silicone</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Every old seal removed completely. No new silicone applied over old. Surface cleaned and prepped for adhesion.</p>
+                </div>
+                <div class="flex flex-col items-center text-center px-6 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">30-60 min</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Clean &amp; Apply</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Mould treated, surfaces cleaned. Fresh anti-mould silicone applied to every junction. Tooled for a clean, professional finish.</p>
+                </div>
+                <div class="flex flex-col items-center text-center px-6 reveal">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
+                    <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">24 hrs</span>
+                    <h3 class="font-bold text-primary text-sm mb-2">Cure</h3>
+                    <p class="text-xs text-secondary leading-relaxed">Silicone needs 24 hours to fully cure. Light use OK after 12 hours, full waterproof seal after 24.</p>
+                </div>
+            </div>
+        </div>
+        <!-- MOBILE -->
+        <div class="lg:hidden space-y-0">
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">~30 min</span><h3 class="font-bold text-primary mb-1">Strip Old Silicone</h3><p class="text-sm text-secondary leading-relaxed">Every old seal removed completely. Surface cleaned and prepped for adhesion.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">30-60 min</span><h3 class="font-bold text-primary mb-1">Clean &amp; Apply</h3><p class="text-sm text-secondary leading-relaxed">Mould treated. Fresh anti-mould silicone applied to every junction. Tooled for a clean finish.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div></div><div class="pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">24 hrs</span><h3 class="font-bold text-primary mb-1">Cure</h3><p class="text-sm text-secondary leading-relaxed">Silicone needs 24 hours to fully cure. Light use OK after 12 hours, full waterproof seal after 24.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- MID-PAGE CTA -->
+<div class="bg-primary py-5 sm:py-6">
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white font-bold text-sm sm:text-base text-center sm:text-left">Shower leaking? Send us photos for a free quote in hours.</p>
+        <a href="#quote" class="flex-shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
+    </div>
+</div>
+
+<!-- VALUE PROPOSITION -->
+<section class="py-10 sm:py-12 bg-surface">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter text-center mb-8">Why Choose Timeless?</h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most showers sealed in 1-2 hours.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, full cleanup. Cleaner than we found it.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- GOOGLE REVIEWS -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
@@ -567,123 +523,64 @@
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 8: FAQ
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
-    <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Shower Sealing FAQs</h2>
-        <p class="text-secondary text-center mb-10">Common questions about mouldy silicone replacement.</p>
-        <div class="space-y-3">
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you just clean mouldy silicone instead of replacing it?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">No. Once mould has penetrated inside the silicone body, surface cleaning only removes the visible layer. The mould&rsquo;s root network (hyphae) survives within the material and regrows within 2-4 weeks. The only permanent solution is complete removal and replacement with fresh, mould-resistant silicone.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does silicone replacement take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most shower silicone replacements take 1-2 hours on site. The new silicone forms a skin within 30 minutes but needs a full 24 hours to cure completely before the shower can be used.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What type of silicone do you use?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We use premium bathroom-grade neutral-cure silicone with built-in anti-fungal additives. It&rsquo;s rated for 25+ years in wet areas, resists mould growth, and comes in a range of colours to match your bathroom. Neutral-cure means no vinegar smell and safe to use on all surfaces including marble and natural stone.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I also need regrouting if I&rsquo;m getting silicone replaced?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Not necessarily. Silicone (flexible sealant in corners and junctions) and grout (hard filler between tiles) are different materials that fail independently. If only the silicone is mouldy and the grout between tiles looks fine, silicone replacement alone is sufficient. If both are damaged, we can do both in one visit &mdash; which is actually the most common scenario.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I replace the silicone myself?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">While technically possible, DIY silicone replacement commonly fails for three reasons: incomplete removal of old silicone (new silicone won&rsquo;t bond to old residue), using the wrong product (not all silicone is suitable for wet areas), and poor tooling technique (leads to water trapping and early failure). Professional replacement ensures clean lines, proper adhesion, and a watertight seal.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does new silicone take to cure?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">New silicone skins over within about 30 minutes. Full cure takes 24 hours &mdash; during this time you should avoid using the shower and keep the area dry. After 24 hours it&rsquo;s completely cured and waterproof.</p></div></div>
-
-            <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for silicone replacement?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your shower corners and junctions via our quote form below. Close-up shots of the mouldy areas are most helpful. We&rsquo;ll assess the photos and send back a fixed-price quote within hours &mdash; no obligation, no surprises.</p></div></div>
+<!-- FAQ -->
+<section class="py-14 sm:py-16 bg-surface-container-low" id="faqs">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3">Questions? We&rsquo;ve Got Answers</h2>
+                <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if you need a silicone reseal or a full regrout? Wondering how long it takes? These are the questions we hear most. If yours isn&rsquo;t here, send us a message. No pressure.</p>
+                <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+            </div>
+            <div class="space-y-2">
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does shower sealing cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every shower is different. The cost depends on the number of junctions, extent of mould damage, and whether grout repair is also needed. Send us photos and we&rsquo;ll have a fixed-price quote back within hours. The number you see is the number you pay.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it take?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Most silicone replacements are completed in 1-2 hours. The silicone needs 24 hours to cure before you can use the shower.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does new silicone last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Professional anti-mould silicone lasts 15-20 years when properly applied. We use 100% silicone with fungicide built into the polymer, not the surface-treated type from hardware stores that wears off within months.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I just do it myself?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">You can, but the common DIY failure point is incomplete removal of old silicone. New silicone won&rsquo;t bond to residue from old silicone. Professional removal and surface prep is what makes the seal last. A failed DIY seal can cause more water damage than the original problem.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you fix the grout too?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes. If your grout is also cracked or mouldy, we can regrout and reseal in the same visit. We&rsquo;ll tell you what&rsquo;s needed after seeing your photos.</p></div></div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     SECTION 9: SERVICE AREAS
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-12 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-xl font-extrabold text-primary tracking-tighter mb-6 text-center">Shower Sealing Across Greater Sydney</h2>
-        <div class="flex flex-wrap justify-center gap-3">
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Sydney CBD</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Eastern Suburbs</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Inner West</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">North Shore</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Northern Beaches</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Western Sydney</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Parramatta</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Hills District</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Sutherland Shire</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Wollongong</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Central Coast</span>
-            <span class="bg-surface-container-low px-4 py-2 rounded-lg text-xs font-medium text-primary">Blue Mountains</span>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 10: QUOTE FORM
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 sm:py-20 bg-surface-container-low" id="quote">
+<!-- QUOTE FORM -->
+<section class="py-16 sm:py-20 bg-white" id="quote">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
         <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
             <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
-                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Silicone Replacement Quote</h2>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Shower Sealing Quote</h2>
                 <p class="text-on-primary-container text-sm">5 minutes. No obligation. Fixed pricing guaranteed.</p>
             </div>
-            <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
-                <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your shower</span></div>
-                    <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
-                    <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
+            <div class="p-6 sm:p-8 lg:p-12">
+                <div class="flex items-center justify-between gap-4 mb-8 text-center">
+                    <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">1</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Send photos</strong> of your shower</p></div>
+                    <div class="flex-shrink-0 w-8 h-px bg-surface-container"></div>
+                    <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">2</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Fixed-price quote</strong> within hours</p></div>
+                    <div class="flex-shrink-0 w-8 h-px bg-surface-container"></div>
+                    <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">3</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Book a date</strong> that suits you</p></div>
                 </div>
-            </div>
-            <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
-                    <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
-                </div>
-                <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
-                <div>
-                    <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs sealing?</label>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Shower silicone only</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Bath silicone too</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Full bathroom silicone</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Also need regrouting</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Window/door silicone</label>
+                <form class="space-y-4" id="quote-form">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Full Name *</label><input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="John Citizen" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Phone *</label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="0400 000 000" /></div>
                     </div>
-                </div>
-                <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. silicone is black and mouldy, peeling away from tiles, musty smell..."></textarea></div>
-                <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Sealing Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
-                <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════
-     SECTION 11: CROSS-SELL
-     ═══════════════════════════════════════════════════ -->
-
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-2xl font-extrabold text-primary tracking-tighter mb-8">Other Services You Might Need</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <a href="shower-regrouting.html" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">plumbing</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
-                <p class="text-xs text-secondary mt-1">Full grout removal &amp; replacement.</p>
-            </a>
-            <a href="mouldy-shower-grout.html" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">coronavirus</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Mouldy Grout Removal</h3>
-                <p class="text-xs text-secondary mt-1">Remove mould from grout lines for good.</p>
-            </a>
-            <a href="epoxy-grout-upgrade.html" class="bg-surface-container-low rounded-xl p-6 hover:shadow-md transition-all group">
-                <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">star</span>
-                <h3 class="font-bold text-primary text-sm group-hover:text-on-primary-container transition-colors">Epoxy Grout Upgrade</h3>
-                <p class="text-xs text-secondary mt-1">Waterproof grout that never moulds.</p>
-            </a>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Suburb *</label><input type="text" name="suburb" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="e.g. Bondi, Parramatta" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Email</label><input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="you@email.com" /></div>
+                    </div>
+                    <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">What do you need? *</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Silicone Replacement" checked class="text-primary rounded" /> Silicone Replacement</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Shower Regrouting" class="text-primary rounded" /> Shower Regrouting</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Leak Repair" class="text-primary rounded" /> Leak Repair</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Bath Resurfacing" class="text-primary rounded" /> Bath Resurfacing</label>
+                        </div>
+                    </div>
+                    <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Anything else?</label><textarea name="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" placeholder="e.g. Silicone around the shower screen is mouldy and the shower is leaking onto the floor outside."></textarea></div>
+                    <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Shower Sealing Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
+                    <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
+                </form>
+            </div>
         </div>
     </div>
 </section>
@@ -696,7 +593,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-12">
             <div class="col-span-2 md:col-span-1">
                 <span class="text-2xl font-black tracking-tighter text-white block mb-4">Timeless Resurfacing</span>
-                <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney\&rsquo;s bathroom resurfacing specialists.</p>
+                <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney&rsquo;s bathroom resurfacing specialists.</p>
             </div>
             <div>
                 <h4 class="font-bold text-white mb-4 text-sm">Quick Links</h4>
@@ -737,12 +634,35 @@
 <!-- JAVASCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    /* -- Before/After Slider -- */
+    (function(){
+        var slider = document.getElementById('hero-slider');
+        if(!slider) return;
+        var clip = document.getElementById('ba-clip');
+        var line = document.getElementById('ba-line');
+        var handle = document.getElementById('ba-handle');
+        var bImg = document.getElementById('ba-before-img');
+        var active = false;
+        function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
+        syncWidth(); window.addEventListener('resize', syncWidth);
+        function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
+        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
+        document.addEventListener('mouseup', function(){ active=false; });
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
+        document.addEventListener('touchend', function(){ active=false; });
+    })();
+
     /* -- Mobile Menu -- */
     var menuBtn = document.getElementById('menu-btn');
     var menuClose = document.getElementById('menu-close');
     var mobileNav = document.getElementById('mobile-nav');
-    window.closeMobile = function(){ if(mobileNav){ mobileNav.classList.remove('open'); document.body.style.overflow=''; } };
-    if(menuBtn && mobileNav){ menuBtn.addEventListener('click', function(){ mobileNav.classList.add('open'); document.body.style.overflow='hidden'; }); }
+    window.closeMobile = function(){ if(mobileNav){ mobileNav.classList.remove('open'); mobileNav.style.display='none'; document.body.style.overflow=''; } };
+    if(menuBtn && mobileNav){ menuBtn.addEventListener('click', function(){ mobileNav.style.display='block'; mobileNav.classList.add('open'); document.body.style.overflow='hidden'; }); }
     if(menuClose && mobileNav){ menuClose.addEventListener('click', closeMobile); }
 
     /* -- Mega Menu -- */
@@ -763,11 +683,192 @@ document.addEventListener('DOMContentLoaded', function () {
     var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 
+    /* -- Testimonial Carousel (JS-measured widths like homepage pattern) -- */
+    (function(){
+        var container = document.getElementById('tile-testimonial-carousel');
+        var track = document.getElementById('tile-testimonial-track');
+        var counter = document.getElementById('tile-testimonial-counter');
+        if (!container || !track) return;
+
+        var GAP = 24; // gap-6 in Tailwind
+        var cards = track.querySelectorAll('.tile-t-card');
+        var total = cards.length;
+        var index = 0;
+
+        function perView() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        }
+
+        function sizeCards() {
+            var w = container.offsetWidth;
+            var view = perView();
+            var cardW = (w - GAP * (view - 1)) / view;
+            cards.forEach(function(c) {
+                c.style.width = cardW + 'px';
+                c.style.minWidth = cardW + 'px';
+            });
+            // Clamp index in case of resize
+            var maxIndex = Math.max(0, total - view);
+            if (index > maxIndex) index = maxIndex;
+            applyTransform();
+        }
+
+        function applyTransform() {
+            var w = container.offsetWidth;
+            var view = perView();
+            var cardW = (w - GAP * (view - 1)) / view;
+            var offset = index * (cardW + GAP);
+            track.style.transform = 'translateX(-' + offset + 'px)';
+            if (counter) counter.textContent = (index + 1) + ' / ' + total;
+        }
+
+        window.moveTileTestimonials = function(dir) {
+            var view = perView();
+            var maxIndex = Math.max(0, total - view);
+            index += dir;
+            if (index < 0) index = maxIndex;
+            if (index > maxIndex) index = 0;
+            applyTransform();
+        };
+
+        sizeCards();
+        window.addEventListener('resize', sizeCards);
+    })();
+
     /* -- Smooth Scroll -- */
     document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = this.getAttribute('href'); if(t && t !== '#'){ var el = document.querySelector(t); if(el){ e.preventDefault(); window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' }); } } }); });
 });
 </script>
 
+<script>
+document.querySelectorAll(".ba-slider").forEach(function(slider){
+    var clip=slider.querySelector(".ba-clip"),line=slider.querySelector(".ba-line"),handle=slider.querySelector(".ba-handle"),bImg=slider.querySelector(".ba-before"),active=false;
+    function sync(){var w=slider.offsetWidth+"px";bImg.style.width=w;bImg.style.minWidth=w;bImg.style.maxWidth=w;}
+    sync(); window.addEventListener("resize",sync);
+    function move(x){var r=slider.getBoundingClientRect();var pct=((x-r.left)/r.width)*100;pct=Math.max(3,Math.min(97,pct));clip.style.width=pct+"%";line.style.left=pct+"%";handle.style.left=pct+"%";}
+    slider.addEventListener("mousedown",function(e){active=true;move(e.clientX);e.preventDefault();});
+    document.addEventListener("mousemove",function(e){if(active)move(e.clientX);});
+    document.addEventListener("mouseup",function(){active=false;});
+    slider.addEventListener("touchstart",function(e){active=true;move(e.touches[0].clientX);},{passive:true});
+    document.addEventListener("touchmove",function(e){if(active)move(e.touches[0].clientX);},{passive:true});
+    document.addEventListener("touchend",function(){active=false;});
+});
+</script>
+
+<script>
+(function(){
+    var el = document.getElementById('logo-scroller');
+    if(!el) return;
+    el.style.overflow = 'hidden';
+
+    var isDrag = false, startX = 0, scrollStart = 0;
+    var velocity = 0, lastX = 0, lastTime = 0, animFrame = 0;
+    var halfWidth = el.scrollWidth / 2;
+
+    // Build dots
+    var dotsBox = document.getElementById('logo-dots');
+    if(dotsBox && dotsBox.children.length === 0){
+        for(var i=0;i<8;i++){
+            var d=document.createElement('span');
+            d.className='inline-block rounded-full bg-slate-300 transition-all duration-200';
+            d.style.width='8px'; d.style.height='8px';
+            dotsBox.appendChild(d);
+        }
+    }
+
+    // Start centered
+    el.scrollLeft = halfWidth * 0.3;
+
+    function loop(){
+        if(el.scrollLeft <= 0) el.scrollLeft += halfWidth;
+        else if(el.scrollLeft >= halfWidth) el.scrollLeft -= halfWidth;
+    }
+
+    function updateDots(){
+        var dots = document.getElementById('logo-dots');
+        if(!dots) return;
+        var pct = (el.scrollLeft % halfWidth) / halfWidth;
+        var idx = Math.round(pct * 7) % 8;
+        for(var i=0; i<dots.children.length; i++){
+            dots.children[i].style.width = i===idx ? '18px' : '8px';
+            dots.children[i].style.background = i===idx ? '#041534' : '#cbd5e1';
+        }
+    }
+
+    // Momentum coast after release
+    function coast(){
+        if(Math.abs(velocity) < 0.5){ velocity = 0; return; }
+        velocity *= 0.95;
+        el.scrollLeft -= velocity;
+        loop();
+        updateDots();
+        animFrame = requestAnimationFrame(coast);
+    }
+
+    el.addEventListener('mousedown', function(e){
+        isDrag = true;
+        startX = e.pageX;
+        scrollStart = el.scrollLeft;
+        lastX = e.pageX;
+        lastTime = Date.now();
+        velocity = 0;
+        cancelAnimationFrame(animFrame);
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e){
+        if(!isDrag) return;
+        var now = Date.now();
+        var dt = now - lastTime;
+        if(dt > 0) velocity = (e.pageX - lastX) / dt * 16;
+        lastX = e.pageX;
+        lastTime = now;
+        el.scrollLeft = scrollStart - (e.pageX - startX);
+        loop();
+        updateDots();
+    });
+
+    document.addEventListener('mouseup', function(){
+        if(!isDrag) return;
+        isDrag = false;
+        coast();
+    });
+
+    el.addEventListener('touchstart', function(e){
+        isDrag = true;
+        startX = e.touches[0].pageX;
+        scrollStart = el.scrollLeft;
+        lastX = e.touches[0].pageX;
+        lastTime = Date.now();
+        velocity = 0;
+        cancelAnimationFrame(animFrame);
+    }, {passive:true});
+
+    document.addEventListener('touchmove', function(e){
+        if(!isDrag) return;
+        var now = Date.now();
+        var dt = now - lastTime;
+        if(dt > 0) velocity = (e.touches[0].pageX - lastX) / dt * 16;
+        lastX = e.touches[0].pageX;
+        lastTime = now;
+        el.scrollLeft = scrollStart - (e.touches[0].pageX - startX);
+        loop();
+        updateDots();
+    }, {passive:true});
+
+    document.addEventListener('touchend', function(){
+        if(!isDrag) return;
+        isDrag = false;
+        coast();
+    });
+
+    updateDots();
+    var autoStep=(el.scrollWidth/2)/10;
+    setInterval(function(){if(isDrag||Math.abs(velocity)>0.5)return;var target=el.scrollLeft+autoStep,start=el.scrollLeft,startTime=Date.now();function animate(){var p=Math.min((Date.now()-startTime)/600,1);var e=p<0.5?2*p*p:-1+(4-2*p)*p;el.scrollLeft=start+(target-start)*e;loop();updateDots();if(p<1)requestAnimationFrame(animate);}animate();},10000);
+})();
+</script>
 <div id="chat-widget-container">
     <!-- Floating bubble button (chat icon, teal green) -->
     <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="Open chat">
