@@ -6,7 +6,7 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Shower Regrouting Sydney",
-    "description": "Professional shower regrouting in Sydney. Full grout removal and replacement with epoxy or cement grout. Same-day service, 3-year warranty.",
+    "description": "Professional shower regrouting in Sydney. Full grout removal and replacement with epoxy or cement grout. Same-day service. Epoxy: 5-year warranty. Cement: 2-year warranty.",
     "provider": {
         "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",
@@ -44,7 +44,6 @@
     ]
 }
 </script>
-
 <main id="main-content">
 
 <!-- BREADCRUMB -->
@@ -83,8 +82,8 @@
                     <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Available</p>
                 </div>
                 <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
-                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 3yr</p>
-                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Warranty</p>
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 5yr</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Epoxy warranty</p>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-3 mb-4">
@@ -120,7 +119,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
     </div>
 </section>
@@ -162,8 +161,8 @@
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-after.png" alt="Clean shower grout after mould removal" class="w-full h-full object-cover absolute inset-0" /></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-before.png" alt="Mouldy shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-after.png" alt="Clean shower grout after mould removal and regrouting" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-before.png" alt="Mouldy shower grout before regrouting" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -188,8 +187,8 @@
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-after.png" alt="Repaired shower grout" class="w-full h-full object-cover absolute inset-0" /></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-before.png" alt="Cracked crumbling grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-after.png" alt="Repaired shower grout after crumbling fix" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-before.png" alt="Cracked crumbling shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -214,8 +213,8 @@
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-after.png" alt="Clean white grout" class="w-full h-full object-cover absolute inset-0" /></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-before.png" alt="Discoloured stained grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-after.png" alt="Clean white grout after discolouration removal" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-before.png" alt="Discoloured stained shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -279,6 +278,7 @@
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Easy to repair later</p><p class="text-xs text-secondary">Simple to patch or regrout individual joints</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Needs sealing in wet areas</p><p class="text-xs text-secondary">Periodic resealing keeps it waterproof</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Lifespan: 5-12 years</p><p class="text-xs text-secondary">With regular sealing and proper ventilation</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-blue-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">2-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
                 </ul>
                 </div>
             </div>
@@ -299,6 +299,7 @@
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Never needs sealing</p><p class="text-xs text-secondary">Set and forget. Zero maintenance.</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lifespan: 15-20 years</p><p class="text-xs text-secondary">Outlasts cement by 2-3x in wet areas</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span><div><p class="font-bold text-primary text-sm">Higher upfront cost</p><p class="text-xs text-secondary">3-5x material cost, but amortised over lifespan</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">5-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
                 </ul>
                 </div>
             </div>
@@ -368,7 +369,7 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
             <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
             <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most showers regrouted in a single day.</p></div></div>
-            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Epoxy: 5yr. Cement: 2yr. Fully insured with public liability.</p></div></div>
             <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div></div>
         </div>
     </div>

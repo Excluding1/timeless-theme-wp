@@ -6,7 +6,7 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Floor Tile Regrouting Sydney",
-    "description": "Professional floor tile regrouting in Sydney. Bathroom, laundry, and kitchen floor grout removal and replacement. Epoxy and cement options. Same-day service, up to 3-year warranty.",
+    "description": "Professional floor tile regrouting in Sydney. Bathroom, laundry, and kitchen floor grout removal and replacement. Epoxy and cement options. Same-day service. Epoxy: 5-year warranty. Cement: 2-year warranty.",
     "provider": {
         "@type": "HomeAndConstructionBusiness",
         "name": "Timeless Resurfacing",
@@ -82,8 +82,8 @@
                     <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Available</p>
                 </div>
                 <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
-                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 3yr</p>
-                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Warranty</p>
+                    <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 5yr</p>
+                    <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Epoxy warranty</p>
                 </div>
             </div>
             <div class="flex flex-col sm:flex-row gap-3 mb-4">
@@ -121,7 +121,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-4">
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
-        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
     </div>
 </section>
@@ -228,43 +228,6 @@
     </div>
 </section>
 
-<!-- CLEANING vs REGROUTING — Floor-specific decision section -->
-<section class="py-16 sm:py-20 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Cleaning vs Regrouting</h2>
-            <p class="text-secondary max-w-2xl mx-auto">Not sure which you need? Here&rsquo;s how to tell. We&rsquo;ll confirm after seeing your photos.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div class="bg-white rounded-2xl p-8 border-2 border-emerald-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <div class="absolute top-0 right-0 bg-emerald-100 text-emerald-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Cheaper Option</div>
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-emerald-600" aria-hidden="true">cleaning_services</span></div>
-                    <h3 class="text-xl font-extrabold text-primary">Grout Cleaning + Seal</h3>
-                </div>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Grout is stained but structurally sound</p><p class="text-xs text-secondary">No cracks, no crumbling, just discolouration</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Surface-level dirt and soap scum</p><p class="text-xs text-secondary">Professional deep clean can restore colour</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-emerald-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Sealed afterwards for protection</p><p class="text-xs text-secondary">Keeps grout looking clean for 1-2 years</p></div></li>
-                </ul>
-            </div>
-            <div class="bg-white rounded-2xl p-8 border-2 border-primary relative overflow-hidden ring-2 ring-primary/10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
-                <div class="absolute top-0 right-0 bg-tertiary-fixed-dim text-on-tertiary-fixed text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Permanent Fix</div>
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">construction</span></div>
-                    <h3 class="text-xl font-extrabold text-primary">Full Regrout</h3>
-                </div>
-                <ul class="space-y-4">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Grout is cracked, crumbling, or missing</p><p class="text-xs text-secondary">Structural failure that cleaning can&rsquo;t fix</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Tiles are loose or moving</p><p class="text-xs text-secondary">Grout has failed and tiles need re-securing</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Mould keeps coming back after cleaning</p><p class="text-xs text-secondary">Mould is inside the grout, not on the surface</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-primary text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Epoxy upgrade available</p><p class="text-xs text-secondary">Never needs sealing, lasts 15-20 years</p></div></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- CEMENT vs EPOXY GROUT COMPARISON -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
@@ -275,6 +238,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <div class="bg-blue-50/50 rounded-2xl border-2 border-blue-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-blue-100 text-blue-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Budget-Friendly</div>
+                <div class="aspect-[16/9] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/cement-grout-example.png" alt="Close-up of fresh cement grout between floor tiles" class="w-full h-full object-cover" />
+                </div>
                 <div class="p-8">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-blue-600" aria-hidden="true">construction</span></div>
@@ -283,13 +249,18 @@
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lower upfront cost</p><p class="text-xs text-secondary">Great option when budget is the priority</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Wide colour range</p><p class="text-xs text-secondary">Easy to match existing tiles and decor</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Needs resealing every 1-2 years</p><p class="text-xs text-secondary">Most homeowners skip this, accelerating failure</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Lifespan: 5-10 years on floors</p><p class="text-xs text-secondary">Foot traffic wears it faster than wall grout</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Easy to repair later</p><p class="text-xs text-secondary">Simple to patch or regrout individual joints</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Needs resealing every 1-2 years</p><p class="text-xs text-secondary">Periodic resealing keeps it waterproof</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Lifespan: 5-10 years on floors</p><p class="text-xs text-secondary">With regular sealing and proper ventilation</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-blue-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">2-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
                 </ul>
                 </div>
             </div>
             <div class="bg-green-50/50 rounded-2xl border-2 border-green-300 relative overflow-hidden ring-2 ring-green-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Recommended</div>
+                <div class="aspect-[16/9] bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/epoxy-grout-example.png" alt="Close-up of fresh epoxy grout between floor tiles" class="w-full h-full object-cover" />
+                </div>
                 <div class="p-8">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-green-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span></div>
@@ -297,9 +268,11 @@
                 </div>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">100% waterproof</p><p class="text-xs text-secondary">Zero water absorption, even with constant mopping</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Stain-proof and mould-resistant</p><p class="text-xs text-secondary">Non-porous surface repels everything</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Never needs resealing</p><p class="text-xs text-secondary">Set and forget. No annual maintenance.</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Resists foot traffic wear</p><p class="text-xs text-secondary">Harder than cement, doesn&rsquo;t crack or crumble</p></div></li>
                     <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lifespan: 15-20 years</p><p class="text-xs text-secondary">Outlasts cement by 2-3x on high-traffic floors</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">5-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
                 </ul>
                 </div>
             </div>
@@ -369,7 +342,7 @@
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
             <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
             <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most bathroom floors regrouted in a single day.</p></div></div>
-            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Epoxy: 5yr. Cement: 2yr. Fully insured with public liability.</p></div></div>
             <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div></div>
         </div>
     </div>
