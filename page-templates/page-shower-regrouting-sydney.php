@@ -72,6 +72,18 @@
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Mouldy, cracked, or discoloured grout letting water behind your tiles? We remove every joint and replace it with fresh grout. Epoxy or cement. Your tiles stay, the problems go.
             </p>
+            <!-- MOBILE: Hero image between paragraph and stats -->
+            <div class="md:hidden mb-6">
+                <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/hero.png" alt="Shower regrouting before and after comparison" class="w-full h-full object-cover" />
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
+                        <span class="text-xs font-bold text-primary">Before &amp; After</span>
+                        <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
+                    </div>
+                </div>
+            </div>
             <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
                 <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
                     <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">1 Day</p>
@@ -99,8 +111,8 @@
                 <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
         </div>
-        <div>
-            <!-- HERO IMAGE (single side-by-side before/after image) -->
+        <div class="hidden md:block">
+            <!-- HERO IMAGE (DESKTOP — single side-by-side before/after image) -->
             <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/hero.png" alt="Shower regrouting before and after comparison" class="w-full h-full object-cover" />
                 <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>

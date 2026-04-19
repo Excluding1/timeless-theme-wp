@@ -70,6 +70,27 @@
             <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6">
                 Chipped, stained, or worn basin dragging down your bathroom? We restore porcelain, ceramic, and cast iron basins to like-new condition. Done in hours, no plumber needed.
             </p>
+            <!-- MOBILE: Hero image between paragraph and stats -->
+            <div class="md:hidden mb-6">
+                <div id="hero-slider-mobile" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
+                    <div class="absolute inset-0 w-full h-full">
+                        <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/hero-after.png" alt="Restored basin with glossy black finish" class="w-full h-full object-cover" draggable="false" />
+                    </div>
+                    <div id="mob-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+                        <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/hero-before.png" alt="Worn basin before restoration" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" draggable="false" />
+                    </div>
+                    <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
+                        <span class="text-xs font-bold text-primary">Drag to Compare</span>
+                        <span class="text-xs font-bold text-on-primary-container">Completed in 2-4 Hours</span>
+                    </div>
+                </div>
+            </div>
             <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-8">
                 <div class="text-center bg-white/10 rounded-lg px-2 sm:px-3 py-3">
                     <p class="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">Up to 80%</p>
@@ -97,8 +118,8 @@
                 <p class="text-sm font-medium text-white/80"><strong class="text-white">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
             </div>
         </div>
-        <div>
-            <!-- HERO BEFORE/AFTER SLIDER -->
+        <div class="hidden md:block">
+            <!-- HERO BEFORE/AFTER SLIDER (DESKTOP) -->
             <div id="hero-slider" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
                 <!-- AFTER image -->
                 <div class="absolute inset-0 w-full h-full">

@@ -45,6 +45,43 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('touchend', function(){ active=false; });
     })();
 
+    /* ── Mobile Hero Before/After Slider (shared across pages) ── */
+    (function(){
+        var slider = document.getElementById('hero-slider-mobile');
+        if(!slider) return;
+        var clip   = document.getElementById('mob-clip');
+        var line   = document.getElementById('mob-line');
+        var handle = document.getElementById('mob-handle');
+        var bImg   = document.getElementById('mob-before-img');
+        var active = false;
+
+        function syncWidth(){
+            var w = slider.offsetWidth + 'px';
+            if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; }
+        }
+        syncWidth();
+        slider.classList.add('ba-ready');
+        window.addEventListener('resize', syncWidth);
+
+        function move(x){
+            var r = slider.getBoundingClientRect();
+            var pct = ((x - r.left) / r.width) * 100;
+            pct = Math.max(3, Math.min(97, pct));
+            clip.style.width   = pct + '%';
+            line.style.left    = pct + '%';
+            handle.style.left  = pct + '%';
+        }
+        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
+        document.addEventListener('mouseup', function(){ active=false; });
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
+        document.addEventListener('touchend', function(){ active=false; });
+    })();
+
     /* ── Section 2B sliders — mark ready after images load ── */
     document.querySelectorAll('.ba-slider').forEach(function(s){ s.classList.add('ba-ready'); });
 
