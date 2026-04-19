@@ -180,7 +180,7 @@
                 <h3 class="font-bold text-primary text-sm mb-2 group-hover:underline">Silicone Replacement</h3>
                 <p class="text-xs text-secondary leading-relaxed">Strip and replace deteriorated silicone at all wet-area junctions. Prevents leaks, mould, and water damage behind tiles.</p>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover-sydney/' ) ); ?>" class="group bg-primary/[0.03] rounded-xl p-6 hover:shadow-lg transition-all border-2 border-primary ring-1 ring-primary/10 reveal">
+            <a href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 border-2 border-primary ring-1 ring-primary/10 reveal">
                 <span class="material-symbols-outlined text-2xl text-primary mb-3 block" aria-hidden="true">auto_awesome</span>
                 <h3 class="font-bold text-primary text-sm mb-2 group-hover:underline">Full Bathroom Makeover Package</h3>
                 <p class="text-xs text-secondary leading-relaxed">Combine multiple services for a complete transformation. Ideal for pre-sale or major tenant turnarounds where the whole bathroom needs attention.</p>

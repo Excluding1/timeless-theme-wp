@@ -219,7 +219,7 @@
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Dust and mess through your entire home</li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
+            <div class="bg-white rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Our Bathroom Makeover</h3>
                 <ul class="space-y-3 text-sm text-secondary">
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> A fraction of renovation cost</li>
