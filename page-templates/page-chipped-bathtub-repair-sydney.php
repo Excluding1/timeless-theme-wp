@@ -68,7 +68,7 @@
                 Chip <span class="text-tertiary-fixed-dim">Repair</span>
             </h1>
             <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6">
-                Chip in your bath, basin, or tiles? Hairline crack spreading? We fill, shape, and colour-match every repair so it's invisible. Works on porcelain, enamel, acrylic, ceramic, and fibreglass. Done in hours, not days.&rsquo;s a chip? Hairline crack spreading? We fill, shape, and colour-match every repair so it&rsquo;s invisible. Done in hours, not days.
+                Chip in your bath, basin, or tiles? Hairline crack spreading? We fill, shape, and colour-match every repair so it&rsquo;s invisible. Works on porcelain, enamel, acrylic, ceramic, and fibreglass. Done in hours, not days.
             </p>
             <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-8">
                 <div class="text-center bg-white/10 rounded-lg px-2 sm:px-3 py-3">
