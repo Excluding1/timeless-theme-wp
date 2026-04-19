@@ -160,6 +160,7 @@
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="gallery.html">Before &amp; After</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="areas.html">Service Areas</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="about.html">About</a>
+                <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="faqs.html">FAQs</a>
                 <a class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 transition-all" href="#quote">Get a Free Quote</a>
             </div>
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
@@ -419,30 +420,61 @@
             </article>
 
         </div>
-        <p class="text-center text-sm text-secondary mt-10">More transformations added as we complete new jobs across Sydney.</p>
+        <!-- Load More button -->
+        <div class="text-center mt-10" id="load-more-wrap">
+            <button id="load-more-btn" class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all">Load More Transformations <span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></button>
+        </div>
+        <p class="text-center text-sm text-secondary mt-6">More transformations added as we complete new jobs across Sydney.</p>
     </div>
 </section>
 
-<!-- Gallery Filter JS -->
+<!-- Gallery Filter + Load More JS -->
 <script>
+var CARDS_PER_PAGE = 6;
+var visibleCount = CARDS_PER_PAGE;
+var currentFilter = 'all';
+
+function getFilteredCards() {
+    var all = Array.from(document.querySelectorAll('.gallery-card'));
+    if (currentFilter === 'all') return all;
+    return all.filter(function(c) { return c.getAttribute('data-category') === currentFilter; });
+}
+
+function updateVisibility() {
+    var filtered = getFilteredCards();
+    filtered.forEach(function(card, i) {
+        card.style.display = i < visibleCount ? '' : 'none';
+    });
+    // Hide cards not matching filter
+    document.querySelectorAll('.gallery-card').forEach(function(card) {
+        if (currentFilter !== 'all' && card.getAttribute('data-category') !== currentFilter) {
+            card.style.display = 'none';
+        }
+    });
+    // Show/hide Load More button
+    var btn = document.getElementById('load-more-wrap');
+    if (btn) btn.style.display = visibleCount >= filtered.length ? 'none' : '';
+}
+
 document.querySelectorAll('.gallery-filter').forEach(function(btn) {
     btn.addEventListener('click', function() {
-        var filter = this.getAttribute('data-filter');
-        // Update active button style
+        currentFilter = this.getAttribute('data-filter');
+        visibleCount = CARDS_PER_PAGE;
         document.querySelectorAll('.gallery-filter').forEach(function(b) {
             b.className = b.className.replace('bg-primary text-white', 'bg-surface-container-high text-secondary');
         });
         this.className = this.className.replace('bg-surface-container-high text-secondary', 'bg-primary text-white');
-        // Show/hide cards
-        document.querySelectorAll('.gallery-card').forEach(function(card) {
-            if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+        updateVisibility();
     });
 });
+
+document.getElementById('load-more-btn').addEventListener('click', function() {
+    visibleCount += CARDS_PER_PAGE;
+    updateVisibility();
+});
+
+// Initial state — show first 6
+updateVisibility();
 </script>
 
 <!-- CTA -->
