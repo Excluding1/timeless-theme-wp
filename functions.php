@@ -245,12 +245,12 @@ add_action( 'customize_register', 'timeless_customizer' );
 
 /** Get phone display number */
 function timeless_phone() {
-    return esc_html( get_theme_mod( 'timeless_phone', '0400 000 000' ) );
+    return esc_html( get_theme_mod( 'timeless_phone', '0451 110 154' ) );
 }
 
 /** Get phone tel: link */
 function timeless_phone_link() {
-    return esc_attr( get_theme_mod( 'timeless_phone_link', '+61400000000' ) );
+    return esc_attr( get_theme_mod( 'timeless_phone_link', '+61451110154' ) );
 }
 
 /** Get NSW licence number (empty string if unlicensed) */
