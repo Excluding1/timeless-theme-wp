@@ -103,7 +103,7 @@
             <!-- HERO IMAGE (single before/after composite) -->
             <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
                 <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-5xl text-emerald-400" aria-hidden="true">grid_view</span>
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/hero.png" alt="Floor tile regrouting before and after" class="w-full h-full object-cover" />
                 </div>
                 <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
                 <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
@@ -163,8 +163,8 @@
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">grid_view</span></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/crumbling-after.png" alt="Floor grout after repair" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/crumbling-before.png" alt="Cracked crumbling floor grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -189,8 +189,8 @@
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">auto_awesome</span></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">opacity</span></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/discoloured-after.png" alt="Clean floor grout" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/discoloured-before.png" alt="Discoloured floor grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -215,8 +215,8 @@
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">shower</span></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">mold</span></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/mouldy-after.png" alt="Clean floor grout after mould removal" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/mouldy-before.png" alt="Mouldy floor grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -239,7 +239,7 @@
             <div class="bg-blue-50/50 rounded-2xl border-2 border-blue-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-blue-100 text-blue-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Budget-Friendly</div>
                 <div class="aspect-[16/9] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/cement-grout-example.png" alt="Close-up of fresh cement grout between floor tiles" class="w-full h-full object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/cement-grout-example.png" alt="Close-up of fresh cement grout between floor tiles" class="w-full h-full object-cover" />
                 </div>
                 <div class="p-8">
                 <div class="flex items-center gap-3 mb-6">
@@ -259,7 +259,7 @@
             <div class="bg-green-50/50 rounded-2xl border-2 border-green-300 relative overflow-hidden ring-2 ring-green-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Recommended</div>
                 <div class="aspect-[16/9] bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/epoxy-grout-example.png" alt="Close-up of fresh epoxy grout between floor tiles" class="w-full h-full object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/services/floor-tile-regrouting/epoxy-grout-example.png" alt="Close-up of fresh epoxy grout between floor tiles" class="w-full h-full object-cover" />
                 </div>
                 <div class="p-8">
                 <div class="flex items-center gap-3 mb-6">
