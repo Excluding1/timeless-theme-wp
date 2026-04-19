@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
             bImg.style.maxWidth = w;
         }
         syncWidth();
+        slider.classList.add('ba-ready');
         window.addEventListener('resize', syncWidth);
 
         function move(x){
@@ -43,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
         document.addEventListener('touchend', function(){ active=false; });
     })();
+
+    /* ── Section 2B sliders — mark ready after images load ── */
+    document.querySelectorAll('.ba-slider').forEach(function(s){ s.classList.add('ba-ready'); });
 
     /* ── Mobile Menu ── */
     const menuBtn = document.getElementById('menu-btn');
