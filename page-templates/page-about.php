@@ -175,7 +175,7 @@
             </div>
             <div class="lg:w-1/2 reveal">
                 <div class="grid grid-cols-2 gap-4">
-                    <img class="rounded-lg shadow-lg mt-12 w-full h-auto aspect-[3/4] object-cover" alt="Professional bathroom resurfacing result — gleaming white bathtub" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom.png" loading="lazy" width="400" height="533" />
+                    <img class="rounded-lg shadow-lg mt-12 w-full h-auto aspect-[3/4] object-cover" alt="Professional bathroom resurfacing result" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom-3.png" loading="lazy" width="400" height="533" />
                     <img class="rounded-lg shadow-lg w-full h-auto aspect-[3/4] object-cover" alt="Beautiful bathroom after professional resurfacing" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom-2.png" loading="lazy" width="400" height="533" />
                 </div>
             </div>
