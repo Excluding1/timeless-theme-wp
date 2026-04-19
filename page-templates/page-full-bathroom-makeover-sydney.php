@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Complete bathroom makeover in Sydney — bath, tiles, grout, vanity and basin all resurfaced to look brand new without renovation" src="<?php echo get_template_directory_uri(); ?>/images/services/full-bathroom-makeover/hero.jpg" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Complete bathroom makeover in Sydney — bath, tiles, grout, vanity and basin all resurfaced to look brand new without renovation" src="<?php echo get_template_directory_uri(); ?>/images/services/full-bathroom-makeover/hero.png" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>
