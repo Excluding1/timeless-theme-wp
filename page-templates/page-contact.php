@@ -92,6 +92,10 @@
                 <p class="text-xs text-secondary">Wollongong, Central Coast, Blue Mountains</p>
             </div>
         </div>
+        <!-- Quote Form CTA with gold border -->
+        <div class="mt-10 text-center">
+            <a href="#quote" class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all border-2 border-tertiary-fixed-dim">Fill Out Quote Form <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_downward</span></a>
+        </div>
     </div>
 </section>
 
