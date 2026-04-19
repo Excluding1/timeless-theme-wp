@@ -98,24 +98,13 @@
             </div>
         </div>
         <div>
-            <!-- HERO BEFORE/AFTER SLIDER -->
-            <div id="hero-slider" class="rounded-xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:4/3;cursor:ew-resize;">
-                <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-5xl text-emerald-400" aria-hidden="true">handyman</span>
-                </div>
-                <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;">
-                    <div class="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-300 to-slate-400 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-5xl text-slate-500" aria-hidden="true">broken_image</span>
-                    </div>
-                </div>
-                <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:66%;z-index:20;cursor:ew-resize;"></div>
-                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
+            <!-- HERO IMAGE (single before/after composite) -->
+            <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/hero.png" alt="Chip repair before and after" class="w-full h-full object-cover" />
                 <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
                 <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
-                    <span class="text-xs font-bold text-primary">Drag to Compare</span>
+                    <span class="text-xs font-bold text-primary">Before &amp; After</span>
                     <span class="text-xs font-bold text-on-primary-container">Repaired in Hours</span>
                 </div>
             </div>
@@ -178,8 +167,8 @@
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">handyman</span></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">broken_image</span></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/chips-after.png" alt="Bath after chip repair" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/chips-before.png" alt="Chipped bathtub" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:66%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -204,8 +193,8 @@
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">verified</span></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">texture</span></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/cracks-after.png" alt="Bath after crack repair" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/cracks-before.png" alt="Hairline cracks" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
@@ -230,8 +219,8 @@
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-emerald-400" aria-hidden="true">auto_awesome</span></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><span class="material-symbols-outlined text-4xl sm:text-5xl text-slate-400" aria-hidden="true">warning</span></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/rust-after.png" alt="Bath after rust repair" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/chip-repair/rust-before.png" alt="Rust staining" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
                         <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
