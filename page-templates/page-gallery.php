@@ -157,20 +157,23 @@
                 <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Shower Sealing</span></div>
             </article>
         </div>
-        <p class="text-center text-sm text-secondary mt-10">More transformations added as we complete new jobs across Sydney.</p>
+        <div class="text-center mt-10" id="load-more-wrap">
+            <button id="load-more-btn" class="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-lg hover:shadow-xl transition-all">Load More Transformations <span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span></button>
+        </div>
+        <p class="text-center text-sm text-secondary mt-6">More transformations added as we complete new jobs across Sydney.</p>
     </div>
 </section>
 
-<!-- Gallery Filter + Lightbox JS -->
+<!-- Gallery Filter + Load More JS -->
 <script>
-document.querySelectorAll('.gallery-filter').forEach(function(btn){
-    btn.addEventListener('click',function(){
-        var filter=this.getAttribute('data-filter');
-        document.querySelectorAll('.gallery-filter').forEach(function(b){b.className=b.className.replace('bg-primary text-white','bg-surface-container-high text-secondary');});
-        this.className=this.className.replace('bg-surface-container-high text-secondary','bg-primary text-white');
-        document.querySelectorAll('.gallery-card').forEach(function(card){card.style.display=(filter==='all'||card.getAttribute('data-category')===filter)?'':'none';});
-    });
-});
+var CARDS_PER_PAGE = 9;
+var visibleCount = CARDS_PER_PAGE;
+var currentFilter = 'all';
+function getFilteredCards(){var a=Array.from(document.querySelectorAll('.gallery-card'));if(currentFilter==='all')return a;return a.filter(function(c){return c.getAttribute('data-category')===currentFilter;});}
+function updateVisibility(){var f=getFilteredCards();f.forEach(function(c,i){c.style.display=i<visibleCount?'':'none';});document.querySelectorAll('.gallery-card').forEach(function(c){if(currentFilter!=='all'&&c.getAttribute('data-category')!==currentFilter)c.style.display='none';});var b=document.getElementById('load-more-wrap');if(b)b.style.display=visibleCount>=f.length?'none':'';}
+document.querySelectorAll('.gallery-filter').forEach(function(btn){btn.addEventListener('click',function(){currentFilter=this.getAttribute('data-filter');visibleCount=CARDS_PER_PAGE;document.querySelectorAll('.gallery-filter').forEach(function(b){b.className=b.className.replace('bg-primary text-white','bg-surface-container-high text-secondary');});this.className=this.className.replace('bg-surface-container-high text-secondary','bg-primary text-white');updateVisibility();});});
+document.getElementById('load-more-btn').addEventListener('click',function(){visibleCount+=CARDS_PER_PAGE;updateVisibility();});
+updateVisibility();
 </script>
 
 <!-- CTA -->

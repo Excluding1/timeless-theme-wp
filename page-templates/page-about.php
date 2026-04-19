@@ -55,7 +55,7 @@
                 We kept seeing Sydney homeowners quoted $25,000&ndash;$50,000 to renovate bathrooms that just needed resurfacing. So we built a better option.
             </p>
             <div class="flex flex-wrap gap-4">
-                <a class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm tracking-wide shadow-lg hover:shadow-primary/20 transition-all" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Get a Free Quote</a>
+                <a class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm tracking-wide shadow-lg hover:shadow-primary/20 transition-all inline-flex items-center gap-2 border-2 border-tertiary-fixed-dim" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 <a class="bg-surface-container-high text-primary px-8 py-4 rounded-lg font-bold text-sm hover:bg-surface-container-highest transition-all" href="<?php echo esc_url( home_url( '/#services' ) ); ?>">View Our Services</a>
             </div>
         </div>
