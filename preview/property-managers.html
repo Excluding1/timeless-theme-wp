@@ -511,24 +511,26 @@
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How It Works</h2>
             <p class="text-secondary max-w-2xl mx-auto">Streamlined for busy property managers. Minimal back-and-forth.</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            <!-- Connector line (desktop only) -->
+            <div class="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
             <div class="text-center reveal bg-white rounded-xl p-6 border border-surface-container">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md">1</div>
+                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md relative z-10">1</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Send Photos</h3>
                 <p class="text-xs text-secondary">Text or email 3-4 photos of the bathroom. Include the suburb and what needs doing.</p>
             </div>
             <div class="text-center reveal bg-white rounded-xl p-6 border border-surface-container">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md">2</div>
+                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md relative z-10">2</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Get Fixed-Price Quote</h3>
                 <p class="text-xs text-secondary">We review and send a detailed fixed-price quote within hours. No surprises, no extras.</p>
             </div>
             <div class="text-center reveal bg-white rounded-xl p-6 border border-surface-container">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md">3</div>
+                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md relative z-10">3</div>
                 <h3 class="font-bold text-primary text-sm mb-2">We Complete the Work</h3>
                 <p class="text-xs text-secondary">Our team arrives on the scheduled date, completes the job in 1-3 days. Key access arranged.</p>
             </div>
             <div class="text-center reveal bg-white rounded-xl p-6 border border-surface-container">
-                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md">4</div>
+                <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md relative z-10">4</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Before &amp; After Documentation</h3>
                 <p class="text-xs text-secondary">Professional before/after photos sent on completion for your records and listings.</p>
             </div>
@@ -547,7 +549,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Full Renovation -->
-            <div class="bg-white rounded-2xl p-8 border-2 border-error/20 relative overflow-hidden">
+            <div class="bg-white rounded-2xl p-8 border-2 border-error/20 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300">
                 <div class="absolute top-0 right-0 bg-error/10 text-error text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">High Cost</div>
                 <h3 class="text-xl font-extrabold text-primary mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-error" aria-hidden="true">construction</span> Full Renovation
@@ -924,5 +926,88 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 </script>
+<script>
+/* -- Logo Scroller Momentum Carousel (populates #logo-dots) -- */
+(function(){
+    var el = document.getElementById('logo-scroller');
+    if(!el) return;
+    el.style.overflow = 'hidden';
+    var isDrag = false, startX = 0, scrollStart = 0;
+    var velocity = 0, lastX = 0, lastTime = 0, animFrame = 0;
+    var halfWidth = el.scrollWidth / 2;
+    var dotsBox = document.getElementById('logo-dots');
+    if(dotsBox && dotsBox.children.length === 0){
+        for(var i=0;i<8;i++){
+            var d=document.createElement('span');
+            d.className='inline-block rounded-full bg-slate-300 transition-all duration-200';
+            d.style.width='8px'; d.style.height='8px';
+            dotsBox.appendChild(d);
+        }
+    }
+    el.scrollLeft = halfWidth * 0.3;
+    function loop(){
+        if(el.scrollLeft <= 0) el.scrollLeft += halfWidth;
+        else if(el.scrollLeft >= halfWidth) el.scrollLeft -= halfWidth;
+    }
+    function updateDots(){
+        var dots = document.getElementById('logo-dots');
+        if(!dots) return;
+        var pct = (el.scrollLeft % halfWidth) / halfWidth;
+        var idx = Math.round(pct * 7) % 8;
+        for(var i=0; i<dots.children.length; i++){
+            dots.children[i].style.width = i===idx ? '18px' : '8px';
+            dots.children[i].style.background = i===idx ? '#041534' : '#cbd5e1';
+        }
+    }
+    function coast(){
+        if(Math.abs(velocity) < 0.5){ velocity = 0; return; }
+        velocity *= 0.95;
+        el.scrollLeft -= velocity;
+        loop(); updateDots();
+        animFrame = requestAnimationFrame(coast);
+    }
+    el.addEventListener('mousedown', function(e){
+        isDrag = true; startX = e.pageX; scrollStart = el.scrollLeft;
+        lastX = e.pageX; lastTime = Date.now(); velocity = 0;
+        cancelAnimationFrame(animFrame); e.preventDefault();
+    });
+    document.addEventListener('mousemove', function(e){
+        if(!isDrag) return;
+        var now = Date.now(); var dt = now - lastTime;
+        if(dt > 0) velocity = (e.pageX - lastX) / dt * 16;
+        lastX = e.pageX; lastTime = now;
+        el.scrollLeft = scrollStart - (e.pageX - startX);
+        loop(); updateDots();
+    });
+    document.addEventListener('mouseup', function(){
+        if(!isDrag) return; isDrag = false; coast();
+    });
+    el.addEventListener('touchstart', function(e){
+        isDrag = true; startX = e.touches[0].pageX; scrollStart = el.scrollLeft;
+        lastX = e.touches[0].pageX; lastTime = Date.now(); velocity = 0;
+        cancelAnimationFrame(animFrame);
+    }, {passive:true});
+    document.addEventListener('touchmove', function(e){
+        if(!isDrag) return;
+        var now = Date.now(); var dt = now - lastTime;
+        if(dt > 0) velocity = (e.touches[0].pageX - lastX) / dt * 16;
+        lastX = e.touches[0].pageX; lastTime = now;
+        el.scrollLeft = scrollStart - (e.touches[0].pageX - startX);
+        loop(); updateDots();
+    }, {passive:true});
+    document.addEventListener('touchend', function(){
+        if(!isDrag) return; isDrag = false; coast();
+    });
+    // Auto-scroll every 10 seconds
+    setInterval(function(){
+        if(!isDrag){
+            el.scrollLeft += 200;
+            loop(); updateDots();
+        }
+    }, 10000);
+    updateDots();
+})();
+</script>
+
 </body>
 </html>
