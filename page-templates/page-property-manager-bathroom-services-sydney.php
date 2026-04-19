@@ -36,7 +36,7 @@
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [
             { "@type": "Question", "name": "Do you work directly with property managers?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We work with property managers, real estate agents, and landlords across Sydney. We understand the urgency of tenant turnarounds and can coordinate directly with your office, tenants, or tradespeople as needed. We provide professional documentation including before and after photos for your records." } },
-            { "@type": "Question", "name": "Can you quote from photos only?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — this is ideal for remote landlords and interstate investors. Send us 3-4 clear photos of the bathroom and we'll provide a fixed-price quote within hours. No call-out fee, no obligation. This saves time for property managers who manage multiple properties and need quick answers." } },
+            { "@type": "Question", "name": "Can you quote from photos only?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. this is ideal for remote landlords and interstate investors. Send us 3-4 clear photos of the bathroom and we'll provide a fixed-price quote within hours. No call-out fee, no obligation. This saves time for property managers who manage multiple properties and need quick answers." } },
             { "@type": "Question", "name": "How fast can you complete a job?", "acceptedAnswer": { "@type": "Answer", "text": "Most individual services such as regrouting, bath resurfacing, or silicone replacement are completed in 1 day. Larger jobs combining multiple services typically take 2-3 days. We schedule around your vacancy windows and can often start within days of approval." } },
             { "@type": "Question", "name": "Do you provide before and after photos?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We photograph every job before and after completion. These are useful for end-of-lease documentation, landlord reports, insurance records, and marketing materials for rental listings." } },
             { "@type": "Question", "name": "Can you handle multiple properties?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. We regularly work with property managers who look after multiple properties across Sydney. We can schedule jobs efficiently across your portfolio and maintain consistent quality and pricing." } },
@@ -71,10 +71,10 @@
             </h1>
             <p class="text-lg sm:text-xl text-on-primary-container font-medium mb-4">Fast Bathroom Turnarounds for Rental &amp; Investment Properties</p>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                The bathroom is the number one reason tenants complain and buyers walk away. Dated tiles, mouldy grout, chipped baths, and peeling surfaces cost you rent and sale price every week they're left untouched. <strong>We fix rental and investment property bathrooms fast &mdash; so you can get tenants in or get to settlement without delays.</strong>
+                The bathroom is the number one reason tenants complain and buyers walk away. Dated tiles, mouldy grout, chipped baths, and peeling surfaces cost you rent and sale price every week they're left untouched. <strong>We fix rental and investment property bathrooms fast. so you can get tenants in or get to settlement without delays.</strong>
             </p>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                No full renovation needed. We resurface, regrout, and restore what's already there &mdash; typically in 1-3 days &mdash; and provide fixed-price quotes from photos so you can approve jobs without site visits or back-and-forth.
+                No full renovation needed. We resurface, regrout, and restore what's already there. typically in 1-3 days. and provide fixed-price quotes from photos so you can approve jobs without site visits or back-and-forth.
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
@@ -94,11 +94,10 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Professional bathroom resurfacing for property managers and landlords in Sydney — rental property bathroom restoration" src="<?php echo get_template_directory_uri(); ?>/images/services/property-manager/hero.png" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Professional bathroom resurfacing for property managers and landlords in Sydney. rental property bathroom restoration" src="<?php echo get_template_directory_uri(); ?>/images/services/property-manager/hero.png" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>
@@ -117,7 +116,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Common Property Scenarios</h2>
-        <p class="text-secondary max-w-3xl mb-10">Whether you're turning a property between tenants, preparing for sale, or responding to maintenance requests &mdash; we've handled it before and can move quickly.</p>
+        <p class="text-secondary max-w-3xl mb-10">Whether you're turning a property between tenants, preparing for sale, or responding to maintenance requests. we've handled it before and can move quickly.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
@@ -133,12 +132,12 @@
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">feedback</span>
                 <h3 class="font-bold text-primary mb-2">Tenant Complaints</h3>
-                <p class="text-sm text-secondary leading-relaxed">Mouldy grout, stained bathtubs, dated tiles, and peeling surfaces are common maintenance requests. We resolve these issues properly &mdash; not with temporary fixes that generate repeat call-outs.</p>
+                <p class="text-sm text-secondary leading-relaxed">Mouldy grout, stained bathtubs, dated tiles, and peeling surfaces are common maintenance requests. We resolve these issues properly. not with temporary fixes that generate repeat call-outs.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">trending_up</span>
                 <h3 class="font-bold text-primary mb-2">Vacant Property Upgrade</h3>
-                <p class="text-sm text-secondary leading-relaxed">Maximise rental yield with a fresh bathroom during vacancy periods. A cost-effective refresh can justify higher rent and attract better-quality tenants &mdash; without a full renovation.</p>
+                <p class="text-sm text-secondary leading-relaxed">Maximise rental yield with a fresh bathroom during vacancy periods. A cost-effective refresh can justify higher rent and attract better-quality tenants. without a full renovation.</p>
             </div>
         </div>
     </div>
@@ -148,7 +147,7 @@
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Services for Property Managers</h2>
-        <p class="text-secondary max-w-3xl mb-10">Every service we offer is relevant to rental and investment properties. All work is completed by NSW-licensed tradespeople &mdash; important for your compliance obligations under NSW Fair Trading requirements.</p>
+        <p class="text-secondary max-w-3xl mb-10">Every service we offer is relevant to rental and investment properties. All work is completed by NSW-licensed tradespeople. important for your compliance obligations under NSW Fair Trading requirements.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all border border-surface-container reveal">
@@ -249,21 +248,21 @@
             <div class="bg-white rounded-xl p-8 border border-surface-container reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-4 block" aria-hidden="true">account_balance</span>
                 <h3 class="font-bold text-primary text-lg mb-3">A Fraction of Full Renovation Cost</h3>
-                <p class="text-sm text-secondary leading-relaxed mb-4">A full bathroom renovation can take weeks and require multiple trades &mdash; plumber, tiler, waterproofer, electrician. Our resurfacing and regrouting services achieve a visually comparable result at a fraction of the cost and time. No demolition, no permits, no weeks of disruption.</p>
+                <p class="text-sm text-secondary leading-relaxed mb-4">A full bathroom renovation can take weeks and require multiple trades. plumber, tiler, waterproofer, electrician. Our resurfacing and regrouting services achieve a visually comparable result at a fraction of the cost and time. No demolition, no permits, no weeks of disruption.</p>
                 <p class="text-sm text-secondary leading-relaxed">For investment properties, the maths is straightforward: spend less on the refresh, keep the property tenanted sooner, and preserve your rental yield.</p>
             </div>
             <div class="bg-white rounded-xl p-8 border border-surface-container reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-4 block" aria-hidden="true">real_estate_agent</span>
                 <h3 class="font-bold text-primary text-lg mb-3">First Impressions Drive Decisions</h3>
                 <p class="text-sm text-secondary leading-relaxed mb-4">Prospective tenants and buyers form their opinion of a property within seconds. Bathrooms are one of the first rooms they inspect closely. Mouldy grout, a stained bath, or dated tiles can be the reason an application doesn't come in or a buyer walks away at an open home.</p>
-                <p class="text-sm text-secondary leading-relaxed">A fresh, clean bathroom signals a well-maintained property &mdash; it attracts better tenants, supports higher rent, and can directly influence sale offers. The return on a bathroom refresh often far exceeds the cost.</p>
+                <p class="text-sm text-secondary leading-relaxed">A fresh, clean bathroom signals a well-maintained property. it attracts better tenants, supports higher rent, and can directly influence sale offers. The return on a bathroom refresh often far exceeds the cost.</p>
             </div>
         </div>
     </div>
 </section>
 
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- GOOGLE REVIEWS. Auto-updating via Trustindex -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
@@ -283,7 +282,7 @@
         <div class="space-y-3">
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you work directly with property managers?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. We work with property managers, real estate agents, and landlords across Sydney. We understand the urgency of tenant turnarounds and can coordinate directly with your office, tenants, or other tradespeople as needed. We provide professional documentation including before and after photos for your records.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you quote from photos only?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes &mdash; this is ideal for remote landlords and interstate investors. Send us 3-4 clear photos of the bathroom and we'll provide a fixed-price quote within hours. No call-out fee, no obligation. This saves time for property managers who look after multiple properties and need quick answers without arranging site visits.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you quote from photos only?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. this is ideal for remote landlords and interstate investors. Send us 3-4 clear photos of the bathroom and we'll provide a fixed-price quote within hours. No call-out fee, no obligation. This saves time for property managers who look after multiple properties and need quick answers without arranging site visits.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How fast can you turn around a job?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most individual services such as regrouting, bath resurfacing, or silicone replacement are completed in 1 day. Larger jobs combining multiple services typically take 2-3 days. We schedule around your vacancy windows and can often start within days of approval.</p></div></div>
 
@@ -334,7 +333,7 @@
 <section class="py-16 sm:py-20 bg-white" id="quote">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
         <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Send Us Photos &mdash; Get a Fixed-Price Quote in Hours</h2>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Send Us Photos. Get a Fixed-Price Quote in Hours</h2>
             <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send 3-4 photos of the bathroom, let us know your timeline, and we'll have a fixed-price quote back to you within hours. No call-out fee. No obligation. Perfect for busy property managers and interstate landlords.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>

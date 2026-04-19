@@ -35,13 +35,13 @@
     {
         "@context": "https://schema.org", "@type": "FAQPage",
         "mainEntity": [
-            { "@type": "Question", "name": "What does a full bathroom makeover include?", "acceptedAnswer": { "@type": "Answer", "text": "Our full makeover can include bath resurfacing, tile resurfacing (walls and/or floor), complete regrouting, silicone replacement at all junctions, vanity respray in a new colour, and basin restoration. Not every bathroom needs all six — we customise the package to what your bathroom actually needs." } },
-            { "@type": "Question", "name": "How long does a full bathroom makeover take?", "acceptedAnswer": { "@type": "Answer", "text": "Most full bathroom makeovers are completed in 2-3 days depending on the scope of work. A single-item job like just the bath or just the tiles is usually done in a day. The more items included, the closer to 3 days — but still dramatically faster than a renovation." } },
+            { "@type": "Question", "name": "What does a full bathroom makeover include?", "acceptedAnswer": { "@type": "Answer", "text": "Our full makeover can include bath resurfacing, tile resurfacing (walls and/or floor), complete regrouting, silicone replacement at all junctions, vanity respray in a new colour, and basin restoration. Not every bathroom needs all six. we customise the package to what your bathroom actually needs." } },
+            { "@type": "Question", "name": "How long does a full bathroom makeover take?", "acceptedAnswer": { "@type": "Answer", "text": "Most full bathroom makeovers are completed in 2-3 days depending on the scope of work. A single-item job like just the bath or just the tiles is usually done in a day. The more items included, the closer to 3 days. but still dramatically faster than a renovation." } },
             { "@type": "Question", "name": "Can I choose the colours for my bathroom makeover?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can choose new colours for your bath, tiles, vanity and basin. We have a wide range of colours and finishes available. Most customers go with white or neutral tones, but we can match specific colours if needed. We'll help you choose during the quoting process." } },
             { "@type": "Question", "name": "Do I need to move out during the makeover?", "acceptedAnswer": { "@type": "Answer", "text": "No. You can stay home the entire time. The work is contained to the bathroom being done. There's no demolition dust spreading through your home, no jackhammering, and no disruption to your plumbing or electricity. If you have a second bathroom, you can use that while the work cures." } },
-            { "@type": "Question", "name": "Is a bathroom makeover as good as a full renovation?", "acceptedAnswer": { "@type": "Answer", "text": "Honest answer: a resurfacing makeover makes your bathroom look brand new, but it doesn't change the layout or replace fixtures like taps, toilet, or showerhead. If you want to move the bath, change the layout, or upgrade your plumbing, you need a renovation. If you want the same bathroom looking completely refreshed with new colours and finishes — without the $25,000-$50,000 price tag, weeks of disruption, and multiple trades — this is the smarter option." } },
+            { "@type": "Question", "name": "Is a bathroom makeover as good as a full renovation?", "acceptedAnswer": { "@type": "Answer", "text": "Honest answer: a resurfacing makeover makes your bathroom look brand new, but it doesn't change the layout or replace fixtures like taps, toilet, or showerhead. If you want to move the bath, change the layout, or upgrade your plumbing, you need a renovation. If you want the same bathroom looking completely refreshed with new colours and finishes. without the $25,000-$50,000 price tag, weeks of disruption, and multiple trades. this is the smarter option." } },
             { "@type": "Question", "name": "Do you work on weekends?", "acceptedAnswer": { "@type": "Answer", "text": "We work Monday to Friday only. Let us know your preferred day and we'll schedule you in." } },
-            { "@type": "Question", "name": "How do I get a quote for a full bathroom makeover?", "acceptedAnswer": { "@type": "Answer", "text": "Send us photos of your bathroom through our contact page — ideally showing the bath, tiles, grout, vanity and any problem areas. We'll assess what needs doing and send you a fixed-price quote for the complete package. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
+            { "@type": "Question", "name": "How do I get a quote for a full bathroom makeover?", "acceptedAnswer": { "@type": "Answer", "text": "Send us photos of your bathroom through our contact page. ideally showing the bath, tiles, grout, vanity and any problem areas. We'll assess what needs doing and send you a fixed-price quote for the complete package. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
         ]
     }
     </script>
@@ -70,10 +70,10 @@
                 Complete Bathroom Makeover <span class="text-on-primary-container">New Look. No Renovation. Done in Days.</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                Your entire bathroom looks tired and dated. The bath is stained, the tiles are an old colour, the grout is cracked and discoloured, and the vanity has seen better days. You've been quoted <strong>$25,000&ndash;$50,000 for a full renovation</strong> &mdash; weeks of demolition, multiple trades, and no bathroom while it's happening.
+                Your entire bathroom looks tired and dated. The bath is stained, the tiles are an old colour, the grout is cracked and discoloured, and the vanity has seen better days. You've been quoted <strong>$25,000&ndash;$50,000 for a full renovation</strong>. weeks of demolition, multiple trades, and no bathroom while it's happening.
             </p>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                There's a smarter way. Our <strong>complete bathroom makeover</strong> resurfaces, regrouts and refreshes everything in your bathroom &mdash; so it looks brand new without the cost, time, or disruption of a renovation. One team, one visit, done in days.
+                There's a smarter way. Our <strong>complete bathroom makeover</strong> resurfaces, regrouts and refreshes everything in your bathroom. so it looks brand new without the cost, time, or disruption of a renovation. One team, one visit, done in days.
             </p>
             <div class="flex items-center gap-6 mb-8">
                 <div class="text-center">
@@ -93,11 +93,10 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
-                <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
         <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
-            <img class="w-full h-full object-cover" alt="Complete bathroom makeover in Sydney — bath, tiles, grout, vanity and basin all resurfaced to look brand new without renovation" src="<?php echo get_template_directory_uri(); ?>/images/services/full-bathroom-makeover/hero.png" loading="eager" width="800" height="600" />
+            <img class="w-full h-full object-cover" alt="Complete bathroom makeover in Sydney. bath, tiles, grout, vanity and basin all resurfaced to look brand new without renovation" src="<?php echo get_template_directory_uri(); ?>/images/services/full-bathroom-makeover/hero.png" loading="eager" width="800" height="600" />
         </div>
     </div>
 </section>
@@ -116,7 +115,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">What's Included in a Full Makeover</h2>
-        <p class="text-secondary max-w-3xl mb-10">Our complete bathroom makeover can cover up to six services in one coordinated visit. Not every bathroom needs all six &mdash; we customise the package to what <em>your</em> bathroom actually needs.</p>
+        <p class="text-secondary max-w-3xl mb-10">Our complete bathroom makeover can cover up to six services in one coordinated visit. Not every bathroom needs all six. we customise the package to what <em>your</em> bathroom actually needs.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all reveal">
@@ -163,7 +162,7 @@
             <div class="bg-white rounded-xl p-6 reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">1</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Send Us Photos</h3>
-                <p class="text-xs text-secondary leading-relaxed">Take a few photos of your bathroom &mdash; the bath, tiles, grout, vanity, and any problem areas. Send them through our contact page or give us a call. That's all we need to get started.</p>
+                <p class="text-xs text-secondary leading-relaxed">Take a few photos of your bathroom. the bath, tiles, grout, vanity, and any problem areas. Send them through our contact page or give us a call. That's all we need to get started.</p>
             </div>
             <div class="bg-white rounded-xl p-6 reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">2</div>
@@ -173,7 +172,7 @@
             <div class="bg-white rounded-xl p-6 reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">3</div>
                 <h3 class="font-bold text-primary text-sm mb-2">We Complete the Work</h3>
-                <p class="text-xs text-secondary leading-relaxed">Our team arrives and completes the full makeover in 2-3 days. One coordinated team handles everything &mdash; no juggling multiple trades or managing timelines yourself.</p>
+                <p class="text-xs text-secondary leading-relaxed">Our team arrives and completes the full makeover in 2-3 days. One coordinated team handles everything. no juggling multiple trades or managing timelines yourself.</p>
             </div>
             <div class="bg-white rounded-xl p-6 reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">4</div>
@@ -206,7 +205,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Full Renovation vs Our Makeover</h2>
-        <p class="text-secondary max-w-3xl mb-10">If you want to change the layout or move fixtures, you need a renovation. If you want the same bathroom looking brand new &mdash; here's how the two options compare.</p>
+        <p class="text-secondary max-w-3xl mb-10">If you want to change the layout or move fixtures, you need a renovation. If you want the same bathroom looking brand new. here's how the two options compare.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
             <div class="bg-surface-container-low rounded-xl p-8 border-2 border-surface-container">
@@ -215,7 +214,7 @@
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> $25,000&ndash;$50,000+ typical cost</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> 3&ndash;6 weeks to complete</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Full demolition of existing bathroom</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Multiple trades &mdash; plumber, tiler, electrician, waterproofer, painter</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Multiple trades. plumber, tiler, electrician, waterproofer, painter</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Weeks without a usable bathroom</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Dust and mess through your entire home</li>
                 </ul>
@@ -225,7 +224,7 @@
                 <ul class="space-y-3 text-sm text-secondary">
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> A fraction of renovation cost</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Completed in 2&ndash;3 days</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Zero demolition &mdash; everything stays in place</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Zero demolition. everything stays in place</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Single coordinated team handles everything</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Bathroom usable within 48 hours</li>
                     <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Minimal disruption to your home</li>
@@ -239,13 +238,13 @@
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Who This Is Perfect For</h2>
-        <p class="text-secondary max-w-3xl mb-10">A full bathroom makeover makes sense for a range of situations &mdash; and saves serious money in every one of them.</p>
+        <p class="text-secondary max-w-3xl mb-10">A full bathroom makeover makes sense for a range of situations. and saves serious money in every one of them.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">home</span>
                 <h3 class="font-bold text-primary mb-2">Homeowners</h3>
-                <p class="text-sm text-secondary leading-relaxed">You want a fresh, modern-looking bathroom without spending $25,000+ on a full renovation. Same bathroom, completely new feel &mdash; at a fraction of the cost.</p>
+                <p class="text-sm text-secondary leading-relaxed">You want a fresh, modern-looking bathroom without spending $25,000+ on a full renovation. Same bathroom, completely new feel. at a fraction of the cost.</p>
             </div>
             <div class="bg-white rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">trending_up</span>
@@ -255,19 +254,19 @@
             <div class="bg-white rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">apartment</span>
                 <h3 class="font-bold text-primary mb-2">Landlords</h3>
-                <p class="text-sm text-secondary leading-relaxed">Tenant moving out and the bathroom needs a refresh? We can have it looking brand new in 2-3 days &mdash; ready for the next tenant without weeks of vacancy.</p>
+                <p class="text-sm text-secondary leading-relaxed">Tenant moving out and the bathroom needs a refresh? We can have it looking brand new in 2-3 days. ready for the next tenant without weeks of vacancy.</p>
             </div>
             <div class="bg-white rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">savings</span>
                 <h3 class="font-bold text-primary mb-2">Quoted $25k+ for a Reno?</h3>
-                <p class="text-sm text-secondary leading-relaxed">If you just want your bathroom looking new &mdash; not a new layout, not new plumbing &mdash; you don't need a $25,000+ renovation. You need a makeover.</p>
+                <p class="text-sm text-secondary leading-relaxed">If you just want your bathroom looking new. not a new layout, not new plumbing. you don't need a $25,000+ renovation. You need a makeover.</p>
             </div>
         </div>
     </div>
 </section>
 
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- GOOGLE REVIEWS. Auto-updating via Trustindex -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
@@ -285,19 +284,19 @@
         <p class="text-secondary text-center mb-10">Common questions about our full bathroom makeover service in Sydney.</p>
 
         <div class="space-y-3">
-            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What does a full bathroom makeover include?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Our full makeover can include up to six services: <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium">bath resurfacing</a>, <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium">tile resurfacing</a> (walls and/or floor), <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium">complete regrouting</a>, silicone replacement at all junctions, <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="text-primary underline font-medium">vanity respray</a>, and <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="text-primary underline font-medium">basin restoration</a>. Not every bathroom needs all six &mdash; we customise the package to what your bathroom actually needs and quote accordingly.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What does a full bathroom makeover include?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Our full makeover can include up to six services: <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium">bath resurfacing</a>, <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium">tile resurfacing</a> (walls and/or floor), <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium">complete regrouting</a>, silicone replacement at all junctions, <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="text-primary underline font-medium">vanity respray</a>, and <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="text-primary underline font-medium">basin restoration</a>. Not every bathroom needs all six. we customise the package to what your bathroom actually needs and quote accordingly.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a full bathroom makeover take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most full bathroom makeovers are completed in 2&ndash;3 days depending on the scope of work. A single-item job like just the bath or tiles is usually done in a day. The more items included in your package, the closer to 3 days &mdash; but still dramatically faster than the 3&ndash;6 weeks a renovation takes.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a full bathroom makeover take?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Most full bathroom makeovers are completed in 2&ndash;3 days depending on the scope of work. A single-item job like just the bath or tiles is usually done in a day. The more items included in your package, the closer to 3 days. but still dramatically faster than the 3&ndash;6 weeks a renovation takes.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I choose the colours?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. You can choose new colours for your bath, tiles, vanity and basin. We have a wide range of colours and finishes available. Most customers go with white or neutral tones for a clean, modern look, but we can match specific colours if needed. We'll help you choose during the quoting process so everything works together.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I need to move out during the makeover?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">No. You can stay home the entire time. The work is contained to the bathroom being done. There's no demolition dust spreading through your home, no jackhammering, and no disruption to your plumbing or electricity. If you have a second bathroom, you can use that while the coatings cure. If it's your only bathroom, we'll let you know the exact cure times so you can plan ahead.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is a makeover as good as a full renovation?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Honest answer: a resurfacing makeover makes your bathroom <em>look</em> brand new, but it doesn't change the layout or replace fixtures like taps, toilet, or showerhead. If you want to move the bath, change the layout, or upgrade your plumbing &mdash; you need a renovation. If you want the same bathroom looking completely refreshed with new colours and finishes, without the $25,000&ndash;$50,000 price tag, weeks of disruption, and multiple trades &mdash; this is the smarter option for most people.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is a makeover as good as a full renovation?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Honest answer: a resurfacing makeover makes your bathroom <em>look</em> brand new, but it doesn't change the layout or replace fixtures like taps, toilet, or showerhead. If you want to move the bath, change the layout, or upgrade your plumbing. you need a renovation. If you want the same bathroom looking completely refreshed with new colours and finishes, without the $25,000&ndash;$50,000 price tag, weeks of disruption, and multiple trades. this is the smarter option for most people.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you work on weekends?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We work Monday to Friday only. Let us know your preferred day and we&rsquo;ll schedule you in.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for a full bathroom makeover?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us photos of your bathroom through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> &mdash; ideally showing the bath, tiles, grout, vanity and any problem areas. We'll assess what needs doing and send you a fixed-price quote for the complete package. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for a full bathroom makeover?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us photos of your bathroom through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a>. ideally showing the bath, tiles, grout, vanity and any problem areas. We'll assess what needs doing and send you a fixed-price quote for the complete package. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
         </div>
     </div>
 </section>
@@ -339,7 +338,7 @@
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
         <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Tell Us About Your Bathroom</h2>
-            <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us a few photos of your bathroom and we'll quote you a fixed price for everything it needs. No obligation, no call-out fee &mdash; just an honest assessment and a clear price.</p>
+            <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us a few photos of your bathroom and we'll quote you a fixed price for everything it needs. No obligation, no call-out fee. just an honest assessment and a clear price.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-10 py-4 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-base"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Or Call Us</a>
