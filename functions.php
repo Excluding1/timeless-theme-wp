@@ -277,7 +277,7 @@ add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
  *
  * The browser still receives <span class="material-symbols-outlined">home</span>
  * in source code (easier to maintain), but this filter converts it to
- * <span class="material-symbols-outlined">&#xe88a;</span> on the way out.
+ * <span class="material-symbols-outlined">&#xe9b2;</span> on the way out.
  *
  * Performance: regex runs once per page render (~1-3ms). With cache plugins
  * (WP Rocket, etc.) this runs once per cache generation, then served from
