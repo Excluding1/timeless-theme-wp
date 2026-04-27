@@ -71,7 +71,7 @@
         <div>
             <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Bath Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Stained &amp; Yellow Bathtub? <span class="text-on-primary-container">We Make It Look Brand New</span>
+                Stained &amp; Yellow Bathtub? <span class="text-primary-soft">We Make It Look Brand New</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 Your bath has gone yellow. Or brown. Maybe there are rust rings around the drain and hard water marks you can't scrub off no matter what product you try. You've used bleach, bathroom cleaner, bicarb &mdash; nothing works. <strong>The staining isn't on the surface anymore &mdash; it's in the surface.</strong>
@@ -263,14 +263,14 @@
 </section>
 
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- GOOGLE REVIEWS — Auto-updating via Google Places API (self-hosted, see timeless_render_google_reviews in functions.php) -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
-        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+        <?php timeless_render_google_reviews(); ?>
     </div>
 </section>
 

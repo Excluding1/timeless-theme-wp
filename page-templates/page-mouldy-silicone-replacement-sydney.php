@@ -70,7 +70,7 @@
         <div>
             <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Shower Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Black Mouldy Silicone <span class="text-on-primary-container">in Your Shower?</span>
+                Black Mouldy Silicone <span class="text-primary-soft">in Your Shower?</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 That black stuff in the corners of your shower and along the floor-wall join? That's mouldy silicone. You've probably tried bleach, mould sprays, even scrubbing with a toothbrush. It comes back every time. <strong>That's because the mould has grown inside the silicone itself &mdash; cleaning only touches the surface.</strong>
@@ -236,7 +236,7 @@
             <div class="bg-white rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10 reveal">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" aria-hidden="true">straighten</span> Just Silicone</h3>
                 <p class="text-sm text-secondary leading-relaxed mb-4">If the black mould is only in the corners and along floor-wall junctions &mdash; and the flat grid lines between your tiles look fine &mdash; you likely just need a silicone replacement. That's what this page is about.</p>
-                <p class="text-xs text-on-primary-container font-medium">Quick, affordable, same-day job.</p>
+                <p class="text-xs text-primary-soft font-medium">Quick, affordable, same-day job.</p>
             </div>
             <div class="bg-white rounded-xl p-8 border-2 border-surface-container reveal">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" aria-hidden="true">grid_on</span> Just Regrouting</h3>
@@ -253,14 +253,14 @@
 </section>
 
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- GOOGLE REVIEWS — Auto-updating via Google Places API (self-hosted, see timeless_render_google_reviews in functions.php) -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
-        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+        <?php timeless_render_google_reviews(); ?>
     </div>
 </section>
 

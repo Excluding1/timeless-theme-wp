@@ -49,7 +49,7 @@
         <div class="lg:col-span-7 z-10 reveal">
             <span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-[0.15em] uppercase mb-6 rounded-xs">About Us</span>
             <h1 class="text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-primary leading-[1.05] tracking-tighter mb-6">
-                Beautiful Bathrooms <br/><span class="text-on-primary-container">Shouldn't Cost a Fortune.</span>
+                Beautiful Bathrooms <br/><span class="text-primary-soft">Shouldn't Cost a Fortune.</span>
             </h1>
             <p class="text-lg sm:text-xl text-secondary max-w-xl leading-relaxed mb-8">
                 We kept seeing Sydney homeowners quoted $25,000&ndash;$50,000 to renovate bathrooms that just needed resurfacing. So we built a better option.
@@ -82,22 +82,22 @@
             <div class="grid grid-cols-2 gap-5 reveal">
                 <div class="bg-surface-container-low p-7 rounded-xl border-l-4 border-tertiary-fixed-dim">
                     <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">schedule</span>
-                    <h4 class="font-bold text-primary text-lg mb-2">Done in a Day</h4>
+                    <h3 class="font-bold text-primary text-lg mb-2">Done in a Day</h3>
                     <p class="text-sm text-secondary leading-relaxed">Most bathrooms completed in a single day. Ready to use again the next morning.</p>
                 </div>
                 <div class="bg-primary-container p-7 rounded-xl">
                     <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block" aria-hidden="true">savings</span>
-                    <h4 class="font-bold text-white text-lg mb-2">Save up to 80%</h4>
+                    <h3 class="font-bold text-white text-lg mb-2">Save up to 80%</h3>
                     <p class="text-sm text-on-primary-container leading-relaxed">A fraction of the cost of a full renovation. No demolition, no plumber, no weeks of disruption.</p>
                 </div>
                 <div class="bg-surface-container-low p-7 rounded-xl border-l-4 border-tertiary-fixed-dim">
                     <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">workspace_premium</span>
-                    <h4 class="font-bold text-primary text-lg mb-2">Premium Coatings</h4>
+                    <h3 class="font-bold text-primary text-lg mb-2">Premium Coatings</h3>
                     <p class="text-sm text-secondary leading-relaxed">professional-grade system &mdash; commercial-grade coatings that last 10&ndash;15 years.</p>
                 </div>
                 <div class="bg-primary-container p-7 rounded-xl">
                     <span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim mb-3 block" aria-hidden="true">verified_user</span>
-                    <h4 class="font-bold text-white text-lg mb-2">Fully Backed</h4>
+                    <h3 class="font-bold text-white text-lg mb-2">Fully Backed</h3>
                     <p class="text-sm text-on-primary-container leading-relaxed">Workmanship warranty. Public liability insured. Qualified &amp; insured.</p>
                 </div>
             </div>
@@ -188,7 +188,7 @@
     <div class="max-w-5xl mx-auto px-6 sm:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div class="reveal">
-                <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">4.9<span class="text-tertiary-fixed-dim">&#9733;</span></p>
+                <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">4.9<span class="text-tertiary-fixed-dim" aria-hidden="true">&#9733;</span><span class="sr-only">, 5 stars</span></p>
                 <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Google Rating</p>
             </div>
             <div class="reveal">
@@ -207,14 +207,14 @@
     </div>
 </section>
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- GOOGLE REVIEWS — Auto-updating via Google Places API (self-hosted, see timeless_render_google_reviews in functions.php) -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
-        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+        <?php timeless_render_google_reviews(); ?>
     </div>
 </section>
 

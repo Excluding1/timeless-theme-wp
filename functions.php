@@ -513,8 +513,183 @@ function timeless_customizer( $wp_customize ) {
         'section' => 'timeless_business',
         'type'    => 'text',
     ) );
+
+    // ─── Google Reviews Section ────────────────────────────────────
+    $wp_customize->add_section( 'timeless_google_reviews', array(
+        'title'       => __( 'Google Reviews', 'timeless' ),
+        'priority'    => 35,
+        'description' => __( 'Self-hosted Google Places API integration. No third-party widgets, no paywall. <br><br><strong>Setup (one-time, ~10 min):</strong><br>1. Visit <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>, create a project, enable "Places API" (free tier: 100K requests/month).<br>2. Create an API key under "Credentials". Restrict it to your domain for security.<br>3. Find your Place ID at <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener noreferrer">Google\'s Place ID Finder</a> by searching for your business.<br>4. Paste both below.<br><br>Reviews refresh every 24 hours via WordPress transients (cached, no per-request API calls).', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_google_api_key', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options', // Sensitive — admin only
+    ) );
+    $wp_customize->add_control( 'timeless_google_api_key', array(
+        'label'       => __( 'Google Places API Key', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'text',
+        'description' => __( 'Restrict this key to HTTP referrer = your domain in Google Cloud Console.', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_google_place_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'timeless_google_place_id', array(
+        'label'       => __( 'Google Place ID', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'text',
+        'description' => __( 'Looks like ChIJxxxxxxxxxxxxxx. Find via the Place ID Finder linked above.', 'timeless' ),
+    ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
+
+/* ─────────────────────────────────────────────
+   3b. GOOGLE REVIEWS — Self-hosted Places API integration
+   ─────────────────────────────────────────────
+   Why custom (not Trustindex/Featurable):
+     - Zero third-party CDN requests (matches our self-host-everything pattern)
+     - Free (Google Places API has 100K-request/month free tier; with 24h cache
+       on a small site we use ~30 requests/month total)
+     - Full design control (renders with our Tailwind cards, Inter font, palette)
+     - Privacy: no third-party trackers, no paywall surprise
+
+   Strategy:
+     - WordPress transient caches reviews for 24 hours (DAY_IN_SECONDS).
+     - On cache miss, fetch from Google Places API server-side.
+     - Render directly in PHP — no JS, no CLS, no async injection.
+     - Graceful fallback: if API fails or keys not set, render a "See reviews
+       on Google" link to the GBP listing instead of an empty section.
+   ───────────────────────────────────────────── */
+
+/** Fetch Google reviews (cached). Returns array of reviews + rating + count, or false on failure. */
+function timeless_get_google_reviews() {
+    $cache_key = 'timeless_google_reviews_v1';
+    $cached    = get_transient( $cache_key );
+    if ( false !== $cached ) {
+        // Distinguish "cached failure" sentinel from real success data
+        if ( is_array( $cached ) && isset( $cached['_failed'] ) ) {
+            return false;
+        }
+        return $cached;
+    }
+
+    $api_key  = trim( get_theme_mod( 'timeless_google_api_key', '' ) );
+    $place_id = trim( get_theme_mod( 'timeless_google_place_id', '' ) );
+    if ( empty( $api_key ) || empty( $place_id ) ) {
+        return false;
+    }
+
+    $url = sprintf(
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=%s&fields=reviews,rating,user_ratings_total,name,url&reviews_sort=newest&key=%s',
+        rawurlencode( $place_id ),
+        rawurlencode( $api_key )
+    );
+
+    $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
+    if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+        // Cache a failure SENTINEL (not literal false) for 1 hour so we don't hammer
+        // the API on every page hit. We can't cache `false` because get_transient()
+        // returns false for "not set" — same as our cached failure → no backoff.
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    if ( empty( $body['result'] ) ) {
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    $data = array(
+        'reviews'      => isset( $body['result']['reviews'] ) ? array_slice( $body['result']['reviews'], 0, 5 ) : array(),
+        'rating'       => isset( $body['result']['rating'] ) ? floatval( $body['result']['rating'] ) : 0,
+        'total'        => isset( $body['result']['user_ratings_total'] ) ? intval( $body['result']['user_ratings_total'] ) : 0,
+        'business_url' => isset( $body['result']['url'] ) ? esc_url_raw( $body['result']['url'] ) : '',
+    );
+
+    set_transient( $cache_key, $data, DAY_IN_SECONDS );
+    return $data;
+}
+
+/** Render the Google Reviews widget. Drop-in replacement for the Featurable embed. */
+function timeless_render_google_reviews() {
+    $data = timeless_get_google_reviews();
+
+    // Graceful fallback when API keys aren't set or fetch fails: link to Google.
+    // Note: $data may be `false` (not an array), so we can't subscript it directly —
+    // PHP 8.1+ would warn "Trying to access array offset on value of type bool".
+    if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
+        $fallback_business = 'https://www.google.com/maps/search/' . rawurlencode( get_bloginfo( 'name' ) . ' Sydney' );
+        $business_url = ( is_array( $data ) && ! empty( $data['business_url'] ) ) ? $data['business_url'] : $fallback_business;
+        ?>
+        <div class="text-center py-8">
+            <p class="text-sm text-secondary mb-4">Read our reviews directly on Google.</p>
+            <a href="<?php echo esc_url( $business_url ); ?>" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">
+                See Our Google Reviews
+                <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
+            </a>
+        </div>
+        <?php
+        return;
+    }
+
+    $rating  = number_format( $data['rating'], 1 );
+    $total   = $data['total'];
+    $reviews = $data['reviews'];
+    ?>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <?php foreach ( $reviews as $r ) :
+            $author      = $r['author_name'] ?? 'Google User';
+            $initial     = mb_substr( $author, 0, 1 );
+            $time_label  = $r['relative_time_description'] ?? '';
+            $stars       = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) ); // Clamp 1-5 (defensive)
+            $text        = $r['text'] ?? '';
+            $author_url  = $r['author_url'] ?? '';
+        ?>
+        <article class="bg-white rounded-2xl p-6 shadow-md border border-surface-container">
+            <header class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm" aria-hidden="true">
+                    <?php echo esc_html( $initial ); ?>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-bold text-primary text-sm truncate"><?php echo esc_html( $author ); ?></p>
+                    <p class="text-xs text-secondary"><?php echo esc_html( $time_label ); ?></p>
+                </div>
+                <span class="material-symbols-outlined text-secondary text-lg" aria-hidden="true">reviews</span>
+            </header>
+            <div class="flex text-amber-500 text-sm mb-3" aria-hidden="true">
+                <?php for ( $i = 0; $i < $stars; $i++ ) echo '&#9733;'; ?>
+            </div>
+            <span class="sr-only"><?php echo esc_html( $stars ); ?> out of 5 stars</span>
+            <p class="text-sm text-secondary leading-relaxed line-clamp-6"><?php echo esc_html( $text ); ?></p>
+        </article>
+        <?php endforeach; ?>
+    </div>
+
+    <?php if ( $data['business_url'] ) : ?>
+    <div class="text-center">
+        <a href="<?php echo esc_url( $data['business_url'] ); ?>" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-soft transition-colors">
+            See all <?php echo esc_html( $total ); ?> reviews on Google
+            <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+        </a>
+    </div>
+    <?php endif; ?>
+    <?php
+}
+
+/** Clear the reviews cache (e.g. after Customizer save). The next page hit will
+ *  refetch lazily — we deliberately don't refetch synchronously here because
+ *  customize_save_after fires for ANY Customizer save (phone, email, etc.), and
+ *  a 5-second wp_remote_get on every save would make the admin UX painful. */
+function timeless_refresh_google_reviews() {
+    delete_transient( 'timeless_google_reviews_v1' );
+}
+add_action( 'customize_save_after', 'timeless_refresh_google_reviews' );
 
 /* ─────────────────────────────────────────────
    4. HELPER FUNCTIONS

@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] — `develop` branch
 
+### Accessibility & UX — Day 3 Task E (WCAG AA compliance + Trustindex swap)
+- **WCAG AA color contrast fixes** — found and resolved real contrast failures the prior color audit missed:
+  - Added new `primary-soft: #5a6789` palette token (5.62:1 on white, passes AA). Replaced ~40 misuses of `text-on-primary-container` (#8392b7, 2.94:1 on white, FAILED AA) on light backgrounds: H1 accents on 8 service pages, "Completed in X Hours" overlay badges, hover states on contact + faqs, group-hover on property-manager service cards. The original `text-on-primary-container` is still used on dark `bg-primary` sections (where it correctly passes 5.82:1).
+  - Footer copyright bumped from `text-white/30` (2.64:1, FAILED) to `text-white/60` (6.97:1, passes AA).
+- **Heading hierarchy** — fixed global H2→H4 skip caused by 3× `<h4>` in footer.php (Quick Links, Services, Useful Information). Now `<h3>`. Combined with prior page-about.php H4→H3 fix, no skipped levels remain anywhere.
+- **Decorative star characters** — added `aria-hidden="true"` + `<span class="sr-only">5 out of 5 stars</span>` SR fallbacks to all 22 star clusters. Was failing WCAG 1.4.11 (1.67:1 amber on white). Screen readers now hear "5 stars" instead of "Black Star Black Star Black Star Black Star Black Star".
+- **Trustindex CLS** — wrapped 21 review embeds in `<div class="min-h-[400px]">` to reserve vertical space. Eliminates the layout shift when reviews load asynchronously.
+- **Reviews widget rebuilt as self-hosted Google Places API integration** — final form after a 3-step evolution: Trustindex (paywall expired) → Featurable (free but third-party CDN) → custom self-hosted (best). All 21 review embeds now call `timeless_render_google_reviews()` which fetches Google Places API server-side, caches in WP transients for 24 hours, and renders our own Tailwind cards (zero browser-side third-party requests, matches the self-host-everything pattern from Inter/Material Symbols/WebP). Customizer fields for API key + Place ID added under "Google Reviews" section. Graceful empty-state fallback (centered "See Our Google Reviews" button linking to Google Maps) when keys aren't configured. Within Google's 100K-requests/month free tier (we use ~30/month).
+
 ### Performance — Day 3 self-hosting fonts + WebP images
 - **Material Symbols subset** (1.06 MB CDN → 10 KB local, 99.7% smaller). Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept for filled-icon variants. Audit-fix-audit loop converged after 4 passes (caught 2 critical bugs: dynamic `faucet` icon in PHP array; JS-injected `check_circle` bypassing PHP filter).
 - **Inter body font subset** (200-300 KB across multiple Google Fonts CDN requests → 99 KB local single file, plus eliminates 2 third-party DNS lookups). Variable font with wght (100..900) and opsz (14..32) axes preserved. Latin + essential punctuation + ★ for ratings. No italic variant (theme has zero italic usage).

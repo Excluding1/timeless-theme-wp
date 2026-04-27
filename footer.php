@@ -24,7 +24,7 @@ $phone      = timeless_phone();
             </div>
             <!-- Quick Links -->
             <div>
-                <h4 class="font-bold text-white mb-4 text-sm">Quick Links</h4>
+                <h3 class="font-bold text-white mb-4 text-sm">Quick Links</h3>
                 <ul class="space-y-2.5 text-sm">
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
@@ -34,7 +34,7 @@ $phone      = timeless_phone();
             </div>
             <!-- Services -->
             <div>
-                <h4 class="font-bold text-white mb-4 text-sm">Services</h4>
+                <h3 class="font-bold text-white mb-4 text-sm">Services</h3>
                 <ul class="space-y-2.5 text-sm">
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>">Bath Resurfacing</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>">Tile Resurfacing</a></li>
@@ -44,7 +44,7 @@ $phone      = timeless_phone();
             </div>
             <!-- Useful Information -->
             <div>
-                <h4 class="font-bold text-white mb-4 text-sm">Useful Information</h4>
+                <h3 class="font-bold text-white mb-4 text-sm">Useful Information</h3>
                 <ul class="space-y-3">
                     <li class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-white/70 text-lg" aria-hidden="true">mail</span>
@@ -55,7 +55,7 @@ $phone      = timeless_phone();
                         <a href="tel:<?php echo $phone_link; ?>" class="text-sm text-white/60 hover:text-white transition-colors"><?php echo $phone; ?></a>
                     </li>
                 </ul>
-                <p class="text-xs text-white/30 mt-6">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing.<br>All Rights Reserved.</p>
+                <p class="text-xs text-white/60 mt-6">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing.<br>All Rights Reserved.</p>
             </div>
         </div>
     </div>

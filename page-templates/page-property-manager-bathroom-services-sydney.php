@@ -154,7 +154,7 @@
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">plumbing</span>
                     </div>
                     <div class="flex-1">
-                        <h3 class="font-bold text-primary mb-1 group-hover:text-on-primary-container transition-colors">Shower Regrouting</h3>
+                        <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Shower Regrouting</h3>
                         <p class="text-sm text-secondary leading-relaxed">Full grout removal and replacement. Stops leaks, eliminates mould.</p>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">bathtub</span>
                     </div>
                     <div class="flex-1">
-                        <h3 class="font-bold text-primary mb-1 group-hover:text-on-primary-container transition-colors">Bath Resurfacing</h3>
+                        <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Bath Resurfacing</h3>
                         <p class="text-sm text-secondary leading-relaxed">Restore chipped, stained, or worn bathtubs to like-new condition.</p>
                     </div>
                 </div>
@@ -178,7 +178,7 @@
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">grid_view</span>
                     </div>
                     <div class="flex-1">
-                        <h3 class="font-bold text-primary mb-1 group-hover:text-on-primary-container transition-colors">Tile Resurfacing</h3>
+                        <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Tile Resurfacing</h3>
                         <p class="text-sm text-secondary leading-relaxed">Recoat dated wall or floor tiles in a fresh, modern colour.</p>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">countertops</span>
                     </div>
                     <div class="flex-1">
-                        <h3 class="font-bold text-primary mb-1 group-hover:text-on-primary-container transition-colors">Vanity Respray</h3>
+                        <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Vanity Respray</h3>
                         <p class="text-sm text-secondary leading-relaxed">Cabinet resprayed in a modern colour. Transforms the whole bathroom aesthetic.</p>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">wash</span>
                     </div>
                     <div class="flex-1">
-                        <h3 class="font-bold text-primary mb-1 group-hover:text-on-primary-container transition-colors">Basin Restoration</h3>
+                        <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Basin Restoration</h3>
                         <p class="text-sm text-secondary leading-relaxed">Resurface chipped or stained basins. Cheaper than replacement.</p>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">water_drop</span>
                     </div>
                     <div class="flex-1">
-                        <h3 class="font-bold text-primary mb-1 group-hover:text-on-primary-container transition-colors">Silicone Replacement</h3>
+                        <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Silicone Replacement</h3>
                         <p class="text-sm text-secondary leading-relaxed">Strip and reseal all junctions. Fixes leaks and mouldy silicone.</p>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-1">
-                            <h3 class="font-bold text-primary group-hover:text-on-primary-container transition-colors">Full Bathroom Makeover Package</h3>
+                            <h3 class="font-bold text-primary group-hover:text-primary-soft transition-colors">Full Bathroom Makeover Package</h3>
                             <span class="text-[0.6rem] bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-sm font-bold uppercase">Best Value</span>
                         </div>
                         <p class="text-sm text-secondary leading-relaxed">Complete transformation. bath, tiles, grout, silicone, vanity, basin. All done in 2-3 days. The highest-impact, lowest-disruption option for rental turnarounds and pre-sale prep.</p>
@@ -431,9 +431,9 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
-        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+        <?php timeless_render_google_reviews(); ?>
     </div>
 </section>
 

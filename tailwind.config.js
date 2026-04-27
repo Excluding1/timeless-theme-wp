@@ -47,7 +47,8 @@ module.exports = {
                 // Material Design 3-style semantic palette — matches inline config exactly
                 'primary': '#041534',
                 'primary-container': '#1b2a4a',
-                'on-primary-container': '#8392b7',
+                'on-primary-container': '#8392b7',  // for use ON dark bg-primary / bg-primary-container only
+                'primary-soft': '#5a6789',          // muted blue for use on LIGHT backgrounds (5.62:1 on white — passes WCAG AA)
 
                 'secondary': '#595e6d',
 
