@@ -154,6 +154,153 @@ Edit `src/main.css`:
 
 ---
 
+## WebP Image Companion Pipeline
+
+Separate from the Tailwind build. The theme generates `.webp` companions
+alongside every `.jpg/.jpeg/.png` (where WebP is genuinely smaller). A PHP
+output filter wraps `<img>` tags in `<picture>` so modern browsers get the
+WebP, older browsers get the original.
+
+### When to regenerate WebP companions
+- Added a new image under `images/**`
+- Replaced an existing image (the script will re-encode if you pass `--force`)
+- Bulk image quality tuning (edit `JPG_QUALITY`/`PNG_LOSSY_QUALITY` in script)
+
+### Build commands
+```bash
+# Default — process every JPG/PNG in images/, only write .webp where it beats source
+python3 scripts/convert-images-to-webp.py
+
+# Dry-run preview (no writes)
+python3 scripts/convert-images-to-webp.py --check
+
+# Force re-encoding of existing .webp companions (after quality changes)
+python3 scripts/convert-images-to-webp.py --force
+```
+
+### Naming + behavior
+- Source `images/homepage/before.jpg` → companion `images/homepage/before.jpg.webp` (double extension preserves original filename — backlinks/CDN caches stay valid)
+- The script tries multiple WebP encodings (lossy+lossless), picks the smallest, AND only writes the file if it's smaller than the source. Bloat-free guaranteed.
+- Typical results: JPG hero photos shrink ~50-65%; pre-optimized small PNGs often skip (script reports `no_benefit`).
+
+### How the runtime works
+- `timeless_webp_picture_filter()` in `functions.php` runs as part of the output buffer chain (alongside the icon ligature filter).
+- For each `<img src="x.jpg">`, the filter checks if `x.jpg.webp` exists on disk. If yes, wraps the tag: `<picture><source srcset="x.jpg.webp" type="image/webp">[original img]</picture>`. If no, output unchanged.
+- The browser picks WebP if `Accept: image/webp` is in the request headers (Chrome, Firefox, Safari 14+, Edge — 96%+ of users). Older browsers ignore the `<source>` and use the inner `<img>`.
+
+### Critical rules
+- **CSS selectors targeting `<img>` directly**: now have `<picture>` parent. Use `.parent img` (descendant), NOT `.parent > img` (direct child) — the latter would no longer match.
+- **JS `img.parentNode`**: was the layout wrapper, now is `<picture>`. If any JS relies on `parentNode`, audit it.
+- **Production MIME**: server must send `Content-Type: image/webp` for `.webp` files. The `htaccess-security.txt` template includes an `AddType image/webp .webp` directive — verify your live `.htaccess` has it. Without correct MIME, browsers reject the file and fall back to JPG/PNG silently.
+- **Filter doesn't touch `wp-content/uploads/`** — only theme-bundled `images/`. WP Media Library uploads need a separate pipeline if you ever want WebP delivery for them.
+
+---
+
+## Inter Body Font Subset Pipeline
+
+Separate from the Tailwind build. The theme self-hosts a Latin subset of the
+official Inter Variable font (~99 KB instead of 200-300 KB across multiple
+Google Fonts CDN requests, plus eliminates two third-party DNS lookups).
+
+### When to rebuild the Inter subset
+- Adding content in a new language outside Latin range (Cyrillic, Greek, Vietnamese, etc.)
+- Bumping to a new Inter major version (rsms releases ~yearly)
+- Need new symbol coverage (math, dingbats — currently excluded by design)
+
+### Inputs (must exist in /tmp/ before running)
+| File | Source |
+|---|---|
+| `/tmp/Inter-test.woff2` | https://github.com/rsms/inter/raw/v4.0/docs/font-files/InterVariable.woff2 |
+
+(No codepoint manifest needed — script defines the unicode-range list itself.)
+
+### Build commands
+```bash
+# Step 1 — fetch upstream Inter Variable (~340 KB)
+curl -L -o /tmp/Inter-test.woff2 \
+  "https://github.com/rsms/inter/raw/v4.0/docs/font-files/InterVariable.woff2"
+
+# Step 2 — subset to Latin + essential punctuation (drops Cyrillic, Greek, Vietnamese, etc.)
+python3 scripts/subset-inter.py
+```
+
+### Output
+- `assets/fonts/inter-variable-latin.woff2` — ~99 KB, wght+opsz axes preserved
+
+### How the runtime works
+1. `functions.php` enqueues an inline `@font-face` declaring Inter with `font-weight: 100 900` (the variable axis range).
+2. Tailwind's `tailwind.config.js` has `fontFamily.body: ['Inter', 'system-ui', 'sans-serif']` — Inter is the first choice with system-ui as a fallback.
+3. Tailwind weight utilities (`font-bold`, `font-extrabold`, etc.) all resolve to specific weights along the variable wght axis — single font file delivers ALL weights.
+4. `<link rel="preload">` in HEAD gets the font fetching in parallel with HTML parse for fast first paint.
+5. `font-display: swap` shows fallback text immediately, swaps to Inter when loaded — no FOIT (blank period).
+
+### Critical rules
+- **No italic variant subset** — theme has zero italic usage. If you ever add italic, also subset `InterVariable-Italic.woff2` and add a 2nd `@font-face` with `font-style: italic`.
+- **Subset character set is documented in `scripts/subset-inter.py`** — Basic Latin, Latin-1, smart quotes, currency, arrows, ★ ☆ for ratings. If a future page introduces a glyph outside this range (e.g., a Vietnamese suburb name, ✓ ✗ symbols, Greek letters), the browser will silently fall back to system-ui for those characters only. Add the range to the script and rebuild.
+- **The `file_exists()` guard in functions.php** silently disables Inter if the font file is missing in production — body falls back to system-ui chain. Better than a 404'd `@font-face` blocking the swap window.
+
+---
+
+## Material Symbols Icon Subset Pipeline
+
+Separate from the Tailwind build. The theme self-hosts a tiny subset of Google's
+Material Symbols Outlined variable font (~10 KB instead of the 1.06 MB CDN version,
+99.7% reduction).
+
+### When to rebuild the icon subset
+- Added a new icon name to any `.php` file (`<span class="material-symbols-outlined">…</span>`)
+- Added a new icon to a PHP array (e.g. `'icon' => 'shower'` in `functions.php`)
+- Added a new icon via JS DOM injection (`textContent = '…'` on a material-symbols span)
+- Removed an icon and want to slim the font further
+
+### Inputs (must exist in /tmp/ before running)
+| File | Source | What it is |
+|---|---|---|
+| `/tmp/material-symbols.woff2` | https://fonts.gstatic.com/s/materialsymbolsoutlined/v\<X\>.woff2 | The full upstream variable font (3.83 MB) |
+| `/tmp/material-symbols.codepoints` | https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/MaterialSymbolsOutlined%5BFILL%2CGRAD%2Copsz%2Cwght%5D.codepoints | Google's name → hex codepoint map (78 KB, ~4,200 icons) |
+| `/tmp/icons-used.txt` | Generated by `scripts/audit-icons.sh` | One icon name per line — what THIS theme actually uses |
+
+⚠ **Version pinning is manual** — re-fetching the upstream files will pull whatever
+Google ships today. Hash the inputs (`shasum /tmp/material-symbols.woff2`) before a
+rebuild and compare to the previous run if you want determinism. Google has historically
+reassigned codepoints when icons get redesigned; if a glyph suddenly looks different, the
+upstream font version is the first place to check.
+
+### Build commands
+```bash
+# Step 1 — find every icon used (HTML markup + PHP arrays + JS textContent)
+bash scripts/audit-icons.sh
+
+# Step 2 — rebuild font subset (instances font keeping FILL axis, drops GSUB/GPOS,
+#          subsets to only used codepoints, regenerates inc/material-symbols-codepoints.php)
+python3 scripts/subset-material-symbols.py
+```
+
+### Outputs
+- `assets/fonts/material-symbols-subset.woff2` — the subset font (~10 KB)
+- `inc/material-symbols-codepoints.php` — name → hex map used by the PHP filter
+
+### How the runtime works
+1. PHP filter `timeless_replace_icon_ligatures()` (in `functions.php`) registers an
+   `ob_start` on `template_redirect`.
+2. On flush, the buffer is regex-scanned for `<span class="material-symbols-outlined">name</span>`
+   and the name is swapped for `&#xCODEPOINT;` using the codepoints map.
+3. Browser receives codepoints → looks them up in our subset font's CMAP → renders
+   the correct glyph. No GSUB ligature lookup needed (we stripped that table to save bytes).
+
+### Critical rules
+- **Static HTML icons** (in `.php` files) work automatically.
+- **Dynamic PHP icons** (`echo '<span...>' . $var . '</span>';`) work as long as `$var`
+  values are added to the `'icon' => '…'` array pattern that `audit-icons.sh` scans.
+- **JS-injected icons** must use the codepoint character directly, NOT the name —
+  the PHP filter has already flushed by the time JS runs. See `js/main.js:241` for an
+  example with full comment explaining why.
+- **The `.material-symbols-outlined` CSS class binding lives in `functions.php`** inside
+  `@layer base` so Tailwind utility classes (text-2xl, etc.) can override font-size.
+  Don't add font properties to `style.css` — see the comment there for why.
+
+---
+
 ## Migration History
 
 - **2026-04 — Tailwind v3 → v4** via `npx @tailwindcss/upgrade`

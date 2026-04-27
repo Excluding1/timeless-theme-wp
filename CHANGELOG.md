@@ -13,12 +13,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] — `develop` branch
 
-### Coming next (v1.2.0)
-- Day 3: Image pipeline + Material Symbols subset
-- Day 4: Schema as code + analytics setup (GA4, Microsoft Clarity)
-- Day 5: Suburb programmatic landing pages
-- Day 6: Service page polish (H1s, customer language variants)
-- Off-page: GBP claim, citations, review collection
+### Coming next (v1.3.0)
+- Day 4: Schema-as-code audit + GA4 + Microsoft Clarity setup
+- Day 5: Suburb programmatic landing pages (`/services/X/parramatta/` etc.)
+- Day 6: Service page polish (H1 tweaks, customer-language audit)
+- Off-page (parallel, 4-6 weeks): GBP claim, citations, reviews campaign
+
+---
+
+## [1.2.0] — 2026-04-28
+
+The "performance + accessibility" release. Mobile Lighthouse score 97 verified
+on production after deploy. Major shifts: every external font/icon CDN
+self-hosted, WebP + responsive image variants, Cloudflare edge caching active,
+custom Google Places reviews integration replacing paid Trustindex.
+
+### Performance (Day 3)
+- **Material Symbols icon subset** — 1.06 MB CDN → 10 KB local (99.7% smaller).
+  Variable font instanced at fixed axes except FILL (kept for filled variants).
+  PHP buffer filter swaps icon names → codepoints at output. Build pipeline
+  reproducible via `scripts/audit-icons.sh` + `scripts/subset-material-symbols.py`.
+- **Inter body font subset** — 200-300 KB CDN multi-request → 99 KB local single
+  file. Variable wght (100..900) + opsz (14..32) axes preserved. Eliminates 2
+  third-party DNS lookups (fonts.googleapis.com + fonts.gstatic.com).
+  Build via `scripts/subset-inter.py`.
+- **WebP image companions** — 1.67 MB savings on WebP-capable browsers (96%+ of
+  users), 0 wasted bytes on the ~103 already-optimized PNGs. Smart converter
+  only writes `.webp` when smaller than source. PHP filter wraps `<img>` in
+  `<picture>` automatically.
+- **Responsive image variants** (`-400w`, `-800w`, `-1600w` per source ≥800px).
+  Mobile fetches the small variant via `srcset` + `sizes` instead of the full
+  desktop resolution. Hero image: ~80 KB → ~6 KB on mobile. 213 variants
+  generated, gitignored as build artifacts (regenerable via `scripts/`).
+- **Cloudflare cache rules + .htaccess** — HTML edge cache 30 min, static
+  1 year. `Expires` + `AddType image/webp` + gzip in .htaccess. Brotli +
+  HTTP/3 + Speed Brain + Early Hints enabled in CF dashboard. Every page
+  + every asset returns `cf-cache-status: HIT`. Production TTFB drops from
+  500-800ms to 50-100ms.
+- **Audit-fix-audit loop formalized as WORKFLOW.md Rule 4a**. Caught 2 critical
+  Material Symbols bugs (dynamic `faucet` icon in PHP array; JS-injected
+  `check_circle` bypassing PHP filter), CSS cascade-layer footguns,
+  asymmetric regex word-boundaries, and more across 4+ audit passes.
+
+### Accessibility & UX (Day 3 Task E)
+- **WCAG AA contrast** — added `primary-soft: #5a6789` token (5.62:1 on white).
+  Replaced ~40 misuses of `text-on-primary-container` on light backgrounds
+  (was 2.94:1, FAILED AA). Footer `text-white/30` → `text-white/60` (was
+  2.64:1, now 6.97:1).
+- **Heading hierarchy** — fixed H2→H4 skips in footer (3 cards) + page-about.php
+  (4 cards). All pages now have clean nesting.
+- **Decorative star characters** — `aria-hidden="true"` + sr-only "5 out of 5
+  stars" SR fallback on all 22 star clusters. Was failing WCAG 1.4.11.
+- **Reviews widget rebuilt** (3-stage evolution): Trustindex (paywall expired) →
+  Featurable (free but third-party CDN) → **custom self-hosted Google Places API
+  integration**. Server-side fetch via `places.googleapis.com/v1/places/{id}`
+  (new endpoint, not legacy), 24-hour transient cache, smart Place ID
+  resolver accepting business name OR Maps URL OR direct ID. Renders our own
+  Tailwind cards. Trustindex-style carousel (manual click + wrap-around) +
+  modal popup for "Read more" with click-outside / ESC dismiss.
+- **Days-based time labels** ("9 days ago" instead of Google's vague
+  "a week ago") computed from publishTime in Sydney timezone.
+- **Hover tooltips** on Google G logo, Verified badge, time label
+  (full timestamp). Pure CSS, no JS, with focus-within for keyboard a11y.
+- **Favicon set** — multi-format (ico, PNG 96x96, apple-touch-icon, manifest).
+  theme-color set to brand `#041534`. SVG omitted from link tags due to
+  bloated upstream (1.46 MB raster-in-SVG); inline comment in header.php
+  documents how to restore once a real vector is provided.
+
+### UI/UX (also Day 3 Task E)
+- SECTION 2B before/after cards capped at `max-w-md` on 4 big service pages.
+- H2 sizing standardized across all 19 service pages + about + homepage to
+  `text-3xl sm:text-4xl`.
+- Homepage "Full Renovation" badge icon: `delete` (trash) → `close` (X).
+
+### Verified on production
+- Mobile Lighthouse score: **97** (up from previous baseline)
+- All assets `cf-cache-status: HIT`
+- HTTP/3 advertised, Brotli compression active
+- Real Google reviews rendering (3 reviews, real photos, days-ago labels,
+  hover tooltips functional)
 
 ---
 

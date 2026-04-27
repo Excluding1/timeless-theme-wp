@@ -21,3 +21,18 @@ thesis-*.png
 
 # Logs
 npm-debug.log*
+
+# Responsive image variants — derived artifacts, regenerable via:
+#   python3 scripts/generate-responsive-images.py
+# Kept on disk for the deploy zip but excluded from git history to avoid
+# committing ~25 MB of binary blobs that are deterministic outputs of the
+# script. Pattern matches files like image-400w.jpg.webp, image-800w.png, etc.
+images/**/*-[0-9]*w.jpg
+images/**/*-[0-9]*w.jpeg
+images/**/*-[0-9]*w.png
+images/**/*-[0-9]*w.jpg.webp
+images/**/*-[0-9]*w.jpeg.webp
+images/**/*-[0-9]*w.png.webp
+
+# Deploy zip artifacts
+*.zip

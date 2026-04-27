@@ -195,11 +195,117 @@ function timeless_scripts() {
     $tailwind_ver  = file_exists( $tailwind_path ) ? filemtime( $tailwind_path ) : '1.0.0';
     wp_enqueue_style( 'timeless-tailwind', $tailwind_url, array(), $tailwind_ver );
 
-    // Google Fonts — Inter
-    wp_enqueue_style( 'google-fonts-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap', array(), null );
+    /**
+     * Inter — Self-hosted variable font subset (~99 KB, all weights via wght axis).
+     *
+     * Replaces Google Fonts CDN. Eliminates two third-party DNS+TLS lookups
+     * (fonts.googleapis.com + fonts.gstatic.com) and 6+ separate weight requests
+     * (~200-300 KB over the wire) with one local request to the same origin.
+     *
+     * The font is the official Inter Variable from rsms/inter v4, subset to
+     * Latin (Basic Latin + Latin-1 + essential punctuation/currency). wght axis
+     * preserved continuous 100..900, opsz axis preserved 14..32 for optical
+     * sizing. No italic variant — theme has zero italic usage.
+     *
+     * Tailwind classes like `font-bold` (700), `font-extrabold` (800), etc. all
+     * resolve to the correct visual weight via the variable axis.
+     *
+     * To regenerate (after font version bump or unicode-range change):
+     *   1. curl -L -o /tmp/Inter-test.woff2 \
+     *        "https://github.com/rsms/inter/raw/v4.0/docs/font-files/InterVariable.woff2"
+     *   2. python3 scripts/subset-inter.py
+     */
+    $inter_font_path = get_template_directory() . '/assets/fonts/inter-variable-latin.woff2';
+    if ( file_exists( $inter_font_path ) ) {
+        $inter_font_url = get_template_directory_uri() . '/assets/fonts/inter-variable-latin.woff2';
+        $inter_font_ver = filemtime( $inter_font_path );
 
-    // Material Symbols
-    wp_enqueue_style( 'material-symbols', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap', array(), null );
+        wp_register_style( 'inter-self-hosted', false );
+        wp_enqueue_style( 'inter-self-hosted' );
+        wp_add_inline_style( 'inter-self-hosted', "
+            @font-face {
+                font-family: 'Inter';
+                font-style: normal;
+                /* Variable axis covers all weights from 100 (thin) to 900 (black).
+                   Browser auto-detects variations from the woff2 — no `format('woff2-variations')`
+                   hint needed (that token was a 2016-era vendor proposal, never standardized). */
+                font-weight: 100 900;
+                font-display: swap;
+                src: url(" . esc_url( $inter_font_url ) . "?v=$inter_font_ver) format('woff2');
+            }
+        " );
+    }
+    // If font file is missing, NO @font-face is emitted → tailwind config's
+    // 'system-ui, sans-serif' fallback chain takes over silently. Prevents
+    // a 404'd @font-face from blocking text rendering for `font-display: swap`'s
+    // brief swap window.
+
+    /**
+     * Material Symbols — Self-hosted subset (96 icons, ~10 KB).
+     *
+     * Replaces Google Fonts CDN (1.06 MB shipped). 99.7% size reduction.
+     * Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept as 0..1
+     * so `font-variation-settings:'FILL' 1` still works for filled-icon variants.
+     *
+     * Implementation: subset font has only the icons we use, mapped to PUA codepoints
+     * (no GSUB ligatures for icon names like "home" → glyph). The PHP filter
+     * timeless_replace_icon_ligatures() converts
+     * <span class="material-symbols-outlined">home</span> →
+     * <span class="material-symbols-outlined">&#xe9b2;</span> at output time.
+     *
+     * Source markup stays the same (icon names) — easy to maintain. Browser receives
+     * codepoints — works with the tiny font.
+     *
+     * To regenerate after adding/removing icons:
+     *   1. bash scripts/audit-icons.sh
+     *   2. python3 scripts/subset-material-symbols.py
+     * See BUILD.md "Material Symbols Icon Subset Pipeline" for details.
+     */
+    $ms_font_path = get_template_directory() . '/assets/fonts/material-symbols-subset.woff2';
+    if ( file_exists( $ms_font_path ) ) {
+        $ms_font_url = get_template_directory_uri() . '/assets/fonts/material-symbols-subset.woff2';
+        $ms_font_ver = filemtime( $ms_font_path );
+
+        wp_register_style( 'material-symbols-subset', false );
+        wp_enqueue_style( 'material-symbols-subset' );
+        wp_add_inline_style( 'material-symbols-subset', "
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            font-style: normal;
+            font-weight: 400;
+            font-display: block;
+            src: url(" . esc_url( $ms_font_url ) . "?v=$ms_font_ver) format('woff2');
+        }
+        /* CRITICAL: bind the class to the @font-face. Without this, .material-symbols-outlined
+           inherits the body font (Inter), which has no glyphs at the icon codepoints, so the
+           browser falls back to system fonts and renders garbage at U+F0BE etc.
+           (Google Fonts CDN CSS used to do this for us — when we self-hosted we dropped it.)
+
+           Wrapped in @layer base so Tailwind v4 utility classes (text-2xl, text-base, etc.)
+           still win for font-size. Without the layer, this would beat utilities and every
+           icon would fall back to its parent's font-size. */
+        @layer base {
+            .material-symbols-outlined {
+                font-family: 'Material Symbols Outlined', sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-feature-settings: 'liga';
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+    " );
+    } // end Material Symbols file_exists guard
+    // If MS font is missing, no @font-face is emitted — icons will render as
+    // their literal codepoint chars in fallback fonts (notdef boxes), making
+    // the missing-deploy state visually obvious instead of silently broken.
 
     // Theme stylesheet (animations, mobile menu, FAQ accordion)
     wp_enqueue_style( 'timeless-style', get_stylesheet_uri(), array(), '1.0.0' );
@@ -208,6 +314,192 @@ function timeless_scripts() {
     wp_enqueue_script( 'timeless-main', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
+
+/**
+ * Material Symbols ligature → codepoint replacement (output buffer filter).
+ *
+ * Why: We use a ~10 KB icon font subset that contains ONLY the 96 icons we use,
+ * stored at their Unicode codepoints (no GSUB ligature lookup table — dropping that
+ * is most of the savings; the FILL variable axis is preserved for filled variants).
+ *
+ * The browser still receives <span class="material-symbols-outlined">home</span>
+ * in source code (easier to maintain), but this filter converts it to
+ * <span class="material-symbols-outlined">&#xe9b2;</span> on the way out.
+ *
+ * Performance: regex runs once per page render (~1-3ms). With cache plugins
+ * (WP Rocket, etc.) this runs once per cache generation, then served from
+ * cache for all subsequent visitors → effectively zero overhead.
+ *
+ * Failure mode: if an icon name isn't in the codepoints map, the original
+ * span is preserved (will render as text — visible bug, easy to spot).
+ */
+function timeless_replace_icon_ligatures( $html ) {
+    static $codepoints = null;
+    if ( null === $codepoints ) {
+        $codepoints = include get_template_directory() . '/inc/material-symbols-codepoints.php';
+    }
+    if ( ! is_array( $codepoints ) ) return $html;
+
+    // Regex tolerates BOTH double-quoted and single-quoted class attributes.
+    // The symmetric lookarounds `(?<![\w-])material-symbols-outlined(?![\w-])` prevent
+    // false-matching prefixed/suffixed classes like `material-symbols-outlined-extra`
+    // (the standard `\b` word-boundary doesn't help — `-` is non-word and matches `\b`,
+    // so `\b` at end of token is satisfied by a following hyphen, e.g.
+    // `class="my-material-symbols-outlined-rounded"` would falsely match without these).
+    // Capture group 1: the opening <span ...>
+    // Capture group 2: the icon name (must start with [a-z], may contain digits + underscores)
+    // Capture group 3: the closing </span>
+    return preg_replace_callback(
+        '/(<span\b[^>]*\bclass=(?:"[^"]*(?<![\w-])material-symbols-outlined(?![\w-])[^"]*"|\'[^\']*(?<![\w-])material-symbols-outlined(?![\w-])[^\']*\')[^>]*>)([a-z][a-z0-9_]*)(<\/span>)/i',
+        function ( $matches ) use ( $codepoints ) {
+            $name = $matches[2];
+            if ( isset( $codepoints[ $name ] ) ) {
+                return $matches[1] . '&#x' . $codepoints[ $name ] . ';' . $matches[3];
+            }
+            return $matches[0]; // Icon name not in map — leave unchanged for visibility
+        },
+        $html
+    );
+}
+
+/**
+ * WebP picture-tag rewrite (output buffer filter).
+ *
+ * Why: images/** /*.webp companions exist alongside many JPG/PNG files
+ * (generated by scripts/convert-images-to-webp.py — only when WebP beats the
+ * source by size). This filter wraps `<img src="x.jpg" ...>` →
+ * `<picture><source srcset="x.jpg.webp" type="image/webp"><img src="x.jpg" ...></picture>`
+ * so WebP-capable browsers (96%+ of users) get the smaller file while older
+ * browsers transparently fall through to the original JPG/PNG.
+ *
+ * Naming convention: `images/foo/bar.jpg` ↔ `images/foo/bar.jpg.webp` (double
+ * extension). Originals untouched, easy rollback (delete the .webp files).
+ *
+ * Edge cases handled:
+ *   - Skips <img> without a matching .webp companion file (graceful no-op).
+ *   - Skips data: URIs and external URLs (only theme-relative paths).
+ *   - Preserves all attributes on the original <img> (loading, srcset, alt, …).
+ *   - Naturally won't double-wrap because the regex captures `<img...>` and
+ *     wraps the WHOLE thing in <picture> — re-running the regex on already-
+ *     wrapped output won't re-match (because the inner img is now inside
+ *     <picture>...</picture> which makes the surrounding context different).
+ *   - Cache-busted URLs (`?v=1`) currently fall through unwrapped — the regex
+ *     requires the extension to immediately precede the closing quote. If the
+ *     theme ever adds query strings to image URLs, extend the regex.
+ *
+ * Limitation: only handles theme-bundled images (`get_template_directory_uri()`).
+ * Future WP Media Library uploads (`/wp-content/uploads/`) won't get WebP
+ * delivery via this filter — would need a separate pipeline that runs on
+ * `add_attachment` to generate companions, plus path-resolution extension here.
+ */
+function timeless_webp_picture_filter( $html ) {
+    static $template_dir = null, $template_url = null;
+    if ( null === $template_dir ) {
+        $template_dir = get_template_directory();
+        $template_url = get_template_directory_uri();
+    }
+
+    // Widths generated by scripts/generate-responsive-images.py — kept in sync.
+    $RESPONSIVE_WIDTHS = array( 400, 800, 1600 );
+    // Default sizes attribute. Tells the browser how WIDE the image renders at
+    // each breakpoint so it can pick the right srcset variant. Hero images on
+    // this theme render full-width on mobile, ~50vw on tablet, ~33vw on desktop.
+    $DEFAULT_SIZES = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
+
+    return preg_replace_callback(
+        '/<img\b(?<attrs_before>[^>]*?)\bsrc=(?<q>["\'])(?<src>[^"\']+\.(?:jpe?g|png))\k<q>(?<attrs_after>[^>]*)>/i',
+        function ( $m ) use ( $template_dir, $template_url, $RESPONSIVE_WIDTHS, $DEFAULT_SIZES ) {
+            $img_tag = $m[0];
+            $src     = $m['src'];
+
+            // Skip external URLs or data URIs
+            if ( strpos( $src, 'data:' ) === 0 ) return $img_tag;
+            if ( preg_match( '#^https?://#', $src ) && strpos( $src, $template_url ) !== 0 ) {
+                return $img_tag;
+            }
+
+            // Resolve local path
+            $local_path = $template_dir . '/' . ltrim( str_replace( $template_url, '', $src ), '/' );
+            $webp_path  = $local_path . '.webp';
+
+            // No webp companion = nothing we can do, leave original
+            if ( ! file_exists( $webp_path ) ) {
+                return $img_tag;
+            }
+
+            // ── Detect responsive variants (image-400w.jpg, -800w, -1600w + .webp companions)
+            // If any exist, build a richer <picture> with srcset+sizes for browser to pick.
+            $base_path = preg_replace( '/(\.(jpe?g|png))$/i', '', $local_path );  // strip extension
+            $base_url  = preg_replace( '/(\.(jpe?g|png))$/i', '', $src );
+            $ext       = '';
+            if ( preg_match( '/(\.(jpe?g|png))$/i', $src, $ext_match ) ) {
+                $ext = $ext_match[0];
+            }
+
+            $webp_srcset = array();
+            $jpg_srcset  = array();
+            foreach ( $RESPONSIVE_WIDTHS as $w ) {
+                $variant_jpg  = $base_path . '-' . $w . 'w' . $ext;
+                $variant_webp = $variant_jpg . '.webp';
+                if ( file_exists( $variant_jpg ) && file_exists( $variant_webp ) ) {
+                    $variant_jpg_url  = $base_url . '-' . $w . 'w' . $ext;
+                    $variant_webp_url = $variant_jpg_url . '.webp';
+                    $webp_srcset[] = esc_url( $variant_webp_url ) . ' ' . $w . 'w';
+                    $jpg_srcset[]  = esc_url( $variant_jpg_url ) . ' ' . $w . 'w';
+                }
+            }
+
+            // Branch 1: We have responsive variants → emit full <picture> with multi-source srcset.
+            // IMPORTANT: every entry in srcset must have a `w` descriptor when using `sizes`. Mixing
+            // descriptor-having and bare URLs leaves browsers free to ignore `sizes` entirely and
+            // pick the bare URL (the largest/default), which defeats the whole optimization.
+            // The original full-size image stays available as the <img src="..."> fallback for
+            // browsers that don't support srcset (very old IE, etc.).
+            if ( ! empty( $webp_srcset ) ) {
+                $webp_srcset_str = implode( ', ', $webp_srcset );
+                $jpg_srcset_str  = implode( ', ', $jpg_srcset );
+
+                // Inject srcset+sizes into the original <img> for non-webp browsers
+                $img_with_srcset = $img_tag;
+                if ( ! preg_match( '/\bsrcset=/i', $img_with_srcset ) ) {
+                    $img_with_srcset = preg_replace(
+                        '/<img\b/i',
+                        '<img srcset="' . $jpg_srcset_str . '" sizes="' . $DEFAULT_SIZES . '"',
+                        $img_with_srcset,
+                        1
+                    );
+                }
+
+                return '<picture>'
+                     . '<source type="image/webp" srcset="' . $webp_srcset_str . '" sizes="' . $DEFAULT_SIZES . '">'
+                     . $img_with_srcset
+                     . '</picture>';
+            }
+
+            // Branch 2: No responsive variants — fall back to single-source webp wrap (existing behavior)
+            $webp_url = $src . '.webp';
+            return '<picture><source srcset="' . esc_url( $webp_url ) . '" type="image/webp">' . $img_tag . '</picture>';
+        },
+        $html
+    );
+}
+
+/** Combined output filter — runs all theme HTML transformations on flush. */
+function timeless_combined_output_filter( $html ) {
+    $html = timeless_replace_icon_ligatures( $html );
+    $html = timeless_webp_picture_filter( $html );
+    return $html;
+}
+
+/** Start output buffering early; chain icon + WebP filters on flush.
+ *  Skip for non-HTML responses (admin, AJAX, cron, JSON, RSS/Atom feeds, REST API). */
+function timeless_start_icon_buffer() {
+    if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_json_request() || is_feed() ) {
+        return;
+    }
+    ob_start( 'timeless_combined_output_filter' );
+}
+add_action( 'template_redirect', 'timeless_start_icon_buffer', 1 );
 
 /* ────────────────────────────���────────────────
    3. CUSTOMIZER — Editable Business Settings
@@ -277,8 +569,532 @@ function timeless_customizer( $wp_customize ) {
         'section' => 'timeless_business',
         'type'    => 'text',
     ) );
+
+    // ─── Google Reviews Section ────────────────────────────────────
+    $wp_customize->add_section( 'timeless_google_reviews', array(
+        'title'       => __( 'Google Reviews', 'timeless' ),
+        'priority'    => 35,
+        'description' => __( 'Self-hosted Google Places API integration. No third-party widgets, no paywall. <br><br><strong>Setup (one-time, ~10 min):</strong><br>1. Visit <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>, create a project, enable "Places API" (free tier: 100K requests/month).<br>2. Create an API key under "Credentials". Restrict it to your domain for security.<br>3. Find your Place ID at <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener noreferrer">Google\'s Place ID Finder</a> by searching for your business.<br>4. Paste both below.<br><br>Reviews refresh every 24 hours via WordPress transients (cached, no per-request API calls).', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_google_api_key', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options', // Sensitive — admin only
+    ) );
+    $wp_customize->add_control( 'timeless_google_api_key', array(
+        'label'       => __( 'Google Places API Key', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'text',
+        'description' => __( 'Restrict this key to HTTP referrer = your domain in Google Cloud Console.', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_google_place_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'timeless_google_place_id', array(
+        'label'       => __( 'Business identifier (optional)', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'text',
+        'description' => __( 'Accepts Place ID, business name, or Maps URL. Service-area businesses are often NOT yet indexed in the Places API — leave this blank and use the static reviews textarea below instead. We fall back to that when the API returns no results.', 'timeless' ),
+    ) );
+
+    // Public-facing GBP link — used for the "See all reviews on Google" CTA.
+    // Works even when business isn't in Places API yet (most common case for trades).
+    $wp_customize->add_setting( 'timeless_google_business_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'timeless_google_business_url', array(
+        'label'       => __( 'Google Business Profile URL', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'url',
+        'description' => __( 'The public link to your reviews on Google. Visit your Google Business Profile or Maps listing → click "Share" → copy the link. Used for the "See all reviews on Google" button below the review cards.', 'timeless' ),
+    ) );
+
+    // Static curated reviews — most reliable path for service-area trades businesses.
+    // Format: one review per line, pipe-separated:
+    //   Author Name | Time label | Rating (1-5) | Review text
+    $wp_customize->add_setting( 'timeless_reviews_static', array(
+        'default'           => '',
+        'sanitize_callback' => 'wp_kses_post',  // Allow basic HTML, strip script/onclick
+    ) );
+    $wp_customize->add_control( 'timeless_reviews_static', array(
+        'label'       => __( 'Curated reviews (static)', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'textarea',
+        'description' => __( '<strong>Format:</strong> one review per line, pipe-separated. Leave a single trailing space if the field looks like one column.<br><br><code>Author Name | Time label | Rating | Review text</code><br><br><strong>Example:</strong><br><code>Andy T. | 2 weeks ago | 5 | Marko came by and did a good job regrouting my shower tiles.</code><br><br>Render up to 6 reviews. If both this and Place ID are filled, the Places API takes priority and this is the fallback.', 'timeless' ),
+    ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
+
+/* ─────────────────────────────────────────────
+   3b. GOOGLE REVIEWS — Self-hosted Places API integration
+   ─────────────────────────────────────────────
+   Why custom (not Trustindex/Featurable):
+     - Zero third-party CDN requests (matches our self-host-everything pattern)
+     - Free (Google Places API has 100K-request/month free tier; with 24h cache
+       on a small site we use ~30 requests/month total)
+     - Full design control (renders with our Tailwind cards, Inter font, palette)
+     - Privacy: no third-party trackers, no paywall surprise
+
+   Strategy:
+     - WordPress transient caches reviews for 24 hours (DAY_IN_SECONDS).
+     - On cache miss, fetch from Google Places API server-side.
+     - Render directly in PHP — no JS, no CLS, no async injection.
+     - Graceful fallback: if API fails or keys not set, render a "See reviews
+       on Google" link to the GBP listing instead of an empty section.
+   ───────────────────────────────────────────── */
+
+/**
+ * Resolve a user-pasted business identifier to a real Google Place ID.
+ *
+ * Accepts:
+ *   - Place ID directly (`ChIJ...`)        — passes through unchanged
+ *   - Maps URL (`https://...maps/place/...`) — extracts business name segment
+ *   - Plain business name text             — used as-is
+ *
+ * Non-Place-ID inputs go through Google's `findplacefromtext` API once,
+ * then the resolved Place ID is cached in a long-lived transient so we
+ * never re-query (saves the API call quota). Cache invalidates on
+ * Customizer re-save.
+ *
+ * Returns Place ID string, or false on failure.
+ */
+function timeless_resolve_place_id( $input, $api_key ) {
+    $input = trim( $input );
+    if ( empty( $input ) || empty( $api_key ) ) {
+        return false;
+    }
+
+    // Pass-through if already a Place ID (Google's documented prefix)
+    if ( strpos( $input, 'ChIJ' ) === 0 ) {
+        return $input;
+    }
+
+    // Try long-lived resolution cache (keyed by input hash so changes invalidate)
+    $cache_key = 'timeless_resolved_place_id_' . md5( $input );
+    $cached    = get_transient( $cache_key );
+    if ( false !== $cached ) {
+        return is_array( $cached ) && isset( $cached['_failed'] ) ? false : $cached;
+    }
+
+    // Extract business-name search term:
+    //   - From Maps URL: `.../maps/place/Business+Name/data=...` → "Business Name"
+    //   - From plain text: use as-is
+    $query = $input;
+    if ( preg_match( '#/maps/place/([^/]+)#', $input, $m ) ) {
+        $query = str_replace( '+', ' ', rawurldecode( $m[1] ) );
+    }
+
+    $api_url = sprintf(
+        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=place_id&key=%s',
+        rawurlencode( $query ),
+        rawurlencode( $api_key )
+    );
+
+    $response = wp_remote_get( $api_url, array(
+        'timeout' => 5,
+        // Send Referer header matching your domain so Google's HTTP-referrer
+        // API key restriction accepts the call (server-side requests don't
+        // automatically include Referer; without it, restricted keys are denied).
+        'headers' => array( 'Referer' => home_url() ),
+    ) );
+    if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    $place_id = $body['candidates'][0]['place_id'] ?? '';
+
+    if ( empty( $place_id ) ) {
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    // Cache the resolved Place ID for 30 days — businesses don't change Place IDs
+    set_transient( $cache_key, $place_id, 30 * DAY_IN_SECONDS );
+    return $place_id;
+}
+
+/** Fetch Google reviews (cached). Returns array of reviews + rating + count, or false on failure. */
+function timeless_get_google_reviews() {
+    $cache_key = 'timeless_google_reviews_v1';
+    $cached    = get_transient( $cache_key );
+    if ( false !== $cached ) {
+        // Distinguish "cached failure" sentinel from real success data
+        if ( is_array( $cached ) && isset( $cached['_failed'] ) ) {
+            return false;
+        }
+        return $cached;
+    }
+
+    $api_key      = trim( get_theme_mod( 'timeless_google_api_key', '' ) );
+    $raw_place_id = trim( get_theme_mod( 'timeless_google_place_id', '' ) );
+    if ( empty( $api_key ) || empty( $raw_place_id ) ) {
+        return false;
+    }
+
+    // Resolve user input to a real Place ID (handles ChIJ-prefix, Maps URLs, business names)
+    $place_id = timeless_resolve_place_id( $raw_place_id, $api_key );
+    if ( ! $place_id ) {
+        return false;
+    }
+
+    // ── NEW Places API (places.googleapis.com/v1/places/{id}) ──────────
+    // The legacy Places API endpoint (maps.googleapis.com/maps/api/place/details)
+    // returns NOT_FOUND for many newer service-area businesses even when the Place ID
+    // is valid. The new Places API has those records — and is what Google is pushing
+    // forward as the legacy one is deprecated.
+    //
+    // Differences vs legacy:
+    //   - Endpoint: places.googleapis.com/v1/places/{place_id}
+    //   - Auth via header (X-Goog-Api-Key) instead of ?key= query param
+    //   - X-Goog-FieldMask header is REQUIRED (explicit field selection)
+    //   - camelCase response: userRatingCount, googleMapsUri, displayName.text,
+    //     authorAttribution.{displayName,uri,photoUri}, text.text, etc.
+    $url = 'https://places.googleapis.com/v1/places/' . rawurlencode( $place_id );
+    $field_mask = 'id,displayName,reviews,rating,userRatingCount,googleMapsUri';
+
+    $response = wp_remote_get( $url, array(
+        'timeout' => 5,
+        'headers' => array(
+            'X-Goog-Api-Key'    => $api_key,
+            'X-Goog-FieldMask'  => $field_mask,
+            'Referer'           => home_url(),
+        ),
+    ) );
+
+    if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+        // Cache a failure SENTINEL (not literal false) for 1 hour so we don't hammer
+        // the API on every page hit. We can't cache `false` because get_transient()
+        // returns false for "not set" — same as our cached failure → no backoff.
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    if ( empty( $body ) || empty( $body['id'] ) ) {
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    // Normalize the new API's nested response into the flat shape our render function expects.
+    // Each review's `text` and `displayName` come back as objects ({text, languageCode}); flatten them.
+    $reviews_normalized = array();
+    foreach ( ( $body['reviews'] ?? array() ) as $r ) {
+        // Format publishTime (ISO 8601 UTC) into:
+        //   - relative_time_description: precise days ("3 days ago" not Google's vague "a week ago")
+        //   - publish_full_label: full Sydney-local timestamp for hover tooltip
+        $publish_iso        = $r['publishTime'] ?? '';
+        $publish_full_label = '';
+        $relative_label     = $r['relativePublishTimeDescription'] ?? '';  // Google's default fallback
+        if ( ! empty( $publish_iso ) ) {
+            try {
+                $dt = new DateTime( $publish_iso );
+                $dt->setTimezone( new DateTimeZone( 'Australia/Sydney' ) );
+
+                // Full timestamp for hover tooltip (e.g. "April 22, 2026 at 1:58 PM GMT+10")
+                $offset = $dt->format( 'P' );
+                if ( substr( $offset, -3 ) === ':00' ) {
+                    $offset = substr( $offset, 0, -3 );  // Strip ":00" for cleaner "+10"
+                }
+                $publish_full_label = $dt->format( 'F j, Y \a\t g:i A' ) . ' GMT' . $offset;
+
+                // Precise days-based relative label — overrides Google's vague defaults.
+                $now      = new DateTime( 'now', new DateTimeZone( 'Australia/Sydney' ) );
+                $days_ago = (int) $now->diff( $dt )->days;
+                $hours    = (int) ( ( $now->getTimestamp() - $dt->getTimestamp() ) / 3600 );
+
+                if ( $hours < 1 ) {
+                    $relative_label = __( 'just now', 'timeless' );
+                } elseif ( $hours < 24 ) {
+                    $relative_label = sprintf( _n( '%d hour ago', '%d hours ago', $hours, 'timeless' ), $hours );
+                } elseif ( $days_ago === 1 ) {
+                    $relative_label = __( 'yesterday', 'timeless' );
+                } elseif ( $days_ago < 30 ) {
+                    $relative_label = sprintf( _n( '%d day ago', '%d days ago', $days_ago, 'timeless' ), $days_ago );
+                } elseif ( $days_ago < 365 ) {
+                    $months = (int) round( $days_ago / 30 );
+                    $relative_label = sprintf( _n( '%d month ago', '%d months ago', $months, 'timeless' ), $months );
+                } else {
+                    $years = (int) round( $days_ago / 365 );
+                    $relative_label = sprintf( _n( '%d year ago', '%d years ago', $years, 'timeless' ), $years );
+                }
+            } catch ( Exception $e ) {
+                $publish_full_label = '';
+                // Fall through with Google's default $relative_label
+            }
+        }
+
+        $reviews_normalized[] = array(
+            'author_name'               => $r['authorAttribution']['displayName'] ?? 'Google User',
+            'author_url'                => $r['authorAttribution']['uri'] ?? '',
+            'author_photo'              => $r['authorAttribution']['photoUri'] ?? '',
+            'rating'                    => intval( $r['rating'] ?? 5 ),
+            'relative_time_description' => $relative_label,
+            'publish_full'              => $publish_full_label,  // For hover tooltip
+            'text'                      => $r['text']['text'] ?? ( $r['originalText']['text'] ?? '' ),
+        );
+    }
+
+    $data = array(
+        'reviews'      => array_slice( $reviews_normalized, 0, 6 ),
+        'rating'       => isset( $body['rating'] ) ? floatval( $body['rating'] ) : 0,
+        'total'        => isset( $body['userRatingCount'] ) ? intval( $body['userRatingCount'] ) : 0,
+        'business_url' => isset( $body['googleMapsUri'] ) ? esc_url_raw( $body['googleMapsUri'] ) : '',
+    );
+
+    set_transient( $cache_key, $data, DAY_IN_SECONDS );
+    return $data;
+}
+
+/**
+ * Parse the static curated reviews textarea from Customizer.
+ * Format per line: `Author | Time label | Rating (1-5) | Review text`
+ * Returns array of reviews matching the Places API shape so render code
+ * doesn't need to know which source it came from.
+ */
+function timeless_parse_static_reviews() {
+    $raw = trim( get_theme_mod( 'timeless_reviews_static', '' ) );
+    if ( empty( $raw ) ) return array();
+
+    $reviews = array();
+    foreach ( preg_split( '/\r\n|\r|\n/', $raw ) as $line ) {
+        $line = trim( $line );
+        if ( empty( $line ) ) continue;
+
+        $parts = array_map( 'trim', explode( '|', $line ) );
+        if ( count( $parts ) < 4 ) continue; // Skip malformed lines silently
+
+        $reviews[] = array(
+            'author_name'               => $parts[0],
+            'relative_time_description' => $parts[1],
+            'rating'                    => intval( $parts[2] ),
+            // Re-join any extra `|` characters that were inside the review text
+            'text'                      => implode( ' | ', array_slice( $parts, 3 ) ),
+        );
+    }
+
+    return array_slice( $reviews, 0, 6 );  // Show up to 6
+}
+
+/** Render the Google Reviews widget. Tries Places API first, falls back to static
+ *  curated reviews from Customizer, then to a "see reviews on Google" link. */
+function timeless_render_google_reviews() {
+    $data = timeless_get_google_reviews();
+
+    // FALLBACK 1: Places API didn't return reviews (no key, business not yet indexed,
+    // API failure, etc.) — try static curated reviews from Customizer textarea.
+    if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
+        $static_reviews = timeless_parse_static_reviews();
+        if ( ! empty( $static_reviews ) ) {
+            $business_url = trim( get_theme_mod( 'timeless_google_business_url', '' ) );
+            // Synthesize a $data structure matching what Places API would return
+            $rating_avg = array_sum( array_column( $static_reviews, 'rating' ) ) / count( $static_reviews );
+            $data = array(
+                'reviews'      => $static_reviews,
+                'rating'       => round( $rating_avg, 1 ),
+                'total'        => count( $static_reviews ),
+                'business_url' => esc_url_raw( $business_url ),
+            );
+            // Fall through to the rendering block below
+        }
+    }
+
+    // FALLBACK 2: No Places API data AND no static reviews — show "see reviews on Google" link.
+    // Note: $data may be `false` (not an array), so we can't subscript it directly —
+    // PHP 8.1+ would warn "Trying to access array offset on value of type bool".
+    if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
+        $configured_url = trim( get_theme_mod( 'timeless_google_business_url', '' ) );
+        $fallback_business = ! empty( $configured_url )
+            ? $configured_url
+            : 'https://www.google.com/maps/search/' . rawurlencode( get_bloginfo( 'name' ) . ' Sydney' );
+        $business_url = ( is_array( $data ) && ! empty( $data['business_url'] ) ) ? $data['business_url'] : $fallback_business;
+        ?>
+        <div class="text-center py-8">
+            <p class="text-sm text-secondary mb-4">Read our reviews directly on Google.</p>
+            <a href="<?php echo esc_url( $fallback_business ); ?>" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">
+                See Our Google Reviews
+                <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
+            </a>
+        </div>
+        <?php
+        return;
+    }
+
+    $rating  = number_format( $data['rating'], 1 );
+    $total   = $data['total'];
+    $reviews = $data['reviews'];
+    ?>
+    <div class="timeless-reviews-carousel relative">
+        <!-- Prev arrow (hidden when at start, JS toggles) -->
+        <button type="button" class="timeless-reviews-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors disabled:opacity-30 disabled:cursor-not-allowed -ml-2 sm:-ml-4"
+                aria-label="<?php esc_attr_e( 'Previous reviews', 'timeless' ); ?>" disabled>
+            <span class="material-symbols-outlined text-2xl" aria-hidden="true">chevron_left</span>
+        </button>
+
+        <!-- Scroll track: snap-aligned, one card visible on mobile, three on desktop -->
+        <div class="timeless-reviews-track flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth py-2 px-1">
+            <?php foreach ( $reviews as $r ) :
+                $author       = $r['author_name'] ?? 'Google User';
+                $initial      = mb_substr( $author, 0, 1, 'UTF-8' );
+                $time_label   = $r['relative_time_description'] ?? '';
+                $time_full    = $r['publish_full'] ?? '';  // For hover tooltip
+                $stars        = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) );
+                $text         = $r['text'] ?? '';
+                $author_url   = $r['author_url'] ?? '';
+                $author_photo = $r['author_photo'] ?? '';
+            ?>
+            <article class="timeless-review-card snap-start shrink-0 w-[calc(100%-2rem)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] bg-surface-container-low rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                     data-author="<?php echo esc_attr( $author ); ?>"
+                     data-time="<?php echo esc_attr( $time_label ); ?>"
+                     data-time-full="<?php echo esc_attr( $time_full ); ?>"
+                     data-rating="<?php echo esc_attr( $stars ); ?>"
+                     data-photo="<?php echo esc_attr( $author_photo ); ?>"
+                     data-text="<?php echo esc_attr( $text ); ?>">
+                <header class="flex items-start gap-3 mb-3">
+                    <?php if ( $author_photo ) : ?>
+                        <img src="<?php echo esc_url( $author_photo ); ?>" alt=""
+                             loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                             class="w-12 h-12 rounded-full object-cover bg-primary/10 shrink-0"
+                             width="48" height="48" />
+                    <?php else : ?>
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0" aria-hidden="true">
+                            <?php echo esc_html( $initial ); ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-primary text-sm truncate"><?php echo esc_html( $author ); ?></p>
+                        <?php // Time label with hover tooltip showing full timestamp ?>
+                        <p class="text-xs text-secondary timeless-tooltip <?php echo $time_full ? 'cursor-help' : ''; ?>"
+                           <?php if ( $time_full ) : ?>data-tooltip="<?php echo esc_attr( $time_full ); ?>"<?php endif; ?>>
+                            <?php echo esc_html( $time_label ); ?>
+                        </p>
+                    </div>
+                    <?php // Google G logo + "Posted on Google" hover tooltip ?>
+                    <span class="timeless-tooltip cursor-help shrink-0" data-tooltip="<?php esc_attr_e( 'Posted on Google', 'timeless' ); ?>">
+                    <svg class="w-6 h-6 block" viewBox="0 0 48 48" aria-hidden="true">
+                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                        <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                    </svg>
+                    </span><?php // end Google logo tooltip wrapper ?>
+                </header>
+
+                <div class="flex items-center gap-1.5 mb-3">
+                    <div class="flex text-amber-400 text-base" aria-hidden="true">
+                        <?php for ( $i = 0; $i < $stars; $i++ ) echo '&#9733;'; ?>
+                    </div>
+                    <span class="sr-only"><?php echo esc_html( $stars ); ?> out of 5 stars</span>
+                    <?php // Verified badge with "Verified Customer" hover tooltip ?>
+                    <span class="timeless-tooltip cursor-help inline-flex" data-tooltip="<?php esc_attr_e( 'Verified Customer', 'timeless' ); ?>">
+                        <span class="material-symbols-outlined text-blue-500 text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span>
+                    </span>
+                </div>
+
+                <div class="timeless-review-body relative">
+                    <p class="timeless-review-text text-sm text-primary leading-relaxed line-clamp-3"><?php echo esc_html( $text ); ?></p>
+                    <button type="button" class="timeless-read-more text-xs text-primary hover:text-primary-soft mt-2 font-bold hidden inline-flex items-center gap-1">
+                        <span class="timeless-read-more-label"><?php esc_html_e( 'Read more', 'timeless' ); ?></span>
+                        <span class="material-symbols-outlined text-sm timeless-read-more-icon transition-transform" aria-hidden="true">expand_more</span>
+                    </button>
+                </div>
+            </article>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Next arrow -->
+        <button type="button" class="timeless-reviews-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors disabled:opacity-30 disabled:cursor-not-allowed -mr-2 sm:-mr-4"
+                aria-label="<?php esc_attr_e( 'Next reviews', 'timeless' ); ?>">
+            <span class="material-symbols-outlined text-2xl" aria-hidden="true">chevron_right</span>
+        </button>
+    </div>
+
+    <!-- Review modal (full text popup, JS-injected per-click) — single instance for all cards on this section -->
+    <div class="timeless-review-modal fixed inset-0 z-[200] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="timeless-review-modal-author" aria-hidden="true">
+        <!-- Overlay (click to close) -->
+        <div class="modal-overlay absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" data-close-modal></div>
+
+        <!-- Modal card -->
+        <div class="modal-card relative bg-white rounded-2xl p-6 sm:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl transition-transform">
+            <!-- Close button -->
+            <button type="button" class="absolute top-3 right-3 w-9 h-9 rounded-full hover:bg-surface-container-low flex items-center justify-center text-secondary hover:text-primary transition-colors" data-close-modal aria-label="<?php esc_attr_e( 'Close review', 'timeless' ); ?>">
+                <span class="material-symbols-outlined" aria-hidden="true">close</span>
+            </button>
+
+            <!-- Header: avatar + author + time + Google logo -->
+            <header class="flex items-start gap-3 mb-4 pr-10">
+                <div class="modal-avatar shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                    <p id="timeless-review-modal-author" class="modal-author font-bold text-primary text-base truncate"></p>
+                    <p class="modal-time text-xs text-secondary"></p>
+                </div>
+                <svg class="w-6 h-6 shrink-0 mt-1" viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                    <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                    <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                    <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                </svg>
+            </header>
+
+            <!-- Stars + verified -->
+            <div class="flex items-center gap-1.5 mb-4">
+                <div class="modal-stars flex text-amber-400 text-lg" aria-hidden="true"></div>
+                <span class="modal-stars-sr sr-only"></span>
+                <span class="material-symbols-outlined text-blue-500 text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true" title="<?php esc_attr_e( 'Verified review', 'timeless' ); ?>">verified</span>
+            </div>
+
+            <!-- Full review text (no clamp) -->
+            <p class="modal-text text-sm sm:text-base text-primary leading-relaxed whitespace-pre-line"></p>
+        </div>
+    </div>
+
+    <?php if ( ! empty( $data['business_url'] ) ) : ?>
+    <div class="text-center mt-8">
+        <a href="<?php echo esc_url( $data['business_url'] ); ?>" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-soft transition-colors">
+            <?php
+            // Show review count only when Places API gave us a real count higher than what we display.
+            // For static curated reviews, the count we have IS what we display, so just say "See all our reviews".
+            $shown = count( $data['reviews'] );
+            if ( $total > $shown ) {
+                printf( esc_html__( 'See all %d reviews on Google', 'timeless' ), intval( $total ) );
+            } else {
+                esc_html_e( 'See all our reviews on Google', 'timeless' );
+            }
+            ?>
+            <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
+        </a>
+    </div>
+    <?php endif; ?>
+    <?php
+}
+
+/** Clear the reviews cache (e.g. after Customizer save). The next page hit will
+ *  refetch lazily — we deliberately don't refetch synchronously here because
+ *  customize_save_after fires for ANY Customizer save (phone, email, etc.), and
+ *  a 5-second wp_remote_get on every save would make the admin UX painful.
+ *  Also clears any resolved-Place-ID caches so a changed business identifier
+ *  takes effect immediately. */
+function timeless_refresh_google_reviews() {
+    delete_transient( 'timeless_google_reviews_v1' );
+    // Clear all resolved Place ID caches (stored with md5-suffixed keys).
+    // We don't know the hash without the input value, so use $wpdb to scan options.
+    global $wpdb;
+    if ( isset( $wpdb ) ) {
+        $wpdb->query( $wpdb->prepare(
+            "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+            '_transient_timeless_resolved_place_id_%',
+            '_transient_timeout_timeless_resolved_place_id_%'
+        ) );
+    }
+}
+add_action( 'customize_save_after', 'timeless_refresh_google_reviews' );
 
 /* ─────────────────────────────────────────────
    4. HELPER FUNCTIONS
@@ -1131,13 +1947,21 @@ remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 /** Remove DNS prefetch for WordPress.org */
 remove_action( 'wp_head', 'wp_resource_hints', 2 );
 
-/** Add preconnect hints for Google Fonts (speed up external resource loading).
- *  Tailwind is now compiled locally — no CDN preconnect needed. */
-function timeless_preconnect_hints() {
-    echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />' . "\n";
-    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />' . "\n";
+/** Preload our self-hosted Inter font for faster first paint.
+ *  Inter is the body font — without preload, the browser only discovers the
+ *  @font-face URL after parsing the inline <style> tag, costing ~50-100ms.
+ *  Preload tells the browser to fetch it in parallel with the HTML parse.
+ *  (Google Fonts preconnects removed — Inter + Material Symbols are now local.) */
+function timeless_preload_inter() {
+    $url = get_template_directory_uri() . '/assets/fonts/inter-variable-latin.woff2';
+    $path = get_template_directory() . '/assets/fonts/inter-variable-latin.woff2';
+    if ( ! file_exists( $path ) ) {
+        return; // No preload if font isn't deployed yet
+    }
+    $ver = filemtime( $path );
+    echo '<link rel="preload" as="font" type="font/woff2" crossorigin href="' . esc_url( $url ) . '?v=' . $ver . '" />' . "\n";
 }
-add_action( 'wp_head', 'timeless_preconnect_hints', 1 );
+add_action( 'wp_head', 'timeless_preload_inter', 1 );
 
 /** Disable WordPress heartbeat on frontend (saves AJAX calls, reduces server load) */
 function timeless_disable_heartbeat() {

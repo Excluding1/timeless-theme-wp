@@ -70,7 +70,7 @@
                     <span class="material-symbols-outlined text-3xl text-primary" aria-hidden="true">call</span>
                 </div>
                 <h2 class="font-bold text-primary text-lg mb-2">Phone</h2>
-                <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-xl font-extrabold text-primary hover:text-on-primary-container transition-colors block mb-2"><?php echo timeless_phone(); ?></a>
+                <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-xl font-extrabold text-primary hover:text-primary-soft transition-colors block mb-2"><?php echo timeless_phone(); ?></a>
                 <p class="text-xs text-secondary">Call us Mon&ndash;Fri 7am&ndash;5pm</p>
             </div>
             <!-- Email -->
@@ -79,7 +79,7 @@
                     <span class="material-symbols-outlined text-3xl text-primary" aria-hidden="true">mail</span>
                 </div>
                 <h2 class="font-bold text-primary text-lg mb-2">Email</h2>
-                <a href="mailto:<?php echo timeless_email(); ?>" class="text-sm font-bold text-primary hover:text-on-primary-container transition-colors block mb-2 break-all"><?php echo timeless_email(); ?></a>
+                <a href="mailto:<?php echo timeless_email(); ?>" class="text-sm font-bold text-primary hover:text-primary-soft transition-colors block mb-2 break-all"><?php echo timeless_email(); ?></a>
                 <p class="text-xs text-secondary">We respond within hours</p>
             </div>
             <!-- Service Area -->
@@ -110,7 +110,7 @@
             <div class="space-y-4">
                 <div class="flex justify-between items-center py-3 border-b border-surface-container">
                     <span class="text-sm font-bold text-primary">Monday &ndash; Friday</span>
-                    <span class="text-sm font-bold text-on-primary-container">7:00am &ndash; 5:00pm</span>
+                    <span class="text-sm font-bold text-primary-soft">7:00am &ndash; 5:00pm</span>
                 </div>
                 <div class="flex justify-between items-center py-3 border-b border-surface-container">
                     <span class="text-sm font-bold text-primary">Saturday</span>

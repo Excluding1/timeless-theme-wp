@@ -80,7 +80,7 @@
                     <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                         <span class="text-xs font-bold text-primary">Before &amp; After</span>
-                        <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
+                        <span class="text-xs font-bold text-primary-soft">Completed in 1 Day</span>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-2.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" width="96" height="96" loading="lazy" />
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/reviews/reviewer-3.png" alt="" class="w-8 h-8 rounded-full border-2 border-white object-cover" width="96" height="96" loading="lazy" />
                 </div>
-                <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9&#9733;</strong> Google Rating from NSW Homeowners</p>
+                <p class="text-sm font-medium text-secondary"><strong class="text-primary">4.9<span aria-hidden="true">&#9733;</span></strong><span class="sr-only">, 5 stars</span> Google Rating from NSW Homeowners</p>
             </div>
         </div>
         <div class="hidden md:block">
@@ -119,7 +119,7 @@
                 <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                     <span class="text-xs font-bold text-primary">Before &amp; After</span>
-                    <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
+                    <span class="text-xs font-bold text-primary-soft">Completed in 1 Day</span>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
                         <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-after.png" alt="Clean shower grout after mould removal and regrouting" class="w-full h-full object-cover absolute inset-0" /></div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-before.png" alt="Mouldy shower grout before regrouting" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -198,7 +198,7 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
-                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
                         <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-after.png" alt="Repaired shower grout after crumbling fix" class="w-full h-full object-cover absolute inset-0" /></div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-before.png" alt="Cracked crumbling shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -224,7 +224,7 @@
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
+                    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
                         <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-after.png" alt="Clean white grout after discolouration removal" class="w-full h-full object-cover absolute inset-0" /></div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-before.png" alt="Discoloured stained shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -391,10 +391,10 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
-        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+        <?php timeless_render_google_reviews(); ?>
     </div>
 </section>
 

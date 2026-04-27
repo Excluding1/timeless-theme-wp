@@ -71,7 +71,7 @@
         <div>
             <span class="inline-block py-1 px-3 bg-primary/10 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Premium Upgrade</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
-                Upgrade to Waterproof <span class="text-on-primary-container">Epoxy Grout</span>
+                Upgrade to Waterproof <span class="text-primary-soft">Epoxy Grout</span>
             </h1>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
                 You've regrouted before. You've scrubbed the mould. You've sealed the grout &mdash; twice. And yet, your shower grout keeps staining, cracking, and growing mould within a year or two. <strong>The problem isn't how the grout was applied &mdash; it's the grout itself.</strong>
@@ -119,7 +119,7 @@
 <!-- WHAT IS EPOXY GROUT -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">What Is Epoxy Grout?</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Is Epoxy Grout?</h2>
         <p class="text-secondary max-w-3xl mb-10">If you've only ever had standard cement grout in your shower, here's what makes epoxy grout fundamentally different &mdash; and why it outperforms cement in every wet-area metric.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -150,7 +150,7 @@
 <!-- CEMENT VS EPOXY COMPARISON -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Cement vs Epoxy Grout</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Cement vs Epoxy Grout</h2>
         <p class="text-secondary max-w-3xl mb-10">Most showers in Sydney homes have standard cement grout. Here's how it compares to a professional epoxy grout upgrade &mdash; and why so many homeowners are making the switch.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
@@ -183,7 +183,7 @@
 <!-- HOW WE DO IT -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
         <p class="text-secondary max-w-3xl mb-10">An epoxy grout upgrade isn't a patch job. We remove all your old cement grout and replace it with professional-grade epoxy for a result that lasts decades.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -242,7 +242,7 @@
 <!-- IS EPOXY GROUT WORTH IT -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Is Epoxy Grout Worth It?</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Is Epoxy Grout Worth It?</h2>
         <p class="text-secondary max-w-3xl mb-10">Epoxy grout costs more upfront than standard cement grout. But when you factor in lifespan, maintenance, and the cost of re-doing failed cement grout every few years, it's the smarter long-term investment.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
@@ -266,21 +266,21 @@
 </section>
 
 
-<!-- GOOGLE REVIEWS — Auto-updating via Trustindex -->
+<!-- GOOGLE REVIEWS — Auto-updating via Google Places API (self-hosted, see timeless_render_google_reviews in functions.php) -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
-            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
-        <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
+        <?php timeless_render_google_reviews(); ?>
     </div>
 </section>
 
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-white" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Epoxy Grout FAQs</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Epoxy Grout FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about epoxy grout upgrades for Sydney showers.</p>
 
         <div class="space-y-3">
@@ -306,7 +306,7 @@
 <!-- RELATED SERVICES -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
         <p class="text-secondary max-w-3xl mb-10">While we're upgrading your grout, it's often worth tackling other bathroom issues at the same time &mdash; saving you time and a second visit.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">

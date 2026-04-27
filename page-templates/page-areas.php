@@ -94,7 +94,7 @@
     }).addTo(map);
 
     var marker = L.marker([-33.86, 151.21]).addTo(map);
-    marker.bindPopup('<strong>Timeless Resurfacing</strong><br>Serving all of Greater Sydney<br><span style="color:#e7c08b;">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0').openPopup();
+    marker.bindPopup('<strong>Timeless Resurfacing</strong><br>Serving all of Greater Sydney<br><span style="color:#e7c08b;" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="sr-only">5 stars</span> 5.0').openPopup();
 
     map.fitBounds(polygon.getBounds().pad(0.05));
 })();

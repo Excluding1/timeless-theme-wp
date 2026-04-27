@@ -48,6 +48,14 @@ Options -Indexes
   RewriteRule ^wp-content/uploads/.*\.php$ - [F,L]
 </IfModule>
 
+# ─── EXPLICIT MIME TYPES (insurance against missing server defaults) ───
+# Without this, some shared hosts serve .webp as application/octet-stream,
+# which causes browsers to silently reject the file and fall back to <img>.
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
+
 # ─── BROWSER CACHING (Speed) ───
 <IfModule mod_expires.c>
   ExpiresActive On

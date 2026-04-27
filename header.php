@@ -22,6 +22,20 @@ $phone      = timeless_phone();
     <meta name="ICBM" content="-33.8688, 151.2093" />
     <meta property="og:locale" content="en_AU" />
     <meta property="og:site_name" content="Timeless Resurfacing" />
+
+    <?php // ─── Favicons (multi-format for full browser/device coverage) ─── ?>
+    <?php $fav = get_template_directory_uri() . '/assets/favicon'; ?>
+    <?php // SVG favicon link is intentionally OMITTED — the supplied favicon.svg is 1.46 MB
+          // (a raster PNG embedded inside SVG via <image> + base64, not a real vector). Modern
+          // browsers fall through to the PNG variants below which cover all use cases. To
+          // restore SVG support, replace assets/favicon/favicon.svg with a real vector ≤5 KB
+          // and uncomment the line below. ?>
+    <link rel="icon" type="image/png" sizes="96x96" href="<?php echo esc_url( $fav ); ?>/favicon-96x96.png" />
+    <link rel="icon" href="<?php echo esc_url( $fav ); ?>/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( $fav ); ?>/apple-touch-icon.png" />
+    <link rel="manifest" href="<?php echo esc_url( $fav ); ?>/site.webmanifest" />
+    <meta name="theme-color" content="#041534" />
+
     <?php wp_head(); ?>
 </head>
 

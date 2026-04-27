@@ -11,6 +11,16 @@
       ],
       "port": 8765,
       "autoPort": true
+    },
+    {
+      "name": "wp-now-mirror",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "-e",
+        "const http=require('http'),u=require('url');const targetHost='localhost',targetPort=8881;const proxyPort=parseInt(process.env.PORT||'8901');http.createServer((req,res)=>{const opts={hostname:targetHost,port:targetPort,path:req.url,method:req.method,headers:{...req.headers,host:`${targetHost}:${targetPort}`}};delete opts.headers['accept-encoding'];const p=http.request(opts,pr=>{const ct=pr.headers['content-type']||'';const isText=/text|json|javascript|xml|css/.test(ct);if(isText){let chunks=[];pr.on('data',c=>chunks.push(c));pr.on('end',()=>{let body=Buffer.concat(chunks).toString();body=body.split(`localhost:${targetPort}`).join(`localhost:${proxyPort}`);body=body.split(`http://${targetHost}:${targetPort}`).join(`http://${targetHost}:${proxyPort}`);const h={...pr.headers};delete h['content-length'];delete h['content-encoding'];res.writeHead(pr.statusCode,h);res.end(body);});}else{res.writeHead(pr.statusCode,pr.headers);pr.pipe(res);}});req.pipe(p);p.on('error',e=>{res.statusCode=502;res.end('wp-now (8881) unreachable: '+e.message);});}).listen(proxyPort,()=>console.log('Mirror of wp-now :8881 ready on',proxyPort));"
+      ],
+      "port": 8901,
+      "autoPort": true
     }
   ]
 }
