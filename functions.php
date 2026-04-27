@@ -883,6 +883,39 @@ function timeless_get_google_reviews() {
 }
 
 /**
+ * Dynamic AggregateRating JSON-LD fragment.
+ *
+ * Uses the same 24h-cached Google Places API call that feeds the reviews
+ * widget. Returns empty string when no real review data exists, so we
+ * never claim ratings we don't have. Google penalizes false rating
+ * signals via Search Console schema warnings.
+ *
+ * Usage in JSON-LD scripts (inside Service/LocalBusiness object):
+ *
+ *   Last property:
+ *     "address": { ... }<?php echo timeless_aggregate_rating_jsonld(); ?>
+ *
+ *   Middle property (followed by another property):
+ *     "priceRange": "$$",<?php echo timeless_aggregate_rating_jsonld('middle'); ?>
+ *     "hasOfferCatalog": { ... }
+ *
+ * @param string $position 'last' (default) emits leading comma. 'middle' emits trailing comma.
+ * @return string JSON-LD fragment, or empty string if no real review data.
+ */
+function timeless_aggregate_rating_jsonld( $position = 'last' ) {
+    $data = timeless_get_google_reviews();
+    if ( ! $data || empty( $data['total'] ) || empty( $data['rating'] ) ) {
+        return '';
+    }
+    $body = sprintf(
+        '"aggregateRating": { "@type": "AggregateRating", "ratingValue": "%s", "reviewCount": "%d", "bestRating": "5" }',
+        number_format( (float) $data['rating'], 1 ),
+        (int) $data['total']
+    );
+    return $position === 'middle' ? ' ' . $body . ',' : ', ' . $body;
+}
+
+/**
  * Parse the static curated reviews textarea from Customizer.
  * Format per line: `Author | Time label | Rating (1-5) | Review text`
  * Returns array of reviews matching the Places API shape so render code

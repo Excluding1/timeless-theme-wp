@@ -22,8 +22,7 @@
  { "@type": "City", "name": "Wollongong" },
  { "@type": "City", "name": "Central Coast" },
  { "@type": "City", "name": "Blue Mountains" }
- ],
- "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23", "bestRating": "5" }
+ ]<?php echo timeless_aggregate_rating_jsonld(); ?>
  }
 }
 </script>

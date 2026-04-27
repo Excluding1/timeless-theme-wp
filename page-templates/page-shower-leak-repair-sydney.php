@@ -12,8 +12,7 @@
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",
- "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressRegion": "NSW", "addressCountry": "AU" },
- "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23" }
+ "address": { "@type": "PostalAddress", "addressLocality": "Sydney", "addressRegion": "NSW", "addressCountry": "AU" }<?php echo timeless_aggregate_rating_jsonld(); ?>
  },
  "areaServed": { "@type": "City", "name": "Sydney" },
  "serviceType": "Shower Sealing"

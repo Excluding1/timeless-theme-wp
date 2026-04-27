@@ -21,8 +21,7 @@ get_header(); ?>
  { "@type": "City", "name": "Bondi" }
  ],
  "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "17:00" },
- "priceRange": "$$",
- "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "23", "bestRating": "5" },
+ "priceRange": "$$",<?php echo timeless_aggregate_rating_jsonld('middle'); ?>
  "hasOfferCatalog": {
  "@type": "OfferCatalog", "name": "Bathroom Resurfacing Services",
  "itemListElement": [
