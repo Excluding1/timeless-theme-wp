@@ -137,6 +137,14 @@ function timeless_ensure_pages_exist() {
         timeless_create_pages();
     }
 
+    // Same self-heal pattern for suburb landing pages — runs cheap idempotent
+    // checks. Probe the first (service × suburb) combo and run the full
+    // routine if missing. Catches the case where a fresh wp-now install or
+    // a theme re-upload skipped the after_switch_theme hook.
+    if ( ! get_page_by_path( 'services/bath-resurfacing-sydney/parramatta' ) ) {
+        timeless_create_suburb_pages();
+    }
+
     // Self-heal permalinks ONLY if WordPress is using completely default (empty).
     // Never overrides custom permalink structures (e.g. live site, plugin-managed).
     if ( get_option( 'permalink_structure' ) === '' ) {
@@ -144,6 +152,55 @@ function timeless_ensure_pages_exist() {
         flush_rewrite_rules();
     }
 }
+
+/**
+ * Programmatic suburb landing pages — auto-create on theme activation.
+ *
+ * Iterates inc/service-data.php × inc/suburb-data.php and creates a page
+ * for each combo at /services/{service-slug}/{suburb-slug}/.
+ *
+ * Idempotent: skips any (service × suburb) page that already exists.
+ *
+ * Priority 20 (runs AFTER timeless_create_pages at default 10) so the
+ * parent service pages exist before we try to attach suburb pages to them.
+ */
+function timeless_create_suburb_pages() {
+    $suburb_file  = get_template_directory() . '/inc/suburb-data.php';
+    $service_file = get_template_directory() . '/inc/service-data.php';
+    if ( ! file_exists( $suburb_file ) || ! file_exists( $service_file ) ) {
+        return;
+    }
+
+    $suburbs  = include $suburb_file;
+    $services = include $service_file;
+
+    foreach ( $services as $service_slug => $service ) {
+        $parent = get_page_by_path( 'services/' . $service_slug );
+        if ( ! $parent ) {
+            continue;  // Parent service page doesn't exist yet — skip
+        }
+
+        foreach ( $suburbs as $suburb_slug => $suburb ) {
+            // Idempotent check
+            $existing = get_page_by_path( 'services/' . $service_slug . '/' . $suburb_slug );
+            if ( $existing ) {
+                continue;
+            }
+
+            wp_insert_post( array(
+                'post_title'  => $service['name'] . ' in ' . $suburb['name'],
+                'post_name'   => $suburb_slug,
+                'post_status' => 'publish',
+                'post_type'   => 'page',
+                'post_parent' => $parent->ID,
+                'meta_input'  => array(
+                    '_wp_page_template' => 'page-templates/page-suburb-service.php',
+                ),
+            ) );
+        }
+    }
+}
+add_action( 'after_switch_theme', 'timeless_create_suburb_pages', 20 );
 
 /**
  * Aggressive permalink self-heal — runs on every `init` until permalinks are set.
