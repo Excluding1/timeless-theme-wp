@@ -626,6 +626,37 @@ function timeless_customizer( $wp_customize ) {
         'type'        => 'textarea',
         'description' => __( '<strong>Format:</strong> one review per line, pipe-separated. Leave a single trailing space if the field looks like one column.<br><br><code>Author Name | Time label | Rating | Review text</code><br><br><strong>Example:</strong><br><code>Andy T. | 2 weeks ago | 5 | Marko came by and did a good job regrouting my shower tiles.</code><br><br>Render up to 6 reviews. If both this and Place ID are filled, the Places API takes priority and this is the fallback.', 'timeless' ),
     ) );
+
+    // ─── Analytics Section ────────────────────────────────────────
+    $wp_customize->add_section( 'timeless_analytics', array(
+        'title'       => __( 'Analytics', 'timeless' ),
+        'priority'    => 36,
+        'description' => __( 'Tracking IDs for Google Analytics 4 and Microsoft Clarity. Both are free. Both skip logged-in admins automatically (so your own visits don\'t pollute the data).<br><br><strong>GA4 (Google Analytics 4):</strong> conversion + traffic dashboard. <a href="https://analytics.google.com" target="_blank" rel="noopener">analytics.google.com</a> → Admin → Data Streams → copy the <code>G-XXXXXXXXXX</code> ID.<br><br><strong>Microsoft Clarity:</strong> heatmaps + session replays. Way more useful for UX than GA4. <a href="https://clarity.microsoft.com" target="_blank" rel="noopener">clarity.microsoft.com</a> → New Project → Settings → copy the 10-character project ID.', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_ga4_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options',  // Admin-only field
+    ) );
+    $wp_customize->add_control( 'timeless_ga4_id', array(
+        'label'       => __( 'Google Analytics 4 Measurement ID', 'timeless' ),
+        'section'     => 'timeless_analytics',
+        'type'        => 'text',
+        'description' => __( 'Format: <code>G-XXXXXXXXXX</code> (starts with G- followed by 10 alphanumeric chars). Leave blank to disable.', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_clarity_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options',
+    ) );
+    $wp_customize->add_control( 'timeless_clarity_id', array(
+        'label'       => __( 'Microsoft Clarity Project ID', 'timeless' ),
+        'section'     => 'timeless_analytics',
+        'type'        => 'text',
+        'description' => __( '10-character lowercase alphanumeric ID (e.g. <code>p7q3k9z2x1</code>). Leave blank to disable.', 'timeless' ),
+    ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
 
@@ -1237,6 +1268,55 @@ function timeless_seo_meta() {
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
 }
 add_action( 'wp_head', 'timeless_seo_meta', 2 );
+
+/* ─────────────────────────────────────────────
+   5b. ANALYTICS — GA4 + Microsoft Clarity (Customizer-driven)
+   ─────────────────────────────────────────────
+   Both tracking scripts are gated by:
+     - Empty ID → no script injected (clean source)
+     - Logged-in admin → no script injected (admin's own browsing
+       doesn't pollute the data Angela actually wants to see)
+     - Strict format validation on the ID before echoing into HTML
+       (defense against accidental XSS via Customizer)
+   ───────────────────────────────────────────── */
+function timeless_analytics_scripts() {
+    // Skip for logged-in admins so their own page views don't pollute analytics
+    if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    $ga4 = trim( get_theme_mod( 'timeless_ga4_id', '' ) );
+    if ( $ga4 && preg_match( '/^G-[A-Z0-9]{8,12}$/i', $ga4 ) ) {
+        // Google Analytics 4 (gtag.js)
+        $ga4_safe = esc_attr( $ga4 );
+        ?>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $ga4_safe; ?>"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '<?php echo esc_js( $ga4 ); ?>', { 'anonymize_ip': true });
+</script>
+        <?php
+    }
+
+    $clarity = trim( get_theme_mod( 'timeless_clarity_id', '' ) );
+    if ( $clarity && preg_match( '/^[a-z0-9]{8,15}$/i', $clarity ) ) {
+        // Microsoft Clarity — heatmaps + session replays
+        ?>
+<!-- Microsoft Clarity -->
+<script>
+(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "<?php echo esc_js( $clarity ); ?>");
+</script>
+        <?php
+    }
+}
+add_action( 'wp_head', 'timeless_analytics_scripts', 99 );  // Priority 99 = late in head, after most other tags
 
 /* ─────────────────────────────────────────────
    5c. XML SITEMAP — Auto-generated at /sitemap.xml
