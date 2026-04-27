@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased] — `develop` branch
+## [Unreleased] — `develop` branch (v1.3.0)
 
-### Coming next (v1.3.0)
+### Coming next
 - Day 4: Schema-as-code audit + GA4 + Microsoft Clarity setup
 - Day 5: Suburb programmatic landing pages (`/services/X/parramatta/` etc.)
 - Day 6: Service page polish (H1 tweaks, customer-language audit)
