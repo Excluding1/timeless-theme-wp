@@ -13,10 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] — `develop` branch
 
-### Performance — Day 3 self-hosting fonts
+### Performance — Day 3 self-hosting fonts + WebP images
 - **Material Symbols subset** (1.06 MB CDN → 10 KB local, 99.7% smaller). Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept for filled-icon variants. Audit-fix-audit loop converged after 4 passes (caught 2 critical bugs: dynamic `faucet` icon in PHP array; JS-injected `check_circle` bypassing PHP filter).
 - **Inter body font subset** (200-300 KB across multiple Google Fonts CDN requests → 99 KB local single file, plus eliminates 2 third-party DNS lookups). Variable font with wght (100..900) and opsz (14..32) axes preserved. Latin + essential punctuation + ★ for ratings. No italic variant (theme has zero italic usage).
-- **Audit-fix-audit loop formalized as Rule 4a** in WORKFLOW.md. Documents the methodology that caught regressions the first audit missed (stale comments, asymmetric regex word-boundaries, missed star character).
+- **WebP image companions** (1.67 MB savings for WebP-capable browsers, 0 wasted bytes elsewhere). Smart converter at `scripts/convert-images-to-webp.py` writes `image.jpg.webp` companions ONLY when WebP beats the source size — 102 of 205 images got companions, 103 already-optimized PNGs correctly skipped. PHP output filter `timeless_webp_picture_filter()` wraps `<img src="x.jpg">` in `<picture><source srcset="x.jpg.webp" type="image/webp">…</picture>` so 96%+ of browsers get WebP transparently. Original URLs unchanged — easy rollback, no broken backlinks.
+- **Audit-fix-audit loop formalized as Rule 4a** in WORKFLOW.md. Documents the methodology that caught regressions the first audit missed (stale comments, asymmetric regex word-boundaries, missed star character, WebP bloat on already-optimized PNGs).
 
 ### UI/UX
 - SECTION 2B before/after cards capped at `max-w-md` on 4 big service pages. Were rendering ~552×368 on desktop (dominating text columns); now 448×299 with proper visual balance.
@@ -24,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Homepage "Full Renovation" badge icon swapped from `delete` (trash) to `close` (X) to match the row icons visually.
 
 ### Coming next (v1.2.0)
-- Day 3 Task C: Convert hero images (before.jpg/after.jpg) to WebP
 - Day 3 Task D: Configure Cloudflare cache rules (HTML 30min, static 1yr) — dashboard work
 - Day 4: Schema as code + analytics setup (GA4, Microsoft Clarity)
 - Day 5: Suburb programmatic landing pages

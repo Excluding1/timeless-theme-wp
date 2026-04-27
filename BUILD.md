@@ -154,6 +154,48 @@ Edit `src/main.css`:
 
 ---
 
+## WebP Image Companion Pipeline
+
+Separate from the Tailwind build. The theme generates `.webp` companions
+alongside every `.jpg/.jpeg/.png` (where WebP is genuinely smaller). A PHP
+output filter wraps `<img>` tags in `<picture>` so modern browsers get the
+WebP, older browsers get the original.
+
+### When to regenerate WebP companions
+- Added a new image under `images/**`
+- Replaced an existing image (the script will re-encode if you pass `--force`)
+- Bulk image quality tuning (edit `JPG_QUALITY`/`PNG_LOSSY_QUALITY` in script)
+
+### Build commands
+```bash
+# Default — process every JPG/PNG in images/, only write .webp where it beats source
+python3 scripts/convert-images-to-webp.py
+
+# Dry-run preview (no writes)
+python3 scripts/convert-images-to-webp.py --check
+
+# Force re-encoding of existing .webp companions (after quality changes)
+python3 scripts/convert-images-to-webp.py --force
+```
+
+### Naming + behavior
+- Source `images/homepage/before.jpg` → companion `images/homepage/before.jpg.webp` (double extension preserves original filename — backlinks/CDN caches stay valid)
+- The script tries multiple WebP encodings (lossy+lossless), picks the smallest, AND only writes the file if it's smaller than the source. Bloat-free guaranteed.
+- Typical results: JPG hero photos shrink ~50-65%; pre-optimized small PNGs often skip (script reports `no_benefit`).
+
+### How the runtime works
+- `timeless_webp_picture_filter()` in `functions.php` runs as part of the output buffer chain (alongside the icon ligature filter).
+- For each `<img src="x.jpg">`, the filter checks if `x.jpg.webp` exists on disk. If yes, wraps the tag: `<picture><source srcset="x.jpg.webp" type="image/webp">[original img]</picture>`. If no, output unchanged.
+- The browser picks WebP if `Accept: image/webp` is in the request headers (Chrome, Firefox, Safari 14+, Edge — 96%+ of users). Older browsers ignore the `<source>` and use the inner `<img>`.
+
+### Critical rules
+- **CSS selectors targeting `<img>` directly**: now have `<picture>` parent. Use `.parent img` (descendant), NOT `.parent > img` (direct child) — the latter would no longer match.
+- **JS `img.parentNode`**: was the layout wrapper, now is `<picture>`. If any JS relies on `parentNode`, audit it.
+- **Production MIME**: server must send `Content-Type: image/webp` for `.webp` files. The `htaccess-security.txt` template includes an `AddType image/webp .webp` directive — verify your live `.htaccess` has it. Without correct MIME, browsers reject the file and fall back to JPG/PNG silently.
+- **Filter doesn't touch `wp-content/uploads/`** — only theme-bundled `images/`. WP Media Library uploads need a separate pipeline if you ever want WebP delivery for them.
+
+---
+
 ## Inter Body Font Subset Pipeline
 
 Separate from the Tailwind build. The theme self-hosts a Latin subset of the
