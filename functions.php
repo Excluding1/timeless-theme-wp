@@ -538,10 +538,10 @@ function timeless_customizer( $wp_customize ) {
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'timeless_google_place_id', array(
-        'label'       => __( 'Google Place ID', 'timeless' ),
+        'label'       => __( 'Business identifier', 'timeless' ),
         'section'     => 'timeless_google_reviews',
         'type'        => 'text',
-        'description' => __( 'Looks like ChIJxxxxxxxxxxxxxx. Find via the Place ID Finder linked above.', 'timeless' ),
+        'description' => __( 'Accepts ANY of:<br>• Place ID (<code>ChIJ...</code>) — direct, fastest<br>• Your business name (e.g. <code>Timeless Resurfacing Sydney</code>) — auto-resolved on first save<br>• Your Google Maps URL (paste the full link) — auto-resolved on first save<br><br>Auto-resolution uses one Google Places API call per unique input, then caches the result. Service-area businesses (no public address) work via business name lookup.', 'timeless' ),
     ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
@@ -564,6 +564,72 @@ add_action( 'customize_register', 'timeless_customizer' );
        on Google" link to the GBP listing instead of an empty section.
    ───────────────────────────────────────────── */
 
+/**
+ * Resolve a user-pasted business identifier to a real Google Place ID.
+ *
+ * Accepts:
+ *   - Place ID directly (`ChIJ...`)        — passes through unchanged
+ *   - Maps URL (`https://...maps/place/...`) — extracts business name segment
+ *   - Plain business name text             — used as-is
+ *
+ * Non-Place-ID inputs go through Google's `findplacefromtext` API once,
+ * then the resolved Place ID is cached in a long-lived transient so we
+ * never re-query (saves the API call quota). Cache invalidates on
+ * Customizer re-save.
+ *
+ * Returns Place ID string, or false on failure.
+ */
+function timeless_resolve_place_id( $input, $api_key ) {
+    $input = trim( $input );
+    if ( empty( $input ) || empty( $api_key ) ) {
+        return false;
+    }
+
+    // Pass-through if already a Place ID (Google's documented prefix)
+    if ( strpos( $input, 'ChIJ' ) === 0 ) {
+        return $input;
+    }
+
+    // Try long-lived resolution cache (keyed by input hash so changes invalidate)
+    $cache_key = 'timeless_resolved_place_id_' . md5( $input );
+    $cached    = get_transient( $cache_key );
+    if ( false !== $cached ) {
+        return is_array( $cached ) && isset( $cached['_failed'] ) ? false : $cached;
+    }
+
+    // Extract business-name search term:
+    //   - From Maps URL: `.../maps/place/Business+Name/data=...` → "Business Name"
+    //   - From plain text: use as-is
+    $query = $input;
+    if ( preg_match( '#/maps/place/([^/]+)#', $input, $m ) ) {
+        $query = str_replace( '+', ' ', rawurldecode( $m[1] ) );
+    }
+
+    $api_url = sprintf(
+        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=%s&inputtype=textquery&fields=place_id&key=%s',
+        rawurlencode( $query ),
+        rawurlencode( $api_key )
+    );
+
+    $response = wp_remote_get( $api_url, array( 'timeout' => 5 ) );
+    if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    $place_id = $body['candidates'][0]['place_id'] ?? '';
+
+    if ( empty( $place_id ) ) {
+        set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
+        return false;
+    }
+
+    // Cache the resolved Place ID for 30 days — businesses don't change Place IDs
+    set_transient( $cache_key, $place_id, 30 * DAY_IN_SECONDS );
+    return $place_id;
+}
+
 /** Fetch Google reviews (cached). Returns array of reviews + rating + count, or false on failure. */
 function timeless_get_google_reviews() {
     $cache_key = 'timeless_google_reviews_v1';
@@ -576,9 +642,15 @@ function timeless_get_google_reviews() {
         return $cached;
     }
 
-    $api_key  = trim( get_theme_mod( 'timeless_google_api_key', '' ) );
-    $place_id = trim( get_theme_mod( 'timeless_google_place_id', '' ) );
-    if ( empty( $api_key ) || empty( $place_id ) ) {
+    $api_key      = trim( get_theme_mod( 'timeless_google_api_key', '' ) );
+    $raw_place_id = trim( get_theme_mod( 'timeless_google_place_id', '' ) );
+    if ( empty( $api_key ) || empty( $raw_place_id ) ) {
+        return false;
+    }
+
+    // Resolve user input to a real Place ID (handles ChIJ-prefix, Maps URLs, business names)
+    $place_id = timeless_resolve_place_id( $raw_place_id, $api_key );
+    if ( ! $place_id ) {
         return false;
     }
 
@@ -685,9 +757,21 @@ function timeless_render_google_reviews() {
 /** Clear the reviews cache (e.g. after Customizer save). The next page hit will
  *  refetch lazily — we deliberately don't refetch synchronously here because
  *  customize_save_after fires for ANY Customizer save (phone, email, etc.), and
- *  a 5-second wp_remote_get on every save would make the admin UX painful. */
+ *  a 5-second wp_remote_get on every save would make the admin UX painful.
+ *  Also clears any resolved-Place-ID caches so a changed business identifier
+ *  takes effect immediately. */
 function timeless_refresh_google_reviews() {
     delete_transient( 'timeless_google_reviews_v1' );
+    // Clear all resolved Place ID caches (stored with md5-suffixed keys).
+    // We don't know the hash without the input value, so use $wpdb to scan options.
+    global $wpdb;
+    if ( isset( $wpdb ) ) {
+        $wpdb->query( $wpdb->prepare(
+            "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+            '_transient_timeless_resolved_place_id_%',
+            '_transient_timeout_timeless_resolved_place_id_%'
+        ) );
+    }
 }
 add_action( 'customize_save_after', 'timeless_refresh_google_reviews' );
 
