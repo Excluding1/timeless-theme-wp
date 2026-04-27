@@ -294,7 +294,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return '★'.repeat(Math.max(0, Math.min(5, n|0)));
         }
 
-        // -- Carousel: arrow click + scroll snap, button enabled-state per scroll position
+        // -- Carousel: arrow click + scroll snap, with WRAP-AROUND looping.
+        //    With small review counts (e.g. 3 reviews + 3-up desktop layout = no overflow),
+        //    a non-looping carousel would show permanently-disabled arrows. Looping keeps
+        //    the UI responsive: clicking "next" at the end jumps back to start, and vice versa.
         document.querySelectorAll('.timeless-reviews-carousel').forEach(function (carousel) {
             var track = carousel.querySelector('.timeless-reviews-track');
             var prev  = carousel.querySelector('.timeless-reviews-prev');
@@ -302,26 +305,53 @@ document.addEventListener('DOMContentLoaded', function () {
             var card  = track && track.querySelector('.timeless-review-card');
             if (!track || !prev || !next || !card) return;
 
+            // Always-enabled (loop semantics)
+            prev.disabled = false;
+            next.disabled = false;
+
             function scrollAmount() {
-                // Scroll one card-width + gap each click. Computed live so resize works.
                 var gap = parseFloat(getComputedStyle(track).gap) || 16;
                 return card.offsetWidth + gap;
             }
 
-            function updateButtons() {
-                prev.disabled = track.scrollLeft <= 4;
-                next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+            // Detect "no overflow" state (track.scrollWidth = track.clientWidth) — content fits.
+            // In that case, looping = brief scroll animation back to 0; visually subtle but
+            // confirms the click was registered.
+            function atEnd() {
+                return track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+            }
+            function atStart() {
+                return track.scrollLeft <= 4;
             }
 
             prev.addEventListener('click', function () {
-                track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+                if (atStart()) {
+                    // Wrap to end
+                    track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
+                } else {
+                    track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+                }
             });
             next.addEventListener('click', function () {
-                track.scrollBy({ left:  scrollAmount(), behavior: 'smooth' });
+                if (atEnd()) {
+                    // Wrap to start
+                    track.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    track.scrollBy({ left:  scrollAmount(), behavior: 'smooth' });
+                }
             });
-            track.addEventListener('scroll', updateButtons, { passive: true });
-            window.addEventListener('resize', updateButtons);
-            updateButtons();
+
+            // OPTIONAL: hide arrows entirely when content fits the viewport AND there's nothing
+            // to loop to (e.g., only 1 card total). With ≥2 cards, loop still feels right even
+            // if all visible — clicking jumps to the leftmost/rightmost edge as feedback.
+            function maybeHideArrows() {
+                var totalCards = track.querySelectorAll('.timeless-review-card').length;
+                var bothHide = totalCards <= 1;  // 0 or 1 card → nothing to navigate
+                prev.style.display = bothHide ? 'none' : '';
+                next.style.display = bothHide ? 'none' : '';
+            }
+            maybeHideArrows();
+            window.addEventListener('resize', maybeHideArrows);
         });
 
         // -- Read more button: only show when text is actually clamped, click → open modal
