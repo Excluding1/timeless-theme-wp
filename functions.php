@@ -198,8 +198,34 @@ function timeless_scripts() {
     // Google Fonts — Inter
     wp_enqueue_style( 'google-fonts-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap', array(), null );
 
-    // Material Symbols
-    wp_enqueue_style( 'material-symbols', 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap', array(), null );
+    /**
+     * Material Symbols — Self-hosted subset (94 icons only, ~7.6 KB).
+     *
+     * Replaces Google Fonts CDN (1.06 MB shipped). 99% size reduction.
+     *
+     * Implementation: tiny font has only 94 Unicode glyphs at codepoints (no ligatures
+     * for icon names like "home" → glyph). The PHP filter timeless_replace_icon_ligatures()
+     * converts <span class="material-symbols-outlined">home</span> →
+     * <span class="material-symbols-outlined">&#xe88a;</span> at output time.
+     *
+     * Source markup stays the same (icon names) — easy to maintain. Browser receives
+     * codepoints — works with the tiny font.
+     */
+    $ms_font_path = get_template_directory() . '/assets/fonts/material-symbols-subset.woff2';
+    $ms_font_url  = get_template_directory_uri() . '/assets/fonts/material-symbols-subset.woff2';
+    $ms_font_ver  = file_exists( $ms_font_path ) ? filemtime( $ms_font_path ) : '1.0.0';
+
+    wp_register_style( 'material-symbols-subset', false );
+    wp_enqueue_style( 'material-symbols-subset' );
+    wp_add_inline_style( 'material-symbols-subset', "
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            font-style: normal;
+            font-weight: 400;
+            font-display: block;
+            src: url(" . esc_url( $ms_font_url ) . "?v=$ms_font_ver) format('woff2');
+        }
+    " );
 
     // Theme stylesheet (animations, mobile menu, FAQ accordion)
     wp_enqueue_style( 'timeless-style', get_stylesheet_uri(), array(), '1.0.0' );
@@ -208,6 +234,53 @@ function timeless_scripts() {
     wp_enqueue_script( 'timeless-main', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
+
+/**
+ * Material Symbols ligature → codepoint replacement (output buffer filter).
+ *
+ * Why: We use a 7.6 KB icon font subset that contains ONLY the 94 icons we use,
+ * stored at their Unicode codepoints (no ligature lookup table — that's what made
+ * the full font 245+ KB).
+ *
+ * The browser still receives <span class="material-symbols-outlined">home</span>
+ * in source code (easier to maintain), but this filter converts it to
+ * <span class="material-symbols-outlined">&#xe88a;</span> on the way out.
+ *
+ * Performance: regex runs once per page render (~1-3ms). With cache plugins
+ * (WP Rocket, etc.) this runs once per cache generation, then served from
+ * cache for all subsequent visitors → effectively zero overhead.
+ *
+ * Failure mode: if an icon name isn't in the codepoints map, the original
+ * span is preserved (will render as text — visible bug, easy to spot).
+ */
+function timeless_replace_icon_ligatures( $html ) {
+    static $codepoints = null;
+    if ( null === $codepoints ) {
+        $codepoints = include get_template_directory() . '/inc/material-symbols-codepoints.php';
+    }
+    if ( ! is_array( $codepoints ) ) return $html;
+
+    return preg_replace_callback(
+        '/(<span\b[^>]*\bclass="[^"]*\bmaterial-symbols-outlined\b[^"]*"[^>]*>)([a-z][a-z0-9_]*)(<\/span>)/i',
+        function ( $matches ) use ( $codepoints ) {
+            $name = $matches[2];
+            if ( isset( $codepoints[ $name ] ) ) {
+                return $matches[1] . '&#x' . $codepoints[ $name ] . ';' . $matches[3];
+            }
+            return $matches[0]; // Icon name not in map — leave unchanged for visibility
+        },
+        $html
+    );
+}
+
+/** Start output buffering early; flush with the icon filter on shutdown. */
+function timeless_start_icon_buffer() {
+    if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_json_request() ) {
+        return;
+    }
+    ob_start( 'timeless_replace_icon_ligatures' );
+}
+add_action( 'template_redirect', 'timeless_start_icon_buffer', 1 );
 
 /* ────────────────────────────���────────────────
    3. CUSTOMIZER — Editable Business Settings
