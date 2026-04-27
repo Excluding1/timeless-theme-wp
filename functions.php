@@ -225,6 +225,31 @@ function timeless_scripts() {
             font-display: block;
             src: url(" . esc_url( $ms_font_url ) . "?v=$ms_font_ver) format('woff2');
         }
+        /* CRITICAL: bind the class to the @font-face. Without this, .material-symbols-outlined
+           inherits the body font (Inter), which has no glyphs at the icon codepoints, so the
+           browser falls back to system fonts and renders garbage at U+F0BE etc.
+           (Google Fonts CDN CSS used to do this for us — when we self-hosted we dropped it.)
+
+           Wrapped in @layer base so Tailwind v4 utility classes (text-2xl, text-base, etc.)
+           still win for font-size. Without the layer, this would beat utilities and every
+           icon would fall back to its parent's font-size. */
+        @layer base {
+            .material-symbols-outlined {
+                font-family: 'Material Symbols Outlined', sans-serif;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+                -webkit-font-feature-settings: 'liga';
+                -webkit-font-smoothing: antialiased;
+            }
+        }
     " );
 
     // Theme stylesheet (animations, mobile menu, FAQ accordion)
