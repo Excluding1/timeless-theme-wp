@@ -144,6 +144,35 @@ function timeless_ensure_pages_exist() {
         flush_rewrite_rules();
     }
 }
+
+/**
+ * Aggressive permalink self-heal — runs on every `init` until permalinks are set.
+ *
+ * Why a separate hook from after_switch_theme:
+ * Some WordPress install methods (notably wp-now for local dev) bypass the
+ * after_switch_theme hook by setting the active theme directly in the database.
+ * This means our theme activation code never runs, and permalinks stay default.
+ *
+ * This hook fires on every WP request but exits in <1ms once permalinks are set
+ * (single get_option call, which is cached). Negligible overhead.
+ *
+ * Like the other permalink fix: only acts on TRULY EMPTY structure.
+ * Never overrides custom permalink configurations on production.
+ */
+function timeless_ensure_permalinks_pretty() {
+    // Skip on AJAX/cron to avoid race conditions
+    if ( wp_doing_ajax() || wp_doing_cron() ) {
+        return;
+    }
+
+    // Only set if completely empty (default ugly URLs).
+    // This protects custom permalink structures on production.
+    if ( get_option( 'permalink_structure' ) === '' ) {
+        update_option( 'permalink_structure', '/%postname%/' );
+        flush_rewrite_rules( false );
+    }
+}
+add_action( 'init', 'timeless_ensure_permalinks_pretty', 5 );
 add_action( 'admin_init', 'timeless_ensure_pages_exist' );
 
 /* ────��──────────────────────────────────────
