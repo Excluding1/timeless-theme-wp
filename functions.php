@@ -538,10 +538,37 @@ function timeless_customizer( $wp_customize ) {
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'timeless_google_place_id', array(
-        'label'       => __( 'Business identifier', 'timeless' ),
+        'label'       => __( 'Business identifier (optional)', 'timeless' ),
         'section'     => 'timeless_google_reviews',
         'type'        => 'text',
-        'description' => __( 'Accepts ANY of:<br>• Place ID (<code>ChIJ...</code>) — direct, fastest<br>• Your business name (e.g. <code>Timeless Resurfacing Sydney</code>) — auto-resolved on first save<br>• Your Google Maps URL (paste the full link) — auto-resolved on first save<br><br>Auto-resolution uses one Google Places API call per unique input, then caches the result. Service-area businesses (no public address) work via business name lookup.', 'timeless' ),
+        'description' => __( 'Accepts Place ID, business name, or Maps URL. Service-area businesses are often NOT yet indexed in the Places API — leave this blank and use the static reviews textarea below instead. We fall back to that when the API returns no results.', 'timeless' ),
+    ) );
+
+    // Public-facing GBP link — used for the "See all reviews on Google" CTA.
+    // Works even when business isn't in Places API yet (most common case for trades).
+    $wp_customize->add_setting( 'timeless_google_business_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'timeless_google_business_url', array(
+        'label'       => __( 'Google Business Profile URL', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'url',
+        'description' => __( 'The public link to your reviews on Google. Visit your Google Business Profile or Maps listing → click "Share" → copy the link. Used for the "See all reviews on Google" button below the review cards.', 'timeless' ),
+    ) );
+
+    // Static curated reviews — most reliable path for service-area trades businesses.
+    // Format: one review per line, pipe-separated:
+    //   Author Name | Time label | Rating (1-5) | Review text
+    $wp_customize->add_setting( 'timeless_reviews_static', array(
+        'default'           => '',
+        'sanitize_callback' => 'wp_kses_post',  // Allow basic HTML, strip script/onclick
+    ) );
+    $wp_customize->add_control( 'timeless_reviews_static', array(
+        'label'       => __( 'Curated reviews (static)', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'textarea',
+        'description' => __( '<strong>Format:</strong> one review per line, pipe-separated. Leave a single trailing space if the field looks like one column.<br><br><code>Author Name | Time label | Rating | Review text</code><br><br><strong>Example:</strong><br><code>Andy T. | 2 weeks ago | 5 | Marko came by and did a good job regrouting my shower tiles.</code><br><br>Render up to 6 reviews. If both this and Place ID are filled, the Places API takes priority and this is the fallback.', 'timeless' ),
     ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
@@ -660,16 +687,30 @@ function timeless_get_google_reviews() {
         return false;
     }
 
-    $url = sprintf(
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=%s&fields=reviews,rating,user_ratings_total,name,url&reviews_sort=newest&key=%s',
-        rawurlencode( $place_id ),
-        rawurlencode( $api_key )
-    );
+    // ── NEW Places API (places.googleapis.com/v1/places/{id}) ──────────
+    // The legacy Places API endpoint (maps.googleapis.com/maps/api/place/details)
+    // returns NOT_FOUND for many newer service-area businesses even when the Place ID
+    // is valid. The new Places API has those records — and is what Google is pushing
+    // forward as the legacy one is deprecated.
+    //
+    // Differences vs legacy:
+    //   - Endpoint: places.googleapis.com/v1/places/{place_id}
+    //   - Auth via header (X-Goog-Api-Key) instead of ?key= query param
+    //   - X-Goog-FieldMask header is REQUIRED (explicit field selection)
+    //   - camelCase response: userRatingCount, googleMapsUri, displayName.text,
+    //     authorAttribution.{displayName,uri,photoUri}, text.text, etc.
+    $url = 'https://places.googleapis.com/v1/places/' . rawurlencode( $place_id );
+    $field_mask = 'id,displayName,reviews,rating,userRatingCount,googleMapsUri';
 
     $response = wp_remote_get( $url, array(
         'timeout' => 5,
-        'headers' => array( 'Referer' => home_url() ),  // see resolver function for why
+        'headers' => array(
+            'X-Goog-Api-Key'    => $api_key,
+            'X-Goog-FieldMask'  => $field_mask,
+            'Referer'           => home_url(),
+        ),
     ) );
+
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         // Cache a failure SENTINEL (not literal false) for 1 hour so we don't hammer
         // the API on every page hit. We can't cache `false` because get_transient()
@@ -679,36 +720,102 @@ function timeless_get_google_reviews() {
     }
 
     $body = json_decode( wp_remote_retrieve_body( $response ), true );
-    if ( empty( $body['result'] ) ) {
+    if ( empty( $body ) || empty( $body['id'] ) ) {
         set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
         return false;
     }
 
+    // Normalize the new API's nested response into the flat shape our render function expects.
+    // Each review's `text` and `displayName` come back as objects ({text, languageCode}); flatten them.
+    $reviews_normalized = array();
+    foreach ( ( $body['reviews'] ?? array() ) as $r ) {
+        $reviews_normalized[] = array(
+            'author_name'               => $r['authorAttribution']['displayName'] ?? 'Google User',
+            'author_url'                => $r['authorAttribution']['uri'] ?? '',
+            'author_photo'              => $r['authorAttribution']['photoUri'] ?? '',
+            'rating'                    => intval( $r['rating'] ?? 5 ),
+            'relative_time_description' => $r['relativePublishTimeDescription'] ?? '',
+            'text'                      => $r['text']['text'] ?? ( $r['originalText']['text'] ?? '' ),
+        );
+    }
+
     $data = array(
-        'reviews'      => isset( $body['result']['reviews'] ) ? array_slice( $body['result']['reviews'], 0, 5 ) : array(),
-        'rating'       => isset( $body['result']['rating'] ) ? floatval( $body['result']['rating'] ) : 0,
-        'total'        => isset( $body['result']['user_ratings_total'] ) ? intval( $body['result']['user_ratings_total'] ) : 0,
-        'business_url' => isset( $body['result']['url'] ) ? esc_url_raw( $body['result']['url'] ) : '',
+        'reviews'      => array_slice( $reviews_normalized, 0, 6 ),
+        'rating'       => isset( $body['rating'] ) ? floatval( $body['rating'] ) : 0,
+        'total'        => isset( $body['userRatingCount'] ) ? intval( $body['userRatingCount'] ) : 0,
+        'business_url' => isset( $body['googleMapsUri'] ) ? esc_url_raw( $body['googleMapsUri'] ) : '',
     );
 
     set_transient( $cache_key, $data, DAY_IN_SECONDS );
     return $data;
 }
 
-/** Render the Google Reviews widget. Drop-in replacement for the Featurable embed. */
+/**
+ * Parse the static curated reviews textarea from Customizer.
+ * Format per line: `Author | Time label | Rating (1-5) | Review text`
+ * Returns array of reviews matching the Places API shape so render code
+ * doesn't need to know which source it came from.
+ */
+function timeless_parse_static_reviews() {
+    $raw = trim( get_theme_mod( 'timeless_reviews_static', '' ) );
+    if ( empty( $raw ) ) return array();
+
+    $reviews = array();
+    foreach ( preg_split( '/\r\n|\r|\n/', $raw ) as $line ) {
+        $line = trim( $line );
+        if ( empty( $line ) ) continue;
+
+        $parts = array_map( 'trim', explode( '|', $line ) );
+        if ( count( $parts ) < 4 ) continue; // Skip malformed lines silently
+
+        $reviews[] = array(
+            'author_name'               => $parts[0],
+            'relative_time_description' => $parts[1],
+            'rating'                    => intval( $parts[2] ),
+            // Re-join any extra `|` characters that were inside the review text
+            'text'                      => implode( ' | ', array_slice( $parts, 3 ) ),
+        );
+    }
+
+    return array_slice( $reviews, 0, 6 );  // Show up to 6
+}
+
+/** Render the Google Reviews widget. Tries Places API first, falls back to static
+ *  curated reviews from Customizer, then to a "see reviews on Google" link. */
 function timeless_render_google_reviews() {
     $data = timeless_get_google_reviews();
 
-    // Graceful fallback when API keys aren't set or fetch fails: link to Google.
+    // FALLBACK 1: Places API didn't return reviews (no key, business not yet indexed,
+    // API failure, etc.) — try static curated reviews from Customizer textarea.
+    if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
+        $static_reviews = timeless_parse_static_reviews();
+        if ( ! empty( $static_reviews ) ) {
+            $business_url = trim( get_theme_mod( 'timeless_google_business_url', '' ) );
+            // Synthesize a $data structure matching what Places API would return
+            $rating_avg = array_sum( array_column( $static_reviews, 'rating' ) ) / count( $static_reviews );
+            $data = array(
+                'reviews'      => $static_reviews,
+                'rating'       => round( $rating_avg, 1 ),
+                'total'        => count( $static_reviews ),
+                'business_url' => esc_url_raw( $business_url ),
+            );
+            // Fall through to the rendering block below
+        }
+    }
+
+    // FALLBACK 2: No Places API data AND no static reviews — show "see reviews on Google" link.
     // Note: $data may be `false` (not an array), so we can't subscript it directly —
     // PHP 8.1+ would warn "Trying to access array offset on value of type bool".
     if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
-        $fallback_business = 'https://www.google.com/maps/search/' . rawurlencode( get_bloginfo( 'name' ) . ' Sydney' );
+        $configured_url = trim( get_theme_mod( 'timeless_google_business_url', '' ) );
+        $fallback_business = ! empty( $configured_url )
+            ? $configured_url
+            : 'https://www.google.com/maps/search/' . rawurlencode( get_bloginfo( 'name' ) . ' Sydney' );
         $business_url = ( is_array( $data ) && ! empty( $data['business_url'] ) ) ? $data['business_url'] : $fallback_business;
         ?>
         <div class="text-center py-8">
             <p class="text-sm text-secondary mb-4">Read our reviews directly on Google.</p>
-            <a href="<?php echo esc_url( $business_url ); ?>" target="_blank" rel="noopener"
+            <a href="<?php echo esc_url( $fallback_business ); ?>" target="_blank" rel="noopener"
                class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">
                 See Our Google Reviews
                 <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
@@ -724,18 +831,26 @@ function timeless_render_google_reviews() {
     ?>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <?php foreach ( $reviews as $r ) :
-            $author      = $r['author_name'] ?? 'Google User';
-            $initial     = mb_substr( $author, 0, 1 );
-            $time_label  = $r['relative_time_description'] ?? '';
-            $stars       = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) ); // Clamp 1-5 (defensive)
-            $text        = $r['text'] ?? '';
-            $author_url  = $r['author_url'] ?? '';
+            $author       = $r['author_name'] ?? 'Google User';
+            $initial      = mb_substr( $author, 0, 1, 'UTF-8' );
+            $time_label   = $r['relative_time_description'] ?? '';
+            $stars        = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) ); // Clamp 1-5 (defensive)
+            $text         = $r['text'] ?? '';
+            $author_url   = $r['author_url'] ?? '';
+            $author_photo = $r['author_photo'] ?? '';
         ?>
         <article class="bg-white rounded-2xl p-6 shadow-md border border-surface-container">
             <header class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm" aria-hidden="true">
-                    <?php echo esc_html( $initial ); ?>
-                </div>
+                <?php if ( $author_photo ) : ?>
+                    <img src="<?php echo esc_url( $author_photo ); ?>" alt=""
+                         loading="lazy" decoding="async"
+                         class="w-10 h-10 rounded-full object-cover bg-primary/10"
+                         width="40" height="40" />
+                <?php else : ?>
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm" aria-hidden="true">
+                        <?php echo esc_html( $initial ); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="flex-1 min-w-0">
                     <p class="font-bold text-primary text-sm truncate"><?php echo esc_html( $author ); ?></p>
                     <p class="text-xs text-secondary"><?php echo esc_html( $time_label ); ?></p>
@@ -751,12 +866,21 @@ function timeless_render_google_reviews() {
         <?php endforeach; ?>
     </div>
 
-    <?php if ( $data['business_url'] ) : ?>
+    <?php if ( ! empty( $data['business_url'] ) ) : ?>
     <div class="text-center">
         <a href="<?php echo esc_url( $data['business_url'] ); ?>" target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-soft transition-colors">
-            See all <?php echo esc_html( $total ); ?> reviews on Google
-            <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+            <?php
+            // Show review count only when Places API gave us a real count higher than what we display.
+            // For static curated reviews, the count we have IS what we display, so just say "See all our reviews".
+            $shown = count( $data['reviews'] );
+            if ( $total > $shown ) {
+                printf( esc_html__( 'See all %d reviews on Google', 'timeless' ), intval( $total ) );
+            } else {
+                esc_html_e( 'See all our reviews on Google', 'timeless' );
+            }
+            ?>
+            <span class="material-symbols-outlined text-base" aria-hidden="true">open_in_new</span>
         </a>
     </div>
     <?php endif; ?>
