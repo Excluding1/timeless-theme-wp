@@ -13,8 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] — `develop` branch
 
+### Performance — Day 3 self-hosting fonts
+- **Material Symbols subset** (1.06 MB CDN → 10 KB local, 99.7% smaller). Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept for filled-icon variants. Audit-fix-audit loop converged after 4 passes (caught 2 critical bugs: dynamic `faucet` icon in PHP array; JS-injected `check_circle` bypassing PHP filter).
+- **Inter body font subset** (200-300 KB across multiple Google Fonts CDN requests → 99 KB local single file, plus eliminates 2 third-party DNS lookups). Variable font with wght (100..900) and opsz (14..32) axes preserved. Latin + essential punctuation + ★ for ratings. No italic variant (theme has zero italic usage).
+- **Audit-fix-audit loop formalized as Rule 4a** in WORKFLOW.md. Documents the methodology that caught regressions the first audit missed (stale comments, asymmetric regex word-boundaries, missed star character).
+
+### UI/UX
+- SECTION 2B before/after cards capped at `max-w-md` on 4 big service pages. Were rendering ~552×368 on desktop (dominating text columns); now 448×299 with proper visual balance.
+- H2 sizing standardized across all 19 service pages + about + homepage to `text-3xl sm:text-4xl`. Was inconsistent — some sections rendered at 30px while neighbors used 36px.
+- Homepage "Full Renovation" badge icon swapped from `delete` (trash) to `close` (X) to match the row icons visually.
+
 ### Coming next (v1.2.0)
-- Day 3: Image pipeline + Material Symbols subset
+- Day 3 Task C: Convert hero images (before.jpg/after.jpg) to WebP
+- Day 3 Task D: Configure Cloudflare cache rules (HTML 30min, static 1yr) — dashboard work
 - Day 4: Schema as code + analytics setup (GA4, Microsoft Clarity)
 - Day 5: Suburb programmatic landing pages
 - Day 6: Service page polish (H1s, customer language variants)

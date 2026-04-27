@@ -154,6 +154,51 @@ Edit `src/main.css`:
 
 ---
 
+## Inter Body Font Subset Pipeline
+
+Separate from the Tailwind build. The theme self-hosts a Latin subset of the
+official Inter Variable font (~99 KB instead of 200-300 KB across multiple
+Google Fonts CDN requests, plus eliminates two third-party DNS lookups).
+
+### When to rebuild the Inter subset
+- Adding content in a new language outside Latin range (Cyrillic, Greek, Vietnamese, etc.)
+- Bumping to a new Inter major version (rsms releases ~yearly)
+- Need new symbol coverage (math, dingbats — currently excluded by design)
+
+### Inputs (must exist in /tmp/ before running)
+| File | Source |
+|---|---|
+| `/tmp/Inter-test.woff2` | https://github.com/rsms/inter/raw/v4.0/docs/font-files/InterVariable.woff2 |
+
+(No codepoint manifest needed — script defines the unicode-range list itself.)
+
+### Build commands
+```bash
+# Step 1 — fetch upstream Inter Variable (~340 KB)
+curl -L -o /tmp/Inter-test.woff2 \
+  "https://github.com/rsms/inter/raw/v4.0/docs/font-files/InterVariable.woff2"
+
+# Step 2 — subset to Latin + essential punctuation (drops Cyrillic, Greek, Vietnamese, etc.)
+python3 scripts/subset-inter.py
+```
+
+### Output
+- `assets/fonts/inter-variable-latin.woff2` — ~99 KB, wght+opsz axes preserved
+
+### How the runtime works
+1. `functions.php` enqueues an inline `@font-face` declaring Inter with `font-weight: 100 900` (the variable axis range).
+2. Tailwind's `tailwind.config.js` has `fontFamily.body: ['Inter', 'system-ui', 'sans-serif']` — Inter is the first choice with system-ui as a fallback.
+3. Tailwind weight utilities (`font-bold`, `font-extrabold`, etc.) all resolve to specific weights along the variable wght axis — single font file delivers ALL weights.
+4. `<link rel="preload">` in HEAD gets the font fetching in parallel with HTML parse for fast first paint.
+5. `font-display: swap` shows fallback text immediately, swaps to Inter when loaded — no FOIT (blank period).
+
+### Critical rules
+- **No italic variant subset** — theme has zero italic usage. If you ever add italic, also subset `InterVariable-Italic.woff2` and add a 2nd `@font-face` with `font-style: italic`.
+- **Subset character set is documented in `scripts/subset-inter.py`** — Basic Latin, Latin-1, smart quotes, currency, arrows, ★ ☆ for ratings. If a future page introduces a glyph outside this range (e.g., a Vietnamese suburb name, ✓ ✗ symbols, Greek letters), the browser will silently fall back to system-ui for those characters only. Add the range to the script and rebuild.
+- **The `file_exists()` guard in functions.php** silently disables Inter if the font file is missing in production — body falls back to system-ui chain. Better than a 404'd `@font-face` blocking the swap window.
+
+---
+
 ## Material Symbols Icon Subset Pipeline
 
 Separate from the Tailwind build. The theme self-hosts a tiny subset of Google's

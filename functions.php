@@ -195,8 +195,50 @@ function timeless_scripts() {
     $tailwind_ver  = file_exists( $tailwind_path ) ? filemtime( $tailwind_path ) : '1.0.0';
     wp_enqueue_style( 'timeless-tailwind', $tailwind_url, array(), $tailwind_ver );
 
-    // Google Fonts — Inter
-    wp_enqueue_style( 'google-fonts-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap', array(), null );
+    /**
+     * Inter — Self-hosted variable font subset (~99 KB, all weights via wght axis).
+     *
+     * Replaces Google Fonts CDN. Eliminates two third-party DNS+TLS lookups
+     * (fonts.googleapis.com + fonts.gstatic.com) and 6+ separate weight requests
+     * (~200-300 KB over the wire) with one local request to the same origin.
+     *
+     * The font is the official Inter Variable from rsms/inter v4, subset to
+     * Latin (Basic Latin + Latin-1 + essential punctuation/currency). wght axis
+     * preserved continuous 100..900, opsz axis preserved 14..32 for optical
+     * sizing. No italic variant — theme has zero italic usage.
+     *
+     * Tailwind classes like `font-bold` (700), `font-extrabold` (800), etc. all
+     * resolve to the correct visual weight via the variable axis.
+     *
+     * To regenerate (after font version bump or unicode-range change):
+     *   1. curl -L -o /tmp/Inter-test.woff2 \
+     *        "https://github.com/rsms/inter/raw/v4.0/docs/font-files/InterVariable.woff2"
+     *   2. python3 scripts/subset-inter.py
+     */
+    $inter_font_path = get_template_directory() . '/assets/fonts/inter-variable-latin.woff2';
+    if ( file_exists( $inter_font_path ) ) {
+        $inter_font_url = get_template_directory_uri() . '/assets/fonts/inter-variable-latin.woff2';
+        $inter_font_ver = filemtime( $inter_font_path );
+
+        wp_register_style( 'inter-self-hosted', false );
+        wp_enqueue_style( 'inter-self-hosted' );
+        wp_add_inline_style( 'inter-self-hosted', "
+            @font-face {
+                font-family: 'Inter';
+                font-style: normal;
+                /* Variable axis covers all weights from 100 (thin) to 900 (black).
+                   Browser auto-detects variations from the woff2 — no `format('woff2-variations')`
+                   hint needed (that token was a 2016-era vendor proposal, never standardized). */
+                font-weight: 100 900;
+                font-display: swap;
+                src: url(" . esc_url( $inter_font_url ) . "?v=$inter_font_ver) format('woff2');
+            }
+        " );
+    }
+    // If font file is missing, NO @font-face is emitted → tailwind config's
+    // 'system-ui, sans-serif' fallback chain takes over silently. Prevents
+    // a 404'd @font-face from blocking text rendering for `font-display: swap`'s
+    // brief swap window.
 
     /**
      * Material Symbols — Self-hosted subset (96 icons, ~10 KB).
@@ -220,12 +262,13 @@ function timeless_scripts() {
      * See BUILD.md "Material Symbols Icon Subset Pipeline" for details.
      */
     $ms_font_path = get_template_directory() . '/assets/fonts/material-symbols-subset.woff2';
-    $ms_font_url  = get_template_directory_uri() . '/assets/fonts/material-symbols-subset.woff2';
-    $ms_font_ver  = file_exists( $ms_font_path ) ? filemtime( $ms_font_path ) : '1.0.0';
+    if ( file_exists( $ms_font_path ) ) {
+        $ms_font_url = get_template_directory_uri() . '/assets/fonts/material-symbols-subset.woff2';
+        $ms_font_ver = filemtime( $ms_font_path );
 
-    wp_register_style( 'material-symbols-subset', false );
-    wp_enqueue_style( 'material-symbols-subset' );
-    wp_add_inline_style( 'material-symbols-subset', "
+        wp_register_style( 'material-symbols-subset', false );
+        wp_enqueue_style( 'material-symbols-subset' );
+        wp_add_inline_style( 'material-symbols-subset', "
         @font-face {
             font-family: 'Material Symbols Outlined';
             font-style: normal;
@@ -259,6 +302,10 @@ function timeless_scripts() {
             }
         }
     " );
+    } // end Material Symbols file_exists guard
+    // If MS font is missing, no @font-face is emitted — icons will render as
+    // their literal codepoint chars in fallback fonts (notdef boxes), making
+    // the missing-deploy state visually obvious instead of silently broken.
 
     // Theme stylesheet (animations, mobile menu, FAQ accordion)
     wp_enqueue_style( 'timeless-style', get_stylesheet_uri(), array(), '1.0.0' );
@@ -1247,13 +1294,21 @@ remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 /** Remove DNS prefetch for WordPress.org */
 remove_action( 'wp_head', 'wp_resource_hints', 2 );
 
-/** Add preconnect hints for Google Fonts (speed up external resource loading).
- *  Tailwind is now compiled locally — no CDN preconnect needed. */
-function timeless_preconnect_hints() {
-    echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />' . "\n";
-    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />' . "\n";
+/** Preload our self-hosted Inter font for faster first paint.
+ *  Inter is the body font — without preload, the browser only discovers the
+ *  @font-face URL after parsing the inline <style> tag, costing ~50-100ms.
+ *  Preload tells the browser to fetch it in parallel with the HTML parse.
+ *  (Google Fonts preconnects removed — Inter + Material Symbols are now local.) */
+function timeless_preload_inter() {
+    $url = get_template_directory_uri() . '/assets/fonts/inter-variable-latin.woff2';
+    $path = get_template_directory() . '/assets/fonts/inter-variable-latin.woff2';
+    if ( ! file_exists( $path ) ) {
+        return; // No preload if font isn't deployed yet
+    }
+    $ver = filemtime( $path );
+    echo '<link rel="preload" as="font" type="font/woff2" crossorigin href="' . esc_url( $url ) . '?v=' . $ver . '" />' . "\n";
 }
-add_action( 'wp_head', 'timeless_preconnect_hints', 1 );
+add_action( 'wp_head', 'timeless_preload_inter', 1 );
 
 /** Disable WordPress heartbeat on frontend (saves AJAX calls, reduces server load) */
 function timeless_disable_heartbeat() {
