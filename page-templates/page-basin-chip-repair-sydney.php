@@ -118,7 +118,7 @@
 <!-- TYPES OF BASIN DAMAGE -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Types of Basin Damage We Fix</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Types of Basin Damage We Fix</h2>
         <p class="text-secondary max-w-3xl mb-10">Whether your basin is ceramic, porcelain, acrylic or stone-composite, we've seen and repaired every kind of damage. Here are the most common issues we fix.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -149,7 +149,7 @@
 <!-- WHY YOU SHOULDN'T LEAVE IT -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Why You Shouldn't Leave It</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why You Shouldn't Leave It</h2>
         <p class="text-secondary max-w-3xl mb-10">A chipped or cracked basin might seem like a minor cosmetic issue. But left unrepaired, it only gets worse &mdash; and more expensive to fix.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl">
@@ -175,7 +175,7 @@
 <!-- HOW WE FIX IT -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Fix It</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">How We Fix It</h2>
         <p class="text-secondary max-w-3xl mb-10">Our five-step process repairs basin chips and cracks to a smooth, colour-matched, waterproof finish &mdash; typically in a single visit.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -229,7 +229,7 @@
 <!-- REPAIR VS REPLACE -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Repair vs Replace</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Repair vs Replace</h2>
         <p class="text-secondary max-w-3xl mb-10">Replacing a basin is expensive and disruptive. Here's how a professional repair compares.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
@@ -262,7 +262,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
             <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
@@ -272,7 +272,7 @@
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-white" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Basin Chip Repair FAQs</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Basin Chip Repair FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about basin chip and crack repair in Sydney.</p>
 
         <div class="space-y-3">
@@ -296,7 +296,7 @@
 <!-- RELATED SERVICES -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
         <p class="text-secondary max-w-3xl mb-10">If your basin needs attention, chances are other parts of your bathroom could use some work too. We can tackle multiple jobs in the same visit.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">

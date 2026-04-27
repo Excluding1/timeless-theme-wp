@@ -118,7 +118,7 @@
 <!-- WHAT IS VANITY RESPRAYING -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">What Is Vanity Respraying?</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Is Vanity Respraying?</h2>
         <p class="text-secondary max-w-3xl mb-10">Vanity respraying is a professional refinishing process that gives your existing bathroom cabinet a completely new look. It's not brush painting &mdash; we use automotive-grade two-part coatings spray-applied with professional equipment for a factory-smooth finish. The process works on virtually any vanity surface including laminate, timber, MDF, and melamine.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -149,7 +149,7 @@
 <!-- PERFECT FOR THESE VANITIES -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Perfect For These Vanities</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Perfect For These Vanities</h2>
         <p class="text-secondary max-w-3xl mb-10">If your vanity falls into any of these categories, a respray is likely the smartest way to update it without the cost and hassle of replacement.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -180,7 +180,7 @@
 <!-- HOW WE DO IT -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
         <p class="text-secondary max-w-3xl mb-10">Our six-step process ensures proper adhesion and a durable, factory-quality finish on every vanity we respray.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -239,7 +239,7 @@
 <!-- RESPRAY VS NEW VANITY -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Respray vs New Vanity</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Respray vs New Vanity</h2>
         <p class="text-secondary max-w-3xl mb-10">Replacing a bathroom vanity sounds simple, but the hidden costs and disruption add up quickly. Here's how the two options compare.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
@@ -272,7 +272,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
             <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
@@ -282,7 +282,7 @@
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-white" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Vanity Respray FAQs</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Vanity Respray FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about bathroom vanity respraying in Sydney.</p>
 
         <div class="space-y-3">
@@ -306,7 +306,7 @@
 <!-- RELATED SERVICES -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
         <p class="text-secondary max-w-3xl mb-10">While we're refreshing your vanity, it's often worth tackling other bathroom updates at the same time &mdash; saving you time and a second visit.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">

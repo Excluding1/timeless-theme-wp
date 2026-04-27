@@ -119,7 +119,7 @@
 <!-- WHY YOUR BATH WON'T COME CLEAN -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Why Your Bath Won't Come Clean</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why Your Bath Won't Come Clean</h2>
         <p class="text-secondary max-w-3xl mb-10">If you've tried every cleaning product on the shelf and the stains won't budge, it's not your technique &mdash; it's the bath itself. Here's what's actually happening.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -150,7 +150,7 @@
 <!-- THE RESURFACING SOLUTION -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">The Resurfacing Solution</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">The Resurfacing Solution</h2>
         <p class="text-secondary max-w-3xl mb-6">If you've never heard of bath resurfacing, here's the short version: it's a professional recoating process that gives your existing bathtub a brand new, factory-smooth finish &mdash; without removing or replacing the bath.</p>
 
         <div class="bg-white rounded-xl p-8 sm:p-10 max-w-3xl border border-surface-container reveal">
@@ -171,7 +171,7 @@
 <!-- HOW WE DO IT -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
         <p class="text-secondary max-w-3xl mb-10">Our six-step process transforms your stained bath from eyesore to showroom condition. Here's exactly what happens on the day.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -230,7 +230,7 @@
 <!-- WHY CHOOSE RESURFACING OVER REPLACEMENT -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Why Choose Resurfacing Over Replacement</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why Choose Resurfacing Over Replacement</h2>
         <p class="text-secondary max-w-3xl mb-10">Thinking about ripping out your old bath and putting in a new one? Here's how the two options compare side by side.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
@@ -267,7 +267,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
             <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
@@ -277,7 +277,7 @@
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-white" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Stained Bathtub FAQs</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Stained Bathtub FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about stained bath resurfacing in Sydney.</p>
 
         <div class="space-y-3">
@@ -303,7 +303,7 @@
 <!-- RELATED SERVICES -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
         <p class="text-secondary max-w-3xl mb-10">While we're resurfacing your bath, it's often worth tackling other bathroom issues at the same time &mdash; saving you time and a second visit.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">

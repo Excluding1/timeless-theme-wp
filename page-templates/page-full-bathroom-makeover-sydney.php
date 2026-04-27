@@ -402,7 +402,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
             <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
@@ -414,7 +414,7 @@
      ═══════════════════════════════════════════════════ -->
 <section class="py-16 sm:py-20 bg-surface-container-low" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Full Bathroom Makeover FAQs</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Full Bathroom Makeover FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about our complete bathroom makeover service.</p>
         <div class="space-y-3">
             <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What&rsquo;s included in a full bathroom makeover?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Our complete bathroom makeover includes bath resurfacing, wall and/or floor tile resurfacing, full regrouting, silicone replacement at all junctions, vanity cabinet respray, and basin restoration. Everything your bathroom needs to look brand new. without demolition. You can also choose individual services if you don&rsquo;t need the full package.</p></div></div>

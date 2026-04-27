@@ -119,7 +119,7 @@
 <!-- WHAT IS TILE RESURFACING -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">What Is Tile Resurfacing?</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Is Tile Resurfacing?</h2>
         <p class="text-secondary max-w-3xl mb-4">Tile resurfacing is a professional recoating process &mdash; we spray a durable, multi-layer coating over your existing tiles to give them a completely new colour and finish. No demolition, no retiling, no waterproofing needed.</p>
         <p class="text-secondary max-w-3xl mb-10">Tradies sometimes call it tile reglazing or tile recoating. It's the same process: your old tiles stay in place, and we apply a hard-wearing two-part coating that bonds to the tile surface and cures to a smooth, factory-like finish.</p>
 
@@ -151,7 +151,7 @@
 <!-- PERFECT FOR THESE SITUATIONS -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Perfect For These Situations</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Perfect For These Situations</h2>
         <p class="text-secondary max-w-3xl mb-10">Tile resurfacing is ideal when the tiles are structurally fine but the look is outdated, damaged, or just not your style.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -182,7 +182,7 @@
 <!-- HOW WE DO IT -->
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">How We Do It</h2>
         <p class="text-secondary max-w-3xl mb-10">Our six-step process ensures a durable, professional finish that lasts for years. Good ventilation is required during the spraying process.</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -241,7 +241,7 @@
 <!-- RETILING VS RESURFACING -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Retiling vs Resurfacing</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Retiling vs Resurfacing</h2>
         <p class="text-secondary max-w-3xl mb-10">When your tiles are structurally sound but the look is outdated, resurfacing delivers a modern result at a fraction of the cost and disruption.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
@@ -274,7 +274,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What Our Customers Say</h2>
             <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
         </div>
         <script defer async src='https://cdn.trustindex.io/loader.js?fe231eb69ba66041914656a8b64'></script>
@@ -284,7 +284,7 @@
 <!-- FAQ -->
 <section class="py-16 sm:py-20 bg-white" id="faqs">
     <div class="max-w-3xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4 text-center">Bathroom Tile Resurfacing FAQs</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Bathroom Tile Resurfacing FAQs</h2>
         <p class="text-secondary text-center mb-10">Common questions about tile resurfacing for Sydney bathrooms.</p>
 
         <div class="space-y-3">
@@ -310,7 +310,7 @@
 <!-- RELATED SERVICES -->
 <section class="py-16 sm:py-20 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <h2 class="text-3xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
         <p class="text-secondary max-w-3xl mb-10">While we're resurfacing your tiles, it's often worth tackling other bathroom items at the same time &mdash; saving you time and a second visit.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
