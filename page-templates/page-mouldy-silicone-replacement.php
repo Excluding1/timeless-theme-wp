@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Shower Sealing", "item": "https://timelessresurfacing.com.au/services/shower-leak-repair-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Mouldy Silicone Replacement", "item": "https://timelessresurfacing.com.au/services/mouldy-silicone-replacement-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Shower Sealing", "item": "https://timelessresurfacing.com.au/services/shower-leak-repair/" },
+ { "@type": "ListItem", "position": 4, "name": "Mouldy Silicone Replacement", "item": "https://timelessresurfacing.com.au/services/mouldy-silicone-replacement/" }
  ]
  }
  </script>
@@ -56,7 +56,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Shower Sealing</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="hover:text-primary transition-colors">Shower Sealing</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Mouldy Silicone Replacement</li>
  </ol>
@@ -239,8 +239,8 @@
  </div>
  <div class="bg-white rounded-xl p-8 border-2 border-surface-container reveal">
  <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" aria-hidden="true">grid_on</span> Just Regrouting</h3>
- <p class="text-sm text-secondary leading-relaxed mb-4">If the mould or damage is in the flat lines between your tiles (the grid pattern) but the corners look fine, you need <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower regrouting</a>. This replaces the hard grout between tiles.</p>
- <p class="text-xs text-secondary">See also: <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">mouldy grout removal</a></p>
+ <p class="text-sm text-secondary leading-relaxed mb-4">If the mould or damage is in the flat lines between your tiles (the grid pattern) but the corners look fine, you need <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower regrouting</a>. This replaces the hard grout between tiles.</p>
+ <p class="text-xs text-secondary">See also: <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">mouldy grout removal</a></p>
  </div>
  <div class="bg-white rounded-xl p-8 border-2 border-surface-container reveal">
  <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" aria-hidden="true">select_all</span> Both</h3>
@@ -276,7 +276,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What type of silicone do you use?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">We use premium wet-area silicone specifically rated for bathroom and shower use. It has built-in anti-fungal properties for long-term mould resistance and is rated for 25+ years of service life when properly applied. We always use a neutral-cure silicone that won't damage surfaces or discolour over time.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I also need regrouting?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Not necessarily. Silicone and grout are different materials in different locations. Silicone is the flexible sealant in corners and where surfaces meet (like wall-to-floor junctions). Grout is the hard material between tiles in a grid pattern. If only your silicone is mouldy, you may just need a silicone replacement. If your grout lines are also discoloured or damaged, we can assess whether <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium">regrouting</a> is needed during the same visit.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do I also need regrouting?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Not necessarily. Silicone and grout are different materials in different locations. Silicone is the flexible sealant in corners and where surfaces meet (like wall-to-floor junctions). Grout is the hard material between tiles in a grid pattern. If only your silicone is mouldy, you may just need a silicone replacement. If your grout lines are also discoloured or damaged, we can assess whether <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium">regrouting</a> is needed during the same visit.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I replace shower silicone myself?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Technically yes. Silicone and a caulking gun are available at any hardware store. However, getting a clean, consistent, watertight bead is harder than it looks. Common DIY issues include uneven beads, poor adhesion from incomplete removal of old silicone, gaps at corners where two beads meet, and using the wrong type of silicone for wet areas. A professional gets it right the first time with proper tools, surface preparation, and technique. And it's backed by our 2-year workmanship warranty.</p></div></div>
 
@@ -293,22 +293,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">If your silicone is failing, there may be other issues worth addressing at the same time. Saving you a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">cleaning_services</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Mouldy Grout Removal</h3>
  <p class="text-xs text-secondary">Mouldy grout lines between tiles? Different problem, different fix</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_on</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Regrouting</h3>
  <p class="text-xs text-secondary">Full grout replacement for cracked or failing tile joints</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">water_damage</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Sealing</h3>
  <p class="text-xs text-secondary">Stop leaks from failed grout and silicone seals</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Bath Resurfacing</h3>
  <p class="text-xs text-secondary">Restore chipped, stained or peeling bathtubs</p>

@@ -4,7 +4,7 @@
  * Dynamic template for {service} × {suburb} programmatic landing pages.
  *
  * URL pattern: /services/{service-slug}/{suburb-slug}/
- *   e.g. /services/bath-resurfacing-sydney/parramatta/
+ *   e.g. /services/bath-resurfacing/parramatta/
  *
  * Pulls suburb data from inc/suburb-data.php and service data from
  * inc/service-data.php based on the current page's slug + parent page's slug.

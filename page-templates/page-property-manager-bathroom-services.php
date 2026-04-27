@@ -25,7 +25,7 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Property Manager Services", "item": "https://timelessresurfacing.com.au/services/property-manager-bathroom-services-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Property Manager Services", "item": "https://timelessresurfacing.com.au/services/property-manager-bathroom-services/" }
  ]
  }
  </script>
@@ -147,7 +147,7 @@
  </div>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
  <!-- Service 1 -->
- <a href="<?php echo esc_url( home_url('/services/shower-regrouting-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/shower-regrouting/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">plumbing</span>
@@ -159,7 +159,7 @@
  </div>
  </a>
  <!-- Service 2 -->
- <a href="<?php echo esc_url( home_url('/services/bath-resurfacing-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/bath-resurfacing/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">bathtub</span>
@@ -171,7 +171,7 @@
  </div>
  </a>
  <!-- Service 3 -->
- <a href="<?php echo esc_url( home_url('/services/tile-resurfacing-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/tile-resurfacing/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">grid_view</span>
@@ -183,7 +183,7 @@
  </div>
  </a>
  <!-- Service 4 -->
- <a href="<?php echo esc_url( home_url('/services/vanity-refinishing-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/vanity-refinishing/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">countertops</span>
@@ -195,7 +195,7 @@
  </div>
  </a>
  <!-- Service 5 -->
- <a href="<?php echo esc_url( home_url('/services/basin-restoration-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/basin-restoration/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">wash</span>
@@ -207,7 +207,7 @@
  </div>
  </a>
  <!-- Service 6 -->
- <a href="<?php echo esc_url( home_url('/services/shower-leak-repair-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/shower-leak-repair/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">water_drop</span>
@@ -219,7 +219,7 @@
  </div>
  </a>
  <!-- Service 7. Full package, highlighted -->
- <a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover-sydney/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
+ <a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-on-tertiary-fixed" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span>

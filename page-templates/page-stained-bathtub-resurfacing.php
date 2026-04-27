@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing", "item": "https://timelessresurfacing.com.au/services/bath-resurfacing-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Stained Bathtub Resurfacing", "item": "https://timelessresurfacing.com.au/services/stained-bathtub-resurfacing-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing", "item": "https://timelessresurfacing.com.au/services/bath-resurfacing/" },
+ { "@type": "ListItem", "position": 4, "name": "Stained Bathtub Resurfacing", "item": "https://timelessresurfacing.com.au/services/stained-bathtub-resurfacing/" }
  ]
  }
  </script>
@@ -57,7 +57,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Bath Resurfacing</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="hover:text-primary transition-colors">Bath Resurfacing</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Stained Bathtub Resurfacing</li>
  </ol>
@@ -76,7 +76,7 @@
  Your bath has gone yellow. Or brown. Maybe there are rust rings around the drain and hard water marks you can't scrub off no matter what product you try. You've used bleach, bathroom cleaner, bicarb. Nothing works. <strong>The staining isn't on the surface anymore. It's in the surface.</strong>
  </p>
  <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Replacing the bath means $3,000-$8,000+ for demolition, plumbing, a new tub, and retiling. Our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional bath resurfacing</a> gives you a factory-smooth, brilliant white finish over the existing bath. In just one day, at a fraction of that cost.
+ Replacing the bath means $3,000-$8,000+ for demolition, plumbing, a new tub, and retiling. Our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional bath resurfacing</a> gives you a factory-smooth, brilliant white finish over the existing bath. In just one day, at a fraction of that cost.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">
@@ -182,7 +182,7 @@
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">2</div>
  <h3 class="font-bold text-primary text-sm mb-2">Repair Chips, Cracks &amp; Rough Spots</h3>
- <p class="text-xs text-secondary leading-relaxed">Any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">chips</a>, cracks, or rough areas are filled and sanded smooth. This ensures the final finish is completely uniform with no bumps or imperfections showing through the new coating.</p>
+ <p class="text-xs text-secondary leading-relaxed">Any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="text-primary underline font-medium">chips</a>, cracks, or rough areas are filled and sanded smooth. This ensures the final finish is completely uniform with no bumps or imperfections showing through the new coating.</p>
  </div>
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">3</div>
@@ -292,7 +292,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Will the resurfaced bath actually look like new?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. The finished surface is factory-smooth and glossy. Visually identical to a brand new bathtub. All staining, yellowing, and discolouration is completely hidden beneath the new coating. The difference is dramatic. Check our <a href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" class="text-primary underline font-medium">before and after gallery</a> to see real results from Sydney bathrooms.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you fix chips and cracks at the same time?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Absolutely. Chip and crack repair is part of our standard resurfacing process. We fill and sand smooth any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or rough spots</a> before applying the new coating, so the finished surface is completely uniform. There's no extra visit needed. It's all done on the same day.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you fix chips and cracks at the same time?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Absolutely. Chip and crack repair is part of our standard resurfacing process. We fill and sand smooth any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or rough spots</a> before applying the new coating, so the finished surface is completely uniform. There's no extra visit needed. It's all done on the same day.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for my stained bathtub?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your bathtub through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
@@ -305,22 +305,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">While we're resurfacing your bath, it's often worth tackling other bathroom issues at the same time. Saving you time and a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">build</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Chipped Bathtub Repair</h3>
  <p class="text-xs text-secondary">Fix chips and cracks in your bath surface</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">wash</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Basin Restoration</h3>
  <p class="text-xs text-secondary">Resurface stained or damaged basins to match</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
  <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">countertops</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Vanity Refinishing</h3>
  <p class="text-xs text-secondary">Restore worn vanity tops and cabinets</p>

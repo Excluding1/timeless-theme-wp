@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Shower Regrouting", "item": "https://timelessresurfacing.com.au/services/shower-regrouting-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Epoxy Grout Upgrade", "item": "https://timelessresurfacing.com.au/services/epoxy-grout-upgrade-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Shower Regrouting", "item": "https://timelessresurfacing.com.au/services/shower-regrouting/" },
+ { "@type": "ListItem", "position": 4, "name": "Epoxy Grout Upgrade", "item": "https://timelessresurfacing.com.au/services/epoxy-grout-upgrade/" }
  ]
  }
  </script>
@@ -57,7 +57,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Shower Regrouting</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="hover:text-primary transition-colors">Shower Regrouting</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Epoxy Grout Upgrade</li>
  </ol>
@@ -76,7 +76,7 @@
  You've regrouted before. You've scrubbed the mould. You've sealed the grout. Twice. And yet, your shower grout keeps staining, cracking, and growing mould within a year or two. <strong>The problem isn't how the grout was applied. It's the grout itself.</strong>
  </p>
  <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Standard cement grout is porous. It absorbs water, traps dirt, and feeds mould no matter how well you maintain it. Epoxy grout is different. It's a <strong>resin-based material that's 100% waterproof from day one</strong>. No sealing, no staining, no mould. We remove your old cement grout completely and replace it with professional-grade epoxy. And most <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower regrouting jobs</a> are finished in a single day.
+ Standard cement grout is porous. It absorbs water, traps dirt, and feeds mould no matter how well you maintain it. Epoxy grout is different. It's a <strong>resin-based material that's 100% waterproof from day one</strong>. No sealing, no staining, no mould. We remove your old cement grout completely and replace it with professional-grade epoxy. And most <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower regrouting jobs</a> are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">
@@ -189,7 +189,7 @@
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">1</div>
  <h3 class="font-bold text-primary text-sm mb-2">Assess Your Shower</h3>
- <p class="text-xs text-secondary leading-relaxed">We inspect every grout line, check for loose tiles, and look for signs of water damage or <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">shower leaks</a>. We photograph the current condition and confirm epoxy grout is the right solution for your tiles and layout.</p>
+ <p class="text-xs text-secondary leading-relaxed">We inspect every grout line, check for loose tiles, and look for signs of water damage or <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="text-primary underline font-medium">shower leaks</a>. We photograph the current condition and confirm epoxy grout is the right solution for your tiles and layout.</p>
  </div>
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">2</div>
@@ -285,9 +285,9 @@
  <div class="space-y-3">
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What is epoxy grout?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Epoxy grout is a two-part resin-based grout made from epoxy resin and a hardener. Unlike standard cement grout which is porous and absorbs water, epoxy grout cures into a solid, non-porous material that is 100% waterproof, stain-proof, and highly resistant to mould. It's the highest-performing grout available for wet areas like showers and is widely used in commercial kitchens, hospitals, and swimming pools where waterproofing is critical.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is epoxy grout waterproof?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Epoxy grout is 100% waterproof. Unlike cement grout which is porous and needs periodic sealing to resist moisture, epoxy grout does not absorb water at all. This makes it the ideal choice for showers, wet rooms, and any area exposed to constant moisture. It's also why <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="text-primary underline font-medium">mould can't grow on epoxy grout</a>. There's no moisture for it to feed on.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is epoxy grout waterproof?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Epoxy grout is 100% waterproof. Unlike cement grout which is porous and needs periodic sealing to resist moisture, epoxy grout does not absorb water at all. This makes it the ideal choice for showers, wet rooms, and any area exposed to constant moisture. It's also why <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout/' ) ); ?>" class="text-primary underline font-medium">mould can't grow on epoxy grout</a>. There's no moisture for it to feed on.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does epoxy grout last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Professional-grade epoxy grout typically lasts 15-20 years in a residential shower with normal use. This is roughly double the lifespan of standard cement grout, which usually lasts 8-10 years before it starts <a href="<?php echo esc_url( home_url( '/services/cracked-grout-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">cracking</a>, staining, or deteriorating. The exact lifespan depends on the quality of the product and the installation.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does epoxy grout last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Professional-grade epoxy grout typically lasts 15-20 years in a residential shower with normal use. This is roughly double the lifespan of standard cement grout, which usually lasts 8-10 years before it starts <a href="<?php echo esc_url( home_url( '/services/cracked-grout-repair/' ) ); ?>" class="text-primary underline font-medium">cracking</a>, staining, or deteriorating. The exact lifespan depends on the quality of the product and the installation.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you apply epoxy grout over old grout?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">No. And this is important. Epoxy grout cannot be applied over existing grout. The old grout must be completely removed first so the epoxy can bond directly to the clean tile edges. Applying epoxy over old cement grout would result in poor adhesion and premature failure. We use oscillating multi-tools with diamond blades to remove all old grout back to the tile edge before applying the epoxy.</p></div></div>
 
@@ -308,22 +308,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">While we're upgrading your grout, it's often worth tackling other bathroom issues at the same time. Saving you time and a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">cleaning_services</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Mouldy Grout Removal</h3>
  <p class="text-xs text-secondary">Remove mould at the source with fresh grout</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/cracked-grout-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/cracked-grout-repair/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">build</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Cracked Grout Repair</h3>
  <p class="text-xs text-secondary">Fix cracking, crumbling grout before it causes leaks</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">water_damage</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Sealing</h3>
  <p class="text-xs text-secondary">Stop leaks from failed grout and silicone</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
  <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>

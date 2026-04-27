@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing", "item": "https://timelessresurfacing.com.au/services/bath-resurfacing-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Peeling Bathtub Resurfacing", "item": "https://timelessresurfacing.com.au/services/peeling-bathtub-resurfacing-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Bath Resurfacing", "item": "https://timelessresurfacing.com.au/services/bath-resurfacing/" },
+ { "@type": "ListItem", "position": 4, "name": "Peeling Bathtub Resurfacing", "item": "https://timelessresurfacing.com.au/services/peeling-bathtub-resurfacing/" }
  ]
  }
  </script>
@@ -57,7 +57,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Bath Resurfacing</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="hover:text-primary transition-colors">Bath Resurfacing</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Peeling Bathtub Resurfacing</li>
  </ol>
@@ -79,7 +79,7 @@
  Flakes of coating lifting off the bath surface. Chunks peeling away every time you run the water. That rough, patchy look where the old paint has failed. <strong>Whether it was a previous DIY job or a cheap coating that didn't last, a peeling bath looks terrible and only gets worse.</strong>
  </p>
  <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The fix isn't to paint over it again. It's to <strong>strip the old coating completely</strong> and resurface with a professional two-part acrylic that bonds properly to the bare substrate. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">bath resurfacing service</a> does. And most jobs are finished in a single day.
+ The fix isn't to paint over it again. It's to <strong>strip the old coating completely</strong> and resurface with a professional two-part acrylic that bonds properly to the bare substrate. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">bath resurfacing service</a> does. And most jobs are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">
@@ -187,7 +187,7 @@
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">2</div>
  <h3 class="font-bold text-primary text-sm mb-2">Repair Chips &amp; Damage</h3>
- <p class="text-xs text-secondary leading-relaxed">With the old coating removed, we inspect the underlying bath surface for any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or damage</a>. These are filled and smoothed to create a uniform base for the new coating to sit on.</p>
+ <p class="text-xs text-secondary leading-relaxed">With the old coating removed, we inspect the underlying bath surface for any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or damage</a>. These are filled and smoothed to create a uniform base for the new coating to sit on.</p>
  </div>
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">3</div>
@@ -295,7 +295,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What colour will my resurfaced bath be?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Standard finish is high-gloss white. The most popular choice and matches modern bathroom fittings. Light custom tints (cream, off-white) available by request. Just mention it in your quote.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you fix chips and damage too?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Once we strip the old peeling coating, we repair any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or damage</a> in the underlying bath surface before applying the new coating. The finished result is smooth and even across the entire bath. No bumps, ridges, or imperfections.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you fix chips and damage too?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Once we strip the old peeling coating, we repair any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or damage</a> in the underlying bath surface before applying the new coating. The finished result is smooth and even across the entire bath. No bumps, ridges, or imperfections.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for my peeling bathtub?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your peeling bath through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
@@ -308,22 +308,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">While we're resurfacing your bath, it's often worth tackling other bathroom issues at the same time. Saving you time and a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Bath Resurfacing</h3>
  <p class="text-xs text-secondary">Full bath resurfacing for stained, worn or dated baths</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">build</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Chipped Bathtub Repair</h3>
  <p class="text-xs text-secondary">Fix chips, cracks and surface damage in your bath</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
  <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">wash</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Basin Restoration</h3>
  <p class="text-xs text-secondary">Restore worn or damaged bathroom basins</p>

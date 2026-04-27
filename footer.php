@@ -36,10 +36,10 @@ $phone      = timeless_phone();
             <div>
                 <h3 class="font-bold text-white mb-4 text-sm">Services</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>">Bath Resurfacing</a></li>
-                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>">Tile Resurfacing</a></li>
-                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>">Shower Regrouting</a></li>
-                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>">Shower Sealing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>">Bath Resurfacing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>">Tile Resurfacing</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>">Shower Regrouting</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>">Shower Sealing</a></li>
                 </ul>
             </div>
             <!-- Useful Information -->

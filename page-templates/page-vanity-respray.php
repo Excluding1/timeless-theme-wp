@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Vanity Refinishing", "item": "https://timelessresurfacing.com.au/services/vanity-refinishing-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Vanity Respray", "item": "https://timelessresurfacing.com.au/services/vanity-respray-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Vanity Refinishing", "item": "https://timelessresurfacing.com.au/services/vanity-refinishing/" },
+ { "@type": "ListItem", "position": 4, "name": "Vanity Respray", "item": "https://timelessresurfacing.com.au/services/vanity-respray/" }
  ]
  }
  </script>
@@ -56,7 +56,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Vanity Refinishing</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="hover:text-primary transition-colors">Vanity Refinishing</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Vanity Respray</li>
  </ol>
@@ -308,22 +308,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">While we're refreshing your vanity, it's often worth tackling other bathroom updates at the same time. Saving you time and a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">wash</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Basin Restoration</h3>
  <p class="text-xs text-secondary">Restore chipped, stained or worn basins</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Bath Resurfacing</h3>
  <p class="text-xs text-secondary">Restore chipped, stained or peeling bathtubs</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
  <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Regrouting</h3>
  <p class="text-xs text-secondary">Fresh grout for a clean, sealed shower</p>

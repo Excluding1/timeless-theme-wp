@@ -25,7 +25,7 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Vanity Refinishing Sydney", "item": "https://timelessresurfacing.com.au/services/vanity-refinishing-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Vanity Refinishing Sydney", "item": "https://timelessresurfacing.com.au/services/vanity-refinishing/" }
  ]
 }
 </script>

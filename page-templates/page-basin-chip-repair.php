@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Basin Restoration", "item": "https://timelessresurfacing.com.au/services/basin-restoration-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Basin Chip Repair", "item": "https://timelessresurfacing.com.au/services/basin-chip-repair-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Basin Restoration", "item": "https://timelessresurfacing.com.au/services/basin-restoration/" },
+ { "@type": "ListItem", "position": 4, "name": "Basin Chip Repair", "item": "https://timelessresurfacing.com.au/services/basin-chip-repair/" }
  ]
  }
  </script>
@@ -56,7 +56,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Basin Restoration</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="hover:text-primary transition-colors">Basin Restoration</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Basin Chip Repair</li>
  </ol>
@@ -285,7 +285,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you fix multiple chips at once?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Absolutely. If your basin has several chips or a combination of chips and cracks, we address all damaged areas in the same visit. Repairing multiple spots at once is more efficient and cost-effective than booking separate jobs.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you also resurface the whole basin?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. If your basin has widespread damage, heavy staining, or you want a brand-new finish, a full basin resurfacing may be a better option. We recoat the entire basin with a durable new high-gloss white finish. See our <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="text-primary underline font-medium">basin restoration service</a> for details.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you also resurface the whole basin?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. If your basin has widespread damage, heavy staining, or you want a brand-new finish, a full basin resurfacing may be a better option. We recoat the entire basin with a durable new high-gloss white finish. See our <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="text-primary underline font-medium">basin restoration service</a> for details.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of the damaged basin through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
@@ -298,22 +298,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Related Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">If your basin needs attention, chances are other parts of your bathroom could use some work too. We can tackle multiple jobs in the same visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">wash</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Basin Restoration</h3>
  <p class="text-xs text-secondary">Full basin resurfacing for a brand-new finish</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Chipped Bathtub Repair</h3>
  <p class="text-xs text-secondary">Fix chips and cracks on your bathtub too</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">countertops</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Vanity Refinishing</h3>
  <p class="text-xs text-secondary">Restore your vanity cabinet and benchtop</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="group bg-white rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_on</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Regrouting</h3>
  <p class="text-xs text-secondary">Replace cracked grout with fresh material</p>

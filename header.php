@@ -67,28 +67,28 @@ $phone      = timeless_phone();
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurfacing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>"><span class="font-semibold text-primary block">Bath Resurfacing</span><span class="text-xs text-secondary">Restore chipped or stained baths</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>"><span class="font-semibold text-primary block">Tile Resurfacing</span><span class="text-xs text-secondary">Transform outdated wall tiles</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>"><span class="font-semibold text-primary block">Vanity Refinishing</span><span class="text-xs text-secondary">Benchtop &amp; cabinet respray</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>"><span class="font-semibold text-primary block">Basin Restoration</span><span class="text-xs text-secondary">Chip repair &amp; full resurface</span></a>
                     </div>
                 </div>
                 <!-- Regrouting & Sealing -->
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/floor-tile-regrouting-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>"><span class="font-semibold text-primary block">Shower Regrouting</span><span class="text-xs text-secondary">Full grout removal &amp; replacement</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/floor-tile-regrouting/' ) ); ?>"><span class="font-semibold text-primary block">Floor Tile Regrouting</span><span class="text-xs text-secondary">Bathroom &amp; laundry floor grout</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>"><span class="font-semibold text-primary block">Shower Sealing</span><span class="text-xs text-secondary">Silicone replacement &amp; leak fix</span></a>
                     </div>
                 </div>
                 <!-- Repairs & Packages -->
                 <div>
                     <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-3 pb-2 border-b-2 border-tertiary-fixed-dim flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">build</span> Repairs &amp; Packages</h3>
                     <div class="space-y-0.5">
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Chip Repair</span><span class="text-xs text-secondary">Bath &amp; basin chip fixes</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Full Bathroom Makeover</span><span class="text-xs text-secondary">Complete resurface package</span></a>
-                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/property-manager-bathroom-services-sydney/' ) ); ?>"><span class="font-semibold text-primary block">Property Managers</span><span class="text-xs text-secondary">Multi-unit &amp; rental turnarounds</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>"><span class="font-semibold text-primary block">Chip Repair</span><span class="text-xs text-secondary">Bath &amp; basin chip fixes</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover/' ) ); ?>"><span class="font-semibold text-primary block">Full Bathroom Makeover</span><span class="text-xs text-secondary">Complete resurface package</span></a>
+                        <a class="block px-3 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors" onclick="hideMega()" href="<?php echo esc_url( home_url( '/services/property-manager-bathroom-services/' ) ); ?>"><span class="font-semibold text-primary block">Property Managers</span><span class="text-xs text-secondary">Multi-unit &amp; rental turnarounds</span></a>
                     </div>
                     <div class="mt-4 pt-4 border-t border-surface-container">
                         <a class="flex items-center gap-2 px-3 py-2.5 bg-primary text-white rounded-lg text-sm font-bold hover:opacity-90 transition-all justify-center" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span> View All Services</a>
@@ -111,10 +111,10 @@ $phone      = timeless_phone();
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" onclick="closeMobile()">Bath Resurfacing</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" onclick="closeMobile()">Tile Resurfacing</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" onclick="closeMobile()">Vanity Refinishing</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" onclick="closeMobile()">Basin Restoration</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" onclick="closeMobile()">Bath Resurfacing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" onclick="closeMobile()">Tile Resurfacing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" onclick="closeMobile()">Vanity Refinishing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" onclick="closeMobile()">Basin Restoration</a>
             </div>
             <!-- Regrouting & Sealing -->
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
@@ -122,9 +122,9 @@ $phone      = timeless_phone();
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" onclick="closeMobile()">Shower Regrouting</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/floor-tile-regrouting-sydney/' ) ); ?>" onclick="closeMobile()">Floor Tile Regrouting</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" onclick="closeMobile()">Shower Sealing</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" onclick="closeMobile()">Shower Regrouting</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/floor-tile-regrouting/' ) ); ?>" onclick="closeMobile()">Floor Tile Regrouting</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" onclick="closeMobile()">Shower Sealing</a>
             </div>
             <!-- Repairs & Packages -->
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
@@ -132,9 +132,9 @@ $phone      = timeless_phone();
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair-sydney/' ) ); ?>" onclick="closeMobile()">Chip Repair</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover-sydney/' ) ); ?>" onclick="closeMobile()">Full Bathroom Makeover</a>
-                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/property-manager-bathroom-services-sydney/' ) ); ?>" onclick="closeMobile()">Property Managers</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" onclick="closeMobile()">Chip Repair</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/full-bathroom-makeover/' ) ); ?>" onclick="closeMobile()">Full Bathroom Makeover</a>
+                <a class="text-primary py-2.5 pl-4 text-base font-medium hover:bg-surface-container-low rounded-lg block" href="<?php echo esc_url( home_url( '/services/property-manager-bathroom-services/' ) ); ?>" onclick="closeMobile()">Property Managers</a>
             </div>
             <div class="h-px bg-surface-container my-3"></div>
             <a class="text-primary py-3 text-lg font-semibold" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>" onclick="closeMobile()">Before &amp; After</a>

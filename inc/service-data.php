@@ -9,14 +9,14 @@
  *   - Lifespan + warranty figures (display strings)
  *   - 1-day service flag (drives "Same-day" badge)
  *
- * MVP: only bath-resurfacing-sydney is wired up. Add more entries to expand.
+ * MVP: only bath-resurfacing is wired up. Add more entries to expand.
  */
 
 defined( 'ABSPATH' ) || exit;
 
 return array(
 
-    'bath-resurfacing-sydney' => array(
+    'bath-resurfacing' => array(
         'name'           => 'Bath Resurfacing',
         'short_name'     => 'bath resurfacing',
         'verb'           => 'resurface',

@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Shower Regrouting", "item": "https://timelessresurfacing.com.au/services/shower-regrouting-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Mouldy Shower Grout", "item": "https://timelessresurfacing.com.au/services/mouldy-shower-grout-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Shower Regrouting", "item": "https://timelessresurfacing.com.au/services/shower-regrouting/" },
+ { "@type": "ListItem", "position": 4, "name": "Mouldy Shower Grout", "item": "https://timelessresurfacing.com.au/services/mouldy-shower-grout/" }
  ]
  }
  </script>
@@ -57,7 +57,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Shower Regrouting</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="hover:text-primary transition-colors">Shower Regrouting</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Mouldy Shower Grout</li>
  </ol>
@@ -76,7 +76,7 @@
  Those black lines between your tiles. The musty smell every time you shower. No matter how much you scrub with bleach or bathroom cleaner, it keeps coming back within weeks. <strong>That's because the mould is growing inside the grout, not just on the surface.</strong>
  </p>
  <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The only permanent fix is to <strong>remove all the old grout</strong> and replace it with fresh, mould-resistant material. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional shower regrouting</a> service does. And most jobs are finished in a single day.
+ The only permanent fix is to <strong>remove all the old grout</strong> and replace it with fresh, mould-resistant material. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional shower regrouting</a> service does. And most jobs are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">
@@ -140,7 +140,7 @@
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
  <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">trending_up</span>
  <h3 class="font-bold text-primary mb-2">Gets Worse Over Time</h3>
- <p class="text-sm text-secondary leading-relaxed">Left untreated, mould spreads behind tiles, compromises your waterproofing membrane, and can cause structural timber damage. This is also a common cause of <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower leaks</a>.</p>
+ <p class="text-sm text-secondary leading-relaxed">Left untreated, mould spreads behind tiles, compromises your waterproofing membrane, and can cause structural timber damage. This is also a common cause of <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower leaks</a>.</p>
  </div>
  </div>
  </div>
@@ -346,22 +346,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">While we're fixing your grout, it's often worth tackling other bathroom issues at the same time. Saving you time and a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">grid_view</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Regrouting</h3>
  <p class="text-xs text-secondary">Full grout replacement for walls and floors</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Bath Resurfacing</h3>
  <p class="text-xs text-secondary">Restore chipped, stained or peeling bathtubs</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
  <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">water_damage</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Sealing</h3>
  <p class="text-xs text-secondary">Stop leaks from failed grout and silicone</p>

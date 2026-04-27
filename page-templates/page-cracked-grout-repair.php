@@ -25,8 +25,8 @@
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://timelessresurfacing.com.au/" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://timelessresurfacing.com.au/services/" },
- { "@type": "ListItem", "position": 3, "name": "Shower Regrouting", "item": "https://timelessresurfacing.com.au/services/shower-regrouting-sydney/" },
- { "@type": "ListItem", "position": 4, "name": "Cracked Grout Repair", "item": "https://timelessresurfacing.com.au/services/cracked-grout-repair-sydney/" }
+ { "@type": "ListItem", "position": 3, "name": "Shower Regrouting", "item": "https://timelessresurfacing.com.au/services/shower-regrouting/" },
+ { "@type": "ListItem", "position": 4, "name": "Cracked Grout Repair", "item": "https://timelessresurfacing.com.au/services/cracked-grout-repair/" }
  ]
  }
  </script>
@@ -57,7 +57,7 @@
  <li><span class="mx-1">/</span></li>
  <li><a href="/#services" class="hover:text-primary transition-colors">Services</a></li>
  <li><span class="mx-1">/</span></li>
- <li><a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="hover:text-primary transition-colors">Shower Regrouting</a></li>
+ <li><a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="hover:text-primary transition-colors">Shower Regrouting</a></li>
  <li><span class="mx-1">/</span></li>
  <li class="text-primary font-medium">Cracked Grout Repair</li>
  </ol>
@@ -76,7 +76,7 @@
  You can see the gaps between your tiles. Pieces of grout crumbling into the shower tray. Hairline cracks spreading across the joints. Maybe water is starting to seep behind the tiles. <strong>That cracked grout isn't just ugly. It's letting water into your walls.</strong>
  </p>
  <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The proper fix is to <strong>remove all the old, damaged grout</strong> and replace it with fresh material that bonds cleanly to your tiles. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional regrouting service</a> does. And most jobs are finished in a single day.
+ The proper fix is to <strong>remove all the old, damaged grout</strong> and replace it with fresh material that bonds cleanly to your tiles. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional regrouting service</a> does. And most jobs are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">
@@ -161,7 +161,7 @@
  <div class="bg-white rounded-xl p-8 border-l-4 border-error reveal">
  <span class="material-symbols-outlined text-2xl text-error mb-3 block" aria-hidden="true">bug_report</span>
  <h3 class="font-bold text-primary mb-2">Mould Growth</h3>
- <p class="text-sm text-secondary leading-relaxed">Moisture trapped behind tiles creates ideal conditions for <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="text-primary underline font-medium">mould growth</a>. Not just on the surface but deep inside walls where you can't see or clean it.</p>
+ <p class="text-sm text-secondary leading-relaxed">Moisture trapped behind tiles creates ideal conditions for <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout/' ) ); ?>" class="text-primary underline font-medium">mould growth</a>. Not just on the surface but deep inside walls where you can't see or clean it.</p>
  </div>
  <div class="bg-white rounded-xl p-8 border-l-4 border-error reveal">
  <span class="material-symbols-outlined text-2xl text-error mb-3 block" aria-hidden="true">payments</span>
@@ -309,7 +309,7 @@
  <div class="space-y-3">
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Why is my shower grout cracking?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Shower grout cracks for several reasons: natural shrinkage as cement grout ages, minor building movement and settling, thermal expansion from hot water cycling, poor original mix or application, and water getting behind tiles and weakening the grout from the back. Once grout starts cracking, water gets in and accelerates the damage. Which is why it gets worse over time, not better.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is cracked shower grout a serious problem?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Cracked grout lets water penetrate behind your tiles and into the wall cavity. Over time this can damage your waterproofing membrane, cause timber rot in wall studs and floor joists, and lead to costly structural repairs. A regrout now is significantly cheaper than dealing with water damage later. If you're noticing <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="text-primary underline font-medium">leaks from your shower</a>, cracked grout is often the cause.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Is cracked shower grout a serious problem?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Cracked grout lets water penetrate behind your tiles and into the wall cavity. Over time this can damage your waterproofing membrane, cause timber rot in wall studs and floor joists, and lead to costly structural repairs. A regrout now is significantly cheaper than dealing with water damage later. If you're noticing <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="text-primary underline font-medium">leaks from your shower</a>, cracked grout is often the cause.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I just fill the cracks with new grout?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Patching over cracked grout is a temporary fix that rarely lasts. New grout doesn't bond well to old grout. The surfaces are contaminated with soap scum, moisture, and mineral deposits. The patch usually cracks again within weeks or months. The proper fix is to remove all the old grout and replace it completely with fresh material. This gives a clean bond to the tile edges and a uniform finish that lasts years.</p></div></div>
 
@@ -332,22 +332,22 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Other Bathroom Services</h2>
  <p class="text-secondary max-w-3xl mb-10">While we're fixing your grout, it's often worth tackling other bathroom issues at the same time. Saving you time and a second visit.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
- <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/mouldy-shower-grout/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">cleaning_services</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Mouldy Grout Removal</h3>
  <p class="text-xs text-secondary">Remove mould at the source with fresh grout</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">bathtub</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Bath Resurfacing</h3>
  <p class="text-xs text-secondary">Restore chipped, stained or peeling bathtubs</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">dashboard</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Tile Resurfacing</h3>
  <p class="text-xs text-secondary">Recoat dated tiles without replacing them</p>
  </a>
- <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
+ <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="group bg-surface-container-low rounded-xl p-6 hover:shadow-lg transition-all">
  <span class="material-symbols-outlined text-2xl text-primary mb-2 block" aria-hidden="true">water_damage</span>
  <h3 class="font-bold text-primary text-sm mb-1 group-hover:underline">Shower Sealing</h3>
  <p class="text-xs text-secondary">Stop leaks from failed grout and silicone</p>
