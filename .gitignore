@@ -1,24 +1,19 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
+# Build artifacts (compiled CSS is committed, but source maps etc. shouldn't be)
+*.map
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# WordPress uploads (managed via wp-admin, not git)
-uploads/
-
-# Node (if ever needed for build tools)
+# Dependencies
 node_modules/
 
-# Playwright test artifacts
-.playwright-mcp/
+# OS / Editor
+.DS_Store
+*.swp
+.vscode/
+.idea/
 
-# Claude Code preview/test artifacts (not part of the theme)
-.claude/preview/
-# Local Claude Code permission grants (per-machine, not for repo)
-.claude/settings.local.json
+# Stray screenshots
+homepage-mobile-full.png
+vanity-desktop-full.png
+thesis-*.png
+
+# Logs
+npm-debug.log*

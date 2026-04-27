@@ -1,0 +1,23 @@
+{
+  "name": "timeless-resurfacing-theme",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build pipeline for Timeless Resurfacing WordPress theme. Compiles Tailwind CSS locally to replace CDN.",
+  "scripts": {
+    "build": "postcss src/main.css -o assets/main.min.css --env production",
+    "watch": "postcss src/main.css -o assets/main.min.css --env development --watch",
+    "build:dev": "postcss src/main.css -o assets/main.css --env development"
+  },
+  "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.10",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.17"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

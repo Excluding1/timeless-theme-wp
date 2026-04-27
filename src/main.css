@@ -1,0 +1,19 @@
+/**
+ * Timeless Resurfacing — Source CSS
+ *
+ * This file is the entry point for the Tailwind compile.
+ * The build pipeline (PostCSS + Tailwind + Autoprefixer + cssnano) processes
+ * this file along with all PHP/JS templates to produce assets/main.min.css.
+ *
+ * Don't edit assets/main.min.css directly — it's auto-generated.
+ * To make CSS changes:
+ *   1. Edit this file (custom CSS) OR add Tailwind classes in PHP/JS
+ *   2. Run `npm run build`
+ *   3. Commit both this file AND assets/main.min.css
+ */
+
+/* Tailwind layer directives — these expand to thousands of utility classes
+   based on what's actually used in the content config (page-templates/*.php, js/*.js, etc.) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
