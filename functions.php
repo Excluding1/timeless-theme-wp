@@ -1221,7 +1221,7 @@ function timeless_seo_meta() {
         'property-manager-bathroom-services-sydney' => 'Property manager bathroom services Sydney. Multi-unit turnarounds, rental refreshes, and strata work. Volume pricing available.',
         'stained-bathtub-resurfacing-sydney'    => 'Stained bathtub resurfacing Sydney. Remove yellow, brown, and rust stains permanently with professional recoating.',
         'peeling-bathtub-resurfacing-sydney'    => 'Peeling bathtub resurfacing Sydney. Fix failed DIY kits and peeling coatings with professional two-part acrylic system.',
-        'bathroom-tile-resurfacing-sydney'      => 'Bathroom tile resurfacing Sydney. Change tile colour without removal. High-gloss or matte finish options.',
+        'bathroom-tile-resurfacing-sydney'      => 'Bathroom tile resurfacing Sydney. Fresh high-gloss white finish over your existing tiles. No demolition, 1-2 day service.',
         'mouldy-shower-grout-sydney'            => 'Mouldy shower grout removal Sydney. Strip black mould grout and replace with waterproof epoxy. Stops mould permanently.',
         'cracked-grout-repair-sydney'           => 'Cracked grout repair Sydney. Fix crumbling, cracked shower and bathroom grout before water damage occurs.',
         'mouldy-silicone-replacement-sydney'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',

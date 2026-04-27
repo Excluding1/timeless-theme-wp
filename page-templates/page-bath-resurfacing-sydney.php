@@ -39,7 +39,7 @@
         { "@type": "Question", "name": "How long does bath resurfacing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most baths are completed in 5-8.5 hours (one day). Freestanding baths may take a full day due to extra prep for stripping old coatings. Your bath is usable 24-48 hours after completion." } },
         { "@type": "Question", "name": "How long does a resurfaced bath last?", "acceptedAnswer": { "@type": "Answer", "text": "up to 10 years with the professional-grade system. Commercial-grade acrylic urethane coating resists chipping, peeling, and yellowing." } },
         { "@type": "Question", "name": "Can you resurface any type of bath?", "acceptedAnswer": { "@type": "Answer", "text": "Yes: porcelain, enamel steel, cast iron, acrylic, fibreglass, and spa baths. We cannot resurface natural stone (marble/granite) baths — those need specialist stone restoration." } },
-        { "@type": "Question", "name": "Can you change the bath colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Our system offers 900+ colour options. White and bone are most popular but any custom colour is available for a small surcharge." } }
+        { "@type": "Question", "name": "What colour will my resurfaced bath be?", "acceptedAnswer": { "@type": "Answer", "text": "Standard finish is high-gloss white — the modern, clean look most customers want. Light custom tints (cream, off-white) available by request. We don't offer dark colours as they can't be applied consistently in a home environment." } }
     ]
 }
 </script>
@@ -116,25 +116,7 @@
                     <p class="text-[0.65rem] text-secondary font-medium">Resurface warranty</p>
                 </div>
             </div>
-            <!-- Choose Your Colour -->
-            <div class="mb-5 p-4 bg-surface-container-low rounded-xl">
-                <p class="text-xs font-bold text-primary uppercase tracking-widest mb-3">Choose Your Colour</p>
-                <div class="flex items-center gap-4">
-                    <div class="text-center">
-                        <div class="w-10 h-10 rounded-full bg-white border-2 border-surface-container shadow-xs mx-auto mb-1"></div>
-                        <span class="text-[0.6rem] text-secondary font-medium">White</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-10 h-10 rounded-full bg-[#FFFFF0] border-2 border-surface-container shadow-xs mx-auto mb-1"></div>
-                        <span class="text-[0.6rem] text-secondary font-medium">Ivory</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-10 h-10 rounded-full mx-auto mb-1 border-2 border-surface-container shadow-xs overflow-hidden" style="background: conic-gradient(#f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171);"></div>
-                        <span class="text-[0.6rem] text-secondary font-medium">900+ Custom</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-3 mb-4">
+<div class="flex flex-col sm:flex-row gap-3 mb-4">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
             </div>
         </div>
@@ -284,10 +266,10 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Faded or Outdated Colour</h3>
-                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Avocado green, baby pink, powder blue? Dated bath colours make your whole bathroom look old. We spray any colour you want over the existing surface. White, ivory, or choose from hundreds of modern shades.</p>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Avocado green, baby pink, powder blue? Dated bath colours make your whole bathroom look old. We spray a clean high-gloss white finish over the existing surface for an instant modern look.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Any colour you want, including custom matches</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> White and ivory are most popular</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Clean high-gloss white finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Light custom tints (cream, off-white) by request</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Instantly modernises your bathroom</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
@@ -561,7 +543,7 @@
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it take?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Most baths are done in 5&ndash;8 hours. Your bath is ready to use again the next day.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Instantly modernises your bathroom. Every job backed by our up to 3-year workmanship warranty.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you resurface any type of bath?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes. Porcelain, enamel, cast iron, acrylic, and fibreglass. The only exception is natural stone.</p></div></div>
-                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the colour?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes, 900+ colours available. White and ivory are most popular, but we can match anything.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What colour will my bath be?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Standard finish is high-gloss white &mdash; clean and modern. Light custom tints (cream, off-white) available by request &mdash; just mention it in your quote.</p></div></div>
             </div>
         </div>
     </div>

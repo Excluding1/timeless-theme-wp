@@ -6,7 +6,7 @@
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "Bathroom Tile Resurfacing Sydney",
-        "description": "Professional bathroom tile resurfacing service in Sydney. We spray a durable two-part coating over your existing tiles to give them a completely new colour and finish. No demolition, no retiling. Completed in 1-2 days.",
+        "description": "Professional bathroom tile resurfacing service in Sydney. We spray a durable two-part coating over your existing tiles to give them a fresh high-gloss white finish. No demolition, no retiling. Completed in 1-2 days.",
         "provider": {
             "@type": "HomeAndConstructionBusiness",
             "name": "Timeless Resurfacing",
@@ -38,7 +38,7 @@
         "mainEntity": [
             { "@type": "Question", "name": "What types of tiles can be resurfaced?", "acceptedAnswer": { "@type": "Answer", "text": "We can resurface most tile types including ceramic, porcelain, and pressed tiles. This covers standard wall tiles, floor tiles, and feature tiles commonly found in Sydney bathrooms. Tiles need to be firmly attached and in structurally sound condition — if tiles are loose or badly cracked, they may need to be re-adhered or replaced before resurfacing." } },
             { "@type": "Question", "name": "How long does tile resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "A professionally applied tile resurfacing coating typically lasts 8-15 years with proper care. The longevity depends on the area (wall tiles last longer than high-traffic floor tiles), how well the surface is maintained, and the products used. We use commercial-grade two-part coatings designed for wet areas." } },
-            { "@type": "Question", "name": "Can I choose any colour for my resurfaced tiles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. One of the biggest advantages of tile resurfacing is the ability to choose virtually any colour. White and light neutral tones are the most popular choices for bathrooms as they create a clean, modern look, but we can match any colour you like. We'll help you choose a colour that suits your bathroom." } },
+            { "@type": "Question", "name": "What colour will my resurfaced tiles be?", "acceptedAnswer": { "@type": "Answer", "text": "Standard finish is high-gloss white — clean, modern, and matches every bathroom. Light custom tints (cream, off-white) available by request." } },
             { "@type": "Question", "name": "Will the finish look painted or will it look smooth like real tiles?", "acceptedAnswer": { "@type": "Answer", "text": "When done professionally, tile resurfacing produces a smooth, even finish that looks and feels like new tiles — not like a painted surface. We spray the coating rather than roll or brush it, which eliminates brush marks and gives a factory-like finish. The coating is also touch-dry smooth, not rough or textured." } },
             { "@type": "Question", "name": "How long does the coating take to cure?", "acceptedAnswer": { "@type": "Answer", "text": "The coating is touch-dry within hours, but we recommend keeping the bathroom dry and avoiding use for 48 hours to allow the coating to fully cure and harden. After 48 hours, you can use your bathroom normally. Avoid abrasive cleaners for the first two weeks." } },
             { "@type": "Question", "name": "Does tile resurfacing work on floor tiles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we can resurface floor tiles. Floor coatings include a non-slip additive to maintain safe grip when wet. Floor tiles do experience more wear than wall tiles due to foot traffic, so the coating may have a slightly shorter lifespan on floors compared to walls." } },
@@ -77,7 +77,7 @@
                 Still staring at those pink, brown, or green tiles from the 80s? Faded, scratched, or just plain ugly? You're not alone &mdash; thousands of Sydney bathrooms are stuck with dated tiles that make the whole room feel tired. <strong>But retiling costs $15,000&ndash;$30,000 and takes weeks.</strong>
             </p>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                There's a smarter option. We <strong>resurface your existing tiles</strong> with a durable professional coating &mdash; giving them a completely new colour and smooth finish. No demolition. No waterproofing. No retiling. Just a modern bathroom in 1&ndash;2 days.
+                There's a smarter option. We <strong>resurface your existing tiles</strong> with a durable professional coating &mdash; giving them a fresh high-gloss white finish. No demolition. No waterproofing. No retiling. Just a modern bathroom in 1&ndash;2 days.
             </p>
             <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
                 <div class="text-center">
@@ -120,7 +120,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Is Tile Resurfacing?</h2>
-        <p class="text-secondary max-w-3xl mb-4">Tile resurfacing is a professional recoating process &mdash; we spray a durable, multi-layer coating over your existing tiles to give them a completely new colour and finish. No demolition, no retiling, no waterproofing needed.</p>
+        <p class="text-secondary max-w-3xl mb-4">Tile resurfacing is a professional recoating process &mdash; we spray a durable, multi-layer coating over your existing tiles to give them a fresh high-gloss white finish. No demolition, no retiling, no waterproofing needed.</p>
         <p class="text-secondary max-w-3xl mb-10">Tradies sometimes call it tile reglazing or tile recoating. It's the same process: your old tiles stay in place, and we apply a hard-wearing two-part coating that bonds to the tile surface and cures to a smooth, factory-like finish.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -131,8 +131,8 @@
             </div>
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">palette</span>
-                <h3 class="font-bold text-primary mb-2">Any Colour You Choose</h3>
-                <p class="text-sm text-secondary leading-relaxed">Pick virtually any colour. White and neutral tones are the most popular for a clean, modern look, but we can match any shade you have in mind.</p>
+                <h3 class="font-bold text-primary mb-2">Clean Gloss White Finish</h3>
+                <p class="text-sm text-secondary leading-relaxed">Standard finish is high-gloss white &mdash; the clean, modern look most customers want. Light custom tints (cream, off-white) available by request.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">grid_view</span>
@@ -158,7 +158,7 @@
             <div class="bg-white rounded-xl p-8 border-l-4 border-primary reveal">
                 <span class="material-symbols-outlined text-2xl text-primary mb-3 block" aria-hidden="true">history</span>
                 <h3 class="font-bold text-primary mb-2">Dated Colours</h3>
-                <p class="text-sm text-secondary leading-relaxed">Pink, brown, green, or beige tiles from the 80s and 90s. They were fashionable once &mdash; but now they make your bathroom feel decades old. Resurfacing gives them a modern colour instantly.</p>
+                <p class="text-sm text-secondary leading-relaxed">Pink, brown, green, or beige tiles from the 80s and 90s. They were fashionable once &mdash; but now they make your bathroom feel decades old. Resurfacing covers them with a clean, modern high-gloss white finish.</p>
             </div>
             <div class="bg-white rounded-xl p-8 border-l-4 border-primary reveal">
                 <span class="material-symbols-outlined text-2xl text-primary mb-3 block" aria-hidden="true">blur_on</span>
@@ -209,7 +209,7 @@
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">5</div>
                 <h3 class="font-bold text-primary text-sm mb-2">Spray Professional Coating</h3>
-                <p class="text-xs text-secondary leading-relaxed">Multiple coats of a professional two-part coating are sprayed in your chosen colour. Spraying (rather than rolling) gives an even, smooth, factory-like finish with no brush marks or texture.</p>
+                <p class="text-xs text-secondary leading-relaxed">Multiple coats of a professional two-part coating are sprayed in clean high-gloss white. Spraying (rather than rolling) gives an even, smooth, factory-like finish with no brush marks or texture.</p>
             </div>
             <div class="bg-surface-container-low rounded-xl p-6 reveal">
                 <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-4">6</div>
@@ -292,7 +292,7 @@
 
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does tile resurfacing last?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">A professionally applied tile resurfacing coating typically lasts 8&ndash;15 years with proper care. The longevity depends on the area (wall tiles last longer than high-traffic floor tiles), how well the surface is maintained, and the products used. We use commercial-grade two-part coatings designed for wet areas.</p></div></div>
 
-            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I choose any colour for my resurfaced tiles?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. One of the biggest advantages of tile resurfacing is the ability to choose virtually any colour. White and light neutral tones are the most popular choices for bathrooms as they create a clean, modern look, but we can match any colour you like. We'll help you choose a colour that suits your bathroom and your style.</p></div></div>
+            <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What colour will my resurfaced tiles be?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Standard finish is high-gloss white &mdash; clean, modern, and matches every bathroom. Light custom tints (cream, off-white) available by request &mdash; just mention it in your quote.</p></div></div>
 
             <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Will the finish look painted or smooth like real tiles?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">When done professionally, tile resurfacing produces a smooth, even finish that looks and feels like new tiles &mdash; not like a painted surface. We spray the coating rather than roll or brush it, which eliminates brush marks and gives a factory-like finish. The coating is also touch-dry smooth, not rough or textured.</p></div></div>
 

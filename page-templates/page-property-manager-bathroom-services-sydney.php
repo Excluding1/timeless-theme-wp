@@ -179,7 +179,7 @@
                     </div>
                     <div class="flex-1">
                         <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Tile Resurfacing</h3>
-                        <p class="text-sm text-secondary leading-relaxed">Recoat dated wall or floor tiles in a fresh, modern colour.</p>
+                        <p class="text-sm text-secondary leading-relaxed">Recoat dated wall tiles in a fresh high-gloss white finish.</p>
                     </div>
                 </div>
             </a>

@@ -45,7 +45,7 @@
         { "@type": "Question", "name": "How much does tile resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every tile resurfacing job is priced based on size, condition, and scope. We provide fixed-price quotes based on your photos — no hidden fees, no surprises." } },
         { "@type": "Question", "name": "What tiles can you resurface?", "acceptedAnswer": { "@type": "Answer", "text": "We resurface ceramic, porcelain, textured, patterned, and mosaic tiles. Send us photos and we'll confirm suitability and pricing." } },
         { "@type": "Question", "name": "How long does tile resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "Wall tiles last up to 10+ years with proper care. Floor tiles last 5-7 years due to foot traffic. Every job backed by our up to 3-year workmanship warranty." } },
-        { "@type": "Question", "name": "Can you change the tile colour?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — 900+ colours available including stone-fleck granite look finishes. White, ivory, and light grey are most popular, but we can match anything." } },
+        { "@type": "Question", "name": "What colour will my resurfaced tiles be?", "acceptedAnswer": { "@type": "Answer", "text": "Standard finish is high-gloss white — the cleanest, most modern look for bathroom walls. Light custom tints (cream, off-white) available by request." } },
         { "@type": "Question", "name": "Does tile resurfacing cover grout lines?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — the coating covers tiles and grout for a seamless, easy-to-clean finish. We can mask grout lines if you prefer a traditional tile look." } }
     ]
 }
@@ -77,7 +77,7 @@
             </h1>
             <div class="h-0 mb-3"></div>
             <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
-                Dated tiles dragging down your bathroom? We spray them in any colour you want. <strong>No ripping them out, no tiler, no weeks of mess.</strong> Most jobs done in 1&ndash;2 days.
+                Dated tiles dragging down your bathroom? We spray them in a clean high-gloss white finish. <strong>No ripping them out, no tiler, no weeks of mess.</strong> Most jobs done in 1&ndash;2 days.
             </p>
             <!-- MOBILE: Hero image between paragraph and stats -->
             <div class="md:hidden mb-6">
@@ -114,25 +114,7 @@
                     <p class="text-[0.65rem] text-secondary font-medium">Coating warranty</p>
                 </div>
             </div>
-            <!-- Choose Your Colour -->
-            <div class="mb-5 p-4 bg-surface-container-low rounded-xl">
-                <p class="text-xs font-bold text-primary uppercase tracking-widest mb-3">Choose Your Colour</p>
-                <div class="flex items-center gap-4">
-                    <div class="text-center">
-                        <div class="w-10 h-10 rounded-full bg-white border-2 border-surface-container shadow-xs mx-auto mb-1"></div>
-                        <span class="text-[0.6rem] text-secondary font-medium">White</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-10 h-10 rounded-full bg-[#FFFFF0] border-2 border-surface-container shadow-xs mx-auto mb-1"></div>
-                        <span class="text-[0.6rem] text-secondary font-medium">Ivory</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-10 h-10 rounded-full mx-auto mb-1 border-2 border-surface-container shadow-xs overflow-hidden" style="background: conic-gradient(#f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171);"></div>
-                        <span class="text-[0.6rem] text-secondary font-medium">900+ Custom</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-3 mb-4">
+<div class="flex flex-col sm:flex-row gap-3 mb-4">
                 <a class="px-8 py-4 bg-primary text-white font-bold rounded-lg text-center hover:shadow-xl transition-all" href="#quote">Get Your Free Quote</a>
             </div>
         </div>
@@ -217,9 +199,9 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="order-2 lg:order-1">
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Dated, Dull &amp; Ugly</h3>
-                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Still living with avocado green from 1985? Pink from the 90s? Or tiles that used to shine but now look flat, rough, and tired no matter how much you clean? We spray your existing tiles in any modern colour with a fresh gloss or satin finish. Your bathroom looks brand new without ripping anything out.</p>
+                    <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Still living with avocado green from 1985? Pink from the 90s? Or tiles that used to shine but now look flat, rough, and tired no matter how much you clean? We spray your existing tiles in a clean high-gloss white finish. Your bathroom looks brand new without ripping anything out.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 900+ colours, gloss or satin finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Clean high-gloss white finish</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works over any existing tile colour or pattern</li>
                         <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Completed in 1-2 days, lasts 10+ years</li>
                     </ul>
@@ -463,9 +445,9 @@
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center shrink-0"><span class="text-sm font-black text-[#7a5c10]">4</span></div>
-                    <h3 class="font-bold text-primary">Spray Colour Coat</h3>
+                    <h3 class="font-bold text-primary">Spray Coat</h3>
                 </div>
-                <p class="text-sm text-secondary leading-relaxed">Your chosen colour sprayed in smooth, even layers. No brush marks, no roller texture. Just a clean factory finish.</p>
+                <p class="text-sm text-secondary leading-relaxed">High-gloss white sprayed in smooth, even layers. No brush marks, no roller texture. Just a clean factory finish.</p>
             </div>
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
@@ -496,7 +478,7 @@
             <!-- Left: intro -->
             <div>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3">Got Questions About Tile Resurfacing?</h2>
-                <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if your tiles can be resurfaced? Wondering how long it lasts or what colours are available? These are the questions Sydney homeowners ask us most. Don&rsquo;t see yours? Just ask. No pressure, no obligation.</p>
+                <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if your tiles can be resurfaced? Wondering how long it lasts or what the finish looks like? These are the questions Sydney homeowners ask us most. Don&rsquo;t see yours? Just ask. No pressure, no obligation.</p>
                 <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
             </div>
             <!-- Right: accordion -->
@@ -504,7 +486,7 @@
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does it cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every job is different. Send us photos and we&rsquo;ll have a fixed-price quote back within hours &mdash; no hidden fees, no obligation.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What tiles can you resurface?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Ceramic, porcelain, textured, patterned, and mosaic tiles. Send us photos and we&rsquo;ll confirm suitability.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Wall tiles last up to 10+ years. Floor tiles last 5&ndash;7 years due to foot traffic. Every job backed by our up to 3-year workmanship warranty.</p></div></div>
-                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you change the colour?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes &mdash; 900+ colours available. White, ivory, and light grey are most popular, but we can match anything.</p></div></div>
+                <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What colour will my tiles be?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Standard finish is high-gloss white &mdash; clean, modern, and matches every bathroom. Light custom tints (cream, off-white) available by request.</p></div></div>
                 <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Does it cover grout lines?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes &mdash; the coating covers tiles and grout for a seamless finish. We can mask grout lines if you prefer a traditional tile look.</p></div></div>
             </div>
         </div>
