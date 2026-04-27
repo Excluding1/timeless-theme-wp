@@ -13,32 +13,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] — `develop` branch
 
-### Accessibility & UX — Day 3 Task E (WCAG AA compliance + Trustindex swap)
-- **WCAG AA color contrast fixes** — found and resolved real contrast failures the prior color audit missed:
-  - Added new `primary-soft: #5a6789` palette token (5.62:1 on white, passes AA). Replaced ~40 misuses of `text-on-primary-container` (#8392b7, 2.94:1 on white, FAILED AA) on light backgrounds: H1 accents on 8 service pages, "Completed in X Hours" overlay badges, hover states on contact + faqs, group-hover on property-manager service cards. The original `text-on-primary-container` is still used on dark `bg-primary` sections (where it correctly passes 5.82:1).
-  - Footer copyright bumped from `text-white/30` (2.64:1, FAILED) to `text-white/60` (6.97:1, passes AA).
-- **Heading hierarchy** — fixed global H2→H4 skip caused by 3× `<h4>` in footer.php (Quick Links, Services, Useful Information). Now `<h3>`. Combined with prior page-about.php H4→H3 fix, no skipped levels remain anywhere.
-- **Decorative star characters** — added `aria-hidden="true"` + `<span class="sr-only">5 out of 5 stars</span>` SR fallbacks to all 22 star clusters. Was failing WCAG 1.4.11 (1.67:1 amber on white). Screen readers now hear "5 stars" instead of "Black Star Black Star Black Star Black Star Black Star".
-- **Trustindex CLS** — wrapped 21 review embeds in `<div class="min-h-[400px]">` to reserve vertical space. Eliminates the layout shift when reviews load asynchronously.
-- **Reviews widget rebuilt as self-hosted Google Places API integration** — final form after a 3-step evolution: Trustindex (paywall expired) → Featurable (free but third-party CDN) → custom self-hosted (best). All 21 review embeds now call `timeless_render_google_reviews()` which fetches Google Places API server-side, caches in WP transients for 24 hours, and renders our own Tailwind cards (zero browser-side third-party requests, matches the self-host-everything pattern from Inter/Material Symbols/WebP). Customizer fields for API key + Place ID added under "Google Reviews" section. Graceful empty-state fallback (centered "See Our Google Reviews" button linking to Google Maps) when keys aren't configured. Within Google's 100K-requests/month free tier (we use ~30/month).
+### Coming next (v1.3.0)
+- Day 4: Schema-as-code audit + GA4 + Microsoft Clarity setup
+- Day 5: Suburb programmatic landing pages (`/services/X/parramatta/` etc.)
+- Day 6: Service page polish (H1 tweaks, customer-language audit)
+- Off-page (parallel, 4-6 weeks): GBP claim, citations, reviews campaign
 
-### Performance — Day 3 self-hosting fonts + WebP images
-- **Material Symbols subset** (1.06 MB CDN → 10 KB local, 99.7% smaller). Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept for filled-icon variants. Audit-fix-audit loop converged after 4 passes (caught 2 critical bugs: dynamic `faucet` icon in PHP array; JS-injected `check_circle` bypassing PHP filter).
-- **Inter body font subset** (200-300 KB across multiple Google Fonts CDN requests → 99 KB local single file, plus eliminates 2 third-party DNS lookups). Variable font with wght (100..900) and opsz (14..32) axes preserved. Latin + essential punctuation + ★ for ratings. No italic variant (theme has zero italic usage).
-- **WebP image companions** (1.67 MB savings for WebP-capable browsers, 0 wasted bytes elsewhere). Smart converter at `scripts/convert-images-to-webp.py` writes `image.jpg.webp` companions ONLY when WebP beats the source size — 102 of 205 images got companions, 103 already-optimized PNGs correctly skipped. PHP output filter `timeless_webp_picture_filter()` wraps `<img src="x.jpg">` in `<picture><source srcset="x.jpg.webp" type="image/webp">…</picture>` so 96%+ of browsers get WebP transparently. Original URLs unchanged — easy rollback, no broken backlinks.
-- **Audit-fix-audit loop formalized as Rule 4a** in WORKFLOW.md. Documents the methodology that caught regressions the first audit missed (stale comments, asymmetric regex word-boundaries, missed star character, WebP bloat on already-optimized PNGs).
+---
 
-### UI/UX
-- SECTION 2B before/after cards capped at `max-w-md` on 4 big service pages. Were rendering ~552×368 on desktop (dominating text columns); now 448×299 with proper visual balance.
-- H2 sizing standardized across all 19 service pages + about + homepage to `text-3xl sm:text-4xl`. Was inconsistent — some sections rendered at 30px while neighbors used 36px.
-- Homepage "Full Renovation" badge icon swapped from `delete` (trash) to `close` (X) to match the row icons visually.
+## [1.2.0] — 2026-04-28
 
-### Coming next (v1.2.0)
-- Day 3 Task D: Configure Cloudflare cache rules (HTML 30min, static 1yr) — dashboard work
-- Day 4: Schema as code + analytics setup (GA4, Microsoft Clarity)
-- Day 5: Suburb programmatic landing pages
-- Day 6: Service page polish (H1s, customer language variants)
-- Off-page: GBP claim, citations, review collection
+The "performance + accessibility" release. Mobile Lighthouse score 97 verified
+on production after deploy. Major shifts: every external font/icon CDN
+self-hosted, WebP + responsive image variants, Cloudflare edge caching active,
+custom Google Places reviews integration replacing paid Trustindex.
+
+### Performance (Day 3)
+- **Material Symbols icon subset** — 1.06 MB CDN → 10 KB local (99.7% smaller).
+  Variable font instanced at fixed axes except FILL (kept for filled variants).
+  PHP buffer filter swaps icon names → codepoints at output. Build pipeline
+  reproducible via `scripts/audit-icons.sh` + `scripts/subset-material-symbols.py`.
+- **Inter body font subset** — 200-300 KB CDN multi-request → 99 KB local single
+  file. Variable wght (100..900) + opsz (14..32) axes preserved. Eliminates 2
+  third-party DNS lookups (fonts.googleapis.com + fonts.gstatic.com).
+  Build via `scripts/subset-inter.py`.
+- **WebP image companions** — 1.67 MB savings on WebP-capable browsers (96%+ of
+  users), 0 wasted bytes on the ~103 already-optimized PNGs. Smart converter
+  only writes `.webp` when smaller than source. PHP filter wraps `<img>` in
+  `<picture>` automatically.
+- **Responsive image variants** (`-400w`, `-800w`, `-1600w` per source ≥800px).
+  Mobile fetches the small variant via `srcset` + `sizes` instead of the full
+  desktop resolution. Hero image: ~80 KB → ~6 KB on mobile. 213 variants
+  generated, gitignored as build artifacts (regenerable via `scripts/`).
+- **Cloudflare cache rules + .htaccess** — HTML edge cache 30 min, static
+  1 year. `Expires` + `AddType image/webp` + gzip in .htaccess. Brotli +
+  HTTP/3 + Speed Brain + Early Hints enabled in CF dashboard. Every page
+  + every asset returns `cf-cache-status: HIT`. Production TTFB drops from
+  500-800ms to 50-100ms.
+- **Audit-fix-audit loop formalized as WORKFLOW.md Rule 4a**. Caught 2 critical
+  Material Symbols bugs (dynamic `faucet` icon in PHP array; JS-injected
+  `check_circle` bypassing PHP filter), CSS cascade-layer footguns,
+  asymmetric regex word-boundaries, and more across 4+ audit passes.
+
+### Accessibility & UX (Day 3 Task E)
+- **WCAG AA contrast** — added `primary-soft: #5a6789` token (5.62:1 on white).
+  Replaced ~40 misuses of `text-on-primary-container` on light backgrounds
+  (was 2.94:1, FAILED AA). Footer `text-white/30` → `text-white/60` (was
+  2.64:1, now 6.97:1).
+- **Heading hierarchy** — fixed H2→H4 skips in footer (3 cards) + page-about.php
+  (4 cards). All pages now have clean nesting.
+- **Decorative star characters** — `aria-hidden="true"` + sr-only "5 out of 5
+  stars" SR fallback on all 22 star clusters. Was failing WCAG 1.4.11.
+- **Reviews widget rebuilt** (3-stage evolution): Trustindex (paywall expired) →
+  Featurable (free but third-party CDN) → **custom self-hosted Google Places API
+  integration**. Server-side fetch via `places.googleapis.com/v1/places/{id}`
+  (new endpoint, not legacy), 24-hour transient cache, smart Place ID
+  resolver accepting business name OR Maps URL OR direct ID. Renders our own
+  Tailwind cards. Trustindex-style carousel (manual click + wrap-around) +
+  modal popup for "Read more" with click-outside / ESC dismiss.
+- **Days-based time labels** ("9 days ago" instead of Google's vague
+  "a week ago") computed from publishTime in Sydney timezone.
+- **Hover tooltips** on Google G logo, Verified badge, time label
+  (full timestamp). Pure CSS, no JS, with focus-within for keyboard a11y.
+- **Favicon set** — multi-format (ico, PNG 96x96, apple-touch-icon, manifest).
+  theme-color set to brand `#041534`. SVG omitted from link tags due to
+  bloated upstream (1.46 MB raster-in-SVG); inline comment in header.php
+  documents how to restore once a real vector is provided.
+
+### UI/UX (also Day 3 Task E)
+- SECTION 2B before/after cards capped at `max-w-md` on 4 big service pages.
+- H2 sizing standardized across all 19 service pages + about + homepage to
+  `text-3xl sm:text-4xl`.
+- Homepage "Full Renovation" badge icon: `delete` (trash) → `close` (X).
+
+### Verified on production
+- Mobile Lighthouse score: **97** (up from previous baseline)
+- All assets `cf-cache-status: HIT`
+- HTTP/3 advertised, Brotli compression active
+- Real Google reviews rendering (3 reviews, real photos, days-ago labels,
+  hover tooltips functional)
 
 ---
 
