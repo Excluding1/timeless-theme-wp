@@ -611,7 +611,13 @@ function timeless_resolve_place_id( $input, $api_key ) {
         rawurlencode( $api_key )
     );
 
-    $response = wp_remote_get( $api_url, array( 'timeout' => 5 ) );
+    $response = wp_remote_get( $api_url, array(
+        'timeout' => 5,
+        // Send Referer header matching your domain so Google's HTTP-referrer
+        // API key restriction accepts the call (server-side requests don't
+        // automatically include Referer; without it, restricted keys are denied).
+        'headers' => array( 'Referer' => home_url() ),
+    ) );
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
         return false;
@@ -660,7 +666,10 @@ function timeless_get_google_reviews() {
         rawurlencode( $api_key )
     );
 
-    $response = wp_remote_get( $url, array( 'timeout' => 5 ) );
+    $response = wp_remote_get( $url, array(
+        'timeout' => 5,
+        'headers' => array( 'Referer' => home_url() ),  // see resolver function for why
+    ) );
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         // Cache a failure SENTINEL (not literal false) for 1 hour so we don't hammer
         // the API on every page hit. We can't cache `false` because get_transient()
