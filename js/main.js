@@ -287,4 +287,143 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    /* ── Reviews carousel + Read-more modal ── */
+    (function(){
+        // Build star string for modal (Unicode BLACK STAR, count = rating)
+        function starStr(n) {
+            return '★'.repeat(Math.max(0, Math.min(5, n|0)));
+        }
+
+        // -- Carousel: arrow click + scroll snap, button enabled-state per scroll position
+        document.querySelectorAll('.timeless-reviews-carousel').forEach(function (carousel) {
+            var track = carousel.querySelector('.timeless-reviews-track');
+            var prev  = carousel.querySelector('.timeless-reviews-prev');
+            var next  = carousel.querySelector('.timeless-reviews-next');
+            var card  = track && track.querySelector('.timeless-review-card');
+            if (!track || !prev || !next || !card) return;
+
+            function scrollAmount() {
+                // Scroll one card-width + gap each click. Computed live so resize works.
+                var gap = parseFloat(getComputedStyle(track).gap) || 16;
+                return card.offsetWidth + gap;
+            }
+
+            function updateButtons() {
+                prev.disabled = track.scrollLeft <= 4;
+                next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+            }
+
+            prev.addEventListener('click', function () {
+                track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+            });
+            next.addEventListener('click', function () {
+                track.scrollBy({ left:  scrollAmount(), behavior: 'smooth' });
+            });
+            track.addEventListener('scroll', updateButtons, { passive: true });
+            window.addEventListener('resize', updateButtons);
+            updateButtons();
+        });
+
+        // -- Read more button: only show when text is actually clamped, click → open modal
+        document.querySelectorAll('.timeless-review-card').forEach(function (card) {
+            var textEl = card.querySelector('.timeless-review-text');
+            var btn    = card.querySelector('.timeless-read-more');
+            if (!textEl || !btn) return;
+
+            function checkTruncation() {
+                if (textEl.scrollHeight - textEl.clientHeight > 2) {
+                    btn.classList.remove('hidden');
+                } else {
+                    btn.classList.add('hidden');
+                }
+            }
+            checkTruncation();
+            window.addEventListener('resize', checkTruncation);
+
+            btn.addEventListener('click', function () {
+                openReviewModal(card);
+            });
+        });
+
+        // Build avatar DOM safely (no innerHTML — prevents XSS from any user-controlled data)
+        function buildAvatar(photoUrl, author) {
+            if (photoUrl) {
+                var img = document.createElement('img');
+                img.src = photoUrl;
+                img.alt = '';
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                img.referrerPolicy = 'no-referrer';
+                img.width = 48;
+                img.height = 48;
+                img.className = 'w-12 h-12 rounded-full object-cover bg-primary/10';
+                return img;
+            }
+            var div = document.createElement('div');
+            div.className = 'w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold';
+            div.setAttribute('aria-hidden', 'true');
+            div.textContent = (author || 'G').charAt(0);
+            return div;
+        }
+
+        // -- Modal: populate from card data attributes, then show with overlay
+        function openReviewModal(card) {
+            // Find the section's modal (usually next sibling of carousel within same parent block)
+            var section = card.closest('section') || document.body;
+            var modal   = section.querySelector('.timeless-review-modal') || document.querySelector('.timeless-review-modal');
+            if (!modal) return;
+
+            var author = card.getAttribute('data-author') || '';
+            var time   = card.getAttribute('data-time') || '';
+            var rating = parseInt(card.getAttribute('data-rating') || '5', 10);
+            var photo  = card.getAttribute('data-photo') || '';
+            var text   = card.getAttribute('data-text') || '';
+
+            // textContent is safe — never interpreted as HTML
+            modal.querySelector('.modal-author').textContent = author;
+            modal.querySelector('.modal-time').textContent   = time;
+            modal.querySelector('.modal-text').textContent   = text;
+            modal.querySelector('.modal-stars').textContent  = starStr(rating);
+            modal.querySelector('.modal-stars-sr').textContent = rating + ' out of 5 stars';
+
+            // Avatar — replace existing children, then append safely-constructed element
+            var avatarSlot = modal.querySelector('.modal-avatar');
+            while (avatarSlot.firstChild) avatarSlot.removeChild(avatarSlot.firstChild);
+            avatarSlot.appendChild(buildAvatar(photo, author));
+
+            // Show modal (CSS handles fade-in)
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            var closeBtn = modal.querySelector('[data-close-modal]');
+            if (closeBtn) closeBtn.focus();
+        }
+
+        function closeReviewModal(modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // -- Close handlers (overlay click, X button, ESC key)
+        document.querySelectorAll('.timeless-review-modal').forEach(function (modal) {
+            modal.addEventListener('click', function (e) {
+                var target = e.target;
+                while (target && target !== modal) {
+                    if (target.hasAttribute && target.hasAttribute('data-close-modal')) {
+                        closeReviewModal(modal);
+                        return;
+                    }
+                    target = target.parentElement;
+                }
+            });
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            document.querySelectorAll('.timeless-review-modal:not(.hidden)').forEach(closeReviewModal);
+        });
+    })();
+
 });

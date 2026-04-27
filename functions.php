@@ -829,45 +829,122 @@ function timeless_render_google_reviews() {
     $total   = $data['total'];
     $reviews = $data['reviews'];
     ?>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <?php foreach ( $reviews as $r ) :
-            $author       = $r['author_name'] ?? 'Google User';
-            $initial      = mb_substr( $author, 0, 1, 'UTF-8' );
-            $time_label   = $r['relative_time_description'] ?? '';
-            $stars        = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) ); // Clamp 1-5 (defensive)
-            $text         = $r['text'] ?? '';
-            $author_url   = $r['author_url'] ?? '';
-            $author_photo = $r['author_photo'] ?? '';
-        ?>
-        <article class="bg-white rounded-2xl p-6 shadow-md border border-surface-container">
-            <header class="flex items-center gap-3 mb-4">
-                <?php if ( $author_photo ) : ?>
-                    <img src="<?php echo esc_url( $author_photo ); ?>" alt=""
-                         loading="lazy" decoding="async"
-                         class="w-10 h-10 rounded-full object-cover bg-primary/10"
-                         width="40" height="40" />
-                <?php else : ?>
-                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm" aria-hidden="true">
-                        <?php echo esc_html( $initial ); ?>
+    <div class="timeless-reviews-carousel relative">
+        <!-- Prev arrow (hidden when at start, JS toggles) -->
+        <button type="button" class="timeless-reviews-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors disabled:opacity-30 disabled:cursor-not-allowed -ml-2 sm:-ml-4"
+                aria-label="<?php esc_attr_e( 'Previous reviews', 'timeless' ); ?>" disabled>
+            <span class="material-symbols-outlined text-2xl" aria-hidden="true">chevron_left</span>
+        </button>
+
+        <!-- Scroll track: snap-aligned, one card visible on mobile, three on desktop -->
+        <div class="timeless-reviews-track flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth py-2 px-1">
+            <?php foreach ( $reviews as $r ) :
+                $author       = $r['author_name'] ?? 'Google User';
+                $initial      = mb_substr( $author, 0, 1, 'UTF-8' );
+                $time_label   = $r['relative_time_description'] ?? '';
+                $stars        = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) );
+                $text         = $r['text'] ?? '';
+                $author_url   = $r['author_url'] ?? '';
+                $author_photo = $r['author_photo'] ?? '';
+            ?>
+            <article class="timeless-review-card snap-start shrink-0 w-[calc(100%-2rem)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] bg-surface-container-low rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                     data-author="<?php echo esc_attr( $author ); ?>"
+                     data-time="<?php echo esc_attr( $time_label ); ?>"
+                     data-rating="<?php echo esc_attr( $stars ); ?>"
+                     data-photo="<?php echo esc_attr( $author_photo ); ?>"
+                     data-text="<?php echo esc_attr( $text ); ?>">
+                <header class="flex items-start gap-3 mb-3">
+                    <?php if ( $author_photo ) : ?>
+                        <img src="<?php echo esc_url( $author_photo ); ?>" alt=""
+                             loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                             class="w-12 h-12 rounded-full object-cover bg-primary/10 shrink-0"
+                             width="48" height="48" />
+                    <?php else : ?>
+                        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0" aria-hidden="true">
+                            <?php echo esc_html( $initial ); ?>
+                        </div>
+                    <?php endif; ?>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-primary text-sm truncate"><?php echo esc_html( $author ); ?></p>
+                        <p class="text-xs text-secondary"><?php echo esc_html( $time_label ); ?></p>
                     </div>
-                <?php endif; ?>
-                <div class="flex-1 min-w-0">
-                    <p class="font-bold text-primary text-sm truncate"><?php echo esc_html( $author ); ?></p>
-                    <p class="text-xs text-secondary"><?php echo esc_html( $time_label ); ?></p>
+                    <!-- Google G logo (multi-color, inline SVG so no extra request) -->
+                    <svg class="w-6 h-6 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
+                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                        <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                    </svg>
+                </header>
+
+                <div class="flex items-center gap-1.5 mb-3">
+                    <div class="flex text-amber-400 text-base" aria-hidden="true">
+                        <?php for ( $i = 0; $i < $stars; $i++ ) echo '&#9733;'; ?>
+                    </div>
+                    <span class="sr-only"><?php echo esc_html( $stars ); ?> out of 5 stars</span>
+                    <!-- Verified badge (Google's blue checkmark) -->
+                    <span class="material-symbols-outlined text-blue-500 text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true" title="Verified review">verified</span>
                 </div>
-                <span class="material-symbols-outlined text-secondary text-lg" aria-hidden="true">reviews</span>
+
+                <div class="timeless-review-body relative">
+                    <p class="timeless-review-text text-sm text-primary leading-relaxed line-clamp-3"><?php echo esc_html( $text ); ?></p>
+                    <button type="button" class="timeless-read-more text-xs text-primary hover:text-primary-soft mt-2 font-bold hidden inline-flex items-center gap-1">
+                        <span class="timeless-read-more-label"><?php esc_html_e( 'Read more', 'timeless' ); ?></span>
+                        <span class="material-symbols-outlined text-sm timeless-read-more-icon transition-transform" aria-hidden="true">expand_more</span>
+                    </button>
+                </div>
+            </article>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Next arrow -->
+        <button type="button" class="timeless-reviews-next absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors disabled:opacity-30 disabled:cursor-not-allowed -mr-2 sm:-mr-4"
+                aria-label="<?php esc_attr_e( 'Next reviews', 'timeless' ); ?>">
+            <span class="material-symbols-outlined text-2xl" aria-hidden="true">chevron_right</span>
+        </button>
+    </div>
+
+    <!-- Review modal (full text popup, JS-injected per-click) — single instance for all cards on this section -->
+    <div class="timeless-review-modal fixed inset-0 z-[200] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="timeless-review-modal-author" aria-hidden="true">
+        <!-- Overlay (click to close) -->
+        <div class="modal-overlay absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" data-close-modal></div>
+
+        <!-- Modal card -->
+        <div class="modal-card relative bg-white rounded-2xl p-6 sm:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl transition-transform">
+            <!-- Close button -->
+            <button type="button" class="absolute top-3 right-3 w-9 h-9 rounded-full hover:bg-surface-container-low flex items-center justify-center text-secondary hover:text-primary transition-colors" data-close-modal aria-label="<?php esc_attr_e( 'Close review', 'timeless' ); ?>">
+                <span class="material-symbols-outlined" aria-hidden="true">close</span>
+            </button>
+
+            <!-- Header: avatar + author + time + Google logo -->
+            <header class="flex items-start gap-3 mb-4 pr-10">
+                <div class="modal-avatar shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                    <p id="timeless-review-modal-author" class="modal-author font-bold text-primary text-base truncate"></p>
+                    <p class="modal-time text-xs text-secondary"></p>
+                </div>
+                <svg class="w-6 h-6 shrink-0 mt-1" viewBox="0 0 48 48" aria-hidden="true">
+                    <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                    <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                    <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                    <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                </svg>
             </header>
-            <div class="flex text-amber-500 text-sm mb-3" aria-hidden="true">
-                <?php for ( $i = 0; $i < $stars; $i++ ) echo '&#9733;'; ?>
+
+            <!-- Stars + verified -->
+            <div class="flex items-center gap-1.5 mb-4">
+                <div class="modal-stars flex text-amber-400 text-lg" aria-hidden="true"></div>
+                <span class="modal-stars-sr sr-only"></span>
+                <span class="material-symbols-outlined text-blue-500 text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true" title="<?php esc_attr_e( 'Verified review', 'timeless' ); ?>">verified</span>
             </div>
-            <span class="sr-only"><?php echo esc_html( $stars ); ?> out of 5 stars</span>
-            <p class="text-sm text-secondary leading-relaxed line-clamp-6"><?php echo esc_html( $text ); ?></p>
-        </article>
-        <?php endforeach; ?>
+
+            <!-- Full review text (no clamp) -->
+            <p class="modal-text text-sm sm:text-base text-primary leading-relaxed whitespace-pre-line"></p>
+        </div>
     </div>
 
     <?php if ( ! empty( $data['business_url'] ) ) : ?>
-    <div class="text-center">
+    <div class="text-center mt-8">
         <a href="<?php echo esc_url( $data['business_url'] ); ?>" target="_blank" rel="noopener"
            class="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-soft transition-colors">
             <?php
