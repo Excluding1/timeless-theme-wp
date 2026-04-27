@@ -273,13 +273,22 @@ function timeless_email() {
     return sanitize_email( get_theme_mod( 'timeless_email', 'info@timelessresurfacing.com.au' ) );
 }
 
-/* ──��─────────────────────────────���────────────
-   5. SEO — Remove WordPress clutter
-   ────────────────────��──────────────────────── */
+/* ─────────────────────────────────────────────
+   5. SEO — Remove WordPress clutter + hide server fingerprinting
+   ───────────────────────────────────────────── */
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+
+/** Hide X-Powered-By header (security: don't reveal PHP version to attackers) */
+function timeless_hide_powered_by() {
+    if ( function_exists( 'header_remove' ) ) {
+        header_remove( 'X-Powered-By' );
+    }
+}
+add_action( 'send_headers', 'timeless_hide_powered_by', 1 );
+add_action( 'init', 'timeless_hide_powered_by', 1 );
 
 /* Self-referencing canonical URL — fixes "Duplicate without user-selected canonical" */
 function timeless_canonical_url() {
@@ -1058,14 +1067,21 @@ function timeless_remove_jquery_migrate( $scripts ) {
 }
 add_action( 'wp_default_scripts', 'timeless_remove_jquery_migrate' );
 
-/** Remove Gutenberg block CSS on frontend (not using block editor for templates) */
+/** Remove Gutenberg block CSS on frontend (not using block editor for templates).
+ *  Hooked at very late priority on BOTH wp_enqueue_scripts AND wp_print_styles
+ *  because newer WP versions (6.4+) add some styles after the standard enqueue cycle. */
 function timeless_remove_block_css() {
     wp_dequeue_style( 'wp-block-library' );
     wp_dequeue_style( 'wp-block-library-theme' );
     wp_dequeue_style( 'wc-blocks-style' );
     wp_dequeue_style( 'global-styles' );
+    wp_dequeue_style( 'classic-theme-styles' );             // WP 6.4+
+    wp_dequeue_style( 'wp-img-auto-sizes-contain' );        // WP 6.7+
+    wp_deregister_style( 'global-styles' );                  // belt-and-suspenders for stubborn handle
+    wp_deregister_style( 'classic-theme-styles' );
 }
-add_action( 'wp_enqueue_scripts', 'timeless_remove_block_css', 100 );
+add_action( 'wp_enqueue_scripts', 'timeless_remove_block_css', 999 );
+add_action( 'wp_print_styles', 'timeless_remove_block_css', 999 );
 
 /** Remove oEmbed scripts */
 remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
