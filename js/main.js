@@ -341,12 +341,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            // OPTIONAL: hide arrows entirely when content fits the viewport AND there's nothing
-            // to loop to (e.g., only 1 card total). With ≥2 cards, loop still feels right even
-            // if all visible — clicking jumps to the leftmost/rightmost edge as feedback.
+            // Hide arrows when nothing to navigate (0 or 1 card)
             function maybeHideArrows() {
                 var totalCards = track.querySelectorAll('.timeless-review-card').length;
-                var bothHide = totalCards <= 1;  // 0 or 1 card → nothing to navigate
+                var bothHide = totalCards <= 1;
                 prev.style.display = bothHide ? 'none' : '';
                 next.style.display = bothHide ? 'none' : '';
             }
