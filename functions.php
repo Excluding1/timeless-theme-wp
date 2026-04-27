@@ -88,16 +88,17 @@ function timeless_create_pages() {
     }
 
     /**
-     * CRITICAL: Force pretty permalinks (/%postname%/) so service URLs work.
+     * SAFE: Only set pretty permalinks if WordPress is using DEFAULT (empty/plain).
      *
-     * Without this, fresh WordPress installs default to "?p=123" URLs and our
-     * service pages at /services/bath-resurfacing-sydney/ silently fall back
-     * to rendering the homepage template — sneaky bug that doesn't 404, just
-     * wrong content.
+     * This protects existing sites with custom permalink structures (e.g. live site,
+     * plugin-managed permalinks). Only fresh WP installs (wp-now, new staging) get
+     * the auto-fix.
      *
-     * Only changes the option if not already set (don't override user preference).
+     *   Live site (already /%postname%/): condition false → no change ✓
+     *   Live site (custom plugin perms):  condition false → no change ✓ (preserved)
+     *   Fresh wp-now (empty):             condition true  → set to /%postname%/ ✓
      */
-    if ( get_option( 'permalink_structure' ) !== '/%postname%/' ) {
+    if ( get_option( 'permalink_structure' ) === '' ) {
         update_option( 'permalink_structure', '/%postname%/' );
     }
 
@@ -136,9 +137,9 @@ function timeless_ensure_pages_exist() {
         timeless_create_pages();
     }
 
-    // Self-heal permalinks: if WordPress is using default "?p=" URLs, switch
-    // to pretty URLs so service pages actually route correctly.
-    if ( get_option( 'permalink_structure' ) !== '/%postname%/' ) {
+    // Self-heal permalinks ONLY if WordPress is using completely default (empty).
+    // Never overrides custom permalink structures (e.g. live site, plugin-managed).
+    if ( get_option( 'permalink_structure' ) === '' ) {
         update_option( 'permalink_structure', '/%postname%/' );
         flush_rewrite_rules();
     }
