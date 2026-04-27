@@ -87,6 +87,20 @@ function timeless_create_pages() {
         ) );
     }
 
+    /**
+     * CRITICAL: Force pretty permalinks (/%postname%/) so service URLs work.
+     *
+     * Without this, fresh WordPress installs default to "?p=123" URLs and our
+     * service pages at /services/bath-resurfacing-sydney/ silently fall back
+     * to rendering the homepage template — sneaky bug that doesn't 404, just
+     * wrong content.
+     *
+     * Only changes the option if not already set (don't override user preference).
+     */
+    if ( get_option( 'permalink_structure' ) !== '/%postname%/' ) {
+        update_option( 'permalink_structure', '/%postname%/' );
+    }
+
     flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'timeless_create_pages' );
@@ -120,6 +134,13 @@ function timeless_ensure_pages_exist() {
     // If no, run the full creation routine (which skips existing pages anyway).
     if ( ! get_page_by_path( 'faqs' ) ) {
         timeless_create_pages();
+    }
+
+    // Self-heal permalinks: if WordPress is using default "?p=" URLs, switch
+    // to pretty URLs so service pages actually route correctly.
+    if ( get_option( 'permalink_structure' ) !== '/%postname%/' ) {
+        update_option( 'permalink_structure', '/%postname%/' );
+        flush_rewrite_rules();
     }
 }
 add_action( 'admin_init', 'timeless_ensure_pages_exist' );
