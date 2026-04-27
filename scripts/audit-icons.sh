@@ -48,15 +48,25 @@ js_files=$(find . -name "*.js" \
     -not -path "./vendor/*" \
     -not -path "./assets/main.min.js" 2>/dev/null || true)
 
-php_count=$(echo "$php_files" | grep -c .)
-js_count=$(echo "$js_files" | grep -c . || echo 0)
+# Helper: count non-empty lines in a multiline variable.
+# `grep -c .` counts non-empty lines but exits 1 when the input is empty.
+# Under `set -e` that aborts the script, AND `|| echo 0` produces "0\n0"
+# (because grep already wrote "0" to stdout before exiting non-zero).
+# This wrapper handles both cases cleanly.
+count_lines() { [[ -n "$1" ]] && printf '%s\n' "$1" | grep -c . || printf '0'; }
+
+php_count=$(count_lines "$php_files")
+js_count=$(count_lines "$js_files")
 echo "Scanning $php_count PHP files + $js_count JS files..."
 echo ""
 
 # ── Pattern 1: Static <span class="material-symbols-outlined">name</span> ──
 # Tolerates single OR double quotes in the class attribute.
+# The `[^a-zA-Z0-9_-]` after the class name guards against false-matching
+# `material-symbols-outlined-extra` or similar suffixed class names
+# (POSIX BREs/EREs don't have lookaheads, so we use a negated char class instead).
 icons_html=$(echo "$php_files" | xargs grep -hoE \
-    "<span[^>]*material-symbols-outlined[^>]*>[a-z][a-z0-9_]*</span>" 2>/dev/null \
+    "<span[^>]*material-symbols-outlined[^a-zA-Z0-9_-][^>]*>[a-z][a-z0-9_]*</span>" 2>/dev/null \
     | grep -oE '>[a-z][a-z0-9_]*<' \
     | tr -d '<>' \
     | sort -u)
@@ -94,9 +104,9 @@ echo "$icons" | nl
 # Show breakdown by source for transparency
 echo ""
 echo "Source breakdown:"
-echo "  HTML spans (PHP):      $(echo "$icons_html" | grep -c .)"
-echo "  PHP array values:      $(echo "$icons_php" | grep -c . || echo 0)"
-echo "  JS textContent:        $(echo "$icons_js" | grep -c . || echo 0)"
+echo "  HTML spans (PHP):      $(count_lines "$icons_html")"
+echo "  PHP array values:      $(count_lines "$icons_php")"
+echo "  JS textContent:        $(count_lines "$icons_js")"
 
 echo ""
 echo "$icons" > /tmp/icons-used.txt

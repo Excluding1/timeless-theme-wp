@@ -183,6 +183,39 @@ Before saying "fixed" / "done" / "complete", verify with evidence:
 **Anti-pattern**: testing only the homepage. Service pages can break independently.
 *(Lesson learned 2026-04-27: missed permalink bug because only tested homepage.)*
 
+#### Rule 4a: The audit-fix-audit loop (every non-trivial task)
+After completing any non-trivial task, run a deep audit on the work — then fix
+what the audit finds — then audit AGAIN — and keep looping until an audit pass
+finds zero new issues.
+
+**Why**: Code-path verification (curl, file checks, regex tests) catches
+different bugs than rendering verification (visual screenshot, browser
+inspection). And both miss what only an outside reviewer would notice
+(stale comments, regression hazards from your own fix, edge cases).
+
+**The loop**:
+1. **Do the task** (write code, verify works, commit).
+2. **Audit pass** — spawn an audit agent OR self-audit with two hats:
+   *(a) domain expert who knows the deep mechanics of this area*
+   *(b) skeptical code reviewer who doesn't trust prior claims.*
+3. **Triage findings** — by severity (critical → high → medium → low).
+4. **Fix critical + high** (always). Fix medium where cheap. Defer low to
+   debt log if needed.
+5. **Re-audit** — focus the next audit on (i) "did the fixes work?" and
+   (ii) "did the fixes introduce new issues?" plus broader scan.
+6. **Repeat from step 3** until audit returns "no new issues found".
+7. **Only then** mark the task done in TodoWrite + commit.
+
+**Stopping criteria**: ONE audit pass that turns up nothing actionable
+(only nits/deferred-debt). Two clean passes is even better but not required.
+
+**Lesson logged 2026-04-27**: First Material Symbols subset shipped with
+two latent bugs (`faucet` missed by audit script; `check_circle` injected
+via JS bypassed PHP filter). The first audit caught both; the second audit
+caught regressions FROM the fix (display-formatting in audit script,
+stale comments). The third audit caught the regex word-boundary issue.
+Each pass found real problems the previous didn't.
+
 ### Rule 5: Production safety first
 Any code that modifies WordPress settings (options, permalinks, etc.) must:
 - Use `=== ''` or similar strict checks (only act on truly default values)

@@ -199,17 +199,25 @@ function timeless_scripts() {
     wp_enqueue_style( 'google-fonts-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap', array(), null );
 
     /**
-     * Material Symbols — Self-hosted subset (94 icons only, ~7.6 KB).
+     * Material Symbols — Self-hosted subset (96 icons, ~10 KB).
      *
-     * Replaces Google Fonts CDN (1.06 MB shipped). 99% size reduction.
+     * Replaces Google Fonts CDN (1.06 MB shipped). 99.7% size reduction.
+     * Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept as 0..1
+     * so `font-variation-settings:'FILL' 1` still works for filled-icon variants.
      *
-     * Implementation: tiny font has only 94 Unicode glyphs at codepoints (no ligatures
-     * for icon names like "home" → glyph). The PHP filter timeless_replace_icon_ligatures()
-     * converts <span class="material-symbols-outlined">home</span> →
-     * <span class="material-symbols-outlined">&#xe88a;</span> at output time.
+     * Implementation: subset font has only the icons we use, mapped to PUA codepoints
+     * (no GSUB ligatures for icon names like "home" → glyph). The PHP filter
+     * timeless_replace_icon_ligatures() converts
+     * <span class="material-symbols-outlined">home</span> →
+     * <span class="material-symbols-outlined">&#xe9b2;</span> at output time.
      *
      * Source markup stays the same (icon names) — easy to maintain. Browser receives
      * codepoints — works with the tiny font.
+     *
+     * To regenerate after adding/removing icons:
+     *   1. bash scripts/audit-icons.sh
+     *   2. python3 scripts/subset-material-symbols.py
+     * See BUILD.md "Material Symbols Icon Subset Pipeline" for details.
      */
     $ms_font_path = get_template_directory() . '/assets/fonts/material-symbols-subset.woff2';
     $ms_font_url  = get_template_directory_uri() . '/assets/fonts/material-symbols-subset.woff2';
@@ -263,9 +271,9 @@ add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
 /**
  * Material Symbols ligature → codepoint replacement (output buffer filter).
  *
- * Why: We use a 7.6 KB icon font subset that contains ONLY the 94 icons we use,
- * stored at their Unicode codepoints (no ligature lookup table — that's what made
- * the full font 245+ KB).
+ * Why: We use a ~10 KB icon font subset that contains ONLY the 96 icons we use,
+ * stored at their Unicode codepoints (no GSUB ligature lookup table — dropping that
+ * is most of the savings; the FILL variable axis is preserved for filled variants).
  *
  * The browser still receives <span class="material-symbols-outlined">home</span>
  * in source code (easier to maintain), but this filter converts it to
@@ -286,11 +294,16 @@ function timeless_replace_icon_ligatures( $html ) {
     if ( ! is_array( $codepoints ) ) return $html;
 
     // Regex tolerates BOTH double-quoted and single-quoted class attributes.
+    // The symmetric lookarounds `(?<![\w-])material-symbols-outlined(?![\w-])` prevent
+    // false-matching prefixed/suffixed classes like `material-symbols-outlined-extra`
+    // (the standard `\b` word-boundary doesn't help — `-` is non-word and matches `\b`,
+    // so `\b` at end of token is satisfied by a following hyphen, e.g.
+    // `class="my-material-symbols-outlined-rounded"` would falsely match without these).
     // Capture group 1: the opening <span ...>
     // Capture group 2: the icon name (must start with [a-z], may contain digits + underscores)
     // Capture group 3: the closing </span>
     return preg_replace_callback(
-        '/(<span\b[^>]*\bclass=(?:"[^"]*\bmaterial-symbols-outlined\b[^"]*"|\'[^\']*\bmaterial-symbols-outlined\b[^\']*\')[^>]*>)([a-z][a-z0-9_]*)(<\/span>)/i',
+        '/(<span\b[^>]*\bclass=(?:"[^"]*(?<![\w-])material-symbols-outlined(?![\w-])[^"]*"|\'[^\']*(?<![\w-])material-symbols-outlined(?![\w-])[^\']*\')[^>]*>)([a-z][a-z0-9_]*)(<\/span>)/i',
         function ( $matches ) use ( $codepoints ) {
             $name = $matches[2];
             if ( isset( $codepoints[ $name ] ) ) {
