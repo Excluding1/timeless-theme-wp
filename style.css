@@ -97,6 +97,56 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
 
+/* ── Tooltip on hover (data-tooltip attribute) ──
+   Used on review cards: Google G logo, Verified badge, time label.
+   Pure CSS — no JS, no external libs. Dark rounded pill above the element
+   with a small triangle pointer. */
+.timeless-tooltip {
+    position: relative;
+    display: inline-block;  /* so ::before/::after position relative to element */
+}
+.timeless-tooltip[data-tooltip]::before,
+.timeless-tooltip[data-tooltip]::after {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    z-index: 50;
+}
+.timeless-tooltip[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(31, 41, 55);  /* slate-800 */
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.timeless-tooltip[data-tooltip]::after {
+    /* Small triangle pointing down to the element */
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgb(31, 41, 55);
+}
+.timeless-tooltip[data-tooltip]:hover::before,
+.timeless-tooltip[data-tooltip]:hover::after,
+.timeless-tooltip[data-tooltip]:focus-within::before,
+.timeless-tooltip[data-tooltip]:focus-within::after {
+    visibility: visible;
+    opacity: 1;
+}
+
 /* Review modal — fade in overlay + scale-up card */
 .timeless-review-modal:not(.hidden) {
     animation: timeless-modal-in 0.2s ease-out;

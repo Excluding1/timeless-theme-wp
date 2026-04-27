@@ -785,12 +785,57 @@ function timeless_get_google_reviews() {
     // Each review's `text` and `displayName` come back as objects ({text, languageCode}); flatten them.
     $reviews_normalized = array();
     foreach ( ( $body['reviews'] ?? array() ) as $r ) {
+        // Format publishTime (ISO 8601 UTC) into:
+        //   - relative_time_description: precise days ("3 days ago" not Google's vague "a week ago")
+        //   - publish_full_label: full Sydney-local timestamp for hover tooltip
+        $publish_iso        = $r['publishTime'] ?? '';
+        $publish_full_label = '';
+        $relative_label     = $r['relativePublishTimeDescription'] ?? '';  // Google's default fallback
+        if ( ! empty( $publish_iso ) ) {
+            try {
+                $dt = new DateTime( $publish_iso );
+                $dt->setTimezone( new DateTimeZone( 'Australia/Sydney' ) );
+
+                // Full timestamp for hover tooltip (e.g. "April 22, 2026 at 1:58 PM GMT+10")
+                $offset = $dt->format( 'P' );
+                if ( substr( $offset, -3 ) === ':00' ) {
+                    $offset = substr( $offset, 0, -3 );  // Strip ":00" for cleaner "+10"
+                }
+                $publish_full_label = $dt->format( 'F j, Y \a\t g:i A' ) . ' GMT' . $offset;
+
+                // Precise days-based relative label — overrides Google's vague defaults.
+                $now      = new DateTime( 'now', new DateTimeZone( 'Australia/Sydney' ) );
+                $days_ago = (int) $now->diff( $dt )->days;
+                $hours    = (int) ( ( $now->getTimestamp() - $dt->getTimestamp() ) / 3600 );
+
+                if ( $hours < 1 ) {
+                    $relative_label = __( 'just now', 'timeless' );
+                } elseif ( $hours < 24 ) {
+                    $relative_label = sprintf( _n( '%d hour ago', '%d hours ago', $hours, 'timeless' ), $hours );
+                } elseif ( $days_ago === 1 ) {
+                    $relative_label = __( 'yesterday', 'timeless' );
+                } elseif ( $days_ago < 30 ) {
+                    $relative_label = sprintf( _n( '%d day ago', '%d days ago', $days_ago, 'timeless' ), $days_ago );
+                } elseif ( $days_ago < 365 ) {
+                    $months = (int) round( $days_ago / 30 );
+                    $relative_label = sprintf( _n( '%d month ago', '%d months ago', $months, 'timeless' ), $months );
+                } else {
+                    $years = (int) round( $days_ago / 365 );
+                    $relative_label = sprintf( _n( '%d year ago', '%d years ago', $years, 'timeless' ), $years );
+                }
+            } catch ( Exception $e ) {
+                $publish_full_label = '';
+                // Fall through with Google's default $relative_label
+            }
+        }
+
         $reviews_normalized[] = array(
             'author_name'               => $r['authorAttribution']['displayName'] ?? 'Google User',
             'author_url'                => $r['authorAttribution']['uri'] ?? '',
             'author_photo'              => $r['authorAttribution']['photoUri'] ?? '',
             'rating'                    => intval( $r['rating'] ?? 5 ),
-            'relative_time_description' => $r['relativePublishTimeDescription'] ?? '',
+            'relative_time_description' => $relative_label,
+            'publish_full'              => $publish_full_label,  // For hover tooltip
             'text'                      => $r['text']['text'] ?? ( $r['originalText']['text'] ?? '' ),
         );
     }
@@ -898,6 +943,7 @@ function timeless_render_google_reviews() {
                 $author       = $r['author_name'] ?? 'Google User';
                 $initial      = mb_substr( $author, 0, 1, 'UTF-8' );
                 $time_label   = $r['relative_time_description'] ?? '';
+                $time_full    = $r['publish_full'] ?? '';  // For hover tooltip
                 $stars        = max( 1, min( 5, intval( $r['rating'] ?? 5 ) ) );
                 $text         = $r['text'] ?? '';
                 $author_url   = $r['author_url'] ?? '';
@@ -906,6 +952,7 @@ function timeless_render_google_reviews() {
             <article class="timeless-review-card snap-start shrink-0 w-[calc(100%-2rem)] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)] bg-surface-container-low rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
                      data-author="<?php echo esc_attr( $author ); ?>"
                      data-time="<?php echo esc_attr( $time_label ); ?>"
+                     data-time-full="<?php echo esc_attr( $time_full ); ?>"
                      data-rating="<?php echo esc_attr( $stars ); ?>"
                      data-photo="<?php echo esc_attr( $author_photo ); ?>"
                      data-text="<?php echo esc_attr( $text ); ?>">
@@ -922,15 +969,21 @@ function timeless_render_google_reviews() {
                     <?php endif; ?>
                     <div class="flex-1 min-w-0">
                         <p class="font-bold text-primary text-sm truncate"><?php echo esc_html( $author ); ?></p>
-                        <p class="text-xs text-secondary"><?php echo esc_html( $time_label ); ?></p>
+                        <?php // Time label with hover tooltip showing full timestamp ?>
+                        <p class="text-xs text-secondary timeless-tooltip <?php echo $time_full ? 'cursor-help' : ''; ?>"
+                           <?php if ( $time_full ) : ?>data-tooltip="<?php echo esc_attr( $time_full ); ?>"<?php endif; ?>>
+                            <?php echo esc_html( $time_label ); ?>
+                        </p>
                     </div>
-                    <!-- Google G logo (multi-color, inline SVG so no extra request) -->
-                    <svg class="w-6 h-6 shrink-0" viewBox="0 0 48 48" aria-hidden="true">
+                    <?php // Google G logo + "Posted on Google" hover tooltip ?>
+                    <span class="timeless-tooltip cursor-help shrink-0" data-tooltip="<?php esc_attr_e( 'Posted on Google', 'timeless' ); ?>">
+                    <svg class="w-6 h-6 block" viewBox="0 0 48 48" aria-hidden="true">
                         <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
                         <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
                         <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
                         <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
                     </svg>
+                    </span><?php // end Google logo tooltip wrapper ?>
                 </header>
 
                 <div class="flex items-center gap-1.5 mb-3">
@@ -938,8 +991,10 @@ function timeless_render_google_reviews() {
                         <?php for ( $i = 0; $i < $stars; $i++ ) echo '&#9733;'; ?>
                     </div>
                     <span class="sr-only"><?php echo esc_html( $stars ); ?> out of 5 stars</span>
-                    <!-- Verified badge (Google's blue checkmark) -->
-                    <span class="material-symbols-outlined text-blue-500 text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true" title="Verified review">verified</span>
+                    <?php // Verified badge with "Verified Customer" hover tooltip ?>
+                    <span class="timeless-tooltip cursor-help inline-flex" data-tooltip="<?php esc_attr_e( 'Verified Customer', 'timeless' ); ?>">
+                        <span class="material-symbols-outlined text-blue-500 text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span>
+                    </span>
                 </div>
 
                 <div class="timeless-review-body relative">
