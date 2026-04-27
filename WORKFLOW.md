@@ -42,12 +42,29 @@ Timeless Resurfacing is a Sydney-based bathroom resurfacing/regrouting business.
 
 ## 🌳 Branch Strategy
 
-We use **two long-lived branches**:
+We use **two long-lived branches** plus archived branches for retired work:
 
 | Branch | Purpose | Version | Stability |
 |---|---|---|---|
 | `main` | Production-ready, deployable to live site | Current stable (e.g. `v1.1.0`) | ✅ Always works |
 | `develop` | Active work, next version | Next minor (e.g. `v1.2.0`) | 🚧 May be temporarily broken |
+| `archive/*` | Retired branches kept for history | n/a | 🗄 Read-only reference |
+
+### Archive policy
+
+When we retire a branch (no longer maintained), we **rename it to `archive/<name>-retired`** rather than delete it. This preserves history, makes the retirement explicit, and allows easy recovery if needed.
+
+**Currently archived:**
+- `archive/html-preview-retired` — Static HTML preview workflow (retired v1.1.0, April 2026, replaced by wp-now). Tag: `archive/html-preview-final-state`.
+
+**To archive a branch:**
+```bash
+git fetch origin <branch>:archive/<branch>-retired
+git push origin archive/<branch>-retired
+git push origin --delete <branch>
+git tag -a archive/<branch>-final-state archive/<branch>-retired -m "..."
+git push origin archive/<branch>-final-state
+```
 
 ### Optional later: feature branches
 For big experiments, branch off `develop`:
@@ -305,6 +322,12 @@ When we change a process or rule, we record it here so we know WHY in 6 months.
 ### 2026-04-27 — Rule 4 added (verify before claiming done)
 - Reason: caught a permalink routing bug only because Angela tested service pages
 - New rule: always sample-test 3-5 different page URLs, not just homepage
+
+### 2026-04-27 — Archive policy adopted (don't delete retired branches)
+- Reason: branches are free to keep, deletion is irreversible
+- New policy: rename `<branch>` → `archive/<branch>-retired` instead of deleting
+- Also tag the final state for easy point-in-time recovery
+- Applied to: `preview` branch (HTML preview era) → `archive/html-preview-retired`
 
 ---
 
