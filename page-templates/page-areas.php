@@ -55,7 +55,7 @@
 <!-- HERO -->
 <section class="pt-6 pb-12 sm:pb-16 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
-        <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">All of Greater Sydney &amp; Beyond</span>
+        <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-6">All of Greater Sydney &amp; Beyond</span>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-4">Bathroom Resurfacing Across Sydney &amp; NSW</h1>
         <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-2xl">We service the entire Greater Sydney region and beyond. Same-day photo-based quoting available for all areas.</p>
         <div class="h-1 w-20 bg-tertiary-fixed-dim mt-6"></div>
@@ -114,7 +114,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Sydney CBD &amp; Inner City</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Surry Hills, Darlinghurst, Redfern, Glebe, Ultimo, Pyrmont</p>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Eastern Suburbs</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Bondi, Coogee, Randwick, Maroubra, Double Bay, Woollahra</p>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Inner West</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Newtown, Marrickville, Leichhardt, Ashfield, Dulwich Hill, Enmore</p>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">North Shore</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Chatswood, Lane Cove, Mosman, Neutral Bay, Cremorne, Willoughby</p>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Northern Beaches</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Manly, Dee Why, Brookvale, Mona Vale, Narrabeen, Freshwater</p>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Sutherland Shire</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Cronulla, Miranda, Caringbah, Engadine, Sutherland, Sylvania</p>
@@ -185,7 +185,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Parramatta &amp; Greater Parramatta</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Parramatta, Rydalmere, Granville, Merrylands, Harris Park</p>
@@ -195,7 +195,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Hills District</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill</p>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Blacktown, Penrith &amp; Blue Mountains</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Blacktown, Mt Druitt, Penrith, Springwood, Katoomba</p>
@@ -226,7 +226,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Wollongong &amp; Illawarra</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Wollongong, Shellharbour, Kiama, Thirroul, Corrimal</p>
@@ -236,7 +236,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Central Coast</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Gosford, Terrigal, Erina, Tuggerah, Woy Woy, Avoca Beach</p>
@@ -246,7 +246,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-6 hover:shadow-lg transition-all group">
                     <div class="flex items-start gap-4">
-                        <span class="material-symbols-outlined text-2xl text-primary flex-shrink-0 mt-0.5" aria-hidden="true">location_on</span>
+                        <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
                         <div class="flex-1">
                             <h3 class="font-bold text-primary mb-1">Campbelltown &amp; Macarthur</h3>
                             <p class="text-xs text-secondary leading-relaxed mb-3">Campbelltown, Camden, Narellan, Ingleburn, Picton</p>

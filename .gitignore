@@ -4,6 +4,10 @@
 # Dependencies
 node_modules/
 
+# Dev tool artifacts (not part of the theme)
+.claude/
+.playwright-mcp/
+
 # OS / Editor
 .DS_Store
 *.swp

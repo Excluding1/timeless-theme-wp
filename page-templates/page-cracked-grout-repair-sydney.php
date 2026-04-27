@@ -69,7 +69,7 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Shower Problem</span>
+            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Shower Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
                 Shower Grout <span class="text-on-primary-container">Cracking &amp; Falling Out?</span>
             </h1>
@@ -100,7 +100,7 @@
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
-        <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
+        <div class="aspect-4/3 bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
             <img class="w-full h-full object-cover" alt="Cracked and crumbling shower grout between bathroom tiles in Sydney — before professional regrouting repair" src="<?php echo get_template_directory_uri(); ?>/images/services/cracked-grout-repair/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
@@ -183,21 +183,21 @@
             <div class="bg-surface-container-low rounded-xl p-8 border-2 border-surface-container">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" aria-hidden="true">close</span> DIY Patching</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> New grout won't bond to old grout</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Grout pens only coat the surface &mdash; cracks remain underneath</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Caulk in grout lines looks messy and collects dirt</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Patch fails again within weeks or months</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Water still gets behind tiles through remaining cracks</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> New grout won't bond to old grout</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Grout pens only coat the surface &mdash; cracks remain underneath</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Caulk in grout lines looks messy and collects dirt</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Patch fails again within weeks or months</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Water still gets behind tiles through remaining cracks</li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
+            <div class="bg-primary/3 rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Professional Regrouting</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> ALL old grout removed back to the tile edge</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Fresh grout bonds directly to clean tile &mdash; proper adhesion</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Uniform finish across every joint &mdash; looks brand new</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Sealed for moisture protection (or epoxy for waterproof finish)</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Workmanship warranty</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> ALL old grout removed back to the tile edge</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Fresh grout bonds directly to clean tile &mdash; proper adhesion</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Uniform finish across every joint &mdash; looks brand new</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Sealed for moisture protection (or epoxy for waterproof finish)</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Workmanship warranty</li>
                 </ul>
             </div>
         </div>
@@ -275,7 +275,7 @@
                 <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of full renovation cost. No demolition, single-trade job, no weeks of disruption.</p>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 reveal">
+            <div class="bg-primary/3 rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">schedule</span>
                 <h3 class="font-bold text-primary mb-2">Done in a Day</h3>
                 <p class="text-sm text-secondary leading-relaxed">Most shower regrouting jobs completed in a single day. Your bathroom is ready to use again the next morning.</p>

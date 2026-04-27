@@ -1,15 +1,14 @@
 /**
- * PostCSS pipeline:
+ * PostCSS pipeline (Tailwind v4):
  *   src/main.css
- *      → tailwindcss (generates utility classes from content scan)
- *      → autoprefixer (adds vendor prefixes for browser compatibility)
+ *      → @tailwindcss/postcss (v4 — generates utility classes from content scan,
+ *                              autoprefixer + container-queries are built-in)
  *      → cssnano (production-only minification: ~70% size reduction)
  *      → assets/main.min.css
  */
 module.exports = (ctx) => ({
     plugins: [
-        require('tailwindcss')(),
-        require('autoprefixer')(),
+        require('@tailwindcss/postcss')(),
         ctx.env === 'production'
             ? require('cssnano')({
                   preset: ['default', {

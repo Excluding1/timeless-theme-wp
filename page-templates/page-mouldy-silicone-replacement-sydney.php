@@ -68,7 +68,7 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Shower Problem</span>
+            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Shower Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
                 Black Mouldy Silicone <span class="text-on-primary-container">in Your Shower?</span>
             </h1>
@@ -99,7 +99,7 @@
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
-        <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
+        <div class="aspect-4/3 bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
             <img class="w-full h-full object-cover" alt="Black mouldy silicone in shower corner where wall meets floor — before professional silicone replacement in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/mouldy-silicone/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>

@@ -62,8 +62,8 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-[#1b2a4a] text-white" style="margin-top:-96px; padding-top:120px;">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Transform in a Day</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] mb-6 underline decoration-[#c9a060] decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Transform in a Day</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] mb-6 underline decoration-[#c9a060] decoration-[5px] underline-offset-8 [text-decoration-skip-ink:none]">
                 Vanity <span class="text-tertiary-fixed-dim">Refinishing</span>
             </h1>
             <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6">
@@ -79,11 +79,11 @@
                         <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" draggable="false" />
                     </div>
                     <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
-                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                         <span class="text-xs font-bold text-primary">Drag to Compare</span>
                         <span class="text-xs font-bold text-on-primary-container">Completed in Hours</span>
@@ -129,11 +129,11 @@
                     <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                     <span class="text-xs font-bold text-primary">Drag to Compare</span>
                     <span class="text-xs font-bold text-on-primary-container">Transformed in 1 Day</span>
@@ -189,7 +189,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded-sm mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
             <p class="text-secondary">Whatever&rsquo;s wrong with your vanity, we&rsquo;ve seen it and fixed it. Here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
@@ -201,28 +201,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Peeling &amp; Lifting Laminate</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Laminate bubbling off the edges of your benchtop? Cabinet doors with peeled strips showing raw MDF underneath? Steam and humidity cause laminate to separate over time. We strip the failing edges, seal the substrate, then respray the whole vanity with a 2-pack polyurethane coating that locks everything down.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Fixes bubbling, lifting, and peeling edges</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Seals substrate to stop future water damage</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 2-pack polyurethane coating, durable &amp; glossy</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Fixes bubbling, lifting, and peeling edges</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Seals substrate to stop future water damage</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 2-pack polyurethane coating, durable &amp; glossy</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/peeling-after.png" alt="Refinished vanity after peeling laminate repair" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/peeling-before.png" alt="Vanity with peeling lifting laminate" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -235,28 +235,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Dated &amp; Dull Finish</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Brown oak laminate from the 90s? Beige vanity everyone else replaced years ago? We respray the whole vanity in any modern colour. Crisp white, soft grey, black, stone-fleck texture. Instant 20-year upgrade.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 900+ colours including stone-fleck textures</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Factory-smooth gloss or satin finish</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Matches the rest of your bathroom instantly</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> 900+ colours including stone-fleck textures</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Factory-smooth gloss or satin finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Matches the rest of your bathroom instantly</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/dated-after.png" alt="Modern refinished vanity after colour change" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/dated-before.png" alt="Dated dull vanity with outdated finish" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -269,28 +269,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Scratched, Stained &amp; Water-Damaged</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Scratches from years of use? Dark mineral stains around the taps? Heat marks from hair straighteners or curling irons? These sit in the top layer where cleaning can&rsquo;t reach. We fill the scratches, prep the surface, then spray a fresh coat over the top. Benchtop looks showroom-new.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Covers scratches, water marks, heat damage</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> New surface resists future staining</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Easier to clean than bare laminate</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Covers scratches, water marks, heat damage</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> New surface resists future staining</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Easier to clean than bare laminate</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/scratched-after.png" alt="Smooth refinished vanity after scratch and stain removal" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/scratched-before.png" alt="Scratched stained vanity with water damage" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -306,22 +306,22 @@
             <p class="text-secondary">No need to rip it out. If your vanity is structurally sound but looks tired, refinishing is the answer.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">door_front</span>
                 <h3 class="font-bold text-primary mb-2">Dated Timber or Oak</h3>
                 <p class="text-sm text-secondary leading-relaxed">Those honey-oak or dark timber vanities from the &rsquo;90s and 2000s. We transform them into a modern finish. White, grey, or custom colour.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">wb_sunny</span>
                 <h3 class="font-bold text-primary mb-2">Yellowed or Faded Laminate</h3>
                 <p class="text-sm text-secondary leading-relaxed">White laminate that&rsquo;s gone yellow over time. We strip, prime, and recoat for a crisp, bright finish.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">texture</span>
                 <h3 class="font-bold text-primary mb-2">Scratched or Worn Surfaces</h3>
                 <p class="text-sm text-secondary leading-relaxed">Surface wear, water marks, and scratches from years of daily use. Sanded back and recoated to perfection.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 text-center reveal shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 text-center reveal shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">apartment</span>
                 <h3 class="font-bold text-primary mb-2">Rental &amp; Landlord Refresh</h3>
                 <p class="text-sm text-secondary leading-relaxed">Quick turnaround between tenants. Refresh a dated vanity in hours instead of replacing it over days.</p>
@@ -347,23 +347,23 @@
                 </div>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">$2,000 &ndash; $5,000+</p><p class="text-xs text-secondary">Vanity + plumber + installer + disposal</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Weeks of waiting</p><p class="text-xs text-secondary">Cabinet maker lead times + install day</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Plumber required</p><p class="text-xs text-secondary">Disconnect &amp; reconnect taps and waste</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Demolition and mess</p><p class="text-xs text-secondary">Rip-out, waste removal, wall patching</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">May not fit</p><p class="text-xs text-secondary">New unit may clash with existing plumbing or layout</p></div>
                     </li>
                 </ul>
@@ -377,23 +377,23 @@
                 </div>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Fixed-Price Quote</p><p class="text-xs text-secondary">Send photos for your price</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Done in 1 day</p><p class="text-xs text-secondary">Most vanities completed same day</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">No plumber needed</p><p class="text-xs text-secondary">Taps stay connected, no disconnection</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Zero demolition</p><p class="text-xs text-secondary">No dust, no noise, no wall damage</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Usable next day</p><p class="text-xs text-secondary">Light use after 24 hours, full cure in 7 days</p></div>
                     </li>
                 </ul>
@@ -418,7 +418,7 @@
 
                 <!-- Step 1 -->
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">1&ndash;2 hrs</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Prep &amp; Clean</h3>
                     <p class="text-xs text-secondary leading-relaxed">Surface sanded, degreased, and cleaned. Handles removed. Areas masked and protected.</p>
@@ -426,7 +426,7 @@
 
                 <!-- Step 2 -->
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">30&ndash;45 min</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Prime</h3>
                     <p class="text-xs text-secondary leading-relaxed">Bonding primer for maximum adhesion. The key to a finish that lasts years, not months.</p>
@@ -434,7 +434,7 @@
 
                 <!-- Step 3 -->
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">2&ndash;4 hrs</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Coat</h3>
                     <p class="text-xs text-secondary leading-relaxed">Multiple coats of professional-grade 2-pack polyurethane. Satin, semi-gloss, or gloss to your choice.</p>
@@ -442,7 +442,7 @@
 
                 <!-- Step 4 -->
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">4</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">4</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">24 hrs</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Cure &amp; Handover</h3>
                     <p class="text-xs text-secondary leading-relaxed">Hardware re-fitted. Light use after 24 hours, full cure in 7 days. Factory-smooth finish that lasts.</p>
@@ -454,8 +454,8 @@
         <div class="lg:hidden space-y-0">
             <!-- Step 1 -->
             <div class="flex gap-4 reveal">
-                <div class="flex flex-col items-center flex-shrink-0">
-                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div>
+                <div class="flex flex-col items-center shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div>
                     <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
                 </div>
                 <div class="pb-8 pt-1">
@@ -466,8 +466,8 @@
             </div>
             <!-- Step 2 -->
             <div class="flex gap-4 reveal">
-                <div class="flex flex-col items-center flex-shrink-0">
-                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div>
+                <div class="flex flex-col items-center shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div>
                     <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
                 </div>
                 <div class="pb-8 pt-1">
@@ -478,8 +478,8 @@
             </div>
             <!-- Step 3 -->
             <div class="flex gap-4 reveal">
-                <div class="flex flex-col items-center flex-shrink-0">
-                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div>
+                <div class="flex flex-col items-center shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div>
                     <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
                 </div>
                 <div class="pb-8 pt-1">
@@ -490,8 +490,8 @@
             </div>
             <!-- Step 4 (last — no connector line below) -->
             <div class="flex gap-4 reveal">
-                <div class="flex flex-col items-center flex-shrink-0">
-                    <div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">4</span></div></div>
+                <div class="flex flex-col items-center shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">4</span></div></div>
                 </div>
                 <div class="pt-1">
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">24 hrs</span>
@@ -507,13 +507,13 @@
 <section class="py-12 bg-primary text-white">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
         <div class="flex flex-col md:flex-row items-center gap-8">
-            <div class="flex-shrink-0">
+            <div class="shrink-0">
                 <div class="w-24 h-24 rounded-xl bg-white/10 flex items-center justify-center">
                     <span class="material-symbols-outlined text-4xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">diamond</span>
                 </div>
             </div>
             <div>
-                <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded mb-3">Premium Upgrade</span>
+                <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded-sm mb-3">Premium Upgrade</span>
                 <h2 class="text-2xl font-extrabold tracking-tight mb-2">Stone-Fleck Finish</h2>
                 <p class="text-white/80 text-sm leading-relaxed mb-4">Want the look of granite or marble without the price? Our premium stone-fleck finish creates a realistic stone texture on your vanity benchtop. Multiple colours available. Charcoal, sandstone, marble white, and more.</p>
                 <a href="#quote" class="inline-flex items-center gap-2 bg-white text-primary font-bold py-3 px-6 rounded-lg hover:bg-surface-container-low transition-colors text-sm">Ask About Stone-Fleck <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
@@ -528,7 +528,7 @@
         <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter text-center mb-8">Why Choose Timeless?</h2>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span>
                 </div>
                 <div>
@@ -537,7 +537,7 @@
                 </div>
             </div>
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span>
                 </div>
                 <div>
@@ -546,7 +546,7 @@
                 </div>
             </div>
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span>
                 </div>
                 <div>
@@ -555,7 +555,7 @@
                 </div>
             </div>
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span>
                 </div>
                 <div>
@@ -609,11 +609,11 @@
             </div>
             <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your vanity</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your vanity</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
                 </div>
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
@@ -625,11 +625,11 @@
                 <div>
                     <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs refinishing?</label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Vanity cabinet doors</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Benchtop/countertop</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Full vanity unit</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Stone-fleck finish</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Basin too</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Vanity cabinet doors</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Benchtop/countertop</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Full vanity unit</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Stone-fleck finish</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Basin too</label>
                     </div>
                 </div>
                 <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. vanity material (timber, laminate), desired colour/finish, number of doors..."></textarea></div>

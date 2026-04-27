@@ -47,7 +47,7 @@
 <section class="relative min-h-[600px] flex items-center bg-surface-container-low px-6 sm:px-8 lg:px-24 py-16 sm:py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7 z-10 reveal">
-            <span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-[0.15em] uppercase mb-6 rounded-sm">About Us</span>
+            <span class="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-[0.15em] uppercase mb-6 rounded-xs">About Us</span>
             <h1 class="text-4xl sm:text-5xl lg:text-[4rem] font-extrabold text-primary leading-[1.05] tracking-tighter mb-6">
                 Beautiful Bathrooms <br/><span class="text-on-primary-container">Shouldn't Cost a Fortune.</span>
             </h1>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="lg:col-span-5 relative reveal">
-            <div class="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl border-[10px] border-white">
+            <div class="aspect-4/5 rounded-xl overflow-hidden shadow-2xl border-10 border-white">
                 <img class="w-full h-full object-cover" alt="Timeless Resurfacing professional bathroom transformation in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom.jpg" loading="eager" width="600" height="750" />
             </div>
         </div>
@@ -113,21 +113,21 @@
             <p class="text-secondary">The principles behind every bathroom we transform.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-sm border-b-4 border-primary reveal">
+            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-xs border-b-4 border-primary reveal">
                 <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-3">
                     <span class="material-symbols-outlined text-primary" aria-hidden="true">payments</span>
                     Honest, Fixed-Price Quotes
                 </h3>
                 <p class="text-secondary leading-relaxed">Send us photos, get a price. That's it. No call-out fees, no hourly rates, no "we'll see when we get there." The quote you get is the price you pay.</p>
             </div>
-            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-sm border-b-4 border-primary reveal">
+            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-xs border-b-4 border-primary reveal">
                 <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-3">
                     <span class="material-symbols-outlined text-primary" aria-hidden="true">handshake</span>
                     Respect Your Time
                 </h3>
                 <p class="text-secondary leading-relaxed">We show up when we say we will. Most jobs are done in one day. No demolition, no construction waste, no tradies in your house for weeks on end.</p>
             </div>
-            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-sm border-b-4 border-primary reveal">
+            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-xs border-b-4 border-primary reveal">
                 <h3 class="text-xl font-bold text-primary mb-4 flex items-center gap-3">
                     <span class="material-symbols-outlined text-primary" aria-hidden="true">shield</span>
                     Stand Behind Our Work
@@ -175,8 +175,8 @@
             </div>
             <div class="lg:w-1/2 reveal">
                 <div class="grid grid-cols-2 gap-4">
-                    <img class="rounded-lg shadow-lg mt-12 w-full h-auto aspect-[3/4] object-cover" alt="Professional bathroom resurfacing result" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom-3.jpg" loading="lazy" width="400" height="533" />
-                    <img class="rounded-lg shadow-lg w-full h-auto aspect-[3/4] object-cover" alt="Beautiful bathroom after professional resurfacing" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom-2.jpg" loading="lazy" width="400" height="533" />
+                    <img class="rounded-lg shadow-lg mt-12 w-full h-auto aspect-3/4 object-cover" alt="Professional bathroom resurfacing result" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom-3.jpg" loading="lazy" width="400" height="533" />
+                    <img class="rounded-lg shadow-lg w-full h-auto aspect-3/4 object-cover" alt="Beautiful bathroom after professional resurfacing" src="<?php echo get_template_directory_uri(); ?>/images/about/bathroom-2.jpg" loading="lazy" width="400" height="533" />
                 </div>
             </div>
         </div>

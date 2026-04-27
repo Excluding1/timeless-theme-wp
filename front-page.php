@@ -58,7 +58,7 @@ get_header(); ?>
 <section class="relative pt-28 sm:pt-32 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         <div class="md:col-span-7">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">Sydney&rsquo;s Bathroom Experts</span>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-6">Sydney&rsquo;s Bathroom Experts</span>
             <h1 class="text-[35px] sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
                 Bathroom<br class="sm:hidden" /> Resurfacing<br /> <span class="text-on-primary-container">Sydney Specialists</span>
             </h1>
@@ -75,11 +75,11 @@ get_header(); ?>
                         <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;object-position:center 70%;" />
                     </div>
                     <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
-                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                         <span class="text-xs font-bold text-primary">Drag to Compare</span>
                         <span class="text-xs font-bold text-on-primary-container">Completed in 7 Hours</span>
@@ -104,11 +104,11 @@ get_header(); ?>
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                     <span class="text-xs font-bold text-primary">Drag to Compare</span>
                     <span class="text-xs font-bold text-on-primary-container">Completed in 7 Hours</span>
@@ -164,7 +164,7 @@ get_header(); ?>
     </div>
     <div class="max-w-7xl mx-auto pl-6 sm:px-8">
         <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pr-6 sm:pr-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:pb-0" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
-            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
+            <a href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" alt="Shower regrouting service" class="w-full h-full object-cover rounded-full" />
                 </div>
@@ -172,7 +172,7 @@ get_header(); ?>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Full grout removal &amp; replacement with premium waterproof epoxy. Same-day service.</p>
                 <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
+            <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png" alt="Bath resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
@@ -180,7 +180,7 @@ get_header(); ?>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Restore chipped or stained bathtubs to brilliant shine. Lasts up to 10 years.</p>
                 <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
+            <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png" alt="Tile resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
@@ -188,7 +188,7 @@ get_header(); ?>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Transform outdated tiles into a clean, modern finish. No demolition required.</p>
                 <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
+            <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png" alt="Vanity resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
@@ -196,7 +196,7 @@ get_header(); ?>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Stone-fleck or sleek satin finish. 900+ colours available.</p>
                 <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
+            <a href="<?php echo esc_url( home_url( '/services/basin-restoration-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png" alt="Basin resurfacing service" class="w-full h-full object-cover rounded-full" />
                 </div>
@@ -204,7 +204,7 @@ get_header(); ?>
                 <p class="text-secondary text-sm leading-relaxed mb-3">Chip repair &amp; full resurface for porcelain, cast iron, and acrylic basins.</p>
                 <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
             </a>
-            <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block flex-shrink-0 text-center">
+            <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair-sydney/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
                 <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png" alt="Shower sealing service" class="w-full h-full object-cover rounded-full" />
                 </div>
@@ -247,7 +247,7 @@ get_header(); ?>
                     <div class="flex justify-between items-center py-2"><span class="text-sm text-secondary flex items-center gap-2"><span class="material-symbols-outlined text-red-400 text-base" aria-hidden="true">close</span> Usable</span><span class="text-sm font-bold text-error">After 2+ weeks</span></div>
                 </div>
             </div>
-            <div class="bg-primary/[0.03] rounded-2xl p-8 border-2 border-primary relative overflow-hidden ring-2 ring-primary/10 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
+            <div class="bg-primary/3 rounded-2xl p-8 border-2 border-primary relative overflow-hidden ring-2 ring-primary/10 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-tertiary-fixed-dim text-on-tertiary-fixed text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Recommended</div>
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-emerald-600" aria-hidden="true">check_circle</span></div>
@@ -270,7 +270,7 @@ get_header(); ?>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Left: Process image placeholder -->
             <div class="hidden lg:block reveal">
-                <div class="rounded-2xl overflow-hidden aspect-[3/4] max-w-md mx-auto shadow-xl">
+                <div class="rounded-2xl overflow-hidden aspect-3/4 max-w-md mx-auto shadow-xl">
                     <img class="w-full h-full object-cover" src="<?php echo get_template_directory_uri(); ?>/images/homepage/how-it-works.png" alt="Professional bathroom resurfacing process in Sydney" loading="lazy" width="600" height="800" />
                 </div>
             </div>
@@ -279,29 +279,29 @@ get_header(); ?>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-3">How It Works</h2>
                 <p class="text-secondary mb-10">From photo to perfection in four simple steps.</p>
                 <div class="space-y-4">
-                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">photo_camera</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">photo_camera</span></div>
                         <div>
                             <h3 class="font-bold text-primary text-base mb-0.5">Step 1: Send Us Photos</h3>
                             <p class="text-sm text-secondary leading-relaxed">Snap photos of your bathroom on your phone and upload via our quote form. Takes 2 minutes.</p>
                         </div>
                     </div>
-                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">request_quote</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">request_quote</span></div>
                         <div>
                             <h3 class="font-bold text-primary text-base mb-0.5">Step 2: Quote Next Business Day</h3>
                             <p class="text-sm text-secondary leading-relaxed">We review your photos and send a transparent fixed-price quote. No hidden fees.</p>
                         </div>
                     </div>
-                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">calendar_month</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">calendar_month</span></div>
                         <div>
                             <h3 class="font-bold text-primary text-base mb-0.5">Step 3: Book Your Day</h3>
                             <p class="text-sm text-secondary leading-relaxed">Available Monday to Friday across Greater Sydney and NSW. We work around your schedule.</p>
                         </div>
                     </div>
-                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
-                        <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">celebration</span></div>
+                    <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
+                        <div class="shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">celebration</span></div>
                         <div>
                             <h3 class="font-bold text-primary text-base mb-0.5">Step 4: One-Day Transformation</h3>
                             <p class="text-sm text-secondary leading-relaxed">Most jobs done in 6-8 hours. Your bathroom is ready to use the next day.</p>
@@ -325,16 +325,16 @@ get_header(); ?>
         <!-- Desktop: 3-col grid -->
         <?php $t = get_template_directory_uri(); ?>
         <div class="hidden lg:grid grid-cols-3 gap-8">
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-before.png" alt="Bathtub before" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-after.png" alt="Bathtub after" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-before.png" alt="Bathtub before" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-after.png" alt="Bathtub after" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">After</span></div></div>
                 <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </div>
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-before.png" alt="Stained bathtub" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-after.png" alt="Bathtub after stain removal" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-before.png" alt="Stained bathtub" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-after.png" alt="Bathtub after stain removal" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">After</span></div></div>
                 <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div>
             </div>
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-before.png" alt="Dated wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-after.png" alt="Clean wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300">
+                <div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-before.png" alt="Dated wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-after.png" alt="Clean wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">After</span></div></div>
                 <div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Tile Resurfacing</span></div>
             </div>
         </div>
@@ -342,9 +342,9 @@ get_header(); ?>
         <div class="lg:hidden">
             <div class="overflow-hidden" id="transform-carousel">
                 <div class="flex transition-transform duration-300 ease-out" id="transform-track">
-                    <div class="w-full flex-shrink-0 px-1"><div class="bg-white rounded-2xl overflow-hidden shadow-sm"><div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-before.png" alt="Bathtub before" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-after.png" alt="Bathtub after" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div><div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div></div></div>
-                    <div class="w-full flex-shrink-0 px-1"><div class="bg-white rounded-2xl overflow-hidden shadow-sm"><div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-before.png" alt="Stained bathtub" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-after.png" alt="Bathtub after stain removal" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div><div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div></div></div>
-                    <div class="w-full flex-shrink-0 px-1"><div class="bg-white rounded-2xl overflow-hidden shadow-sm"><div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-before.png" alt="Dated wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-after.png" alt="Clean wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded">After</span></div></div><div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Tile Resurfacing</span></div></div></div>
+                    <div class="w-full shrink-0 px-1"><div class="bg-white rounded-2xl overflow-hidden shadow-xs"><div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-before.png" alt="Bathtub before" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/bathtub-after.png" alt="Bathtub after" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">After</span></div></div><div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div></div></div>
+                    <div class="w-full shrink-0 px-1"><div class="bg-white rounded-2xl overflow-hidden shadow-xs"><div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-before.png" alt="Stained bathtub" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/stain-after.png" alt="Bathtub after stain removal" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">After</span></div></div><div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Bathtub Resurfacing</span></div></div></div>
+                    <div class="w-full shrink-0 px-1"><div class="bg-white rounded-2xl overflow-hidden shadow-xs"><div class="grid grid-cols-2"><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-before.png" alt="Dated wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 left-2 bg-black/60 text-white text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">Before</span></div><div class="relative aspect-square overflow-hidden"><img src="<?php echo $t; ?>/images/homepage/transformations/tile-wall-after.png" alt="Clean wall tiles" class="w-full h-full object-cover" loading="lazy" /><span class="absolute top-2 right-2 bg-white/80 text-primary text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm">After</span></div></div><div class="p-5 flex justify-center"><span class="text-[0.7rem] bg-tertiary-fixed-dim/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider">Tile Resurfacing</span></div></div></div>
                 </div>
             </div>
             <div class="flex justify-center items-center gap-3 mt-6">
@@ -385,10 +385,10 @@ get_header(); ?>
             <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tighter mb-4 sm:mb-6">Up to 3-Year Workmanship Warranty</h2>
             <p class="text-sm sm:text-base text-white/70 leading-relaxed mb-6 sm:mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last up to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service &mdash; we&rsquo;ll confirm the exact coverage in your quote.</p>
             <div class="space-y-3">
-                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">security</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Fully Insured</h3><p class="text-xs text-white/60">Public liability insured on every job for your peace of mind.</p></div></div>
-                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">handshake</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">No Obligation Quotes</h3><p class="text-xs text-white/60">Send us photos and get a fixed-price quote. No surprises, no hidden costs.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">security</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Fully Insured</h3><p class="text-xs text-white/60">Public liability insured on every job for your peace of mind.</p></div></div>
+                <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">handshake</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">No Obligation Quotes</h3><p class="text-xs text-white/60">Send us photos and get a fixed-price quote. No surprises, no hidden costs.</p></div></div>
             </div>
         </div>
         <div class="hidden lg:flex items-center justify-center">
@@ -428,7 +428,7 @@ get_header(); ?>
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 space-y-8">
                 <fieldset>
-                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded">1</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Contact Info</legend></div>
+                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">1</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Contact Info</legend></div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
                         <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="<?php echo timeless_phone(); ?>" type="tel" required /></div>
@@ -436,24 +436,24 @@ get_header(); ?>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded">2</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Property</legend></div>
+                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">2</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Property</legend></div>
                     <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Address *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Street, Suburb, NSW Postcode" required /></div>
                     <div class="mt-4 p-4 bg-error-container/20 rounded-lg flex items-start gap-4 border-l-4 border-error">
-                        <span class="material-symbols-outlined text-error flex-shrink-0" aria-hidden="true">warning</span>
+                        <span class="material-symbols-outlined text-error shrink-0" aria-hidden="true">warning</span>
                         <div><p class="text-xs font-bold text-on-error-container mb-1">Asbestos Check (NSW)</p><p class="text-[0.7rem] text-on-error-container/80">Home built before 1990?</p>
                             <div class="mt-2 flex gap-4"><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="yes" class="text-primary" /> Yes</label><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="no" class="text-primary" /> No</label><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="unsure" class="text-primary" /> Unsure</label></div>
                         </div>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded">3</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">What Needs Work?</legend></div>
+                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">3</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">What Needs Work?</legend></div>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Bathtub</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Shower Tiles</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Wall Tiles</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Vanity Top</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Shower Base</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Floor Tiles</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bathtub</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Tiles</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Wall Tiles</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity Top</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Base</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Floor Tiles</label>
                     </div>
                 </fieldset>
                 <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Submit Free Quote Request <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
@@ -464,10 +464,10 @@ get_header(); ?>
 </section>
 
 <!-- LIGHTBOX POPUP -->
-<div id="lightbox" class="fixed inset-0 z-[9999] hidden" style="background:rgba(0,0,0,0.92);">
+<div id="lightbox" class="fixed inset-0 z-9999 hidden" style="background:rgba(0,0,0,0.92);">
     <button id="lb-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10" aria-label="Close"><span class="material-symbols-outlined text-white text-2xl">close</span></button>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl px-4">
-        <div class="relative"><img id="lb-image" src="" alt="" class="w-full rounded-xl shadow-2xl" /><span id="lb-badge" class="absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded">Before</span></div>
+        <div class="relative"><img id="lb-image" src="" alt="" class="w-full rounded-xl shadow-2xl" /><span id="lb-badge" class="absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-sm">Before</span></div>
         <div class="flex items-center justify-center gap-4 mt-6">
             <button id="lb-prev" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Previous"><span class="material-symbols-outlined text-white text-2xl">chevron_left</span></button>
             <span id="lb-label" class="text-white text-sm font-bold uppercase tracking-wider">Before</span>
@@ -491,7 +491,7 @@ get_header(); ?>
     function showImage(){
         lbImg.src=images[idx].src; lbBadge.textContent=images[idx].state;
         lbLabel.textContent=images[idx].state+' \u2014 '+images[idx].label;
-        lbBadge.className=idx===0?'absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded':'absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded';
+        lbBadge.className=idx===0?'absolute top-3 left-3 bg-black/60 text-white text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-sm':'absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.65rem] font-bold uppercase tracking-widest px-3 py-1 rounded-sm';
     }
     function closeLb(){lb.classList.add('hidden');document.body.style.overflow='';}
     document.getElementById('lb-close').addEventListener('click',closeLb);

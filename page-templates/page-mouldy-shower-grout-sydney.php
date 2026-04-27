@@ -69,7 +69,7 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed-dim/30 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Shower Problem</span>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed-dim/30 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Shower Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
                 Is Your Shower Grout <span class="text-on-primary-container">Black &amp; Mouldy?</span>
             </h1>
@@ -100,7 +100,7 @@
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
-        <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
+        <div class="aspect-4/3 bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
             <img class="w-full h-full object-cover" alt="Black mouldy shower grout between white tiles — before professional regrouting in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/mouldy-shower-grout/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
@@ -224,7 +224,7 @@
                     <li class="flex items-start gap-2"><span class="text-error font-bold">&minus;</span> Lifespan: 8-10 years</li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
+            <div class="bg-primary/3 rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span> Epoxy Grout (Premium)</h3>
                 <p class="text-xs text-secondary mb-4 leading-relaxed">Professional-grade epoxy &mdash; the ultimate in shower grout performance. 100% waterproof from day one.</p>
                 <ul class="space-y-3 text-sm text-secondary">
@@ -239,7 +239,7 @@
 
         <div class="bg-surface-container-low rounded-xl p-6 mt-6 max-w-4xl">
             <p class="text-sm text-secondary leading-relaxed flex items-start gap-3">
-                <span class="material-symbols-outlined text-primary flex-shrink-0 mt-0.5" aria-hidden="true">help</span>
+                <span class="material-symbols-outlined text-primary shrink-0 mt-0.5" aria-hidden="true">help</span>
                 <span><strong class="text-primary">Not sure which is right for you?</strong> We'll recommend the best option based on your photos. Send us a few pictures of your shower and we'll include both options in your quote.</span>
             </p>
         </div>
@@ -258,7 +258,7 @@
                 <h3 class="font-bold text-primary mb-2">Save up to 80%</h3>
                 <p class="text-sm text-secondary leading-relaxed">A fraction of full renovation cost. No demolition, single-trade job, no weeks of disruption.</p>
             </div>
-            <div class="bg-white rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 bg-primary/[0.03] reveal">
+            <div class="bg-white rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 bg-primary/3 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">schedule</span>
                 <h3 class="font-bold text-primary mb-2">Done in a Day</h3>
                 <p class="text-sm text-secondary leading-relaxed">Most shower regrouting jobs completed in a single day. Your bathroom is ready to use again the next morning.</p>
@@ -282,21 +282,21 @@
             <div class="bg-surface-container-low rounded-xl p-8 border-2 border-surface-container">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" aria-hidden="true">construction</span> Full Bathroom Renovation</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> $25,000 &ndash; $50,000+</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> 3&ndash;6 weeks of work</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Full demolition required</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Multiple trades needed (plumber, tiler, electrician)</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Days or weeks without a bathroom</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> $25,000 &ndash; $50,000+</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> 3&ndash;6 weeks of work</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Full demolition required</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Multiple trades needed (plumber, tiler, electrician)</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Days or weeks without a bathroom</li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
+            <div class="bg-primary/3 rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">thumb_up</span> Regrouting with Timeless</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> A fraction of the cost</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Most jobs done in 1 day</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> No demolition at all</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Single-trade job &mdash; no plumber or tiler needed</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Bathroom back in use next morning</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> A fraction of the cost</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Most jobs done in 1 day</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> No demolition at all</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Single-trade job &mdash; no plumber or tiler needed</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Bathroom back in use next morning</li>
                 </ul>
             </div>
         </div>

@@ -53,7 +53,7 @@
 <!-- HERO -->
 <section class="pt-6 pb-12 sm:pb-16 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
-        <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">Sydney &amp; NSW</span>
+        <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-6">Sydney &amp; NSW</span>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-4">Get In Touch</h1>
         <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mx-auto">Have a question or ready to get a quote? We're here to help.</p>
         <div class="h-1 w-20 bg-tertiary-fixed-dim mt-6 mx-auto"></div>
@@ -139,7 +139,7 @@
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 space-y-8">
                 <fieldset>
-                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded">1</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Contact Info</legend></div>
+                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">1</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Contact Info</legend></div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
                         <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
@@ -148,18 +148,18 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded">2</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">What Needs Work?</legend></div>
+                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">2</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">What Needs Work?</legend></div>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Bathtub</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Shower Tiles</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Wall Tiles</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Vanity Top</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Shower Base</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Floor Tiles</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bathtub</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Tiles</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Wall Tiles</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity Top</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Base</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Floor Tiles</label>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded">3</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Additional Notes</legend></div>
+                    <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">3</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Additional Notes</legend></div>
                     <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Tell Us More (Optional)</label><textarea id="notes" name="notes" rows="4" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Describe the condition of your bathroom, any specific issues, or questions you have..."></textarea></div>
                 </fieldset>
                 <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Request a Free Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>

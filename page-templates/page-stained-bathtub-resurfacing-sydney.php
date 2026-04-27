@@ -69,7 +69,7 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Bath Problem</span>
+            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Bath Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
                 Stained &amp; Yellow Bathtub? <span class="text-on-primary-container">We Make It Look Brand New</span>
             </h1>
@@ -100,7 +100,7 @@
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
-        <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
+        <div class="aspect-4/3 bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
             <img class="w-full h-full object-cover" alt="Stained and yellowed bathtub in Sydney bathroom before professional resurfacing restoration" src="<?php echo get_template_directory_uri(); ?>/images/services/stained-bathtub/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
@@ -234,28 +234,28 @@
         <p class="text-secondary max-w-3xl mb-10">Thinking about ripping out your old bath and putting in a new one? Here's how the two options compare side by side.</p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10 reveal">
+            <div class="bg-primary/3 rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10 reveal">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Resurfacing</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Completed in 1 day</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> A fraction of the cost of replacement</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> No plumber required</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> No demolition or mess</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Bath ready to use in 24&ndash;48 hours</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Single trade &mdash; one visit, one day</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Factory-smooth finish, looks brand new</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Completed in 1 day</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> A fraction of the cost of replacement</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> No plumber required</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> No demolition or mess</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Bath ready to use in 24&ndash;48 hours</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Single trade &mdash; one visit, one day</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Factory-smooth finish, looks brand new</li>
                 </ul>
             </div>
             <div class="bg-surface-container-low rounded-xl p-8 border-2 border-surface-container reveal">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" aria-hidden="true">close</span> Full Replacement</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Takes 3&ndash;5 days minimum</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> $3,000&ndash;$8,000+ all up</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Plumber required for disconnect/reconnect</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Demolition required to remove old bath</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> May need retiling around the new bath</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Multiple trades &mdash; plumber, tiler, builder</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Bathroom out of action for days</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Takes 3&ndash;5 days minimum</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> $3,000&ndash;$8,000+ all up</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Plumber required for disconnect/reconnect</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Demolition required to remove old bath</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> May need retiling around the new bath</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Multiple trades &mdash; plumber, tiler, builder</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Bathroom out of action for days</li>
                 </ul>
             </div>
         </div>

@@ -72,9 +72,9 @@
 <section class="pt-4 pb-10 sm:pb-16 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-surface via-transparent to-transparent rounded-3xl -z-10 -m-4"></div>
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Same-Day Service</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-3 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+            <div class="absolute inset-0 bg-linear-to-br from-surface via-transparent to-transparent rounded-3xl -z-10 -m-4"></div>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Same-Day Service</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-3 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-8 [text-decoration-skip-ink:none]">
                 Bath Resurfacing
             </h1>
             <div class="h-0 mb-3"></div>
@@ -91,11 +91,11 @@
                         <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/hero-before.png" alt="Damaged bathtub before resurfacing" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" draggable="false" />
                     </div>
                     <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                    <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
-                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                         <span class="text-xs font-bold text-primary">Drag to Compare</span>
                         <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
@@ -121,15 +121,15 @@
                 <p class="text-xs font-bold text-primary uppercase tracking-widest mb-3">Choose Your Colour</p>
                 <div class="flex items-center gap-4">
                     <div class="text-center">
-                        <div class="w-10 h-10 rounded-full bg-white border-2 border-surface-container shadow-sm mx-auto mb-1"></div>
+                        <div class="w-10 h-10 rounded-full bg-white border-2 border-surface-container shadow-xs mx-auto mb-1"></div>
                         <span class="text-[0.6rem] text-secondary font-medium">White</span>
                     </div>
                     <div class="text-center">
-                        <div class="w-10 h-10 rounded-full bg-[#FFFFF0] border-2 border-surface-container shadow-sm mx-auto mb-1"></div>
+                        <div class="w-10 h-10 rounded-full bg-[#FFFFF0] border-2 border-surface-container shadow-xs mx-auto mb-1"></div>
                         <span class="text-[0.6rem] text-secondary font-medium">Ivory</span>
                     </div>
                     <div class="text-center">
-                        <div class="w-10 h-10 rounded-full mx-auto mb-1 border-2 border-surface-container shadow-sm overflow-hidden" style="background: conic-gradient(#f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171);"></div>
+                        <div class="w-10 h-10 rounded-full mx-auto mb-1 border-2 border-surface-container shadow-xs overflow-hidden" style="background: conic-gradient(#f87171, #fbbf24, #34d399, #60a5fa, #a78bfa, #f87171);"></div>
                         <span class="text-[0.6rem] text-secondary font-medium">900+ Custom</span>
                     </div>
                 </div>
@@ -150,11 +150,11 @@
                     <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/hero-before.png" alt="Damaged bathtub before resurfacing" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" />
                 </div>
                 <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                     <span class="text-xs font-bold text-primary">Drag to Compare</span>
                     <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
@@ -206,7 +206,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded-sm mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
             <p class="text-secondary">Whatever's wrong with your bath, we've seen it and we've fixed it. From single chip repairs to full restoration. Here&rsquo;s what we fix, how we do it, and what the results look like.</p>
         </div>
@@ -218,28 +218,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Chip &amp; Crack Repairs</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Dropped a shampoo bottle? Missing chunk of enamel? We repair chips, cracks, and holes in bathtubs using a two-part epoxy filler that matches your existing finish. No visible patch lines, no weak spots.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Single chip or multi-chip repairs available</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Invisible colour-matched finish</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Most repairs done in under 2 hours</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Single chip or multi-chip repairs available</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Invisible colour-matched finish</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Most repairs done in under 2 hours</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/chips-after.png" alt="Repaired bathtub" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/chips-before.png" alt="Chipped bathtub" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:66%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -252,28 +252,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Stain &amp; Yellowing Removal</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Yellow rust stains from a dripping tap? Brown hard-water deposits? Old enamel gone dull and grey? We strip decades of stains and restore the original white finish. No abrasive cleaning, no bleach damage.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Removes rust, calcium, soap scum buildup</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Restores factory-smooth surface feel</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Cheaper than full resurface for surface-only stains</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Removes rust, calcium, soap scum buildup</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Restores factory-smooth surface feel</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Cheaper than full resurface for surface-only stains</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/stain-after.png" alt="Clean restored bathtub" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/stain-before.png" alt="Stained bathtub" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -286,28 +286,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Faded or Outdated Colour</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Avocado green, baby pink, powder blue? Dated bath colours make your whole bathroom look old. We spray any colour you want over the existing surface. White, ivory, or choose from hundreds of modern shades.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Any colour you want, including custom matches</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> White and ivory are most popular</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Instantly modernises your bathroom</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Any colour you want, including custom matches</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> White and ivory are most popular</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Instantly modernises your bathroom</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/colour-after.png" alt="Modern white bath" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/colour-before.png" alt="Dated coloured bath" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -320,28 +320,28 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Worn &amp; Rough Finish</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Bath feels rough when you run your hand across it? Lost its gloss years ago? The enamel wears down over time, trapping dirt and making it impossible to keep clean. We restore the surface to smooth, glossy, factory-new condition.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on porcelain, acrylic, cast iron, and fibreglass</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Smooth, glossy finish that stays clean</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Feels brand new to the touch</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Works on porcelain, acrylic, cast iron, and fibreglass</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Smooth, glossy finish that stays clean</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Feels brand new to the touch</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/worn-after.png" alt="Smooth glossy finish" class="w-full h-full object-cover absolute inset-0" />
                         </div>
                         <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
-                            <div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
+                            <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
                                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/worn-before.png" alt="Worn rough finish" class="w-full h-full object-cover absolute inset-0" />
                             </div>
                         </div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -369,23 +369,23 @@
                 </div>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Thousands more</p><p class="text-xs text-secondary">Bath + plumber + tiler + waterproofing</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">3&ndash;5 days</p><p class="text-xs text-secondary">Demolition, install, tiling, drying</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Full demolition required</p><p class="text-xs text-secondary">Dust, noise, tile damage risk</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Multiple trades needed</p><p class="text-xs text-secondary">Plumber, tiler, waterproofer, painter</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span>
+                        <span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span>
                         <div><p class="font-bold text-primary text-sm">Bathroom unusable for days</p><p class="text-xs text-secondary">No bath access during install</p></div>
                     </li>
                 </ul>
@@ -399,23 +399,23 @@
                 </div>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Fixed-Price Quote</p><p class="text-xs text-secondary">Send photos for your price</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">1 day (5&ndash;8 hours)</p><p class="text-xs text-secondary">Most baths done same day</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Zero demolition</p><p class="text-xs text-secondary">No dust, no noise, no damage</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Single visit</p><p class="text-xs text-secondary">One tradesperson, one day</p></div>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+                        <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
                         <div><p class="font-bold text-primary text-sm">Bath usable next day</p><p class="text-xs text-secondary">24-48 hour cure, then back to normal</p></div>
                     </li>
                 </ul>
@@ -428,7 +428,7 @@
 <div class="bg-primary py-5 sm:py-6">
     <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p class="text-white font-bold text-sm sm:text-base text-center sm:text-left">Ready to get started? Send us photos for a free quote in hours.</p>
-        <a href="#quote" class="flex-shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
+        <a href="#quote" class="shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
     </div>
 </div>
 
@@ -439,7 +439,7 @@
         <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter text-center mb-8">Why Choose Timeless?</h2>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span>
                 </div>
                 <div>
@@ -448,7 +448,7 @@
                 </div>
             </div>
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span>
                 </div>
                 <div>
@@ -457,7 +457,7 @@
                 </div>
             </div>
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span>
                 </div>
                 <div>
@@ -466,7 +466,7 @@
                 </div>
             </div>
             <div class="flex items-start gap-3">
-                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
                     <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span>
                 </div>
                 <div>
@@ -485,28 +485,28 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Process</span>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded-sm mb-3">Our Process</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How We Resurface Your Bath</h2>
             <p class="text-secondary">Every step exists for a reason. Here's exactly what we do and why.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#7a5c10]">1</span></div>
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center shrink-0"><span class="text-sm font-black text-[#7a5c10]">1</span></div>
                     <h3 class="font-bold text-primary">Assessment &amp; Repair</h3>
                 </div>
                 <p class="text-sm text-secondary leading-relaxed">Inspect for chips, cracks, and damage. Fill and sand any defects with two-part epoxy so the surface is completely smooth.</p>
             </div>
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#7a5c10]">2</span></div>
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center shrink-0"><span class="text-sm font-black text-[#7a5c10]">2</span></div>
                     <h3 class="font-bold text-primary">Surface Preparation</h3>
                 </div>
                 <p class="text-sm text-secondary leading-relaxed">Chemical etching and degreasing creates microscopic grooves for the coating to bond to. This separates professional work from DIY kits.</p>
             </div>
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#7a5c10]">3</span></div>
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center shrink-0"><span class="text-sm font-black text-[#7a5c10]">3</span></div>
                     <h3 class="font-bold text-primary">Priming</h3>
                 </div>
                 <p class="text-sm text-secondary leading-relaxed">Specialist adhesion primer bonds to both the original surface and the top coat, creating a bridge between old and new.</p>
@@ -515,14 +515,14 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto lg:max-w-[calc(66.666%+0.75rem)]">
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#7a5c10]">4</span></div>
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center shrink-0"><span class="text-sm font-black text-[#7a5c10]">4</span></div>
                     <h3 class="font-bold text-primary">Top Coat Application</h3>
                 </div>
                 <p class="text-sm text-secondary leading-relaxed">Professional spray-applied coating in multiple thin layers. Factory-smooth, glass-like finish with no brush marks.</p>
             </div>
             <div class="bg-surface-container-low rounded-2xl p-6 reveal">
                 <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center flex-shrink-0"><span class="text-sm font-black text-[#7a5c10]">5</span></div>
+                    <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center shrink-0"><span class="text-sm font-black text-[#7a5c10]">5</span></div>
                     <h3 class="font-bold text-primary">Cure &amp; Quality Check</h3>
                 </div>
                 <p class="text-sm text-secondary leading-relaxed">24-hour cure at room temperature. Final inspection for consistency and finish quality. Bath ready to use the next day.</p>
@@ -580,11 +580,11 @@
             <!-- How quoting works -->
             <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your bath</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your bath</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
                 </div>
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6">
@@ -596,11 +596,11 @@
                 <div>
                     <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What type of bath?</label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Standard bath</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Large bath</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Freestanding bath</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Spa bath</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Chip repair too</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Standard bath</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Large bath</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Freestanding bath</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Spa bath</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Chip repair too</label>
                     </div>
                 </div>
                 <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. bath is chipped, stained yellow, want to change colour to white..."></textarea></div>

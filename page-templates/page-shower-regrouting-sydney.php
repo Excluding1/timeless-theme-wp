@@ -63,9 +63,9 @@
 <section class="pt-4 pb-10 sm:pb-16 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div class="relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-surface via-transparent to-transparent rounded-3xl -z-10 -m-4"></div>
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Waterproof Guarantee</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-3 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-[8px] [text-decoration-skip-ink:none]">
+            <div class="absolute inset-0 bg-linear-to-br from-surface via-transparent to-transparent rounded-3xl -z-10 -m-4"></div>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Waterproof Guarantee</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-3 underline decoration-tertiary-fixed-dim decoration-[5px] underline-offset-8 [text-decoration-skip-ink:none]">
                 Shower Regrouting
             </h1>
             <div class="h-0 mb-3"></div>
@@ -76,8 +76,8 @@
             <div class="md:hidden mb-6">
                 <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/hero.png" alt="Shower regrouting before and after comparison" class="w-full h-full object-cover" />
-                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                    <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                    <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                         <span class="text-xs font-bold text-primary">Before &amp; After</span>
                         <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
@@ -115,8 +115,8 @@
             <!-- HERO IMAGE (DESKTOP — single side-by-side before/after image) -->
             <div class="rounded-xl overflow-hidden shadow-2xl relative" style="aspect-ratio:4/3;">
                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/hero.png" alt="Shower regrouting before and after comparison" class="w-full h-full object-cover" />
-                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
                     <span class="text-xs font-bold text-primary">Before &amp; After</span>
                     <span class="text-xs font-bold text-on-primary-container">Completed in 1 Day</span>
@@ -153,7 +153,7 @@
 <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
         <div class="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
-            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded mb-3">Our Services</span>
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded-sm mb-3">Our Services</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
             <p class="text-secondary">These are the grout problems we see every week in Sydney showers. If yours looks like any of these, we can fix it in a day.</p>
         </div>
@@ -165,20 +165,20 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Mouldy Shower Grout</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Black mould keeps coming back no matter how many times you bleach it? That&rsquo;s because the mould is <em>inside</em> the grout, not just on the surface. Cement grout is porous. Once mould roots into it, cleaning only removes what you can see. The only fix is removing the infected grout entirely and starting fresh.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full grout removal, not just a clean</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy option eliminates future mould growth</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> All silicone corners replaced at the same time</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Full grout removal, not just a clean</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy option eliminates future mould growth</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> All silicone corners replaced at the same time</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-after.png" alt="Clean shower grout after mould removal and regrouting" class="w-full h-full object-cover absolute inset-0" /></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-before.png" alt="Mouldy shower grout before regrouting" class="w-full h-full object-cover absolute inset-0" /></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-after.png" alt="Clean shower grout after mould removal and regrouting" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/mouldy-before.png" alt="Mouldy shower grout before regrouting" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -191,20 +191,20 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Cracked &amp; Crumbling Grout</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Hairline cracks in the grout between your tiles? Chunks falling out when you run your finger along the joint? Every crack is a pathway for water to get behind your tiles and into the wall cavity. Left alone, this leads to waterproofing failure and structural damage.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water penetration at the source</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Prevents expensive waterproofing repairs</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> No tiles removed or replaced</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Stops water penetration at the source</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Prevents expensive waterproofing repairs</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> No tiles removed or replaced</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-1">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-after.png" alt="Repaired shower grout after crumbling fix" class="w-full h-full object-cover absolute inset-0" /></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-before.png" alt="Cracked crumbling shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-after.png" alt="Repaired shower grout after crumbling fix" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/crumbling-before.png" alt="Cracked crumbling shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -217,20 +217,20 @@
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3 text-center lg:text-left">Discoloured &amp; Stained Grout</h3>
                     <p class="text-sm sm:text-base text-secondary leading-relaxed mb-5">Grout started white but now it&rsquo;s brown, yellow, or patchy? Years of soap scum, body oils, and Sydney hard water stain cement grout permanently. No amount of scrubbing restores the original colour. We replace it entirely so every joint is uniform, bright, and sealed.</p>
                     <ul class="space-y-2.5 mb-6">
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Every joint removed and replaced fresh</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Uniform colour across the whole shower</li>
-                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base flex-shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy option stays stain-free for 15-20 years</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Every joint removed and replaced fresh</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Uniform colour across the whole shower</li>
+                        <li class="flex items-start gap-2 text-sm text-secondary"><span class="material-symbols-outlined text-emerald-500 text-base shrink-0 mt-0.5" aria-hidden="true">check_circle</span> Epoxy option stays stain-free for 15-20 years</li>
                     </ul>
                     <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
                 </div>
                 <div class="order-1 lg:order-2">
                     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-after.png" alt="Clean white grout after discolouration removal" class="w-full h-full object-cover absolute inset-0" /></div>
-                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-before.png" alt="Discoloured stained shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
+                        <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-after.png" alt="Clean white grout after discolouration removal" class="w-full h-full object-cover absolute inset-0" /></div>
+                        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/discoloured-before.png" alt="Discoloured stained shower grout" class="w-full h-full object-cover absolute inset-0" /></div></div>
                         <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
-                        <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">Before</span>
-                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded" style="z-index:15;">After</span>
+                        <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
+                        <span class="absolute top-3 right-3 bg-white/80 text-[#041534] text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
                     </div>
                 </div>
             </div>
@@ -246,17 +246,17 @@
             <p class="text-secondary">Cracked grout isn&rsquo;t just ugly. It&rsquo;s actively letting water into places it shouldn&rsquo;t be.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">water_damage</span>
                 <h3 class="font-bold text-primary mb-2">Water Behind Tiles</h3>
                 <p class="text-sm text-secondary leading-relaxed">Every crack in your grout is a pathway for water. It seeps behind tiles, saturates wall framing, and causes damage you can&rsquo;t see until it&rsquo;s expensive to fix.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">coronavirus</span>
                 <h3 class="font-bold text-primary mb-2">Mould Spreads Fast</h3>
                 <p class="text-sm text-secondary leading-relaxed">Mould spreads through porous grout joints and embeds deeper every time the shower gets wet. Once it&rsquo;s inside the wall cavity, surface cleaning does nothing. It&rsquo;s a health risk, not just cosmetic.</p>
             </div>
-            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-sm transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
+            <div class="bg-white rounded-xl p-6 reveal border-l-4 border-error shadow-xs transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg">
                 <span class="material-symbols-outlined text-3xl text-error mb-3 block" aria-hidden="true">engineering</span>
                 <h3 class="font-bold text-primary mb-2">Waterproofing Failure</h3>
                 <p class="text-sm text-secondary leading-relaxed">If water reaches the waterproofing membrane and it fails, the repair involves removing ALL tiles, re-waterproofing, and retiling. Depending on shower size and substrate damage, that&rsquo;s a $5,000-$15,000 job. Regrouting prevents it.</p>
@@ -276,7 +276,7 @@
             <div class="bg-blue-50/50 rounded-2xl border-2 border-blue-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-blue-100 text-blue-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Budget-Friendly</div>
                 <!-- Visual: cement grout appearance -->
-                <div class="aspect-[16/9] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                <div class="aspect-video bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/cement-grout-example.png" alt="Close-up of cement grout between tiles" class="w-full h-full object-cover" />
                 </div>
                 <div class="p-8">
@@ -285,19 +285,19 @@
                     <h3 class="text-xl font-extrabold text-primary">Cement Grout</h3>
                 </div>
                 <ul class="space-y-4">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lower upfront cost</p><p class="text-xs text-secondary">Great option when budget is the priority</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Wide colour range</p><p class="text-xs text-secondary">Easy to match existing tiles and decor</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Easy to repair later</p><p class="text-xs text-secondary">Simple to patch or regrout individual joints</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Needs sealing in wet areas</p><p class="text-xs text-secondary">Periodic resealing keeps it waterproof</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Lifespan: 5-12 years</p><p class="text-xs text-secondary">With regular sealing and proper ventilation</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-blue-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">2-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lower upfront cost</p><p class="text-xs text-secondary">Great option when budget is the priority</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Wide colour range</p><p class="text-xs text-secondary">Easy to match existing tiles and decor</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Easy to repair later</p><p class="text-xs text-secondary">Simple to patch or regrout individual joints</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Needs sealing in wet areas</p><p class="text-xs text-secondary">Periodic resealing keeps it waterproof</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-amber-500 text-lg mt-0.5 shrink-0" aria-hidden="true">info</span><div><p class="font-bold text-primary text-sm">Lifespan: 5-12 years</p><p class="text-xs text-secondary">With regular sealing and proper ventilation</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-blue-500 text-lg mt-0.5 shrink-0" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">2-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
                 </ul>
                 </div>
             </div>
             <div class="bg-green-50/50 rounded-2xl border-2 border-green-300 relative overflow-hidden ring-2 ring-green-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 reveal">
                 <div class="absolute top-0 right-0 bg-green-100 text-green-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Recommended</div>
                 <!-- Visual: epoxy grout appearance -->
-                <div class="aspect-[16/9] bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center">
+                <div class="aspect-video bg-linear-to-br from-emerald-50 to-emerald-100 flex items-center justify-center">
                     <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-regrouting/epoxy-grout-example.png" alt="Close-up of epoxy grout between tiles" class="w-full h-full object-cover" />
                 </div>
                 <div class="p-8">
@@ -306,12 +306,12 @@
                     <h3 class="text-xl font-extrabold text-primary">Epoxy Grout</h3>
                 </div>
                 <ul class="space-y-4">
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">100% waterproof</p><p class="text-xs text-secondary">Zero water absorption, ever</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Stain-proof and mould-resistant</p><p class="text-xs text-secondary">Non-porous surface repels everything</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Never needs sealing</p><p class="text-xs text-secondary">Set and forget. Zero maintenance.</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lifespan: 15-20 years</p><p class="text-xs text-secondary">Outlasts cement by 2-3x in wet areas</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-red-500 text-lg mt-0.5 flex-shrink-0" aria-hidden="true">close</span><div><p class="font-bold text-primary text-sm">Higher upfront cost</p><p class="text-xs text-secondary">3-5x material cost, but amortised over lifespan</p></div></li>
-                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 flex-shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">5-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">100% waterproof</p><p class="text-xs text-secondary">Zero water absorption, ever</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Stain-proof and mould-resistant</p><p class="text-xs text-secondary">Non-porous surface repels everything</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Never needs sealing</p><p class="text-xs text-secondary">Set and forget. Zero maintenance.</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Lifespan: 15-20 years</p><p class="text-xs text-secondary">Outlasts cement by 2-3x in wet areas</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-red-500 text-lg mt-0.5 shrink-0" aria-hidden="true">close</span><div><p class="font-bold text-primary text-sm">Higher upfront cost</p><p class="text-xs text-secondary">3-5x material cost, but amortised over lifespan</p></div></li>
+                    <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><div><p class="font-bold text-primary text-sm">5-year workmanship warranty</p><p class="text-xs text-secondary">Covers joint integrity and waterproofing</p></div></li>
                 </ul>
                 </div>
             </div>
@@ -331,25 +331,25 @@
             <div class="grid grid-cols-4 gap-0 relative">
                 <div class="absolute top-7 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">~30 min</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Protect &amp; Mask</h3>
                     <p class="text-xs text-secondary leading-relaxed">Drop sheets down, fixtures masked, drain protected. We contain all dust and debris.</p>
                 </div>
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">2</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">2-3 hrs</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Remove Old Grout</h3>
                     <p class="text-xs text-secondary leading-relaxed">Every joint ground out 2-4mm deep with precision oscillating tools. Old silicone stripped from corners.</p>
                 </div>
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">3</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">2-3 hrs</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Apply New Grout</h3>
                     <p class="text-xs text-secondary leading-relaxed">Fresh epoxy or cement grout pressed into every joint. Excess cleaned off tiles before it sets.</p>
                 </div>
                 <div class="flex flex-col items-center text-center px-4 reveal">
-                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-sm"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">4</span></div></div>
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">4</span></div></div>
                     <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">24-48 hrs</span>
                     <h3 class="font-bold text-primary text-sm mb-2">Silicone &amp; Cure</h3>
                     <p class="text-xs text-secondary leading-relaxed">Fresh silicone in all corners and transitions. Area cleaned up. Shower ready in 24-48 hours.</p>
@@ -358,10 +358,10 @@
         </div>
         <!-- MOBILE -->
         <div class="lg:hidden space-y-0">
-            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">~30 min</span><h3 class="font-bold text-primary mb-1">Protect &amp; Mask</h3><p class="text-sm text-secondary leading-relaxed">Drop sheets down, fixtures masked, drain protected. All dust and debris contained.</p></div></div>
-            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-3 hrs</span><h3 class="font-bold text-primary mb-1">Remove Old Grout</h3><p class="text-sm text-secondary leading-relaxed">Every joint ground out 2-4mm deep with precision oscillating tools. Old silicone stripped.</p></div></div>
-            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-3 hrs</span><h3 class="font-bold text-primary mb-1">Apply New Grout</h3><p class="text-sm text-secondary leading-relaxed">Fresh epoxy or cement grout pressed into every joint. Excess cleaned off before it sets.</p></div></div>
-            <div class="flex gap-4 reveal"><div class="flex flex-col items-center flex-shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-sm flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">4</span></div></div></div><div class="pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">24-48 hrs</span><h3 class="font-bold text-primary mb-1">Silicone &amp; Cure</h3><p class="text-sm text-secondary leading-relaxed">Fresh silicone in all corners and transitions. Shower ready in 24-48 hours.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">~30 min</span><h3 class="font-bold text-primary mb-1">Protect &amp; Mask</h3><p class="text-sm text-secondary leading-relaxed">Drop sheets down, fixtures masked, drain protected. All dust and debris contained.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-3 hrs</span><h3 class="font-bold text-primary mb-1">Remove Old Grout</h3><p class="text-sm text-secondary leading-relaxed">Every joint ground out 2-4mm deep with precision oscillating tools. Old silicone stripped.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div><div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div></div><div class="pb-8 pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-3 hrs</span><h3 class="font-bold text-primary mb-1">Apply New Grout</h3><p class="text-sm text-secondary leading-relaxed">Fresh epoxy or cement grout pressed into every joint. Excess cleaned off before it sets.</p></div></div>
+            <div class="flex gap-4 reveal"><div class="flex flex-col items-center shrink-0"><div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">4</span></div></div></div><div class="pt-1"><span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">24-48 hrs</span><h3 class="font-bold text-primary mb-1">Silicone &amp; Cure</h3><p class="text-sm text-secondary leading-relaxed">Fresh silicone in all corners and transitions. Shower ready in 24-48 hours.</p></div></div>
         </div>
     </div>
 </section>
@@ -370,7 +370,7 @@
 <div class="bg-primary py-5 sm:py-6">
     <div class="max-w-5xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p class="text-white font-bold text-sm sm:text-base text-center sm:text-left">Ready to fix your shower grout? Send us photos for a free quote in hours.</p>
-        <a href="#quote" class="flex-shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
+        <a href="#quote" class="shrink-0 px-6 py-3 bg-white text-primary font-bold text-sm rounded-lg hover:shadow-lg transition-all whitespace-nowrap">Get Your Free Quote &rarr;</a>
     </div>
 </div>
 
@@ -379,10 +379,10 @@
     <div class="max-w-6xl mx-auto px-6 sm:px-8">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter text-center mb-8">Why Choose Timeless?</h2>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
-            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
-            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most showers regrouted in a single day.</p></div></div>
-            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Epoxy: 5yr. Cement: 2yr. Fully insured with public liability.</p></div></div>
-            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most showers regrouted in a single day.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Epoxy: 5yr. Cement: 2yr. Fully insured with public liability.</p></div></div>
+            <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div></div>
         </div>
     </div>
 </section>
@@ -431,29 +431,29 @@
             <div class="p-6 sm:p-8 lg:p-12">
                 <div class="flex items-center justify-between gap-4 mb-8 text-center">
                     <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">1</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Send photos</strong> of your shower grout</p></div>
-                    <div class="flex-shrink-0 w-8 h-px bg-surface-container"></div>
+                    <div class="shrink-0 w-8 h-px bg-surface-container"></div>
                     <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">2</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Fixed-price quote</strong> within hours</p></div>
-                    <div class="flex-shrink-0 w-8 h-px bg-surface-container"></div>
+                    <div class="shrink-0 w-8 h-px bg-surface-container"></div>
                     <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">3</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Book a date</strong> that suits you</p></div>
                 </div>
                 <form class="space-y-4" id="quote-form">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Full Name *</label><input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="John Citizen" /></div>
-                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Phone *</label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="0400 000 000" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Full Name *</label><input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="John Citizen" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Phone *</label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="0400 000 000" /></div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Suburb *</label><input type="text" name="suburb" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="e.g. Bondi, Parramatta" /></div>
-                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Email</label><input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="you@email.com" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Suburb *</label><input type="text" name="suburb" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="e.g. Bondi, Parramatta" /></div>
+                        <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Email</label><input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="you@email.com" /></div>
                     </div>
                     <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">What do you need? *</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Shower Regrouting" checked class="text-primary rounded" /> Shower Regrouting</label>
-                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Epoxy Grout Upgrade" class="text-primary rounded" /> Epoxy Grout Upgrade</label>
-                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Silicone Replacement" class="text-primary rounded" /> Silicone Replacement</label>
-                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Bath Resurfacing" class="text-primary rounded" /> Bath Resurfacing</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Shower Regrouting" checked class="text-primary rounded-sm" /> Shower Regrouting</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Epoxy Grout Upgrade" class="text-primary rounded-sm" /> Epoxy Grout Upgrade</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Silicone Replacement" class="text-primary rounded-sm" /> Silicone Replacement</label>
+                            <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Bath Resurfacing" class="text-primary rounded-sm" /> Bath Resurfacing</label>
                         </div>
                     </div>
-                    <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Anything else?</label><textarea name="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" placeholder="e.g. Mould keeps coming back in the shower corners, interested in epoxy grout."></textarea></div>
+                    <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Anything else?</label><textarea name="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden resize-none" placeholder="e.g. Mould keeps coming back in the shower corners, interested in epoxy grout."></textarea></div>
                     <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Regrouting Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
                     <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
                 </form>

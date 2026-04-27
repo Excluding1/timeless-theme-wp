@@ -28,11 +28,11 @@ $phone      = timeless_phone();
 <body <?php body_class( 'bg-surface text-[#191c1e] font-body' ); ?>>
 <?php wp_body_open(); ?>
 
-<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
 <!-- NAV -->
 <header>
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl shadow-sm" id="main-nav">
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl shadow-xs" id="main-nav">
         <div class="flex justify-between items-center px-6 sm:px-8 py-4 max-w-7xl mx-auto">
             <a class="text-2xl font-black tracking-tighter text-[#1B2A4A]" href="<?php echo esc_url( home_url( '/' ) ); ?>">Timeless Resurfacing</a>
             <div class="hidden lg:flex items-center space-x-8 font-medium text-sm">
@@ -85,7 +85,7 @@ $phone      = timeless_phone();
     </nav>
 
     <!-- MOBILE NAV -->
-    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-[60] bg-white lg:hidden overflow-y-auto">
+    <div id="mobile-nav" class="mobile-menu fixed inset-0 z-60 bg-white lg:hidden overflow-y-auto">
         <div class="flex justify-between items-center px-6 py-4">
             <span class="text-2xl font-black tracking-tighter text-[#1B2A4A]">Timeless Resurfacing</span>
             <button id="menu-close" class="p-2" aria-label="Close menu"><span class="material-symbols-outlined text-2xl text-primary">close</span></button>

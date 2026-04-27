@@ -72,10 +72,10 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/property-manager/hero.png" alt="Professional bathroom resurfacing for property managers" class="w-full h-full object-cover" />
             </div>
             <!-- Gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-r from-[#041534] via-[#041534]/85 to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-[#041534] via-[#041534]/85 to-transparent"></div>
             <!-- Content -->
             <div class="relative z-10 px-8 sm:px-12 lg:px-16 py-12 sm:py-16 max-w-3xl">
-                <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">For Property Professionals</span>
+                <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">For Property Professionals</span>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[0.95] mb-5">
                     Property Manager &amp;<br/><span class="text-tertiary-fixed-dim">Landlord Services</span>
                 </h1>
@@ -84,24 +84,24 @@
                 </p>
                 <!-- Service badge pills -->
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrout</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurface</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">water_drop</span> Seal</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">countertops</span> Respray</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">wash</span> Restore</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrout</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurface</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">water_drop</span> Seal</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">countertops</span> Respray</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">wash</span> Restore</span>
                 </div>
                 <p class="text-3xl font-extrabold text-white mb-6">Quote from photos <span class="text-sm font-normal text-white/60">No call-out fee</span></p>
                 <!-- Stats row -->
                 <div class="flex flex-wrap items-center gap-4 mb-8">
-                    <div class="text-center bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 border border-white/10">
+                    <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
                         <p class="text-2xl font-extrabold text-white">1-3 Days</p>
                         <p class="text-[0.65rem] text-white/60 font-medium">Completion</p>
                     </div>
-                    <div class="text-center bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 border border-white/10">
+                    <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
                         <p class="text-2xl font-extrabold text-white">Quick Quote</p>
                         <p class="text-[0.65rem] text-white/60 font-medium">from photos</p>
                     </div>
-                    <div class="text-center bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 border border-white/10">
+                    <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
                         <p class="text-2xl font-extrabold text-white">Up to 3yr</p>
                         <p class="text-[0.65rem] text-white/60 font-medium">Warranty</p>
                     </div>
@@ -150,7 +150,7 @@
             <!-- Service 1 -->
             <a href="<?php echo esc_url( home_url('/services/shower-regrouting-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">plumbing</span>
                     </div>
                     <div class="flex-1">
@@ -162,7 +162,7 @@
             <!-- Service 2 -->
             <a href="<?php echo esc_url( home_url('/services/bath-resurfacing-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">bathtub</span>
                     </div>
                     <div class="flex-1">
@@ -174,7 +174,7 @@
             <!-- Service 3 -->
             <a href="<?php echo esc_url( home_url('/services/tile-resurfacing-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">grid_view</span>
                     </div>
                     <div class="flex-1">
@@ -186,7 +186,7 @@
             <!-- Service 4 -->
             <a href="<?php echo esc_url( home_url('/services/vanity-refinishing-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">countertops</span>
                     </div>
                     <div class="flex-1">
@@ -198,7 +198,7 @@
             <!-- Service 5 -->
             <a href="<?php echo esc_url( home_url('/services/basin-restoration-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">wash</span>
                     </div>
                     <div class="flex-1">
@@ -210,7 +210,7 @@
             <!-- Service 6 -->
             <a href="<?php echo esc_url( home_url('/services/shower-leak-repair-sydney/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">water_drop</span>
                     </div>
                     <div class="flex-1">
@@ -220,15 +220,15 @@
                 </div>
             </a>
             <!-- Service 7. Full package, highlighted -->
-            <a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover-sydney/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/[0.03] rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
+            <a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover-sydney/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-on-tertiary-fixed" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span>
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center gap-3 mb-1">
                             <h3 class="font-bold text-primary group-hover:text-on-primary-container transition-colors">Full Bathroom Makeover Package</h3>
-                            <span class="text-[0.6rem] bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded font-bold uppercase">Best Value</span>
+                            <span class="text-[0.6rem] bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-sm font-bold uppercase">Best Value</span>
                         </div>
                         <p class="text-sm text-secondary leading-relaxed">Complete transformation. bath, tiles, grout, silicone, vanity, basin. All done in 2-3 days. The highest-impact, lowest-disruption option for rental turnarounds and pre-sale prep.</p>
                     </div>
@@ -416,7 +416,7 @@
         </div>
         <div class="mt-8 p-6 bg-tertiary-fixed/20 rounded-xl">
             <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                <span class="material-symbols-outlined text-3xl text-on-tertiary-fixed flex-shrink-0" aria-hidden="true">calculate</span>
+                <span class="material-symbols-outlined text-3xl text-on-tertiary-fixed shrink-0" aria-hidden="true">calculate</span>
                 <div>
                     <p class="text-sm text-primary font-bold mb-1">Example: Regrout + bath resurface for a rental turnover</p>
                     <p class="text-xs text-secondary">Done in 1-2 days. Property listed immediately after. Compare that to weeks of vacancy for a full renovation. Send us photos for a fixed-price quote.</p>
@@ -467,11 +467,11 @@
             <!-- How quoting works -->
             <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of the bathroom</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of the bathroom</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Approve &amp; book</strong> a date</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Approve &amp; book</strong> a date</span></div>
                 </div>
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
@@ -508,13 +508,13 @@
                 <div>
                     <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Services needed (tick all that apply)</label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Shower regrouting</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Bath resurfacing</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Tile resurfacing</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Vanity respray</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Basin restoration</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Silicone replacement</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30 sm:col-span-2 md:col-span-3"><input type="checkbox" class="rounded text-primary" /> Full bathroom makeover (everything above)</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower regrouting</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bath resurfacing</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Tile resurfacing</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity respray</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Basin restoration</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Silicone replacement</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30 sm:col-span-2 md:col-span-3"><input type="checkbox" class="rounded-sm text-primary" /> Full bathroom makeover (everything above)</label>
                     </div>
                 </div>
                 <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Additional details</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. end-of-lease turnover, need done by [date], key access details..."></textarea></div>

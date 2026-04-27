@@ -69,7 +69,7 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-primary/10 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Premium Upgrade</span>
+            <span class="inline-block py-1 px-3 bg-primary/10 text-primary text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Premium Upgrade</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
                 Upgrade to Waterproof <span class="text-on-primary-container">Epoxy Grout</span>
             </h1>
@@ -100,7 +100,7 @@
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
-        <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
+        <div class="aspect-4/3 bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
             <img class="w-full h-full object-cover" alt="Professional epoxy grout upgrade in a Sydney shower — clean, waterproof grout lines between bathroom tiles" src="<?php echo get_template_directory_uri(); ?>/images/services/epoxy-grout-upgrade/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
@@ -157,23 +157,23 @@
             <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" aria-hidden="true">close</span> Standard Cement Grout</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Porous &mdash; absorbs water like a sponge</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Needs sealing every 1-2 years</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Typical lifespan of 8-10 years</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Absorbs stains from soap, oils, and minerals</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Mould grows into the pores &mdash; can't be fully cleaned</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Weakened by acidic cleaners over time</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Porous &mdash; absorbs water like a sponge</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Needs sealing every 1-2 years</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Typical lifespan of 8-10 years</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Absorbs stains from soap, oils, and minerals</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Mould grows into the pores &mdash; can't be fully cleaned</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Weakened by acidic cleaners over time</li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
+            <div class="bg-primary/3 rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Professional Epoxy Grout</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> 100% waterproof &mdash; zero water absorption</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Never needs sealing &mdash; ever</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Lasts 15-20 years in residential showers</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Stain-proof &mdash; nothing soaks in</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Mould-proof &mdash; no pores for mould to colonise</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Resists acids, alkalis, and harsh cleaners</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> 100% waterproof &mdash; zero water absorption</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Never needs sealing &mdash; ever</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Lasts 15-20 years in residential showers</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Stain-proof &mdash; nothing soaks in</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Mould-proof &mdash; no pores for mould to colonise</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Resists acids, alkalis, and harsh cleaners</li>
                 </ul>
             </div>
         </div>
@@ -251,7 +251,7 @@
                 <h3 class="font-bold text-primary mb-2">Lasts 2x Longer</h3>
                 <p class="text-sm text-secondary leading-relaxed">Epoxy grout lasts 15-20 years versus 8-10 for cement. That means you pay for one regrout instead of two over the same period. For most homeowners, epoxy pays for itself well before it needs replacing.</p>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 reveal">
+            <div class="bg-primary/3 rounded-xl p-8 text-center border-2 border-primary ring-2 ring-primary/10 reveal">
                 <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">auto_awesome</span>
                 <h3 class="font-bold text-primary mb-2">Zero Maintenance</h3>
                 <p class="text-sm text-secondary leading-relaxed">No sealing. No scrubbing mould. No re-applying grout sealant every year. Epoxy grout stays clean with normal shower use &mdash; saving you hours of bathroom maintenance and the ongoing cost of cleaning products and sealers.</p>

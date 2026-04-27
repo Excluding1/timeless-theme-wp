@@ -68,7 +68,7 @@
 <section class="pt-4 pb-16 sm:pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <div>
-            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded mb-4">Basin Problem</span>
+            <span class="inline-block py-1 px-3 bg-error-container text-on-error-container text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4">Basin Problem</span>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
                 Chipped or Cracked Basin? <span class="text-on-primary-container">Repair It &mdash; Don't Replace It</span>
             </h1>
@@ -99,7 +99,7 @@
                 <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-lg text-center hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call Now</a>
             </div>
         </div>
-        <div class="aspect-[4/3] bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
+        <div class="aspect-4/3 bg-surface-container-highest rounded-xl overflow-hidden shadow-xl">
             <img class="w-full h-full object-cover" alt="Chipped bathroom basin with visible damage before professional chip repair in Sydney" src="<?php echo get_template_directory_uri(); ?>/images/services/basin-chip-repair/hero.jpg" loading="eager" width="800" height="600" />
         </div>
     </div>
@@ -236,21 +236,21 @@
             <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" aria-hidden="true">close</span> Replace the Basin</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> New basin costs $300&ndash;$1,500 depending on style and material</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Plumber required &mdash; typically $200&ndash;$400 for disconnection and reconnection</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Risk of damage to vanity, benchtop or tiles during removal</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> Half a day minimum with bathroom out of action</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base flex-shrink-0" aria-hidden="true">close</span> New basin may not match existing vanity or benchtop cutout</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> New basin costs $300&ndash;$1,500 depending on style and material</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Plumber required &mdash; typically $200&ndash;$400 for disconnection and reconnection</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Risk of damage to vanity, benchtop or tiles during removal</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> Half a day minimum with bathroom out of action</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-error text-base shrink-0" aria-hidden="true">close</span> New basin may not match existing vanity or benchtop cutout</li>
                 </ul>
             </div>
-            <div class="bg-primary/[0.03] rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
+            <div class="bg-primary/3 rounded-xl p-8 border-2 border-primary ring-1 ring-primary/10">
                 <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span> Repair the Basin</h3>
                 <ul class="space-y-3 text-sm text-secondary">
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> A fraction of the cost of replacement</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Completed in 2&ndash;4 hours &mdash; no plumber needed</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Zero risk to surrounding vanity, benchtop or plumbing</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Colour-matched finish &mdash; virtually invisible repair</li>
-                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base flex-shrink-0" aria-hidden="true">check</span> Workmanship warranty</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> A fraction of the cost of replacement</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Completed in 2&ndash;4 hours &mdash; no plumber needed</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Zero risk to surrounding vanity, benchtop or plumbing</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Colour-matched finish &mdash; virtually invisible repair</li>
+                    <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base shrink-0" aria-hidden="true">check</span> Workmanship warranty</li>
                 </ul>
             </div>
         </div>

@@ -129,12 +129,12 @@ add_action( 'admin_init', 'timeless_ensure_pages_exist' );
    ───────────────────────────────────────────── */
 function timeless_scripts() {
     /**
-     * COMPILED Tailwind CSS — replaces the previous CDN runtime.
+     * COMPILED Tailwind CSS v4.2.4 — replaces the previous CDN runtime.
      * Source: src/main.css → built via `npm run build` → assets/main.min.css
      *
      * Performance gain vs CDN:
      *   - CDN runtime: 409 KB (uncompressed) / ~50 KB gzipped
-     *   - Compiled:     82 KB (uncompressed) / ~13 KB gzipped
+     *   - Compiled v4: ~61 KB (uncompressed) / ~11 KB gzipped (85% smaller)
      *   - Plus: no JIT runtime in browser (eliminates ~250-500ms of parse/exec)
      *
      * Cache busting: file modification time so browsers re-fetch only when the file changes.
@@ -536,7 +536,7 @@ function timeless_related_services() {
         $s = $services[ $k ];
         $url = home_url( '/services/' . $k . '/' );
         echo '<a href="' . esc_url( $url ) . '" class="flex items-center gap-3 bg-white rounded-xl p-4 hover:shadow-lg transition-all group">';
-        echo '<span class="material-symbols-outlined text-2xl text-primary flex-shrink-0" aria-hidden="true">' . esc_html( $s['icon'] ) . '</span>';
+        echo '<span class="material-symbols-outlined text-2xl text-primary shrink-0" aria-hidden="true">' . esc_html( $s['icon'] ) . '</span>';
         echo '<div><span class="font-bold text-primary text-sm">' . esc_html( $s['label'] ) . '</span>';
         echo '<span class="text-xs text-secondary block">Sydney &amp; NSW</span></div>';
         echo '<span class="material-symbols-outlined text-primary text-sm ml-auto group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>';
@@ -753,11 +753,11 @@ function timeless_render_chat_widget() {
     ?>
     <!-- CHAT WIDGET — Floating "Have a Question?" bubble -->
     <div id="chat-widget-container">
-        <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="<?php esc_attr_e( 'Open chat', 'timeless' ); ?>">
+        <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-60 w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="<?php esc_attr_e( 'Open chat', 'timeless' ); ?>">
             <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;" aria-hidden="true">chat</span>
         </button>
 
-        <div id="chat-widget-panel" class="fixed bottom-24 md:bottom-24 right-4 md:right-6 z-[70] w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden hidden transform origin-bottom-right transition-all duration-200" style="max-height: calc(100vh - 8rem);">
+        <div id="chat-widget-panel" class="fixed bottom-24 md:bottom-24 right-4 md:right-6 z-70 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl overflow-hidden hidden transform origin-bottom-right transition-all duration-200" style="max-height: calc(100vh - 8rem);">
             <div class="bg-teal-700 text-white px-5 py-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
@@ -777,21 +777,21 @@ function timeless_render_chat_widget() {
                     <p class="text-xs text-secondary leading-relaxed"><?php esc_html_e( "Hi! 👋 Share your contact details and we'll reply shortly with a quote.", 'timeless' ); ?></p>
                 </div>
                 <form id="chat-widget-form" class="space-y-3">
-                    <input type="text" name="cw_name" placeholder="<?php esc_attr_e( 'Name *', 'timeless' ); ?>" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none" />
+                    <input type="text" name="cw_name" placeholder="<?php esc_attr_e( 'Name *', 'timeless' ); ?>" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-hidden" />
                     <div class="flex gap-2">
                         <span class="flex items-center px-3 bg-surface-container-low border border-surface-container rounded-lg text-sm font-medium text-secondary">🇦🇺 +61</span>
-                        <input type="tel" name="cw_phone" placeholder="<?php esc_attr_e( 'Phone *', 'timeless' ); ?>" required class="flex-1 px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none" />
+                        <input type="tel" name="cw_phone" placeholder="<?php esc_attr_e( 'Phone *', 'timeless' ); ?>" required class="flex-1 px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-hidden" />
                     </div>
-                    <input type="email" name="cw_email" placeholder="<?php esc_attr_e( 'Email *', 'timeless' ); ?>" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none" />
-                    <select name="cw_customer_type" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none bg-white">
+                    <input type="email" name="cw_email" placeholder="<?php esc_attr_e( 'Email *', 'timeless' ); ?>" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-hidden" />
+                    <select name="cw_customer_type" required class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-hidden bg-white">
                         <option value=""><?php esc_html_e( 'What customer are you? *', 'timeless' ); ?></option>
                         <?php foreach ( $customer_types as $type ) : ?>
                             <option value="<?php echo esc_attr( $type ); ?>"><?php echo esc_html( $type ); ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <textarea name="cw_message" placeholder="<?php esc_attr_e( 'Message *', 'timeless' ); ?>" required rows="3" class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-none resize-none"></textarea>
+                    <textarea name="cw_message" placeholder="<?php esc_attr_e( 'Message *', 'timeless' ); ?>" required rows="3" class="w-full px-4 py-3 text-sm border border-surface-container rounded-lg focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600 outline-hidden resize-none"></textarea>
                     <label class="flex items-start gap-2 text-[0.65rem] text-secondary leading-relaxed cursor-pointer">
-                        <input type="checkbox" name="cw_consent" required checked class="mt-0.5 text-teal-700 rounded" />
+                        <input type="checkbox" name="cw_consent" required checked class="mt-0.5 text-teal-700 rounded-sm" />
                         <span><?php esc_html_e( 'By submitting you agree to receive SMS or emails for the provided channel. Rates may apply.', 'timeless' ); ?></span>
                     </label>
                     <?php wp_nonce_field( 'timeless_chat_widget', 'cw_nonce' ); ?>
@@ -1080,11 +1080,11 @@ remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 /** Remove DNS prefetch for WordPress.org */
 remove_action( 'wp_head', 'wp_resource_hints', 2 );
 
-/** Add preconnect hints for Google Fonts + Tailwind CDN (speed up external resource loading) */
+/** Add preconnect hints for Google Fonts (speed up external resource loading).
+ *  Tailwind is now compiled locally — no CDN preconnect needed. */
 function timeless_preconnect_hints() {
     echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />' . "\n";
     echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />' . "\n";
-    echo '<link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />' . "\n";
 }
 add_action( 'wp_head', 'timeless_preconnect_hints', 1 );
 

@@ -33,7 +33,7 @@
 <!-- PAGE HEADING -->
 <section class="pt-6 pb-12 sm:pb-16 bg-surface">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 text-center">
-        <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded mb-6">Answers You Need</span>
+        <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-6">Answers You Need</span>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-4">Frequently Asked Questions</h1>
         <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-2xl mx-auto">Everything you need to know about bathroom resurfacing, shower regrouting, pricing, process, and warranty.</p>
         <div class="h-1 w-20 bg-tertiary-fixed-dim mt-6 mx-auto"></div>
@@ -41,7 +41,7 @@
 </section>
 
 <!-- STICKY CATEGORY FILTER -->
-<div class="sticky top-16 z-30 bg-white border-b border-surface-container shadow-sm">
+<div class="sticky top-16 z-30 bg-white border-b border-surface-container shadow-xs">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
         <nav class="flex gap-2 overflow-x-auto py-3 -mx-6 px-6 sm:mx-0 sm:px-0 no-scrollbar" aria-label="FAQ categories">
             <button onclick="showCategory('all')" class="faq-cat-btn active px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg transition-all whitespace-nowrap" data-cat="all">All Questions</button>

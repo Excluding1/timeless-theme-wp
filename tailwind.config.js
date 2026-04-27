@@ -77,6 +77,6 @@ module.exports = {
 
     plugins: [
         require('@tailwindcss/forms'),
-        require('@tailwindcss/container-queries'),
+        // Note: @tailwindcss/container-queries is built into v4 — no plugin needed
     ],
 };

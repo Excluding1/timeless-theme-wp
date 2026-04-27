@@ -73,7 +73,7 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/images/services/full-bathroom-makeover/hero.png" alt="Complete bathroom makeover in Sydney" class="w-full h-full object-cover" />
             </div>
             <!-- Gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-r from-[#041534] via-[#041534]/85 to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-[#041534] via-[#041534]/85 to-transparent"></div>
             <!-- Content -->
             <div class="relative z-10 px-8 sm:px-12 lg:px-16 py-12 sm:py-16 max-w-3xl">
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[0.95] mb-5">
@@ -84,24 +84,24 @@
                 </p>
                 <!-- Service badge pills -->
                 <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">bathtub</span> Bath</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">grid_view</span> Tiles</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Grout</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">water_drop</span> Silicone</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">countertops</span> Vanity</span>
-                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">wash</span> Basin</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">bathtub</span> Bath</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">grid_view</span> Tiles</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Grout</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">water_drop</span> Silicone</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">countertops</span> Vanity</span>
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">wash</span> Basin</span>
                 </div>
                 <!-- Stats row -->
                 <div class="flex flex-wrap items-center gap-4 mb-8">
-                    <div class="text-center bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 border border-white/10">
+                    <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
                         <p class="text-2xl font-extrabold text-white">2-3 Days</p>
                         <p class="text-[0.65rem] text-white/60 font-medium">Complete makeover</p>
                     </div>
-                    <div class="text-center bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 border border-white/10">
+                    <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
                         <p class="text-2xl font-extrabold text-white">Save up to 80%</p>
                         <p class="text-[0.65rem] text-white/60 font-medium">vs renovation</p>
                     </div>
-                    <div class="text-center bg-white/10 backdrop-blur-sm rounded-lg px-5 py-3 border border-white/10">
+                    <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
                         <p class="text-2xl font-extrabold text-white">3yr</p>
                         <p class="text-[0.65rem] text-white/60 font-medium">Warranty</p>
                     </div>
@@ -150,7 +150,7 @@
             <!-- Tile 1 -->
             <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">bathtub</span>
                     </div>
                     <div class="flex-1">
@@ -165,7 +165,7 @@
             <!-- Tile 2 -->
             <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">grid_view</span>
                     </div>
                     <div class="flex-1">
@@ -180,7 +180,7 @@
             <!-- Tile 3 -->
             <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">plumbing</span>
                     </div>
                     <div class="flex-1">
@@ -195,7 +195,7 @@
             <!-- Tile 4 -->
             <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">water_drop</span>
                     </div>
                     <div class="flex-1">
@@ -210,7 +210,7 @@
             <!-- Tile 5 -->
             <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">countertops</span>
                     </div>
                     <div class="flex-1">
@@ -225,7 +225,7 @@
             <!-- Tile 6 -->
             <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                         <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">wash</span>
                     </div>
                     <div class="flex-1">
@@ -441,11 +441,11 @@
             <!-- How quoting works -->
             <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your bathroom</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your bathroom</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within hours</span></div>
                     <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
-                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary flex-shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
+                    <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
                 </div>
             </div>
             <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
@@ -457,13 +457,13 @@
                 <div>
                     <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs doing? (tick all that apply)</label>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Bath resurfacing</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Wall tile resurfacing</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Floor tile resurfacing</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Regrouting</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" checked /> Silicone replacement</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Vanity respray</label>
-                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded text-primary" /> Basin restoration</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Bath resurfacing</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Wall tile resurfacing</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Floor tile resurfacing</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Regrouting</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Silicone replacement</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity respray</label>
+                        <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Basin restoration</label>
                     </div>
                 </div>
                 <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. colour preferences, access details, timeline..."></textarea></div>
