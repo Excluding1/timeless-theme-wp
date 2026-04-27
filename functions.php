@@ -285,8 +285,12 @@ function timeless_replace_icon_ligatures( $html ) {
     }
     if ( ! is_array( $codepoints ) ) return $html;
 
+    // Regex tolerates BOTH double-quoted and single-quoted class attributes.
+    // Capture group 1: the opening <span ...>
+    // Capture group 2: the icon name (must start with [a-z], may contain digits + underscores)
+    // Capture group 3: the closing </span>
     return preg_replace_callback(
-        '/(<span\b[^>]*\bclass="[^"]*\bmaterial-symbols-outlined\b[^"]*"[^>]*>)([a-z][a-z0-9_]*)(<\/span>)/i',
+        '/(<span\b[^>]*\bclass=(?:"[^"]*\bmaterial-symbols-outlined\b[^"]*"|\'[^\']*\bmaterial-symbols-outlined\b[^\']*\')[^>]*>)([a-z][a-z0-9_]*)(<\/span>)/i',
         function ( $matches ) use ( $codepoints ) {
             $name = $matches[2];
             if ( isset( $codepoints[ $name ] ) ) {
@@ -298,9 +302,10 @@ function timeless_replace_icon_ligatures( $html ) {
     );
 }
 
-/** Start output buffering early; flush with the icon filter on shutdown. */
+/** Start output buffering early; flush with the icon filter on shutdown.
+ *  Skip for non-HTML responses (admin, AJAX, cron, JSON, RSS/Atom feeds, REST API). */
 function timeless_start_icon_buffer() {
-    if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_json_request() ) {
+    if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || wp_is_json_request() || is_feed() ) {
         return;
     }
     ob_start( 'timeless_replace_icon_ligatures' );

@@ -238,7 +238,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     var icon = document.createElement('span');
                     icon.className = 'material-symbols-outlined text-4xl text-green-600 block mb-3';
                     icon.setAttribute('aria-hidden', 'true');
-                    icon.textContent = 'check_circle';
+                    // Use the U+F0BE codepoint directly, NOT the literal name 'check_circle'.
+                    // Our self-hosted Material Symbols subset has GSUB ligatures stripped
+                    // (the PHP buffer filter swaps icon names → codepoints server-side).
+                    // JS-injected DOM nodes are added AFTER PHP flushes the buffer, so the
+                    // filter never sees them — we have to write the codepoint here directly.
+                    // If you ever change this icon, update inc/material-symbols-codepoints.php
+                    // and re-run scripts/audit-icons.sh + scripts/subset-material-symbols.py.
+                    icon.textContent = ''; // check_circle
                     var heading = document.createElement('p');
                     heading.className = 'text-lg font-bold text-primary mb-2';
                     heading.textContent = 'Quote Request Sent!';

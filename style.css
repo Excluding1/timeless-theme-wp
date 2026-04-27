@@ -16,7 +16,13 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
 
 /* Tailwind CDN handles all styling. This file is required by WordPress for theme metadata only. */
 
-/* Material Symbols icon font settings */
+/* Material Symbols icon font settings.
+   ⚠ This rule is UNLAYERED — it beats any rule in @layer base/utilities (CSS spec).
+   The font-family + display + size defaults live in functions.php inside @layer base
+   so Tailwind utility classes (text-2xl, etc.) can override them. DO NOT add other
+   properties here (font-size, font-family, etc.) — they would silently override every
+   Tailwind utility on every icon span across the site. Only safe property here is
+   font-variation-settings, since no Tailwind utility sets it. */
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
