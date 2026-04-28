@@ -34,6 +34,10 @@ function timeless_create_pages() {
         array( 'title' => 'Service Areas', 'slug' => 'areas', 'template' => 'page-templates/page-areas.php' ),
         array( 'title' => 'FAQs',    'slug' => 'faqs',    'template' => 'page-templates/page-faqs.php' ),
         array( 'title' => 'Privacy Policy', 'slug' => 'privacy', 'template' => 'page-templates/page-privacy.php' ),
+        // City homepages — currently /sydney/ duplicates / for nationwide expansion staging.
+        // When Melbourne launches: / becomes Australia-neutral, /sydney/ keeps the Sydney
+        // content (page-sydney.php diverges from front-page.php at that point).
+        array( 'title' => 'Bathroom Resurfacing Sydney', 'slug' => 'sydney', 'template' => 'page-templates/page-sydney.php' ),
         // Service pages — universal slugs (no -sydney suffix) for nationwide expansion
         array( 'title' => 'Shower Regrouting',           'slug' => 'services/shower-regrouting',           'template' => 'page-templates/page-shower-regrouting.php' ),
         array( 'title' => 'Bath Resurfacing',            'slug' => 'services/bath-resurfacing',            'template' => 'page-templates/page-bath-resurfacing.php' ),
@@ -217,23 +221,32 @@ function timeless_ensure_pages_exist() {
         return;
     }
 
-    // Rate limit: only check once per hour via transient
-    if ( get_transient( 'timeless_pages_checked' ) ) {
-        return;
-    }
-    set_transient( 'timeless_pages_checked', 1, HOUR_IN_SECONDS );
+    // Cheap pre-checks BEFORE the transient gate — these run on every admin
+    // page load but exit in <1ms when pages exist (single cached get_page_by_path).
+    // This pattern catches "new pages added in theme update" without waiting
+    // for the 1-hour transient to expire.
+    $needs_create_pages = ! get_page_by_path( 'sydney' );
+    $needs_suburb_pages = ! get_page_by_path( 'services/bath-resurfacing/parramatta' );
 
-    // Quick check: does the FAQs page exist? If yes, assume all pages OK.
-    // If no, run the full creation routine (which skips existing pages anyway).
-    if ( ! get_page_by_path( 'faqs' ) ) {
+    // Rate limit the EXPENSIVE check (full FAQs + create_pages) to once per hour
+    if ( ! get_transient( 'timeless_pages_checked' ) ) {
+        set_transient( 'timeless_pages_checked', 1, HOUR_IN_SECONDS );
+
+        // Quick check: does the FAQs page exist? If yes, assume baseline pages OK.
+        // If no, run the full creation routine (which skips existing pages anyway).
+        if ( ! get_page_by_path( 'faqs' ) ) {
+            timeless_create_pages();
+        }
+    }
+
+    // Run create_pages if /sydney/ is missing (bypasses transient — it's a cheap
+    // recheck and we WANT new pages to materialize quickly post-deploy)
+    if ( $needs_create_pages ) {
         timeless_create_pages();
     }
 
-    // Same self-heal pattern for suburb landing pages — runs cheap idempotent
-    // checks. Probe the first (service × suburb) combo and run the full
-    // routine if missing. Catches the case where a fresh wp-now install or
-    // a theme re-upload skipped the after_switch_theme hook.
-    if ( ! get_page_by_path( 'services/bath-resurfacing/parramatta' ) ) {
+    // Same self-heal pattern for suburb landing pages — bypasses transient too
+    if ( $needs_suburb_pages ) {
         timeless_create_suburb_pages();
     }
 
