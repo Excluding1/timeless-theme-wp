@@ -70,8 +70,8 @@ get_header(); ?>
  <div class="absolute inset-0 w-full h-full">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing" class="w-full h-full object-cover" style="object-position:center 70%;" draggable="false" fetchpriority="high" width="800" height="600" />
  </div>
- <div id="mob-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
- <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;object-position:center 70%;" />
+ <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
+ <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" class="absolute inset-0 w-full h-full object-cover" style="object-position:center 70%;" />
  </div>
  <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -99,8 +99,8 @@ get_header(); ?>
  <div class="hidden md:block md:col-span-5">
  <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:5/6;cursor:ew-resize;">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney" class="absolute inset-0 w-full h-full object-cover" draggable="false" fetchpriority="high" width="800" height="960" />
- <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;" />
+ <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" class="absolute inset-0 w-full h-full object-cover" />
  </div>
  <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -498,31 +498,6 @@ get_header(); ?>
  document.addEventListener('keydown',function(e){if(lb.classList.contains('hidden'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft'||e.key==='ArrowRight'){idx=idx===0?1:0;showImage();}});
  document.getElementById('lb-prev').addEventListener('click',function(){idx=idx===0?1:0;showImage();});
  document.getElementById('lb-next').addEventListener('click',function(){idx=idx===0?1:0;showImage();});
-})();
-</script>
-
-<script>
-/* -- Mobile Hero Before/After Slider (inline. Same pattern as bath page) -- */
-(function(){
- var slider = document.getElementById('hero-slider-mobile');
- if(!slider) return;
- var clip = document.getElementById('mob-clip');
- var line = document.getElementById('mob-line');
- var handle = document.getElementById('mob-handle');
- var bImg = document.getElementById('mob-before-img');
- var active = false;
- function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
- syncWidth(); window.addEventListener('resize', syncWidth);
- function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
- function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
- handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
- line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
- document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
- document.addEventListener('mouseup', function(){ active=false; });
- handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
- line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
- document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
- document.addEventListener('touchend', function(){ active=false; });
 })();
 </script>
 

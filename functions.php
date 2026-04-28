@@ -2714,24 +2714,23 @@ function timeless_preload_hero_lcp() {
     if ( ! file_exists( $base_path ) ) {
         return;
     }
-    $w400_path = get_template_directory() . '/images/homepage/after-400w.jpg';
-    $w800_path = get_template_directory() . '/images/homepage/after-800w.jpg';
-    if ( ! file_exists( $w400_path ) || ! file_exists( $w800_path ) ) {
+    $w400_webp_path = get_template_directory() . '/images/homepage/after-400w.jpg.webp';
+    $w800_webp_path = get_template_directory() . '/images/homepage/after-800w.jpg.webp';
+    if ( ! file_exists( $w400_webp_path ) || ! file_exists( $w800_webp_path ) ) {
         return;
     }
     $ver = filemtime( $base_path );
-    $w400 = get_template_directory_uri() . '/images/homepage/after-400w.jpg';
-    $w800 = get_template_directory_uri() . '/images/homepage/after-800w.jpg';
+    $w400_webp = get_template_directory_uri() . '/images/homepage/after-400w.jpg.webp';
+    $w800_webp = get_template_directory_uri() . '/images/homepage/after-800w.jpg.webp';
 
-    // Note: WebP variants exist (after-400w.jpg.webp etc) but we preload JPG
-    // because Safari's preload behavior with WebP imagesrcset is buggy.
-    // The actual rendering still picks WebP via the picture element's
-    // <source type="image/webp"> when the browser supports it.
+    // Preload the WebP variants directly. type="image/webp" makes non-WebP
+    // browsers skip this preload and fall back to the picture element's
+    // <img> srcset (JPG). WebP browsers (95%+ of traffic) preload the
+    // right size — no duplicate JPG fetch (was costing ~30 KB + 100ms LCP).
     printf(
-        '<link rel="preload" as="image" href="%s?v=%d" imagesrcset="%s?v=%d 400w, %s?v=%d 800w" imagesizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" fetchpriority="high" />' . "\n",
-        esc_url( $base_url ), $ver,
-        esc_url( $w400 ), $ver,
-        esc_url( $w800 ), $ver
+        '<link rel="preload" as="image" type="image/webp" imagesrcset="%s?v=%d 400w, %s?v=%d 800w" imagesizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" fetchpriority="high" />' . "\n",
+        esc_url( $w400_webp ), $ver,
+        esc_url( $w800_webp ), $ver
     );
 }
 add_action( 'wp_head', 'timeless_preload_hero_lcp', 1 );

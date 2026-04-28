@@ -74,8 +74,8 @@
  <div class="absolute inset-0 w-full h-full">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-after.png" alt="Refinished vanity, modern white gloss finish" class="w-full h-full object-cover" draggable="false" />
  </div>
- <div id="mob-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
- <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" draggable="false" />
+ <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
+ <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
  </div>
  <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -124,8 +124,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-after.png" alt="Refinished vanity, modern white gloss finish" class="w-full h-full object-cover" />
  </div>
  <!-- BEFORE image -->
- <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
- <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" />
+ <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
+ <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="absolute inset-0 w-full h-full object-cover" />
  </div>
  <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">

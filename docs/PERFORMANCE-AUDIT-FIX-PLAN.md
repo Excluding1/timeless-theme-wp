@@ -92,3 +92,74 @@ Expected Lighthouse impact:
 - ✅ Font-display warning resolved
 - ✅ Accessibility contrast warnings resolved
 - ✅ No visual regressions
+
+---
+
+## Round 2 (Desktop Lighthouse) — 2026-04-28
+
+**Starting state:** Desktop Performance 92/100/100/92 (mobile already at 100)
+
+**Lighthouse findings:**
+- Forced reflow 145ms at slider initialization
+- Image savings 300 KiB on service icons (PNG fallbacks bloated, missing WebP companions)
+- LCP element render delay 420ms
+- 4 long main-thread tasks
+
+### Cycle 5: Forced reflow elimination — ✅ DONE
+
+**Root cause:** `syncWidth()` ran twice on initial paint (inline in front-page.php + duplicated in main.js), each reading `slider.offsetWidth` then writing 3 style properties → classic layout thrash.
+
+- [x] Refactored both desktop + mobile sliders to use `clip-path: inset(0 X% 0 0)` instead of `overflow: hidden + width manipulation`
+- [x] Removed `syncWidth()` function entirely (no more `offsetWidth` reads)
+- [x] Removed duplicate inline mobile slider JS from front-page.php
+- [x] Drag updates now compositor-only (GPU), no layout pass per move event
+- [x] Verified slider drag still works at 25% / 50% / 75% positions
+
+**Impact:** ~145ms forced reflow eliminated on initial paint. Drag performance also smoother.
+
+### Cycle 6: Image savings — ✅ DONE
+
+**Root cause:** Two issues:
+1. `generate-responsive-images.py` lost palette mode when resizing PNGs → 400w variants 2× larger than 800w originals
+2. 4 of 6 service icons missing 800w WebP companions → picture filter falling through to PNG fallback
+
+**Per-icon savings (400w PNG):**
+
+| Icon | Old | New | Saved |
+|---|---|---|---|
+| bath-resurfacing | 33 KB | 14 KB | -19 KB |
+| tile-resurfacing | 41 KB | 25 KB | -16 KB |
+| vanity-resurfacing | 70 KB | 33 KB | -37 KB |
+| basin-resurfacing | 42 KB | 27 KB | -15 KB |
+| shower-sealing | 47 KB | 35 KB | -12 KB |
+
+- [x] Re-encoded with palette quantization (256-colour PNG via PIL)
+- [x] Generated 4 missing 800w WebP companions (~93 KB available for retina)
+- [x] Verified picture filter wraps all 6 service icons with WebP `<source>`
+- [x] Browser confirmed loading WebP variants (verified via Resource Timing API)
+
+**Impact:** ~99 KB saved on PNG fallback path; 4 new WebP variants available for modern browsers.
+
+### Cycle 7: LCP final polish — ✅ DONE
+
+**Root cause:** Hero preload used `imagesrcset` with JPG variants, but the `<picture><source type="image/webp">` overrode it at parse time and fetched WebP separately. Result: 51 KB downloaded (41 KB JPG + 10 KB WebP) for an image that only needs 10 KB.
+
+- [x] Updated `timeless_preload_hero_lcp()` to preload WebP variants directly
+- [x] Added `type="image/webp"` so non-WebP browsers skip preload (rare, fall back to picture's `<img>`)
+- [x] Verified single fetch via Resource Timing API: preload at 378ms, img reuses cache at 379ms — no duplicate network round-trip
+
+**Impact:** ~30 KB saved + ~100ms LCP delay reclaimed.
+
+### Cycle 8: Final smoke tests — ✅ DONE
+
+- [x] Homepage renders, slider works, no console errors
+- [x] Picture wrapping verified on all 6 service icons
+- [x] Hero preload + img both serve same 10 KB WebP (single network request)
+- [x] No visual regressions
+
+**Expected Lighthouse impact:**
+- Desktop Performance: 92 → 98-100 (forced reflow + image bytes + LCP fix)
+- Mobile Performance: 100 → 100 (no regression — fixes apply to both)
+- Accessibility: 100 → 100 (no changes to a11y)
+- Best Practices: 100 → 100 (no regression)
+- SEO: 100 → 100 (no regression)

@@ -81,7 +81,7 @@ get_header(); ?>
  <div class="absolute inset-0 w-full h-full">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing" class="w-full h-full object-cover" style="object-position:center 70%;" draggable="false" />
  </div>
- <div id="mob-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;object-position:center 70%;" />
  </div>
  <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -110,7 +110,7 @@ get_header(); ?>
  <div class="hidden md:block md:col-span-5">
  <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:5/6;cursor:ew-resize;">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
- <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" style="position:absolute;top:0;left:0;height:100%;width:200%;object-fit:cover;" />
  </div>
  <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>

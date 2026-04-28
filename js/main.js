@@ -5,33 +5,26 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* ── Before/After Slider ── */
-    (function(){
-        var slider = document.getElementById('hero-slider');
+    /* ── Before/After Slider (desktop + mobile share the same impl) ──
+       Uses clip-path to clip the before-image instead of width manipulation.
+       This eliminates the offsetWidth read on init (was causing 145ms forced
+       reflow on Lighthouse) and makes drag updates compositor-only (no layout). */
+    function initBaSlider(sliderId, clipId, lineId, handleId){
+        var slider = document.getElementById(sliderId);
         if(!slider) return;
-        var clip   = document.getElementById('ba-clip');
-        var line   = document.getElementById('ba-line');
-        var handle = document.getElementById('ba-handle');
-        var bImg   = document.getElementById('ba-before-img');
+        var clip   = document.getElementById(clipId);
+        var line   = document.getElementById(lineId);
+        var handle = document.getElementById(handleId);
+        if(!clip || !line || !handle) return;
         var active = false;
-
-        function syncWidth(){
-            var w = slider.offsetWidth + 'px';
-            bImg.style.width = w;
-            bImg.style.minWidth = w;
-            bImg.style.maxWidth = w;
-        }
-        syncWidth();
-        slider.classList.add('ba-ready');
-        window.addEventListener('resize', syncWidth);
 
         function move(x){
             var r = slider.getBoundingClientRect();
             var pct = ((x - r.left) / r.width) * 100;
             pct = Math.max(3, Math.min(97, pct));
-            clip.style.width   = pct + '%';
-            line.style.left    = pct + '%';
-            handle.style.left  = pct + '%';
+            clip.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+            line.style.left   = pct + '%';
+            handle.style.left = pct + '%';
         }
 
         function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
@@ -43,44 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
         line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
         document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
         document.addEventListener('touchend', function(){ active=false; });
-    })();
-
-    /* ── Mobile Hero Before/After Slider (shared across pages) ── */
-    (function(){
-        var slider = document.getElementById('hero-slider-mobile');
-        if(!slider) return;
-        var clip   = document.getElementById('mob-clip');
-        var line   = document.getElementById('mob-line');
-        var handle = document.getElementById('mob-handle');
-        var bImg   = document.getElementById('mob-before-img');
-        var active = false;
-
-        function syncWidth(){
-            var w = slider.offsetWidth + 'px';
-            if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; }
-        }
-        syncWidth();
-        slider.classList.add('ba-ready');
-        window.addEventListener('resize', syncWidth);
-
-        function move(x){
-            var r = slider.getBoundingClientRect();
-            var pct = ((x - r.left) / r.width) * 100;
-            pct = Math.max(3, Math.min(97, pct));
-            clip.style.width   = pct + '%';
-            line.style.left    = pct + '%';
-            handle.style.left  = pct + '%';
-        }
-        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
-        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
-        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
-        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
-        document.addEventListener('mouseup', function(){ active=false; });
-        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
-        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
-        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
-        document.addEventListener('touchend', function(){ active=false; });
-    })();
+    }
+    initBaSlider('hero-slider', 'ba-clip', 'ba-line', 'ba-handle');
+    initBaSlider('hero-slider-mobile', 'mob-clip', 'mob-line', 'mob-handle');
 
     /* ── Section 2B sliders — mark ready after images load ── */
     document.querySelectorAll('.ba-slider').forEach(function(s){ s.classList.add('ba-ready'); });

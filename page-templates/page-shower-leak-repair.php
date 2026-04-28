@@ -127,9 +127,9 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/hero-after.png" alt="Sealed shower with fresh silicone" class="w-full h-full object-cover" />
  </div>
  <!-- BEFORE image -->
- <div id="ba-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="absolute inset-0">
- <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/hero-before.png" alt="Leaking shower" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:200%;" />
+ <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/hero-before.png" alt="Leaking shower" class="absolute inset-0 w-full h-full object-cover" />
  </div>
  </div>
  <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
