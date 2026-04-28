@@ -168,11 +168,20 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
     box-shadow: 0 10px 25px -5px rgba(4, 21, 52, 0.10), 0 4px 10px -2px rgba(4, 21, 52, 0.05);
 }
 
-/* Before/After Slider */
-#hero-slider, #hero-slider-mobile, .ba-slider { opacity: 0; transition: opacity 0.3s ease; }
-#hero-slider.ba-ready, #hero-slider-mobile.ba-ready, .ba-slider.ba-ready { opacity: 1; }
+/* Before/After Slider
+   PREVIOUSLY had opacity: 0 default + .ba-ready opacity: 1 transition.
+   That hid the hero image until JS ran, which destroyed Lighthouse LCP
+   measurement (NO_LCP error — browser sees no large element painted
+   in the LCP detection window).
+
+   Fix: keep slider visible from initial paint. The handle/divider gets
+   hidden via .ba-handle-hidden until JS positions it correctly — this
+   prevents the brief "wrong-position handle flash" without blocking
+   LCP detection. */
 #hero-slider img, #hero-slider-mobile img { pointer-events: none; -webkit-user-drag: none; }
 #ba-handle, #mob-handle { transition: none; }
+.ba-slider .ba-handle:not(.ba-handle-ready) { opacity: 0; }
+.ba-slider .ba-handle.ba-handle-ready { opacity: 1; transition: opacity 0.2s ease; }
 
 /* ── Blog: Article (.entry-content) typography ──
    Styles Gutenberg block output inside single-article.php. Authors compose
