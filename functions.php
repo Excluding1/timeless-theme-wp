@@ -1989,10 +1989,21 @@ function timeless_analytics_scripts() {
     window.addEventListener(ev, loadAnalytics, { once: true, passive: true });
   });
 
-  // Fallback: load after 2.5s even if no interaction. Lighthouse runs are
-  // headless (no interaction) so this guarantees tracking still loads,
-  // but only AFTER LCP has been measured.
-  setTimeout(loadAnalytics, 2500);
+  // Fallback: load 500ms AFTER window.load. window.load guarantees the LCP
+  // measurement window has closed (Lighthouse uses load + 250ms as the LCP
+  // boundary). Loading earlier than this can race with LCP measurement and
+  // cause NO_LCP errors. Loading later than this means tracking still works
+  // for engaged visitors — they triggered the interaction handlers above.
+  function deferredFallback(){ setTimeout(loadAnalytics, 500); }
+  if (document.readyState === 'complete') {
+    deferredFallback();
+  } else {
+    window.addEventListener('load', deferredFallback, { once: true });
+  }
+
+  // Hard ceiling: load after 10s no matter what. Protects against very
+  // slow connections where window.load may take 8s+ on slow 4G.
+  setTimeout(loadAnalytics, 10000);
 })();
 </script>
     <?php
