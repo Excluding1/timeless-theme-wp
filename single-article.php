@@ -95,10 +95,10 @@ $show_toc     = count( $toc_items ) >= 3;
  <?php if ( $show_toc ) : ?>
  <!-- 2-column layout: TOC sidebar + article content -->
  <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-12">
- <!-- TOC Sidebar -->
- <aside class="lg:sticky lg:top-24 lg:self-start order-2 lg:order-1">
- <!-- Mobile: collapsible -->
- <details class="lg:hidden bg-surface-container-low rounded-xl p-5 mb-6">
+ <!-- TOC + CTA Sidebar -->
+ <aside class="lg:sticky lg:top-24 lg:self-start order-2 lg:order-1 space-y-6">
+ <!-- Mobile: collapsible TOC -->
+ <details class="lg:hidden bg-surface-container-low rounded-xl p-5">
  <summary class="font-bold text-primary text-sm cursor-pointer flex items-center justify-between">
  <span class="flex items-center gap-2">
  <span class="material-symbols-outlined text-base" aria-hidden="true">format_list_bulleted</span>
@@ -128,6 +128,8 @@ $show_toc     = count( $toc_items ) >= 3;
  <?php endforeach; ?>
  </ul>
  </nav>
+ <!-- Quote CTA box (under TOC, also sticky) -->
+ <?php echo timeless_blog_quote_cta_box(); ?>
  </aside>
  <!-- Content -->
  <div class="entry-content order-1 lg:order-2 max-w-3xl">
@@ -143,23 +145,15 @@ $show_toc     = count( $toc_items ) >= 3;
 </div>
 </article>
 
-<!-- BACK TO BLOG + CTA -->
-<section class="py-12 sm:py-16 bg-surface-container-low border-t border-surface-container">
- <div class="max-w-4xl mx-auto px-6 sm:px-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
- <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" class="group flex items-center gap-3 bg-white rounded-xl p-6 hover:shadow-lg transition-all">
- <span class="material-symbols-outlined text-2xl text-primary shrink-0 group-hover:-translate-x-1 transition-transform" aria-hidden="true">arrow_back</span>
- <div>
- <span class="font-bold text-primary block">All articles</span>
- <span class="text-xs text-secondary">Back to the blog</span>
- </div>
- </a>
- <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="group flex items-center gap-3 bg-primary text-white rounded-xl p-6 hover:shadow-lg transition-all">
- <span class="material-symbols-outlined text-2xl shrink-0" aria-hidden="true">request_quote</span>
- <div>
- <span class="font-bold block">Get a free quote</span>
- <span class="text-xs text-white/70">Photos to fixed-price in hours</span>
- </div>
- <span class="material-symbols-outlined text-xl ml-auto group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
+<!-- END-OF-ARTICLE CTA: full-width prominent conversion section -->
+<?php echo timeless_blog_end_of_article_cta(); ?>
+
+<!-- Back to blog (small secondary action) -->
+<section class="py-8 bg-surface border-t border-surface-container">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center">
+ <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" class="inline-flex items-center gap-2 text-primary font-bold hover:text-primary-soft transition-colors text-sm">
+ <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_back</span>
+ Back to all articles
  </a>
  </div>
 </section>

@@ -194,6 +194,149 @@ function timeless_flush_blog_rewrites() {
 add_action( 'init', 'timeless_flush_blog_rewrites', 99 );
 
 /* ─────────────────────────────────────────────
+   1f. BLOG CTA WIDGETS (sidebar quote box + end-of-article CTA)
+   ─────────────────────────────────────────────
+   Conversion-focused components used in blog archive sidebar AND single
+   article footer. Pattern modeled on competitor analysis (Surface Care
+   uses a sidebar quote-box on archives + full-width CTA section after
+   article content). Both reuse the same brand language for consistency.
+   ───────────────────────────────────────────── */
+
+/* Sidebar quote box — image background + headline + button.
+   Used in: archive-article.php sidebar, single-article.php TOC sidebar.
+   Returns rendered HTML so callers can echo or buffer it. */
+function timeless_blog_quote_cta_box() {
+    $img      = get_template_directory_uri() . '/images/services/bath-resurfacing/hero.jpg';
+    $contact  = esc_url( home_url( '/contact/' ) );
+    $tel_disp = function_exists( 'timeless_phone' ) ? timeless_phone() : '0451 110 154';
+    $tel_link = function_exists( 'timeless_phone_link' ) ? timeless_phone_link() : '+61451110154';
+    ob_start(); ?>
+    <aside class="bg-primary rounded-2xl overflow-hidden shadow-md relative" aria-label="Free quote call to action">
+        <div class="relative h-40 sm:h-48 overflow-hidden">
+            <img src="<?php echo esc_url( $img ); ?>" alt="" class="w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-linear-to-t from-primary via-primary/70 to-transparent"></div>
+        </div>
+        <div class="p-6 -mt-12 relative">
+            <span class="inline-block py-0.5 px-2 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded-sm mb-3">Free Quote</span>
+            <h3 class="text-xl font-extrabold text-white tracking-tight leading-tight mb-2">Request A Free Quote</h3>
+            <p class="text-xs text-white/80 leading-relaxed mb-5">Send 3-4 photos. Fixed-price quote back within hours. No obligation.</p>
+            <a href="<?php echo $contact; ?>" class="block w-full text-center bg-white text-primary font-bold py-2.5 rounded-lg hover:bg-surface-container-low transition-colors text-sm mb-2">
+                Get Free Quote →
+            </a>
+            <a href="tel:<?php echo esc_attr( $tel_link ); ?>" class="block w-full text-center border border-white/30 text-white font-bold py-2.5 rounded-lg hover:bg-white/10 transition-colors text-sm">
+                <span class="material-symbols-outlined text-sm align-middle" aria-hidden="true">call</span>
+                Call <?php echo esc_html( $tel_disp ); ?>
+            </a>
+        </div>
+    </aside>
+    <?php
+    return ob_get_clean();
+}
+
+/* Recent posts widget — 5 most recent articles for sidebar. */
+function timeless_blog_recent_posts_widget( $limit = 5 ) {
+    $recent = get_posts( array(
+        'post_type'      => 'article',
+        'posts_per_page' => $limit,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) );
+    if ( empty( $recent ) ) {
+        return '';
+    }
+    ob_start(); ?>
+    <aside class="bg-surface-container-low rounded-2xl p-6" aria-label="Recent posts">
+        <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
+            Recent Posts
+        </h3>
+        <ul class="space-y-3">
+            <?php foreach ( $recent as $post ) : setup_postdata( $post );
+                $thumb = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
+            ?>
+                <li>
+                    <a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" class="flex items-start gap-3 group">
+                        <?php if ( $thumb ) : ?>
+                            <img src="<?php echo esc_url( $thumb ); ?>" alt="" class="w-14 h-14 rounded-lg object-cover shrink-0" loading="lazy" />
+                        <?php else : ?>
+                            <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-lg text-primary/50" aria-hidden="true">article</span>
+                            </div>
+                        <?php endif; ?>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-sm font-bold text-primary group-hover:text-primary-soft transition-colors leading-tight mb-1"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h4>
+                            <time class="text-[0.65rem] text-secondary" datetime="<?php echo esc_attr( get_the_date( 'c', $post->ID ) ); ?>"><?php echo esc_html( get_the_date( '', $post->ID ) ); ?></time>
+                        </div>
+                    </a>
+                </li>
+            <?php endforeach; wp_reset_postdata(); ?>
+        </ul>
+    </aside>
+    <?php
+    return ob_get_clean();
+}
+
+/* Search box widget for sidebar */
+function timeless_blog_search_widget() {
+    ob_start(); ?>
+    <form role="search" method="get" class="bg-surface-container-low rounded-2xl p-6" action="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Search articles">
+        <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-base" aria-hidden="true">search</span>
+            Search
+        </h3>
+        <div class="relative">
+            <input type="search" name="s" placeholder="Search articles..." value="<?php echo esc_attr( get_search_query() ); ?>"
+                   class="w-full bg-white border border-surface-container rounded-lg px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" />
+            <input type="hidden" name="post_type" value="article" />
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-primary p-1 hover:opacity-70" aria-label="Submit search">
+                <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+            </button>
+        </div>
+    </form>
+    <?php
+    return ob_get_clean();
+}
+
+/* End-of-article full-width CTA section. Renders BEFORE related articles
+   on single article pages. Headline + value prop + dual CTA (quote + call). */
+function timeless_blog_end_of_article_cta() {
+    $contact  = esc_url( home_url( '/contact/' ) );
+    $tel_disp = function_exists( 'timeless_phone' ) ? timeless_phone() : '0451 110 154';
+    $tel_link = function_exists( 'timeless_phone_link' ) ? timeless_phone_link() : '+61451110154';
+    ob_start(); ?>
+    <section class="py-16 sm:py-20 bg-primary text-white relative overflow-hidden">
+        <!-- Decorative gradient overlay -->
+        <div class="absolute inset-0 bg-linear-to-br from-primary via-primary to-[#0a2d52] opacity-90" aria-hidden="true"></div>
+        <div class="relative max-w-4xl mx-auto px-6 sm:px-8 text-center">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-6">Get Your Free Quote</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tighter leading-tight mb-4">
+                Save Time &amp; Money with Professional Resurfacing
+            </h2>
+            <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
+                Cracks, chips, or stains can lead to bigger problems — repairing them quickly keeps your bathroom looking its best.
+                We offer fast, cost-effective resurfacing that restores surfaces without the cost or disruption of full replacements.
+            </p>
+            <p class="text-sm sm:text-base text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
+                Send 3-4 photos of your bathroom. We'll reply with a fixed-price quote within hours. No call-out fee, no obligation.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="<?php echo $contact; ?>" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
+                    Get Your Free Quote Today
+                    <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span>
+                </a>
+                <a href="tel:<?php echo esc_attr( $tel_link ); ?>" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
+                    <span class="material-symbols-outlined text-lg" aria-hidden="true">call</span>
+                    Call <?php echo esc_html( $tel_disp ); ?>
+                </a>
+            </div>
+        </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+
+/* ─────────────────────────────────────────────
    1e. AUTO TABLE OF CONTENTS FOR ARTICLES
    ─────────────────────────────────────────────
    When an article has 3+ H2 headings, generate a sticky "On this page"

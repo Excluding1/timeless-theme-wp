@@ -130,11 +130,15 @@ $all_categories = get_categories( array(
 </section>
 <?php endif; ?>
 
-<!-- ARTICLE GRID -->
+<!-- ARTICLE GRID + SIDEBAR (2-column on desktop, stacks on mobile) -->
 <section class="py-12 sm:py-16 bg-white">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
+ <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 lg:gap-12">
+
+ <!-- MAIN: Article grid -->
+ <div>
  <?php if ( have_posts() ) : ?>
- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+ <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
  <?php while ( have_posts() ) : the_post();
  $thumb = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
  $cats  = get_the_category();
@@ -173,7 +177,7 @@ $all_categories = get_categories( array(
  ) );
  ?>
  <?php else : ?>
- <div class="text-center py-16 max-w-xl mx-auto">
+ <div class="text-center py-16">
  <span class="material-symbols-outlined text-6xl text-primary/30 mb-4 block" aria-hidden="true">article</span>
  <h2 class="text-xl font-bold text-primary mb-3">
  <?php echo $is_category ? 'No articles in this category yet' : ( $is_tag ? 'No articles with this tag yet' : 'No articles published yet' ); ?>
@@ -182,6 +186,18 @@ $all_categories = get_categories( array(
  <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-block px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">← Back to home</a>
  </div>
  <?php endif; ?>
+ </div>
+
+ <!-- SIDEBAR: search + CTA + recent posts -->
+ <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+ <?php
+ echo timeless_blog_search_widget();
+ echo timeless_blog_quote_cta_box();
+ echo timeless_blog_recent_posts_widget( 5 );
+ ?>
+ </aside>
+
+ </div>
  </div>
 </section>
 
