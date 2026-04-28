@@ -20,7 +20,7 @@
  { "@type": "City", "name": "Blue Mountains" }
  ],
  "openingHoursSpecification": [
- { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "17:00" },
+ { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "17:00" }
  ],
  "priceRange": "$$",<?php echo timeless_aggregate_rating_jsonld('middle'); ?>
  "contactPoint": {
