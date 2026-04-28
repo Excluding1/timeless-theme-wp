@@ -346,6 +346,11 @@ function timeless_migrate_service_slugs_v2() {
 }
 add_action( 'after_switch_theme', 'timeless_migrate_service_slugs_v2', 5 );  // Before create_pages (priority 10)
 add_action( 'admin_init', 'timeless_migrate_service_slugs_v2' );
+// FRONTEND TRIGGER: also fire on init for frontend requests so visitors
+// don't get caught in a redirect loop if the admin hasn't logged in yet
+// after deploy. Function early-exits via option flag once complete, so
+// the cost is one cached get_option() call on every subsequent request.
+add_action( 'init', 'timeless_migrate_service_slugs_v2', 99 );
 
 /**
  * 301 redirect old "-sydney" URLs to new universal URLs.
@@ -364,9 +369,26 @@ function timeless_legacy_url_redirect() {
 
     $uri = $_SERVER['REQUEST_URI'] ?? '';
     if ( preg_match( '#^/services/([a-z0-9-]+)-sydney(/.*)?$#', $uri, $m ) ) {
-        $rest = $m[2] ?? '/';
-        wp_redirect( home_url( '/services/' . $m[1] . $rest ), 301 );
-        exit;
+        $new_path = '/services/' . $m[1] . ( $m[2] ?? '/' );
+
+        // SAFETY: only redirect to the new URL if a page actually exists there.
+        // This prevents an infinite loop when:
+        //   - Old URL is requested
+        //   - DB migration hasn't run yet (slugs still have -sydney suffix)
+        //   - Without this check, we'd redirect to a URL that doesn't exist,
+        //     WP's canonical_redirect would send back to old URL, our redirect
+        //     would fire again — loop forever.
+        // With this check, we just let the request fall through to WordPress
+        // until migration runs.
+        $check_path = trim( strtok( $new_path, '?' ), '/' );  // strip query + leading/trailing slashes
+        $new_page   = get_page_by_path( $check_path );
+
+        if ( $new_page ) {
+            wp_redirect( home_url( $new_path ), 301 );
+            exit;
+        }
+        // No page at new URL yet → skip redirect, let WP render the old URL normally
+        // until timeless_migrate_service_slugs_v2 runs on next admin_init
     }
 }
 add_action( 'template_redirect', 'timeless_legacy_url_redirect', 1 );
