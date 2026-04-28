@@ -71,7 +71,7 @@ get_header(); ?>
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing" class="w-full h-full object-cover" style="object-position:center 70%;" draggable="false" fetchpriority="high" width="800" height="600" />
  </div>
  <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
- <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" class="absolute inset-0 w-full h-full object-cover" style="object-position:center 70%;" />
+ <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" class="absolute inset-0 w-full h-full object-cover" style="object-position:center 70%;" fetchpriority="high" width="800" height="600" />
  </div>
  <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
@@ -100,7 +100,7 @@ get_header(); ?>
  <div id="hero-slider" class="rounded-2xl overflow-hidden shadow-2xl relative select-none" style="aspect-ratio:5/6;cursor:ew-resize;">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="After bathroom resurfacing Sydney" class="absolute inset-0 w-full h-full object-cover" draggable="false" fetchpriority="high" width="800" height="960" />
  <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" class="absolute inset-0 w-full h-full object-cover" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" width="800" height="960" />
  </div>
  <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">

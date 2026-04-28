@@ -1936,35 +1936,66 @@ function timeless_analytics_scripts() {
     }
 
     $ga4 = trim( get_theme_mod( 'timeless_ga4_id', '' ) );
-    if ( $ga4 && preg_match( '/^G-[A-Z0-9]{8,12}$/i', $ga4 ) ) {
-        // Google Analytics 4 (gtag.js)
-        $ga4_safe = esc_attr( $ga4 );
-        ?>
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $ga4_safe; ?>"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '<?php echo esc_js( $ga4 ); ?>', { 'anonymize_ip': true });
-</script>
-        <?php
+    $clarity = trim( get_theme_mod( 'timeless_clarity_id', '' ) );
+
+    $has_ga4 = $ga4 && preg_match( '/^G-[A-Z0-9]{8,12}$/i', $ga4 );
+    $has_clarity = $clarity && preg_match( '/^[a-z0-9]{8,15}$/i', $clarity );
+
+    if ( ! $has_ga4 && ! $has_clarity ) {
+        return;
     }
 
-    $clarity = trim( get_theme_mod( 'timeless_clarity_id', '' ) );
-    if ( $clarity && preg_match( '/^[a-z0-9]{8,15}$/i', $clarity ) ) {
-        // Microsoft Clarity — heatmaps + session replays
-        ?>
-<!-- Microsoft Clarity -->
+    // Defer all analytics until first user interaction OR 2.5s after page load.
+    // This frees the main thread during the LCP measurement window — without
+    // this, GTM (172 KB) creates 200+ ms long tasks at 3-5s on slow 4G mobile,
+    // which pushes Lighthouse LCP past 5s. The tracking still fires for any
+    // engaged visitor (anyone who scrolls/clicks within 2.5s) so we don't
+    // lose meaningful analytics data — just bot impressions.
+    ?>
+<!-- Analytics (deferred until interaction or 2.5s) -->
 <script>
-(function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "<?php echo esc_js( $clarity ); ?>");
-</script>
-        <?php
+(function(){
+  var loaded = false;
+  var ga4 = <?php echo $has_ga4 ? '"' . esc_js( $ga4 ) . '"' : 'null'; ?>;
+  var clarityId = <?php echo $has_clarity ? '"' . esc_js( $clarity ) . '"' : 'null'; ?>;
+
+  function loadAnalytics(){
+    if (loaded) return;
+    loaded = true;
+
+    if (ga4) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', ga4, { anonymize_ip: true });
+      var g = document.createElement('script');
+      g.async = true;
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4;
+      document.head.appendChild(g);
     }
+
+    if (clarityId) {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", clarityId);
+    }
+  }
+
+  // Trigger on first user signal
+  var events = ['scroll','click','keydown','touchstart','mousemove'];
+  events.forEach(function(ev){
+    window.addEventListener(ev, loadAnalytics, { once: true, passive: true });
+  });
+
+  // Fallback: load after 2.5s even if no interaction. Lighthouse runs are
+  // headless (no interaction) so this guarantees tracking still loads,
+  // but only AFTER LCP has been measured.
+  setTimeout(loadAnalytics, 2500);
+})();
+</script>
+    <?php
 }
 add_action( 'wp_head', 'timeless_analytics_scripts', 99 );  // Priority 99 = late in head, after most other tags
 
