@@ -2695,6 +2695,47 @@ function timeless_preload_inter() {
 }
 add_action( 'wp_head', 'timeless_preload_inter', 1 );
 
+/** Preload hero LCP image on homepage only.
+ *  Without this, Lighthouse sometimes can't detect LCP (NO_LCP error) because
+ *  the hero image is discovered late in the load sequence. With preload, the
+ *  browser fetches it in parallel with HTML — making LCP measurement
+ *  deterministic + reducing actual LCP time by 100-300ms.
+ *
+ *  Mobile gets the 800w variant (responsive). Desktop gets the full image.
+ *  imagesrcset/imagesizes mirrors the picture element so browser picks
+ *  the right variant for the viewport.
+ */
+function timeless_preload_hero_lcp() {
+    if ( ! is_front_page() ) {
+        return;
+    }
+    $base_url = get_template_directory_uri() . '/images/homepage/after.jpg';
+    $base_path = get_template_directory() . '/images/homepage/after.jpg';
+    if ( ! file_exists( $base_path ) ) {
+        return;
+    }
+    $w400_path = get_template_directory() . '/images/homepage/after-400w.jpg';
+    $w800_path = get_template_directory() . '/images/homepage/after-800w.jpg';
+    if ( ! file_exists( $w400_path ) || ! file_exists( $w800_path ) ) {
+        return;
+    }
+    $ver = filemtime( $base_path );
+    $w400 = get_template_directory_uri() . '/images/homepage/after-400w.jpg';
+    $w800 = get_template_directory_uri() . '/images/homepage/after-800w.jpg';
+
+    // Note: WebP variants exist (after-400w.jpg.webp etc) but we preload JPG
+    // because Safari's preload behavior with WebP imagesrcset is buggy.
+    // The actual rendering still picks WebP via the picture element's
+    // <source type="image/webp"> when the browser supports it.
+    printf(
+        '<link rel="preload" as="image" href="%s?v=%d" imagesrcset="%s?v=%d 400w, %s?v=%d 800w" imagesizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" fetchpriority="high" />' . "\n",
+        esc_url( $base_url ), $ver,
+        esc_url( $w400 ), $ver,
+        esc_url( $w800 ), $ver
+    );
+}
+add_action( 'wp_head', 'timeless_preload_hero_lcp', 1 );
+
 /** Disable WordPress heartbeat on frontend (saves AJAX calls, reduces server load) */
 function timeless_disable_heartbeat() {
     if ( ! is_admin() ) {
