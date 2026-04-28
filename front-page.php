@@ -165,7 +165,7 @@ get_header(); ?>
  <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pr-6 sm:pr-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:pb-0" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
  <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" alt="Shower regrouting service" class="w-full h-full object-cover rounded-full" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting-400w.jpg 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg 800w" sizes="(max-width: 640px) 200px, 250px" alt="Shower regrouting service" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
  </div>
  <h3 class="text-lg font-bold text-primary mb-2">Shower Regrouting</h3>
  <p class="text-secondary text-sm leading-relaxed mb-3">Full grout removal &amp; replacement with premium waterproof epoxy. Same-day service.</p>
@@ -173,7 +173,7 @@ get_header(); ?>
  </a>
  <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png" alt="Bath resurfacing service" class="w-full h-full object-cover rounded-full" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png 800w" sizes="(max-width: 640px) 200px, 250px" alt="Bath resurfacing service" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
  </div>
  <h3 class="text-lg font-bold text-primary mb-2">Bath Resurfacing</h3>
  <p class="text-secondary text-sm leading-relaxed mb-3">Restore chipped or stained bathtubs to brilliant shine. Lasts up to 10 years.</p>
@@ -181,7 +181,7 @@ get_header(); ?>
  </a>
  <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png" alt="Tile resurfacing service" class="w-full h-full object-cover rounded-full" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png 800w" sizes="(max-width: 640px) 200px, 250px" alt="Tile resurfacing service" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
  </div>
  <h3 class="text-lg font-bold text-primary mb-2">Tile Resurfacing</h3>
  <p class="text-secondary text-sm leading-relaxed mb-3">Transform outdated tiles into a clean, modern finish. No demolition required.</p>
@@ -189,7 +189,7 @@ get_header(); ?>
  </a>
  <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png" alt="Vanity resurfacing service" class="w-full h-full object-cover rounded-full" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png 800w" sizes="(max-width: 640px) 200px, 250px" alt="Vanity resurfacing service" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
  </div>
  <h3 class="text-lg font-bold text-primary mb-2">Vanity Refinishing</h3>
  <p class="text-secondary text-sm leading-relaxed mb-3">Stone-fleck or sleek satin finish. 900+ colours available.</p>
@@ -197,7 +197,7 @@ get_header(); ?>
  </a>
  <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png" alt="Basin resurfacing service" class="w-full h-full object-cover rounded-full" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png 800w" sizes="(max-width: 640px) 200px, 250px" alt="Basin resurfacing service" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
  </div>
  <h3 class="text-lg font-bold text-primary mb-2">Basin Restoration</h3>
  <p class="text-secondary text-sm leading-relaxed mb-3">Chip repair &amp; full resurface for porcelain, cast iron, and acrylic basins.</p>
@@ -205,14 +205,14 @@ get_header(); ?>
  </a>
  <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 flex items-center justify-center overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png" alt="Shower sealing service" class="w-full h-full object-cover rounded-full" />
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png 800w" sizes="(max-width: 640px) 200px, 250px" alt="Shower sealing service" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
  </div>
  <h3 class="text-lg font-bold text-primary mb-2">Shower Sealing</h3>
  <p class="text-secondary text-sm leading-relaxed mb-3">Leaking shower? Precision waterproof silicone &amp; epoxy sealing.</p>
  <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
  </a>
  </div>
- <p class="text-center text-[0.6rem] text-outline mt-3 sm:hidden">Swipe to see more services &rarr;</p>
+ <p class="text-center text-[0.6rem] text-secondary mt-3 sm:hidden">Swipe to see more services &rarr;</p>
  </div>
 </section>
 

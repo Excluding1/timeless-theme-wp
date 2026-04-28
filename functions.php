@@ -887,7 +887,10 @@ function timeless_scripts() {
             font-family: 'Material Symbols Outlined';
             font-style: normal;
             font-weight: 400;
-            font-display: block;
+            /* swap (not block) per Lighthouse — minor codepoint flash on first uncached
+               load is acceptable trade for FCP improvement. Font is preloaded + tiny
+               (~10KB subset) + Cloudflare-cached, so flash window is <100ms in practice. */
+            font-display: swap;
             src: url(" . esc_url( $ms_font_url ) . "?v=$ms_font_ver) format('woff2');
         }
         /* CRITICAL: bind the class to the @font-face. Without this, .material-symbols-outlined

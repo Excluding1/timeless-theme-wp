@@ -108,7 +108,7 @@ $phone      = timeless_phone();
         <div class="flex flex-col px-6 pt-2 pb-8">
             <!-- Resurfacing -->
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
-                <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">format_paint</span> Resurfacing</span>
+                <span class="text-[0.65rem] font-bold text-primary uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">format_paint</span> Resurfacing</span>
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
@@ -119,7 +119,7 @@ $phone      = timeless_phone();
             </div>
             <!-- Regrouting & Sealing -->
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
-                <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</span>
+                <span class="text-[0.65rem] font-bold text-primary uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">plumbing</span> Regrouting &amp; Sealing</span>
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
@@ -129,7 +129,7 @@ $phone      = timeless_phone();
             </div>
             <!-- Repairs & Packages -->
             <button class="flex justify-between items-center py-3 text-left" onclick="toggleMobileAccordion(this)">
-                <span class="text-[0.65rem] font-bold text-tertiary-fixed-dim uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">build</span> Repairs &amp; Packages</span>
+                <span class="text-[0.65rem] font-bold text-primary uppercase tracking-widest flex items-center gap-2"><span class="material-symbols-outlined text-sm" aria-hidden="true">build</span> Repairs &amp; Packages</span>
                 <span class="material-symbols-outlined text-sm text-secondary mobile-chevron transition-transform" aria-hidden="true">expand_more</span>
             </button>
             <div class="mobile-accordion open">
