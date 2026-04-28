@@ -85,8 +85,61 @@ $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
 </header>
 
 <!-- ARTICLE BODY -->
-<div class="entry-content px-6 sm:px-8 max-w-3xl mx-auto pb-16">
- <?php the_content(); ?>
+<?php
+// Pre-render content so we can inspect TOC items before deciding layout
+$content_html = apply_filters( 'the_content', get_the_content() );
+$toc_items    = $GLOBALS['timeless_toc_items'] ?? array();
+$show_toc     = count( $toc_items ) >= 3;
+?>
+<div class="px-6 sm:px-8 max-w-7xl mx-auto pb-16">
+ <?php if ( $show_toc ) : ?>
+ <!-- 2-column layout: TOC sidebar + article content -->
+ <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-12">
+ <!-- TOC Sidebar -->
+ <aside class="lg:sticky lg:top-24 lg:self-start order-2 lg:order-1">
+ <!-- Mobile: collapsible -->
+ <details class="lg:hidden bg-surface-container-low rounded-xl p-5 mb-6">
+ <summary class="font-bold text-primary text-sm cursor-pointer flex items-center justify-between">
+ <span class="flex items-center gap-2">
+ <span class="material-symbols-outlined text-base" aria-hidden="true">format_list_bulleted</span>
+ On this page
+ </span>
+ <span class="material-symbols-outlined text-base" aria-hidden="true">expand_more</span>
+ </summary>
+ <ul class="mt-4 space-y-2">
+ <?php foreach ( $toc_items as $item ) : ?>
+ <li><a href="#<?php echo esc_attr( $item['slug'] ); ?>" class="text-sm text-secondary hover:text-primary block py-1 leading-snug"><?php echo esc_html( $item['text'] ); ?></a></li>
+ <?php endforeach; ?>
+ </ul>
+ </details>
+ <!-- Desktop: always visible, sticky -->
+ <nav class="hidden lg:block bg-surface-container-low rounded-xl p-6" aria-label="Table of contents">
+ <h2 class="font-bold text-primary text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
+ <span class="material-symbols-outlined text-base" aria-hidden="true">format_list_bulleted</span>
+ On this page
+ </h2>
+ <ul class="space-y-2.5 border-l-2 border-surface-container">
+ <?php foreach ( $toc_items as $item ) : ?>
+ <li>
+ <a href="#<?php echo esc_attr( $item['slug'] ); ?>" class="text-sm text-secondary hover:text-primary block pl-4 -ml-0.5 border-l-2 border-transparent hover:border-primary leading-snug py-1 transition-colors">
+ <?php echo esc_html( $item['text'] ); ?>
+ </a>
+ </li>
+ <?php endforeach; ?>
+ </ul>
+ </nav>
+ </aside>
+ <!-- Content -->
+ <div class="entry-content order-1 lg:order-2 max-w-3xl">
+ <?php echo $content_html; ?>
+ </div>
+ </div>
+ <?php else : ?>
+ <!-- Single-column layout: no TOC -->
+ <div class="entry-content max-w-3xl mx-auto">
+ <?php echo $content_html; ?>
+ </div>
+ <?php endif; ?>
 </div>
 </article>
 

@@ -200,6 +200,8 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
     letter-spacing: -0.02em;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
+    /* Offset for sticky nav when jumped to via TOC anchor */
+    scroll-margin-top: 5rem;
 }
 .entry-content h3 {
     font-size: 1.5rem;

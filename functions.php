@@ -192,6 +192,124 @@ function timeless_flush_blog_rewrites() {
     }
 }
 add_action( 'init', 'timeless_flush_blog_rewrites', 99 );
+
+/* ─────────────────────────────────────────────
+   1e. AUTO TABLE OF CONTENTS FOR ARTICLES
+   ─────────────────────────────────────────────
+   When an article has 3+ H2 headings, generate a sticky "On this page"
+   sidebar with jump links. Only triggers for substantive articles —
+   short posts (<3 H2s) skip the TOC to avoid visual clutter.
+
+   Implementation: filters the_content output, injects id attributes
+   into H2 tags, and stores the TOC items in a global for the template
+   to render. Smooth scroll behavior comes from existing CSS scroll-smooth
+   class on <html>.
+   ───────────────────────────────────────────── */
+function timeless_inject_heading_anchors( $content ) {
+    if ( ! is_singular( 'article' ) || ! in_the_loop() ) {
+        return $content;
+    }
+
+    $GLOBALS['timeless_toc_items'] = array();
+
+    $content = preg_replace_callback(
+        '/<h2([^>]*)>(.+?)<\/h2>/i',
+        function ( $m ) {
+            $attrs = $m[1];
+            $inner = $m[2];
+            // Extract plain text for slug + display
+            $text  = trim( wp_strip_all_tags( $inner ) );
+            if ( empty( $text ) ) {
+                return $m[0];
+            }
+            // Generate slug from heading text
+            $slug = sanitize_title( $text );
+            // Avoid duplicate IDs by appending counter if needed
+            static $seen = array();
+            $base_slug = $slug;
+            $i         = 1;
+            while ( in_array( $slug, $seen, true ) ) {
+                $i++;
+                $slug = $base_slug . '-' . $i;
+            }
+            $seen[] = $slug;
+
+            // Skip if H2 already has id attribute
+            if ( strpos( $attrs, 'id=' ) === false ) {
+                $attrs .= ' id="' . esc_attr( $slug ) . '"';
+            } else {
+                // Extract existing id for TOC linking
+                if ( preg_match( '/id="([^"]+)"/', $attrs, $idm ) ) {
+                    $slug = $idm[1];
+                }
+            }
+
+            $GLOBALS['timeless_toc_items'][] = array(
+                'slug' => $slug,
+                'text' => $text,
+            );
+
+            return '<h2' . $attrs . '>' . $inner . '</h2>';
+        },
+        $content
+    );
+
+    return $content;
+}
+add_filter( 'the_content', 'timeless_inject_heading_anchors', 5 );
+
+/* ─────────────────────────────────────────────
+   1d. STARTER BLOG CATEGORIES
+   ─────────────────────────────────────────────
+   Pre-create 5 categories so authors don't end up with "Uncategorized" mess.
+   Idempotent: skips any category that already exists. Authors can rename,
+   add, or delete via wp-admin → Posts → Categories at any time.
+   ───────────────────────────────────────────── */
+function timeless_create_blog_categories() {
+    if ( get_option( 'timeless_blog_cats_created' ) ) {
+        return;
+    }
+
+    $categories = array(
+        array(
+            'name'        => 'Bath Resurfacing Tips',
+            'slug'        => 'bath-resurfacing-tips',
+            'description' => 'Practical guides for bath resurfacing: how it works, what to expect, care tips, common questions.',
+        ),
+        array(
+            'name'        => 'Tile & Grout Care',
+            'slug'        => 'tile-grout-care',
+            'description' => 'How to maintain tiles and grout between professional services. Cleaning, mould prevention, when to repair vs regrout.',
+        ),
+        array(
+            'name'        => 'Before & After',
+            'slug'        => 'before-after',
+            'description' => 'Real Sydney bathroom transformations. Photos, costs, timelines, and customer stories.',
+        ),
+        array(
+            'name'        => 'DIY vs Professional',
+            'slug'        => 'diy-vs-professional',
+            'description' => 'When DIY makes sense and when it costs more in the long run. Honest comparisons.',
+        ),
+        array(
+            'name'        => 'Service Spotlights',
+            'slug'        => 'service-spotlights',
+            'description' => 'Deep dives into specific services: epoxy grout, vanity respray, shower regrouting and more.',
+        ),
+    );
+
+    foreach ( $categories as $cat ) {
+        if ( ! term_exists( $cat['slug'], 'category' ) ) {
+            wp_insert_term( $cat['name'], 'category', array(
+                'slug'        => $cat['slug'],
+                'description' => $cat['description'],
+            ) );
+        }
+    }
+
+    update_option( 'timeless_blog_cats_created', '1' );
+}
+add_action( 'init', 'timeless_create_blog_categories', 100 );
 add_action( 'after_setup_theme', 'timeless_setup' );
 
 /* Auto-create all pages on theme activation (skips existing ones) */
