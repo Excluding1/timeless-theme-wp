@@ -18,11 +18,180 @@ function timeless_setup() {
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo' );
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
+    add_theme_support( 'wp-block-styles' );  // Gutenberg block default styles
+    add_theme_support( 'align-wide' );        // Wide/full alignment for blocks
 
     register_nav_menus( array(
         'primary' => __( 'Primary Navigation', 'timeless' ),
     ) );
 }
+
+/* ─────────────────────────────────────────────
+   1b. CUSTOM POST TYPE: ARTICLE (Blog)
+   ─────────────────────────────────────────────
+   Custom CPT "article" lives at /blog/{slug}/. Separate from default
+   "page" so blog content stays organized in its own admin section.
+   Gutenberg-enabled (show_in_rest=true) so users can compose flexible
+   layouts with text + images + custom shortcodes for before/after etc.
+   ───────────────────────────────────────────── */
+function timeless_register_article_cpt() {
+    register_post_type( 'article', array(
+        'labels' => array(
+            'name'               => 'Articles',
+            'singular_name'      => 'Article',
+            'add_new'            => 'Add New Article',
+            'add_new_item'       => 'Add New Article',
+            'edit_item'          => 'Edit Article',
+            'new_item'           => 'New Article',
+            'view_item'          => 'View Article',
+            'search_items'       => 'Search Articles',
+            'not_found'          => 'No articles found',
+            'not_found_in_trash' => 'No articles in trash',
+            'menu_name'          => 'Blog',
+        ),
+        'public'              => true,
+        'has_archive'         => 'blog',
+        'rewrite'             => array( 'slug' => 'blog', 'with_front' => false ),
+        'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author' ),
+        'show_in_rest'        => true,  // Gutenberg
+        'menu_icon'           => 'dashicons-edit',
+        'menu_position'       => 5,
+        'taxonomies'          => array( 'category', 'post_tag' ),
+    ) );
+}
+add_action( 'init', 'timeless_register_article_cpt' );
+
+/* ─────────────────────────────────────────────
+   1c. SHORTCODES FOR BLOG CONTENT
+   ─────────────────────────────────────────────
+   Custom shortcodes that authors can embed in articles via the Shortcode
+   block in Gutenberg, OR by typing the [shortcode] markup directly in
+   any text block. Each renders themed components matching the rest of
+   the site (before/after, icon callouts, process steps).
+   ───────────────────────────────────────────── */
+
+/* [before_after before="url" after="url" alt="..."] — interactive slider */
+function timeless_shortcode_before_after( $atts ) {
+    $a = shortcode_atts( array(
+        'before' => '',
+        'after'  => '',
+        'alt'    => 'Before and after',
+    ), $atts );
+    if ( empty( $a['before'] ) || empty( $a['after'] ) ) {
+        return '';
+    }
+    ob_start(); ?>
+    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-2xl my-8" style="aspect-ratio:3/2;cursor:ew-resize;">
+        <div class="absolute inset-0 w-full h-full">
+            <img src="<?php echo esc_url( $a['after'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — after' ); ?>" class="w-full h-full object-cover absolute inset-0" />
+        </div>
+        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+            <div class="ba-before absolute inset-0">
+                <img src="<?php echo esc_url( $a['before'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — before' ); ?>" class="w-full h-full object-cover absolute inset-0" />
+            </div>
+        </div>
+        <div class="ba-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left:50%;transform:translateX(-50%);cursor:ew-resize;">
+            <div class="absolute top-1/2 left-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center" style="transform:translate(-50%,-50%);">
+                <span class="material-symbols-outlined text-primary" aria-hidden="true">drag_indicator</span>
+            </div>
+        </div>
+        <span class="absolute top-3 left-3 bg-white/90 text-primary text-xs font-bold px-2 py-1 rounded">BEFORE</span>
+        <span class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">AFTER</span>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'before_after', 'timeless_shortcode_before_after' );
+
+/* [icon_callout icon="check_circle" title="..." content="..."] — themed callout */
+function timeless_shortcode_icon_callout( $atts, $content = null ) {
+    $a = shortcode_atts( array(
+        'icon'    => 'check_circle',
+        'title'   => '',
+        'content' => '',
+    ), $atts );
+    $body = $a['content'] ?: $content;
+    ob_start(); ?>
+    <div class="my-6 bg-surface-container-low rounded-xl p-6 flex items-start gap-4 border-l-4 border-primary">
+        <span class="material-symbols-outlined text-3xl text-primary shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true"><?php echo esc_html( $a['icon'] ); ?></span>
+        <div class="flex-1">
+            <?php if ( $a['title'] ) : ?>
+                <h4 class="font-bold text-primary mb-2 text-lg"><?php echo esc_html( $a['title'] ); ?></h4>
+            <?php endif; ?>
+            <div class="text-sm text-secondary leading-relaxed"><?php echo wp_kses_post( $body ); ?></div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'icon_callout', 'timeless_shortcode_icon_callout' );
+
+/* [process_step number="1" title="..." duration="..." content="..."] — timeline step */
+function timeless_shortcode_process_step( $atts, $content = null ) {
+    $a = shortcode_atts( array(
+        'number'   => '1',
+        'title'    => '',
+        'duration' => '',
+        'content'  => '',
+    ), $atts );
+    $body = $a['content'] ?: $content;
+    ob_start(); ?>
+    <div class="my-6 flex gap-4">
+        <div class="flex flex-col items-center shrink-0">
+            <div class="w-12 h-12 rounded-full bg-white shadow-xs flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center">
+                    <span class="text-base font-black text-[#7a5c10]"><?php echo esc_html( $a['number'] ); ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1">
+            <?php if ( $a['duration'] ) : ?>
+                <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2"><?php echo esc_html( $a['duration'] ); ?></span>
+            <?php endif; ?>
+            <?php if ( $a['title'] ) : ?>
+                <h4 class="font-bold text-primary mb-1 text-lg"><?php echo esc_html( $a['title'] ); ?></h4>
+            <?php endif; ?>
+            <div class="text-sm text-secondary leading-relaxed"><?php echo wp_kses_post( $body ); ?></div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'process_step', 'timeless_shortcode_process_step' );
+
+/* [stat_grid] for reusable stat blocks like the homepage hero counters
+   Usage: [stat_grid stats="1 Day|Most jobs;Up to 80%|Save vs new;3yr|Warranty"] */
+function timeless_shortcode_stat_grid( $atts ) {
+    $a = shortcode_atts( array( 'stats' => '' ), $atts );
+    if ( empty( $a['stats'] ) ) return '';
+    $items = explode( ';', $a['stats'] );
+    ob_start(); ?>
+    <div class="my-8 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+        <?php foreach ( $items as $item ) :
+            $parts = explode( '|', $item );
+            $value = $parts[0] ?? '';
+            $label = $parts[1] ?? '';
+            if ( ! $value ) continue; ?>
+            <div class="bg-white rounded-xl p-4 text-center border border-surface-container">
+                <p class="text-2xl sm:text-3xl font-extrabold text-primary leading-tight"><?php echo esc_html( trim( $value ) ); ?></p>
+                <p class="text-xs text-secondary mt-1"><?php echo esc_html( trim( $label ) ); ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'stat_grid', 'timeless_shortcode_stat_grid' );
+
+/* Flush rewrite rules when CPT is registered (one-time, on theme activation) */
+function timeless_flush_blog_rewrites() {
+    if ( ! get_option( 'timeless_blog_rewrites_flushed' ) ) {
+        timeless_register_article_cpt();
+        flush_rewrite_rules();
+        update_option( 'timeless_blog_rewrites_flushed', '1' );
+    }
+}
+add_action( 'init', 'timeless_flush_blog_rewrites', 99 );
 add_action( 'after_setup_theme', 'timeless_setup' );
 
 /* Auto-create all pages on theme activation (skips existing ones) */
