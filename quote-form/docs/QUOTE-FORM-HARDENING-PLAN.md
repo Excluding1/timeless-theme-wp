@@ -67,6 +67,49 @@
 - [x] No horizontal scroll at any viewport.
 - [x] No console errors after reloading at any viewport.
 
+### Cycle 9: Holiday-state user + landline portability — ✅ DONE
+
+**User feedback that triggered this cycle:**
+1. *"What happens if someone is on holiday?"* — i.e., a NSW resident on holiday in QLD/VIC opens the form, types their NSW property address, and Google's IP-based bias surfaces interstate suggestions first. Even with chkAddr Tier 2 catching the post-pick state code, the user sees confusing wrong-state results in the dropdown.
+2. *"Don't some landlines have redirect?"* — i.e., the soft hint about "NSW landlines usually start with 02" is wrong because of:
+   - Number portability (2002+) — moved-from-VIC residents keep their 03 number forever
+   - Call forwarding — 02 office line redirects to a 03 mobile/VOIP
+   - VOIP / virtual numbers (Twilio, Aircall) — geographic prefix is arbitrary
+   - Inherited business lines — kept for continuity
+
+**Fixes:**
+
+🟢 **Fix 1 — `locationRestriction` rectangle on Places API**
+
+Added a NSW bounding box to every autocomplete request:
+```js
+locationRestriction: {
+  rectangle: {
+    low:  { latitude: -37.51, longitude: 140.999 },  // VIC + SA borders
+    high: { latitude: -28.16, longitude: 153.64 }    // QLD border + Pacific
+  }
+}
+```
+Now Google **never** returns non-NSW suggestions regardless of where the user is. Lord Howe Is + Norfolk Is excluded as collateral — out of service area anyway. ACT enclaves still filtered by chkAddr postcode check (defense in depth).
+
+🟢 **Fix 2 — Removed `landlineNonNSW` soft hint**
+
+Reverted the 03/07/08 warning. Reasoning: prefix isn't a reliable signal of physical location due to portability/redirect/VOIP. The hint catches ~1 actual misdial per ~100 valid edge-case numbers — net negative for UX.
+
+**Audit results:**
+
+| # | Test | Before fix | After fix |
+|---|---|---|---|
+| 1 | Curl Places API "15 King St" with NSW restriction | (not yet restricted — returned QLD/VIC) | ✅ All 5 results NSW (Campbelltown, Balmain, Manly Vale, Waverton, Randwick) |
+| 2 | Live form: type 0398765432 in landline mode | Showed warning hint | ✅ Hint gone, green confirmation only |
+| 3 | NSW landline (0298765432) | Green confirmation | ✅ Unchanged — still works correctly |
+
+**Expert reasoning trail:**
+
+Initial Cycle 8 added the soft landline hint "with good intentions". User pointed out the gap: prefix isn't authoritative in modern AU telephony. Best to **defer to the address gating** (which is geographic + verifiable) rather than try to infer location from phone prefix (which isn't). Removed the hint.
+
+For the holiday case, **fixing it at the API level beats fixing it post-hoc.** Even if chkAddr would have caught the wrong-state pick after the click, the user sees confusing suggestions and has to remember to scroll past them. `locationRestriction` makes the entire UI clean — the only suggestions visible are valid ones.
+
 ### Cycle 8: NSW gating + phone hardening (expert review) — ✅ DONE
 
 **Expert lens applied:**

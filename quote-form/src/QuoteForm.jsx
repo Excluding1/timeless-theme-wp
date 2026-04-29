@@ -345,7 +345,25 @@ export default function QuoteForm() {
       const res = await fetch("https://places.googleapis.com/v1/places:autocomplete", {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-Goog-Api-Key": apiKey },
-        body: JSON.stringify({ input: text, includedRegionCodes: ["AU"], languageCode: "en", sessionToken: addrSessionToken.current }),
+        body: JSON.stringify({
+          input: text,
+          includedRegionCodes: ["AU"],
+          languageCode: "en",
+          sessionToken: addrSessionToken.current,
+          // Restrict to mainland NSW bounding box. Without this, Google's
+          // IP-based location bias surfaces nearby suggestions — so a NSW
+          // resident on holiday in QLD/VIC types "15 King St" and gets
+          // wrong-state results promoted. With restriction, Google never
+          // suggests non-NSW addresses regardless of user location.
+          // Bounds: -37.51..-28.16 lat, 140.999..153.64 lng (excludes
+          // Lord Howe Is + Norfolk Is — out of service area anyway).
+          locationRestriction: {
+            rectangle: {
+              low: { latitude: -37.51, longitude: 140.999 },
+              high: { latitude: -28.16, longitude: 153.64 },
+            },
+          },
+        }),
       });
       if (!res.ok) { setAddrSuggestions([]); return; }
       const data = await res.json();
@@ -458,10 +476,10 @@ export default function QuoteForm() {
   const emOk = EMAIL_RE.test(em);
   const landlineNorm = landline.replace(/[\s\-\(\)\.]/g, "");
   const landlineOk = /^0[2-9]\d{8}$/.test(landlineNorm);
-  // Soft signal: NSW landlines start with 02. 03/07/08 are interstate landlines
-  // (VIC/QLD/WA-SA-NT-TAS). Probably a misdial — but allow because some NSW
-  // residents kept their interstate number after moving.
-  const landlineNonNSW = landlineOk && /^0[3789]/.test(landlineNorm);
+  // Note: deliberately NOT warning on 03/07/08 prefixes. Number portability
+  // (since 2002), call forwarding, VOIP, and inherited business lines mean
+  // a non-02 prefix doesn't reliably indicate a non-NSW resident. The hint
+  // would frustrate more legit users than it would catch genuine misdials.
   const phoneOk = noMobile ? (landlineOk && emOk) : phOk; // landline requires email for quote delivery
   // Landlord email is required only when tenant chooses "Send to landlord" flow.
   // Without this gate, a tenant could submit "x" as landlord email and we'd
@@ -737,8 +755,7 @@ export default function QuoteForm() {
             <div>
               <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone number *</label>
               <input type="tel" inputMode="numeric" autoComplete="tel" value={landline} onChange={e => setLandline(e.target.value)} placeholder="02 XXXX XXXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${landline.length > 3 && !landlineOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {landlineOk && !landlineNonNSW && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
-              {landlineNonNSW && <p style={{ fontSize: 12, color: C.warn, marginTop: 5 }}>Heads up: NSW landlines usually start with <strong>02</strong>. Double-check this is correct &mdash; we still service NSW only.</p>}
+              {landlineOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
               <button type="button" onClick={() => { setNoMobile(false); setLandline(""); }} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", marginTop: 6, textDecoration: "underline", padding: "8px 4px", minHeight: 32 }}>I have a mobile number</button>
             </div>
           )}
