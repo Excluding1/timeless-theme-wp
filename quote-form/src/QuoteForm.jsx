@@ -330,6 +330,9 @@ export default function QuoteForm() {
   // Step 2
   const [addr, setAddr] = useState(""); const [addrOk, setAddrOk] = useState(null);
   const [prop, setProp] = useState(null); const [lift, setLift] = useState(null);
+  // Asbestos screening (NSW Excel rejection #8). Restoring parity with the
+  // existing WP-side quote form which has been asking this since launch.
+  const [builtBefore1990, setBuiltBefore1990] = useState(null); // "yes" | "no" | "unsure"
   // Address autocomplete (Google Places Autocomplete New — REST API).
   // Free with session tokens since Nov 2024. Falls back to plain text
   // input if VITE_GOOGLE_PLACES_KEY isn't set (no error, just no suggestions).
@@ -383,6 +386,9 @@ export default function QuoteForm() {
   const [svcPicks, setSvcPicks] = useState({}); const [epoxyPicks, setEpoxyPicks] = useState({});
   const [basinCnt, setBasinCnt] = useState(null);
   const [showerOverBath, setShowerOverBath] = useState(null); // "yes" | "no" | null
+  // Spa bath flag — Excel BTV-05/06 vs BTH-01 is ~+$440 pricing delta.
+  // Only shown when bath area is being serviced + bath resurface (bt1) picked.
+  const [isSpa, setIsSpa] = useState(null); // "yes" | "no"
   // Step 5
   const [notes, setNotes] = useState("");
   const [prevResurfaced, setPrevResurfaced] = useState(null); // yes/no/unsure
@@ -495,7 +501,7 @@ export default function QuoteForm() {
   // Tenant must choose an authorization path (self vs send) before continuing.
   const tenantOk = cust !== "tenant" || tenAuth !== null;
   const can1 = fn.length >= 2 && ln.length >= 2 && phoneOk && emOk && cust && tenantOk && llEmOk;
-  const can2 = addr.length >= 6 && addrOk !== false && prop;
+  const can2 = addr.length >= 6 && addrOk !== false && prop && builtBefore1990;
   const can3 = mode === "single" ? !!selArea : mode === "multi" ? multiPicks.length > 0 : mode === "unsure" ? unsureTxt.length >= 10 : false;
 
   const toggleArea = id => setSelAreas(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
@@ -578,7 +584,9 @@ export default function QuoteForm() {
     if (step === "where") setStep("about");
     else if (step === "what") setStep("where");
     else if (step === "services") setStep("what");
-    else if (step === "photos") { if (selAreas.length === 1 && mode === "single") setStep("services"); else setStep("what"); }
+    // Photos → services for both single + multi modes (multi now has services
+    // step). Unsure mode skips services so back from photos goes to "what".
+    else if (step === "photos") { if (mode === "unsure") setStep("what"); else setStep("services"); }
   };
 
   /* ─── WEBHOOK CONFIG ─── */
@@ -658,6 +666,7 @@ export default function QuoteForm() {
         property_type: prop || "",
         property_address: addr,
         lift_access: prop === "apt" ? (lift || "not_specified") : "n/a",
+        built_before_1990: builtBefore1990 || "not_asked",
         // Bathroom
         areas_selected: activeAreas.join(", "),
         services_selected: servicesStr,
@@ -665,6 +674,7 @@ export default function QuoteForm() {
         shower_over_bath: showerOverBath || "not_specified",
         epoxy_preference: Object.entries(epoxyPicks).filter(([,v]) => v).map(([area, val]) => `${area}: ${val}`).join(", ") || "standard",
         basin_count: basinCnt || "1",
+        bath_type: isSpa === "yes" ? "spa" : isSpa === "no" ? "standard" : "not_specified",
         // Condition questions
         previously_resurfaced: prevResurfaced || "not_asked",
         ventilation: hasVentilation || "not_asked",
@@ -752,9 +762,10 @@ export default function QuoteForm() {
         setMode(null);
         setSelAreas([]); setSelArea(null); setMultiPicks([]);
         setSvcPicks({}); setEpoxyPicks({});
-        setBasinCnt(null); setLift(null);
+        setBasinCnt(null); setLift(null); setIsSpa(null);
         setShowerOverBath(null); setPrevResurfaced(null); setHasVentilation(null);
         setUnsureTxt(""); setNotes(""); setConsent(false);
+        // builtBefore1990 NOT reset — same property, same age; user already answered.
         // Photos collected via ref need explicit clearing (otherwise old photos
         // re-submit with the next job).
         allPhotos.current = {};
@@ -899,7 +910,22 @@ export default function QuoteForm() {
             <OptGrid label="Property type" opts={[{ id: "house", icon: I.house(), label: "House" }, { id: "apt", icon: I.apt(), label: "Apartment" }, { id: "comm", icon: I.comm(), label: "Commercial" }]} val={prop} set={setProp} />
             {prop === "apt" && <div style={{ display: "flex", gap: 6, marginTop: 8 }}>{["yes", "no"].map(v => <button key={v} onClick={() => setLift(v)} style={{ flex: 1, padding: 9, borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: "pointer", border: lift === v ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: lift === v ? `${C.pri}08` : C.white, color: lift === v ? C.pri : C.sec }}>{v === "yes" ? "Has lift access" : "No lift (stairs)"}</button>)}</div>}
           </div>
-          {/* Bathroom count moved to Step 3 — available for all customer types */}
+
+          {/* Asbestos check (NSW) — restoring parity with the WP-side form.
+              Excel rejection #8: pre-1990 properties may contain asbestos in
+              tile adhesive / fibro sheeting. We don't BLOCK booking — just
+              flag for the tradie to discuss clearance during quote call. */}
+          <div style={{ padding: 12, background: C.warnBg, borderRadius: 10, borderLeft: `3px solid ${C.warn}` }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.warn, marginBottom: 4 }}>Asbestos check (NSW) *</div>
+            <div style={{ fontSize: 12, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>Was the property built before 1990?</div>
+            <div role="group" aria-label="Built before 1990?" style={{ display: "flex", gap: 6 }}>
+              {[{ id: "no", l: "No" }, { id: "yes", l: "Yes" }, { id: "unsure", l: "Unsure" }].map(o => (
+                <button key={o.id} type="button" onClick={() => setBuiltBefore1990(o.id)} aria-pressed={builtBefore1990 === o.id} style={{ flex: 1, padding: "10px 8px", minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: "pointer", border: builtBefore1990 === o.id ? `2px solid ${C.warn}` : `1.5px solid ${C.brd}`, background: builtBefore1990 === o.id ? C.white : C.white, color: builtBefore1990 === o.id ? C.warn : C.sec }}>{o.l}</button>
+              ))}
+            </div>
+            {builtBefore1990 === "yes" && <p style={{ fontSize: 11, color: C.sec, marginTop: 8, lineHeight: 1.4 }}>Got it &mdash; we&rsquo;ll discuss asbestos clearance during the quote call before we book.</p>}
+            {builtBefore1990 === "unsure" && <p style={{ fontSize: 11, color: C.sec, marginTop: 8, lineHeight: 1.4 }}>No problem &mdash; we&rsquo;ll check with you during the quote call.</p>}
+          </div>
         </div>
         <Btn onClick={() => setStep("what")} disabled={!can2}>Next — what does your bathroom need? →</Btn>
       </>}
@@ -965,8 +991,12 @@ export default function QuoteForm() {
             <button onClick={() => { setMode("unsure"); setSelAreas([]); }} style={{ fontSize: 13, color: C.sec, background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>Not sure what it needs? Describe it instead</button>
           </div>
 
-          <Btn onClick={() => { setMode(selAreas.length === 1 ? "single" : "multi"); if (selAreas.length === 1) { setSelArea(selAreas[0]); setStep("services"); } else setStep("photos"); }} disabled={selAreas.length === 0}>
-            {selAreas.length === 0 ? "Tick at least one area" : selAreas.length === 1 ? "Next — tell us more →" : `Next — upload photos (${selAreas.length} areas) →`}
+          <Btn onClick={() => {
+            if (selAreas.length === 1) { setMode("single"); setSelArea(selAreas[0]); }
+            else { setMode("multi"); setSelArea(null); }
+            setStep("services");
+          }} disabled={selAreas.length === 0}>
+            {selAreas.length === 0 ? "Tick at least one area" : selAreas.length === 1 ? "Next — tell us more →" : `Next — services for ${selAreas.length} areas →`}
           </Btn>
         </>) : null}
 
@@ -980,15 +1010,82 @@ export default function QuoteForm() {
         </div>}
       </>}
 
-      {/* ═══ STEP 4 — SERVICES (single area only) ═══ */}
-      {step === "services" && selArea && <>
+      {/* ═══ STEP 4 — SERVICES (single area) ═══ */}
+      {step === "services" && mode === "single" && selArea && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>Your {AREAS.find(a => a.id === selArea)?.label.toLowerCase()}</h2>
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Select all that apply</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {(SVCS[selArea] || []).map(s => <SvcCard key={s.id} s={s} on={(svcPicks[selArea] || []).includes(s.id)} toggle={() => toggleSvc(selArea, s.id)} epV={epoxyPicks[selArea] || "standard"} setEp={v => setEpoxyPicks(p => ({ ...p, [selArea]: v }))} />)}
         </div>
-        {selArea === "basin" && (svcPicks.basin || []).length > 0 && <div style={{ marginTop: 12, padding: 12, background: C.surfLow, borderRadius: 10 }}><div style={{ fontSize: 12, fontWeight: 600, color: C.pri, marginBottom: 6 }}>How many basins?</div><div style={{ display: "flex", gap: 6 }}>{[{ id: "1", l: "Just 1" }, { id: "2", l: "Double / 2" }].map(o => <button key={o.id} onClick={() => setBasinCnt(o.id)} style={{ flex: 1, padding: 9, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: basinCnt === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: basinCnt === o.id ? `${C.pri}08` : C.white, color: basinCnt === o.id ? C.pri : C.sec }}>{o.l}</button>)}</div></div>}
-        <Btn onClick={() => setStep("photos")} disabled={(svcPicks[selArea] || []).length === 0}>Next — upload photos →</Btn>
+        {selArea === "basin" && (svcPicks.basin || []).length > 0 && <div style={{ marginTop: 12, padding: 12, background: C.surfLow, borderRadius: 10 }}><div style={{ fontSize: 12, fontWeight: 600, color: C.pri, marginBottom: 6 }}>How many basins?</div><div style={{ display: "flex", gap: 6 }}>{[{ id: "1", l: "Just 1" }, { id: "2", l: "Double / 2" }].map(o => <button key={o.id} type="button" onClick={() => setBasinCnt(o.id)} aria-pressed={basinCnt === o.id} style={{ flex: 1, padding: 9, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: basinCnt === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: basinCnt === o.id ? `${C.pri}08` : C.white, color: basinCnt === o.id ? C.pri : C.sec }}>{o.l}</button>)}</div></div>}
+        {selArea === "bath" && (svcPicks.bath || []).includes("bt1") && <div style={{ marginTop: 12, padding: 12, background: C.surfLow, borderRadius: 10 }}><div style={{ fontSize: 12, fontWeight: 600, color: C.pri, marginBottom: 6 }}>Is this a spa bath (with jets)?</div><div style={{ display: "flex", gap: 6 }}>{[{ id: "no", l: "No — standard bath" }, { id: "yes", l: "Yes — spa with jets" }].map(o => <button key={o.id} type="button" onClick={() => setIsSpa(o.id)} aria-pressed={isSpa === o.id} style={{ flex: 1, padding: 9, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: isSpa === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: isSpa === o.id ? `${C.pri}08` : C.white, color: isSpa === o.id ? C.pri : C.sec }}>{o.l}</button>)}</div></div>}
+        <Btn onClick={() => setStep("photos")} disabled={(svcPicks[selArea] || []).length === 0 || (selArea === "bath" && (svcPicks.bath || []).includes("bt1") && !isSpa)}>Next — upload photos →</Btn>
+      </>}
+
+      {/* ═══ STEP 4 — SERVICES (multi area) ═══
+          Renders services for each picked area on one screen. Compact rows
+          (no before/after card images) keeps the page short. Wired into the
+          existing svcPicks state — same data shape as single mode. */}
+      {step === "services" && mode === "multi" && <>
+        <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>What does each area need?</h2>
+        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Tick at least one service per area.</p>
+        {selAreas.map(areaId => {
+          const area = AREAS.find(a => a.id === areaId);
+          const services = SVCS[areaId] || [];
+          if (!area || services.length === 0) return null;
+          const picked = svcPicks[areaId] || [];
+          return (
+            <div key={areaId} style={{ marginBottom: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                {typeof area.icon === 'function' ? area.icon(22) : area.icon}
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: C.pri, margin: 0 }}>{area.label}</h3>
+                {picked.length === 0 && <span style={{ fontSize: 10, color: C.err, fontWeight: 600, marginLeft: "auto" }}>Pick at least one</span>}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {services.map(s => {
+                  const on = picked.includes(s.id);
+                  return (
+                    <label key={s.id} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "10px 12px", borderRadius: 10, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: on ? `${C.pri}06` : C.white, cursor: "pointer" }}>
+                      <input type="checkbox" checked={on} onChange={() => toggleSvc(areaId, s.id)} style={{ marginTop: 3, accentColor: C.pri, width: 16, height: 16, flexShrink: 0 }} />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: on ? C.pri : C.priC }}>{s.label}</div>
+                        <div style={{ fontSize: 11, color: C.sec, marginTop: 2 }}>{s.trade}</div>
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+              {/* Basin count nested */}
+              {areaId === "basin" && picked.length > 0 && (
+                <div style={{ marginTop: 8, padding: 10, background: C.surfLow, borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: C.pri, marginBottom: 6 }}>How many basins?</div>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {[{ id: "1", l: "Just 1" }, { id: "2", l: "Double / 2" }].map(o => <button key={o.id} type="button" onClick={() => setBasinCnt(o.id)} aria-pressed={basinCnt === o.id} style={{ flex: 1, padding: 8, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: basinCnt === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: basinCnt === o.id ? `${C.pri}08` : C.white, color: basinCnt === o.id ? C.pri : C.sec }}>{o.l}</button>)}
+                  </div>
+                </div>
+              )}
+              {/* Spa flag nested — only when bath area + bt1 (resurface) picked */}
+              {areaId === "bath" && picked.includes("bt1") && (
+                <div style={{ marginTop: 8, padding: 10, background: C.surfLow, borderRadius: 8 }}>
+                  <div style={{ fontSize: 11, fontWeight: 600, color: C.pri, marginBottom: 6 }}>Is this a spa bath (with jets)?</div>
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {[{ id: "no", l: "No — standard bath" }, { id: "yes", l: "Yes — spa with jets" }].map(o => <button key={o.id} type="button" onClick={() => setIsSpa(o.id)} aria-pressed={isSpa === o.id} style={{ flex: 1, padding: 8, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: isSpa === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: isSpa === o.id ? `${C.pri}08` : C.white, color: isSpa === o.id ? C.pri : C.sec }}>{o.l}</button>)}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+        <Btn
+          onClick={() => setStep("photos")}
+          disabled={selAreas.some(a => (svcPicks[a] || []).length === 0) || (selAreas.includes("bath") && (svcPicks.bath || []).includes("bt1") && !isSpa)}
+        >
+          {selAreas.some(a => (svcPicks[a] || []).length === 0)
+            ? "Pick at least one service per area"
+            : (selAreas.includes("bath") && (svcPicks.bath || []).includes("bt1") && !isSpa)
+              ? "Spa bath? answer above"
+              : "Next — upload photos →"}
+        </Btn>
       </>}
 
       {/* ═══ STEP 5 — PHOTOS + URGENCY + SUBMIT ═══ */}

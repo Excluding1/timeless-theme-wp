@@ -67,6 +67,61 @@
 - [x] No horizontal scroll at any viewport.
 - [x] No console errors after reloading at any viewport.
 
+### Cycle 12: P0 fixes from deep audit — ✅ DONE
+
+**Triggered by:** deep audit (`DEEP-AUDIT-2026-04-29.md`) which surfaced 3 P0 gaps.
+
+**Fixes shipped:**
+
+🔴 **Fix 1 — Multi-mode services screen** (was: customer picked 2+ areas → form jumped straight to photos, never asked WHAT to do in each area)
+
+- Added `mode === "multi"` services step rendering services-per-area on one screen
+- Compact label rows (no SvcCard images) keeps page short
+- Each area gets its own section with header + checkboxes
+- Basin count + spa flag nest inside their respective area sections
+- Disabled gate: every picked area must have ≥1 service
+- Updated routing: multi mode now `setStep("services")` not `setStep("photos")`
+- Updated `back()` to handle multi → services → what flow
+
+🔴 **Fix 2 — Asbestos check** (was: no built-year question; restored parity with WP-side form)
+
+- New `[builtBefore1990]` state: "no" / "yes" / "unsure"
+- Warning-styled box on Step 2 (matches WP form style)
+- 3-button radio with `aria-pressed` + `role="group"`
+- Updated `can2` to require an answer
+- Contextual hint when "yes" or "unsure" picked
+- KEPT across "Have another bathroom?" reset (same property, same year)
+
+🔴 **Fix 3 — Spa bath flag** (was: BTV-05/06 ~$440 over BTH-01 not captured)
+
+- New `[isSpa]` state, conditional rendering
+- Only appears when bath area is being serviced + bt1 (resurface) picked
+- Wired into both single-mode (under bath services) AND multi-mode (nested in bath section)
+- Disabled gate: when bt1 picked, must answer spa
+- Reset on "Have another bathroom?" (different bathroom = different bath possibly)
+
+**GHL payload additions:**
+```js
+built_before_1990: builtBefore1990 || "not_asked",
+bath_type: isSpa === "yes" ? "spa" : isSpa === "no" ? "standard" : "not_specified",
+```
+
+**Audit results (live in browser):**
+
+| # | Scenario | Result |
+|---|---|---|
+| 1 | Step 2 → asbestos UI present, Next disabled until answered | ✅ |
+| 2 | Step 3 → 2 areas selected → button reads "Next — services for 2 areas →" | ✅ |
+| 3 | Step 4 multi → shower + bath sections both render with their service lists | ✅ |
+| 4 | Pick bt1 (Resurface bath) → spa question appears, Next disabled until answered | ✅ |
+| 5 | Click "No — standard bath" → Next enables to "upload photos →" | ✅ |
+
+**Pricing audit catch (separate, not yet shipped):**
+
+User flagged: "regrouting and epoxy regrouting same price." Verified — for non-shower regrouting (BFR/BWR/FBR), Excel has cement-only SKUs, no epoxy variants. Form's `epoxy: true` flag on `fl1` and `wl1` promises something Excel can't price. Two fixes pending user decision:
+- Add BFR/BWR/FBR epoxy SKUs to Excel, OR
+- Remove `epoxy: true` from `fl1` and `wl1` in form (only shower regrouting offers epoxy)
+
 ### Cycle 11: Loose-ends audit — ✅ DONE
 
 **Triggered by:** user request to "audit for any loose ends like that" (after the dead-promise waitlist link was found in Cycle 10).
