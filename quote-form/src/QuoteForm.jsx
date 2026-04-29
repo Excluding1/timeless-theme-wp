@@ -326,6 +326,31 @@ export default function QuoteForm() {
   const [addr, setAddr] = useState(""); const [addrOk, setAddrOk] = useState(null);
   const [prop, setProp] = useState(null); const [lift, setLift] = useState(null);
   const [pmCnt, setPmCnt] = useState(null);
+  // Address autocomplete (Google Places Autocomplete New — REST API).
+  // Free with session tokens since Nov 2024. Falls back to plain text
+  // input if VITE_GOOGLE_PLACES_KEY isn't set (no error, just no suggestions).
+  const [addrSuggestions, setAddrSuggestions] = useState([]);
+  const [showAddrDropdown, setShowAddrDropdown] = useState(false);
+  const addrDebounce = useRef();
+  const addrSessionToken = useRef(typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2));
+  async function fetchAddrSuggestions(text) {
+    const apiKey = import.meta.env.VITE_GOOGLE_PLACES_KEY || "";
+    if (!apiKey || text.length < 3) { setAddrSuggestions([]); return; }
+    try {
+      const res = await fetch("https://places.googleapis.com/v1/places:autocomplete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Goog-Api-Key": apiKey },
+        body: JSON.stringify({ input: text, includedRegionCodes: ["AU"], languageCode: "en", sessionToken: addrSessionToken.current }),
+      });
+      if (!res.ok) { setAddrSuggestions([]); return; }
+      const data = await res.json();
+      const preds = (data.suggestions || []).filter(s => s.placePrediction).slice(0, 5);
+      setAddrSuggestions(preds);
+      setShowAddrDropdown(preds.length > 0);
+    } catch {
+      setAddrSuggestions([]);
+    }
+  }
   // Step 3
   const [mode, setMode] = useState(null); // "single" | "multi" | "unsure"
   const [selArea, setSelArea] = useState(null); // single area id
@@ -701,7 +726,59 @@ export default function QuoteForm() {
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>Where's the job?</h2>
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We service all of Greater Sydney & NSW</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Property address or suburb *</label><input type="text" value={addr} onChange={e => { setAddr(e.target.value); setAddrOk(chkAddr(e.target.value)); }} placeholder="Start typing your address..." style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${addrOk === false ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />{addrOk === false && <div style={{ marginTop: 6, padding: 10, background: C.errBg, borderRadius: 10, fontSize: 12, color: C.err, fontWeight: 500 }}>We only service NSW currently — join our waitlist!</div>}</div>
+          <div style={{ position: "relative" }}>
+            <label htmlFor="addr-input" style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Property address *</label>
+            <input
+              id="addr-input"
+              type="text"
+              value={addr}
+              autoComplete="off"
+              onChange={e => {
+                const v = e.target.value;
+                setAddr(v);
+                setAddrOk(chkAddr(v));
+                clearTimeout(addrDebounce.current);
+                addrDebounce.current = setTimeout(() => fetchAddrSuggestions(v), 300);
+              }}
+              onFocus={() => addrSuggestions.length > 0 && setShowAddrDropdown(true)}
+              onBlur={() => setTimeout(() => setShowAddrDropdown(false), 200)}
+              placeholder="Start typing your full address&hellip;"
+              aria-autocomplete="list"
+              aria-expanded={showAddrDropdown}
+              aria-controls="addr-suggestions"
+              style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${addrOk === false ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }}
+            />
+            {showAddrDropdown && addrSuggestions.length > 0 && (
+              <div id="addr-suggestions" role="listbox" style={{ position: "absolute", top: "100%", left: 0, right: 0, zIndex: 50, background: C.white, border: `1.5px solid ${C.brd}`, borderRadius: 10, marginTop: 4, boxShadow: "0 4px 16px rgba(4,21,52,0.12)", overflow: "hidden", maxHeight: 240, overflowY: "auto" }}>
+                {addrSuggestions.map((s, i) => {
+                  const main = s.placePrediction.structuredFormat?.mainText?.text || s.placePrediction.text.text;
+                  const secondary = s.placePrediction.structuredFormat?.secondaryText?.text || "";
+                  const fullText = s.placePrediction.text.text;
+                  return (
+                    <button
+                      key={s.placePrediction.placeId || i}
+                      type="button"
+                      role="option"
+                      aria-selected="false"
+                      onMouseDown={e => e.preventDefault()}
+                      onClick={() => {
+                        setAddr(fullText);
+                        setAddrOk(chkAddr(fullText));
+                        setShowAddrDropdown(false);
+                        setAddrSuggestions([]);
+                        addrSessionToken.current = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2);
+                      }}
+                      style={{ display: "block", width: "100%", padding: "10px 14px", background: "none", border: "none", borderBottom: i < addrSuggestions.length - 1 ? `1px solid ${C.surfC}` : "none", textAlign: "left", fontSize: 13, color: C.pri, cursor: "pointer", fontFamily: "inherit" }}
+                    >
+                      <div style={{ fontWeight: 600 }}>{main}</div>
+                      {secondary && <div style={{ fontSize: 11, color: C.sec, marginTop: 2 }}>{secondary}</div>}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            {addrOk === false && <div style={{ marginTop: 6, padding: 10, background: C.errBg, borderRadius: 10, fontSize: 12, color: C.err, fontWeight: 500 }}>We only service NSW currently &mdash; join our waitlist!</div>}
+          </div>
           <div>
             <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Property type *</label>
             <OptGrid label="Property type" opts={[{ id: "house", icon: I.house(), label: "House" }, { id: "apt", icon: I.apt(), label: "Apartment" }, { id: "comm", icon: I.comm(), label: "Commercial" }]} val={prop} set={setProp} />
