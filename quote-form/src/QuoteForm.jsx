@@ -330,7 +330,6 @@ export default function QuoteForm() {
   // Step 2
   const [addr, setAddr] = useState(""); const [addrOk, setAddrOk] = useState(null);
   const [prop, setProp] = useState(null); const [lift, setLift] = useState(null);
-  const [pmCnt, setPmCnt] = useState(null);
   // Address autocomplete (Google Places Autocomplete New — REST API).
   // Free with session tokens since Nov 2024. Falls back to plain text
   // input if VITE_GOOGLE_PLACES_KEY isn't set (no error, just no suggestions).
@@ -397,6 +396,11 @@ export default function QuoteForm() {
   // Waitlist state — for users whose address is outside NSW. One-click capture
   // using the email they already provided in Step 1 + their typed address.
   const [waitlistSent, setWaitlistSent] = useState(false);
+  // Reset counter — incremented when user clicks "Have another bathroom?" on
+  // the confirmation page. Used as React `key` on PhotoUp so its internal
+  // `files`/`busy` state forcibly resets (otherwise old photos stay "selected"
+  // after the parent reset).
+  const [resetCount, setResetCount] = useState(0);
   // Photos — collected from PhotoUp children
   const allPhotos = useRef({});
   const onPhotosChange = (newFiles) => { allPhotos.current = { ...allPhotos.current, ...newFiles }; };
@@ -739,7 +743,27 @@ export default function QuoteForm() {
         Need it sooner? Call 0451 110 154
       </a>
 
-      <button type="button" onClick={() => { setDone(false); setStep("what"); setMode(null); setSelAreas([]); setSelArea(null); setMultiPicks([]); setSvcPicks({}); setEpoxyPicks({}); setUnsureTxt(""); setNotes(""); setConsent(false); setPrevResurfaced(null); setHasVentilation(null); setShowerOverBath(null); }} style={{ width: "100%", padding: 14, borderRadius: 10, border: `1.5px solid ${C.brd}`, background: C.white, color: C.pri, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
+      <button type="button" onClick={() => {
+        // Reset bathroom-specific state. Persona-level data (name, phone, email,
+        // customer type, address, property type, tenancy) intentionally KEPT
+        // because "another bathroom" implies same property + same person.
+        setDone(false);
+        setStep("what");
+        setMode(null);
+        setSelAreas([]); setSelArea(null); setMultiPicks([]);
+        setSvcPicks({}); setEpoxyPicks({});
+        setBasinCnt(null); setLift(null);
+        setShowerOverBath(null); setPrevResurfaced(null); setHasVentilation(null);
+        setUnsureTxt(""); setNotes(""); setConsent(false);
+        // Photos collected via ref need explicit clearing (otherwise old photos
+        // re-submit with the next job).
+        allPhotos.current = {};
+        // Allow partial-lead webhook to fire again on the next abandoned form.
+        partialSent.current = false;
+        // Force PhotoUp to remount — its internal files/busy state is local
+        // and survives parent state resets without this trick.
+        setResetCount(c => c + 1);
+      }} style={{ width: "100%", padding: 14, borderRadius: 10, border: `1.5px solid ${C.brd}`, background: C.white, color: C.pri, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" }}>
         Have another bathroom? Quote it here &rarr;
       </button>
       <p style={{ fontSize: 11, color: C.sec, marginTop: 6 }}>Your contact details are saved &mdash; just pick the areas</p>
@@ -1022,7 +1046,7 @@ export default function QuoteForm() {
           </div>
         )}
 
-        {mode === "unsure" ? <PhotoUp photos={[...PHOTOS.not_sure, ...PHOTOS.extra]} onFilesChange={onPhotosChange} /> : <>
+        {mode === "unsure" ? <PhotoUp key={`unsure-${resetCount}`} photos={[...PHOTOS.not_sure, ...PHOTOS.extra]} onFilesChange={onPhotosChange} /> : <>
           {/* Group photos by area with headers */}
           {(() => {
             const photoList = buildPhotos();
@@ -1038,7 +1062,7 @@ export default function QuoteForm() {
             return Object.entries(groups).map(([name, photos]) => (
               <div key={name} style={{ marginBottom: 16 }}>
                 {Object.keys(groups).length > 1 && <div style={{ fontSize: 14, fontWeight: 600, color: C.pri, marginBottom: 8 }}>{name}</div>}
-                <PhotoUp photos={photos} onFilesChange={onPhotosChange} />
+                <PhotoUp key={`photos-${resetCount}`} photos={photos} onFilesChange={onPhotosChange} />
               </div>
             ));
           })()}

@@ -67,6 +67,52 @@
 - [x] No horizontal scroll at any viewport.
 - [x] No console errors after reloading at any viewport.
 
+### Cycle 11: Loose-ends audit — ✅ DONE
+
+**Triggered by:** user request to "audit for any loose ends like that" (after the dead-promise waitlist link was found in Cycle 10).
+
+**Audit method:** systematic pass across the codebase looking for:
+- Dead state declared but never used
+- Click handlers that do nothing
+- Conditional render branches with empty bodies
+- Reset paths that miss state
+- Component-internal state that survives parent resets
+- Placeholder URLs/text still in production
+- TODO/FIXME markers
+
+**Findings:**
+
+| # | Loose end | Severity | Root cause |
+|---|---|---|---|
+| 1 | `pmCnt` state declared but never used | Low | Dead code — likely planned PM-property-count feature that never shipped |
+| 2 | "Have another bathroom?" reset misses `basinCnt`, `lift`, `allPhotos.current`, `partialSent.current` | Medium | Carried-over data: previous job's basin count + lift access leak into new submission. Old photos re-submit. Partial webhook can't fire on new abandoned form. |
+| 3 | `PhotoUp` internal `files`/`busy` state survives parent reset | Medium | Classic React gotcha — child component state isn't unmounted unless React sees a new key. Old photos visually stay "selected" after reset. |
+
+**Acknowledged but NOT fixed (already documented elsewhere):**
+- `REPLACE_ME` in webhook URLs — Phase 2 GHL setup
+- `// TODO: Upload photos to cloud storage` — Phase 3 Cloudinary
+- 13 `placehold.co` service photos — `PHOTOS-NEEDED.md`
+
+**Fixes applied:**
+
+- [x] Removed unused `[pmCnt, setPmCnt]` declaration
+- [x] Reset handler now also clears: `setBasinCnt(null)`, `setLift(null)`, `allPhotos.current = {}`, `partialSent.current = false`
+- [x] Added `[resetCount, setResetCount]` state, incremented in reset handler
+- [x] Added `key={\`photos-\${resetCount}\`}` (and `unsure-` variant) on `<PhotoUp>` instances → React unmounts + remounts the component on reset → internal state cleared
+
+**Why these were kept persistent across "Have another bathroom" reset:**
+- `fn`, `ln`, `ph`, `em`, `cust`, `co` — same person
+- `addr`, `prop` — same property (button text says "another bathroom" implying same address)
+- `tenAuth`, `llEm` — same tenancy status
+- `addrOk` — address still valid
+- `waitlistSent` — once they're on the waitlist they stay on it (relevant if they used a non-NSW address but then changed to NSW one)
+- `tracking` — UTM/GCLID is per-session, stays valid
+
+**Audit results:**
+- ✅ Form still renders after pmCnt removal (no missing reference)
+- ✅ Trust badge + h2 + customer-type buttons all present
+- ✅ No console errors
+
 ### Cycle 10: Waitlist capture for out-of-NSW users — ✅ DONE
 
 **User feedback:** *"It says join waitlist for those not in Australia, but how?"*
