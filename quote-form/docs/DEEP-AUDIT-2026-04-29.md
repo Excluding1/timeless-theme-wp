@@ -162,6 +162,32 @@ AU market for walk-in shower regrout: $1,500–$2,400. Excel is at upper bound. 
 
 ### 🔴 Pricing red flags / inconsistencies
 
+#### 0. ✅ **RESOLVED 2026-04-29 — Non-shower epoxy regrouting SKUs missing**
+
+User caught: form's `fl1` (floor regrout) and `wl1` (wall regrout) carry `epoxy: true` flag, but Excel had cement-only SKUs (BFR/BWR/FBR). Customers picking "epoxy floor regrout" got the same price as cement.
+
+Verified via Australian industry research (GroutPro, Megasealed, Tile Rescue, Zephyr+Stone): **epoxy IS the recommended best practice for bathroom floors in AU 2026** — wet-area Building Code, mould resistance, no resealing schedule. The form's flag was correct; the Excel was incomplete.
+
+**Fix applied:** added 5 new epoxy SKUs to Excel (R122-R126), totals updated to 140 SKUs.
+
+**Sub-pay bumped per AU 2026 trades data + Modifier R6:** PayScale + Indeed + ServiceTasker show Sydney skilled trade rates $60-100/hr; epoxy specialist work commands premium. Modifier R6 in user's own Excel says "+$50 labour" for epoxy — now actually applied (existing shower epoxy SKUs were paying subs LESS than cement, which was inconsistent with stated policy).
+
+Sub-labour formula: (hours × cement-equivalent hourly rate) + **$50 flat epoxy bonus**. Retail bumped ~7% to preserve 54-59% margin.
+
+| New SKU | Hours | Materials | Sub-pay | Total cost | T1 | T2 | T3 | Margin | $/hr base |
+|---|---|---|---|---|---|---|---|---|---|
+| BFR-03 — Bathroom Floor Regrout: Small (Epoxy) | 4 | $95 | $300 (incl. $50 bonus) | $425 | $1,300 | $1,040 | $840 | 57.0% | $63 |
+| BFR-04 — Bathroom Floor Regrout: Standard (Epoxy) | 6 | $135 | $410 | $580 | $1,770 | $1,410 | $1,150 | 54.7% | $60 |
+| BWR-02 — Bathroom Wall Regrout: Splashback/Half (Epoxy) | 5 | $135 | $350 | $515 | $1,550 | $1,240 | $1,010 | 54.3% | $60 |
+| FBR-03 — Full Bathroom Regrout: Standard (Epoxy) | 15 | $300 | $1,055 | $1,410 | $4,640 | $3,700 | $3,020 | 58.1% | $67 |
+| FBR-04 — Full Bathroom Regrout: Large (Epoxy) | 18 | $385 | $1,292 | $1,742 | $5,720 | $4,560 | $3,720 | 58.0% | $69 |
+
+**Hour uplift rationale:** epoxy adds 0.5-1h per surface vs cement (industry pattern from your existing RGE/RSE/FLR-02/WLL-02 SKUs). Single-area jobs (BFR/BWR) get +0.5-1h. Full-bathroom (FBR) covers shower + floor + walls back-to-back, so total +3h vs cement equivalent — matches the cumulative reality of doing 3 epoxy surfaces in one job.
+
+Pricing derived from AU 2026 market data + existing shower cement→epoxy patterns. Warranty extended from 2yr (cement) to 4yr (epoxy) per material durability. Sub gets honest +$50 bonus for harder skilled work — matches Modifier R6 stated policy.
+
+**Note for future review:** existing shower epoxy SKUs (RGE/RSE/FLR-02/WLL-02) currently pay subs LESS per hour than their cement counterparts — opposite of intended Modifier R6 policy. Worth aligning these to also include the $50 epoxy bonus when next pricing pass happens.
+
 #### 1. **Combo pricing breaks bundle expectation** — already covered above. This is the biggest concern.
 
 #### 2. **CHR-04 (Tile Chip Single Tile) and CHR-08 (Vanity Top Chip)** are both T2 $230 but are different surfaces requiring different prep. Possibly fine, possibly should differ. Worth user reviewing.

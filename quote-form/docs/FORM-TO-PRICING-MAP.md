@@ -68,7 +68,7 @@ Mapping legend:
 
 | Form ID | Form label | Excel SKUs | Type |
 |---|---|---|---|
-| fl1 | Fix lines between tiles | BFR-01 (small) OR BFR-02 (standard) — sized by photo | 1:N |
+| fl1 | Fix lines between tiles | BFR-01/02 (cement) OR BFR-03/04 (epoxy) — `epoxyPicks` flag picks cement vs epoxy series, size from photo | 1:N |
 | fl2 | Resurface — change tile colour | TSR-07/08/09 (small/standard/large bathroom floor) | 1:N |
 | fl3 | Make floor less slippery | ❌ ASL-01 exists for "Shower Floor Anti-Slip" only — bathroom floor anti-slip isn't a separate SKU. Currently maps to ASL-01 with override note. | ❌ |
 | fl4 | Fix a cracked tile | TRP-01/02 OR CHR-04/05 (tile chip repair) | 1:N |
@@ -78,7 +78,7 @@ Mapping legend:
 
 | Form ID | Form label | Excel SKUs | Type |
 |---|---|---|---|
-| wl1 | Fix lines between wall tiles | BWR-01 (Bathroom Wall Regrout — half/splashback) | 1:1 |
+| wl1 | Fix lines between wall tiles | BWR-01 (cement) OR BWR-02 (epoxy) — `epoxyPicks` flag picks variant | 1:N |
 | wl2 | Resurface wall tile colour | TSR-10 (half-height) OR TSR-11 (full-height) — picked from photo + customer description | 1:N |
 | wl3 | Fix a cracked wall tile | TRP-01/02 (tile replacement) | 1:N |
 
@@ -98,7 +98,7 @@ When customer picks multiple areas, the form moves into "multi" mode with these 
 | m_vanity | Vanity — refresh benchtop or cabinet | VAN-01/02, LBR-01/02, VCR-01/02 | 1:N |
 | m_floor | Floor tiles — fix lines or colour | BFR-01/02 OR TSR-07..09 | 1:N |
 | m_full | The whole bathroom needs a refresh | FBP-01..06 (Full Bathroom packages) — pricing engine bundles based on what's selected | 1:N |
-| m_regrout_all | Fix all tile lines in whole bathroom | FBR-01 (standard) OR FBR-02 (large) | 1:N |
+| m_regrout_all | Fix all tile lines in whole bathroom | FBR-01/02 (cement) OR FBR-03/04 (epoxy) — `epoxyPicks` picks variant | 1:N |
 | m_maintenance | Annual maintenance check | AMP-01 (single bathroom) OR AMP-02 (per unit, PM) | 1:N |
 
 **Combo SKUs reached implicitly via multi mode:**
