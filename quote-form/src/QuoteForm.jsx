@@ -394,6 +394,9 @@ export default function QuoteForm() {
   // Bots that auto-fill every <input> will populate this; we silently "succeed"
   // so they don't iterate and try to bypass.
   const [honeypot, setHoneypot] = useState("");
+  // Waitlist state — for users whose address is outside NSW. One-click capture
+  // using the email they already provided in Step 1 + their typed address.
+  const [waitlistSent, setWaitlistSent] = useState(false);
   // Photos — collected from PhotoUp children
   const allPhotos = useRef({});
   const onPhotosChange = (newFiles) => { allPhotos.current = { ...allPhotos.current, ...newFiles }; };
@@ -588,6 +591,22 @@ export default function QuoteForm() {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, ...tracking } }),
     }).catch(() => {});
+  };
+
+  /* ─── WAITLIST CAPTURE (out-of-NSW user clicks "Notify me") ─── */
+  // Reuses GHL_PARTIAL with form_status="waitlist" so the GHL workflow can
+  // branch on the flag (welcome-when-we-expand sequence vs. quote follow-up).
+  const sendWaitlistSignup = () => {
+    if (waitlistSent) return;
+    setWaitlistSent(true); // optimistic UI — show thanks immediately
+    const phone = noMobile ? `+61${landline.replace(/[\s\-\(\)\.]/g, "").replace(/^0/, "")}` : `+61${phNorm.replace(/^0/, "")}`;
+    fetch(GHL_PARTIAL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        firstName: fn, lastName: ln, email: em, phone,
+        customData: { form_status: "waitlist", out_of_area_address: addr, customer_type: cust || "", ...tracking },
+      }),
+    }).catch(() => {}); // optimistic — never block UX on webhook errors
   };
 
   /* ─── FULL SUBMIT ─── */
@@ -827,7 +846,29 @@ export default function QuoteForm() {
                 })}
               </div>
             )}
-            {addrOk === false && <div style={{ marginTop: 6, padding: 10, background: C.errBg, borderRadius: 10, fontSize: 12, color: C.err, fontWeight: 500 }}>We only service NSW currently &mdash; join our waitlist!</div>}
+            {addrOk === false && (
+              <div style={{ marginTop: 6, padding: 12, background: C.errBg, borderRadius: 10 }}>
+                <div style={{ fontSize: 12, color: C.err, fontWeight: 600, marginBottom: waitlistSent ? 0 : 8 }}>We only service NSW currently.</div>
+                {!waitlistSent ? (
+                  <>
+                    <div style={{ fontSize: 11, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>We&rsquo;re growing &mdash; want a heads-up when we expand to your area? We&rsquo;ll use the email + phone you already entered.</div>
+                    <button
+                      type="button"
+                      onClick={sendWaitlistSignup}
+                      disabled={!emOk || fn.length < 2}
+                      style={{ padding: "10px 14px", borderRadius: 8, border: "none", background: emOk && fn.length >= 2 ? C.pri : C.brd, color: C.white, fontSize: 12, fontWeight: 600, cursor: emOk && fn.length >= 2 ? "pointer" : "not-allowed", fontFamily: "inherit" }}
+                    >
+                      Notify me when we expand &rarr;
+                    </button>
+                    {(!emOk || fn.length < 2) && <div style={{ fontSize: 10, color: C.sec, marginTop: 6 }}>Fill in your name + email above first.</div>}
+                  </>
+                ) : (
+                  <div style={{ fontSize: 12, color: C.green, fontWeight: 600, display: "flex", alignItems: "center", gap: 6, marginTop: 8 }}>
+                    {I.check(16)} Thanks {fn}! We&rsquo;ll email you when we&rsquo;re servicing your area.
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div>
             <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Property type *</label>

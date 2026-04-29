@@ -67,6 +67,41 @@
 - [x] No horizontal scroll at any viewport.
 - [x] No console errors after reloading at any viewport.
 
+### Cycle 10: Waitlist capture for out-of-NSW users — ✅ DONE
+
+**User feedback:** *"It says join waitlist for those not in Australia, but how?"*
+
+The Cycle 1 error message said "We only service NSW currently — join our waitlist!" but there was no waitlist mechanism — no input, no link, no button. False promise = bad UX + lost lead capture.
+
+**Fix:** turned the address-fail state into a real one-click waitlist signup that reuses the data already collected on Step 1 (name, email, phone).
+
+**Implementation:**
+- New state: `waitlistSent` (bool)
+- New helper: `sendWaitlistSignup()` — fires `GHL_PARTIAL` with `form_status: "waitlist"` + `out_of_area_address: addr` (so GHL knows where they wanted service) + existing tracking params
+- UI when `addrOk === false`:
+  - Red error block: "We only service NSW currently."
+  - Friendly prompt: "We're growing — want a heads-up when we expand to your area?"
+  - CTA: "Notify me when we expand →"
+  - Disabled state if name/email aren't filled (can't fire webhook without them)
+  - On click: optimistic UI flip to green "Thanks {name}! We'll email you when we're servicing your area." with check icon
+- Reuses existing `GHL_PARTIAL` webhook — no new infrastructure. GHL workflow can branch on `form_status` flag (welcome-when-expand sequence vs. quote follow-up).
+
+**Audit results (live in browser):**
+
+| # | Test | Result |
+|---|---|---|
+| 1 | Type "Melbourne 3000" → see waitlist UI | ✅ Red error + prompt + CTA button visible |
+| 2 | Click "Notify me when we expand" | ✅ Button replaced with green "Thanks Sarah!" message + check icon |
+| 3 | Webhook fires (will hit real GHL once webhook URL is wired in Phase 2) | ✅ Body includes form_status="waitlist", out_of_area_address, customer info |
+| 4 | UI doesn't block them from continuing — they could change to NSW address | ✅ Form behaviour unchanged elsewhere |
+
+**Expert reasoning:**
+
+Free-tier waitlist capture has zero infrastructure cost (reuses existing webhook) and adds value when the business decides to expand. The 1-click flow (no extra typing) keeps friction near zero. Even if Angela never expands beyond NSW, the list is useful for:
+- Partner referrals (interstate tradies who want a NSW lead share)
+- Brand awareness ("they remembered me 6 months later")
+- Market signal — if 200 people join the waitlist for QLD, that's a data-driven reason to actually expand there
+
 ### Cycle 9: Holiday-state user + landline portability — ✅ DONE
 
 **User feedback that triggered this cycle:**
