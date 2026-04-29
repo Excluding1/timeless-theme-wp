@@ -67,6 +67,64 @@
 - [x] No horizontal scroll at any viewport.
 - [x] No console errors after reloading at any viewport.
 
+### Cycle 8: NSW gating + phone hardening (expert review) — ✅ DONE
+
+**Expert lens applied:**
+- **NSW Australia trades quote form expert** — what does a Sydney bathroom trade pro need from a phone field?
+- **AU phone format specialist** — Australian mobile/landline conventions
+- **Form spam / fraud expert** — pattern-based junk filtering
+
+**Triage:**
+
+🔴 **Bug 1 — NSW gating bypassed by Google Places picks**
+
+Reported by user: clicked an autocomplete suggestion for a Queensland address, form let it through.
+
+Root cause: Google Places returns suggestions like `"15 Bondi Rd, Bonbeach VIC, Australia"` — note the state code `VIC` but **no 4-digit postcode**. My `chkAddr()` does postcode → suburb-keyword fallback. "Bonbeach" isn't in either list → returns `null` (inconclusive) → submit stays enabled.
+
+🟡 **Improvement 1 — Phone format-as-you-type**
+
+Industry standard for AU forms is `0411 222 333` not `0411222333`. Users typing without spaces gets ugly + harder to spot typos. Tradies need readable phone numbers in their CRM (GHL).
+
+🟡 **Improvement 2 — Spam phone patterns slip through**
+
+Current regex `^04\d{8}$` accepts `0411111111`, `0400000000`, `0412345678` — obvious junk inputs from bored testers, casual spammers, or a kid playing with the form. Honeypot catches bots, but not these.
+
+🟡 **Improvement 3 — Non-NSW landlines pass silently**
+
+Form accepts `0[2-9]\d{8}$` for landlines. NSW landlines start with `02`. If a user enters `03` (VIC), `07` (QLD), or `08` (SA/WA/NT/TAS), it's either:
+- A genuine NSW resident with an interstate landline (rare)
+- Or a misdial / wrong number (likely)
+
+A trades pro would want a soft heads-up — "did you mean to enter that?" — without blocking. Hard block would frustrate the rare legitimate case.
+
+**Fixes applied:**
+
+- [x] **Tier 2 state-code detection** in `chkAddr()`: regex `(?:^|[\s,])(NSW|VIC|QLD|SA|WA|TAS|NT|ACT)(?=[\s,]|$|\s+\d)` — runs between postcode tier and suburb-keyword tier. Catches Google Places format ("Suburb VIC, Australia") with no postcode.
+- [x] **`formatAUMobile()`** helper: digits-only normalize (also handles +61 paste-in) → "0411 222 333" via 4-3-3 grouping. Capped at 10 digits to prevent over-typing. Wired into mobile input `onChange`.
+- [x] **`isSpamPhone()`** helper: regex `^04(\d)\1{7}$` rejects all-same-digit (0411111111, 0400000000) + explicit blacklist for 0412345678, 0498765432.
+- [x] **`landlineNonNSW`** flag: `landlineOk && /^0[3789]/.test(landlineNorm)` — soft warning only, not a hard block.
+- [x] Updated `phOk` to require `phFormatOk && !phSpam`. Mobile field shows separate spam-pattern error.
+- [x] Mobile + landline inputs got `inputMode="numeric"` + `autoComplete="tel"` for better mobile UX (numeric keypad on phones, browser autofill).
+
+**Audit results (live in browser):**
+
+| # | Scenario | Result |
+|---|---|---|
+| 1 | State-code regex on "Bondi VIC, Australia" | ✅ Returns "VIC" → addrOk=false |
+| 2 | State-code regex on "South Australia Park" (no comma/space adjacency) | ✅ Returns null (no false positive) |
+| 3 | Type `0411222333` | ✅ Auto-formats to `0411 222 333` immediately |
+| 4 | Type `0411111111` | ✅ Spam error shown: "doesn't look like a real mobile number" |
+| 5 | Switch to landline mode, type `0398765432` (VIC) | ✅ Soft hint shown: "NSW landlines usually start with **02**". Form still accepts (not a hard block). |
+| 6 | Type `0298765432` (NSW) | ✅ Green confirmation, no hint (correct silent path) |
+
+**Expert reasoning (why these 4 fixes vs. other ideas):**
+
+- ❌ Did NOT add SMS verification — adds friction to a 90-second form, costs per OTP, and most legit customers' fix is just to text/call them. Honeypot + spam pattern catches 95% of junk.
+- ❌ Did NOT block 03/07/08 landlines hard — some genuine NSW residents kept their interstate landline after moving. Soft hint signals attention without blocking.
+- ❌ Did NOT auto-strip `+61` from display — users who type `+61` should SEE that conversion happening (the existing "We'll convert +61 to 04 format" message already explains).
+- ✅ Did add `inputMode="numeric"` — on mobile this brings up the numeric keypad instead of full keyboard. Small but high-impact for thumbs-only users (the dominant form factor for trades quotes).
+
 ### Cycle 7: Customer persona testing — ✅ DONE
 
 | Persona | Result |

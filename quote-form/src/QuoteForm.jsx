@@ -178,12 +178,11 @@ function isNSWPostcode(pc) {
 }
 function chkAddr(v) {
   if (v.length < 4) return null;
-  // Postcode-first (highest confidence). Match a 4-digit number on word boundary.
+  // Tier 1 — Postcode (highest confidence). Match a 4-digit number on word boundary.
   const m = v.match(/\b(\d{4})\b/);
   if (m) {
     const pc = parseInt(m[1], 10);
     if (isNSWPostcode(pc)) return true;
-    // Other-state postcode ranges (definitive non-NSW)
     if ((pc >= 200 && pc <= 299) || (pc >= 2600 && pc <= 2618) || (pc >= 2900 && pc <= 2920)) return false; // ACT
     if (pc >= 3000 && pc <= 3999) return false; // VIC
     if (pc >= 4000 && pc <= 4999) return false; // QLD
@@ -191,9 +190,15 @@ function chkAddr(v) {
     if (pc >= 6000 && pc <= 6999) return false; // WA
     if (pc >= 7000 && pc <= 7999) return false; // TAS
     if (pc >= 800 && pc <= 999) return false; // NT
-    // Postcode out of valid range — treat as inconclusive (don't block)
   }
-  // Fallback: suburb keyword match (handles "Sydney" typed without postcode)
+  // Tier 2 — State code (Google Places suggestions include ", VIC, Australia" etc.).
+  // Word-boundary + adjacent space/comma to avoid false positives like "South Australia".
+  // Crucially this catches Google Places picks even when postcode isn't in the text.
+  const stateMatch = v.match(/(?:^|[\s,])(NSW|VIC|QLD|SA|WA|TAS|NT|ACT)(?=[\s,]|$|\s+\d)/i);
+  if (stateMatch) {
+    return stateMatch[1].toUpperCase() === "NSW";
+  }
+  // Tier 3 — Suburb keyword (handles bare "Sydney" / "Melbourne" without state code).
   const l = v.toLowerCase();
   if (NSW_W.some(w => l.includes(w))) return true;
   if (NOT_NSW.some(w => l.includes(w))) return false;
@@ -426,11 +431,37 @@ export default function QuoteForm() {
     else if (n.startsWith("61") && n.length >= 11) n = "0" + n.slice(2);
     return n;
   };
+  // Format-as-you-type for AU mobile: 0411222333 → "0411 222 333".
+  // Caps at 10 digits to prevent over-typing. Cursor jumps to end which is
+  // standard behaviour for phone fields (users type left-to-right anyway).
+  const formatAUMobile = (raw) => {
+    const n = normPhone(raw); // also handles +61 paste-in
+    const d = n.slice(0, 10); // cap at 10 digits
+    if (d.length <= 4) return d;
+    if (d.length <= 7) return `${d.slice(0, 4)} ${d.slice(4)}`;
+    return `${d.slice(0, 4)} ${d.slice(4, 7)} ${d.slice(7)}`;
+  };
+  // Spam pattern detection: rejects junk inputs like 0411111111, 0400000000,
+  // 0412345678 (common test number from Telstra tutorials). Honeypot catches
+  // bots; this catches bored testers + casual spam without triggering false
+  // positives on real numbers.
+  const isSpamPhone = (n) => {
+    if (/^04(\d)\1{7}$/.test(n)) return true; // all same digit after 04
+    if (n === "0412345678" || n === "0498765432") return true; // sequential test patterns
+    return false;
+  };
   const phNorm = normPhone(ph);
-  const phOk = /^04\d{8}$/.test(phNorm);
+  const phFormatOk = /^04\d{8}$/.test(phNorm);
+  const phSpam = phFormatOk && isSpamPhone(phNorm);
+  const phOk = phFormatOk && !phSpam;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const emOk = EMAIL_RE.test(em);
-  const landlineOk = /^0[2-9]\d{8}$/.test(landline.replace(/[\s\-\(\)\.]/g, ""));
+  const landlineNorm = landline.replace(/[\s\-\(\)\.]/g, "");
+  const landlineOk = /^0[2-9]\d{8}$/.test(landlineNorm);
+  // Soft signal: NSW landlines start with 02. 03/07/08 are interstate landlines
+  // (VIC/QLD/WA-SA-NT-TAS). Probably a misdial — but allow because some NSW
+  // residents kept their interstate number after moving.
+  const landlineNonNSW = landlineOk && /^0[3789]/.test(landlineNorm);
   const phoneOk = noMobile ? (landlineOk && emOk) : phOk; // landline requires email for quote delivery
   // Landlord email is required only when tenant chooses "Send to landlord" flow.
   // Without this gate, a tenant could submit "x" as landlord email and we'd
@@ -696,16 +727,18 @@ export default function QuoteForm() {
           {!noMobile ? (
             <div>
               <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Mobile number *</label>
-              <input type="tel" value={ph} onChange={e => setPh(e.target.value)} placeholder="04XX XXX XXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {ph.length > 3 && !phOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We'll convert +61 to 04 format — keep typing" : "Enter an Australian mobile starting with 04"}</p>}
-              {phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We'll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
+              <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUMobile(e.target.value))} placeholder="04XX XXX XXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
+              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We'll convert +61 to 04 format — keep typing" : "Enter an Australian mobile starting with 04"}</p>}
+              {phSpam && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>That doesn&rsquo;t look like a real mobile number. Please enter your actual contact number.</p>}
+              {phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
               <button type="button" onClick={() => { setNoMobile(true); setPh(""); }} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", marginTop: 6, textDecoration: "underline", padding: "8px 4px", minHeight: 32 }}>I don&rsquo;t have a mobile</button>
             </div>
           ) : (
             <div>
               <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone number *</label>
-              <input type="tel" value={landline} onChange={e => setLandline(e.target.value)} placeholder="02 XXXX XXXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${landline.length > 3 && !landlineOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {landlineOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We'll email your quote (landline can't receive SMS)</p>}
+              <input type="tel" inputMode="numeric" autoComplete="tel" value={landline} onChange={e => setLandline(e.target.value)} placeholder="02 XXXX XXXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${landline.length > 3 && !landlineOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
+              {landlineOk && !landlineNonNSW && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
+              {landlineNonNSW && <p style={{ fontSize: 12, color: C.warn, marginTop: 5 }}>Heads up: NSW landlines usually start with <strong>02</strong>. Double-check this is correct &mdash; we still service NSW only.</p>}
               <button type="button" onClick={() => { setNoMobile(false); setLandline(""); }} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", marginTop: 6, textDecoration: "underline", padding: "8px 4px", minHeight: 32 }}>I have a mobile number</button>
             </div>
           )}
