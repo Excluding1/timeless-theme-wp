@@ -487,7 +487,11 @@ export default function QuoteForm() {
   const phOk = phFormatOk && !phSpam;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const emOk = EMAIL_RE.test(em);
-  const landlineNorm = landline.replace(/[\s\-\(\)\.]/g, "");
+  // Landline uses the same normPhone helper as mobile so +61 prefixes
+  // (common when iPhone Contacts saves a contact in international format)
+  // get correctly converted to 0X. Was previously a separate regex that
+  // only stripped whitespace, blocking valid international-format inputs.
+  const landlineNorm = normPhone(landline);
   const landlineOk = /^0[2-9]\d{8}$/.test(landlineNorm);
   // Note: deliberately NOT warning on 03/07/08 prefixes. Number portability
   // (since 2002), call forwarding, VOIP, and inherited business lines mean
