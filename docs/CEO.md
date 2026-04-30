@@ -103,15 +103,39 @@ When the topic at hand involves a doc I've referenced, I read it FULLY — not s
 ### Rule 11 — Research failure modes, not just success patterns
 Most research defaults to "best practices" / "what to do." That's half the picture. The other half — and often more valuable — is **what went wrong for others**.
 
-**For every meaningful decision, also research:**
-- **NCAT (NSW Civil & Administrative Tribunal) decisions** for trades businesses → what triggered customer disputes; what contract clauses failed; what the tribunal awarded
-- **NSW Fair Trading complaints data** → patterns in trades complaints; what businesses got sanctioned
-- **ACCC enforcement actions** for trades or marketing claims → what got businesses fined
-- **Reddit AU trades / business / consumer threads** → "ripped off by bathroom resurfacing" type posts reveal real customer rage triggers
-- **Product Review.com.au** for competitors → what specifically pissed customers off
-- **Facebook trade groups** (Sydney Tradies, NSW trades) → "don't use brand X, here's why" + "best brand for Y, here's why"
-- **Hipages / Airtasker reviews** of established operators → operational mistakes that surface
-- **Court judgments** for trades disputes (NSW Supreme Court, District Court) → high-stakes failure cases
+**For every meaningful decision, also research these channels (don't restrict to Facebook/Reddit):**
+
+### Australian sources
+- **NCAT decisions** (NSW Civil & Administrative Tribunal) for trades — customer disputes, contract failures, tribunal awards
+- **NSW Fair Trading complaints data** + sanction registry
+- **ACCC enforcement actions** for trades / marketing claims
+- **Reddit** (r/AusTrades, r/sydney, r/AusFinance, r/AusProperty)
+- **Product Review.com.au** for competitor reviews
+- **Facebook trade groups** (Sydney Tradies, NSW Tiles & Bathroom Renovations, Australian Tradies Network)
+- **Hipages / Airtasker reviews** for established operators' operational mistakes
+- **Court judgments** (NSW Supreme Court, District Court, Federal Court) for trades disputes
+- **Whirlpool Australia forums** (renovation + trades sections)
+- **Renovate Forum** (Australian renovation community)
+- **Trade Association sites**: HIA (Housing Industry Association), Master Builders Association NSW, Australian Tile Council
+- **Industry publications**: Trade Risk magazine, Trade Business magazine, Renovate magazine, Houzz AU
+- **AusBath / Aussie home renovation forums**
+
+### International sources (apply when Sydney-relevant)
+- **US resurfacing industry**: Miracle Method (largest US franchise), International Concrete Polishing Society, ContractorTalk.com bathroom resurfacing threads
+- **UK trade forums**: TradeForum.co.uk, BathReviveUK reviews, MyBuilder.com reviews
+- **Canadian trade associations**: similar regulatory approach to AU
+- **NZ resurfacing trade**: similar materials/methods (Bert distributes there too)
+
+### Country-applicability filter
+Only apply international insights if:
+- Same materials / chemistry (Hawk products = US/AU/NZ same; methylene chloride strippers banned in US after 14 deaths = WHY we don't use them in AU either)
+- Same regulatory pattern (AU + UK consumer-protection laws similar enough to learn from each other)
+- Same market dynamics (small-trade-business margins, sub recruitment challenges)
+
+**Don't apply** when:
+- Material brands differ (US Aqua-Tek ≠ AU Hawk Glass-Tech distribution)
+- Regulatory wholly different (AU GST vs US sales tax patterns)
+- Cultural/customer expectations differ markedly
 
 **Allan's example pattern:**
 > *"Good resurfacing materials in Sydney" forum says "don't use Bunnings materials, they don't supply it" + "Napco or Hawk resurfacing materials are the best"*
