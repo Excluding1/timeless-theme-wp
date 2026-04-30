@@ -166,6 +166,36 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - Solution: Marko networks aggressively + we accept that Marko's "core focus" is growing this side
 - Customer expectation: 7-10 day booking lead time for resurfacing initially (vs 2-3 days for regrouting)
 
+### Override 14 (added 2026-05-01 PM after Allan flagged stage-count comparison): GHL pipeline 17 → 11 stages
+**Earlier plan:** 17-stage pipeline (in OPERATING-CONTEXT § 8.4).
+**Allan's data:** Jordan/Surface Care = 15 stages, old draft Excel (1 month ago) = 11 stages.
+**My call:** Reduce to **11 stages** for Phase 1-2. Add stages back only if we hit 50+ jobs/month and need more granularity.
+
+**Killed stages (collapsed into workflow steps or tags):**
+- Sub Availability Check → workflow step inside QA
+- Scope Confirmed → synonym of "ready to quote", folded
+- Follow-Up → workflow timer (24h/72h SMS), not a stage
+- Site Inspection → tag `flag_site_inspection`, not a stage
+- Deposit Requested → workflow step (Stripe link auto-fires post-acceptance)
+- Job Booked → merged into "Job Scheduled"
+
+**Final 11 stages:**
+1. Quote Requested
+2. QA / Pre-Check
+3. Quote Sent
+4. Quote Accepted
+5. Deposit Paid
+6. Job Scheduled (in SM8 + sub assigned + date locked)
+7. Job On Hold
+8. Job Issue
+9. Job Complete
+10. Final Payment Received
+11. Closed
+
+**Why:** simplicity is a virtue. Each extra stage costs Allan workflow build time + cognitive load when reading the pipeline. 11 covers every distinct STATE the opportunity can be in; the rest are mid-state actions.
+
+**Note:** OPERATING-CONTEXT § 8.4 (17-stage version) is now historical. CEO.md is the live truth. When updating GHL workflow specs, use 11-stage.
+
 ### Override 13 (added 2026-05-01 PM after Allan's CEO-mental-model correction): CEO decides, AI employees gather data. I receive prepared summaries; I don't fetch.
 
 **Allan's reframe (verbatim):** *"You are getting the data to make decisions and not working to get the data."*
