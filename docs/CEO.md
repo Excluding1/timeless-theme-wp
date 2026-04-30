@@ -166,35 +166,54 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - Solution: Marko networks aggressively + we accept that Marko's "core focus" is growing this side
 - Customer expectation: 7-10 day booking lead time for resurfacing initially (vs 2-3 days for regrouting)
 
-### Override 14 (added 2026-05-01 PM after Allan flagged stage-count comparison): GHL pipeline 17 → 11 stages
-**Earlier plan:** 17-stage pipeline (in OPERATING-CONTEXT § 8.4).
-**Allan's data:** Jordan/Surface Care = 15 stages, old draft Excel (1 month ago) = 11 stages.
-**My call:** Reduce to **11 stages** for Phase 1-2. Add stages back only if we hit 50+ jobs/month and need more granularity.
+### Override 14 v2 (revised 2026-05-01 PM after Allan challenged "Jordan does $2M with 15 stages — there must be a reason"): GHL pipeline = 13 stages (Jordan's structure minus sub-quote-per-job)
 
-**Killed stages (collapsed into workflow steps or tags):**
-- Sub Availability Check → workflow step inside QA
-- Scope Confirmed → synonym of "ready to quote", folded
-- Follow-Up → workflow timer (24h/72h SMS), not a stage
-- Site Inspection → tag `flag_site_inspection`, not a stage
-- Deposit Requested → workflow step (Stripe link auto-fires post-acceptance)
-- Job Booked → merged into "Job Scheduled"
+**Earlier (v1):** I cut Jordan's 15 down to 11 calling 6 of his stages "workflow steps masquerading as states."
+**Allan's challenge:** *"There must be a reason he has 15 stages and is making $2M/year in rev?"*
+**My re-derivation:** Jordan's structure is the result of operational learning at scale. I was reinventing wheels he'd already debugged. CEO discipline = adopt proven + remove only what genuinely doesn't apply to OUR specific model.
 
-**Final 11 stages:**
+**Final 13 stages (Jordan's 15 minus 2 sub-quote stages we don't need):**
 1. Quote Requested
-2. QA / Pre-Check
+2. Q&A / Pre-Check
 3. Quote Sent
 4. Quote Accepted
-5. Deposit Paid
-6. Job Scheduled (in SM8 + sub assigned + date locked)
-7. Job On Hold
-8. Job Issue
-9. Job Complete
-10. Final Payment Received
-11. Closed
+5. Site Inspection (only when flag triggered — rare but a distinct waiting state)
+6. Prepayment (Stripe link sent, awaiting customer click)
+7. Job in ServiceM8 (deposit cleared, job card created)
+8. Job On Hold (access/strata/asbestos blocker)
+9. Job Issue (sub problem reported)
+10. Job Booked (date locked + sub assigned)
+11. Job Complete
+12. Job Invoiced (final invoice sent, awaiting customer payment)
+13. Job Paid (customer paid, ready to pay sub) → closes terminal when sub-paid
 
-**Why:** simplicity is a virtue. Each extra stage costs Allan workflow build time + cognitive load when reading the pipeline. 11 covers every distinct STATE the opportunity can be in; the rest are mid-state actions.
+**Skipped from Jordan's 15 (not applicable to our model):**
+- Sub-quote Requested (we use fixed rate cards; subs don't bid per job)
+- Sub-quote Received (same reason)
 
-**Note:** OPERATING-CONTEXT § 8.4 (17-stage version) is now historical. CEO.md is the live truth. When updating GHL workflow specs, use 11-stage.
+**Why these specifically can't be killed (correcting my v1 mistake):**
+- **Site Inspection**: distinct state from "Quote Accepted" — customer agreed in principle but full quote depends on physical inspection. Even at low volume, when this happens it's a real waiting state.
+- **Prepayment vs Job in SM8**: 2 different waiting periods. Prepayment = waiting on customer to click Stripe link; Job in SM8 = waiting for sub to accept job card. Different alerts, different ageing thresholds.
+- **Job Invoiced vs Job Paid**: 2 different waiting periods. Invoice sent → waiting for customer payment; Paid → waiting for sub payout via pay.com.au. Cash flow visibility requires distinct stages.
+
+**Why this is right at OUR scale even with 0-3 jobs/month:**
+- Workflows are built ONCE, used forever — better to build for $2M scale from start
+- Sub-quote stages we genuinely don't need stay killed
+- Adopting proven structure beats inventing simpler
+
+**Note:** OPERATING-CONTEXT § 8.4 (17-stage version) is now historical. CEO.md Override 14 v2 = current authoritative pipeline. Update GHL workflow specs to use 13-stage.
+
+**Audit refinements (added 2026-05-01 PM after Allan caught me skipping the 3-lens audit):**
+1. **"Closed" is a terminal status flag** on Job Paid, NOT a separate stage 14. Count = genuinely 13.
+2. **Ageing rules per stage** must be in the workflow spec:
+   - Prepayment: 24hr reminder, 72hr final, 7d auto-cancel
+   - Job in SM8: 2hr alert if no sub accept; escalate to Marko
+   - Job Invoiced: 7d/14d/30d reminder cascade to customer
+   - Job Paid → Sub-Paid: must complete within 72hr of customer payment clearing
+3. **Site Inspection rot prevention**: quarterly reminder to verify the workflow still triggers correctly; if no opps used the stage in 90 days, audit whether trigger is broken or the use case is dead
+4. **Pipeline flowchart documented** in `docs/specs/ghl-pipeline-13-stage.md` (build during GHL workflow spec session)
+
+**Methodology lesson logged**: I skipped my own 3-lens audit on Override 14 v1 — Allan called it. Reversed and re-derived properly. Going forward: every Override runs through 3 lenses BEFORE landing in CEO.md, not after Allan catches.
 
 ### Override 13 (added 2026-05-01 PM after Allan's CEO-mental-model correction): CEO decides, AI employees gather data. I receive prepared summaries; I don't fetch.
 
