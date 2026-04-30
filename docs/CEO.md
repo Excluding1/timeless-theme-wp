@@ -166,6 +166,37 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - Solution: Marko networks aggressively + we accept that Marko's "core focus" is growing this side
 - Customer expectation: 7-10 day booking lead time for resurfacing initially (vs 2-3 days for regrouting)
 
+### Override 13 (added 2026-05-01 PM after Allan's CEO-mental-model correction): CEO decides, AI employees gather data. I receive prepared summaries; I don't fetch.
+
+**Allan's reframe (verbatim):** *"You are getting the data to make decisions and not working to get the data."*
+
+**My behaviour drift this session that prompted the correction:**
+- Curl-auditing the live site myself
+- Reading the Excel + extracting numbers myself
+- Planning manual web searches for Sydney prices
+- Treating "execute the pricing audit" as a CEO-personal task
+
+**Correct CEO behaviour going forward:**
+- For ANY repetitive gathering / research / monitoring task: SPEC the AI employee, not do the work
+- Every spec file in `docs/specs/` (especially pricing-audit-2026-05.md) is now an AI EMPLOYEE JOB DESCRIPTION
+- I commission, AI employees execute, I review summary, I decide
+- One-off direct actions (running curl to verify a thing, opening a file to confirm) — fine, but minimise
+
+**Revised AI agent priority order (some pulled forward from Phase 6):**
+
+| Agent | When | Reason for pull-forward |
+|---|---|---|
+| AI Pricing Researcher | Week 1-2 NEXT SESSION | Replaces my manual price gathering; needs only web access |
+| AI Materials Validator | Week 2-3 | Validates approved-brands list across forums/reviews; needs only web access |
+| AI Competitive Intelligence | Week 2-3 | Weekly Sydney competitor scan; needs only web access |
+| AI Quote Drafter | Week 4-5 (was Month 4-5) | Saves quote drafting time from job 1 |
+| AI Business Analyst | Month 3 (was Month 6) | Needs GHL data, but starts as soon as we have 30+ events |
+| AI Ad Watchdog | Month 4+ | After 30 days of stable ad spend |
+| AI Photo Quality | Month 4+ | After 10+ SM8 jobs |
+| AI Review Responder | Month 9-10 | After 20+ reviews |
+
+The first three (research-focused) come BEFORE Phase 6 because they don't need operational data.
+
 ### Override 12 (added 2026-05-01 PM, reframed after Allan's agency-model clarification): Recruit pre-trained subs; don't train new ones
 **Note on Bert's "don't teach spray" warning:** Bert was speaking from operator perspective (warning operators against training employees who become competitors). In OUR agency model we don't train at all — every sub comes pre-trained with their own ABN, own tools, own business. So Bert's warning doesn't directly apply, BUT the underlying principle (limit business intelligence shared with subs) still does.
 
