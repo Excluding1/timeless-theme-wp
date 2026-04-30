@@ -343,25 +343,42 @@ export default function QuoteForm() {
   const [showAddrDropdown, setShowAddrDropdown] = useState(false);
   const addrDebounce = useRef();
   const addrSessionToken = useRef(typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2));
+  // Cache recent queries — typing "15 Bondi" then deleting to "15 Bond" should
+  // hit cache instead of re-fetching identical results from Google.
+  const addrCache = useRef(new Map());
+  // Abort controller for in-flight requests — when user types fast we cancel
+  // the previous request so the latest query's response always wins, not
+  // whichever one Google answered first.
+  const addrAbort = useRef(null);
   async function fetchAddrSuggestions(text) {
     const apiKey = import.meta.env.VITE_GOOGLE_PLACES_KEY || "";
     if (!apiKey || text.length < 3) { setAddrSuggestions([]); return; }
+
+    // Cache hit = instant
+    const cached = addrCache.current.get(text);
+    if (cached) {
+      setAddrSuggestions(cached);
+      setShowAddrDropdown(cached.length > 0);
+      return;
+    }
+
+    // Cancel any in-flight request — its response is now stale
+    if (addrAbort.current) addrAbort.current.abort();
+    const ctrl = new AbortController();
+    addrAbort.current = ctrl;
+
     try {
       const res = await fetch("https://places.googleapis.com/v1/places:autocomplete", {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-Goog-Api-Key": apiKey },
+        signal: ctrl.signal,
         body: JSON.stringify({
           input: text,
           includedRegionCodes: ["AU"],
           languageCode: "en",
           sessionToken: addrSessionToken.current,
-          // Restrict to mainland NSW bounding box. Without this, Google's
-          // IP-based location bias surfaces nearby suggestions — so a NSW
-          // resident on holiday in QLD/VIC types "15 King St" and gets
-          // wrong-state results promoted. With restriction, Google never
-          // suggests non-NSW addresses regardless of user location.
-          // Bounds: -37.51..-28.16 lat, 140.999..153.64 lng (excludes
-          // Lord Howe Is + Norfolk Is — out of service area anyway).
+          // NSW bounding box — Google never suggests non-NSW addresses
+          // regardless of user IP location bias.
           locationRestriction: {
             rectangle: {
               low: { latitude: -37.51, longitude: 140.999 },
@@ -373,10 +390,17 @@ export default function QuoteForm() {
       if (!res.ok) { setAddrSuggestions([]); return; }
       const data = await res.json();
       const preds = (data.suggestions || []).filter(s => s.placePrediction).slice(0, 5);
+      // Cache the result for instant replays. Cap at 50 entries (LRU-ish).
+      if (addrCache.current.size >= 50) {
+        const firstKey = addrCache.current.keys().next().value;
+        addrCache.current.delete(firstKey);
+      }
+      addrCache.current.set(text, preds);
       setAddrSuggestions(preds);
       setShowAddrDropdown(preds.length > 0);
-    } catch {
-      setAddrSuggestions([]);
+    } catch (err) {
+      // AbortError when we cancelled — silent, expected. Other errors silent too.
+      if (err.name !== "AbortError") setAddrSuggestions([]);
     }
   }
   // Step 3
@@ -864,7 +888,7 @@ export default function QuoteForm() {
                 setAddr(v);
                 setAddrOk(chkAddr(v));
                 clearTimeout(addrDebounce.current);
-                addrDebounce.current = setTimeout(() => fetchAddrSuggestions(v), 300);
+                addrDebounce.current = setTimeout(() => fetchAddrSuggestions(v), 150);
               }}
               onFocus={() => addrSuggestions.length > 0 && setShowAddrDropdown(true)}
               onBlur={() => setTimeout(() => setShowAddrDropdown(false), 200)}
