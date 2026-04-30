@@ -297,8 +297,44 @@ Before this audit runs, CEO must:
 - [ ] Web search current 2026 NSW trade hourly rates (skilled bathroom)
 - [ ] Web search current Sydney bathroom resurfacing competitor pricing (3-5 competitors)
 - [ ] Verify Bert/AUSTRS CSV is current (already verified 2026-04-30)
-- [ ] Web search Bunnings + Reece + tradies' supply for current cement grout, silicone, blade prices
+- [ ] Web search Bunnings + Reece + tradies' supply for current cement grout, silicone, blade prices (multiple brands per category)
 - [ ] Cross-reference Hipages "average price for X" data (if accessible)
+- [ ] Research SUB EQUIPMENT options (HVLP turbines, vacuums, sanders, fans, zip walls) with multiple brand alternatives at quality tier
+
+## Approved materials & equipment list (deliverable B from this audit)
+
+**Allan requirement (2026-05-01 PM):** "high quality even for disposable items as we want high quality jobs. Multiple approved items even if same product, different brands. We don't mind the brand as long as it's good quality."
+
+Pricing audit produces a SECOND deliverable: an Approved Materials & Equipment List that tells subs what to use. Per category, list 2-3 approved alternatives at the same quality tier so subs can buy what's locally available without breaking standards.
+
+### Categories to cover
+| Category | Examples of approved-alternatives needed |
+|---|---|
+| **Cement grout (regrouting)** | Davco SuperColour / Mapei Ultracolor Plus / Ardex FG-C MicroTec |
+| **Epoxy grout (regrouting premium)** | Mapei Kerapoxy / Davco Hydroepoxy / Laticrete SpectraLOCK |
+| **Silicone (sanitary, mould-resistant)** | Selleys Wet Area / Sika Sanisil / Soudal Silirub MA / Bostik Cementone |
+| **Grout removal blades** | Premium oscillating blades only — research brands |
+| **Surface cleaners** | Cement: Sugar Soap / industrial degreasers. Resurfacing: Bert's Step 1 + Step 2 (no alternatives — Hawk system) |
+| **Masking tape (no bleed)** | 3M Scotch Blue 2090 / Tesa Premium / Selleys 3-day painter's tape |
+| **Drop cloths** | Pro-grade canvas (12oz+) — multiple Bunnings/Total Tools brands |
+| **Disposable gloves** | Nitrile, powder-free, 4mm+: Ansell TouchNTuff / Bastion / Microflex |
+| **Respirators** | 3M 6000-series half-mask + organic vapour cartridges / Sundström / Moldex |
+| **HVLP turbine systems (resurfacing)** | Bert: Fuji Spray D6 / Apollo HVLP / Earlex Spray Station — confirm brand approvals |
+| **Vacuums (dust extraction)** | Festool CT26 (premium) / Makita VC4710 / Bosch GAS 35 / Karcher WD entry+ |
+| **Sanders** | Festool / Mirka / Bosch / Makita random-orbital with dust port |
+| **Fans/extractors** | Bunnings industrial fan + flexible duct / portable HEPA negative-pressure unit |
+| **Zip wall systems** | 12-pole zip wall (sourced AU locally) — verify brand options |
+
+### Format for the future SOP
+A separate file `docs/sop/sub-materials-standard.md` will contain the full approved list with:
+- Category name
+- 2-3 approved brand+SKU options
+- Where to buy (Bunnings / Reece / Bert / Total Tools / etc)
+- Approximate price per category
+- Quality criteria (e.g., "any nitrile glove ≥4mm thickness, AS/NZS 4011 standard")
+- What NOT to use (avoid list — e.g., dollar-shop tape that bleeds, super-cheap silicone that yellows)
+
+**Trigger to build the SOP:** after first 2-3 subs onboarded + CEO has run the pricing audit research with real Sydney supplier prices.
 
 ---
 
