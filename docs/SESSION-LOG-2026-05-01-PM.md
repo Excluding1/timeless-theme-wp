@@ -96,7 +96,8 @@
 1. **9dee899** — `docs(jordan): integrate transcripts research — F11-F15 + V56 KPIs + 2 AI employees + Rule 12`
 2. **d80601c** — `docs(sub-onboarding): migrate sheets 06-14 — 6 SOPs + rate schedule + 2 templates`
 3. **c0495e0** — `docs(ai-employees): build Phase 1-2 research-focused roster — materials + competitive + trades`
-4. *(pending: Batch D — GHL pipeline 13-stage spec)*
+4. **5051981** — `docs(ghl): build 13-stage pipeline spec — stages + workflows + ageing rules`
+5. *(pending: Batch E — customer comms templates from QUOTE_OUTPUT_TEMPLATES)*
 
 ---
 
@@ -135,6 +136,10 @@
 - **MODIFIED** `docs/FUTURE-PLAN.md § Phase 1.4` — updated from "17-stage" to "13-stage" with reference to new authoritative spec; added ageing-rule + Slack-channel setup steps
 - **MODIFIED** `docs/FUTURE-PLAN.md § Phase 5` — added Override 15 callout at top: BigQuery setup happens NOW (Phase 1 timing) per Override 15; population work stays Phase 5
 - **MODIFIED** `docs/OPERATING-CONTEXT.md § 8.4` — marked HISTORICAL with deprecation banner pointing to ghl-pipeline-13-stage.md as current authoritative spec
+
+### Batch E — Customer communications templates (14-sheet QUOTE_OUTPUT_TEMPLATES.xlsx migration)
+- **NEW** `docs/templates/customer-comms-templates.md` — complete 21-template lifecycle covering pre-quote / quote-delivery / 24-48-72hr nudges / post-deposit / NPS-review-referral / PM-builder repeat nurture / win-back / edge cases. ACCC + Spam Act compliance audit checklist. 7 new custom fields documented. Cross-referenced to ghl-pipeline-13-stage workflows + customer-aftercare-cards.
+- **NEW** `data/archive/old-drafts-2026-04/extracted-quote-output-templates/` — 14 sheets extracted to MD via openpyxl for archive + future spec migration (sheets 01-02 psychology/competitors, 05-08 quote page/key data/GHL setup/custom values, 09-12 audit/integration map/build order/NSW legal — all archived but not yet migrated; primary value extracted from 03 SMS, 04 Email, 13 post-deposit, 14 edge cases)
 
 ---
 
