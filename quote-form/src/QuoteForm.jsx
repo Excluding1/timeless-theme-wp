@@ -44,15 +44,22 @@ const AREAS = [
   { id: "walls", label: "Wall Tiles", desc: "Wall regrouting or resurfacing outside the shower", icon: I.wall },
 ];
 
-/* ─── MULTIPLE AREAS CHECKLIST (from spec 01 — 📦 Multiple) ─── */
+/* ─── MULTIPLE AREAS CHECKLIST ───
+   Broad intent picks for multi-area mode. Each maps to one or more Excel
+   SKU categories — tradie disambiguates final SKU from photos + flags
+   (epoxy, basin count, spa). Designed for "I want shower + bath fixed"
+   not "I want regrout+sil epoxy with cabinet respray". Granular detail
+   comes from photos. */
 const MULTI_ITEMS = [
-  { id: "m_shower_regrout", label: "Shower — fix tiles & corners", trade: "regrouting", area: "shower", icon: I.shower },
-  { id: "m_shower_recoat", label: "Shower — change tile colour", trade: "resurfacing", area: "shower", icon: I.shower },
-  { id: "m_bath_resurface", label: "Bath — make it look new", trade: "resurfacing", area: "bath", icon: I.bath },
+  { id: "m_shower_regrout", label: "Shower — fix tiles & corners", trade: "regrouting + silicone", area: "shower", icon: I.shower },
+  { id: "m_shower_recoat", label: "Shower — change tile colour", trade: "tile resurfacing", area: "shower", icon: I.shower },
+  { id: "m_bath_resurface", label: "Bath — make it look new", trade: "bath resurfacing", area: "bath", icon: I.bath },
   { id: "m_bath_chip", label: "Bath — fix a chip or dent", trade: "chip repair", area: "bath", icon: I.bath },
-  { id: "m_basin", label: "Sink — make it look new", trade: "resurfacing", area: "basin", icon: I.basin },
-  { id: "m_vanity", label: "Vanity — refresh benchtop or cabinet", trade: "resurfacing/respray", area: "vanity", icon: I.vanity },
-  { id: "m_floor", label: "Floor tiles — fix lines or change colour", trade: "regrouting/resurfacing", area: "floor", icon: I.floor },
+  { id: "m_basin", label: "Sink — make it look new", trade: "basin resurfacing", area: "basin", icon: I.basin },
+  { id: "m_vanity", label: "Vanity — refresh benchtop or cabinet", trade: "vanity refinishing", area: "vanity", icon: I.vanity },
+  { id: "m_mould", label: "Mould — replace silicone seals", trade: "silicone replacement", area: "mould", icon: I.mould },
+  { id: "m_floor", label: "Floor tiles — fix lines or change colour", trade: "floor regrouting / resurfacing", area: "floor", icon: I.floor },
+  { id: "m_walls", label: "Wall tiles — fix lines or change colour", trade: "wall regrouting / resurfacing", area: "walls", icon: I.wall },
   { id: "m_full", label: "The whole bathroom needs a refresh", trade: "full makeover", area: "full", icon: I.sparkle },
   { id: "m_regrout_all", label: "Fix all tile lines in the whole bathroom", trade: "full regrout", area: "regrout_all", icon: I.floor },
 ];
@@ -1069,70 +1076,73 @@ export default function QuoteForm() {
       </>}
 
       {/* ═══ STEP 4 — SERVICES (multi area) ═══
-          Renders services for each picked area on one screen. Compact rows
-          (no before/after card images) keeps the page short. Wired into the
-          existing svcPicks state — same data shape as single mode. */}
-      {step === "services" && mode === "multi" && <>
-        <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>What does each area need?</h2>
-        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Tick at least one service per area.</p>
-        {selAreas.map(areaId => {
-          const area = AREAS.find(a => a.id === areaId);
-          const services = SVCS[areaId] || [];
-          if (!area || services.length === 0) return null;
-          const picked = svcPicks[areaId] || [];
-          return (
-            <div key={areaId} style={{ marginBottom: 20 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-                {typeof area.icon === 'function' ? area.icon(22) : area.icon}
-                <h3 style={{ fontSize: 16, fontWeight: 700, color: C.pri, margin: 0 }}>{area.label}</h3>
-                {picked.length === 0 && <span style={{ fontSize: 10, color: C.err, fontWeight: 600, marginLeft: "auto" }}>Pick at least one</span>}
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {services.map(s => {
-                  const on = picked.includes(s.id);
-                  return (
-                    <label key={s.id} style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: "10px 12px", borderRadius: 10, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: on ? `${C.pri}06` : C.white, cursor: "pointer" }}>
-                      <input type="checkbox" checked={on} onChange={() => toggleSvc(areaId, s.id)} style={{ marginTop: 3, accentColor: C.pri, width: 16, height: 16, flexShrink: 0 }} />
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: on ? C.pri : C.priC }}>{s.label}</div>
-                        <div style={{ fontSize: 11, color: C.sec, marginTop: 2 }}>{s.trade}</div>
-                      </div>
-                    </label>
-                  );
-                })}
-              </div>
-              {/* Basin count nested */}
-              {areaId === "basin" && picked.length > 0 && (
-                <div style={{ marginTop: 8, padding: 10, background: C.surfLow, borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: C.pri, marginBottom: 6 }}>How many basins?</div>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    {[{ id: "1", l: "Just 1" }, { id: "2", l: "Double / 2" }].map(o => <button key={o.id} type="button" onClick={() => setBasinCnt(o.id)} aria-pressed={basinCnt === o.id} style={{ flex: 1, padding: 8, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: basinCnt === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: basinCnt === o.id ? `${C.pri}08` : C.white, color: basinCnt === o.id ? C.pri : C.sec }}>{o.l}</button>)}
+          Broad-intent picks via MULTI_ITEMS, filtered by selected areas.
+          Customers think in outcomes ("fix tiles & corners") not tradie
+          taxonomy ("regrout cement vs epoxy"). Granular SKU is determined
+          by photos + flags (epoxy / spa / basin count). Simpler = faster
+          intake = higher completion rate. */}
+      {step === "services" && mode === "multi" && (() => {
+        const relevantItems = MULTI_ITEMS.filter(item => selAreas.includes(item.area));
+        const hasRegroutPick = multiPicks.some(id => ["m_shower_regrout", "m_floor", "m_walls", "m_regrout_all", "m_full"].includes(id));
+        const hasBathResurfacePick = multiPicks.includes("m_bath_resurface") || multiPicks.includes("m_full");
+        const hasBasinPick = multiPicks.includes("m_basin") || multiPicks.includes("m_full");
+        const needsSpaAnswer = hasBathResurfacePick && !isSpa;
+        const canContinue = multiPicks.length > 0 && !needsSpaAnswer;
+        return <>
+          <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>What do you want done?</h2>
+          <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Pick what applies. We&rsquo;ll work out the details from your photos.</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {relevantItems.map(item => {
+              const on = multiPicks.includes(item.id);
+              return (
+                <label key={item.id} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", borderRadius: 10, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: on ? `${C.pri}06` : C.white, cursor: "pointer", minHeight: 44 }}>
+                  <input type="checkbox" checked={on} onChange={() => toggleMulti(item.id)} style={{ marginTop: 3, accentColor: C.pri, width: 18, height: 18, flexShrink: 0 }} />
+                  {typeof item.icon === 'function' ? item.icon(22) : item.icon}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: on ? C.pri : C.priC }}>{item.label}</div>
+                    <div style={{ fontSize: 11, color: C.sec, marginTop: 2 }}>{item.trade}</div>
                   </div>
-                </div>
-              )}
-              {/* Spa flag nested — only when bath area + bt1 (resurface) picked */}
-              {areaId === "bath" && picked.includes("bt1") && (
-                <div style={{ marginTop: 8, padding: 10, background: C.surfLow, borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, fontWeight: 600, color: C.pri, marginBottom: 6 }}>Is this a spa bath (with jets)?</div>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    {[{ id: "no", l: "No — standard bath" }, { id: "yes", l: "Yes — spa with jets" }].map(o => <button key={o.id} type="button" onClick={() => setIsSpa(o.id)} aria-pressed={isSpa === o.id} style={{ flex: 1, padding: 8, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: isSpa === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: isSpa === o.id ? `${C.pri}08` : C.white, color: isSpa === o.id ? C.pri : C.sec }}>{o.l}</button>)}
-                  </div>
-                </div>
-              )}
+                </label>
+              );
+            })}
+          </div>
+
+          {/* Conditional flags — only the questions photos can't answer for the tradie */}
+          {hasRegroutPick && (
+            <div style={{ marginTop: 14, padding: 12, background: C.surfLow, borderRadius: 10 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: C.pri, marginBottom: 4 }}>Grout type</div>
+              <div style={{ fontSize: 11, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>Epoxy lasts 2&times; longer + waterproof. Cement is the standard.</div>
+              <div style={{ display: "flex", gap: 6 }}>
+                {[{ id: "standard", l: "Cement (standard)" }, { id: "epoxy", l: "Epoxy upgrade (+)" }].map(o => <button key={o.id} type="button" onClick={() => setEpoxyPicks(p => ({ ...p, all: o.id }))} aria-pressed={(epoxyPicks.all || "standard") === o.id} style={{ flex: 1, padding: 9, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: (epoxyPicks.all || "standard") === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: (epoxyPicks.all || "standard") === o.id ? `${C.pri}08` : C.white, color: (epoxyPicks.all || "standard") === o.id ? C.pri : C.sec }}>{o.l}</button>)}
+              </div>
             </div>
-          );
-        })}
-        <Btn
-          onClick={() => setStep("photos")}
-          disabled={selAreas.some(a => (svcPicks[a] || []).length === 0) || (selAreas.includes("bath") && (svcPicks.bath || []).includes("bt1") && !isSpa)}
-        >
-          {selAreas.some(a => (svcPicks[a] || []).length === 0)
-            ? "Pick at least one service per area"
-            : (selAreas.includes("bath") && (svcPicks.bath || []).includes("bt1") && !isSpa)
-              ? "Spa bath? answer above"
+          )}
+
+          {hasBasinPick && (
+            <div style={{ marginTop: 10, padding: 12, background: C.surfLow, borderRadius: 10 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: C.pri, marginBottom: 6 }}>How many basins?</div>
+              <div style={{ display: "flex", gap: 6 }}>
+                {[{ id: "1", l: "Just 1" }, { id: "2", l: "Double / 2" }].map(o => <button key={o.id} type="button" onClick={() => setBasinCnt(o.id)} aria-pressed={basinCnt === o.id} style={{ flex: 1, padding: 9, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: basinCnt === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: basinCnt === o.id ? `${C.pri}08` : C.white, color: basinCnt === o.id ? C.pri : C.sec }}>{o.l}</button>)}
+              </div>
+            </div>
+          )}
+
+          {hasBathResurfacePick && (
+            <div style={{ marginTop: 10, padding: 12, background: C.surfLow, borderRadius: 10 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: C.pri, marginBottom: 6 }}>Is this a spa bath (with jets)? *</div>
+              <div style={{ display: "flex", gap: 6 }}>
+                {[{ id: "no", l: "No — standard bath" }, { id: "yes", l: "Yes — spa with jets" }].map(o => <button key={o.id} type="button" onClick={() => setIsSpa(o.id)} aria-pressed={isSpa === o.id} style={{ flex: 1, padding: 9, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: isSpa === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: isSpa === o.id ? `${C.pri}08` : C.white, color: isSpa === o.id ? C.pri : C.sec }}>{o.l}</button>)}
+              </div>
+            </div>
+          )}
+
+          <Btn onClick={() => setStep("photos")} disabled={!canContinue}>
+            {multiPicks.length === 0 ? "Pick at least one above"
+              : needsSpaAnswer ? "Spa bath? answer above"
               : "Next — upload photos →"}
-        </Btn>
-      </>}
+          </Btn>
+        </>;
+      })()}
 
       {/* ═══ STEP 5 — PHOTOS + URGENCY + SUBMIT ═══ */}
       {step === "photos" && <>
