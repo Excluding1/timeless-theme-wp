@@ -513,16 +513,37 @@ Marko escalates to CEO for:
 
 ## References (component SOPs + specs)
 
+### Pre-live (sourcing → first job)
 | Component | What it covers |
 |---|---|
+| [sub-recruitment-channels.md](sub-recruitment-channels.md) | Stage 0 — 8 channels for finding subs + compliance language |
+| [recruitment-ads.md](../templates/recruitment-ads.md) | Stage 0 — ad copy templates per channel |
 | [sub-vetting-checklist.md](sub-vetting-checklist.md) | Stages 1-3 documents + interview |
 | [sub-trial-job-protocol.md](sub-trial-job-protocol.md) | Stage 4 paid trial protocol |
 | [sub-quality-rubric.md](sub-quality-rubric.md) | Stage 4 + 8 + ongoing scoring |
-| [sub-onboarding-checklist.md](sub-onboarding-checklist.md) | Stages 5-8 detailed steps |
 | [sub-agreement-clauses.md](../specs/sub-agreement-clauses.md) | Stage 5 contract Sprintlaw brief |
+| [sub-onboarding-checklist.md](sub-onboarding-checklist.md) | Stages 5-8 detailed steps |
 | [sub-materials-standard.md](sub-materials-standard.md) | Approved materials referenced in agreement Schedule B |
+| [sub-rate-schedule.md](../specs/sub-rate-schedule.md) | Stage 5 rate schedule attached to agreement (Clause 15) |
+| [customer-aftercare-cards.md](../templates/customer-aftercare-cards.md) | Stage 7 — sub leaves with every customer |
+
+### Live (ongoing operations)
+| Component | What it covers |
+|---|---|
+| [sub-ongoing-quality-monitoring.md](sub-ongoing-quality-monitoring.md) | 9 monitoring systems post-onboarding (NPS, photo review, inspections, callbacks, scorecard, insurance, offboarding) |
+| [sub-risk-scenarios-playbook.md](sub-risk-scenarios-playbook.md) | 28 scenarios + action SOP for each |
+| [sub-sham-contracting-protections.md](sub-sham-contracting-protections.md) | 9-indicator Fair Work compliance + super test |
+| [sub-tax-compliance.md](sub-tax-compliance.md) | TPAR + super + portable long service leave |
+| [sub-sopa-protections.md](sub-sopa-protections.md) | NSW Security of Payment Act 1999 |
+
+### Lenses + identity
+| Component | What it covers |
+|---|---|
 | [auditor-fair-work.md](../roles/auditor-fair-work.md) | Sham contracting protection lens applied throughout |
 | [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md) | NSW law compliance lens (s175B, SOPA, WHS, ACL) |
+| [auditor-customer-fairness.md](../roles/auditor-customer-fairness.md) | Customer-side fairness lens (warranty wording, dispatch reliability) |
+| [auditor-margin-per-job.md](../roles/auditor-margin-per-job.md) | Rate setting + margin floor enforcement |
+| [auditor-general-operational.md](../roles/auditor-general-operational.md) | Quarterly ops audit lens |
 | [expert-trades-ops-contractor.md](../roles/expert-trades-ops-contractor.md) | Domain expertise lens |
 | [OPERATING-CONTEXT § 9.5 + 9.6](../OPERATING-CONTEXT.md) | Tier system + agreement essentials |
 

@@ -64,7 +64,28 @@
 
 ## Open questions logged (non-blocking — keep working)
 
-*Add as encountered. Each: Question → Why I need it → What I'm assuming for now → Where I'd revise once Allan answers.*
+*Each: Question → Why I need it → What I'm assuming for now → Where I'd revise once Allan answers.*
+
+### Q-NEW-1. NSW Long Service Corporation portable leave applicability
+- **Why I need it:** Sub tax compliance — could trigger 0.35% levy obligation on all sub payments if applicable.
+- **My assumption (per [sub-tax-compliance.md § C](sop/sub-tax-compliance.md)):** Likely doesn't apply to genuine independent contractors with own ABN + multiple clients + own tools.
+- **Source for verification needed:** Allan calls **Long Service Corporation NSW** (13 14 41) or emails enquiries@longservice.nsw.gov.au with the question template I drafted in sub-tax-compliance.md.
+- **Where I'd revise:** if applies → register as "building employer" + add 0.35% to sub cost calculation; rate schedule needs $X tagged for portable leave levy.
+- **Blocking?** No — work continues; small calc adjustment if confirmed applies.
+
+### Q-NEW-2. Sub rate validation against Marko's actual network
+- **Why I need it:** [sub-rate-schedule.md](specs/sub-rate-schedule.md) numbers ($320-$650 regrout, $250-$800 resurface) are EXAMPLES from old draft Excel, not validated against Marko's real network.
+- **My assumption:** Numbers are directionally reasonable based on Sydney market data, but need ±10-20% adjustment per actual sub conversations.
+- **Source for verification needed:** Marko (already on QUESTIONS.md Q1).
+- **Where I'd revise:** rate schedule + master pricing sub-labour column.
+- **Blocking?** No — schedule marked DRAFT pending validation; no subs see it before Allan/Marko sign off.
+
+### Q-NEW-3. Customizer ABN field for aftercare cards
+- **Why I need it:** [customer-aftercare-cards.md](templates/customer-aftercare-cards.md) references `[ABN]` placeholder pulled from Customizer; current Customizer has phone + email + licence but not ABN field.
+- **My assumption:** Allan adds ABN field to Customizer next time editing; until then, hardcode ABN in card variants.
+- **Source for verification needed:** ABN is in [STATE.md](STATE.md) (already known); just needs Customizer field add.
+- **Where I'd revise:** WordPress Customizer config in functions.php (small task — could do later in batch).
+- **Blocking?** No — cards aren't being printed yet; add Customizer field when Allan ready.
 
 ---
 
@@ -72,13 +93,14 @@
 
 *Append each commit hash + summary here for Allan's review.*
 
-(pending — about to commit Batch A)
+1. **9dee899** — `docs(jordan): integrate transcripts research — F11-F15 + V56 KPIs + 2 AI employees + Rule 12`
+2. *(pending: Batch B — sub-onboarding sheets 06-09, 11-14 migration)*
 
 ---
 
 ## Files created / modified this session
 
-### Batch A — Jordan transcripts integration
+### Batch A — Jordan transcripts integration (committed 9dee899)
 - **NEW** `data/research/jordan-transcripts-mined-2026-05-01.md` — research output (already created pre-summary)
 - **NEW** `docs/specs/ai-employees/maintenance-reminder.md` — full spec (V7 inspiration → seasonal nudge agent, $2-5/mo)
 - **NEW** `docs/specs/ai-employees/dm-handler.md` — full spec (V21 inspiration → FB/IG DM-to-quote conversational agent, $5-10/mo)
@@ -86,6 +108,19 @@
 - **MODIFIED** `docs/FUTURE-PLAN.md` — added F11-F15 (AI Voice Driving, AI DM Handler, AI Voice Narration, Coordinator-model expansion, Franchise consideration) with failure modes + triggers
 - **MODIFIED** `docs/CEO.md` — added Rule 12 (structured decisioning, pre-existing) + new section "KPI definitions + funnel benchmarks" with V56 Jordan benchmarks (13.7% form-fill, 72.3% quote-sent, 28.2% close)
 - **MODIFIED** `docs/specs/ai-employees/README.md` — added 2 new employees to roster table
+
+### Batch B — Sub-onboarding sheet migration (sheets 06-14, sheet 15 archive-only)
+- **NEW** `docs/sop/sub-sham-contracting-protections.md` (sheet 06) — 9-indicator Fair Work + super test + audit cadence
+- **NEW** `docs/sop/sub-ongoing-quality-monitoring.md` (sheet 07) — 9 monitoring systems + 3-stage removal + offboarding 10-step
+- **NEW** `docs/sop/sub-risk-scenarios-playbook.md` (sheet 08) — 28 scenarios with action SOP + clause backing per scenario
+- **NEW** `docs/sop/sub-recruitment-channels.md` (sheet 09) — 8 channels with compliance language + funnel benchmarks
+- **NEW** `docs/sop/sub-tax-compliance.md` (sheet 11) — TPAR + super 3-part test + portable LSL
+- **NEW** `docs/sop/sub-sopa-protections.md` (sheet 12) — NSW Security of Payment Act 1999 SOP + Clause 16 wording
+- **NEW** `docs/specs/sub-rate-schedule.md` (sheet 13) — sub rate tables (DRAFT pending Marko validation) + 8-step payment SOP + callout/cancellation fees
+- **NEW** `docs/templates/customer-aftercare-cards.md` (sheet 14 section A) — A5 card templates with ACCC-compliant warranty wording
+- **NEW** `docs/templates/recruitment-ads.md` (sheet 14 section B) — ad copy per channel with Fair Work compliance audit checklist
+- **MODIFIED** `docs/sop/sub-onboarding-master.md` — references table updated with all 9 new docs grouped pre-live / live / lenses
+- Sheet 15 (audit log) → archive-only; verifies source Excel completeness; not migrated as ongoing operating doc
 
 ---
 
