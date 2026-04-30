@@ -363,7 +363,14 @@ customer_repeat
 customer_referrer
 ```
 
-### 8.4 The 17-stage pipeline
+### 8.4 The 17-stage pipeline (HISTORICAL — superseded by 13-stage spec)
+
+> **⚠️ Historical reference.** Per [CEO Override 14 v2](CEO.md#override-14-v2-revised-2026-05-01-pm-after-allan-challenged-jordan-does-2m-with-15-stages--there-must-be-a-reason-ghl-pipeline--13-stages-jordans-structure-minus-sub-quote-per-job), the pipeline is now 13 stages following Jordan Schofield's proven Surface Care structure (15 stages minus 2 sub-quote stages we don't use).
+>
+> **Current authoritative spec:** [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md)
+>
+> Below 17-stage table preserved for historical context only.
+
 
 | # | Stage | Owner | Trigger to enter |
 |---|---|---|---|

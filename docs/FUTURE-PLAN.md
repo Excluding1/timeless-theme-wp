@@ -67,15 +67,18 @@
   - [ ] Document: "tags are for filtering, fields are for storing data"
 - **Verify:** Tag a test contact with each prefix family, can filter contacts by each.
 
-### 1.4 17-stage pipeline
+### 1.4 13-stage pipeline (revised 2026-05-01 PM per CEO Override 14 v2)
 - **Expert:** GHL operator + service business ops
 - **Auditor:** Pipeline integrity auditor — is every transition triggered by a system event, not manual drag?
 - **Setup steps:**
   - [ ] Create pipeline "Bathroom Quote → Job"
-  - [ ] Add 17 stages per [OPERATING-CONTEXT § 8.4](OPERATING-CONTEXT.md#84-the-17-stage-pipeline)
-  - [ ] Set default opportunity value field (will be filled by quote)
-  - [ ] Each stage: who owns it (Auto / You / Co-founder)
-- **Verify:** Drag a test opp through all 17 stages by hand — no missing transitions.
+  - [ ] Add 13 stages per [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) (authoritative spec)
+  - [ ] Set default opportunity value field (filled by `quote_amount_final`)
+  - [ ] Each stage: who owns it (Auto / Allan / Marko)
+  - [ ] Implement ageing rules per stage (Prepayment 24hr/72hr/7d, Job in SM8 2hr alert, Job Invoiced 7d/14d/30d cascade, Sub-payout 72hr)
+  - [ ] Set up Slack alert channels per spec (`#quotes-in`, `#new-jobs`, `#job-issues`, `#nps-detractors`, `#sla-breach`, `#dispatch-stuck`, `#sub-payouts-overdue`, `#system-alerts`)
+- **Verify:** Drag a test opp through all 13 stages by hand — no missing transitions; ageing alerts fire on test cases.
+- **Note:** [OPERATING-CONTEXT § 8.4](OPERATING-CONTEXT.md#84-the-17-stage-pipeline) (17-stage version) is now historical. The 13-stage spec adopts Jordan Schofield's proven 15-stage Surface Care structure minus 2 sub-quote stages (we use fixed rate cards, not per-job bidding).
 
 ### 1.5 Connect quote form to GHL (the critical hop)
 - **Expert:** Frontend dev (React) + GHL operator
@@ -367,6 +370,8 @@
 
 **Phase 5 expert lens:** Analytics data engineer
 **Phase 5 auditor lens:** Data quality + privacy
+
+> **⚠️ Override 15 (added 2026-05-01 PM):** BigQuery project + dataset + schema setup happens **NOW** (Phase 1 timing), not Phase 5. Per [CEO § Override 15](CEO.md#override-15-added-2026-05-01-pm-after-allan-challenged-bigquery-defer-bigquery-setup-now-empty-schema-populate-when-ops-data-flows-live), we create empty schema during Phase 1 GHL setup so events can flow as soon as GHL/Stripe/SM8 go live. Phase 5 below describes population + dashboard work — same work, just population happens when ops data exists. Cost: $0-10/mo at our scale.
 
 ### 5.1 Google Cloud project setup
 - **Expert:** Data engineer

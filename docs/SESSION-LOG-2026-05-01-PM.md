@@ -95,7 +95,8 @@
 
 1. **9dee899** — `docs(jordan): integrate transcripts research — F11-F15 + V56 KPIs + 2 AI employees + Rule 12`
 2. **d80601c** — `docs(sub-onboarding): migrate sheets 06-14 — 6 SOPs + rate schedule + 2 templates`
-3. *(pending: Batch C — 3 AI employee specs)*
+3. **c0495e0** — `docs(ai-employees): build Phase 1-2 research-focused roster — materials + competitive + trades`
+4. *(pending: Batch D — GHL pipeline 13-stage spec)*
 
 ---
 
@@ -128,6 +129,12 @@
 - **NEW** `docs/specs/ai-employees/competitive-intelligence.md` — weekly NSW competitor scan + failure-mode log; ~$1-3/week
 - **NEW** `docs/specs/ai-employees/trades-researcher.md` — generic deep-research catch-all for industry/law/tool/geo/sub questions; ~$1-5/task
 - **MODIFIED** `docs/specs/ai-employees/README.md` — Phase 1-2 roster all marked ✅ Spec built (pricing + materials + competitive + trades)
+
+### Batch D — GHL pipeline + 12 workflows + ageing rules + Phase 5 Override 15 note
+- **NEW** `docs/specs/ghl-pipeline-13-stage.md` — comprehensive build spec for GHL operator: 13 stages with owner/triggers/ageing/escalation per stage + 12 full workflow specs + custom field requirements + tag library + Slack channel architecture + 4-tier audit cadence + failure modes researched per Rule 11
+- **MODIFIED** `docs/FUTURE-PLAN.md § Phase 1.4` — updated from "17-stage" to "13-stage" with reference to new authoritative spec; added ageing-rule + Slack-channel setup steps
+- **MODIFIED** `docs/FUTURE-PLAN.md § Phase 5` — added Override 15 callout at top: BigQuery setup happens NOW (Phase 1 timing) per Override 15; population work stays Phase 5
+- **MODIFIED** `docs/OPERATING-CONTEXT.md § 8.4` — marked HISTORICAL with deprecation banner pointing to ghl-pipeline-13-stage.md as current authoritative spec
 
 ---
 
