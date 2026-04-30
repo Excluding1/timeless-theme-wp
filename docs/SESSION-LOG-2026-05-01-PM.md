@@ -94,7 +94,8 @@
 *Append each commit hash + summary here for Allan's review.*
 
 1. **9dee899** — `docs(jordan): integrate transcripts research — F11-F15 + V56 KPIs + 2 AI employees + Rule 12`
-2. *(pending: Batch B — sub-onboarding sheets 06-09, 11-14 migration)*
+2. **d80601c** — `docs(sub-onboarding): migrate sheets 06-14 — 6 SOPs + rate schedule + 2 templates`
+3. *(pending: Batch C — 3 AI employee specs)*
 
 ---
 
@@ -121,6 +122,12 @@
 - **NEW** `docs/templates/recruitment-ads.md` (sheet 14 section B) — ad copy per channel with Fair Work compliance audit checklist
 - **MODIFIED** `docs/sop/sub-onboarding-master.md` — references table updated with all 9 new docs grouped pre-live / live / lenses
 - Sheet 15 (audit log) → archive-only; verifies source Excel completeness; not migrated as ongoing operating doc
+
+### Batch C — AI employee specs (Phase 1-2 research-focused roster complete)
+- **NEW** `docs/specs/ai-employees/materials-validator.md` — quarterly approved-brand audit + on-demand new-brand eval; ~$0.20-0.50/brand
+- **NEW** `docs/specs/ai-employees/competitive-intelligence.md` — weekly NSW competitor scan + failure-mode log; ~$1-3/week
+- **NEW** `docs/specs/ai-employees/trades-researcher.md` — generic deep-research catch-all for industry/law/tool/geo/sub questions; ~$1-5/task
+- **MODIFIED** `docs/specs/ai-employees/README.md` — Phase 1-2 roster all marked ✅ Spec built (pricing + materials + competitive + trades)
 
 ---
 

@@ -57,9 +57,9 @@ Every AI employee in this folder must have:
 | Spec | Status | Job | Cost/run |
 |---|---|---|---|
 | ✅ [pricing-researcher.md](pricing-researcher.md) | Spec built | Audit each pricing SKU against real 2026 Sydney market data + Bert/Bunnings + Bert prices | ~$0.50-2 per audit cycle |
-| ⬜ materials-validator.md | Pending | Validate approved-brand list against forums + reviews + recall data | ~$0.20-0.50 per brand |
-| ⬜ competitive-intelligence.md | Pending | Weekly Sydney competitor scan: pricing, services, reviews, marketing claims | ~$1-3/week |
-| ⬜ trades-researcher.md | Pending | Generic deep-research employee for any trades-domain question (sub recruitment patterns, AU industry standards, supplier comparisons) | ~$1-5 per task |
+| ✅ [materials-validator.md](materials-validator.md) | Spec built | Validate approved-brand list against forums + reviews + recall data; quarterly + on-demand new-brand evaluation | ~$0.20-0.50 per brand |
+| ✅ [competitive-intelligence.md](competitive-intelligence.md) | Spec built | Weekly Sydney competitor scan: pricing, services, reviews, marketing claims, Meta Ad Library + failure-mode log | ~$1-3/week |
+| ✅ [trades-researcher.md](trades-researcher.md) | Spec built | Generic deep-research employee for any trades-domain question (industry benchmarks, compliance/law, tool comparison, geo expansion, sub network) | ~$1-5 per task |
 
 ### Phase 4-5 (operational-data — when GHL/SM8/Stripe live)
 
