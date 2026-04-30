@@ -324,7 +324,10 @@ export default function QuoteForm() {
   // Step 1
   const [fn, setFn] = useState(""); const [ln, setLn] = useState("");
   const [ph, setPh] = useState(""); const [em, setEm] = useState("");
-  const [noMobile, setNoMobile] = useState(false); const [landline, setLandline] = useState("");
+  // Unified phone field accepts mobile (04) OR landline (02/03/05/07/08/09).
+  // noPhone = true → email-only contact path (rare edge case for elderly /
+  // overseas customers who don't want to provide a phone).
+  const [noPhone, setNoPhone] = useState(false);
   const [cust, setCust] = useState(null); const [co, setCo] = useState("");
   const [tenAuth, setTenAuth] = useState(null); const [llEm, setLlEm] = useState("");
   // Step 2
@@ -462,15 +465,22 @@ export default function QuoteForm() {
     else if (n.startsWith("61") && n.length >= 11) n = "0" + n.slice(2);
     return n;
   };
-  // Format-as-you-type for AU mobile: 0411222333 → "0411 222 333".
-  // Caps at 10 digits to prevent over-typing. Cursor jumps to end which is
-  // standard behaviour for phone fields (users type left-to-right anyway).
-  const formatAUMobile = (raw) => {
-    const n = normPhone(raw); // also handles +61 paste-in
-    const d = n.slice(0, 10); // cap at 10 digits
-    if (d.length <= 4) return d;
-    if (d.length <= 7) return `${d.slice(0, 4)} ${d.slice(4)}`;
-    return `${d.slice(0, 4)} ${d.slice(4, 7)} ${d.slice(7)}`;
+  // Format-as-you-type for AU phone (mobile OR landline). Auto-detects by
+  // first 2 digits: "04" → mobile (4-3-3 grouping), else landline (2-4-4).
+  // normPhone handles +61 paste-in. Caps at 10 digits.
+  const formatAUPhone = (raw) => {
+    const n = normPhone(raw);
+    const d = n.slice(0, 10);
+    if (d.length === 0) return "";
+    if (d.startsWith("04")) {
+      if (d.length <= 4) return d;
+      if (d.length <= 7) return `${d.slice(0, 4)} ${d.slice(4)}`;
+      return `${d.slice(0, 4)} ${d.slice(4, 7)} ${d.slice(7)}`;
+    }
+    // Landline: 2-4-4 (e.g. "02 9876 5432")
+    if (d.length <= 2) return d;
+    if (d.length <= 6) return `${d.slice(0, 2)} ${d.slice(2)}`;
+    return `${d.slice(0, 2)} ${d.slice(2, 6)} ${d.slice(6)}`;
   };
   // Spam pattern detection: rejects junk inputs like 0411111111, 0400000000,
   // 0412345678 (common test number from Telstra tutorials). Honeypot catches
@@ -482,22 +492,16 @@ export default function QuoteForm() {
     return false;
   };
   const phNorm = normPhone(ph);
-  const phFormatOk = /^04\d{8}$/.test(phNorm);
+  const phIsMobile = /^04\d{8}$/.test(phNorm);
+  const phIsLandline = /^0[235789]\d{8}$/.test(phNorm); // 02/03/05/07/08/09 — excludes 04 mobile + 06 (unused)
+  const phFormatOk = phIsMobile || phIsLandline;
   const phSpam = phFormatOk && isSpamPhone(phNorm);
   const phOk = phFormatOk && !phSpam;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const emOk = EMAIL_RE.test(em);
-  // Landline uses the same normPhone helper as mobile so +61 prefixes
-  // (common when iPhone Contacts saves a contact in international format)
-  // get correctly converted to 0X. Was previously a separate regex that
-  // only stripped whitespace, blocking valid international-format inputs.
-  const landlineNorm = normPhone(landline);
-  const landlineOk = /^0[2-9]\d{8}$/.test(landlineNorm);
-  // Note: deliberately NOT warning on 03/07/08 prefixes. Number portability
-  // (since 2002), call forwarding, VOIP, and inherited business lines mean
-  // a non-02 prefix doesn't reliably indicate a non-NSW resident. The hint
-  // would frustrate more legit users than it would catch genuine misdials.
-  const phoneOk = noMobile ? (landlineOk && emOk) : phOk; // landline requires email for quote delivery
+  // Phone requirement: either a valid phone number, OR noPhone=true with valid email.
+  // Landline always requires email anyway (can't text a quote to a landline).
+  const phoneOk = noPhone ? emOk : (phOk && (phIsMobile || emOk));
   // Landlord email is required only when tenant chooses "Send to landlord" flow.
   // Without this gate, a tenant could submit "x" as landlord email and we'd
   // attempt to email a garbage address (Privacy Act + Spam Act exposure).
@@ -602,7 +606,7 @@ export default function QuoteForm() {
   const sendPartialLead = () => {
     if (partialSent.current) return;
     partialSent.current = true;
-    const phone = noMobile ? `+61${landline.replace(/[\s\-\(\)\.]/g, "").replace(/^0/, "")}` : `+61${phNorm.replace(/^0/, "")}`;
+    const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, ...tracking } }),
@@ -615,7 +619,7 @@ export default function QuoteForm() {
   const sendWaitlistSignup = () => {
     if (waitlistSent) return;
     setWaitlistSent(true); // optimistic UI — show thanks immediately
-    const phone = noMobile ? `+61${landline.replace(/[\s\-\(\)\.]/g, "").replace(/^0/, "")}` : `+61${phNorm.replace(/^0/, "")}`;
+    const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -634,7 +638,7 @@ export default function QuoteForm() {
       return;
     }
     setSubmitting(true);
-    const phone = noMobile ? `+61${landline.replace(/[\s\-\(\)\.]/g, "").replace(/^0/, "")}` : `+61${phNorm.replace(/^0/, "")}`;
+    const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
 
     // Build services string
     let servicesStr = "";
@@ -742,10 +746,10 @@ export default function QuoteForm() {
     <div style={{ fontFamily: "'Inter',system-ui,sans-serif", maxWidth: 480, margin: "0 auto", padding: "60px 20px", textAlign: "center" }}>
       <div style={{ width: 64, height: 64, borderRadius: "50%", background: C.greenBg, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>{I.check(32)}</div>
       <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px", color: C.pri, letterSpacing: "-0.02em" }}>Thanks {fn}!</h2>
-      {noMobile ? (
-        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We'll email your quote to <strong style={{ color: C.pri }}>{em}</strong> by the next business day.</p>
+      {noPhone || phIsLandline ? (
+        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll email your quote to <strong style={{ color: C.pri }}>{em}</strong> by the next business day.</p>
       ) : (<>
-        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 6px" }}>We'll text <strong style={{ color: C.pri }}>{phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</strong> by the next business day with your quote.</p>
+        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 6px" }}>We&rsquo;ll text <strong style={{ color: C.pri }}>{phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</strong> by the next business day with your quote.</p>
         <p style={{ fontSize: 13, color: C.sec, margin: "0 0 20px" }}>A copy is on its way to <strong>{em}</strong> too.</p>
       </>)}
       <div style={{ padding: 12, background: C.surfLow, borderRadius: 10, fontSize: 12, color: C.sec, marginBottom: 16 }}><span style={{ color: C.acc }}>&#9733;</span> 4.9 from Sydney bathrooms</div>
@@ -800,21 +804,21 @@ export default function QuoteForm() {
             <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>First name *</label><input type="text" value={fn} onChange={e => setFn(e.target.value)} placeholder="First name" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} /></div>
             <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Last name *</label><input type="text" value={ln} onChange={e => setLn(e.target.value)} placeholder="Last name" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} /></div>
           </div>
-          {!noMobile ? (
+          {!noPhone ? (
             <div>
-              <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Mobile number *</label>
-              <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUMobile(e.target.value))} placeholder="04XX XXX XXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We'll convert +61 to 04 format — keep typing" : "Enter an Australian mobile starting with 04"}</p>}
-              {phSpam && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>That doesn&rsquo;t look like a real mobile number. Please enter your actual contact number.</p>}
-              {phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
-              <button type="button" onClick={() => { setNoMobile(true); setPh(""); }} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", marginTop: 6, textDecoration: "underline", padding: "8px 4px", minHeight: 32 }}>I don&rsquo;t have a mobile</button>
+              <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone *</label>
+              <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUPhone(e.target.value))} placeholder="Mobile or landline" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
+              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We&rsquo;ll convert +61 to 0X format &mdash; keep typing" : "Enter an Australian phone (mobile starts 04, landline starts 02/03/07/08)"}</p>}
+              {phSpam && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>That doesn&rsquo;t look like a real phone number. Please enter your actual contact number.</p>}
+              {phIsMobile && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
+              {phIsLandline && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
+              <button type="button" onClick={() => { setNoPhone(true); setPh(""); }} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", marginTop: 6, textDecoration: "underline", padding: "8px 4px", minHeight: 32 }}>I don&rsquo;t have a phone number</button>
             </div>
           ) : (
-            <div>
-              <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone number *</label>
-              <input type="tel" inputMode="numeric" autoComplete="tel" value={landline} onChange={e => setLandline(e.target.value)} placeholder="02 XXXX XXXX" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${landline.length > 3 && !landlineOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {landlineOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
-              <button type="button" onClick={() => { setNoMobile(false); setLandline(""); }} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", marginTop: 6, textDecoration: "underline", padding: "8px 4px", minHeight: 32 }}>I have a mobile number</button>
+            <div style={{ padding: 14, background: C.greenBg, borderRadius: 10, borderLeft: `3px solid ${C.green}` }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>{I.check(18)}<div style={{ fontSize: 13, fontWeight: 700, color: C.green }}>That&rsquo;s okay &mdash; we&rsquo;ll email you</div></div>
+              <p style={{ fontSize: 12, color: C.sec, margin: "4px 0 8px", lineHeight: 1.4 }}>Your quote will be sent to your email below. No phone needed.</p>
+              <button type="button" onClick={() => setNoPhone(false)} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", textDecoration: "underline", padding: "4px 0", minHeight: 32 }}>Actually, I do have a phone</button>
             </div>
           )}
           <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Email *</label><input type="email" value={em} onChange={e => setEm(e.target.value)} placeholder="your@email.com" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${em.length > 3 && !emOk ? C.err : C.brd}`, fontSize: 15, fontFamily: "inherit", boxSizing: "border-box" }} />{em.length > 3 && !emOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>Please enter a valid email address</p>}</div>
@@ -1172,7 +1176,7 @@ export default function QuoteForm() {
         {/* Summary */}
         <div style={{ marginTop: 20, padding: 14, background: C.surfLow, borderRadius: 12, border: `1px solid ${C.brd}` }}>
           <div style={{ fontSize: 13, fontWeight: 600, color: C.pri, marginBottom: 10 }}>Quote summary</div>
-          <div style={{ fontSize: 12, color: C.sec, marginBottom: 4 }}><strong style={{ color: C.pri }}>{fn} {ln}</strong>{co ? ` (${co})` : ""} · {noMobile ? landline : phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")} · {em}</div>
+          <div style={{ fontSize: 12, color: C.sec, marginBottom: 4 }}><strong style={{ color: C.pri }}>{fn} {ln}</strong>{co ? ` (${co})` : ""} {noPhone ? "" : `· ${phIsMobile ? phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3") : phNorm.replace(/(\d{2})(\d{4})(\d{4})/, "$1 $2 $3")}`} · {em}</div>
           <div style={{ fontSize: 12, color: C.sec, marginBottom: 4 }}>{cust === "owner" ? "🏠 Homeowner" : cust === "pm" ? "🏢 Property Manager" : cust === "builder" ? "🔨 Builder" : cust === "tenant" ? "🔑 Tenant" : ""}{prop ? ` · ${prop === "house" ? "House" : prop === "apt" ? "Apartment" : "Commercial"}` : ""}{prop === "apt" && lift === "no" ? " · No lift (stairs)" : ""}</div>
           <div style={{ fontSize: 12, color: C.sec, marginBottom: 8 }}>{addr}</div>
           {buildSummary().map((s, i) => <div key={i} style={{ fontSize: 12, color: C.sec, padding: "3px 0" }}>• {s.area}: {s.label}{s.ep === "epoxy" ? <span style={{ fontSize: 9, background: C.greenBg, color: C.green, padding: "1px 6px", borderRadius: 4, fontWeight: 600, marginLeft: 4 }}>EPOXY</span> : ""}</div>)}
