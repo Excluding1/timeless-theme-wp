@@ -327,6 +327,20 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - Solution: Marko networks aggressively + we accept that Marko's "core focus" is growing this side
 - Customer expectation: 7-10 day booking lead time for resurfacing initially (vs 2-3 days for regrouting)
 
+### Override 15 (added 2026-05-01 PM after Allan challenged BigQuery defer): BigQuery setup NOW (empty schema), populate when ops data flows live
+**Earlier (Override 3):** Skip BigQuery indefinitely until 50 jobs/month.
+**Allan's challenge:** *"Are we using BigQuery? I'd be shocked if we didn't, that was in the transcript."*
+**Re-derivation:** Per CEO Rule 3 (proven systems beat invented simpler), Jordan transcripts (Videos 25, 26, 30, 36) emphasize BigQuery as the "data brain" — backup + ownership + AI query layer. My defer was wrong.
+**My call:**
+- Set up BigQuery NOW (Phase 1 task, ~30 min Allan time)
+- Empty schema ready: `leads_raw`, `contacts`, `opportunities`, `pipeline_events`, `payments`, `jobs_sm8`, `nps_reviews`, `ad_spend_daily`
+- Cost at our scale: $0-10/mo (free tier covers low volume)
+- Configure GHL outbound webhook to write events to BQ via small Cloud Function when GHL goes live
+- Gives us: data backed up from Day 1; no painful migration later; AI agents can query when needed
+- **This reverses Override 3** which is now archived/superseded.
+
+**Updated FUTURE-PLAN.md**: BigQuery moves from Phase 5 to Phase 1 setup task.
+
 ### Override 14 v2 (revised 2026-05-01 PM after Allan challenged "Jordan does $2M with 15 stages — there must be a reason"): GHL pipeline = 13 stages (Jordan's structure minus sub-quote-per-job)
 
 **Earlier (v1):** I cut Jordan's 15 down to 11 calling 6 of his stages "workflow steps masquerading as states."
