@@ -102,6 +102,19 @@
   - [ ] Use structured format per [OPERATING-CONTEXT § 10.2](OPERATING-CONTEXT.md#102-message-format-structured-not-chatty)
 - **Verify:** Submit test form → Slack message appears within 10s with customer name, suburb, service, flags, photo count, GHL link.
 
+### 1.6a Google Search Console + GA4 + GTM (added 2026-05-01 PM per Allan flag)
+- **Owner:** Allan
+- **Why now:** SEO + future ads need conversion tracking + indexing visibility
+- **Steps:**
+  - [ ] Verify timelessresurfacing.com.au at search.google.com/search-console
+  - [ ] Submit sitemap.xml (already exists)
+  - [ ] Verify both www. + non-www variants
+  - [ ] Set up email alerts for indexing issues + Core Web Vitals failures
+  - [ ] Create GA4 property + install via Google Tag Manager
+  - [ ] Set up conversion events (form submit, deposit paid, final payment)
+  - [ ] Link GA4 to Google Ads (when ads launch in Phase 2)
+- **Verify:** Sitemap accepted by GSC, GA4 receives test events.
+
 ### 1.7 Instant SMS acknowledgement workflow
 - **Expert:** GHL operator + direct response copywriter
 - **Auditor:** Spam Act 2003 auditor — message must include sender identification
@@ -501,6 +514,32 @@
   - [ ] Human approves → posts via GMB API
 - **Verify:** First 10 review responses sound human and on-brand; no auto-posts without human approval.
 
+### 6.6a AI Dashboard Connector Agent (added 2026-05-01 PM per Allan request)
+- **Job:** Connect to existing Netlify+Supabase dashboard. Read finance entries, expenses, KPIs. Edit/add/remove entries based on commands. Surface dashboard state to CEO without manual login.
+- **Expert:** AI ops + Supabase developer
+- **Auditor:** Data integrity auditor + auditor-general-operational
+- **Setup steps:**
+  - [ ] Generate Supabase API keys with read+write scope (rotate regularly)
+  - [ ] Cloud Function with Supabase client
+  - [ ] Slack slash command interface: `/dashboard expense add 30 cement-grout`, `/dashboard kpi cash-on-hand`, etc
+  - [ ] OR Claude API tool that reads/writes Supabase rows + responds in Slack
+  - [ ] Audit log every write (who/what/when)
+- **Cost:** ~$2-5/mo Claude + Supabase free tier
+- **When:** Month 4-5 (after dashboard connected to GHL/Stripe so data has real value)
+- **Status:** Future spec — pending dashboard audit + Supabase access
+
+### 6.6b AI Email Manager Agent (added 2026-05-01 PM)
+- **Job:** Read Allan's `hello@timelessresurfacing.com.au` inbox. Categorise (customer enquiry / sub / supplier / spam / billing). Draft replies for human approval. Surface critical messages to Slack immediately.
+- **Expert:** AI ops + customer service
+- **Auditor:** Privacy auditor + brand voice auditor
+- **Setup steps:**
+  - [ ] Google Workspace API + service account with delegated read access
+  - [ ] Claude API for categorisation + reply drafting
+  - [ ] Posts categorised summaries to Slack `#email-inbox` (NEW channel)
+  - [ ] Drafts queued in Drive folder for 1-tap approve
+- **Cost:** ~$5-10/mo
+- **When:** Month 6 (after enough volume justifies — currently inbox is light)
+
 ### 6.6 Sub Recruitment Agent
 - **Job:** Browse Hipages / Airtasker daily, find new bathroom resurfacing operators in NSW, draft outreach DM, queue for human approval.
 - **Expert:** B2B outreach + AI ops
@@ -575,6 +614,157 @@ For **each** agent, run the audit:
 - [ ] **Expert audit (scaler):** No process is still "Angela does it manually" at 50 jobs/week
 - [ ] **Sub audit:** Sub satisfaction surveys quarterly — they're getting paid on time, jobs are profitable for them, not getting overworked
 - [ ] **Adversarial audit (compliance):** All compliance gates still hold at 10x volume — strata holds aren't being skipped, asbestos checks aren't being rushed
+
+---
+
+## Future enhancements — gaps discovered from Jordan transcripts + analysis (added 2026-05-01 PM)
+
+### F1. ROAS-slider tool / max-CPL calculator (Phase 2)
+- **Source:** Jordan Video 52 — *"I can adjust this here and what this does is it changes our max CPL... if I want to achieve a target ROAS of $4, that means my maximum CPL is $27"*
+- **What:** Looker Studio tile with a slider for target ROAS/POAS → outputs max-CPL we can pay per channel + per service. Lets us scale ad spend confidently.
+- **Build effort:** ~2hr Looker work once Phase 5 BigQuery exists
+- **Trigger:** when running Google Ads with $500+/mo spend (Phase 2 onwards)
+
+### F2. Customer Lifetime Value (LTV) tracking (Phase 4 onwards)
+- **Source:** Jordan Video 82 — *"customers coming back maybe 20-25%, want to increase to 35-40%"*
+- **What:** Track repeat customers explicitly. Flag returning customer in GHL + Stripe metadata. LTV = sum of (customer's revenue across all jobs, lifetime).
+- **Build effort:** ~30min GHL custom field + Stripe metadata + monthly query
+- **Trigger:** when we have 20+ completed jobs (so repeats become possible)
+
+### F3. Referral tracking system formalisation (Phase 4)
+- **What:** Beyond the $50/$50 split workflow, build proper attribution: customer A refers customer B → B's job revenue tagged with A's ID → A's credit balance tracked → A's lifetime referral count visible.
+- **Build effort:** ~1hr GHL custom fields + workflow
+- **Trigger:** First referral lands
+
+### F4. Christmas / holiday marketing strategy (Phase 4 first season)
+- **Source:** Jordan Videos 77-78 — leads continue over Christmas break, surprised by volume
+- **What:** Document our Christmas-period plan: keep ads running OR pause? Reduced response SLA? Adjusted messaging? **Decision needed before Dec 2026.**
+- **Trigger:** November 2026 — CEO + Allan plan
+
+### F5. Customer Loyalty / Credit system (Phase 4-5)
+- **Source:** Jordan Video 82 — *"credit loyalty-based system where you potentially earn credit towards your next job"*
+- **What:** Beyond referral credits, returning customers get bonuses (e.g., 10% off second job, free silicone reseal at year 2). Drives repeat rate from 20% baseline to 35%.
+- **Build effort:** ~2hr GHL workflow + Stripe metadata
+- **Trigger:** Month 6+ (when we have repeat customers possible)
+
+### F6. PR / trade media outreach (Phase 7)
+- **Source:** CEO analysis — Jordan didn't mention but it's a high-leverage move at $50K/mo
+- **What:** Pitch to trade media (Build it Magazine, MyBusiness, Sydney trade press) about our agency model. Generates inbound brand visibility + sub-recruitment lift.
+- **Trigger:** $50K/mo revenue + 6-month operating track record
+
+### F7. Cross-trade expansion decision (Phase 7+)
+- **Source:** Bert transcript — *"Kitchens + benchtops is probably a bigger market than bathrooms now, and all the successful companies do all 3"*
+- **What:** Decide whether to expand from bathroom-only into kitchen + benchtop resurfacing. Same supplier (Bert/Hawk), similar subs, much bigger market.
+- **Trigger:** 12 months at $25K/mo bathroom revenue stable + sub roster covers it
+- **Decision factors:** sub capacity, equipment for benchtop work, marketing rebrand, customer mix
+
+### F8. Sub-discovery B2B platform (very speculative — Phase 8+)
+- **Source:** Jordan Video 28 — *"AU has trade discoverability issue... helping create a platform for B2B trade discovery"*
+- **What:** Build a separate platform for AU agencies to find vetted subs (different from Hipages — B2B not B2C). Side venture if we hit supply constraints.
+- **Trigger:** Year 3+ if our model is replicable + sub recruitment is the bottleneck industry-wide
+
+### F9. Strata coordinator B2B partnerships (Phase 4-5)
+- **Source:** OPERATING-CONTEXT § 7 — strata customers exist
+- **What:** Outreach to NSW strata managers (LNS, Bright & Duggan, Strata Plus, etc) for pre-emptive panel relationship. Offer: "Quote-within-24hr panel pricing for any bathroom work in your buildings."
+- **Trigger:** First 3 strata jobs completed successfully (proves capacity)
+
+### F10. Vehicle / fleet decision (Phase 7+)
+- **Source:** Jordan Video 34 — chose chimney vs Caddy vs mini-cabs for fleet
+- **What:** When/if we want a branded company vehicle (not for tools — for brand visibility at job sites + marketing). Probably defer indefinitely since subs use own vehicles.
+- **Trigger:** $30K/mo + brand investment phase
+
+---
+
+## Anytime / continuous tasks (not phase-locked)
+
+These don't fit neatly in phases — they're ongoing or trigger-based.
+
+### A1. Partnership agreement (founder agreement)
+- **Owner:** Allan + Marko + Sprintlaw
+- **When:** Optional pre-Pty Ltd, mandatory at Pty Ltd formation (~Month 2-3 if revenue >$5K/mo)
+- **Why:** Backup for what happens if one founder leaves, dies, becomes incapacitated. Equity vesting, buy-sell terms, decision-making.
+- **Cost:** ~$300-600 via Sprintlaw template + customisation
+- **Status:** ❌ Not done. CEO has working assumption: 50/50 equity, both founders vesting over 4 years. Lock in writing before first big customer or first hire.
+
+### A2. Pty Ltd structure decision
+- **Owner:** Allan + Marko + accountant
+- **When:** Trigger: revenue >$5K/mo for 3 consecutive months
+- **Steps:**
+  - [ ] Engage Sprintlaw or ASIC direct (~$600 setup + $329 annual)
+  - [ ] 50/50 directors + shareholders
+  - [ ] Migrate ABN, Stripe, GHL, SM8, bank account, insurance to company
+  - [ ] Update all contracts to company name
+- **Status:** Deferred per Override (until $5K/mo × 3 months hit)
+
+### A3. Trademark consideration
+- **Owner:** CEO + Sprintlaw advice
+- **When:** When brand investment hits $5K (logo design, vehicle livery, marketing)
+- **Cost:** ~$330 application + lawyer review ~$300
+- **Status:** Defer to Month 6+
+
+### A4. Google Search Console setup
+- **Owner:** Allan
+- **When:** Phase 1 (should already be there per HANDOFF.md but flagged as ❓)
+- **Steps:**
+  - [ ] Verify timelessresurfacing.com.au at search.google.com/search-console
+  - [ ] Submit sitemap.xml (already exists at /sitemap.xml)
+  - [ ] Verify both www. + non-www variants
+  - [ ] Set up email alerts for indexing issues, Core Web Vitals problems
+  - [ ] Connect to Google Analytics 4 (if/when GA4 set up)
+- **Status:** ❌ Not done — added to STATE.md ❓ queue
+
+### A5. Google Analytics 4 + Tag Manager
+- **Owner:** Allan
+- **When:** Phase 2 (with Google Ads launch)
+- **Steps:**
+  - [ ] Create GA4 property
+  - [ ] Install via Google Tag Manager
+  - [ ] Set up conversion events (form submit, deposit paid)
+  - [ ] Link to Google Ads
+- **Status:** ❌ Not done
+
+### A6. Email management — CEO scope discussion
+- **Owner:** Allan
+- **When:** Phase 1 (so CEO has visibility on customer/sub/Bert email threads)
+- **Approach (per CEO playbook discussion):**
+  - DO NOT share full inbox raw access (privacy + scope creep)
+  - DO: forward specific threads to a Drive folder OR set up Google Workspace email delegation for one specific account
+- **Specific threads CEO wants visibility on:**
+  - Customer enquiries (any received historically + ongoing)
+  - Bert thread (already partially shared in chat — preserve in /data/research/ when migrated)
+  - Sub conversations (when they start)
+  - Insurance broker
+  - Supplier negotiations
+- **Status:** ❌ Not arranged — decision pending Allan
+
+### A7. Backup strategy for cloud-only data
+- **Owner:** CEO + Allan
+- **When:** Continuous, urgency rises with each new customer/payment record
+- **Approach:**
+  - Stripe transactions: monthly export to Drive + git
+  - GHL contacts: weekly export when integration live
+  - SM8 jobs: weekly export when active
+  - Supabase/dashboard data: daily export when live
+- **Status:** ❌ Not in place. Phase 5 BigQuery solves most of this; until then, manual exports.
+
+### A8. ATO + accountant relationship
+- **Owner:** Allan + accountant
+- **When:** Month 6 OR earlier if revenue >$10K/mo
+- **Steps:**
+  - [ ] Engage local accountant (Sydney) for BAS preparation + tax advice
+  - [ ] GST registration when forecast >$75K/yr
+  - [ ] Income tax return for FY26 (Oct 2026)
+  - [ ] Quarterly BAS once GST-registered
+- **Status:** ❌ Not engaged
+
+### A9. Insurance broker relationship
+- **Owner:** Allan
+- **When:** Annually (for $20M PL renewal)
+- **Steps:**
+  - [ ] Confirm broker (CEO doesn't know who yet — ask in STATE.md ❓ queue)
+  - [ ] Annual review of cover adequacy
+  - [ ] Add covers as scope expands (cyber, professional indemnity for advice)
+- **Status:** ⏳ Active broker exists; broker name ❓
 
 ---
 

@@ -168,6 +168,32 @@ Plus a summary: ship-blocked yes/no, top 3 must-fixes, regulatory exposure if sh
 
 ---
 
+## Gaps to research / surface back to CEO (proactive log — per roles/README mandate)
+
+This is the running list of compliance gaps this auditor has flagged. CEO decides priority + action.
+
+### Active gaps
+- 🟠 **Safe Work Method Statement (SWMS) full requirements** — flagged 2026-05-01 PM. Research needed:
+  - Is bathroom resurfacing/regrouting "high-risk construction work" per NSW WHS Reg 2017 § 297? Initial read: NO unless ACM/heights/confined-space involved.
+  - Pre-1990 jobs with potential ACM = HIGH RISK = SWMS mandatory from sub
+  - Need to clarify: do we collect SWMS from sub for every pre-1990 job? Yes per current draft logic.
+  - Need verified template for sub-supplied SWMS
+  - **Action**: Once AI Compliance Researcher employee built, commission deep research on this.
+
+- 🟠 **NSW Subcontractor's Statement** specific form version — verify 2026-current version is being used. SafeWork NSW updates these periodically.
+
+- 🟠 **Insurance Certificate of Currency requirements** — what specific wording confirms PL covers "bathroom resurfacing/regrouting"? Need example to compare against sub's certs.
+
+- 🟠 **Privacy Act 2024 amendments** — need to verify if any 2024 amendments to data breach notification or APPs affect our customer data handling.
+
+- 🟢 **Asbestos awareness training certs** — verified valid path: SafeWork NSW approved providers. Course typically $50-150, half-day.
+
+### Recently resolved gaps
+- ✅ 2026-05-01 PM — confirmed Bert/Hawk relationship is via licensed AU distributor, not direct US import (Hawk products are 40+ years AU-tested)
+- ✅ 2026-05-01 PM — confirmed builder licence threshold ($5K residential) per Home Building Act 1989 NSW; most of our jobs are under
+
+---
+
 ## References
 
 - Spam Act 2003 (Cth)

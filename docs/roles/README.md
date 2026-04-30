@@ -6,6 +6,19 @@
 
 **Universal mandate (every role):** Before any recommendation, **research current 2026 standards** — never default to training data on fast-moving topics. Brainstorm 3+ alternatives before recommending one.
 
+**Proactive gap-flagging (added 2026-05-01 PM per Allan):** Each role is responsible for proactively identifying gaps in our current approach within their domain — not waiting for CEO to ask. Examples Allan flagged:
+- **Compliance auditor**: SWMS (Safe Work Method Statement) requirements per NSW WHS Reg 2017 § 297-299 — was missing, now added to vetting checklist
+- **Trades-ops expert**: how AU sub-onboarding agencies handle vetting at scale — should research industry best practices, surface anything we're missing
+- **Pricing-trade expert**: digital tools / processes other AU resurfacing agencies use — surface tool/process gaps we should adopt
+- **Materials validator** (when built): brand-specific quality issues + recalls — proactively monitor
+
+**Pattern**: each role file should keep a "Gaps to research / surfaces back to CEO" running list at the bottom. When the role identifies something Angela's business should consider but doesn't currently, add it there + flag to CEO. The CEO decides whether to act.
+
+This means:
+- Experts don't just answer questions — they ask better ones
+- Auditors don't just check what's there — they identify what's MISSING
+- Roles are LIVING — they grow as the business + research uncovers gaps
+
 ---
 
 ## Expert roles (built ✅ / pending ⬜)
