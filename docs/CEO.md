@@ -22,12 +22,30 @@ These are non-negotiable. When I break these, Allan catches it within an hour. E
 
 ### Rule 2 — Every decision passes 3-lens audit BEFORE landing in CEO.md
 - Domain expert lens (the role file relevant to the task)
-- Stakeholder lens (customer / sub / business — pick the most affected)
-- Adversarial lens (what could go wrong, compliance, hidden cost)
+- Stakeholder/operator lens (the most-affected party)
+- Adversarial lens (what could go wrong)
 - If all 3 agree → ship
 - If 2 of 3 → trade-off documented
 - If only 1 → don't ship; rethink
+
+**Lens composition by decision type — DON'T force-fit lenses that don't apply:**
+
+| Decision type | Lens 1 (domain) | Lens 2 (most-affected) | Lens 3 (adversarial) |
+|---|---|---|---|
+| Quote form UX | expert-cro-specialist | auditor-customer-fairness | auditor-mobile-abandonment |
+| Quote tier pricing | expert-pricing-trade | auditor-customer-fairness + auditor-fair-work | auditor-margin-per-job |
+| **GHL pipeline structure** | expert-ghl-operator | operator (Allan/Marko) | **auditor-general-operational** |
+| Sub agreement clauses | expert-trades-ops-contractor | auditor-fair-work | auditor-compliance-aus |
+| Customer SMS/email copy | expert-direct-response-copywriter | auditor-customer-fairness | auditor-compliance-aus |
+| Sub recruitment outreach | expert-trades-ops-contractor | sub perspective | auditor-compliance-aus |
+| **File / SOP architecture** | (CEO) | operator | **auditor-general-operational** |
+| **Tool selection** | (CEO) | operator | **auditor-general-operational** |
+| AI agent design | expert-ai-ops (pending) | operator | auditor-ai-safety (pending) |
+
+**My v1 mistake on Override 14**: I wrote "customer-fairness: N/A; sub-fairness: N/A; margin: N/A" instead of swapping in the right lens (operator + general-operational). New auditor-general-operational role file built to fix this gap. I have CEO authority to add more auditors as needed.
+
 - See [OPERATING-CONTEXT § 16.3](OPERATING-CONTEXT.md#163-triple-audit-rule-3-lenses-minimum-one-must-be-adversarial)
+- See [auditor-general-operational.md](roles/auditor-general-operational.md) for the catch-all internal-decision lens
 
 ### Rule 3 — Proven systems beat invented simpler
 - When facing "their system has X — should we cut it?": **first ask why they have X**

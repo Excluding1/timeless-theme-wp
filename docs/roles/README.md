@@ -36,6 +36,8 @@
 | ✅ [auditor-webhook-integrity.md](auditor-webhook-integrity.md) | Webhook / data flow integrity | All system handoffs (form→GHL, GHL→SM8, etc) | Silent drops, race conditions, wrong field mapping |
 | ✅ [auditor-margin-per-job.md](auditor-margin-per-job.md) | Margin-per-job auditor | Pricing decisions, quote templates | Quote that loses money once costs subtract |
 | ✅ [auditor-fair-work.md](auditor-fair-work.md) | Fair Work / contractor independence | Sub agreements, dispatch logic | Sham contracting, super back-pay risk |
+| ✅ [auditor-general-operational.md](auditor-general-operational.md) | General operational (catch-all for internal/system) | Pipelines, workflows, file architecture, tool selection | Over/under-engineering, single-points-of-failure, maintenance rot |
+| ✅ [auditor-customer-fairness.md](auditor-customer-fairness.md) | Customer-side stakeholder fairness | Pricing, terms, customer comms | Brand-damaging-but-legal practices |
 | ⬜ auditor-data-integrity.md | Data integrity (sync correctness) | BigQuery sync, GHL↔SM8 | Mismatched records, lost events |
 | ⬜ auditor-privacy.md | Privacy Act 1988 | Any storage/transfer of customer data | Data retention, deletion-on-request, residency |
 | ⬜ auditor-margin-per-channel.md | POAS by channel | Google Ads campaigns | Profit-negative keywords running silently |
