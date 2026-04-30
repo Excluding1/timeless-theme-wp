@@ -829,7 +829,16 @@ export default function QuoteForm() {
             {cust === "tenant" && <div style={{ marginTop: 8, padding: 10, background: C.warnBg, borderRadius: 10 }}><div style={{ fontSize: 12, fontWeight: 600, color: C.warn, marginBottom: 6 }}>Landlord approval needed</div><div role="group" aria-label="How will you get landlord approval?" style={{ display: "flex", gap: 6 }}>{[{ id: "self", l: "I'll get it" }, { id: "send", l: "Send to landlord" }].map(o => <button key={o.id} type="button" onClick={() => setTenAuth(o.id)} aria-pressed={tenAuth === o.id} style={{ flex: 1, padding: "12px 8px", minHeight: 44, borderRadius: 7, fontSize: 11, fontWeight: 500, cursor: "pointer", border: tenAuth === o.id ? `2px solid ${C.warn}` : `1.5px solid ${C.brd}`, background: tenAuth === o.id ? C.warnBg : C.white, color: tenAuth === o.id ? C.warn : C.sec }}>{o.l}</button>)}</div>{tenAuth === "send" && <><p style={{ fontSize: 11, color: C.warn, marginTop: 6, marginBottom: 4 }}>We&rsquo;ll email them a copy of your quote for approval</p><input type="email" value={llEm} onChange={e => setLlEm(e.target.value)} placeholder="Landlord/agent email" style={{ width: "100%", padding: 8, borderRadius: 8, border: `1.5px solid ${llEm.length > 3 && !EMAIL_RE.test(llEm) ? C.err : C.brd}`, fontSize: 12, fontFamily: "inherit", boxSizing: "border-box" }} />{llEm.length > 3 && !EMAIL_RE.test(llEm) && <p style={{ fontSize: 11, color: C.err, marginTop: 4 }}>Enter a valid email address</p>}<p style={{ fontSize: 10, color: C.sec, marginTop: 6, lineHeight: 1.4 }}>By providing this address, you confirm you have authority to share it. Your landlord/agent can request not to be contacted at any time.</p></>}</div>}
           </div>
         </div>
-        <Btn onClick={() => { sendPartialLead(); setStep("where"); }} disabled={!can1}>Next — where's the job? →</Btn>
+        <Btn onClick={() => { sendPartialLead(); setStep("where"); }} disabled={!can1}>{
+          can1 ? "Next — where's the job? →"
+          : (fn.length < 2 || ln.length < 2) ? "Add your name to continue"
+          : (!phoneOk && !noPhone) ? "Enter a valid phone (or click “I don’t have a phone”)"
+          : !emOk ? "Enter a valid email to continue"
+          : !cust ? "Pick who you are above"
+          : !tenantOk ? "Choose how to get landlord approval"
+          : !llEmOk ? "Enter your landlord’s email"
+          : "Fill required fields above"
+        }</Btn>
         <p style={{ textAlign: "center", marginTop: 8, fontSize: 11, color: C.sec }}>Takes ~90 seconds. No obligation.</p>
       </>}
 
