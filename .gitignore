@@ -3,6 +3,11 @@
 
 # Dependencies
 node_modules/
+quote-form/node_modules/
+quote-form/dist/
+quote-form/.env
+quote-form/.env.local
+quote-form/.env.production
 
 # Dev tool artifacts (not part of the theme)
 .claude/

@@ -66,7 +66,7 @@ To swap an image: replace the `.jpg` file in the matching folder. The PHP refere
 ## Deploy Workflow
 1. Edit files in this repo
 2. `git add -A && git commit -m "description" && git push`
-3. Zip (excluding .git + dev-only files + data files): `zip -r ../timeless-theme.zip . -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" ".claude/*" "docs/*" "data/*" ".playwright-mcp/*"`
+3. Zip (excluding .git + dev-only files + data + quote-form + brand internal): `zip -r ../timeless-theme.zip . -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*"`
 4. Upload via wp-admin → Appearance → Themes → Upload → "Replace current with uploaded"
 
 ## Related Repos

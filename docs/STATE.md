@@ -126,7 +126,8 @@
 
 | Item | Status | Details | Last verified |
 |---|---|---|---|
-| Repo | `/Users/angelapham/Downloads/timeless-quote-app` | Separate repo from WP theme | 2026-05-01 |
+| Location (NEW master hub) | `/Users/angelapham/Downloads/timeless-theme-wp/quote-form/` | Absorbed into master repo 2026-05-01 PM. Old standalone folder `/Users/angelapham/Downloads/timeless-quote-app/` preserved for safety until Allan confirms migration works (then he can delete) | 2026-05-01 PM verified |
+| GitHub | `Excluding1/timeless-theme-wp` (single repo now). TimelessDash repo holds historical quote-form/react-v8 branch — to be archived per WORKFLOW.md retire policy | | 2026-05-01 PM |
 | Build state | 95% complete | v9.x with NSW gating, asbestos check, multi-mode, photo upload | 2026-05-01 |
 | GHL_WEBHOOK URL | ❌ | `REPLACE_ME` placeholder at QuoteForm.jsx:633 — must replace before May 27 | 2026-05-01 |
 | GHL_PARTIAL URL | ❌ | `REPLACE_ME_PARTIAL` placeholder at QuoteForm.jsx:634 | 2026-05-01 |
