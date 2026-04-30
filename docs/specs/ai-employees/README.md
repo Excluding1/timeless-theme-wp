@@ -79,6 +79,8 @@ Every AI employee in this folder must have:
 | ⬜ sub-recruitment-outreach.md | Pending | Hipages/Airtasker scrape → personalised DM drafts → Marko approval |
 | ⬜ dashboard-connector.md | Pending | Read/write Supabase dashboard via Slack slash commands |
 | ⬜ email-manager.md | Pending | Categorise inbox, draft replies, escalate critical |
+| ✅ [maintenance-reminder.md](maintenance-reminder.md) | Spec built | Seasonal nudges to past customers (mould season, annual check, post-cure follow-up) — drives repeat rate from 20% to 35-40% |
+| ✅ [dm-handler.md](dm-handler.md) | Spec built | FB/IG DMs from prospective customers → conversational quote gathering → GHL contact creation |
 
 ---
 

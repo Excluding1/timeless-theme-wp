@@ -100,6 +100,43 @@ When the topic at hand involves a doc I've referenced, I read it FULLY — not s
 
 **The check**: at the start of a new task, list the docs that touch the topic. Read each one end-to-end. Then decide.
 
+### Rule 12 — Structured decisioning when uncertain
+When I can't decide instantly, don't guess. Use the framework:
+
+1. **List PROs** (reasons to do it)
+2. **List CONs** (reasons NOT to do it)
+3. **List ALTERNATIVES** (other paths besides this one)
+4. **Weigh** (which list outweighs; what's the killer concern)
+5. **Decide** (CEO authority — pick + commit)
+6. **Document** (the why, in CEO.md decision log)
+
+Example structure:
+```
+Decision: should we [X]?
+PRO:
+- Reason A (evidence)
+- Reason B (evidence)
+CON:
+- Risk A (severity, probability)
+- Risk B (severity, probability)
+ALTERNATIVES:
+- Path Y: tradeoff vs X
+- Path Z: tradeoff vs X
+WEIGHT: CON-Risk-A is fatal if it materialises (prob 30%, severity 10/10).
+        PRO-Reason-A worth 7/10. Net: alternative Y is safer.
+DECISION: Path Y. Document in CEO.md.
+```
+
+Apply when:
+- Multiple valid options exist
+- Founder challenges my call
+- Data is partially missing (acknowledge the uncertainty)
+- High-impact decision (affects revenue, reputation, compliance)
+
+Skip when:
+- Trivial (single boolean, no real impact)
+- Obvious one-best-answer (don't manufacture false uncertainty)
+
 ### Rule 11 — Research failure modes, not just success patterns
 Most research defaults to "best practices" / "what to do." That's half the picture. The other half — and often more valuable — is **what went wrong for others**.
 
@@ -898,6 +935,58 @@ Connection method depends on platform. Likely Zapier ($30/mo if needed) for firs
 
 ### Phase C — Refine (ongoing)
 Weekly review tab becomes the source of truth I check every Friday. KPIs tab shows ONLY the 5 metrics that matter: cash, weekly jobs, quote conversion, average profit per job, NPS. Everything else is supporting.
+
+---
+
+## KPI definitions + funnel benchmarks (added 2026-05-01 PM after Jordan transcripts mining)
+
+**Source:** Jordan Schofield, Surface Care AU — Video 56. Real numbers from his ~$2M/yr business. Best benchmark we have for AU bathroom-resurfacing/regrouting funnel.
+
+### Jordan's funnel (Surface Care, period unspecified — illustrative quote-period benchmark)
+
+| Stage | Volume | Conversion to next |
+|---|---|---|
+| Site visits | 1,900 | — |
+| Form submissions | 260 | **13.7%** |
+| Personalised quotes sent | 188 | **72.3%** (some leads filtered out: out of area, scope unviable) |
+| Quotes signed off (deposit paid) | 53 | **28.2%** |
+| Revenue | ~$57,000 | $1,075 avg deposit-attached value (note: customer pays balance later) |
+
+### Our targets (modelled on Jordan, with first-year reality buffer)
+
+| Metric | Target Year 1 | Target Year 2+ | Reasoning |
+|---|---|---|---|
+| Site visit → form submit | **13%+** | 16%+ | Match Jordan early; beat as landing pages mature |
+| Form submit → quote sent | **70%+** | 75%+ | Allowing for ~25% out-of-area / unviable; tightens as our targeting improves |
+| Quote sent → deposit paid | **28%+** | 35%+ | Match Jordan early; lift via 24h+72h follow-up sequence |
+| Visit → deposit (overall) | **~2.6%** | 4%+ | 13% × 70% × 28% ≈ 2.55%; doubling realistic by Year 2 |
+
+### How to use these (Rule 4 — fact-check whenever cited)
+
+1. **Below 13% form-fill** = landing page is broken (slow, unclear CTA, doesn't match ad), NOT a quote-process problem. Fix the page first.
+2. **Below 70% quote-sent rate** = ad targeting is too broad (too many out-of-area or wrong-service leads). Fix targeting before blaming quote drafting.
+3. **Below 28% close** = quote tier presentation, follow-up cadence, or pricing is off. Compare to Jordan's tier framework + our [Phase 2.1 quote drafting templates](FUTURE-PLAN.md#21-quote-drafting-templates).
+4. **All three weak** = our overall positioning vs Jordan's market is fundamentally different. Pause and audit before more spend.
+
+### Other KPIs I track (not from Jordan — derived from our model)
+
+| KPI | Definition | Target |
+|---|---|---|
+| Cash on hand | Bank balance + unsettled Stripe | Never <$3K floor (per cash safety rules) |
+| Profit per completed job | Revenue − materials − sub-labour − PPE − allocated overhead | $362-$366 average (Jordan benchmark) |
+| Margin % | Profit ÷ Revenue per job | ≥47% (Jordan benchmark, soft target) |
+| POAS (per CEO Override 2 — Jordan V22) | Profit / Ad Spend per campaign per 14-day window | ≥1.0 (else pause keyword); ≥2.0 healthy |
+| NPS distribution | After-job 1-10 score, distribution | ≥50% promoters (9-10), <10% detractors (1-6) |
+| Sub acceptance rate | % of dispatched jobs that sub accepts within 2hr SLA | ≥80% |
+| Repeat customer rate | % of jobs from previously-served customers | 20% Y1 → 35% Y2 (Jordan V82 benchmark) |
+| Time-to-deposit (lead-to-revenue) | Hours from form-submit to deposit-cleared | Median <72h (industry benchmark — fast wins) |
+
+### When KPI numbers diverge from these benchmarks
+
+Per **Rule 9** (Pause-Audit-Decide), don't react in single-week panic. Wait for 4-week rolling average. If still off, run 3-lens audit:
+- **Operations lens** ([auditor-general-operational](roles/auditor-general-operational.md)): are processes broken?
+- **Customer lens** ([auditor-customer-fairness](roles/auditor-customer-fairness.md)): is the offer right for the market?
+- **Marketing lens** ([expert-cro-specialist](roles/expert-cro-specialist.md)): is the funnel itself broken?
 
 ---
 

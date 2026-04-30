@@ -673,6 +673,57 @@ For **each** agent, run the audit:
 - **What:** When/if we want a branded company vehicle (not for tools — for brand visibility at job sites + marketing). Probably defer indefinitely since subs use own vehicles.
 - **Trigger:** $30K/mo + brand investment phase
 
+### F11. AI Voice Driving Assistant (Phase 7+, speculative)
+- **Source:** Jordan Video 16 — *"I can't wait for AI to make driving more productive. Speak with AI as I'm driving, get business updates, build entire projects from voice."*
+- **What:** Voice-first AI agent for Marko driving between jobs. Pipeline updates verbally, dispatch new jobs by voice, dictate sub coaching messages.
+- **Build effort:** Unknown — depends whether OpenAI Realtime / Claude Voice mature enough by trigger date
+- **Trigger:** Phase 7+ once Marko driving 5+ jobs/week. Don't pre-build; wait for the pain.
+- **Failure modes:** voice agents hallucinate worse than text; bathroom-trade jargon may confuse off-the-shelf models; safety risk if agent prompts driver visual confirmation. Defer until tech matures or pain is acute.
+
+### F12. AI DM Handler — quote-via-conversation (Phase 6)
+- **Source:** Jordan Video 21 — *"DM handler that actually collects quotes from customers in a conversation rather than sending them to a form."*
+- **What:** AI agent reads incoming Facebook/Instagram DMs from prospective customers, walks them through quote-gathering conversationally (name, suburb, service, photos), drops result into GHL as form-equivalent. Reduces friction for mobile-first social-media customers who won't switch out of DM to a web form.
+- **Build effort:** ~6-10hr — Meta Graph API integration + Claude API + GHL custom field mapping
+- **Cost:** ~$5-10/mo Claude + Meta API free tier
+- **Trigger:** Once we run paid social ads (Meta) AND inbound DM volume >5/week. Currently zero — defer until ad spend creates the channel.
+- **Failure modes:** Meta API restrictions on automated messaging (review their Platform Terms re: messaging quality); customer trust drops if they realise it's a bot mid-conversation (so disclose); spam-detection algorithm may throttle automated replies. Build with "human approves before auto-reply" mode initially.
+- **Spec:** [docs/specs/ai-employees/dm-handler.md](specs/ai-employees/dm-handler.md)
+
+### F13. AI Voice Narration for marketing videos (Phase 6+)
+- **Source:** Jordan Video 79 — *"Training a voice AI agent, feeding it my tone, my scripts. Saves 10 minutes per video."*
+- **What:** Brand-voice AI narration for TikTok/Instagram Reels of before/after work. Saves Marko 10min/video, ensures consistent brand voice across content.
+- **Build effort:** ~2hr — ElevenLabs voice clone (~$22/mo) + script-to-audio pipeline
+- **Trigger:** When we start producing 3+ short-form videos/week (post Phase 4, when before/after photo library has 20+ jobs).
+- **Failure modes:** voice clone of Allan/Marko may sound off in early generations; uncanny-valley risk loses trust; legal — must disclose AI-generated voice if questioned (ACCC misleading-conduct interpretation TBD for AI content).
+
+### F14. Coordinator-model expansion to adjacent services (Phase 7+)
+- **Source:** Jordan Video 89 — *"For [adjacent service we don't offer], we built a landing page, put up Google Ads, pumped money. Used Gemini to scrape competitor websites for contractor info. Now we deliver clients to those subcontractors and keep margin."*
+- **Reframed (Allan/CEO take):** We're a coordinator, not a tradie. The model already works for bathroom resurfacing/regrouting via subs. It can extend to adjacent services (kitchen splashback resurfacing, leather couch repair, benchtop renewal) without us hiring or training new tradies — find a specialist sub already doing it, refer them work, keep coordination margin. We add value via better customer experience + admin + lead gen; specialist sub gets work they wouldn't have won; customer gets a vetted operator.
+- **Build effort per service:** ~4-8hr — landing page (Claude Code), Google Ads small test ($5-10/day), 2-3 candidate subs from competitor research, dispatch SOP
+- **Trigger:** Once $30K+/mo bathroom revenue stable AND we hear repeated customer requests for an adjacent service AND we identify quality specialist subs.
+- **Failure modes:**
+  - Quality control harder when we lack domain expertise — sub fails, customer blames us
+  - Competitor research method (Gemini scrapes for contractor info) needs ACCC-compliant outreach; cold-DM templates must be honest about who we are
+  - "Coordinator without expertise" risks under-quoting — need to mark up generously to cover surprises
+  - Sub may bypass us once they have the customer (NDA + pre-payment + customer-relationship-ownership clauses needed)
+- **Decision pre-conditions:** must have signed sub agreement with customer-NDA clause; must have CEO + Allan agreement on minimum-margin floor (40%+ given coordination-only role); must research ACCC misleading-conduct precedent for "we deliver this service" claims when fulfilment is fully subcontracted
+- **3-lens audit (light):**
+  - Margin: 40-50% achievable if priced right; sub keeps $X, we keep $Y, net positive
+  - Customer fairness: customer gets vetted operator + warranty backing — better than DIY-finding on Hipages
+  - Sub fairness: specialist sub wins work they'd otherwise miss; we coordinate but don't take their core craft margin
+
+### F15. Franchise model consideration (Year 3+)
+- **Source:** Jordan Video 70 — *"We are early in building out a franchise option."*
+- **What:** Once business model proven multi-state + revenue >$200K/mo + ops fully systematised, consider licensing model to other AU operators (e.g., Brisbane operator licenses our systems, brand, sub network for fee + revenue share).
+- **Build effort:** ~6-12 months legal + ops; ~$30-50K legal cost (Sprintlaw franchise package per Jordan's reference); registered franchisor obligations under Franchising Code of Conduct (ACCC-administered).
+- **Trigger:** Year 3+ AND $200K+/mo revenue AND multi-state expansion proven (e.g., Sydney + Melbourne both running) AND systems documented to "anyone can run this" standard.
+- **Failure modes:**
+  - Franchising Code of Conduct compliance heavy (disclosure documents, marketing fund accounting, dispute resolution)
+  - Brand reputation risk — one bad franchisee tanks national brand
+  - Most early-stage franchises fail by year 5 — research Australian Franchise Council failure data first
+  - Competitor model (Surface Care) likely faster to market — first-mover advantage may already be lost
+- **Alternative paths:** licensing-only model (sell systems + sub network access without trademark/brand obligation) is lighter compliance burden than full franchise.
+
 ---
 
 ## Anytime / continuous tasks (not phase-locked)
