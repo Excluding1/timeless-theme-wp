@@ -508,7 +508,12 @@ export default function QuoteForm() {
   const llEmOk = cust !== "tenant" || tenAuth !== "send" || EMAIL_RE.test(llEm);
   // Tenant must choose an authorization path (self vs send) before continuing.
   const tenantOk = cust !== "tenant" || tenAuth !== null;
-  const can1 = fn.length >= 2 && ln.length >= 2 && phoneOk && emOk && cust && tenantOk && llEmOk;
+  // Names: trim + require at least 1 character. Some real people have
+  // single-letter names (cultural / legal); blocking them is worse UX
+  // than letting through the rare "A" typo.
+  const fnOk = fn.trim().length >= 1;
+  const lnOk = ln.trim().length >= 1;
+  const can1 = fnOk && lnOk && phoneOk && emOk && cust && tenantOk && llEmOk;
   const can2 = addr.length >= 6 && addrOk !== false && prop && builtBefore1990;
   const can3 = mode === "single" ? !!selArea : mode === "multi" ? multiPicks.length > 0 : mode === "unsure" ? unsureTxt.length >= 10 : false;
 
@@ -831,7 +836,7 @@ export default function QuoteForm() {
         </div>
         <Btn onClick={() => { sendPartialLead(); setStep("where"); }} disabled={!can1}>{
           can1 ? "Next — where's the job? →"
-          : (fn.length < 2 || ln.length < 2) ? "Add your name to continue"
+          : (!fnOk || !lnOk) ? "Add your name to continue"
           : (!phoneOk && !noPhone) ? "Enter a valid phone (or click “I don’t have a phone”)"
           : !emOk ? "Enter a valid email to continue"
           : !cust ? "Pick who you are above"
