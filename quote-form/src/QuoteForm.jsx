@@ -35,11 +35,11 @@ const I = {
 
 /* ─── SINGLE-AREA OPTIONS ─── */
 const AREAS = [
-  { id: "shower", label: "Shower", desc: "Regrouting, silicone, tile resurfacing, or deep clean", icon: I.shower },
-  { id: "bath", label: "Bath", desc: "Resurfacing, chip repair, or stain removal", icon: I.bath },
-  { id: "basin", label: "Sink / Basin", desc: "Resurfacing, chip repair, or restoration", icon: I.basin },
+  { id: "shower", label: "Shower", desc: "Regrouting, silicone, or tile resurfacing", icon: I.shower },
+  { id: "bath", label: "Bath", desc: "Resurfacing, chip repair, or mouldy seal", icon: I.bath },
+  { id: "basin", label: "Sink / Basin", desc: "Resurfacing or chip repair", icon: I.basin },
   { id: "vanity", label: "Vanity / Benchtop", desc: "Benchtop resurfacing, cabinet respray, or chip repair", icon: I.vanity },
-  { id: "mould", label: "Mould & Corners", desc: "Silicone replacement — corners, edges, junctions", icon: I.mould },
+  { id: "mould", label: "Silicone seals", desc: "Replace mouldy/peeling silicone — bath rim, toilet base, vanity edges", icon: I.mould },
   { id: "floor", label: "Bathroom Floor", desc: "Floor regrouting, tile resurfacing, or anti-slip", icon: I.floor },
   { id: "walls", label: "Wall Tiles", desc: "Wall regrouting or resurfacing outside the shower", icon: I.wall },
 ];
@@ -51,17 +51,17 @@ const AREAS = [
    not "I want regrout+sil epoxy with cabinet respray". Granular detail
    comes from photos. */
 const MULTI_ITEMS = [
-  { id: "m_shower_regrout", label: "Shower — fix tiles & corners", trade: "regrouting + silicone", area: "shower", icon: I.shower },
-  { id: "m_shower_recoat", label: "Shower — change tile colour", trade: "tile resurfacing", area: "shower", icon: I.shower },
-  { id: "m_bath_resurface", label: "Bath — make it look new", trade: "bath resurfacing", area: "bath", icon: I.bath },
-  { id: "m_bath_chip", label: "Bath — fix a chip or dent", trade: "chip repair", area: "bath", icon: I.bath },
-  { id: "m_basin", label: "Sink — make it look new", trade: "basin resurfacing", area: "basin", icon: I.basin },
-  { id: "m_vanity", label: "Vanity — refresh benchtop or cabinet", trade: "vanity refinishing", area: "vanity", icon: I.vanity },
-  { id: "m_mould", label: "Mould — replace silicone seals", trade: "silicone replacement", area: "mould", icon: I.mould },
-  { id: "m_floor", label: "Floor tiles — fix lines or change colour", trade: "floor regrouting / resurfacing", area: "floor", icon: I.floor },
-  { id: "m_walls", label: "Wall tiles — fix lines or change colour", trade: "wall regrouting / resurfacing", area: "walls", icon: I.wall },
-  { id: "m_full", label: "The whole bathroom needs a refresh", trade: "full makeover", area: "full", icon: I.sparkle },
-  { id: "m_regrout_all", label: "Fix all tile lines in the whole bathroom", trade: "full regrout", area: "regrout_all", icon: I.floor },
+  { id: "m_shower_regrout", label: "Shower — fix tiles & corners", trade: "regrouting + silicone", area: "shower", icon: I.shower, befImg: "/images/services/shower/sh1-before.png", aftImg: "/images/services/shower/sh1-after.png", befTxt: "Mouldy grout", aftTxt: "Bright white grout" },
+  { id: "m_shower_recoat", label: "Shower — change tile colour", trade: "tile resurfacing", area: "shower", icon: I.shower, befImg: "/images/services/shower/sh4-before.png", aftImg: "/images/services/shower/sh4-after.png", befTxt: "Dated tile colour", aftTxt: "Modern white finish" },
+  { id: "m_bath_resurface", label: "Bath — make it look new", trade: "bath resurfacing", area: "bath", icon: I.bath, befImg: "/images/services/bath/bt1-before.png", aftImg: "/images/services/bath/bt1-after.png", befTxt: "Yellowed enamel", aftTxt: "Glossy white finish" },
+  { id: "m_bath_chip", label: "Bath — fix a chip or dent", trade: "chip repair", area: "bath", icon: I.bath, befImg: "/images/services/bath/bt2-before.png", aftImg: "/images/services/bath/bt2-after.png", befTxt: "Visible chip", aftTxt: "Invisible repair" },
+  { id: "m_basin", label: "Sink — make it look new", trade: "basin resurfacing", area: "basin", icon: I.basin, befImg: "/images/services/basin/bs1-before.png", aftImg: "/images/services/basin/bs1-after.png", befTxt: "Stained porcelain", aftTxt: "Bright white" },
+  { id: "m_vanity", label: "Vanity — refresh benchtop or cabinet", trade: "vanity refinishing", area: "vanity", icon: I.vanity, befImg: "/images/services/vanity/vn1-before.png", aftImg: "/images/services/vanity/vn1-after.png", befTxt: "Worn laminate", aftTxt: "Smooth new surface" },
+  { id: "m_mould", label: "Mould — replace silicone seals", trade: "silicone replacement", area: "mould", icon: I.mould, befImg: "https://placehold.co/200x140/1e1a14/fff?text=Before", aftImg: "https://placehold.co/200x140/f0eeea/333?text=After", befTxt: "Black mould", aftTxt: "Mould free" },
+  { id: "m_floor", label: "Floor tiles — fix lines or change colour", trade: "floor regrouting / resurfacing", area: "floor", icon: I.floor, befImg: "/images/services/floor/fl1-before.png", aftImg: "/images/services/floor/fl1-after.png", befTxt: "Dark cracked grout", aftTxt: "Clean uniform grout" },
+  { id: "m_walls", label: "Wall tiles — fix lines or change colour", trade: "wall regrouting / resurfacing", area: "walls", icon: I.wall, befImg: "https://placehold.co/200x140/5a4a3a/fff?text=Before", aftImg: "https://placehold.co/200x140/e4e0da/333?text=After", befTxt: "Stained wall grout", aftTxt: "Clean white grout" },
+  { id: "m_full", label: "The whole bathroom needs a refresh", trade: "full makeover", area: "full", icon: I.sparkle, befImg: "/images/services/bath/bt1-before.png", aftImg: "/images/services/bath/bt1-after.png", befTxt: "Dated bathroom", aftTxt: "Like-new finish" },
+  { id: "m_regrout_all", label: "Fix all tile lines in the whole bathroom", trade: "full regrout", area: "regrout_all", icon: I.floor, befImg: "/images/services/floor/fl1-before.png", aftImg: "/images/services/floor/fl1-after.png", befTxt: "Stained grout throughout", aftTxt: "Clean fresh grout" },
 ];
 const MULTI_PM = { id: "m_maintenance", label: "Annual maintenance check", trade: "inspection", area: "maintenance", icon: I.comm };
 
@@ -70,15 +70,12 @@ const SVCS = {
   shower: [
     { id: "sh1", label: "Fix tiles + corners", trade: "grout lines + corner silicone — the full job", tip: "Remove old grout and silicone, replace fresh. Our bread & butter — 60%+ of shower jobs.", epoxy: true, star: true, befImg: "/images/services/shower/sh1-before.png", aftImg: "/images/services/shower/sh1-after.png", befTxt: "Mouldy grout lines", aftTxt: "Bright white grout" },
     { id: "sh2", label: "Fix just the tile lines", trade: "grout lines only — no corners", tip: "Remove and replace grout only — no silicone corners.", epoxy: true, befImg: "/images/services/shower/sh2-before.png", aftImg: "/images/services/shower/sh2-after.png", befTxt: "Discoloured grout", aftTxt: "Clean uniform lines" },
-    { id: "sh3", label: "Fix mouldy corners only", trade: "corners + edges only — no grout lines", tip: "Cut out old mouldy sealant, apply fresh silicone. Quick job.", befImg: "https://placehold.co/200x140/2e2218/fff?text=Before", aftImg: "https://placehold.co/200x140/f0eeea/333?text=After", befTxt: "Black mould corners", aftTxt: "Fresh white silicone" },
     { id: "sh4", label: "Resurface — change the tile colour", trade: "tile resurfacing", tip: "Spray coating over your existing tiles — any colour you want.", befImg: "/images/services/shower/sh4-before.png", aftImg: "/images/services/shower/sh4-after.png", befTxt: "Dated tile colour", aftTxt: "Modern white finish" },
     { id: "sh5", label: "Fix a cracked tile", trade: "tile repair", tip: "Replace or repair broken tiles. You supply the replacement tile.", befImg: "/images/services/shower/sh5-before.png", aftImg: "/images/services/shower/sh5-after.png", befTxt: "Cracked tile", aftTxt: "Seamless repair" },
-    { id: "sh6", label: "Deep clean & protect", trade: "grout cleaning + sealing", tip: "Professional clean + invisible protective seal. Great for newer bathrooms.", befImg: "https://placehold.co/200x140/6a6050/fff?text=Before", aftImg: "https://placehold.co/200x140/e8e4de/333?text=After", befTxt: "Built-up grime", aftTxt: "Professionally sealed" },
   ],
   bath: [
-    { id: "bt1", label: "Resurface — make it look new", trade: "bath resurfacing", tip: "Spray coating over your existing bath. Looks brand new.", star: true, befImg: "/images/services/bath/bt1-before.png", aftImg: "/images/services/bath/bt1-after.png", befTxt: "Yellowed enamel", aftTxt: "Glossy white finish" },
+    { id: "bt1", label: "Resurface — make it look new", trade: "bath resurfacing", tip: "Full spray coating — covers stains, scratches, dated colour. Looks brand new.", star: true, befImg: "/images/services/bath/bt1-before.png", aftImg: "/images/services/bath/bt1-after.png", befTxt: "Yellowed enamel", aftTxt: "Glossy white finish" },
     { id: "bt2", label: "Fix a chip or dent", trade: "chip repair", tip: "Fill and colour-match chips. Invisible when done.", befImg: "/images/services/bath/bt2-before.png", aftImg: "/images/services/bath/bt2-after.png", befTxt: "Visible chip", aftTxt: "Invisible repair" },
-    { id: "bt3", label: "Remove scratches / stains", trade: "polishing / stain removal", tip: "Buff out scratches, remove hard water stains, rust marks, or heat damage.", befImg: "/images/services/bath/bt3-before.png", aftImg: "/images/services/bath/bt3-after.png", befTxt: "Stains & scratches", aftTxt: "Polished smooth" },
     { id: "bt4", label: "Fix the mouldy seal", trade: "silicone replacement", tip: "Replace silicone around bath rim — stops leaks and removes mould.", befImg: "https://placehold.co/200x140/3a2e22/fff?text=Before", aftImg: "https://placehold.co/200x140/f0eeea/333?text=After", befTxt: "Peeling silicone", aftTxt: "Fresh sealed edge" },
   ],
   basin: [
@@ -101,7 +98,6 @@ const SVCS = {
     { id: "fl2", label: "Resurface — change the tile colour", trade: "floor tile resurfacing", tip: "Coating over floor tiles + anti-slip additive.", befImg: "https://placehold.co/200x140/6a5e4e/fff?text=Before", aftImg: "https://placehold.co/200x140/dcd8d2/333?text=After", befTxt: "Outdated colour", aftTxt: "Modern colour" },
     { id: "fl3", label: "Make floor less slippery", trade: "anti-slip treatment", tip: "Invisible chemical grip treatment. Doesn't change the look.", befImg: "https://placehold.co/200x140/8a8a8a/fff?text=Before", aftImg: "https://placehold.co/200x140/c8c8c8/333?text=After", befTxt: "Slippery when wet", aftTxt: "Safe invisible grip" },
     { id: "fl4", label: "Fix a cracked tile", trade: "tile repair", tip: "Replace broken tiles. You supply the replacement tile.", befImg: "/images/services/floor/fl4-before.png", aftImg: "/images/services/floor/fl4-after.png", befTxt: "Cracked floor tile", aftTxt: "Seamless match" },
-    { id: "fl5", label: "White powdery buildup", trade: "efflorescence removal", tip: "Specialist removal of salt/mineral deposits on tiles.", befImg: "https://placehold.co/200x140/b0b0b0/fff?text=Before", aftImg: "https://placehold.co/200x140/d8d4ce/333?text=After", befTxt: "White powder stains", aftTxt: "Clean tiles" },
   ],
   walls: [
     { id: "wl1", label: "Fix lines between wall tiles", trade: "wall regrouting", tip: "Regrout bathroom wall tiles outside the shower area. Splashback, behind vanity, around toilet.", epoxy: true, star: true, befImg: "https://placehold.co/200x140/5a4a3a/fff?text=Before", aftImg: "https://placehold.co/200x140/e4e0da/333?text=After", befTxt: "Stained wall grout", aftTxt: "Clean white grout" },
@@ -1023,7 +1019,7 @@ export default function QuoteForm() {
           {/* Shower vs Mould helper */}
           {selAreas.includes("shower") && !selAreas.includes("mould") && (
             <p style={{ fontSize: 11, color: C.sec, marginTop: 8, padding: "6px 10px", background: C.surfLow, borderRadius: 8 }}>
-              Tip: "Shower" covers grout lines AND corner silicone. Only tick "Mould & Corners" if mould is OUTSIDE the shower (bath rim, toilet base).
+              Tip: &ldquo;Shower&rdquo; already covers shower-corner silicone. Only tick &ldquo;Silicone seals&rdquo; for mould OUTSIDE the shower (bath rim, toilet base, vanity edges).
             </p>
           )}
 
@@ -1091,18 +1087,38 @@ export default function QuoteForm() {
         return <>
           <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>What do you want done?</h2>
           <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Pick what applies. We&rsquo;ll work out the details from your photos.</p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {relevantItems.map(item => {
               const on = multiPicks.includes(item.id);
               return (
-                <label key={item.id} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", borderRadius: 10, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: on ? `${C.pri}06` : C.white, cursor: "pointer", minHeight: 44 }}>
-                  <input type="checkbox" checked={on} onChange={() => toggleMulti(item.id)} style={{ marginTop: 3, accentColor: C.pri, width: 18, height: 18, flexShrink: 0 }} />
-                  {typeof item.icon === 'function' ? item.icon(22) : item.icon}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: on ? C.pri : C.priC }}>{item.label}</div>
-                    <div style={{ fontSize: 11, color: C.sec, marginTop: 2 }}>{item.trade}</div>
-                  </div>
-                </label>
+                <div key={item.id} onClick={() => toggleMulti(item.id)} style={{ background: C.white, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, borderRadius: 12, cursor: "pointer", overflow: "hidden", transition: "all 0.15s" }}>
+                  {item.befImg && item.aftImg && (
+                    <div style={{ display: "flex" }}>
+                      <div style={{ flex: 1, position: "relative" }}>
+                        <span style={{ position: "absolute", top: 6, left: 6, fontSize: 9, fontWeight: 700, color: C.white, background: "rgba(186,26,26,.8)", padding: "2px 7px", borderRadius: 4, zIndex: 2 }}>BEFORE</span>
+                        <img src={item.befImg} alt="" style={{ width: "100%", height: 80, objectFit: "cover", display: "block" }} loading="lazy" />
+                      </div>
+                      <div style={{ flex: 1, position: "relative" }}>
+                        <span style={{ position: "absolute", top: 6, left: 6, fontSize: 9, fontWeight: 700, color: C.white, background: "rgba(15,110,86,.8)", padding: "2px 7px", borderRadius: 4, zIndex: 2 }}>AFTER</span>
+                        <img src={item.aftImg} alt="" style={{ width: "100%", height: 80, objectFit: "cover", display: "block" }} loading="lazy" />
+                      </div>
+                    </div>
+                  )}
+                  {item.befTxt && item.aftTxt && (
+                    <div style={{ display: "flex", borderTop: `1px solid ${C.brd}` }}>
+                      <div style={{ flex: 1, padding: "5px 10px", fontSize: 10, color: C.sec, borderRight: `1px solid ${C.brd}`, fontWeight: 500 }}>{item.befTxt}</div>
+                      <div style={{ flex: 1, padding: "5px 10px", fontSize: 10, color: C.green, fontWeight: 500 }}>{item.aftTxt}</div>
+                    </div>
+                  )}
+                  <label style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", cursor: "pointer", borderTop: item.befImg ? `1px solid ${C.brd}` : "none" }}>
+                    <input type="checkbox" checked={on} readOnly style={{ accentColor: C.pri, width: 18, height: 18, flexShrink: 0 }} />
+                    {typeof item.icon === 'function' ? item.icon(22) : item.icon}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: on ? C.pri : C.priC }}>{item.label}</div>
+                      <div style={{ fontSize: 11, color: C.sec, marginTop: 2 }}>{item.trade}</div>
+                    </div>
+                  </label>
+                </div>
               );
             })}
           </div>
@@ -1208,7 +1224,7 @@ export default function QuoteForm() {
             photoList.forEach(p => {
               const prefix3 = p.id.substring(0, 3);
               const prefix2 = p.id.substring(0, 2);
-              const areaName = prefix3 === "pbs" ? "Basin" : prefix3 === "pns" ? "Photos" : prefix3 === "pex" ? "Extra" : prefix2 === "ps" ? "Shower" : prefix2 === "pb" ? "Bath" : prefix2 === "pv" ? "Vanity" : prefix2 === "pm" ? "Mould & Corners" : prefix2 === "pf" ? "Floor" : prefix2 === "pw" ? "Wall Tiles" : "Other";
+              const areaName = prefix3 === "pbs" ? "Basin" : prefix3 === "pns" ? "Photos" : prefix3 === "pex" ? "Extra" : prefix2 === "ps" ? "Shower" : prefix2 === "pb" ? "Bath" : prefix2 === "pv" ? "Vanity" : prefix2 === "pm" ? "Silicone seals" : prefix2 === "pf" ? "Floor" : prefix2 === "pw" ? "Wall Tiles" : "Other";
               if (!groups[areaName]) groups[areaName] = [];
               groups[areaName].push(p);
             });
