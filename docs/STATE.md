@@ -183,11 +183,23 @@
 | Item | Status | Details |
 |---|---|---|
 | Customer enquiries received historically | ❓ | CEO to ask if anyone enquired during build phase |
-| Active customer conversations | ❓ | CEO to ask |
 | Network outreach lists (Allan) | ❌ Not built | Override 1 priority — target 25 contacts |
 | Network outreach lists (Marko) | ❌ Not built | Same |
-| First 3 customers booked | ❌ | Goal by 2026-05-27 |
+| First 3 customers booked | ❌ 0/3 | Goal by 2026-05-27 |
 | Customer database (CRM contacts) | ❌ | Empty — GHL not yet connected |
+
+### Active customer pipeline (CONFIRMED 2026-05-01 PM)
+
+| # | Customer | Source | Service Needed | Status | Action needed |
+|---|---|---|---|---|---|
+| 1 | **Marko's prior regrouting customer** (name ❓) | Warm referral via Marko's previous job | Shower-over-bath resurface + strip-back (peeling existing coat) | 🟢 Soft-locked, "happy to wait until we establish business" | Marko: capture name, suburb, contact, photos. CEO: draft holding-quote message. |
+
+**Special considerations for this customer:**
+- Strip-back surcharge applies (Excel Modifier — Rejection #9 territory)
+- Combo bathtub/shower unit = SOB-01..04 SKU range
+- Skilled resurfacing sub required (Marko's established-business network)
+- High-trust customer + perfect for first case study (real before/after photos, real testimonial, real Google review)
+- Willingness to wait removes timeline pressure
 
 ---
 
