@@ -100,6 +100,34 @@ When the topic at hand involves a doc I've referenced, I read it FULLY — not s
 
 **The check**: at the start of a new task, list the docs that touch the topic. Read each one end-to-end. Then decide.
 
+### Rule 11 — Research failure modes, not just success patterns
+Most research defaults to "best practices" / "what to do." That's half the picture. The other half — and often more valuable — is **what went wrong for others**.
+
+**For every meaningful decision, also research:**
+- **NCAT (NSW Civil & Administrative Tribunal) decisions** for trades businesses → what triggered customer disputes; what contract clauses failed; what the tribunal awarded
+- **NSW Fair Trading complaints data** → patterns in trades complaints; what businesses got sanctioned
+- **ACCC enforcement actions** for trades or marketing claims → what got businesses fined
+- **Reddit AU trades / business / consumer threads** → "ripped off by bathroom resurfacing" type posts reveal real customer rage triggers
+- **Product Review.com.au** for competitors → what specifically pissed customers off
+- **Facebook trade groups** (Sydney Tradies, NSW trades) → "don't use brand X, here's why" + "best brand for Y, here's why"
+- **Hipages / Airtasker reviews** of established operators → operational mistakes that surface
+- **Court judgments** for trades disputes (NSW Supreme Court, District Court) → high-stakes failure cases
+
+**Allan's example pattern:**
+> *"Good resurfacing materials in Sydney" forum says "don't use Bunnings materials, they don't supply it" + "Napco or Hawk resurfacing materials are the best"*
+
+This kind of "don't use X / use Y" evidence from real operators is gold — typically more reliable than vendor marketing claims.
+
+**Apply this to:**
+- Materials selection (already in sub-materials-standard.md research protocol)
+- Pricing decisions (research customer complaints about competitors' pricing)
+- Sub agreements (research NCAT cases for contract failure modes)
+- Marketing claims (research ACCC enforcement actions)
+- Tools / equipment (research forum complaints + warranty claim patterns)
+- Geographic expansion (research failures of similar businesses in target markets)
+
+**Don't ship a decision based only on best-practice research.** Always also research failure modes from real-world data.
+
 ### Rule 9 — Pause-Audit-Decide trigger
 **The trap I keep falling into**: fresh data lands, I feel the urge to decide quickly, I skip the audit ("it's obvious"), Allan catches it.
 
