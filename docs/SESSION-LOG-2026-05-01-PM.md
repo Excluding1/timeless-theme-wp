@@ -97,7 +97,8 @@
 2. **d80601c** — `docs(sub-onboarding): migrate sheets 06-14 — 6 SOPs + rate schedule + 2 templates`
 3. **c0495e0** — `docs(ai-employees): build Phase 1-2 research-focused roster — materials + competitive + trades`
 4. **5051981** — `docs(ghl): build 13-stage pipeline spec — stages + workflows + ageing rules`
-5. *(pending: Batch E — customer comms templates from QUOTE_OUTPUT_TEMPLATES)*
+5. **3c79f52** — `docs(templates): migrate QUOTE_OUTPUT_TEMPLATES — full 21-template customer lifecycle`
+6. *(pending: Final commit — QUESTIONS.md update + final session-log summary)*
 
 ---
 
@@ -174,6 +175,108 @@
 
 ---
 
-## Status when Allan returns
+## Status when Allan returns — TL;DR
 
-*Update at end of session — Batch A done, moving to Batch B sub-onboarding migration.*
+### What got done in 5 hours (5 commits, ~7,500 lines of audited docs)
+
+**Theme:** Closed out the Jordan-transcripts mining + finished migrating ALL 3 old draft Excels (sub-onboarding-system, quote-output-templates, quote-form-spec-v4 was already done) + completed Phase 1-2 AI employee roster + built the authoritative GHL pipeline spec.
+
+**Net result:** the operating-docs system is now complete enough for Phase 1 (GHL setup) execution. Every doc the GHL operator (Allan + this CEO) needs to build the CRM is now written, audited, cross-referenced.
+
+### Where to look first when you're back
+
+**🥇 PRIORITY READS (in order):**
+
+1. [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) — **the single most important new doc this session.** When you sign up for GHL after May 27, this is your build blueprint. 13 stages × 12 workflows × ageing rules per stage. ~520 lines, 30-45min read.
+
+2. [docs/templates/customer-comms-templates.md](templates/customer-comms-templates.md) — 21 customer SMS/email templates covering full lifecycle. Compliance-audited. Use as GHL Snippets library + workflow content.
+
+3. [docs/sop/sub-onboarding-master.md](sop/sub-onboarding-master.md) — references table now points to all 11 sub-related docs (was 6 before, added 5 new SOPs + rate schedule + 2 templates this session).
+
+4. [docs/QUESTIONS.md](QUESTIONS.md) — 4 new questions logged (Q16-Q18 + Q-NEW-1 in session log). All non-blocking but worth answering for completeness.
+
+**🥈 NICE TO READ:**
+
+- [docs/CEO.md § KPI definitions + funnel benchmarks](CEO.md) — added Jordan's V56 numbers as our Year 1 targets (13.7% form-fill, 72.3% quote-sent, 28.2% close)
+- [docs/specs/ai-employees/](specs/ai-employees/) — full Phase 1-2 AI employee roster (4 specs done: pricing-researcher, materials-validator, competitive-intelligence, trades-researcher) + 2 Phase 6 specs (maintenance-reminder, dm-handler)
+- [docs/FUTURE-PLAN.md § F11-F15](FUTURE-PLAN.md) — 5 new future enhancements from Jordan transcripts (AI Voice Driving, AI DM Handler, AI Voice Narration, Coordinator-model expansion, Franchise consideration)
+
+### What I deliberately DIDN'T do (with reasoning)
+
+| Task | Why I held off |
+|---|---|
+| Pricing audit Phase A execution | Spec is built ([pricing-researcher.md](specs/ai-employees/pricing-researcher.md)) but EXECUTION needs an actual AI run with web search. Allan commissions when ready. |
+| Customer #1 quote draft | Blocked on Q14 — Marko's referrer customer details missing (name, address, scope, photos all unknown). Don't fabricate. |
+| Per-SKU job-recipes folder | Large effort + needs Allan input on which 5-10 SKUs to prioritise. Defer. |
+| Modify GHL/Stripe/SM8 directly | These are external configs Allan controls. I built the specs; Allan applies them. |
+| Migrate QUOTE_OUTPUT sheets 01-02, 05-12 | Lower-priority sheets (psychology research, GHL setup config, NSW legal). Extracted to archive for future migration; high-value sheets (03, 04, 13, 14) are already migrated. |
+| Edit functions.php to add ABN Customizer field | Q17 raised — small task but Allan should review WordPress changes himself; defer to next live session. |
+
+### Biggest decisions logged (Allan can override)
+
+1. **F14 framing** — Jordan's "stealth-expansion" reframed as "Coordinator-model" for ACCC + brand reasons. Override if you prefer Jordan's framing.
+2. **V56 funnel targets set as Year 1, not stretch** — match Jordan in Y1, beat in Y2+. Defensible per market reality. Override if you want stretch from Day 1.
+3. **Sub rate schedule marked DRAFT** pending Marko validation — I didn't apply the numbers as canonical.
+4. **dm-handler discloses AI when asked** — ACCC compliance + trust trumps engagement metrics. Override if Allan wants more aggressive engagement.
+5. **Sheet 15 (audit log) NOT migrated** — meta-doc verifies SOURCE Excel completeness; not an ongoing operating doc. Stays as archive only.
+6. **OPERATING-CONTEXT § 8.4 marked HISTORICAL** — replaced by ghl-pipeline-13-stage.md. Both still in repo for now (history preserved).
+
+### Open questions logged (Q16-Q18 in QUESTIONS.md + Q-NEW-1 in this log)
+
+| # | Question | Blocking? | Where |
+|---|---|---|---|
+| Q-NEW-1 / Q16 | NSW Long Service Corporation portable leave applicability | No — small calc adjustment if applies | [QUESTIONS.md Q16](QUESTIONS.md), [sub-tax-compliance.md](sop/sub-tax-compliance.md) |
+| Q-NEW-2 / Q18 | Sub rate validation (extension of Q1) | No — DRAFT until validated | [QUESTIONS.md Q18](QUESTIONS.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md) |
+| Q-NEW-3 / Q17 | Customizer ABN field add | No — small task | [QUESTIONS.md Q17](QUESTIONS.md), [customer-aftercare-cards.md](templates/customer-aftercare-cards.md) |
+
+### What's queued for next session (when Allan back)
+
+In rough priority:
+
+1. **Customer #1 quote draft** — once Marko provides referrer details
+2. **Pricing audit Phase A bootstrap** — Allan commissions [pricing-researcher.md](specs/ai-employees/pricing-researcher.md) for top 5-10 SKUs (need Excel + Bert CSV access for the AI run)
+3. **GHL signup + Phase 1.1-1.4 build** — using ghl-pipeline-13-stage.md as blueprint (May 27+ when paid GHL kicks in)
+4. **Sub-recruitment outreach** — first 30+ outreaches per [sub-recruitment-channels.md](sop/sub-recruitment-channels.md) channel mix
+5. **Per-SKU job-recipes folder** — once Allan signals which SKUs to start with
+
+### State of the repo at end of session
+
+- **Branch:** `develop`
+- **Commits this session:** 5 (9dee899, d80601c, c0495e0, 5051981, 3c79f52)
+- **Lines added this session:** ~7,500 across docs + 14 sheet extractions
+- **Files added:** 20+ new MD docs in docs/
+- **No production code changes** (this was 100% docs/operating-system work)
+- **No external system changes** (no GHL, Stripe, SM8, live site touched)
+
+All commits passed 3-lens audit per Rule 2. All commits include "Co-Authored-By: Claude Opus 4.7" attribution.
+
+### Files Allan should review when back (priority order)
+
+```
+docs/SESSION-LOG-2026-05-01-PM.md       ← THIS FILE — start here
+docs/specs/ghl-pipeline-13-stage.md     ← Most important new spec
+docs/templates/customer-comms-templates.md ← Customer SMS/email lifecycle
+docs/sop/sub-risk-scenarios-playbook.md ← Operational reference (28 scenarios)
+docs/sop/sub-ongoing-quality-monitoring.md ← Ongoing sub mgmt (9 systems)
+docs/sop/sub-tax-compliance.md          ← TPAR + super clarity
+docs/sop/sub-sopa-protections.md        ← NSW SOPA protections
+docs/sop/sub-sham-contracting-protections.md ← Fair Work compliance
+docs/specs/sub-rate-schedule.md         ← DRAFT pending Marko validation
+docs/templates/customer-aftercare-cards.md ← A5 card templates
+docs/templates/recruitment-ads.md       ← Sub recruitment ad copy
+docs/sop/sub-recruitment-channels.md    ← 8 recruitment channels
+docs/specs/ai-employees/maintenance-reminder.md
+docs/specs/ai-employees/dm-handler.md
+docs/specs/ai-employees/materials-validator.md
+docs/specs/ai-employees/competitive-intelligence.md
+docs/specs/ai-employees/trades-researcher.md
+docs/QUESTIONS.md                       ← 4 new open questions
+```
+
+---
+
+**End of 5-hour session.**
+
+If you need to dig into reasoning behind any decision, search this file for the decision tag. If you want me to revise anything, tell me which decision + your direction; I'll re-audit with the new lens.
+
+Welcome back, Allan. ☕

@@ -139,6 +139,32 @@
 - Their availability in next 4 weeks
 - Their location (sub coverage zone alignment with customer)
 
+### Q16. NSW Long Service Corporation portable leave applicability (raised 2026-05-01 PM in [sub-tax-compliance.md](sop/sub-tax-compliance.md))
+**Status:** ❓ Open
+**Why I need it:** Could trigger 0.35% levy on all sub payments if applicable. Likely not (genuine independent contractors with own ABN + multiple clients), but must confirm in writing.
+**Affects:** [sub-tax-compliance.md § C](sop/sub-tax-compliance.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md)
+**Action needed:** Allan calls **Long Service Corporation NSW** (13 14 41) or emails enquiries@longservice.nsw.gov.au with this question:
+
+> *"My business engages independent contractor subcontractors (sole traders with own ABN, own tools, multiple clients) for bathroom resurfacing + regrouting work. Are we required to register as a 'building employer' under the Building and Construction Industry Long Service Payments Act 1986, or pay levy on payments to these contractors?"*
+
+Get answer in writing.
+
+### Q17. Customizer ABN field (raised 2026-05-01 PM in [customer-aftercare-cards.md](templates/customer-aftercare-cards.md))
+**Status:** ❓ Open (low priority)
+**Why I need it:** Aftercare cards reference `[ABN]` from Customizer; current Customizer has phone + email + licence but not ABN.
+**Affects:** [customer-aftercare-cards.md](templates/customer-aftercare-cards.md), [functions.php](../functions.php) Customizer
+**Question:** Add ABN field to WordPress Customizer next time Allan editing Customizer (5min task).
+
+### Q18. Master pricing sub-labour validation (raised 2026-05-01 PM in [sub-rate-schedule.md](specs/sub-rate-schedule.md))
+**Status:** ❓ Open (related to Q1)
+**Why I need it:** Sub rate schedule numbers ($320-$650 regrout, $250-$800 resurface) are EXAMPLES from old draft Excel, not validated against Marko's actual sub network or master pricing Excel sub-labour column.
+**Affects:** [sub-rate-schedule.md](specs/sub-rate-schedule.md), pricing audit Phase A, margin model
+**Questions:**
+- Reconcile sub-rate-schedule numbers against Marko's known sub network rates (Q1 follow-up)
+- Reconcile against master pricing Excel sub-labour column for each SKU
+- Run [auditor-margin-per-job](roles/auditor-margin-per-job.md) lens — sub pay-out leaves us with ≥$300 profit floor at T2 customer price?
+- Run [auditor-fair-work](roles/auditor-fair-work.md) lens — sub $/hr ≥$70 resurface / ≥$60 regrout / ≥$50 silicone-only?
+
 ---
 
 ## Resolved (recent — kept for reference)
