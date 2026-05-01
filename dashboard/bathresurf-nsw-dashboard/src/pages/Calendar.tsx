@@ -428,8 +428,11 @@ export function Calendar() {
               ))}
             </div>
 
-            {/* Day cells */}
-            <div className="flex-1 grid grid-cols-7 auto-rows-fr bg-slate-200 gap-px overflow-auto">
+            {/* Day cells — minmax(120px,1fr) guarantees readable cell height even on
+                short viewports where auto-rows-fr alone would squish rows below 100px.
+                overflow-auto on this container lets the grid scroll internally if the
+                month doesn't fit the viewport (5-6 rows × 120px + headers > short laptop). */}
+            <div className="flex-1 grid grid-cols-7 auto-rows-[minmax(120px,1fr)] bg-slate-200 gap-px overflow-auto">
               {monthDays.map((day, i) => {
                 const dayEvents = eventsForDay(day);
                 const isCurrentMonth = isSameMonth(day, monthStart);
