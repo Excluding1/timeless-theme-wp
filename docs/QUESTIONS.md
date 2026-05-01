@@ -190,19 +190,40 @@ Get answer in writing.
 4. **Optionally: cashflow draft plan** from Cashflow tab so CEO can sync founder-draw policy in CEO.md with dashboard's canonical numbers
 **Security discipline (per spec):** customer PII tables read-only or excluded; quarterly key rotation; audit log every CEO write; no bulk DELETE without inline approval.
 
-### Q21. Persistent CEO VPS provisioning (raised 2026-05-01 PM after Allan's VPS-not-Cloud-Function decision)
+### Q21. Persistent CEO VPS provisioning (revised 2026-05-01 PM — Linode Sydney + personal Claude Max)
 **Status:** ❓ Open — needed to enable 24/7 CEO daemon per [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md)
-**Why I need it:** Allan elected VPS-first architecture for 24/7 reactivity (webhook receivers + anomaly detection + Slack slash commands). Cloud Function rejected for cold-start latency on Stripe webhooks + lack of always-on state.
-**Affects:** [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md), all AI employee specs (they'll run as cron jobs on this VPS), dashboard integration L2 layer.
+**Why I need it:** Allan elected VPS-first architecture for 24/7 reactivity. Reliability priority drove revision from Oracle Free Tier to Linode (Akamai-owned, established 2003, 99.99% SLA, Sydney Equinix datacenter). Personal Claude Max for daemon AI calls until business Max trigger (Q23).
+**Affects:** [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md), all AI employee specs (they'll run on this VPS), dashboard integration L2 layer.
 **Action needed (Allan, total ~30min over 7 days):**
-1. Sign up at digitalocean.com (free $200 credit at signup)
-2. Provision Sydney SYD1 droplet, $6/mo Basic, Ubuntu 24.04, SSH key auth
+1. Sign up at [linode.com](https://login.linode.com/signup) — Akamai-owned
+2. Provision Sydney "Nanode 1GB" plan ($5 USD/mo), Ubuntu 24.04, SSH key auth
 3. Confirm `ceo.timelessresurfacing.com.au` subdomain via Cloudflare DNS A record
-4. Sign up Claude API key at console.anthropic.com ($20/mo cap)
+4. Anthropic API safety net key at console.anthropic.com — $5/mo cap (fallback only)
 5. Slack workspace setup (free tier) with #ceo-events + #weekly-numbers + #job-issues channels
-6. SSH into droplet + run § 5.2 hardening commands per the deployment recipe
-7. Tell CEO when droplet ready → I write daemon code + deploy
-**Cost:** ~$15-25 AUD/mo total (DO $9 + Claude $5-15 + backup $1)
+6. SSH into Linode + run § 5.2 hardening commands per the deployment recipe
+7. Auth Claude Code with personal Max via `claude /login` on the VPS
+8. Tell CEO when Linode ready → I write daemon code + deploy
+**Cost:** **~$8-12 AUD/mo** total (Linode $7.50 + API safety $0-3 + backup $1)
+**Trigger to migrate to business Max:** see Q23
+
+### Q23. Personal → Business Claude Max migration trigger (raised 2026-05-01 PM)
+**Status:** ❓ Open — recurring monitor question
+**Why I need it:** Allan elected to use personal Claude Max for daemon now (zero marginal cost) + migrate to business Max when triggered. Need to monitor triggers + execute migration cleanly.
+**Affects:** [persistent-ceo-vps-deployment.md § 9](specs/persistent-ceo-vps-deployment.md), tax bookkeeping, business expense deductibility
+**Migration triggers (whichever fires first):**
+1. Revenue ≥ $10K/mo for 2 consecutive months
+2. Pty Ltd formation per [Anytime A2 in FUTURE-PLAN](FUTURE-PLAN.md)
+3. Phase 4 first real customer + first sub paid (real operations)
+4. Forced — Anthropic policy change OR personal Max rate limits hit
+**Action when triggered:**
+- Sign up business Max subscription under admin@timelessresurfacing.com.au
+- 5-minute migration on VPS: `claude /logout` then `claude /login` with business creds
+- Daemon code doesn't change; zero downtime if done at low-traffic hour
+- Update finances tab + accountant for tax treatment change
+**Phase A bookkeeping (now):**
+- Document personal Max % used for business CEO daemon work (~estimate, not metered)
+- Track in `data/finances/personal-business-shared-expenses-2026.md`
+- Optional: business reimburses Allan retroactively when cash allows
 
 ### Q22. Service_role key rotation timing (raised 2026-05-01 PM)
 **Status:** ❓ Open — security hygiene
