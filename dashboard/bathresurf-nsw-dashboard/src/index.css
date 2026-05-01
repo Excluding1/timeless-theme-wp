@@ -25,3 +25,20 @@
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Touch target a11y — Apple HIG / Material recommend 44px min on touch devices.
+   Many icon-only buttons in the codebase use p-1 or p-1.5 (~28px target), too small
+   for thumbs. This bumps them to ≥44px on coarse-pointer devices only — desktop
+   keeps the tighter spacing because precise pointers don't need the extra padding. */
+@media (pointer: coarse) {
+  button.p-1,
+  button.p-1\.5,
+  a.p-1,
+  a.p-1\.5 {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

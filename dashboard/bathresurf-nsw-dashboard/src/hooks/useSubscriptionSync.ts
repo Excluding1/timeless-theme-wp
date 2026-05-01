@@ -43,7 +43,9 @@ export function useSubscriptionSync() {
         const remaining: typeof newPriceChanges = [];
         newPriceChanges.forEach((pc) => {
           if (!pc.effective_date) { remaining.push(pc); return; }
-          const effectiveDate = parseISO(pc.effective_date);
+          // Wrap parseISO in startOfDay so '2026-05-01' compares equal to today's local midnight,
+          // not to UTC midnight (which is 10am Sydney → would never equal today's Sydney midnight).
+          const effectiveDate = startOfDay(parseISO(pc.effective_date));
           if (!isValid(effectiveDate)) { remaining.push(pc); return; }
           if (isBefore(effectiveDate, today) || effectiveDate.getTime() === today.getTime()) {
             // Price change has taken effect — apply it
@@ -59,7 +61,8 @@ export function useSubscriptionSync() {
 
       // ── 2. Check if renewal is due (loop catches multi-cycle gaps) ────
       if (sub.next_renewal) {
-        let currentRenewal = parseISO(sub.next_renewal);
+        // startOfDay wraps parseISO into local-zone midnight so equality vs `today` works in Sydney.
+        let currentRenewal = startOfDay(parseISO(sub.next_renewal));
         if (isValid(currentRenewal) && (isBefore(currentRenewal, today) || currentRenewal.getTime() === today.getTime())) {
           // If a sub is multiple cycles overdue (e.g. monthly missed for 4 months),
           // log a finance entry for each missed cycle, not just one.

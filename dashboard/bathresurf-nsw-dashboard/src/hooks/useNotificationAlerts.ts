@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useData } from './useData';
 import { sendLocalNotification } from '../lib/notifications';
-import { differenceInDays, parseISO, isBefore, startOfDay, format } from 'date-fns';
+import { differenceInCalendarDays, parseISO, isBefore, isValid, startOfDay, format } from 'date-fns';
 import type { Task, Subscription, Subcontractor, AppNotification } from '../lib/database';
 
 export function useNotificationAlerts() {
@@ -21,7 +21,11 @@ export function useNotificationAlerts() {
     const today = format(new Date(), 'yyyy-MM-dd');
     const existingCategories = new Set(
       (notifications as AppNotification[])
-        .filter(n => n.created_at && format(parseISO(n.created_at), 'yyyy-MM-dd') === today)
+        .filter(n => {
+          if (!n.created_at) return false;
+          const d = parseISO(n.created_at);
+          return isValid(d) && format(d, 'yyyy-MM-dd') === today;
+        })
         .map(n => n.category)
     );
 
@@ -39,11 +43,13 @@ export function useNotificationAlerts() {
       }
     }
 
-    // Overdue tasks
+    // Overdue tasks — guard parseISO so a malformed due_date doesn't crash the entire effect.
     const todayDate = startOfDay(new Date());
-    const overdue = (tasks as Task[]).filter(
-      t => t.status !== 'done' && t.due_date && isBefore(parseISO(t.due_date), todayDate)
-    );
+    const overdue = (tasks as Task[]).filter(t => {
+      if (t.status === 'done' || !t.due_date) return false;
+      const d = parseISO(t.due_date);
+      return isValid(d) && isBefore(d, todayDate);
+    });
     if (overdue.length > 0) {
       createIfNew('overdue_task', {
         type: 'system',
@@ -57,14 +63,16 @@ export function useNotificationAlerts() {
 
     // Subscription renewals within 7 days
     const now = new Date();
-    const renewingSubs = (subscriptions as Subscription[]).filter(
-      s => s.status === 'active' && s.next_renewal &&
-        differenceInDays(parseISO(s.next_renewal), now) >= 0 &&
-        differenceInDays(parseISO(s.next_renewal), now) <= 7
-    );
+    const renewingSubs = (subscriptions as Subscription[]).filter(s => {
+      if (s.status !== 'active' || !s.next_renewal) return false;
+      const d = parseISO(s.next_renewal);
+      if (!isValid(d)) return false;
+      const days = differenceInCalendarDays(d, now);
+      return days >= 0 && days <= 7;
+    });
     if (renewingSubs.length > 0) {
       const sub = renewingSubs[0];
-      const days = differenceInDays(parseISO(sub.next_renewal!), now);
+      const days = differenceInCalendarDays(parseISO(sub.next_renewal!), now);
       createIfNew('subscription_renewal', {
         type: 'system',
         category: 'subscription_renewal',
@@ -78,14 +86,16 @@ export function useNotificationAlerts() {
     }
 
     // Insurance expiry within 14 days
-    const expiringSubs = (subcontractors as Subcontractor[]).filter(
-      s => s.status === 'active' && s.pl_insurance_expiry &&
-        differenceInDays(parseISO(s.pl_insurance_expiry), now) >= 0 &&
-        differenceInDays(parseISO(s.pl_insurance_expiry), now) <= 14
-    );
+    const expiringSubs = (subcontractors as Subcontractor[]).filter(s => {
+      if (s.status !== 'active' || !s.pl_insurance_expiry) return false;
+      const d = parseISO(s.pl_insurance_expiry);
+      if (!isValid(d)) return false;
+      const days = differenceInCalendarDays(d, now);
+      return days >= 0 && days <= 14;
+    });
     if (expiringSubs.length > 0) {
       const sub = expiringSubs[0];
-      const days = differenceInDays(parseISO(sub.pl_insurance_expiry!), now);
+      const days = differenceInCalendarDays(parseISO(sub.pl_insurance_expiry!), now);
       createIfNew('insurance_expiry', {
         type: 'system',
         category: 'insurance_expiry',

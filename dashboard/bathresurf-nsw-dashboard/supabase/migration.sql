@@ -294,6 +294,7 @@ ALTER TABLE quick_links ENABLE ROW LEVEL SECURITY;
 
 -- Create a simple policy: authenticated users can do everything
 -- (Both founders share full access to all data)
+-- Drop-then-create makes this safe to re-run on a DB where the policy already exists.
 DO $$
 DECLARE
   tbl TEXT;
@@ -306,6 +307,7 @@ BEGIN
       'notes', 'business_links', 'notifications', 'quick_links'
     ])
   LOOP
+    EXECUTE format('DROP POLICY IF EXISTS "Authenticated full access" ON %I', tbl);
     EXECUTE format(
       'CREATE POLICY "Authenticated full access" ON %I FOR ALL TO authenticated USING (true) WITH CHECK (true)',
       tbl
@@ -327,9 +329,14 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Apply to tables with updated_at
+-- Apply to tables with updated_at (drop-first so the script is re-runnable)
+DROP TRIGGER IF EXISTS update_finances_updated_at ON finances;
 CREATE TRIGGER update_finances_updated_at BEFORE UPDATE ON finances FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+DROP TRIGGER IF EXISTS update_notes_updated_at ON notes;
 CREATE TRIGGER update_notes_updated_at BEFORE UPDATE ON notes FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+DROP TRIGGER IF EXISTS update_notifications_updated_at ON notifications;
 CREATE TRIGGER update_notifications_updated_at BEFORE UPDATE ON notifications FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 
@@ -434,6 +441,7 @@ ALTER TABLE agent_activity_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE audit_log ENABLE ROW LEVEL SECURITY;
 
 -- Authenticated full-access for the team-shared tables (matches existing pattern)
+-- Drop-then-create makes this safe to re-run.
 DO $$
 DECLARE
   tbl TEXT;
@@ -444,6 +452,7 @@ BEGIN
       'agent_runs', 'agent_activity_events', 'audit_log'
     ])
   LOOP
+    EXECUTE format('DROP POLICY IF EXISTS "Authenticated full access" ON %I', tbl);
     EXECUTE format(
       'CREATE POLICY "Authenticated full access" ON %I FOR ALL TO authenticated USING (true) WITH CHECK (true)',
       tbl
@@ -453,13 +462,17 @@ END
 $$;
 
 -- user_preferences is per-user — only the row owner can read/write their preferences.
+DROP POLICY IF EXISTS "Users manage own preferences" ON user_preferences;
 CREATE POLICY "Users manage own preferences"
   ON user_preferences FOR ALL TO authenticated
   USING (user_id = auth.uid())
   WITH CHECK (user_id = auth.uid());
 
--- updated_at triggers for the new tables
+-- updated_at triggers for the new tables (drop-first so the script is re-runnable)
+DROP TRIGGER IF EXISTS update_business_settings_updated_at ON business_settings;
 CREATE TRIGGER update_business_settings_updated_at BEFORE UPDATE ON business_settings FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+DROP TRIGGER IF EXISTS update_user_preferences_updated_at ON user_preferences;
 CREATE TRIGGER update_user_preferences_updated_at BEFORE UPDATE ON user_preferences FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 

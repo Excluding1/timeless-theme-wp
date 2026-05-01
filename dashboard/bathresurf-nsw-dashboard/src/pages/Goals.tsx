@@ -194,7 +194,14 @@ export function Goals() {
                 </div>
 
                 {/* Progress bar */}
-                <div className="w-full bg-slate-100 rounded-full h-2 mb-2">
+                <div
+                  className="w-full bg-slate-100 rounded-full h-2 mb-2"
+                  role="progressbar"
+                  aria-valuenow={Math.round(pct)}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={`${goal.metric_name}: ${status.label}, ${Math.round(pct)}%`}
+                >
                   <div
                     className={cn('h-2 rounded-full transition-all', status.label === 'Behind' ? 'bg-[#DC2626]' : status.label === 'On Track' ? 'bg-amber-500' : 'bg-[#16A34A]')}
                     style={{ width: `${barPct}%` }}
