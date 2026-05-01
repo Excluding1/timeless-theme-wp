@@ -190,6 +190,26 @@ Get answer in writing.
 4. **Optionally: cashflow draft plan** from Cashflow tab so CEO can sync founder-draw policy in CEO.md with dashboard's canonical numbers
 **Security discipline (per spec):** customer PII tables read-only or excluded; quarterly key rotation; audit log every CEO write; no bulk DELETE without inline approval.
 
+### Q21. Persistent CEO VPS provisioning (raised 2026-05-01 PM after Allan's VPS-not-Cloud-Function decision)
+**Status:** ❓ Open — needed to enable 24/7 CEO daemon per [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md)
+**Why I need it:** Allan elected VPS-first architecture for 24/7 reactivity (webhook receivers + anomaly detection + Slack slash commands). Cloud Function rejected for cold-start latency on Stripe webhooks + lack of always-on state.
+**Affects:** [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md), all AI employee specs (they'll run as cron jobs on this VPS), dashboard integration L2 layer.
+**Action needed (Allan, total ~30min over 7 days):**
+1. Sign up at digitalocean.com (free $200 credit at signup)
+2. Provision Sydney SYD1 droplet, $6/mo Basic, Ubuntu 24.04, SSH key auth
+3. Confirm `ceo.timelessresurfacing.com.au` subdomain via Cloudflare DNS A record
+4. Sign up Claude API key at console.anthropic.com ($20/mo cap)
+5. Slack workspace setup (free tier) with #ceo-events + #weekly-numbers + #job-issues channels
+6. SSH into droplet + run § 5.2 hardening commands per the deployment recipe
+7. Tell CEO when droplet ready → I write daemon code + deploy
+**Cost:** ~$15-25 AUD/mo total (DO $9 + Claude $5-15 + backup $1)
+
+### Q22. Service_role key rotation timing (raised 2026-05-01 PM)
+**Status:** ❓ Open — security hygiene
+**Why I need it:** Service_role key was shared in chat 2026-05-01 PM. Standard practice = rotate within 14 days of any exposure, even if low-risk.
+**Affects:** Supabase access for both CEO + future Dashboard Connector agent
+**Action needed:** Rotate via Supabase → Settings → API → "Reset" service_role key. Update the new key in the VPS daemon's `.env` file (after VPS deployed). Don't rotate BEFORE VPS is using it stably — would break this session's tooling. Target: ~Day 14 of VPS deployment, when daemon is stable.
+
 ### Q20. Founder draw formula confirmation (raised 2026-05-01 PM)
 **Status:** ❓ Open — CEO drafted working framework; Allan's dashboard has canonical version
 **Why I need it:** [CEO.md § Founder draw policy](CEO.md#founder-draw-policy-formalised-2026-05-01-pm-per-allans-direction) currently has CEO-recommended formula (30%/40%/50% draws by savings band). Allan said "we have a draft plan in the dashboard" — that's the actual joint Allan+Marko decision.

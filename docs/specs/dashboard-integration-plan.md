@@ -1,5 +1,8 @@
 # Spec: Dashboard Integration — CEO + AI Agent Access
 
+> **⚠️ Updated 2026-05-01 PM:** Allan elected VPS-first architecture (not Cloud Function). See [persistent-ceo-vps-deployment.md](persistent-ceo-vps-deployment.md) for the canonical deployment plan. This doc remains accurate for the **L1 (CEO direct) + L3 (Native UI) + access model**, but **L2 (AI agent)** is now spec'd as a VPS daemon, not a Cloud Function. Reasons in the new doc § 1.
+
+
 **Source:** Allan's direction 2026-05-01 PM — *"we plan on not withdrawing any money until 5k... we have a draft plan in the dashboard... we will need to install agents or you or something best method for you to manage and also edit and add stuff if needed like add tasks to the task board etc"*
 
 **Audited via:** [auditor-general-operational](../roles/auditor-general-operational.md) + [auditor-compliance-aus](../roles/auditor-compliance-aus.md) (data privacy + access control)
