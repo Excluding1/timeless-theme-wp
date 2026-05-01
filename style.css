@@ -4,7 +4,7 @@ Theme URI: https://timelessresurfacing.com.au
 Author: Timeless Resurfacing Pty Ltd
 Author URI: https://timelessresurfacing.com.au
 Description: Custom WordPress theme for Timeless Resurfacing — Sydney's bathroom resurfacing specialists. Features SEO-optimised service pages, hub-and-spoke architecture, and Australian trades compliance.
-Version: 1.2.0
+Version: 1.3.0-dev
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 8.0
@@ -168,8 +168,191 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
     box-shadow: 0 10px 25px -5px rgba(4, 21, 52, 0.10), 0 4px 10px -2px rgba(4, 21, 52, 0.05);
 }
 
-/* Before/After Slider */
-#hero-slider, #hero-slider-mobile, .ba-slider { opacity: 0; transition: opacity 0.3s ease; }
-#hero-slider.ba-ready, #hero-slider-mobile.ba-ready, .ba-slider.ba-ready { opacity: 1; }
+/* Before/After Slider
+   PREVIOUSLY had opacity: 0 default + .ba-ready opacity: 1 transition.
+   That hid the hero image until JS ran, which destroyed Lighthouse LCP
+   measurement (NO_LCP error — browser sees no large element painted
+   in the LCP detection window).
+
+   Fix: keep slider visible from initial paint. The handle/divider gets
+   hidden via .ba-handle-hidden until JS positions it correctly — this
+   prevents the brief "wrong-position handle flash" without blocking
+   LCP detection. */
 #hero-slider img, #hero-slider-mobile img { pointer-events: none; -webkit-user-drag: none; }
 #ba-handle, #mob-handle { transition: none; }
+.ba-slider .ba-handle:not(.ba-handle-ready) { opacity: 0; }
+.ba-slider .ba-handle.ba-handle-ready { opacity: 1; transition: opacity 0.2s ease; }
+
+/* ── Blog: Article (.entry-content) typography ──
+   Styles Gutenberg block output inside single-article.php. Authors compose
+   posts with native blocks (paragraph, image, list, quote) + custom shortcodes
+   ([before_after], [icon_callout], [process_step], [stat_grid]).
+
+   Typography rhythm tuned for long-form reading: 17px body, generous
+   line-height, comfortable max-width. */
+.entry-content {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgb(89, 94, 109);  /* secondary text */
+}
+.entry-content > * { margin-bottom: 1.25rem; }
+.entry-content > *:last-child { margin-bottom: 0; }
+
+.entry-content p { margin-bottom: 1.25rem; }
+.entry-content p:last-child { margin-bottom: 0; }
+
+.entry-content h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: rgb(4, 21, 52);  /* primary */
+    letter-spacing: -0.02em;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    /* Offset for sticky nav when jumped to via TOC anchor */
+    scroll-margin-top: 5rem;
+}
+.entry-content h3 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: rgb(4, 21, 52);
+    letter-spacing: -0.01em;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+.entry-content h4 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    font-weight: 700;
+    color: rgb(4, 21, 52);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.entry-content ul, .entry-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+.entry-content ul { list-style: disc; }
+.entry-content ol { list-style: decimal; }
+.entry-content li { margin-bottom: 0.5rem; }
+.entry-content li > p { margin-bottom: 0.25rem; }
+
+.entry-content a {
+    color: rgb(4, 21, 52);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color 0.15s ease;
+}
+.entry-content a:hover { color: rgb(90, 103, 137); }
+
+.entry-content blockquote {
+    border-left: 4px solid rgb(231, 192, 139);  /* accent gold */
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgb(247, 249, 251);  /* surface-container-low */
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-style: italic;
+    color: rgb(4, 21, 52);
+}
+.entry-content blockquote p:last-child { margin-bottom: 0; }
+.entry-content blockquote cite {
+    display: block;
+    font-style: normal;
+    font-size: 0.875rem;
+    color: rgb(89, 94, 109);
+    margin-top: 0.75rem;
+    font-weight: 600;
+}
+
+.entry-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(4, 21, 52, 0.08);
+    margin: 1.5rem auto;
+    display: block;
+}
+
+.entry-content figure { margin: 1.5rem 0; }
+.entry-content figcaption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: rgb(89, 94, 109);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Wide / full-width Gutenberg alignment */
+.entry-content .alignwide { max-width: none; margin-left: -2rem; margin-right: -2rem; }
+.entry-content .alignfull { max-width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+
+.entry-content code {
+    background: rgb(247, 249, 251);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    color: rgb(4, 21, 52);
+}
+.entry-content pre {
+    background: rgb(4, 21, 52);
+    color: rgb(247, 249, 251);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+.entry-content pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+.entry-content hr {
+    border: 0;
+    border-top: 1px solid rgb(231, 232, 237);
+    margin: 2.5rem 0;
+}
+
+/* Gutenberg gallery styling */
+.entry-content .wp-block-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+.entry-content .wp-block-gallery img {
+    margin: 0;
+    border-radius: 0.5rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* Pagination on archive page */
+.pagination, .nav-links { display: flex; gap: 0.5rem; justify-content: center; margin-top: 2rem; }
+.pagination .page-numbers, .nav-links a, .nav-links span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+    background: rgb(247, 249, 251);
+    color: rgb(4, 21, 52);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+.pagination .page-numbers:hover, .nav-links a:hover {
+    background: rgb(4, 21, 52);
+    color: white;
+}
+.pagination .page-numbers.current, .nav-links .current {
+    background: rgb(4, 21, 52);
+    color: white;
+}

@@ -18,11 +18,441 @@ function timeless_setup() {
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo' );
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
+    add_theme_support( 'wp-block-styles' );  // Gutenberg block default styles
+    add_theme_support( 'align-wide' );        // Wide/full alignment for blocks
 
     register_nav_menus( array(
         'primary' => __( 'Primary Navigation', 'timeless' ),
     ) );
 }
+
+/* ─────────────────────────────────────────────
+   1b. CUSTOM POST TYPE: ARTICLE (Blog)
+   ─────────────────────────────────────────────
+   Custom CPT "article" lives at /blog/{slug}/. Separate from default
+   "page" so blog content stays organized in its own admin section.
+   Gutenberg-enabled (show_in_rest=true) so users can compose flexible
+   layouts with text + images + custom shortcodes for before/after etc.
+   ───────────────────────────────────────────── */
+function timeless_register_article_cpt() {
+    register_post_type( 'article', array(
+        'labels' => array(
+            'name'               => 'Articles',
+            'singular_name'      => 'Article',
+            'add_new'            => 'Add New Article',
+            'add_new_item'       => 'Add New Article',
+            'edit_item'          => 'Edit Article',
+            'new_item'           => 'New Article',
+            'view_item'          => 'View Article',
+            'search_items'       => 'Search Articles',
+            'not_found'          => 'No articles found',
+            'not_found_in_trash' => 'No articles in trash',
+            'menu_name'          => 'Blog',
+        ),
+        'public'              => true,
+        'has_archive'         => 'blog',
+        'rewrite'             => array( 'slug' => 'blog', 'with_front' => false ),
+        'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'author' ),
+        'show_in_rest'        => true,  // Gutenberg
+        'menu_icon'           => 'dashicons-edit',
+        'menu_position'       => 5,
+        'taxonomies'          => array( 'category', 'post_tag' ),
+    ) );
+}
+add_action( 'init', 'timeless_register_article_cpt' );
+
+/* ─────────────────────────────────────────────
+   1c. SHORTCODES FOR BLOG CONTENT
+   ─────────────────────────────────────────────
+   Custom shortcodes that authors can embed in articles via the Shortcode
+   block in Gutenberg, OR by typing the [shortcode] markup directly in
+   any text block. Each renders themed components matching the rest of
+   the site (before/after, icon callouts, process steps).
+   ───────────────────────────────────────────── */
+
+/* [before_after before="url" after="url" alt="..."] — interactive slider */
+function timeless_shortcode_before_after( $atts ) {
+    $a = shortcode_atts( array(
+        'before' => '',
+        'after'  => '',
+        'alt'    => 'Before and after',
+    ), $atts );
+    if ( empty( $a['before'] ) || empty( $a['after'] ) ) {
+        return '';
+    }
+    ob_start(); ?>
+    <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-2xl my-8" style="aspect-ratio:3/2;cursor:ew-resize;">
+        <div class="absolute inset-0 w-full h-full">
+            <img src="<?php echo esc_url( $a['after'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — after' ); ?>" class="w-full h-full object-cover absolute inset-0" />
+        </div>
+        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+            <div class="ba-before absolute inset-0">
+                <img src="<?php echo esc_url( $a['before'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — before' ); ?>" class="w-full h-full object-cover absolute inset-0" />
+            </div>
+        </div>
+        <div class="ba-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left:50%;transform:translateX(-50%);cursor:ew-resize;">
+            <div class="absolute top-1/2 left-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center" style="transform:translate(-50%,-50%);">
+                <span class="material-symbols-outlined text-primary" aria-hidden="true">drag_indicator</span>
+            </div>
+        </div>
+        <span class="absolute top-3 left-3 bg-white/90 text-primary text-xs font-bold px-2 py-1 rounded">BEFORE</span>
+        <span class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">AFTER</span>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'before_after', 'timeless_shortcode_before_after' );
+
+/* [icon_callout icon="check_circle" title="..." content="..."] — themed callout */
+function timeless_shortcode_icon_callout( $atts, $content = null ) {
+    $a = shortcode_atts( array(
+        'icon'    => 'check_circle',
+        'title'   => '',
+        'content' => '',
+    ), $atts );
+    $body = $a['content'] ?: $content;
+    ob_start(); ?>
+    <div class="my-6 bg-surface-container-low rounded-xl p-6 flex items-start gap-4 border-l-4 border-primary">
+        <span class="material-symbols-outlined text-3xl text-primary shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true"><?php echo esc_html( $a['icon'] ); ?></span>
+        <div class="flex-1">
+            <?php if ( $a['title'] ) : ?>
+                <h4 class="font-bold text-primary mb-2 text-lg"><?php echo esc_html( $a['title'] ); ?></h4>
+            <?php endif; ?>
+            <div class="text-sm text-secondary leading-relaxed"><?php echo wp_kses_post( $body ); ?></div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'icon_callout', 'timeless_shortcode_icon_callout' );
+
+/* [process_step number="1" title="..." duration="..." content="..."] — timeline step */
+function timeless_shortcode_process_step( $atts, $content = null ) {
+    $a = shortcode_atts( array(
+        'number'   => '1',
+        'title'    => '',
+        'duration' => '',
+        'content'  => '',
+    ), $atts );
+    $body = $a['content'] ?: $content;
+    ob_start(); ?>
+    <div class="my-6 flex gap-4">
+        <div class="flex flex-col items-center shrink-0">
+            <div class="w-12 h-12 rounded-full bg-white shadow-xs flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center">
+                    <span class="text-base font-black text-[#7a5c10]"><?php echo esc_html( $a['number'] ); ?></span>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1">
+            <?php if ( $a['duration'] ) : ?>
+                <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2"><?php echo esc_html( $a['duration'] ); ?></span>
+            <?php endif; ?>
+            <?php if ( $a['title'] ) : ?>
+                <h4 class="font-bold text-primary mb-1 text-lg"><?php echo esc_html( $a['title'] ); ?></h4>
+            <?php endif; ?>
+            <div class="text-sm text-secondary leading-relaxed"><?php echo wp_kses_post( $body ); ?></div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'process_step', 'timeless_shortcode_process_step' );
+
+/* [stat_grid] for reusable stat blocks like the homepage hero counters
+   Usage: [stat_grid stats="1 Day|Most jobs;Up to 80%|Save vs new;3yr|Warranty"] */
+function timeless_shortcode_stat_grid( $atts ) {
+    $a = shortcode_atts( array( 'stats' => '' ), $atts );
+    if ( empty( $a['stats'] ) ) return '';
+    $items = explode( ';', $a['stats'] );
+    ob_start(); ?>
+    <div class="my-8 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+        <?php foreach ( $items as $item ) :
+            $parts = explode( '|', $item );
+            $value = $parts[0] ?? '';
+            $label = $parts[1] ?? '';
+            if ( ! $value ) continue; ?>
+            <div class="bg-white rounded-xl p-4 text-center border border-surface-container">
+                <p class="text-2xl sm:text-3xl font-extrabold text-primary leading-tight"><?php echo esc_html( trim( $value ) ); ?></p>
+                <p class="text-xs text-secondary mt-1"><?php echo esc_html( trim( $label ) ); ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'stat_grid', 'timeless_shortcode_stat_grid' );
+
+/* Flush rewrite rules when CPT is registered (one-time, on theme activation) */
+function timeless_flush_blog_rewrites() {
+    if ( ! get_option( 'timeless_blog_rewrites_flushed' ) ) {
+        timeless_register_article_cpt();
+        flush_rewrite_rules();
+        update_option( 'timeless_blog_rewrites_flushed', '1' );
+    }
+}
+add_action( 'init', 'timeless_flush_blog_rewrites', 99 );
+
+/* ─────────────────────────────────────────────
+   1f. BLOG CTA WIDGETS (sidebar quote box + end-of-article CTA)
+   ─────────────────────────────────────────────
+   Conversion-focused components used in blog archive sidebar AND single
+   article footer. Pattern modeled on competitor analysis (Surface Care
+   uses a sidebar quote-box on archives + full-width CTA section after
+   article content). Both reuse the same brand language for consistency.
+   ───────────────────────────────────────────── */
+
+/* Sidebar quote box — image background + headline + button.
+   Used in: archive-article.php sidebar, single-article.php TOC sidebar.
+   Returns rendered HTML so callers can echo or buffer it. */
+function timeless_blog_quote_cta_box() {
+    $img      = get_template_directory_uri() . '/images/services/bath-resurfacing/hero.jpg';
+    $contact  = esc_url( home_url( '/contact/' ) );
+    $tel_disp = function_exists( 'timeless_phone' ) ? timeless_phone() : '0451 110 154';
+    $tel_link = function_exists( 'timeless_phone_link' ) ? timeless_phone_link() : '+61451110154';
+    ob_start(); ?>
+    <aside class="bg-primary rounded-2xl overflow-hidden shadow-md relative" aria-label="Free quote call to action">
+        <div class="relative h-40 sm:h-48 overflow-hidden">
+            <img src="<?php echo esc_url( $img ); ?>" alt="" class="w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-linear-to-t from-primary via-primary/70 to-transparent"></div>
+        </div>
+        <div class="p-6 -mt-12 relative">
+            <span class="inline-block py-0.5 px-2 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded-sm mb-3">Free Quote</span>
+            <h3 class="text-xl font-extrabold text-white tracking-tight leading-tight mb-2">Request A Free Quote</h3>
+            <p class="text-xs text-white/80 leading-relaxed mb-5">Send 3-4 photos. Fixed-price quote back within hours. No obligation.</p>
+            <a href="<?php echo $contact; ?>" class="block w-full text-center bg-white text-primary font-bold py-2.5 rounded-lg hover:bg-surface-container-low transition-colors text-sm mb-2">
+                Get Free Quote →
+            </a>
+            <a href="tel:<?php echo esc_attr( $tel_link ); ?>" class="block w-full text-center border border-white/30 text-white font-bold py-2.5 rounded-lg hover:bg-white/10 transition-colors text-sm">
+                <span class="material-symbols-outlined text-sm align-middle" aria-hidden="true">call</span>
+                Call <?php echo esc_html( $tel_disp ); ?>
+            </a>
+        </div>
+    </aside>
+    <?php
+    return ob_get_clean();
+}
+
+/* Recent posts widget — 5 most recent articles for sidebar. */
+function timeless_blog_recent_posts_widget( $limit = 5 ) {
+    $recent = get_posts( array(
+        'post_type'      => 'article',
+        'posts_per_page' => $limit,
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) );
+    if ( empty( $recent ) ) {
+        return '';
+    }
+    ob_start(); ?>
+    <aside class="bg-surface-container-low rounded-2xl p-6" aria-label="Recent posts">
+        <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
+            Recent Posts
+        </h3>
+        <ul class="space-y-3">
+            <?php foreach ( $recent as $post ) : setup_postdata( $post );
+                $thumb = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
+            ?>
+                <li>
+                    <a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" class="flex items-start gap-3 group">
+                        <?php if ( $thumb ) : ?>
+                            <img src="<?php echo esc_url( $thumb ); ?>" alt="" class="w-14 h-14 rounded-lg object-cover shrink-0" loading="lazy" />
+                        <?php else : ?>
+                            <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-lg text-primary/50" aria-hidden="true">article</span>
+                            </div>
+                        <?php endif; ?>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-sm font-bold text-primary group-hover:text-primary-soft transition-colors leading-tight mb-1"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h4>
+                            <time class="text-[0.65rem] text-secondary" datetime="<?php echo esc_attr( get_the_date( 'c', $post->ID ) ); ?>"><?php echo esc_html( get_the_date( '', $post->ID ) ); ?></time>
+                        </div>
+                    </a>
+                </li>
+            <?php endforeach; wp_reset_postdata(); ?>
+        </ul>
+    </aside>
+    <?php
+    return ob_get_clean();
+}
+
+/* Search box widget for sidebar */
+function timeless_blog_search_widget() {
+    ob_start(); ?>
+    <form role="search" method="get" class="bg-surface-container-low rounded-2xl p-6" action="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Search articles">
+        <h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-base" aria-hidden="true">search</span>
+            Search
+        </h3>
+        <div class="relative">
+            <input type="search" name="s" placeholder="Search articles..." value="<?php echo esc_attr( get_search_query() ); ?>"
+                   class="w-full bg-white border border-surface-container rounded-lg px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" />
+            <input type="hidden" name="post_type" value="article" />
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-primary p-1 hover:opacity-70" aria-label="Submit search">
+                <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+            </button>
+        </div>
+    </form>
+    <?php
+    return ob_get_clean();
+}
+
+/* End-of-article full-width CTA section. Renders BEFORE related articles
+   on single article pages. Headline + value prop + dual CTA (quote + call). */
+function timeless_blog_end_of_article_cta() {
+    $contact  = esc_url( home_url( '/contact/' ) );
+    $tel_disp = function_exists( 'timeless_phone' ) ? timeless_phone() : '0451 110 154';
+    $tel_link = function_exists( 'timeless_phone_link' ) ? timeless_phone_link() : '+61451110154';
+    ob_start(); ?>
+    <section class="py-16 sm:py-20 bg-primary text-white relative overflow-hidden">
+        <!-- Decorative gradient overlay -->
+        <div class="absolute inset-0 bg-linear-to-br from-primary via-primary to-[#0a2d52] opacity-90" aria-hidden="true"></div>
+        <div class="relative max-w-4xl mx-auto px-6 sm:px-8 text-center">
+            <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-6">Get Your Free Quote</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tighter leading-tight mb-4">
+                Save Time &amp; Money with Professional Resurfacing
+            </h2>
+            <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
+                Cracks, chips, or stains can lead to bigger problems — repairing them quickly keeps your bathroom looking its best.
+                We offer fast, cost-effective resurfacing that restores surfaces without the cost or disruption of full replacements.
+            </p>
+            <p class="text-sm sm:text-base text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
+                Send 3-4 photos of your bathroom. We'll reply with a fixed-price quote within hours. No call-out fee, no obligation.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="<?php echo $contact; ?>" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
+                    Get Your Free Quote Today
+                    <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span>
+                </a>
+                <a href="tel:<?php echo esc_attr( $tel_link ); ?>" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
+                    <span class="material-symbols-outlined text-lg" aria-hidden="true">call</span>
+                    Call <?php echo esc_html( $tel_disp ); ?>
+                </a>
+            </div>
+        </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+
+/* ─────────────────────────────────────────────
+   1e. AUTO TABLE OF CONTENTS FOR ARTICLES
+   ─────────────────────────────────────────────
+   When an article has 3+ H2 headings, generate a sticky "On this page"
+   sidebar with jump links. Only triggers for substantive articles —
+   short posts (<3 H2s) skip the TOC to avoid visual clutter.
+
+   Implementation: filters the_content output, injects id attributes
+   into H2 tags, and stores the TOC items in a global for the template
+   to render. Smooth scroll behavior comes from existing CSS scroll-smooth
+   class on <html>.
+   ───────────────────────────────────────────── */
+function timeless_inject_heading_anchors( $content ) {
+    if ( ! is_singular( 'article' ) || ! in_the_loop() ) {
+        return $content;
+    }
+
+    $GLOBALS['timeless_toc_items'] = array();
+
+    $content = preg_replace_callback(
+        '/<h2([^>]*)>(.+?)<\/h2>/i',
+        function ( $m ) {
+            $attrs = $m[1];
+            $inner = $m[2];
+            // Extract plain text for slug + display
+            $text  = trim( wp_strip_all_tags( $inner ) );
+            if ( empty( $text ) ) {
+                return $m[0];
+            }
+            // Generate slug from heading text
+            $slug = sanitize_title( $text );
+            // Avoid duplicate IDs by appending counter if needed
+            static $seen = array();
+            $base_slug = $slug;
+            $i         = 1;
+            while ( in_array( $slug, $seen, true ) ) {
+                $i++;
+                $slug = $base_slug . '-' . $i;
+            }
+            $seen[] = $slug;
+
+            // Skip if H2 already has id attribute
+            if ( strpos( $attrs, 'id=' ) === false ) {
+                $attrs .= ' id="' . esc_attr( $slug ) . '"';
+            } else {
+                // Extract existing id for TOC linking
+                if ( preg_match( '/id="([^"]+)"/', $attrs, $idm ) ) {
+                    $slug = $idm[1];
+                }
+            }
+
+            $GLOBALS['timeless_toc_items'][] = array(
+                'slug' => $slug,
+                'text' => $text,
+            );
+
+            return '<h2' . $attrs . '>' . $inner . '</h2>';
+        },
+        $content
+    );
+
+    return $content;
+}
+add_filter( 'the_content', 'timeless_inject_heading_anchors', 5 );
+
+/* ─────────────────────────────────────────────
+   1d. STARTER BLOG CATEGORIES
+   ─────────────────────────────────────────────
+   Pre-create 5 categories so authors don't end up with "Uncategorized" mess.
+   Idempotent: skips any category that already exists. Authors can rename,
+   add, or delete via wp-admin → Posts → Categories at any time.
+   ───────────────────────────────────────────── */
+function timeless_create_blog_categories() {
+    if ( get_option( 'timeless_blog_cats_created' ) ) {
+        return;
+    }
+
+    $categories = array(
+        array(
+            'name'        => 'Bath Resurfacing Tips',
+            'slug'        => 'bath-resurfacing-tips',
+            'description' => 'Practical guides for bath resurfacing: how it works, what to expect, care tips, common questions.',
+        ),
+        array(
+            'name'        => 'Tile & Grout Care',
+            'slug'        => 'tile-grout-care',
+            'description' => 'How to maintain tiles and grout between professional services. Cleaning, mould prevention, when to repair vs regrout.',
+        ),
+        array(
+            'name'        => 'Before & After',
+            'slug'        => 'before-after',
+            'description' => 'Real Sydney bathroom transformations. Photos, costs, timelines, and customer stories.',
+        ),
+        array(
+            'name'        => 'DIY vs Professional',
+            'slug'        => 'diy-vs-professional',
+            'description' => 'When DIY makes sense and when it costs more in the long run. Honest comparisons.',
+        ),
+        array(
+            'name'        => 'Service Spotlights',
+            'slug'        => 'service-spotlights',
+            'description' => 'Deep dives into specific services: epoxy grout, vanity respray, shower regrouting and more.',
+        ),
+    );
+
+    foreach ( $categories as $cat ) {
+        if ( ! term_exists( $cat['slug'], 'category' ) ) {
+            wp_insert_term( $cat['name'], 'category', array(
+                'slug'        => $cat['slug'],
+                'description' => $cat['description'],
+            ) );
+        }
+    }
+
+    update_option( 'timeless_blog_cats_created', '1' );
+}
+add_action( 'init', 'timeless_create_blog_categories', 100 );
 add_action( 'after_setup_theme', 'timeless_setup' );
 
 /* Auto-create all pages on theme activation (skips existing ones) */
@@ -34,26 +464,30 @@ function timeless_create_pages() {
         array( 'title' => 'Service Areas', 'slug' => 'areas', 'template' => 'page-templates/page-areas.php' ),
         array( 'title' => 'FAQs',    'slug' => 'faqs',    'template' => 'page-templates/page-faqs.php' ),
         array( 'title' => 'Privacy Policy', 'slug' => 'privacy', 'template' => 'page-templates/page-privacy.php' ),
-        // Service pages
-        array( 'title' => 'Shower Regrouting Sydney',  'slug' => 'services/shower-regrouting-sydney',  'template' => 'page-templates/page-shower-regrouting-sydney.php' ),
-        array( 'title' => 'Bath Resurfacing Sydney',   'slug' => 'services/bath-resurfacing-sydney',   'template' => 'page-templates/page-bath-resurfacing-sydney.php' ),
-        array( 'title' => 'Tile Resurfacing Sydney',   'slug' => 'services/tile-resurfacing-sydney',   'template' => 'page-templates/page-tile-resurfacing-sydney.php' ),
-        array( 'title' => 'Vanity Refinishing Sydney',  'slug' => 'services/vanity-refinishing-sydney',  'template' => 'page-templates/page-vanity-refinishing-sydney.php' ),
-        array( 'title' => 'Basin Restoration Sydney',   'slug' => 'services/basin-restoration-sydney',   'template' => 'page-templates/page-basin-restoration-sydney.php' ),
-        array( 'title' => 'Shower Sealing Sydney',      'slug' => 'services/shower-leak-repair-sydney',  'template' => 'page-templates/page-shower-leak-repair-sydney.php' ),
-        array( 'title' => 'Epoxy Grout Upgrade Sydney',  'slug' => 'services/epoxy-grout-upgrade-sydney',  'template' => 'page-templates/page-epoxy-grout-upgrade-sydney.php' ),
-        array( 'title' => 'Floor Tile Regrouting Sydney', 'slug' => 'services/floor-tile-regrouting-sydney', 'template' => 'page-templates/page-floor-tile-regrouting-sydney.php' ),
-        array( 'title' => 'Chip Repair Sydney',          'slug' => 'services/chipped-bathtub-repair-sydney', 'template' => 'page-templates/page-chipped-bathtub-repair-sydney.php' ),
-        array( 'title' => 'Full Bathroom Makeover Sydney', 'slug' => 'services/full-bathroom-makeover-sydney', 'template' => 'page-templates/page-full-bathroom-makeover-sydney.php' ),
-        array( 'title' => 'Property Manager Services Sydney', 'slug' => 'services/property-manager-bathroom-services-sydney', 'template' => 'page-templates/page-property-manager-bathroom-services-sydney.php' ),
-        array( 'title' => 'Stained Bathtub Resurfacing Sydney', 'slug' => 'services/stained-bathtub-resurfacing-sydney', 'template' => 'page-templates/page-stained-bathtub-resurfacing-sydney.php' ),
-        array( 'title' => 'Peeling Bathtub Resurfacing Sydney', 'slug' => 'services/peeling-bathtub-resurfacing-sydney', 'template' => 'page-templates/page-peeling-bathtub-resurfacing-sydney.php' ),
-        array( 'title' => 'Bathroom Tile Resurfacing Sydney',   'slug' => 'services/bathroom-tile-resurfacing-sydney', 'template' => 'page-templates/page-bathroom-tile-resurfacing-sydney.php' ),
-        array( 'title' => 'Mouldy Shower Grout Sydney',  'slug' => 'services/mouldy-shower-grout-sydney', 'template' => 'page-templates/page-mouldy-shower-grout-sydney.php' ),
-        array( 'title' => 'Cracked Grout Repair Sydney', 'slug' => 'services/cracked-grout-repair-sydney', 'template' => 'page-templates/page-cracked-grout-repair-sydney.php' ),
-        array( 'title' => 'Mouldy Silicone Replacement Sydney', 'slug' => 'services/mouldy-silicone-replacement-sydney', 'template' => 'page-templates/page-mouldy-silicone-replacement-sydney.php' ),
-        array( 'title' => 'Basin Chip Repair Sydney',    'slug' => 'services/basin-chip-repair-sydney', 'template' => 'page-templates/page-basin-chip-repair-sydney.php' ),
-        array( 'title' => 'Vanity Respray Sydney',       'slug' => 'services/vanity-respray-sydney', 'template' => 'page-templates/page-vanity-respray-sydney.php' ),
+        // City homepages — currently /sydney/ duplicates / for nationwide expansion staging.
+        // When Melbourne launches: / becomes Australia-neutral, /sydney/ keeps the Sydney
+        // content (page-sydney.php diverges from front-page.php at that point).
+        array( 'title' => 'Bathroom Resurfacing Sydney', 'slug' => 'sydney', 'template' => 'page-templates/page-sydney.php' ),
+        // Service pages — universal slugs (no -sydney suffix) for nationwide expansion
+        array( 'title' => 'Shower Regrouting',           'slug' => 'services/shower-regrouting',           'template' => 'page-templates/page-shower-regrouting.php' ),
+        array( 'title' => 'Bath Resurfacing',            'slug' => 'services/bath-resurfacing',            'template' => 'page-templates/page-bath-resurfacing.php' ),
+        array( 'title' => 'Tile Resurfacing',            'slug' => 'services/tile-resurfacing',            'template' => 'page-templates/page-tile-resurfacing.php' ),
+        array( 'title' => 'Vanity Refinishing',          'slug' => 'services/vanity-refinishing',          'template' => 'page-templates/page-vanity-refinishing.php' ),
+        array( 'title' => 'Basin Restoration',           'slug' => 'services/basin-restoration',           'template' => 'page-templates/page-basin-restoration.php' ),
+        array( 'title' => 'Shower Sealing',              'slug' => 'services/shower-leak-repair',          'template' => 'page-templates/page-shower-leak-repair.php' ),
+        array( 'title' => 'Epoxy Grout Upgrade',         'slug' => 'services/epoxy-grout-upgrade',         'template' => 'page-templates/page-epoxy-grout-upgrade.php' ),
+        array( 'title' => 'Floor Tile Regrouting',       'slug' => 'services/floor-tile-regrouting',       'template' => 'page-templates/page-floor-tile-regrouting.php' ),
+        array( 'title' => 'Chip Repair',                 'slug' => 'services/chipped-bathtub-repair',      'template' => 'page-templates/page-chipped-bathtub-repair.php' ),
+        array( 'title' => 'Full Bathroom Makeover',      'slug' => 'services/full-bathroom-makeover',      'template' => 'page-templates/page-full-bathroom-makeover.php' ),
+        array( 'title' => 'Property Manager Services',   'slug' => 'services/property-manager-bathroom-services', 'template' => 'page-templates/page-property-manager-bathroom-services.php' ),
+        array( 'title' => 'Stained Bathtub Resurfacing', 'slug' => 'services/stained-bathtub-resurfacing', 'template' => 'page-templates/page-stained-bathtub-resurfacing.php' ),
+        array( 'title' => 'Peeling Bathtub Resurfacing', 'slug' => 'services/peeling-bathtub-resurfacing', 'template' => 'page-templates/page-peeling-bathtub-resurfacing.php' ),
+        array( 'title' => 'Bathroom Tile Resurfacing',   'slug' => 'services/bathroom-tile-resurfacing',   'template' => 'page-templates/page-bathroom-tile-resurfacing.php' ),
+        array( 'title' => 'Mouldy Shower Grout',         'slug' => 'services/mouldy-shower-grout',         'template' => 'page-templates/page-mouldy-shower-grout.php' ),
+        array( 'title' => 'Cracked Grout Repair',        'slug' => 'services/cracked-grout-repair',        'template' => 'page-templates/page-cracked-grout-repair.php' ),
+        array( 'title' => 'Mouldy Silicone Replacement', 'slug' => 'services/mouldy-silicone-replacement', 'template' => 'page-templates/page-mouldy-silicone-replacement.php' ),
+        array( 'title' => 'Basin Chip Repair',           'slug' => 'services/basin-chip-repair',           'template' => 'page-templates/page-basin-chip-repair.php' ),
+        array( 'title' => 'Vanity Respray',              'slug' => 'services/vanity-respray',              'template' => 'page-templates/page-vanity-respray.php' ),
     );
 
     foreach ( $pages as $p ) {
@@ -107,6 +541,120 @@ function timeless_create_pages() {
 add_action( 'after_switch_theme', 'timeless_create_pages' );
 
 /**
+ * One-time URL migration: drop "-sydney" suffix from service page slugs.
+ *
+ * Why: Service pages were originally `/services/bath-resurfacing-sydney/`
+ * which baked geography into URLs that should be national. New scheme:
+ * `/services/bath-resurfacing/` — same page, universal URL, scales to
+ * Melbourne/Brisbane without fragmenting authority.
+ *
+ * Idempotent via `timeless_url_migration_v2_done` option flag — runs once
+ * and never again. Updates BOTH post_name (URL slug) AND _wp_page_template
+ * meta (so renamed template files are found).
+ *
+ * Suburb pages auto-migrate as side effect: WordPress builds child URLs
+ * from parent slug, so `/services/bath-resurfacing-sydney/parramatta/`
+ * automatically becomes `/services/bath-resurfacing/parramatta/`.
+ */
+function timeless_migrate_service_slugs_v2() {
+    if ( get_option( 'timeless_url_migration_v2_done' ) ) {
+        return;
+    }
+
+    $migrations = array(
+        'shower-regrouting-sydney'                  => 'shower-regrouting',
+        'bath-resurfacing-sydney'                   => 'bath-resurfacing',
+        'tile-resurfacing-sydney'                   => 'tile-resurfacing',
+        'vanity-refinishing-sydney'                 => 'vanity-refinishing',
+        'basin-restoration-sydney'                  => 'basin-restoration',
+        'shower-leak-repair-sydney'                 => 'shower-leak-repair',
+        'epoxy-grout-upgrade-sydney'                => 'epoxy-grout-upgrade',
+        'floor-tile-regrouting-sydney'              => 'floor-tile-regrouting',
+        'chipped-bathtub-repair-sydney'             => 'chipped-bathtub-repair',
+        'full-bathroom-makeover-sydney'             => 'full-bathroom-makeover',
+        'property-manager-bathroom-services-sydney' => 'property-manager-bathroom-services',
+        'stained-bathtub-resurfacing-sydney'        => 'stained-bathtub-resurfacing',
+        'peeling-bathtub-resurfacing-sydney'        => 'peeling-bathtub-resurfacing',
+        'bathroom-tile-resurfacing-sydney'          => 'bathroom-tile-resurfacing',
+        'mouldy-shower-grout-sydney'                => 'mouldy-shower-grout',
+        'cracked-grout-repair-sydney'               => 'cracked-grout-repair',
+        'mouldy-silicone-replacement-sydney'        => 'mouldy-silicone-replacement',
+        'basin-chip-repair-sydney'                  => 'basin-chip-repair',
+        'vanity-respray-sydney'                     => 'vanity-respray',
+    );
+
+    foreach ( $migrations as $old_slug => $new_slug ) {
+        $page = get_page_by_path( 'services/' . $old_slug );
+        if ( ! $page ) {
+            continue;  // Page doesn't exist yet (fresh install) — let create_pages handle it
+        }
+
+        wp_update_post( array(
+            'ID'        => $page->ID,
+            'post_name' => $new_slug,
+        ) );
+
+        // Update template meta to point to renamed file
+        update_post_meta(
+            $page->ID,
+            '_wp_page_template',
+            'page-templates/page-' . $new_slug . '.php'
+        );
+    }
+
+    update_option( 'timeless_url_migration_v2_done', '1' );
+    flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'timeless_migrate_service_slugs_v2', 5 );  // Before create_pages (priority 10)
+add_action( 'admin_init', 'timeless_migrate_service_slugs_v2' );
+// FRONTEND TRIGGER: also fire on init for frontend requests so visitors
+// don't get caught in a redirect loop if the admin hasn't logged in yet
+// after deploy. Function early-exits via option flag once complete, so
+// the cost is one cached get_option() call on every subsequent request.
+add_action( 'init', 'timeless_migrate_service_slugs_v2', 99 );
+
+/**
+ * 301 redirect old "-sydney" URLs to new universal URLs.
+ *
+ * Single regex covers all 19 service URLs + all suburb children:
+ *   /services/bath-resurfacing-sydney/           → /services/bath-resurfacing/
+ *   /services/bath-resurfacing-sydney/parramatta/ → /services/bath-resurfacing/parramatta/
+ *
+ * Runs at template_redirect priority 1 — BEFORE WordPress tries to render
+ * a 404 for the old URL.
+ */
+function timeless_legacy_url_redirect() {
+    if ( wp_doing_ajax() || wp_doing_cron() || is_admin() ) {
+        return;
+    }
+
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ( preg_match( '#^/services/([a-z0-9-]+)-sydney(/.*)?$#', $uri, $m ) ) {
+        $new_path = '/services/' . $m[1] . ( $m[2] ?? '/' );
+
+        // SAFETY: only redirect to the new URL if a page actually exists there.
+        // This prevents an infinite loop when:
+        //   - Old URL is requested
+        //   - DB migration hasn't run yet (slugs still have -sydney suffix)
+        //   - Without this check, we'd redirect to a URL that doesn't exist,
+        //     WP's canonical_redirect would send back to old URL, our redirect
+        //     would fire again — loop forever.
+        // With this check, we just let the request fall through to WordPress
+        // until migration runs.
+        $check_path = trim( strtok( $new_path, '?' ), '/' );  // strip query + leading/trailing slashes
+        $new_page   = get_page_by_path( $check_path );
+
+        if ( $new_page ) {
+            wp_redirect( home_url( $new_path ), 301 );
+            exit;
+        }
+        // No page at new URL yet → skip redirect, let WP render the old URL normally
+        // until timeless_migrate_service_slugs_v2 runs on next admin_init
+    }
+}
+add_action( 'template_redirect', 'timeless_legacy_url_redirect', 1 );
+
+/**
  * Self-healing: also run page creation on admin_init.
  *
  * Why: `after_switch_theme` doesn't fire when the user "Replace current
@@ -125,16 +673,33 @@ function timeless_ensure_pages_exist() {
         return;
     }
 
-    // Rate limit: only check once per hour via transient
-    if ( get_transient( 'timeless_pages_checked' ) ) {
-        return;
-    }
-    set_transient( 'timeless_pages_checked', 1, HOUR_IN_SECONDS );
+    // Cheap pre-checks BEFORE the transient gate — these run on every admin
+    // page load but exit in <1ms when pages exist (single cached get_page_by_path).
+    // This pattern catches "new pages added in theme update" without waiting
+    // for the 1-hour transient to expire.
+    $needs_create_pages = ! get_page_by_path( 'sydney' );
+    $needs_suburb_pages = ! get_page_by_path( 'services/bath-resurfacing/parramatta' );
 
-    // Quick check: does the FAQs page exist? If yes, assume all pages OK.
-    // If no, run the full creation routine (which skips existing pages anyway).
-    if ( ! get_page_by_path( 'faqs' ) ) {
+    // Rate limit the EXPENSIVE check (full FAQs + create_pages) to once per hour
+    if ( ! get_transient( 'timeless_pages_checked' ) ) {
+        set_transient( 'timeless_pages_checked', 1, HOUR_IN_SECONDS );
+
+        // Quick check: does the FAQs page exist? If yes, assume baseline pages OK.
+        // If no, run the full creation routine (which skips existing pages anyway).
+        if ( ! get_page_by_path( 'faqs' ) ) {
+            timeless_create_pages();
+        }
+    }
+
+    // Run create_pages if /sydney/ is missing (bypasses transient — it's a cheap
+    // recheck and we WANT new pages to materialize quickly post-deploy)
+    if ( $needs_create_pages ) {
         timeless_create_pages();
+    }
+
+    // Same self-heal pattern for suburb landing pages — bypasses transient too
+    if ( $needs_suburb_pages ) {
+        timeless_create_suburb_pages();
     }
 
     // Self-heal permalinks ONLY if WordPress is using completely default (empty).
@@ -144,6 +709,55 @@ function timeless_ensure_pages_exist() {
         flush_rewrite_rules();
     }
 }
+
+/**
+ * Programmatic suburb landing pages — auto-create on theme activation.
+ *
+ * Iterates inc/service-data.php × inc/suburb-data.php and creates a page
+ * for each combo at /services/{service-slug}/{suburb-slug}/.
+ *
+ * Idempotent: skips any (service × suburb) page that already exists.
+ *
+ * Priority 20 (runs AFTER timeless_create_pages at default 10) so the
+ * parent service pages exist before we try to attach suburb pages to them.
+ */
+function timeless_create_suburb_pages() {
+    $suburb_file  = get_template_directory() . '/inc/suburb-data.php';
+    $service_file = get_template_directory() . '/inc/service-data.php';
+    if ( ! file_exists( $suburb_file ) || ! file_exists( $service_file ) ) {
+        return;
+    }
+
+    $suburbs  = include $suburb_file;
+    $services = include $service_file;
+
+    foreach ( $services as $service_slug => $service ) {
+        $parent = get_page_by_path( 'services/' . $service_slug );
+        if ( ! $parent ) {
+            continue;  // Parent service page doesn't exist yet — skip
+        }
+
+        foreach ( $suburbs as $suburb_slug => $suburb ) {
+            // Idempotent check
+            $existing = get_page_by_path( 'services/' . $service_slug . '/' . $suburb_slug );
+            if ( $existing ) {
+                continue;
+            }
+
+            wp_insert_post( array(
+                'post_title'  => $service['name'] . ' in ' . $suburb['name'],
+                'post_name'   => $suburb_slug,
+                'post_status' => 'publish',
+                'post_type'   => 'page',
+                'post_parent' => $parent->ID,
+                'meta_input'  => array(
+                    '_wp_page_template' => 'page-templates/page-suburb-service.php',
+                ),
+            ) );
+        }
+    }
+}
+add_action( 'after_switch_theme', 'timeless_create_suburb_pages', 20 );
 
 /**
  * Aggressive permalink self-heal — runs on every `init` until permalinks are set.
@@ -273,7 +887,10 @@ function timeless_scripts() {
             font-family: 'Material Symbols Outlined';
             font-style: normal;
             font-weight: 400;
-            font-display: block;
+            /* swap (not block) per Lighthouse — minor codepoint flash on first uncached
+               load is acceptable trade for FCP improvement. Font is preloaded + tiny
+               (~10KB subset) + Cloudflare-cached, so flash window is <100ms in practice. */
+            font-display: swap;
             src: url(" . esc_url( $ms_font_url ) . "?v=$ms_font_ver) format('woff2');
         }
         /* CRITICAL: bind the class to the @font-face. Without this, .material-symbols-outlined
@@ -626,6 +1243,37 @@ function timeless_customizer( $wp_customize ) {
         'type'        => 'textarea',
         'description' => __( '<strong>Format:</strong> one review per line, pipe-separated. Leave a single trailing space if the field looks like one column.<br><br><code>Author Name | Time label | Rating | Review text</code><br><br><strong>Example:</strong><br><code>Andy T. | 2 weeks ago | 5 | Marko came by and did a good job regrouting my shower tiles.</code><br><br>Render up to 6 reviews. If both this and Place ID are filled, the Places API takes priority and this is the fallback.', 'timeless' ),
     ) );
+
+    // ─── Analytics Section ────────────────────────────────────────
+    $wp_customize->add_section( 'timeless_analytics', array(
+        'title'       => __( 'Analytics', 'timeless' ),
+        'priority'    => 36,
+        'description' => __( 'Tracking IDs for Google Analytics 4 and Microsoft Clarity. Both are free. Both skip logged-in admins automatically (so your own visits don\'t pollute the data).<br><br><strong>GA4 (Google Analytics 4):</strong> conversion + traffic dashboard. <a href="https://analytics.google.com" target="_blank" rel="noopener">analytics.google.com</a> → Admin → Data Streams → copy the <code>G-XXXXXXXXXX</code> ID.<br><br><strong>Microsoft Clarity:</strong> heatmaps + session replays. Way more useful for UX than GA4. <a href="https://clarity.microsoft.com" target="_blank" rel="noopener">clarity.microsoft.com</a> → New Project → Settings → copy the 10-character project ID.', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_ga4_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options',  // Admin-only field
+    ) );
+    $wp_customize->add_control( 'timeless_ga4_id', array(
+        'label'       => __( 'Google Analytics 4 Measurement ID', 'timeless' ),
+        'section'     => 'timeless_analytics',
+        'type'        => 'text',
+        'description' => __( 'Format: <code>G-XXXXXXXXXX</code> (starts with G- followed by 10 alphanumeric chars). Leave blank to disable.', 'timeless' ),
+    ) );
+
+    $wp_customize->add_setting( 'timeless_clarity_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options',
+    ) );
+    $wp_customize->add_control( 'timeless_clarity_id', array(
+        'label'       => __( 'Microsoft Clarity Project ID', 'timeless' ),
+        'section'     => 'timeless_analytics',
+        'type'        => 'text',
+        'description' => __( '10-character lowercase alphanumeric ID (e.g. <code>p7q3k9z2x1</code>). Leave blank to disable.', 'timeless' ),
+    ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
 
@@ -849,6 +1497,39 @@ function timeless_get_google_reviews() {
 
     set_transient( $cache_key, $data, DAY_IN_SECONDS );
     return $data;
+}
+
+/**
+ * Dynamic AggregateRating JSON-LD fragment.
+ *
+ * Uses the same 24h-cached Google Places API call that feeds the reviews
+ * widget. Returns empty string when no real review data exists, so we
+ * never claim ratings we don't have. Google penalizes false rating
+ * signals via Search Console schema warnings.
+ *
+ * Usage in JSON-LD scripts (inside Service/LocalBusiness object):
+ *
+ *   Last property:
+ *     "address": { ... }<?php echo timeless_aggregate_rating_jsonld(); ?>
+ *
+ *   Middle property (followed by another property):
+ *     "priceRange": "$$",<?php echo timeless_aggregate_rating_jsonld('middle'); ?>
+ *     "hasOfferCatalog": { ... }
+ *
+ * @param string $position 'last' (default) emits leading comma. 'middle' emits trailing comma.
+ * @return string JSON-LD fragment, or empty string if no real review data.
+ */
+function timeless_aggregate_rating_jsonld( $position = 'last' ) {
+    $data = timeless_get_google_reviews();
+    if ( ! $data || empty( $data['total'] ) || empty( $data['rating'] ) ) {
+        return '';
+    }
+    $body = sprintf(
+        '"aggregateRating": { "@type": "AggregateRating", "ratingValue": "%s", "reviewCount": "%d", "bestRating": "5" }',
+        number_format( (float) $data['rating'], 1 ),
+        (int) $data['total']
+    );
+    return $position === 'middle' ? ' ' . $body . ',' : ', ' . $body;
 }
 
 /**
@@ -1177,25 +1858,25 @@ function timeless_seo_meta() {
 
     /* Per-page meta descriptions — unique for each service page */
     $desc_map = array(
-        'shower-regrouting-sydney'              => 'Professional shower regrouting in Sydney. Full grout removal and waterproof epoxy replacement. Same-day service, free quotes.',
-        'bath-resurfacing-sydney'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, 80–90% cheaper than replacement.',
-        'tile-resurfacing-sydney'               => 'Tile resurfacing Sydney. Transform outdated bathroom tiles with durable high-gloss finish. No demolition, one-day turnaround.',
-        'vanity-refinishing-sydney'             => 'Vanity refinishing Sydney. Benchtop resurfacing and cabinet respray with 900+ colour options. Same-day service.',
-        'basin-restoration-sydney'              => 'Basin restoration Sydney. Expert chip repair and full resurface for porcelain, acrylic, and cast iron basins.',
-        'shower-leak-repair-sydney'             => 'Shower sealing and leak repair Sydney. Silicone replacement and waterproof epoxy regrouting to stop leaks permanently.',
-        'epoxy-grout-upgrade-sydney'            => 'Epoxy grout upgrade Sydney. Waterproof, mould-resistant grout for showers, bathrooms, and wet areas.',
-        'floor-tile-regrouting-sydney'          => 'Floor tile regrouting Sydney. Bathroom and laundry floor grout removal and replacement. Anti-slip finish available.',
-        'chipped-bathtub-repair-sydney'         => 'Chipped bathtub repair Sydney. Professional chip repair for baths and basins. Same-day fix, invisible results.',
-        'full-bathroom-makeover-sydney'         => 'Full bathroom makeover Sydney. Complete resurface package — bath, tiles, basin, and grout. 1-2 days, fraction of renovation cost.',
-        'property-manager-bathroom-services-sydney' => 'Property manager bathroom services Sydney. Multi-unit turnarounds, rental refreshes, and strata work. Volume pricing available.',
-        'stained-bathtub-resurfacing-sydney'    => 'Stained bathtub resurfacing Sydney. Remove yellow, brown, and rust stains permanently with professional recoating.',
-        'peeling-bathtub-resurfacing-sydney'    => 'Peeling bathtub resurfacing Sydney. Fix failed DIY kits and peeling coatings with professional two-part acrylic system.',
-        'bathroom-tile-resurfacing-sydney'      => 'Bathroom tile resurfacing Sydney. Change tile colour without removal. High-gloss or matte finish options.',
-        'mouldy-shower-grout-sydney'            => 'Mouldy shower grout removal Sydney. Strip black mould grout and replace with waterproof epoxy. Stops mould permanently.',
-        'cracked-grout-repair-sydney'           => 'Cracked grout repair Sydney. Fix crumbling, cracked shower and bathroom grout before water damage occurs.',
-        'mouldy-silicone-replacement-sydney'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',
-        'basin-chip-repair-sydney'              => 'Basin chip repair Sydney. Invisible repairs for chipped porcelain and ceramic basins. Same-day service.',
-        'vanity-respray-sydney'                 => 'Vanity respray Sydney. Cabinet door and drawer front respray with 2-pack polyurethane. 900+ colours.',
+        'shower-regrouting'              => 'Professional shower regrouting in Sydney. Full grout removal and waterproof epoxy replacement. Same-day service, free quotes.',
+        'bath-resurfacing'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, 80-90% cheaper than replacement.',
+        'tile-resurfacing'               => 'Tile resurfacing Sydney. Transform outdated bathroom tiles with durable high-gloss finish. No demolition, one-day turnaround.',
+        'vanity-refinishing'             => 'Vanity refinishing Sydney. Benchtop resurfacing and cabinet respray with 900+ colour options. Same-day service.',
+        'basin-restoration'              => 'Basin restoration Sydney. Expert chip repair and full resurface for porcelain, acrylic, and cast iron basins.',
+        'shower-leak-repair'             => 'Shower sealing and leak repair Sydney. Silicone replacement and waterproof epoxy regrouting to stop leaks permanently.',
+        'epoxy-grout-upgrade'            => 'Epoxy grout upgrade Sydney. Waterproof, mould-resistant grout for showers, bathrooms, and wet areas.',
+        'floor-tile-regrouting'          => 'Floor tile regrouting Sydney. Bathroom and laundry floor grout removal and replacement. Anti-slip finish available.',
+        'chipped-bathtub-repair'         => 'Chipped bathtub repair Sydney. Professional chip repair for baths and basins. Same-day fix, invisible results.',
+        'full-bathroom-makeover'         => 'Full bathroom makeover Sydney. Complete resurface package. Bath, tiles, basin, and grout. 1-2 days, fraction of renovation cost.',
+        'property-manager-bathroom-services' => 'Property manager bathroom services Sydney. Multi-unit turnarounds, rental refreshes, and strata work. Volume pricing available.',
+        'stained-bathtub-resurfacing'    => 'Stained bathtub resurfacing Sydney. Remove yellow, brown, and rust stains permanently with professional recoating.',
+        'peeling-bathtub-resurfacing'    => 'Peeling bathtub resurfacing Sydney. Fix failed DIY kits and peeling coatings with professional two-part acrylic system.',
+        'bathroom-tile-resurfacing'      => 'Bathroom tile resurfacing Sydney. Fresh high-gloss white finish over your existing tiles. No demolition, 1-2 day service.',
+        'mouldy-shower-grout'            => 'Mouldy shower grout removal Sydney. Strip black mould grout and replace with waterproof epoxy. Stops mould permanently.',
+        'cracked-grout-repair'           => 'Cracked grout repair Sydney. Fix crumbling, cracked shower and bathroom grout before water damage occurs.',
+        'mouldy-silicone-replacement'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',
+        'basin-chip-repair'              => 'Basin chip repair Sydney. Invisible repairs for chipped porcelain and ceramic basins. Same-day service.',
+        'vanity-respray'                 => 'Vanity respray Sydney. Cabinet door and drawer front respray with 2-pack polyurethane. 900+ colours.',
         'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Fully insured, experienced team, up to 3-year warranty on every job.',
         'contact'  => 'Contact Timeless Resurfacing for a free bathroom resurfacing quote in Sydney. Send photos, get a fixed-price quote next business day.',
         'gallery'  => 'Before and after bathroom resurfacing photos across Sydney. Real transformations by Timeless Resurfacing.',
@@ -1237,6 +1918,97 @@ function timeless_seo_meta() {
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
 }
 add_action( 'wp_head', 'timeless_seo_meta', 2 );
+
+/* ─────────────────────────────────────────────
+   5b. ANALYTICS — GA4 + Microsoft Clarity (Customizer-driven)
+   ─────────────────────────────────────────────
+   Both tracking scripts are gated by:
+     - Empty ID → no script injected (clean source)
+     - Logged-in admin → no script injected (admin's own browsing
+       doesn't pollute the data Angela actually wants to see)
+     - Strict format validation on the ID before echoing into HTML
+       (defense against accidental XSS via Customizer)
+   ───────────────────────────────────────────── */
+function timeless_analytics_scripts() {
+    // Skip for logged-in admins so their own page views don't pollute analytics
+    if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    $ga4 = trim( get_theme_mod( 'timeless_ga4_id', '' ) );
+    $clarity = trim( get_theme_mod( 'timeless_clarity_id', '' ) );
+
+    $has_ga4 = $ga4 && preg_match( '/^G-[A-Z0-9]{8,12}$/i', $ga4 );
+    $has_clarity = $clarity && preg_match( '/^[a-z0-9]{8,15}$/i', $clarity );
+
+    if ( ! $has_ga4 && ! $has_clarity ) {
+        return;
+    }
+
+    // Defer all analytics until first user interaction OR 2.5s after page load.
+    // This frees the main thread during the LCP measurement window — without
+    // this, GTM (172 KB) creates 200+ ms long tasks at 3-5s on slow 4G mobile,
+    // which pushes Lighthouse LCP past 5s. The tracking still fires for any
+    // engaged visitor (anyone who scrolls/clicks within 2.5s) so we don't
+    // lose meaningful analytics data — just bot impressions.
+    ?>
+<!-- Analytics (deferred until interaction or 2.5s) -->
+<script>
+(function(){
+  var loaded = false;
+  var ga4 = <?php echo $has_ga4 ? '"' . esc_js( $ga4 ) . '"' : 'null'; ?>;
+  var clarityId = <?php echo $has_clarity ? '"' . esc_js( $clarity ) . '"' : 'null'; ?>;
+
+  function loadAnalytics(){
+    if (loaded) return;
+    loaded = true;
+
+    if (ga4) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', ga4, { anonymize_ip: true });
+      var g = document.createElement('script');
+      g.async = true;
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + ga4;
+      document.head.appendChild(g);
+    }
+
+    if (clarityId) {
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", clarityId);
+    }
+  }
+
+  // Trigger on first user signal
+  var events = ['scroll','click','keydown','touchstart','mousemove'];
+  events.forEach(function(ev){
+    window.addEventListener(ev, loadAnalytics, { once: true, passive: true });
+  });
+
+  // Fallback: load 500ms AFTER window.load. window.load guarantees the LCP
+  // measurement window has closed (Lighthouse uses load + 250ms as the LCP
+  // boundary). Loading earlier than this can race with LCP measurement and
+  // cause NO_LCP errors. Loading later than this means tracking still works
+  // for engaged visitors — they triggered the interaction handlers above.
+  function deferredFallback(){ setTimeout(loadAnalytics, 500); }
+  if (document.readyState === 'complete') {
+    deferredFallback();
+  } else {
+    window.addEventListener('load', deferredFallback, { once: true });
+  }
+
+  // Hard ceiling: load after 10s no matter what. Protects against very
+  // slow connections where window.load may take 8s+ on slow 4G.
+  setTimeout(loadAnalytics, 10000);
+})();
+</script>
+    <?php
+}
+add_action( 'wp_head', 'timeless_analytics_scripts', 99 );  // Priority 99 = late in head, after most other tags
 
 /* ─────────────────────────────────────────────
    5c. XML SITEMAP — Auto-generated at /sitemap.xml
@@ -1378,16 +2150,18 @@ add_filter( 'robots_txt', 'timeless_robots_txt', 10, 2 );
 function timeless_related_services() {
     if ( ! is_singular( 'page' ) ) return;
     $slug = get_post_field( 'post_name', get_post() );
-    if ( strpos( $slug, 'sydney' ) === false ) return; // Only on service pages
 
     $services = array(
-        'shower-regrouting-sydney'     => array( 'label' => 'Shower Regrouting',  'icon' => 'shower' ),
-        'bath-resurfacing-sydney'      => array( 'label' => 'Bath Resurfacing',   'icon' => 'bathtub' ),
-        'tile-resurfacing-sydney'      => array( 'label' => 'Tile Resurfacing',   'icon' => 'grid_view' ),
-        'vanity-refinishing-sydney'    => array( 'label' => 'Vanity Refinishing', 'icon' => 'countertops' ),
-        'basin-restoration-sydney'     => array( 'label' => 'Basin Restoration',  'icon' => 'faucet' ),
-        'shower-leak-repair-sydney'    => array( 'label' => 'Shower Sealing',     'icon' => 'water_damage' ),
+        'shower-regrouting'     => array( 'label' => 'Shower Regrouting',  'icon' => 'shower' ),
+        'bath-resurfacing'      => array( 'label' => 'Bath Resurfacing',   'icon' => 'bathtub' ),
+        'tile-resurfacing'      => array( 'label' => 'Tile Resurfacing',   'icon' => 'grid_view' ),
+        'vanity-refinishing'    => array( 'label' => 'Vanity Refinishing', 'icon' => 'countertops' ),
+        'basin-restoration'     => array( 'label' => 'Basin Restoration',  'icon' => 'faucet' ),
+        'shower-leak-repair'    => array( 'label' => 'Shower Sealing',     'icon' => 'water_damage' ),
     );
+
+    // Only render on service pages — check if current slug is a service
+    if ( ! isset( $services[ $slug ] ) ) return;
 
     // Remove current page from list
     unset( $services[ $slug ] );
@@ -1962,6 +2736,46 @@ function timeless_preload_inter() {
     echo '<link rel="preload" as="font" type="font/woff2" crossorigin href="' . esc_url( $url ) . '?v=' . $ver . '" />' . "\n";
 }
 add_action( 'wp_head', 'timeless_preload_inter', 1 );
+
+/** Preload hero LCP image on homepage only.
+ *  Without this, Lighthouse sometimes can't detect LCP (NO_LCP error) because
+ *  the hero image is discovered late in the load sequence. With preload, the
+ *  browser fetches it in parallel with HTML — making LCP measurement
+ *  deterministic + reducing actual LCP time by 100-300ms.
+ *
+ *  Mobile gets the 800w variant (responsive). Desktop gets the full image.
+ *  imagesrcset/imagesizes mirrors the picture element so browser picks
+ *  the right variant for the viewport.
+ */
+function timeless_preload_hero_lcp() {
+    if ( ! is_front_page() ) {
+        return;
+    }
+    $base_url = get_template_directory_uri() . '/images/homepage/after.jpg';
+    $base_path = get_template_directory() . '/images/homepage/after.jpg';
+    if ( ! file_exists( $base_path ) ) {
+        return;
+    }
+    $w400_webp_path = get_template_directory() . '/images/homepage/after-400w.jpg.webp';
+    $w800_webp_path = get_template_directory() . '/images/homepage/after-800w.jpg.webp';
+    if ( ! file_exists( $w400_webp_path ) || ! file_exists( $w800_webp_path ) ) {
+        return;
+    }
+    $ver = filemtime( $base_path );
+    $w400_webp = get_template_directory_uri() . '/images/homepage/after-400w.jpg.webp';
+    $w800_webp = get_template_directory_uri() . '/images/homepage/after-800w.jpg.webp';
+
+    // Preload the WebP variants directly. type="image/webp" makes non-WebP
+    // browsers skip this preload and fall back to the picture element's
+    // <img> srcset (JPG). WebP browsers (95%+ of traffic) preload the
+    // right size — no duplicate JPG fetch (was costing ~30 KB + 100ms LCP).
+    printf(
+        '<link rel="preload" as="image" type="image/webp" imagesrcset="%s?v=%d 400w, %s?v=%d 800w" imagesizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" fetchpriority="high" />' . "\n",
+        esc_url( $w400_webp ), $ver,
+        esc_url( $w800_webp ), $ver
+    );
+}
+add_action( 'wp_head', 'timeless_preload_hero_lcp', 1 );
 
 /** Disable WordPress heartbeat on frontend (saves AJAX calls, reduces server load) */
 function timeless_disable_heartbeat() {

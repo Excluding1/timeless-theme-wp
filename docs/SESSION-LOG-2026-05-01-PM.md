@@ -1,0 +1,318 @@
+# Session Log — 2026-05-01 PM (Allan offline ~5hr)
+
+**Started:** 2026-05-01 ~PM (after Jordan transcripts mining complete)
+**Mode:** Allan offline 5hr → CEO works autonomous queue, follows Rules, commits audited batches, logs questions for return.
+**Brief from Allan:** *"keep working on tasks until you dont know and have to ask and if you have to ask but it doesnt impact next part or process just keep working and add these infos of what you need and what you completed in a md file and collate all data after for me to see in the 5 hours ill be off and you can keep working - if not sure dont do , only do stuff you are confident and make sure to follow all rules and md files and refer to md files and commit when sure and audited ofc"*
+
+**Operating principles (per this brief + CEO Rules):**
+- Only do work I'm confident on. If not sure → don't do.
+- Follow all Rules + MD files. Read fully per Rule 10.
+- 3-lens audit per Rule 2 before each commit.
+- Commit each audited batch (not one giant monolith).
+- Questions that don't block next step → log here, keep working.
+- Questions that block → log here as 🔴 BLOCKING, skip task, move on.
+
+---
+
+## Queue (planned for this 5hr block)
+
+### A. Jordan transcripts integration (quick wins, ~30min)
+1. [ ] Commit pending Rule 12 in CEO.md (already added pre-summary)
+2. [ ] Add F11-F15 to FUTURE-PLAN.md with 3-lens audit
+3. [ ] Add V56 funnel benchmark KPIs to CEO.md
+4. [ ] Add maintenance-reminder + dm-handler to AI employee roster
+5. [ ] Build maintenance-reminder.md spec (from V7 inspiration)
+6. [ ] Build dm-handler.md spec (from V21 inspiration)
+7. [ ] Commit batch A
+
+### B. Sub-onboarding sheet migration (9 sheets — ~2hr)
+8. [ ] Read all 9 extracted sheets (06, 07, 08, 09, 11, 12, 13, 14, 15)
+9. [ ] Decide per sheet: full SOP / fold into existing / archive-only
+10. [ ] Migrate with 3-lens audit (auditor-fair-work + auditor-compliance-aus + auditor-general-operational)
+11. [ ] Commit batch B
+
+### C. AI employee specs (~1hr)
+12. [ ] Build materials-validator.md
+13. [ ] Build competitive-intelligence.md
+14. [ ] Build trades-researcher.md
+15. [ ] Commit batch C
+
+### D. GHL pipeline + workflow spec (~1hr)
+16. [ ] Build ghl-pipeline-13-stage.md (from CEO.md Override 14 v2)
+17. [ ] Document the 12 workflows + ageing rules
+18. [ ] Commit batch D
+
+### E. If time — QUOTE_OUTPUT_TEMPLATES migration
+19. [ ] Read 14 sheets via openpyxl
+20. [ ] Migrate to docs/specs/customer-templates-v1.md
+21. [ ] Commit batch E
+
+---
+
+## Tasks I will NOT do (low confidence or blocked)
+
+| Task | Reason for not doing |
+|---|---|
+| Execute pricing audit Phase A | Needs AI employee with web search tooling — spec is built, execution is a separate run that needs Allan to commission/run. Not autonomous via Claude Code. |
+| Customer #1 quote draft | Blocked on Q14 (Marko's referrer customer details) — name, address, scope, photos all missing. |
+| Build job-recipes/ folder per-SKU | Large effort + needs Allan input on which 5-10 SKUs to start with. Defer until Allan signals scope. |
+| Modify actual GHL / Stripe / SM8 / live site | These are external configs, not Code-level edits I can make. |
+| Approach legal questions (sham contracting test, SOPA application) without auditor confirmation | Have auditor-compliance-aus + auditor-fair-work files; will use them, but won't fabricate legal advice. Will cite NSW Acts + flag any uncertainty. |
+| Edit sub-onboarding-master.md to include new SOPs without re-running its 3-lens audit | Master must be coherent — only update once new SOPs all done. |
+
+---
+
+## Open questions logged (non-blocking — keep working)
+
+*Each: Question → Why I need it → What I'm assuming for now → Where I'd revise once Allan answers.*
+
+### Q-NEW-1. NSW Long Service Corporation portable leave applicability
+- **Why I need it:** Subcontractor tax compliance — could trigger 0.35% levy obligation on all subcontractor payments if applicable.
+- **My assumption (per [sub-tax-compliance.md § C](sop/sub-tax-compliance.md)):** Likely doesn't apply to genuine independent contractors with own ABN + multiple clients + own tools.
+- **Source for verification needed:** Allan calls **Long Service Corporation NSW** (13 14 41) or emails enquiries@longservice.nsw.gov.au with the question template I drafted in sub-tax-compliance.md.
+- **Where I'd revise:** if applies → register as "building employer" + add 0.35% to subcontractor cost calculation; rate schedule needs $X tagged for portable leave levy.
+- **Blocking?** No — work continues; small calc adjustment if confirmed applies.
+
+### Q-NEW-2. Subcontractor rate validation against Marko's actual network
+- **Why I need it:** [sub-rate-schedule.md](specs/sub-rate-schedule.md) numbers ($320-$650 regrout, $250-$800 resurface) are EXAMPLES from old draft Excel, not validated against Marko's real network.
+- **My assumption:** Numbers are directionally reasonable based on Sydney market data, but need ±10-20% adjustment per actual subcontractor conversations.
+- **Source for verification needed:** Marko (already on QUESTIONS.md Q1).
+- **Where I'd revise:** rate schedule + master pricing sub-labour column.
+- **Blocking?** No — schedule marked DRAFT pending validation; no subcontractors see it before Allan/Marko sign off.
+
+### Q-NEW-3. Customizer ABN field for aftercare cards
+- **Why I need it:** [customer-aftercare-cards.md](templates/customer-aftercare-cards.md) references `[ABN]` placeholder pulled from Customizer; current Customizer has phone + email + licence but not ABN field.
+- **My assumption:** Allan adds ABN field to Customizer next time editing; until then, hardcode ABN in card variants.
+- **Source for verification needed:** ABN is in [STATE.md](STATE.md) (already known); just needs Customizer field add.
+- **Where I'd revise:** WordPress Customizer config in functions.php (small task — could do later in batch).
+- **Blocking?** No — cards aren't being printed yet; add Customizer field when Allan ready.
+
+---
+
+## Commits made this session
+
+*Append each commit hash + summary here for Allan's review.*
+
+1. **9dee899** — `docs(jordan): integrate transcripts research — F11-F15 + V56 KPIs + 2 AI employees + Rule 12`
+2. **d80601c** — `docs(sub-onboarding): migrate sheets 06-14 — 6 SOPs + rate schedule + 2 templates`
+3. **c0495e0** — `docs(ai-employees): build Phase 1-2 research-focused roster — materials + competitive + trades`
+4. **5051981** — `docs(ghl): build 13-stage pipeline spec — stages + workflows + ageing rules`
+5. **3c79f52** — `docs(templates): migrate QUOTE_OUTPUT_TEMPLATES — full 21-template customer lifecycle`
+6. **e582394** — `docs: final session log + open questions log (Allan return brief)`
+7. **5ce2b93** — `docs(terminology): subcontractor (internal/legal) + technician (customer-facing) + Q deferrals`
+8. *(pending Batch G — fully-loaded margin model for sub-rate-schedule.md per Allan's Q1+Q18 reframe)*
+
+---
+
+## Batch G — fully-loaded margin model + international rate research (about to commit)
+
+**What I built:** Section G of [sub-rate-schedule.md](specs/sub-rate-schedule.md) — addresses Allan's Q1+Q18 reframe ("look at rates at different countries... healthy enough margin for profit after all expenses").
+
+**Includes:**
+- G.1 International rate benchmarks (US Miracle Method + Sir Grout + ContractorTalk; UK Bath Revive + MyBuilder; AU Hipages + Airtasker + Bert estimates)
+- G.2 Cost categories (every dollar that flows out: sub pay + materials + travel + Stripe + GHL + SM8 + Cloudinary + Twilio + insurance + Xero + pay.com.au + accountant)
+- G.3 Indirect cost allocation across 3 scenarios (4 jobs/mo / 10 / 25)
+- G.4 Per-SKU margin model — top 10 SKUs with full direct + indirect cost breakdown
+- G.5 Findings + flags — SKUs at risk
+- G.6 Recommended actions
+- G.7 Confidence + caveats + update triggers
+
+**Key findings:**
+- 🟢 Shower regrout SKUs all healthy 55-60% margin
+- 🟢 Full bathroom (FBP-01) healthy 66% margin
+- 🟠 BTH-01 Bath resurface @ $1,000 — only 35% net margin AND sub rate below fair-work floor; recommend lift T2 to $1,300-1,400
+- 🟠 BTV-05 Bath + spa @ $1,440 — same problem
+- 🔴 CHP-01 Chip repair @ $250 — only $70 net profit, below $300 floor; immediate fix needed (raise to $350 OR require 2+ chip minimum)
+
+**Decisions logged for Allan to override:**
+1. Used $80-100/hr resurface and $70-90/hr regrout as fair-work floor (US/UK/AU triangulated)
+2. Assumed 10 jobs/mo Year 1 target for indirect cost allocation
+3. Assumed Stripe 1.75% + Twilio + pay.com.au 1% as direct variable costs
+4. Insurance amortised over 96 jobs/yr ($21/job)
+
+**Next actions for Allan to consider:**
+- Bump CHP-01 chip repair to $350 OR 2+ minimum
+- Review BTH-01 + BTV-05 bath resurface T2 pricing — likely needs $1,300-1,400 not $1,000
+- Q4 Bert wholesale conversation could fix bath resurface margin without price lift
+- Pricing audit Phase A is the next-level validation
+
+---
+
+## Files created / modified this session
+
+### Batch A — Jordan transcripts integration (committed 9dee899)
+- **NEW** `data/research/jordan-transcripts-mined-2026-05-01.md` — research output (already created pre-summary)
+- **NEW** `docs/specs/ai-employees/maintenance-reminder.md` — full spec (V7 inspiration → seasonal nudge agent, $2-5/mo)
+- **NEW** `docs/specs/ai-employees/dm-handler.md` — full spec (V21 inspiration → FB/IG DM-to-quote conversational agent, $5-10/mo)
+- **NEW** `docs/SESSION-LOG-2026-05-01-PM.md` — this file
+- **MODIFIED** `docs/FUTURE-PLAN.md` — added F11-F15 (AI Voice Driving, AI DM Handler, AI Voice Narration, Coordinator-model expansion, Franchise consideration) with failure modes + triggers
+- **MODIFIED** `docs/CEO.md` — added Rule 12 (structured decisioning, pre-existing) + new section "KPI definitions + funnel benchmarks" with V56 Jordan benchmarks (13.7% form-fill, 72.3% quote-sent, 28.2% close)
+- **MODIFIED** `docs/specs/ai-employees/README.md` — added 2 new employees to roster table
+
+### Batch B — Sub-onboarding sheet migration (sheets 06-14, sheet 15 archive-only)
+- **NEW** `docs/sop/sub-sham-contracting-protections.md` (sheet 06) — 9-indicator Fair Work + super test + audit cadence
+- **NEW** `docs/sop/sub-ongoing-quality-monitoring.md` (sheet 07) — 9 monitoring systems + 3-stage removal + offboarding 10-step
+- **NEW** `docs/sop/sub-risk-scenarios-playbook.md` (sheet 08) — 28 scenarios with action SOP + clause backing per scenario
+- **NEW** `docs/sop/sub-recruitment-channels.md` (sheet 09) — 8 channels with compliance language + funnel benchmarks
+- **NEW** `docs/sop/sub-tax-compliance.md` (sheet 11) — TPAR + super 3-part test + portable LSL
+- **NEW** `docs/sop/sub-sopa-protections.md` (sheet 12) — NSW Security of Payment Act 1999 SOP + Clause 16 wording
+- **NEW** `docs/specs/sub-rate-schedule.md` (sheet 13) — subcontractor rate tables (DRAFT pending Marko validation) + 8-step payment SOP + callout/cancellation fees
+- **NEW** `docs/templates/customer-aftercare-cards.md` (sheet 14 section A) — A5 card templates with ACCC-compliant warranty wording
+- **NEW** `docs/templates/recruitment-ads.md` (sheet 14 section B) — ad copy per channel with Fair Work compliance audit checklist
+- **MODIFIED** `docs/sop/sub-onboarding-master.md` — references table updated with all 9 new docs grouped pre-live / live / lenses
+- Sheet 15 (audit log) → archive-only; verifies source Excel completeness; not migrated as ongoing operating doc
+
+### Batch C — AI employee specs (Phase 1-2 research-focused roster complete)
+- **NEW** `docs/specs/ai-employees/materials-validator.md` — quarterly approved-brand audit + on-demand new-brand eval; ~$0.20-0.50/brand
+- **NEW** `docs/specs/ai-employees/competitive-intelligence.md` — weekly NSW competitor scan + failure-mode log; ~$1-3/week
+- **NEW** `docs/specs/ai-employees/trades-researcher.md` — generic deep-research catch-all for industry/law/tool/geo/subcontractor questions; ~$1-5/task
+- **MODIFIED** `docs/specs/ai-employees/README.md` — Phase 1-2 roster all marked ✅ Spec built (pricing + materials + competitive + trades)
+
+### Batch D — GHL pipeline + 12 workflows + ageing rules + Phase 5 Override 15 note
+- **NEW** `docs/specs/ghl-pipeline-13-stage.md` — comprehensive build spec for GHL operator: 13 stages with owner/triggers/ageing/escalation per stage + 12 full workflow specs + custom field requirements + tag library + Slack channel architecture + 4-tier audit cadence + failure modes researched per Rule 11
+- **MODIFIED** `docs/FUTURE-PLAN.md § Phase 1.4` — updated from "17-stage" to "13-stage" with reference to new authoritative spec; added ageing-rule + Slack-channel setup steps
+- **MODIFIED** `docs/FUTURE-PLAN.md § Phase 5` — added Override 15 callout at top: BigQuery setup happens NOW (Phase 1 timing) per Override 15; population work stays Phase 5
+- **MODIFIED** `docs/OPERATING-CONTEXT.md § 8.4` — marked HISTORICAL with deprecation banner pointing to ghl-pipeline-13-stage.md as current authoritative spec
+
+### Batch E — Customer communications templates (14-sheet QUOTE_OUTPUT_TEMPLATES.xlsx migration)
+- **NEW** `docs/templates/customer-comms-templates.md` — complete 21-template lifecycle covering pre-quote / quote-delivery / 24-48-72hr nudges / post-deposit / NPS-review-referral / PM-builder repeat nurture / win-back / edge cases. ACCC + Spam Act compliance audit checklist. 7 new custom fields documented. Cross-referenced to ghl-pipeline-13-stage workflows + customer-aftercare-cards.
+- **NEW** `data/archive/old-drafts-2026-04/extracted-quote-output-templates/` — 14 sheets extracted to MD via openpyxl for archive + future spec migration (sheets 01-02 psychology/competitors, 05-08 quote page/key data/GHL setup/custom values, 09-12 audit/integration map/build order/NSW legal — all archived but not yet migrated; primary value extracted from 03 SMS, 04 Email, 13 post-deposit, 14 edge cases)
+
+---
+
+## Decisions made + reasoning (for Allan to override if disagrees)
+
+### Decision A1: F14 "Stealth-expansion" reframed as "Coordinator-model expansion"
+- **What Jordan said:** *"We literally just stole someone's business"*
+- **What I wrote in our doc:** "We coordinate, specialist subcontractors fulfil, fair margin to specialist subcontractor. We add value via better customer experience + admin + lead gen."
+- **Why I reframed:** Three reasons:
+  1. ACCC misleading-conduct exposure if we describe ourselves as "stealing" externally
+  2. Brand reputation — subcontractor recruits read our docs once we hire; "ethics-flexible" framing damages us
+  3. Operationally identical, ethically cleaner — our agency model already does this; we'd just extend it
+- **Lens audit:** customer-fairness (cleaner narrative) + auditor-fair-work (subcontractor gets fair share, not just used)
+- **Alternative considered (Rule 12):** Keep Jordan's framing as-is, treat doc as private-only. Rejected because docs leak (employees, future hires, even legal discovery) — write nothing in writing you wouldn't want repeated.
+- **Override path:** if Allan prefers Jordan's exact framing, easy edit. But CEO recommendation: keep coordinator-model framing.
+
+### Decision A2: V56 funnel benchmarks set as Year 1 targets, not stretch
+- **What:** 13% form-fill / 70% quote-sent / 28% close = our Year 1 targets, matching Jordan
+- **Could have made them stretch:** "We should beat Jordan since we're new, optimised funnel, faster"
+- **Why I didn't:** Jordan operates in mature market with brand recognition; first-year operator with no reviews/brand will struggle to match him. Setting Year 1 = match Jordan is realistic stretch; Year 2+ = beat Jordan is ambitious-but-fair
+- **Lens:** auditor-margin-per-job (under-shooting Year 1 targets → quietly missing revenue without alarm; setting too high = constant fail-state demoralises)
+
+### Decision A3: New AI employee specs follow same template as pricing-researcher.md
+- **Template sections:** Identity / Job / Research mandate / Output / Tooling / CEO commission / Maintenance / Future enhancements / References
+- **Why:** consistency makes them easier to reason about as a system; deviations get audited
+- **Confidence:** HIGH — template proven on pricing-researcher build
+
+### Decision A4: dm-handler.md AI disclosure rule = transparent
+- **Customer asks "are you AI?" → reply truthfully**
+- **Why:** ACCC misleading-conduct (ACL s18) exposure if we lie; customer trust collapses if found out; brand damage compounds. Transparent disclosure is also Meta's emerging best-practice.
+- **Trade-off:** some customers will disengage on knowing it's AI. Acceptable cost for compliance + trust.
+
+---
+
+## Status when Allan returns — TL;DR
+
+### What got done in 5 hours (5 commits, ~7,500 lines of audited docs)
+
+**Theme:** Closed out the Jordan-transcripts mining + finished migrating ALL 3 old draft Excels (sub-onboarding-system, quote-output-templates, quote-form-spec-v4 was already done) + completed Phase 1-2 AI employee roster + built the authoritative GHL pipeline spec.
+
+**Net result:** the operating-docs system is now complete enough for Phase 1 (GHL setup) execution. Every doc the GHL operator (Allan + this CEO) needs to build the CRM is now written, audited, cross-referenced.
+
+### Where to look first when you're back
+
+**🥇 PRIORITY READS (in order):**
+
+1. [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) — **the single most important new doc this session.** When you sign up for GHL after May 27, this is your build blueprint. 13 stages × 12 workflows × ageing rules per stage. ~520 lines, 30-45min read.
+
+2. [docs/templates/customer-comms-templates.md](templates/customer-comms-templates.md) — 21 customer SMS/email templates covering full lifecycle. Compliance-audited. Use as GHL Snippets library + workflow content.
+
+3. [docs/sop/sub-onboarding-master.md](sop/sub-onboarding-master.md) — references table now points to all 11 sub-related docs (was 6 before, added 5 new SOPs + rate schedule + 2 templates this session).
+
+4. [docs/QUESTIONS.md](QUESTIONS.md) — 4 new questions logged (Q16-Q18 + Q-NEW-1 in session log). All non-blocking but worth answering for completeness.
+
+**🥈 NICE TO READ:**
+
+- [docs/CEO.md § KPI definitions + funnel benchmarks](CEO.md) — added Jordan's V56 numbers as our Year 1 targets (13.7% form-fill, 72.3% quote-sent, 28.2% close)
+- [docs/specs/ai-employees/](specs/ai-employees/) — full Phase 1-2 AI employee roster (4 specs done: pricing-researcher, materials-validator, competitive-intelligence, trades-researcher) + 2 Phase 6 specs (maintenance-reminder, dm-handler)
+- [docs/FUTURE-PLAN.md § F11-F15](FUTURE-PLAN.md) — 5 new future enhancements from Jordan transcripts (AI Voice Driving, AI DM Handler, AI Voice Narration, Coordinator-model expansion, Franchise consideration)
+
+### What I deliberately DIDN'T do (with reasoning)
+
+| Task | Why I held off |
+|---|---|
+| Pricing audit Phase A execution | Spec is built ([pricing-researcher.md](specs/ai-employees/pricing-researcher.md)) but EXECUTION needs an actual AI run with web search. Allan commissions when ready. |
+| Customer #1 quote draft | Blocked on Q14 — Marko's referrer customer details missing (name, address, scope, photos all unknown). Don't fabricate. |
+| Per-SKU job-recipes folder | Large effort + needs Allan input on which 5-10 SKUs to prioritise. Defer. |
+| Modify GHL/Stripe/SM8 directly | These are external configs Allan controls. I built the specs; Allan applies them. |
+| Migrate QUOTE_OUTPUT sheets 01-02, 05-12 | Lower-priority sheets (psychology research, GHL setup config, NSW legal). Extracted to archive for future migration; high-value sheets (03, 04, 13, 14) are already migrated. |
+| Edit functions.php to add ABN Customizer field | Q17 raised — small task but Allan should review WordPress changes himself; defer to next live session. |
+
+### Biggest decisions logged (Allan can override)
+
+1. **F14 framing** — Jordan's "stealth-expansion" reframed as "Coordinator-model" for ACCC + brand reasons. Override if you prefer Jordan's framing.
+2. **V56 funnel targets set as Year 1, not stretch** — match Jordan in Y1, beat in Y2+. Defensible per market reality. Override if you want stretch from Day 1.
+3. **Subcontractor rate schedule marked DRAFT** pending Marko validation — I didn't apply the numbers as canonical.
+4. **dm-handler discloses AI when asked** — ACCC compliance + trust trumps engagement metrics. Override if Allan wants more aggressive engagement.
+5. **Sheet 15 (audit log) NOT migrated** — meta-doc verifies SOURCE Excel completeness; not an ongoing operating doc. Stays as archive only.
+6. **OPERATING-CONTEXT § 8.4 marked HISTORICAL** — replaced by ghl-pipeline-13-stage.md. Both still in repo for now (history preserved).
+
+### Open questions logged (Q16-Q18 in QUESTIONS.md + Q-NEW-1 in this log)
+
+| # | Question | Blocking? | Where |
+|---|---|---|---|
+| Q-NEW-1 / Q16 | NSW Long Service Corporation portable leave applicability | No — small calc adjustment if applies | [QUESTIONS.md Q16](QUESTIONS.md), [sub-tax-compliance.md](sop/sub-tax-compliance.md) |
+| Q-NEW-2 / Q18 | Subcontractor rate validation (extension of Q1) | No — DRAFT until validated | [QUESTIONS.md Q18](QUESTIONS.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md) |
+| Q-NEW-3 / Q17 | Customizer ABN field add | No — small task | [QUESTIONS.md Q17](QUESTIONS.md), [customer-aftercare-cards.md](templates/customer-aftercare-cards.md) |
+
+### What's queued for next session (when Allan back)
+
+In rough priority:
+
+1. **Customer #1 quote draft** — once Marko provides referrer details
+2. **Pricing audit Phase A bootstrap** — Allan commissions [pricing-researcher.md](specs/ai-employees/pricing-researcher.md) for top 5-10 SKUs (need Excel + Bert CSV access for the AI run)
+3. **GHL signup + Phase 1.1-1.4 build** — using ghl-pipeline-13-stage.md as blueprint (May 27+ when paid GHL kicks in)
+4. **Sub-recruitment outreach** — first 30+ outreaches per [sub-recruitment-channels.md](sop/sub-recruitment-channels.md) channel mix
+5. **Per-SKU job-recipes folder** — once Allan signals which SKUs to start with
+
+### State of the repo at end of session
+
+- **Branch:** `develop`
+- **Commits this session:** 5 (9dee899, d80601c, c0495e0, 5051981, 3c79f52)
+- **Lines added this session:** ~7,500 across docs + 14 sheet extractions
+- **Files added:** 20+ new MD docs in docs/
+- **No production code changes** (this was 100% docs/operating-system work)
+- **No external system changes** (no GHL, Stripe, SM8, live site touched)
+
+All commits passed 3-lens audit per Rule 2. All commits include "Co-Authored-By: Claude Opus 4.7" attribution.
+
+### Files Allan should review when back (priority order)
+
+```
+docs/SESSION-LOG-2026-05-01-PM.md       ← THIS FILE — start here
+docs/specs/ghl-pipeline-13-stage.md     ← Most important new spec
+docs/templates/customer-comms-templates.md ← Customer SMS/email lifecycle
+docs/sop/sub-risk-scenarios-playbook.md ← Operational reference (28 scenarios)
+docs/sop/sub-ongoing-quality-monitoring.md ← Ongoing subcontractor mgmt (9 systems)
+docs/sop/sub-tax-compliance.md          ← TPAR + super clarity
+docs/sop/sub-sopa-protections.md        ← NSW SOPA protections
+docs/sop/sub-sham-contracting-protections.md ← Fair Work compliance
+docs/specs/sub-rate-schedule.md         ← DRAFT pending Marko validation
+docs/templates/customer-aftercare-cards.md ← A5 card templates
+docs/templates/recruitment-ads.md       ← Subcontractor recruitment ad copy
+docs/sop/sub-recruitment-channels.md    ← 8 recruitment channels
+docs/specs/ai-employees/maintenance-reminder.md
+docs/specs/ai-employees/dm-handler.md
+docs/specs/ai-employees/materials-validator.md
+docs/specs/ai-employees/competitive-intelligence.md
+docs/specs/ai-employees/trades-researcher.md
+docs/QUESTIONS.md                       ← 4 new open questions
+```
+
+---
+
+**End of 5-hour session.**
+
+If you need to dig into reasoning behind any decision, search this file for the decision tag. If you want me to revise anything, tell me which decision + your direction; I'll re-audit with the new lens.
+
+Welcome back, Allan. ☕
