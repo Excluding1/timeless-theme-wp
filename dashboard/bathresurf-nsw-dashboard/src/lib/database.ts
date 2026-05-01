@@ -196,6 +196,7 @@ export interface GoalMilestone {
   achieved_value: number;
   unit: string;
   period?: string;
+  days_to_achieve?: number;
   achieved_at: string;
 }
 

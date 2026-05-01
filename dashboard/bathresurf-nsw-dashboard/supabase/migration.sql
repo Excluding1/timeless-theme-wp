@@ -491,8 +491,12 @@ CREATE TABLE IF NOT EXISTS goal_milestones (
   achieved_value NUMERIC(12,2) NOT NULL,
   unit TEXT NOT NULL,
   period TEXT,
+  days_to_achieve INTEGER,         -- how long it took: from goal creation OR previous milestone
   achieved_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- For DBs that already created goal_milestones without days_to_achieve:
+ALTER TABLE goal_milestones ADD COLUMN IF NOT EXISTS days_to_achieve INTEGER;
 
 CREATE INDEX IF NOT EXISTS idx_goal_milestones_goal_id ON goal_milestones(goal_id);
 CREATE INDEX IF NOT EXISTS idx_goal_milestones_achieved_at ON goal_milestones(achieved_at DESC);

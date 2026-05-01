@@ -61,13 +61,29 @@ function isAchieved(goal: Goal): boolean {
   return goal.current_value >= goal.target_value;
 }
 
-// Reasonable next-target suggestion: stretch by ~50% for higher-is-better,
-// tighten by ~30% for lower-is-better. User can always override in the modal.
+// Milestone ladder — psychologically clean "round number" tiers à la
+// YouTube subscribers: 5k → 10k → 20k → 50k → 100k → 200k → 300k.
+// Uses the 1-2-3-5 series so each step feels like a meaningful jump.
+const MILESTONE_LADDER = [
+  1, 2, 3, 5,
+  10, 20, 30, 50,
+  100, 200, 300, 500,
+  1_000, 2_000, 3_000, 5_000,
+  10_000, 20_000, 30_000, 50_000,
+  100_000, 200_000, 300_000, 500_000,
+  1_000_000, 2_000_000, 3_000_000, 5_000_000,
+  10_000_000, 20_000_000, 30_000_000, 50_000_000, 100_000_000,
+];
+
+// Find the next ladder rung. For higher-is-better: smallest tier > current target.
+// For lower-is-better: largest tier < current target. Falls back to ×1.5/×0.7 if
+// off the ladder (rare — would mean target_value > 100M).
 function suggestNextTarget(goal: Goal): number {
   if (goal.lower_is_better) {
-    return Math.max(Math.round(goal.target_value * 0.7), 1);
+    const next = [...MILESTONE_LADDER].reverse().find(v => v < goal.target_value);
+    return next ?? Math.max(Math.floor(goal.target_value * 0.7), 1);
   }
-  return Math.round(goal.target_value * 1.5);
+  return MILESTONE_LADDER.find(v => v > goal.target_value) ?? Math.ceil(goal.target_value * 1.5);
 }
 
 export function Goals() {
@@ -113,6 +129,22 @@ export function Goals() {
     if (!nextTargetGoal || nextTargetValue <= 0) return;
     setSavingMilestone(true);
     try {
+      // Compute how many days this milestone took: from the previous milestone if any,
+      // otherwise from the goal's creation date. Lets the wins history show velocity.
+      const previousMilestonesForGoal = milestones
+        .filter(m => m.goal_id === nextTargetGoal.id)
+        .sort((a, b) => b.achieved_at.localeCompare(a.achieved_at));
+      const startDateRaw = previousMilestonesForGoal.length > 0
+        ? previousMilestonesForGoal[0].achieved_at
+        : nextTargetGoal.created_at;
+      let daysToAchieve: number | undefined;
+      if (startDateRaw) {
+        const startDate = parseISO(startDateRaw);
+        if (isValid(startDate)) {
+          daysToAchieve = Math.max(0, differenceInDays(new Date(), startDate));
+        }
+      }
+
       // Log the milestone (preserves history even if the goal is later deleted).
       await createMilestone({
         goal_id: nextTargetGoal.id,
@@ -121,6 +153,7 @@ export function Goals() {
         achieved_value: nextTargetGoal.current_value,
         unit: nextTargetGoal.unit,
         period: nextTargetGoal.period,
+        days_to_achieve: daysToAchieve,
       } as any);
       // Advance the goal: new target, reset progress.
       await update(nextTargetGoal.id, {
@@ -246,7 +279,10 @@ export function Goals() {
                   {formatValue(m.achieved_value, m.unit)}
                 </div>
                 <div className="text-[10px] text-slate-400 mt-0.5">
-                  Hit {formatValue(m.target_value, m.unit)} · {format(parseISO(m.achieved_at), 'MMM d')}
+                  Hit {formatValue(m.target_value, m.unit)}
+                  {m.days_to_achieve != null && ` · ${m.days_to_achieve}d`}
+                  {' · '}
+                  {format(parseISO(m.achieved_at), 'MMM d')}
                 </div>
               </div>
             ))}
