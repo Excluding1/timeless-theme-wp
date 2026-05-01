@@ -30,6 +30,7 @@ import { EmptyState } from '../components/EmptyState';
 import { TableSkeleton } from '../components/LoadingSkeleton';
 import { PeriodFilter, type Period } from '../components/PeriodFilter';
 import { useData } from '../hooks/useData';
+import { usePreferences } from '../contexts/PreferencesContext';
 import { getPeriodDateRange } from '../lib/database';
 import { cn } from '../lib/utils';
 import type { Finance, Subscription } from '../lib/database';
@@ -478,9 +479,11 @@ function toMonthlyCost(cost: number, cycle: string): number {
 export function Finances() {
   const { data: finances, loading, create, update, remove } = useData('finances');
   const { data: subscriptionsRaw } = useData('subscriptions');
+  const { preferences, updatePreferences } = usePreferences();
 
-  // Period
-  const [period, setPeriod] = useState<Period>('this_month');
+  // Period — sourced from preferences so the user's last selection persists across sessions.
+  const period = (preferences.default_finance_period as Period) || 'this_month';
+  const setPeriod = (next: Period) => updatePreferences({ default_finance_period: next });
   const [customStart, setCustomStart] = useState('');
   const [customEnd, setCustomEnd] = useState('');
 

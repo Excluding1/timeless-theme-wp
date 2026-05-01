@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { PeriodFilter, type Period } from '../components/PeriodFilter';
 import { Skeleton } from '../components/LoadingSkeleton';
 import { useData } from '../hooks/useData';
+import { usePreferences } from '../contexts/PreferencesContext';
 import { getPeriodDateRange, getPreviousPeriodRange } from '../lib/database';
 import type { Finance, Goal, Subscription, Subcontractor, KpiSnapshot } from '../lib/database';
 import { ArrowUpRight, ArrowDownRight, DollarSign, TrendingUp, Target, Users, CreditCard, BarChart3 } from 'lucide-react';
@@ -13,7 +14,9 @@ import {
 } from 'recharts';
 
 export function Overview() {
-  const [period, setPeriod] = useState<Period>('this_month');
+  const { preferences, updatePreferences } = usePreferences();
+  const period = (preferences.default_overview_period as Period) || 'this_month';
+  const setPeriod = (next: Period) => updatePreferences({ default_overview_period: next });
   const { data: finances, loading: finLoading } = useData('finances');
   const { data: goals, loading: goalsLoading } = useData('goals');
   const { data: subscriptions, loading: subsLoading } = useData('subscriptions');

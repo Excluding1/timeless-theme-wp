@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Wallet, TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight,
@@ -15,6 +15,7 @@ import { Skeleton } from '../components/LoadingSkeleton';
 import { EmptyState } from '../components/EmptyState';
 import { useData } from '../hooks/useData';
 import { useBusinessSettings } from '../hooks/useBusinessSettings';
+import { usePreferences } from '../contexts/PreferencesContext';
 import { getPeriodDateRange } from '../lib/database';
 import { cn } from '../lib/utils';
 import type { Finance, Subscription } from '../lib/database';
@@ -124,7 +125,9 @@ export function Cashflow() {
   const subscriptions = rawSubs as unknown as Subscription[];
   const loading = finLoading || subsLoading;
 
-  const [period, setPeriod] = useState<Period>('this_month');
+  const { preferences, updatePreferences } = usePreferences();
+  const period = (preferences.default_cashflow_period as Period) || 'this_month';
+  const setPeriod = (next: Period) => updatePreferences({ default_cashflow_period: next });
 
   // Shared business settings
   const taxReserve = biz.cashflow_tax_reserve as number;
