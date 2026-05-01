@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS goals (
   target_value NUMERIC(12,2) NOT NULL,
   current_value NUMERIC(12,2) NOT NULL DEFAULT 0,
   unit TEXT NOT NULL DEFAULT '#' CHECK (unit IN ('$', '%', '#')),
-  period TEXT NOT NULL DEFAULT 'monthly' CHECK (period IN ('weekly', 'monthly', 'quarterly', 'annual')),
+  period TEXT NOT NULL DEFAULT 'monthly' CHECK (period IN ('weekly', 'monthly', 'quarterly', 'annual', 'all_time')),
   lower_is_better BOOLEAN NOT NULL DEFAULT FALSE,
   deadline DATE,
   notes TEXT,

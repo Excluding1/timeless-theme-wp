@@ -12,9 +12,10 @@ import { cn } from '../lib/utils';
 import type { Goal, GoalMilestone } from '../lib/database';
 
 const UNIT_OPTIONS = ['$', '%', '#'] as const;
-const PERIOD_OPTIONS = ['weekly', 'monthly', 'quarterly', 'annual'] as const;
+const PERIOD_OPTIONS = ['weekly', 'monthly', 'quarterly', 'annual', 'all_time'] as const;
 const PERIOD_LABELS: Record<string, string> = {
   weekly: 'Weekly', monthly: 'Monthly', quarterly: 'Quarterly', annual: 'Annual',
+  all_time: 'All Time',
 };
 
 type GoalForm = {
@@ -22,7 +23,7 @@ type GoalForm = {
   target_value: number;
   current_value: number;
   unit: '$' | '%' | '#';
-  period: 'weekly' | 'monthly' | 'quarterly' | 'annual';
+  period: 'weekly' | 'monthly' | 'quarterly' | 'annual' | 'all_time';
   lower_is_better: boolean;
   deadline: string;
   notes: string;
@@ -155,10 +156,14 @@ export function Goals() {
         period: nextTargetGoal.period,
         days_to_achieve: daysToAchieve,
       } as any);
-      // Advance the goal: new target, reset progress.
+      // Advance the goal: new target. For periodic goals (monthly/weekly/etc) reset
+      // current_value to 0 — new period starts fresh. For lifetime/all-time goals
+      // KEEP the current value (e.g. lifetime revenue $50k stays $50k after we
+      // raise the next target to $100k — we haven't lost the cumulative total).
+      const shouldReset = nextTargetGoal.period !== 'all_time';
       await update(nextTargetGoal.id, {
         target_value: Number(nextTargetValue),
-        current_value: 0,
+        current_value: shouldReset ? 0 : nextTargetGoal.current_value,
       } as any);
       toast.success(
         `🏆 ${nextTargetGoal.metric_name} milestone saved! New target: ${formatValue(nextTargetValue, nextTargetGoal.unit)}`,
@@ -545,7 +550,9 @@ export function Goals() {
                 autoFocus
               />
               <p className="text-xs text-slate-400 mt-1">
-                Saving will reset progress to 0 and log this milestone to your wins history.
+                {nextTargetGoal.period === 'all_time'
+                  ? 'Saving raises the bar but keeps your cumulative total — lifetime metrics only ever climb.'
+                  : 'Saving will reset progress to 0 and log this milestone to your wins history.'}
               </p>
             </div>
             <div className="flex justify-end gap-3 pt-5 mt-5 border-t border-slate-200">

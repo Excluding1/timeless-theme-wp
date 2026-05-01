@@ -180,7 +180,7 @@ export interface Goal {
   target_value: number;
   current_value: number;
   unit: '$' | '%' | '#';
-  period: 'weekly' | 'monthly' | 'quarterly' | 'annual';
+  period: 'weekly' | 'monthly' | 'quarterly' | 'annual' | 'all_time';
   lower_is_better: boolean;
   deadline?: string;
   notes?: string;
