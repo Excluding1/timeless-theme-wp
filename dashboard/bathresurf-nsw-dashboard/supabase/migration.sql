@@ -477,5 +477,32 @@ CREATE TRIGGER update_user_preferences_updated_at BEFORE UPDATE ON user_preferen
 
 
 -- ============================================================================
--- Done! 21 tables total with RLS policies.
+-- ── Goal milestones — log of achieved targets for the celebration feature ──
+-- ============================================================================
+-- When a goal hits its target, the user clicks "Set next target" → we log the
+-- old target + achieved value here, then update the goal with a new target.
+-- This becomes the "Recent Wins" strip + a permanent achievement history.
+
+CREATE TABLE IF NOT EXISTS goal_milestones (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  goal_id UUID REFERENCES goals(id) ON DELETE SET NULL,
+  metric_name TEXT NOT NULL,       -- denormalized so milestones outlive their goal
+  target_value NUMERIC(12,2) NOT NULL,
+  achieved_value NUMERIC(12,2) NOT NULL,
+  unit TEXT NOT NULL,
+  period TEXT,
+  achieved_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_goal_milestones_goal_id ON goal_milestones(goal_id);
+CREATE INDEX IF NOT EXISTS idx_goal_milestones_achieved_at ON goal_milestones(achieved_at DESC);
+
+ALTER TABLE goal_milestones ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Authenticated full access" ON goal_milestones;
+CREATE POLICY "Authenticated full access" ON goal_milestones FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+
+-- ============================================================================
+-- Done! 22 tables total with RLS policies.
 -- ============================================================================

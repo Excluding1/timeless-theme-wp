@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import type {
   Finance, KpiSnapshot, Subscription, Credential, Task,
-  CalendarEvent, Subcontractor, Contact, Goal,
+  CalendarEvent, Subcontractor, Contact, Goal, GoalMilestone,
   WeeklyReviewItem, WeeklyReviewCheck, Note, QuickLink, BusinessLink, AppNotification, Message
 } from '../lib/database';
 import * as mock from '../lib/mockData';
@@ -18,6 +18,7 @@ interface TableTypeMap {
   subcontractors: Subcontractor;
   contacts: Contact;
   goals: Goal;
+  goal_milestones: GoalMilestone;
   weekly_review_items: WeeklyReviewItem;
   weekly_review_checks: WeeklyReviewCheck;
   notes: Note;
@@ -39,6 +40,7 @@ const MOCK_DATA: { [K in TableName]: TableTypeMap[K][] } = {
   subcontractors: mock.mockSubcontractors,
   contacts: mock.mockContacts,
   goals: mock.mockGoals,
+  goal_milestones: [],
   weekly_review_items: mock.mockWeeklyReviewItems,
   weekly_review_checks: mock.mockWeeklyReviewChecks,
   notes: mock.mockNotes,

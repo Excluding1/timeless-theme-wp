@@ -188,6 +188,17 @@ export interface Goal {
   created_at?: string;
 }
 
+export interface GoalMilestone {
+  id: string;
+  goal_id?: string;
+  metric_name: string;
+  target_value: number;
+  achieved_value: number;
+  unit: string;
+  period?: string;
+  achieved_at: string;
+}
+
 export interface WeeklyReviewItem {
   id: string;
   text: string;
