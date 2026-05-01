@@ -355,6 +355,9 @@ export function Tasks() {
       const remaining = allTasks.filter(
         (t) => t.id !== draggableId && t.status !== newStatus,
       );
+
+      // Capture pre-drag state for rollback on Supabase failure
+      const prevTasks = [...(tasks as Task[])];
       setData([...remaining, ...updates] as any);
 
       try {
@@ -369,7 +372,9 @@ export function Tasks() {
           ),
         );
       } catch {
-        toast.error('Failed to move task');
+        // Rollback optimistic UI to pre-drag state
+        setData(prevTasks as any);
+        toast.error('Failed to move task — restored previous order');
       }
     },
     [tasks, update, setData],
@@ -588,6 +593,9 @@ export function Tasks() {
                                         'w-2.5 h-2.5 rounded-full mt-1 shrink-0',
                                         PRIORITY_DOT_COLOR[task.priority],
                                       )}
+                                      title={`Priority: ${task.priority}`}
+                                      aria-label={`Priority: ${task.priority}`}
+                                      role="img"
                                     />
                                     <h4 className="text-sm font-medium text-slate-900 leading-snug line-clamp-2">
                                       {task.title}
@@ -704,25 +712,36 @@ export function Tasks() {
                       <td className="p-4">
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={(e) => {
+                            onClick={async (e) => {
                               e.stopPropagation();
                               const prevStatus = task.status;
-                              update(task.id, {
-                                status: 'done',
-                                completed_at: new Date().toISOString(),
-                              } as any);
-                              toast('Task archived', {
-                                action: {
-                                  label: 'Undo',
-                                  onClick: () => update(task.id, {
-                                    status: prevStatus,
-                                    completed_at: undefined,
-                                  } as any),
-                                },
-                              });
+                              try {
+                                await update(task.id, {
+                                  status: 'done',
+                                  completed_at: new Date().toISOString(),
+                                } as any);
+                                toast('Task archived', {
+                                  action: {
+                                    label: 'Undo',
+                                    onClick: async () => {
+                                      try {
+                                        await update(task.id, {
+                                          status: prevStatus,
+                                          completed_at: undefined,
+                                        } as any);
+                                      } catch {
+                                        toast.error('Undo failed');
+                                      }
+                                    },
+                                  },
+                                });
+                              } catch {
+                                toast.error('Failed to archive task');
+                              }
                             }}
                             className="w-5 h-5 rounded-md border-2 border-slate-300 hover:border-[#0D9488] flex items-center justify-center shrink-0 transition-colors"
                             title="Mark as done (archive)"
+                            aria-label={`Mark "${task.title}" as done`}
                           />
                           <span className="font-medium text-slate-900">{task.title}</span>
                         </div>
@@ -819,11 +838,16 @@ export function Tasks() {
                         </td>
                         <td className="p-4 text-right">
                           <button
-                            onClick={() => {
-                              update(task.id, { status: 'todo', completed_at: undefined } as any);
-                              toast.success('Task unarchived');
+                            onClick={async () => {
+                              try {
+                                await update(task.id, { status: 'todo', completed_at: undefined } as any);
+                                toast.success('Task unarchived');
+                              } catch {
+                                toast.error('Failed to unarchive task');
+                              }
                             }}
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-100 border border-slate-200 rounded-lg hover:bg-slate-200 transition-colors"
+                            aria-label={`Unarchive "${task.title}"`}
                           >
                             <ArchiveRestore className="w-3.5 h-3.5" />
                             Unarchive
@@ -849,8 +873,8 @@ export function Tasks() {
         <TaskForm
           task={editingTask || (prefillTask as Task | null)}
           categories={usedCategories}
-          onSave={async (values, checklist) => {
-            await handleSave(values, checklist);
+          onSave={async (values, checklist, attachments) => {
+            await handleSave(values, checklist, attachments);
             setPrefillTask(null);
           }}
           onDelete={(t) => {

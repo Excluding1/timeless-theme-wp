@@ -334,5 +334,135 @@ CREATE TRIGGER update_notifications_updated_at BEFORE UPDATE ON notifications FO
 
 
 -- ============================================================================
--- Done! All 15 tables created with RLS policies.
+-- ── Schema-drift catch-up: tables added live but missing from this file ─────
+-- ============================================================================
+
+-- ── Business Settings (k/v store for tunables — used by useBusinessSettings) ─
+
+CREATE TABLE IF NOT EXISTS business_settings (
+  key TEXT PRIMARY KEY,
+  value JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- ── Messages (team chat / threaded comments — used by Messages.tsx) ──────────
+
+CREATE TABLE IF NOT EXISTS messages (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  sender_id UUID REFERENCES auth.users(id),
+  sender_name TEXT NOT NULL,
+  sender_avatar TEXT,
+  body TEXT NOT NULL DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- ── User Preferences (per-user UI settings JSON) ─────────────────────────────
+
+CREATE TABLE IF NOT EXISTS user_preferences (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID UNIQUE NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  preferences JSONB NOT NULL DEFAULT '{}',
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- ============================================================================
+-- ── New: CEO Daemon agent observability + audit trail ───────────────────────
+-- For tracking every agent run + every write the agent makes (security best practice).
+-- ============================================================================
+
+-- ── Agent Runs (one row per autonomous agent invocation) ─────────────────────
+
+CREATE TABLE IF NOT EXISTS agent_runs (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  agent_name TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'running' CHECK (status IN ('running', 'success', 'error', 'cancelled', 'timeout')),
+  started_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  completed_at TIMESTAMPTZ,
+  input JSONB,
+  output JSONB,
+  slack_url TEXT,
+  cost_usd NUMERIC(10,4) DEFAULT 0,
+  confidence NUMERIC(3,2) CHECK (confidence IS NULL OR (confidence >= 0 AND confidence <= 1)),
+  trigger_source TEXT,
+  error_message TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_agent_runs_agent_name ON agent_runs(agent_name);
+CREATE INDEX IF NOT EXISTS idx_agent_runs_status ON agent_runs(status);
+CREATE INDEX IF NOT EXISTS idx_agent_runs_started_at ON agent_runs(started_at DESC);
+
+-- ── Agent Activity Events (timeline within a run) ────────────────────────────
+
+CREATE TABLE IF NOT EXISTS agent_activity_events (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  agent_run_id UUID NOT NULL REFERENCES agent_runs(id) ON DELETE CASCADE,
+  event_type TEXT NOT NULL CHECK (event_type IN ('start', 'tool_call', 'tool_result', 'thought', 'write', 'message', 'finish', 'error')),
+  message TEXT,
+  data JSONB,
+  ts TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_agent_events_run_id ON agent_activity_events(agent_run_id, ts);
+
+-- ── Audit Log (every write CEO/agents make to the dashboard) ─────────────────
+
+CREATE TABLE IF NOT EXISTS audit_log (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  actor TEXT NOT NULL,
+  action TEXT NOT NULL CHECK (action IN ('insert', 'update', 'delete')),
+  table_name TEXT NOT NULL,
+  row_id UUID,
+  before JSONB,
+  after JSONB,
+  reasoning TEXT,
+  agent_run_id UUID REFERENCES agent_runs(id) ON DELETE SET NULL,
+  ts TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_log_table_row ON audit_log(table_name, row_id);
+CREATE INDEX IF NOT EXISTS idx_audit_log_actor ON audit_log(actor);
+CREATE INDEX IF NOT EXISTS idx_audit_log_ts ON audit_log(ts DESC);
+
+-- ── RLS policies for the new tables ──────────────────────────────────────────
+
+ALTER TABLE business_settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_preferences ENABLE ROW LEVEL SECURITY;
+ALTER TABLE agent_runs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE agent_activity_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_log ENABLE ROW LEVEL SECURITY;
+
+-- Authenticated full-access for the team-shared tables (matches existing pattern)
+DO $$
+DECLARE
+  tbl TEXT;
+BEGIN
+  FOR tbl IN
+    SELECT unnest(ARRAY[
+      'business_settings', 'messages',
+      'agent_runs', 'agent_activity_events', 'audit_log'
+    ])
+  LOOP
+    EXECUTE format(
+      'CREATE POLICY "Authenticated full access" ON %I FOR ALL TO authenticated USING (true) WITH CHECK (true)',
+      tbl
+    );
+  END LOOP;
+END
+$$;
+
+-- user_preferences is per-user — only the row owner can read/write their preferences.
+CREATE POLICY "Users manage own preferences"
+  ON user_preferences FOR ALL TO authenticated
+  USING (user_id = auth.uid())
+  WITH CHECK (user_id = auth.uid());
+
+-- updated_at triggers for the new tables
+CREATE TRIGGER update_business_settings_updated_at BEFORE UPDATE ON business_settings FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_user_preferences_updated_at BEFORE UPDATE ON user_preferences FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================================================
+-- Done! 21 tables total with RLS policies.
 -- ============================================================================

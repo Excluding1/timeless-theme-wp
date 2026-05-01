@@ -134,8 +134,9 @@ export function Subscriptions() {
         (s.plan_name && s.plan_name.toLowerCase().includes(q))
     );
     return [...list].sort((a, b) => {
-      if (!a.next_renewal) return 1;
-      if (!b.next_renewal) return -1;
+      // Empty string treated same as null — push to end (no renewal date)
+      if (!a.next_renewal || a.next_renewal === '') return 1;
+      if (!b.next_renewal || b.next_renewal === '') return -1;
       return a.next_renewal.localeCompare(b.next_renewal);
     });
   }, [subscriptions, search]);
@@ -227,7 +228,7 @@ export function Subscriptions() {
           await createFinance({
             date: data.start_date || new Date().toISOString().split('T')[0],
             type: 'expense',
-            category: 'Subscriptions',
+            category: 'Software & Subs',
             description: `${data.name}${data.plan_name ? ` (${data.plan_name})` : ''} — ${fmtCycleLabel(data.billing_cycle)}`,
             amount: Number(data.cost),
             payment_method: 'Credit Card',
@@ -270,7 +271,7 @@ export function Subscriptions() {
       await createFinance({
         date: new Date().toISOString().split('T')[0],
         type: 'expense',
-        category: 'Subscriptions',
+        category: 'Software & Subs',
         description: `${sub.name}${sub.plan_name ? ` (${sub.plan_name})` : ''} — ${fmtCycleLabel(sub.billing_cycle)}`,
         amount: cost,
         payment_method: 'Credit Card',

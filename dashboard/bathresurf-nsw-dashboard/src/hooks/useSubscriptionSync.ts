@@ -12,16 +12,19 @@ import type { Subscription, Finance } from '../lib/database';
  * Only runs once per session (useRef guard).
  */
 export function useSubscriptionSync() {
-  const { data: rawSubs, update: updateSub } = useData('subscriptions');
-  const { data: rawFinances, create: createFinance } = useData('finances');
+  const { data: rawSubs, loading: subsLoading, update: updateSub } = useData('subscriptions');
+  const { data: rawFinances, loading: financesLoading, create: createFinance } = useData('finances');
   const hasRun = useRef(false);
 
   const subscriptions = rawSubs as unknown as Subscription[];
   const finances = rawFinances as unknown as Finance[];
 
   useEffect(() => {
-    // Only run once per session, and only when data is loaded
-    if (hasRun.current || subscriptions.length === 0) return;
+    if (hasRun.current) return;
+    // Wait until both tables finished their initial fetch — running while `finances`
+    // is still loading would skip the dedup check and create duplicate entries.
+    if (subsLoading || financesLoading) return;
+    if (subscriptions.length === 0) return;
     hasRun.current = true;
 
     const today = startOfDay(new Date());
@@ -54,48 +57,50 @@ export function useSubscriptionSync() {
         newPriceChanges = remaining;
       }
 
-      // ── 2. Check if renewal is due ────────────────────────────────────
+      // ── 2. Check if renewal is due (loop catches multi-cycle gaps) ────
       if (sub.next_renewal) {
-        const renewalDate = parseISO(sub.next_renewal);
-        if (isValid(renewalDate) && (isBefore(renewalDate, today) || renewalDate.getTime() === today.getTime())) {
-          // Check if we already logged this payment (avoid duplicates)
-          const renewalStr = format(renewalDate, 'yyyy-MM-dd');
-          const alreadyLogged = finances.some(
-            (f) =>
-              f.type === 'expense' &&
-              f.category === 'Subscriptions' &&
-              f.description?.includes(sub.name) &&
-              f.date === renewalStr
-          );
+        let currentRenewal = parseISO(sub.next_renewal);
+        if (isValid(currentRenewal) && (isBefore(currentRenewal, today) || currentRenewal.getTime() === today.getTime())) {
+          // If a sub is multiple cycles overdue (e.g. monthly missed for 4 months),
+          // log a finance entry for each missed cycle, not just one.
+          while (isBefore(currentRenewal, today) || currentRenewal.getTime() === today.getTime()) {
+            const renewalStr = format(currentRenewal, 'yyyy-MM-dd');
+            const alreadyLogged = finances.some(
+              (f) =>
+                f.type === 'expense' &&
+                f.category === 'Software & Subs' &&
+                f.description?.includes(sub.name) &&
+                f.date === renewalStr
+            );
 
-          if (!alreadyLogged && newCost > 0) {
-            // Create the finance entry
-            try {
-              await createFinance({
-                date: renewalStr,
-                type: 'expense',
-                category: 'Subscriptions',
-                description: `${sub.name}${sub.plan_name ? ` (${sub.plan_name})` : ''} — auto-renewal`,
-                amount: newCost,
-                payment_method: 'Credit Card',
-                gst_included: false,
-                receipt_photos: [],
-                notes: 'Auto-logged by subscription sync',
-              } as any);
-            } catch {
-              // Silently fail — don't break the app over a sync issue
+            if (!alreadyLogged && newCost > 0) {
+              try {
+                await createFinance({
+                  date: renewalStr,
+                  type: 'expense',
+                  category: 'Software & Subs',
+                  description: `${sub.name}${sub.plan_name ? ` (${sub.plan_name})` : ''} — auto-renewal`,
+                  amount: newCost,
+                  payment_method: 'Credit Card',
+                  gst_included: false,
+                  receipt_photos: [],
+                  notes: 'Auto-logged by subscription sync',
+                } as any);
+              } catch {
+                // Silently fail — don't break the app over a sync issue
+              }
             }
+
+            currentRenewal = advanceDate(currentRenewal, sub.billing_cycle);
           }
 
-          // Advance to next renewal date
-          const nextRenewal = advanceDate(renewalDate, sub.billing_cycle);
           updated = true;
 
-          // Apply all updates
+          // currentRenewal is now the first future renewal date
           try {
             await updateSub(sub.id, {
               cost: newCost,
-              next_renewal: format(nextRenewal, 'yyyy-MM-dd'),
+              next_renewal: format(currentRenewal, 'yyyy-MM-dd'),
               price_changes: newPriceChanges.length > 0 ? newPriceChanges : [],
             } as any);
           } catch {
@@ -117,7 +122,7 @@ export function useSubscriptionSync() {
         }
       }
     });
-  }, [subscriptions, finances, createFinance, updateSub]);
+  }, [subscriptions, finances, subsLoading, financesLoading, createFinance, updateSub]);
 }
 
 function advanceDate(from: Date, cycle: string): Date {

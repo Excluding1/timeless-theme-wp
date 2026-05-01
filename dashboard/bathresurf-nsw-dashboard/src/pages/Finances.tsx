@@ -1,8 +1,8 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { format, parseISO, isWithinInterval } from 'date-fns';
+import { format, parseISO, isWithinInterval, isValid } from 'date-fns';
 import { useDropzone } from 'react-dropzone';
 import imageCompression from 'browser-image-compression';
 import { toast } from 'sonner';
@@ -125,6 +125,16 @@ function ReceiptUploader({
   photos: string[];
   onChange: (photos: string[]) => void;
 }) {
+  // Track blob URLs we created so we can revoke them on unmount and prevent leaks.
+  const blobUrlsRef = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    return () => {
+      blobUrlsRef.current.forEach(url => URL.revokeObjectURL(url));
+      blobUrlsRef.current.clear();
+    };
+  }, []);
+
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       if (photos.length + acceptedFiles.length > 5) {
@@ -142,9 +152,11 @@ function ReceiptUploader({
           });
           const url = await uploadToCloudinary(compressed);
           newUrls.push(url);
+          if (url.startsWith('blob:')) blobUrlsRef.current.add(url);
         } catch (err) {
           console.error('Upload failed, using local blob:', err);
           const url = URL.createObjectURL(file);
+          blobUrlsRef.current.add(url);
           newUrls.push(url);
         }
       }
@@ -164,6 +176,11 @@ function ReceiptUploader({
   });
 
   const removePhoto = (index: number) => {
+    const url = photos[index];
+    if (url && url.startsWith('blob:')) {
+      URL.revokeObjectURL(url);
+      blobUrlsRef.current.delete(url);
+    }
     const updated = [...photos];
     updated.splice(index, 1);
     onChange(updated);
@@ -503,7 +520,9 @@ export function Finances() {
   const filteredByPeriod = useMemo(() => {
     if (!periodRange) return finances;
     return finances.filter((f) => {
+      if (!f.date) return false;
       const d = parseISO(f.date);
+      if (!isValid(d)) return false;
       return isWithinInterval(d, { start: periodRange.start, end: periodRange.end });
     });
   }, [finances, periodRange]);
@@ -878,7 +897,11 @@ export function Finances() {
                           className="hover:bg-slate-50 transition-colors cursor-pointer group"
                         >
                           <td className="p-4 text-slate-600 whitespace-nowrap">
-                            {format(parseISO(entry.date), 'MMM dd, yyyy')}
+                            {(() => {
+                              if (!entry.date) return '-';
+                              const d = parseISO(entry.date);
+                              return isValid(d) ? format(d, 'MMM dd, yyyy') : entry.date;
+                            })()}
                           </td>
                           <td className="p-4">
                             <span

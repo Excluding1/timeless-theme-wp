@@ -99,8 +99,10 @@ function NavItem({
         isCollapsed ? "justify-center px-0 py-2.5" : "px-3"
       )}
       title={isCollapsed ? item.label : undefined}
+      aria-label={item.label}
+      aria-current={isActive ? 'page' : undefined}
     >
-      <Icon className="w-5 h-5 shrink-0" />
+      <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
       {!isCollapsed && <span className="truncate">{item.label}</span>}
     </NavLink>
   );
@@ -197,12 +199,14 @@ function GroupedNav({
                   ? "text-[#0D9488]"
                   : "text-slate-300 hover:bg-white/10 hover:text-white"
               )}
+              aria-expanded={isExpanded}
+              aria-label={`${group.label} navigation group, ${isExpanded ? 'expanded' : 'collapsed'}`}
             >
               <span>{group.label}</span>
               {isExpanded ? (
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-4 h-4" aria-hidden="true" />
               ) : (
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
               )}
             </button>
 
@@ -316,8 +320,10 @@ export function Layout() {
                 onClick={toggleSidebar}
                 className="w-8 h-8 rounded bg-[#0D9488] flex items-center justify-center shrink-0 hover:bg-teal-500 transition-colors"
                 title="Expand Menu"
+                aria-label="Expand sidebar"
+                aria-expanded={false}
               >
-                <span className="text-white font-bold">TR</span>
+                <span className="text-white font-bold" aria-hidden="true">TR</span>
               </button>
             </div>
           )}
@@ -327,14 +333,20 @@ export function Layout() {
               onClick={toggleSidebar}
               className="hidden md:flex text-slate-400 hover:text-white transition-colors"
               title="Collapse Menu"
+              aria-label="Collapse sidebar"
+              aria-expanded={true}
             >
-              <PanelLeftClose className="w-5 h-5" />
+              <PanelLeftClose className="w-5 h-5" aria-hidden="true" />
             </button>
           )}
 
           {!isCollapsed && (
-            <button className="md:hidden text-slate-300 hover:text-white" onClick={closeMobile}>
-              <X className="w-5 h-5" />
+            <button
+              className="md:hidden text-slate-300 hover:text-white"
+              onClick={closeMobile}
+              aria-label="Close navigation menu"
+            >
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -398,8 +410,10 @@ export function Layout() {
                                   isEditMode && !isCollapsed ? "pr-3 pl-1" : ""
                                 )}
                                 title={isCollapsed ? item.label : undefined}
+                                aria-label={item.label}
+                                aria-current={isActive ? 'page' : undefined}
                               >
-                                <Icon className="w-5 h-5 shrink-0" />
+                                <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
                                 {!isCollapsed && <span className="truncate">{item.label}</span>}
                               </NavLink>
                             </div>
@@ -428,6 +442,9 @@ export function Layout() {
                   isCollapsed && "mx-auto"
                 )}
                 title={isCollapsed ? "Toggle Edit Mode" : undefined}
+                role="switch"
+                aria-checked={isEditMode}
+                aria-label={isEditMode ? "Exit nav reorder mode" : "Enter nav reorder mode"}
               >
                 <span
                   className={cn(
@@ -451,8 +468,10 @@ export function Layout() {
               isCollapsed ? "justify-center px-0" : "px-3"
             )}
             title={isCollapsed ? "Settings" : undefined}
+            aria-label="Settings"
+            aria-current={location.pathname === '/settings' ? 'page' : undefined}
           >
-            <Settings className="w-5 h-5 shrink-0" />
+            <Settings className="w-5 h-5 shrink-0" aria-hidden="true" />
             {!isCollapsed && <span>Settings</span>}
           </NavLink>
 
@@ -463,8 +482,9 @@ export function Layout() {
               isCollapsed && "justify-center px-0"
             )}
             title={isCollapsed ? "Sign Out" : undefined}
+            aria-label="Sign out"
           >
-            <LogOut className="w-5 h-5 shrink-0" />
+            <LogOut className="w-5 h-5 shrink-0" aria-hidden="true" />
             {!isCollapsed && <span>Sign Out</span>}
           </button>
         </div>
@@ -478,8 +498,10 @@ export function Layout() {
             <button
               className="md:hidden text-slate-500 hover:text-slate-700"
               onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={mobileMenuOpen}
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-6 h-6" aria-hidden="true" />
             </button>
             <h1 className="text-xl font-semibold text-slate-800 capitalize">
               {location.pathname === '/' ? 'Dashboard' : location.pathname.slice(1).replace('-', ' ')}
