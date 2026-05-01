@@ -2,6 +2,28 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { supabase } from '../lib/supabase';
 
+// localStorage key for the per-user prefs cache. Per-user-keyed so multi-user
+// browsers don't leak prefs between accounts.
+const LS_KEY_PREFIX = 'timelessdash_prefs_';
+const lsKey = (userId: string) => `${LS_KEY_PREFIX}${userId}`;
+
+function loadLocalPrefs(userId: string): Partial<UserPreferences> | null {
+  try {
+    const raw = localStorage.getItem(lsKey(userId));
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveLocalPrefs(userId: string, prefs: UserPreferences): void {
+  try {
+    localStorage.setItem(lsKey(userId), JSON.stringify(prefs));
+  } catch {
+    /* quota exceeded or private mode */
+  }
+}
+
 interface UserPreferences {
   dashboard_sections: string[];
   default_task_view: 'kanban' | 'list';
@@ -66,8 +88,19 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     }
 
     const fetchPreferences = async () => {
-      // maybeSingle returns null (not an error) when no row — safer than .single()
-      // which returns PGRST116. We then upsert defaults so the row always exists.
+      // 1) Read localStorage FIRST — instant, no flash of defaults while DB fetches.
+      const localPrefs = loadLocalPrefs(user.id);
+      if (localPrefs) {
+        const merged = { ...defaultPreferences, ...localPrefs } as UserPreferences;
+        setPreferences(merged);
+        console.info('[PreferencesContext] loaded from localStorage:', {
+          finance: merged.default_finance_period,
+          overview: merged.default_overview_period,
+          cashflow: merged.default_cashflow_period,
+        });
+      }
+
+      // 2) Then fetch from Supabase — overrides local if DB has a more recent value.
       const { data, error } = await supabase
         .from('user_preferences')
         .select('preferences')
@@ -75,14 +108,20 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
         .maybeSingle();
 
       if (error) {
-        console.error('[PreferencesContext] fetch failed:', error);
+        console.error('[PreferencesContext] DB fetch failed:', error);
       }
 
       if (data && data.preferences) {
-        setPreferences({ ...defaultPreferences, ...data.preferences });
-      } else {
-        // No row exists yet — upsert with defaults. Upsert (not insert) so
-        // we don't fail if a concurrent process already created the row.
+        const merged = { ...defaultPreferences, ...data.preferences } as UserPreferences;
+        setPreferences(merged);
+        saveLocalPrefs(user.id, merged); // sync localStorage with DB truth
+        console.info('[PreferencesContext] loaded from DB:', {
+          finance: merged.default_finance_period,
+          overview: merged.default_overview_period,
+          cashflow: merged.default_cashflow_period,
+        });
+      } else if (!localPrefs) {
+        // No DB row + no local fallback — initialise with defaults
         const { error: upsertError } = await supabase
           .from('user_preferences')
           .upsert(
@@ -91,6 +130,8 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
           );
         if (upsertError) {
           console.error('[PreferencesContext] initial upsert failed:', upsertError);
+        } else {
+          saveLocalPrefs(user.id, defaultPreferences);
         }
       }
       setLoading(false);
@@ -103,10 +144,14 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     const updated = { ...preferences, ...newPrefs };
     setPreferences(updated);
 
+    // 1) Write to localStorage IMMEDIATELY — guaranteed persistence even if DB is broken.
+    if (user) {
+      saveLocalPrefs(user.id, updated);
+      console.info('[PreferencesContext] saved to localStorage:', newPrefs);
+    }
+
+    // 2) Also write to Supabase — keeps cross-device sync working when it works.
     if (supabase && user) {
-      // UPSERT instead of UPDATE — handles the case where the user_preferences row
-      // doesn't exist yet (e.g. fetch's no-row INSERT path silently failed earlier).
-      // First write creates the row; subsequent writes overwrite. Robust either way.
       const { error } = await supabase
         .from('user_preferences')
         .upsert(
@@ -114,7 +159,9 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
           { onConflict: 'user_id' },
         );
       if (error) {
-        console.error('[PreferencesContext] upsert failed:', error);
+        console.error('[PreferencesContext] DB upsert failed (localStorage still saved):', error);
+      } else {
+        console.info('[PreferencesContext] saved to DB:', newPrefs);
       }
     }
   };
