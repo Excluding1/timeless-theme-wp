@@ -23,7 +23,7 @@
  <!-- 1. INTRODUCTION -->
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">1. Introduction</h2>
- <p class="mb-3">Timeless Resurfacing (ABN 30 412 161 602) is a partnership operating a bathroom resurfacing business in Sydney, NSW. We are committed to protecting the privacy of our customers and website visitors in accordance with the <strong>Australian Privacy Act 1988 (Cth)</strong> and the <strong>Australian Privacy Principles (APPs)</strong>.</p>
+ <p class="mb-3">Timeless Resurfacing (ABN <?php echo timeless_abn(); ?>) is a partnership operating a bathroom resurfacing business in Sydney, NSW. We are committed to protecting the privacy of our customers and website visitors in accordance with the <strong>Australian Privacy Act 1988 (Cth)</strong> and the <strong>Australian Privacy Principles (APPs)</strong>.</p>
  <p>This policy explains how we collect, use, store and disclose your personal information when you use our website, submit a quote request, or engage our services.</p>
  </div>
 
@@ -116,7 +116,7 @@
  <p class="mb-3">If you have any questions about this privacy policy, wish to make a complaint, or would like to exercise your rights regarding your personal information, please contact us:</p>
  <div class="bg-white border border-surface-container rounded-xl p-6 space-y-3">
  <p><strong>Timeless Resurfacing</strong></p>
- <p class="text-xs text-outline">ABN 30 412 161 602</p>
+ <p class="text-xs text-outline">ABN <?php echo timeless_abn(); ?></p>
  <p class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary" aria-hidden="true">mail</span> <a href="mailto:<?php echo timeless_email(); ?>" class="text-primary underline font-medium hover:text-primary-container"><?php echo timeless_email(); ?></a></p>
  <p class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary" aria-hidden="true">call</span> <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium hover:text-primary-container"><?php echo timeless_phone(); ?></a></p>
  <p class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary" aria-hidden="true">location_on</span> Sydney, NSW, Australia</p>

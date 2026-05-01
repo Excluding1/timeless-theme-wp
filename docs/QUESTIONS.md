@@ -46,20 +46,27 @@
 **Question:** Allan to ask Bert in next conversation: "If our subcontractors order Hawk products through us as a group, can you offer fleet/wholesale pricing different from individual operator pricing?"
 
 ### Q5. Builder licence necessity outcome
-**Status:** ❓ Open (Override 5 action item)
-**Why I need it:** Compliance + marketing claims.
-**Affects:** [STATE.md](STATE.md), trust badges, future ad copy
-**Action needed:** Allan calls NSW Fair Trading 1300 224 988. Question: "Bathroom resurfacing/regrouting coordination business; jobs typically $300-$4,500 individual; under $5K HBA threshold. Do I need a Building Licence under Home Building Act 1989?"
+**Status:** ✅ RESOLVED 2026-05-01 — Allan's decision: defer indefinitely.
+**Resolution:** Builder licence deferred indefinitely due to:
+- Lengthy process: Option 1 (partner gets licensed) = 22-27 weeks total (Cert IV + 2-4yr exp); Option 2 (hire licensed supervisor as full-time employee/partner — NOT subcontractor/casual) = 13 weeks
+- Insufficient funds for licensing process + supervisor salary
+- **Operating strategy:** keep all jobs <$5K HBA threshold via **per-bathroom invoice splitting** for multi-bathroom customers
+- **Revisit trigger:** when funds + revenue support either licensing path + supervisor cost
+**Future pathway documented:**
+- **Option 1 — Partner gets licensed (fastest internal):** ~22-27 weeks total. Phase 1: ~9-14 weeks for partner Individual Contractor Licence or Qualified Supervisor Certificate (requires Cert IV + 2-4yr industry experience). Phase 2: ~13 weeks for partnership application processing.
+- **Option 2 — Hire licensed full-time supervisor as Nominated Qualified Supervisor:** ~13 weeks from partnership application. **CRITICAL: must be full-time employee or partner — cannot be subcontractor or casual employee.**
+- Partnership cannot get partnership licence without a Nominated Qualified Supervisor's licence number on application.
+**Affects:** [STATE.md § 1 Legal & Compliance](STATE.md), trust badges, ad copy compliance, customer pricing structure (per-bathroom invoicing convention).
 
 ### Q6. Bank account specifics
-**Status:** ❓ Open
-**Why I need it:** Cash math accuracy.
-**Affects:** [STATE.md § 2 Financial Accounts](STATE.md)
-**Questions:**
-- Which bank (CBA Smart Access? Up Business? other)?
-- Account opened date?
-- $100 signup bonus expected when exactly?
-- Bank feed connected anywhere?
+**Status:** ✅ RESOLVED 2026-05-01 — Allan provided details.
+**Resolution:**
+- **Bank:** Westpac Business partnership account
+- **Opened:** mid-April 2026
+- **Documents used to open:** Partnership agreement contract + IDs
+- **$100 signup bonus expected:** ~mid-June 2026 (~2 months post-opening)
+- **Bank feed connected:** ❓ (not yet — likely Phase 1 with Xero setup)
+**Updated in:** [STATE.md § 2 Financial Accounts](STATE.md)
 
 ### Q7. Insurance broker name + policy details
 **Status:** ❓ Open
@@ -142,20 +149,24 @@
 - Their location (subcontractor coverage zone alignment with customer)
 
 ### Q16. NSW Long Service Corporation portable leave applicability (raised 2026-05-01 PM in [sub-tax-compliance.md](sop/sub-tax-compliance.md))
-**Status:** ❓ Open
-**Why I need it:** Could trigger 0.35% levy on all subcontractor payments if applicable. Likely not (genuine independent contractors with own ABN + multiple clients), but must confirm in writing.
-**Affects:** [sub-tax-compliance.md § C](sop/sub-tax-compliance.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md)
-**Action needed:** Allan calls **Long Service Corporation NSW** (13 14 41) or emails enquiries@longservice.nsw.gov.au with this question:
+**Status:** ✅ RESOLVED 2026-05-01 — Allan provided clarity.
+**Resolution:** Since 1 January 2023, the Building & Construction Industry portable LSL **levy only applies to projects with total value of $250,000 (inc GST) or above**. Most resurfacing jobs ($300-$4,500 typical) fall well below this threshold. **No levy obligation for our normal job book.**
+**Future trigger:** if we ever bid/win a project where total contract value ≥ $250,000 inc GST (e.g., large strata building bundle, commercial bathroom contract), levy applies to that project — register at point of contract.
+**Affects:** [sub-tax-compliance.md § C](sop/sub-tax-compliance.md) updated with $250K threshold clarity.
 
 > *"My business engages independent contractor subcontractors (sole traders with own ABN, own tools, multiple clients) for bathroom resurfacing + regrouting work. Are we required to register as a 'building employer' under the Building and Construction Industry Long Service Payments Act 1986, or pay levy on payments to these contractors?"*
 
 Get answer in writing.
 
-### Q17. Customizer ABN field (raised 2026-05-01 PM in [customer-aftercare-cards.md](templates/customer-aftercare-cards.md))
-**Status:** ❓ Open (low priority)
-**Why I need it:** Aftercare cards reference `[ABN]` from Customizer; current Customizer has phone + email + licence but not ABN.
-**Affects:** [customer-aftercare-cards.md](templates/customer-aftercare-cards.md), [functions.php](../functions.php) Customizer
-**Question:** Add ABN field to WordPress Customizer next time Allan editing Customizer (5min task).
+### Q17. Customizer ABN field — IT EXISTS but wasn't being used dynamically
+**Status:** ✅ RESOLVED 2026-05-01 PM — Allan caught the inconsistency.
+**Investigation:**
+- ABN Customizer setting EXISTS at [functions.php:1180](../functions.php) (default `30 412 161 602`)
+- Helper function `timeless_abn()` EXISTS at [functions.php:1805](../functions.php)
+- BUT: `page-templates/page-privacy.php` was hardcoding the ABN twice (lines 26 + 119) instead of calling `timeless_abn()` — same way it correctly calls `timeless_phone()`, `timeless_email()`, `timeless_phone_link()` for those fields. Inconsistent.
+**Fix applied 2026-05-01 PM:** both ABN references in page-privacy.php updated to `<?php echo timeless_abn(); ?>` — fully dynamic + Customizer-driven.
+**CLAUDE.md updated:** added `timeless_abn()` to documented helper function list (was missing).
+**Verification:** if Allan edits ABN in WordPress Customizer, both privacy-page references update automatically. Future templates (aftercare cards) will use `timeless_abn()` from the start.
 
 ### Q18. Master pricing sub-labour validation (raised 2026-05-01 PM in [sub-rate-schedule.md](specs/sub-rate-schedule.md))
 **Status:** 🟡 DEFERRED 2026-05-01 PM — Allan's direction: same trigger as Q1 (Marko engages first subcontractor). CEO doing temporary international research + fully-loaded margin model NOW so we have defensible draft until validated.

@@ -160,40 +160,42 @@ If decision = "no super": maintain evidence on file. If ATO ever audits, we prod
 
 ## C. Portable Long Service Leave (NSW)
 
-### The scheme
+### Status: ✅ RESOLVED 2026-05-01 — Levy does NOT apply to our typical jobs
+
+**Threshold rule (from 1 January 2023):** Portable Long Service Leave levy applies **only to projects with a total value of $250,000 (inc GST) or above**. Most resurfacing/regrouting jobs ($300-$4,500 typical) fall well below this threshold.
+
+**Bottom line:** No levy obligation for our normal job book.
+
+### The scheme (background)
 
 NSW operates a Portable Long Service Leave scheme for building/construction workers, administered by the Long Service Corporation under the *Building and Construction Industry Long Service Payments Act 1986*.
 
-The Act covers: *"Any work carried out on a building site by a worker in a contract of service/training."* Specifically includes: maintenance, repair, renovation, painting, decorating, finishing work.
+The scheme is funded by a levy charged on building/construction projects above the $250K threshold (administered at the project level, not the per-worker payment level since the 2023 reform).
 
-Bathroom regrouting/resurfacing **could arguably fall within "maintenance, repair, finishing work."**
+### When levy WOULD apply (future trigger)
 
-### Does it apply to us?
+If we ever bid/win a project where **total contract value ≥ $250,000 inc GST**:
+- Large strata building bundle (e.g., 50+ apartment units in one contract)
+- Commercial bathroom contract with multi-site coordination
+- Builder/developer contract for new construction completion
 
-**Likely no — but confirm in writing.**
+**Action when triggered:**
+- [ ] Register as "building employer" with Long Service Corporation NSW at point of contract
+- [ ] Pay levy (currently ~0.35% of project value) at the time the project is reported
+- [ ] Pricing: build the levy cost into customer quote for $250K+ projects (~$875+ levy on a $250K project)
 
-Reasoning:
-- Our subcontractors are independent contractors, not "workers in a contract of service"
-- Scheme primarily applies to **employees**
-- Genuine independent contractors are generally NOT covered
-- Our subcontractors supply own tools, multiple clients, own ABN
+### Operational discipline
 
-### Action required (per [auditor-compliance-aus](../roles/auditor-compliance-aus.md))
+- All current job pricing assumes single-property, single-bathroom or multi-bathroom contracts at typical $300-$4,500 per job. Levy not applicable.
+- If a quote ever exceeds $200K (approaching threshold), flag for CEO review BEFORE submitting customer quote — confirm levy + register if needed.
+- Document any quote/contract that triggers the threshold in `data/compliance/lsl-levy-projects/`.
 
-⚠️ **Allan to confirm with Long Service Corporation:**
-- Web: [longservice.nsw.gov.au](https://www.longservice.nsw.gov.au)
+### Reference
+
+- NSW Long Service Corporation: [longservice.nsw.gov.au](https://www.longservice.nsw.gov.au)
 - Phone: 13 14 41
 - Email: enquiries@longservice.nsw.gov.au
-
-Question: *"My business engages independent contractor subcontractors (sole traders with own ABN, own tools, multiple clients) for bathroom resurfacing + regrouting work. Are we required to register as a 'building employer' under the Building and Construction Industry Long Service Payments Act 1986, or pay levy on payments to these contractors?"*
-
-Get answer in writing (email response sufficient).
-
-### If it does apply
-
-We must register as "building employer" and pay a levy (currently ~0.35% of wages/payments). Worth checking even if we believe it doesn't apply — penalties for non-registration if it does apply.
-
-**Status:** ❓ Pending Allan confirmation call. Adding to [QUESTIONS.md](../QUESTIONS.md) Q-NEW.
+- Building and Construction Industry Long Service Payments Act 1986: [legislation.nsw.gov.au](https://legislation.nsw.gov.au)
 
 ---
 

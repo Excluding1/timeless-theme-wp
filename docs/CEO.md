@@ -307,11 +307,27 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 **Why:** Pareto. 80% of search demand will hit these 5. The other 14 are the long tail — they'll get organic traffic but don't justify ad spend until top 5 are saturated. Allan keeps the long tail live for SEO breadth.
 **Override 10 alignment:** of these 5, regrouting-priority is #1, #2, #4, #5 — consistent with regrouting-first GTM. Bath-resurfacing waits for subcontractor.
 
-### Override 5: Push back on builder licence assumption
-**Earlier:** Memory implies builder licence is on the to-do list.
-**My call:** **Verify if we need it at all.** Per NSW Fair Trading guidance: residential building work UNDER $5,000 doesn't require builder licence. Most resurfacing/regrouting jobs are $300-$3,500 individually. Most full bathrooms are $2,500-$4,500. Likely 95%+ of our jobs sit under threshold.
-**Action:** Allan, **call NSW Fair Trading directly this week** (1300 224 988). Ask: "I'm running a bathroom resurfacing/regrouting coordination business; subcontractors do the work; jobs are typically $500-$4,500 individual; do I need a Building Licence under the Home Building Act 1989?"
-**Decision rule:** if "no" → save the time + $$$ + paperwork; if "yes" → expedite application.
+### Override 5 v2 (resolved 2026-05-01 PM after Allan researched licensing pathway): Builder licence DEFERRED INDEFINITELY — keep all jobs <$5K HBA threshold via per-bathroom invoicing
+**Earlier (v1):** Verify if licence required before applying. Defer until verified.
+**Allan's research outcome:** No partner currently holds a contractor licence. Two pathways exist:
+- **Option 1 (partner gets licensed):** ~22-27 weeks total. Phase 1: 9-14 weeks for partner to get Individual Contractor Licence or Qualified Supervisor Certificate (requires Cert IV trade qualification + 2-4yr industry experience). Phase 2: 13 weeks for partnership application processing.
+- **Option 2 (hire licensed full-time supervisor as Nominated Qualified Supervisor):** ~13 weeks. **Critical:** must be full-time employee or partner — CANNOT be subcontractor or casual employee.
+- Partnership cannot get partnership licence without a Nominated Qualified Supervisor's licence number on application.
+
+**Allan's decision (final):** **Defer indefinitely.** Lengthy process + insufficient funds for either path (Cert IV cost + study time, or full-time supervisor salary).
+
+**Operating strategy:** keep ALL jobs **under $5,000 inc GST** to stay under Home Building Act 1989 licensing threshold:
+- Single-bathroom jobs naturally sit at $300-$4,500 (no issue)
+- **Multi-bathroom customers = split into per-bathroom invoices**, each <$5K. Customer signs separate scope-of-work + payment per bathroom. Don't bundle into one $8K-12K contract.
+- Quote forms + GHL workflows reflect this: a customer with 3 bathrooms gets 3 quotes (T1/T2/T3 tier per bathroom), 3 deposits, 3 invoices, 3 final payments. Same job sequence, separately documented.
+
+**Revisit trigger:** when revenue + cash position support either Option 1 (partner studies + applies) or Option 2 (full-time supervisor salary ~$80-120K/yr). Likely Year 2-3+.
+
+**Documented in:**
+- [STATE.md § 1 Legal & Compliance](STATE.md) — Builder Licence row updated with "DEFERRED INDEFINITELY" status + strategy
+- [QUESTIONS.md Q5](QUESTIONS.md) — RESOLVED with full pathway info preserved for future reactivation
+
+**Marketing claims affected:** never claim "NSW Licensed" or "Licensed Bathroom Resurfacer" anywhere. Trust badges stay: "Sydney Local • $20M Insured • Up to 5yr Warranty" (per [trust badge convention](OPERATING-CONTEXT.md)).
 
 ### Override 6: AI agents NOT in Phase 6 — start with ONE in Phase 1
 **Earlier:** Phase 6 designs 7 AI agents.

@@ -59,7 +59,7 @@ To swap an image: replace the `.jpg` file in the matching folder. The PHP refere
 ## Conventions
 - All image `src` attributes use: `<?php echo get_template_directory_uri(); ?>/images/...`
 - Page templates use WordPress `_wp_page_template` meta via the page-creator plugin
-- Customizer stores phone, email, licence, ABN — accessed via `timeless_phone()`, `timeless_email()`, `timeless_licence()`
+- Customizer stores phone, email, licence, ABN — accessed via `timeless_phone()`, `timeless_phone_link()`, `timeless_email()`, `timeless_licence()`, `timeless_abn()`
 - Responsive breakpoints: `md:` (768px) for hero grid, `sm:` for general mobile
 - All service pages follow identical HTML structure — hero image, problem description, process steps, FAQ, CTA
 

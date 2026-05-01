@@ -25,7 +25,7 @@
 | Public Liability Insurance | ✅ | $20M cover, active per saved memory | ❓ — need policy doc + expiry date |
 | Professional Indemnity | ❓ | CEO to ask | — |
 | WorkCover NSW | ❌ | Not required while no employees, only contractors | — |
-| Builder Licence | ❌ | Override 5: Allan to call NSW Fair Trading 1300 224 988 to verify if needed for our scope | — |
+| Builder Licence | ❌ DEFERRED INDEFINITELY | **Allan's call 2026-05-01**: lengthy process (22-27 weeks via partner cert path; 13 weeks via licensed-supervisor hire) + insufficient funds. Strategy: keep all jobs <$5K HBA threshold via per-bathroom invoice splitting. Revisit when funds + revenue allow. Future pathway documented in [CEO.md § Compliance](CEO.md). | 2026-05-01 |
 | Privacy Policy (published) | ❓ | CEO to ask if exists on website + linked from quote form | — |
 | Terms of Service (customer-facing) | ❌ | Need to draft before first quote | — |
 | Subcontractor Agreement template | ❌ | Engage Sprintlaw (~$200) before first subcontractor signs | — |
@@ -37,8 +37,8 @@
 
 | Item | Status | Details | Last verified |
 |---|---|---|---|
-| Business bank account | ✅ | Active. Bank: ❓ (CEO to ask) | 2026-05-01 |
-| $100 bank signup bonus | ⏳ | Expected within next 2 months | — |
+| Business bank account | ✅ | **Westpac Business partnership account**, opened mid-April 2026. Partnership agreement + IDs used to open. | 2026-05-01 |
+| $100 bank signup bonus | ⏳ | **Expected ~mid-June 2026** (~2 months post-opening) | — |
 | Current cash on hand | $1,500 | Per starting capital + $0 revenue, after $187.56 expenses tracked. **Note: NOT $1,600 — bonus is pending.** | 2026-05-01 |
 | Stripe account | ❌ | Sign up Phase 1 before first quote sent | — |
 | pay.com.au account | ❌ | Sign up before first subcontractor paid | — |
