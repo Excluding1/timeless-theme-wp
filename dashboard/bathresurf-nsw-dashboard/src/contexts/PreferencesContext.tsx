@@ -88,19 +88,13 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     }
 
     const fetchPreferences = async () => {
-      // 1) Read localStorage FIRST — instant, no flash of defaults while DB fetches.
-      const localPrefs = loadLocalPrefs(user.id);
-      if (localPrefs) {
-        const merged = { ...defaultPreferences, ...localPrefs } as UserPreferences;
-        setPreferences(merged);
-        console.info('[PreferencesContext] loaded from localStorage:', {
-          finance: merged.default_finance_period,
-          overview: merged.default_overview_period,
-          cashflow: merged.default_cashflow_period,
-        });
-      }
+      // Merge order: defaults < DB < localStorage (localStorage WINS on same device).
+      // Why: localStorage reflects the user's most recent local action and is always
+      // fresh. The DB row may be stale (e.g. if a prior upsert silently failed).
+      // Cross-device sync still works: a new device has empty localStorage, so DB wins.
+      let merged: UserPreferences = { ...defaultPreferences };
 
-      // 2) Then fetch from Supabase — overrides local if DB has a more recent value.
+      // 1) DB layer
       const { data, error } = await supabase
         .from('user_preferences')
         .select('preferences')
@@ -112,16 +106,31 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
       }
 
       if (data && data.preferences) {
-        const merged = { ...defaultPreferences, ...data.preferences } as UserPreferences;
-        setPreferences(merged);
-        saveLocalPrefs(user.id, merged); // sync localStorage with DB truth
-        console.info('[PreferencesContext] loaded from DB:', {
+        merged = { ...merged, ...data.preferences };
+        console.info('[PreferencesContext] DB layer:', {
           finance: merged.default_finance_period,
           overview: merged.default_overview_period,
           cashflow: merged.default_cashflow_period,
         });
-      } else if (!localPrefs) {
-        // No DB row + no local fallback — initialise with defaults
+      }
+
+      // 2) localStorage layer (overrides DB — most recent local action wins)
+      const localPrefs = loadLocalPrefs(user.id);
+      if (localPrefs) {
+        merged = { ...merged, ...localPrefs };
+        console.info('[PreferencesContext] localStorage layer (overrides DB):', {
+          finance: merged.default_finance_period,
+          overview: merged.default_overview_period,
+          cashflow: merged.default_cashflow_period,
+        });
+      }
+
+      setPreferences(merged);
+      // Sync the merged result back to both layers so they're aligned for next time.
+      saveLocalPrefs(user.id, merged);
+
+      // If neither localStorage nor DB had anything, seed the DB so future fetches succeed.
+      if (!localPrefs && !(data && data.preferences)) {
         const { error: upsertError } = await supabase
           .from('user_preferences')
           .upsert(
@@ -130,10 +139,14 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
           );
         if (upsertError) {
           console.error('[PreferencesContext] initial upsert failed:', upsertError);
-        } else {
-          saveLocalPrefs(user.id, defaultPreferences);
         }
       }
+
+      console.info('[PreferencesContext] FINAL merged prefs:', {
+        finance: merged.default_finance_period,
+        overview: merged.default_overview_period,
+        cashflow: merged.default_cashflow_period,
+      });
       setLoading(false);
     };
 
