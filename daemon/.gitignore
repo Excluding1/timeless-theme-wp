@@ -1,0 +1,6 @@
+# Real env file — contains secrets, NEVER commit.
+# .env.example is the template that IS committed.
+.env
+
+# Lock file from running tasks
+*.lock

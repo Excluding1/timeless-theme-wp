@@ -1,0 +1,30 @@
+[Unit]
+Description=CEO Daemon — daily Supabase health check + Slack alerts
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ceo
+Group=ceo
+WorkingDirectory=/opt/timeless/daemon
+ExecStart=/opt/timeless/daemon/tasks/daily-health-check.sh
+
+# Hard timeout — if a single run takes >10 min, kill it.
+# Health check should normally take 2-5 seconds; 10 min is "something is very wrong".
+TimeoutStartSec=600
+RuntimeMaxSec=600
+
+# Failures send to journald only — Slack is the alerting channel.
+StandardOutput=journal
+StandardError=journal
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target

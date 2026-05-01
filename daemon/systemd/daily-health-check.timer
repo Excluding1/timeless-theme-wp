@@ -1,0 +1,15 @@
+[Unit]
+Description=Daily 7am Sydney trigger for CEO Daemon health check
+Requires=daily-health-check.service
+
+[Timer]
+# 7:00 AM Sydney every day. Sydney is UTC+10 (AEST) or UTC+11 (AEDT) depending on DST.
+# OnCalendar interprets in the system timezone, which setup.sh sets to Australia/Sydney.
+OnCalendar=*-*-* 07:00:00
+Persistent=true
+# AccuracySec gives systemd flexibility to bunch timers together — for a daily
+# task we don't care about exact 07:00:00, ±60s is fine.
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target
