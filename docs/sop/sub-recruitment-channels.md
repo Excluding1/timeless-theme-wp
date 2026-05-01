@@ -1,4 +1,4 @@
-# SOP: Sub Recruitment Channels — Where to Find Subs
+# SOP: Subcontractor Recruitment Channels — Where to Find Subcontractors
 
 **Source:** Migrated from `data/archive/old-drafts-2026-04/extracted-sub-onboarding/09-where-to-find-subs.md` (sub-onboarding-system.xlsx Sheet 09).
 **Audited via:** [auditor-fair-work.md](../roles/auditor-fair-work.md) (recruitment language must reflect contractor-not-employee) + [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md)
@@ -8,7 +8,7 @@
 
 ## Why this SOP exists
 
-We don't train tradies. Per [CEO Override 12](../CEO.md), we recruit pre-trained subs and add value via lead-flow + admin. **Sub roster scaling is the #1 growth bottleneck** once demand kicks in (per [Jordan Video 33, 43, 46](../../data/research/jordan-transcripts-mined-2026-05-01.md) — Surface Care has 70 subs across AU; we need a clear channel mix from Day 1).
+We don't train tradies. Per [CEO Override 12](../CEO.md), we recruit pre-trained subcontractors and add value via lead-flow + admin. **Subcontractor roster scaling is the #1 growth bottleneck** once demand kicks in (per [Jordan Video 33, 43, 46](../../data/research/jordan-transcripts-mined-2026-05-01.md) — Surface Care has 70 subcontractors across AU; we need a clear channel mix from Day 1).
 
 Per [Jordan V63](../../data/research/jordan-transcripts-mined-2026-05-01.md): demand outpacing supply means leads walk out 75% of the time when wait is 3-4 weeks. **Recruitment must run continuously, not as a Phase-3 one-off.**
 
@@ -22,7 +22,7 @@ Per [Jordan V63](../../data/research/jordan-transcripts-mined-2026-05-01.md): de
 
 **Volume:** 10-20 responses per post; 80% won't pass [vetting](sub-vetting-checklist.md).
 
-**Best for:** Sole-trader regrout subs. This is where sole-trader tradies look for work.
+**Best for:** Sole-trader regrout subcontractors. This is where sole-trader tradies look for work.
 
 **Failure mode:** if ad uses employee-language ("hiring", "salary"), creates sham contracting evidence trail. Use "engaging subcontractors" / "ABN required" / "flat rate per job" only.
 
@@ -35,9 +35,9 @@ Per [Jordan V63](../../data/research/jordan-transcripts-mined-2026-05-01.md): de
 - Subcontractors NSW
 - NSW Tiles & Bathroom Renovations
 
-**How:** Watch for tradies advertising services; DM promising candidates. Or post an "open for work?" call for regrout/resurface subs.
+**How:** Watch for tradies advertising services; DM promising candidates. Or post an "open for work?" call for regrout/resurface subcontractors.
 
-**Best for:** Niche specialists (regrout-only, resurface-only). Trade FB groups are the **#1 source for niche subs**.
+**Best for:** Niche specialists (regrout-only, resurface-only). Trade FB groups are the **#1 source for niche subcontractors**.
 
 **Failure mode:** group rules vary; some prohibit recruitment posts. Read group rules before posting; lead with "we'd like to engage..." not "hiring".
 
@@ -49,7 +49,7 @@ Per [Jordan V63](../../data/research/jordan-transcripts-mined-2026-05-01.md): de
 - ✅ "engaging subcontractors", "seeking independent contractors", "ABN required"
 - ❌ "hiring", "employee", "permanent role", "salary"
 
-**Best for:** subs who want a steady-flow side income alongside their existing trade. Lower pass rate (most respondents are looking for employment) but quality candidates exist.
+**Best for:** subcontractors who want a steady-flow side income alongside their existing trade. Lower pass rate (most respondents are looking for employment) but quality candidates exist.
 
 ### 4. Hipages / Airtasker (screen existing tradies)
 
@@ -59,7 +59,7 @@ Per [Jordan V63](../../data/research/jordan-transcripts-mined-2026-05-01.md): de
 - Portfolio (real before/after)
 - Pricing range (very-low pricers signal cutting corners)
 
-**Outreach:** *"We coordinate bathroom resurfacing work across Sydney and are looking for experienced subs to add to our network. Interested?"*
+**Outreach:** *"We coordinate bathroom resurfacing work across Sydney and are looking for experienced subcontractors to add to our network. Interested?"*
 
 **Best for:** **Existing operators with proven quality.** Pre-vetted by their public reviews.
 
@@ -69,23 +69,23 @@ Per [Jordan V63](../../data/research/jordan-transcripts-mined-2026-05-01.md): de
 
 **How:** Bert sells Hawk Glass-Tech and knows who's buying it = he knows who's doing resurfacing in Sydney.
 
-Ask Bert: *"Do you know any experienced resurfacing technicians in Sydney who might be looking for additional work? We coordinate jobs and need quality subs."*
+Ask Bert: *"Do you know any experienced resurfacing technicians in Sydney who might be looking for additional work? We coordinate jobs and need quality subcontractors."*
 
-**Best for:** **Resurface subs specifically.** Bert is THE supplier — he sees everyone.
+**Best for:** **Resurface subcontractors specifically.** Bert is THE supplier — he sees everyone.
 
 **Cross-reference:** [docs/specs/bert-supplier.md](../specs/bert-supplier.md) for Bert relationship status, capabilities, contact info.
 
 **Failure mode:** Bert is a supplier, not a recruiter — don't put him in awkward position. Ask casually, accept if he says "I don't pass on names." But this channel has paid off historically (per Bert call transcripts).
 
-### 6. Existing sub network referrals
+### 6. Existing subcontractor network referrals
 
-**How:** Once we have one good sub, ask them: *"Know anyone else who does quality work and might want sub work?"*
+**How:** Once we have one good subcontractor, ask them: *"Know anyone else who does quality work and might want subcontractor work?"*
 
-Pay an introducer's fee ($200 per sub who passes trial, paid 30 days post-first-job-completed) to incentivise.
+Pay an introducer's fee ($200 per subcontractor who passes trial, paid 30 days post-first-job-completed) to incentivise.
 
-**Best for:** Highest-quality candidates. Good tradies know other good tradies. Often **the best source of quality subs.**
+**Best for:** Highest-quality candidates. Good tradies know other good tradies. Often **the best source of quality subcontractors.**
 
-**Failure mode:** if only sub goes bad, their referrals may also be poor quality. Don't lean exclusively on one network.
+**Failure mode:** if only subcontractor goes bad, their referrals may also be poor quality. Don't lean exclusively on one network.
 
 ### 7. Franchise alumni (Jim's / Surface Care / Bathroom Werx)
 
@@ -93,15 +93,15 @@ Pay an introducer's fee ($200 per sub who passes trial, paid 30 days post-first-
 
 **Outreach approach:** *"We're a smaller operation — keep things flexible, fair rates, no franchise fees. Open to a chat?"*
 
-**Best for:** **Highly-trained subs who left for autonomy or better economics.** They're already familiar with the dispatch model so onboarding is faster.
+**Best for:** **Highly-trained subcontractors who left for autonomy or better economics.** They're already familiar with the dispatch model so onboarding is faster.
 
-**⚠️ Failure mode:** **Don't poach active subs** (bad reputation, possible tortious interference claim from competitor). Look for people who've recently left or are doing independent work. Surface Care subs in particular: don't poach (Jordan is our competitive intelligence reference, not adversary).
+**⚠️ Failure mode:** **Don't poach active subcontractors** (bad reputation, possible tortious interference claim from competitor). Look for people who've recently left or are doing independent work. Surface Care subcontractors in particular: don't poach (Jordan is our competitive intelligence reference, not adversary).
 
 ### 8. Trade schools / TAFE
 
 **How:**
-- **Regrout subs:** recently qualified tilers looking for experience. They know tile/grout fundamentals.
-- **Resurface subs:** automotive spray painters transitioning to bathroom work. Spray application skills transfer directly.
+- **Regrout subcontractors:** recently qualified tilers looking for experience. They know tile/grout fundamentals.
+- **Resurface subcontractors:** automotive spray painters transitioning to bathroom work. Spray application skills transfer directly.
 
 **Best for:** when we have time + can invest in training. Higher training investment, but mouldable to our quality standard.
 
@@ -124,11 +124,11 @@ Pay an introducer's fee ($200 per sub who passes trial, paid 30 days post-first-
 - Channel 8 (TAFE): only when gap exists
 
 **Funnel benchmarks (initial estimates — to be replaced with real data after Month 3):**
-- 100 outreaches → 30 responses → 15 take a call → 10 pass vetting → 5 pass trial → 5 active subs
+- 100 outreaches → 30 responses → 15 take a call → 10 pass vetting → 5 pass trial → 5 active subcontractors
 
-So roughly **20:1 ratio outreach to active sub.** We need ~200 outreaches to build a roster of 10 subs.
+So roughly **20:1 ratio outreach to active subcontractor.** We need ~200 outreaches to build a roster of 10 subcontractors.
 
-**Tracking:** Google Sheet `Sub Pipeline` (per [FUTURE-PLAN Phase 3.2](../FUTURE-PLAN.md)) → migrate to BigQuery in Phase 5.
+**Tracking:** Google Sheet `Subcontractor Pipeline` (per [FUTURE-PLAN Phase 3.2](../FUTURE-PLAN.md)) → migrate to BigQuery in Phase 5.
 
 ---
 
@@ -160,8 +160,8 @@ If any ad uses ❌ terms, that ad is sham-contracting evidence forever. Take it 
 ## Future enhancements
 
 - **Recruitment AI agent (Phase 6):** scrape Hipages/Airtasker daily, draft personalised DMs, queue for human approval (per [CEO § AI agent roadmap](../CEO.md#ai-agent-roadmap-per-override-6) and [docs/specs/ai-employees/sub-recruitment-outreach.md](../specs/ai-employees/) — pending spec)
-- **Sub recruitment ad spend:** ~$7/day Meta ads (per [FUTURE-PLAN A1](../FUTURE-PLAN.md)) when funnel is proven; A/B test creatives by channel
-- **Sub-discovery B2B platform** (Year 3+ per [F8](../FUTURE-PLAN.md#f8-sub-discovery-b2b-platform-very-speculative--phase-8)): if recruitment becomes industry-wide bottleneck, build platform that other agencies pay to access vetted subs
+- **Subcontractor recruitment ad spend:** ~$7/day Meta ads (per [FUTURE-PLAN A1](../FUTURE-PLAN.md)) when funnel is proven; A/B test creatives by channel
+- **Sub-discovery B2B platform** (Year 3+ per [F8](../FUTURE-PLAN.md#f8-sub-discovery-b2b-platform-very-speculative--phase-8)): if recruitment becomes industry-wide bottleneck, build platform that other agencies pay to access vetted subcontractors
 
 ---
 

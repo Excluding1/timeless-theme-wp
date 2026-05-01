@@ -30,8 +30,8 @@
 - **Pricing**: equal for all customers (his policy: "small firm to largest firm pays the same — fair game, even playing field")
 - **Contract**: none. Verbal/relationship-based.
 - **Discounts**: limited — extra-gun discount only ($820 → $650 if bought with rig)
-- **Sub recruitment from Bert**: he won't supply names — his existing Sydney customers ARE our competition
-- **Training requirement**: subs MUST have training sign-off (verbal + practical instruction on acids + breathing gear) before Bert sells them etch/cleaners
+- **Subcontractor recruitment from Bert**: he won't supply names — his existing Sydney customers ARE our competition
+- **Training requirement**: subcontractors MUST have training sign-off (verbal + practical instruction on acids + breathing gear) before Bert sells them etch/cleaners
 - **Communication preference**: phone over email for complex topics ("not got time to write big essays")
 
 ## What he supplies
@@ -115,7 +115,7 @@ Per Bert's emails + transcripts:
 3. **Two paths**:
    - Travel to NZ (Bert's home) for training
    - Training with one of Bert's "top guys" in Australia (Melbourne)
-4. **Bert will accept**: signed statement from Allan + the third party that the sub has been instructed
+4. **Bert will accept**: signed statement from Allan + the third party that the subcontractor has been instructed
 5. **Cost**: not free — "going to cost some money" but Bert's wording suggests under $2K per trainee
 
 ## Bert's strategic advice (quote-unquote, from emails + transcripts)
@@ -126,7 +126,7 @@ Per Bert's emails + transcripts:
 ### On business approach
 > *"To get this up and running it's going to take commitment, money, and a bit of blood, sweat and tears. But there is very good coin to be made for good operators. Educate yourself first, get confident, then build it up. Rome was not built in a day."*
 
-### On subs/training others
+### On subcontractors/training others
 > *"Never teach anyone that helps you how to spray. Only teach prep work. They'll start up against you in six months."*
 
 ### On warranty for rentals
@@ -151,7 +151,7 @@ Per Bert's emails + transcripts:
 1. **Regrouting-first is right** — no Bert dependency, can ship today
 2. **Resurfacing service deferred** until training trip + ~$12K equipment + ~5K cash buffer
 3. **"From X" pricing language**: cement grout = 2-year warranty, epoxy = 5-year, bathtub = up to 5-year private home / 6 months rental
-4. **Sub recruitment for resurfacing**: NOT through Bert (his customers are competition); recruit existing AU resurfacers looking for steady work
+4. **Subcontractor recruitment for resurfacing**: NOT through Bert (his customers are competition); recruit existing AU resurfacers looking for steady work
 5. **Future expansion**: kitchen + benchtop are bigger market than bathroom — consider Phase 7 (year 1+)
 6. **Training trip planning** (Override 11): 1 founder, Melbourne, ~$1-2K total cost, when business cash >$5K
 
@@ -170,7 +170,7 @@ Per Bert's emails + transcripts:
 - Bert relationship stays warm — quarterly check-in even if no order placed
 - Pricing remains stable (Bert's policy says yes)
 - New product releases monitored (e.g., Loft Collection, Apollo HVLP system updates)
-- Training cert status of any sub kept on file with Bert sign-off
+- Training cert status of any subcontractor kept on file with Bert sign-off
 - Order frequency tracks to job volume
 
 ---

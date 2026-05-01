@@ -10,7 +10,7 @@
 
 ## Why this employee exists
 
-Per [sub-materials-standard.md](../../sop/sub-materials-standard.md), our approved-products list dictates what subs use on jobs. **A wrong-product call costs us:**
+Per [sub-materials-standard.md](../../sop/sub-materials-standard.md), our approved-products list dictates what subcontractors use on jobs. **A wrong-product call costs us:**
 - Customer warranty claim ($400-1200 per re-do)
 - Brand damage if pattern (Reddit/forums spread fast)
 - ACCC consumer guarantee exposure if marketing claimed durability that material doesn't deliver
@@ -245,7 +245,7 @@ OR for new-brand evaluation:
 @ai-materials-validator: Evaluate brand "[Brand X]" for approval.
 
 Use case: [regrout / resurface / silicone / etc]
-Sub asking about it: [Sub name + context]
+Subcontractor asking about it: [Subcontractor name + context]
 Reason for evaluation: [why we're considering]
 
 Output: append to docs/specs/materials-validation-2026-MM-findings.md
@@ -261,7 +261,7 @@ Confidence threshold: 75%. Deadline: 6 hours.
 Quarterly CEO review:
 - [ ] Audit cycle completed on schedule (last quarter)?
 - [ ] Recommendations from prior cycle applied to sub-materials-standard?
-- [ ] Any post-application issues (sub used new brand, customer warranty issue)?
+- [ ] Any post-application issues (subcontractor used new brand, customer warranty issue)?
 - [ ] Confidence trend — declining = prompt drift or stale knowledge?
 - [ ] Acceptance rate — if CEO rejects >70% of recommendations, prompt needs work
 - [ ] Cost trend — $/brand-evaluated stable?
@@ -272,10 +272,10 @@ Quarterly CEO review:
 
 ## Future enhancements (post-MVP)
 
-- **Sub-materials request handler:** sub asks "can I use Brand X this job?" → agent runs quick eval (5-10min, simpler than full audit) → approves/denies via Slack
+- **Sub-materials request handler:** subcontractor asks "can I use Brand X this job?" → agent runs quick eval (5-10min, simpler than full audit) → approves/denies via Slack
 - **Recall watch:** subscribe to ACCC recall RSS, alert immediately if any brand on our list gets recalled
 - **Price-tracking dashboard:** chart price history per approved brand; alert on >15% jumps
-- **Photo-based product detection:** Claude Vision reads sub's before/during photos, identifies products on visible labels, flags non-approved use
+- **Photo-based product detection:** Claude Vision reads subcontractor's before/during photos, identifies products on visible labels, flags non-approved use
 
 ---
 

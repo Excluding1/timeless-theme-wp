@@ -10,11 +10,12 @@
 
 ## Active questions (waiting on Allan/Marko)
 
-### Q1. Marko's resurfacing sub day rate (Excel margin model)
-**Status:** ❓ Open
-**Why I need it:** Excel sub-labour numbers ($370-490/job for shower regrout) need validation against what Marko's actual established-business resurfacing subs charge. Affects margin model accuracy.
-**Affects:** [data/pricing/master-pricing-2026-05-01-snapshot.xlsx](../data/pricing/master-pricing-2026-05-01-snapshot.xlsx) Sub Labour column
-**Question:** What's the realistic per-job rate for Marko's known resurfacing sub for: (a) standard bathtub resurface, (b) shower-over-bath combo, (c) chip repair?
+### Q1. Marko's resurfacing subcontractor day rate (Excel margin model)
+**Status:** 🟡 DEFERRED 2026-05-01 PM — Allan's direction: validates only when Marko engages first subcontractor (precondition for Q14).
+**Why I need it:** Excel sub-labour numbers ($370-490/job for shower regrout) need validation against what Marko's actual established-business resurfacing subcontractors charge. Affects margin model accuracy.
+**Affects:** [data/pricing/master-pricing-2026-05-01-snapshot.xlsx](../data/pricing/master-pricing-2026-05-01-snapshot.xlsx) Subcontractor Labour column, [sub-rate-schedule.md](specs/sub-rate-schedule.md)
+**Question:** What's the realistic per-job rate for Marko's known resurfacing subcontractor for: (a) standard bathtub resurface, (b) shower-over-bath combo, (c) chip repair?
+**Temporary baseline:** CEO running international rate research (US Miracle Method, UK Bath Revive, AU Hipages benchmarks) + fully-loaded margin model that accounts for ALL costs (ads, GHL/SM8/Stripe/Cloudinary digital tools, sub pay, materials, travel, insurance amortisation) — see [sub-rate-schedule.md § Margin Model](specs/sub-rate-schedule.md). Numbers replaced with reality once Marko engages first subcontractor.
 
 ### Q2. Marko personal context (sustainability planning)
 **Status:** ❓ Open
@@ -40,9 +41,9 @@
 
 ### Q4. Bert wholesale-for-our-subs question
 **Status:** ❓ Open
-**Why I need it:** Could Bert offer trade pricing to subs ordering through us as a fleet? Would lower sub material costs + tighten relationship.
-**Affects:** Margin model + sub value-add
-**Question:** Allan to ask Bert in next conversation: "If our subs order Hawk products through us as a group, can you offer fleet/wholesale pricing different from individual operator pricing?"
+**Why I need it:** Could Bert offer trade pricing to subcontractors ordering through us as a fleet? Would lower subcontractor material costs + tighten relationship.
+**Affects:** Margin model + subcontractor value-add
+**Question:** Allan to ask Bert in next conversation: "If our subcontractors order Hawk products through us as a group, can you offer fleet/wholesale pricing different from individual operator pricing?"
 
 ### Q5. Builder licence necessity outcome
 **Status:** ❓ Open (Override 5 action item)
@@ -116,10 +117,11 @@
 - Will sender ID be the Twilio number or separate?
 
 ### Q14. Customer #1 (Marko's referrer customer) full details
-**Status:** ❓ Open per [STATE.md § 8 active customer pipeline](STATE.md)
+**Status:** 🟡 DEFERRED 2026-05-01 PM — Allan's direction: leave until system built + Marko onboards + tests first resurfacing subcontractor. Then capture customer #1 details, run her through full system as the proving customer.
 **Why I need it:** Real first booking + holding-quote drafting.
 **Affects:** Override 1 first 3 customers + customer #1 timeline
-**Questions:**
+**Precondition:** Q15 (Marko's first subcontractor engaged + trial passed) → THEN Q14 captured + run end-to-end through GHL + SM8 + payment flow as the system's first real test.
+**Questions (capture once trigger met):**
 - Customer name?
 - Suburb / address?
 - Contact (phone + email)?
@@ -129,19 +131,19 @@
 - Photos available now or need her to take?
 - Earliest she'd want booking?
 
-### Q15. Marko's sub network — specific names + readiness
-**Status:** ❓ Open
+### Q15. Marko's subcontractor network — specific names + readiness
+**Status:** 🟡 DEFERRED 2026-05-01 PM — Allan's direction: this becomes active when Marko ready to onboard first resurfacing subcontractor. Tied to Q14 (customer #1 unblocks once Q15 resolved).
 **Why I need it:** Override 9 v4 sub-led path + customer #1 dispatch planning.
-**Affects:** First booking dispatch
-**Questions:**
-- Names of 1-3 specific resurfacing subs Marko has in mind for customer #1
+**Affects:** First booking dispatch, [sub-rate-schedule.md](specs/sub-rate-schedule.md) validation, Q1 + Q18 resolution
+**Questions (capture when active):**
+- Names of 1-3 specific resurfacing subcontractors Marko has in mind for customer #1
 - Their typical day rate
 - Their availability in next 4 weeks
-- Their location (sub coverage zone alignment with customer)
+- Their location (subcontractor coverage zone alignment with customer)
 
 ### Q16. NSW Long Service Corporation portable leave applicability (raised 2026-05-01 PM in [sub-tax-compliance.md](sop/sub-tax-compliance.md))
 **Status:** ❓ Open
-**Why I need it:** Could trigger 0.35% levy on all sub payments if applicable. Likely not (genuine independent contractors with own ABN + multiple clients), but must confirm in writing.
+**Why I need it:** Could trigger 0.35% levy on all subcontractor payments if applicable. Likely not (genuine independent contractors with own ABN + multiple clients), but must confirm in writing.
 **Affects:** [sub-tax-compliance.md § C](sop/sub-tax-compliance.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md)
 **Action needed:** Allan calls **Long Service Corporation NSW** (13 14 41) or emails enquiries@longservice.nsw.gov.au with this question:
 
@@ -156,14 +158,15 @@ Get answer in writing.
 **Question:** Add ABN field to WordPress Customizer next time Allan editing Customizer (5min task).
 
 ### Q18. Master pricing sub-labour validation (raised 2026-05-01 PM in [sub-rate-schedule.md](specs/sub-rate-schedule.md))
-**Status:** ❓ Open (related to Q1)
-**Why I need it:** Sub rate schedule numbers ($320-$650 regrout, $250-$800 resurface) are EXAMPLES from old draft Excel, not validated against Marko's actual sub network or master pricing Excel sub-labour column.
+**Status:** 🟡 DEFERRED 2026-05-01 PM — Allan's direction: same trigger as Q1 (Marko engages first subcontractor). CEO doing temporary international research + fully-loaded margin model NOW so we have defensible draft until validated.
+**Why I need it:** Subcontractor rate schedule numbers ($320-$650 regrout, $250-$800 resurface) are EXAMPLES from old draft Excel. Need defensible international-research-backed baseline + full cost model now; replace with reality once Marko engages first subcontractor.
 **Affects:** [sub-rate-schedule.md](specs/sub-rate-schedule.md), pricing audit Phase A, margin model
-**Questions:**
-- Reconcile sub-rate-schedule numbers against Marko's known sub network rates (Q1 follow-up)
+**Temporary action (CEO doing now):** International rate research (US Miracle Method, UK Bath Revive, Sydney Hipages comp) + fully-loaded margin model (ads + GHL/SM8/Stripe/Cloudinary + sub pay + materials + travel + insurance amortisation). Output: [sub-rate-schedule.md § Margin Model](specs/sub-rate-schedule.md).
+**Questions (revisit when active):**
+- Reconcile sub-rate-schedule numbers against Marko's known subcontractor network rates (Q1 follow-up)
 - Reconcile against master pricing Excel sub-labour column for each SKU
-- Run [auditor-margin-per-job](roles/auditor-margin-per-job.md) lens — sub pay-out leaves us with ≥$300 profit floor at T2 customer price?
-- Run [auditor-fair-work](roles/auditor-fair-work.md) lens — sub $/hr ≥$70 resurface / ≥$60 regrout / ≥$50 silicone-only?
+- Run [auditor-margin-per-job](roles/auditor-margin-per-job.md) lens — subcontractor pay-out leaves us with ≥$300 profit floor at T2 customer price?
+- Run [auditor-fair-work](roles/auditor-fair-work.md) lens — subcontractor $/hr ≥$70 resurface / ≥$60 regrout / ≥$50 silicone-only?
 
 ---
 
@@ -175,7 +178,7 @@ Get answer in writing.
 | - | GitHub repo URLs | HANDOFF.md confirmed `Excluding1/timeless-theme-wp` + `TimelessDash` | 2026-05-01 PM |
 | - | Bert (supplier) details | Extensive intel from voice call transcripts + email + CSV | 2026-05-01 PM |
 | - | Live site state (phone, pages, SSL, redirects) | Curl-audited; all good | 2026-05-01 PM |
-| - | Marko's hours + skills | 10-20hr/week; multi-trade incl. regrouting; established-business resurfacing sub network | 2026-05-01 PM |
+| - | Marko's hours + skills | 10-20hr/week; multi-trade incl. regrouting; established-business resurfacing subcontractor network | 2026-05-01 PM |
 | - | Customer #1 exists | Marko has prior regrouting customer, soft-locked, shower-over-bath resurface peeling | 2026-05-01 PM |
 | - | Pricing Excel canonical | Confirmed Excel snapshot matches Allan's authoritative version | 2026-05-01 PM |
 

@@ -40,9 +40,9 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 6. Prepayment (Stripe link sent)
         ↓ (Stripe webhook: deposit cleared)
 7. Job in ServiceM8 (job card created)
-        ↓ (sub assigned + date locked)
+        ↓ (subcontractor assigned + date locked)
         ├──→ 8. Job On Hold (access/strata/asbestos blocker — pauses 7→10 transition)
-        ├──→ 9. Job Issue (sub reports problem mid-flow)
+        ├──→ 9. Job Issue (subcontractor reports problem mid-flow)
         ↓
 10. Job Booked
         ↓ (SM8 webhook: completion form submitted)
@@ -51,7 +51,7 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 12. Job Invoiced (awaiting customer payment)
         ↓ (Stripe webhook: final payment cleared)
 13. Job Paid (terminal)
-        ↓ (sub paid via pay.com.au within 72hr per SOPA)
+        ↓ (subcontractor paid via pay.com.au within 72hr per SOPA)
         [closed]
 ```
 
@@ -146,9 +146,9 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 |---|---|
 | Owner | Marko (or AI Dashboard Connector when Phase 6.6a live) |
 | Trigger to enter | Stripe webhook fires deposit-paid → GHL workflow creates SM8 job via Zapier → SM8 job ID returned to GHL |
-| Trigger to exit | Sub assigned in SM8 + date locked (auto via SM8 webhook back to GHL) |
-| Ageing rule | **2hr alert if no sub accepts; escalate to Marko** (per Override 14 v2 audit) |
-| Escalation | >24hr without sub assignment = `#dispatch-stuck` Slack alert |
+| Trigger to exit | Subcontractor assigned in SM8 + date locked (auto via SM8 webhook back to GHL) |
+| Ageing rule | **2hr alert if no subcontractor accepts; escalate to Marko** (per Override 14 v2 audit) |
+| Escalation | >24hr without subcontractor assignment = `#dispatch-stuck` Slack alert |
 | Custom fields written | `sm8_job_id`, `sm8_job_created_ts`, `assigned_sub_id` (once assigned) |
 | Tags applied | `sm8_job_created`, `awaiting_sub` |
 | Workflows triggered | None auto (SM8 dispatch is its own flow); ageing reminders |
@@ -171,7 +171,7 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 | Field | Value |
 |---|---|
 | Owner | Allan + Marko |
-| Trigger to enter | Sub reports problem mid-flow OR customer complaint mid-job OR photo review fails |
+| Trigger to enter | Subcontractor reports problem mid-flow OR customer complaint mid-job OR photo review fails |
 | Trigger to exit | Issue resolved (manual back to Stage 7 or Stage 10/11 depending on resolution) |
 | Ageing rule | **30min Slack alert; 4hr CEO callback per SLA** |
 | Escalation | If unresolved 24hr OR safety/legal angle → CEO crisis triage |
@@ -184,7 +184,7 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 | Field | Value |
 |---|---|
 | Owner | Marko |
-| Trigger to enter | Sub assigned + date locked + customer notified |
+| Trigger to enter | Subcontractor assigned + date locked + customer notified |
 | Trigger to exit | SM8 webhook fires on job completion |
 | Ageing rule | None (job has its own scheduled date — calendar-driven, not ageing-driven) |
 | Escalation | If date passes without completion → Slack alert |
@@ -222,10 +222,10 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 
 | Field | Value |
 |---|---|
-| Owner | Marko (sub payout); CEO (closed) |
+| Owner | Marko (subcontractor payout); CEO (closed) |
 | Trigger to enter | Stripe final-payment cleared |
-| Trigger to exit | Sub paid via pay.com.au + `sub_paid=true` flag set |
-| Ageing rule | **Sub MUST be paid within 72hr of customer payment clearing** (per Override 14 v2 audit + SOPA discipline) |
+| Trigger to exit | Subcontractor paid via pay.com.au + `sub_paid=true` flag set |
+| Ageing rule | **Subcontractor MUST be paid within 72hr of customer payment clearing** (per Override 14 v2 audit + SOPA discipline) |
 | Escalation | >72hr sub-unpaid = Slack `#sub-payouts-overdue` (cashflow + sub-loyalty risk) |
 | Custom fields written | `final_payment_received_ts`, `sub_paid_ts`, `sub_paid_amount`, `pay_com_au_ref` |
 | Tags applied | `final_payment_received`, `sub_paid` (when complete), `closed` (terminal flag) |
@@ -239,10 +239,10 @@ Jordan (Surface Care AU, ~$2M/yr) runs 15 stages. We adopt 13. The 2 we skip:
 
 | Skipped stage | Why doesn't apply to us |
 |---|---|
-| Sub-quote Requested | We use fixed rate cards ([sub-rate-schedule.md](sub-rate-schedule.md)). Subs don't bid per job; they accept rate-card pay or decline. No quote stage needed. |
+| Sub-quote Requested | We use fixed rate cards ([sub-rate-schedule.md](sub-rate-schedule.md)). Subcontractors don't bid per job; they accept rate-card pay or decline. No quote stage needed. |
 | Sub-quote Received | Same reason — there's no sub-side quote to receive. |
 
-If we ever switch to per-job sub bidding (unlikely — fixed rates are simpler + sub-friendly), reactivate these 2 stages.
+If we ever switch to per-job subcontractor bidding (unlikely — fixed rates are simpler + sub-friendly), reactivate these 2 stages.
 
 ---
 
@@ -253,8 +253,8 @@ CEO v1 wanted to merge these 3 into other stages. Allan caught the mistake; v2 k
 | Stage | Why it's distinct |
 |---|---|
 | Stage 5 (Site Inspection) | Distinct waiting state from "Quote Accepted." Customer agreed in principle, full quote depends on physical inspection. Even at low volume (rare flag), when triggered it's a real waiting state with own SLA. |
-| Stage 6 vs Stage 7 (Prepayment vs Job in SM8) | 2 different waiting periods. Prepayment = waiting on customer to click Stripe link; Job in SM8 = waiting for sub to accept job card. **Different alerts, different ageing thresholds.** Merging would lose escalation visibility. |
-| Stage 12 vs Stage 13 (Invoiced vs Paid) | 2 different waiting periods. Invoice sent → waiting customer payment; Paid → waiting sub payout via pay.com.au. **Cash flow visibility requires distinct stages** for KPI dashboard accuracy. |
+| Stage 6 vs Stage 7 (Prepayment vs Job in SM8) | 2 different waiting periods. Prepayment = waiting on customer to click Stripe link; Job in SM8 = waiting for subcontractor to accept job card. **Different alerts, different ageing thresholds.** Merging would lose escalation visibility. |
+| Stage 12 vs Stage 13 (Invoiced vs Paid) | 2 different waiting periods. Invoice sent → waiting customer payment; Paid → waiting subcontractor payout via pay.com.au. **Cash flow visibility requires distinct stages** for KPI dashboard accuracy. |
 
 ---
 
@@ -337,7 +337,7 @@ CEO v1 wanted to merge these 3 into other stages. Allan caught the mistake; v2 k
 |---|---|
 | Trigger | Stage 10 (Job Booked) + 24h before `job_booked_date` |
 | Action 1 | SMS to customer: *"Hi [First Name], reminder your bathroom job is booked for [date] [time]. Our tech will call ~30min before arrival. Need to reschedule? Reply or call [phone]. — Timeless"* |
-| Action 2 | Slack ping to assigned sub via SM8 |
+| Action 2 | Slack ping to assigned subcontractor via SM8 |
 
 ### W9: Cure Time Warning
 
@@ -376,7 +376,7 @@ CEO v1 wanted to merge these 3 into other stages. Allan caught the mistake; v2 k
 |---|---|
 | Trigger | Stage 13 (Job Paid) entered |
 | Wait | 0s |
-| Action | Email customer: PDF warranty certificate with: service, date, sub name (or "Timeless team"), warranty term per service (regrout 12mo / resurface up-to-5-year private / 6mo rental / etc), care instructions, our contact for any issues. |
+| Action | Email customer: PDF warranty certificate with: service, date, subcontractor name (or "Timeless team"), warranty term per service (regrout 12mo / resurface up-to-5-year private / 6mo rental / etc), care instructions, our contact for any issues. |
 | Compliance | ACCC — warranty in writing, in addition to ACL rights, no over-claiming |
 
 ---
@@ -419,8 +419,8 @@ Per [OPERATING-CONTEXT § 8.3](../OPERATING-CONTEXT.md). Stage-aligned tag prefi
 | `#job-issues` | W7 Job Issue alerts |
 | `#nps-detractors` | W10 NPS 1-6 alerts → Allan callback |
 | `#sla-breach` | Stage 2 >24hr, Stage 5 >10 days, Stage 9 unresolved |
-| `#dispatch-stuck` | Stage 7 no sub assignment >24hr |
-| `#sub-payouts-overdue` | Stage 13 sub unpaid >72hr |
+| `#dispatch-stuck` | Stage 7 no subcontractor assignment >24hr |
+| `#sub-payouts-overdue` | Stage 13 subcontractor unpaid >72hr |
 | `#system-alerts` | Webhook integrity (transient stages stuck >5min) |
 | `#weekly-numbers` | Weekly KPI digest from BQ |
 | `#ai-agents-activity` | All AI agent posts (per OPERATING-CONTEXT § 12) |
@@ -448,7 +448,7 @@ Per [OPERATING-CONTEXT § 8.3](../OPERATING-CONTEXT.md). Stage-aligned tag prefi
 - [ ] [auditor-webhook-integrity](../roles/auditor-webhook-integrity.md) full lens: every event reaches its destination, no silent drops
 
 ### Weekly (post-launch)
-- [ ] Pipeline integrity: every Stage 7 has matching SM8 job; every Stage 13 has sub paid <72hr
+- [ ] Pipeline integrity: every Stage 7 has matching SM8 job; every Stage 13 has subcontractor paid <72hr
 - [ ] Ageing alerts firing correctly (no stuck-stage opps invisible)
 - [ ] Slack channel signal-to-noise — any alerts that aren't useful, mute or remove
 
@@ -460,7 +460,7 @@ Per [OPERATING-CONTEXT § 8.3](../OPERATING-CONTEXT.md). Stage-aligned tag prefi
 ### Quarterly
 - [ ] Full pipeline review — stages still right? workflows still firing? any stage that should be split or merged?
 - [ ] Custom fields hygiene — orphaned fields, unused fields, fields that should be tags
-- [ ] Sub Stripe payouts via pay.com.au still working + 72hr SLA met
+- [ ] Subcontractor Stripe payouts via pay.com.au still working + 72hr SLA met
 
 ---
 
@@ -487,7 +487,7 @@ Phase 1.1 → 1.9, in order. Critical: build custom fields + tags BEFORE workflo
 - [docs/OPERATING-CONTEXT.md § 8.4](../OPERATING-CONTEXT.md) — historical 17-stage version (deprecated by this spec)
 - [docs/OPERATING-CONTEXT.md § 8.5](../OPERATING-CONTEXT.md) — 12-workflow original list (matched here with stage numbers updated)
 - [docs/FUTURE-PLAN.md § Phase 1](../FUTURE-PLAN.md) — implementation phases (note: § 1.4 still references 17-stage; should be updated to 13)
-- [docs/specs/sub-rate-schedule.md § D](sub-rate-schedule.md) — sub payment process (Stage 13 sub-paid 72hr)
+- [docs/specs/sub-rate-schedule.md § D](sub-rate-schedule.md) — subcontractor payment process (Stage 13 sub-paid 72hr)
 - [docs/sop/sub-sopa-protections.md](../sop/sub-sopa-protections.md) — payment timing law (backs Stage 12 + Stage 13 ageing)
 - [docs/roles/expert-ghl-operator.md](../roles/expert-ghl-operator.md) — GHL operator lens
 - [docs/roles/auditor-webhook-integrity.md](../roles/auditor-webhook-integrity.md) — webhook integrity lens

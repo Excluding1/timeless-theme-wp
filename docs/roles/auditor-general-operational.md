@@ -64,10 +64,10 @@ When CEO asks "which 3 auditors for this decision?", I help map:
 | Quote form UX | expert-cro-specialist | auditor-customer-fairness | auditor-mobile-abandonment |
 | Quote tier pricing | expert-pricing-trade | auditor-customer-fairness + auditor-fair-work | auditor-margin-per-job |
 | GHL pipeline structure | expert-ghl-operator | operator (Allan/Marko using it) | **auditor-general-operational** (this role) |
-| Sub agreement clauses | expert-trades-ops-contractor | auditor-fair-work | auditor-compliance-aus |
+| Subcontractor agreement clauses | expert-trades-ops-contractor | auditor-fair-work | auditor-compliance-aus |
 | Customer SMS/email copy | expert-direct-response-copywriter | auditor-customer-fairness | auditor-compliance-aus |
 | Brand/positioning | expert-conversion-copywriter | auditor-customer-fairness | auditor-compliance-aus |
-| Sub recruitment outreach | expert-trades-ops-contractor | (sub perspective) | auditor-compliance-aus + auditor-general-operational |
+| Subcontractor recruitment outreach | expert-trades-ops-contractor | (subcontractor perspective) | auditor-compliance-aus + auditor-general-operational |
 | Photo upload pipeline | expert-mobile-frontend (pending) | auditor-customer-fairness | auditor-webhook-integrity + auditor-general-operational |
 | File architecture / SOP design | (CEO directly) | operator (Allan/Marko) | **auditor-general-operational** |
 | AI agent design | expert-ai-ops-engineer (pending) | operator | auditor-ai-safety (pending) + auditor-general-operational |
@@ -184,7 +184,7 @@ When an internal/system decision is being audited:
 - Lens 2: operator perspective (Allan/Marko using it daily — sometimes CEO speaks for them; sometimes ask them directly)
 - Lens 3: this role (general operational adversarial)
 
-If decision involves customer/sub/business stakeholders, swap in those auditors instead of this one.
+If decision involves customer/subcontractor/business stakeholders, swap in those auditors instead of this one.
 
 ---
 

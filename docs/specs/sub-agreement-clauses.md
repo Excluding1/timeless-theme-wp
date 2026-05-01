@@ -29,77 +29,77 @@
 3. **Per Clause 22**: review entire agreement for unfair contract terms under ACL. Since November 2023, unfair terms in standard form small-business contracts are ILLEGAL (not just voidable). Penalties up to $50M per contravention. Pay particular attention to: Clauses 6 (deductions), 9 (non-solicitation), 12 (termination), 15 (rate changes), 25 (indemnity).
 4. Format as DocuSign-ready document
 5. Include schedule attachments: Rate Schedule (Clause 15), Approved Materials list (reference to [docs/sop/sub-materials-standard.md](../sop/sub-materials-standard.md))
-6. Provide quick-reference "Sub Onboarding Briefing Notes" (1-page sub-friendly summary of key obligations)
+6. Provide quick-reference "Subcontractor Onboarding Briefing Notes" (1-page sub-friendly summary of key obligations)
 
 ---
 
 ## The 32 Clauses
 
 ### Clause 1 — Independent Contractor Status
-**Wording (intent):** Sub is independent contractor, not employee/agent/partner. Nothing creates employment relationship. Sub responsible for own tax, super (if applicable), insurance, business expenses.
+**Wording (intent):** Subcontractor is independent contractor, not employee/agent/partner. Nothing creates employment relationship. Subcontractor responsible for own tax, super (if applicable), insurance, business expenses.
 
 **Why it matters:** Sham contracting protection — first line of defence. But the clause alone isn't enough; the real working relationship must match. If it walks like an employee, it's an employee.
 
 ### Clause 2 — Scope of Work
-**Wording:** Sub will perform regrout/resurface services as dispatched via ServiceM8. Sub **not required to accept every job** offered and may decline without penalty. Sub may delegate to qualified replacement with prior written approval.
+**Wording:** Subcontractor will perform regrout/resurface services as dispatched via ServiceM8. Subcontractor **not required to accept every job** offered and may decline without penalty. Subcontractor may delegate to qualified replacement with prior written approval.
 
 **Why:** Decline + delegate rights are critical sham-contracting protections per Fair Work 2024 whole-of-relationship test. Delegation right must genuinely exist.
 
 ### Clause 3 — Payment Terms
 **Wording:** Flat rate per job per Rate Schedule (Clause 15). Payment within **7 business days** of approved Tax Invoice + NSW Subcontractor's Statement. **Payment NOT conditional on customer payment to Principal** (SOPA compliance). Weekly batch payments every Friday.
 
-**Why:** Flat rate (not hourly) supports contractor status. SOPA: must pay subs for completed work even if customer hasn't paid. Per Building & Construction Industry Security of Payment Act 1999 (NSW).
+**Why:** Flat rate (not hourly) supports contractor status. SOPA: must pay subcontractors for completed work even if customer hasn't paid. Per Building & Construction Industry Security of Payment Act 1999 (NSW).
 
 ### Clause 4 — Materials and Equipment
-**Wording:** Sub supplies all materials, tools, equipment at own cost. Materials must be from Approved Materials list. Non-approved = sub bears full rectification cost.
+**Wording:** Subcontractor supplies all materials, tools, equipment at own cost. Materials must be from Approved Materials list. Non-approved = subcontractor bears full rectification cost.
 
 Approved (resurface): Hawk Glass-Tech only via ARS.
 Approved (regrout cement): Davco Sanitised (preferred), Ardex FG8, Laticrete PermaColor.
 Approved (regrout epoxy): Ardex EG15, Davco K10, Laticrete SpectraLOCK.
 
-**Why:** Sub supplying own tools + materials = key contractor indicator. Approved list protects quality (consumer-grade fails in months → consumer guarantee liability lands on us).
+**Why:** Subcontractor supplying own tools + materials = key contractor indicator. Approved list protects quality (consumer-grade fails in months → consumer guarantee liability lands on us).
 
 ### Clause 5 — Quality Standards and Warranty
-**Wording:** Sub warrants work performed (a) professional and workmanlike (b) per Principal's quality standards (c) using only approved materials (d) with **12-month warranty** on workmanship and materials.
+**Wording:** Subcontractor warrants work performed (a) professional and workmanlike (b) per Principal's quality standards (c) using only approved materials (d) with **12-month warranty** on workmanship and materials.
 
 Warranty covers defects in workmanship/materials only — not customer misuse, normal wear, or pre-existing structural/waterproofing defects.
 
-**Why:** **THE most important clause.** Without it, sub does bad work, walks away, we refund customer + zero recourse. With it, sub must fix at own cost within warranty period.
+**Why:** **THE most important clause.** Without it, subcontractor does bad work, walks away, we refund customer + zero recourse. With it, subcontractor must fix at own cost within warranty period.
 
 ### Clause 6 — Rectification and Deductions
-**Wording:** If sub fails to rectify defect within 5 business days of notification, Principal may engage another sub. Cost deducted from outstanding payments OR invoiced to original sub if no payments outstanding.
+**Wording:** If subcontractor fails to rectify defect within 5 business days of notification, Principal may engage another subcontractor. Cost deducted from outstanding payments OR invoiced to original subcontractor if no payments outstanding.
 
-**Why:** Without this, if sub refuses to fix, we pay twice — once to original + again to replacement. This clause lets us deduct.
+**Why:** Without this, if subcontractor refuses to fix, we pay twice — once to original + again to replacement. This clause lets us deduct.
 
 ### Clause 7 — Photo Documentation
-**Wording:** Sub must photograph (a) before work (full + close-ups) (b) during work (progress) (c) after completion (same angles as before). Submit same day via ServiceM8. **Payment withheld until photos received.**
+**Wording:** Subcontractor must photograph (a) before work (full + close-ups) (b) during work (progress) (c) after completion (same angles as before). Submit same day via ServiceM8. **Payment withheld until photos received.**
 
 **Why:** Photos = our eyes on every job. Without them we're blind. Also: dispute evidence, social proof for marketing.
 
 ### Clause 8 — Insurance Requirements
-**Wording:** Sub must maintain at all times:
+**Wording:** Subcontractor must maintain at all times:
 (a) Public Liability Insurance — **minimum $10M**
 (b) Personal Accident / Income Protection — RECOMMENDED
-(c) Workers Compensation — MANDATORY if sub has any employees
+(c) Workers Compensation — MANDATORY if subcontractor has any employees
 
-Sub provides Certificate of Currency before first job + each renewal. Sub notifies Principal immediately if insurance lapses.
+Subcontractor provides Certificate of Currency before first job + each renewal. Subcontractor notifies Principal immediately if insurance lapses.
 
-**Why:** Our #1 financial risk. If sub injures themselves or damages property without insurance, we're exposed. $10M PL is conservative AU industry standard for property work. Personal accident protects sub (sole traders get no workers comp for themselves).
+**Why:** Our #1 financial risk. If subcontractor injures themselves or damages property without insurance, we're exposed. $10M PL is conservative AU industry standard for property work. Personal accident protects subcontractor (sole traders get no workers comp for themselves).
 
 ### Clause 9 — Non-Solicitation
-**Wording:** Sub must not directly solicit or perform work for any customer **introduced by Principal** for **12 months** after sub's last job for that specific customer. Applies ONLY to customers sub was directly dispatched to service. Sub must not hand out business cards or personal contacts to customers.
+**Wording:** Subcontractor must not directly solicit or perform work for any customer **introduced by Principal** for **12 months** after subcontractor's last job for that specific customer. Applies ONLY to customers subcontractor was directly dispatched to service. Subcontractor must not hand out business cards or personal contacts to customers.
 
-**Why:** Without this, sub meets our customer, hands them a card, offers 20% less next time. We paid for the lead, they steal the relationship. Narrowed to personally-serviced customers only for UCT compliance.
+**Why:** Without this, subcontractor meets our customer, hands them a card, offers 20% less next time. We paid for the lead, they steal the relationship. Narrowed to personally-serviced customers only for UCT compliance.
 
 ### Clause 10 — Confidentiality and Pricing Prohibition
-**Wording:** Sub must keep confidential all customer details, pricing, business methods, operational info. Survives termination.
+**Wording:** Subcontractor must keep confidential all customer details, pricing, business methods, operational info. Survives termination.
 
-ADDITIONALLY: sub must not discuss, enquire about, or attempt to discover Principal's customer pricing. If asked: **"All pricing goes through the office."** Breach = written warning; second offence = termination.
+ADDITIONALLY: subcontractor must not discuss, enquire about, or attempt to discover Principal's customer pricing. If asked: **"All pricing goes through the office."** Breach = written warning; second offence = termination.
 
-**Why:** Prevents subs sharing customer database, pricing structure, ops details with competitors. Pricing prohibition critical — sub doing $450 job who discovers customer paid $1,660 may demand more, poach customer, or undermine brand.
+**Why:** Prevents subcontractors sharing customer database, pricing structure, ops details with competitors. Pricing prohibition critical — subcontractor doing $450 job who discovers customer paid $1,660 may demand more, poach customer, or undermine brand.
 
 ### Clause 11 — NSW Subcontractor's Statement
-**Wording:** Sub provides completed NSW Subcontractor's Statement with each payment claim/Tax Invoice. Statutory form declaring all wages, super, workers comp, payroll tax up to date.
+**Wording:** Subcontractor provides completed NSW Subcontractor's Statement with each payment claim/Tax Invoice. Statutory form declaring all wages, super, workers comp, payroll tax up to date.
 
 **Why:** **Per s175B Workers Compensation Act 1987 (NSW), if we don't collect this, we become personally liable for unpaid workers comp premiums.** Collect with EVERY payment.
 
@@ -147,19 +147,19 @@ Governing law: NSW.
 **Why:** Mediation first = cheaper than court. NSW Small Business Commissioner offers free/low-cost mediation under $20K.
 
 ### Clause 14 — WHS Obligations
-**Wording:** Sub responsible for WHS at all times:
+**Wording:** Subcontractor responsible for WHS at all times:
 (a) Wear appropriate PPE (especially respirator for resurfacing)
 (b) Adequate ventilation during spray/chemical application
 (c) Report safety incidents within 2 hours
 (d) Asbestos awareness training cert (SafeWork NSW free online course)
 (e) Follow all SafeWork NSW guidelines
 
-**Why:** WHS Act 2011 — we have duty of care as PCBU. Sub also has WHS duties. Documents shared responsibility.
+**Why:** WHS Act 2011 — we have duty of care as PCBU. Subcontractor also has WHS duties. Documents shared responsibility.
 
 ### Clause 15 — Rate Schedule (attachment)
 **Wording:** Separate attached Rate Schedule listing flat rate per job type (regrout small/med/large, resurface, silicone-only, etc), travel allowance per zone, callout + cancellation fees.
 
-Principal must give **at least 14 days written notice** of rate changes. Changes apply to future jobs only, not jobs already accepted. Sub may decline future work if disagreement — no penalty.
+Principal must give **at least 14 days written notice** of rate changes. Changes apply to future jobs only, not jobs already accepted. Subcontractor may decline future work if disagreement — no penalty.
 
 **Why:** Keep rates in attachment, not main body — update without re-executing entire contract. 14-day notice + decline right = UCT compliant.
 
@@ -169,12 +169,12 @@ Principal must give **at least 14 days written notice** of rate changes. Changes
 **Why:** SOPA compliance. Acknowledges Act, sets payment claim cycle, shows good faith. Doesn't try to contract out (would be void).
 
 ### Clause 17 — Tax Reporting (TPAR)
-**Wording:** Sub acknowledges Principal must lodge Taxable Payments Annual Report with ATO, reporting all sub payments per financial year.
+**Wording:** Subcontractor acknowledges Principal must lodge Taxable Payments Annual Report with ATO, reporting all subcontractor payments per financial year.
 
-**Why:** TPAR transparency. No surprises at tax time. Also evidence if sub later claims they weren't paid.
+**Why:** TPAR transparency. No surprises at tax time. Also evidence if subcontractor later claims they weren't paid.
 
 ### Clause 18 — Strata Property Clause
-**Wording:** For strata-titled properties, sub must not commence work until Principal confirms:
+**Wording:** For strata-titled properties, subcontractor must not commence work until Principal confirms:
 (a) Strata approval obtained (if required)
 (b) Work hours confirmed (typically 8am-5pm weekdays, no weekends)
 (c) Access arrangements with building manager
@@ -183,7 +183,7 @@ Principal must give **at least 14 days written notice** of rate changes. Changes
 **Why:** Strata properties have by-laws on noise, access, common-area protection. Breaching = fines for owner + complaints against business.
 
 ### Clause 19 — Asbestos Clause
-**Wording:** Sub must not commence/continue work where ACM suspected. If suspected (pre-1990 tiles, adhesive, backing):
+**Wording:** Subcontractor must not commence/continue work where ACM suspected. If suspected (pre-1990 tiles, adhesive, backing):
 (a) STOP work immediately
 (b) Do NOT disturb
 (c) Notify Principal immediately
@@ -194,19 +194,19 @@ Principal must give **at least 14 days written notice** of rate changes. Changes
 **Why:** SafeWork NSW requires all workers to stop if ACM suspected. Penalties for unlicensed asbestos removal up to $50,000 for individuals.
 
 ### Clause 20 — Intellectual Property and Photo Licence
-**Wording:** All photos/videos taken during work owned by Principal. Sub grants perpetual royalty-free licence for Principal to use for marketing, social media, proposals, training. **Sub must NOT post customer photos on own social media** or use for own marketing without written permission. Survives termination.
+**Wording:** All photos/videos taken during work owned by Principal. Subcontractor grants perpetual royalty-free licence for Principal to use for marketing, social media, proposals, training. **Subcontractor must NOT post customer photos on own social media** or use for own marketing without written permission. Survives termination.
 
-**Why:** Without this, sub could demand we stop using job photos. Also prevents subs posting customer bathroom photos privately.
+**Why:** Without this, subcontractor could demand we stop using job photos. Also prevents subcontractors posting customer bathroom photos privately.
 
 ### Clause 21 — Variation / Change Order Process
-**Wording:** If sub identifies additional/different work needed during job:
+**Wording:** If subcontractor identifies additional/different work needed during job:
 (a) STOP work on additional scope
 (b) Notify Principal within 1 hour with photo + text
 (c) Wait for written approval before proceeding
 
-**No verbal approvals.** Unapproved additional work at sub's own cost. Principal requotes customer + confirms adjusted scope and rate.
+**No verbal approvals.** Unapproved additional work at subcontractor's own cost. Principal requotes customer + confirms adjusted scope and rate.
 
-**Why:** Without this, subs inflate jobs on site. Customer surprised, blames us, demands refund. With this, all scope changes go through us.
+**Why:** Without this, subcontractors inflate jobs on site. Customer surprised, blames us, demands refund. With this, all scope changes go through us.
 
 ### Clause 22 — Unfair Contract Terms Compliance (Sprintlaw instruction)
 **This is NOT a standalone clause — it's an instruction to Sprintlaw:**
@@ -216,9 +216,9 @@ Principal must give **at least 14 days written notice** of rate changes. Changes
 **Why:** Since Nov 2023, UCT regime applies to standard form contracts with small businesses. Penalties severe. Sprintlaw must review every clause for fairness.
 
 ### Clause 23 — Data and Privacy
-**Wording:** Sub acknowledges customer personal info (name, address, phone, photos) is provided for sole purpose of completing assigned job. Sub must not retain after job, share with third parties, or use for any purpose other than assigned work. Privacy Act 1988 compliant. Survives termination.
+**Wording:** Subcontractor acknowledges customer personal info (name, address, phone, photos) is provided for sole purpose of completing assigned job. Subcontractor must not retain after job, share with third parties, or use for any purpose other than assigned work. Privacy Act 1988 compliant. Survives termination.
 
-**Why:** Privacy compliance. We collect customer PII; sub sees all of it; this clause ensures proper treatment.
+**Why:** Privacy compliance. We collect customer PII; subcontractor sees all of it; this clause ensures proper treatment.
 
 ### Clause 24 — Force Majeure
 **Wording:** Neither party liable for failure caused by events beyond reasonable control:
@@ -233,7 +233,7 @@ Affected party notifies other within 24 hours.
 
 ### Clause 25 — Mutual Indemnity
 **Wording:** Each party indemnifies the other for loss, damage, cost, expense (incl. legal fees):
-(a) **SUB indemnifies PRINCIPAL** for: defective work, property damage, personal injury caused by sub's negligence, WHS breaches
+(a) **SUB indemnifies PRINCIPAL** for: defective work, property damage, personal injury caused by subcontractor's negligence, WHS breaches
 (b) **PRINCIPAL indemnifies SUB** for: incorrect job specs, dispatching to unsafe site, failure to pay within agreed terms
 
 Survives termination.
@@ -241,7 +241,7 @@ Survives termination.
 **Why:** UCT compliance. One-sided indemnity could be challenged as unfair. Mutual indemnity balanced.
 
 ### Clause 26 — Professional Conduct and On-Site Behaviour
-**Wording:** When performing Services, sub must:
+**Wording:** When performing Services, subcontractor must:
 (a) **PRESENTATION**: Clean work attire + clean organised vehicle
 (b) **PUNCTUALITY**: Arrive within scheduled window. Notify if running >15 min late
 (c) **SUBSTANCES**: Zero tolerance for alcohol/drugs/impairing substances. Immediate termination.
@@ -253,59 +253,59 @@ Survives termination.
 (i) **UNAPPROVED PERSONS**: No extras without 48hr notice (Clause 27)
 (j) **RESPECT**: Treat property with care. Don't move belongings without permission.
 
-**Why:** Brand protection. Sub is the only person customer ever meets. One bad experience = 1-star + refund. Walk through in plain language during onboarding.
+**Why:** Brand protection. Subcontractor is the only person customer ever meets. One bad experience = 1-star + refund. Walk through in plain language during onboarding.
 
 ### Clause 27 — Unapproved Persons On Site
-**Wording:** Sub must not bring any employee/assistant/helper without **48 hours written notice** including the person's ABN + PL Certificate. Principal must approve in writing before person attends. Unapproved person = sub bears full liability for damage/injury + breach.
+**Wording:** Subcontractor must not bring any employee/assistant/helper without **48 hours written notice** including the person's ABN + PL Certificate. Principal must approve in writing before person attends. Unapproved person = subcontractor bears full liability for damage/injury + breach.
 
 **Why:** If unapproved/uninsured person shows up + injured/damages property, we have zero coverage. This prevents it.
 
 ### Clause 28 — Cancellation and Callout Fee
-**Wording:** If Principal/customer cancels <24 hours before scheduled start, sub receives **$100 ex GST callout fee**.
+**Wording:** If Principal/customer cancels <24 hours before scheduled start, subcontractor receives **$100 ex GST callout fee**.
 
-If sub arrives + can't access (customer not home, locked gate, strata access denied) through no fault of sub, same $100. Sub must wait 15 min + attempt phone contact before leaving, with time-stamped photo of property.
+If subcontractor arrives + can't access (customer not home, locked gate, strata access denied) through no fault of subcontractor, same $100. Subcontractor must wait 15 min + attempt phone contact before leaving, with time-stamped photo of property.
 
-Callout fee NOT applied if: (a) sub late + customer left, (b) sub cancelled, (c) cancellation with 24+ hours notice.
+Callout fee NOT applied if: (a) subcontractor late + customer left, (b) subcontractor cancelled, (c) cancellation with 24+ hours notice.
 
-**Why:** Protects sub from lost income on wasted trips. Without this, subs leave after first no-access. Offset by customer's non-refundable deposit.
+**Why:** Protects subcontractor from lost income on wasted trips. Without this, subcontractors leave after first no-access. Offset by customer's non-refundable deposit.
 
 ### Clause 29 — Warranty Callback Obligations
-**Wording:** Sub must rectify warranty claims within 12-month warranty period (Clause 5) at own cost (incl. travel + materials). Response within 48 hours, rectification within 7 business days.
+**Wording:** Subcontractor must rectify warranty claims within 12-month warranty period (Clause 5) at own cost (incl. travel + materials). Response within 48 hours, rectification within 7 business days.
 
-If sub fails: Principal may engage another sub + deduct cost.
+If subcontractor fails: Principal may engage another subcontractor + deduct cost.
 
-**Warranty SURVIVES TERMINATION**: obligation continues 12 months after each job, even if sub left network.
+**Warranty SURVIVES TERMINATION**: obligation continues 12 months after each job, even if subcontractor left network.
 
-Sub NOT liable for: customer misuse, normal wear, pre-existing structural/waterproofing defects.
+Subcontractor NOT liable for: customer misuse, normal wear, pre-existing structural/waterproofing defects.
 
-**Why:** Without "survives termination," sub does bad job, quits next day, we pay another sub to fix. 48hr response + 7-day rectification = fair time + customer protection.
+**Why:** Without "survives termination," subcontractor does bad job, quits next day, we pay another subcontractor to fix. 48hr response + 7-day rectification = fair time + customer protection.
 
 ### Clause 30 — Photo-to-Reality Mismatch
 **Wording:** Customer quotes based on photos. If actual scope differs materially from photos:
 1. STOP work on additional/different scope
 2. Contact Principal within 30 minutes with photos + description
 3. Principal requotes customer
-4. Sub proceeds ONLY after Principal provides written confirmation of adjusted scope + rate
+4. Subcontractor proceeds ONLY after Principal provides written confirmation of adjusted scope + rate
 
-Sub paid based on **ACTUAL confirmed scope**, not original photo estimate. **Sub must NEVER quote customer directly.**
+Subcontractor paid based on **ACTUAL confirmed scope**, not original photo estimate. **Subcontractor must NEVER quote customer directly.**
 
-**Why:** Happens in ~15-20% of photo-based quotes. Without this, sub eats loss (leaves), we eat it (margin dies), or customer surprised (trust dies). Clean requote process.
+**Why:** Happens in ~15-20% of photo-based quotes. Without this, subcontractor eats loss (leaves), we eat it (margin dies), or customer surprised (trust dies). Clean requote process.
 
 ### Clause 31 — Multi-Day Job Continuity
 **Wording:** For 2+ consecutive day jobs (full bathroom, large resurface with curing):
 
-Sub commits to all scheduled days consecutively unless force majeure or written agreement. If sub can't return, notify by 6pm night before.
+Subcontractor commits to all scheduled days consecutively unless force majeure or written agreement. If subcontractor can't return, notify by 6pm night before.
 
 Failure to return without notice = WARNING. Second occurrence = termination.
 
-Payment: single flat rate for complete job, not per-day. Sub must leave work area safe + secure between days.
+Payment: single flat rate for complete job, not per-day. Subcontractor must leave work area safe + secure between days.
 
-**Why:** Bath resurface = 2 days. If sub doesn't return day 2, customer has unusable bathroom with half-cured coating. Single flat rate prevents subs doing day 1 + claiming half pay.
+**Why:** Bath resurface = 2 days. If subcontractor doesn't return day 2, customer has unusable bathroom with half-cured coating. Single flat rate prevents subcontractors doing day 1 + claiming half pay.
 
 ### Clause 32 — Job Dispatch Acceptance and Commitment
-**Wording:** Sub may accept or decline any offered job without penalty.
+**Wording:** Subcontractor may accept or decline any offered job without penalty.
 
-**Once accepted, committed** — customer notified + expecting sub.
+**Once accepted, committed** — customer notified + expecting subcontractor.
 
 Cancelling committed job:
 - 48+ hrs notice: OK
@@ -315,14 +315,14 @@ Cancelling committed job:
 
 Declining ≠ cancelling. Declining always free.
 
-**Why:** Closes loop between customer "You're booked Tuesday 2pm" SMS and sub contract. Without this, subs accept then cancel freely. $100 mirrors callout fee = symmetric/fair.
+**Why:** Closes loop between customer "You're booked Tuesday 2pm" SMS and subcontractor contract. Without this, subcontractors accept then cancel freely. $100 mirrors callout fee = symmetric/fair.
 
 ---
 
 ## Schedules to attach
 
 ### Schedule A — Rate Schedule
-Per [data/pricing/master-pricing-2026-05-01-snapshot.xlsx](../../data/pricing/master-pricing-2026-05-01-snapshot.xlsx) "Sub Labour ($)" column.
+Per [data/pricing/master-pricing-2026-05-01-snapshot.xlsx](../../data/pricing/master-pricing-2026-05-01-snapshot.xlsx) "Subcontractor Labour ($)" column.
 - **Pending pricing audit** ([docs/specs/pricing-audit-2026-05.md](pricing-audit-2026-05.md)) — Schedule A finalised after audit
 - Includes per-job rates, travel zone allowances, callout fees ($100), cancellation fees ($100)
 
@@ -342,12 +342,12 @@ Per OPERATING-CONTEXT.md geographic zones.
 
 ---
 
-## Sub onboarding briefing notes (1-page summary for sub)
+## Subcontractor onboarding briefing notes (1-page summary for subcontractor)
 
-When Sprintlaw delivers the agreement, also produce a **1-page plain-English summary** for sub onboarding briefing covering:
+When Sprintlaw delivers the agreement, also produce a **1-page plain-English summary** for subcontractor onboarding briefing covering:
 - Independent contractor status (own ABN, own tools, own insurance)
 - Payment terms (7 business days, weekly Friday batch, with NSW Subcontractor's Statement)
-- Quality + warranty (12-month, photos required, rectification at sub's cost)
+- Quality + warranty (12-month, photos required, rectification at subcontractor's cost)
 - Insurance ($10M PL minimum, asbestos cert)
 - Non-solicitation (12 months on Principal-introduced customers)
 - Confidentiality (no pricing discussion with customers)
@@ -356,7 +356,7 @@ When Sprintlaw delivers the agreement, also produce a **1-page plain-English sum
 - Conduct standards
 - Cancellation fees + callout fees
 
-This briefing happens at onboarding (before signing). Sub asks questions; Marko + CEO answer.
+This briefing happens at onboarding (before signing). Subcontractor asks questions; Marko + CEO answer.
 
 ---
 

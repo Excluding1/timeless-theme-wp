@@ -1,4 +1,4 @@
-# Templates: Sub Recruitment Ads (Gumtree / Facebook / Seek / Indeed)
+# Templates: Subcontractor Recruitment Ads (Gumtree / Facebook / Seek / Indeed)
 
 **Source:** Migrated from `data/archive/old-drafts-2026-04/extracted-sub-onboarding/14-templates-+-ads.md` (sub-onboarding-system.xlsx Sheet 14, section B).
 **Audited via:** [auditor-fair-work.md](../roles/auditor-fair-work.md) — language must reflect contractor relationship, NOT employee relationship. Critical for sham contracting protection.
@@ -30,7 +30,7 @@ Per [auditor-fair-work.md](../roles/auditor-fair-work.md):
 
 ---
 
-## Ad 1: Regrout sub recruitment
+## Ad 1: Regrout subcontractor recruitment
 
 ### Title
 **Experienced Bathroom Regrout Technician — Subcontractor (Sydney)**
@@ -83,7 +83,7 @@ Timeless Resurfacing
 
 ---
 
-## Ad 2: Resurface sub recruitment
+## Ad 2: Resurface subcontractor recruitment
 
 ### Title
 **Bathroom Resurfacing Technician — Subcontractor (Sydney)**
@@ -154,12 +154,12 @@ Timeless Resurfacing
 
 ## Existing-sub referral prompt
 
-To send to current subs once we have any.
+To send to current subcontractors once we have any.
 
 ```
-Hey [Sub name],
+Hey [Subcontractor name],
 
-You doing good work for us — would love to add another sub or two to the
+You doing good work for us — would love to add another subcontractor or two to the
 network at your quality level.
 
 Know any other regrout/resurface tradies in Sydney who do quality work and
@@ -172,7 +172,7 @@ Cheers,
 [Your name]
 ```
 
-**Why $200:** modest enough not to incentivise low-quality referrals; high enough to get a sub to send a name.
+**Why $200:** modest enough not to incentivise low-quality referrals; high enough to get a subcontractor to send a name.
 
 ---
 
@@ -205,7 +205,7 @@ Track per ad post:
 - Responses (number)
 - Vetted (passed initial screen)
 - Trial-job invitations
-- Active subs from this post
+- Active subcontractors from this post
 - Cost (if paid Seek/Indeed)
 
 Quarterly review: kill posts producing <2 vetted responses; double down on highest-converting variants. Migrate to BigQuery once Phase 5 live.
@@ -215,9 +215,9 @@ Quarterly review: kill posts producing <2 vetted responses; double down on highe
 ## Future enhancements
 
 - **A/B test rate ranges:** does $400-700 vs $350-600 attract different quality of candidates?
-- **Video ad** for Meta — 30s "what it's like to be a Timeless sub" with current-sub testimonial (post 6 months when we have happy subs)
+- **Video ad** for Meta — 30s "what it's like to be a Timeless subcontractor" with current-sub testimonial (post 6 months when we have happy subcontractors)
 - **Multilingual ads** — Mandarin / Cantonese / Arabic variants for Sydney's diverse trade community
-- **AI Sub Recruitment agent** ([Phase 6.6](../FUTURE-PLAN.md)) — auto-generate personalised DMs to scraped Hipages profiles, queued for human approval
+- **AI Subcontractor Recruitment agent** ([Phase 6.6](../FUTURE-PLAN.md)) — auto-generate personalised DMs to scraped Hipages profiles, queued for human approval
 
 ---
 

@@ -98,10 +98,10 @@ An adversarial auditor wearing the hat of an Australian consumer law lawyer + AC
 - [ ] **Active leak flag** → plumber assessment offered before commencing
 - [ ] **Tenant** customer → landlord authorisation captured
 
-### Every sub engagement
+### Every subcontractor engagement
 - [ ] **ABN current** (verified via ABN Lookup, not just claimed)
 - [ ] **PL insurance current** ($5M minimum, cert dated within last 12 months)
-- [ ] **Independent contractor test** clean (sub has own tools, sets own hours, multiple potential clients)
+- [ ] **Independent contractor test** clean (subcontractor has own tools, sets own hours, multiple potential clients)
 - [ ] **Asbestos awareness cert** if any pre-1990 jobs
 
 ---
@@ -110,7 +110,7 @@ An adversarial auditor wearing the hat of an Australian consumer law lawyer + AC
 
 - **No builder licence yet** = HARD CONSTRAINT on every claim. Trust badges, copy, ads must all reflect this.
 - **NSW jurisdiction** = NSW Fair Trading complaint paths apply.
-- **2-founder coordination model** = neither founder is the licensed builder; subs perform the work. Document this clearly.
+- **2-founder coordination model** = neither founder is the licensed builder; subcontractors perform the work. Document this clearly.
 - **Bathroom-only scope** = compliance risk if any quote/marketing implies broader scope.
 
 ---
@@ -132,7 +132,7 @@ When auditing, run this scan:
 - [ ] Incentivised reviews
 - [ ] No privacy policy link on form
 - [ ] No customer notification of collection at form
-- [ ] Sub agreement missing essential clause (insurance, asbestos, etc)
+- [ ] Subcontractor agreement missing essential clause (insurance, asbestos, etc)
 
 🟢 **Medium**:
 - [ ] WCAG AA gaps (form keyboard navigation, error labelling)
@@ -142,7 +142,7 @@ When auditing, run this scan:
 ⚪ **Document explicitly**:
 - [ ] Cooling-off doesn't apply (since not unsolicited)
 - [ ] HBCF doesn't apply (under threshold)
-- [ ] Asbestos covered via "we'll discuss in quote call" + sub training
+- [ ] Asbestos covered via "we'll discuss in quote call" + subcontractor training
 
 ---
 
@@ -175,14 +175,14 @@ This is the running list of compliance gaps this auditor has flagged. CEO decide
 ### Active gaps
 - 🟠 **Safe Work Method Statement (SWMS) full requirements** — flagged 2026-05-01 PM. Research needed:
   - Is bathroom resurfacing/regrouting "high-risk construction work" per NSW WHS Reg 2017 § 297? Initial read: NO unless ACM/heights/confined-space involved.
-  - Pre-1990 jobs with potential ACM = HIGH RISK = SWMS mandatory from sub
-  - Need to clarify: do we collect SWMS from sub for every pre-1990 job? Yes per current draft logic.
+  - Pre-1990 jobs with potential ACM = HIGH RISK = SWMS mandatory from subcontractor
+  - Need to clarify: do we collect SWMS from subcontractor for every pre-1990 job? Yes per current draft logic.
   - Need verified template for sub-supplied SWMS
   - **Action**: Once AI Compliance Researcher employee built, commission deep research on this.
 
 - 🟠 **NSW Subcontractor's Statement** specific form version — verify 2026-current version is being used. SafeWork NSW updates these periodically.
 
-- 🟠 **Insurance Certificate of Currency requirements** — what specific wording confirms PL covers "bathroom resurfacing/regrouting"? Need example to compare against sub's certs.
+- 🟠 **Insurance Certificate of Currency requirements** — what specific wording confirms PL covers "bathroom resurfacing/regrouting"? Need example to compare against subcontractor's certs.
 
 - 🟠 **Privacy Act 2024 amendments** — need to verify if any 2024 amendments to data breach notification or APPs affect our customer data handling.
 

@@ -274,7 +274,7 @@ Sorry we couldn't help this time. If you need anything else down the track, we'r
 
 ## Section 3: Post-deposit job lifecycle
 
-### 3A. Booking Confirmed (after team confirms date with sub)
+### 3A. Booking Confirmed (after team confirms date with subcontractor)
 **Type:** Transactional | **Workflow:** Manual after Stage 10 (Job Booked)
 
 ```
@@ -289,7 +289,7 @@ Our technician will text you 30 minutes before arrival. If anything changes, jus
 — Timeless Resurfacing
 ```
 
-**Required custom fields:** `job_date` (Date), `job_time` (Single line text), `job_address` (Single line text). Team fills after confirming with sub.
+**Required custom fields:** `job_date` (Date), `job_time` (Single line text), `job_address` (Single line text). Team fills after confirming with subcontractor.
 
 ---
 
@@ -310,8 +310,8 @@ Please make sure the bathroom area is cleared of personal items. Our tech will t
 
 ---
 
-### 3C. On-My-Way (30min before sub arrival)
-**Type:** Transactional | **Source:** Sub sends from SM8 OR team sends from GHL conversation
+### 3C. On-My-Way (30min before subcontractor arrival)
+**Type:** Transactional | **Source:** Subcontractor sends from SM8 OR team sends from GHL conversation
 
 ```
 Hi {{contact.first_name}}, your technician is on the way — arriving in about 30 minutes! 🚗
@@ -323,7 +323,7 @@ Hi {{contact.first_name}}, your technician is on the way — arriving in about 3
 
 ---
 
-### 3D. Job Complete + Balance Due (sub marks complete in SM8)
+### 3D. Job Complete + Balance Due (subcontractor marks complete in SM8)
 **Type:** Transactional | **Workflow:** Stage 11 → Stage 12 transition
 
 ```
@@ -423,7 +423,7 @@ Phone: {{contact.phone}}
 Job: {{custom.service_summary}}
 NPS score: [their reply]
 
-Action: Call within 60 minutes. Listen. Fix if possible. Offer sub return at no cost.
+Action: Call within 60 minutes. Listen. Fix if possible. Offer subcontractor return at no cost.
 ```
 
 **Service Recovery Paradox:** A 1-6 customer who gets a personal callback often becomes a 9-10 after resolution. Without callback, they go straight to Google with 1-star.
@@ -633,7 +633,7 @@ Anything specific I can clarify? Or did you want to talk on the phone — happy 
 
 **Don't discount on first ask.** Per [CEO § Pricing, discount, and refund policy](../CEO.md#pricing-discount-and-refund-policy-added-2026-05-01-pm) — value justification first; discount is last resort, not first resort.
 
-### 7D. Sub Cancels Day-Of (customer comms)
+### 7D. Subcontractor Cancels Day-Of (customer comms)
 
 ```
 Hi {{contact.first_name}}, quick update — we need to reschedule your bathroom service today. We're really sorry about the short notice.
@@ -645,7 +645,7 @@ As a thank-you for the inconvenience, we'll [free silicone reseal at 6mo / $50 o
 — Timeless Resurfacing
 ```
 
-**Per [sub-risk-scenarios-playbook § Scenario 2](../sop/sub-risk-scenarios-playbook.md):** never blame the sub publicly. Always say "we" — protects relationship + brand.
+**Per [sub-risk-scenarios-playbook § Scenario 2](../sop/sub-risk-scenarios-playbook.md):** never blame the subcontractor publicly. Always say "we" — protects relationship + brand.
 
 ---
 
@@ -690,7 +690,7 @@ Per [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md):
 
 | Field name | Type | Source |
 |---|---|---|
-| `job_date` | Date | Team sets after confirming with sub |
+| `job_date` | Date | Team sets after confirming with subcontractor |
 | `job_time` | Single Line Text | Team sets — e.g. "2:00 PM" |
 | `job_address` | Single Line Text | From booking form (full street address) |
 | `invoice_link` | Single Line Text | Stripe/SM8 invoice URL |

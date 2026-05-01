@@ -1,8 +1,8 @@
-# SOP: Approved Materials & Equipment Standard for Subs
+# SOP: Approved Materials & Equipment Standard for Subcontractors
 
-**Purpose:** Quick-reference checklist for sub conversations. Sub says "I use brand X" → we look here → approve or escalate.
+**Purpose:** Quick-reference checklist for subcontractor conversations. Subcontractor says "I use brand X" → we look here → approve or escalate.
 
-**Owner:** Marko (sub conversations) + CEO (list maintenance)
+**Owner:** Marko (subcontractor conversations) + CEO (list maintenance)
 
 **Status:** ⚠️ STARTER SCAFFOLD — brands marked ❓ pending real-Sydney verification via pricing audit. Use with caution; if a brand isn't on this list, escalate to CEO+Marko BEFORE approving.
 
@@ -12,19 +12,19 @@
 
 ## How to use this SOP
 
-### When onboarding a sub
-1. Walk through this list with the sub
+### When onboarding a subcontractor
+1. Walk through this list with the subcontractor
 2. Confirm they use brands marked ✅ approved
 3. If they use a brand marked ❓ pending, note it for CEO research
 4. If they use a brand NOT on this list, escalate to CEO+Marko before approving
 
-### When sub asks during a job ("is X brand OK?")
+### When subcontractor asks during a job ("is X brand OK?")
 1. Look up category
 2. Find brand on approved list → ✅ approve immediately
 3. Brand NOT on list → text Marko + CEO before approving. Apply quality criteria below if no time:
    - Is it from a recognised AU/global trades brand?
    - Does it meet relevant Australian Standard (AS/NZS)?
-   - Has the sub used it successfully on prior jobs?
+   - Has the subcontractor used it successfully on prior jobs?
    - Does packaging look like trade-grade (not consumer-grade)?
 
 ### Quality principle
@@ -34,7 +34,7 @@
 
 ## Resurfacing materials (sourced via Bert / Australasian Resurfacing Supplies)
 
-**No alternatives — Bert is exclusive AU distributor for Hawk products. All resurfacing subs ordering from Bert get same quality.**
+**No alternatives — Bert is exclusive AU distributor for Hawk products. All resurfacing subcontractors ordering from Bert get same quality.**
 
 | Item | Brand | Status |
 |---|---|---|
@@ -42,7 +42,7 @@
 | Catalyst | Glas-Tech 9000 catalyst | ✅ Bert exclusive |
 | Epoxy primer (high-build) | Hawk Ultragrip 4000 | ✅ Bert exclusive |
 | Wipe-on primer | Hawk Quick-Prep 2000 | ✅ Bert exclusive |
-| Etch (acid) | Hawk Porc-Etch Extra Strength | ✅ Bert exclusive — sub MUST have training cert |
+| Etch (acid) | Hawk Porc-Etch Extra Strength | ✅ Bert exclusive — subcontractor MUST have training cert |
 | Step 1 cleaner | Hawk MicroClean Step 1 | ✅ Bert exclusive |
 | Step 2 defilmer | Hawk MicroClean Step 2 | ✅ Bert exclusive |
 | Surface wash solvent | Hawk Surface Wash 1gal | ✅ Bert exclusive |
@@ -160,7 +160,7 @@
 
 ---
 
-## Equipment (sub MUST OWN — not consumables)
+## Equipment (subcontractor MUST OWN — not consumables)
 
 ### HVLP turbine systems (resurfacing — required for spray)
 | Brand | Product | Quality criteria | Approx price | Status |
@@ -207,7 +207,7 @@
 
 ---
 
-## Tools (sub already owns — no purchase needed if they're trade-experienced)
+## Tools (subcontractor already owns — no purchase needed if they're trade-experienced)
 
 ### Oscillating multi-tools (grout removal)
 | Brand | Product | Status |
@@ -257,7 +257,7 @@ Some brands LOOK approved but we literally cannot buy them. Research must filter
 
 ---
 
-## Where subs typically buy (Sydney 2026)
+## Where subcontractors typically buy (Sydney 2026)
 
 | Category | Best place |
 |---|---|
@@ -274,7 +274,7 @@ Some brands LOOK approved but we literally cannot buy them. Research must filter
 When the pricing audit research happens (next session), each brand entry needs:
 - [ ] Verified availability in Sydney (online or in-store)
 - [ ] Verified current price (within ±15% of estimate)
-- [ ] Cross-checked at least 1 sub or supplier review
+- [ ] Cross-checked at least 1 subcontractor or supplier review
 - [ ] Removed if discontinued or quality has slipped per recent reviews
 
 ### Specific research channels (per Allan 2026-05-01 PM)
@@ -290,7 +290,7 @@ When the pricing audit research happens (next session), each brand entry needs:
 
 4. **Hipages + Airtasker reviews** — read reviews for established Sydney operators. They often mention brands when describing job quality or issues.
 
-5. **Bert's existing network** — when Marko's resurfacing sub network is engaged, ASK them directly: "What brands do you use and trust?"
+5. **Bert's existing network** — when Marko's resurfacing subcontractor network is engaged, ASK them directly: "What brands do you use and trust?"
 
 6. **Bunnings + Total Tools customer reviews** — for disposables and tools, Bunnings reviews from verified tradespeople are gold.
 

@@ -10,7 +10,7 @@
 
 ## 1. Business in one paragraph
 
-Two co-founders run a tech-operated bathroom resurfacing & regrouting **coordination** business across NSW. Neither touches a tool. Customers find service-specific landing pages via Google Ads, submit a photo-rich quote form, get a 3-tier quote within 15 minutes during business hours, pay a 10% deposit to lock in a date, the job is dispatched to a tier-matched subcontractor via ServiceM8, completion photos are reviewed, final payment is collected, NPS triggers Google review or recovery, and the sub is paid via pay.com.au within 3 business days. Target margin: 48–52% per job.
+Two co-founders run a tech-operated bathroom resurfacing & regrouting **coordination** business across NSW. Neither touches a tool. Customers find service-specific landing pages via Google Ads, submit a photo-rich quote form, get a 3-tier quote within 15 minutes during business hours, pay a 10% deposit to lock in a date, the job is dispatched to a tier-matched subcontractor via ServiceM8, completion photos are reviewed, final payment is collected, NPS triggers Google review or recovery, and the subcontractor is paid via pay.com.au within 3 business days. Target margin: 48–52% per job.
 
 **The founders are the machine. Subcontractors are the workforce.**
 
@@ -29,9 +29,9 @@ Two co-founders run a tech-operated bathroom resurfacing & regrouting **coordina
 | Weekly metrics: CPL, POAS, CPBJ | ✅ | |
 | TikTok / Instagram content | ✅ | |
 | Photo review & quote sending | ✅ | |
-| Sub recruitment (Hipages, Meta, audit) | | ✅ |
-| Sub onboarding, vetting, agreements | | ✅ |
-| Sub dispatch & tier management | | ✅ |
+| Subcontractor recruitment (Hipages, Meta, audit) | | ✅ |
+| Subcontractor onboarding, vetting, agreements | | ✅ |
+| Subcontractor dispatch & tier management | | ✅ |
 | Before/after photo quality checks | | ✅ |
 | Customer phone calls | | ✅ |
 | NPS escalation calls (score < 7) | | ✅ |
@@ -63,7 +63,7 @@ Two co-founders run a tech-operated bathroom resurfacing & regrouting **coordina
 | Subcontractors signed | ❌ 0 vetted | — |
 | BigQuery | ❌ Phase 5 only | — |
 
-**Right now we are at:** quote form polish → GHL build → first subs → first ad spend.
+**Right now we are at:** quote form polish → GHL build → first subcontractors → first ad spend.
 
 ---
 
@@ -77,9 +77,9 @@ Google search → service landing page → quote form (5 steps + photos) → sub
   → 24h + 72h follow-ups if no response
   → Customer picks tier → 10% deposit Stripe link
   → Deposit paid → ServiceM8 job created + Slack #new-jobs alert
-  → Co-founder dispatches tier-matched sub
+  → Co-founder dispatches tier-matched subcontractor
   → Day-before reminder SMS to customer
-  → Sub completes job + uploads before/after photos
+  → Subcontractor completes job + uploads before/after photos
   → Cure-time SMS to customer (don't use 24-48h)
   → 4h after completion: NPS request SMS
     → Score 9-10: Google review request + referral offer 24h later
@@ -87,7 +87,7 @@ Google search → service landing page → quote form (5 steps + photos) → sub
     → Score 1-6: Slack alert + co-founder calls within 60min
   → Final payment Stripe link → 90% collected
   → Warranty confirmation email
-  → Sub paid via pay.com.au within 3 business days
+  → Subcontractor paid via pay.com.au within 3 business days
   → Job closed
 ```
 
@@ -120,7 +120,7 @@ The current React form ([src/QuoteForm.jsx](../timeless-quote-app/src/QuoteForm.
 - **Asbestos question required** (Yes / No / Unsure) — Excel rejection #8.
 - **Spa flag** triggers when bath resurface picked — BTV-05/06 vs BTH (~$440 delta).
 - **Basin count** triggers when basin pick made — BSN-03 add-on for double basin.
-- **Epoxy upgrade** triggers when any regrout pick made — different SKU series + +$50 sub bonus.
+- **Epoxy upgrade** triggers when any regrout pick made — different SKU series + +$50 subcontractor bonus.
 - **Honeypot anti-spam** + **spam phone pattern detection** (rejects 0411111111, 0412345678 etc).
 - **localStorage persistence** for cheap-to-restore fields (name/phone/email/address only).
 - **Image compression** client-side before upload (1920px max, JPEG q0.8).
@@ -160,8 +160,8 @@ Authoritative map: [docs/FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/F
 | **React quote form** | Lead intake | Form submission event | Free (Vercel/embed) |
 | **GoHighLevel** | CRM, pipeline, customer comms, follow-ups | Contact + opportunity state | $155/mo AUD |
 | **Stripe** | Deposit + final payment links | Payment events | 1.75% + 30c |
-| **ServiceM8** | Job dispatch, sub assignment, completion photos | Job execution state | $29/mo Starter |
-| **pay.com.au** | Sub payouts via rewards card | Outgoing sub payments | ~1.5–2% per txn (absorbed by margin) |
+| **ServiceM8** | Job dispatch, subcontractor assignment, completion photos | Job execution state | $29/mo Starter |
+| **pay.com.au** | Subcontractor payouts via rewards card | Outgoing subcontractor payments | ~1.5–2% per txn (absorbed by margin) |
 | **Xero** | Accounting, bank feed, invoices | Books of account | $35/mo Ignite |
 | **Slack** | Internal alerts only (NOT customer-facing) | Real-time notifications | Free tier OK initially |
 | **Zapier or Make** | Glue between systems for events not natively connected | (none — pure plumbing) | $30/mo AUD |
@@ -211,8 +211,8 @@ Authoritative map: [docs/FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/F
                    ▼
               ┌─────────────────┐
               │  ServiceM8      │
-              │  ─ Job card     │──── Sub mobile app
-              │  ─ Templates    │     (assigned sub gets job)
+              │  ─ Job card     │──── Subcontractor mobile app
+              │  ─ Templates    │     (assigned subcontractor gets job)
               │  ─ Photos       │
               │  ─ Completion   │
               └────────┬────────┘
@@ -376,7 +376,7 @@ customer_referrer
 |---|---|---|---|
 | 1 | Quote Requested | Auto | Form submitted |
 | 2 | QA / Pre-Check | You | Auto on flag detection (strata/asbestos/leak/stone/multi) |
-| 3 | Sub Availability Check | Co-founder | After QA cleared |
+| 3 | Subcontractor Availability Check | Co-founder | After QA cleared |
 | 4 | Scope Confirmed | You | All info present, photos clear |
 | 5 | Quote Sent | Auto | Quote dispatched via SMS+email |
 | 6 | Follow-Up | Auto | 24h after Stage 5, no response |
@@ -385,12 +385,12 @@ customer_referrer
 | 9 | Deposit Requested | Auto | Stripe link sent |
 | 10 | Deposit Paid | Auto | Stripe webhook fires |
 | 11 | Job in ServiceM8 | Co-founder | SM8 job created |
-| 12 | Job Booked | Co-founder | Date + sub locked in |
+| 12 | Job Booked | Co-founder | Date + subcontractor locked in |
 | 13 | Job On Hold | Manual | Access/strata/asbestos hold |
-| 14 | Job Issue | Auto | Sub reports problem |
+| 14 | Job Issue | Auto | Subcontractor reports problem |
 | 15 | Job Complete | Auto | SM8 completion form filled |
 | 16 | Final Invoice / Payment | Auto | Final Stripe link → paid |
-| 17 | Closed / Sub Paid | Co-founder | Sub paid via pay.com.au |
+| 17 | Closed / Subcontractor Paid | Co-founder | Subcontractor paid via pay.com.au |
 
 ### 8.5 The 12 workflows (in priority order)
 
@@ -401,7 +401,7 @@ customer_referrer
 5. **Booking Fee Trigger** — Stage 7 → 10% deposit Stripe link SMS.
 6. **BOOM Notification** — Stripe deposit paid → Slack `#new-jobs` + Stage 10.
 7. **Job Issue Alert** — Stage 14 → Slack alert + customer SMS "Co-founder will call within 30min".
-8. **Day-Before Reminder** — Stage 12 + 24h before appointment → customer SMS + sub Slack ping.
+8. **Day-Before Reminder** — Stage 12 + 24h before appointment → customer SMS + subcontractor Slack ping.
 9. **Cure Time Warning** — Stage 15 → SMS "Don't use shower/bath 24–48h".
 10. **NPS Routing** — Stage 15 + 4h → SMS rating request → score routing.
 11. **Referral Offer** — `nps_promoter` tag + 24h → SMS with referral code ($50/$50 split).
@@ -441,7 +441,7 @@ Each template includes scope checklist + materials notes + before/after photo re
 - job_profitability_estimate
 ```
 
-### 9.4 Job completion form (sub fills)
+### 9.4 Job completion form (subcontractor fills)
 
 - Before photos (required)
 - After photos (required)
@@ -465,7 +465,7 @@ Each template includes scope checklist + materials notes + before/after photo re
 
 **Never** send Tier 3 to strata, commercial, full bathroom, or pre-1990 jobs.
 
-**Monthly tier review.** Subs averaging <4/5 get a call before downgrade. Tier 3 with no improvement after 2 months → removed.
+**Monthly tier review.** Subcontractors averaging <4/5 get a call before downgrade. Tier 3 with no improvement after 2 months → removed.
 
 ### 9.6 Subcontractor agreement (must be signed before any job)
 
@@ -495,7 +495,7 @@ Use **DocuSign** to sign every agreement. Zero exceptions.
 | `#new-jobs` | Deposit paid → BOOM. The dopamine channel. | Persistent on phone |
 | `#job-updates` | Booking, completion, reschedule, photo upload | On |
 | `#job-issues` | Stage 14 alerts — needs response within 30min | Persistent |
-| `#subs` | Coordination with subcontractors directly | On |
+| `#subcontractors` | Coordination with subcontractors directly | On |
 | `#reviews-nps` | NPS scores + Google review tracking | On |
 | `#weekly-numbers` | Friday KPI digest (manual or auto from BigQuery in Phase 5) | On |
 | `#automation-errors` | Failed Zaps, webhook errors, sync failures | Persistent — silent failures kill businesses |
@@ -518,15 +518,15 @@ Photos: [N uploaded]
 💰 DEPOSIT PAID | [First] [Last] | [Suburb]
 Service: [name] · Tier: [option_2]
 Quote: $[total] · Deposit: $[10%]
-Sub assigned: [name, tier]
+Subcontractor assigned: [name, tier]
 Booking date: [TBC]
 → GHL: [link] · SM8: [link]
 ```
 
 `#job-issues`:
 ```
-🚨 JOB ISSUE | [Customer name] | [Sub name]
-Issue: [from sub completion form]
+🚨 JOB ISSUE | [Customer name] | [Subcontractor name]
+Issue: [from subcontractor completion form]
 Customer notified: ✅
 [Co-founder] to call within 30min.
 ```
@@ -556,7 +556,7 @@ quotes                     -- quote details (tier, amount)
 payments                   -- deposit + final, Stripe-sourced
 jobs_sm8                   -- ServiceM8 job records
 job_completion             -- completion form data + photos URLs
-subcontractors             -- sub roster
+subcontractors             -- subcontractor roster
 sub_payouts                -- pay.com.au transactions
 nps_reviews                -- NPS scores + review status
 ad_spend_daily             -- Google Ads daily spend per campaign
@@ -574,7 +574,7 @@ landing_page_performance   -- WP analytics → BQ
 | **Quote-to-booking rate** | deposit_paid ÷ quote_sent |
 | **Form completion rate** | submissions ÷ form_starts |
 | **NPS distribution** | promoter / passive / detractor mix |
-| **Sub utilisation** | jobs_per_sub_per_week, by tier |
+| **Subcontractor utilisation** | jobs_per_sub_per_week, by tier |
 | **Suburb profitability** | profit by suburb (some areas drag margins) |
 | **Service profitability** | profit by service type (regrout vs resurface vs full) |
 
@@ -637,7 +637,7 @@ Google Ads conversion fires on quote form thank-you page (URL param: `gclid` alr
 | Input | Source |
 |---|---|
 | Expected revenue | Quote tier customer picked |
-| Expected cost | Sub rate card + materials + pay.com.au fee + travel zone |
+| Expected cost | Subcontractor rate card + materials + pay.com.au fee + travel zone |
 | Margin | revenue − cost |
 
 **If margin < $300 → don't accept.** Better to leave money on the table than carry a low-margin job.
@@ -648,7 +648,7 @@ Jordan's average profit per job: $362. Aim for $300+ as a floor.
 
 ```
 if job.tier_required == "premium" or has_flag(strata|commercial|fullbath):
-    require Tier 1 sub
+    require Tier 1 subcontractor
 elif job.standard:
     Tier 1 first, fallback Tier 2
 elif test job, simple, low-risk:
@@ -661,7 +661,7 @@ elif test job, simple, low-risk:
 - Strata approval not sighted yet
 - Active leak — plumber assessment first
 - Customer access not arranged
-- Photo retakes needed before sub commits
+- Photo retakes needed before subcontractor commits
 
 ### 13.5 When to reject a job outright
 
@@ -681,9 +681,9 @@ elif test job, simple, low-risk:
 | **5-yr warranty** | Always say "Up to 5-year" — varies by service per pricing schedule | Same — accurate claims only |
 | **Privacy Act 1988** | Privacy policy linked from form, photos handled per stated policy | Required by law for any business collecting personal info |
 | **Spam Act 2003** | Marketing consent checkbox separate from quote consent, unsubscribe in every marketing email | Australian anti-spam law |
-| **NSW Strata Schemes Management Act 2015** | Confirm owners corp approval before commencing strata jobs | Strata can demand reinstatement at sub's cost otherwise |
+| **NSW Strata Schemes Management Act 2015** | Confirm owners corp approval before commencing strata jobs | Strata can demand reinstatement at subcontractor's cost otherwise |
 | **Asbestos pre-1990** | Always require independent assessment before commencing on suspected ACM | NSW WHS Reg 2017 — large fines, criminal liability |
-| **Subcontractor independence** | Sub keeps own ABN, own insurance, own tools, sets own hours where possible | Fair Work — sham contracting fines + super back-pay risk |
+| **Subcontractor independence** | Subcontractor keeps own ABN, own insurance, own tools, sets own hours where possible | Fair Work — sham contracting fines + super back-pay risk |
 | **GST registration** | Required once 12-month revenue forecast exceeds $75,000 | ATO law |
 
 ---
@@ -717,7 +717,7 @@ elif test job, simple, low-risk:
 - ⬜ Google review request
 - ⬜ Referral offer ($50/$50) workflow
 - ⬜ Warranty email template
-- ⬜ pay.com.au sub payment workflow
+- ⬜ pay.com.au subcontractor payment workflow
 
 ### Phase 5 — BigQuery + measurement
 - ⬜ Google Cloud project + BigQuery dataset
@@ -731,7 +731,7 @@ elif test job, simple, low-risk:
 - ⬜ Duplicate-address detector (per Jordan's "quote integrity analyst")
 - ⬜ Weekly business analyst agent (Monday Slack post)
 - ⬜ Ads optimisation agent (POAS-based, not ROAS)
-- ⬜ Sub recruitment outreach agent (Hipages auto-message)
+- ⬜ Subcontractor recruitment outreach agent (Hipages auto-message)
 - ⬜ Review responder agent
 
 **Hard rule: don't skip phases.** Phase 6 needs Phase 5 data; Phase 5 needs Phase 2-4 events. Skipping creates "AI agents with no data" or "automations that fire into nothing."
@@ -767,7 +767,7 @@ This is the process I commit to applying on **every meaningful task** (form chan
 | Quote form UX changes | CRO specialist for AU home services | Mobile abandonment auditor + WCAG auditor |
 | Form copy / customer-facing text | Conversion copywriter (B2C trades) | Compliance auditor (ACCC, Spam Act) |
 | GHL workflow design | GHL automation operator (agency archetype) | Privacy + Spam Act auditor |
-| ServiceM8 setup | Field service ops manager | Sub independence (Fair Work) auditor |
+| ServiceM8 setup | Field service ops manager | Subcontractor independence (Fair Work) auditor |
 | Slack channel architecture | Internal comms IA specialist | Noise / signal-to-noise auditor |
 | BigQuery schema | Analytics data engineer | Data quality + GDPR/Privacy auditor |
 | Google Ads structure | Performance marketing specialist (POAS-first) | Margin-per-channel auditor |
@@ -870,16 +870,16 @@ When advising on this business, I should:
 
 ## 19. Quick-recall summary (for the impatient)
 
-- **Business**: 2-founder coordination biz; subs do work; aim 48–52% margin
+- **Business**: 2-founder coordination biz; subcontractors do work; aim 48–52% margin
 - **Front door**: React quote form on WP service pages → GHL webhook
 - **CRM**: GoHighLevel, 17-stage pipeline, 12 workflows
 - **Job delivery**: ServiceM8 (only after deposit paid)
 - **Internal alerts**: Slack (10 channels, structured messages, no decisions)
-- **Money**: Stripe in (deposit + final), pay.com.au out (sub payments + rewards)
+- **Money**: Stripe in (deposit + final), pay.com.au out (subcontractor payments + rewards)
 - **Reporting**: Google Sheets now → BigQuery in Phase 5
 - **North-star metric**: POAS ≥ 2.5x, $300+ profit floor per job
 - **Tone**: trades-business operator (Jordan model), not luxury services brand
-- **Compliance gates**: no licence claim, no fake reviews, asbestos/strata holds enforced, sub agreements before any job
+- **Compliance gates**: no licence claim, no fake reviews, asbestos/strata holds enforced, subcontractor agreements before any job
 
 ---
 

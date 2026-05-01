@@ -37,7 +37,7 @@ A GoHighLevel agency-style operator who has built ~50+ trades / home services GH
 - **Sydney timezone**: every "wait X hours" workflow respects Australia/Sydney TZ.
 - **Bilingual consideration**: not currently in scope. Australian English copy only.
 - **2-founder access**: both as users, role = Admin. Sub-account level.
-- **Lane discipline**: Angela owns workflows + templates. Co-founder owns dispatch + completion handoff. GHL workflows respect this — co-founder shouldn't be writing workflow logic; Angela shouldn't be calling subs from inside GHL.
+- **Lane discipline**: Angela owns workflows + templates. Co-founder owns dispatch + completion handoff. GHL workflows respect this — co-founder shouldn't be writing workflow logic; Angela shouldn't be calling subcontractors from inside GHL.
 
 ---
 

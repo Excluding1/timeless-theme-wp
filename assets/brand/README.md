@@ -14,7 +14,7 @@ assets/brand/
 ├── favicon-source/        ← Source files for favicons (the live favicons live in ../favicon/ already)
 ├── vehicle-livery/        ← Magnetic decal designs, vinyl wrap mockups
 ├── uniforms/              ← Polo / hi-vis / hat designs
-├── business-cards/        ← Card designs, both founders + sub variants
+├── business-cards/        ← Card designs, both founders + subcontractor variants
 ├── marketing-photos/      ← Pro-shot real-job photography (NOT theme structural images)
 └── style-guide/           ← Brand colours, fonts, tone-of-voice doc
 ```
@@ -53,12 +53,12 @@ assets/brand/
 - [ ] `card-allan-back.svg`
 - [ ] `card-marko-front.svg`
 - [ ] `card-marko-back.svg`
-- [ ] `card-sub-front.svg` — for subs to leave with customers (still our brand)
+- [ ] `card-sub-front.svg` — for subcontractors to leave with customers (still our brand)
 
 ### marketing-photos/
 - [ ] First-job pro-photoshoot (~30 photos when first customer #1 job done)
 - [ ] Before/after pairs from real jobs
-- [ ] Tradesperson on-job action shots (with sub permission)
+- [ ] Tradesperson on-job action shots (with subcontractor permission)
 - [ ] Brand-style hero photos for landing pages
 
 ### style-guide/

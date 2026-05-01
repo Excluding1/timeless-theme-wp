@@ -20,15 +20,15 @@ This is operational guidance, not legal advice. Engage Sprintlaw or a NSW constr
 
 **YES.** Bathroom regrouting and resurfacing = "maintenance" of buildings under the Act.
 
-The Act covers: *"construction, alteration, repair, restoration, maintenance"* of any works forming part of land. Our subs perform construction work under a construction contract (our subcontractor agreement) in NSW. We are a "head contractor" (or "principal" in some clauses) under SOPA.
+The Act covers: *"construction, alteration, repair, restoration, maintenance"* of any works forming part of land. Our subcontractors perform construction work under a construction contract (our subcontractor agreement) in NSW. We are a "head contractor" (or "principal" in some clauses) under SOPA.
 
 ---
 
-## Sub's statutory rights under SOPA
+## Subcontractor's statutory rights under SOPA
 
 ### 1. Right to progress payments
 
-Subs have a **statutory right** to claim progress payments for work completed, even if our contract didn't expressly allow it.
+Subcontractors have a **statutory right** to claim progress payments for work completed, even if our contract didn't expressly allow it.
 
 Default statutory timeframe: **payment due within 20 business days** of a payment claim being served, unless contract specifies a shorter period.
 
@@ -45,7 +45,7 @@ A valid SOPA payment claim must:
 
 ### 3. Right to adjudication
 
-If dispute, sub can apply for adjudication through an Authorised Nominating Authority. Adjudicator decides within 10-15 business days. Cost $500-3,000 depending on amount.
+If dispute, subcontractor can apply for adjudication through an Authorised Nominating Authority. Adjudicator decides within 10-15 business days. Cost $500-3,000 depending on amount.
 
 ---
 
@@ -55,7 +55,7 @@ If dispute, sub can apply for adjudication through an Authorised Nominating Auth
 
 If we don't respond within 10 business days:
 - We become liable for the **FULL amount claimed**
-- Sub can apply for adjudication
+- Subcontractor can apply for adjudication
 - We **lose the right to raise defences** (quality issues, scope disputes, anything)
 
 Adjudicator will award the full claim because we forfeited our defence by not responding.
@@ -64,7 +64,7 @@ Adjudicator will award the full claim because we forfeited our defence by not re
 
 ### NEVER pay late if work is done well
 
-95% of SOPA claims arise from late payment, not quality disputes. **Pay your subs on time, you almost never see SOPA.** Pay late, you get adjudication notices.
+95% of SOPA claims arise from late payment, not quality disputes. **Pay your subcontractors on time, you almost never see SOPA.** Pay late, you get adjudication notices.
 
 ### NEVER include a SOPA-exclusion clause in the agreement
 
@@ -76,21 +76,21 @@ Any contract clause trying to exclude SOPA is void by statute (s34). Don't waste
 
 ### Day 0: Job complete
 
-Sub completes job, submits before/during/after photos via ServiceM8 or Slack.
+Subcontractor completes job, submits before/during/after photos via ServiceM8 or Slack.
 
-### Day 0-2: Sub sends Tax Invoice
+### Day 0-2: Subcontractor sends Tax Invoice
 
-Sub emails Tax Invoice within 2 business days. Per [Clause 16](../specs/sub-agreement-clauses.md):
+Subcontractor emails Tax Invoice within 2 business days. Per [Clause 16](../specs/sub-agreement-clauses.md):
 
 *"The parties acknowledge that the Building and Construction Industry Security of Payment Act 1999 (NSW) applies to this Agreement. Payment claims must be submitted monthly (or per job completion). The Principal will respond to any payment claim within 10 business days. Payment is due within 14 business days of a valid payment claim."*
 
-If sub's invoice mentions "made under the Act" → it's a SOPA claim. The 10-day clock starts.
+If subcontractor's invoice mentions "made under the Act" → it's a SOPA claim. The 10-day clock starts.
 
 ### Day 2-4: We verify quality
 
 Team reviews after-photos. Checks for customer complaints. Confirms job meets quality standard.
 
-**If quality issue:** notify sub within 24hr; **issue payment schedule within 10 business days** explaining exactly why and how much we're withholding (per Clause 6 rectification rights).
+**If quality issue:** notify subcontractor within 24hr; **issue payment schedule within 10 business days** explaining exactly why and how much we're withholding (per Clause 6 rectification rights).
 
 Payment schedule template:
 > "Re: your payment claim dated [date] for $[amount].
@@ -108,11 +108,11 @@ Once quality verified + NSW Subcontractor's Statement received → approve in Xe
 
 EFT bank transfer via Xero batch payment, weekly Friday.
 
-(Per [sub-rate-schedule.md § D](../specs/sub-rate-schedule.md): Jordan pays subs weekly Friday — same approach. Subs know they get paid every Friday for prior week's work.)
+(Per [sub-rate-schedule.md § D](../specs/sub-rate-schedule.md): Jordan pays subcontractors weekly Friday — same approach. Subcontractors know they get paid every Friday for prior week's work.)
 
 ### Day 7-14: Confirmation
 
-Xero auto-sends remittance advice. Sub sees payment in their bank within 1-2 business days of EFT.
+Xero auto-sends remittance advice. Subcontractor sees payment in their bank within 1-2 business days of EFT.
 
 ### Day 14: Records
 
@@ -131,14 +131,14 @@ Retention: 5 years ATO minimum, 7 years recommended for SOPA disputes.
 
 When we serve a payment claim on the customer (property owner), we must include a **"supporting statement"** declaring all subcontractors have been paid for that work.
 
-**This applies when we're the head contractor and have subs working on the project.**
+**This applies when we're the head contractor and have subcontractors working on the project.**
 
 In practice for us: most small residential jobs are billed to customer as a single amount (not progress claims), so this rarely applies. **For larger commercial or PM work, MUST include supporting statement.**
 
 **Penalty for missing supporting statement: up to $22,000.**
 
 Process for commercial/larger jobs:
-1. Before billing customer, confirm all subs paid for the work being billed
+1. Before billing customer, confirm all subcontractors paid for the work being billed
 2. Generate supporting statement (template available from NSW Fair Trading)
 3. Attach to customer payment claim
 
@@ -159,15 +159,15 @@ For our $1,500-3,500 typical bathroom jobs, SOPA adjudication is the right tool 
 
 ## How to make SOPA work FOR us, not against us
 
-1. **Pay subs on time** — within the 7-14 days stated in our contract. Prevents 99% of SOPA issues.
+1. **Pay subcontractors on time** — within the 7-14 days stated in our contract. Prevents 99% of SOPA issues.
 2. **If withholding payment for quality reasons, issue a payment schedule within 10 business days** explaining exactly why and how much.
 3. **Use rectification clause (Clause 6)** — deduct cost of fixing bad work, but document everything with photos and written notice.
 4. **Keep records of every invoice, payment, communication.** SOPA disputes are won on documentation.
 5. **Use SOPA against non-paying customers** — fast, cheap, enforceable.
 
 SOPA forces professionalism on both sides:
-- We pay subs promptly = subs stay loyal + do good work
-- Subs invoice properly = clean records for TPAR
+- We pay subcontractors promptly = subcontractors stay loyal + do good work
+- Subcontractors invoice properly = clean records for TPAR
 - Disputes resolved quickly = less business disruption
 
 The businesses that fear SOPA are the ones who pay late. We're not that business.
@@ -197,8 +197,8 @@ Cross-reference: [sub-agreement-clauses.md § Clause 16](../specs/sub-agreement-
 ## Failure modes we've researched (per CEO Rule 11)
 
 - **NSW Supreme Court 2023 (Tucker v Anderson Constructions):** head contractor missed 10-day response → forfeited all defences → ordered to pay full $186K claim despite genuine quality issues. Lesson: **respond within 10 business days, always**.
-- **NCAT 2024 (small bathroom-renovation case):** sub served SOPA claim for $4,200; head contractor responded within 8 days with detailed payment schedule citing photo evidence of poor work; reduced to $2,800; no adjudication needed. Lesson: **good payment schedule + photo evidence wins**.
-- **Reddit r/AusBusiness "SOPA destroyed my margins":** head contractor was paying late by habit; subs started serving SOPA claims as routine; head contractor's cashflow gutted by adjudication awards. Lesson: **pay on time, not "around when convenient"**.
+- **NCAT 2024 (small bathroom-renovation case):** subcontractor served SOPA claim for $4,200; head contractor responded within 8 days with detailed payment schedule citing photo evidence of poor work; reduced to $2,800; no adjudication needed. Lesson: **good payment schedule + photo evidence wins**.
+- **Reddit r/AusBusiness "SOPA destroyed my margins":** head contractor was paying late by habit; subcontractors started serving SOPA claims as routine; head contractor's cashflow gutted by adjudication awards. Lesson: **pay on time, not "around when convenient"**.
 
 ---
 

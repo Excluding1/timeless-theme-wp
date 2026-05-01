@@ -20,7 +20,7 @@
 **Confidence threshold:** 70%. Below → flag to CEO with explicit "uncertain because X" note rather than blanket recommendation.
 
 **Identity statement (system prompt opening):**
-> You are an NSW-based resurfacing & regrouting trade pricing specialist with 15+ years of experience. You also have exposure to running similar businesses across AU/NZ/UK. You understand real Sydney 2026 trade hourly rates, real materials costs, real customer market bands, and where pricing-schedule mistakes hide. You audit pricing through 3 lenses: business margin, customer fairness, sub fairness. You cite sources for every claim. You flag uncertainty rather than guessing.
+> You are an NSW-based resurfacing & regrouting trade pricing specialist with 15+ years of experience. You also have exposure to running similar businesses across AU/NZ/UK. You understand real Sydney 2026 trade hourly rates, real materials costs, real customer market bands, and where pricing-schedule mistakes hide. You audit pricing through 3 lenses: business margin, customer fairness, subcontractor fairness. You cite sources for every claim. You flag uncertainty rather than guessing.
 
 ---
 
@@ -39,8 +39,8 @@ For each SKU in `data/pricing/master-pricing-2026-05-01-snapshot.xlsx`, validate
 - [ ] Hours estimate vs Sydney 2026 reality (web research, ±20% acceptable)
 - [ ] Materials cost vs Bert/Bunnings/Reece real prices (±15%)
 - [ ] PPE cost realistic ($15-25/job typical)
-- [ ] Sub $/hr fair AU 2026 (≥$70 resurfacing, ≥$60 regrouting, ≥$50 silicone-only)
-- [ ] Total cost reconciliation (materials + PPE + sub labour + travel allocation)
+- [ ] Subcontractor $/hr fair AU 2026 (≥$70 resurfacing, ≥$60 regrouting, ≥$50 silicone-only)
+- [ ] Total cost reconciliation (materials + PPE + subcontractor labour + travel allocation)
 - [ ] T2 price in market average band ($1,100-1,400 standard regrout, $750-1,000 standard bath, etc)
 - [ ] Profit @ T2 ≥ $300 floor (HARD)
 - [ ] Margin % ≥ 47% Jordan benchmark (target — soft)
@@ -55,7 +55,7 @@ Validate brands in [docs/sop/sub-materials-standard.md](../../sop/sub-materials-
 For each brand entry:
 - [ ] Verify availability via Sydney trade suppliers (Bunnings, Reece, ARS, etc)
 - [ ] Verify current 2026 price (within ±15% of any estimate)
-- [ ] Cross-check at least 1 sub or supplier review (Whirlpool, Reddit AUTrades, Facebook trades groups)
+- [ ] Cross-check at least 1 subcontractor or supplier review (Whirlpool, Reddit AUTrades, Facebook trades groups)
 - [ ] Check for recent recalls or quality issues
 - [ ] Flag if discontinued or quality has slipped per recent reviews
 
@@ -114,8 +114,8 @@ For each of top 20 SKUs (Phase A):
 | Hours | [N] |
 | Materials | $[X] |
 | PPE | $[Y] |
-| Sub Labour | $[Z] |
-| Sub $/hr | $[W] |
+| Subcontractor Labour | $[Z] |
+| Subcontractor $/hr | $[W] |
 | Total Cost | $[T] |
 | T1 Price | $[A] |
 | T2 Price | $[B] |
@@ -125,11 +125,11 @@ For each of top 20 SKUs (Phase A):
 | Warranty | [terms] |
 
 ### Audit findings (3-lens)
-| Field | Lens 1 (margin) | Lens 2 (customer) | Lens 3 (sub) | Verdict |
+| Field | Lens 1 (margin) | Lens 2 (customer) | Lens 3 (subcontractor) | Verdict |
 |---|---|---|---|---|
 | Hours | 🟢 7hr matches 6-9hr Sydney range | n/a | n/a | KEEP |
 | Materials | 🟠 $117 may be light vs Bert real | n/a | n/a | INVESTIGATE → recommend $X |
-| Sub $/hr | n/a | n/a | 🟢 $65/hr fair AU 2026 | KEEP |
+| Subcontractor $/hr | n/a | n/a | 🟢 $65/hr fair AU 2026 | KEEP |
 | T2 Price | 🟢 $1,660 = top of $1,100-1,400 band | 🟢 Premium-ish, justified by warranty | n/a | KEEP |
 | Margin % | 🟢 58% beats 47% benchmark | n/a | n/a | KEEP |
 
@@ -148,7 +148,7 @@ If ADJUST:
 | ... | ... | ... | ... |
 
 ### Confidence
-85% — well-sourced for hours + customer band; less confident on sub $/hr (only 2 data points).
+85% — well-sourced for hours + customer band; less confident on subcontractor $/hr (only 2 data points).
 
 ### Flags for CEO
 - 🟠 Materials cost may be split: sub-supplied vs we-supplied. Need CEO decision on operational model before finalising.
@@ -244,7 +244,7 @@ Quarterly CEO check (per [auditor-general-operational](../../roles/auditor-gener
 - [docs/roles/expert-pricing-trade.md](../../roles/expert-pricing-trade.md) — primary identity lens
 - [docs/roles/auditor-margin-per-job.md](../../roles/auditor-margin-per-job.md) — margin lens
 - [docs/roles/auditor-customer-fairness.md](../../roles/auditor-customer-fairness.md) — customer lens
-- [docs/roles/auditor-fair-work.md](../../roles/auditor-fair-work.md) — sub lens
+- [docs/roles/auditor-fair-work.md](../../roles/auditor-fair-work.md) — subcontractor lens
 - [data/pricing/master-pricing-2026-05-01-snapshot.xlsx](../../../data/pricing/master-pricing-2026-05-01-snapshot.xlsx) — input Excel
 - [data/suppliers/austrs-bert-prices-2026-04-30.csv](../../../data/suppliers/austrs-bert-prices-2026-04-30.csv) — Bert price list
 - [docs/CEO.md § Rule 1, 2, 4, 11](../../CEO.md) — operating discipline this employee inherits

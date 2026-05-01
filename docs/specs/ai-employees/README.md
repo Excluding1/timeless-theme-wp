@@ -59,14 +59,14 @@ Every AI employee in this folder must have:
 | ✅ [pricing-researcher.md](pricing-researcher.md) | Spec built | Audit each pricing SKU against real 2026 Sydney market data + Bert/Bunnings + Bert prices | ~$0.50-2 per audit cycle |
 | ✅ [materials-validator.md](materials-validator.md) | Spec built | Validate approved-brand list against forums + reviews + recall data; quarterly + on-demand new-brand evaluation | ~$0.20-0.50 per brand |
 | ✅ [competitive-intelligence.md](competitive-intelligence.md) | Spec built | Weekly Sydney competitor scan: pricing, services, reviews, marketing claims, Meta Ad Library + failure-mode log | ~$1-3/week |
-| ✅ [trades-researcher.md](trades-researcher.md) | Spec built | Generic deep-research employee for any trades-domain question (industry benchmarks, compliance/law, tool comparison, geo expansion, sub network) | ~$1-5 per task |
+| ✅ [trades-researcher.md](trades-researcher.md) | Spec built | Generic deep-research employee for any trades-domain question (industry benchmarks, compliance/law, tool comparison, geo expansion, subcontractor network) | ~$1-5 per task |
 
 ### Phase 4-5 (operational-data — when GHL/SM8/Stripe live)
 
 | Spec | Status | Job |
 |---|---|---|
 | ⬜ quote-drafter.md | Pending | Form submit → draft 3-tier quote → post to Slack for human approval |
-| ⬜ photo-quality-reviewer.md | Pending | Review sub completion photos against quality criteria, flag issues before customer sees |
+| ⬜ photo-quality-reviewer.md | Pending | Review subcontractor completion photos against quality criteria, flag issues before customer sees |
 | ⬜ business-analyst.md | Pending | Monday morning KPI summary from GHL + Stripe + ad spend |
 
 ### Phase 6+ (when data layer mature)

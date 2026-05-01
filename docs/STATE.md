@@ -28,7 +28,7 @@
 | Builder Licence | ❌ | Override 5: Allan to call NSW Fair Trading 1300 224 988 to verify if needed for our scope | — |
 | Privacy Policy (published) | ❓ | CEO to ask if exists on website + linked from quote form | — |
 | Terms of Service (customer-facing) | ❌ | Need to draft before first quote | — |
-| Subcontractor Agreement template | ❌ | Engage Sprintlaw (~$200) before first sub signs | — |
+| Subcontractor Agreement template | ❌ | Engage Sprintlaw (~$200) before first subcontractor signs | — |
 | Founder Partnership Agreement | ❌ | Defer to Pty Ltd setup OR draft when going formal | — |
 
 ---
@@ -41,7 +41,7 @@
 | $100 bank signup bonus | ⏳ | Expected within next 2 months | — |
 | Current cash on hand | $1,500 | Per starting capital + $0 revenue, after $187.56 expenses tracked. **Note: NOT $1,600 — bonus is pending.** | 2026-05-01 |
 | Stripe account | ❌ | Sign up Phase 1 before first quote sent | — |
-| pay.com.au account | ❌ | Sign up before first sub paid | — |
+| pay.com.au account | ❌ | Sign up before first subcontractor paid | — |
 | Rewards credit card linked to pay.com.au | ❓ | CEO to ask which card (Amex Explorer / Westpac Altitude / ANZ Rewards Black recommended per Jordan) | — |
 | Xero accounting | ❌ | Phase 1.7 in FUTURE-PLAN — connect bank feed when set up | — |
 | Bookkeeping current state | ⏳ | Tracked in custom dashboard (per Allan), not yet Xero | — |
@@ -153,9 +153,9 @@
 | Zapier / Make | ❌ Not signed up | Need when GHL → SM8 sync needed |
 | Cloudinary | ❌ Not signed up | Need before photo upload works in form |
 | Xero | ❌ Not signed up | Need when bookkeeping volume justifies (~$5K/mo revenue) |
-| pay.com.au | ❌ Not signed up | Need before first sub paid |
-| DocuSign | ❌ Not signed up | Need before first sub signs |
-| Sprintlaw subcontractor template | ❌ Not purchased | Need before first sub signs |
+| pay.com.au | ❌ Not signed up | Need before first subcontractor paid |
+| DocuSign | ❌ Not signed up | Need before first subcontractor signs |
+| Sprintlaw subcontractor template | ❌ Not purchased | Need before first subcontractor signs |
 
 ---
 
@@ -198,7 +198,7 @@
 **Special considerations for this customer:**
 - Strip-back surcharge applies (Excel Modifier — Rejection #9 territory)
 - Combo bathtub/shower unit = SOB-01..04 SKU range
-- Skilled resurfacing sub required (Marko's established-business network)
+- Skilled resurfacing subcontractor required (Marko's established-business network)
 - High-trust customer + perfect for first case study (real before/after photos, real testimonial, real Google review)
 - Willingness to wait removes timeline pressure
 
@@ -208,13 +208,13 @@
 
 | Item | Status | Details |
 |---|---|---|
-| Subs vetted + signed | ❌ 0 signed | Phase 3 target |
-| Subs in conversation | ❓ | CEO to ask if any informal conversations started |
+| Subcontractors vetted + signed | ❌ 0 signed | Phase 3 target |
+| Subcontractors in conversation | ❓ | CEO to ask if any informal conversations started |
 | Bert (supplier) | ❓ | Voice transcripts pending — relationship type unknown |
-| Hipages account (for sub recruitment) | ❓ | CEO to ask |
+| Hipages account (for subcontractor recruitment) | ❓ | CEO to ask |
 | Airtasker account | ❓ | CEO to ask |
 | Facebook trades groups joined | ❓ | CEO to ask |
-| Sub recruitment ad (Meta) | ❌ Not running | Override 8: deferred to Month 3 |
+| Subcontractor recruitment ad (Meta) | ❌ Not running | Override 8: deferred to Month 3 |
 
 ---
 
@@ -230,7 +230,7 @@
 | Slack workspace | ❌ | Phase 1 task |
 | WhatsApp Business | ❓ | CEO to ask if used |
 | Customer SMS history (pre-launch) | ❓ | CEO to ask |
-| Sub conversation history | ❓ | CEO to ask |
+| Subcontractor conversation history | ❓ | CEO to ask |
 
 ---
 
@@ -304,7 +304,7 @@
 | Hours/week available May 2026 | ✅ | 10-20 hr/week |
 | Day job status | ❓ | CEO to ask |
 | Personal financial pressure | ❓ | CEO to ask |
-| Sub recruitment comfort | ✅ | Comfortable calling strangers. Already started Airtasker/Hipages search but paused waiting for onboarding materials |
+| Subcontractor recruitment comfort | ✅ | Comfortable calling strangers. Already started Airtasker/Hipages search but paused waiting for onboarding materials |
 | Network depth (NSW property owners) | ❓ | CEO to ask |
 | Has own ABN | ❓ | CEO to ask (likely yes given existing trade work) |
 | Has own PL insurance | ❓ | CEO to ask |
@@ -325,7 +325,7 @@
 | Photographer (for first-job shoot) | ❌ | Need to source |
 | Print supplier (uniforms, livery) | ❌ | Need to source |
 | Accountant | ❌ | Defer to Month 6 |
-| Lawyer | ❌ | Sprintlaw for sub agreement template only |
+| Lawyer | ❌ | Sprintlaw for subcontractor agreement template only |
 
 ---
 
@@ -337,7 +337,7 @@
 | Dashboard platform | ✅ Custom build | React frontend on Netlify + Supabase backend |
 | Dashboard repo | ✅ Confirmed exists | `https://github.com/Excluding1/TimelessDash` per HANDOFF.md (NOTE: repo also contains React quote form on branch `quote-form/react-v8`) |
 | Dashboard branch | ❓ | CEO to ask which branch holds dashboard code |
-| Dashboard tabs | ✅ Listed | Dashboard, Tasks, Messages, Calendar, Finances, Cashflow, KPIs, Subscriptions, Subs Tracker, Contacts, Credentials, Goals, Weekly Review, Notes, Links & Sheets, Notifications |
+| Dashboard tabs | ✅ Listed | Dashboard, Tasks, Messages, Calendar, Finances, Cashflow, KPIs, Subscriptions, Subcontractors Tracker, Contacts, Credentials, Goals, Weekly Review, Notes, Links & Sheets, Notifications |
 | Dashboard data flows in | Manual entry | Per Allan |
 | Dashboard data flows out | None yet | No GHL/Stripe/etc connected |
 | Both founders have access | ❓ | CEO to ask |
@@ -403,7 +403,7 @@
 - Cross-reference from CEO.md when planning
 
 ### Allan + Marko
-- Update when something changes (account opened, trial activated, sub signed, etc)
+- Update when something changes (account opened, trial activated, subcontractor signed, etc)
 - When in doubt, mark with note + flag CEO to verify
 - This file is the source of truth — if it says ✅, that's the agreed state
 

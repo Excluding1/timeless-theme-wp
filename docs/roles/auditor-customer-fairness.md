@@ -54,14 +54,14 @@ Distinct from compliance auditor (which catches LEGAL violations) — this catch
 - Hidden fees revealed at quote stage
 - Unrealistic claims ("15-year warranty" — Bert specifically warned)
 - Aggressive upsells once on-site
-- Sub no-shows without prompt callback
+- Subcontractor no-shows without prompt callback
 - Refusing to refund deposit when WE cancelled the job
 - Using "first 10 customers" pricing forever (feels manipulative)
 
 ### Refund/dispute customer-fair benchmarks
 - Pre-deposit cancellation = full refund within 3 days
 - Post-deposit cancellation by customer = deposit forfeit (industry norm)
-- Post-deposit cancellation by US (sub unavailable, weather) = full refund
+- Post-deposit cancellation by US (subcontractor unavailable, weather) = full refund
 - Job rectification request = at our cost, no questions if within warranty
 - Post-warranty issue = goodwill resolution case-by-case (often free if minor)
 
@@ -70,7 +70,7 @@ Distinct from compliance auditor (which catches LEGAL violations) — this catch
 ## NSW + Angela context
 
 - **No licence yet** — must NEVER imply licence we don't have. Customer who later checks Fair Trading + finds us not licensed = trust dead.
-- **Coordination model** — customer hires US, sub does work. Customer's invoice/contract is with us. We are accountable, not sub.
+- **Coordination model** — customer hires US, subcontractor does work. Customer's invoice/contract is with us. We are accountable, not subcontractor.
 - **First customers (Override 1)** are network/friends/family — they get extra benefit of doubt BUT also deserve extra-careful treatment because they're our first reviews
 - **Two audiences** (homeowner + property manager) — fairness expectations differ slightly:
   - Homeowner: emotional, wants reassurance, photos, warranty clarity
@@ -111,7 +111,7 @@ Distinct from compliance auditor (which catches LEGAL violations) — this catch
 - [ ] NPS request 4hr post-completion
 
 ### Day-of-job
-- [ ] Sub arrives within 2hr arrival window
+- [ ] Subcontractor arrives within 2hr arrival window
 - [ ] Branded uniform + clean tools
 - [ ] Treats property with respect (drop cloths, clean up)
 - [ ] Customer-facing tradesperson knows the scope of work agreed
@@ -177,7 +177,7 @@ Plus narrative: "Customer would feel: respected/uncertain/ripped-off. Reason: __
 
 When pricing decision is being audited:
 - I (this auditor) speak for the customer
-- [auditor-fair-work.md](auditor-fair-work.md) speaks for the sub
+- [auditor-fair-work.md](auditor-fair-work.md) speaks for the subcontractor
 - [auditor-margin-per-job.md](auditor-margin-per-job.md) speaks for the business
 - If all 3 agree → ship it. If 2 of 3 → trade-off explicitly documented. If only 1 → don't ship.
 

@@ -1,6 +1,6 @@
 # Pricing Schedule Audit — May 2026
 
-**Purpose:** Deep audit of `data/pricing/master-pricing-2026-05-01-snapshot.xlsx` (140 SKUs, T1/T2/T3 tiers) against real Sydney 2026 market data, Bert/AUSTRS material costs, fair sub rates, and Jordan/Surface Care 47% margin benchmark.
+**Purpose:** Deep audit of `data/pricing/master-pricing-2026-05-01-snapshot.xlsx` (140 SKUs, T1/T2/T3 tiers) against real Sydney 2026 market data, Bert/AUSTRS material costs, fair subcontractor rates, and Jordan/Surface Care 47% margin benchmark.
 
 **Owner:** CEO designs + executes audit; Allan approves recommended Excel changes; CEO commits Excel updates to data/pricing/.
 
@@ -27,12 +27,12 @@ Per [CEO playbook § Methodology](../CEO.md), every meaningful pricing decision 
 | # | Auditor | What they check |
 |---|---|---|
 | 1 | [auditor-customer-fairness.md](../roles/auditor-customer-fairness.md) | Customer perspective: market band, transparency, no surprise fees, value-for-money signal |
-| 2 | [auditor-fair-work.md](../roles/auditor-fair-work.md) | Sub perspective: $/hr fair, take-home justifies risk + own-tools/insurance/no-benefits, indep contractor test passes |
+| 2 | [auditor-fair-work.md](../roles/auditor-fair-work.md) | Subcontractor perspective: $/hr fair, take-home justifies risk + own-tools/insurance/no-benefits, indep contractor test passes |
 | 3 | [auditor-margin-per-job.md](../roles/auditor-margin-per-job.md) | Business perspective: $300+ floor, 47%+ Jordan benchmark, sustainable cash, no leak through travel/PPE/overhead |
 | 4 | [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md) | Regulatory: warranty claims accurate, ACL-compliant, no misleading conduct |
 | 5 | [expert-pricing-trade.md](../roles/expert-pricing-trade.md) | Domain: NSW reality on hours, materials, market — used as primary lens |
 
-**Reconciliation:** if all 3 of (customer + sub + business) agree → ship. If 2 of 3 → trade-off documented. If only 1 → don't ship; rethink.
+**Reconciliation:** if all 3 of (customer + subcontractor + business) agree → ship. If 2 of 3 → trade-off documented. If only 1 → don't ship; rethink.
 
 ---
 
@@ -113,17 +113,17 @@ For each SKU, validate against this checklist:
 - [ ] Realistic per-job PPE: $15-25 typical
 - [ ] Flag if Excel PPE differs significantly (>$40 may be over, <$10 may be under)
 
-### D. Sub labour validation (sub-fairness lens)
-- [ ] Calculate Sub $/hr = Sub Labour ÷ Hours
+### D. Subcontractor labour validation (sub-fairness lens)
+- [ ] Calculate Subcontractor $/hr = Subcontractor Labour ÷ Hours
 - [ ] Compare to market floor:
   - Resurfacing skilled: ≥$70/hr
   - Regrouting skilled: ≥$60/hr
   - Silicone-only: ≥$50/hr
-- [ ] Flag if below market floor (sub feels exploited) OR significantly above (eats margin)
-- [ ] Sanity check: would a sub with own ABN, insurance, tools take this rate for steady jobs?
+- [ ] Flag if below market floor (subcontractor feels exploited) OR significantly above (eats margin)
+- [ ] Sanity check: would a subcontractor with own ABN, insurance, tools take this rate for steady jobs?
 
 ### E. Total cost reconciliation
-- [ ] Total Cost = Materials + PPE + Sub Labour
+- [ ] Total Cost = Materials + PPE + Subcontractor Labour
 - [ ] Add overhead allocation (~$10-15/job for tools/admin/marketing)
 - [ ] Flag if missing categories (e.g., travel for outer zones)
 
@@ -161,7 +161,7 @@ For each SKU, validate against this checklist:
 ## Specific known issues to investigate (Phase A priority)
 
 ### Issue 1: BTH-01 below 47% benchmark (42%)
-**Current:** Materials $155, PPE $5, Sub Labour $370, Total $530, T2 $1,000, Profit $379, Margin 42%
+**Current:** Materials $155, PPE $5, Subcontractor Labour $370, Total $530, T2 $1,000, Profit $379, Margin 42%
 
 **Hypothesis:** Materials underestimated. Real bathtub resurface materials per Bert prices:
 - Glas-Tech 9100 1qt: ~$68
@@ -178,9 +178,9 @@ If real materials are $274:
 - T2 of $1,000 → ex-GST $909
 - Profit = $260 — BELOW $300 FLOOR 🔴
 
-**Implication:** Either (a) raise BTH-01 T2 to ~$1,100-1,200 OR (b) confirm $155 materials is accurate (maybe sub buys cheaper materials than retail Bert prices).
+**Implication:** Either (a) raise BTH-01 T2 to ~$1,100-1,200 OR (b) confirm $155 materials is accurate (maybe subcontractor buys cheaper materials than retail Bert prices).
 
-**Action:** AUDIT-RESEARCH → confirm with Marko's resurfacing sub network what they actually pay for materials; OR confirm with Bert if there's a wholesale-bulk discount we're getting.
+**Action:** AUDIT-RESEARCH → confirm with Marko's resurfacing subcontractor network what they actually pay for materials; OR confirm with Bert if there's a wholesale-bulk discount we're getting.
 
 ### Issue 2: PPE costs vary widely between similar SKUs
 **Examples:**
@@ -192,7 +192,7 @@ If real materials are $274:
 
 **Action:** AUDIT — verify which SKUs have which PPE allocation; reconcile.
 
-### Issue 3: Sub $/hr varies — is it consistent?
+### Issue 3: Subcontractor $/hr varies — is it consistent?
 **Examples:**
 - RSC-01: $370 ÷ 5.5hr = $67.27/hr
 - RSC-02: $460 ÷ 7hr = $65.71/hr
@@ -201,9 +201,9 @@ If real materials are $274:
 - FBP-01: $860 ÷ 12hr = $71.67/hr
 - FBP-02: $940 ÷ 13hr = $72.31/hr
 
-Sub $/hr range = $61-72/hr. Mostly reasonable. Epoxy series ($61) is LOWEST despite being more skill-required — may be unfair to subs.
+Subcontractor $/hr range = $61-72/hr. Mostly reasonable. Epoxy series ($61) is LOWEST despite being more skill-required — may be unfair to subcontractors.
 
-**Action:** AUDIT — verify epoxy sub take should be EQUAL or HIGHER than cement (more skill, more hazardous), not lower.
+**Action:** AUDIT — verify epoxy subcontractor take should be EQUAL or HIGHER than cement (more skill, more hazardous), not lower.
 
 ### Issue 4: SOB (Shower-over-bath) needed for customer #1
 **Status:** Excel SKUs SOB-01..04 exist but I haven't extracted/reviewed.
@@ -231,8 +231,8 @@ For each SKU audited:
 | Hours | 7 |
 | Materials | $117 |
 | PPE | $48 |
-| Sub Labour | $460 |
-| Sub $/hr | $65.71 |
+| Subcontractor Labour | $460 |
+| Subcontractor $/hr | $65.71 |
 | Total Cost | $625 |
 | T2 Price | $1,660 |
 | Profit @ T2 | $884 |
@@ -244,7 +244,7 @@ For each SKU audited:
 - Hours: 🟢 Within 6-9hr realistic range
 - Materials: 🟢 Validated against Bunnings 2026 prices
 - PPE: 🟢 Reasonable
-- Sub $/hr: 🟢 $65.71 = fair AU 2026 skilled regrouter rate
+- Subcontractor $/hr: 🟢 $65.71 = fair AU 2026 skilled regrouter rate
 - T2 price: 🟢 At top of $1,100-1,400 market band; warranty + brand justifies premium
 - Margin: 🟢 58% beats 47% benchmark
 
@@ -305,7 +305,7 @@ Before this audit runs, CEO must:
 
 **Allan requirement (2026-05-01 PM):** "high quality even for disposable items as we want high quality jobs. Multiple approved items even if same product, different brands. We don't mind the brand as long as it's good quality."
 
-Pricing audit produces a SECOND deliverable: an Approved Materials & Equipment List that tells subs what to use. Per category, list 2-3 approved alternatives at the same quality tier so subs can buy what's locally available without breaking standards.
+Pricing audit produces a SECOND deliverable: an Approved Materials & Equipment List that tells subcontractors what to use. Per category, list 2-3 approved alternatives at the same quality tier so subcontractors can buy what's locally available without breaking standards.
 
 ### Categories to cover
 | Category | Examples of approved-alternatives needed |
@@ -334,7 +334,7 @@ A separate file `docs/sop/sub-materials-standard.md` will contain the full appro
 - Quality criteria (e.g., "any nitrile glove ≥4mm thickness, AS/NZS 4011 standard")
 - What NOT to use (avoid list — e.g., dollar-shop tape that bleeds, super-cheap silicone that yellows)
 
-**Trigger to build the SOP:** after first 2-3 subs onboarded + CEO has run the pricing audit research with real Sydney supplier prices.
+**Trigger to build the SOP:** after first 2-3 subcontractors onboarded + CEO has run the pricing audit research with real Sydney supplier prices.
 
 ---
 

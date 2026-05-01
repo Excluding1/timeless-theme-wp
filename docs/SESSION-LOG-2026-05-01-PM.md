@@ -67,18 +67,18 @@
 *Each: Question → Why I need it → What I'm assuming for now → Where I'd revise once Allan answers.*
 
 ### Q-NEW-1. NSW Long Service Corporation portable leave applicability
-- **Why I need it:** Sub tax compliance — could trigger 0.35% levy obligation on all sub payments if applicable.
+- **Why I need it:** Subcontractor tax compliance — could trigger 0.35% levy obligation on all subcontractor payments if applicable.
 - **My assumption (per [sub-tax-compliance.md § C](sop/sub-tax-compliance.md)):** Likely doesn't apply to genuine independent contractors with own ABN + multiple clients + own tools.
 - **Source for verification needed:** Allan calls **Long Service Corporation NSW** (13 14 41) or emails enquiries@longservice.nsw.gov.au with the question template I drafted in sub-tax-compliance.md.
-- **Where I'd revise:** if applies → register as "building employer" + add 0.35% to sub cost calculation; rate schedule needs $X tagged for portable leave levy.
+- **Where I'd revise:** if applies → register as "building employer" + add 0.35% to subcontractor cost calculation; rate schedule needs $X tagged for portable leave levy.
 - **Blocking?** No — work continues; small calc adjustment if confirmed applies.
 
-### Q-NEW-2. Sub rate validation against Marko's actual network
+### Q-NEW-2. Subcontractor rate validation against Marko's actual network
 - **Why I need it:** [sub-rate-schedule.md](specs/sub-rate-schedule.md) numbers ($320-$650 regrout, $250-$800 resurface) are EXAMPLES from old draft Excel, not validated against Marko's real network.
-- **My assumption:** Numbers are directionally reasonable based on Sydney market data, but need ±10-20% adjustment per actual sub conversations.
+- **My assumption:** Numbers are directionally reasonable based on Sydney market data, but need ±10-20% adjustment per actual subcontractor conversations.
 - **Source for verification needed:** Marko (already on QUESTIONS.md Q1).
 - **Where I'd revise:** rate schedule + master pricing sub-labour column.
-- **Blocking?** No — schedule marked DRAFT pending validation; no subs see it before Allan/Marko sign off.
+- **Blocking?** No — schedule marked DRAFT pending validation; no subcontractors see it before Allan/Marko sign off.
 
 ### Q-NEW-3. Customizer ABN field for aftercare cards
 - **Why I need it:** [customer-aftercare-cards.md](templates/customer-aftercare-cards.md) references `[ABN]` placeholder pulled from Customizer; current Customizer has phone + email + licence but not ABN field.
@@ -98,7 +98,9 @@
 3. **c0495e0** — `docs(ai-employees): build Phase 1-2 research-focused roster — materials + competitive + trades`
 4. **5051981** — `docs(ghl): build 13-stage pipeline spec — stages + workflows + ageing rules`
 5. **3c79f52** — `docs(templates): migrate QUOTE_OUTPUT_TEMPLATES — full 21-template customer lifecycle`
-6. *(pending: Final commit — QUESTIONS.md update + final session-log summary)*
+6. **e582394** — `docs: final session log + open questions log (Allan return brief)`
+7. *(pending Batch F — terminology pass: sub→subcontractor internal + technician customer-facing + Q1/Q14/Q15/Q18 deferral)*
+8. *(pending Batch G — international rate research + fully-loaded margin model for sub-rate-schedule.md per Allan's Q1+Q18 reframe)*
 
 ---
 
@@ -120,7 +122,7 @@
 - **NEW** `docs/sop/sub-recruitment-channels.md` (sheet 09) — 8 channels with compliance language + funnel benchmarks
 - **NEW** `docs/sop/sub-tax-compliance.md` (sheet 11) — TPAR + super 3-part test + portable LSL
 - **NEW** `docs/sop/sub-sopa-protections.md` (sheet 12) — NSW Security of Payment Act 1999 SOP + Clause 16 wording
-- **NEW** `docs/specs/sub-rate-schedule.md` (sheet 13) — sub rate tables (DRAFT pending Marko validation) + 8-step payment SOP + callout/cancellation fees
+- **NEW** `docs/specs/sub-rate-schedule.md` (sheet 13) — subcontractor rate tables (DRAFT pending Marko validation) + 8-step payment SOP + callout/cancellation fees
 - **NEW** `docs/templates/customer-aftercare-cards.md` (sheet 14 section A) — A5 card templates with ACCC-compliant warranty wording
 - **NEW** `docs/templates/recruitment-ads.md` (sheet 14 section B) — ad copy per channel with Fair Work compliance audit checklist
 - **MODIFIED** `docs/sop/sub-onboarding-master.md` — references table updated with all 9 new docs grouped pre-live / live / lenses
@@ -129,7 +131,7 @@
 ### Batch C — AI employee specs (Phase 1-2 research-focused roster complete)
 - **NEW** `docs/specs/ai-employees/materials-validator.md` — quarterly approved-brand audit + on-demand new-brand eval; ~$0.20-0.50/brand
 - **NEW** `docs/specs/ai-employees/competitive-intelligence.md` — weekly NSW competitor scan + failure-mode log; ~$1-3/week
-- **NEW** `docs/specs/ai-employees/trades-researcher.md` — generic deep-research catch-all for industry/law/tool/geo/sub questions; ~$1-5/task
+- **NEW** `docs/specs/ai-employees/trades-researcher.md` — generic deep-research catch-all for industry/law/tool/geo/subcontractor questions; ~$1-5/task
 - **MODIFIED** `docs/specs/ai-employees/README.md` — Phase 1-2 roster all marked ✅ Spec built (pricing + materials + competitive + trades)
 
 ### Batch D — GHL pipeline + 12 workflows + ageing rules + Phase 5 Override 15 note
@@ -148,12 +150,12 @@
 
 ### Decision A1: F14 "Stealth-expansion" reframed as "Coordinator-model expansion"
 - **What Jordan said:** *"We literally just stole someone's business"*
-- **What I wrote in our doc:** "We coordinate, specialist subs fulfil, fair margin to specialist sub. We add value via better customer experience + admin + lead gen."
+- **What I wrote in our doc:** "We coordinate, specialist subcontractors fulfil, fair margin to specialist subcontractor. We add value via better customer experience + admin + lead gen."
 - **Why I reframed:** Three reasons:
   1. ACCC misleading-conduct exposure if we describe ourselves as "stealing" externally
-  2. Brand reputation — sub recruits read our docs once we hire; "ethics-flexible" framing damages us
+  2. Brand reputation — subcontractor recruits read our docs once we hire; "ethics-flexible" framing damages us
   3. Operationally identical, ethically cleaner — our agency model already does this; we'd just extend it
-- **Lens audit:** customer-fairness (cleaner narrative) + auditor-fair-work (sub gets fair share, not just used)
+- **Lens audit:** customer-fairness (cleaner narrative) + auditor-fair-work (subcontractor gets fair share, not just used)
 - **Alternative considered (Rule 12):** Keep Jordan's framing as-is, treat doc as private-only. Rejected because docs leak (employees, future hires, even legal discovery) — write nothing in writing you wouldn't want repeated.
 - **Override path:** if Allan prefers Jordan's exact framing, easy edit. But CEO recommendation: keep coordinator-model framing.
 
@@ -216,7 +218,7 @@
 
 1. **F14 framing** — Jordan's "stealth-expansion" reframed as "Coordinator-model" for ACCC + brand reasons. Override if you prefer Jordan's framing.
 2. **V56 funnel targets set as Year 1, not stretch** — match Jordan in Y1, beat in Y2+. Defensible per market reality. Override if you want stretch from Day 1.
-3. **Sub rate schedule marked DRAFT** pending Marko validation — I didn't apply the numbers as canonical.
+3. **Subcontractor rate schedule marked DRAFT** pending Marko validation — I didn't apply the numbers as canonical.
 4. **dm-handler discloses AI when asked** — ACCC compliance + trust trumps engagement metrics. Override if Allan wants more aggressive engagement.
 5. **Sheet 15 (audit log) NOT migrated** — meta-doc verifies SOURCE Excel completeness; not an ongoing operating doc. Stays as archive only.
 6. **OPERATING-CONTEXT § 8.4 marked HISTORICAL** — replaced by ghl-pipeline-13-stage.md. Both still in repo for now (history preserved).
@@ -226,7 +228,7 @@
 | # | Question | Blocking? | Where |
 |---|---|---|---|
 | Q-NEW-1 / Q16 | NSW Long Service Corporation portable leave applicability | No — small calc adjustment if applies | [QUESTIONS.md Q16](QUESTIONS.md), [sub-tax-compliance.md](sop/sub-tax-compliance.md) |
-| Q-NEW-2 / Q18 | Sub rate validation (extension of Q1) | No — DRAFT until validated | [QUESTIONS.md Q18](QUESTIONS.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md) |
+| Q-NEW-2 / Q18 | Subcontractor rate validation (extension of Q1) | No — DRAFT until validated | [QUESTIONS.md Q18](QUESTIONS.md), [sub-rate-schedule.md](specs/sub-rate-schedule.md) |
 | Q-NEW-3 / Q17 | Customizer ABN field add | No — small task | [QUESTIONS.md Q17](QUESTIONS.md), [customer-aftercare-cards.md](templates/customer-aftercare-cards.md) |
 
 ### What's queued for next session (when Allan back)
@@ -257,13 +259,13 @@ docs/SESSION-LOG-2026-05-01-PM.md       ← THIS FILE — start here
 docs/specs/ghl-pipeline-13-stage.md     ← Most important new spec
 docs/templates/customer-comms-templates.md ← Customer SMS/email lifecycle
 docs/sop/sub-risk-scenarios-playbook.md ← Operational reference (28 scenarios)
-docs/sop/sub-ongoing-quality-monitoring.md ← Ongoing sub mgmt (9 systems)
+docs/sop/sub-ongoing-quality-monitoring.md ← Ongoing subcontractor mgmt (9 systems)
 docs/sop/sub-tax-compliance.md          ← TPAR + super clarity
 docs/sop/sub-sopa-protections.md        ← NSW SOPA protections
 docs/sop/sub-sham-contracting-protections.md ← Fair Work compliance
 docs/specs/sub-rate-schedule.md         ← DRAFT pending Marko validation
 docs/templates/customer-aftercare-cards.md ← A5 card templates
-docs/templates/recruitment-ads.md       ← Sub recruitment ad copy
+docs/templates/recruitment-ads.md       ← Subcontractor recruitment ad copy
 docs/sop/sub-recruitment-channels.md    ← 8 recruitment channels
 docs/specs/ai-employees/maintenance-reminder.md
 docs/specs/ai-employees/dm-handler.md

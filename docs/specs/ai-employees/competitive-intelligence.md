@@ -119,7 +119,7 @@ Weekly digest: `data/research/competitor-weekly-2026-MM-DD.md`
 
 ## Executive summary (2-3 bullets)
 - Surface Care launched new "weekend express" service for $300 markup
-- Bathroom Werx pricing dropped 8% on bath resurface (likely sub roster change)
+- Bathroom Werx pricing dropped 8% on bath resurface (likely subcontractor roster change)
 - 3 competitors now offering "rental property 6-month" warranty exclusively (we already do)
 
 ## Per-competitor digest

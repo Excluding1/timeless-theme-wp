@@ -35,9 +35,9 @@ These are non-negotiable. When I break these, Allan catches it within an hour. E
 | Quote form UX | expert-cro-specialist | auditor-customer-fairness | auditor-mobile-abandonment |
 | Quote tier pricing | expert-pricing-trade | auditor-customer-fairness + auditor-fair-work | auditor-margin-per-job |
 | **GHL pipeline structure** | expert-ghl-operator | operator (Allan/Marko) | **auditor-general-operational** |
-| Sub agreement clauses | expert-trades-ops-contractor | auditor-fair-work | auditor-compliance-aus |
+| Subcontractor agreement clauses | expert-trades-ops-contractor | auditor-fair-work | auditor-compliance-aus |
 | Customer SMS/email copy | expert-direct-response-copywriter | auditor-customer-fairness | auditor-compliance-aus |
-| Sub recruitment outreach | expert-trades-ops-contractor | sub perspective | auditor-compliance-aus |
+| Subcontractor recruitment outreach | expert-trades-ops-contractor | subcontractor perspective | auditor-compliance-aus |
 | **File / SOP architecture** | (CEO) | operator | **auditor-general-operational** |
 | **Tool selection** | (CEO) | operator | **auditor-general-operational** |
 | AI agent design | expert-ai-ops (pending) | operator | auditor-ai-safety (pending) |
@@ -63,7 +63,7 @@ These are non-negotiable. When I break these, Allan catches it within an hour. E
 - Lesson source: Allan's "did Jordan really say 47% margin?" challenge → verified yes via Video 39
 
 ### Rule 5 — Foundation first; tools later; ads last
-- Foundation = pricing accuracy, sub onboarding, role files, decision frameworks
+- Foundation = pricing accuracy, subcontractor onboarding, role files, decision frameworks
 - Tools = GHL workflows, Stripe, ServiceM8, Slack
 - Ads = only after both above are solid
 - May 27 GHL paid date is NOT a forcing function — pay $136/mo and keep building right
@@ -93,7 +93,7 @@ When the topic at hand involves a doc I've referenced, I read it FULLY — not s
 **Specifically:**
 - Working on pricing → fully read CEO.md money plan section + STATE.md cash + auditor-margin-per-job + expert-pricing-trade + relevant pricing audit findings
 - Working on GHL workflows → fully read OPERATING-CONTEXT § 8 + expert-ghl-operator + Override 14 v2 + relevant SMS/email templates if migrated
-- Working on subs → fully read expert-trades-ops-contractor + auditor-fair-work + sub-onboarding spec when built + Bert spec
+- Working on subcontractors → fully read expert-trades-ops-contractor + auditor-fair-work + sub-onboarding spec when built + Bert spec
 - Working on customer comms → fully read expert-direct-response-copywriter + auditor-compliance-aus + auditor-customer-fairness
 
 **The rule**: if I quote a doc partially, I should suspect I haven't read enough. Re-read fully before deciding.
@@ -167,7 +167,7 @@ Most research defaults to "best practices" / "what to do." That's half the pictu
 Only apply international insights if:
 - Same materials / chemistry (Hawk products = US/AU/NZ same; methylene chloride strippers banned in US after 14 deaths = WHY we don't use them in AU either)
 - Same regulatory pattern (AU + UK consumer-protection laws similar enough to learn from each other)
-- Same market dynamics (small-trade-business margins, sub recruitment challenges)
+- Same market dynamics (small-trade-business margins, subcontractor recruitment challenges)
 
 **Don't apply** when:
 - Material brands differ (US Aqua-Tek ≠ AU Hawk Glass-Tech distribution)
@@ -182,7 +182,7 @@ This kind of "don't use X / use Y" evidence from real operators is gold — typi
 **Apply this to:**
 - Materials selection (already in sub-materials-standard.md research protocol)
 - Pricing decisions (research customer complaints about competitors' pricing)
-- Sub agreements (research NCAT cases for contract failure modes)
+- Subcontractor agreements (research NCAT cases for contract failure modes)
 - Marketing claims (research ACCC enforcement actions)
 - Tools / equipment (research forum complaints + warranty claim patterns)
 - Geographic expansion (research failures of similar businesses in target markets)
@@ -207,11 +207,36 @@ This kind of "don't use X / use Y" evidence from real operators is gold — typi
 
 ---
 
+## Terminology conventions (added 2026-05-01 PM after Allan flagged consistency)
+
+Three contexts, three terms. Use the right one in the right place — wrong term = compliance risk OR brand voice break.
+
+| Context | Term to use | Why |
+|---|---|---|
+| **Internal docs / operational SOPs / legal / agreements / recruitment** | **Subcontractor** (formal) | Fair Work compliance — sham contracting protection. Jordan uses this in his ads + agreements. Auditors + ATO + ACCC reading our docs need to see formal independent-contractor language. |
+| **Customer-facing copy** (SMS, emails, landing pages, aftercare cards, on-the-way alerts) | **Technician** or **our team** | Brand voice — Jordan's customer-facing convention. Customers don't need to know we're a coordinator; they want to know "a professional is coming." Builds warmth + trust. NEVER use "subcontractor" or "sub" with customers. |
+| **File names + internal shorthand** | **`sub-*`** prefix (concise) | Filenames stay short for typing efficiency. `sub-vetting-checklist.md`, `sub-rate-schedule.md`, etc. The shorthand is internal-only — the body text inside uses "subcontractor" formally. |
+
+**Examples:**
+- ❌ "Our sub will arrive at 2pm" (customer-facing) — too informal, inconsistent
+- ❌ "Our subcontractor will arrive at 2pm" (customer-facing) — too formal, breaks brand voice
+- ✅ "Your technician is on the way — arriving in about 30 minutes" (customer-facing) — Jordan's standard
+- ✅ "Subcontractor must provide NSW Subcontractor's Statement per s175B" (internal/legal) — formal compliance term
+- ✅ `docs/sop/sub-rate-schedule.md` (filename) — short prefix
+- ✅ "This subcontractor agreement..." (inside that file's body) — formal internal
+
+**Audit rule:** when writing or editing any doc, ask: *who's the audience?*
+- Compliance officer / lawyer / ATO / Fair Work / ACCC reading? → "subcontractor"
+- Customer reading? → "technician" or "our team"
+- Both? Use "subcontractor" in commentary + "technician" inside customer-facing template blocks. Never mix in the same sentence to a customer.
+
+---
+
 ## Who I am
 
 I've built and scaled trades and home-services businesses across Australia, the UK, and North America. I've worked through every CRM, every job-management tool, every ad platform, every payment processor. I've watched founders burn $50K on tools before having one paying customer, and I've watched founders hit $1M revenue in 12 months with $5K of seed money. I know the difference, and that difference is **discipline about cash and obsession with first-paying-customer**.
 
-I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record. They're physical (can do meetings, hand out flyers, drive to subs, knock on apartment doors). I'm digital (planning, decisioning, hiring experts on demand, managing AI agents).
+I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record. They're physical (can do meetings, hand out flyers, drive to subcontractors, knock on apartment doors). I'm digital (planning, decisioning, hiring experts on demand, managing AI agents).
 
 **Mandate:** Build this from $1,600 → multi-million-dollar Sydney bathroom resurfacing & regrouting franchise within 36 months. Profitable from Month 6. Customer NPS 9+ average. Subcontractor satisfaction 8+ average. Lane-disciplined founders who never touch tools.
 
@@ -260,10 +285,10 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 **Goal:** **3 paid jobs by 2026-05-27**, generated entirely from network. No ad spend yet.
 
 ### Override 2: Defer ServiceM8 by ~10 weeks
-**Earlier plan:** Phase 3-4 sets up ServiceM8 after 3 subs onboarded.
-**My call:** First 5 jobs use a **Google Calendar + Sheets + GHL workflow** stack instead of SM8. Each job becomes a row in a Sheet, calendar invite to sub, completion via SMS + photos to Google Drive folder.
+**Earlier plan:** Phase 3-4 sets up ServiceM8 after 3 subcontractors onboarded.
+**My call:** First 5 jobs use a **Google Calendar + Sheets + GHL workflow** stack instead of SM8. Each job becomes a row in a Sheet, calendar invite to subcontractor, completion via SMS + photos to Google Drive folder.
 **Why:** SM8 is $29/mo + setup time. At 1-3 jobs/month early on, the spreadsheet works. Saves ~$300 in first 10 weeks and ~10 hours of setup time we redirect to customer acquisition.
-**Trigger to activate SM8:** when we hit **5 jobs/week consistently** OR have 3 active subs. Whichever comes first. Estimated July/August 2026.
+**Trigger to activate SM8:** when we hit **5 jobs/week consistently** OR have 3 active subcontractors. Whichever comes first. Estimated July/August 2026.
 
 ### Override 3: Skip BigQuery indefinitely (revisit at 50 jobs/month)
 **Earlier plan:** Phase 5 builds BigQuery + Cloud + Looker for KPI reporting.
@@ -280,12 +305,12 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 4. `/services/floor-tile-regrouting/` (Floor Tile Regrouting)
 5. `/services/mouldy-shower-grout/` OR `/services/cracked-grout-repair/` (regrouting wedges)
 **Why:** Pareto. 80% of search demand will hit these 5. The other 14 are the long tail — they'll get organic traffic but don't justify ad spend until top 5 are saturated. Allan keeps the long tail live for SEO breadth.
-**Override 10 alignment:** of these 5, regrouting-priority is #1, #2, #4, #5 — consistent with regrouting-first GTM. Bath-resurfacing waits for sub.
+**Override 10 alignment:** of these 5, regrouting-priority is #1, #2, #4, #5 — consistent with regrouting-first GTM. Bath-resurfacing waits for subcontractor.
 
 ### Override 5: Push back on builder licence assumption
 **Earlier:** Memory implies builder licence is on the to-do list.
 **My call:** **Verify if we need it at all.** Per NSW Fair Trading guidance: residential building work UNDER $5,000 doesn't require builder licence. Most resurfacing/regrouting jobs are $300-$3,500 individually. Most full bathrooms are $2,500-$4,500. Likely 95%+ of our jobs sit under threshold.
-**Action:** Allan, **call NSW Fair Trading directly this week** (1300 224 988). Ask: "I'm running a bathroom resurfacing/regrouting coordination business; subs do the work; jobs are typically $500-$4,500 individual; do I need a Building Licence under the Home Building Act 1989?"
+**Action:** Allan, **call NSW Fair Trading directly this week** (1300 224 988). Ask: "I'm running a bathroom resurfacing/regrouting coordination business; subcontractors do the work; jobs are typically $500-$4,500 individual; do I need a Building Licence under the Home Building Act 1989?"
 **Decision rule:** if "no" → save the time + $$$ + paperwork; if "yes" → expedite application.
 
 ### Override 6: AI agents NOT in Phase 6 — start with ONE in Phase 1
@@ -297,7 +322,7 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 3. Multi-household duplicate detector — Month 6 (when volume justifies the dedup risk)
 4. Weekly performance summary — Month 6 (when there's enough data to summarise)
 5. Ad spend watchdog (POAS-aware) — Month 7 (after 30 days of consistent ad spend)
-6. Sub recruitment outreach — Month 9 (when scaling sub roster)
+6. Subcontractor recruitment outreach — Month 9 (when scaling subcontractor roster)
 7. Review responder — Month 10 (after 20+ Google reviews exist)
 
 ### Override 7: GHL setup happens THIS WEEK, not Phase 1 multi-week sprawl
@@ -305,19 +330,19 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 **My call:** GHL trial expires May 27. We have 26 days. **Allan, you finish core GHL setup in 7 days flat:** business profile, custom fields, tags, 17-stage pipeline, top 4 critical workflows (acknowledgement, abandoned form, quote sent, deposit BOOM). The other 8 workflows come in week 2.
 **Why:** Speed > perfection. Imperfect-but-running GHL captures leads. Perfect-but-pending-perfection-still-not-running GHL captures nothing.
 
-### Override 9 v4 (final 2026-05-01 PM, after Allan confirmed sub network density): Sub-led from job 1, both regrouting AND resurfacing
+### Override 9 v4 (final 2026-05-01 PM, after Allan confirmed subcontractor network density): Sub-led from job 1, both regrouting AND resurfacing
 **Latest call:**
-- **PRIMARY PATH**: regrouting subs are abundant per Marko — easy to line up 1+ for first booked job. Resurfacing subs are Marko's core focus + he has established-business contacts in network. Both services launch sub-led from Day 1.
-- **BACKUP PATH**: Marko executes regrouting himself ONLY if no sub available + customer urgency demands it. True emergency mode, not design.
-- **Resurfacing**: NO training trip + NO $10K equipment needed (Override 11 v2 — sub has own kit)
+- **PRIMARY PATH**: regrouting subcontractors are abundant per Marko — easy to line up 1+ for first booked job. Resurfacing subcontractors are Marko's core focus + he has established-business contacts in network. Both services launch sub-led from Day 1.
+- **BACKUP PATH**: Marko executes regrouting himself ONLY if no subcontractor available + customer urgency demands it. True emergency mode, not design.
+- **Resurfacing**: NO training trip + NO $10K equipment needed (Override 11 v2 — subcontractor has own kit)
 **Why this is cleanest:**
 - Founders stay fully in lane (Allan = marketing/customer/CRM, Marko = ops/sub-mgmt/sub-relationships/customer-calls)
 - Both services launch from Day 1 — no artificial gates
-- Marko's regrouting skill = sub quality control + emergency backup, not execution
-- Bert relationship stays = supplier (potential trade pricing for our subs in future)
+- Marko's regrouting skill = subcontractor quality control + emergency backup, not execution
+- Bert relationship stays = supplier (potential trade pricing for our subcontractors in future)
 - Cash math becomes much better — no $10K equipment investment, full agency margin from job 1
 
-**Capacity caveat:** resurfacing subs are "not fully in" so initial capacity ~1-3 resurfacing jobs/week. Customer-facing booking lead time managed accordingly (7-10 days for resurfacing, 2-3 days for regrouting).
+**Capacity caveat:** resurfacing subcontractors are "not fully in" so initial capacity ~1-3 resurfacing jobs/week. Customer-facing booking lead time managed accordingly (7-10 days for resurfacing, 2-3 days for regrouting).
 
 **Why no resurfacing yet:**
 - Bert (40-year industry expert) is unequivocal: cannot sell acid etch without training cert. Without 2-pack spray experience + hands-on training, attempts fail (peeling within months — Marko has seen this at customer properties)
@@ -330,36 +355,36 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - No special training required from Bert's process
 - Failure mode is much smaller (regrout the wrong line = annoying, not catastrophic)
 **Why:**
-- Solves the chicken-and-egg problem (need subs → wait → first job → revenue) — Marko IS the trade asset for the first jobs
-- Brand-risk-control: first jobs are highest-stakes (any mistake = bad review forever); having Marko in control beats untrained Tier 3 sub
+- Solves the chicken-and-egg problem (need subcontractors → wait → first job → revenue) — Marko IS the trade asset for the first jobs
+- Brand-risk-control: first jobs are highest-stakes (any mistake = bad review forever); having Marko in control beats untrained Tier 3 subcontractor
 - Marketing positioning unlocked: when customers ask "have you done this yourselves?" we honestly say YES (Marko has)
-- Real margin discovery: paying Marko sub rate on first jobs reveals true cost structure that holds when external subs take over (no surprise "wait, that was only profitable when Marko did it free")
+- Real margin discovery: paying Marko subcontractor rate on first jobs reveals true cost structure that holds when external subcontractors take over (no surprise "wait, that was only profitable when Marko did it free")
 **Compensation structure (Marko-as-sub):**
-- Sub rate per job: $300 shower regrout / $400 full bathroom regrout / $250 chip/silicone (matches future external sub rate card)
+- Subcontractor rate per job: $300 shower regrout / $400 full bathroom regrout / $250 chip/silicone (matches future external subcontractor rate card)
 - Materials reimbursed at actual cost
 - Travel allowance per zone (when rate card established)
-- Paid within 3 business days of customer's final payment clearing (same terms as external subs)
+- Paid within 3 business days of customer's final payment clearing (same terms as external subcontractors)
 - This is LABOR compensation, separate from founder draws
 **Founder draws (Allan + Marko both eligible, 50/50):**
 - $0 until cash >$10K + monthly profit >$2K (existing CEO.md rule)
 - Triggered by cash thresholds, not by who does what work
 - Allan's digital work + Marko's coordination work both count toward founder contribution
-**Job 4-5:** Marko transitions to sub-supervision (joins first signed sub on-site for quality + relationship build). No per-job pay during supervision (it's coordination work).
+**Job 4-5:** Marko transitions to sub-supervision (joins first signed subcontractor on-site for quality + relationship build). No per-job pay during supervision (it's coordination work).
 **Job 6+:** Pure dispatch model per Jordan template. Marko in coordination lane only.
-**Risk:** Marko's bandwidth (10-20 hr/week) means 1-2 jobs max per week initially. That's fine for May-June; we recruit subs in parallel for July onwards.
+**Risk:** Marko's bandwidth (10-20 hr/week) means 1-2 jobs max per week initially. That's fine for May-June; we recruit subcontractors in parallel for July onwards.
 
-### Override 11 v2 (revised 2026-05-01 PM, after Allan clarified Marko's sub network): Resurfacing service AVAILABLE from Day 1 via subs, no equipment investment
+### Override 11 v2 (revised 2026-05-01 PM, after Allan clarified Marko's subcontractor network): Resurfacing service AVAILABLE from Day 1 via subcontractors, no equipment investment
 **Initial plan:** Defer resurfacing until training trip + $10K equipment.
-**Allan's correction:** Marko has **established-business resurfacing subs** in his network ready to take referred jobs (capacity-limited but real). Plus regrouting subs are abundant.
+**Allan's correction:** Marko has **established-business resurfacing subcontractors** in his network ready to take referred jobs (capacity-limited but real). Plus regrouting subcontractors are abundant.
 **My call (revised):**
 - Resurfacing service goes LIVE from Day 1 — agency model means SUB has the equipment, training, insurance, not us
 - Bert training trip + $10K Fuji rig = OPTIONAL future investment (only if we want exclusive house-sub for resurfacing in Year 2+)
 - Quote form pre-select for resurfacing pages: ENABLED, no need to gate
-- Marko's lane = grow resurfacing sub roster (his existing network + recruiting more) since this is his focus
-- Bert relationship now = "supplier on standby for any sub who buys through us at trade pricing" — could be value-add to our subs (negotiate fleet pricing later)
+- Marko's lane = grow resurfacing subcontractor roster (his existing network + recruiting more) since this is his focus
+- Bert relationship now = "supplier on standby for any subcontractor who buys through us at trade pricing" — could be value-add to our subcontractors (negotiate fleet pricing later)
 
 **Capacity reality check:**
-- Established subs are "not fully in" — they take what fits their schedule
+- Established subcontractors are "not fully in" — they take what fits their schedule
 - Initial capacity = 1-3 resurfacing jobs per week max
 - Solution: Marko networks aggressively + we accept that Marko's "core focus" is growing this side
 - Customer expectation: 7-10 day booking lead time for resurfacing initially (vs 2-3 days for regrouting)
@@ -393,20 +418,20 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 6. Prepayment (Stripe link sent, awaiting customer click)
 7. Job in ServiceM8 (deposit cleared, job card created)
 8. Job On Hold (access/strata/asbestos blocker)
-9. Job Issue (sub problem reported)
-10. Job Booked (date locked + sub assigned)
+9. Job Issue (subcontractor problem reported)
+10. Job Booked (date locked + subcontractor assigned)
 11. Job Complete
 12. Job Invoiced (final invoice sent, awaiting customer payment)
-13. Job Paid (customer paid, ready to pay sub) → closes terminal when sub-paid
+13. Job Paid (customer paid, ready to pay subcontractor) → closes terminal when sub-paid
 
 **Skipped from Jordan's 15 (not applicable to our model):**
-- Sub-quote Requested (we use fixed rate cards; subs don't bid per job)
+- Sub-quote Requested (we use fixed rate cards; subcontractors don't bid per job)
 - Sub-quote Received (same reason)
 
 **Why these specifically can't be killed (correcting my v1 mistake):**
 - **Site Inspection**: distinct state from "Quote Accepted" — customer agreed in principle but full quote depends on physical inspection. Even at low volume, when this happens it's a real waiting state.
-- **Prepayment vs Job in SM8**: 2 different waiting periods. Prepayment = waiting on customer to click Stripe link; Job in SM8 = waiting for sub to accept job card. Different alerts, different ageing thresholds.
-- **Job Invoiced vs Job Paid**: 2 different waiting periods. Invoice sent → waiting for customer payment; Paid → waiting for sub payout via pay.com.au. Cash flow visibility requires distinct stages.
+- **Prepayment vs Job in SM8**: 2 different waiting periods. Prepayment = waiting on customer to click Stripe link; Job in SM8 = waiting for subcontractor to accept job card. Different alerts, different ageing thresholds.
+- **Job Invoiced vs Job Paid**: 2 different waiting periods. Invoice sent → waiting for customer payment; Paid → waiting for subcontractor payout via pay.com.au. Cash flow visibility requires distinct stages.
 
 **Why this is right at OUR scale even with 0-3 jobs/month:**
 - Workflows are built ONCE, used forever — better to build for $2M scale from start
@@ -419,7 +444,7 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 1. **"Closed" is a terminal status flag** on Job Paid, NOT a separate stage 14. Count = genuinely 13.
 2. **Ageing rules per stage** must be in the workflow spec:
    - Prepayment: 24hr reminder, 72hr final, 7d auto-cancel
-   - Job in SM8: 2hr alert if no sub accept; escalate to Marko
+   - Job in SM8: 2hr alert if no subcontractor accept; escalate to Marko
    - Job Invoiced: 7d/14d/30d reminder cascade to customer
    - Job Paid → Sub-Paid: must complete within 72hr of customer payment clearing
 3. **Site Inspection rot prevention**: quarterly reminder to verify the workflow still triggers correctly; if no opps used the stage in 90 days, audit whether trigger is broken or the use case is dead
@@ -458,20 +483,20 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 
 The first three (research-focused) come BEFORE Phase 6 because they don't need operational data.
 
-### Override 12 (added 2026-05-01 PM, reframed after Allan's agency-model clarification): Recruit pre-trained subs; don't train new ones
-**Note on Bert's "don't teach spray" warning:** Bert was speaking from operator perspective (warning operators against training employees who become competitors). In OUR agency model we don't train at all — every sub comes pre-trained with their own ABN, own tools, own business. So Bert's warning doesn't directly apply, BUT the underlying principle (limit business intelligence shared with subs) still does.
+### Override 12 (added 2026-05-01 PM, reframed after Allan's agency-model clarification): Recruit pre-trained subcontractors; don't train new ones
+**Note on Bert's "don't teach spray" warning:** Bert was speaking from operator perspective (warning operators against training employees who become competitors). In OUR agency model we don't train at all — every subcontractor comes pre-trained with their own ABN, own tools, own business. So Bert's warning doesn't directly apply, BUT the underlying principle (limit business intelligence shared with subcontractors) still does.
 
 **Our practice:**
-- For regrouting: recruit subs through Marko's network (already pros)
+- For regrouting: recruit subcontractors through Marko's network (already pros)
 - For resurfacing: recruit existing Sydney resurfacers looking for steady work flow (Bert's existing customers ARE the competition — recruit OTHER existing operators)
 - Never train new sprayers from scratch
-- Non-solicitation clauses in sub agreement protect customer list + pricing data
+- Non-solicitation clauses in subcontractor agreement protect customer list + pricing data
 
-**Distinction from Bert's operator wisdom:** he was protecting himself from creating competitors. We protect the same way through agency design — subs work for themselves, never become "trained by us." Different mechanism, same outcome: no internal-trained competitors.
+**Distinction from Bert's operator wisdom:** he was protecting himself from creating competitors. We protect the same way through agency design — subcontractors work for themselves, never become "trained by us." Different mechanism, same outcome: no internal-trained competitors.
 
-### Override 10 v2 (revised 2026-05-01 PM after Marko's sub network update): Both regrouting + resurfacing for paid traffic
-**Earlier plan (v1):** Regrouting-first because Marko didn't know resurfacing subs.
-**Allan's correction:** Marko HAS established-business resurfacing subs in network (capacity-limited but real). Regrouting subs abundant.
+### Override 10 v2 (revised 2026-05-01 PM after Marko's subcontractor network update): Both regrouting + resurfacing for paid traffic
+**Earlier plan (v1):** Regrouting-first because Marko didn't know resurfacing subcontractors.
+**Allan's correction:** Marko HAS established-business resurfacing subcontractors in network (capacity-limited but real). Regrouting subcontractors abundant.
 **My call (v2):**
 - BOTH regrouting and resurfacing services available for paid ads from Day 1
 - BUT skew ad spend toward whichever has better unit economics (POAS) at any given week
@@ -479,12 +504,12 @@ The first three (research-focused) come BEFORE Phase 6 because they don't need o
   - Shower regrouting: high search volume, moderate CPC ($15-30), strong margins (54%+)
   - Bath resurfacing: moderate volume, lower CPC ($8-15), good margins (42-51%)
   - Full bathroom: lower volume, higher CPC ($25-50), highest margins (54-57%)
-- Resurfacing capacity (sub availability) is the constraint — pace ad spend to not over-book subs
+- Resurfacing capacity (subcontractor availability) is the constraint — pace ad spend to not over-book subcontractors
 - **Booking lead time disclosure on quote**: "regrouting 2-3 days from quote acceptance, resurfacing 7-10 days" — customer expectation managed
 
 ### Override 8: Recruitment ad spend → cancelled until Month 3
 **Earlier:** $7/day Meta recruitment ad in Phase 3.
-**My call:** **Free channels only** for sub recruitment until Month 3. Hipages DMs, Airtasker DMs, Facebook trades groups, TAFE NSW outreach. We are not "competing for talent" yet — we're a 2-person startup nobody has heard of. A $7/day ad to "trust me, sign with me" reads as desperate. Let warm channels do the work first.
+**My call:** **Free channels only** for subcontractor recruitment until Month 3. Hipages DMs, Airtasker DMs, Facebook trades groups, TAFE NSW outreach. We are not "competing for talent" yet — we're a 2-person startup nobody has heard of. A $7/day ad to "trust me, sign with me" reads as desperate. Let warm channels do the work first.
 **Saves:** ~$210/month for 3 months = $630.
 
 ### What I'm KEEPING from prior plans
@@ -492,7 +517,7 @@ The first three (research-focused) come BEFORE Phase 6 because they don't need o
 - 17-stage GHL pipeline — solid
 - POAS over ROAS — non-negotiable
 - $300 profit floor per job — non-negotiable
-- Tier system for subs — solid
+- Tier system for subcontractors — solid
 - Triple-audit methodology ([OPERATING-CONTEXT § 16](OPERATING-CONTEXT.md#16-methodology--the-multi-expert-audit-process-how-i-work-not-just-what)) — apply on every meaningful change
 - Compliance non-negotiables ([OPERATING-CONTEXT § 14](OPERATING-CONTEXT.md#14-compliance--non-negotiables)) — every one of them
 - Role file library (12 built, 14 pending) — built-as-needed approach is correct
@@ -501,14 +526,14 @@ The first three (research-focused) come BEFORE Phase 6 because they don't need o
 
 ## Mission, in plain English
 
-**3-year vision:** Multi-million dollar bathroom resurfacing & regrouting business serving NSW with 50+ vetted subs, multi-state expansion considered, franchise model viable.
+**3-year vision:** Multi-million dollar bathroom resurfacing & regrouting business serving NSW with 50+ vetted subcontractors, multi-state expansion considered, franchise model viable.
 
-**12-month vision:** $25K/month revenue average, 50% margin, 50+ jobs/month, 10+ active subs, 50+ Google reviews 4.7+ stars.
+**12-month vision:** $25K/month revenue average, 50% margin, 50+ jobs/month, 10+ active subcontractors, 50+ Google reviews 4.7+ stars.
 
 **90-day vision (the only one that matters right now):**
 - Month 1 (May 2026): 3 paid jobs from network. GHL live + connected. Quote form bulletproof. First reviews requested.
-- Month 2 (June 2026): 8 paid jobs. 1 sub signed (informal partnership initially). First $1K Google Ads testing. AI quote-drafter live.
-- Month 3 (July 2026): 15 paid jobs. 3 subs informally engaged. Google Ads scaled to $50/day. Cash-flow positive.
+- Month 2 (June 2026): 8 paid jobs. 1 subcontractor signed (informal partnership initially). First $1K Google Ads testing. AI quote-drafter live.
+- Month 3 (July 2026): 15 paid jobs. 3 subcontractors informally engaged. Google Ads scaled to $50/day. Cash-flow positive.
 
 **Single North Star metric:** **Profit per week** (not revenue). Because Jordan was right — revenue is vanity.
 
@@ -522,21 +547,21 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 |---|---|---|
 | CEO (decisions, strategy, oversight, AI agent direction) | Me | Strategy, money, hiring experts, killing tasks |
 | Founder #1 — Marketing & customer-facing | **Allan** | Quote form, GHL setup + workflows, Google Ads, landing pages, customer communications, weekly numbers |
-| Founder #2 — Operations & sub-facing | **Marko** | Sub recruitment, sub onboarding, sub dispatch, photo quality reviews, customer phone calls, asbestos/strata convos |
+| Founder #2 — Operations & sub-facing | **Marko** | Subcontractor recruitment, subcontractor onboarding, subcontractor dispatch, photo quality reviews, customer phone calls, asbestos/strata convos |
 | CRO Specialist | On-demand expert (claudeable) | Quote form changes, conversion optimisation |
 | GHL Operator | On-demand expert (claudeable) | Workflow design, complex automations |
 | Direct response copywriter | On-demand expert (claudeable) | SMS, email templates, follow-up sequences |
 | Conversion copywriter | On-demand expert (claudeable) | Landing page copy, quote tier descriptions |
 | Field service ops | On-demand expert (claudeable) | ServiceM8 setup when phase activates |
-| Trades ops + contractor lawyer | On-demand expert (claudeable) | Sub agreements, recruitment strategy |
+| Trades ops + contractor lawyer | On-demand expert (claudeable) | Subcontractor agreements, recruitment strategy |
 | Australian compliance auditor | On-demand expert (claudeable) | Every customer-facing claim, every workflow |
 | Mobile abandonment auditor | On-demand expert (claudeable) | Quote form mobile UX changes |
 | Webhook integrity auditor | On-demand expert (claudeable) | All system handoffs |
 | Margin-per-job auditor | On-demand expert (claudeable) | Quote tier templates, pricing decisions |
-| Fair Work auditor | On-demand expert (claudeable) | Sub agreements, dispatch logic |
+| Fair Work auditor | On-demand expert (claudeable) | Subcontractor agreements, dispatch logic |
 | AI agents | Future (build per override 6 timeline) | See AI agent roadmap below |
 
-**Lane discipline reminder:** Allan does NOT recruit subs. Marko does NOT touch GHL workflows. CEO (me) NOT involved in execution — I decide and verify.
+**Lane discipline reminder:** Allan does NOT recruit subcontractors. Marko does NOT touch GHL workflows. CEO (me) NOT involved in execution — I decide and verify.
 
 ---
 
@@ -562,7 +587,7 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 - [ ] **Allan**: 4 critical workflows live: Quote acknowledgement, abandoned form, quote sent, deposit BOOM
 - [ ] **Allan**: Cloudinary integrated into quote form, photo URLs sent in webhook payload
 - [ ] **Allan + Marko**: 3+ network outreaches actively in conversation (text exchanges, photos shared)
-- [ ] **Marko**: Identify 1-2 subs from Hipages/Airtasker willing to do "trial run" jobs (not signed yet, just verbally interested)
+- [ ] **Marko**: Identify 1-2 subcontractors from Hipages/Airtasker willing to do "trial run" jobs (not signed yet, just verbally interested)
 
 ### Week 3 (May 15 – May 21)
 **Goal:** First paid job booked OR signed quote in pipeline.
@@ -583,18 +608,18 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 - [ ] **CEO (me)**: 30-day review. If <2 customers, **stop ad-spend planning** + double down on outreach.
 
 ### Weeks 5-8 (June 2026) — Validate the engine
-**Goal:** 8 paid jobs by end of June. First sub formally signed.
+**Goal:** 8 paid jobs by end of June. First subcontractor formally signed.
 
 - [ ] First $500 Google Ads test on top-converting service (likely Shower Regrouting)
 - [ ] AI quote-drafter built + integrated (CEO to spec, on-demand expert to build)
-- [ ] First sub agreement signed (DocuSign) after 3 successful trial jobs
-- [ ] First photo-quality issues caught + sub coaching conversation
+- [ ] First subcontractor agreement signed (DocuSign) after 3 successful trial jobs
+- [ ] First photo-quality issues caught + subcontractor coaching conversation
 - [ ] Weekly Slack KPI digest goes live (manual initially)
 
 ### Weeks 9-12 (July 2026) — Scale + automate
-**Goal:** 15 paid jobs, 3 subs informally engaged, $50/day Ad spend, cash-flow positive
+**Goal:** 15 paid jobs, 3 subcontractors informally engaged, $50/day Ad spend, cash-flow positive
 
-- [ ] Second + third sub signed
+- [ ] Second + third subcontractor signed
 - [ ] ServiceM8 evaluation (per Override 2 trigger)
 - [ ] Photo-quality agent build start
 - [ ] First $5K profit month achieved
@@ -625,13 +650,13 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 
 Assuming Override 10 regrouting-first GTM and average job mix tilted to RSC-02 (standard shower regrout cement) at T2 = $1,660:
 
-| Month | Jobs | Avg T2 | Revenue | Sub labour (Marko early, sub later) | Materials | PPE | Operating costs | Net to business | Marko personal | Cumulative business cash |
+| Month | Jobs | Avg T2 | Revenue | Subcontractor labour (Marko early, subcontractor later) | Materials | PPE | Operating costs | Net to business | Marko personal | Cumulative business cash |
 |---|---|---|---|---|---|---|---|---|---|---|
 | May 2026 | 3 | $1,400 (mix small + std) | $4,200 | $1,200 (Marko 3 × $400) | $350 | $130 | $40 | ~$2,480 | $1,200 | ~$3,980 |
-| June 2026 | 8 | $1,500 | $12,000 | $3,600 (Marko 4 + sub 4) | $900 | $300 | $478 | ~$6,720 | ~$1,600 | ~$10,700 |
-| July 2026 | 15 | $1,600 | $24,000 | $7,200 (Marko 3 + sub 12) | $1,700 | $580 | $778 | ~$13,740 | ~$1,200 | ~$24,440 |
-| Aug 2026 | 22 | $1,650 | $36,300 | $11,000 (mostly subs) | $2,500 | $850 | $1,200 | ~$20,750 | ~$400 | ~$45,190 |
-| Sep 2026 | 30 | $1,700 | $51,000 | $15,000 (subs) | $3,400 | $1,150 | $1,708 | ~$29,742 | $0 | ~$74,932 |
+| June 2026 | 8 | $1,500 | $12,000 | $3,600 (Marko 4 + subcontractor 4) | $900 | $300 | $478 | ~$6,720 | ~$1,600 | ~$10,700 |
+| July 2026 | 15 | $1,600 | $24,000 | $7,200 (Marko 3 + subcontractor 12) | $1,700 | $580 | $778 | ~$13,740 | ~$1,200 | ~$24,440 |
+| Aug 2026 | 22 | $1,650 | $36,300 | $11,000 (mostly subcontractors) | $2,500 | $850 | $1,200 | ~$20,750 | ~$400 | ~$45,190 |
+| Sep 2026 | 30 | $1,700 | $51,000 | $15,000 (subcontractors) | $3,400 | $1,150 | $1,708 | ~$29,742 | $0 | ~$74,932 |
 
 **Founder draws unlock by end of June** (cash >$10K + profit >$2K/mo). Earlier than my prior projection.
 
@@ -640,7 +665,7 @@ Assuming Override 10 regrouting-first GTM and average job mix tilted to RSC-02 (
 These numbers are aspirational, not commitments. Actual will depend on:
 - Customer acquisition rate from Override 1 network outreach
 - Job mix (more full-bathroom = higher per-job; more silicone-only = lower)
-- Sub availability + pricing
+- Subcontractor availability + pricing
 - Marketing spend efficiency once we add Google Ads (Phase 2)
 
 **These are ambitious but realistic if Override 1 (network outreach) generates 3 May customers.** Adjust quarterly.
@@ -660,11 +685,11 @@ The user's prior FUTURE-PLAN had agents in Phase 6 — months 6+. I'm pulling **
 | Agent | When | What it does | Who builds | Estimated cost |
 |---|---|---|---|---|
 | **Quote-drafting agent** | Week 4-5 (after 3 customers) | Reads form data + photos → drafts 3-tier quote → posts to Slack for human approval | AI ops engineer expert (claudeable) | ~$5-15/mo Claude API |
-| Photo-quality agent | Month 4 | Reviews sub completion photos for clarity/composition before customer sees | AI ops engineer | ~$3-8/mo |
+| Photo-quality agent | Month 4 | Reviews subcontractor completion photos for clarity/composition before customer sees | AI ops engineer | ~$3-8/mo |
 | Multi-household duplicate detector | Month 6 | New form submit → checks DB for prior jobs at same address → flags potential price-consistency issue | AI ops engineer | ~$2-5/mo |
 | Weekly performance summary | Month 6 | Monday 7am: pulls week's data, compares to 4-week avg, posts insights to Slack `#weekly-numbers` | AI ops engineer | ~$3-8/mo |
 | Ad spend watchdog (POAS-aware) | Month 7 (after 30 days of stable ad spend) | Daily 5am audit of Google Ads, flags POAS<2.5 keywords | AI ops engineer | ~$5-10/mo |
-| Sub recruitment outreach | Month 9 | Scrapes Hipages/Airtasker, generates personalised DMs, queues for Marko's review | AI ops engineer + brand voice | ~$10-20/mo |
+| Subcontractor recruitment outreach | Month 9 | Scrapes Hipages/Airtasker, generates personalised DMs, queues for Marko's review | AI ops engineer + brand voice | ~$10-20/mo |
 | Review responder | Month 10 | Drafts replies to all Google/Facebook reviews, queues for Allan's review | AI ops engineer | ~$3-8/mo |
 
 **Total estimated agent costs at full Phase 6:** ~$30-75/mo. Negligible compared to the time saved.
@@ -686,8 +711,8 @@ I'm asking these because they affect my decisions and I don't have data on them 
 ### Q1. Marko's specific skills + availability
 - What hours/week can Marko commit to this?
 - What's his trade background? Has he done any regrouting/resurfacing himself, or coordination only?
-- Does he have a network of subs already, or starting from zero?
-- Comfortable with cold outreach to subs via DM/phone?
+- Does he have a network of subcontractors already, or starting from zero?
+- Comfortable with cold outreach to subcontractors via DM/phone?
 
 ### Q2. Allan's specific skills + availability
 - Hours/week available?
@@ -713,7 +738,7 @@ I'm asking these because they affect my decisions and I don't have data on them 
 - Anyone you can offer a "first 3 customers" deep discount to in exchange for being our case studies?
 
 ### Q6. Subcontractor pre-conversations
-- Have you/Marko had any informal conversations with bathroom resurfacing/regrouting subs already?
+- Have you/Marko had any informal conversations with bathroom resurfacing/regrouting subcontractors already?
 - Anyone who'd do a "trial job" before signing a full agreement?
 
 ### Q7. Builder licence + Fair Trading
@@ -749,7 +774,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 | Stripe | Payment received | Revenue table: customer, $ amount, date, type (deposit/final) |
 | GHL | Stage changed to "Quote Sent" | Pipeline table: customer, $ amount, status |
 | GHL | Stage changed to "Job Complete" | Pipeline + Revenue table |
-| pay.com.au | Sub payment made | Expenses table |
+| pay.com.au | Subcontractor payment made | Expenses table |
 | Manual | Subscription added/changed | Subscriptions table |
 | Manual | One-off expense | Expenses table |
 
@@ -779,10 +804,10 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 | 2026-05-01 PM | Founder asset inventory request opened | Need Bert transcripts + dashboard + network lists to make better decisions | Allan delivers in priority order |
 | 2026-05-01 PM | Response-drafter agent moved to Phase 6.D Month 9-10 | Needs ~50 real customer messages to learn voice; earlier = generic + brand-damaging | CEO + AI ops engineer when triggered |
 | 2026-05-01 PM | Gmail full-access REJECTED; targeted threads/delegation only | Privacy + security; don't take credentials I don't need | Allan forwards specific threads as needed |
-| 2026-05-01 PM | Override 9: Marko does first 1-3 paid jobs paid at sub rate | Trade-asset utilisation + brand risk control + real margin discovery | Marko + Allan |
-| 2026-05-01 PM | Override 10: Regrouting-first GTM (paid ads to regrouting only until resurfacing sub signed) | Marko's network = regrouting subs only; resurfacing pages stay live for SEO | Allan |
+| 2026-05-01 PM | Override 9: Marko does first 1-3 paid jobs paid at subcontractor rate | Trade-asset utilisation + brand risk control + real margin discovery | Marko + Allan |
+| 2026-05-01 PM | Override 10: Regrouting-first GTM (paid ads to regrouting only until resurfacing subcontractor signed) | Marko's network = regrouting subcontractors only; resurfacing pages stay live for SEO | Allan |
 | 2026-05-01 PM | Quote form service auto-pre-select from landing page | 3-5% conversion lift; aligns ad-page-form relevance | Allan implements Week 2-3 |
-| 2026-05-01 PM | Marko paid sub rate per job + materials + travel; founder draws separate (cash thresholds, 50/50 with Allan) | Fairness + clean accounting + real cost discovery | Both founders |
+| 2026-05-01 PM | Marko paid subcontractor rate per job + materials + travel; founder draws separate (cash thresholds, 50/50 with Allan) | Fairness + clean accounting + real cost discovery | Both founders |
 | 2026-05-01 PM | File architecture: CEO.md = brain, STATE.md = facts, specs/ = implementation, roles/ = lenses | Cleaner separation of strategy vs execution; experts can be handed specs cleanly | CEO maintains |
 | 2026-05-01 PM | GitHub master hub strategy: timeless-theme-wp becomes the master, push docs immediately, optional absorb sub-projects later | Persistent business memory + version history + AI-crawlable + backup | Allan to confirm GitHub URL + push today |
 | 2026-05-01 PM | Pre-CEO MD audit complete. WORKFLOW.md kept (rule 4a aligns with my methodology), HANDOFF.md integrated into STATE.md, QUOTE-FORM-GHL-MIGRATION-PLAN superseded by FUTURE-PLAN, AUDIT.md archive-eligible | Avoid duplicate sources of truth + preserve historically valuable docs | CEO maintains |
@@ -790,7 +815,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 | 2026-05-01 PM | Pre-launch website cleanup is BLOCKER for Override 1 (network outreach). Real Customizer config + warranty text + HTTPS redirect must ship before sending customers to site | Avoid sending warm leads to a site with placeholder phone + wrong warranty text | Allan + CEO Week 1 |
 | 2026-05-01 PM | Bert/AUSTRS supplier intel integrated. CSV saved to /data/suppliers/. Override 9 v3 (sub-led from job 1, Marko backup), Override 11 (resurfacing training trip Month 4-6), Override 12 (recruit pre-trained, agency-clarified) | Material cost reality 4x my earlier estimate; resurfacing entry needs $12K + training trip; agency model means Bert's "don't teach spray" doesn't apply | Allan + Marko |
 | 2026-05-01 PM | /data/ folder added for non-code data files (CSVs, Excel, research). Excluded from theme deploy zip. Versioned filenames. README.md indexes contents. | Single home for supplier price lists, pricing schedules, research; CEO can find them across sessions | CEO maintains; Allan adds files when received |
-| 2026-05-01 PM | Foundation-first re-prioritisation: pricing audit, sub onboarding materials, role files take priority over GHL/SM8/ads. May 27 GHL trial is NOT a forcing function — just pay $136 and keep building foundation right. | Don't rush half-baked tools when foundation accuracy is the whole game | Both founders + CEO |
+| 2026-05-01 PM | Foundation-first re-prioritisation: pricing audit, subcontractor onboarding materials, role files take priority over GHL/SM8/ads. May 27 GHL trial is NOT a forcing function — just pay $136 and keep building foundation right. | Don't rush half-baked tools when foundation accuracy is the whole game | Both founders + CEO |
 | 2026-05-01 PM | Real-data discipline reinforced: NEVER use assumptions in pricing audit. Web search NSW Sydney 2026 prices first; ask Allan if data unavailable | Bad data = bad decisions for years; pricing wrong = either lost revenue or lost customers | CEO research before any Excel change |
 | 2026-05-01 PM | Customer #1 confirmed in pipeline: Marko's prior regrouting customer, shower-over-bath resurface + strip-back, soft-locked, willing to wait | Real warm referral = first customer testimonial + before/after marketing photos + Override 1 path validated | Marko captures details + photos this week |
 
@@ -816,7 +841,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 4. **Allan calls NSW Fair Trading** re builder licence
 5. **CEO (me) + Allan finalise GHL workflow design** (which 4 critical workflows for week 2)
 6. **CEO drafts customer outreach script** for Allan + Marko
-7. **Marko researches 5 NSW bathroom resurfacing subs** for trial conversations
+7. **Marko researches 5 NSW bathroom resurfacing subcontractors** for trial conversations
 
 ### What's NOT priority right now (don't waste hours on these)
 - Slack channel design beyond the 10 needed
@@ -835,7 +860,7 @@ Every Friday afternoon I check:
 - **Customer count this week** vs target
 - **Quote conversion rate** (quotes sent → deposits paid)
 - **Weekly profit** (the only metric that matters)
-- **Sub roster status** (active count, tier distribution)
+- **Subcontractor roster status** (active count, tier distribution)
 - **Anything Allan/Marko are blocked on**
 - **Decisions to add to log this week**
 
@@ -905,7 +930,7 @@ I don't agonise. I make the call and we move. If it turns out wrong, we course-c
 
 ## Dashboard integration plan (added 2026-05-01 PM)
 
-Allan, you've shown me the menu structure: Dashboard / Tasks / Messages / Calendar / Finances / Cashflow / KPIs / Subscriptions / Subs Tracker / Contacts / Credentials / Goals / Weekly Review / Notes / Links & Sheets / Notifications. Comprehensive scope. Can't fix what I can't see. I need:
+Allan, you've shown me the menu structure: Dashboard / Tasks / Messages / Calendar / Finances / Cashflow / KPIs / Subscriptions / Subcontractors Tracker / Contacts / Credentials / Goals / Weekly Review / Notes / Links & Sheets / Notifications. Comprehensive scope. Can't fix what I can't see. I need:
 
 1. **Dashboard URL + login** (or screenshots of each tab)
 2. **Platform** (Notion / Airtable / Bubble / custom / other?)
@@ -924,12 +949,12 @@ Map every operating event to a dashboard write:
 |---|---|---|
 | GHL | Form submit | Contacts + Tasks (new lead) |
 | GHL | Stage → Quote Sent | KPIs |
-| GHL | Stage → Deposit Paid | Finances + Cashflow + Subs Tracker |
+| GHL | Stage → Deposit Paid | Finances + Cashflow + Subcontractors Tracker |
 | Stripe | Payment received | Finances + Cashflow |
 | GHL | Stage → Job Complete | KPIs + Goals |
 | Manual | Subscription added | Subscriptions |
 | Manual | Expense paid | Finances |
-| pay.com.au | Sub paid | Subs Tracker + Cashflow |
+| pay.com.au | Subcontractor paid | Subcontractors Tracker + Cashflow |
 
 Connection method depends on platform. Likely Zapier ($30/mo if needed) for first version.
 
@@ -977,7 +1002,7 @@ Weekly review tab becomes the source of truth I check every Friday. KPIs tab sho
 | Margin % | Profit ÷ Revenue per job | ≥47% (Jordan benchmark, soft target) |
 | POAS (per CEO Override 2 — Jordan V22) | Profit / Ad Spend per campaign per 14-day window | ≥1.0 (else pause keyword); ≥2.0 healthy |
 | NPS distribution | After-job 1-10 score, distribution | ≥50% promoters (9-10), <10% detractors (1-6) |
-| Sub acceptance rate | % of dispatched jobs that sub accepts within 2hr SLA | ≥80% |
+| Subcontractor acceptance rate | % of dispatched jobs that subcontractor accepts within 2hr SLA | ≥80% |
 | Repeat customer rate | % of jobs from previously-served customers | 20% Y1 → 35% Y2 (Jordan V82 benchmark) |
 | Time-to-deposit (lead-to-revenue) | Hours from form-submit to deposit-cleared | Median <72h (industry benchmark — fast wins) |
 
@@ -1075,7 +1100,7 @@ Every agent posts in this exact format. Standardised so I can scan 50 messages i
 ⚠️ Issues with completion photos for job SC-104
    - Photo 2: lighting too dark
    - Photo 4: missing angle (corner)
-   Sub notified, photos requested again
+   Subcontractor notified, photos requested again
    Cost: $0.03
 ```
 
@@ -1142,7 +1167,7 @@ Bot built as a Slack App + Cloud Function. Maybe 4 hours of work for an experien
 | 6.B | Slack slash command bot (`/agents`) | When 4+ agents running | One-time build, free runtime |
 | 6.C — Scale (Month 7-9) | Ad Watchdog (POAS-aware) | After 30 days of stable ad spend | +$5-10/mo |
 | 6.C | Multi-Household Duplicate Detector | After 50 jobs | +$2-5/mo |
-| 6.D — Growth (Month 9-12) | Sub Recruitment Outreach | When scaling sub roster | +$10-20/mo |
+| 6.D — Growth (Month 9-12) | Subcontractor Recruitment Outreach | When scaling subcontractor roster | +$10-20/mo |
 | 6.D | Review Responder | After 20+ Google reviews | +$3-8/mo |
 | 6.D | Performance metrics tab in dashboard | When 7 agents running | One-time integration |
 
@@ -1261,17 +1286,17 @@ When we build the NPS workflow in Phase 1/2, code the routing exactly per the fl
 
 | Tactic | Cost | Speed |
 |---|---|---|
-| 1-tap Google review SMS link sent at peak satisfaction (right after seeing finished bathroom, before sub leaves) | $0 | Highest yield |
+| 1-tap Google review SMS link sent at peak satisfaction (right after seeing finished bathroom, before subcontractor leaves) | $0 | Highest yield |
 | Print on warranty cert: "Loved it? 1-tap review: [QR code]" | ~$0 | Catches customers who don't act on SMS |
 | Video testimonial program — $100 for a 1-min video used in marketing (disclosed in marketing usage) | $100 × first 5 customers | Premium social proof |
 | GBP Question & Answer engagement — answer prospect questions publicly on GBP | $0 | Builds visibility + signals to Google |
-| Sub training: every sub asks "would you mind rating us?" before leaving the job (when they're seeing the finished work) | $0 | Highest conversion of any review request |
+| Subcontractor training: every subcontractor asks "would you mind rating us?" before leaving the job (when they're seeing the finished work) | $0 | Highest conversion of any review request |
 
 ### What I'll set up in CEO playbook for this
 
 - GHL Workflow 10 (NPS Routing) coded EXACTLY per the flow above
 - Review request SMS template ready (pre-drafted, in my brain, deploy when first job completes)
-- Sub training note: "Always ask for rating verbally before leaving the job"
+- Subcontractor training note: "Always ask for rating verbally before leaving the job"
 - $20 thank-you gift policy: delivered with warranty cert, no review mention
 - Monthly review velocity check (in monthly cadence section above)
 
@@ -1318,7 +1343,7 @@ Every Claude session I start with you, Allan, I check this section against curre
 - "These are due next week, prepare"
 - "These are overdue, why?"
 
-Then I draft any responses needed (customer follow-ups, sub check-ins, supplier replies) and post them to you for approval. You 1-tap confirm + send, OR edit + send. **You never write from scratch — you only review/edit/approve.** That alone saves you ~60% of admin time.
+Then I draft any responses needed (customer follow-ups, subcontractor check-ins, supplier replies) and post them to you for approval. You 1-tap confirm + send, OR edit + send. **You never write from scratch — you only review/edit/approve.** That alone saves you ~60% of admin time.
 
 Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole cadence becomes automatic Slack notifications.
 
@@ -1330,7 +1355,7 @@ Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole ca
 | First thing | Check `#new-jobs` for overnight bookings | Marko | Slack |
 | Within 1hr of new lead | Acknowledge + start quote draft | Allan (or Quote Drafter agent once live) | GHL stage check |
 | End of day | Any leads sitting in QA stage >24hr — push forward or close | Allan | GHL pipeline review |
-| End of day | Any sub jobs scheduled tomorrow — confirm sub availability | Marko | SM8 / Sheet check |
+| End of day | Any subcontractor jobs scheduled tomorrow — confirm subcontractor availability | Marko | SM8 / Sheet check |
 
 ### Weekly cadence (every Friday afternoon)
 
@@ -1338,7 +1363,7 @@ Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole ca
 |---|---|---|
 | KPI review against targets | CEO posts to `#weekly-numbers` | Pulled numbers + insights |
 | Pipeline cleanup — close stale leads (>14 days inactive) | Allan | List of contacts to close + draft "if you're ready, here's our team" SMS |
-| Sub performance check — any flags from this week's jobs | Marko | List of issues + draft sub coaching messages |
+| Subcontractor performance check — any flags from this week's jobs | Marko | List of issues + draft subcontractor coaching messages |
 | Ad spend review — POAS check on each campaign | Allan | Numbers + draft "pause" decisions for me to approve |
 | Cash position vs runway | CEO | I report runway months remaining |
 | Decision log update | CEO | I add anything decided this week |
@@ -1349,15 +1374,15 @@ Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole ca
 |---|---|
 | Network outreach refresh — Allan + Marko each add 10 new prospects to outreach list | Allan + Marko |
 | Google Business Profile post — this fortnight's job + before/after | Allan |
-| Sub roster check-in — message every active sub: "any feedback / availability / anything I should know?" | Marko (CEO drafts) |
+| Subcontractor roster check-in — message every active subcontractor: "any feedback / availability / anything I should know?" | Marko (CEO drafts) |
 
 ### Monthly cadence (1st of month)
 
 | Task | Owner |
 |---|---|
 | P&L close — revenue, expenses, profit, cash | CEO + Allan |
-| Sub tier review (per [OPERATING-CONTEXT § 9.5](OPERATING-CONTEXT.md#95-subcontractor-tier-system)) — promote/demote subs based on quality + acceptance rate | Marko |
-| Insurance currency check — sub PL certs still valid? | Marko |
+| Subcontractor tier review (per [OPERATING-CONTEXT § 9.5](OPERATING-CONTEXT.md#95-subcontractor-tier-system)) — promote/demote subcontractors based on quality + acceptance rate | Marko |
+| Insurance currency check — subcontractor PL certs still valid? | Marko |
 | Subscription audit — what's auto-renewing, anything to cancel | Allan |
 | Strategy review — does my 90-day plan still match reality? | CEO |
 | Bert (supplier) check-in — pricing, availability, any new products | Marko (CEO drafts) |
@@ -1367,7 +1392,7 @@ Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole ca
 | Task | Owner |
 |---|---|
 | Pricing schedule review — input costs changed? Margin still 48-52%? | CEO + Allan |
-| Sub roster expansion — recruit new subs in any underserved zone | Marko |
+| Subcontractor roster expansion — recruit new subcontractors in any underserved zone | Marko |
 | Marketing performance — which channels generated highest-margin jobs | CEO |
 | Tax preparation (BAS if registered) | Allan + accountant |
 | AI agent performance review — keep / improve / kill each running agent | CEO |
@@ -1379,8 +1404,8 @@ Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole ca
 | ABN currency verification | March (anniversary) | Allan |
 | Public Liability insurance renewal | Per policy date | Allan |
 | Domain renewals (Cloudflare + Ventraip) | Apr 2027 | Allan |
-| Sub PL certificate refresh | Per sub | Marko |
-| Sub asbestos awareness refresh | Per sub | Marko |
+| Subcontractor PL certificate refresh | Per subcontractor | Marko |
+| Subcontractor asbestos awareness refresh | Per subcontractor | Marko |
 | Builder licence review — does threshold or scope change require it now? | Each January | CEO |
 | Strategic plan rewrite — vision + 12-month plan | Each Jan | CEO |
 | Hosting renewal review (is Ventraip still right?) | Apr | Allan |
@@ -1392,8 +1417,8 @@ Until the agent lands, I keep these pre-drafted in my brain — when you tell me
 - Customer follow-up (24h, 72h, "we still here") variants
 - Customer "I want to think about it" → 2-3 nudge SMS variants
 - Customer NPS detractor (1-6) → recovery call script
-- Sub no-show → customer apology + reschedule + sub coaching
-- Sub coaching after photo issues → professional but firm
+- Subcontractor no-show → customer apology + reschedule + subcontractor coaching
+- Subcontractor coaching after photo issues → professional but firm
 - Bert / supplier follow-up — depends on what your relationship looks like (need transcripts)
 - Strata coordinator first-contact email
 - Property manager intro pitch (B2B leads)
@@ -1408,7 +1433,7 @@ You said it: "remind me to give you what I have currently." I will. Here's the f
 - [ ] **Dashboard URL + login** (or screen recordings of every tab)
 - [ ] **Bank statements** last 3 months (or current balance + recent transaction list)
 - [ ] **Bert (supplier) — voice call transcripts** + any contract / pricing emails
-  - Who is Bert? Materials supplier (grout, silicone, paint)? Consultant? Sub?
+  - Who is Bert? Materials supplier (grout, silicone, paint)? Consultant? Subcontractor?
   - What's been agreed verbally?
   - Pricing locked in?
 - [ ] **Pricing schedule top-5** services — actual T1/T2/T3 dollar figures (so I can audit margins before first quote)
@@ -1417,18 +1442,18 @@ You said it: "remind me to give you what I have currently." I will. Here's the f
 
 ### Priority 2 — Communications history (this fortnight)
 - [ ] **Gmail access scope discussion** — I do NOT need full inbox access. I need:
-  - Specific threads with potential subs (any conversations to date)
+  - Specific threads with potential subcontractors (any conversations to date)
   - Specific threads with Bert
   - Any customer enquiries received historically
   - Any supplier negotiations
   - **Best path:** you forward relevant threads to a Drive folder OR set up Google Workspace email delegation for one specific account, NOT full Allan/Marko inbox access.
-- [ ] **Phone SMS history** with potential subs/customers if any
+- [ ] **Phone SMS history** with potential subcontractors/customers if any
 - [ ] **Facebook messenger / WhatsApp** any business conversations to date
 
 ### Priority 3 — Existing assets (whenever)
 - [ ] **Any photos taken** during practice/test work (even rough — gives me a sense of trade competence + visual style)
 - [ ] **Logo files** (current state — Canva file? Final SVG/PNG?)
-- [ ] **Insurance certificates** ($20M PL — for cross-reference + to be ready when subs ask)
+- [ ] **Insurance certificates** ($20M PL — for cross-reference + to be ready when subcontractors ask)
 - [ ] **ABN/Fair Trading registration confirmations** (for compliance file)
 - [ ] **Domain + hosting credentials** (so I can audit DNS, email forwarding, etc — keep secure!)
 - [ ] **Google Workspace + GBP credentials** (for posting access to Allan)
@@ -1447,12 +1472,12 @@ You said it: "remind me to give you what I have currently." I will. Here's the f
 |---|---|
 | Dashboard | Audit + connect to operations + spec the layout fixes |
 | Bank statements | Verify cash, plan Stripe payout cadence, identify any subscription bloat |
-| Bert transcripts | Understand supplier relationship, sub strategy implications, materials cost lock-ins |
+| Bert transcripts | Understand supplier relationship, subcontractor strategy implications, materials cost lock-ins |
 | Pricing top-5 | Margin auditor runs each tier through the formula, validates $300+ profit floor |
 | Customer pipeline | Convert informal interest into Override 1 first 3 customers immediately |
 | Network lists | Brief Allan + Marko on outreach script, sequence the contact list |
 | Gmail threads | Extract any prior promises/commitments I need to honour or reset |
-| Photos | Inform photo-quality expectations, sub onboarding standards |
+| Photos | Inform photo-quality expectations, subcontractor onboarding standards |
 | Logo / branding | Verify it works on uniforms, vehicle livery, GHL templates |
 | Time availability | Adjust week-by-week plan to realistic capacity |
 
@@ -1472,7 +1497,7 @@ You mentioned: "create an agent to tell us when to respond and also build a good
 
 ### What it does
 - **Listens** to incoming SMS/email events from GHL
-- **Identifies** type of message (customer follow-up reply, sub question, supplier query, complaint, NPS reply)
+- **Identifies** type of message (customer follow-up reply, subcontractor question, supplier query, complaint, NPS reply)
 - **Drafts** a reply in our brand voice (uses templates I've taught it + recent context)
 - **Posts** the draft to Slack `#response-drafts` channel
 - **Format**:
@@ -1514,20 +1539,20 @@ I'm tracking the 10 things most likely to end this business + my mitigation for 
 | # | Risk | Probability | Impact | Mitigation owned by |
 |---|---|---|---|---|
 | 1 | **Cash runs out before revenue ramps** | High | Fatal | Override 1 (network customers first), cash safety rule (never <$1,200), kill ads if approaching, monthly P&L close — CEO weekly review |
-| 2 | **Customer complaint goes viral** (one bad job → social media → reputation dead) | Medium | High | Photo quality reviews before customer sees, NPS detractor 60min callback, sub agreements with rectification clause — Marko + CEO |
-| 3 | **Sub injures themselves on a job** (no WorkCover for contractors) | Low-Medium | High (legal + insurance) | Sub PL insurance verified annually, asbestos cert verified, sub agreement waives liability for own injury, $20M PL backstop — Marko + insurance broker |
+| 2 | **Customer complaint goes viral** (one bad job → social media → reputation dead) | Medium | High | Photo quality reviews before customer sees, NPS detractor 60min callback, subcontractor agreements with rectification clause — Marko + CEO |
+| 3 | **Subcontractor injures themselves on a job** (no WorkCover for contractors) | Low-Medium | High (legal + insurance) | Subcontractor PL insurance verified annually, asbestos cert verified, subcontractor agreement waives liability for own injury, $20M PL backstop — Marko + insurance broker |
 | 4 | **GBP listing suspended** (review violation, fake account flag, spam complaint) | Medium | Severe (lose #1 organic channel) | Review strategy section above (no gating, no incentivised), engage GBP regularly with real posts, respond to all reviews — Allan |
 | 5 | **Google Ads account suspended** (policy violation, billing issue, suspected click fraud against us) | Low-Medium | Severe (lose paid acquisition) | Clean ad copy (no superlatives), proper landing pages, separate billing card, consider Microsoft Ads as backup channel — Allan |
 | 6 | **Allan or Marko leaves the partnership** | Low (both committed) | Catastrophic | Partnership agreement with vesting + buy-sell terms (defer to Pty Ltd setup Month 2-3), document EVERYTHING so other founder can pick up — both founders + Sprintlaw |
-| 7 | **First sub poaches customers** (talks to customer about doing direct) | Medium | Moderate (annoying but recoverable) | Non-solicitation clause in sub agreement (24mo), sub never sees customer phone/email directly until job day, customer pays Timeless not sub — Marko |
-| 8 | **Asbestos incident** at a job site (sub didn't check pre-1990, ACM disturbed) | Low (with controls) | Severe (criminal + civil) | Asbestos question on form (req'd), sub asbestos awareness cert (req'd), Marko verifies sighted before any pre-1990 dispatch, hold flag in GHL — Marko |
+| 7 | **First subcontractor poaches customers** (talks to customer about doing direct) | Medium | Moderate (annoying but recoverable) | Non-solicitation clause in subcontractor agreement (24mo), subcontractor never sees customer phone/email directly until job day, customer pays Timeless not subcontractor — Marko |
+| 8 | **Asbestos incident** at a job site (subcontractor didn't check pre-1990, ACM disturbed) | Low (with controls) | Severe (criminal + civil) | Asbestos question on form (req'd), subcontractor asbestos awareness cert (req'd), Marko verifies sighted before any pre-1990 dispatch, hold flag in GHL — Marko |
 | 9 | **Stripe chargebacks** (customer disputes, refunds via card not arrangement) | Low-Medium | Moderate (each one) | Clear quote acceptance flow, deposit non-refundable T&Cs documented, photo evidence of completion, 1 week cooling-off for disputes — Allan |
 | 10 | **Builder licence issue surfaces mid-operation** (Fair Trading complaint or audit) | Unknown until Override 5 verifies | High | Override 5: Allan calls Fair Trading this week to verify if licence required for our scope. If yes, expedite application. If no, document the rationale. — Allan |
 
 ### Risks I'm NOT putting in top 10 but watching
 - ATO contractor reclassification audit — Phase 3 onwards, mitigation in [auditor-fair-work.md](roles/auditor-fair-work.md)
 - Privacy Act complaint — handled by privacy policy + auditor-compliance-aus
-- Local council issue (waste disposal, noise complaint) — handled by sub training
+- Local council issue (waste disposal, noise complaint) — handled by subcontractor training
 - Currency hit on imported materials — minor, monitored quarterly
 
 ### My weekly risk check
@@ -1539,40 +1564,40 @@ Friday afternoons I review this register. Probabilities updated based on the wee
 
 When [X] happens, do exactly this. No improvisation. Improvising during a crisis is how businesses turn a fire into an explosion.
 
-### Crisis 1: Customer reports damage to their property (sub damaged tile, broke fixture, etc)
+### Crisis 1: Customer reports damage to their property (subcontractor damaged tile, broke fixture, etc)
 
 ```
 1. Marko receives report → STOP work at that job site
 2. Within 60min: Marko calls customer, listens fully, no admission of liability
-3. Within 2hr: photos taken, written note from sub on what happened
+3. Within 2hr: photos taken, written note from subcontractor on what happened
 4. Within 4hr: Marko reports to insurance broker for claim file open
 5. Within 24hr: customer offered repair/refund/rectification
 6. Job moved to "Job Issue" stage in GHL with full file
-7. Sub's tier downgraded pending review
+7. Subcontractor's tier downgraded pending review
 ```
 
 Authority: Marko handles up to $500 rectification without my approval. Above $500, escalate to CEO.
 
-### Crisis 2: Sub no-shows for booked job
+### Crisis 2: Subcontractor no-shows for booked job
 
 ```
-1. Marko detects (sub didn't check in by appointment time)
+1. Marko detects (subcontractor didn't check in by appointment time)
 2. Within 30min: Marko calls customer, apologises, offers immediate rebook
 3. Within 30min: Marko offers $50 inconvenience credit (or full refund of deposit if customer wants out)
-4. Marko calls sub directly — what happened?
-5. Documented in sub file: 1st no-show = warning, 2nd = tier downgrade, 3rd = removed
+4. Marko calls subcontractor directly — what happened?
+5. Documented in subcontractor file: 1st no-show = warning, 2nd = tier downgrade, 3rd = removed
 ```
 
-### Crisis 3: Sub injured at job site
+### Crisis 3: Subcontractor injured at job site
 
 ```
-1. Sub or customer reports injury → Marko called immediately
-2. Marko ensures sub gets medical attention (call ambulance if needed)
+1. Subcontractor or customer reports injury → Marko called immediately
+2. Marko ensures subcontractor gets medical attention (call ambulance if needed)
 3. Marko notifies insurance broker within 24hr
-4. Marko collects: incident location, time, what happened, who witnessed, sub's PL insurance details
+4. Marko collects: incident location, time, what happened, who witnessed, subcontractor's PL insurance details
 5. Customer notified if their property involved
-6. Job paused, may need different sub to complete
-7. Sub's PL insurance handles their own injury claim (per agreement)
+6. Job paused, may need different subcontractor to complete
+7. Subcontractor's PL insurance handles their own injury claim (per agreement)
 ```
 
 CEO escalated within 4hr.
@@ -1593,9 +1618,9 @@ CEO escalated within 4hr.
 ```
 1. Allan/Marko receive ATO contact → DON'T respond informally
 2. Engage accountant within 24hr
-3. Pull all sub agreements, all sub PL certs, all sub ABN status checks, sub invoice history
+3. Pull all subcontractor agreements, all subcontractor PL certs, all subcontractor ABN status checks, subcontractor invoice history
 4. Accountant + lawyer prepare response
-5. Document defence: subs have own ABN, own tools, own insurance, set own hours, refuse jobs, multiple clients
+5. Document defence: subcontractors have own ABN, own tools, own insurance, set own hours, refuse jobs, multiple clients
 6. CEO communicates with founders, no public statements
 ```
 
@@ -1624,7 +1649,7 @@ Cost preparation: maintain $5K legal reserve once cash >$30K.
 ### Crisis 8: Allan or Marko unable to work (illness, family, etc)
 
 ```
-1. Other founder picks up critical-path tasks (customer comms, sub dispatch)
+1. Other founder picks up critical-path tasks (customer comms, subcontractor dispatch)
 2. Non-critical work paused for the duration
 3. CEO adjusts cadence — daily check-ins instead of weekly
 4. If >2 weeks: hire VA contract for backup admin
@@ -1657,7 +1682,7 @@ What customers expect from us. Documented so we hold ourselves to it.
 ```
 Customer issue arises
    ↓
-Sub-level: sub resolves on-site if minor (e.g., grout colour preference)
+Sub-level: subcontractor resolves on-site if minor (e.g., grout colour preference)
    ↓ (if can't resolve)
 Marko-level: Marko negotiates resolution — refund, rectification, partial refund (up to $500)
    ↓ (if cost > $500 OR pattern of similar issues)
@@ -1676,8 +1701,8 @@ Lawyer + insurance: formal dispute resolution
 | Above $1,500 | Marko + Allan + CEO + check with insurance broker first |
 
 ### Standard customer guarantees (post quote acceptance)
-- 10% deposit non-refundable once job booked + sub assigned (covers our coordination cost)
-- Deposit refunded if job cancelled by us (sub unavailable, weather, etc)
+- 10% deposit non-refundable once job booked + subcontractor assigned (covers our coordination cost)
+- Deposit refunded if job cancelled by us (subcontractor unavailable, weather, etc)
 - "Up to 5-year workmanship warranty" per [pricing schedule] — rectification at our cost during warranty period
 - Customer may cancel before deposit paid with no penalty
 
@@ -1707,7 +1732,7 @@ Lawyer + insurance: formal dispute resolution
 - Spec'd in quote document so customer knows
 
 ### Refund policy (customer-facing)
-- Deposit non-refundable once job booked unless WE cancel (sub unavailable, weather, our error)
+- Deposit non-refundable once job booked unless WE cancel (subcontractor unavailable, weather, our error)
 - 100% refund if work doesn't match scope OR rectification not possible
 - Partial refund possible if customer accepts service with adjustment
 - All refunds via Stripe within 3 business days of approval
@@ -1727,8 +1752,8 @@ What's due when. CEO tracks against this monthly.
 | GST registration | When 12-month forecast >$75K | Estimated Q4 2026 | Allan + accountant |
 | BAS lodgement | Quarterly once GST-registered | TBD | Allan + accountant |
 | Income tax return | Annual (Oct following EOFY) | Oct 2026 (FY26 return) | Allan + accountant |
-| Sub PL certificate refresh | Annual per sub | Per sub | Marko |
-| Sub asbestos awareness refresh | Annual per sub | Per sub | Marko |
+| Subcontractor PL certificate refresh | Annual per subcontractor | Per subcontractor | Marko |
+| Subcontractor asbestos awareness refresh | Annual per subcontractor | Per subcontractor | Marko |
 | Builder licence review | Annual (post Override 5 outcome) | Each January | CEO |
 | Privacy policy review | Annual | Each January | Allan + auditor-compliance-aus |
 | Pty Ltd structure decision | Trigger: revenue >$5K/mo for 3 months | TBD | CEO + Sprintlaw |
@@ -1754,7 +1779,7 @@ You can't run a 7-day-a-week business as 2 founders for 36 months without breaki
 
 ### Communication boundaries
 - **No customer SMS replies after 8pm** (except emergencies) — set GHL business hours
-- **No sub coordination after 9pm** — they need rest too
+- **No subcontractor coordination after 9pm** — they need rest too
 - **CEO doesn't ping you weekends** unless cash/customer crisis
 - **Friday weekly review** is the formal check-in; daily Slack checks are optional but recommended
 
@@ -1815,7 +1840,7 @@ I report these EVERY Friday. Anything else is decoration.
 - Source: GHL pipeline events
 
 ### KPI 4: Average profit per job (rolling 4 weeks)
-- Definition: (revenue − sub cost − materials − fees − allocable overhead) ÷ jobs completed
+- Definition: (revenue − subcontractor cost − materials − fees − allocable overhead) ÷ jobs completed
 - Target: $300 floor, $362 Jordan benchmark, aim $400+ at scale
 - Source: GHL + Stripe + dashboard finance tab
 
@@ -1828,8 +1853,8 @@ I report these EVERY Friday. Anything else is decoration.
 - Cost per lead (per channel)
 - Cost per booked job (per channel)
 - POAS (per campaign)
-- Sub utilisation (jobs per active sub per week)
-- Sub tier distribution (T1 / T2 / T3 mix)
+- Subcontractor utilisation (jobs per active subcontractor per week)
+- Subcontractor tier distribution (T1 / T2 / T3 mix)
 - Subscription burn (MTD)
 - Lifetime value (once we have repeat customers)
 
@@ -1847,7 +1872,7 @@ People + companies we depend on. CEO maintains the relationship list.
 | Google | Workspace email + Ads + GBP | Standard | High (GBP loss = pipeline loss) |
 | GoHighLevel | CRM (trial → paid May 27) | Customer | High (lock-in once data lives there) |
 | Stripe | Payments | Standard | High (replacing requires customer re-auth) |
-| pay.com.au | Sub payouts | Standard | Low |
+| pay.com.au | Subcontractor payouts | Standard | Low |
 | Insurance broker | $20M PL via BizCover | TBC — find out who Allan is with | High |
 | Anthropic | Claude API (when agents launch) | Standard | Low (can swap to OpenAI) |
 | Bert | Supplier (TBC role) | UNKNOWN — needs voice transcripts | TBC |
@@ -1856,12 +1881,12 @@ People + companies we depend on. CEO maintains the relationship list.
 | Vendor | Service | When | Why |
 |---|---|---|---|
 | Cloudinary | Photo upload + storage | Week 1 | Quote form photos pipeline |
-| DocuSign or Sprintlaw | Sub agreements | Week 6-8 | Before first sub signs |
+| DocuSign or Sprintlaw | Subcontractor agreements | Week 6-8 | Before first subcontractor signs |
 | Local photographer | First-job professional photoshoot | Week 4 (when first job lands) | Real social proof imagery |
 | Branded uniform supplier | Polos, hi-vis with logo | Week 4 (before first job) | Premium positioning |
 | Vehicle livery supplier | Magnetic decals for Allan/Marko's vehicle | Week 4 | Premium positioning |
 | Accountant | Annual return + BAS | Month 6 | Tax compliance |
-| Sprintlaw | Subcontractor agreement template (~$200) | Week 6 | Before first sub signs |
+| Sprintlaw | Subcontractor agreement template (~$200) | Week 6 | Before first subcontractor signs |
 
 ### Vendor management rules
 - **No vendor contract >12 months** without my approval
@@ -1915,7 +1940,7 @@ How we don't lose institutional knowledge.
 
 ### What gets a written SOP (Standard Operating Procedure)
 - Anything we'll do >5 times
-- Anything that requires consistent quality (sub onboarding, customer response, NPS routing)
+- Anything that requires consistent quality (subcontractor onboarding, customer response, NPS routing)
 - Anything compliance-related
 - Anything where wrong execution = significant cost
 
@@ -1934,9 +1959,9 @@ How we don't lose institutional knowledge.
 |---|---|---|
 | Network outreach script | Week 1 (this week) | 🔴 |
 | Quote drafting from form + photos | Week 2-3 (before first quote) | 🔴 |
-| Sub onboarding checklist (executable) | Week 4 (before first sub) | 🔴 |
+| Subcontractor onboarding checklist (executable) | Week 4 (before first subcontractor) | 🔴 |
 | Customer NPS detractor recovery call script | Week 4-5 | 🟠 |
-| Sub coaching conversation script | Month 2 | 🟠 |
+| Subcontractor coaching conversation script | Month 2 | 🟠 |
 | Strata coordination email templates | Month 2-3 | 🟠 |
 | Property manager B2B pitch deck | Month 3-4 | 🟢 |
 | GHL workflow build SOP (for next CRM tier) | Month 6+ | 🟢 |
@@ -1950,9 +1975,9 @@ Things that look fine but precede serious problems.
 | Signal | What it predicts | Action |
 |---|---|---|
 | Quote conversion rate dropping >10% week-over-week for 2 weeks | Offer broken, pricing wrong, market shift | Pause, audit, reset |
-| Single sub doing >40% of jobs | Single point of failure | Aggressive sub recruitment in their zone |
+| Single subcontractor doing >40% of jobs | Single point of failure | Aggressive subcontractor recruitment in their zone |
 | Same suburb generating zero leads for 8 weeks (despite ads/SEO) | Targeting wrong, copy wrong, not our market | Pause spend in suburb, redirect |
-| NPS rolling avg below 7.5 | Service quality problem | Sub coaching, photo quality review intensifies |
+| NPS rolling avg below 7.5 | Service quality problem | Subcontractor coaching, photo quality review intensifies |
 | One founder working >55hr/week for 2+ weeks | Burnout pending | Lane review, redistribute, hire VA backup |
 | Subscription costs growing faster than revenue | Bloat | Vendor audit, cancel unused |
 | Customer email/SMS replies sitting >24hr | Process broken or founder overloaded | Triage, prioritise, agent earlier |

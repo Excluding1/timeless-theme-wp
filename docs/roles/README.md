@@ -29,8 +29,8 @@ This means:
 | ✅ [expert-ghl-operator.md](expert-ghl-operator.md) | GoHighLevel automation operator | All workflow / pipeline / template work | webhook-integrity + compliance-aus |
 | ✅ [expert-direct-response-copywriter.md](expert-direct-response-copywriter.md) | Direct response copywriter (SMS/email) | Customer-facing message copy | compliance-aus |
 | ✅ [expert-conversion-copywriter.md](expert-conversion-copywriter.md) | Conversion copywriter (B2C trades) | Quote tier descriptions, landing page copy | compliance-aus + margin-per-job |
-| ✅ [expert-field-service-ops.md](expert-field-service-ops.md) | Field service ops manager | ServiceM8 setup, sub dispatch | photo-quality + fair-work |
-| ✅ [expert-trades-ops-contractor.md](expert-trades-ops-contractor.md) | Trades ops + contractor lawyer | Sub agreements, recruitment, onboarding | fair-work |
+| ✅ [expert-field-service-ops.md](expert-field-service-ops.md) | Field service ops manager | ServiceM8 setup, subcontractor dispatch | photo-quality + fair-work |
+| ✅ [expert-trades-ops-contractor.md](expert-trades-ops-contractor.md) | Trades ops + contractor lawyer | Subcontractor agreements, recruitment, onboarding | fair-work |
 | ⬜ expert-analytics-data-engineer.md | Analytics data engineer | BigQuery schema, data sync | data-integrity + privacy |
 | ⬜ expert-performance-marketing.md | Performance marketing (POAS-first) | Google Ads, campaign structure | margin-per-channel |
 | ⬜ expert-ai-ops-engineer.md | AI ops engineer | Agent design, prompt engineering | ai-safety |
@@ -48,7 +48,7 @@ This means:
 | ✅ [auditor-mobile-abandonment.md](auditor-mobile-abandonment.md) | Mobile abandonment auditor | Quote form changes | Excessive scroll, tap targets <44px, slow inputs |
 | ✅ [auditor-webhook-integrity.md](auditor-webhook-integrity.md) | Webhook / data flow integrity | All system handoffs (form→GHL, GHL→SM8, etc) | Silent drops, race conditions, wrong field mapping |
 | ✅ [auditor-margin-per-job.md](auditor-margin-per-job.md) | Margin-per-job auditor | Pricing decisions, quote templates | Quote that loses money once costs subtract |
-| ✅ [auditor-fair-work.md](auditor-fair-work.md) | Fair Work / contractor independence | Sub agreements, dispatch logic | Sham contracting, super back-pay risk |
+| ✅ [auditor-fair-work.md](auditor-fair-work.md) | Fair Work / contractor independence | Subcontractor agreements, dispatch logic | Sham contracting, super back-pay risk |
 | ✅ [auditor-general-operational.md](auditor-general-operational.md) | General operational (catch-all for internal/system) | Pipelines, workflows, file architecture, tool selection | Over/under-engineering, single-points-of-failure, maintenance rot |
 | ✅ [auditor-customer-fairness.md](auditor-customer-fairness.md) | Customer-side stakeholder fairness | Pricing, terms, customer comms | Brand-damaging-but-legal practices |
 | ⬜ auditor-data-integrity.md | Data integrity (sync correctness) | BigQuery sync, GHL↔SM8 | Mismatched records, lost events |
@@ -57,7 +57,7 @@ This means:
 | ⬜ auditor-ai-safety.md | AI safety / hallucination | Every agent | False outputs, missing kill switch, bias |
 | ⬜ auditor-accc-review-genuineness.md | ACCC review genuineness | Review request workflows | Incentivised reviews, fake testimonials |
 | ⬜ auditor-noise-signal.md | Slack signal-to-noise | Slack channel design | Alert fatigue, important things buried |
-| ⬜ auditor-photo-quality.md | Sub completion photo quality | SM8 completion form | Bad lighting, missing angles, fake before/after |
+| ⬜ auditor-photo-quality.md | Subcontractor completion photo quality | SM8 completion form | Bad lighting, missing angles, fake before/after |
 | ⬜ auditor-performance-offline.md | Performance + offline tolerance | Photo upload, mobile flows | Hangs on 3G, no offline queue |
 | ⬜ auditor-customer-fairness.md | Customer fairness (multi-household) | Duplicate detection, pricing consistency | Different price for same address, brand damage |
 

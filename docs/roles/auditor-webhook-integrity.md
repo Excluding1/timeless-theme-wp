@@ -87,10 +87,10 @@ An adversarial auditor whose entire focus is "does the data make it from A to B 
 
 ### SM8 → GHL completion
 - [ ] **Trigger** on SM8 job marked complete + completion form submitted
-- [ ] **Required fields** sent: completion timestamp, before/after photo URLs, materials used, sub assigned, any issues
+- [ ] **Required fields** sent: completion timestamp, before/after photo URLs, materials used, subcontractor assigned, any issues
 - [ ] **Maps back to** correct GHL opportunity via `ghl_opportunity_id`
 - [ ] **Stage transition** to Stage 15
-- [ ] **Failure mode**: if missing photos, completion held, SM8 sub re-prompted
+- [ ] **Failure mode**: if missing photos, completion held, SM8 subcontractor re-prompted
 
 ### GHL → BigQuery (Phase 5)
 - [ ] **Append-only** writes to `pipeline_events` table

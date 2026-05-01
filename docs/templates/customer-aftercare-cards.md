@@ -8,14 +8,14 @@
 
 ## Why these exist
 
-Per [sub-onboarding-checklist.md](../sop/sub-onboarding-checklist.md): every sub leaves an aftercare card on the vanity/kitchen bench after every job. Reasons:
+Per [sub-onboarding-checklist.md](../sop/sub-onboarding-checklist.md): every subcontractor leaves an aftercare card on the vanity/kitchen bench after every job. Reasons:
 
 1. **Customer education** — proper care preserves the work + reduces warranty callback rate (per [sub-ongoing-quality-monitoring.md § 4](../sop/sub-ongoing-quality-monitoring.md))
 2. **Brand reinforcement** — physical artifact in customer's home keeps us top-of-mind for future jobs + referrals
 3. **Warranty terms in writing** — consumer protection requires customer can see warranty terms; this card backs up email/SMS warranty mentions
 4. **Review prompt** — natural moment to ask for Google review
 
-**Format:** A5, double-sided, printed on slightly thick (180gsm+) cardstock so it doesn't get tossed. Sub carries stack in van.
+**Format:** A5, double-sided, printed on slightly thick (180gsm+) cardstock so it doesn't get tossed. Subcontractor carries stack in van.
 
 **⚠️ ACCC compliance check:** warranty wording must NOT over-claim. Per [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md):
 - Use "up to 5-year" not "5-year guaranteed"
@@ -194,12 +194,12 @@ These cards have placeholders that fill from WordPress Customizer per [CLAUDE.md
 
 ### Quantities + reorder cycle
 - **Initial order:** 200 of each card variant (regrout, resurface, quick service) = 600 total
-- **Reorder threshold:** sub down to 20 cards = order 200 more
+- **Reorder threshold:** subcontractor down to 20 cards = order 200 more
 - **Cost estimate:** ~$80-150 for 600 A5 cards via Vistaprint or Officeworks
-- **Storage:** Allan keeps master stack at home; subs pick up batch of 20 each at onboarding + on quarterly review visits
+- **Storage:** Allan keeps master stack at home; subcontractors pick up batch of 20 each at onboarding + on quarterly review visits
 
 ### Card distribution per onboarding (per [sub-onboarding-checklist.md § Step 7](../sop/sub-onboarding-checklist.md))
-- 20 of each relevant card type to each new sub
+- 20 of each relevant card type to each new subcontractor
 - Reorder via Slack request to Allan
 
 ---

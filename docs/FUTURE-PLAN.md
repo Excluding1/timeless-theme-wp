@@ -2,7 +2,7 @@
 
 **Companion to:** [OPERATING-CONTEXT.md](OPERATING-CONTEXT.md)
 
-**Purpose:** Every concrete task to go from current state (quote form 95% done, no GHL, no SM8, no subs) to fully streamlined automated business with AI agents catching edge cases. Each task has the best-fit expert who'd do it, the best-fit auditor who'd verify it, and the setup detail.
+**Purpose:** Every concrete task to go from current state (quote form 95% done, no GHL, no SM8, no subcontractors) to fully streamlined automated business with AI agents catching edge cases. Each task has the best-fit expert who'd do it, the best-fit auditor who'd verify it, and the setup detail.
 
 **How to use:** Tick `[x]` as completed. Don't skip phases — each phase is a dependency for the next.
 
@@ -163,7 +163,7 @@
 - **Auditor:** Margin per job auditor (Tier 2 must hit $300 profit floor at minimum)
 - **Setup steps:**
   - [ ] Build 3-tier quote template per service in GHL document/email template:
-    - **Tier 1 — Essential** (lowest sub time, highest margin %, lowest price)
+    - **Tier 1 — Essential** (lowest subcontractor time, highest margin %, lowest price)
     - **Tier 2 — Standard** (middle, this is the recommended pick)
     - **Tier 3 — Premium** (epoxy, full silicone, etc — highest price, highest margin $)
   - [ ] Each tier shows: scope, what's included, warranty, price, "click to accept"
@@ -206,9 +206,9 @@
 
 ---
 
-## Phase 3 — Sub recruitment + onboarding
+## Phase 3 — Subcontractor recruitment + onboarding
 
-**Goal:** 3 vetted, signed, test-job-passed subs ready to dispatch before any Phase 4 (booking) work.
+**Goal:** 3 vetted, signed, test-job-passed subcontractors ready to dispatch before any Phase 4 (booking) work.
 
 **Phase 3 expert lens:** Trade ops + ABN/contractor lawyer
 **Phase 3 auditor lens:** Fair Work compliance + insurance verification
@@ -220,9 +220,9 @@
   - [ ] Engage Sprintlaw (~$200) for subcontractor agreement template
   - [ ] Confirm clauses per [OPERATING-CONTEXT § 9.6](OPERATING-CONTEXT.md#96-subcontractor-agreement-must-be-signed-before-any-job)
   - [ ] Set up DocuSign for digital signing
-- **Verify:** Lawyer reviews final template, you sign one as "test sub" and check signature flow.
+- **Verify:** Lawyer reviews final template, you sign one as "test subcontractor" and check signature flow.
 
-### 3.2 Sub recruitment outreach
+### 3.2 Subcontractor recruitment outreach
 - **Expert:** Trade ops + B2B outreach
 - **Auditor:** Brand consistency auditor (your messaging in DMs reflects business)
 - **Setup steps:**
@@ -232,15 +232,15 @@
   - [ ] Facebook groups: Sydney Tradies, NSW Tiles & Bathroom Renovations, Australian Tradies Network
   - [ ] Meta recruitment ad ($7/day, target NSW + interests bathroom renovation/tiling)
   - [ ] Recruitment Form (GHL): collects name, phone, ABN, years exp, suburb coverage, services, asbestos training
-  - [ ] Track every contact in a Google Sheet "Sub Pipeline"
-- **Verify:** First week → contact 30+ subs, 5 reply, 3 take a call, 1 signs.
+  - [ ] Track every contact in a Google Sheet "Subcontractor Pipeline"
+- **Verify:** First week → contact 30+ subcontractors, 5 reply, 3 take a call, 1 signs.
 
-### 3.3 Sub onboarding checklist
+### 3.3 Subcontractor onboarding checklist
 - **Expert:** Service business ops + insurance auditor
-- **Auditor:** Documentation auditor (every sub has every cert before going live)
-- **Setup steps:** Per sub:
+- **Auditor:** Documentation auditor (every subcontractor has every cert before going live)
+- **Setup steps:** Per subcontractor:
   - [ ] Full legal name + ABN verified (ABN Lookup)
-  - [ ] PL insurance certificate ≥$5M sighted (sub provides PDF, you store)
+  - [ ] PL insurance certificate ≥$5M sighted (subcontractor provides PDF, you store)
   - [ ] Portfolio reviewed (5+ real before/after bathroom jobs)
   - [ ] Suburb coverage confirmed (which postcodes they'll travel to)
   - [ ] Skill confirmation: shower regrout / bath resurface / silicone / epoxy / full bathroom (tick which)
@@ -250,36 +250,36 @@
   - [ ] Bank details + pay.com.au setup
   - [ ] Tier 2 assigned by default (Tier 3 if green)
   - [ ] **Test job completed and approved** (low-risk, close-to-home, you review before/after photos)
-- **Verify:** Every sub onboarded → all checklist items ticked in their Google Sheet tab.
+- **Verify:** Every subcontractor onboarded → all checklist items ticked in their Google Sheet tab.
 
 ### 3.4 Triple audit Phase 3
-- [ ] **Expert audit (trade ops):** All 3 subs cover different geographic zones (CBD/west/north or similar)
-- [ ] **Sub audit (their POV):** Is the agreement fair? Payment terms (3 business days) realistic from their POV?
-- [ ] **Compliance audit (adversarial):** Every sub has ABN, own insurance, sets own work hours, supplies own tools — passes Fair Work independent contractor test?
+- [ ] **Expert audit (trade ops):** All 3 subcontractors cover different geographic zones (CBD/west/north or similar)
+- [ ] **Subcontractor audit (their POV):** Is the agreement fair? Payment terms (3 business days) realistic from their POV?
+- [ ] **Compliance audit (adversarial):** Every subcontractor has ABN, own insurance, sets own work hours, supplies own tools — passes Fair Work independent contractor test?
 
-**Phase 3 done when:** 3 subs signed, all certs sighted, all 3 passed test jobs. Until then, no real customer jobs go to subs (you'd be liable for unvetted work).
+**Phase 3 done when:** 3 subcontractors signed, all certs sighted, all 3 passed test jobs. Until then, no real customer jobs go to subcontractors (you'd be liable for unvetted work).
 
 ---
 
 ## Phase 4 — Job dispatch (ServiceM8) + completion
 
-**Goal:** Deposit-paid job → SM8 → assigned to right sub → completed → photos reviewed → final payment → sub paid → review request.
+**Goal:** Deposit-paid job → SM8 → assigned to right subcontractor → completed → photos reviewed → final payment → subcontractor paid → review request.
 
 **Phase 4 expert lens:** Service business ops + customer experience
 **Phase 4 auditor lens:** Photo quality + timeliness
 
 ### 4.1 ServiceM8 setup
 - **Expert:** Service ops manager
-- **Auditor:** Field operations auditor (does it work on a sub's mobile in a bathroom with bad signal?)
+- **Auditor:** Field operations auditor (does it work on a subcontractor's mobile in a bathroom with bad signal?)
 - **Setup steps:**
   - [ ] Sign up SM8 Starter ($29/mo)
   - [ ] Company profile + branding
   - [ ] Add yourself + co-founder as admins
-  - [ ] Add 3 onboarded subs with limited access (their assigned jobs only)
+  - [ ] Add 3 onboarded subcontractors with limited access (their assigned jobs only)
   - [ ] Build 5 job templates per [OPERATING-CONTEXT § 9.2](OPERATING-CONTEXT.md#92-job-templates-5-core)
   - [ ] Build SM8 custom fields per [OPERATING-CONTEXT § 9.3](OPERATING-CONTEXT.md#93-sm8-custom-fields)
   - [ ] Build job completion form per [OPERATING-CONTEXT § 9.4](OPERATING-CONTEXT.md#94-job-completion-form-sub-fills)
-- **Verify:** Sub on their phone can open assigned job, see scope, upload before/after photos, fill completion form, mark complete.
+- **Verify:** Subcontractor on their phone can open assigned job, see scope, upload before/after photos, fill completion form, mark complete.
 
 ### 4.2 GHL → SM8 job sync
 - **Expert:** Integration architect
@@ -297,19 +297,19 @@
 - **Setup steps:**
   - [ ] SM8 webhook on job marked complete → Zapier → GHL workflow
   - [ ] GHL action: move opportunity to Stage 15 (Job Complete) → fire NPS workflow
-- **Verify:** Test sub marks job complete in SM8 → opp moves to Stage 15 in GHL within 30s.
+- **Verify:** Test subcontractor marks job complete in SM8 → opp moves to Stage 15 in GHL within 30s.
 
-### 4.4 Sub dispatch logic
+### 4.4 Subcontractor dispatch logic
 - **Expert:** Service ops manager
 - **Auditor:** Tier-fairness auditor (no Tier 3 sent to complex jobs)
 - **Setup steps:**
-  - [ ] In SM8: tag every sub with `coverage_<suburb>`, `skill_<service>`, `tier_<1|2|3>`
+  - [ ] In SM8: tag every subcontractor with `coverage_<suburb>`, `skill_<service>`, `tier_<1|2|3>`
   - [ ] Co-founder dispatch SOP:
-    1. Filter SM8 subs by suburb tag matching customer's suburb
+    1. Filter SM8 subcontractors by suburb tag matching customer's suburb
     2. Filter by skill tag matching customer's service
     3. Offer to Tier 1 first via SMS through SM8
     4. If declined or no response in 2h → offer to Tier 2
-    5. If both declined → Slack `#subs` alert "Need help in <suburb>"
+    5. If both declined → Slack `#subcontractors` alert "Need help in <suburb>"
   - [ ] **Hard rule:** Strata, commercial, full bathroom, pre-1990 → Tier 1 only
 - **Verify:** Run dispatch SOP on first 3 booked jobs, document any friction.
 
@@ -329,7 +329,7 @@
 - **Auditor:** Payment integrity auditor
 - **Setup steps:**
   - [ ] Stripe: same dynamic payment link pattern as deposit, this time for 90% balance
-  - [ ] GHL workflow: Stage 15 (Job Complete) → check before/after photos uploaded by sub → if yes → SMS final payment link to customer
+  - [ ] GHL workflow: Stage 15 (Job Complete) → check before/after photos uploaded by subcontractor → if yes → SMS final payment link to customer
   - [ ] Stripe webhook on success → GHL Stage 16 + warranty email fires
 - **Verify:** Manually move test job to Stage 15 (with photos) → final SMS arrives → test card pays → Stage 16 + warranty email both fire.
 
@@ -345,18 +345,18 @@
     - 1-6 → tag `nps_detractor`, Slack alert + co-founder must call within 60min
 - **Verify:** Test by sending fake reply numbers → each routes correctly + fires correct downstream.
 
-### 4.8 Sub payment via pay.com.au
+### 4.8 Subcontractor payment via pay.com.au
 - **Expert:** Service ops + accounts
 - **Auditor:** Cash flow auditor (3-business-day promise)
 - **Setup steps:**
   - [ ] pay.com.au account active with rewards card connected
-  - [ ] Per completed job: Co-founder schedules sub payment in pay.com.au within 3 business days of customer final payment clearing
-  - [ ] Record sub payment in Google Sheet tracker (Phase 5: replaced by BigQuery)
+  - [ ] Per completed job: Co-founder schedules subcontractor payment in pay.com.au within 3 business days of customer final payment clearing
+  - [ ] Record subcontractor payment in Google Sheet tracker (Phase 5: replaced by BigQuery)
   - [ ] Tag GHL opp `sub_paid` → moves to Stage 17 (closed)
-- **Verify:** First sub paid within 3 business days as promised, points credited to your card.
+- **Verify:** First subcontractor paid within 3 business days as promised, points credited to your card.
 
 ### 4.9 Triple audit Phase 4
-- [ ] **Expert audit (service ops):** Sub experience smooth, no SM8 confusion, completion form short enough to fill in 2 min
+- [ ] **Expert audit (service ops):** Subcontractor experience smooth, no SM8 confusion, completion form short enough to fill in 2 min
 - [ ] **Customer audit:** Cure-time message arrived right after job, NPS request felt natural not pushy, final payment link was simple
 - [ ] **Adversarial audit (data integrity):** Every Stage 10 in GHL has a corresponding SM8 job, no orphans either direction
 
@@ -534,7 +534,7 @@
 - **Status:** Future spec — pending dashboard audit + Supabase access
 
 ### 6.6b AI Email Manager Agent (added 2026-05-01 PM)
-- **Job:** Read Allan's `hello@timelessresurfacing.com.au` inbox. Categorise (customer enquiry / sub / supplier / spam / billing). Draft replies for human approval. Surface critical messages to Slack immediately.
+- **Job:** Read Allan's `hello@timelessresurfacing.com.au` inbox. Categorise (customer enquiry / subcontractor / supplier / spam / billing). Draft replies for human approval. Surface critical messages to Slack immediately.
 - **Expert:** AI ops + customer service
 - **Auditor:** Privacy auditor + brand voice auditor
 - **Setup steps:**
@@ -545,20 +545,20 @@
 - **Cost:** ~$5-10/mo
 - **When:** Month 6 (after enough volume justifies — currently inbox is light)
 
-### 6.6 Sub Recruitment Agent
+### 6.6 Subcontractor Recruitment Agent
 - **Job:** Browse Hipages / Airtasker daily, find new bathroom resurfacing operators in NSW, draft outreach DM, queue for human approval.
 - **Expert:** B2B outreach + AI ops
-- **Auditor:** Anti-spam auditor (don't message same sub repeatedly)
+- **Auditor:** Anti-spam auditor (don't message same subcontractor repeatedly)
 - **Setup steps:**
   - [ ] Web scraper (Playwright via Claude code) runs daily
-  - [ ] Dedupe against existing sub list in BQ
-  - [ ] Generate personalised DM per sub
+  - [ ] Dedupe against existing subcontractor list in BQ
+  - [ ] Generate personalised DM per subcontractor
   - [ ] Post to Slack `#sub-outreach` (NEW) for co-founder review
   - [ ] Co-founder approves → DM sent via Hipages/Airtasker manual paste
-- **Verify:** First 7 days, agent finds 5+ new subs/day, DMs feel personal not template.
+- **Verify:** First 7 days, agent finds 5+ new subcontractors/day, DMs feel personal not template.
 
 ### 6.7 Photo Quality Agent
-- **Job:** Sub uploads completion photos to SM8. Agent reviews — checks for: proper before/after, in focus, full surface visible, lighting adequate. Flags issues to Slack before customer ever sees the result.
+- **Job:** Subcontractor uploads completion photos to SM8. Agent reviews — checks for: proper before/after, in focus, full surface visible, lighting adequate. Flags issues to Slack before customer ever sees the result.
 - **Expert:** Computer vision + trade ops
 - **Auditor:** False-rejection auditor
 - **Setup steps:**
@@ -597,18 +597,18 @@ For **each** agent, run the audit:
 - [ ] Update Stripe to handle GST
 - [ ] Customer-facing prices on quote → "incl. GST" line item
 
-### 7.3 Sub roster expansion
-- [ ] From 3 → 10 → 20 subs over 12 months
+### 7.3 Subcontractor roster expansion
+- [ ] From 3 → 10 → 20 subcontractors over 12 months
 - [ ] Recruitment agent (Phase 6.6) doing the heavy lifting
 - [ ] Geographic coverage: CBD, North Shore, Eastern Suburbs, Inner West, South, West, Sutherland, Hills, Northern Beaches, Wollongong, Central Coast (~10 zones)
-- [ ] Each zone needs ≥2 subs (redundancy)
+- [ ] Each zone needs ≥2 subcontractors (redundancy)
 
 ### 7.4 New service expansion (only if data supports)
-- [ ] Once 100+ bathroom jobs done, look at adjacent services with same sub pool:
+- [ ] Once 100+ bathroom jobs done, look at adjacent services with same subcontractor pool:
   - Kitchen splashback regrout
   - Laundry resurfacing
   - Commercial bathroom resurfacing
-- [ ] Each new service needs: landing page, pricing tier, sub skill expansion, SM8 template
+- [ ] Each new service needs: landing page, pricing tier, subcontractor skill expansion, SM8 template
 
 ### 7.5 Reviews & referral velocity
 - [ ] Goal: 50+ Google reviews in first 12 months
@@ -617,7 +617,7 @@ For **each** agent, run the audit:
 
 ### 7.6 Triple audit Phase 7
 - [ ] **Expert audit (scaler):** No process is still "Angela does it manually" at 50 jobs/week
-- [ ] **Sub audit:** Sub satisfaction surveys quarterly — they're getting paid on time, jobs are profitable for them, not getting overworked
+- [ ] **Subcontractor audit:** Subcontractor satisfaction surveys quarterly — they're getting paid on time, jobs are profitable for them, not getting overworked
 - [ ] **Adversarial audit (compliance):** All compliance gates still hold at 10x volume — strata holds aren't being skipped, asbestos checks aren't being rushed
 
 ---
@@ -659,14 +659,14 @@ For **each** agent, run the audit:
 
 ### F7. Cross-trade expansion decision (Phase 7+)
 - **Source:** Bert transcript — *"Kitchens + benchtops is probably a bigger market than bathrooms now, and all the successful companies do all 3"*
-- **What:** Decide whether to expand from bathroom-only into kitchen + benchtop resurfacing. Same supplier (Bert/Hawk), similar subs, much bigger market.
-- **Trigger:** 12 months at $25K/mo bathroom revenue stable + sub roster covers it
-- **Decision factors:** sub capacity, equipment for benchtop work, marketing rebrand, customer mix
+- **What:** Decide whether to expand from bathroom-only into kitchen + benchtop resurfacing. Same supplier (Bert/Hawk), similar subcontractors, much bigger market.
+- **Trigger:** 12 months at $25K/mo bathroom revenue stable + subcontractor roster covers it
+- **Decision factors:** subcontractor capacity, equipment for benchtop work, marketing rebrand, customer mix
 
 ### F8. Sub-discovery B2B platform (very speculative — Phase 8+)
 - **Source:** Jordan Video 28 — *"AU has trade discoverability issue... helping create a platform for B2B trade discovery"*
-- **What:** Build a separate platform for AU agencies to find vetted subs (different from Hipages — B2B not B2C). Side venture if we hit supply constraints.
-- **Trigger:** Year 3+ if our model is replicable + sub recruitment is the bottleneck industry-wide
+- **What:** Build a separate platform for AU agencies to find vetted subcontractors (different from Hipages — B2B not B2C). Side venture if we hit supply constraints.
+- **Trigger:** Year 3+ if our model is replicable + subcontractor recruitment is the bottleneck industry-wide
 
 ### F9. Strata coordinator B2B partnerships (Phase 4-5)
 - **Source:** OPERATING-CONTEXT § 7 — strata customers exist
@@ -675,12 +675,12 @@ For **each** agent, run the audit:
 
 ### F10. Vehicle / fleet decision (Phase 7+)
 - **Source:** Jordan Video 34 — chose chimney vs Caddy vs mini-cabs for fleet
-- **What:** When/if we want a branded company vehicle (not for tools — for brand visibility at job sites + marketing). Probably defer indefinitely since subs use own vehicles.
+- **What:** When/if we want a branded company vehicle (not for tools — for brand visibility at job sites + marketing). Probably defer indefinitely since subcontractors use own vehicles.
 - **Trigger:** $30K/mo + brand investment phase
 
 ### F11. AI Voice Driving Assistant (Phase 7+, speculative)
 - **Source:** Jordan Video 16 — *"I can't wait for AI to make driving more productive. Speak with AI as I'm driving, get business updates, build entire projects from voice."*
-- **What:** Voice-first AI agent for Marko driving between jobs. Pipeline updates verbally, dispatch new jobs by voice, dictate sub coaching messages.
+- **What:** Voice-first AI agent for Marko driving between jobs. Pipeline updates verbally, dispatch new jobs by voice, dictate subcontractor coaching messages.
 - **Build effort:** Unknown — depends whether OpenAI Realtime / Claude Voice mature enough by trigger date
 - **Trigger:** Phase 7+ once Marko driving 5+ jobs/week. Don't pre-build; wait for the pain.
 - **Failure modes:** voice agents hallucinate worse than text; bathroom-trade jargon may confuse off-the-shelf models; safety risk if agent prompts driver visual confirmation. Defer until tech matures or pain is acute.
@@ -703,23 +703,23 @@ For **each** agent, run the audit:
 
 ### F14. Coordinator-model expansion to adjacent services (Phase 7+)
 - **Source:** Jordan Video 89 — *"For [adjacent service we don't offer], we built a landing page, put up Google Ads, pumped money. Used Gemini to scrape competitor websites for contractor info. Now we deliver clients to those subcontractors and keep margin."*
-- **Reframed (Allan/CEO take):** We're a coordinator, not a tradie. The model already works for bathroom resurfacing/regrouting via subs. It can extend to adjacent services (kitchen splashback resurfacing, leather couch repair, benchtop renewal) without us hiring or training new tradies — find a specialist sub already doing it, refer them work, keep coordination margin. We add value via better customer experience + admin + lead gen; specialist sub gets work they wouldn't have won; customer gets a vetted operator.
-- **Build effort per service:** ~4-8hr — landing page (Claude Code), Google Ads small test ($5-10/day), 2-3 candidate subs from competitor research, dispatch SOP
-- **Trigger:** Once $30K+/mo bathroom revenue stable AND we hear repeated customer requests for an adjacent service AND we identify quality specialist subs.
+- **Reframed (Allan/CEO take):** We're a coordinator, not a tradie. The model already works for bathroom resurfacing/regrouting via subcontractors. It can extend to adjacent services (kitchen splashback resurfacing, leather couch repair, benchtop renewal) without us hiring or training new tradies — find a specialist subcontractor already doing it, refer them work, keep coordination margin. We add value via better customer experience + admin + lead gen; specialist subcontractor gets work they wouldn't have won; customer gets a vetted operator.
+- **Build effort per service:** ~4-8hr — landing page (Claude Code), Google Ads small test ($5-10/day), 2-3 candidate subcontractors from competitor research, dispatch SOP
+- **Trigger:** Once $30K+/mo bathroom revenue stable AND we hear repeated customer requests for an adjacent service AND we identify quality specialist subcontractors.
 - **Failure modes:**
-  - Quality control harder when we lack domain expertise — sub fails, customer blames us
+  - Quality control harder when we lack domain expertise — subcontractor fails, customer blames us
   - Competitor research method (Gemini scrapes for contractor info) needs ACCC-compliant outreach; cold-DM templates must be honest about who we are
   - "Coordinator without expertise" risks under-quoting — need to mark up generously to cover surprises
-  - Sub may bypass us once they have the customer (NDA + pre-payment + customer-relationship-ownership clauses needed)
-- **Decision pre-conditions:** must have signed sub agreement with customer-NDA clause; must have CEO + Allan agreement on minimum-margin floor (40%+ given coordination-only role); must research ACCC misleading-conduct precedent for "we deliver this service" claims when fulfilment is fully subcontracted
+  - Subcontractor may bypass us once they have the customer (NDA + pre-payment + customer-relationship-ownership clauses needed)
+- **Decision pre-conditions:** must have signed subcontractor agreement with customer-NDA clause; must have CEO + Allan agreement on minimum-margin floor (40%+ given coordination-only role); must research ACCC misleading-conduct precedent for "we deliver this service" claims when fulfilment is fully subcontracted
 - **3-lens audit (light):**
-  - Margin: 40-50% achievable if priced right; sub keeps $X, we keep $Y, net positive
+  - Margin: 40-50% achievable if priced right; subcontractor keeps $X, we keep $Y, net positive
   - Customer fairness: customer gets vetted operator + warranty backing — better than DIY-finding on Hipages
-  - Sub fairness: specialist sub wins work they'd otherwise miss; we coordinate but don't take their core craft margin
+  - Subcontractor fairness: specialist subcontractor wins work they'd otherwise miss; we coordinate but don't take their core craft margin
 
 ### F15. Franchise model consideration (Year 3+)
 - **Source:** Jordan Video 70 — *"We are early in building out a franchise option."*
-- **What:** Once business model proven multi-state + revenue >$200K/mo + ops fully systematised, consider licensing model to other AU operators (e.g., Brisbane operator licenses our systems, brand, sub network for fee + revenue share).
+- **What:** Once business model proven multi-state + revenue >$200K/mo + ops fully systematised, consider licensing model to other AU operators (e.g., Brisbane operator licenses our systems, brand, subcontractor network for fee + revenue share).
 - **Build effort:** ~6-12 months legal + ops; ~$30-50K legal cost (Sprintlaw franchise package per Jordan's reference); registered franchisor obligations under Franchising Code of Conduct (ACCC-administered).
 - **Trigger:** Year 3+ AND $200K+/mo revenue AND multi-state expansion proven (e.g., Sydney + Melbourne both running) AND systems documented to "anyone can run this" standard.
 - **Failure modes:**
@@ -727,7 +727,7 @@ For **each** agent, run the audit:
   - Brand reputation risk — one bad franchisee tanks national brand
   - Most early-stage franchises fail by year 5 — research Australian Franchise Council failure data first
   - Competitor model (Surface Care) likely faster to market — first-mover advantage may already be lost
-- **Alternative paths:** licensing-only model (sell systems + sub network access without trademark/brand obligation) is lighter compliance burden than full franchise.
+- **Alternative paths:** licensing-only model (sell systems + subcontractor network access without trademark/brand obligation) is lighter compliance burden than full franchise.
 
 ---
 
@@ -781,14 +781,14 @@ These don't fit neatly in phases — they're ongoing or trigger-based.
 
 ### A6. Email management — CEO scope discussion
 - **Owner:** Allan
-- **When:** Phase 1 (so CEO has visibility on customer/sub/Bert email threads)
+- **When:** Phase 1 (so CEO has visibility on customer/subcontractor/Bert email threads)
 - **Approach (per CEO playbook discussion):**
   - DO NOT share full inbox raw access (privacy + scope creep)
   - DO: forward specific threads to a Drive folder OR set up Google Workspace email delegation for one specific account
 - **Specific threads CEO wants visibility on:**
   - Customer enquiries (any received historically + ongoing)
   - Bert thread (already partially shared in chat — preserve in /data/research/ when migrated)
-  - Sub conversations (when they start)
+  - Subcontractor conversations (when they start)
   - Insurance broker
   - Supplier negotiations
 - **Status:** ❌ Not arranged — decision pending Allan
@@ -860,7 +860,7 @@ For each task above:
 |---|---|
 | What do I do next on the quote form? | Phase 1.5 (replace REPLACE_ME webhooks) |
 | When do I start ads? | After Phase 1.9 audit passes |
-| When do I add subs? | Phase 3 — before any real customer jobs |
+| When do I add subcontractors? | Phase 3 — before any real customer jobs |
 | When do I add BigQuery? | Phase 5 — once 50+ completed jobs exist |
 | When do I add AI agents? | Phase 6 — only after Phase 5 data layer is real |
 | Multi-household duplicate detection? | Phase 6.2 — needs BigQuery (Phase 5) first |

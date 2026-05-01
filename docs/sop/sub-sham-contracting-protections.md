@@ -24,28 +24,28 @@ Each row: how a genuine contractor relationship looks vs how an employee relatio
 
 | # | Indicator | ✅ Contractor (us) | ❌ Employee (we'd be liable) |
 |---|---|---|---|
-| 1 | **Control over HOW work is done** | Sub decides how to regrout/resurface. We set quality standard + scope; they choose methods, tools, sequence. | We tell them exactly how to do each step, supervise on site, dictate procedure. |
-| 2 | **Tools and materials** | Sub supplies own tools, vehicle, materials at own cost. | We supply tools/materials/vehicle. We provide branded clothing. |
-| 3 | **Ability to refuse work** | Sub can decline a job offer with no penalty. | Sub must accept every dispatched job, penalised for refusing. |
-| 4 | **Works for others** | Sub has other clients. Can work for competitors. | Sub works exclusively for us, not allowed to work elsewhere. |
-| 5 | **Financial risk** | Sub quotes flat rate. If job takes longer, they absorb. If materials cost more, they absorb. | We pay hourly. Sub has no financial risk — paid regardless of efficiency. |
-| 6 | **Delegation** | Sub can send a qualified replacement (with our quality approval). | Specific person must do the work; cannot delegate. |
-| 7 | **Integration** | Sub not part of team meetings, no company email, doesn't attend our office, doesn't wear our uniform. | Sub has company email, attends meetings, listed as "our team" on website, wears branded uniform. |
-| 8 | **Tax and super** | Sub handles own ABN, BAS, tax. Invoices us with Tax Invoice. We don't withhold PAYG. | We withhold PAYG, pay their super (note: super may apply even for genuine contractors per s12(3) SGAA — see [sub-tax-compliance.md](sub-tax-compliance.md)). |
+| 1 | **Control over HOW work is done** | Subcontractor decides how to regrout/resurface. We set quality standard + scope; they choose methods, tools, sequence. | We tell them exactly how to do each step, supervise on site, dictate procedure. |
+| 2 | **Tools and materials** | Subcontractor supplies own tools, vehicle, materials at own cost. | We supply tools/materials/vehicle. We provide branded clothing. |
+| 3 | **Ability to refuse work** | Subcontractor can decline a job offer with no penalty. | Subcontractor must accept every dispatched job, penalised for refusing. |
+| 4 | **Works for others** | Subcontractor has other clients. Can work for competitors. | Subcontractor works exclusively for us, not allowed to work elsewhere. |
+| 5 | **Financial risk** | Subcontractor quotes flat rate. If job takes longer, they absorb. If materials cost more, they absorb. | We pay hourly. Subcontractor has no financial risk — paid regardless of efficiency. |
+| 6 | **Delegation** | Subcontractor can send a qualified replacement (with our quality approval). | Specific person must do the work; cannot delegate. |
+| 7 | **Integration** | Subcontractor not part of team meetings, no company email, doesn't attend our office, doesn't wear our uniform. | Subcontractor has company email, attends meetings, listed as "our team" on website, wears branded uniform. |
+| 8 | **Tax and super** | Subcontractor handles own ABN, BAS, tax. Invoices us with Tax Invoice. We don't withhold PAYG. | We withhold PAYG, pay their super (note: super may apply even for genuine contractors per s12(3) SGAA — see [sub-tax-compliance.md](sub-tax-compliance.md)). |
 | 9 | **Engagement nature** | Engaged per job. No guarantee of ongoing work. Can pause/end without notice. | Guaranteed minimum hours per week, ongoing open-ended engagement. |
 
 ### How our agreement enforces each indicator
 
-| Indicator | Sub Agreement clause that enforces it |
+| Indicator | Subcontractor Agreement clause that enforces it |
 |---|---|
-| 1. Control | Clause 1 (independent contractor status), Clause 26 (sub controls method) |
-| 2. Tools/materials | Clause 4 (sub supplies materials), Clause 26 (sub supplies own tools/vehicle) |
+| 1. Control | Clause 1 (independent contractor status), Clause 26 (subcontractor controls method) |
+| 2. Tools/materials | Clause 4 (subcontractor supplies materials), Clause 26 (subcontractor supplies own tools/vehicle) |
 | 3. Refuse work | Clause 1 + Clause 32 (declining = no penalty; only accepted-then-cancelled is penalised) |
 | 4. Multiple clients | Clause 1 + recruitment ad explicitly says "you maintain own business" |
-| 5. Financial risk | Clause 4 (flat rate), Clause 6 (sub absorbs rectification cost) |
+| 5. Financial risk | Clause 4 (flat rate), Clause 6 (subcontractor absorbs rectification cost) |
 | 6. Delegation | Clause 1 explicit delegation right (with quality approval) |
 | 7. No integration | Clause 26h (no business cards), no company email issued, no uniform |
-| 8. Tax | Clause 16 (sub provides Tax Invoice + ABN), no PAYG withholding |
+| 8. Tax | Clause 16 (subcontractor provides Tax Invoice + ABN), no PAYG withholding |
 | 9. Per-job engagement | Clause 1 + Clause 12 (either party can terminate) |
 
 References to specific clauses: see [docs/specs/sub-agreement-clauses.md](../specs/sub-agreement-clauses.md).
@@ -57,7 +57,7 @@ References to specific clauses: see [docs/specs/sub-agreement-clauses.md](../spe
 **You can be a genuine contractor AND still be owed super under s12(3) SGAA.** The "principally for labour" test for super is SEPARATE from the employee/contractor test. Don't conflate them.
 
 **Our analysis: super almost certainly NOT required.** The ATO 3-part test (s12(3)):
-1. Contract mainly for labour → **FAILS**: subs supply $50-300 materials + tools + vehicle
+1. Contract mainly for labour → **FAILS**: subcontractors supply $50-300 materials + tools + vehicle
 2. Paid for personal labour, not a result → **FAILS**: flat rate per completed job (result-based)
 3. Cannot delegate → **FAILS**: contract includes delegation right
 
@@ -65,8 +65,8 @@ All three must be true simultaneously for super obligation. We fail all three. A
 
 **MUST do before relying on this:**
 - [ ] Run ATO Super Guarantee Eligibility Tool ([ato.gov.au](https://www.ato.gov.au)) — screenshot result, store in `data/compliance/`
-- [ ] Get accountant written confirmation ($100-200) — store with sub file
-- [ ] If sub invoices through Pty Ltd company → super DEFINITIVELY not required (super is the company's obligation to its employees, not ours)
+- [ ] Get accountant written confirmation ($100-200) — store with subcontractor file
+- [ ] If subcontractor invoices through Pty Ltd company → super DEFINITIVELY not required (super is the company's obligation to its employees, not ours)
 
 **If still in doubt: pay super.** 12% is a known cost. The Super Guarantee Charge (SGC) + Part 7 penalties + non-deductibility is far more expensive than just paying.
 
@@ -76,9 +76,9 @@ See [sub-tax-compliance.md](sub-tax-compliance.md) for full TPAR + super + porta
 
 ## How we audit ourselves quarterly
 
-Per [auditor-fair-work.md](../roles/auditor-fair-work.md) — every quarter, run the 9-indicator audit on each active sub:
+Per [auditor-fair-work.md](../roles/auditor-fair-work.md) — every quarter, run the 9-indicator audit on each active subcontractor:
 
-For each sub:
+For each subcontractor:
 - [ ] Are we **controlling HOW**, or just specifying scope/quality?
 - [ ] Are they **supplying own tools + materials + vehicle**?
 - [ ] In the last 90 days, have we **let them refuse a job** without penalty?
@@ -102,10 +102,10 @@ The Fair Work 2024 amendments + ATO test look at **the whole-of-relationship rea
 - Whether they actually supply own materials (or do we secretly cover the cost)
 
 **Operating discipline:**
-- Brief Marko clearly: "When dispatching, send the job + scope + customer photos. Don't tell the sub HOW to do the regrout. They're the expert."
-- Don't message subs daily for "check-ins" that look like supervision
-- Don't pre-buy materials and hand to subs — they buy + claim back via job rate
-- If a sub starts looking like an employee (heavy supervision needed), it's a quality issue → coach + remove, not micromanage
+- Brief Marko clearly: "When dispatching, send the job + scope + customer photos. Don't tell the subcontractor HOW to do the regrout. They're the expert."
+- Don't message subcontractors daily for "check-ins" that look like supervision
+- Don't pre-buy materials and hand to subcontractors — they buy + claim back via job rate
+- If a subcontractor starts looking like an employee (heavy supervision needed), it's a quality issue → coach + remove, not micromanage
 
 ---
 

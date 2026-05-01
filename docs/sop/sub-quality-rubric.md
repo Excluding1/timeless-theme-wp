@@ -2,7 +2,7 @@
 
 **Purpose:** Standardised scoring for trial jobs AND ongoing random spot-checks. Same rubric used by Marko + CEO so judgements are consistent.
 
-**Owner:** Marko (sub inspections); CEO uses for tier reviews.
+**Owner:** Marko (subcontractor inspections); CEO uses for tier reviews.
 
 **Source:** Migrated from `data/archive/old-drafts-2026-04/sub-onboarding-system.xlsx` sheet 04. 3-lens audited 2026-05-01 PM.
 
@@ -35,11 +35,11 @@ Each criterion scored 0-10. Total /100.
 ### Critical-failure override (added by CEO 2026-05-01 PM)
 Regardless of total score, **automatic FAIL** if any of:
 - Wrong materials used (e.g., Bunnings consumer-grade silicone instead of bathroom-grade)
-- Sham contracting indicator surfaces (e.g., sub asks us to provide tools or supervision)
+- Sham contracting indicator surfaces (e.g., subcontractor asks us to provide tools or supervision)
 - Customer reports unprofessional behaviour (rudeness, swearing, smoking inside, etc.)
 - Asbestos / WHS hazard ignored on pre-1990 job
-- Sub didn't take any photos
-- Sub didn't show up + no notice (no-show)
+- Subcontractor didn't take any photos
+- Subcontractor didn't show up + no notice (no-show)
 
 These trump score because they break trust + create legal/brand risk regardless of finish quality.
 
@@ -91,9 +91,9 @@ These trump score because they break trust + create legal/brand risk regardless 
 - Decision per [trial-job-protocol § 6](sub-trial-job-protocol.md#step-6--decision)
 
 ### For ongoing spot-checks
-- Random audit ~1 in 10 jobs (or ~1/month per sub minimum)
+- Random audit ~1 in 10 jobs (or ~1/month per subcontractor minimum)
 - Same rubric scored
-- Track sub's average score over rolling 90 days
+- Track subcontractor's average score over rolling 90 days
 - Tier movement per OPERATING-CONTEXT § 9.5:
   - 4.5+ avg (90+/100) = Tier 1
   - 3.5-4.4 (70-89) = Tier 2
@@ -101,16 +101,16 @@ These trump score because they break trust + create legal/brand risk regardless 
 
 ### For customer-complaint investigations
 - When NPS detractor (1-6) reported, inspector visits + scores
-- Compares to sub's running avg
+- Compares to subcontractor's running avg
 - Identifies if quality dropped or customer expectation issue
 
 ---
 
 ## Rubric philosophy
 
-**This is a tool, not a punishment.** Subs deserve clear standards before they're held to them. We share this rubric with subs at onboarding so they know exactly how they'll be measured.
+**This is a tool, not a punishment.** Subcontractors deserve clear standards before they're held to them. We share this rubric with subcontractors at onboarding so they know exactly how they'll be measured.
 
-Good subs welcome standards. Bad subs resist measurement. Rubric is a self-selection mechanism.
+Good subcontractors welcome standards. Bad subcontractors resist measurement. Rubric is a self-selection mechanism.
 
 ---
 
