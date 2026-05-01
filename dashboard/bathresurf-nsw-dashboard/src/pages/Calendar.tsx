@@ -32,6 +32,7 @@ import { SlideOver } from '../components/SlideOver';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { EmptyState } from '../components/EmptyState';
 import { useData } from '../hooks/useData';
+import { usePreferences } from '../contexts/PreferencesContext';
 import { cn } from '../lib/utils';
 import type { CalendarEvent } from '../lib/database';
 
@@ -120,8 +121,10 @@ export function Calendar() {
   const { data: events, loading, create, update, remove } = useData('calendar_events');
 
   // UI state
+  const { preferences, updatePreferences } = usePreferences();
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [viewMode, setViewMode] = useState<ViewMode>('month');
+  const viewMode = (preferences.default_calendar_view as ViewMode) || 'month';
+  const setViewMode = (next: ViewMode) => updatePreferences({ default_calendar_view: next });
   const [filter, setFilter] = useState<VisibilityFilter>('all');
   const [slideOpen, setSlideOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);

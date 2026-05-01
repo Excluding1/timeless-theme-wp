@@ -11,6 +11,7 @@ import { ConfirmDialog } from '../components/ConfirmDialog';
 import { EmptyState } from '../components/EmptyState';
 import { CardSkeleton, TableSkeleton } from '../components/LoadingSkeleton';
 import { useData } from '../hooks/useData';
+import { usePreferences } from '../contexts/PreferencesContext';
 import { cn } from '../lib/utils';
 import type { Subcontractor } from '../lib/database';
 
@@ -89,7 +90,9 @@ export function SubsTracker() {
   const { data: rawData, loading, create, update, remove } = useData('subcontractors');
   const data = rawData as unknown as Subcontractor[];
   const [search, setSearch] = useState('');
-  const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+  const { preferences, updatePreferences } = usePreferences();
+  const viewMode = (preferences.default_sub_view as 'cards' | 'table') || 'cards';
+  const setViewMode = (next: 'cards' | 'table') => updatePreferences({ default_sub_view: next });
   const [slideOpen, setSlideOpen] = useState(false);
   const [editing, setEditing] = useState<Subcontractor | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Subcontractor | null>(null);

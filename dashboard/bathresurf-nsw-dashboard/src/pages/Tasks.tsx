@@ -15,7 +15,8 @@ import { ConfirmDialog } from '../components/ConfirmDialog';
 import { EmptyState } from '../components/EmptyState';
 import { Skeleton } from '../components/LoadingSkeleton';
 import { useData } from '../hooks/useData';
-import { cn, safeGetItem, safeSetItem } from '../lib/utils';
+import { usePreferences } from '../contexts/PreferencesContext';
+import { cn } from '../lib/utils';
 import type { Task, Attachment } from '../lib/database';
 import { ImageUploader, ImageGallery } from '../components/ImageUploader';
 
@@ -162,15 +163,10 @@ export function Tasks() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [prefillTask, setPrefillTask] = useState<Partial<Task> | null>(null);
 
-  // UI state — persist view preference
-  const [view, setView] = useState<'kanban' | 'list'>(() => {
-    const saved = safeGetItem('tasks_view');
-    return saved === 'list' ? 'list' : 'kanban';
-  });
-  const handleSetView = (v: 'kanban' | 'list') => {
-    setView(v);
-    safeSetItem('tasks_view', v);
-  };
+  // UI state — view preference persists in user_preferences (synced across sessions + devices).
+  const { preferences, updatePreferences } = usePreferences();
+  const view = (preferences.default_task_view as 'kanban' | 'list') || 'kanban';
+  const handleSetView = (v: 'kanban' | 'list') => updatePreferences({ default_task_view: v });
   const [dueDateFilter, setDueDateFilter] = useState<DueDateFilter>('all');
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>('all');
   const [visibilityFilter, setVisibilityFilter] = useState<VisibilityFilter>('all');

@@ -12,36 +12,36 @@
 INSERT INTO goals (metric_name, target_value, current_value, unit, period, lower_is_better, deadline, notes)
 SELECT * FROM (VALUES
   -- Money
-  ('Monthly revenue', 5000, 0, '$', 'monthly', false, NULL,
+  ('Monthly revenue', 5000, 0, '$', 'monthly', false, NULL::date,
    'Month 1: $5k. Bump to $15k by month 3, $30k+ by month 6 once Marko has subs trained.'),
 
-  ('Avg job value', 1100, 0, '$', 'monthly', false, NULL,
+  ('Avg job value', 1100, 0, '$', 'monthly', false, NULL::date,
    'Industry benchmark: $1,000-$1,500 per shower regrout, $700-$1,200 bath resurface. Track to ensure mix is healthy.'),
 
-  ('Quote-to-booking conversion %', 28, 0, '%', 'monthly', false, NULL,
+  ('Quote-to-booking conversion %', 28, 0, '%', 'monthly', false, NULL::date,
    'Jordan does 28.2%. Below 20% = price too high or quote messaging weak. Above 35% = leaving money on table (under-priced).'),
 
-  ('Cost per lead (CPL)', 80, 0, '$', 'monthly', true, NULL,
+  ('Cost per lead (CPL)', 80, 0, '$', 'monthly', true, NULL::date,
    'Lower is better. Google Ads target: <$80 CPL. Meta: <$45. Anything above = pause + refine targeting.'),
 
-  ('Cost per booked job (CPBJ)', 280, 0, '$', 'monthly', true, NULL,
+  ('Cost per booked job (CPBJ)', 280, 0, '$', 'monthly', true, NULL::date,
    'Lower is better. CPL ÷ conversion %. At 28% close + $80 CPL → $285 CPBJ. Target <$300.'),
 
-  ('POAS (profit on ad spend)', 4, 0, '$', 'monthly', false, NULL,
+  ('POAS (profit on ad spend)', 4, 0, '$', 'monthly', false, NULL::date,
    '$ profit per $1 ad spend. Target 4:1 minimum. Below 2:1 = unprofitable acquisition.'),
 
   -- Operations
-  ('Active subcontractors', 5, 0, '#', 'monthly', false, NULL,
+  ('Active subcontractors', 5, 0, '#', 'monthly', false, NULL::date,
    'Want at least 5 trained + insured subs by month 3 — covers North/East/West/South Sydney + 1 specialist.'),
 
-  ('Avg NPS score', 9, 0, '#', 'monthly', false, NULL,
+  ('Avg NPS score', 9, 0, '#', 'monthly', false, NULL::date,
    '0-10 scale. Below 8 = service quality issue. Below 7 = stop using that sub until retrained.'),
 
-  ('Job callback rate %', 5, 0, '%', 'monthly', true, NULL,
+  ('Job callback rate %', 5, 0, '%', 'monthly', true, NULL::date,
    'Lower is better. % of jobs that needed a return visit for rework. Target <5%. Above 10% = sub or process issue.'),
 
   -- Annual
-  ('Year 1 revenue', 250000, 0, '$', 'annual', false, NULL,
+  ('Year 1 revenue', 250000, 0, '$', 'annual', false, NULL::date,
    'Stretch goal year 1. Modest if month 6 hits $30k/mo and stays steady.')
 ) AS new_goals(metric_name, target_value, current_value, unit, period, lower_is_better, deadline, notes)
 WHERE NOT EXISTS (

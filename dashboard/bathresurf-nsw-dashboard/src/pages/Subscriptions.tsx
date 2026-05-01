@@ -12,6 +12,7 @@ import { ConfirmDialog } from '../components/ConfirmDialog';
 import { EmptyState } from '../components/EmptyState';
 import { Skeleton, CardSkeleton } from '../components/LoadingSkeleton';
 import { useData } from '../hooks/useData';
+import { usePreferences } from '../contexts/PreferencesContext';
 import { cn, sanitizeUrl } from '../lib/utils';
 import type { Subscription, PriceChange } from '../lib/database';
 
@@ -108,7 +109,9 @@ export function Subscriptions() {
   const { create: createFinance } = useData('finances');
 
   const [search, setSearch] = useState('');
-  const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
+  const { preferences, updatePreferences } = usePreferences();
+  const viewMode = (preferences.default_subscription_view as 'cards' | 'table') || 'cards';
+  const setViewMode = (next: 'cards' | 'table') => updatePreferences({ default_subscription_view: next });
   const [slideOpen, setSlideOpen] = useState(false);
   const [editing, setEditing] = useState<Subscription | null>(null);
   const [logToFinances, setLogToFinances] = useState(true);
@@ -424,10 +427,10 @@ export function Subscriptions() {
         </div>
         <div className="flex items-center bg-white border border-slate-200 rounded-lg p-1 shadow-sm">
           <button
-            onClick={() => setViewMode('card')}
+            onClick={() => setViewMode('cards')}
             className={cn(
               'p-2 rounded-md transition-colors',
-              viewMode === 'card' ? 'bg-[#1B2A4A] text-white' : 'text-slate-500 hover:text-slate-700'
+              viewMode === 'cards' ? 'bg-[#1B2A4A] text-white' : 'text-slate-500 hover:text-slate-700'
             )}
             title="Card view"
           >
@@ -462,7 +465,7 @@ export function Subscriptions() {
       )}
 
       {/* ── Card View ───────────────────────────────────────────────────────── */}
-      {viewMode === 'card' && filtered.length > 0 && (
+      {viewMode === 'cards' && filtered.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((sub) => {
             const renewDate = sub.next_renewal ? parseISO(sub.next_renewal) : null;
