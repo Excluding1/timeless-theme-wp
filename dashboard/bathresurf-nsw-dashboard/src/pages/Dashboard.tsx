@@ -8,7 +8,7 @@ import { ArrowRight, Calendar, CheckCircle2, Circle, DollarSign, Link as LinkIco
 import { formatDistanceToNow } from 'date-fns';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { Link } from 'react-router-dom';
-import { cn, sanitizeUrl, safeGetItem, safeSetItem } from '../lib/utils';
+import { cn, sanitizeUrl } from '../lib/utils';
 import { isWithinInterval, parseISO, startOfMonth, endOfMonth, addDays, differenceInDays, isBefore, isToday as isDateToday, startOfDay } from 'date-fns';
 import { useNotificationAlerts } from '../hooks/useNotificationAlerts';
 import { useSubscriptionSync } from '../hooks/useSubscriptionSync';
@@ -79,14 +79,13 @@ const SETUP_STEPS = [
 ];
 
 function GettingStartedSection() {
-  const [expanded, setExpanded] = useState(() => {
-    return safeGetItem('setup_guide_collapsed') !== 'true';
-  });
+  // Persists in user_preferences (Supabase) so collapse state survives across
+  // refreshes, devices, browsers, and incognito sessions — not just this browser's localStorage.
+  const { preferences, updatePreferences } = usePreferences();
+  const expanded = !preferences.setup_guide_collapsed;
 
   const toggleExpanded = () => {
-    const next = !expanded;
-    setExpanded(next);
-    safeSetItem('setup_guide_collapsed', next ? '' : 'true');
+    updatePreferences({ setup_guide_collapsed: expanded });
   };
 
   return (

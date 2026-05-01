@@ -621,8 +621,9 @@ export function Calendar() {
           </div>
         )}
 
-        {/* Empty state */}
-        {filteredEvents.length === 0 && (
+        {/* Empty state — only in week view; in month view the grid IS the canvas
+            (you click any day to create), so an empty-state overlay would clip rows. */}
+        {viewMode === 'week' && filteredEvents.length === 0 && (
           <div className="flex-1 flex items-center justify-center">
             <EmptyState
               icon={CalendarIcon}

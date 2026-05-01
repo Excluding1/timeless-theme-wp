@@ -23,9 +23,10 @@ SELECT
     THEN ROUND(100.0 * COUNT(*) FILTER (WHERE status IN ('error','timeout')) / COUNT(*), 1)
     ELSE 0 END AS error_rate_pct,
   ROUND(COALESCE(SUM(cost_usd), 0), 2) AS total_cost_usd,
-  ROUND(COALESCE(AVG(EXTRACT(EPOCH FROM (completed_at - started_at))), 0), 1) AS avg_seconds,
+  -- Cast EXTRACT(EPOCH FROM …) to numeric — Postgres has no ROUND(double precision, int) overload.
+  ROUND(COALESCE(AVG(EXTRACT(EPOCH FROM (completed_at - started_at)))::numeric, 0), 1) AS avg_seconds,
   ROUND(COALESCE(
-    PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY EXTRACT(EPOCH FROM (completed_at - started_at))),
+    (PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY EXTRACT(EPOCH FROM (completed_at - started_at))))::numeric,
     0), 1) AS p95_seconds
 FROM agent_runs
 WHERE started_at > now() - interval '24 hours';

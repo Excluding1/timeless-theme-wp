@@ -11,6 +11,7 @@ interface UserPreferences {
   default_finance_period: string;
   default_overview_period: string;
   default_cashflow_period: string;
+  setup_guide_collapsed: boolean;
   hidden_nav_items: string[];
   sidebar_collapsed: boolean;
   nav_item_order: string[];
@@ -28,6 +29,7 @@ const defaultPreferences: UserPreferences = {
   default_finance_period: 'this_month',
   default_overview_period: 'this_month',
   default_cashflow_period: 'this_month',
+  setup_guide_collapsed: false,
   hidden_nav_items: [],
   sidebar_collapsed: false,
   nav_item_order: ['dashboard', 'overview', 'tasks', 'messages', 'calendar', 'finances', 'cashflow', 'kpis', 'subscriptions', 'subs', 'contacts', 'credentials', 'goals', 'weekly_review', 'notes', 'links', 'notifications', 'settings'],
