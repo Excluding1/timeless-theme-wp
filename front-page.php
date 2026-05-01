@@ -48,7 +48,7 @@ get_header(); ?>
  { "@type": "Question", "name": "Do you check for asbestos?", "acceptedAnswer": { "@type": "Answer", "text": "If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed." } },
  { "@type": "Question", "name": "What areas do you service?", "acceptedAnswer": { "@type": "Answer", "text": "Entire Greater Sydney. Inner West, Eastern Suburbs, North Shore, Northern Beaches, Western Sydney, Sutherland Shire, Hills District. Plus Wollongong, Central Coast, Blue Mountains." } },
  { "@type": "Question", "name": "Can you resurface coloured tiles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Works on all tile types including coloured, textured, patterned, and mosaic. We transform outdated tiles into clean, modern finishes." } },
- { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Workmanship warranty on every job covering peeling, bubbling, and adhesion failure. Warranty terms vary by service type. Up to 3 years for resurfacing. Fully insured with public liability." } }
+ { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Workmanship warranties up to 5 years, in writing. Bath and tile resurfacing: 5 years. Epoxy regrouting: 5 years. Cement regrouting: 2 years. Silicone replacement: 12 months (wear item, annual replacement recommended). Rental property warranties differ. Your rights under the Australian Consumer Law are unaffected." } }
  ]
 }
 </script>
@@ -62,7 +62,7 @@ get_header(); ?>
  Bathroom<br class="sm:hidden" /> Resurfacing<br /> <span class="text-primary-soft">Sydney Specialists</span>
  </h1>
  <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
- One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
+ One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and warranties up to 5 years in writing.
  </p>
  <!-- MOBILE: Image between text and CTA -->
  <div class="md:hidden mb-6">
@@ -381,8 +381,8 @@ get_header(); ?>
 <section class="py-16 sm:py-24 bg-primary" id="warranty">
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <div>
- <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tighter mb-4 sm:mb-6">Up to 3-Year Workmanship Warranty</h2>
- <p class="text-sm sm:text-base text-white/70 leading-relaxed mb-6 sm:mb-8">Every job is backed by our comprehensive warranty. With proper care, our resurfacing can last up to 10 years. If defects arise from our workmanship under normal use, we fix it free. Warranty terms vary by service. We&rsquo;ll confirm the exact coverage in your quote.</p>
+ <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tighter mb-4 sm:mb-6">Warranties up to 5 years &mdash; every service, in writing</h2>
+ <p class="text-sm sm:text-base text-white/70 leading-relaxed mb-6 sm:mb-8">Every job backed in writing. Different services have different warranty periods because materials genuinely have different lifespans &mdash; 5 years on bath resurfacing, 5 years on epoxy regrouting, 12 months on silicone (annual replacement is normal). <a href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>" class="underline hover:no-underline">See full matrix &rarr;</a></p>
  <div class="space-y-3">
  <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
  <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
@@ -393,7 +393,7 @@ get_header(); ?>
  <div class="hidden lg:flex items-center justify-center">
  <div class="w-72 h-72 rounded-full bg-white/5 flex items-center justify-center" style="box-shadow: 0 0 80px rgba(231,192,139,0.15);">
  <div class="w-56 h-56 rounded-full bg-white/10 flex items-center justify-center text-center border border-white/10">
- <div><span class="material-symbols-outlined text-6xl text-[#e7c08b]" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><p class="text-3xl font-extrabold text-white mt-2">Up to 3 Years</p><p class="text-sm font-bold text-white/60">Warranty</p></div>
+ <div><span class="material-symbols-outlined text-6xl text-[#e7c08b]" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><p class="text-3xl font-extrabold text-white mt-2">Up to 5 Years</p><p class="text-sm font-bold text-white/60">Warranty</p></div>
  </div>
  </div>
  </div>

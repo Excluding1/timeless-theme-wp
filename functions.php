@@ -1877,12 +1877,14 @@ function timeless_seo_meta() {
         'mouldy-silicone-replacement'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',
         'basin-chip-repair'              => 'Basin chip repair Sydney. Invisible repairs for chipped porcelain and ceramic basins. Same-day service.',
         'vanity-respray'                 => 'Vanity respray Sydney. Cabinet door and drawer front respray with 2-pack polyurethane. 900+ colours.',
-        'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Fully insured, experienced team, up to 3-year warranty on every job.',
+        'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Fully insured, experienced team, warranties up to 5 years in writing.',
         'contact'  => 'Contact Timeless Resurfacing for a free bathroom resurfacing quote in Sydney. Send photos, get a fixed-price quote next business day.',
         'gallery'  => 'Before and after bathroom resurfacing photos across Sydney. Real transformations by Timeless Resurfacing.',
         'areas'    => 'Bathroom resurfacing service areas across Greater Sydney, Wollongong, Central Coast, and Blue Mountains.',
         'faqs'     => 'Frequently asked questions about bathroom resurfacing in Sydney. Cost, timing, durability, warranty, and process explained.',
         'privacy'  => 'Privacy policy for Timeless Resurfacing. How we collect, use, and protect your personal information.',
+        'warranty' => 'Timeless Resurfacing warranty terms by service. Bath resurfacing 5 years, epoxy regrouting 5 years, cement regrouting 2 years. ACL-compliant, in writing.',
+        'care-instructions' => 'How to care for your resurfaced bathroom. Cure times, cleaning products to use and avoid, Sydney climate-specific advice, lifespan expectations.',
     );
 
     if ( is_front_page() ) {

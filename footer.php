@@ -28,6 +28,8 @@ $phone      = timeless_phone();
                 <ul class="space-y-2.5 text-sm">
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Gallery</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>">Warranty</a></li>
+                    <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/care-instructions/' ) ); ?>">Care Instructions</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact Us</a></li>
                     <li><a class="text-white/60 hover:text-white transition-colors" href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
                 </ul>
@@ -57,6 +59,10 @@ $phone      = timeless_phone();
                 </ul>
                 <p class="text-xs text-white/60 mt-6">&copy; <?php echo date( 'Y' ); ?> Timeless Resurfacing.<br>All Rights Reserved.</p>
             </div>
+        </div>
+        <!-- ACL Compliance Statement -->
+        <div class="border-t border-white/10 pt-6 mt-6">
+            <p class="text-[11px] text-white/50 leading-relaxed text-center max-w-3xl mx-auto">Our services come with consumer guarantees that cannot be excluded under the Australian Consumer Law. Any warranty we provide is in addition to your statutory rights, not a replacement.</p>
         </div>
     </div>
 </footer>
