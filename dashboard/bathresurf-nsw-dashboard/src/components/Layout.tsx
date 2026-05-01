@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { usePreferences } from '../contexts/PreferencesContext';
@@ -242,6 +242,16 @@ export function Layout() {
   const isGrouped = preferences.nav_grouped;
   const toggleSidebar = () => updatePreferences({ sidebar_collapsed: !isCollapsed });
 
+  // Auto-close the mobile menu drawer when the viewport widens past the md breakpoint —
+  // otherwise the drawer stays open and overlays page content as the user resizes.
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) setMobileMenuOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleEditModeToggle = () => {
     const newEditMode = !isEditMode;
     setIsEditMode(newEditMode);
@@ -351,7 +361,10 @@ export function Layout() {
           )}
         </div>
 
-        <div className="flex-1 overflow-y-auto py-4 scrollbar-hide">
+        {/* Native scrollbar visible on both mobile + desktop so users always know
+            they can scroll past Goals to reach Weekly Review / Notes / Links /
+            Notifications when the nav is taller than the viewport. */}
+        <div className="flex-1 overflow-y-auto py-4">
           {isGrouped && !isEditMode ? (
             <GroupedNav
               isCollapsed={isCollapsed}

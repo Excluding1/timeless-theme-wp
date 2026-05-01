@@ -181,7 +181,8 @@ export function Goals() {
                     </span>
                     <button
                       onClick={(e) => { e.stopPropagation(); setDeleteTarget(goal); }}
-                      className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-red-600 transition-all"
+                      className="md:opacity-0 md:group-hover:opacity-100 p-1 text-slate-400 hover:text-red-600 transition-all"
+                      aria-label={`Delete goal: ${goal.metric_name}`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>

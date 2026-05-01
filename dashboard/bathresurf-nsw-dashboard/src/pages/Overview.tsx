@@ -7,7 +7,7 @@ import { getPeriodDateRange, getPreviousPeriodRange } from '../lib/database';
 import type { Finance, Goal, Subscription, Subcontractor, KpiSnapshot } from '../lib/database';
 import { ArrowUpRight, ArrowDownRight, DollarSign, TrendingUp, Target, Users, CreditCard, BarChart3 } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { isWithinInterval, parseISO, differenceInDays, format, addMonths, startOfMonth } from 'date-fns';
+import { isWithinInterval, parseISO, isValid, differenceInDays, format, addMonths, startOfMonth } from 'date-fns';
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, AreaChart, Area,
@@ -67,12 +67,17 @@ export function Overview() {
     return map;
   }, [goals]);
 
-  // Build monthly revenue/expense trend data for charts
+  // Build monthly revenue/expense trend data for charts.
+  // NOTE: this is intentionally NOT period-filtered — it shows the full all-time trend
+  // so users can see growth over months. The chart heading reflects this with an "all time" label.
   const monthlyTrend = useMemo(() => {
     const allFinances = finances as Finance[];
     const monthMap: Record<string, { revenue: number; expenses: number }> = {};
     allFinances.forEach(f => {
-      const monthKey = format(parseISO(f.date), 'yyyy-MM');
+      if (!f.date) return;
+      const d = parseISO(f.date);
+      if (!isValid(d)) return;
+      const monthKey = format(d, 'yyyy-MM');
       if (!monthMap[monthKey]) monthMap[monthKey] = { revenue: 0, expenses: 0 };
       if (f.type === 'revenue') monthMap[monthKey].revenue += f.amount;
       else monthMap[monthKey].expenses += f.amount;
@@ -256,7 +261,10 @@ export function Overview() {
       {/* Revenue & Expenses Trend Chart */}
       {monthlyTrend.length > 0 && (
         <section className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 className="text-lg font-semibold text-slate-800 mb-6">Revenue vs Expenses</h3>
+          <div className="flex items-baseline justify-between mb-6">
+            <h3 className="text-lg font-semibold text-slate-800">Revenue vs Expenses</h3>
+            <span className="text-xs text-slate-500 font-normal">All-time trend (not affected by period filter)</span>
+          </div>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={monthlyTrend} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>

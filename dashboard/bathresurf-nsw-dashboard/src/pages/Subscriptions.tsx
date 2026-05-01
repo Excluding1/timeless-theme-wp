@@ -479,7 +479,7 @@ export function Subscriptions() {
                 className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 hover:shadow-md hover:border-slate-300 transition-all cursor-pointer group relative"
               >
                 {/* Card actions */}
-                <div className="absolute top-4 right-4 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
+                <div className="absolute top-4 right-4 flex items-center gap-1 md:opacity-0 md:group-hover:opacity-100 transition-all">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();

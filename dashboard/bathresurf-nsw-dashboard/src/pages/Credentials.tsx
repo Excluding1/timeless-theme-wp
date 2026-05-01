@@ -577,21 +577,21 @@ export function Credentials() {
             />
           </div>
 
-          {/* Form actions */}
-          <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="flex-1 px-4 py-2.5 bg-[#1B2A4A] text-white rounded-lg font-medium hover:bg-[#1e335a] transition-colors disabled:opacity-50"
-            >
-              {isSubmitting ? 'Saving...' : editing ? 'Update Credential' : 'Add Credential'}
-            </button>
+          {/* Form actions — Cancel left, primary right (matches Contacts/Subs/Notes pattern). */}
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
             <button
               type="button"
               onClick={() => setSlideOpen(false)}
-              className="px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors"
             >
               Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="px-4 py-2 text-sm font-medium text-white bg-[#1B2A4A] rounded-lg hover:bg-[#1e335a] transition-colors disabled:opacity-50"
+            >
+              {isSubmitting ? 'Saving...' : editing ? 'Update Credential' : 'Add Credential'}
             </button>
           </div>
         </form>

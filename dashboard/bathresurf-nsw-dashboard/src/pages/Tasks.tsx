@@ -437,10 +437,12 @@ export function Tasks() {
         </div>
       </div>
 
-      {/* Filter Row */}
+      {/* Filter Row — each group is independently scrollable on narrow viewports
+          so right-most chips ('Due This Month', 'Low', 'Shared Only') stay reachable
+          even at 375px mobile width. */}
       <div className="flex flex-wrap items-center gap-3 shrink-0">
         {/* Due date filter */}
-        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm max-w-full overflow-x-auto scrollbar-hide">
           {([
             { value: 'overdue', label: 'Overdue' },
             { value: 'today', label: 'Due Today' },
@@ -464,7 +466,7 @@ export function Tasks() {
         </div>
 
         {/* Priority filter */}
-        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm max-w-full overflow-x-auto scrollbar-hide">
           {([
             { value: 'all', label: 'All', dot: '' },
             { value: 'urgent', label: 'Urgent', dot: 'bg-red-500' },
@@ -489,7 +491,7 @@ export function Tasks() {
         </div>
 
         {/* Visibility filter */}
-        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
+        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm max-w-full overflow-x-auto scrollbar-hide">
           {([
             { value: 'all', label: 'All' },
             { value: 'shared', label: 'Shared Only' },

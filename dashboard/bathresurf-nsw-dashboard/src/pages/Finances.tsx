@@ -955,8 +955,9 @@ export function Finances() {
                                 e.stopPropagation();
                                 setDeleteTarget(entry);
                               }}
-                              className="p-1.5 text-slate-400 hover:text-[#DC2626] rounded-md hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-all"
+                              className="p-1.5 text-slate-400 hover:text-[#DC2626] rounded-md hover:bg-red-50 md:opacity-0 md:group-hover:opacity-100 transition-all"
                               title="Delete"
+                              aria-label="Delete entry"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
