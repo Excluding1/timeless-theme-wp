@@ -690,7 +690,44 @@ These numbers are aspirational, not commitments. Actual will depend on:
 1. **Never run negative cash.** If May ends below $1,200 cash, kill all paid ads, freeze GHL upgrade, revisit pricing.
 2. **2 months runway minimum at all times.** Currently 9 months on no-revenue. Once we add ads, this drops fast — check weekly.
 3. **No subscription >$50/mo without my sign-off** while cash <$10K.
-4. **Stripe payouts go to founders monthly** at 30% of net profit each, 40% retained for growth. Once cash >$50K, revisit.
+
+### Founder draw policy (formalised 2026-05-01 PM per Allan's direction)
+
+Allan's stated rule: *"we plan on not withdrawing any money until 5k is reached in savings and then take 1.5k out as that is our initial funds and then after that take according to the savings"*
+
+**Phase 0 — pre-$5K savings:** **NO founder draws.** All revenue net-of-direct-costs reinvests into the business. Initial $1,500 starting capital + $100 bank bonus stays in the account.
+
+**Phase 1 — first milestone ($5K savings reached):**
+- Withdraw exactly **$1,500** = return of initial capital (Allan's $1,500 starting fund).
+- Net post-withdrawal: $3,500 retained as growth + safety buffer.
+- Both founders agree this is "our money back, fairly returned."
+
+**Phase 2 — post-$5K, structured draws per savings level:**
+- Per Allan's note: "after that take according to the savings"
+- **Working framework (CEO recommendation pending Allan confirmation in dashboard):**
+  - $5K-$10K savings band: hold (don't draw — let buffer build)
+  - $10K-$25K savings band: 30% of monthly profit split 50/50 (Allan + Marko); 70% retained for growth + 2-month-runway minimum
+  - $25K-$50K savings band: 40% of monthly profit split 50/50; 60% retained
+  - $50K+ savings band: 50% of monthly profit split 50/50; 50% retained for growth/expansion
+- **Constants:**
+  - Always maintain 2 months runway minimum BEFORE any draw
+  - Draws happen monthly (1st of month, post-P&L-close)
+  - Draws split 50/50 between Allan + Marko per partnership agreement
+  - Draws are documented in the dashboard's Cashflow tab (per Allan's draft plan)
+
+**Phase 3 — post-Pty Ltd structure:** revisit when Pty Ltd formed (Anytime A2 in [FUTURE-PLAN](FUTURE-PLAN.md)). Wages vs distributions changes the tax treatment.
+
+**Allan's draft plan in dashboard:** the specifics ($X savings → $Y draw formula) are in the dashboard's Cashflow / Finances tabs. CEO commits to syncing this CEO.md section with the dashboard's draft plan once accessed (per Dashboard integration plan below). Until then: this CEO.md represents the working framework; dashboard is canonical source of truth for the agreed numbers.
+
+**Source of truth precedence (when CEO.md ≠ dashboard):**
+- Dashboard wins for the actual draw formula + amounts (Allan + Marko's joint decision)
+- CEO.md wins for principles + safety rules (CEO authority + audit protection)
+
+### Stripe payout flow (Phase 1 onwards)
+1. Customer pays final → Stripe receives → 1-2 day deposit to Westpac Business account
+2. Sub paid via pay.com.au within 72hr (per [sub-rate-schedule § D](specs/sub-rate-schedule.md))
+3. Net retained = revenue - sub payment - materials reimbursement - direct costs
+4. Monthly close: P&L calculated, savings tally updated, draw decision made per Phase 0/1/2 rules above
 
 ---
 

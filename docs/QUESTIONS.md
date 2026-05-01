@@ -179,6 +179,27 @@ Get answer in writing.
 - Run [auditor-margin-per-job](roles/auditor-margin-per-job.md) lens — subcontractor pay-out leaves us with ≥$300 profit floor at T2 customer price?
 - Run [auditor-fair-work](roles/auditor-fair-work.md) lens — subcontractor $/hr ≥$70 resurface / ≥$60 regrout / ≥$50 silicone-only?
 
+### Q19. Supabase dashboard access for CEO + Agent integration (raised 2026-05-01 PM)
+**Status:** ❓ Open — needed to enable [dashboard-integration-plan.md L1 + L2](specs/dashboard-integration-plan.md)
+**Why I need it:** CEO direct access (L1) for in-session reads/writes; AI Agent (L2 Phase 6.6a) for 24/7 persistent management. Per Allan's ask for "best method to manage and edit and add stuff like add tasks to the task board."
+**Affects:** [docs/specs/dashboard-integration-plan.md](specs/dashboard-integration-plan.md), [CEO.md § Dashboard integration plan](CEO.md), [CEO.md § Founder draw policy](CEO.md#founder-draw-policy-formalised-2026-05-01-pm-per-allans-direction) (which references dashboard as canonical)
+**Action needed (Allan provides):**
+1. **Supabase URL** (e.g., `https://xxxxx.supabase.co`)
+2. **Supabase API key** (anon key first; service_role only if RLS too restrictive — handle as secret)
+3. **Database schema overview** — easiest: screenshot of Supabase Table Editor view OR paste table list
+4. **Optionally: cashflow draft plan** from Cashflow tab so CEO can sync founder-draw policy in CEO.md with dashboard's canonical numbers
+**Security discipline (per spec):** customer PII tables read-only or excluded; quarterly key rotation; audit log every CEO write; no bulk DELETE without inline approval.
+
+### Q20. Founder draw formula confirmation (raised 2026-05-01 PM)
+**Status:** ❓ Open — CEO drafted working framework; Allan's dashboard has canonical version
+**Why I need it:** [CEO.md § Founder draw policy](CEO.md#founder-draw-policy-formalised-2026-05-01-pm-per-allans-direction) currently has CEO-recommended formula (30%/40%/50% draws by savings band). Allan said "we have a draft plan in the dashboard" — that's the actual joint Allan+Marko decision.
+**Affects:** Cash safety rules, monthly P&L close decisions, founder retention strategy
+**Action needed (Allan provides):** the actual formula from dashboard Cashflow tab — "$X savings → $Y draw" rules. CEO will update CEO.md to match.
+**My current assumption (working framework until confirmed):**
+- Phase 0 ($0-$5K): no draws
+- Phase 1 ($5K hit): take $1.5K (return of initial)
+- Phase 2 ($5K+): 30% profit @ $5-10K band, 40% @ $10-25K, 50% @ $25K+ split 50/50, always preserve 2-month runway
+
 ---
 
 ## Resolved (recent — kept for reference)
