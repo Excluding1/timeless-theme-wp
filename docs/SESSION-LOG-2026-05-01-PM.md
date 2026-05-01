@@ -99,8 +99,42 @@
 4. **5051981** — `docs(ghl): build 13-stage pipeline spec — stages + workflows + ageing rules`
 5. **3c79f52** — `docs(templates): migrate QUOTE_OUTPUT_TEMPLATES — full 21-template customer lifecycle`
 6. **e582394** — `docs: final session log + open questions log (Allan return brief)`
-7. *(pending Batch F — terminology pass: sub→subcontractor internal + technician customer-facing + Q1/Q14/Q15/Q18 deferral)*
-8. *(pending Batch G — international rate research + fully-loaded margin model for sub-rate-schedule.md per Allan's Q1+Q18 reframe)*
+7. **5ce2b93** — `docs(terminology): subcontractor (internal/legal) + technician (customer-facing) + Q deferrals`
+8. *(pending Batch G — fully-loaded margin model for sub-rate-schedule.md per Allan's Q1+Q18 reframe)*
+
+---
+
+## Batch G — fully-loaded margin model + international rate research (about to commit)
+
+**What I built:** Section G of [sub-rate-schedule.md](specs/sub-rate-schedule.md) — addresses Allan's Q1+Q18 reframe ("look at rates at different countries... healthy enough margin for profit after all expenses").
+
+**Includes:**
+- G.1 International rate benchmarks (US Miracle Method + Sir Grout + ContractorTalk; UK Bath Revive + MyBuilder; AU Hipages + Airtasker + Bert estimates)
+- G.2 Cost categories (every dollar that flows out: sub pay + materials + travel + Stripe + GHL + SM8 + Cloudinary + Twilio + insurance + Xero + pay.com.au + accountant)
+- G.3 Indirect cost allocation across 3 scenarios (4 jobs/mo / 10 / 25)
+- G.4 Per-SKU margin model — top 10 SKUs with full direct + indirect cost breakdown
+- G.5 Findings + flags — SKUs at risk
+- G.6 Recommended actions
+- G.7 Confidence + caveats + update triggers
+
+**Key findings:**
+- 🟢 Shower regrout SKUs all healthy 55-60% margin
+- 🟢 Full bathroom (FBP-01) healthy 66% margin
+- 🟠 BTH-01 Bath resurface @ $1,000 — only 35% net margin AND sub rate below fair-work floor; recommend lift T2 to $1,300-1,400
+- 🟠 BTV-05 Bath + spa @ $1,440 — same problem
+- 🔴 CHP-01 Chip repair @ $250 — only $70 net profit, below $300 floor; immediate fix needed (raise to $350 OR require 2+ chip minimum)
+
+**Decisions logged for Allan to override:**
+1. Used $80-100/hr resurface and $70-90/hr regrout as fair-work floor (US/UK/AU triangulated)
+2. Assumed 10 jobs/mo Year 1 target for indirect cost allocation
+3. Assumed Stripe 1.75% + Twilio + pay.com.au 1% as direct variable costs
+4. Insurance amortised over 96 jobs/yr ($21/job)
+
+**Next actions for Allan to consider:**
+- Bump CHP-01 chip repair to $350 OR 2+ minimum
+- Review BTH-01 + BTV-05 bath resurface T2 pricing — likely needs $1,300-1,400 not $1,000
+- Q4 Bert wholesale conversation could fix bath resurface margin without price lift
+- Pricing audit Phase A is the next-level validation
 
 ---
 

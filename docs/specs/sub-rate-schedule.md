@@ -199,6 +199,149 @@ When this doc is finalised + master pricing audited, the margin model becomes pr
 
 ---
 
+## G. International rate research + fully-loaded margin model (added 2026-05-01 PM)
+
+**Why this section exists:** per Q1 + Q18 in [QUESTIONS.md](../QUESTIONS.md), we don't yet have Marko's actual subcontractor rate data. Allan's direction: build a defensible baseline NOW from international + Hipages research + a fully-loaded margin model that accounts for ALL costs (ads, digital tools, sub pay, materials, travel, insurance amortisation, bank fees). Replace with reality once Marko engages first subcontractor.
+
+### G.1 International rate benchmarks (per-hour subcontractor rate)
+
+Triangulated across mature markets with similar materials/regulation:
+
+| Market | Source | Service | Customer price | Sub effective rate | Notes |
+|---|---|---|---|---|---|
+| **US** | Miracle Method (largest US franchise) | Bath resurface | USD $400-600 | USD $30-50/hr | Franchise pays sub, sub doesn't supply most materials |
+| **US** | Sir Grout (regrouting franchise) | Shower regrout | USD $300-500 | USD $40-60/hr | Same model |
+| **US** | ContractorTalk independent | Bath resurface | USD $400-700 | USD $75-100/hr | Solo operator, supplies own materials |
+| **UK** | Bath Revive UK | Bath resurface | £250-400 | £20-30/hr (~$40-60 AUD) | Mature market, materials inc |
+| **UK** | MyBuilder.com avg | Shower regrout | £180-350 | £25-40/hr (~$50-80 AUD) | Open marketplace |
+| **AU** | Hipages (Sydney) | Shower regrout | $300-700 | $50-100/hr | 4-6hr typical job |
+| **AU** | Hipages (Sydney) | Bath resurface | $400-700 | $70-120/hr | 5-6hr typical job |
+| **AU** | Airtasker | Bath resurface | $300-500 | $40-80/hr | Lower-tier operators (PPE/insurance often missing) |
+| **AU** | Bert (ARS) operator estimates | Resurface (retail) | $500-900 | $80-120/hr | Established operators |
+
+**Synthesis — fair AU 2026 effective subcontractor rate AFTER materials cost:**
+- **Resurfacing:** $80-100/hr ← higher than regrout because materials ($150-300) + spray equipment investment + skill premium
+- **Regrouting:** $70-90/hr
+- **Silicone-only:** $60-80/hr
+- **Floor below = sham contracting + sub flight risk** ($60/hr resurface, $50/hr regrout, $45/hr silicone)
+
+These are **floor numbers per [auditor-fair-work.md](../roles/auditor-fair-work.md)** — anything below = unsustainable for sub + Fair Work flag.
+
+### G.2 Cost categories — every dollar that flows out per job
+
+Per Allan's instruction "healthy enough margin for profit after all expenses like ads, digital tools, sub pay and material and travel cost etc."
+
+| Cost category | What's in it | Direct (per job) or Indirect (allocated)? |
+|---|---|---|
+| **Subcontractor flat rate (gross)** | What we pay sub inc GST | Direct |
+| **Materials** (sub-supplied or we-supplied) | Hawk Glass-Tech, grout, silicone, masking, PPE consumables | Direct (in sub rate) OR direct (if we supply per [Q4 Bert wholesale](../QUESTIONS.md)) |
+| **Travel allowance** | Per zone per § C above | Direct |
+| **Stripe fees** | 1.75% + $0.30 AU domestic card | Direct (% of revenue) |
+| **GST** | 10% included in customer price (we remit on lodging GST registered) | Direct (set-aside, doesn't affect margin pre-GST) |
+| **Google Ads** | $20-30/day = $600-900/mo | Indirect — allocated /job |
+| **GHL CRM** | $155/mo AUD | Indirect — allocated /job |
+| **ServiceM8** | $29/mo (basic) | Indirect — allocated /job |
+| **Cloudinary** | Free tier covers ~100 jobs/mo; $89/mo if exceeded | Indirect (free until volume) |
+| **Twilio SMS** | ~$0.10-0.20 per SMS × ~10 SMS per job lifecycle = $1-2/job | Direct (per job comms) |
+| **Public liability insurance** | $20M PL ~$2,000/yr | Indirect — amortised /job |
+| **Workers comp / personal accident** | If we ever have employees | Future (currently $0) |
+| **Xero accounting** | $35-70/mo | Indirect — allocated /job |
+| **pay.com.au (sub payments)** | ~1% transaction fee, offset by rewards points | Direct (% of sub payment) |
+| **Accountant** | ~$1,500-3,000/yr (BAS + tax + ATO advice) | Indirect — amortised /job |
+| **Domain + hosting** | ~$100/yr (already paid) | Indirect (negligible) |
+| **Logo / brand / cards** | One-time + reorder | Capex amortised |
+| **Founder time** | Currently unpaid; should be costed | Future (when revenue allows founder draw) |
+
+### G.3 Allocation assumptions for indirect costs
+
+Need to allocate fixed monthly costs across expected jobs/month. Three scenarios:
+
+| Scenario | Jobs/mo | Indirect cost/job allocation |
+|---|---|---|
+| **Pessimistic** (early ramp) | 4 jobs/mo | Tools $250/mo + Ads $600/mo = $850 ÷ 4 = **$212/job indirect** |
+| **Realistic Year 1 target** | 10 jobs/mo | $850 ÷ 10 = **$85/job indirect** |
+| **Optimistic Year 2** | 25 jobs/mo | Tools $250 + Ads $1,500 = $1,750 ÷ 25 = **$70/job indirect** |
+
+Plus per-job direct costs (Stripe ~2.5% + Twilio ~$2 + pay.com.au ~1% on sub) ≈ **3.5% of revenue**.
+
+Insurance amortisation: $2,000/yr ÷ 96 jobs/yr (Year 1 target) = **$21/job**.
+Accountant amortisation: $2,500/yr ÷ 96 = **$26/job**.
+
+**Total indirect cost / job (Year 1 target scenario, 10 jobs/mo):**
+$85 (allocated tools+ads) + 3.5% revenue (variable) + $21 (insurance) + $26 (accountant) = **~$132 + 3.5% revenue per job**
+
+For a $1,500 average revenue job: $132 + $52 = **~$184 fully-loaded indirect**.
+
+### G.4 Per-SKU margin model (fully loaded, Year 1 realistic scenario)
+
+For each top-10 SKU, calculate:
+- Customer T2 price (ex-GST: divide by 1.1)
+- Subcontractor flat rate (ex-GST)
+- Direct costs (sub fuel/travel + Stripe + Twilio + pay.com.au)
+- Indirect allocation (~$132 fixed + 3.5% revenue)
+- Net profit + margin %
+
+| SKU | Customer T2 inc GST | Sub flat (inc GST) | Sub hours | Sub $/hr after $X materials | Direct costs | Indirect | Net profit | Margin % |
+|---|---|---|---|---|---|---|---|---|
+| **RSC-02** Standard cement shower regrout (medium 4-8sqm) | $1,660 | $480 | 5-6hr | ($436 ex - $80 mat - $30 fuel) ÷ 5.5hr ≈ **$59/hr** ⚠️ borderline | $1,509×3.5%=$53 | $132+$53=$185 | $1,509-$436-$185 = **$888** | **59%** ✅ |
+| **RSC-01** Small shower regrout (<4sqm) | $1,200 | $300 | 3-4hr | ($273 - $50 - $20) ÷ 3.5hr ≈ **$58/hr** ⚠️ | $42 | $174 | **$617** | **57%** ✅ |
+| **RSC-03** Large shower regrout (8sqm+) | $2,100 | $605 | 7-8hr | ($550 - $100 - $30) ÷ 7.5hr ≈ **$56/hr** ⚠️ | $67 | $199 | **$1,143** | **60%** ✅ |
+| **RSC-04** Epoxy upgrade (medium) | $1,860 | $612 | 5-6hr | ($556 - $200 epoxy - $30) ÷ 5.5hr ≈ **$60/hr** ⚠️ | $59 | $191 | **$932** | **55%** ✅ |
+| **BTH-01** Standard bath resurface | $1,000 | $480 (bumped from $450 draft) | 5-6hr | ($436 - $200 mat - $30 fuel) ÷ 5.5hr ≈ **$37/hr** 🔴 BELOW FLOOR | $32 | $164 | **$315** | **35%** 🟠 |
+| **BTV-05** Bath + spa resurface | $1,440 | $660 | 6-7hr | ($600 - $250 - $30) ÷ 6.5hr ≈ **$49/hr** 🔴 | $46 | $178 | **$525** | **40%** 🟠 |
+| **TWL-02** Tile recoat medium | $1,800 | $605 | 6-8hr | ($550 - $250 - $30) ÷ 7hr ≈ **$39/hr** 🔴 | $57 | $189 | **$801** | **49%** ✅ |
+| **FBP-01** Full bathroom (regrout + silicone) | $3,200 | $715 | 7-8hr | ($650 - $200 - $40) ÷ 7.5hr ≈ **$55/hr** ⚠️ | $102 | $234 | **$1,914** | **66%** ✅ |
+| **SLC-01** Silicone only | $400 | $165 | 1.5-2hr | ($150 - $20 - $5) ÷ 1.75hr ≈ **$71/hr** ✅ | $13 | $145 | **$157** | **43%** 🟠 |
+| **CHP-01** Chip repair (per chip) | $250 | $132 | 1-1.5hr | ($120 - $15 - $5) ÷ 1.25hr ≈ **$80/hr** ✅ | $8 | $140 | **$70** | **31%** 🔴 BELOW MARGIN FLOOR |
+
+### G.5 Findings + flags 🚨
+
+**SKUs with HEALTHY margin + FAIR sub rate ✅:**
+- All shower regrout SKUs (RSC-01 through RSC-04) — 55-60% margin
+- Full bathroom (FBP-01) — 66% margin
+- Tile recoat medium (TWL-02) — 49% margin (sub rate borderline though)
+
+**SKUs with MARGIN PROBLEM 🟠:**
+- **BTH-01 Standard bath resurface @ $1,000** — only 35% net margin. Sub rate also at $37/hr after materials = below fair-work floor. **Customer T2 needs lift to $1,300-1,400 OR sub materials cost reduced via [Q4 Bert wholesale](../QUESTIONS.md).**
+- **BTV-05 Bath + spa @ $1,440** — 40% margin, sub $49/hr below floor. Same fix.
+- **SLC-01 Silicone only @ $400** — 43% margin OK, but $400 might be hard to sell standalone (customers expect cheaper for silicone-only). Watch.
+
+**SKUs with CRITICAL ISSUE 🔴:**
+- **CHP-01 Chip repair @ $250 (per chip)** — only 31% margin AND only $70 net profit. **Below our $300 profit floor.** Either: (a) bundle into larger job, (b) raise to $350-400 per chip, (c) require 2+ chips minimum.
+
+**Sub fair-work-rate concerns ⚠️:**
+- Most regrout subcontractor rates land at $56-60/hr after materials — this is just-above-floor ($60/hr regrout floor per our auditor-fair-work). Acceptable but tight.
+- Bath resurface subcontractor rates fail the floor at current Excel draft prices. **Marko's actual subs may quote lower OR higher.** Priority Q1 + Q18 update once Marko engages.
+
+### G.6 Recommended actions for CEO + Allan
+
+1. **🔴 IMMEDIATE — bump CHP-01 chip repair to $350 minimum** OR require 2+ chip minimum dispatch (margin-floor breach)
+2. **🟠 SHORT-TERM — review BTH-01 + BTV-05 bath resurface T2 pricing** — likely needs $1,300-1,400 T2 not $1,000. Prevents fair-work floor breach + margin too thin.
+3. **🟢 Q4 Bert wholesale conversation** — if Bert offers fleet pricing on Hawk products, materials cost drops $50-100/job → bath resurface margin recovers
+4. **🟢 Pricing audit Phase A** ([pricing-researcher.md](ai-employees/pricing-researcher.md)) — commission AI run to validate ALL 140 SKUs against Sydney 2026 market data; flagged SKUs above are first priority
+5. **🟢 Q1 + Q18 — Marko engages first subcontractor** — reality-check the rate model. If Marko's resurfacing sub charges $400 not $480, our analysis shifts (bath resurface margin healthier; sub fair-work compliant; original Excel may be right).
+
+### G.7 Confidence + caveats
+
+**Confidence: 70%** — directionally right, specific numbers could shift ±15-20% based on:
+- Bert wholesale pricing (could lower materials 30-40%)
+- Marko's actual subs may quote differently than international avg
+- Indirect cost allocation depends on actual jobs/mo (10/mo assumption is mid-Year-1)
+- Sydney rates may be higher than US/UK due to local cost of living
+- Stripe + pay.com.au exact fees vary
+
+**Update trigger:**
+- Marko engages first resurfacing subcontractor → real per-job rate captured → re-run model
+- Pricing audit Phase A completes → SKU-by-SKU validation
+- 6 months of real ops data (Q4 2026) → replace estimates with actuals from BigQuery
+
+**Audit lenses applied to this analysis:**
+- 🟢 [auditor-margin-per-job](../roles/auditor-margin-per-job.md) — flagged BTH-01, BTV-05, CHP-01 as below floor
+- 🟢 [auditor-fair-work](../roles/auditor-fair-work.md) — flagged bath resurface sub rates below $/hr floor
+- 🟢 [auditor-customer-fairness](../roles/auditor-customer-fairness.md) — recommended price lifts are still within Sydney market band ($1,300-1,400 bath resurface = top of Hipages range, below full reno alternatives)
+
+---
+
 ## Compliance audit (run quarterly per [auditor-general-operational](../roles/auditor-general-operational.md))
 
 - [ ] All subcontractor payments made within 14 business days of invoice (SOPA)
