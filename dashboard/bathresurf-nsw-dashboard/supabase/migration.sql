@@ -187,9 +187,16 @@ CREATE TABLE IF NOT EXISTS goals (
   lower_is_better BOOLEAN NOT NULL DEFAULT FALSE,
   deadline DATE,
   notes TEXT,
+  -- Pre-defined target progression. When current_value crosses target_value,
+  -- system auto-advances target_value to the next rung in this array.
+  -- Example: [5000, 10000, 20000, 50000, 100000] for Monthly revenue.
+  targets_ladder JSONB DEFAULT '[]',
   created_by UUID REFERENCES auth.users(id),
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+-- Add column to existing live DBs if they were created before this column existed
+ALTER TABLE goals ADD COLUMN IF NOT EXISTS targets_ladder JSONB DEFAULT '[]';
 
 -- ── Weekly Review Items ─────────────────────────────────────────────────────
 

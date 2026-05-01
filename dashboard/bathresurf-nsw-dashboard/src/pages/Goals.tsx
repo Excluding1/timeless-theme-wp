@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import { Plus, Target, TrendingUp, TrendingDown, Pencil, Trash2, Calendar, PartyPopper, Trophy, X } from 'lucide-react';
+import { Plus, Target, TrendingUp, TrendingDown, Trash2, Calendar, Trophy } from 'lucide-react';
 import { format, parseISO, differenceInDays, subDays, isValid } from 'date-fns';
 import { toast } from 'sonner';
 import { SlideOver } from '../components/SlideOver';
@@ -96,15 +96,6 @@ export function Goals() {
   const [editing, setEditing] = useState<Goal | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Goal | null>(null);
 
-  // Achievement modal state — when Allan clicks "Set next target" on an achieved goal.
-  const [nextTargetGoal, setNextTargetGoal] = useState<Goal | null>(null);
-  const [nextTargetValue, setNextTargetValue] = useState<number>(0);
-  const [savingMilestone, setSavingMilestone] = useState(false);
-
-  // Session-only dismiss: clicking "Stay here" hides the banner until reload, doesn't persist.
-  // The natural flow is "Set next target" — dismiss is a relief valve, not a primary action.
-  const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set());
-
   const { register, handleSubmit, reset, formState: { isSubmitting } } = useForm<GoalForm>();
 
   // Recent Wins strip: last 5 milestones from the past 30 days, sorted newest-first.
@@ -121,58 +112,79 @@ export function Goals() {
       .slice(0, 5);
   }, [milestones]);
 
-  function openNextTargetModal(goal: Goal) {
-    setNextTargetGoal(goal);
-    setNextTargetValue(suggestNextTarget(goal));
+  // Effective ladder for a goal: explicit targets_ladder if set, else generated from the
+  // current target_value walking the MILESTONE_LADDER constant.
+  function getEffectiveLadder(goal: Goal): number[] {
+    if (goal.targets_ladder && goal.targets_ladder.length > 0) {
+      return goal.targets_ladder;
+    }
+    if (goal.lower_is_better) {
+      const lower = [...MILESTONE_LADDER].reverse().filter(v => v <= goal.target_value);
+      return lower.length > 0 ? lower : [goal.target_value];
+    }
+    const higher = MILESTONE_LADDER.filter(v => v >= goal.target_value);
+    return higher.length > 0 ? higher : [goal.target_value];
   }
 
-  async function saveNextTarget() {
-    if (!nextTargetGoal || nextTargetValue <= 0) return;
-    setSavingMilestone(true);
-    try {
-      // Compute how many days this milestone took: from the previous milestone if any,
-      // otherwise from the goal's creation date. Lets the wins history show velocity.
-      const previousMilestonesForGoal = milestones
-        .filter(m => m.goal_id === nextTargetGoal.id)
-        .sort((a, b) => b.achieved_at.localeCompare(a.achieved_at));
-      const startDateRaw = previousMilestonesForGoal.length > 0
-        ? previousMilestonesForGoal[0].achieved_at
-        : nextTargetGoal.created_at;
-      let daysToAchieve: number | undefined;
-      if (startDateRaw) {
-        const startDate = parseISO(startDateRaw);
-        if (isValid(startDate)) {
-          daysToAchieve = Math.max(0, differenceInDays(new Date(), startDate));
-        }
-      }
+  // Find the next ladder rung past the current target.
+  function findNextRung(goal: Goal): number | null {
+    const ladder = getEffectiveLadder(goal);
+    if (goal.lower_is_better) {
+      const next = [...ladder].reverse().find(v => v < goal.target_value);
+      return next ?? null;
+    }
+    return ladder.find(v => v > goal.target_value) ?? null;
+  }
 
-      // Log the milestone (preserves history even if the goal is later deleted).
+  // Auto-advance: fires when current_value crosses target_value during a save.
+  // Logs the milestone, walks the ladder to the next rung, updates the goal.
+  // Silent — the only feedback is a toast + the timeline UI updating.
+  async function handleAutoAdvance(goal: Goal) {
+    if (!isAchieved(goal)) return;
+    const nextTarget = findNextRung(goal);
+    if (nextTarget == null) {
+      // Maxed out — no more rungs above (or below for lower-better). Leave the goal at its
+      // current achieved state. Don't toast — silent. User can extend ladder via DB if needed.
+      return;
+    }
+
+    // Days-to-achieve: from previous milestone if any, else from goal creation.
+    const previousMilestonesForGoal = milestones
+      .filter(m => m.goal_id === goal.id)
+      .sort((a, b) => b.achieved_at.localeCompare(a.achieved_at));
+    const startDateRaw = previousMilestonesForGoal.length > 0
+      ? previousMilestonesForGoal[0].achieved_at
+      : goal.created_at;
+    let daysToAchieve: number | undefined;
+    if (startDateRaw) {
+      const startDate = parseISO(startDateRaw);
+      if (isValid(startDate)) {
+        daysToAchieve = Math.max(0, differenceInDays(new Date(), startDate));
+      }
+    }
+
+    try {
       await createMilestone({
-        goal_id: nextTargetGoal.id,
-        metric_name: nextTargetGoal.metric_name,
-        target_value: nextTargetGoal.target_value,
-        achieved_value: nextTargetGoal.current_value,
-        unit: nextTargetGoal.unit,
-        period: nextTargetGoal.period,
+        goal_id: goal.id,
+        metric_name: goal.metric_name,
+        target_value: goal.target_value,
+        achieved_value: goal.current_value,
+        unit: goal.unit,
+        period: goal.period,
         days_to_achieve: daysToAchieve,
       } as any);
-      // Advance the goal: new target. For periodic goals (monthly/weekly/etc) reset
-      // current_value to 0 — new period starts fresh. For lifetime/all-time goals
-      // KEEP the current value (e.g. lifetime revenue $50k stays $50k after we
-      // raise the next target to $100k — we haven't lost the cumulative total).
-      const shouldReset = nextTargetGoal.period !== 'all_time';
-      await update(nextTargetGoal.id, {
-        target_value: Number(nextTargetValue),
-        current_value: shouldReset ? 0 : nextTargetGoal.current_value,
+      // Periodic goals reset current to 0; all_time goals keep their cumulative total.
+      const shouldReset = goal.period !== 'all_time';
+      await update(goal.id, {
+        target_value: nextTarget,
+        current_value: shouldReset ? 0 : goal.current_value,
       } as any);
       toast.success(
-        `🏆 ${nextTargetGoal.metric_name} milestone saved! New target: ${formatValue(nextTargetValue, nextTargetGoal.unit)}`,
+        `🎉 Hit ${formatValue(goal.target_value, goal.unit)}! Next target: ${formatValue(nextTarget, goal.unit)}`,
       );
-      setNextTargetGoal(null);
     } catch {
-      toast.error('Failed to save milestone');
-    } finally {
-      setSavingMilestone(false);
+      // Silent fail — the original save already succeeded; advance just didn't.
+      console.warn('[Goals] auto-advance failed for goal', goal.id);
     }
   }
 
@@ -208,14 +220,18 @@ export function Goals() {
       deadline: form.deadline || undefined,
     };
     try {
+      let savedGoal: Goal;
       if (editing) {
-        await update(editing.id, payload);
+        savedGoal = (await update(editing.id, payload)) as unknown as Goal;
         toast.success('Goal updated');
       } else {
-        await create(payload);
+        savedGoal = (await create(payload)) as unknown as Goal;
         toast.success('Goal added');
       }
       setSlideOpen(false);
+      // Auto-advance check: if the user just bumped current_value past target_value,
+      // log a milestone and walk to the next ladder rung. No modal, no manual step.
+      await handleAutoAdvance(savedGoal);
     } catch {
       toast.error('Failed to save goal');
     }
@@ -311,58 +327,12 @@ export function Goals() {
             const pct = goal.target_value === 0 ? 0 : Math.min((goal.current_value / goal.target_value) * 100, 150);
             const barPct = Math.min(pct, 100);
 
-            const achieved = isAchieved(goal) && !dismissedIds.has(goal.id);
-
             return (
               <div
                 key={goal.id}
-                className={cn(
-                  'bg-white rounded-xl shadow-sm border p-5 hover:shadow-md transition-shadow cursor-pointer group',
-                  achieved ? 'border-emerald-300 ring-2 ring-emerald-100' : 'border-slate-200',
-                )}
+                className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 hover:shadow-md transition-shadow cursor-pointer group"
                 onClick={() => openEdit(goal)}
               >
-                {/* 🎉 Achievement banner — auto-shown when goal hits target.
-                    Two actions: 'Set next target' (the natural progression) or 'Stay here' (dismiss for session). */}
-                {achieved && (
-                  <div
-                    className="-m-5 mb-4 px-4 py-3 rounded-t-xl bg-gradient-to-r from-emerald-50 to-emerald-100 border-b border-emerald-200"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-semibold text-emerald-700 flex items-center gap-1.5">
-                          <PartyPopper className="w-4 h-4" aria-hidden="true" />
-                          Goal hit!
-                        </div>
-                        <div className="text-xs text-emerald-600 mt-0.5">
-                          You reached {formatValue(goal.target_value, goal.unit)}{goal.lower_is_better && ' or lower'} — what's the next mark?
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setDismissedIds(prev => new Set([...prev, goal.id]))}
-                        className="p-1 text-emerald-500 hover:text-emerald-700 hover:bg-white rounded-md shrink-0"
-                        aria-label="Dismiss celebration"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                    <div className="flex gap-2 mt-2.5">
-                      <button
-                        onClick={() => openNextTargetModal(goal)}
-                        className="px-3 py-1.5 text-xs font-semibold bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
-                      >
-                        Set next target →
-                      </button>
-                      <button
-                        onClick={() => setDismissedIds(prev => new Set([...prev, goal.id]))}
-                        className="px-3 py-1.5 text-xs font-medium text-emerald-700 hover:bg-white/60 rounded-md transition-colors"
-                      >
-                        Stay here
-                      </button>
-                    </div>
-                  </div>
-                )}
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <h3 className="font-semibold text-slate-900">{goal.metric_name}</h3>
@@ -428,6 +398,49 @@ export function Goals() {
                     })()}
                   </div>
                 )}
+
+                {/* Milestone timeline — past ✓ rungs, current ⚡ target, future faded.
+                    Horizontal scroll on overflow so a 10-rung ladder still fits a card. */}
+                {(() => {
+                  const ladder = getEffectiveLadder(goal);
+                  if (ladder.length <= 1) return null;
+                  return (
+                    <div
+                      className="mt-3 pt-2 border-t border-slate-100"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="text-[10px] font-medium text-slate-400 uppercase tracking-wide mb-1.5">
+                        Milestones
+                      </div>
+                      <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide pb-1">
+                        {ladder.map((rung, i) => {
+                          const isPast = goal.lower_is_better
+                            ? rung > goal.target_value
+                            : rung < goal.target_value;
+                          const isCurrent = rung === goal.target_value;
+                          return (
+                            <React.Fragment key={`${goal.id}-rung-${i}`}>
+                              {i > 0 && <span className="text-slate-300 shrink-0 text-xs">›</span>}
+                              <span
+                                className={cn(
+                                  'shrink-0 px-1.5 py-0.5 rounded text-[10px] font-medium border',
+                                  isPast && 'text-emerald-700 bg-emerald-50 border-emerald-200',
+                                  isCurrent && 'text-amber-700 bg-amber-50 border-amber-300 ring-1 ring-amber-300',
+                                  !isPast && !isCurrent && 'text-slate-400 bg-slate-50 border-slate-200',
+                                )}
+                                title={isPast ? 'Achieved' : isCurrent ? 'Current target' : 'Future milestone'}
+                              >
+                                {isPast && '✓ '}
+                                {isCurrent && '⚡ '}
+                                {formatValue(rung, goal.unit)}
+                              </span>
+                            </React.Fragment>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             );
           })}
@@ -502,80 +515,6 @@ export function Goals() {
         title="Delete Goal"
         description={`Are you sure you want to delete "${deleteTarget?.metric_name}"? This action cannot be undone.`}
       />
-
-      {/* Next Target modal — fires when user clicks 'Set next target' on an achieved goal.
-          Pre-fills with a sensible suggestion (×1.5 higher-is-better, ×0.7 lower); user can override. */}
-      {nextTargetGoal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60"
-          onClick={() => !savingMilestone && setNextTargetGoal(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="next-target-title"
-        >
-          <div
-            className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start gap-3 mb-1">
-              <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-                <Trophy className="w-5 h-5 text-amber-600" aria-hidden="true" />
-              </div>
-              <div className="flex-1">
-                <h3 id="next-target-title" className="text-lg font-semibold text-slate-900">
-                  Next target — {nextTargetGoal.metric_name}
-                </h3>
-                <p className="text-sm text-slate-500 mt-1">
-                  You hit {formatValue(nextTargetGoal.target_value, nextTargetGoal.unit)}.
-                  {' '}
-                  {nextTargetGoal.lower_is_better
-                    ? 'Suggested: tighten by 30%.'
-                    : 'Suggested: stretch by 50%.'}
-                  {' '}
-                  Override if you want a different mark.
-                </p>
-              </div>
-            </div>
-            <div className="mt-5">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
-                New target ({nextTargetGoal.unit})
-              </label>
-              <input
-                type="number"
-                step="any"
-                min="0"
-                value={nextTargetValue}
-                onChange={(e) => setNextTargetValue(Number(e.target.value))}
-                className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
-                autoFocus
-              />
-              <p className="text-xs text-slate-400 mt-1">
-                {nextTargetGoal.period === 'all_time'
-                  ? 'Saving raises the bar but keeps your cumulative total — lifetime metrics only ever climb.'
-                  : 'Saving will reset progress to 0 and log this milestone to your wins history.'}
-              </p>
-            </div>
-            <div className="flex justify-end gap-3 pt-5 mt-5 border-t border-slate-200">
-              <button
-                type="button"
-                onClick={() => setNextTargetGoal(null)}
-                disabled={savingMilestone}
-                className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 disabled:opacity-50"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={saveNextTarget}
-                disabled={savingMilestone || nextTargetValue <= 0}
-                className="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 disabled:opacity-50"
-              >
-                {savingMilestone ? 'Saving…' : 'Save & celebrate 🏆'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

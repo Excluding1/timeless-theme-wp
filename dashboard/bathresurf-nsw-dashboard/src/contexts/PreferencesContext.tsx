@@ -66,20 +66,32 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     }
 
     const fetchPreferences = async () => {
+      // maybeSingle returns null (not an error) when no row — safer than .single()
+      // which returns PGRST116. We then upsert defaults so the row always exists.
       const { data, error } = await supabase
         .from('user_preferences')
         .select('preferences')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
+
+      if (error) {
+        console.error('[PreferencesContext] fetch failed:', error);
+      }
 
       if (data && data.preferences) {
         setPreferences({ ...defaultPreferences, ...data.preferences });
-      } else if (error && error.code === 'PGRST116') {
-        // No row exists, insert default
-        await supabase.from('user_preferences').insert({
-          user_id: user.id,
-          preferences: defaultPreferences,
-        });
+      } else {
+        // No row exists yet — upsert with defaults. Upsert (not insert) so
+        // we don't fail if a concurrent process already created the row.
+        const { error: upsertError } = await supabase
+          .from('user_preferences')
+          .upsert(
+            { user_id: user.id, preferences: defaultPreferences },
+            { onConflict: 'user_id' },
+          );
+        if (upsertError) {
+          console.error('[PreferencesContext] initial upsert failed:', upsertError);
+        }
       }
       setLoading(false);
     };
@@ -92,10 +104,18 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     setPreferences(updated);
 
     if (supabase && user) {
-      await supabase
+      // UPSERT instead of UPDATE — handles the case where the user_preferences row
+      // doesn't exist yet (e.g. fetch's no-row INSERT path silently failed earlier).
+      // First write creates the row; subsequent writes overwrite. Robust either way.
+      const { error } = await supabase
         .from('user_preferences')
-        .update({ preferences: updated })
-        .eq('user_id', user.id);
+        .upsert(
+          { user_id: user.id, preferences: updated, updated_at: new Date().toISOString() },
+          { onConflict: 'user_id' },
+        );
+      if (error) {
+        console.error('[PreferencesContext] upsert failed:', error);
+      }
     }
   };
 

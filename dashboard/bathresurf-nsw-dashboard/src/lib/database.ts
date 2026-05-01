@@ -184,6 +184,7 @@ export interface Goal {
   lower_is_better: boolean;
   deadline?: string;
   notes?: string;
+  targets_ladder?: number[];
   created_by?: string;
   created_at?: string;
 }
