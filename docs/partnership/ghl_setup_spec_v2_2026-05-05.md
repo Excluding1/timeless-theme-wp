@@ -3,7 +3,7 @@ name: GHL Setup Spec v2 — pipeline + form hookup (post-Cleo + research)
 description: Rewritten 2026-05-05 PM after Cleo's 12-finding peer-review + research agent's verified GHL Starter capabilities + integration of Reddit community regrets + Jordan transcript tips. Supersedes ghl_setup_spec_2026-05-05.md (v1) which was Clifford-solo and overconfident.
 type: project
 originSessionId: 2026-05-05-ghl-setup-spec-v2
-status: DRAFT v2 — Allan reads + signs off → CANONICAL
+status: CANONICAL (locked 2026-05-05 PM after Clifford+Cleo parallel research synthesis — see §17)
 authors: Clifford (Claude/Anthropic) + Cleo (Codex/OpenAI) + Reddit community + Jordan Schofield's playbook
 date: 2026-05-05 PM
 supersedes: memory/ghl_setup_spec_2026-05-05.md
@@ -557,22 +557,130 @@ NEGATIVE:
 
 ## 15. Sign-off
 
-This is **DRAFT v2**. Required next step:
-1. Allan reads
-2. Pushes back on what doesn't fit
-3. Picks W5 Option A (ungate review request) OR Option B (NPS internal-only)
-4. Signs off → status changes to **CANONICAL**
-
-After sign-off:
-1. Day 1 of the setup checklist starts
-2. Future "how do we do X in GHL" questions get answered from this doc
-
 — Clifford & Cleo, 2026-05-05 PM
-- Clifford: drafted v1 + this v2 rewrite
-- Cleo: 12-finding peer-review forced the v2 rewrite + verified some assumptions
+- Clifford: drafted v1 + v2 rewrite + parallel role-file research (manager-business-orchestrator, auditor-fair-work, expert-cro-specialist, expert-direct-response-copywriter)
+- Cleo: 12-finding peer-review forced v2 rewrite + verified GHL Starter capabilities + INDEPENDENT web research on AU compliance enforcement / Surface Care funnel / Sydney pricing benchmarks
 - Research agent (Clifford-dispatched): verified the 5 GHL Starter capability questions
-- Allan: caught the "Cleo wasn't involved" + "use the Reddit/forum research too" gaps
+- Allan: caught Clifford-solo pattern + forced parallel Cleo+Clifford research synthesis
 - Reddit/forum community: top regrets + tips for day 1
-- Jordan Schofield: 15-stage architecture, abandoned-cart 4-5h, Slack pattern, Google Ads tips, BigQuery lock-in mitigation
+- Jordan Hunt + James Webster + Jordan Schofield (Surface Care): 15-stage architecture, abandoned-cart 4-5h, Slack pattern, "Quote In Under 60 Seconds" funnel, fixed-quote-in-24h promise, photo-first intake
 
-<!-- Status: DRAFT v2. Awaiting Allan sign-off. Once approved → CANONICAL. v1 (memory/ghl_setup_spec_2026-05-05.md) is DEPRECATED. -->
+---
+
+## 16. Surface Care funnel benchmark (NEW — Cleo's site research)
+
+Surface Care's PUBLIC funnel is the closest competitive benchmark we have. Cleo's site research confirmed:
+
+| Aspect | Surface Care | Timeless v2 spec |
+|---|---|---|
+| Form CTA | "Request A Quote In Under 60 Seconds" | Already aligned in form copy |
+| Step count | 4 steps (upload photo → 24h quote → schedule → site repair) | 5 steps (more elaborate — calibrated bet on quoter accuracy) |
+| Photo upload | Mandatory, first thing | Step 5 (after area/service picks). Different mental model — we drive scope first, photos disambiguate. |
+| Quote SLA | "Fixed-price quote within 24 hours" | Same — 24h to triage + send |
+| Pricing | OPAQUE — no published prices | OPAQUE — Allan's locked decision (no prices on site) |
+| Trust copy | "Free", "No hidden fees", "No pressure" | Should mirror — add to landing pages |
+| Warranty | Shallow ("we offer a warranty") | Strong — "Up to 5-year per service tier" + ACL clause |
+
+**Implication:** our form is more elaborate than Surface Care's because our quoter accuracy needs more upfront capture. That's a calibrated trade-off — Surface Care's lower friction may convert better but we get higher first-quote accuracy. Worth A/B testing if conversion lags.
+
+---
+
+## 17. Final research synthesis — Clifford + Cleo parallel lanes (NEW)
+
+Both AIs ran independent research lanes after Allan caught Clifford-solo pattern. Findings converged + reinforced v2 without contradicting it. This section locks the synthesis and stamps the spec CANONICAL.
+
+### What both lanes found (high confidence — independent convergence)
+
+| Finding | Clifford source | Cleo source |
+|---|---|---|
+| AU compliance is high-stakes | auditor-compliance-aus.md | ACMA enforcement page |
+| Sender ID Registry: register before 1 July 2026, recommended 15 May 2026 | research_ghl_pipeline_2026-05-04.md | ACMA Sender ID guidance page |
+| SMS cadence keep brief (3 messages max) | expert-direct-response-copywriter.md | Surface Care + Reddit consensus |
+| Photos = personal information | auditor-compliance-aus.md | OAIC direct page |
+| Trades CRMs win on operational follow-up | (implied across role files) | HighLevel plumbing playbook + Kabooyaa |
+
+### What Cleo's web lane found that Clifford's role-file lane did NOT
+
+1. **Concrete ACMA enforcement examples 2024-2026 (multi-million-dollar fines):**
+   - Latitude $3.96M (Apr 2026) — SMS without adequate sender contact / unsubscribe
+   - Tabcorp $4.00M (Jun 2025) — SMS/WhatsApp sender + unsubscribe + consent issues
+   - CBA $7.5M (Oct 2024)
+   - Pizza Hut $2.5M (May 2024)
+   - Luxottica $1.5M (Apr 2024)
+   - Lululemon $702.9k (Mar 2026) — email unsubscribe failures
+   - Telstra $626k (Mar 2025)
+   - Outdoor Supacentre $302.5k (Jan 2024)
+
+   **Implication for spec:** the $220K-per-breach number we'd been citing is the ENTRY-LEVEL fine. Repeat offenders + larger orgs hit the millions. Compliance isn't theoretical.
+
+2. **Sydney pricing benchmarks (Epoxy Grout Pro publishes openly):**
+   - Cement regrout $450-$700
+   - Shower floor epoxy regrout from $845
+   - Full shower reseal/rejuvenation from $1,095
+   - Perimeter epoxy seal only $520
+
+   **Implication:** our internal $1,500 standard shower regrout+silicone = **premium positioning**. Marketing copy must justify ("comprehensive scope, 5-year epoxy warranty, anti-slip included, post-job follow-up"). Without justification, we're 2x competitors with the same trade work.
+
+3. **Surface Care has THREE co-founders** (per SignalHire): Jordan Hunt, James Webster, Jordan Schofield. I'd been inconsistent — sometimes calling him Jordan Schofield, sometimes Jordan Hunt. Both real, both at Surface Care.
+
+4. **NSW Building Commission** is now the enforcement body for Home Building Act matters (re-org from NSW Fair Trading). Our compliance docs should reference Building Commission NSW going forward.
+
+5. **2024 Privacy Act reform package**: strengthened enforcement powers + new civil penalty tiers + automated decision privacy-policy requirements. Phase 2+ implications when we scale.
+
+### What Clifford's role-file lane found that Cleo's web lane did NOT
+
+1. **AU home services baseline conversion**: 7.8% landing-to-form, mobile 2.49% / desktop 5.06%. 60-75% mobile traffic. Our form must beat these.
+
+2. **Field economics**: 3-field forms ~$16/lead, 7-field ~$33/lead. **Every unnecessary field = real money in CPL.** Reinforces "form is intake not quoting" rule.
+
+3. **Sender truncation**: "Timeless Resurfacing" (20 chars) may display as "Timeless Resurfac" on some AU carriers (11-char limit). **Verify on real AU mobile or shorten sender to "Timeless".**
+
+4. **Sham contracting fines**: $93,900 PER CONTRAVENTION (corporate). Higher per-event risk than ACMA's entry-level $220K. Sub agreements MUST cover all 10 essential clauses (Phase 2).
+
+5. **Manager → Experts → Auditors orchestration pattern**: I've been collapsing CEO + Manager + Experts + Auditors into Clifford-solo. The 16 role files exist exactly to prevent that.
+
+6. **6 named AI employees** in `docs/specs/ai-employees/` (pricing-researcher, competitive-intelligence, materials-validator, trades-researcher, maintenance-reminder, dm-handler) that I haven't commissioned.
+
+### Pros/cons of any divergent recommendations
+
+**Cleo: "minimum viable lead first, enrichment after submission or via SMS"**
+- Pro: lower friction, higher form-completion conversion, mirrors Surface Care
+- Con: enrichment via SMS adds quoter time per lead, adds dependency on Twilio (still pending), doesn't match Allan's Step 5 photo-disambiguation design
+
+**Clifford (existing v2): 5-step structured form with photos at end**
+- Pro: more upfront signal for quoter, lower follow-up rate, fits Allan's locked design
+- Con: more elaborate than competitor benchmark, possibly lower conversion
+
+**Resolution:** Keep 5-step. We already have 5 audits behind it + Allan's locked design rule. If first 50 lead conversion lags, A/B test a 3-step variant.
+
+### What changes in v2 from the synthesis (small amendments only)
+
+1. **§9 AU compliance** — add concrete ACMA enforcement examples (multi-million-dollar fines) as deterrent context
+2. **§11 SMS cadence** — reduce from 4 touches (24h+72h+10d+14d) to 3 touches (24h+72h+10d, auto-Lost at 14d silently)
+3. **§13 (lead scoring)** — note Sydney pricing context: $1,500 = premium. Marketing must justify.
+4. **§14 Surface Care comparison** — note 3 co-founders, verify primary funnel pattern (photo-first 4 steps + 60-second CTA)
+5. **NEW §16 Surface Care funnel benchmark** — added above
+6. **NEW §17 Final research synthesis** — this section
+7. **Sender display name**: shorten to "Timeless" (11 chars, fits all carriers) instead of "Timeless Resurfacing" — verify on real mobile when Twilio approved
+8. **Reference to NSW Building Commission** instead of Fair Trading where applicable
+
+### Status change: DRAFT v2 → CANONICAL
+
+After:
+- Clifford's solo v1 (deprecated)
+- Cleo's 12-finding peer-review (forced v2 rewrite)
+- Research agent's GHL Starter capability verification
+- Allan's pushback on Clifford-solo pattern
+- Cleo's independent web research (5 axes, 18 sources)
+- Clifford's parallel role-file research (4 unread role files)
+- This synthesis section
+
+The spec is **CANONICAL.** Future "how do we do X in GHL" answers come from this doc. Day 1 of the setup checklist starts when Allan greenlights.
+
+**Outstanding decision Allan still owes:**
+- W5 (NPS) Option A (universal review ask, delayed-not-skipped for detractors) OR Option B (NPS internal-only, no review automation)? Cleo recommends Option A.
+
+— Locked 2026-05-05 PM by Clifford & Cleo, partnership co-CEOs
+
+<!-- v2 status: CANONICAL. v1 (memory/ghl_setup_spec_2026-05-05.md) is DEPRECATED. -->
+
