@@ -166,6 +166,24 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
 // session-transfer backend is real (see modal block + planning notes for the wiring needed).
 const ENABLE_MOBILE_HANDOFF = false;
 
+// Compliance audit trail: pin the version of the consent line the customer sees on the submit button.
+// If you edit the consent text in the Step 5 submit caption, BUMP THIS VERSION. The webhook payload
+// includes this so we can prove which version of the consent text the customer agreed to at submit.
+// Inferred-consent path under Spam Act 2003 — the form is a quote REQUEST, not marketing.
+const CONSENT_COPY_VERSION = "v1.0-2026-05-05";
+
+// GA4 conversion event helper. Defensive: when window.gtag isn't loaded (e.g. local dev,
+// page without GA4 snippet), this no-ops with a console.debug instead of throwing. WordPress
+// landing pages load GA4 globally so window.gtag will exist in production.
+const fireGA4Event = (eventName, params = {}) => {
+  if (typeof window === "undefined") return;
+  if (typeof window.gtag !== "function") {
+    if (typeof console !== "undefined") console.debug(`[GA4 stub] ${eventName}`, params);
+    return;
+  }
+  try { window.gtag("event", eventName, params); } catch { /* swallow */ }
+};
+
 const SVCS = {
   shower: {
     question: "What needs doing in your shower?",
@@ -603,7 +621,8 @@ export default function QuoteForm() {
   const [notes, setNotes] = useState("");
   const [prevResurfaced, setPrevResurfaced] = useState(null);
   const [hasVentilation, setHasVentilation] = useState(null);
-  const [consent, setConsent] = useState(false);
+  // Marketing opt-in checkbox dropped Allan 2026-05-05 — form is a quote request, not marketing.
+  // If we ever add newsletter / promotional outreach, re-add a checkbox + state then.
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   // Webhook-failure error state (set when all 3 webhook attempts fail; surfaces a recovery UI
@@ -868,8 +887,11 @@ export default function QuoteForm() {
     const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, ...tracking } }),
+      body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, consent_copy_version: CONSENT_COPY_VERSION, ...tracking } }),
     }).catch(() => {});
+    // GA4 conversion event for abandoned-quote / partial-fire path. Used for funnel analysis +
+    // Google Ads optimisation (recover partial leads via the abandoned-quote SMS workflow W2).
+    fireGA4Event("quote_partial", { step_reached: step, customer_type: cust || "unknown" });
   };
 
   /* ─── WAITLIST ─── */
@@ -997,9 +1019,9 @@ export default function QuoteForm() {
         // Conditional
         previously_resurfaced: prevResurfaced || "not_asked",
         ventilation: hasVentilation || "not_asked",
-        // Notes & consent
+        // Notes & consent (inferred-consent only; pinned version of consent copy for audit trail)
         customer_notes: notes,
-        marketing_consent: consent ? "yes" : "no",
+        consent_copy_version: CONSENT_COPY_VERSION,
         // Photos
         photo_count_total: String(totalPhotoCount()),
         photo_count_by_area: JSON.stringify(Object.fromEntries(Object.entries(perAreaPhotos).map(([k, v]) => [k, v?.length || 0]))),
@@ -1053,6 +1075,15 @@ export default function QuoteForm() {
       return;
     }
     try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    // GA4 conversion event — fires on a successful webhook submit. This is THE conversion
+    // signal for Google Ads attribution. Includes minimal context (no PII).
+    fireGA4Event("quote_submit", {
+      areas_count: selectedAreas.length,
+      photo_count: Object.values(perAreaPhotos).reduce((sum, arr) => sum + (arr || []).filter(Boolean).length, 0),
+      customer_type: cust || "unknown",
+      full_bathroom: fullBathroomMode ? "yes" : "no",
+      bathroom_index: bathroomIndex,
+    });
     setSubmitting(false);
     setDone(true);
   };
@@ -1077,7 +1108,7 @@ export default function QuoteForm() {
     setPrevResurfaced(null);
     setHasVentilation(null);
     setNotes("");
-    setConsent(false);
+    // setConsent removed — marketing opt-in checkbox dropped 2026-05-05
     setBathroomIndex(prev => prev + 1);
     partialSent.current = false;
     setResetCount(c => c + 1);
@@ -1838,10 +1869,9 @@ export default function QuoteForm() {
           <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="e.g. Built in the 1970s, only available Wednesdays, need a specific colour, have a deadline…" rows={2} style={{ width: "100%", padding: 12, borderRadius: 10, border: `1.5px solid ${C.brd}`, fontSize: 14, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box", lineHeight: 1.5 }} />
         </div>
 
-        <label style={{ display: "flex", alignItems: "flex-start", gap: 8, marginTop: 14, cursor: "pointer" }}>
-          <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} style={{ width: 17, height: 17, marginTop: 2, accentColor: C.pri, flexShrink: 0 }} />
-          <span style={{ fontSize: 12, color: C.sec, lineHeight: 1.5 }}>Optional: send me bathroom maintenance tips &amp; special offers (you can unsubscribe anytime)</span>
-        </label>
+        {/* Marketing opt-in checkbox dropped 2026-05-05 (Allan): the form is a quote request, not
+            marketing. The submit-button caption below carries the inferred-consent line under
+            Spam Act 2003. If we add newsletter/promotional outreach later, add a checkbox here. */}
 
         {/* Honeypot */}
         <input
