@@ -166,12 +166,6 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
 // session-transfer backend is real (see modal block + planning notes for the wiring needed).
 const ENABLE_MOBILE_HANDOFF = false;
 
-// Compliance audit trail: pin the version of the consent line the customer sees on the submit button.
-// If you edit the consent text in the Step 5 submit caption, BUMP THIS VERSION. The webhook payload
-// includes this so we can prove which version of the consent text the customer agreed to at submit.
-// Inferred-consent path under Spam Act 2003 — the form is a quote REQUEST, not marketing.
-const CONSENT_COPY_VERSION = "v1.0-2026-05-05";
-
 // GA4 conversion event helper. Defensive: when window.gtag isn't loaded (e.g. local dev,
 // page without GA4 snippet), this no-ops with a console.debug instead of throwing. WordPress
 // landing pages load GA4 globally so window.gtag will exist in production.
@@ -887,7 +881,7 @@ export default function QuoteForm() {
     const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, consent_copy_version: CONSENT_COPY_VERSION, ...tracking } }),
+      body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, ...tracking } }),
     }).catch(() => {});
     // GA4 conversion event for abandoned-quote / partial-fire path. Used for funnel analysis +
     // Google Ads optimisation (recover partial leads via the abandoned-quote SMS workflow W2).
@@ -1019,9 +1013,8 @@ export default function QuoteForm() {
         // Conditional
         previously_resurfaced: prevResurfaced || "not_asked",
         ventilation: hasVentilation || "not_asked",
-        // Notes & consent (inferred-consent only; pinned version of consent copy for audit trail)
+        // Notes (consent is inferred from the act of submission — Allan call 2026-05-05)
         customer_notes: notes,
-        consent_copy_version: CONSENT_COPY_VERSION,
         // Photos
         photo_count_total: String(totalPhotoCount()),
         photo_count_by_area: JSON.stringify(Object.fromEntries(Object.entries(perAreaPhotos).map(([k, v]) => [k, v?.length || 0]))),
