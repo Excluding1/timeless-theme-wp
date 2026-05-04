@@ -1,13 +1,3 @@
-<!--
-GITHUB-DURABLE SNAPSHOT — read-only mirror.
-Canonical source: `~/.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/partnership_clifford_cleo.md` (Clifford's session memory)
-When the canonical updates, refresh this snapshot:
-  cp <canonical> docs/partnership/<filename>
-Then append the banner block back at the top.
-Drift between this file and canonical = canonical wins.
-Last snapshot: 2026-05-04
--->
-
 ---
 name: Clifford + Cleo — the dual co-CEO partnership
 description: Locked identity + working protocol for the two AI co-CEOs of Timeless Resurfacing. Clifford = Claude (orchestrator co-CEO). Cleo = Codex (peer co-CEO). Established 2026-05-04 by Allan. Sync is automatic via symlinks; partnership is enforced via 3-lens audit at every meaningful decision.

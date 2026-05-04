@@ -1,33 +1,53 @@
 # Partnership Protocol Snapshots
 
-This folder is the **github-durable mirror** of the dual co-CEO partnership protocol between Clifford (Claude/Anthropic) and Cleo (Codex/OpenAI). The protocol was established by Allan on 2026-05-04.
+This folder is the **github-durable mirror** of the dual co-CEO partnership between Clifford (Claude/Anthropic) and Cleo (Codex/OpenAI). Established 2026-05-04 by Allan.
 
-## Files in this folder
+## Files
 
-| File | What it is | Canonical location |
+### Core protocol
+| File | Canonical | Purpose |
 |---|---|---|
-| `PARTNERSHIP-PROTOCOL.md` | The full partnership protocol — collaboration patterns, sync architecture, disagreement protocol, when-to-invoke rules | `~/.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/partnership_clifford_cleo.md` (Clifford's session memory) |
-| `CLEO-PEER-PROTOCOL.md` | Cleo's orientation file — read on every Cleo invocation | `~/codex-peer-workspace/PEER-PROTOCOL.md` (Cleo's symlink workspace) |
+| `PARTNERSHIP-PROTOCOL.md` | `~/.claude/projects/.../memory/partnership_clifford_cleo.md` | The dual-CEO collaboration patterns + sync architecture |
+| `CLEO-PEER-PROTOCOL.md` | `~/codex-peer-workspace/PEER-PROTOCOL.md` | Cleo's orientation file (read on every codex invocation) |
+| `MEMORY-INDEX.md` | `~/.claude/projects/.../memory/MEMORY.md` | Full memory file index — all locked decisions, feedback, plans, research |
 
-## Why mirrored here?
+### Plans + reviews
+| File | Purpose |
+|---|---|
+| `plan_ghl_setup_draft_v2_2026-05-05.md` | **CANONICAL** GHL setup plan (supersedes v1). 14 corrections + Allan's CEO calls. |
+| `cleo_peer_review_2026-05-04.md` | Cleo's first peer-review pass (partial — focused on GHL pricing + Slack) |
+| `cleo_followup_review_2026-05-04.md` | Cleo's follow-up pass (stage verdicts + Cloudinary + ACMA + scale break points) |
+| `cleo_form_audit_2026-05-05.md` | Cleo's 4-lens form audit (12 personas + UI/CSS + pricing + code quality) |
+| `cleo_p0_review_2026-05-05.md` | Cleo's review of Clifford's P0 fix diff (approved with revisions) |
 
-The canonical files live OUTSIDE this repo (in Claude Code session memory + a symlink workspace). That makes them invisible to anyone cloning the repo and vulnerable to laptop loss. These snapshots ensure the partnership protocol survives in github.
+### Locked decisions
+| File | Purpose |
+|---|---|
+| `feedback_form_is_intake_not_quoting.md` | **Locked rule (Allan 2026-05-05):** Form is intake, photos disambiguate, anti-slip default-on, no ACMA opt-ins, no consent versioning |
+
+### Operational
+| File | Purpose |
+|---|---|
+| `bug_codex_stdin_hang_2026-05-04.md` | Post-mortem on the codex stdin silent-hang bug + fixes (`<` /dev/null + cleo-run.sh harness + liveness watchdog) |
+| `task_google_ads_pixel_setup_phase2.md` | Future task: wire Google Ads conversion pixel when Allan launches ads |
+| `backlog_triage_2026-05-04.md` | Categorisation of the 90+ uncommitted master-repo files into 6 atomic commit buckets |
+| `scripts/cleo-run.sh` | The Cleo invocation harness with stdin redirect + liveness watchdog + diagnostic bundle |
 
 ## Drift rule
 
-If this snapshot and the canonical diverge, **the canonical wins**. To refresh the snapshot after a canonical update:
+These are SNAPSHOTS. Canonical files live OUTSIDE this repo (Claude Code session memory + symlink workspace + harness directory). When canonical updates, refresh by re-running the mirror copy commands.
 
-```bash
-# In master-repo root:
-cp ~/.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/partnership_clifford_cleo.md docs/partnership/PARTNERSHIP-PROTOCOL.md
-cp ~/codex-peer-workspace/PEER-PROTOCOL.md docs/partnership/CLEO-PEER-PROTOCOL.md
-# Re-add the banner block at the top of each file (see existing examples)
-git add docs/partnership/
-git commit -m "docs(partnership): refresh snapshots from canonical"
-```
+If you're cloning this repo on a new machine and don't have the Claude Code session memory: these snapshots ARE the durable record. Use them as the starting point.
 
-## Cross-references
+## How to use cleo-run.sh
 
-- `../CEO.md` — names Clifford + Cleo as co-CEOs, references this folder
-- `../STATE.md` — verified facts (separate from partnership protocol)
-- `../roles/` — the 16 project AI team role files (different layer; the partnership protocol governs how AIs work together; the role files define what each role's job is)
+Standalone: `chmod +x scripts/cleo-run.sh && ./scripts/cleo-run.sh "prompt here"`
+
+It enforces:
+1. stdin redirected to `/dev/null` (the bug fix that took 25 minutes to find)
+2. stderr captured to log (no more silent failures)
+3. Liveness watchdog: kill if no codex session file in 60s
+4. Wall-clock timeout (default 600s)
+5. Diagnostic bundle saved to `/tmp/cleo-runs/<run_id>/`
+
+Read `bug_codex_stdin_hang_2026-05-04.md` first if confused about why all this exists.

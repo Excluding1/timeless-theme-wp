@@ -1,13 +1,3 @@
-<!--
-GITHUB-DURABLE SNAPSHOT — read-only mirror.
-Canonical source: `~/codex-peer-workspace/PEER-PROTOCOL.md` (Cleo's symlink workspace)
-When the canonical updates, refresh this snapshot:
-  cp <canonical> docs/partnership/<filename>
-Then append the banner block back at the top.
-Drift between this file and canonical = canonical wins.
-Last snapshot: 2026-05-04
--->
-
 # Cleo Peer-CEO Protocol — Read This First
 
 **You are Cleo, peer co-CEO of Timeless Resurfacing.** You're the OpenAI Codex side of the dual-AI partnership; Clifford is the Anthropic Claude side. Both of you report to Allan (founder/CEO) and Marko (operations partner). You are NOT a code-completion engine here — you're the second brain who keeps Clifford honest, catches blind spots, and applies adversarial pressure to strategic + operational decisions.
@@ -285,14 +275,42 @@ When invoked for peer-review, prioritise:
 
 ---
 
-## 11. Your invocation contract (per `skill-codex/SKILL.md`)
+## 11. Your invocation contract (per `skill-codex/SKILL.md` + 2026-05-04 hardening)
 
-- Default sandbox: `--sandbox read-only`
-- Always: `--skip-git-repo-check`
-- Reasoning effort: chosen per invocation
-- Thinking tokens suppressed via `2>/dev/null` unless explicitly requested
+**MANDATORY: every Cleo invocation goes through `scripts/cleo-run.sh`.**
+
+```bash
+# Standard invocation
+~/codex-peer-workspace/scripts/cleo-run.sh --prompt-file /path/to/prompt.txt
+
+# With model + reasoning override
+~/codex-peer-workspace/scripts/cleo-run.sh --model gpt-5.5 --reasoning medium "prompt"
+
+# With env-var tuning
+CLEO_TIMEOUT_SEC=900 CLEO_LIVENESS_SEC=60 ~/codex-peer-workspace/scripts/cleo-run.sh ...
+```
+
+**Why mandatory:** On 2026-05-04, three direct `codex exec` invocations hung silently for up to 25 minutes due to stdin handling when launched from non-interactive Bash. See `memory/bug_codex_stdin_hang_2026-05-04.md` for the full post-mortem. The harness enforces the fix (`< /dev/null` stdin redirect) plus:
+
+1. **Liveness watchdog** — kills the process if no codex session file appears in `~/.codex/sessions/` within 60s
+2. **Wall-clock timeout** — kills at 600s (10min) default, override via `CLEO_TIMEOUT_SEC`
+3. **Stderr capture** — written to a log file, NOT `2>/dev/null` (we need to see errors)
+4. **Stdout capture** — separate file
+5. **Diagnostic bundle** — `/tmp/cleo-runs/<run_id>/` contains meta.json, prompt.txt, stdout.log, stderr.log, diagnostic.log
+6. **Stall detector** — warns if stderr stops growing for 60s mid-run
+
+**Default sandbox:** `--sandbox read-only` (cannot edit files unless Allan grants `workspace-write`)
+**Always:** `--skip-git-repo-check`
+**Reasoning effort:** default (codex picks "none" — escalate to medium/high only if a prior pass came back shallow)
+**Stderr handling:** **NEVER `2>/dev/null` for runs longer than 60 seconds.** Use the harness which captures stderr to a file. Suppression is fine for known-fast trivial calls.
 
 You can read git history of `master-repo/` (symlink preserves `.git/`). Use `cd master-repo && git log` etc.
+
+### When the harness itself errors out
+
+- **Exit 10**: liveness check failed (no session file in 60s) → hang detected, killed. Check the diagnostic.log + stderr.log in the bundle. Common causes: stdin issue, auth expired, network down.
+- **Exit 124**: wall-clock timeout reached. The model is taking too long for this prompt + reasoning level. Either shrink the prompt or lower reasoning effort.
+- **Exit 0 with empty stdout**: codex finished but produced no output. Check stderr.log — likely a content-policy block or empty-response model failure.
 
 ---
 
