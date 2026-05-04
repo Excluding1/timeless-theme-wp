@@ -1,3 +1,5 @@
+<!-- ⚠️ DEPRECATED — superseded by ghl_setup_spec_v2_2026-05-05.md after Cleo's 12-finding peer-review. v1 was Clifford-solo + overconfident. v2 fixes margin gates, idempotency, review gating, dependency ordering, etc. Kept here for historical reference only. -->
+
 ---
 name: GHL Setup Spec — 15-stage pipeline + form hookup (DRAFT for Allan)
 description: The complete executable setup for connecting the React quote form into GoHighLevel like Surface Care does. Stage-by-stage detail, end-to-end data flow, exact GHL admin steps. Status DRAFT — Allan reviews and signs off, then we lock as canonical.
