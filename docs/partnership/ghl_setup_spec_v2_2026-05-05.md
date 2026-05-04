@@ -3,7 +3,7 @@ name: GHL Setup Spec v2 — pipeline + form hookup (post-Cleo + research)
 description: Rewritten 2026-05-05 PM after Cleo's 12-finding peer-review + research agent's verified GHL Starter capabilities + integration of Reddit community regrets + Jordan transcript tips. Supersedes ghl_setup_spec_2026-05-05.md (v1) which was Clifford-solo and overconfident.
 type: project
 originSessionId: 2026-05-05-ghl-setup-spec-v2
-status: CANONICAL (locked 2026-05-05 PM after Clifford+Cleo parallel research synthesis — see §17)
+status: CANONICAL v2.1 — locked 2026-05-05 PM after Cleo's APPROVED-WITH-AMENDMENTS final discussion pass
 authors: Clifford (Claude/Anthropic) + Cleo (Codex/OpenAI) + Reddit community + Jordan Schofield's playbook
 date: 2026-05-05 PM
 supersedes: memory/ghl_setup_spec_2026-05-05.md
@@ -575,7 +575,7 @@ Surface Care's PUBLIC funnel is the closest competitive benchmark we have. Cleo'
 |---|---|---|
 | Form CTA | "Request A Quote In Under 60 Seconds" | Already aligned in form copy |
 | Step count | 4 steps (upload photo → 24h quote → schedule → site repair) | 5 steps (more elaborate — calibrated bet on quoter accuracy) |
-| Photo upload | Mandatory, first thing | Step 5 (after area/service picks). Different mental model — we drive scope first, photos disambiguate. |
+| Photo upload | Photo-first public positioning (specific form behavior unverified) | Step 5 (after area/service picks). Different mental model — we drive scope first, photos disambiguate. |
 | Quote SLA | "Fixed-price quote within 24 hours" | Same — 24h to triage + send |
 | Pricing | OPAQUE — no published prices | OPAQUE — Allan's locked decision (no prices on site) |
 | Trust copy | "Free", "No hidden fees", "No pressure" | Should mirror — add to landing pages |
@@ -621,7 +621,7 @@ Both AIs ran independent research lanes after Allan caught Clifford-solo pattern
 
    **Implication:** our internal $1,500 standard shower regrout+silicone = **premium positioning**. Marketing copy must justify ("comprehensive scope, 5-year epoxy warranty, anti-slip included, post-job follow-up"). Without justification, we're 2x competitors with the same trade work.
 
-3. **Surface Care has THREE co-founders** (per SignalHire): Jordan Hunt, James Webster, Jordan Schofield. I'd been inconsistent — sometimes calling him Jordan Schofield, sometimes Jordan Hunt. Both real, both at Surface Care.
+3. **Surface Care has THREE co-founders per SignalHire (third-party, not officially confirmed):** Jordan Hunt, James Webster, Jordan Schofield. I'd been inconsistent — sometimes calling him Jordan Schofield, sometimes Jordan Hunt. Treat as caveated until verified via direct Surface Care source.
 
 4. **NSW Building Commission** is now the enforcement body for Home Building Act matters (re-org from NSW Fair Trading). Our compliance docs should reference Building Commission NSW going forward.
 
@@ -677,10 +677,66 @@ After:
 
 The spec is **CANONICAL.** Future "how do we do X in GHL" answers come from this doc. Day 1 of the setup checklist starts when Allan greenlights.
 
-**Outstanding decision Allan still owes:**
-- W5 (NPS) Option A (universal review ask, delayed-not-skipped for detractors) OR Option B (NPS internal-only, no review automation)? Cleo recommends Option A.
+**Decision locked: W5 NPS = Option A with universal-review-ask hard control.** Cleo's final-pass recommendation (2026-05-05 PM). Specifically:
+- All completed customers receive NPS SMS at 4h post-Stage-13
+- All completed customers receive Google review request — including detractors AFTER their issue is objectively resolved or after a defined resolution window (e.g. 7 days post-resolution)
+- Send is universal + delay-based; **NEVER conditional on improving score** (that would be review-gating per ACCC)
+- This satisfies the auditor-compliance-aus.md "review request goes to all customers, not just expected promoters" rule
 
 — Locked 2026-05-05 PM by Clifford & Cleo, partnership co-CEOs
 
-<!-- v2 status: CANONICAL. v1 (memory/ghl_setup_spec_2026-05-05.md) is DEPRECATED. -->
+---
+
+## 18. Setup operating model (NEW — Cleo amendment)
+
+This spec assumes CEO → Manager → Experts → Auditors orchestration per `master-repo/docs/roles/manager-business-orchestrator.md`. Clifford has been collapsing those layers into solo work; explicit assignments:
+
+**During GHL admin setup execution:**
+
+| Role | Owner | What they do |
+|---|---|---|
+| **CEO** | Allan (human) | Greenlights phases, decides W5 option (already locked Option A), accepts/rejects Manager-flagged conflicts, owns spend decisions |
+| **Manager** | Clifford | Decompose CEO directive ("set up GHL") → match each deliverable to expert + auditor lens → sequence work → consolidate findings → CEO brief |
+| **Experts (channelled by Clifford OR dispatched as Cleo)** | per task | expert-ghl-operator (workflows), expert-direct-response-copywriter (templates), expert-cro-specialist (form changes), expert-pricing-trade (margin gate config) |
+| **Auditors (channelled OR Cleo)** | per task | auditor-webhook-integrity (W1 idempotency, Stripe wiring), auditor-compliance-aus (every SMS template, NPS workflow, Privacy Policy), auditor-margin-per-job (Stage 5 pre-condition logic), auditor-mobile-abandonment (form changes), auditor-fair-work (Phase 2 sub onboarding) |
+| **AI employees (commissioned)** | Phase 1: 2 only | `Competitive Intelligence` (weekly Sydney competitor scan — see if pricing benchmarks shift), `Pricing Researcher` (quarterly margin audit). Defer the other 4 specs until Phase 2. |
+
+**Quality gate:** No deliverable reaches Allan's desk without 3-lens audit per CEO Rule 2. Manager (Clifford) is responsible for ensuring this happens.
+
+---
+
+## 19. Phase 2 Fair Work gate (NEW — Cleo amendment)
+
+`auditor-fair-work.md` documents sham-contracting fines up to $93,900 PER CONTRAVENTION. Phase 2 (sub onboarding) cannot start automation in GHL until Fair Work audit passes.
+
+**Specifically — no automated sub dispatch / tier logic in GHL until ALL of these are true:**
+
+1. Sprintlaw sub-agreement template signed by every sub, with 10 essential clauses:
+   - Independent contractor classification (not employee)
+   - Sub's own ABN listed
+   - PL insurance ≥$5M required, annual cert provided
+   - Per-job payment (not per-hour)
+   - Sub can refuse jobs without penalty
+   - Sub bears rectification cost for substandard work
+   - Sub uses own tools and materials
+   - No exclusivity clause
+   - No fixed roster imposed
+   - Termination is mutual (14 days notice, no cause)
+
+2. Operational reality matches:
+   - Sub actually has multiple clients (>1, even if Timeless is biggest)
+   - Sub uses own tools in practice
+   - Sub sets own hours within customer's window
+   - Sub has declined at least one job without consequence (record evidence)
+
+3. Dispatch automation respects independence:
+   - Tier system DOESN'T punish subs for refusing jobs
+   - Same-day jobs offered, not assigned
+   - Communications use offer language, not directive
+
+4. PL insurance + ABN checks scheduled (annual cert refresh, quarterly ABN active check)
+
+**Until these pass:** sub coordination is manual via Marko (no GHL workflow). Stage 9 stays a "ready to schedule" bucket. The Phase 2 hookup is gated on Fair Work clearance.
+
+<!-- v2.1 status: CANONICAL. Locked 2026-05-05 PM. v1 + earlier v2 (DRAFT) snapshots remain in memory for history. -->
 
