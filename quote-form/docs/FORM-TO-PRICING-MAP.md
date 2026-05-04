@@ -1,176 +1,254 @@
-# Quote Form → Master Pricing SKU Map
+# Quote Form v10 → Master Pricing SKU Map
 
-**Source:** `MASTER_PRICING_UPDATED 111.xlsx` — sheet "All Services & Pricing" (135 SKUs)
-**Form:** `src/QuoteForm.jsx` v9.2 — 27 customer-facing service options + 9 multi-mode bundles
+**Source:** `data/pricing/master-pricing-2026-05-01-snapshot.xlsx` — sheet "All Services & Pricing" (141 SKUs)
+**Form:** `src/QuoteForm.jsx` v10 — locked spec (5 areas, multi-bathroom loop, inline photos)
+**Resolver:** `src/lib/pricing-resolver.js`
+
+---
+
+## Spec changes from v9.2 → v10
+
+**Removed**
+- Mould-as-a-separate-area (silicone is bundled into shower / bath services)
+- Spa flag (CHR-09 / BTV-05/06 routing now happens server-side from photos)
+- Size selectors (photos disambiguate)
+- Tile material selectors (ceramic / porcelain / stone / mosaic visible in photos)
+- Hollow-tile question (tradesperson check at site visit)
+- Urgency question (customer puts in notes if rush)
+- Shower-over-bath question (photos show this)
+- Multi-mode dichotomy (single vs multi UI replaced with single per-area-section flow)
+- "Not sure" / unsure description path (customers describe in notes textarea)
+
+**Added**
+- Bathroom count question on Step 2 (1 / 2 / 3+)
+- Multi-bathroom loop on confirmation screen (preserves person + property; clears bathroom-specific state)
+- Multi-bathroom discount logic (-$200 for #2, -$300 for #3+)
+- Full bathroom makeover toggle with 3 scope chips (regrout-only / resurface-only / both)
+- Inline per-area photos with "+" extras button (max 6 per area)
+- Pricing resolver module producing line_items + modifiers + rejection_flags + tier_default
+
+**Kept**
+- Pre-1990 asbestos screen (NSW Excel rejection #8)
+- Tenant landlord-auth flow
+- Out-of-NSW waitlist
+- Phone validation (mobile + landline + +61 normalisation)
+- Address autocomplete (Google Places, NSW bounding box)
+- Image compression (1920px JPEG q0.8)
+- Webhook retry (3× exponential backoff)
+- localStorage persistence
+- Honeypot anti-spam
+- Tracking (UTM/GCLID)
+- Marketing consent (Spam Act 2003)
 
 ---
 
 ## How the mapping works
 
-The form is a **lead intake**, not a quote calculator. Customers don't see SKU codes — they pick from plain-English options like "Fix tiles + corners". Each form pick maps to **one or more SKUs** in the Excel; the tradie/sub picks the final SKU after seeing photos.
+The form is a **lead intake** that gathers everything needed to build a quote without forcing customers to learn tradesperson taxonomy. Customers pick:
+1. **Areas** they want worked on (5 options + full bathroom toggle)
+2. **Service per area** in plain English (with trade term in italic)
+3. **Photos** that disambiguate the SKU pool
+
+The resolver narrows the SKU pool based on form data; the tradesperson picks the final SKU after photo review.
 
 Mapping legend:
-- **1:1** → Form pick maps to exactly one Excel SKU
-- **1:N** → Form pick maps to several SKUs, photo review picks the right one
-- **🟡 Ambiguous** → Form label is fuzzy, could land in multiple Excel categories
-- **❌ Unmapped** → Form pick has no clear Excel home (gap to investigate)
-- **🚫 Unreachable** → Excel SKU exists but no form path leads there
+- **1:1** — Form pick maps to exactly one Excel SKU
+- **1:N** — Form pick maps to several SKUs, photo review picks final
+- **Photo-disambiguated** — pool narrowed by visible properties
 
 ---
 
-## Single-area mode
+## Per-area SKU pools
 
-### Shower (sh1–sh6)
-
-| Form ID | Form label | Excel SKUs | Type |
+### Shower
+| Form pick | Trade term | SKU pool | Type |
 |---|---|---|---|
-| sh1 | Fix tiles + corners | RSC-01..04 (cement) OR RSE-01..04 (epoxy) — picked via `epoxyPicks` flag, sized by photo | 1:N |
-| sh2 | Fix just the tile lines | RGC-01..04 (cement) OR RGE-01..04 (epoxy) — same logic as sh1 | 1:N |
-| sh3 | Fix mouldy corners only | SIL-01 (Shower Only) | 1:1 |
-| sh4 | Resurface — change the tile colour | TSR-01..03 (walls only) OR TSR-04..06 (walls + floor), sized by photo | 1:N |
-| sh5 | Fix a cracked tile | TRP-01 (1 tile) OR TRP-02 (2-4 tiles) — count from photo | 1:N |
-| sh6 | Deep clean & protect | 🟡 GRS-01 (clear sealer) OR DTL-01 (detailing) — depends on what the customer means | 🟡 |
+| Full shower regrouting — grout lines + corner silicone | regrouting + siliconing | RGC-01..04 (cement) OR RGE-01..04 (epoxy) + SIL-01 | 1:N + bundled silicone |
+| Change the tile colour | tile resurfacing | TSR-01..06 | 1:N (sized by photo) |
+| Both — full regrout and tile colour change | full transformation | RSC-01..04 OR RSE-01..04 (combo) | 1:N |
 
-### Bath (bt1–bt4)
-
-| Form ID | Form label | Excel SKUs | Type |
+### Bath
+| Form pick | Trade term | SKU pool | Type |
 |---|---|---|---|
-| bt1 | Resurface — make it look new | BTH-01/02/03 (size variants) OR BTV-01..06 (material variants — acrylic/porcelain/cast iron/fibreglass/spa) | 1:N |
-| bt2 | Fix a chip or dent | CHR-01 (1 chip <20mm) OR CHR-02 (2-5 chips) — count from photo | 1:N |
-| bt3 | Remove scratches / stains | 🟡 POL-01 (polish) OR CHR-11 (scratches) OR RST-01 (rust) OR HWD-01 (hard water) — needs photo + sometimes customer description | 🟡 |
-| bt4 | Fix the mouldy seal | SIL-02 (Bath Only) | 1:1 |
+| Resurface — make it look new | bath resurfacing | BTH-01/02/03 OR BTV-01..06 + SIL-02 | 1:N (acrylic / porcelain / cast iron / fibreglass / spa from photo) |
+| Just fix a chip or two | chip repair | CHR-01 (1 chip <20mm) OR CHR-02 (2-5) OR CHR-09 (spa) | 1:N (count + spa from photo) |
+| Full restoration — resurface + chip repair | full restoration | BTH-01..03 + CHR-01/02 | 1:N (chips covered by resurface) |
 
-### Basin (bs1–bs2)
-
-| Form ID | Form label | Excel SKUs | Type |
+### Basin & vanity (combined area)
+| Form pick | Trade term | SKU pool | Type |
 |---|---|---|---|
-| bs1 | Resurface — make it look new | BSN-01 (standalone) OR BSN-02 (add-on, same job as bath) OR BSN-03 (double — triggered by `basinCnt=2`) | 1:N |
-| bs2 | Fix a chip or dent | CHR-03 (single basin chip <15mm) | 1:1 |
+| Resurface basin and vanity top | top resurfacing | BSN-01/02/03 + VAN-01/02 | 1:N (single / double / moulded from photo) |
+| Resurface doors and sides too | full vanity resurfacing | BSN + VAN + VCR-01/02 + LBR-01/02 | 1:N (cabinet style from photo) |
 
-### Vanity (vn1–vn4)
-
-| Form ID | Form label | Excel SKUs | Type |
+### Bathroom walls (tiled, outside shower)
+| Form pick | Trade term | SKU pool | Type |
 |---|---|---|---|
-| vn1 | Resurface the benchtop | VAN-01 (moulded — basin + top integrated) OR VAN-02 (countertop only) OR LBR-01/02 (laminate) — picked from photo | 1:N |
-| vn2 | Repaint the cabinet | VCR-01 (small) OR VCR-02 (standard) — sized from photo | 1:N |
-| vn3 | Give it a stone look | SFL-01 (Stone-Fleck Finish) | 1:1 |
-| vn4 | Fix a chip or scratch | CHR-08 (vanity top chip/scratch) | 1:1 |
+| Refresh the grout lines | wall regrouting | BWR-01 (cement) OR BWR-02 (epoxy) | 1:1 by epoxy flag |
+| Change the tile colour | wall tile resurfacing | TSR-10 (half-height) OR TSR-11 (full-height) | 1:N (sized by photo) |
+| Both — regrout + tile colour change | full wall refresh | BWR + TSR-10/11 | 1:N |
 
-### Mould & corners (ml1–ml3)
-
-| Form ID | Form label | Excel SKU | Type |
+### Floor tiles
+| Form pick | Trade term | SKU pool | Type |
 |---|---|---|---|
-| ml1 | Just the shower corners | SIL-01 | 1:1 |
-| ml2 | Shower + bath corners | SIL-03 | 1:1 |
-| ml3 | Everywhere in bathroom | SIL-04 | 1:1 |
-
-### Bathroom floor (fl1–fl5)
-
-| Form ID | Form label | Excel SKUs | Type |
-|---|---|---|---|
-| fl1 | Fix lines between tiles | BFR-01/02 (cement) OR BFR-03/04 (epoxy) — `epoxyPicks` flag picks cement vs epoxy series, size from photo | 1:N |
-| fl2 | Resurface — change tile colour | TSR-07/08/09 (small/standard/large bathroom floor) | 1:N |
-| fl3 | Make floor less slippery | ❌ ASL-01 exists for "Shower Floor Anti-Slip" only — bathroom floor anti-slip isn't a separate SKU. Currently maps to ASL-01 with override note. | ❌ |
-| fl4 | Fix a cracked tile | TRP-01/02 OR CHR-04/05 (tile chip repair) | 1:N |
-| fl5 | White powdery buildup | EFF-01 (Efflorescence Treatment) | 1:1 |
-
-### Wall tiles (wl1–wl3)
-
-| Form ID | Form label | Excel SKUs | Type |
-|---|---|---|---|
-| wl1 | Fix lines between wall tiles | BWR-01 (cement) OR BWR-02 (epoxy) — `epoxyPicks` flag picks variant | 1:N |
-| wl2 | Resurface wall tile colour | TSR-10 (half-height) OR TSR-11 (full-height) — picked from photo + customer description | 1:N |
-| wl3 | Fix a cracked wall tile | TRP-01/02 (tile replacement) | 1:N |
+| Refresh the grout lines | floor regrouting | BFR-01/02 (cement) OR BFR-03/04 (epoxy) | 1:N |
+| Change the tile colour | floor tile resurfacing | TSR-07/08/09 + anti-slip additive | 1:N (sized by photo) |
+| Both — regrout + tile colour change | full floor refresh | BFR + TSR-07..09 | 1:N |
 
 ---
 
-## Multi-area mode (`multiPicks`)
+## Full bathroom makeover (toggle)
 
-When customer picks multiple areas, the form moves into "multi" mode with these bundle options:
+When customer toggles "Full bathroom makeover" on Step 3, the 5-area selector is replaced with one of three scope chips. The pool is the matching FBR/FBP package.
 
-| Multi ID | Form label | Excel SKUs (combo bundles) | Type |
-|---|---|---|---|
-| m_shower_regrout | Shower — fix tiles & corners | RSC-01..04 / RSE-01..04 | 1:N |
-| m_shower_recoat | Shower — change tile colour | TSR-01..06 | 1:N |
-| m_bath_resurface | Bath — make it look new | BTH-01..03 / BTV-01..06 | 1:N |
-| m_bath_chip | Bath — fix a chip or dent | CHR-01/02 | 1:N |
-| m_basin | Sink — make it look new | BSN-01..03 | 1:N |
-| m_vanity | Vanity — refresh benchtop or cabinet | VAN-01/02, LBR-01/02, VCR-01/02 | 1:N |
-| m_floor | Floor tiles — fix lines or colour | BFR-01/02 OR TSR-07..09 | 1:N |
-| m_full | The whole bathroom needs a refresh | FBP-01..06 (Full Bathroom packages) — pricing engine bundles based on what's selected | 1:N |
-| m_regrout_all | Fix all tile lines in whole bathroom | FBR-01/02 (cement) OR FBR-03/04 (epoxy) — `epoxyPicks` picks variant | 1:N |
-| m_maintenance | Annual maintenance check | AMP-01 (single bathroom) OR AMP-02 (per unit, PM) | 1:N |
-
-**Combo SKUs reached implicitly via multi mode:**
-- CMB-01..11 (Shower + Bath combos) ← when m_shower_* AND m_bath_resurface picked together
-- MIX-01..03 (Mixed shower + bath variants) ← same trigger
-- ENS-01..03 (Ensuite packages) ← detected via `prop="apt"` + small bathroom indicators
-- TBC-01..04 (Tile + Bath combo) ← when m_shower_recoat AND m_bath_resurface picked
-- TRC-01..03 (Tile + Regrout combo) ← when m_shower_regrout AND any m_*_recoat picked
-
----
-
-## Modifiers & flags wired correctly
-
-| Form field | Excel modifier | Status |
+| Scope | Trade term | SKU pool |
 |---|---|---|
-| `epoxyPicks` | Modifier R6 "Epoxy upgrade +$250" + RGE/RSE series | ✅ Wired |
-| `showerOverBath` | SOB-01..04 (Shower-Over-Bath SKUs) | ✅ Wired |
-| `basinCnt` (2 vs 1) | BSN-03 (Double Basin Add-On) | ✅ Wired |
-| `lift` (apartment) | Modifier R14 "Multi-storey +$80" | ✅ Wired |
-| `prevResurfaced` | Modifier R5 "Strip-back +$250" + Rejection #9 | ✅ Wired |
-| `hasVentilation` | Rejection #19 (regroups + resurface jobs require fan) | ✅ Wired |
-| `cust=pm` | Multi-bathroom contract pricing (5+/quarter discount) | ✅ Wired (via cust flag in payload) |
+| Just refresh the grout everywhere | full regrout | FBR-01/02 (cement) OR FBR-03/04 (epoxy) |
+| Just change the colour of everything | full resurface | FBP-03/04 |
+| Full transformation — both | regrout + resurface | FBP-01/02 OR FBP-05/06 |
+
+Implicit pool extensions (resolver picks based on photo evidence):
+- CMB-01..11 (Shower + Bath combos) when shower-resurface AND bath-resurface
+- MIX-01..03 (Mixed shower + bath variants)
+- ENS-01..03 (Ensuite packages — `prop="apt"` + small bathroom)
+- TBC-01..04 (Tile + Bath combo)
+- TRC-01..03 (Tile + Regrout combo)
 
 ---
 
-## 🚫 Excel SKUs NOT directly reachable from form (gaps)
+## Modifiers (auto-applied by resolver from form data)
 
-These services exist in the Excel but no form option leads customers to ask for them. Either intentional (specialist services) or genuine gap.
+| Modifier ID | Label | Trigger from form | Delta |
+|---|---|---|---|
+| R5 | Strip-back previous coating | `previously_resurfaced === "yes"` | +$250 |
+| R6 | Epoxy grout upgrade | `epoxy_mode === "epoxy"` AND any regrout service | +$250 |
+| R14 | Multi-storey access (no lift) | `property_type === "apt"` AND `lift_access === "no"` | +$80 |
+| R19 | Temporary ventilation setup | `has_ventilation === "no"` AND chemical work | +$100 |
+| DISC-MB | Multi-bathroom discount | `bathroom_index > 1` | -$200 (#2), -$300 (#3+) |
 
-| Excel SKU | Service | Customer reach via... |
-|---|---|---|
-| GCS-01..04 | Grout Colour Seal (recolour grout, not regrout) | 🟡 sh6 vague — "Deep clean & protect" doesn't say "recolour" |
-| BRN-01 | Burn repair (cigarette, curling iron) | ❌ No form option — currently slots into bt2/CHR-01 incorrectly |
-| CRK-01 | Crack repair (fibreglass/acrylic, not chip) | ❌ No form option — slots into bt2 or sh5 |
-| HWD-01/02 | Hard water / calcium deposit removal | 🟡 bt3 covers loosely |
-| RST-01 | Rust stain treatment | 🟡 bt3 covers loosely |
-| GSP-01/02 | Grout spot repair (1-15 lines, not full regrout) | ❌ No "small grout fix" option in form |
-| GRS-01/02 | Clear grout sealer (post-regrout protection) | 🟡 sh6 covers loosely; usually a tradie-suggested add-on |
-| CHR-09 | Spa bath chip | ❌ No spa flag in form |
-| BTV-05/06 | Spa bath resurface | ❌ No spa flag — quoted as standard BTH |
-| AMP-01/02 | Annual maintenance | ✅ Reachable via m_maintenance (multi mode only — not on single-area path) |
+### Modifiers applied at quote stage (not from form data)
+
+These come from photo review by the tradesperson, not from the form:
+- Extreme mould (+$150)
+- Natural stone (+$300)
+- Mosaic (+$350)
+- Niche / seat (+$100 each)
+- Cast-iron bath (+$200)
+- Hard water (+$50)
+- Weekend booking (+$200) — only if customer requests it
 
 ---
 
-## ❌ Form options with weak Excel mapping
+## Rejection flags (warn, don't block)
 
-These form options leave the tradie guessing. Either narrow the form labels OR train the tradie on disambiguation.
+| Flag ID | Severity | Trigger | Action |
+|---|---|---|---|
+| REJ-08 | warn | `built_before_1990 === "yes"` | Confirm asbestos clearance certificate before disturbing tile adhesive |
+| REJ-08-UNSURE | info | `built_before_1990 === "unsure"` | Check property age on quote call |
 
-| Form ID | Issue | Recommended fix |
+### Site-visit-only rejections (not asked in form)
+
+These are tradesperson checks, not customer questions:
+- Hollow tiles (tap test on site)
+- Active leak behind walls (visual + moisture meter)
+- Glass / stone / Corian basin (visible at quote visit, not from form)
+- Substrate movement / structural cracks
+- Pre-existing waterproofing failure
+- Damage by other trades
+
+---
+
+## Customer tier defaults
+
+| Customer type | Tier | Logic |
 |---|---|---|
-| sh6 "Deep clean & protect" | Maps to GRS-01 OR DTL-01 OR GCS-01..04 — three different services | Either split into 2-3 options or accept it as "tradie investigates during follow-up call" |
-| bt3 "Remove scratches / stains" | Maps to POL-01 / CHR-11 / RST-01 / HWD-01 — four services | Photo review almost always disambiguates; OK as-is |
-| fl3 "Anti-slip — bathroom floor" | ASL-01 exists for SHOWER floor only. Bathroom floor anti-slip uses different chemistry. | Either rename to "Anti-slip — shower floor" OR add bathroom-floor SKU to Excel |
+| owner | T2 | Standard owner-occupier (~80% of jobs) |
+| pm | T1 | Property managers expect trade pricing |
+| builder | T1 | Builders bundle multiple jobs |
+| tenant | T2 | Owner-equivalent (or routed via landlord) |
+
+Tradesperson can override at quote build time.
+
+---
+
+## Webhook payload schema (v10)
+
+```jsonc
+{
+  "firstName": "Allan", "lastName": "Pham", "email": "...", "phone": "+61451110154",
+  "customData": {
+    // Customer
+    "customer_type": "owner|pm|builder|tenant",
+    "company_name": "",
+    "tenant_auth": "self|send|",
+    "landlord_email": "",
+
+    // Property
+    "property_type": "house|apt|comm",
+    "property_address": "...",
+    "lift_access": "yes|no|n/a|not_specified",
+    "built_before_1990": "yes|no|unsure|not_asked",
+
+    // Multi-bathroom
+    "bathroom_count": "1|2|3+",
+    "bathroom_index": "1|2|...",
+
+    // Services
+    "full_bathroom_mode": "yes|no",
+    "full_bathroom_scope": "regrout_only|resurface_only|both|",
+    "selected_areas": "shower, bath, basin_vanity, walls, floor",
+    "area_services_json": "{\"shower\":[\"full_regrout\"], \"bath\":[\"resurface\"]}",
+    "services_summary": "Shower: ... | Bath: ...",
+    "epoxy_mode": "standard|epoxy",
+
+    // Conditional
+    "previously_resurfaced": "yes|no|unsure|not_asked",
+    "ventilation": "yes|no|not_asked",
+
+    // Notes & consent
+    "customer_notes": "free text",
+    "marketing_consent": "yes|no",
+
+    // Photos
+    "photo_count_total": "5",
+    "photo_count_by_area": "{\"shower\":3, \"bath\":2}",
+    "photos_uploaded": "yes|no",
+
+    // Resolved quote skeleton (for downstream automation)
+    "resolved_line_items_json": "[{\"area\":\"shower\", ...}]",
+    "resolved_modifiers_json": "[{\"key\":\"epoxy_upgrade\", ...}]",
+    "resolved_rejection_flags_json": "[]",
+    "resolved_tier_default": "T2",
+    "resolved_multi_bathroom_discount": "-200",
+
+    // Tracking + meta
+    "gclid": "...", "utm_source": "...", "landing_page": "/quote",
+    "form_status": "complete",
+    "form_version": "v10.0",
+    "submitted_at": "2026-05-02T14:30:00Z",
+    "user_agent": "...",
+    "device_type": "mobile|desktop"
+  }
+}
+```
 
 ---
 
 ## Expert verdict
 
-**The form correctly aligns with the Excel for its intended purpose: customer intake, not quote calculation.**
+**v10 captures everything needed to build an accurate quote, with fewer customer questions than v9.2.**
 
-- Every form path that a real customer would pick maps to at least one Excel SKU
-- Modifiers + flags (epoxy, shower-over-bath, basin count, lift, previous resurface, ventilation) are wired correctly
-- 1:N mappings (where photo review picks the final SKU) are intentional — this is the tradie's job
+Wins from the locked spec:
+- 5 areas instead of 7 (mould collapsed into bundled silicone, walls scope clarified)
+- Single-section UI replaces single/multi-mode dichotomy
+- Photos shifted from end-of-form pool to inline per-area sections — customer associates each photo with each area mentally
+- Multi-bathroom loop preserves person + property data, only resets bathroom-specific state
+- Conditional fields (epoxy upgrade, prev resurfaced, ventilation) only appear when relevant
 
-**The 5 real gaps worth considering** (in order of impact on revenue/quote accuracy):
+Form completion estimate: **75-90 seconds** for single-bathroom owner with 1 photo per area, vs ~2 minutes in v9.2.
 
-1. **Spa bath flag** — BTV-05/06 are ~+$200 over BTH. Form has no spa option. Currently quoted as standard bath = lost margin OR underbid.
-2. **Pre-1990 / asbestos check** — Rejection #8. Form has no built-year question. Should be a P0 add (covered in audit doc).
-3. **Burn / crack repair separate from chip** — BRN-01, CRK-01. Currently mis-mapped as chip. Different SKU, different price.
-4. **Spa bath chip** — CHR-09 (covered if #1 is added).
-5. **Grout colour seal disambiguation** — GCS-01..04. sh6 is vague; could split.
+Outstanding items (deferred to follow-up):
+- Privacy Policy update for photo handling + APP 8 cross-border disclosure (still outstanding from v9.2)
+- Live AI vision pre-screening (Phase 2)
+- Backend resolver test suite (resolver is a stub; integration tests vs real master pricing recommended before launch)
 
-**My recommendation:** add #1 (spa flag) and #2 (built-year). Skip #3-5 — they're <5% of jobs, photo review catches them.
-
-The form is doing its job. Don't over-engineer the intake.
+The form is doing its job: structured intake that doesn't lose any pricing-critical data while staying mobile-first and conversion-friendly.
