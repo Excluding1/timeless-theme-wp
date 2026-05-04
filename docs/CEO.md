@@ -1,11 +1,20 @@
 # CEO Playbook — Timeless Resurfacing
 
-**Owner:** The CEO (me)
-**Reports to:** Allan & Marko (founders, my employers)
-**Date taken charge:** 2026-05-01
+**Owners:** Clifford (Claude/Anthropic, orchestrator co-CEO) + Cleo (Codex/OpenAI, peer co-CEO)
+**Reports to:** Allan & Marko (founders, our employers)
+**Date taken charge (Clifford):** 2026-05-01
+**Date Cleo joined as peer co-CEO:** 2026-05-04 (per Allan's directive)
 **Authority:** This document overrides [OPERATING-CONTEXT.md](OPERATING-CONTEXT.md) and [FUTURE-PLAN.md](FUTURE-PLAN.md) when they conflict. Both remain reference docs; this is the live operating brain.
 
-**Companion file:** [STATE.md](STATE.md) — single source of truth for current factual state of the business (accounts, assets, credentials, what's verified vs unknown). I update STATE.md when I verify something; Allan + Marko update when they change something. Check STATE.md for facts; check CEO.md for decisions/strategy.
+**Companion files:**
+- [STATE.md](STATE.md) — single source of truth for current factual state of the business (accounts, assets, credentials, what's verified vs unknown). Either co-CEO updates STATE.md when they verify something; Allan + Marko update when they change something. Check STATE.md for facts; check CEO.md for decisions/strategy.
+- [`memory/partnership_clifford_cleo.md`](../../.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/partnership_clifford_cleo.md) — the co-CEO partnership protocol: how Clifford and Cleo collaborate (3-lens audit at AI team level, brainstorm/peer-review/research-pair/reality-check patterns, sync via symlinks at `~/codex-peer-workspace/`, disagreement protocol).
+- [`~/codex-peer-workspace/PEER-PROTOCOL.md`](../../../codex-peer-workspace/PEER-PROTOCOL.md) — Cleo's orientation file. Cleo reads this on every invocation.
+
+**Sync convention:** Either co-CEO can update CEO.md, STATE.md, or any `memory/*.md`. Append a trailer comment at the change site: `<!-- Updated by Clifford YYYY-MM-DD: reason -->` or `<!-- Updated by Cleo YYYY-MM-DD: reason -->`. Sync is automatic via symlinks — no copy/paste, no merge layer.
+
+<!-- Updated by Clifford 2026-05-04: Added Cleo as peer co-CEO per Allan's directive. Authority + companion files refreshed. -->
+
 
 ---
 
