@@ -997,10 +997,16 @@ function timeless_scripts() {
     // the missing-deploy state visually obvious instead of silently broken.
 
     // Theme stylesheet (animations, mobile menu, FAQ accordion)
-    wp_enqueue_style( 'timeless-style', get_stylesheet_uri(), array(), '1.0.0' );
+    // Cache-bust via filemtime so changes propagate without manual version bumps
+    $style_path = get_stylesheet_directory() . '/style.css';
+    $style_ver  = file_exists( $style_path ) ? filemtime( $style_path ) : '1.0.0';
+    wp_enqueue_style( 'timeless-style', get_stylesheet_uri(), array(), $style_ver );
 
-    // Theme JavaScript (mobile menu, FAQ toggle, scroll reveal, smooth scroll)
-    wp_enqueue_script( 'timeless-main', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true );
+    // Theme JavaScript (mobile menu, FAQ toggle, scroll reveal, slider handle init)
+    // Cache-bust via filemtime — REQUIRED so JS updates reach browsers on theme upload
+    $main_js_path = get_template_directory() . '/js/main.js';
+    $main_js_ver  = file_exists( $main_js_path ) ? filemtime( $main_js_path ) : '1.0.0';
+    wp_enqueue_script( 'timeless-main', get_template_directory_uri() . '/js/main.js', array(), $main_js_ver, true );
 }
 add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
 
