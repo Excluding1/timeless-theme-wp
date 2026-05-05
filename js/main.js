@@ -6,9 +6,11 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     /* ── Before/After Slider (desktop + mobile share the same impl) ──
-       Uses clip-path to clip the before-image instead of width manipulation.
-       This eliminates the offsetWidth read on init (was causing 145ms forced
-       reflow on Lighthouse) and makes drag updates compositor-only (no layout). */
+       Uses clip-path to clip the before-image. Drag fix 2026-05-05:
+       - Pixel-based positions (not %) — both clip + line + handle land on same pixel,
+         eliminates subpixel "slivers" Allan reported as "clippings during drag"
+       - requestAnimationFrame batches DOM writes to ~60fps, no layout thrash
+       - On window resize, re-anchor positions to current ratio so they stay aligned. */
     function initBaSlider(sliderId, clipId, lineId, handleId){
         var slider = document.getElementById(sliderId);
         if(!slider) return;
@@ -17,25 +19,60 @@ document.addEventListener('DOMContentLoaded', function () {
         var handle = document.getElementById(handleId);
         if(!clip || !line || !handle) return;
         var active = false;
+        var pendingX = null;
+        var rafId = null;
+        var lastRatio = 0.5; // initial 50/50
 
-        function move(x){
-            var r = slider.getBoundingClientRect();
-            var pct = ((x - r.left) / r.width) * 100;
-            pct = Math.max(3, Math.min(97, pct));
-            clip.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
-            line.style.left   = pct + '%';
-            handle.style.left = pct + '%';
+        function applyPositions(px, width){
+            // Clamp to a small inset so the handle never disappears off the edge
+            var minPx = Math.round(width * 0.03);
+            var maxPx = Math.round(width * 0.97);
+            px = Math.max(minPx, Math.min(maxPx, Math.round(px)));
+            var rightInsetPx = Math.max(0, width - px);
+            // Use pixel values everywhere so all 3 elements snap to the same pixel — no subpixel slivers
+            clip.style.clipPath = 'inset(0 ' + rightInsetPx + 'px 0 0)';
+            line.style.left   = px + 'px';
+            handle.style.left = px + 'px';
+            lastRatio = px / width;
         }
 
-        function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
-        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
-        line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
+        function scheduleMove(){
+            if (rafId !== null) return; // already pending
+            rafId = requestAnimationFrame(function(){
+                rafId = null;
+                if (pendingX === null) return;
+                var x = pendingX;
+                pendingX = null;
+                var r = slider.getBoundingClientRect();
+                applyPositions(x - r.left, r.width);
+            });
+        }
+
+        function move(x){
+            pendingX = x;
+            scheduleMove();
+        }
+
+        function startDrag(x, e){
+            active = true;
+            move(x);
+            if (e) e.preventDefault();
+        }
+
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX, e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX, e); });
         document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
-        document.addEventListener('mouseup', function(){ active=false; });
-        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
-        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
+        document.addEventListener('mouseup', function(){ active = false; });
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX, e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX, e); }, {passive:false});
         document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
-        document.addEventListener('touchend', function(){ active=false; });
+        document.addEventListener('touchend', function(){ active = false; });
+
+        // Re-anchor on resize so positions stay aligned after viewport change
+        window.addEventListener('resize', function(){
+            var r = slider.getBoundingClientRect();
+            applyPositions(lastRatio * r.width, r.width);
+        });
     }
     initBaSlider('hero-slider', 'ba-clip', 'ba-line', 'ba-handle');
     initBaSlider('hero-slider-mobile', 'mob-clip', 'mob-line', 'mob-handle');
