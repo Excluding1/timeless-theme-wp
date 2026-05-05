@@ -73,8 +73,8 @@ get_header(); ?>
  <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing" draggable="false" class="absolute inset-0 w-full h-full object-cover" style="object-position:center 70%;" width="800" height="600" />
  </div>
- <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div id="mob-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -102,8 +102,8 @@ get_header(); ?>
  <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/before.jpg" alt="Before bathroom resurfacing Sydney" draggable="false" id="ba-before-img" class="absolute inset-0 w-full h-full object-cover" width="800" height="960" />
  </div>
- <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div id="ba-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -122,34 +122,38 @@ get_header(); ?>
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
  </div>
 </section>
 
-<?php $logo = get_template_directory_uri() . '/images/homepage/logos'; ?>
-<!-- TRUST LOGO BAR -->
-<section class="py-8 sm:py-10 bg-surface-container-low/50">
- <div class="max-w-7xl mx-auto px-6 sm:px-8">
- <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
+<!-- TRUST STRIP — concrete signals (no placeholder partner logos; ACL §18 compliant) -->
+<section class="py-10 sm:py-12 bg-surface-container-low/50">
+ <div class="max-w-6xl mx-auto px-6 sm:px-8">
+ <p class="text-center text-sm text-secondary mb-8">Owner-led, fully insured, warranty in writing — Sydney bathrooms done properly</p>
+ <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+ <div>
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span></div>
+ <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Up to 5 Years</p>
+ <p class="text-xs sm:text-sm text-secondary font-medium">Workmanship warranty in writing</p>
  </div>
- <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="hp-logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
- <div class="flex items-center gap-5 sm:gap-8 w-max px-8" id="hp-logo-inner">
- <?php for ($i = 0; $i < 2; $i++) : ?>
- <img src="<?php echo $logo; ?>/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <img src="<?php echo $logo; ?>/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
- <?php endfor; ?>
+ <div>
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">shield</span></div>
+ <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">$20M</p>
+ <p class="text-xs sm:text-sm text-secondary font-medium">Public liability insured</p>
+ </div>
+ <div>
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">location_on</span></div>
+ <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Sydney + NSW</p>
+ <p class="text-xs sm:text-sm text-secondary font-medium">Locally owned and operated</p>
+ </div>
+ <div>
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified_user</span></div>
+ <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">ABN-registered</p>
+ <p class="text-xs sm:text-sm text-secondary font-medium">Real business, real receipts</p>
  </div>
  </div>
- <div id="hp-logo-dots" class="flex justify-center gap-1.5 mt-4"></div>
+ </div>
 </section>
 
 <!-- SERVICES. Circle images, horizontal scroll on mobile -->
@@ -417,47 +421,17 @@ get_header(); ?>
  </div>
 </section>
 
-<!-- QUOTE FORM -->
+<!-- QUOTE FORM — embeds the React form via [timeless_quote_form] shortcode -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
  <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Quote</h2>
- <p class="text-on-primary-container text-sm">5 minutes. No obligation. We respond within hours.</p>
+ <p class="text-on-primary-container text-sm">~90 seconds. No obligation. Quote within 1 business day.</p>
  </div>
- <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 space-y-8">
- <fieldset>
- <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">1</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Contact Info</legend></div>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
- <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="<?php echo timeless_phone(); ?>" type="tel" required /></div>
- <div class="md:col-span-2"><label for="email" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Email</label><input id="email" name="email" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="john@example.com" type="email" /></div>
+ <div class="p-2 sm:p-4">
+ <?php echo do_shortcode( '[timeless_quote_form]' ); ?>
  </div>
- </fieldset>
- <fieldset>
- <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">2</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Property</legend></div>
- <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Address *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Street, Suburb, NSW Postcode" required /></div>
- <div class="mt-4 p-4 bg-error-container/20 rounded-lg flex items-start gap-4 border-l-4 border-error">
- <span class="material-symbols-outlined text-error shrink-0" aria-hidden="true">warning</span>
- <div><p class="text-xs font-bold text-on-error-container mb-1">Asbestos Check (NSW)</p><p class="text-[0.7rem] text-on-error-container/80">Home built before 1990?</p>
- <div class="mt-2 flex gap-4"><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="yes" class="text-primary" /> Yes</label><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="no" class="text-primary" /> No</label><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="unsure" class="text-primary" /> Unsure</label></div>
- </div>
- </div>
- </fieldset>
- <fieldset>
- <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">3</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">What Needs Work?</legend></div>
- <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bathtub</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Wall Tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity Top</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Base</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Floor Tiles</label>
- </div>
- </fieldset>
- <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Submit Free Quote Request <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
- <p class="text-center text-[0.6rem] text-secondary">By submitting you agree to our Terms &amp; Privacy Policy.</p>
- </form>
  </div>
  </div>
 </section>

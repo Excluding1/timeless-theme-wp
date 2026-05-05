@@ -71,6 +71,13 @@ Tags: one-column, custom-menu, featured-images, threaded-comments, translation-r
     transition: max-height 0.25s ease, opacity 0.2s ease, border-top-width 0s 0s;
 }
 
+/* Prevent horizontal scroll on mobile — the .mobile-menu uses translateX(100%)
+ * to hide off-screen-right, which without this rule causes a horizontal scrollbar
+ * because the browser keeps the off-screen element in the document scroll area. */
+html, body {
+    overflow-x: hidden;
+}
+
 /* Mobile menu */
 .mobile-menu {
     transform: translateX(100%);

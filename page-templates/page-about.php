@@ -192,7 +192,7 @@
  </div>
  <div class="reveal">
  <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">3<span class="text-tertiary-fixed-dim">yr</span></p>
- <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Up to 3-Year Warranty</p>
+ <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Up to 5-Year Warranty</p>
  </div>
  <div class="reveal">
  <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">$20<span class="text-tertiary-fixed-dim">M</span></p>
@@ -235,7 +235,7 @@
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">gavel</span><span class="text-xs font-bold">NSW Fair Trading Compliant</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  </div>
 </section>
 

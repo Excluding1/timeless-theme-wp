@@ -6,7 +6,7 @@
  "@context": "https://schema.org",
  "@type": "Service",
  "name": "Basin Restoration Sydney",
- "description": "Professional basin restoration in Sydney. Chip repair, stain removal, full resurface. 2-4 hour service, 3-year warranty, up to 80% cheaper than replacement.",
+ "description": "Professional basin restoration in Sydney. Chip repair, stain removal, full resurface. 2-4 hour service, up to 5-year warranty, up to 80% cheaper than replacement.",
  "provider": {
  "@type": "HomeAndConstructionBusiness",
  "name": "Timeless Resurfacing",
@@ -37,7 +37,7 @@
  { "@type": "Question", "name": "How much does basin restoration cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every basin is different. The final price depends on the type of basin, the extent of damage, and whether it's standalone or part of a larger bathroom job. Send us photos and we'll have a fixed-price quote back within hours." } },
  { "@type": "Question", "name": "What types of basins can you restore?", "acceptedAnswer": { "@type": "Answer", "text": "We restore porcelain, ceramic, cast iron enamel, acrylic, and fibreglass basins. Drop-in, undermount, pedestal, and wall-mounted configurations." } },
  { "@type": "Question", "name": "How long does basin restoration take?", "acceptedAnswer": { "@type": "Answer", "text": "2-4 hours on-site for a standalone basin. If done alongside bath or tile resurfacing, it adds roughly 1-1.5 hours. Light use after 24 hours, full cure in 5-7 days." } },
- { "@type": "Question", "name": "How long does a restored basin last?", "acceptedAnswer": { "@type": "Answer", "text": "5-10 years with proper care. The 3-year warranty covers our workmanship. Beyond that, longevity depends on avoiding abrasive cleaners and harsh chemicals." } },
+ { "@type": "Question", "name": "How long does a restored basin last?", "acceptedAnswer": { "@type": "Answer", "text": "5-10 years with proper care. The up to 5-year warranty covers our workmanship. Beyond that, longevity depends on avoiding abrasive cleaners and harsh chemicals." } },
  { "@type": "Question", "name": "What colour will my restored basin be?", "acceptedAnswer": { "@type": "Answer", "text": "Standard finish is high-gloss white. The modern, clean look that matches every bathroom. Light custom tints (cream, off-white) available by request." } }
  ]
 }
@@ -78,8 +78,8 @@
  <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/hero-before.png" alt="Worn basin before restoration" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
  </div>
- <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div id="mob-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -128,8 +128,8 @@
  <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/hero-before.png" alt="Worn basin before restoration" class="absolute inset-0 w-full h-full object-cover" />
  </div>
- <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div id="ba-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -148,7 +148,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">3-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
  </div>
 </section>
@@ -217,8 +217,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/chips-before.png" alt="Chipped and cracked basin" class="w-full h-full object-cover absolute inset-0" />
  </div>
  </div>
- <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:66%;z-index:20;cursor:ew-resize;"></div>
- <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;">
+ <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:66%;z-index:20;cursor:ew-resize;"></div>
+ <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:66%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -251,8 +251,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/stain-before.png" alt="Stained discoloured basin" class="w-full h-full object-cover absolute inset-0" />
  </div>
  </div>
- <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -285,8 +285,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/worn-before.png" alt="Worn scratched basin finish" class="w-full h-full object-cover absolute inset-0" />
  </div>
  </div>
- <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -394,7 +394,7 @@
  </li>
  <li class="flex items-start gap-3">
  <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- <div><p class="font-bold text-primary text-sm">3-year warranty</p><p class="text-xs text-secondary">Professional-grade coating, fully guaranteed</p></div>
+ <div><p class="font-bold text-primary text-sm">up to 5-year warranty</p><p class="text-xs text-secondary">Professional-grade coating, fully guaranteed</p></div>
  </li>
  </ul>
  </div>
@@ -413,7 +413,7 @@
  <!-- DESKTOP: Horizontal connected timeline -->
  <div class="hidden lg:block">
  <div class="grid grid-cols-4 gap-0 relative">
- <div class="absolute top-7 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
+ <div class="absolute top-7 left-[12.5%] right-[12.5%] h-[2px] border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
  <div class="flex flex-col items-center text-center px-4 reveal">
  <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center relative z-10 mb-4 shadow-xs"><div class="w-12 h-12 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-2xl font-black text-[#7a5c10]">1</span></div></div>
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full mb-3">~30 min</span>
@@ -446,7 +446,7 @@
  <div class="flex gap-4 reveal">
  <div class="flex flex-col items-center shrink-0">
  <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div>
- <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+ <div class="w-[2px] flex-1 bg-[#e7c08b]/30 mt-2"></div>
  </div>
  <div class="pb-8 pt-1">
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">~30 min</span>
@@ -457,7 +457,7 @@
  <div class="flex gap-4 reveal">
  <div class="flex flex-col items-center shrink-0">
  <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div>
- <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+ <div class="w-[2px] flex-1 bg-[#e7c08b]/30 mt-2"></div>
  </div>
  <div class="pb-8 pt-1">
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">~30 min</span>
@@ -468,7 +468,7 @@
  <div class="flex gap-4 reveal">
  <div class="flex flex-col items-center shrink-0">
  <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div>
- <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+ <div class="w-[2px] flex-1 bg-[#e7c08b]/30 mt-2"></div>
  </div>
  <div class="pb-8 pt-1">
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">1-2 hrs</span>
@@ -524,7 +524,7 @@
  </div>
  <div class="flex items-start gap-3">
  <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div>
- <div><h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div>
+ <div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div>
  </div>
  <div class="flex items-start gap-3">
  <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div>
@@ -558,7 +558,7 @@
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does basin restoration cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every basin is different. The final price depends on the type of basin, the extent of damage, and whether it&rsquo;s a standalone job or part of a larger bathroom project. Send us photos and we&rsquo;ll have a fixed-price quote back within hours. No hidden fees, no obligation.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What types of basins can you restore?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Porcelain, ceramic, cast iron enamel, acrylic, and fibreglass. Drop-in, undermount, pedestal, and wall-mounted configurations. If the basin is structurally sound, we can restore it.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it take?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">2-4 hours on-site for a standalone basin. If done alongside bath or tile resurfacing, it adds roughly 1-1.5 hours to the visit. Light use after 24 hours, full cure in 5-7 days.</p></div></div>
- <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a restored basin last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">5-10 years with proper care. The 3-year warranty covers our workmanship. Beyond that, longevity depends on avoiding abrasive cleaners and harsh chemicals.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does a restored basin last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">5-10 years with proper care. The up to 5-year warranty covers our workmanship. Beyond that, longevity depends on avoiding abrasive cleaners and harsh chemicals.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What colour will my basin be?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Standard finish is high-gloss white. Clean, modern, and matches every bathroom. Light custom tints (cream, off-white) available by request.</p></div></div>
  </div>
  </div>

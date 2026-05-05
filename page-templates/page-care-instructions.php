@@ -36,7 +36,7 @@
  </thead>
  <tbody class="text-white/85">
  <tr class="border-b border-white/15">
- <td class="p-2 font-medium">Bath / vanity / kitchen benchtop</td>
+ <td class="p-2 font-medium">Bath / vanity</td>
  <td class="p-2">72 hours water, 7 days for mats</td>
  <td class="p-2">No water, no rinsing, no leaning anything against it</td>
  </tr>
@@ -141,10 +141,10 @@
  </details>
 
  <details class="bg-white p-5 rounded-lg border border-slate-200">
- <summary class="font-bold text-primary cursor-pointer">Vanity / kitchen benchtop resurfacing</summary>
+ <summary class="font-bold text-primary cursor-pointer">Vanity resurfacing</summary>
  <div class="mt-4 space-y-2 text-sm">
- <p>48-hour cure for light use, 7 days before heavy use (chopping, hot pots).</p>
- <p>Always use a chopping board and trivet &mdash; coatings aren't heat-or-knife proof. Wipe spills (red wine, turmeric, beetroot) within an hour.</p>
+ <p>48-hour cure for light use, 7 days before heavy daily use.</p>
+ <p>Wipe spills promptly (toothpaste, cosmetics, hair products). Avoid abrasive cleaners and scouring pads.</p>
  </div>
  </details>
 
@@ -211,7 +211,7 @@
  <p class="mb-3">Real-world lifespans with proper care:</p>
  <ul class="list-disc pl-6 space-y-2">
  <li><strong>Bath and tile resurfacing</strong>: 10-15 years</li>
- <li><strong>Vanity / kitchen benchtop resurfacing</strong>: 7-10 years</li>
+ <li><strong>Vanity resurfacing</strong>: 7-10 years</li>
  <li><strong>Cement regrouting</strong>: 8-15 years (annual sealing extends the upper end)</li>
  <li><strong>Epoxy regrouting</strong>: 20+ years</li>
  <li><strong>Silicone</strong>: 1-3 years before recommended replacement</li>

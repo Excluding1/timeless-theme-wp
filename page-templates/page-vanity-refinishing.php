@@ -6,7 +6,7 @@
  "@context": "https://schema.org",
  "@type": "Service",
  "name": "Vanity Refinishing Sydney",
- "description": "Professional vanity refinishing in Sydney. Benchtop resurfacing, cabinet resprays, stone-fleck granite finishes. Done in a day, 3-year warranty, up to 80% cheaper than replacement.",
+ "description": "Professional vanity refinishing in Sydney. Benchtop resurfacing, cabinet resprays, stone-fleck granite finishes. Done in a day, up to 5-year warranty, up to 80% cheaper than replacement.",
  "provider": {
  "@type": "HomeAndConstructionBusiness",
  "name": "Timeless Resurfacing",
@@ -37,7 +37,7 @@
  { "@type": "Question", "name": "How much does vanity refinishing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every vanity is different. The final price depends on the size of the vanity and what's included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. Send us photos and we'll have a fixed-price quote back within hours. No hidden fees, no obligation." } },
  { "@type": "Question", "name": "What surfaces can you refinish?", "acceptedAnswer": { "@type": "Answer", "text": "We refinish timber, MDF, laminate, melamine, and previously painted vanity surfaces. This includes cabinet doors, benchtops, drawer fronts, and side panels. If it's structurally sound, we can refinish it." } },
  { "@type": "Question", "name": "What finishes are available?", "acceptedAnswer": { "@type": "Answer", "text": "We offer a range of finishes including solid colours (white, grey, navy, black, and custom colours), satin and gloss options, and our premium stone-fleck finish that mimics the look of granite or marble. We can colour-match to any sample you provide." } },
- { "@type": "Question", "name": "How long does the refinishing last?", "acceptedAnswer": { "@type": "Answer", "text": "Our vanity refinishing comes with a 3-year warranty. With normal use and care, a professional refinish will last 7-10+ years before needing attention. The key is proper prep and using professional-grade 2-pack coatings, not consumer paint." } }
+ { "@type": "Question", "name": "How long does the refinishing last?", "acceptedAnswer": { "@type": "Answer", "text": "Our vanity refinishing comes with a up to 5-year warranty. With normal use and care, a professional refinish will last 7-10+ years before needing attention. The key is proper prep and using professional-grade 2-pack coatings, not consumer paint." } }
  ]
 }
 </script>
@@ -77,8 +77,8 @@
  <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
  </div>
- <div id="mob-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div id="mob-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div id="mob-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -127,8 +127,8 @@
  <div id="ba-clip" class="absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <img id="ba-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/hero-before.png" alt="Worn vanity before refinishing" class="absolute inset-0 w-full h-full object-cover" />
  </div>
- <div id="ba-line" class="absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div id="ba-handle" class="absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div id="ba-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div id="ba-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -147,7 +147,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">3-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Done in a Day</span></div>
  </div>
 </section>
@@ -216,8 +216,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/peeling-before.png" alt="Vanity with peeling lifting laminate" class="w-full h-full object-cover absolute inset-0" />
  </div>
  </div>
- <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -250,8 +250,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/dated-before.png" alt="Dated dull vanity with outdated finish" class="w-full h-full object-cover absolute inset-0" />
  </div>
  </div>
- <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -284,8 +284,8 @@
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/scratched-before.png" alt="Scratched stained vanity with water damage" class="w-full h-full object-cover absolute inset-0" />
  </div>
  </div>
- <div class="ba-line absolute top-0 bottom-0 w-0.5 bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
- <div class="ba-handle absolute top-1/2 w-11 h-11 mt-[-22px] ml-[-22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
+ <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
+ <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;">
  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
  </div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -413,7 +413,7 @@
  <div class="hidden lg:block">
  <div class="grid grid-cols-4 gap-0 relative">
  <!-- Connector line spanning columns 1-4 behind the nodes -->
- <div class="absolute top-7 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
+ <div class="absolute top-7 left-[12.5%] right-[12.5%] h-[2px] border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
 
  <!-- Step 1 -->
  <div class="flex flex-col items-center text-center px-4 reveal">
@@ -455,7 +455,7 @@
  <div class="flex gap-4 reveal">
  <div class="flex flex-col items-center shrink-0">
  <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">1</span></div></div>
- <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+ <div class="w-[2px] flex-1 bg-[#e7c08b]/30 mt-2"></div>
  </div>
  <div class="pb-8 pt-1">
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">1-2 hrs</span>
@@ -467,7 +467,7 @@
  <div class="flex gap-4 reveal">
  <div class="flex flex-col items-center shrink-0">
  <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">2</span></div></div>
- <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+ <div class="w-[2px] flex-1 bg-[#e7c08b]/30 mt-2"></div>
  </div>
  <div class="pb-8 pt-1">
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">30-45 min</span>
@@ -479,7 +479,7 @@
  <div class="flex gap-4 reveal">
  <div class="flex flex-col items-center shrink-0">
  <div class="w-11 h-11 rounded-full bg-white shadow-xs flex items-center justify-center"><div class="w-9 h-9 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="text-base font-black text-[#7a5c10]">3</span></div></div>
- <div class="w-0.5 flex-1 bg-[#e7c08b]/30 mt-2"></div>
+ <div class="w-[2px] flex-1 bg-[#e7c08b]/30 mt-2"></div>
  </div>
  <div class="pb-8 pt-1">
  <span class="text-[0.6rem] font-bold uppercase tracking-widest bg-[#e7c08b]/15 text-[#7a5c10] px-2.5 py-1 rounded-full inline-block mb-2">2-4 hrs</span>
@@ -549,7 +549,7 @@
  <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span>
  </div>
  <div>
- <h3 class="font-bold text-primary text-sm">Up to 3-Year Warranty</h3>
+ <h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3>
  <p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p>
  </div>
  </div>
@@ -592,7 +592,7 @@
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does vanity refinishing cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every vanity is different. The final price depends on the size of the vanity and what&rsquo;s included. Cabinet doors only, benchtop only, or the full unit. Stone-fleck finishes are a premium upgrade. Send us photos and we&rsquo;ll have a fixed-price quote back within hours. No hidden fees, no obligation.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What surfaces can you refinish?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Timber, MDF, laminate, melamine, and previously painted vanity surfaces. Cabinet doors, benchtops, drawer fronts, and side panels. If it&rsquo;s structurally sound, we can refinish it.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What finishes are available?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Solid colours (white, grey, navy, black, custom), satin and gloss options, and our premium stone-fleck finish that mimics granite or marble. We can colour-match to any sample.</p></div></div>
- <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does the refinishing last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">3-year warranty included. With normal use and care, a professional refinish lasts 7-10+ years. The key is proper prep and professional-grade 2-pack coatings, not consumer paint.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does the refinishing last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">up to 5-year warranty included. With normal use and care, a professional refinish lasts 7-10+ years. The key is proper prep and professional-grade 2-pack coatings, not consumer paint.</p></div></div>
  </div>
  </div>
  </div>

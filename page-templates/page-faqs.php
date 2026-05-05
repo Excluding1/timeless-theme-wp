@@ -12,7 +12,7 @@
  { "@type": "Question", "name": "How long does a resurfaced bathroom last?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 10 years with normal use and basic care. We use commercial-grade two-part epoxy and acrylic urethane coatings." } },
  { "@type": "Question", "name": "What coatings do you use?", "acceptedAnswer": { "@type": "Answer", "text": "Commercial-grade two-part epoxy and acrylic urethane coatings. We use the professional-grade system for bathtubs. Coatings are low-VOC and food-safe once cured." } },
  { "@type": "Question", "name": "Do you work with property managers?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We handle multi-unit turnovers, rental refreshes, and strata work across Sydney. Volume pricing available for property managers with multiple units." } },
- { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 3-year workmanship warranty covering peeling, bubbling, and adhesion failure. We fix it free under normal use." } }
+ { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 5-year workmanship warranty covering peeling, bubbling, and adhesion failure. We fix it free under normal use." } }
  ]
 }
 </script>
@@ -184,7 +184,7 @@
  <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight">Warranty &amp; Aftercare</h2>
  </div>
  <div class="space-y-3">
- <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What warranty do you provide?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Up to 3-year workmanship warranty covering peeling, bubbling, and adhesion failure under normal use. Warranty terms vary by service type. We confirm the exact coverage in your quote. Fully insured with public liability.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What warranty do you provide?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Up to 5-year workmanship warranty covering peeling, bubbling, and adhesion failure under normal use. Warranty terms vary by service type. We confirm the exact coverage in your quote. Fully insured with public liability.</p></div></div>
 
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What does the warranty cover?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Workmanship defects under normal use. This includes peeling, bubbling, and adhesion failure. If something goes wrong because of our work, we come back and fix it free of charge. The warranty does not cover damage from misuse, abrasive cleaners, or impact.</p></div></div>
 

@@ -101,7 +101,7 @@
  <p class="text-[0.65rem] text-white/60 font-medium">from photos</p>
  </div>
  <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">Up to 3yr</p>
+ <p class="text-2xl font-extrabold text-white">Up to 5yr</p>
  <p class="text-[0.65rem] text-white/60 font-medium">Warranty</p>
  </div>
  </div>
@@ -117,7 +117,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 3-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">speed</span><span class="text-xs font-bold">Fast Turnaround</span></div>
  </div>
 </section>

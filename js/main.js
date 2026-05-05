@@ -40,8 +40,15 @@ document.addEventListener('DOMContentLoaded', function () {
     initBaSlider('hero-slider', 'ba-clip', 'ba-line', 'ba-handle');
     initBaSlider('hero-slider-mobile', 'mob-clip', 'mob-line', 'mob-handle');
 
-    /* ── Section 2B sliders — mark ready after images load ── */
-    document.querySelectorAll('.ba-slider').forEach(function(s){ s.classList.add('ba-ready'); });
+    /* ── Section 2B sliders — mark slider AND handle ready ── */
+    /* Bug fix 2026-05-05: style.css:190 hides .ba-handle without .ba-handle-ready,
+       but the JS was only adding .ba-ready to the slider. Add .ba-handle-ready to
+       every handle inside every section slider so the white circle + arrows show. */
+    document.querySelectorAll('.ba-slider').forEach(function(s){
+        s.classList.add('ba-ready');
+        s.querySelectorAll('.ba-handle').forEach(function(h){ h.classList.add('ba-handle-ready'); });
+        s.querySelectorAll('.ba-line').forEach(function(l){ l.classList.add('ba-line-ready'); });
+    });
 
     /* ── Mobile Menu ── */
     const menuBtn = document.getElementById('menu-btn');

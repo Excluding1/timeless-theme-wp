@@ -183,6 +183,52 @@ function timeless_shortcode_stat_grid( $atts ) {
 }
 add_shortcode( 'stat_grid', 'timeless_shortcode_stat_grid' );
 
+/* ─────────────────────────────────────────────────────────────────
+ * [timeless_quote_form] — Embeds the React quote form anywhere.
+ *
+ * Use on any page/post via: [timeless_quote_form]
+ * Or in PHP via: <?php echo do_shortcode('[timeless_quote_form]'); ?>
+ *
+ * Source: quote-form/src/QuoteForm.jsx
+ * Build:  cd quote-form && npm run build  →  outputs to assets/quote-form/
+ * Embed:  this shortcode prints the mount div, sets the asset base URL,
+ *         and enqueues the built JS + CSS bundles.
+ *
+ * Image base: the form references images at /images/areas/... and
+ * /images/services/... — those paths only resolve correctly when
+ * window.TIMELESS_FORM_BASE is set to the theme's assets/quote-form/
+ * URL (so /images/areas/shower.jpg becomes
+ * /wp-content/themes/.../assets/quote-form/images/areas/shower.jpg).
+ * ───────────────────────────────────────────────────────────────── */
+function timeless_quote_form_shortcode( $atts = array() ) {
+    static $rendered_once = false;
+    $atts = shortcode_atts( array(
+        'id' => 'quote-form-root',
+    ), $atts, 'timeless_quote_form' );
+
+    $base_url = get_template_directory_uri() . '/assets/quote-form';
+    $js_url   = $base_url . '/quote-form.js';
+    $css_url  = $base_url . '/quote-form.css';
+
+    ob_start();
+    ?>
+    <div id="<?php echo esc_attr( $atts['id'] ); ?>" class="timeless-quote-form-mount" style="min-height:400px;"></div>
+    <?php if ( ! $rendered_once ) :
+        $rendered_once = true;
+        // Cache-bust on the JS file's mtime so deploys are immediately visible without manual cache-clear.
+        $js_path  = get_template_directory() . '/assets/quote-form/quote-form.js';
+        $css_path = get_template_directory() . '/assets/quote-form/quote-form.css';
+        $js_ver   = file_exists( $js_path )  ? filemtime( $js_path )  : '1';
+        $css_ver  = file_exists( $css_path ) ? filemtime( $css_path ) : '1';
+        ?>
+        <link rel="stylesheet" href="<?php echo esc_url( $css_url . '?v=' . $css_ver ); ?>" />
+        <script>window.TIMELESS_FORM_BASE = <?php echo wp_json_encode( $base_url ); ?>;</script>
+        <script type="module" defer src="<?php echo esc_url( $js_url . '?v=' . $js_ver ); ?>"></script>
+    <?php endif;
+    return ob_get_clean();
+}
+add_shortcode( 'timeless_quote_form', 'timeless_quote_form_shortcode' );
+
 /* Flush rewrite rules when CPT is registered (one-time, on theme activation) */
 function timeless_flush_blog_rewrites() {
     if ( ! get_option( 'timeless_blog_rewrites_flushed' ) ) {
@@ -464,12 +510,14 @@ function timeless_create_pages() {
         array( 'title' => 'Service Areas', 'slug' => 'areas', 'template' => 'page-templates/page-areas.php' ),
         array( 'title' => 'FAQs',    'slug' => 'faqs',    'template' => 'page-templates/page-faqs.php' ),
         array( 'title' => 'Privacy Policy', 'slug' => 'privacy', 'template' => 'page-templates/page-privacy.php' ),
+        array( 'title' => 'Customer Terms of Service', 'slug' => 'terms', 'template' => 'page-templates/page-terms.php' ),
         // City homepages — currently /sydney/ duplicates / for nationwide expansion staging.
         // When Melbourne launches: / becomes Australia-neutral, /sydney/ keeps the Sydney
         // content (page-sydney.php diverges from front-page.php at that point).
         array( 'title' => 'Bathroom Resurfacing Sydney', 'slug' => 'sydney', 'template' => 'page-templates/page-sydney.php' ),
         // Service pages — universal slugs (no -sydney suffix) for nationwide expansion
         array( 'title' => 'Shower Regrouting',           'slug' => 'services/shower-regrouting',           'template' => 'page-templates/page-shower-regrouting.php' ),
+        array( 'title' => 'Shower Resurfacing',          'slug' => 'services/shower-resurfacing',          'template' => 'page-templates/page-shower-resurfacing.php' ),
         array( 'title' => 'Bath Resurfacing',            'slug' => 'services/bath-resurfacing',            'template' => 'page-templates/page-bath-resurfacing.php' ),
         array( 'title' => 'Tile Resurfacing',            'slug' => 'services/tile-resurfacing',            'template' => 'page-templates/page-tile-resurfacing.php' ),
         array( 'title' => 'Vanity Refinishing',          'slug' => 'services/vanity-refinishing',          'template' => 'page-templates/page-vanity-refinishing.php' ),
@@ -488,6 +536,9 @@ function timeless_create_pages() {
         array( 'title' => 'Mouldy Silicone Replacement', 'slug' => 'services/mouldy-silicone-replacement', 'template' => 'page-templates/page-mouldy-silicone-replacement.php' ),
         array( 'title' => 'Basin Chip Repair',           'slug' => 'services/basin-chip-repair',           'template' => 'page-templates/page-basin-chip-repair.php' ),
         array( 'title' => 'Vanity Respray',              'slug' => 'services/vanity-respray',              'template' => 'page-templates/page-vanity-respray.php' ),
+        // Top-level non-services pages
+        array( 'title' => 'Warranty',                     'slug' => 'warranty',                             'template' => 'page-templates/page-warranty.php' ),
+        array( 'title' => 'Care Instructions',            'slug' => 'care-instructions',                    'template' => 'page-templates/page-care-instructions.php' ),
     );
 
     foreach ( $pages as $p ) {
@@ -539,6 +590,27 @@ function timeless_create_pages() {
     flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'timeless_create_pages' );
+
+/**
+ * One-time backfill so new entries added to timeless_create_pages() take effect WITHOUT
+ * needing a full theme switch. Fires once on init then sets a flag to prevent re-runs.
+ *
+ * Use case: when a new service page is added (e.g. shower-resurfacing 2026-05-04), the
+ * `after_switch_theme` hook only fires on actual theme switches — not on file uploads /
+ * theme replacements. This backfill catches up any missing pages on the next admin or
+ * front-end visit. Safe because timeless_create_pages() is idempotent (skips existing).
+ *
+ * Bump the version flag (`timeless_pages_backfill_v4_done` → `_v4_done` etc) whenever
+ * new pages are added to the auto-create list to re-trigger the backfill once more.
+ */
+function timeless_pages_backfill_v4() {
+    if ( get_option( 'timeless_pages_backfill_v4_done' ) ) return;
+    timeless_create_pages();
+    // Mark all prior versions done too, so the upgrade is idempotent
+    update_option( 'timeless_pages_backfill_v3_done', '1' );
+    update_option( 'timeless_pages_backfill_v4_done', '1' );
+}
+add_action( 'init', 'timeless_pages_backfill_v4' );
 
 /**
  * One-time URL migration: drop "-sydney" suffix from service page slugs.
@@ -1872,6 +1944,7 @@ function timeless_seo_meta() {
         'stained-bathtub-resurfacing'    => 'Stained bathtub resurfacing Sydney. Remove yellow, brown, and rust stains permanently with professional recoating.',
         'peeling-bathtub-resurfacing'    => 'Peeling bathtub resurfacing Sydney. Fix failed DIY kits and peeling coatings with professional two-part acrylic system.',
         'bathroom-tile-resurfacing'      => 'Bathroom tile resurfacing Sydney. Fresh high-gloss white finish over your existing tiles. No demolition, 1-2 day service.',
+        'shower-resurfacing'             => 'Shower tile resurfacing Sydney. Modernise dated shower tile colour without demolition. Walls only or walls + floor. Fixed-price quote from photos.',
         'mouldy-shower-grout'            => 'Mouldy shower grout removal Sydney. Strip black mould grout and replace with waterproof epoxy. Stops mould permanently.',
         'cracked-grout-repair'           => 'Cracked grout repair Sydney. Fix crumbling, cracked shower and bathroom grout before water damage occurs.',
         'mouldy-silicone-replacement'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',

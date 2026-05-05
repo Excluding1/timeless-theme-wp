@@ -23,7 +23,7 @@ return array(
         'noun'           => 'bath',
         'hero_image'     => 'bath-resurfacing/hero.jpg',
         'lifespan'       => 'up to 10 years',
-        'warranty'       => 'Up to 3-year workmanship warranty',
+        'warranty'       => 'Up to 5-year workmanship warranty',
         'turnaround'     => '1 day',
         'savings_pct'    => '80',
         'finish_short'   => 'high-gloss white',

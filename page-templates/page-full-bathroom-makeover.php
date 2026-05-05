@@ -117,7 +117,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">3-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">groups</span><span class="text-xs font-bold">Single Team, One Visit</span></div>
  </div>
 </section>
@@ -297,7 +297,7 @@
  </div>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
  <!-- Connector line (desktop only) -->
- <div class="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
+ <div class="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-[2px] border-t-2 border-dashed border-[#e7c08b]/40" aria-hidden="true"></div>
  <div class="text-center reveal">
  <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center font-bold mx-auto mb-4 text-xl border-4 border-white shadow-md relative z-10">1</div>
  <h3 class="font-bold text-primary text-sm mb-2">Send Photos</h3>
