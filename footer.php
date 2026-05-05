@@ -68,22 +68,7 @@ $phone      = timeless_phone();
     </div>
 </footer>
 
-<!-- MOBILE STICKY CTA BAR — fixed bottom on mobile only, hidden on /contact/ to avoid duplicate CTA -->
-<?php if ( ! is_page( 'contact' ) ) : ?>
-<div class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-surface-container shadow-[0_-2px_8px_rgba(0,0,0,0.06)]">
-    <div class="grid grid-cols-2 gap-2 p-3">
-        <a href="tel:<?php echo esc_attr( $phone_link ); ?>" class="flex items-center justify-center gap-2 py-3 rounded-lg border border-primary text-primary font-bold text-sm" aria-label="Call <?php echo esc_attr( $phone ); ?>">
-            <span class="material-symbols-outlined text-lg" aria-hidden="true">call</span>
-            Call now
-        </a>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-white font-bold text-sm">
-            <span class="material-symbols-outlined text-lg" aria-hidden="true">request_quote</span>
-            Get quote
-        </a>
-    </div>
-</div>
-<style>@media (max-width: 1023px) { body { padding-bottom: 76px; } }</style>
-<?php endif; ?>
+<!-- Mobile sticky CTA bar removed 2026-05-05 per Allan: blocking content + duplicate CTA (each page already has Get Quote + phone in nav + footer + section CTAs) -->
 
 <?php wp_footer(); ?>
 </body>
