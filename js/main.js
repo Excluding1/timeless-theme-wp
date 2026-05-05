@@ -77,14 +77,76 @@ document.addEventListener('DOMContentLoaded', function () {
     initBaSlider('hero-slider', 'ba-clip', 'ba-line', 'ba-handle');
     initBaSlider('hero-slider-mobile', 'mob-clip', 'mob-line', 'mob-handle');
 
-    /* ── Section 2B sliders — mark slider AND handle ready ── */
-    /* Bug fix 2026-05-05: style.css:190 hides .ba-handle without .ba-handle-ready,
-       but the JS was only adding .ba-ready to the slider. Add .ba-handle-ready to
-       every handle inside every section slider so the white circle + arrows show. */
-    document.querySelectorAll('.ba-slider').forEach(function(s){
-        s.classList.add('ba-ready');
-        s.querySelectorAll('.ba-handle').forEach(function(h){ h.classList.add('ba-handle-ready'); });
-        s.querySelectorAll('.ba-line').forEach(function(l){ l.classList.add('ba-line-ready'); });
+    /* ── Section 2B sliders — interactive drag with clip-path (replaces inline page-level JS) ──
+       Bug fix 2026-05-05: previously each service page had its own inline <script>
+       that used clip.style.width = pct+"%" — this OVERRODE the static clip-path:inset()
+       in the HTML and reverted to the broken "compresses BEFORE image" pattern.
+       Now every .ba-slider on every page uses this single canonical drag handler. */
+    document.querySelectorAll('.ba-slider').forEach(function(slider){
+        var clip   = slider.querySelector('.ba-clip');
+        var line   = slider.querySelector('.ba-line');
+        var handle = slider.querySelector('.ba-handle');
+        slider.classList.add('ba-ready');
+        if (!clip || !line || !handle) {
+            // Display-only slider (no draggable elements) — just unlock visibility
+            return;
+        }
+
+        // Mark elements visible (CSS .ba-handle:not(.ba-handle-ready) hides them)
+        handle.classList.add('ba-handle-ready');
+        line.classList.add('ba-line-ready');
+
+        // Read initial divider position from existing clip-path:inset(0 X% 0 0)
+        // X% = right-inset (hidden), so visible = (100-X)%
+        var initialPct = 50;
+        var match = (clip.style.clipPath || '').match(/inset\(0\s+(\d+(?:\.\d+)?)%\s+0\s+0\)/);
+        if (match) initialPct = 100 - parseFloat(match[1]);
+
+        var active = false, pendingX = null, rafId = null;
+        var lastRatio = initialPct / 100;
+
+        function applyPositions(px, width){
+            var minPx = Math.round(width * 0.03);
+            var maxPx = Math.round(width * 0.97);
+            px = Math.max(minPx, Math.min(maxPx, Math.round(px)));
+            var rightInsetPx = Math.max(0, width - px);
+            clip.style.clipPath = 'inset(0 ' + rightInsetPx + 'px 0 0)';
+            line.style.left = px + 'px';
+            handle.style.left = px + 'px';
+            lastRatio = px / width;
+        }
+
+        function scheduleMove(){
+            if (rafId !== null) return;
+            rafId = requestAnimationFrame(function(){
+                rafId = null;
+                if (pendingX === null) return;
+                var x = pendingX; pendingX = null;
+                var r = slider.getBoundingClientRect();
+                applyPositions(x - r.left, r.width);
+            });
+        }
+
+        function move(x){ pendingX = x; scheduleMove(); }
+        function startDrag(x, e){ active = true; move(x); if (e) e.preventDefault(); }
+
+        handle.addEventListener('mousedown', function(e){ startDrag(e.clientX, e); });
+        line.addEventListener('mousedown', function(e){ startDrag(e.clientX, e); });
+        document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
+        document.addEventListener('mouseup', function(){ active = false; });
+        handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX, e); }, {passive:false});
+        line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX, e); }, {passive:false});
+        document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
+        document.addEventListener('touchend', function(){ active = false; });
+
+        window.addEventListener('resize', function(){
+            var r = slider.getBoundingClientRect();
+            applyPositions(lastRatio * r.width, r.width);
+        });
+
+        // Set initial pixel positions matching the original % so first paint is correct
+        var r = slider.getBoundingClientRect();
+        if (r.width > 0) applyPositions(initialPct / 100 * r.width, r.width);
     });
 
     /* ── Mobile Menu ── */

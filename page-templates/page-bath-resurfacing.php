@@ -595,52 +595,6 @@
 </main>
 
 <script>
-/* -- Hero Before/After Slider -- */
-(function(){
- var slider = document.getElementById('hero-slider');
- if(!slider) return;
- var clip = document.getElementById('ba-clip');
- var line = document.getElementById('ba-line');
- var handle = document.getElementById('ba-handle');
- var bImg = document.getElementById('ba-before-img');
- var active = false;
- function syncWidth(){ var w = slider.offsetWidth + 'px'; if(bImg){ bImg.style.width = w; bImg.style.minWidth = w; bImg.style.maxWidth = w; } }
- syncWidth(); window.addEventListener('resize', syncWidth);
- function move(x){ var r = slider.getBoundingClientRect(); var pct = ((x - r.left) / r.width) * 100; pct = Math.max(3, Math.min(97, pct)); clip.style.width = pct + '%'; line.style.left = pct + '%'; handle.style.left = pct + '%'; }
- function startDrag(x,e){ active=true; move(x); if(e) e.preventDefault(); }
- handle.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
- line.addEventListener('mousedown', function(e){ startDrag(e.clientX,e); });
- document.addEventListener('mousemove', function(e){ if(active) move(e.clientX); });
- document.addEventListener('mouseup', function(){ active=false; });
- handle.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
- line.addEventListener('touchstart', function(e){ startDrag(e.touches[0].clientX,e); }, {passive:false});
- document.addEventListener('touchmove', function(e){ if(active){ e.preventDefault(); move(e.touches[0].clientX); } }, {passive:false});
- document.addEventListener('touchend', function(){ active=false; });
-})();
-</script>
-
-<script>
-/* -- Section 2B Before/After Sliders -- */
-document.querySelectorAll(".ba-slider").forEach(function(slider){
- var clip=slider.querySelector(".ba-clip"),line=slider.querySelector(".ba-line"),handle=slider.querySelector(".ba-handle"),active=false;
- var bImg=slider.querySelector(".ba-before img") || slider.querySelector(".ba-before");
- if(!clip||!line||!handle) return;
- function sync(){if(bImg){var w=slider.offsetWidth+"px";bImg.style.width=w;bImg.style.minWidth=w;bImg.style.maxWidth=w;}}
- sync(); window.addEventListener("resize",sync);
- function move(x){var r=slider.getBoundingClientRect();var pct=((x-r.left)/r.width)*100;pct=Math.max(3,Math.min(97,pct));clip.style.width=pct+"%";line.style.left=pct+"%";handle.style.left=pct+"%";}
- function startDrag(x,e){active=true;move(x);if(e)e.preventDefault();}
- handle.addEventListener("mousedown",function(e){startDrag(e.clientX,e);});
- line.addEventListener("mousedown",function(e){startDrag(e.clientX,e);});
- document.addEventListener("mousemove",function(e){if(active)move(e.clientX);});
- document.addEventListener("mouseup",function(){active=false;});
- handle.addEventListener("touchstart",function(e){startDrag(e.touches[0].clientX,e);},{passive:false});
- line.addEventListener("touchstart",function(e){startDrag(e.touches[0].clientX,e);},{passive:false});
- document.addEventListener("touchmove",function(e){if(active){e.preventDefault();move(e.touches[0].clientX);}},{passive:false});
- document.addEventListener("touchend",function(){active=false;});
-});
-</script>
-
-<script>
 /* -- Logo Scroller Momentum Carousel -- */
 (function(){
  var el = document.getElementById('logo-scroller');
