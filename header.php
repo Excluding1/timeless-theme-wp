@@ -49,7 +49,7 @@ $phone      = timeless_phone();
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl shadow-xs" id="main-nav">
         <div class="flex justify-between items-center px-6 sm:px-8 py-4 max-w-7xl mx-auto">
             <a class="text-2xl font-black tracking-tighter text-[#1B2A4A]" href="<?php echo esc_url( home_url( '/' ) ); ?>">Timeless Resurfacing</a>
-            <div class="hidden lg:flex items-center space-x-8 font-medium text-sm">
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm">
                 <button id="services-btn" class="text-slate-500 hover:text-[#1B2A4A] transition-colors flex items-center gap-1 py-2" onmouseenter="showMega()" onclick="toggleMega()">Services <span class="material-symbols-outlined text-sm" aria-hidden="true">expand_more</span></button>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Before &amp; After</a>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>">Service Areas</a>
