@@ -185,7 +185,30 @@ html, body {
    hidden via .ba-handle-hidden until JS positions it correctly — this
    prevents the brief "wrong-position handle flash" without blocking
    LCP detection. */
-#hero-slider img, #hero-slider-mobile img { pointer-events: none; -webkit-user-drag: none; }
+#hero-slider img, #hero-slider-mobile img,
+.ba-slider img,
+.ba-slider picture,
+.ba-slider picture img { pointer-events: none; -webkit-user-drag: none; }
+
+/* Section 2B slider images — explicit width:100% + height:100% + position:absolute
+   so the WebP <picture> wrapper (added by timeless_webp_picture_filter) doesn't
+   collapse to inline-natural-size. The picture stays display:block + fills its
+   parent .ba-before / .ba-clip; the inner img also fills picture. Without these,
+   the BEFORE image renders at intrinsic size and the slider looks broken. */
+.ba-slider .ba-before,
+.ba-slider .ba-before picture { display: block; width: 100%; height: 100%; }
+.ba-slider .ba-before img,
+.ba-slider .ba-before picture img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Same for the AFTER image (the outer container's direct img child) */
+.ba-slider > div:first-child picture { display: block; width: 100%; height: 100%; }
+.ba-slider > div:first-child picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
 #ba-handle, #mob-handle { transition: none; }
 .ba-slider .ba-handle:not(.ba-handle-ready) { opacity: 0; }
 .ba-slider .ba-handle.ba-handle-ready { opacity: 1; transition: opacity 0.2s ease; }

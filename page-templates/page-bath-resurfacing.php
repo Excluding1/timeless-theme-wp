@@ -43,13 +43,6 @@
 }
 </script>
 
-<style>
- .ba-card { position: relative; overflow: hidden; cursor: ew-resize; }
- .ba-card .ba-overlay { position: absolute; top: 0; left: 0; bottom: 0; width: 50%; overflow: hidden; }
- #hero-slider img, .ba-slider img { pointer-events: none; -webkit-user-drag: none; }
- .ba-slider .ba-before img { position:absolute; top:0; left:0; height:100%; object-fit:cover; }
-</style>
-
 <main>
 
 <!-- BREADCRUMB -->
