@@ -77,8 +77,8 @@
  <div class="absolute inset-0 w-full h-full">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/hero-after.png" alt="Sealed shower with fresh silicone" class="w-full h-full object-cover" draggable="false" />
  </div>
- <div id="mob-clip" class="absolute top-0 left-0 bottom-0 overflow-hidden" style="width:33%;">
- <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/hero-before.png" alt="Leaking shower" class="object-cover" style="position:absolute;top:0;left:0;height:100%;width:300%;" draggable="false" />
+ <div id="mob-clip" class="absolute inset-0" style="clip-path:inset(0 67% 0 0);">
+ <img id="mob-before-img" src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/hero-before.png" alt="Leaking shower" class="absolute inset-0 w-full h-full object-cover" draggable="false" />
  </div>
  <div id="mob-line" class="absolute top-0 bottom-0 w-[2px] bg-white" style="left:33%;z-index:20;cursor:ew-resize;"></div>
  <div id="mob-handle" class="absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:33%;z-index:25;cursor:ew-resize;">
@@ -195,7 +195,7 @@
  <div class="order-1 lg:order-2">
  <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
  <div class="absolute inset-0 w-full h-full"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/leaking-after.png" alt="Shower after silicone replacement" class="w-full h-full object-cover absolute inset-0" /></div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/leaking-before.png" alt="Leaking shower silicone" class="w-full h-full object-cover absolute inset-0" /></div></div>
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/leaking-before.png" alt="Leaking shower silicone" class="w-full h-full object-cover absolute inset-0" /></div></div>
  <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
  <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:50%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>
@@ -221,7 +221,7 @@
  <div class="order-1 lg:order-1">
  <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
  <div class="absolute inset-0 w-full h-full"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/mouldy-after.png" alt="Clean shower corners" class="w-full h-full object-cover absolute inset-0" /></div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:33%;"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/mouldy-before.png" alt="Mouldy shower corners" class="w-full h-full object-cover absolute inset-0" /></div></div>
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 67% 0 0);"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/mouldy-before.png" alt="Mouldy shower corners" class="w-full h-full object-cover absolute inset-0" /></div></div>
  <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:33%;z-index:20;cursor:ew-resize;"></div>
  <div class="ba-handle absolute top-1/2 w-11 h-11 -mt-[22px] -ml-[22px] rounded-full bg-white shadow-xl flex items-center justify-center" style="left:33%;z-index:25;cursor:ew-resize;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10L2 10M2 10L4.5 7.5M2 10L4.5 12.5M14 10L18 10M18 10L15.5 7.5M18 10L15.5 12.5" stroke="#041534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
  <span class="absolute top-3 left-3 bg-black/60 text-white text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">Before</span>

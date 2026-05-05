@@ -204,7 +204,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/dated-after.png" alt="Modern white tiles" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/dated-before.png" alt="Outdated pink tiles" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -238,7 +238,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/grout-after.png" alt="Clean tiles and grout" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/grout-before.png" alt="Stained tiles with dirty grout" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -272,7 +272,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/cracked-after.png" alt="Repaired tiles" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/tile-resurfacing/cracked-before.png" alt="Cracked damaged tiles" class="w-full h-full object-cover absolute inset-0" />
  </div>

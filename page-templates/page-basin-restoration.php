@@ -212,7 +212,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/chips-after.png" alt="Basin after chip and crack repair" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 34% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/chips-before.png" alt="Chipped and cracked basin" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -246,7 +246,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/stain-after.png" alt="Basin after stain and discolouration removal" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/stain-before.png" alt="Stained discoloured basin" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -280,7 +280,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/worn-after.png" alt="Basin after worn finish restoration" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/basin-restoration/worn-before.png" alt="Worn scratched basin finish" class="w-full h-full object-cover absolute inset-0" />
  </div>

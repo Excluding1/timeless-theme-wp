@@ -210,7 +210,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/chips-after.png" alt="Repaired bathtub" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:66%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 34% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/chips-before.png" alt="Chipped bathtub" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -244,7 +244,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/stain-after.png" alt="Clean restored bathtub" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/stain-before.png" alt="Stained bathtub" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -278,7 +278,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/colour-after.png" alt="Modern white bath" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/colour-before.png" alt="Dated coloured bath" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -312,7 +312,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/worn-after.png" alt="Smooth glossy finish" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/bath-resurfacing/worn-before.png" alt="Worn rough finish" class="w-full h-full object-cover absolute inset-0" />
  </div>

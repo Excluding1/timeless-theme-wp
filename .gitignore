@@ -19,13 +19,21 @@ quote-form/.env.production
 .vscode/
 .idea/
 
-# Stray screenshots
-homepage-mobile-full.png
-vanity-desktop-full.png
+# Stray screenshots — dev-time, never deploy
+# All screenshots should go in .claude/screenshots/ (already gitignored above).
+# These root-level patterns catch the case where someone drops one at the top.
+*.png.dev
+homepage-*.png
+vanity-*.png
 thesis-*.png
+live-*.png
+localhost-*.png
+*-screenshot.png
+*-fullsize.png
 
 # Logs
 npm-debug.log*
+*.log
 
 # Responsive image variants — derived artifacts, regenerable via:
 #   python3 scripts/generate-responsive-images.py
@@ -39,5 +47,5 @@ images/**/*-[0-9]*w.jpg.webp
 images/**/*-[0-9]*w.jpeg.webp
 images/**/*-[0-9]*w.png.webp
 
-# Deploy zip artifacts
+# Deploy zip artifacts (zips of the theme go to ../timeless-theme.zip outside repo)
 *.zip

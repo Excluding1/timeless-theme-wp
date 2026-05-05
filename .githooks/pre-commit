@@ -1,0 +1,102 @@
+#!/bin/bash
+# Pre-commit hook — Timeless Theme regression detector
+# Activated 2026-05-05 after 138-class Tailwind v4 migration regression + slider bugs
+
+set -eu
+
+ERR=0
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+# Get list of staged files (only PHP/JS/CSS/JSON/MD)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(php|js|css|json|md)$' || true)
+STAGED_PHP=$(echo "$STAGED_FILES" | grep -E '\.php$' || true)
+
+if [ -z "$STAGED_FILES" ]; then
+  echo "✅ No relevant files staged."
+  exit 0
+fi
+
+echo "🔍 Pre-commit checks on $(echo "$STAGED_FILES" | wc -l | tr -d ' ') file(s)..."
+
+# Helper: grep across staged files only (safe with empty input)
+check_pattern() {
+  local pattern="$1"
+  local label="$2"
+  local files="$3"
+  local severity="${4:-FAIL}"
+  
+  if [ -z "$files" ]; then return 0; fi
+  
+  local matches
+  matches=$(echo "$files" | xargs -I {} grep -lE "$pattern" {} 2>/dev/null || true)
+  
+  if [ -n "$matches" ]; then
+    if [ "$severity" = "FAIL" ]; then
+      echo -e "${RED}❌ FAIL: $label${NC}"
+      echo "$matches" | head -3 | while read -r f; do
+        grep -nE "$pattern" "$f" 2>/dev/null | head -2 | sed "s|^|  $f:|"
+      done
+      ERR=1
+    else
+      echo -e "${YELLOW}⚠️  WARN: $label${NC}"
+    fi
+  fi
+}
+
+# Check 1: Tailwind v3 negative-arbitrary-value syntax
+check_pattern '(mt|ml|mr|mb|mx|my|top|left|right|bottom)-\[-[0-9]' \
+  "Tailwind v3 negative-arbitrary-value syntax. Use '-mt-[X]' (negative outside brackets)." \
+  "$STAGED_FILES"
+
+# Check 2: Old gradient class
+check_pattern 'bg-gradient-to-' \
+  "Tailwind v3 'bg-gradient-to-*'. Use 'bg-linear-to-*' (v4 syntax)." \
+  "$STAGED_FILES"
+
+# Check 3: Section 2B 'width:X%' broken clip pattern
+check_pattern 'class="ba-clip[^"]*"[^>]*style="width:[0-9]+%' \
+  "Section 2B slider 'width:X%' pattern compresses BEFORE image. Use 'clip-path:inset(0 [100-X]% 0 0)'." \
+  "$STAGED_PHP"
+
+# Check 4: Hardcoded enqueue version (cache-bust failure)
+check_pattern "wp_enqueue_(script|style)\([^)]*'1\.0\.0'" \
+  "Hardcoded '1.0.0' in wp_enqueue. Use filemtime() instead." \
+  "$STAGED_PHP"
+
+# Check 5: w-0.5 / h-0.5 (warning — usually fine in v4 but may not get scanned)
+check_pattern '(class=|"\W)(w-0\.5|h-0\.5)(\s|"|/)' \
+  "w-0.5 / h-0.5 detected. Prefer w-[2px] / h-[2px] for guaranteed v4 compilation." \
+  "$STAGED_PHP" "WARN"
+
+# Check 6: Stray dev screenshots in repo root staged
+SCREENSHOT_STAGED=$(echo "$STAGED_FILES" | grep -E '^(live-|localhost-|homepage-|vanity-|thesis-).*\.png$' || true)
+if [ -n "$SCREENSHOT_STAGED" ]; then
+  echo -e "${RED}❌ FAIL: Dev screenshot in repo root. Move to .claude/screenshots/.${NC}"
+  echo "$SCREENSHOT_STAGED" | head -3 | sed 's|^|  |'
+  ERR=1
+fi
+
+# Check 7: .env files staged
+ENV_STAGED=$(echo "$STAGED_FILES" | grep -E '\.env$' || true)
+if [ -n "$ENV_STAGED" ]; then
+  echo -e "${RED}❌ FAIL: .env file staged. Only .env.example should be tracked.${NC}"
+  echo "$ENV_STAGED" | sed 's|^|  |'
+  ERR=1
+fi
+
+# Check 8: .zip files staged
+ZIP_STAGED=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.zip$' || true)
+if [ -n "$ZIP_STAGED" ]; then
+  echo -e "${RED}❌ FAIL: .zip file staged. Deploy zips go OUTSIDE the repo.${NC}"
+  echo "$ZIP_STAGED" | sed 's|^|  |'
+  ERR=1
+fi
+
+if [ $ERR -eq 0 ]; then
+  echo -e "${GREEN}✅ All pre-commit checks passed.${NC}"
+fi
+
+exit $ERR

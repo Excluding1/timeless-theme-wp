@@ -64,10 +64,70 @@ To swap an image: replace the `.jpg` file in the matching folder. The PHP refere
 - All service pages follow identical HTML structure — hero image, problem description, process steps, FAQ, CTA
 
 ## Deploy Workflow
-1. Edit files in this repo
-2. `git add -A && git commit -m "description" && git push`
-3. Zip (excluding .git + dev-only files + data + quote-form + brand internal): `zip -r ../timeless-theme.zip . -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*"`
-4. Upload via wp-admin → Appearance → Themes → Upload → "Replace current with uploaded"
+
+### CRITICAL: dev screenshots, build artifacts, and stray files MUST stay out of the deploy zip
+Never use `*.png` as a blanket exclusion (that ate hero images on 2026-05-05). Never use `git add -A` when the working tree has unrelated changes. The deploy command below is bulletproof — use it verbatim.
+
+### 1. Edit files in this repo
+
+### 2. Commit ONLY the files you intended to change
+```bash
+git add path/to/specific/files.php   # NOT git add -A
+git commit -m "description"
+git push
+```
+
+### 3. Build the deploy zip (bulletproof exclusions)
+```bash
+cd /Users/angelapham/Downloads/timeless-theme-wp
+zip -rq ../timeless-theme.zip . \
+  -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
+  ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
+  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" \
+  "src/*" "postcss.config.js" "package.json" "package-lock.json" \
+  "memory/*" "*.log" "*.zip" "*.map"
+```
+
+**Includes:** all theme PHP, `images/` (incl. responsive variants), `assets/main.min.css` (compiled Tailwind), `assets/quote-form/` (React form build, untracked but required for homepage shortcode), `js/main.js`, `style.css`.
+
+**Excludes:** `.git/`, `.claude/` (dev tooling + screenshots — anything dev-side goes here), `docs/`/`data/`/`memory/` (CEO/AI internal), sibling apps in master-repo (`dashboard/`, `daemon/`, `scripts/`), build pipeline (`node_modules/`, `src/`).
+
+### 4. Upload via wp-admin
+Appearance → Themes → Upload → **"Replace current with uploaded"**
+
+### 5. Purge Cloudflare cache (REQUIRED — the step everyone forgets)
+Cloudflare dashboard → select `timelessresurfacing.com.au` → **Caching → Configuration → Purge Everything**.
+Without this, customers see cached HTML referencing old assets for up to 1 hour.
+
+### 6. Hard-refresh your browser
+Mac: `Cmd + Shift + R`, or open in Incognito.
+
+### 7. Verify
+- View page source → search `main.js?ver=` → should be a timestamp, NOT `1.0.0` (filemtime cache-bust working)
+- View page source → search `main.min.css?ver=` → should also be a timestamp
+- Service page → Section 2B before/after slider has visible white circle handle + arrow SVG
+- wp-admin → Themes → Theme Details → version reads `1.4.0`
+
+### Common deploy regressions to avoid (learned 2026-05-05)
+| Mistake | Symptom | Prevention |
+|---|---|---|
+| `*.png` blanket exclusion | All hero images missing | Exclude screenshots **by name** or rely on .gitignore + .claude/screenshots/ |
+| Hardcoded `?ver=1.0.0` on JS enqueue | JS updates never reach browsers | Always use `filemtime()` cache-busting on `wp_enqueue_script` |
+| `git add -A` with unrelated working tree | Half-done features ship | Stage specific files only |
+| Forgot Cloudflare purge | Updates take 1+ hour to appear | Purge after every theme upload |
+| Untracked broken templates leak via zip | New page-X.php appears with broken content | Move broken WIP files outside the theme dir |
+| Tailwind v3 syntax (`mt-[-22px]`, `w-0.5`) | Slider handles + lines invisible | Use `-mt-[22px]`, `w-[2px]` (v4 correct syntax) |
+| Section 2B sliders use `width:X%` clip | BEFORE image compressed, looks "chopped off" | Use `clip-path:inset(0 [100-X]% 0 0)` instead — same as hero slider |
+
+### Where to put things
+| Type | Location | Why |
+|---|---|---|
+| Dev screenshots (Lighthouse runs, regression photos) | `.claude/screenshots/` | Already gitignored + already excluded from zip |
+| Live-site curl outputs / debug logs | `.claude/debug/` | Same |
+| Local IDE state | `.claude/launch.json` etc. | Already gitignored |
+| Sibling apps you don't want deployed | `dashboard/`, `daemon/`, `quote-form/` | Already excluded from zip |
+| Real production images (job photos) | `images/services/X/` etc. | Tracked in git so they ship with theme |
+| Responsive image variants (`-400w`, `.webp`) | `images/...` (gitignored but on disk) | `timeless_webp_picture_filter` auto-serves them; deploys via zip include |
 
 ## Related Repos
 - **React Quote Form:** https://github.com/Excluding1/TimelessDash (branch `quote-form/react-v8`)

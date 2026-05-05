@@ -211,7 +211,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/peeling-after.png" alt="Refinished vanity after peeling laminate repair" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/peeling-before.png" alt="Vanity with peeling lifting laminate" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -245,7 +245,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/dated-after.png" alt="Modern refinished vanity after colour change" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/dated-before.png" alt="Dated dull vanity with outdated finish" class="w-full h-full object-cover absolute inset-0" />
  </div>
@@ -279,7 +279,7 @@
  <div class="absolute inset-0 w-full h-full bg-linear-to-br from-emerald-50 via-white to-[#e7c08b]/20 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/scratched-after.png" alt="Smooth refinished vanity after scratch and stain removal" class="w-full h-full object-cover absolute inset-0" />
  </div>
- <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+ <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);">
  <div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center">
  <img src="<?php echo get_template_directory_uri(); ?>/images/services/vanity-refinishing/scratched-before.png" alt="Scratched stained vanity with water damage" class="w-full h-full object-cover absolute inset-0" />
  </div>
