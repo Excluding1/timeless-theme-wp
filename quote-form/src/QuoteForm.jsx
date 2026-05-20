@@ -870,8 +870,30 @@ export default function QuoteForm() {
   };
 
   /* ─── WEBHOOK CONFIG ─── */
-  const GHL_WEBHOOK = "https://services.leadconnectorhq.com/hooks/LOCATION_ID/webhook-trigger/REPLACE_ME";
-  const GHL_PARTIAL = "https://services.leadconnectorhq.com/hooks/LOCATION_ID/webhook-trigger/REPLACE_ME_PARTIAL";
+  // GHL inbound webhook URLs (W1 New Lead from Form LIVE, W2 Abandoned Quote Recovery DRAFT).
+  // LOCATION_ID = Uz8fQwDiUxAHVtlruspD. Webhook IDs are stable per workflow trigger.
+  // Source: day_4_w1_w2_build_2026-05-18.md:48-51 (W1) + :73-77 (W2).
+  const GHL_WEBHOOK = "https://services.leadconnectorhq.com/hooks/Uz8fQwDiUxAHVtlruspD/webhook-trigger/b1087b4d-0629-4e53-bf63-6ed41a436e6b";
+  const GHL_PARTIAL = "https://services.leadconnectorhq.com/hooks/Uz8fQwDiUxAHVtlruspD/webhook-trigger/11247014-933d-4731-ba38-8990256113ca";
+  // secret_token validates inbound webhooks at W1/W2 Action 1 Security Gate (If/Else default-deny).
+  // Source: day_4_w1_w2_build_2026-05-18.md:32-45. Stored in .env.local (gitignored via *.local).
+  // Placeholder fallback prevents accidental deploy without env — but real value must be set in production.
+  const GHL_SECRET_TOKEN = import.meta.env.VITE_GHL_SECRET_TOKEN || "TR_secret_v1_PLACEHOLDER";
+
+  // Map UTM / referrer signals to canonical GHL lead_source dropdown value.
+  // GHL canonical options: google_ads, seo_organic, gbp, meta_ads, referral, social, direct, other.
+  // Source: ghl_setup_spec_v2_2026-05-05.md:176.
+  const deriveLeadSource = () => {
+    const ref = (typeof document !== "undefined" && document.referrer) || "";
+    if (tracking.utm_source === "google" && tracking.utm_medium === "cpc") return "google_ads";
+    if (tracking.utm_source === "facebook" || tracking.utm_source === "instagram") return "meta_ads";
+    if (tracking.utm_medium === "organic") return "seo_organic";
+    if (tracking.utm_source === "gbp" || ref.includes("google.com/maps")) return "gbp";
+    if (ref.includes("facebook") || ref.includes("instagram")) return "social";
+    if (tracking.utm_source === "referral") return "referral";
+    if (!tracking.utm_source && !ref) return "direct";
+    return "other";
+  };
 
   /* ─── PARTIAL LEAD ─── */
   const partialSent = useRef(false);
@@ -881,7 +903,21 @@ export default function QuoteForm() {
     const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName: fn, lastName: ln, email: em, phone, customData: { form_status: "partial", step_reached: step, customer_type: cust, ...tracking } }),
+      body: JSON.stringify({
+        // W2 Action 1 Security Gate validates this (default-deny on mismatch).
+        secret_token: GHL_SECRET_TOKEN,
+        firstName: fn,
+        lastName: ln,
+        email: em,
+        phone,
+        customData: {
+          form_status: "partial",
+          step_reached: step,
+          customer_type: cust || "",
+          lead_source: deriveLeadSource(),
+          ...tracking,
+        },
+      }),
     }).catch(() => {});
     // GA4 conversion event for abandoned-quote / partial-fire path. Used for funnel analysis +
     // Google Ads optimisation (recover partial leads via the abandoned-quote SMS workflow W2).
@@ -896,8 +932,19 @@ export default function QuoteForm() {
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        firstName: fn, lastName: ln, email: em, phone,
-        customData: { form_status: "waitlist", out_of_area_address: addr, customer_type: cust || "", ...tracking },
+        // W2 Action 1 Security Gate validates this (default-deny on mismatch).
+        secret_token: GHL_SECRET_TOKEN,
+        firstName: fn,
+        lastName: ln,
+        email: em,
+        phone,
+        customData: {
+          form_status: "waitlist",
+          out_of_area_address: addr,
+          customer_type: cust || "",
+          lead_source: deriveLeadSource(),
+          ...tracking,
+        },
       }),
     }).catch(() => {});
   };
@@ -977,7 +1024,13 @@ export default function QuoteForm() {
     // Services text summary for human reading in CRM
     const servicesText = buildSummaryItems().map(i => `${i.area}: ${i.tradeName} (${i.easy})`).join(" | ");
 
+    // Normalize property_type to GHL canonical values (React state uses apt/comm shortcuts).
+    // Source: ghl_setup_spec_v2_2026-05-05.md:165 + day_4_w1_w2_build_2026-05-18.md:213.
+    const propertyTypeMap = { house: "house", apt: "apartment", comm: "commercial" };
+
     const payload = {
+      // W1 Action 1 Security Gate validates this against GHL workflow condition (default-deny on mismatch).
+      secret_token: GHL_SECRET_TOKEN,
       firstName: fn,
       lastName: ln,
       email: em,
@@ -986,10 +1039,14 @@ export default function QuoteForm() {
         // Customer
         customer_type: cust || "",
         company_name: co || "",
-        tenant_auth: tenAuth || "",
+        // Field key was `tenant_auth` (Day 8 prep 2026-05-20: corrected to `tenant_authorisation`
+        // — GHL key locked 2026-05-05 per ghl_setup_spec_v2:171, can't be edited post-save).
+        tenant_authorisation: tenAuth || "",
         landlord_email: llEm || "",
-        // Property
-        property_type: prop || "",
+        // Lead source mapped from UTM + referrer signals (ghl_setup_spec_v2:176).
+        lead_source: deriveLeadSource(),
+        // Property — normalize apt/comm to GHL canonical apartment/commercial (ghl_setup_spec_v2:165).
+        property_type: propertyTypeMap[prop] || "",
         property_address: addr,
         lift_access: prop === "apt" ? (lift || "not_specified") : "n/a",
         built_before_1990: builtBefore1990 || "not_asked",
@@ -1010,9 +1067,9 @@ export default function QuoteForm() {
         chip_repair_addon_json: JSON.stringify(chipRepairAddon),
         basin_finish: basinFinish,
         basin_custom_surfaces_json: JSON.stringify(basinCustomSurfaces),
-        // Conditional
+        // Conditional — `ventilation` key corrected to `has_ventilation` per ghl_setup_spec_v2:184
         previously_resurfaced: prevResurfaced || "not_asked",
-        ventilation: hasVentilation || "not_asked",
+        has_ventilation: hasVentilation || "not_asked",
         // Notes (consent is inferred from the act of submission — Allan call 2026-05-05)
         customer_notes: notes,
         // Photos
