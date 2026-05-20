@@ -22,7 +22,7 @@
 | ABN — Pty Ltd company | ❌ | Deferred until revenue >$5K/mo for 3 months | — |
 | ASIC Business Name registration | ✅ | "Timeless Resurfacing" — 1 year, paid $45 on 2026-03-27 (per finance dashboard) | 2026-05-01 |
 | Business name renewal | ⏳ | Next due March 2027 | — |
-| Public Liability Insurance | ✅ | $20M cover, active per saved memory | ❓ — need policy doc + expiry date |
+| Public Liability Insurance | ✅ Active | **F2 LOCK 2026-05-16:** Marko PL ACTIVE. Certificate of Currency arriving 2026-05-17 (Allan to file once received). $20M PL + Products Liability + Subcontractor Extension + $250K Statutory Liability via specialist trades broker. Locked in `memory/f_responses_locked_2026-05-16.md`. Unblocks customer-facing trust badge + Sub Service Agreement deployment. | 2026-05-16 |
 | Professional Indemnity | ❓ | CEO to ask | — |
 | WorkCover NSW | ❌ | Not required while no employees, only contractors | — |
 | Builder Licence | ❌ DEFERRED INDEFINITELY | **Allan's call 2026-05-01**: lengthy process (22-27 weeks via partner cert path; 13 weeks via licensed-supervisor hire) + insufficient funds. Strategy: keep all jobs <$5K HBA threshold via per-bathroom invoice splitting. Revisit when funds + revenue allow. Future pathway documented in [CEO.md § Compliance](CEO.md). | 2026-05-01 |
@@ -38,8 +38,8 @@
 | Item | Status | Details | Last verified |
 |---|---|---|---|
 | Business bank account | ✅ | **Westpac Business partnership account**, opened mid-April 2026. Partnership agreement + IDs used to open. | 2026-05-01 |
-| $100 bank signup bonus | ⏳ | **Expected ~mid-June 2026** (~2 months post-opening) | — |
-| Current cash on hand | $1,500 | Per starting capital + $0 revenue, after $187.56 expenses tracked. **Note: NOT $1,600 — bonus is pending.** | 2026-05-01 |
+| $100 bank signup bonus | ✅ Received | F10 LOCK 2026-05-16: $100 arrived. Cash on hand updated. | 2026-05-16 |
+| Current cash on hand | $1,600 | Per starting capital + $100 bank bonus, after $187.56 expenses tracked. F10 LOCK 2026-05-16. | 2026-05-16 |
 | Stripe account | ❌ | Sign up Phase 1 before first quote sent | — |
 | pay.com.au account | ❌ | Sign up before first subcontractor paid | — |
 | Rewards credit card linked to pay.com.au | ❓ | CEO to ask which card (Amex Explorer / Westpac Altitude / ANZ Rewards Black recommended per Jordan) | — |
@@ -49,17 +49,17 @@
 ### Revenue & expenses (per Allan's dashboard, 2026-05-01)
 | Type | Amount |
 |---|---|
-| Total Revenue | $0 (the $1,500 in dashboard is starting capital, not revenue) |
+| Total Revenue | $0 (the $1,600 in dashboard is starting capital + $100 bonus, not revenue) |
 | Total Expenses | $187.56 |
-| Cash on hand | $1,500 |
-| Monthly recurring | $38.60 |
-| Pending receivable | +$100 (bank signup bonus, within 2 months) |
+| Cash on hand | $1,600 (F10 LOCK 2026-05-16: $100 bonus arrived) |
+| Monthly recurring | $193.60 (Google Workspace $18.88 + GHL Starter PAID $155 + small recurring $19.72 per F3 LOCK) |
+| Pending receivable | $0 (bonus received) |
 
 ### Active subscriptions (per finance dashboard)
 | Subscription | Cost | Type | Renewal | Owner |
 |---|---|---|---|---|
 | Google Workspace Business Standard | $18.88/mo (rising to $22.95/mo from 2026-07-06) | Email | Monthly auto | Both |
-| GoHighLevel Starter | $0 (trial → $136/mo from 2026-05-27, approx $99 USD) | CRM | Monthly auto | Both |
+| GoHighLevel Starter | $155/mo AUD PAID (F3 LOCK 2026-05-16 — trial converted) | CRM | Monthly auto | Both |
 | Ventraip domain timelessresurfacing.com.au | $0 (active to 23 Mar 2027, then $22.95/yr) | Domain | Annual | Both |
 | Ventraip WordPress/cPanel hosting | $222/yr (next 03 Apr 2027) | Hosting | Annual | Both |
 | Cloudflare .com domain | $14.68/yr (next 28 Apr 2027) | Domain | Annual | Both |
@@ -128,10 +128,12 @@
 |---|---|---|---|
 | Location (NEW master hub) | `/Users/angelapham/Downloads/timeless-theme-wp/quote-form/` | Absorbed into master repo 2026-05-01 PM. Old standalone folder `/Users/angelapham/Downloads/timeless-quote-app/` preserved for safety until Allan confirms migration works (then he can delete) | 2026-05-01 PM verified |
 | GitHub | `Excluding1/timeless-theme-wp` (single repo now). TimelessDash repo holds historical quote-form/react-v8 branch — to be archived per WORKFLOW.md retire policy | | 2026-05-01 PM |
-| Build state | 95% complete | v9.x with NSW gating, asbestos check, multi-mode, photo upload | 2026-05-01 |
-| GHL_WEBHOOK URL | ❌ | `REPLACE_ME` placeholder at QuoteForm.jsx:633 — must replace before May 27 | 2026-05-01 |
-| GHL_PARTIAL URL | ❌ | `REPLACE_ME_PARTIAL` placeholder at QuoteForm.jsx:634 | 2026-05-01 |
-| Cloudinary photo upload | ❌ | TODO at QuoteForm.jsx:727 — placeholder, not wired | 2026-05-01 |
+| Build state | v10 GHL-wired (Day 8 prep complete) | v10.0 with NSW gating, asbestos check, multi-mode, photo upload + Day 8 prep applied (webhooks + secret_token + schema normalization). | 2026-05-21 |
+| GHL_WEBHOOK URL | ✅ Wired Day 8 prep 2026-05-21 | W1 webhook URL at QuoteForm.jsx:876 (was REPLACE_ME at :633 pre-Day-8; file grew to 1953 lines). End-to-end verified via Vite dev test: form complete → W1 LIVE → Slack #quotes-in + Contact + Opp Stage 1. | 2026-05-21 |
+| GHL_PARTIAL URL | ✅ Wired Day 8 prep 2026-05-21 | W2 webhook URL at QuoteForm.jsx:877 (was REPLACE_ME_PARTIAL at :634 pre-Day-8). W2 currently DRAFT — enable after Day 6 publish-readiness verified. | 2026-05-21 |
+| secret_token | ✅ Wired via VITE_GHL_SECRET_TOKEN env | TR_secret_v2_<32-byte random base64url>. Validates at W1/W2 Action 1 If/Else Security Gate (default-deny on mismatch). Stored in .env.local (gitignored via *.local). Commit 856722d on feature/day8-react-form-ghl-wire-2026-05-20. | 2026-05-21 |
+| Day 8 prep schema fixes | ✅ Applied 2026-05-21 | tenant_auth → tenant_authorisation (GHL key locked 2026-05-05); ventilation → has_ventilation; property_type apt/comm → apartment/commercial via propertyTypeMap; lead_source derived from UTM + referrer via deriveLeadSource() helper. Source: /tmp/day8-react-form-prep-plan-2026-05-20.md §3. | 2026-05-21 |
+| Cloudinary photo upload | ❌ TODO | Stub in QuoteForm.jsx — placeholder, not wired. Deferred Day 8 sub-task (separate from form-to-GHL prep complete 2026-05-21). | 2026-05-01 |
 | Trust badges | ✅ | "Sydney Local • $20M Insured • Up to 5yr Warranty" — corrected this session | 2026-05-01 |
 | autoComplete attributes | ✅ | given-name, family-name, email — fixed this session | 2026-05-01 |
 | Ventilation Q gating | ✅ | Now includes regrout services — fixed this session | 2026-05-01 |
@@ -146,7 +148,7 @@
 | Tool | Status | Details |
 |---|---|---|
 | Google Workspace | ✅ Active | Email + Drive |
-| GoHighLevel | ⏳ Trial active until 2026-05-27 | Both founders signed up; Allan has watched tutorial |
+| GoHighLevel | ✅ PAID $155/mo AUD | F3 LOCK 2026-05-16: trial converted to paid. Both founders signed up; Allan has watched tutorial. Day 1 of 2-week tech sprint kicks off 2026-05-17. |
 | Stripe | ❌ Not signed up | Need before first quote sent |
 | ServiceM8 | ❌ Not signed up | Deferred per Override 2 |
 | Slack | ❌ Workspace not created | Phase 1 task |
