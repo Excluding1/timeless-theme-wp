@@ -351,7 +351,7 @@ function StepBar({ n, total, label }) {
   );
 }
 function Trust() {
-  return <div style={{ display: "flex", justifyContent: "center", gap: 8, padding: "12px 0 8px", flexWrap: "wrap" }}>{["Sydney Local","$20M Insured","Up to 5yr Warranty"].map((t,i) => <span key={i} style={{ fontSize: 11, fontWeight: 600, color: C.green, display: "flex", alignItems: "center", gap: 3, whiteSpace: "nowrap" }}><span style={{ width: 14, height: 14, borderRadius: "50%", background: C.greenBg, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 8, flexShrink: 0 }}>✓</span>{t}</span>)}</div>;
+  return <div style={{ display: "flex", justifyContent: "center", gap: 8, padding: "12px 0 8px", flexWrap: "wrap" }}>{["Sydney Local","$10M Insured","Up to 5yr Warranty"].map((t,i) => <span key={i} style={{ fontSize: 11, fontWeight: 600, color: C.green, display: "flex", alignItems: "center", gap: 3, whiteSpace: "nowrap" }}><span style={{ width: 14, height: 14, borderRadius: "50%", background: C.greenBg, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 8, flexShrink: 0 }}>✓</span>{t}</span>)}</div>;
 }
 function Btn({ children, onClick, disabled, secondary }) {
   return <button onClick={onClick} disabled={disabled} style={{ width: "100%", padding: "16px 20px", borderRadius: 12, border: secondary ? `1.5px solid ${C.brd}` : "none", background: disabled ? C.surfC : secondary ? C.white : C.pri, color: disabled ? C.sec : secondary ? C.pri : C.white, fontSize: 16, fontWeight: 600, cursor: disabled ? "default" : "pointer", fontFamily: "inherit", marginTop: 12, transition: "all 0.15s", letterSpacing: "-0.01em" }}>{children}</button>;
@@ -416,10 +416,17 @@ function SvcCard({ s, on, onClick, expanded }) {
   );
 }
 
-/* ─── THUMBNAIL — renders a File as an <img> using a blob URL, cleaned up on unmount/file change ─── */
+/* ─── THUMBNAIL — renders a File as an <img> using a blob URL ─── */
+// StrictMode-safe: blob URL is created via useMemo (stable per File reference) and NOT
+// explicitly revoked. Reason: React 18 StrictMode dev-mode mounts components twice
+// (mount → unmount → re-mount); the old `useEffect(() => () => revokeObjectURL(url))`
+// cleanup ran on the first unmount and revoked the URL, then re-mount tried to display
+// the revoked URL → broken thumbnail. Fix surfaced during Cloudinary wire-up 2026-05-22
+// when additional perAreaPhotoUrls state updates triggered more renders, making the bug
+// reliably reproducible. Browser GCs blob URLs on page unload — memory cost at our
+// scale (~10-20 photos × small URL refs) is negligible.
 function ThumbImage({ file, alt, style }) {
   const url = useMemo(() => URL.createObjectURL(file), [file]);
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
   return <img src={url} alt={alt} style={style} loading="lazy" />;
 }
 
@@ -595,6 +602,12 @@ export default function QuoteForm() {
   /* ─── STEP 4: PER-AREA DETAILS ─── */
   const [areaServices, setAreaServices] = useState({});
   const [perAreaPhotos, setPerAreaPhotos] = useState({});
+  // Cloudinary URLs per area, parallel-indexed to perAreaPhotos (sparse arrays).
+  // E.g. perAreaPhotoUrls.shower[0] is the Cloudinary URL for perAreaPhotos.shower[0] File.
+  // Source: /tmp/cloudinary-plan-2026-05-21.md §6.4.
+  const [perAreaPhotoUrls, setPerAreaPhotoUrls] = useState({});
+  // Track in-flight uploads to prevent duplicate fires on useEffect re-runs.
+  const inFlightUploads = useRef({});
   const [epoxyMode, setEpoxyMode] = useState("standard");
   // Per-area chip/crack repair add-on (walls, floor, basin_vanity). Toggled below the area's service cards
   // when the customer picks a service that's NOT the chip-only one (so it stacks rather than duplicates).
@@ -674,6 +687,32 @@ export default function QuoteForm() {
       floor: scopeDefaultForArea(fullScope, "floor"),
     });
   }, [fullScope]);
+
+  /* ─── AUTO-UPLOAD PHOTOS TO CLOUDINARY ─── */
+  // Watches perAreaPhotos for new files and uploads each to Cloudinary in background.
+  // URL stored in perAreaPhotoUrls at matching index. inFlightUploads ref prevents
+  // duplicate uploads on useEffect re-runs (state churn doesn't re-trigger upload).
+  // Source: /tmp/cloudinary-plan-2026-05-21.md §6.5.
+  useEffect(() => {
+    Object.entries(perAreaPhotos).forEach(([areaId, files]) => {
+      (files || []).forEach((file, idx) => {
+        if (!file) return; // empty slot — required slot not yet filled
+        if (perAreaPhotoUrls[areaId]?.[idx]) return; // already uploaded
+        const key = `${areaId}-${idx}`;
+        if (inFlightUploads.current[key]) return; // upload in flight
+        inFlightUploads.current[key] = true;
+        uploadPhotoToCloudinary(file, areaId).then((url) => {
+          delete inFlightUploads.current[key];
+          if (url) {
+            setPerAreaPhotoUrls((prev) => ({
+              ...prev,
+              [areaId]: Object.assign([], prev[areaId] || [], { [idx]: url }),
+            }));
+          }
+        });
+      });
+    });
+  }, [perAreaPhotos]);
 
   /* ─── NAV ─── */
   const [step, setStep] = useState("about");
@@ -895,6 +934,47 @@ export default function QuoteForm() {
     return "other";
   };
 
+  /* ─── CLOUDINARY PHOTO UPLOAD CONFIG ─── */
+  // Phase 1 unsigned upload — preset enforces restrictions (10MB, jpg/png/heic/webp,
+  // EXIF strip, downsize to 1920px, auto format). API secret NOT needed for unsigned.
+  // Phase 2 upgrade: backend signer Cloud Function + switch to signed preset (50+ leads/mo).
+  // Source: /tmp/cloudinary-plan-2026-05-21.md §1.
+  const CLOUDINARY_CLOUD = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
+  const CLOUDINARY_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "";
+
+  // Upload a single photo File to Cloudinary. Returns secure_url on success, null on failure.
+  // Photos go into folder timeless-quotes/YYYY/MM/ with auto-generated unguessable public IDs
+  // (per preset config — privacy: no customer filenames in URLs).
+  const uploadPhotoToCloudinary = async (file, areaId) => {
+    if (!CLOUDINARY_CLOUD || !CLOUDINARY_PRESET) {
+      console.warn("Cloudinary not configured — VITE_CLOUDINARY_CLOUD_NAME / VITE_CLOUDINARY_UPLOAD_PRESET missing. Photo skipped.");
+      return null;
+    }
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const form = new FormData();
+    form.append("file", file);
+    form.append("upload_preset", CLOUDINARY_PRESET);
+    form.append("folder", `timeless-quotes/${yyyy}/${mm}`);
+    form.append("tags", `area:${areaId}`);
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+        method: "POST",
+        body: form,
+      });
+      if (!res.ok) {
+        console.error("Cloudinary upload failed:", res.status, await res.text().catch(() => ""));
+        return null;
+      }
+      const data = await res.json();
+      return data.secure_url || null;
+    } catch (err) {
+      console.error("Cloudinary upload error:", err.message);
+      return null;
+    }
+  };
+
   /* ─── PARTIAL LEAD ─── */
   const partialSent = useRef(false);
   const sendPartialLead = () => {
@@ -1041,7 +1121,7 @@ export default function QuoteForm() {
         company_name: co || "",
         // Field key was `tenant_auth` (Day 8 prep 2026-05-20: corrected to `tenant_authorisation`
         // — GHL key locked 2026-05-05 per ghl_setup_spec_v2:171, can't be edited post-save).
-        tenant_authorisation: tenAuth || "",
+        tenant_authorisation: tenAuth || "n/a",
         landlord_email: llEm || "",
         // Lead source mapped from UTM + referrer signals (ghl_setup_spec_v2:176).
         lead_source: deriveLeadSource(),
@@ -1068,26 +1148,44 @@ export default function QuoteForm() {
         basin_finish: basinFinish,
         basin_custom_surfaces_json: JSON.stringify(basinCustomSurfaces),
         // Conditional — `ventilation` key corrected to `has_ventilation` per ghl_setup_spec_v2:184
-        previously_resurfaced: prevResurfaced || "not_asked",
+        prev_resurfaced: prevResurfaced || "not_asked",
         has_ventilation: hasVentilation || "not_asked",
         // Notes (consent is inferred from the act of submission — Allan call 2026-05-05)
         customer_notes: notes,
-        // Photos
+        // Photos — Cloudinary URLs per area (Day 6 Cloudinary wire 2026-05-21).
+        // Per ghl_setup_spec_v2:236: photos_*_urls = Long text (JSON array) — one per area.
+        // filter(Boolean) strips holes in sparse arrays (empty slots that were never filled).
+        photos_shower_urls: JSON.stringify((perAreaPhotoUrls.shower || []).filter(Boolean)),
+        photos_bath_urls: JSON.stringify((perAreaPhotoUrls.bath || []).filter(Boolean)),
+        photos_basin_vanity_urls: JSON.stringify((perAreaPhotoUrls.basin_vanity || []).filter(Boolean)),
+        photos_walls_urls: JSON.stringify((perAreaPhotoUrls.walls || []).filter(Boolean)),
+        photos_floor_urls: JSON.stringify((perAreaPhotoUrls.floor || []).filter(Boolean)),
+        // Full-bathroom mode photos (keys like full-shower-1, full-bath-1, full-vanity-2, full-walls, full-floor, full-overview)
+        photos_full_bathroom_urls_json: JSON.stringify(
+          Object.fromEntries(
+            Object.entries(perAreaPhotoUrls)
+              .filter(([k]) => k.startsWith("full-"))
+              .map(([k, v]) => [k, (v || []).filter(Boolean)])
+          )
+        ),
+        // "Not sure" mode photos
+        photos_unsure_urls: JSON.stringify((perAreaPhotoUrls.unsure || []).filter(Boolean)),
+        // Existing metadata (counts) — kept for backward compat + summary signal
         photo_count_total: String(totalPhotoCount()),
         photo_count_by_area: JSON.stringify(Object.fromEntries(Object.entries(perAreaPhotos).map(([k, v]) => [k, v?.length || 0]))),
         photos_uploaded: totalPhotoCount() > 0 ? "yes" : "no",
         // Resolved quote skeleton (for downstream automation)
-        resolved_line_items_json: JSON.stringify(resolved.line_items),
-        resolved_modifiers_json: JSON.stringify(resolved.modifiers),
-        resolved_rejection_flags_json: JSON.stringify(resolved.rejection_flags),
-        resolved_tier_default: resolved.tier_default,
-        resolved_multi_bathroom_discount: String(resolved.multi_bathroom_discount),
+        resolved_line_items: JSON.stringify(resolved.line_items),
+        resolved_modifiers: JSON.stringify(resolved.modifiers),
+        resolved_rejection_flags: JSON.stringify(resolved.rejection_flags),
+        pricing_tier_resolved: resolved.tier_default,
+        multi_bathroom_discount: String(resolved.multi_bathroom_discount),
         // Tracking
         ...tracking,
         // Meta
         form_status: "complete",
         form_version: "v10.0",
-        submitted_at: new Date().toISOString(),
+        quote_submitted_at: new Date().toISOString(),
         user_agent: navigator.userAgent,
         device_type: /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop",
       },
