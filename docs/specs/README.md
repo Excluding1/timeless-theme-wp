@@ -25,7 +25,7 @@
 | ✅ [form-auto-preselect.md](form-auto-preselect.md) | Ready | Quote form pre-fills service based on landing page URL | Week 2-3 | Allan |
 | ⬜ ghl-custom-fields.md | Pending | Click-by-click GHL setup for all 40+ custom fields | Week 1-2 | Allan (CEO designs) |
 | ⬜ ghl-workflows.md | Pending | All 12 GHL automation workflow specs (triggers, actions, conditions) | Week 2-3 | Allan (CEO designs) |
-| ⬜ ghl-pipeline.md | Pending | 17-stage pipeline setup spec | Week 1 | Allan (CEO designs) |
+| ✅ [ghl-pipeline-13-stage.md](ghl-pipeline-13-stage.md) | LIVE — pipeline reshape Decision 11 2026-05-25 | 15-stage Jordan-EXACT pipeline (filename stale; SUPERSEDED-IN-PART header inside); workflow + ageing rules still valid; finance stages moved to Accounts pipeline per Decision 12 v2 | Done | Allan (executed UI 2026-05-25) |
 | ⬜ network-outreach-script.md | Pending | Exact SMS + DM scripts for Allan + Marko's network outreach | Week 1 | Both founders |
 | ⬜ marko-first-job-prep.md | Pending | Checklist + materials list + customer comms for Marko's first solo jobs | Week 3-4 | Marko |
 | ⬜ sub-onboarding-checklist.md | Pending | Per-sub onboarding executable checklist (per Override 9 timing) | Month 2 | Marko |

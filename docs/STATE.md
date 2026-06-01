@@ -9,7 +9,8 @@
 - ❓ Unknown — CEO needs to ask
 - 🔒 Sensitive — credentials handled separately
 
-**Last verified:** 2026-05-01
+**Last verified:** 2026-05-26 PM (Day 1 sprint signups + canonical updates)
+**Prior verifications:** 2026-05-01 (initial), 2026-05-16 (F-LOCKs), 2026-05-21 (Day 6 sync)
 
 ---
 
@@ -40,11 +41,11 @@
 | Business bank account | ✅ | **Westpac Business partnership account**, opened mid-April 2026. Partnership agreement + IDs used to open. | 2026-05-01 |
 | $100 bank signup bonus | ✅ Received | F10 LOCK 2026-05-16: $100 arrived. Cash on hand updated. | 2026-05-16 |
 | Current cash on hand | $1,600 | Per starting capital + $100 bank bonus, after $187.56 expenses tracked. F10 LOCK 2026-05-16. | 2026-05-16 |
-| Stripe account | ❌ | Sign up Phase 1 before first quote sent | — |
-| pay.com.au account | ❌ | Sign up before first subcontractor paid | — |
-| Rewards credit card linked to pay.com.au | ❓ | CEO to ask which card (Amex Explorer / Westpac Altitude / ANZ Rewards Black recommended per Jordan) | — |
-| Xero accounting | ❌ | Phase 1.7 in FUTURE-PLAN — connect bank feed when set up | — |
-| Bookkeeping current state | ⏳ | Tracked in custom dashboard (per Allan), not yet Xero | — |
+| Stripe account | ✅ **LIVE** | Production mode active since May 2 2026. Verified today (2026-05-26): "all green no banner" — full AU verification complete, Westpac payouts connected, payment methods Card + PayTo enabled (Zip skipped). | 2026-05-26 |
+| pay.com.au account | ❌ DEFERRED indefinitely | **Decision 12 v2 LOCKED 2026-05-25**: defer until first external sub onboarded AND volume justifies rewards-points optimization. Phase 1 sub payouts via Westpac EFT (free, SOPA-compliant). | 2026-05-25 |
+| Rewards credit card linked to pay.com.au | N/A while deferred | When pay.com.au activates (Phase 2+), revisit card choice | — |
+| Xero accounting | ✅ **LIVE — Grow tier** | Signed up 2026-05-26 with 100% off 6-month referral promo (saves $450 over standard pricing first 6mo). Standard Grow $75/mo from Month 7 (2026-11-26) — calendar reminder set for 2026-11-21 review. Stripe app installed + connected; Westpac bank feed REQUESTED (pending Westpac authorization 1-24h); invoice template with virtual address (AnyTime Mailbox Ultimo) + payment advice (BSB+account for Osko backup). | 2026-05-26 |
+| Bookkeeping current state | ✅ Xero LIVE | Stripe→Xero auto-sync configured. Westpac bank feed pending activation (async, no blocker). Chart of accounts default + Stripe Clearing Account added. | 2026-05-26 |
 
 ### Revenue & expenses (per Allan's dashboard, 2026-05-01)
 | Type | Amount |
@@ -149,15 +150,15 @@
 |---|---|---|
 | Google Workspace | ✅ Active | Email + Drive |
 | GoHighLevel | ✅ PAID $155/mo AUD | F3 LOCK 2026-05-16: trial converted to paid. Both founders signed up; Allan has watched tutorial. Day 1 of 2-week tech sprint kicks off 2026-05-17. |
-| Stripe | ❌ Not signed up | Need before first quote sent |
-| ServiceM8 | ❌ Not signed up | Deferred per Override 2 |
-| Slack | ❌ Workspace not created | Phase 1 task |
-| Zapier / Make | ❌ Not signed up | Need when GHL → SM8 sync needed |
-| Cloudinary | ❌ Not signed up | Need before photo upload works in form |
-| Xero | ❌ Not signed up | Need when bookkeeping volume justifies (~$5K/mo revenue) |
-| pay.com.au | ❌ Not signed up | Need before first subcontractor paid |
-| DocuSign | ❌ Not signed up | Need before first subcontractor signs |
-| Sprintlaw subcontractor template | ❌ Not purchased | Need before first subcontractor signs |
+| Stripe | ✅ **LIVE** | Production mode active since May 2 2026, verified 2026-05-26 ("all green no banner"). Card + PayTo enabled (Zip skipped). |
+| ServiceM8 | ✅ **Starter trial active** | Signed up 2026-05-26 with 50% off 12mo promo; trial converts to $14.50/mo at Day 14. Override 2 superseded by Decision 12 v2. |
+| Slack | ✅ Live | 6 channels (#quotes-in, #hot-leads, #pipeline-feed, #new-jobs, #job-issues, #automation-errors); +2 planned Day 2-3. |
+| Make.com | ⏳ Pending Day 1 hour 6 signup | Make Plan $9/mo (replaces "Zapier or Make"); pay.com.au-style Phase 2 middleware per Decision 12 v2. |
+| Cloudinary | ✅ Live | Cloud `dysrfe5yh`, preset `timeless-form-photos` unsigned Phase 1; signed upload Phase 2 migration per Override 6 reasoning. |
+| Xero | ✅ **Grow LIVE** | Signed up 2026-05-26 with 100% off 6mo referral promo; standard Grow $75/mo from Month 7 (calendar reminder 2026-11-21). Stripe app installed + Westpac bank feed pending Westpac authorization. |
+| pay.com.au | ❌ DEFERRED indefinitely | Decision 12 v2 LOCKED 2026-05-25: defer until first external sub onboarded AND volume justifies rewards-points optimization. Phase 1 sub payouts via Westpac EFT. |
+| DocuSign | ❌ Defer per Decision 12 v2 | Marko-as-sub Phase 1; engage when first external sub onboards. |
+| Sprintlaw subcontractor template | ❌ Deferred per Decision 12 v2 | Same trigger as DocuSign. |
 
 ---
 

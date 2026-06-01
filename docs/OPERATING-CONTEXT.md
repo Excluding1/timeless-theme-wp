@@ -1,6 +1,19 @@
 # Timeless Resurfacing — Operating Context
 
-**Purpose:** Single source of truth for how Angela's bathroom resurfacing & regrouting business runs. Modelled after Jordan Schofield's Surface Care system, adapted to NSW-only bathroom scope and a 2-person partnership.
+## ⚠️ F9 LOCK 2026-05-16 — Name correction
+
+**All "Angela" references in this file are STALE.** Per F9 LOCK 2026-05-16 (`memory/f_responses_locked_2026-05-16.md:50-55`), the founders are **Allan + Marko**. Angela is the Mac user on this machine, not a business owner. When reading this file, mentally substitute "Angela" → "Allan" throughout. Full Angela-cleanup deferred to Phase 9 doc-drift sweep.
+
+**Also stale in this file (read with these in mind):**
+- All "17-stage pipeline" references → 15 stages Jordan-EXACT per Override 14 v4 (Decision 11 LOCKED 2026-05-25 — supersedes F1 LOCK v3 which had Job Invoiced + Job Paid as interpolation)
+- BigQuery "don't build until Stage A" / "Phase 5 only" → empty schema Phase 1 per Override 15 + F7 LOCK (§11 of this file updated above)
+- GHL trial / May 27 references → GHL PAID $155 AUD/mo per F3 LOCK 2026-05-16
+- ServiceM8 "Override 2 defer ~10 weeks" → SUPERSEDED by Decision 12 v2 2026-05-25; SM8 Starter trial signed up 2026-05-26
+- Stripe/Xero "not yet" references → both LIVE since 2026-05-26 (Stripe production verified, Xero Grow 100% off 6mo)
+
+---
+
+**Purpose:** Single source of truth for how Allan + Marko's bathroom resurfacing & regrouting business runs. Modelled after Jordan Schofield's Surface Care system, adapted to NSW-only bathroom scope and a 2-person partnership.
 
 **Audience:** Claude across sessions (so I don't drift), Angela and co-founder for shared alignment.
 
@@ -253,7 +266,7 @@ Authoritative map: [docs/FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/F
 2. **Connect** Google Workspace email + Twilio SMS number (purchased through GHL).
 3. **Custom fields** (build all before workflows — workflows reference them).
 4. **Tags** library.
-5. **Pipeline** — 17 stages (see 8.4 below).
+5. **Pipeline** — ~~17 stages~~ **15 stages Jordan-exact** per **Override 14 v4 LOCKED 2026-05-25** (executed via UI same day). Stage list at `docs/CEO.md` Override 14 v4 + `memory/research_ghl_pipeline_2026-05-04.md` lines 105-130. 17-stage section 8.4 below is HISTORICAL — stage IDs in current Sales pipeline `YTgWxSeFt2oyd3zBe2Xr` documented in CEO.md.
 6. **Workflows** — 12 core (see 8.5 below).
 7. **Form** — only if quote form moves into GHL native (right now stays React for performance).
 8. **Templates** — quote email, deposit SMS, follow-ups, warranty.
@@ -363,11 +376,11 @@ customer_repeat
 customer_referrer
 ```
 
-### 8.4 The 17-stage pipeline (HISTORICAL — superseded by 13-stage spec)
+### 8.4 The 17-stage pipeline (HISTORICAL — superseded by 15-stage Jordan-EXACT per Override 14 v4 / Decision 11 2026-05-25)
 
-> **⚠️ Historical reference.** Per [CEO Override 14 v2](CEO.md#override-14-v2-revised-2026-05-01-pm-after-allan-challenged-jordan-does-2m-with-15-stages--there-must-be-a-reason-ghl-pipeline--13-stages-jordans-structure-minus-sub-quote-per-job), the pipeline is now 13 stages following Jordan Schofield's proven Surface Care structure (15 stages minus 2 sub-quote stages we don't use).
+> **⚠️ Historical reference.** Per [CEO Override 14 v4 (Decision 11 LOCKED 2026-05-25)](CEO.md), the pipeline is **15 stages Jordan-EXACT** (per Allan eyewitness ×4 + Cleo Dispatch 16 ratify). Stages 3+4 (Sub-quote Requested + Sub-quote Not Received) sit empty Phase 1 until first sub onboarded.
 >
-> **Current authoritative spec:** [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md)
+> **Current authoritative spec:** [CEO.md Override 14 v4](CEO.md) for stage list + IDs; [memory/decisions_locked_ghl_2026-05-05.md § Decision 11](../.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/decisions_locked_ghl_2026-05-05.md) for stage table with GHL IDs; [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) (filename stale — SUPERSEDED-IN-PART header inside) for workflow + ageing rules (translate positions: old 13/14/15 finance stages → Accounts pipeline per Decision 12 v2).
 >
 > Below 17-stage table preserved for historical context only.
 
@@ -537,13 +550,15 @@ Customer notified: ✅
 
 ---
 
-## 11. BigQuery — Phase 5 reporting layer
+## 11. BigQuery — Phase 1 schema setup, Phase 5 heavy use (SUPERSEDED 2026-05-16 per Override 15 + F7 LOCK)
 
-**Don't build this until Stage A (stable ops) is reached.** Per Jordan's transcript: BigQuery was added once the operational tools were humming, NOT before. Premature BigQuery = data plumbing for a business with no data yet.
+**SUPERSEDED 2026-05-16:** Original guidance below ("Don't build until Stage A") is REVERSED by Override 15 (`docs/CEO.md:417-427`) + F7 LOCK 2026-05-16. **Set up empty schema NOW** (Phase 1, ~30 min) so events flow from Day 1; heavy analytical querying still waits for Phase 5 (~50 jobs). Cost at our scale: $0-10/mo. Source: Jordan's actual practice per `~/Downloads/all-transcripts-2026-04-30.md:401`: *"any update that we make in our CRM is automatically synced over and stored in the Google Cloud so that we can use BigQuery and query that data… costs us at max maybe $50 a month."*
 
 ### 11.1 When to start
 
-When you have ≥50 completed jobs in GHL + SM8 history. Below that, Google Sheets tracker is fine.
+**Empty schema: Phase 1 (now).** Heavy use: when ≥50 completed jobs in GHL + SM8 history. The "don't build until 50 jobs" guidance below is HISTORICAL — kept for transparency, NOT current.
+
+~~When you have ≥50 completed jobs in GHL + SM8 history. Below that, Google Sheets tracker is fine.~~
 
 ### 11.2 Tables (when built)
 
@@ -700,7 +715,7 @@ elif test job, simple, low-risk:
 ### Phase 2 — GHL pipeline + quoting
 - ⬜ GHL business setup
 - ⬜ Custom fields + tags
-- ⬜ 17-stage pipeline
+- ⬜ ~~17-stage~~ **15-stage** pipeline (F1 LOCK 2026-05-16)
 - ⬜ All 12 workflows live and tested
 - ⬜ Quote templates (3-tier good/better/best per service)
 - ⬜ Stripe deposit + final links
@@ -872,7 +887,7 @@ When advising on this business, I should:
 
 - **Business**: 2-founder coordination biz; subcontractors do work; aim 48–52% margin
 - **Front door**: React quote form on WP service pages → GHL webhook
-- **CRM**: GoHighLevel, 17-stage pipeline, 12 workflows
+- **CRM**: GoHighLevel, ~~17-stage~~ **15-stage** pipeline (F1 LOCK 2026-05-16), 12 workflows
 - **Job delivery**: ServiceM8 (only after deposit paid)
 - **Internal alerts**: Slack (10 channels, structured messages, no decisions)
 - **Money**: Stripe in (deposit + final), pay.com.au out (subcontractor payments + rewards)

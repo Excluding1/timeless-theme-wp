@@ -67,18 +67,20 @@
   - [ ] Document: "tags are for filtering, fields are for storing data"
 - **Verify:** Tag a test contact with each prefix family, can filter contacts by each.
 
-### 1.4 13-stage pipeline (revised 2026-05-01 PM per CEO Override 14 v2)
+### 1.4 15-stage pipeline (LIVE — Decision 11 executed 2026-05-25 per Override 14 v4)
 - **Expert:** GHL operator + service business ops
 - **Auditor:** Pipeline integrity auditor — is every transition triggered by a system event, not manual drag?
-- **Setup steps:**
-  - [ ] Create pipeline "Bathroom Quote → Job"
-  - [ ] Add 13 stages per [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) (authoritative spec)
-  - [ ] Set default opportunity value field (filled by `quote_amount_final`)
-  - [ ] Each stage: who owns it (Auto / Allan / Marko)
-  - [ ] Implement ageing rules per stage (Prepayment 24hr/72hr/7d, Job in SM8 2hr alert, Job Invoiced 7d/14d/30d cascade, Sub-payout 72hr)
-  - [ ] Set up Slack alert channels per spec (`#quotes-in`, `#new-jobs`, `#job-issues`, `#nps-detractors`, `#sla-breach`, `#dispatch-stuck`, `#sub-payouts-overdue`, `#system-alerts`)
-- **Verify:** Drag a test opp through all 13 stages by hand — no missing transitions; ageing alerts fire on test cases.
-- **Note:** [OPERATING-CONTEXT § 8.4](OPERATING-CONTEXT.md#84-the-17-stage-pipeline) (17-stage version) is now historical. The 13-stage spec adopts Jordan Schofield's proven 15-stage Surface Care structure minus 2 sub-quote stages (we use fixed rate cards, not per-job bidding).
+- **Status (2026-05-27):** ✅ LIVE in GHL Sales pipeline `YTgWxSeFt2oyd3zBe2Xr` — 15 Jordan-exact stages per Allan eyewitness ×4 + Decision 11 execution.
+- **Setup steps (HISTORICAL — original spec; live pipeline already reshaped per Decision 11):**
+  - [x] Pipeline "Bathroom Quote → Job" — exists as Sales pipeline
+  - [x] 15 stages per [CEO.md Override 14 v4](CEO.md) (Jordan-exact list locked 2026-05-25); see [memory/decisions_locked_ghl_2026-05-05.md § Decision 11](../../.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/decisions_locked_ghl_2026-05-05.md) for stage IDs. Workflow + ageing rules in [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) (filename stale; SUPERSEDED-IN-PART header inside).
+  - [x] Default opportunity value field (filled by `quote_amount_final`)
+  - [x] Each stage: who owns it (Auto / Allan / Marko) — per Decision 11 stage table
+  - [ ] **PENDING Day 2 sprint:** Stage 7 → 8/10 asbestos routing workflow (Decision 1, position-updated for 15-stage shape)
+  - [ ] **PENDING Day 2 sprint:** Accounts pipeline auto-age workflows (AC1 7d / AC2 14d / AC3 30d cascade — per Decision 12 v2; replaces "Job Invoiced 7d/14d/30d cascade" originally on Sales pipeline since Stages 14+15 deleted)
+  - [x] Slack alert channels exist: `#quotes-in`, `#hot-leads`, `#pipeline-feed`, `#new-jobs`, `#job-issues`, `#automation-errors` (`#finance-summary` + `#finance-overdue` planned Day 2-3)
+- **Verify:** Test opp drag through all 15 stages — ✅ done during pre-flight backup 2026-05-25; ageing alerts pending Day 2 build.
+- **Note:** [OPERATING-CONTEXT § 8.4](OPERATING-CONTEXT.md#84-the-17-stage-pipeline) (17-stage version) is historical. CEO.md Override 14 v4 (Jordan-EXACT) is authoritative — supersedes v3 (which had Job Invoiced + Job Paid as our interpolation). Per Decision 11 + 12 v2, finance moves to Custom Field `Payment Status` + Accounts pipeline (repurposed Marketing Pipeline).
 
 ### 1.5 Connect quote form to GHL (the critical hop)
 - **Expert:** Frontend dev (React) + GHL operator
@@ -861,7 +863,7 @@ For each task above:
 | What do I do next on the quote form? | Phase 1.5 (replace REPLACE_ME webhooks) |
 | When do I start ads? | After Phase 1.9 audit passes |
 | When do I add subcontractors? | Phase 3 — before any real customer jobs |
-| When do I add BigQuery? | Phase 5 — once 50+ completed jobs exist |
+| When do I add BigQuery? | **Empty schema NOW (Phase 1)** per Override 15 / F7 LOCK 2026-05-16. Populated automatically as events flow. Heavy analytical use Phase 5+ once 50+ jobs. |
 | When do I add AI agents? | Phase 6 — only after Phase 5 data layer is real |
 | Multi-household duplicate detection? | Phase 6.2 — needs BigQuery (Phase 5) first |
 

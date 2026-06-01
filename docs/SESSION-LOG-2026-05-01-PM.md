@@ -1,5 +1,20 @@
 # Session Log — 2026-05-01 PM (Allan offline ~5hr)
 
+## 🗂️ STATUS: HISTORICAL SESSION RECORD — FROZEN
+
+**This file is a frozen historical record of the 2026-05-01 PM session.** Many references in this file (13-stage pipeline, May 27 GHL paid date, $1,500 cash, etc.) are STALE as of 2026-05-27. Do NOT use this file for current pipeline / state / cost info — read [BRIEF_2026-05-16.md](../../.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/BRIEF_2026-05-16.md) + [STATE.md](STATE.md) + [CEO.md Override 14 v4](CEO.md) instead.
+
+**Notable supersedes since this session:**
+- 13-stage pipeline → 15-stage Jordan-EXACT (Override 14 v4 / Decision 11 LOCKED 2026-05-25)
+- GHL trial paid May 27 estimate → already PAID since 2026-05-04 (F3 LOCK 2026-05-16)
+- $1,500 cash → $1,600 cash (F10 LOCK 2026-05-16, $100 bank bonus arrived)
+- Override 2 defer SM8 → SUPERSEDED by Decision 12 v2 (build now, SM8 Starter trial signed 2026-05-26)
+- Override 3 skip BigQuery → SUPERSEDED by Override 15 (Phase 1 empty schema setup)
+
+This file kept for historical context (what was decided + what was committed that PM session). Frozen 2026-05-27.
+
+---
+
 **Started:** 2026-05-01 ~PM (after Jordan transcripts mining complete)
 **Mode:** Allan offline 5hr → CEO works autonomous queue, follows Rules, commits audited batches, logs questions for return.
 **Brief from Allan:** *"keep working on tasks until you dont know and have to ask and if you have to ask but it doesnt impact next part or process just keep working and add these infos of what you need and what you completed in a md file and collate all data after for me to see in the 5 hours ill be off and you can keep working - if not sure dont do , only do stuff you are confident and make sure to follow all rules and md files and refer to md files and commit when sure and audited ofc"*
