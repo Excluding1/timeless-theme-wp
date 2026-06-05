@@ -10,7 +10,7 @@
 - 🔒 Sensitive — credentials handled separately
 
 **Last verified:** 2026-06-05 (SM8-keep decision + contractor-app planned + no-contact rule + data-capture sheet live)
-**Prior verifications:** 2026-05-01 (initial), 2026-05-16 (F-LOCKs), 2026-05-21 (Day 6 sync), 2026-05-26 PM (Day 1 sprint signups), 2026-06-02 ($10M PL + Cloudinary correction)
+**Prior verifications:** 2026-05-01 (initial), 2026-05-16 (F-LOCKs), 2026-05-21 (Day 6 sync), 2026-05-26 PM (Day 1 sprint signups + canonical updates), 2026-06-02 ($10M PL + Cloudinary correction)
 
 ---
 
