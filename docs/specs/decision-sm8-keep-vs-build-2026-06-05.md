@@ -58,3 +58,26 @@ Build a lightweight **contractor-view** layer (on top of SM8) ONLY when: **20–
 **DECISION (pending Allan):** Path A now + Path B later/parallel (panel rec) vs Path B first (delays launch ~2–4 wks, designs vs a guessed workflow).
 
 **Sources:** ServiceM8 developer docs (webhooks-overview, attachments 2-step, getting-started/auth, http-response-codes/rate-limits, vendor read-only, job-allocations staff-only) · SM8 Network help · iOS-PWA-limitations · Supabase · Fair Work (s15AA).
+
+---
+
+## 🔒 SUB-ENGAGEMENT MODEL — LOCKED 2026-06-05 (single-account via the custom app)
+**Unanimous: Cleo + field-ops/Fair-Work + Clifford, anchored on Allan's app-first decision. Resolves the §6-vs-06-05 "SM8 Network" tension.**
+
+**LOCK:** subs engage via the **Timeless single-account dispatch app** — they authenticate to OUR app (Supabase Auth) → OUR one SM8 account (backend = sole SM8 key-holder); the app's built-in **accept/decline state machine = the right of refusal**. **SM8 Network (subs on their own accounts) is RETIRED as the canonical model** — retained ONLY as a documented **app-less interim (Path A)** if Allan ever launches before the app ships, and **NOT** as a layered model under the app (net-negative complexity). **Subs = app users, NOT SM8 "Staff"** (SM8 Staff seats = Marko/Allan/genuine employees only; the old §6 "subs-as-Staff" wording carries needless Fair-Work risk — dropped).
+
+**Fair-Work — DEFENSIBLE (s15AA whole-of-relationship; Mar-2026 ATO/FWO construction clampdown):**
+- App-provision is a **low-weight "tools" factor** — the high-cost load-bearing tools (grinder/coatings/abrasives/respirator/vehicle) are sub-supplied. The **high-weight factors** (own ABN, own tools+materials, ≥$10M PL, real no-penalty accept/decline, genuine delegation, self-scheduling, per-job invoicing) all point contractor and are **identical** on either model.
+- The app's accept/decline is a **STRONGER evidence position** than Network's — it's **logged** (`audit_log`), so we can *prove* penalty-free declines to an auditor (Network's refusal is real but opaque/UI-only).
+- The app is **NOT a "digital labour platform" (Part 3A / s15L)** — that regime catches two-sided marketplaces connecting contractors to the *public*; Timeless is the **principal/customer, not an intermediary**, so it does not bite.
+
+**CANONICAL STATEMENT (use across all docs + the sub-agreement preamble):**
+> Timeless engages each subcontractor as a genuine independent contractor. Work is **offered**, never assigned: the contractor receives job *offers* through Timeless's dispatch app and **accepts or declines each one at their sole discretion, with no penalty, ever, for declining**. Each contractor operates **their own business** — own ABN, own ≥$10M public-liability insurance, own tools/materials/vehicle, own commercial risk (rectifies substandard work at own cost) — sets their own booking within the customer's window, may delegate to a suitably qualified + insured substitute, is free to work for others, and **invoices Timeless per job**. The dispatch app is a convenience for offering and completing work; it is **not** the basis of the relationship and confers no employment. It is **not** a digital labour platform under Part 3A — Timeless is the principal/customer, not an intermediary. The contractor is **not** rostered, **not** paid for time, **not** on a timesheet/shift schedule, and is **not** held out as Timeless staff.
+
+**BINDING GUARDRAILS (gate the app launch + the sub agreement on these):**
+- **App:** offer-language only (never "assigned/rostered/your shift") · NO auto-assign (offer → decline → re-route, never re-assign) · decline **silent + zero-penalty** (no counter/score/throttle/coaching-trigger; reason optional) · NO roster/timesheet/clock-in UI (geofence may log job *duration* for ops, never as worked-hours) · NO "our team"/uniform/`@timelessresurfacing.com.au` identity · real **delegation/hand-back** path · **compliance gate** (ABN present + PL-verified + not expired) before any offer · per-job **sub invoice** (NOT an app-generated payslip) · **name + address only** to the sub.
+- **Agreement:** independent contractor (no PAYG/wage/leave language) · ABN listed · PL ≥$10M annual cert · own tools+materials · per-job pay vs **sub's invoice** (no timesheet) · express **penalty-free right to refuse** (no "must accept all") · **no exclusivity** · genuine **delegation** right · sub bears **rectification cost** · mutual 14-day termination · **rests on SUBSTANCE (own business/tools/ABN/risk), NOT "the app proves independence."**
+
+**⚖️ LEGAL REVIEW (required):** have the sub agreement + this posture reviewed by an AU employment lawyer **before the first sub signs** (sham-contracting ~$99k/contravention small-biz + super back-pay; Mar-2026 construction clampdown).
+
+**Sources:** FWO whole-of-relationship (s15AA) + employee-like/Part-3A scope · ATO equipment/tools proportionality · Closing Loopholes No.2 (multi-factorial return) · blueprint §6 guardrails + data model.

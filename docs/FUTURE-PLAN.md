@@ -249,7 +249,7 @@
   - [ ] Suburb coverage confirmed (which postcodes they'll travel to)
   - [ ] Skill confirmation: shower regrout / bath resurface / silicone / epoxy / full bathroom (tick which)
   - [ ] Asbestos awareness training confirmed (cert sighted) — required for pre-1990 jobs
-  - [ ] **ServiceM8 Network** invite sent + accepted — sub on their **own SM8 account** (browser-link fallback), job = an OFFER they accept/decline (NOT a Staff seat / allocation). No `@company` email / uniform / "our team" branding.
+  - [ ] **Dispatch-app account provisioned** — sub gets a login to the **Timeless single-account dispatch app** (canonical per SUB-ENGAGEMENT MODEL LOCKED 2026-06-05; subs auth to OUR app → OUR one SM8 account; the app's own logged accept/decline). Sub is an **app user, NOT a Staff seat / allocation**. *(Interim/fallback ONLY, if launching pre-app: a **SM8 Network** invite to the sub's own SM8 account — still an OFFER they accept/decline, still NOT Staff.)* No `@company` email / uniform / "our team" branding.
   - [ ] Subcontractor agreement signed via DocuSign
   - [ ] Bank details + pay.com.au setup
   - [ ] Tier 2 assigned by default (Tier 3 if green)
@@ -267,7 +267,7 @@
 
 ## Phase 4 — Job dispatch (ServiceM8) + completion
 
-> **Model correction 2026-06-05 ([Override 16](CEO.md) / [decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** Subs are dispatched via **SM8 Network** — each sub on their **own SM8 account**, a job is an **OFFER they accept/decline** (NOT a Staff seat with "limited access"). Staff seats are for Marko/Allan/genuine employees only. **NO-CONTACT rule:** the sub-facing job carries **NAME + ADDRESS only — never customer phone/email**; all customer comms fire from **GHL/Twilio**. SM8 pricing = **per-JOB, UNLIMITED users** (per-staff/seat assumption is STALE); Network is a free add-on. This Phase 4 wires the SM8 backbone; the optional **contractor-VIEW app** that puts a branded screen over the same data is **Phase 4B** (built before launch).
+> **Model correction 2026-06-05 ([Override 16](CEO.md) / [decision-sm8-keep-vs-build §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** **SUB-ENGAGEMENT MODEL LOCKED** — subs engage via the **Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; the app's own built-in, logged accept/decline = the right of refusal). **Subs = app users, NOT SM8 "Staff"** (Staff seats for Marko/Allan/genuine employees only). **SM8 Network (subs on their own accounts) is RETIRED as the canonical model — kept ONLY as an app-less interim/fallback (Path A)** if launching before the app ships; if so, dispatch goes out as a Network Request = an OFFER the sub accepts/declines on their own account (the Phase 4 steps below describe that interim path). **NO-CONTACT rule:** the sub-facing job carries **NAME + ADDRESS only — never customer phone/email**; all customer comms fire from **GHL/Twilio**. SM8 pricing = **per-JOB, UNLIMITED users** (per-staff/seat assumption is STALE). This Phase 4 wires the SM8 backbone; the **contractor-VIEW app that is the canonical sub interface** (branded screen over the same data, with the app's own accept/decline) is **Phase 4B** (built before launch). ⚖️ Legal review of the sub agreement before the first sub signs.
 
 **Goal:** Deposit-paid job → SM8 → **offered** to right subcontractor (accept/decline) → completed → photos reviewed → final payment → subcontractor paid → review request.
 
@@ -280,12 +280,13 @@
 - **Setup steps:**
   - [ ] Sign up SM8 Starter (✅ done 2026-05-26 — trial; per-JOB, unlimited users)
   - [ ] Company profile + branding
-  - [ ] Add yourself + co-founder + **Marko as Staff** (genuine team only)
-  - [ ] **Connect subs via SM8 Network** (each on their own SM8 account / browser-link) — send a Network Request = an OFFER they Accept ("Convert to Job") or Decline; route to next on decline. **Do NOT add subs as Staff with "limited access."**
+  - [ ] Add yourself + co-founder + **Marko as Staff** (genuine team only — subs are NEVER Staff)
+  - [ ] **Canonical sub interface = the Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; the app's own logged accept/decline) — built in **Phase 4B**. **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05** ([decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)).
+  - [ ] **INTERIM/FALLBACK ONLY (Path A — if launching before the app ships):** connect subs via **SM8 Network** (each on their own SM8 account / browser-link) — send a Network Request = an OFFER they Accept ("Convert to Job") or Decline; route to next on decline. **Even on this interim path, do NOT add subs as Staff with "limited access."** SM8 Network is NOT the canonical model — it is retired to interim/fallback under the lock above.
   - [ ] Build 5 job templates per [OPERATING-CONTEXT § 9.2](OPERATING-CONTEXT.md#92-job-templates-5-core)
   - [ ] Build SM8 custom fields per [OPERATING-CONTEXT § 9.3](OPERATING-CONTEXT.md#93-sm8-custom-fields)
   - [ ] Build job completion form per [OPERATING-CONTEXT § 9.4](OPERATING-CONTEXT.md#94-job-completion-form-sub-fills)
-- **Verify:** Subcontractor on their own SM8 app can see an **offered** job, accept it, see scope (name + address, **no customer phone/email**), upload before/after photos, fill completion form, mark complete.
+- **Verify:** A subcontractor can see an **offered** job, accept it, see scope (name + address, **no customer phone/email**), upload before/after photos, fill completion form, mark complete — via the **Timeless dispatch app (canonical, Phase 4B)**, or on their **own SM8 app/link (interim/fallback Path A only)**.
 
 ### 4.2 GHL → SM8 job sync
 - **Expert:** Integration architect
@@ -373,9 +374,9 @@
 
 ## Phase 4B — Custom contractor-VIEW app (scheduled LAST, before launch/scale)
 
-**Status:** APPROVED (Allan 2026-06-05). **Blueprint READY-TO-EXECUTE:** [`docs/specs/contractor-app-blueprint-2026-06-05.md`](specs/contractor-app-blueprint-2026-06-05.md) (read with [`decision-sm8-keep-vs-build`](specs/decision-sm8-keep-vs-build-2026-06-05.md) §VIABILITY STUDY).
+**Status:** APPROVED (Allan 2026-06-05). **This app IS the canonical sub interface** per **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05** ([decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)) — subs auth to OUR app → OUR one SM8 account; SM8 Network = app-less interim/fallback only. **Blueprint READY-TO-EXECUTE:** [`docs/specs/contractor-app-blueprint-2026-06-05.md`](specs/contractor-app-blueprint-2026-06-05.md) (read with [`decision-sm8-keep-vs-build`](specs/decision-sm8-keep-vs-build-2026-06-05.md) §VIABILITY STUDY).
 
-**Where it sits in the order:** **internal automation backbone (Make + GHL + SM8 + Slack + deploy + end-to-end test) FIRST → THIS app → THEN run real jobs at scale.** It is **scheduled LAST** in the build, but is *path-independent* in part — Phase 1 of the blueprint (the Make strip-contact change + the read path) is worth doing as part of the internal backbone now. Standing rec: prove the workflow on SM8's own app/Network over ~10 real jobs (or build Phases 1–3 in parallel) so the UI is built against the *real* workflow, not a guess.
+**Where it sits in the order:** **internal automation backbone (Make + GHL + SM8 + Slack + deploy + end-to-end test) FIRST → THIS app → THEN run real jobs at scale.** It is **scheduled LAST** in the build, but is *path-independent* in part — Phase 1 of the blueprint (the Make strip-contact change + the read path) is worth doing as part of the internal backbone now. Standing rec: prove the workflow on SM8's own app/**Network (the app-less interim path, Path A)** over ~10 real jobs (or build Phases 1–3 in parallel) so the UI is built against the *real* workflow, not a guess — then the single-account app becomes the canonical sub interface.
 
 **What it is (and isn't):** a **React PWA** giving subs a **NAME + ADDRESS-only** view of *offered* jobs, real **accept/decline** (right of refusal), before/after photo capture, complete/problem actions — all mediated by **OUR backend (Supabase BFF/token-broker; sole SM8 key-holder; per-sub JWT+RLS; contact-field filter; rate governor)**. **SM8 stays the system of record; the app is a VIEW + action layer on the same SM8 + GHL + Sheet data → ZERO migration** (subs switch *screens*, not systems). It is **NOT an SM8 replacement.**
 
@@ -898,7 +899,7 @@ For each task above:
 |---|---|
 | What do I do next on the quote form? | Phase 1.5 (replace REPLACE_ME webhooks) |
 | When do I start ads? | After Phase 1.9 audit passes |
-| When do I add subcontractors? | Phase 3 — before any real customer jobs. Via **SM8 Network** (own account, accept/decline), **name+address only** to subs. |
+| When do I add subcontractors? | Phase 3 — before any real customer jobs. Engaged via the **Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; app's own logged accept/decline) — **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05** ([decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)); SM8 Network = app-less interim/fallback only; subs = app users, NOT SM8 Staff; **name+address only** to subs. |
 | Do we keep ServiceM8 or build our own? | **KEEP SM8** as the backbone (Override 16 / [decision doc](specs/decision-sm8-keep-vs-build-2026-06-05.md)). Don't build a replacement. |
 | When do I build the custom contractor app? | **Phase 4B — scheduled LAST** (internal backbone → app → launch). It's a VIEW on the same data, zero migration. [Blueprint](specs/contractor-app-blueprint-2026-06-05.md). |
 | When do I add BigQuery? | **Empty schema NOW (Phase 1)** per Override 15 / F7 LOCK 2026-05-16. Populated automatically as events flow (the per-job data-capture Sheet is already live). Heavy analytical use Phase 5+ once 50+ jobs. |

@@ -10,7 +10,7 @@
 - GHL trial / May 27 references → GHL PAID $155 AUD/mo per F3 LOCK 2026-05-16
 - ServiceM8 "Override 2 defer ~10 weeks" → SUPERSEDED by Decision 12 v2 2026-05-25; SM8 Starter trial signed up 2026-05-26
 - Stripe/Xero "not yet" references → both LIVE since 2026-05-26 (Stripe production verified, Xero Grow 100% off 6mo)
-- **ServiceM8 "$29/mo Starter" / any per-staff cost framing → STALE.** SM8 is **per-JOB, flat monthly, UNLIMITED users**; subs run on their **OWN SM8 account via the Network** (a free add-on), engaged by **OFFER (accept/decline)**, not a Staff seat. Staff seats are for Marko/Allan/genuine employees only. KEEP SM8 as the field-service backbone (do NOT build a replacement). Source: `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md` (LOCKED 2026-06-05).
+- **ServiceM8 "$29/mo Starter" / any per-staff cost framing → STALE.** SM8 is **per-JOB, flat monthly, UNLIMITED users**. **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05:** subs engage via the **Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; the app's own built-in, logged accept/decline = right of refusal). **Subs = app users, NOT SM8 "Staff"** (Staff seats for Marko/Allan/genuine employees only). **SM8 Network (subs on their OWN accounts) is RETIRED as the canonical model — kept ONLY as an app-less interim/fallback (Path A).** Wherever this file says "subs run on their own SM8 account via the Network" as the model, read it as DEMOTED to interim/fallback. KEEP SM8 as the field-service backbone (do NOT build a replacement). Source: `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md` §SUB-ENGAGEMENT MODEL — LOCKED (2026-06-05).
 - **NO-CUSTOMER-CONTACT rule (LOCKED 2026-06-05) — affects §4, §9, §12:** subs get **customer NAME + ADDRESS only**, NEVER phone/email (anti-poaching). Customer "on-the-way"/reminder/cure-time/NPS SMS fire from **GHL/Twilio**, NOT off an SM8 Job Contact (which we leave empty by design). Make Scenario 1 drops "Add Job Contact" + strips contact from the SM8 job. Wherever this doc says "SM8 fires customer SMS" or passes `mobile`/`email` into SM8, read it as SUPERSEDED → GHL/Twilio. Source: same decision doc (UPDATE 2026-06-05) + `docs/specs/contractor-app-blueprint-2026-06-05.md`.
 - **Custom contractor-VIEW app** is APPROVED but scheduled **LAST** (after the internal backbone, before launch) — it is a **VIEW on the same SM8+GHL+Sheet data (zero migration)**, NOT an SM8 replacement. Sequencing (Allan 2026-06-05): internal backbone FIRST → app → launch. Spec: `docs/specs/contractor-app-blueprint-2026-06-05.md`.
 
@@ -93,7 +93,7 @@ Google search → service landing page → quote form (5 steps + photos) → sub
   → 24h + 72h follow-ups if no response
   → Customer picks tier → 10% deposit Stripe link
   → Deposit paid → ServiceM8 job created (name + address only, NO customer contact) + Slack #new-jobs alert
-  → Co-founder OFFERS the job to a tier-matched subcontractor via SM8 Network (sub Accepts/Declines on own account)
+  → Co-founder OFFERS the job to a tier-matched subcontractor via the Timeless dispatch app (sub Accepts/Declines in OUR app → OUR one SM8 account; app-less SM8 Network = interim/fallback only — SUB-ENGAGEMENT MODEL LOCKED 2026-06-05)
   → Day-before reminder SMS to customer (sent from GHL/Twilio, not SM8)
   → Subcontractor completes job + uploads before/after photos
   → Cure-time SMS to customer (don't use 24-48h)
@@ -176,7 +176,7 @@ Authoritative map: [docs/FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/F
 | **React quote form** | Lead intake | Form submission event | Free (Vercel/embed) |
 | **GoHighLevel** | CRM, pipeline, customer comms, follow-ups | Contact + opportunity state | $155/mo AUD |
 | **Stripe** | Deposit + final payment links | Payment events | 1.75% + 30c |
-| **ServiceM8** | Job dispatch, subcontractor **OFFER via Network** (accept/decline on sub's own account), completion photos. **KEPT as backbone** (not replaced). | Job execution state | **Per-JOB, flat monthly, UNLIMITED users** (NOT per-staff — old "$29 Starter/seat" framing is STALE; Network = free add-on) |
+| **ServiceM8** | Field-service backbone — **KEPT** (not replaced). Job dispatch + completion photos. **Sub OFFER (accept/decline) goes via the Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; app's own logged accept/decline) per **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05**; subs = app users, NOT SM8 Staff; SM8 Network (subs on own accounts) = app-less interim/fallback only. See [decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md). | Job execution state | **Per-JOB, flat monthly, UNLIMITED users** (NOT per-staff — old "$29 Starter/seat" framing is STALE) |
 | **pay.com.au** | Subcontractor payouts via rewards card | Outgoing subcontractor payments | ~1.5–2% per txn (absorbed by margin) |
 | **Xero** | Accounting, bank feed, invoices | Books of account | $35/mo Ignite |
 | **Slack** | Internal alerts only (NOT customer-facing) | Real-time notifications | Free tier OK initially |
@@ -227,9 +227,9 @@ Authoritative map: [docs/FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/F
                    ▼
               ┌─────────────────┐
               │  ServiceM8      │     (name+address only — NO customer contact)
-              │  ─ Job card     │──── Subcontractor's own SM8 app (Network)
-              │  ─ Templates    │     (job OFFERED → sub Accepts/Declines)
-              │  ─ Photos       │
+              │  ─ Job card     │──── Timeless dispatch app → OUR one SM8 acct
+              │  ─ Templates    │     (job OFFERED → sub Accepts/Declines in OUR app;
+              │  ─ Photos       │      SM8 Network on sub's own acct = interim/fallback only)
               │  ─ Completion   │
               └────────┬────────┘
                        │ webhook on completion
@@ -431,7 +431,7 @@ customer_referrer
 
 > **⚠️ DECISION 2026-06-05 (LOCKED) — read before this whole section.** Source: `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`.
 > - **SM8 is KEPT** as the field-service backbone (we are NOT building a replacement). Pricing = **per-JOB, flat monthly, UNLIMITED users** — the per-staff/"$29 Starter seat" framing below is STALE.
-> - **Subs run on their OWN SM8 account via the NETWORK** (browser-link fallback), engaged by **OFFER**: a Network Request → sub **Accepts** ("Convert to Job") / **Declines** → route to next. Sub sees only their own job (no pricing/margin/other customers). Staff seats are for Marko/Allan/genuine employees only. Network = free add-on; subs supply own ABN + ≥$10M PL.
+> - **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05: subs engage via the Timeless single-account dispatch app** — subs auth to **OUR app** → **OUR one SM8 account** (our backend = sole key-holder); the app's own built-in, **logged accept/decline = the right of refusal**. **Subs = app users, NOT SM8 "Staff"** (Staff seats for Marko/Allan/genuine employees only). Sub sees only their own job (no pricing/margin/other customers); supplies own ABN + ≥$10M PL; invoices us. **SM8 Network (subs on their OWN accounts, Convert-to-Job/decline) is RETIRED as the canonical model — kept ONLY as an app-less interim/fallback (Path A)** if launching before the app ships. ⚖️ Legal review of the sub agreement before the first sub signs. See `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md` §SUB-ENGAGEMENT MODEL — LOCKED.
 > - **NO-CUSTOMER-CONTACT rule:** the SM8 job carries **customer NAME + ADDRESS only** — NEVER phone/email (anti-poaching). Customer SMS (on-the-way/reminder/cure-time/NPS) fires from **GHL/Twilio**, NOT off an SM8 Job Contact. Make Scenario 1 drops "Add Job Contact" + strips contact from the job description.
 > - **Accept/decline has NO SM8 API** (UI/email-only). A future contractor-VIEW app (scheduled LAST, zero-migration view on the same data) must rebuild that state machine — see `docs/specs/contractor-app-blueprint-2026-06-05.md`.
 
@@ -497,7 +497,7 @@ Each template includes scope checklist + materials notes + before/after photo re
 
 - Non-solicitation: cannot contact your customers directly for 24 months. **Reinforced structurally by the no-contact rule (2026-06-05): subs are given customer NAME + ADDRESS only — never phone/email — so they have no means to poach.**
 - Confidentiality: cannot share pricing, processes, customer data
-- ABN confirmation (independent contractor, not employee — Fair Work compliance). **Engagement is via SM8 Network OFFER (accept/decline on the sub's own account), not a Staff seat — see §9 decision note.**
+- ABN confirmation (independent contractor, not employee — Fair Work compliance). **Engagement is via the Timeless single-account dispatch app — work is OFFERED, never assigned; the sub accepts/declines each offer at sole discretion with no penalty (the app's own logged accept/decline = right of refusal). Sub = app user, NOT a Staff seat. SM8 Network on the sub's own account = app-less interim/fallback only.** SUB-ENGAGEMENT MODEL LOCKED 2026-06-05 — see §9 decision note + `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md` §SUB-ENGAGEMENT MODEL — LOCKED for the canonical sub-agreement preamble. ⚖️ AU employment-lawyer review before the first sub signs.
 - **≥$10M public liability insurance current, certificate annually** *(was "$5M+" — corrected to match the ≥$10M gate locked in `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md` + `docs/roles/auditor-fair-work.md`; ⚑ FLAGGED for CEO confirmation as a compliance/insurance figure — verify the live policy + agreement template wording)*
 - Payment terms: within 3 business days of customer final payment clearing
 - Photo requirement: before/after to SM8 before job marked complete
@@ -719,7 +719,7 @@ elif test job, simple, low-risk:
 
 > **⚠️ Current sequencing (Allan 2026-06-05) — overlays the phases below.** Source: `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md` + `docs/specs/contractor-app-blueprint-2026-06-05.md`.
 > **Internal backbone FIRST → contractor-VIEW app → launch real jobs.**
-> 1. **Internal backbone:** finish Make scenarios (Scenario 1 + strip-contact + find-or-create, then 2–5) → publish/finish GHL workflows (the "Job in ServiceM8" workflow is still DRAFT) → SM8 config (Marko as staff; subs via Network) → Slack alerts → deploy the GHL-wired quote form → end-to-end test.
+> 1. **Internal backbone:** finish Make scenarios (Scenario 1 + strip-contact + find-or-create, then 2–5) → publish/finish GHL workflows (the "Job in ServiceM8" workflow is still DRAFT) → SM8 config (Marko as Staff; **subs = app users via the Timeless single-account dispatch app per SUB-ENGAGEMENT MODEL LOCKED 2026-06-05 — SM8 Network = app-less interim/fallback only**) → Slack alerts → deploy the GHL-wired quote form → end-to-end test.
 > 2. **THEN build the contractor-VIEW app** (scheduled LAST; it's a zero-migration VIEW on the same SM8+GHL+Sheet data, NOT an SM8 replacement; the genuinely-new build piece is the accept/decline state machine — no SM8 API).
 > 3. **THEN run real jobs.**
 > SM8 is **KEPT** as the backbone throughout (do NOT build a replacement). Phases 3/5/6 below remain valid; the data-capture Google Sheet job-log is already live (Make appends each job → future BigQuery).

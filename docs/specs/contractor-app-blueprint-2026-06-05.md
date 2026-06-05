@@ -2,6 +2,8 @@
 
 **Status:** READY-TO-EXECUTE. Architect-produced 2026-06-05 (verified vs 2026 SM8 + Supabase + PWA docs). **Scheduled LAST** — built AFTER the internal backbone (Make/GHL/SM8/Slack/deploy) per Allan's 2026-06-05 resequence. Read with `decision-sm8-keep-vs-build-2026-06-05.md` (§VIABILITY STUDY).
 
+**MODEL LOCKED 2026-06-05:** this single-account app (subs auth to OUR app → OUR one SM8 account; the app's own logged accept/decline) IS the **canonical sub-engagement model** — SM8 Network (subs on their own accounts) is RETIRED to an app-less interim/fallback only. See [`decision-sm8-keep-vs-build-2026-06-05.md` §SUB-ENGAGEMENT MODEL — LOCKED](decision-sm8-keep-vs-build-2026-06-05.md). (This blueprint is already single-account — no structural change.)
+
 **Scope:** React PWA giving subs a NAME+ADDRESS-only view of *offered* jobs, real ACCEPT/DECLINE (right of refusal), before/after photo capture, complete/problem actions — all mediated by OUR backend (sole SM8 key-holder). SM8 = system of record; app = view + action layer.
 
 ## 3 non-negotiable realities that force the design
