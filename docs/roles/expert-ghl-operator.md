@@ -30,14 +30,14 @@ A GoHighLevel agency-style operator who has built ~50+ trades / home services GH
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **Single business, single sub-account**. No agency layer. Keep it simple.
 - **Phone +61 normalisation**: GHL stores E.164. The React form already converts 04XXXXXXXX → +61. Confirm GHL field accepts both formats.
 - **Sydney timezone**: every "wait X hours" workflow respects Australia/Sydney TZ.
 - **Bilingual consideration**: not currently in scope. Australian English copy only.
 - **2-founder access**: both as users, role = Admin. Sub-account level.
-- **Lane discipline**: Angela owns workflows + templates. Co-founder owns dispatch + completion handoff. GHL workflows respect this — co-founder shouldn't be writing workflow logic; Angela shouldn't be calling subcontractors from inside GHL.
+- **Lane discipline**: Allan owns workflows + templates. Co-founder owns dispatch + completion handoff. GHL workflows respect this — co-founder shouldn't be writing workflow logic; Allan shouldn't be calling subcontractors from inside GHL.
 
 ---
 
@@ -65,11 +65,11 @@ A GoHighLevel agency-style operator who has built ~50+ trades / home services GH
 ### Pipeline integrity
 14. **Stage backflow**: customer can move backward (e.g., Job Booked → Job On Hold). Workflows must handle reverse direction.
 15. **Stage skips**: certain flag combinations skip stages (e.g., `flag_strata` cleared → Stage 2 → Stage 4 directly). Skips must be explicit.
-16. **Closure stages**: every opportunity must end at Stage 17 OR a "closed-lost" terminal. No infinite loops.
+16. **Closure stages**: every opportunity must end at Job Complete (stage 15, terminal) OR a "closed-lost" terminal. No infinite loops.
 
 ### Integration handoffs
 17. **Webhook payload validation**: incoming webhook fields match what React form sends. Test with actual production payload.
-18. **SM8 sync**: only after Stage 10 (deposit paid). Pre-deposit creates junk SM8 jobs.
+18. **SM8 sync**: only after Job in ServiceM8 (stage 11) — the deposit is collected at Prepayment Invoice Sent (stage 10) and tracked via the `Payment Status` custom field. Pre-deposit creates junk SM8 jobs.
 19. **Slack alerts**: structured format, link to GHL contact + relevant SM8 job for fast triage.
 20. **BigQuery sync**: append-only events, use `pipeline_events` table as the source of truth for state changes.
 
@@ -83,7 +83,7 @@ A GoHighLevel agency-style operator who has built ~50+ trades / home services GH
 | Streamlined for ops | One stage = one action triggers, no manual drag |
 | Accurate state | Custom fields capture every relevant decision, no free-text where dropdowns fit |
 | 48-52% margin | Workflows handle the 80% common path automatically; human time goes to high-margin decisions |
-| Lane discipline | Angela owns workflow logic; co-founder consumes Slack alerts only |
+| Lane discipline | Allan owns workflow logic; co-founder consumes Slack alerts only |
 | POAS focus | UTM/gclid captured in custom fields → BigQuery joins → POAS calculable per channel |
 
 ---

@@ -67,7 +67,7 @@ Distinct from compliance auditor (which catches LEGAL violations) — this catch
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **No licence yet** — must NEVER imply licence we don't have. Customer who later checks Fair Trading + finds us not licensed = trust dead.
 - **Coordination model** — customer hires US, subcontractor does work. Customer's invoice/contract is with us. We are accountable, not subcontractor.

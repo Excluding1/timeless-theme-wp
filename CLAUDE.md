@@ -79,18 +79,18 @@ git push
 
 ### 3. Build the deploy zip (bulletproof exclusions)
 ```bash
-cd /Users/angelapham/Downloads/timeless-theme-wp
+cd /Users/excluding/Downloads/timeless-theme-wp
 zip -rq ../timeless-theme.zip . \
   -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
-  ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
-  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" \
+  ".secrets/*" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
+  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" \
   "src/*" "postcss.config.js" "package.json" "package-lock.json" \
   "memory/*" "*.log" "*.zip" "*.map"
 ```
 
 **Includes:** all theme PHP, `images/` (incl. responsive variants), `assets/main.min.css` (compiled Tailwind), `assets/quote-form/` (React form build, untracked but required for homepage shortcode), `js/main.js`, `style.css`.
 
-**Excludes:** `.git/`, `.claude/` (dev tooling + screenshots — anything dev-side goes here), `docs/`/`data/`/`memory/` (CEO/AI internal), sibling apps in master-repo (`dashboard/`, `daemon/`, `scripts/`), build pipeline (`node_modules/`, `src/`).
+**Excludes:** `.secrets/` (⚠️ live API credentials — ServiceM8 / GHL PIT / Make webhook secret; NEVER deploy to the public site), `.git/`, `.claude/` (dev tooling + screenshots — anything dev-side goes here), `docs/`/`data/`/`memory/` (CEO/AI internal), sibling apps in master-repo (`dashboard/`, `daemon/`, `scripts/`), build pipeline (`node_modules/`, `src/`).
 
 ### 4. Upload via wp-admin
 Appearance → Themes → Upload → **"Replace current with uploaded"**
@@ -132,20 +132,21 @@ Mac: `Cmd + Shift + R`, or open in Incognito.
 ## Related Repos
 - **React Quote Form:** https://github.com/Excluding1/TimelessDash (branch `quote-form/react-v8`)
   - Standalone React embed, NOT part of this WordPress theme
-  - Has `REPLACE_ME` webhook URLs waiting for GHL account
+  - ✅ Wired to LIVE GHL (W1 webhook + `secret_token`) as of 2026-06-05 — the old `REPLACE_ME` note is stale; TODO is to `npm run build` + deploy the wired bundle to the live site.
 
 ## Pending Work
-See `HANDOFF.md` for the full task list. Key items:
+**Business-automation roadmap (GHL · Make · ServiceM8 · Slack · contractor sub-app) — canonical = the CEO Cockpit board (localhost:4317) + `memory/SESSION_RESUME_2026-06-05.md` + `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`. Plan order (2026-06-05): internal backbone → contractor app → launch.**
+THEME pending items (older full list in `HANDOFF.md`):
 - Upload this theme + page-creator plugin to live WordPress
 - Configure Customizer (real phone, email, licence)
 - Replace placeholder images with real job photos over time
 - Add HTTPS redirect in .htaccess
-- Warranty text bulk update: "2-Year" → "Up to 5-Year"
+- Warranty copy audit (per-material; **NOT a bulk replace** — see STATE.md §15): keep grout 2yr / silicone 1yr / resurface up-to-5yr; use "Up to 5-Year" only with nearby qualifying text (ACL)
 - Blog template for future content marketing
 - Google Search Console + Analytics setup
 
 ## Do NOT
-- Use React/SPA patterns — this is pure server-rendered WordPress for SEO
+- Use React/SPA patterns **in the WordPress theme** — this is pure server-rendered WordPress for SEO. *(The separate **contractor sub-app** IS a React PWA — a distinct planned project, blueprint in `docs/specs/contractor-app-blueprint-2026-06-05.md`; this rule is theme-only.)*
 - Add a build step — Tailwind is loaded via CDN intentionally
 - Put content images (blog photos) in git — those go in WordPress Media Library
 - Change image filenames — PHP templates reference them by exact path

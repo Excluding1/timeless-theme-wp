@@ -1,3 +1,5 @@
+> ⚠️ **SUPERSEDED-IN-PART (2026-06-03).** This doc predates current locks. LIVE pipeline = 15 stages Jordan-EXACT, terminal "Job Complete" (no Job Invoiced/Paid — finance via `Payment Status` field + Accounts pipeline). Insurance = $10M. ServiceM8 = 6 categories. Owners = Allan + Marko. Canonical: `docs/CEO.md` Override 14 v4 + `memory/SESSION_RESUME_2026-06-03.md`. Body retained for historical/workflow reference only.
+
 - [User role](user_role.md) — Angela, launching bathroom resurfacing business in Sydney, non-tradie systems approach
 - [Competitor strategy](project_competitor_strategy.md) — Modelling after Jordan Schofield's Surface Care, hyper-relevant landing pages for Google Ads
 - [Landing page strategy](project_landing_page_strategy.md) — Image psychology, two-audience copy, CTA placement, form design, Google Ads optimization

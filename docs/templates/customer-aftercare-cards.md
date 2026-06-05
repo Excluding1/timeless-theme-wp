@@ -55,7 +55,7 @@ YOUR BATHROOM REGROUTING — AFTERCARE GUIDE
 ```
 YOUR WARRANTY
 
-This work is covered by a 12-month workmanship guarantee.
+This work is covered by our workmanship guarantee: 2 years on cement grout, 1 year on silicone (5 years on epoxy grout).
 
 If you notice any grout cracking, silicone lifting, or discolouration within
 the warranty period, contact us and we'll send our technician back to fix it
@@ -73,10 +73,10 @@ Thank you for choosing us! If you loved the result, we'd appreciate a Google
 review ⭐ — search "Timeless Resurfacing Sydney" on Google.
 ```
 
-**Warranty length variants:**
-- Standard cement grout regrout: **12-month workmanship**
-- Epoxy grout regrout: **24-month** (epoxy lasts longer than cement)
-- Update card variant per service tier per [pricing tier warranty](../specs/sub-rate-schedule.md)
+**Warranty length variants (per canonical per-material ladder — never bulk-replace):**
+- Cement grout regrout: **2-year workmanship**; silicone: **1-year**
+- Epoxy grout regrout: **5-year** (epoxy lasts longer than cement)
+- Other services per the ladder (resurface up-to-5yr private / 6mo rental; chip repair 1yr) — see STATE.md §15
 
 ---
 
@@ -206,7 +206,7 @@ These cards have placeholders that fill from WordPress Customizer per [CLAUDE.md
 
 ## Future enhancements
 
-- **QR code** on back of each card → links to a customer NPS / review form (auto-Google-prompt for 9-10 raters)
+- **QR code** on back of each card → links to a customer NPS / review form (review prompt shown to ALL raters — no score-gating, ACCC-compliant)
 - **Multilingual variants** for Sydney's diverse market (Mandarin, Cantonese, Arabic)
 - **Branded magnetic card** instead of paper for fridge/laundry placement (longer brand presence)
 - **Per-property variant** for strata properties — strata-specific cure-time guidance for shared facilities

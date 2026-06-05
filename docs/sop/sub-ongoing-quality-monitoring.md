@@ -118,7 +118,7 @@ Process:
 - 7 days before → follow-up if not received
 - On expiry day → if no certificate → **STAND DOWN immediately. No jobs dispatched until certificate received.**
 
-**Hard rule:** NEVER dispatch a subcontractor with expired insurance. If they cause damage/injury while uninsured, **WE are liable** (head contractor liability). $20M PL coverage = our PL coverage; subcontractor's $10M+ is required to backstop.
+**Hard rule:** NEVER dispatch a subcontractor with expired insurance. If they cause damage/injury while uninsured, **WE are liable** (head contractor liability). $10M PL coverage = our PL coverage; subcontractor's $10M+ is required to backstop.
 
 Annual check (each renewal):
 - Coverage still ≥$10M?

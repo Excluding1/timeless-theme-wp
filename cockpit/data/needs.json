@@ -1,0 +1,53 @@
+{
+  "updated": "2026-06-03",
+  "items": [
+    {
+      "t": "ServiceM8 job categories — 6 or 10? (sets Make 'Main' service_type→category mapping; RESOLVED 2026-06-03: 6 families)",
+      "done": true
+    },
+    {
+      "t": "Warranty headline — 3-year vs 'Up to 5-Year' for resurfacing/vanity/tile (live site contradicts itself), + rental 6mo vs 3mo",
+      "done": false
+    },
+    {
+      "t": "Sub-minimum PL now business is $10M — keep sub-min at $10M and drop '$20M preferred'?",
+      "done": false
+    },
+    {
+      "t": "Insurance Certificate of Currency — send when ready (confirm $10M + products/sub-extension/$250K SL)",
+      "done": false
+    },
+    {
+      "t": "Trust badge wording — show '$10M Insured' on all pages, or keep generic 'Fully Insured'?",
+      "done": false
+    },
+    {
+      "t": "★ GATE FOR REVENUE BUILD: (a) create the 6 SM8 categories (locked colours) + confirm the ACT queue, (b) generate SM8 API key → gitignored file ~/.../.secrets/servicem8.key (NEVER chat). Unlocks Make Scenario 1 (Main). Main does NOT need the PIT.",
+      "done": false
+    },
+    {
+      "t": "Marko's email — for the ServiceM8 Staff invite",
+      "done": false
+    },
+    {
+      "t": "Make.com region — confirm EU (eu1) is fine",
+      "done": false
+    },
+    {
+      "t": "PIT rotation — when to rotate the exposed GHL token",
+      "done": false
+    },
+    {
+      "t": "Cockpit additions — which of Cleo's must-haves to build next (decision log, setup-readiness, money pulse…)",
+      "done": false
+    },
+    {
+      "t": "Revenue model reconcile — $25K/mo ÷ 50 jobs = $500/job vs ~$1.5K AOV vs Jordan $764/job; pick one consistent model (Cleo strategic-check flag)",
+      "done": false
+    },
+    {
+      "t": "Materials model (sets EVERY resurface sub rate): do subs supply their own coatings (→ pay ~$650/bath so they clear the $65/hr fair-work floor after materials) OR does Timeless supply (→ sub ~$495 + we buy ~$155 materials)? Confirm with Marko + the first sub (open Q4). Surfaced by the metal-bath quote 2026-06-04.",
+      "done": false
+    }
+  ]
+}

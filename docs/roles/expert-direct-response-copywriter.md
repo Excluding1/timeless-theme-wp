@@ -27,13 +27,13 @@ A direct response copywriter who specialises in service business customer comms 
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **Sender:** "Timeless Resurfacing" — verify this fits in SMS sender field (some AU carriers truncate at 11 chars; "Timeless Resurfac" might appear). Check actual delivery.
-- **Phone number visibility**: customers WILL try to call back the SMS sender number. Either route to mobile (Angela's 0451 110 154) or set up GHL number to forward.
+- **Phone number visibility**: customers WILL try to call back the SMS sender number. Either route to mobile (Allan's 0451 110 154) or set up GHL number to forward.
 - **Business hours**: 8am-6pm Mon-Sat. No outbound SMS outside this window unless triggered by customer action.
 - **Two audiences in templates**: homeowner ("your bathroom") vs property manager ("the property at..."). Template must work for both — or fork by `customer_type` field.
-- **Coordination model**: messages must NOT promise things only Angela controls. "Our technician will arrive..." not "I'll arrive...".
+- **Coordination model**: messages must NOT promise things only Allan controls. "Our technician will arrive..." not "I'll arrive...".
 - **Warranty:** "Up to 5-year" not "5-year". Compliance.
 
 ---

@@ -70,19 +70,19 @@ An adversarial auditor whose entire focus is "does the data make it from A to B 
 - [ ] **Failure mode**: if Slack 5xx, retry; if persistently failing, log to `#automation-errors`
 
 ### GHL → ServiceM8 sync
-- [ ] **Trigger**: only fires on Stage 10 (Deposit Paid) — never earlier (no junk SM8 jobs)
+- [ ] **Trigger**: only fires on Job in ServiceM8 (stage 11) — the deposit is collected at Prepayment Invoice Sent (stage 10) and tracked via the `Payment Status` custom field; never earlier (no junk SM8 jobs)
 - [ ] **Required SM8 fields**: name, phone, email, address, suburb, service_type, scope, quote_amount, photo URLs, internal notes
 - [ ] **Field mapping** from GHL custom field → SM8 custom field documented
 - [ ] **Photos**: Cloudinary URLs passed (not source files re-uploaded)
 - [ ] **GHL ↔ SM8 ID linking**: `ghl_opportunity_id` stored in SM8, `servicem8_job_id` stored in GHL
-- [ ] **Failure mode**: if SM8 fails, GHL stays at Stage 10 + alerts Slack — does NOT silently advance
+- [ ] **Failure mode**: if SM8 fails, GHL stays at Prepayment Invoice Sent (stage 10) + alerts Slack — does NOT silently advance to Job in ServiceM8 (stage 11)
 
 ### Stripe → GHL webhook
 - [ ] **Event types** handled: `payment_intent.succeeded` (and failed/canceled)
 - [ ] **Metadata identifies deposit vs final** (`type: "deposit"` or `type: "final"`)
 - [ ] **Customer ID matched** correctly to GHL contact (use email or stripe_customer_id)
 - [ ] **Idempotency**: same event ID processed twice doesn't double-advance stages
-- [ ] **Stage transition** matches: deposit → Stage 10, final → Stage 16
+- [ ] **Stage transition** matches: deposit → Prepayment Invoice Sent (stage 10) + `Payment Status` field; final payment → Accounts pipeline / `Payment Status` field (NOT a Sales stage)
 - [ ] **Failure mode**: webhook 5xx triggers Stripe's retry policy; persistent failure alerts Slack
 
 ### SM8 → GHL completion
@@ -108,11 +108,11 @@ An adversarial auditor whose entire focus is "does the data make it from A to B 
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **Single-region preference**: Cloudinary AU, Stripe AU account, BigQuery australia-southeast1 (Sydney)
 - **Privacy Act compliance**: every webhook moving PII offshore must be documented in privacy policy
-- **2-founder model**: when integration breaks, who fixes it? Angela owns webhook URLs + customer flow; co-founder owns SM8 — clear escalation path
+- **2-founder model**: when integration breaks, who fixes it? Allan owns webhook URLs + customer flow; co-founder owns SM8 — clear escalation path
 
 ---
 

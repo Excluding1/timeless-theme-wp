@@ -220,12 +220,11 @@ Triangulated across mature markets with similar materials/regulation:
 | **AU** | Bert (ARS) operator estimates | Resurface (retail) | $500-900 | $80-120/hr | Established operators |
 
 **Synthesis — fair AU 2026 effective subcontractor rate AFTER materials cost:**
-- **Resurfacing:** $80-100/hr ← higher than regrout because materials ($150-300) + spray equipment investment + skill premium
-- **Regrouting:** $70-90/hr
-- **Silicone-only:** $60-80/hr
-- **Floor below = sham contracting + sub flight risk** ($60/hr resurface, $50/hr regrout, $45/hr silicone)
+> ⚠️ **RECALIBRATED 2026-06-03 — canonical fair-work floors = Resurfacing $65/hr · Regrouting $60/hr · Silicone-only $50/hr** (per [pricing-audit-2026-05-findings.md §2](pricing-audit-2026-05-findings.md)). AU agency-dispatched rates run $5-15/hr below independent-operator rates (the sub doesn't carry marketing/quoting/comms cost). The earlier $80-100 / $70-90 "floors" were too aggressive and produced false-positive Fair-Work flags — the Excel was already calibrated correctly.
+- Market reference (independent operators): Resurfacing ~$80-100/hr · Regrouting ~$70-90/hr · Silicone-only ~$60-80/hr.
+- **Canonical floors (agency-dispatched; below = sham-contracting + sub-flight risk): Resurfacing $65/hr · Regrouting $60/hr · Silicone $50/hr.**
 
-These are **floor numbers per [auditor-fair-work.md](../roles/auditor-fair-work.md)** — anything below = unsustainable for sub + Fair Work flag.
+These floors are canonical per [pricing-audit-2026-05-findings.md §2](pricing-audit-2026-05-findings.md) + [auditor-fair-work.md](../roles/auditor-fair-work.md) — anything below = unsustainable for sub + Fair Work flag.
 
 ### G.2 Cost categories — every dollar that flows out per job
 
@@ -243,7 +242,7 @@ Per Allan's instruction "healthy enough margin for profit after all expenses lik
 | **ServiceM8** | $29/mo (basic) | Indirect — allocated /job |
 | **Cloudinary** | Free tier covers ~100 jobs/mo; $89/mo if exceeded | Indirect (free until volume) |
 | **Twilio SMS** | ~$0.10-0.20 per SMS × ~10 SMS per job lifecycle = $1-2/job | Direct (per job comms) |
-| **Public liability insurance** | $20M PL ~$2,000/yr | Indirect — amortised /job |
+| **Public liability insurance** | $10M PL ~$2,000/yr | Indirect — amortised /job |
 | **Workers comp / personal accident** | If we ever have employees | Future (currently $0) |
 | **Xero accounting** | $35-70/mo | Indirect — allocated /job |
 | **pay.com.au (sub payments)** | ~1% transaction fee, offset by rewards points | Direct (% of sub payment) |

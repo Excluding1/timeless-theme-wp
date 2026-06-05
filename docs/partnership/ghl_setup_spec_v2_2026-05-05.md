@@ -19,6 +19,8 @@ references:
 
 # GHL Setup Spec v2
 
+> ⚠️ **SUPERSEDED-IN-PART (2026-06-03).** This doc predates current locks. LIVE pipeline = 15 stages Jordan-EXACT, terminal "Job Complete" (no Job Invoiced/Paid — finance via `Payment Status` field + Accounts pipeline). Insurance = $10M. ServiceM8 = 6 categories. Owners = Allan + Marko. Canonical: `docs/CEO.md` Override 14 v4 + `memory/SESSION_RESUME_2026-06-03.md`. Body retained for historical/workflow reference only.
+
 ## 0. What changed from v1
 
 This is a substantial rewrite forced by Cleo's peer-review (12 findings, mostly HIGH/BLOCKER severity) + research agent verifying GHL Starter capabilities + integrating Reddit community lessons we'd skipped.

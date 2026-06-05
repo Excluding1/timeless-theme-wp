@@ -8,7 +8,7 @@
 
 **Companion files:**
 - [STATE.md](STATE.md) — single source of truth for current factual state of the business (accounts, assets, credentials, what's verified vs unknown). Either co-CEO updates STATE.md when they verify something; Allan + Marko update when they change something. Check STATE.md for facts; check CEO.md for decisions/strategy.
-- [`memory/partnership_clifford_cleo.md`](../../.claude/projects/-Users-angelapham-Downloads-timeless-theme-wp/memory/partnership_clifford_cleo.md) — the co-CEO partnership protocol: how Clifford and Cleo collaborate (3-lens audit at AI team level, brainstorm/peer-review/research-pair/reality-check patterns, sync via symlinks at `~/codex-peer-workspace/`, disagreement protocol).
+- [`memory/partnership_clifford_cleo.md`](../../.claude/projects/-Users-excluding-Downloads-timeless-theme-wp/memory/partnership_clifford_cleo.md) — the co-CEO partnership protocol: how Clifford and Cleo collaborate (3-lens audit at AI team level, brainstorm/peer-review/research-pair/reality-check patterns, sync via symlinks at `~/codex-peer-workspace/`, disagreement protocol).
 - [`~/codex-peer-workspace/PEER-PROTOCOL.md`](../../../codex-peer-workspace/PEER-PROTOCOL.md) — Cleo's orientation file. Cleo reads this on every invocation.
 
 **Sync convention:** Either co-CEO can update CEO.md, STATE.md, or any `memory/*.md`. Append a trailer comment at the change site: `<!-- Updated by Clifford YYYY-MM-DD: reason -->` or `<!-- Updated by Cleo YYYY-MM-DD: reason -->`. Sync is automatic via symlinks — no copy/paste, no merge layer.
@@ -75,7 +75,7 @@ These are non-negotiable. When I break these, Allan catches it within an hour. E
 - Foundation = pricing accuracy, subcontractor onboarding, role files, decision frameworks
 - Tools = GHL workflows, Stripe, ServiceM8, Slack
 - Ads = only after both above are solid
-- May 27 GHL paid date is NOT a forcing function — pay $136/mo and keep building right
+- ~~May 27 GHL paid date is NOT a forcing function — pay $136/mo and keep building right~~ **(STALE: F3 LOCK 2026-05-16 — GHL already PAID at $155 AUD/mo, trial converted)**
 - See Override 13 + Allan's foundation-first reframe
 
 ### Rule 6 — Don't wait, work the queue
@@ -256,29 +256,31 @@ I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record.
 ### Money
 | Item | Value |
 |---|---|
-| Cash on hand | **$1,500** (starting capital). $100 bank signup bonus pending — receivable within 2 months. |
+| Cash on hand | **$1,600** (starting capital + $100 bank signup bonus arrived per F10 LOCK 2026-05-16). |
 | Total revenue (real customer) | **$0** |
 | Total expenses to date | $187.56 |
 | Monthly recurring (current) | $38.60 |
-| Monthly recurring from May 27 | **$174.60** (when GHL trial converts to paid) |
+| Monthly recurring (F3 LOCK 2026-05-16: GHL paid active) | **~$193.60** ($18.88 Google Workspace + $155 GHL Starter paid + $19.72 other small recurring) |
 | Hard runway at current burn | ~41 months — but irrelevant once we add GHL and ads |
 | Hard runway from May 27 (no revenue, no ads) | **~9 months** |
 | Hard runway from May 27 (with $20/day Google Ads, no revenue) | **~2.5 months** |
-| Critical date | **2026-05-27** — GHL paid kicks in. Must have a path to revenue by then. |
+| Critical date | ~~**2026-05-27** — GHL paid kicks in~~ **SUPERSEDED 2026-05-16 by F3 LOCK** — GHL is PAID $155 AUD/mo (trial closed). No forcing date — sprint pace per Day 1-N task checklist. Current Customer #1 quote in progress 2026-05-26. |
 
 ### Build state
 | Asset | State | Live revenue impact |
 |---|---|---|
 | WordPress site + 19 service pages | ✅ Live | Critical — front door |
-| Quote form v9.x | ✅ 95% — `REPLACE_ME` webhooks block GHL | **HIGHEST PRIORITY** |
+| Quote form | ✅ **v10 GHL-wired** — W1/W2 webhooks + secret_token + Cloudinary (commit 2300503). ~~95% — REPLACE_ME webhooks block GHL~~ resolved 2026-05-21. | Live deploy pending (sprint Day 2). |
 | Pricing schedule (140 SKUs) | ✅ Drafted | Useful, but unproven on real customer yet |
 | Google Business Profile | ✅ Set up | Will drive first organic leads |
-| GHL CRM | 🟡 Trial active until 2026-05-27 | Must be live before May 27 |
-| ServiceM8 | ❌ Not signed up | Defer until 5+ paying customers |
-| Slack workspace | ❌ Not set up | Defer until GHL live |
-| Subcontractors | ❌ 0 vetted | Block until first 3 organic jobs land |
+| GHL CRM | ✅ **PAID** $155 AUD/mo (F3 LOCK 2026-05-16; trial closed). Sales pipeline 15 stages Jordan-exact LIVE per Override 14 v4. | Live. |
+| ServiceM8 | ✅ **Starter trial signed 2026-05-26** (50% off 12mo). **KEPT as the field-service backbone** (Decision SM8-Keep 2026-06-05 — do NOT build a replacement). Pricing = **per-JOB, UNLIMITED users** (the old "per-staff/per-seat" assumption is STALE). ~~❌ Not signed up~~ | ~~Defer until 5+ customers~~ **Override 2 SUPERSEDED by Decision 12 v2 — build now** |
+| Custom contractor-VIEW app | 🟡 **APPROVED, blueprint ready, scheduled LAST** (after internal backbone, before launch). A React PWA that is a VIEW on the same SM8+GHL+Sheet data — **zero migration**, NOT an SM8 replacement. Spec: [`docs/specs/contractor-app-blueprint-2026-06-05.md`](specs/contractor-app-blueprint-2026-06-05.md) + [`decision-sm8-keep-vs-build-2026-06-05.md`](specs/decision-sm8-keep-vs-build-2026-06-05.md). | Not yet started — sequenced after Make/GHL/SM8/Slack/deploy. |
+| Per-job data-capture sheet (job log) | ✅ **Live** — Make appends one row per job (future BigQuery + AI repeat-customer/consistent-pricing). Capture-from-day-1 = one-way door; warehouse choice deferred/reversible. | Operating asset; no customer-facing impact. |
+| Slack workspace | ✅ **Live — 6 channels** (since 2026-05-17). ~~❌ Not set up~~ | Active — pipeline/ops alerts |
+| Subcontractors | ❌ 0 vetted | Block until first 3 organic jobs land. **Engaged via SM8 Network** (own account, accept/decline), **NAME + ADDRESS only — never customer phone/email** (Decision SM8-Keep 2026-06-05). |
 | Builder licence | ❌ Not applied | **Verify if we even need it** (jobs <$5K may not require) |
-| ABN, PL Insurance ($20M), Fair Trading | ✅ Active | Compliance foundation OK |
+| ABN, PL Insurance ($10M), Fair Trading | ✅ Active | Compliance foundation OK |
 | Bank business account | ✅ Active ($100 signup bonus already counted) | Foundation OK |
 
 ---
@@ -293,17 +295,20 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 **Why:** First customers must validate the offer + generate real photos + real reviews + real testimonials. Spending a single dollar on Google Ads before this is gambling. We need to know our conversion rate on warm traffic before paying for cold.
 **Goal:** **3 paid jobs by 2026-05-27**, generated entirely from network. No ad spend yet.
 
-### Override 2: Defer ServiceM8 by ~10 weeks
+### ~~Override 2: Defer ServiceM8 by ~10 weeks~~ **SUPERSEDED 2026-05-25 by Decision 12 v2** — build SM8 NOW (Starter trial signed up 2026-05-26 with 50% off 12mo promo). Per Allan directive *"build everything dont defer anything"* + solo-founder bandwidth principle (Rule 9 Addendum 2). Body of Override 2 preserved below for history.
+> **SM8-KEEP DECISION 2026-06-05 (LOCKED, unanimous: field-service-ops expert + Cleo + Clifford):** ServiceM8 is **KEPT as the field-service backbone — not replaced by a custom app.** Triggered by Allan's *"do we even need ServiceM8 if we just make our own app?"* A custom **contractor-VIEW** app is APPROVED but is a VIEW on the same SM8+GHL+Sheet data (zero migration), scheduled LAST. Subs engaged via **SM8 Network** (own account + own ABN + ≥$10M PL; job = an OFFER they accept/decline), staff seats only for Marko/Allan/genuine employees. See [`docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`](specs/decision-sm8-keep-vs-build-2026-06-05.md). **COST CORRECTION:** SM8 = per-JOB, flat monthly, UNLIMITED users — the "per-staff/per-seat" assumption (incl. the spreadsheet rationale below) is STALE.
 **Earlier plan:** Phase 3-4 sets up ServiceM8 after 3 subcontractors onboarded.
 **My call:** First 5 jobs use a **Google Calendar + Sheets + GHL workflow** stack instead of SM8. Each job becomes a row in a Sheet, calendar invite to subcontractor, completion via SMS + photos to Google Drive folder.
 **Why:** SM8 is $29/mo + setup time. At 1-3 jobs/month early on, the spreadsheet works. Saves ~$300 in first 10 weeks and ~10 hours of setup time we redirect to customer acquisition.
 **Trigger to activate SM8:** when we hit **5 jobs/week consistently** OR have 3 active subcontractors. Whichever comes first. Estimated July/August 2026.
 
-### Override 3: Skip BigQuery indefinitely (revisit at 50 jobs/month)
-**Earlier plan:** Phase 5 builds BigQuery + Cloud + Looker for KPI reporting.
-**My call:** Use **Looker Studio directly on Google Sheets** for first 50+ jobs. Free. Visual. Sufficient.
-**Why:** BQ is the right tool when you're at 1,000+ events/month and need cross-system queries. We are nowhere near that. Premature data engineering eats the cash that should go to first-customer acquisition.
-**Trigger to revisit:** consistent **50 jobs/month** + **multi-system insight need** (e.g., joining ad spend × CRM × completion). Estimated Q1 2027 if growth holds.
+### ~~Override 3: Skip BigQuery indefinitely (revisit at 50 jobs/month)~~ — **ARCHIVED 2026-05-01 PM, RE-CONFIRMED F7 LOCK 2026-05-16**
+**REVERSED by Override 15** (see below in this file at `:417-427`) — BigQuery setup is now Phase 1 task, NOT deferred. Allan's F7 LOCK 2026-05-16: *"keep big query"*. Rationale: Jordan-parity (his $50/mo BigQuery + Claude Code daemon is the proven model per `~/Downloads/all-transcripts-2026-04-30.md:401`). The "premature data engineering" rationale below is OUTDATED — empty schema costs nothing and prevents painful migration later. **Do not read this Override as a current decision. Read Override 15.**
+
+~~Earlier plan: Phase 5 builds BigQuery + Cloud + Looker for KPI reporting.~~
+~~My call: Use Looker Studio directly on Google Sheets for first 50+ jobs. Free. Visual. Sufficient.~~
+~~Why: BQ is the right tool when you're at 1,000+ events/month and need cross-system queries. We are nowhere near that. Premature data engineering eats the cash that should go to first-customer acquisition.~~
+~~Trigger to revisit: consistent 50 jobs/month + multi-system insight need (e.g., joining ad spend × CRM × completion). Estimated Q1 2027 if growth holds.~~
 
 ### Override 4: 19 landing pages → focus on top 5 (URLs corrected 2026-05-01 PM)
 **Earlier:** All 19 service pages built and live.
@@ -336,7 +341,7 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - [STATE.md § 1 Legal & Compliance](STATE.md) — Builder Licence row updated with "DEFERRED INDEFINITELY" status + strategy
 - [QUESTIONS.md Q5](QUESTIONS.md) — RESOLVED with full pathway info preserved for future reactivation
 
-**Marketing claims affected:** never claim "NSW Licensed" or "Licensed Bathroom Resurfacer" anywhere. Trust badges stay: "Sydney Local • $20M Insured • Up to 5yr Warranty" (per [trust badge convention](OPERATING-CONTEXT.md)).
+**Marketing claims affected:** never claim "NSW Licensed" or "Licensed Bathroom Resurfacer" anywhere. Trust badges stay: "Sydney Local • $10M Insured • Up to 5yr Warranty" (per [trust badge convention](OPERATING-CONTEXT.md)).
 
 ### Override 6: AI agents NOT in Phase 6 — start with ONE in Phase 1
 **Earlier:** Phase 6 designs 7 AI agents.
@@ -350,10 +355,10 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 6. Subcontractor recruitment outreach — Month 9 (when scaling subcontractor roster)
 7. Review responder — Month 10 (after 20+ Google reviews exist)
 
-### Override 7: GHL setup happens THIS WEEK, not Phase 1 multi-week sprawl
+### Override 7 v2: GHL setup happens THIS WEEK, not Phase 1 multi-week sprawl (revised 2026-05-16 per F1 + F3 + F8 locks)
 **Earlier:** Phase 1 in FUTURE-PLAN reads as a 2-3 week sprint.
-**My call:** GHL trial expires May 27. We have 26 days. **Allan, you finish core GHL setup in 7 days flat:** business profile, custom fields, tags, 17-stage pipeline, top 4 critical workflows (acknowledgement, abandoned form, quote sent, deposit BOOM). The other 8 workflows come in week 2.
-**Why:** Speed > perfection. Imperfect-but-running GHL captures leads. Perfect-but-pending-perfection-still-not-running GHL captures nothing.
+**My call:** ~~GHL trial expires May 27. We have 26 days.~~ **GHL is PAID $155 AUD/mo as of F3 LOCK 2026-05-16 — trial pressure removed.** Foundation is now 2-week tech-stack sprint (Days 1-14 starting 2026-05-17). Day 1-7 core: business profile, custom fields, tags, **15-stage pipeline (F1 LOCK)**, top 4 critical workflows (acknowledgement, abandoned form, quote sent, deposit BOOM). Day 8-14: remaining workflows + integrations.
+**Why (F8 LOCK 2026-05-16):** *"speed AND perfection cause we want to be the final foundation but also ship this out fast as possible so we can start running"*. NOT "speed over perfection" — ship fast AS the production foundation that lasts. No throwaway code. Every component is permanent.
 
 ### Override 9 v4 (final 2026-05-01 PM, after Allan confirmed subcontractor network density): Sub-led from job 1, both regrouting AND resurfacing
 **Latest call:**
@@ -361,7 +366,7 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - **BACKUP PATH**: Marko executes regrouting himself ONLY if no subcontractor available + customer urgency demands it. True emergency mode, not design.
 - **Resurfacing**: NO training trip + NO $10K equipment needed (Override 11 v2 — subcontractor has own kit)
 **Why this is cleanest:**
-- Founders stay fully in lane (Allan = marketing/customer/CRM, Marko = ops/sub-mgmt/sub-relationships/customer-calls)
+- Founders stay fully in lane (Allan = marketing/customer/CRM/all customer-facing calls, Marko = ops/sub-mgmt/sub-relationships — invisible to customer per Decision 7)
 - Both services launch from Day 1 — no artificial gates
 - Marko's regrouting skill = subcontractor quality control + emergency backup, not execution
 - Bert relationship stays = supplier (potential trade pricing for our subcontractors in future)
@@ -384,7 +389,7 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 - Brand-risk-control: first jobs are highest-stakes (any mistake = bad review forever); having Marko in control beats untrained Tier 3 subcontractor
 - Marketing positioning unlocked: when customers ask "have you done this yourselves?" we honestly say YES (Marko has)
 - Real margin discovery: paying Marko subcontractor rate on first jobs reveals true cost structure that holds when external subcontractors take over (no surprise "wait, that was only profitable when Marko did it free")
-**Compensation structure (Marko-as-sub):**
+**Compensation structure (Marko-as-sub — temporary bootstrap only, first ~1-5 jobs; steady-state is sub-led, Marko does NOT execute jobs):**
 - Subcontractor rate per job: $300 shower regrout / $400 full bathroom regrout / $250 chip/silicone (matches future external subcontractor rate card)
 - Materials reimbursed at actual cost
 - Travel allowance per zone (when rate card established)
@@ -428,54 +433,120 @@ I'm reviewing OPERATING-CONTEXT and FUTURE-PLAN with the brutal lens of someone 
 
 **Updated FUTURE-PLAN.md**: BigQuery moves from Phase 5 to Phase 1 setup task.
 
-### Override 14 v2 (revised 2026-05-01 PM after Allan challenged "Jordan does $2M with 15 stages — there must be a reason"): GHL pipeline = 13 stages (Jordan's structure minus sub-quote-per-job)
+### Override 14 v4 (revised 2026-05-25 PM after Allan eyewitness × 4 + Cleo Dispatch 16 ratify + executed via UI — supersedes v3): GHL pipeline = 15 stages JORDAN-EXACT (AU spelling, live)
 
-**Earlier (v1):** I cut Jordan's 15 down to 11 calling 6 of his stages "workflow steps masquerading as states."
-**Allan's challenge:** *"There must be a reason he has 15 stages and is making $2M/year in rev?"*
-**My re-derivation:** Jordan's structure is the result of operational learning at scale. I was reinventing wheels he'd already debugged. CEO discipline = adopt proven + remove only what genuinely doesn't apply to OUR specific model.
+**v1 said 11** (cut 4 of Jordan's stages as "workflow steps masquerading as states") — REJECTED by Allan.
+**v2 said 13** (skip sub-quote stages 3+4 in Phase 1 since no subs onboarded yet) — caused doc drift, REJECTED.
+**v3 LOCKED 2026-05-16** at 15 stages with Job Invoiced + Job Paid as Stages 14+15 (Clifford operational interpolation for financial visibility). SUPERSEDED 2026-05-25 PM after Allan re-watched Jordan video frame × 4 and confirmed a DIFFERENT 15-stage UI shape — see v4 below.
+**v4 LOCKED 2026-05-25 PM** Jordan-EXACT 15 stages per Allan eyewitness × 4 + Cleo Pattern C Dispatch 16 ratification + executed via UI same day. Financial state migrated to Custom Fields (Payment Status SINGLE_OPTIONS field + 10 existing finance Date/Monetary fields). Pipeline = customer journey only.
 
-**Final 13 stages (Jordan's 15 minus 2 sub-quote stages we don't need):**
+**Final 15 stages (LIVE in GHL Sales pipeline `YTgWxSeFt2oyd3zBe2Xr`, AU spelling per Allan UI input):**
+
+| # | Stage name | GHL Stage ID | Use |
+|---:|---|---|---|
+| 1 | Quote Requested | `943e6215-be3c-4194-b2ec-fd14eef26be3` | W1 entry on form submit |
+| 2 | Q&A | `c5ccce7c-1bc1-45ec-a365-1a830907f342` | Manual move when clarification needed |
+| 3 | Sub-quote Requested | `5cd13533-f72e-43d0-b050-449f1bf0659f` | Phase 1: empty (no subs onboarded) |
+| 4 | Sub-quote Not Received *(NEW Jordan-exact)* | `3081ec9d-72cb-4283-9be5-86a3ec49b02e` | Phase 2: 24h reminder to chase sub |
+| 5 | Sub-quote Received | `97d39f9a-5ede-497e-b338-61879a789c29` | Phase 2: Allan applies markup |
+| 6 | Quote Sent | `ec8f1af2-4f3d-465d-94b6-10e5f807f5ee` | W3 cadence trigger |
+| 7 | Quote Accepted | `7630c6b6-2ccd-48c1-99af-9a3c9c019835` | W7 trigger + Decision 1 asbestos route |
+| 8 | Organise Site Inspection *(split + renamed from Site Inspection)* | `69400fdd-df41-4934-bfad-137809e52215` | We've reached out to schedule; ageing 24h |
+| 9 | Site Inspection Organised *(NEW split-half)* | `1dc43aee-3bba-4969-aecd-25a4b10c092d` | Appointment locked; countdown to date |
+| 10 | Prepayment Invoice Sent *(renamed from Prepayment)* | `e09fac85-c8c6-46e7-a277-f125a2bc7a04` | Stripe deposit invoice cadence 24h/72h/7d |
+| 11 | Job in ServiceM8 | `f34407a6-0c54-47e6-b79f-4cb3ecdbe31d` | 🎯 Make.com Main scenario trigger |
+| 12 | Job on Hold | `25434a28-70b8-42a1-a262-8ff77e070bf1` | 14-day force-decision (Decision 2) |
+| 13 | Job Issue | `e07860f3-2261-4e63-8be6-13ffd3c878a5` | W7 SOS alert |
+| 14 | Job Booked | `8553cc2c-fa8b-4903-8c4c-53b1af486bce` | W8 day-before reminder |
+| 15 | Job Complete | `4fe810e9-2aa4-4e5c-acf0-58b2634782dc` | 🎯 Make Back-sync writes here + W5 NPS 24h |
+
+**Removed from v3 (deleted via Allan UI 2026-05-25 PM):**
+- Job Invoiced (was id `c2952419-5f6c-4d56-b52f-f08140318da3`) — DELETED; replaced by `Payment Status` field value `invoiced` + `Invoice Sent At` Date field
+- Job Paid (was id `68943ddf-0f40-4190-8c26-ae2d62252d2b`) — DELETED; replaced by `Payment Status` field value `paid` + `Final Payment Received At` Date field
+
+**NEW Custom Field added 2026-05-25 PM:** `Payment Status` (id `gcW2L00C3ok1ZT5iwNyt`, SINGLE_OPTIONS enum: not_invoiced / invoiced / paid / overdue, model: opportunity). Preserves cash visibility after dropping Stages 14+15 (Cleo Dispatch 16 safeguard).
+
+**Companion to Decision 12 v2 (`memory/decisions_locked_ghl_2026-05-05.md`):** Accounts pipeline built simultaneously as dedicated finance dashboard. Sales pipeline (this Override 14 v4) = customer journey only. Accounts pipeline = invoice/payment/overdue/paid tracking. Build sequence in `/tmp/task-checklist.md` 3-day sprint.
+
+**Evidence hierarchy (Rule 9 Addendum 1):** Allan eyewitness × 4 of Jordan's GHL UI > transcripts (audio only, blind to UI labels). Transcripts enumerate 13 names verbally (`all-transcripts-2026-04-30.md:417`) but Jordan SAYS "15 stages" twice — the missing 2 names (Sub-quote Not Received + split Site Inspection) are visible only in UI, captured by Allan eyewitness. For UI/visual claims, eyewitness wins.
+
+**Stages 3+4+5 Phase 1 status:** Empty (no subs onboarded yet). Activate automatically when first sub agreement signed (workflow rule: route Quote Sent via stages 3→4→5 if `sub_assigned = true`).
+
+**Note:** OPERATING-CONTEXT § 8.4 (17-stage version) is historical. CEO.md Override 14 v4 = current authoritative pipeline.
+
+**Audit refinements (carry-over):**
+1. **"Closed" is a terminal status flag** on Stage 15 Job Complete + Accounts pipeline Stage 6 Paid, NOT a separate stage.
+2. **Ageing rules per stage** are workflow-spec:
+   - Sub-quote Requested → Not Received: 24hr reminder
+   - Sub-quote Not Received → Received OR Lost: 48hr escalate to Marko
+   - Organise Site Inspection → Site Inspection Organised: 24hr customer chase
+   - Site Inspection Organised → Prepayment Invoice Sent: countdown to inspection date
+   - Prepayment Invoice Sent: 24hr/72hr/7d cadence
+   - Job in SM8: 2hr alert if no SM8 sync; escalate to Marko
+   - Accounts pipeline handles 7d/14d/30d invoice reminder cascade (NOT Sales pipeline — separated by Decision 12 v2)
+   - Job Paid → Sub-Paid: 72hr per SOPA NSW (via Custom Field `Sub Paid At` + Westpac EFT Phase 1; pay.com.au Phase 2+)
+
+---
+
+### Override 16 (2026-06-05): KEEP ServiceM8 as the backbone · custom contractor-VIEW app APPROVED but scheduled LAST · subs get NAME + ADDRESS only
+
+**Status: LOCKED.** Triggered by Allan: *"do we even need ServiceM8 if we just make our own app?"* Unanimous: field-service-ops expert + Cleo + Clifford. **Canonical:** [`docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`](specs/decision-sm8-keep-vs-build-2026-06-05.md) + [`docs/specs/contractor-app-blueprint-2026-06-05.md`](specs/contractor-app-blueprint-2026-06-05.md). Read those before any build work — this is the summary.
+
+**1. KEEP SM8 — do NOT build a replacement.** Pre-revenue with 0 jobs, the bottleneck is customers/jobs/learning, not tooling. SM8 is a mature ops core out-of-the-box (scheduling, dispatch, on-site mobile app, invoicing, Stripe/Xero, reliability). Jordan KEPT SM8 and only added a contractor-VIEW app at ~70 subs — he did not rebuild dispatch/scheduling/invoicing. Keep the layers **modular** (GHL = CRM/leads · Make = automation · Sheets/DB = captured data · SM8 = ops backend) so SM8 is swappable later, but premature switching is value-destructive.
+
+**2. Custom contractor-VIEW app = APPROVED, scheduled LAST.** It is a **VIEW on the same SM8 + GHL + Sheet data — ZERO migration**, NOT an SM8 replacement. Adding it later = subs switch *screens*, not systems; nothing migrates. The permanent / hard-to-redo part is the **data + rules** (incl. the no-contact rule) — nail those now. Architecture (forced by two hard realities: SM8 key = full-account / no per-sub scoping, and accept/decline has NO API): **sub-app → OUR backend (Supabase BFF/token-broker; sole SM8 key-holder; per-sub JWT+RLS; contact-field filter; rate governor) → SM8.** Subs never hold the key. The one genuinely-new build piece = a custom **accept/decline state machine** (SM8 Network's native accept/decline is UI/email-only). Full stack/phase plan = the blueprint doc.
+
+**3. Subs engaged via SM8 NETWORK (not Staff).** Sub on their **own SM8 account** (browser-link fallback) + own ABN + ≥$10M PL — we never create or pay for sub accounts. A job is a **Network Request = an OFFER** → sub ACCEPTS / DECLINES → route to next. Sub sees only their job (no pricing/margin/other customers); **they invoice us.** **Staff seats only for Marko/Allan/genuine employees.** SM8 Network = free add-on; subs cost nothing extra.
+
+**4. NO-CUSTOMER-CONTACT rule (LOCKED).** Subs get **NAME + ADDRESS only — never the customer's phone/email** (anti-poaching: a sub with the number can go direct next time → protect the relationship, our #1 asset; also cleaner for the sub). **All customer comms (on-the-way SMS, reminders) fire from GHL/Twilio — NOT an SM8 Job Contact.** **This SUPERSEDES the earlier "SM8 auto-SMS off the Job Contact" plan.** Build change (Make Scenario 1): DROP the `Add Job Contact` module + strip customer phone/email from the SM8 job (name + address only). Access gap: Marko relays now / masked proxy number at scale (Twilio/GHL).
+
+**5. FAIR WORK guardrail (s15AA whole-of-relationship test + Mar-2026 ATO/FWO construction clampdown).** Network accept/decline + own-ABN = genuine-contractor signal; Staff allocation (no right of refusal) = employee-leaning → sham-contracting risk (up to **$99k/contravention**) + super back-pay. **NEVER penalise a sub's decline** — any "decline >X% → coaching/downgrade" idea is reframed as a **capacity/fit conversation off-system**, never a punishment surfaced to the sub (penalising refusal is an employee indicator). Keep: offer-language not orders · real right to delegate · own-ABN + ≥$10M PL gate before offers · no `@company` email / uniform / "our team" branding for subs · they invoice us · watch >80%-revenue exclusivity (PSI).
+
+**6. SEQUENCING (Allan 2026-06-05): internal backbone FIRST → app → launch.** Internal backbone = finish Make scenarios (1 + strip-contact + find-or-create, then 2–5) + publish/finish GHL workflows + SM8 config (Marko as staff) + Slack alerts + deploy the GHL-wired quote form + end-to-end test. THEN build the contractor app. THEN run real jobs. *(Phase 1–3 of the app — Make strip-contact + read path — is path-independent and can be done as part of the internal backbone now.)*
+
+**Doc corrections flagged elsewhere (outside this strategy cluster — separate task):** `auditor-fair-work.md` + `OPERATING-CONTEXT §9` stale **"SM8 per-staff / $29/mo"** → correct to per-JOB / unlimited-users; `expert-field-service-ops.md` reframe "decline >35% → coaching" as capacity/fit.
+
+---
+
+### ~~Override 14 v3 (revised 2026-05-16 after Allan's F1 lock — supersedes v2): GHL pipeline = 15 stages (Jordan's full model)~~ **SUPERSEDED by v4 above 2026-05-25 PM. Body of v3 preserved below for history only — DO NOT use for current state.**
+
+**v3 LOCKED at 15** (Allan's call 2026-05-16): *"we will just keep for now since it is what jordan uses too"*. Cost of hiding 2 Kanban stages < cost of permanent doc divergence from Jordan's playbook.
+
+**v3's 15 stages (HISTORICAL — replaced by v4 list above):**
 1. Quote Requested
 2. Q&A / Pre-Check
-3. Quote Sent
-4. Quote Accepted
-5. Site Inspection (only when flag triggered — rare but a distinct waiting state)
-6. Prepayment (Stripe link sent, awaiting customer click)
-7. Job in ServiceM8 (deposit cleared, job card created)
-8. Job On Hold (access/strata/asbestos blocker)
-9. Job Issue (subcontractor problem reported)
-10. Job Booked (date locked + subcontractor assigned)
-11. Job Complete
-12. Job Invoiced (final invoice sent, awaiting customer payment)
-13. Job Paid (customer paid, ready to pay subcontractor) → closes terminal when sub-paid
+3. Sub-quote Requested *(Phase 1: empty until first sub onboarded)*
+4. Sub-quote Received *(Phase 1: empty until first sub onboarded)*
+5. Quote Sent
+6. Quote Accepted
+7. Site Inspection *(only when asbestos flag triggered)*
+8. Prepayment (Stripe link sent, awaiting customer click)
+9. Job in ServiceM8 (deposit cleared, job card created)
+10. Job On Hold *(14-day force-decision)*
+11. Job Issue (subcontractor problem reported)
+12. Job Booked (date locked + subcontractor assigned)
+13. Job Complete
+14. Job Invoiced (final invoice sent, awaiting customer payment) *(Clifford 2026-05-04 operational interpolation, NOT transcript-named, REPLACED by Payment Status field)*
+15. Job Paid (customer paid, ready to pay subcontractor) *(Clifford 2026-05-04 operational interpolation, REPLACED by Payment Status field)*
 
-**Skipped from Jordan's 15 (not applicable to our model):**
-- Sub-quote Requested (we use fixed rate cards; subcontractors don't bid per job)
-- Sub-quote Received (same reason)
+**v3 reasoning preserved for history:**
+- Stages 14+15 framed as "2 different waiting periods" (invoice→customer payment vs paid→sub payout)
+- v4 retains the OPERATIONAL distinction via Custom Fields, drops the PIPELINE STAGE representation per Jordan eyewitness
+- Why v4 reshape was right: Jordan does this in Xero (per transcripts), not GHL pipeline. We mirror with Custom Fields on Sales opp + dedicated Accounts pipeline (Decision 12 v2)
 
-**Why these specifically can't be killed (correcting my v1 mistake):**
-- **Site Inspection**: distinct state from "Quote Accepted" — customer agreed in principle but full quote depends on physical inspection. Even at low volume, when this happens it's a real waiting state.
-- **Prepayment vs Job in SM8**: 2 different waiting periods. Prepayment = waiting on customer to click Stripe link; Job in SM8 = waiting for subcontractor to accept job card. Different alerts, different ageing thresholds.
-- **Job Invoiced vs Job Paid**: 2 different waiting periods. Invoice sent → waiting for customer payment; Paid → waiting for subcontractor payout via pay.com.au. Cash flow visibility requires distinct stages.
-
-**Why this is right at OUR scale even with 0-3 jobs/month:**
-- Workflows are built ONCE, used forever — better to build for $2M scale from start
-- Sub-quote stages we genuinely don't need stay killed
-- Adopting proven structure beats inventing simpler
-
-**Note:** OPERATING-CONTEXT § 8.4 (17-stage version) is now historical. CEO.md Override 14 v2 = current authoritative pipeline. Update GHL workflow specs to use 13-stage.
-
-**Audit refinements (added 2026-05-01 PM after Allan caught me skipping the 3-lens audit):**
-1. **"Closed" is a terminal status flag** on Job Paid, NOT a separate stage 14. Count = genuinely 13.
+**Audit refinements (carry-over + new):**
+1. **"Closed" is a terminal status flag** on Job Paid, NOT a separate stage 16. Count = genuinely 15.
 2. **Ageing rules per stage** must be in the workflow spec:
+   - Sub-quote Requested → Received: 24hr reminder to sub, 48hr escalate to Marko
    - Prepayment: 24hr reminder, 72hr final, 7d auto-cancel
    - Job in SM8: 2hr alert if no subcontractor accept; escalate to Marko
    - Job Invoiced: 7d/14d/30d reminder cascade to customer
    - Job Paid → Sub-Paid: must complete within 72hr of customer payment clearing
-3. **Site Inspection rot prevention**: quarterly reminder to verify the workflow still triggers correctly; if no opps used the stage in 90 days, audit whether trigger is broken or the use case is dead
-4. **Pipeline flowchart documented** in `docs/specs/ghl-pipeline-13-stage.md` (build during GHL workflow spec session)
+3. **Site Inspection rot prevention**: quarterly reminder to verify the workflow still triggers correctly; if no opps used the stage in 90 days, audit.
+4. **Stages 3+4 reactivation**: automatic when first sub agreement signed (workflow rule: route Quote Sent via stages 3→4 if `sub_assigned = true`).
+5. **Pipeline flowchart documented** in `docs/specs/ghl-pipeline-15-stage.md` (rename from `ghl-pipeline-13-stage.md` per F1).
 
-**Methodology lesson logged**: I skipped my own 3-lens audit on Override 14 v1 — Allan called it. Reversed and re-derived properly. Going forward: every Override runs through 3 lenses BEFORE landing in CEO.md, not after Allan catches.
+**Methodology lesson re-logged**: v1 cut to 11 (wrong), v2 cut to 13 (defensible but caused drift between CEO.md / tracker / spec / MEMORY), v3 keeps 15 (Jordan-parity restored). Lesson: when in doubt, adopt the proven model; deviations require Allan sign-off + must propagate to ALL canonical docs.
 
 ### Override 13 (added 2026-05-01 PM after Allan's CEO-mental-model correction): CEO decides, AI employees gather data. I receive prepared summaries; I don't fetch.
 
@@ -539,7 +610,7 @@ The first three (research-focused) come BEFORE Phase 6 because they don't need o
 
 ### What I'm KEEPING from prior plans
 - Lane discipline between Allan and Marko ([OPERATING-CONTEXT § 2](OPERATING-CONTEXT.md#2-founders--lane-split)) — non-negotiable
-- 17-stage GHL pipeline — solid
+- ~~17-stage~~ **15-stage** GHL pipeline — solid (F1 LOCK 2026-05-16; see Override 14 v4 above)
 - POAS over ROAS — non-negotiable
 - $300 profit floor per job — non-negotiable
 - Tier system for subcontractors — solid
@@ -554,6 +625,7 @@ The first three (research-focused) come BEFORE Phase 6 because they don't need o
 **3-year vision:** Multi-million dollar bathroom resurfacing & regrouting business serving NSW with 50+ vetted subcontractors, multi-state expansion considered, franchise model viable.
 
 **12-month vision:** $25K/month revenue average, 50% margin, 50+ jobs/month, 10+ active subcontractors, 50+ Google reviews 4.7+ stars.
+⚠️ RECONCILE (Allan): $25K/mo ÷ 50 jobs = $500/job conflicts with the ~$1.5K AOV assumption and Jordan's ~$764/job — pick one consistent model.
 
 **90-day vision (the only one that matters right now):**
 - Month 1 (May 2026): 3 paid jobs from network. GHL live + connected. Quote form bulletproof. First reviews requested.
@@ -572,7 +644,7 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 |---|---|---|
 | CEO (decisions, strategy, oversight, AI agent direction) | Me | Strategy, money, hiring experts, killing tasks |
 | Founder #1 — Marketing & customer-facing | **Allan** | Quote form, GHL setup + workflows, Google Ads, landing pages, customer communications, weekly numbers |
-| Founder #2 — Operations & sub-facing | **Marko** | Subcontractor recruitment, subcontractor onboarding, subcontractor dispatch, photo quality reviews, customer phone calls, asbestos/strata convos |
+| Founder #2 — Operations & sub-facing | **Marko** | Subcontractor recruitment, subcontractor onboarding, subcontractor dispatch, photo quality reviews, before/after QC (sub-ops only — invisible to customer per Decision 7) |
 | CRO Specialist | On-demand expert (claudeable) | Quote form changes, conversion optimisation |
 | GHL Operator | On-demand expert (claudeable) | Workflow design, complex automations |
 | Direct response copywriter | On-demand expert (claudeable) | SMS, email templates, follow-up sequences |
@@ -608,7 +680,7 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 
 - [ ] **Allan**: GHL custom fields all created (~40 fields per OPERATING-CONTEXT § 8.2)
 - [ ] **Allan**: GHL tags created (per § 8.3)
-- [ ] **Allan**: GHL 17-stage pipeline built (per § 8.4)
+- [ ] **Allan**: GHL **15-stage** pipeline built (F1 LOCK 2026-05-16; per Override 14 v4 in this file)
 - [ ] **Allan**: 4 critical workflows live: Quote acknowledgement, abandoned form, quote sent, deposit BOOM
 - [ ] **Allan**: Cloudinary integrated into quote form, photo URLs sent in webhook payload
 - [ ] **Allan + Marko**: 3+ network outreaches actively in conversation (text exchanges, photos shared)
@@ -621,14 +693,14 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 - [ ] **Allan**: Slack workspace + 10 channels per § 10.1
 - [ ] **Allan**: Stripe configured + deposit/final dynamic payment links
 - [ ] **Allan**: Test full flow with himself — submit form, accept quote, pay deposit, mark job booked, complete, NPS arrives
-- [ ] **Marko**: First paid customer booked. Even if it's at cost. Real photos + real testimonial.
+- [ ] **Marko**: First paid job delivered (temporary bootstrap only — Marko on tools; steady-state is sub-led). Even if it's at cost. Real photos + real testimonial. (Customer-facing booking comms via Allan/automation per Decision 7.)
 - [ ] **CEO (me)**: Review Week 1+2 numbers. Adjust plan based on actual outreach response rate.
 
 ### Week 4 (May 22 – May 28)
 **Goal:** First job COMPLETED (with real photos + review). GHL paid kicks in May 27.
 
-- [ ] **Marko**: First job completed. Customer photographed. Cure-time SMS sent. NPS request sent.
-- [ ] **Allan**: First Google review received (target NPS 9-10 customer)
+- [ ] **Marko**: First job completed (temporary bootstrap only — Marko on tools; steady-state is sub-led). Before/after photos captured. (Cure-time SMS + NPS request fire via GHL automation, not Marko — customer-facing per Decision 7.)
+- [ ] **Allan**: First Google review received (review request goes to ALL customers 24h after Job Complete — universal, NOT score-gated, per Decision 4)
 - [ ] **CEO (me)**: Decide on AI quote-drafter build start (likely Yes given 3+ customers in pipeline)
 - [ ] **CEO (me)**: 30-day review. If <2 customers, **stop ad-spend planning** + double down on outreach.
 
@@ -654,19 +726,20 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 ## Money plan (the boring numbers that matter)
 
 ### Cost structure (current + projected)
+> ⚠️ **Live costs are canonical in `docs/STATE.md` §2 (Active subscriptions).** This table predates the paid-GHL / ServiceM8 / Xero / Make signups — Current column corrected 2026-06-02 (audit); June/Sept projections still need recompute.
 | Line item | Current | June 2026 | Sept 2026 |
 |---|---|---|---|
 | Google Workspace | $18.88/mo | $22.95/mo | $22.95/mo |
 | Cloudflare domain | $14.68/yr ($1.22/mo amortised) | same | same |
 | Ventraip hosting | $222/yr ($18.50/mo) | same | same |
 | Ventraip domain | $0 (active until Mar 2027) | $0 | $0 |
-| GHL | $0 (trial) → $136/mo from May 27 | $136/mo | $136/mo |
-| ServiceM8 | $0 | $0 (deferred per Override 2) | ~$29/mo |
+| GHL | ~~$0 (trial) → $136~~ **$155 AUD/mo PAID** (F3 LOCK 2026-05-16) | $155/mo | $155/mo |
+| ServiceM8 | ~~$0 (deferred per Override 2)~~ **$0 (Starter trial → Day 14)** | ~$14.50/mo (50% promo) | ~$29/mo |
 | Cloudinary | $0 (free tier) | $0 | ~$0-29 |
 | Stripe fees | 0 (no transactions) | ~1.75% of revenue | same |
 | Google Ads | $0 | ~$300-600/mo | ~$1,500/mo |
-| Insurance ($20M PL) | already paid annually | same | same |
-| **Total fixed monthly** | **~$38.60** | **~$178.65** | **~$208** |
+| Insurance ($10M PL) | already paid annually | same | same |
+| **Total fixed monthly** | ~~$38.60~~ **~$193.60** (STATE.md §2) | **recompute** | **recompute** |
 | **Total monthly with ads** | **~$38.60** | **~$478-778** | **~$1,708** |
 
 ### Revenue targets v3 (updated 2026-05-01 PM with REAL Excel numbers — RSC-02 standard shower regrout T2 = $1,660)
@@ -855,7 +928,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 |---|---|---|---|
 | 2026-05-01 | Override 1: Network outreach for first 3 customers, no Google Ads | $1,600 cash can't risk paid acquisition before offer is validated | Allan + Marko |
 | 2026-05-01 | Override 2: Defer ServiceM8 ~10 weeks | Saves $300 + setup time at low job volume | Marko (no action — defer) |
-| 2026-05-01 | Override 3: Skip BigQuery indefinitely | Looker Studio on Sheets sufficient for <50 jobs/month | Allan (no action — defer) |
+| 2026-05-01 | ~~Override 3: Skip BigQuery indefinitely~~ **(REVERSED 2026-05-01 PM by Override 15 + F7 LOCK 2026-05-16 — set up BigQuery NOW)** | ~~Looker Studio on Sheets sufficient for <50 jobs/month~~ | Allan |
 | 2026-05-01 | Override 4: Top-5 services get all paid traffic | Pareto on demand distribution | Allan |
 | 2026-05-01 | Override 5: Verify builder licence necessity | Likely under $5K threshold for residential work | Allan call NSW Fair Trading |
 | 2026-05-01 | Override 6: Quote-drafting AI agent in Week 4 | Saves hours/week from job 1; other 6 agents stay later | CEO + AI ops expert |
@@ -877,9 +950,15 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 | 2026-05-01 PM | Pre-launch website cleanup is BLOCKER for Override 1 (network outreach). Real Customizer config + warranty text + HTTPS redirect must ship before sending customers to site | Avoid sending warm leads to a site with placeholder phone + wrong warranty text | Allan + CEO Week 1 |
 | 2026-05-01 PM | Bert/AUSTRS supplier intel integrated. CSV saved to /data/suppliers/. Override 9 v3 (sub-led from job 1, Marko backup), Override 11 (resurfacing training trip Month 4-6), Override 12 (recruit pre-trained, agency-clarified) | Material cost reality 4x my earlier estimate; resurfacing entry needs $12K + training trip; agency model means Bert's "don't teach spray" doesn't apply | Allan + Marko |
 | 2026-05-01 PM | /data/ folder added for non-code data files (CSVs, Excel, research). Excluded from theme deploy zip. Versioned filenames. README.md indexes contents. | Single home for supplier price lists, pricing schedules, research; CEO can find them across sessions | CEO maintains; Allan adds files when received |
-| 2026-05-01 PM | Foundation-first re-prioritisation: pricing audit, subcontractor onboarding materials, role files take priority over GHL/SM8/ads. May 27 GHL trial is NOT a forcing function — just pay $136 and keep building foundation right. | Don't rush half-baked tools when foundation accuracy is the whole game | Both founders + CEO |
+| 2026-05-01 PM | Foundation-first re-prioritisation: pricing audit, subcontractor onboarding materials, role files take priority over GHL/SM8/ads. ~~May 27 GHL trial is NOT a forcing function — just pay $136~~ **(F3 LOCK 2026-05-16: trial closed, GHL paid $155 AUD/mo)** and keep building foundation right. | Don't rush half-baked tools when foundation accuracy is the whole game | Both founders + CEO |
 | 2026-05-01 PM | Real-data discipline reinforced: NEVER use assumptions in pricing audit. Web search NSW Sydney 2026 prices first; ask Allan if data unavailable | Bad data = bad decisions for years; pricing wrong = either lost revenue or lost customers | CEO research before any Excel change |
 | 2026-05-01 PM | Customer #1 confirmed in pipeline: Marko's prior regrouting customer, shower-over-bath resurface + strip-back, soft-locked, willing to wait | Real warm referral = first customer testimonial + before/after marketing photos + Override 1 path validated | Marko captures details + photos this week |
+| 2026-06-05 | **Override 16 — KEEP ServiceM8 as the field-service backbone; do NOT build a replacement.** SM8 pricing corrected to per-JOB / unlimited-users (per-staff assumption STALE). | Pre-revenue, 0 jobs — bottleneck is customers, not tooling; SM8 is a mature ops core; Jordan kept SM8. Keep layers modular so it's swappable later. | CEO (unanimous w/ field-ops expert + Cleo) |
+| 2026-06-05 | **Custom contractor-VIEW app APPROVED but scheduled LAST** (after internal backbone, before launch). It's a VIEW on the same SM8+GHL+Sheet data — ZERO migration; one new build piece = custom accept/decline state machine. | Allan wants it permanent + fears a messy migration; reframe — adding it later = subs switch screens, not systems. Blueprint ready. | Allan call; CEO + AI team build |
+| 2026-06-05 | **Subs engaged via SM8 Network (own account, accept/decline); staff seats only for Marko/Allan/genuine employees.** Own ABN + ≥$10M PL gate before offers. | Genuine-contractor signal (s15AA whole-of-relationship test + Mar-2026 ATO/FWO clampdown); avoids sham-contracting (up to $99k/contravention). | Both founders + CEO |
+| 2026-06-05 | **NO-CUSTOMER-CONTACT rule LOCKED: subs get NAME + ADDRESS only, never customer phone/email.** Customer comms move to GHL/Twilio; Make Scenario 1 drops `Add Job Contact` + strips contact from the SM8 job. Supersedes "SM8 auto-SMS off Job Contact". | Anti-poaching — protect the customer relationship (#1 asset); cleaner for the sub. | Allan + CEO; Make change pending |
+| 2026-06-05 | **NEVER penalise a sub's decline** (Fair-Work guardrail). Any "decline >X% → coaching/downgrade" reframed as a capacity/fit conversation off-system, never a punishment surfaced to the sub. | Penalising refusal = employee indicator → sham-contracting risk. | CEO + Marko |
+| 2026-06-05 | **Sequencing: internal backbone FIRST → contractor app → launch.** | Build on the real workflow, not a guess; don't delay first revenue for a 2–4wk app build. | Allan directive |
 
 **Future decisions land here. I sign off on each.**
 
@@ -892,7 +971,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 - Pricing schedule drafted
 - Quote form 95% built
 - Google Business Profile set up
-- ABN, $20M PL Insurance, Fair Trading compliance basics
+- ABN, $10M PL Insurance, Fair Trading compliance basics
 - OPERATING-CONTEXT, FUTURE-PLAN, role files documentation
 - Top 12 role/skill files for experts and auditors
 
@@ -907,7 +986,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 
 ### What's NOT priority right now (don't waste hours on these)
 - Slack channel design beyond the 10 needed
-- BigQuery thinking (deferred indefinitely)
+- ~~BigQuery thinking (deferred indefinitely)~~ **(REVERSED by Override 15 + F7 LOCK 2026-05-16 — Phase 1 schema setup, see CEO.md:417-427)**
 - ServiceM8 setup (deferred ~10 weeks)
 - Recruitment ads
 - Long-tail landing page A/B tests
@@ -966,7 +1045,7 @@ I don't agonise. I make the call and we move. If it turns out wrong, we course-c
 - Brand promise: "Fresh bathroom. One day. No renovation."
 - Domain: timelessresurfacing.com.au (active until March 2027)
 - Mascot/logo: TBD (per memory, Jordan's axolotl idea inspired but not implemented)
-- Compliance: $20M PL active, ABN active, no builder licence yet
+- Compliance: $10M PL active, ABN active, no builder licence yet
 - Geographic scope: NSW only (Sydney + Wollongong + Central Coast)
 - Service scope: bathroom only
 
@@ -1062,9 +1141,9 @@ Weekly review tab becomes the source of truth I check every Friday. KPIs tab sho
 | Cash on hand | Bank balance + unsettled Stripe | Never <$3K floor (per cash safety rules) |
 | Profit per completed job | Revenue − materials − sub-labour − PPE − allocated overhead | $362-$366 average (Jordan benchmark) |
 | Margin % | Profit ÷ Revenue per job | ≥47% (Jordan benchmark, soft target) |
-| POAS (per CEO Override 2 — Jordan V22) | Profit / Ad Spend per campaign per 14-day window | ≥1.0 (else pause keyword); ≥2.0 healthy |
+| POAS (per CEO Override 2 — Jordan V22) | Profit / Ad Spend per campaign per 14-day window | ≥2.5 healthy; pause keyword if POAS <2.5 (Jordan locked benchmark) |
 | NPS distribution | After-job 1-10 score, distribution | ≥50% promoters (9-10), <10% detractors (1-6) |
-| Subcontractor acceptance rate | % of dispatched jobs that subcontractor accepts within 2hr SLA | ≥80% |
+| Subcontractor acceptance rate | % of *offered* jobs a sub accepts — **internal capacity/coverage signal ONLY; never a target a sub is penalised against or tiered on** (a decline is consequence-free — Fair-Work s15AA, per `decision-sm8-keep-vs-build-2026-06-05.md`) | (no sub-facing target — track for routing/coverage) |
 | Repeat customer rate | % of jobs from previously-served customers | 20% Y1 → 35% Y2 (Jordan V82 benchmark) |
 | Time-to-deposit (lead-to-revenue) | Hours from form-submit to deposit-cleared | Median <72h (industry benchmark — fast wins) |
 
@@ -1322,7 +1401,7 @@ Job complete → NPS sent
        we'd value your feedback on Google: [1-tap link]"
 
   Score 1-6 (Detractor):
-    → 🚨 Marko callback within 60min
+    → 🚨 Allan callback within 60min (customer-facing per Decision 7)
     → Service recovery: fix, refund, redo, whatever it takes
     → Customer confirms recovery resolved
     → 7 days later: "Thanks for working through this with us. If you're
@@ -1348,17 +1427,17 @@ When we build the NPS workflow in Phase 1/2, code the routing exactly per the fl
 
 | Tactic | Cost | Speed |
 |---|---|---|
-| 1-tap Google review SMS link sent at peak satisfaction (right after seeing finished bathroom, before subcontractor leaves) | $0 | Highest yield |
+| 1-tap Google review SMS link sent by automation/Allan at peak satisfaction (24h after Job Complete — universal, NOT score-gated, per Decision 4; subcontractor never makes the ask) | $0 | Highest yield |
 | Print on warranty cert: "Loved it? 1-tap review: [QR code]" | ~$0 | Catches customers who don't act on SMS |
 | Video testimonial program — $100 for a 1-min video used in marketing (disclosed in marketing usage) | $100 × first 5 customers | Premium social proof |
 | GBP Question & Answer engagement — answer prospect questions publicly on GBP | $0 | Builds visibility + signals to Google |
-| Subcontractor training: every subcontractor asks "would you mind rating us?" before leaving the job (when they're seeing the finished work) | $0 | Highest conversion of any review request |
+| Automated review request fired the moment the job is marked complete in GHL (caught at peak satisfaction; subcontractor stays invisible per Decision 4 — never asks the customer) | $0 | Highest conversion of any review request |
 
 ### What I'll set up in CEO playbook for this
 
 - GHL Workflow 10 (NPS Routing) coded EXACTLY per the flow above
 - Review request SMS template ready (pre-drafted, in my brain, deploy when first job completes)
-- Subcontractor training note: "Always ask for rating verbally before leaving the job"
+- Review request note: automation/Allan sends the universal review ask 24h after Job Complete to every customer (per Decision 4) — subcontractor never makes the ask on site
 - $20 thank-you gift policy: delivered with warranty cert, no review mention
 - Monthly review velocity check (in monthly cadence section above)
 
@@ -1372,7 +1451,7 @@ When we build the NPS workflow in Phase 1/2, code the routing exactly per the fl
 - **ACCC enforcement 2024-2026**: dedicated review-integrity unit, $1.5M+ fines for small AU trades caught in 2024, penalties up to $10M individual / $50M corporate per contravention
 - **Reverse-image search risk**: every serious customer reverse-searches before/after photos in 5 seconds. If our "Sydney bathroom" photo is found on a Singapore business's site, our brand is dead overnight on Reddit/Facebook
 - **GBP suspension**: Google Business Profile suspends accounts caught with fake reviews. **GBP is our #1 organic acquisition channel.** Losing it = losing half our pipeline
-- **Insurance doesn't cover this**: $20M PL doesn't cover misleading conduct. We'd be personally liable
+- **Insurance doesn't cover this**: $10M PL doesn't cover misleading conduct. We'd be personally liable
 - **Trades community in Sydney is small + vicious**: maybe 30 competitors. They WILL find us, screenshot us, post us. Done
 
 ### What "fake it til you make it" actually means (legitimate + faster)
@@ -1443,7 +1522,7 @@ Once we have the response-drafter agent in Phase 6.D (Month 9-10), this whole ca
 | Task | Owner |
 |---|---|
 | P&L close — revenue, expenses, profit, cash | CEO + Allan |
-| Subcontractor tier review (per [OPERATING-CONTEXT § 9.5](OPERATING-CONTEXT.md#95-subcontractor-tier-system)) — promote/demote subcontractors based on quality + acceptance rate | Marko |
+| Subcontractor tier review (per [OPERATING-CONTEXT § 9.5](OPERATING-CONTEXT.md#95-subcontractor-tier-system)) — promote/demote based on **work quality + completion outcomes** (NOT acceptance rate — a decline is never penalised; Fair-Work, per `decision-sm8-keep-vs-build-2026-06-05.md`) | Marko |
 | Insurance currency check — subcontractor PL certs still valid? | Marko |
 | Subscription audit — what's auto-renewing, anything to cancel | Allan |
 | Strategy review — does my 90-day plan still match reality? | CEO |
@@ -1515,7 +1594,7 @@ You said it: "remind me to give you what I have currently." I will. Here's the f
 ### Priority 3 — Existing assets (whenever)
 - [ ] **Any photos taken** during practice/test work (even rough — gives me a sense of trade competence + visual style)
 - [ ] **Logo files** (current state — Canva file? Final SVG/PNG?)
-- [ ] **Insurance certificates** ($20M PL — for cross-reference + to be ready when subcontractors ask)
+- [ ] **Insurance certificates** ($10M PL — for cross-reference + to be ready when subcontractors ask)
 - [ ] **ABN/Fair Trading registration confirmations** (for compliance file)
 - [ ] **Domain + hosting credentials** (so I can audit DNS, email forwarding, etc — keep secure!)
 - [ ] **Google Workspace + GBP credentials** (for posting access to Allan)
@@ -1601,8 +1680,8 @@ I'm tracking the 10 things most likely to end this business + my mitigation for 
 | # | Risk | Probability | Impact | Mitigation owned by |
 |---|---|---|---|---|
 | 1 | **Cash runs out before revenue ramps** | High | Fatal | Override 1 (network customers first), cash safety rule (never <$1,200), kill ads if approaching, monthly P&L close — CEO weekly review |
-| 2 | **Customer complaint goes viral** (one bad job → social media → reputation dead) | Medium | High | Photo quality reviews before customer sees, NPS detractor 60min callback, subcontractor agreements with rectification clause — Marko + CEO |
-| 3 | **Subcontractor injures themselves on a job** (no WorkCover for contractors) | Low-Medium | High (legal + insurance) | Subcontractor PL insurance verified annually, asbestos cert verified, subcontractor agreement waives liability for own injury, $20M PL backstop — Marko + insurance broker |
+| 2 | **Customer complaint goes viral** (one bad job → social media → reputation dead) | Medium | High | Photo quality reviews before customer sees (Marko sub-ops), NPS detractor 60min callback (Allan, customer-facing per Decision 7), subcontractor agreements with rectification clause — Allan + Marko + CEO |
+| 3 | **Subcontractor injures themselves on a job** (no WorkCover for contractors) | Low-Medium | High (legal + insurance) | Subcontractor PL insurance verified annually, asbestos cert verified, subcontractor agreement waives liability for own injury, $10M PL backstop — Marko + insurance broker |
 | 4 | **GBP listing suspended** (review violation, fake account flag, spam complaint) | Medium | Severe (lose #1 organic channel) | Review strategy section above (no gating, no incentivised), engage GBP regularly with real posts, respond to all reviews — Allan |
 | 5 | **Google Ads account suspended** (policy violation, billing issue, suspected click fraud against us) | Low-Medium | Severe (lose paid acquisition) | Clean ad copy (no superlatives), proper landing pages, separate billing card, consider Microsoft Ads as backup channel — Allan |
 | 6 | **Allan or Marko leaves the partnership** | Low (both committed) | Catastrophic | Partnership agreement with vesting + buy-sell terms (defer to Pty Ltd setup Month 2-3), document EVERYTHING so other founder can pick up — both founders + Sprintlaw |
@@ -1629,25 +1708,25 @@ When [X] happens, do exactly this. No improvisation. Improvising during a crisis
 ### Crisis 1: Customer reports damage to their property (subcontractor damaged tile, broke fixture, etc)
 
 ```
-1. Marko receives report → STOP work at that job site
-2. Within 60min: Marko calls customer, listens fully, no admission of liability
-3. Within 2hr: photos taken, written note from subcontractor on what happened
-4. Within 4hr: Marko reports to insurance broker for claim file open
-5. Within 24hr: customer offered repair/refund/rectification
+1. Marko receives report → STOP work at that job site (sub-ops)
+2. Within 60min: Allan calls customer, listens fully, no admission of liability (customer-facing per Decision 7)
+3. Within 2hr: photos taken, written note from subcontractor on what happened (Marko sub-ops)
+4. Within 4hr: Marko reports to insurance broker for claim file open (sub-ops)
+5. Within 24hr: Allan offers customer repair/refund/rectification (customer-facing per Decision 7)
 6. Job moved to "Job Issue" stage in GHL with full file
-7. Subcontractor's tier downgraded pending review
+7. Subcontractor's tier downgraded pending review (Marko sub-ops)
 ```
 
-Authority: Marko handles up to $500 rectification without my approval. Above $500, escalate to CEO.
+Authority: Allan + Marko handle up to $500 rectification without my approval. Above $500, escalate to CEO.
 
 ### Crisis 2: Subcontractor no-shows for booked job
 
 ```
-1. Marko detects (subcontractor didn't check in by appointment time)
-2. Within 30min: Marko calls customer, apologises, offers immediate rebook
-3. Within 30min: Marko offers $50 inconvenience credit (or full refund of deposit if customer wants out)
-4. Marko calls subcontractor directly — what happened?
-5. Documented in subcontractor file: 1st no-show = warning, 2nd = tier downgrade, 3rd = removed
+1. Marko detects (subcontractor didn't check in by appointment time) (sub-ops)
+2. Within 30min: Allan calls customer, apologises, offers immediate rebook (customer-facing per Decision 7)
+3. Within 30min: Allan offers $50 inconvenience credit (or full refund of deposit if customer wants out) (customer-facing per Decision 7)
+4. Marko calls subcontractor directly — what happened? (sub-ops)
+5. Documented in subcontractor file: 1st no-show = warning, 2nd = tier downgrade, 3rd = removed (Marko sub-ops)
 ```
 
 ### Crisis 3: Subcontractor injured at job site
@@ -1657,7 +1736,7 @@ Authority: Marko handles up to $500 rectification without my approval. Above $50
 2. Marko ensures subcontractor gets medical attention (call ambulance if needed)
 3. Marko notifies insurance broker within 24hr
 4. Marko collects: incident location, time, what happened, who witnessed, subcontractor's PL insurance details
-5. Customer notified if their property involved
+5. Customer notified by Allan if their property involved (customer-facing per Decision 7)
 6. Job paused, may need different subcontractor to complete
 7. Subcontractor's PL insurance handles their own injury claim (per agreement)
 ```
@@ -1733,10 +1812,10 @@ What customers expect from us. Documented so we hold ourselves to it.
 | Quote form submitted (business hours) | SMS ack within 60s, full quote within 4hr | GHL workflow + Allan |
 | Quote form submitted (after hours) | SMS ack within 60s, full quote by 11am next business day | GHL workflow + Allan |
 | Customer SMS reply to a quote | Reply within 2hr (business hours), 12hr (after hours) | Allan |
-| Customer phone call | Voicemail acknowledged + return call within 2 business hours | Allan or Marko (depending on stage) |
-| NPS detractor (1-6) | Marko callback within 60min | Marko |
-| Job issue reported by customer | Marko callback within 60min | Marko |
-| Strata coordinator email | Reply within 1 business day | Marko |
+| Customer phone call | Voicemail acknowledged + return call within 2 business hours | Allan (all customer-facing per Decision 7) |
+| NPS detractor (1-6) | Allan callback within 60min | Allan |
+| Job issue reported by customer | Allan callback within 60min | Allan |
+| Strata coordinator email | Reply within 1 business day | Allan |
 | Property manager email | Reply within 1 business day | Allan |
 
 ### Escalation path
@@ -1744,9 +1823,7 @@ What customers expect from us. Documented so we hold ourselves to it.
 ```
 Customer issue arises
    ↓
-Sub-level: subcontractor resolves on-site if minor (e.g., grout colour preference)
-   ↓ (if can't resolve)
-Marko-level: Marko negotiates resolution — refund, rectification, partial refund (up to $500)
+Allan-level: Allan negotiates resolution with the customer — refund, rectification, partial refund (Marko approves refund authority up to $500 behind the scenes; subcontractor + Marko stay invisible to customer per Decision 7)
    ↓ (if cost > $500 OR pattern of similar issues)
 CEO-level: I make the call — full refund, complimentary service, lawyer engagement
    ↓ (if irreconcilable)
@@ -1935,7 +2012,7 @@ People + companies we depend on. CEO maintains the relationship list.
 | GoHighLevel | CRM (trial → paid May 27) | Customer | High (lock-in once data lives there) |
 | Stripe | Payments | Standard | High (replacing requires customer re-auth) |
 | pay.com.au | Subcontractor payouts | Standard | Low |
-| Insurance broker | $20M PL via BizCover | TBC — find out who Allan is with | High |
+| Insurance broker | $10M PL via BizCover | TBC — find out who Allan is with | High |
 | Anthropic | Claude API (when agents launch) | Standard | Low (can swap to OpenAI) |
 | Bert | Supplier (TBC role) | UNKNOWN — needs voice transcripts | TBC |
 

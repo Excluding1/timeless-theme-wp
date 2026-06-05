@@ -1,8 +1,8 @@
 # Role Library — Experts & Auditors
 
-**Purpose:** Each file is a "skill" Claude (or Angela) loads when doing a specific task. Experts execute. Auditors verify. Every task in [FUTURE-PLAN.md](../FUTURE-PLAN.md) names which roles apply.
+**Purpose:** Each file is a "skill" Claude (or Allan) loads when doing a specific task. Experts execute. Auditors verify. Every task in [FUTURE-PLAN.md](../FUTURE-PLAN.md) names which roles apply.
 
-**Why separate files:** When Claude does a task, it should load ONLY that role's lens — not 26 lenses' worth of conflicting context. Single-role files = sharp recommendations.
+**Why separate files:** When Claude does a task, it should load ONLY that role's lens — not 16 lenses' worth of conflicting context. Single-role files = sharp recommendations.
 
 **Universal mandate (every role):** Before any recommendation, **research current 2026 standards** — never default to training data on fast-moving topics. Brainstorm 3+ alternatives before recommending one.
 
@@ -12,7 +12,7 @@
 - **Pricing-trade expert**: digital tools / processes other AU resurfacing agencies use — surface tool/process gaps we should adopt
 - **Materials validator** (when built): brand-specific quality issues + recalls — proactively monitor
 
-**Pattern**: each role file should keep a "Gaps to research / surfaces back to CEO" running list at the bottom. When the role identifies something Angela's business should consider but doesn't currently, add it there + flag to CEO. The CEO decides whether to act.
+**Pattern**: each role file should keep a "Gaps to research / surfaces back to CEO" running list at the bottom. When the role identifies something Allan's business should consider but doesn't currently, add it there + flag to CEO. The CEO decides whether to act.
 
 This means:
 - Experts don't just answer questions — they ask better ones
@@ -30,6 +30,7 @@ This means:
 | ✅ [expert-direct-response-copywriter.md](expert-direct-response-copywriter.md) | Direct response copywriter (SMS/email) | Customer-facing message copy | compliance-aus |
 | ✅ [expert-conversion-copywriter.md](expert-conversion-copywriter.md) | Conversion copywriter (B2C trades) | Quote tier descriptions, landing page copy | compliance-aus + margin-per-job |
 | ✅ [expert-field-service-ops.md](expert-field-service-ops.md) | Field service ops manager | ServiceM8 setup, subcontractor dispatch | photo-quality + fair-work |
+| ✅ [expert-make-automation-engineer.md](expert-make-automation-engineer.md) | Make.com automation engineer | Make scenarios, webhooks, cross-system sync (GHL↔Make↔SM8/Slack/Stripe/Cloudinary/Xero) | webhook-integrity + general-operational |
 | ✅ [expert-trades-ops-contractor.md](expert-trades-ops-contractor.md) | Trades ops + contractor lawyer | Subcontractor agreements, recruitment, onboarding | fair-work |
 | ⬜ expert-analytics-data-engineer.md | Analytics data engineer | BigQuery schema, data sync | data-integrity + privacy |
 | ⬜ expert-performance-marketing.md | Performance marketing (POAS-first) | Google Ads, campaign structure | margin-per-channel |
@@ -37,7 +38,7 @@ This means:
 | ⬜ expert-cx-specialist.md | Customer experience specialist | NPS, reviews, retention | accc-review-genuineness |
 | ⬜ expert-internal-comms-ia.md | Internal comms IA | Slack channel architecture | noise-signal |
 | ⬜ expert-mobile-frontend.md | Mobile-first frontend dev | Photo upload, mobile UX | performance-offline |
-| ⬜ expert-pricing-trade.md | NSW resurfacing trade expert | SKU pricing, Excel updates | margin-per-job |
+| ✅ [expert-pricing-trade.md](expert-pricing-trade.md) | NSW resurfacing trade expert | SKU pricing, Excel updates | margin-per-job |
 | ⬜ expert-trust-safety.md | Trust & safety engineer | Multi-household detection, fraud | privacy + customer-fairness |
 
 ## Auditor roles (built ✅ / pending ⬜)
@@ -59,7 +60,6 @@ This means:
 | ⬜ auditor-noise-signal.md | Slack signal-to-noise | Slack channel design | Alert fatigue, important things buried |
 | ⬜ auditor-photo-quality.md | Subcontractor completion photo quality | SM8 completion form | Bad lighting, missing angles, fake before/after |
 | ⬜ auditor-performance-offline.md | Performance + offline tolerance | Photo upload, mobile flows | Hangs on 3G, no offline queue |
-| ⬜ auditor-customer-fairness.md | Customer fairness (multi-household) | Duplicate detection, pricing consistency | Different price for same address, brand damage |
 
 ---
 
@@ -81,11 +81,11 @@ When [FUTURE-PLAN.md](../FUTURE-PLAN.md) reaches a phase that uses a ⬜ pending
 - **Role definition** — who they are, what they care about most
 - **Knowledge base** — domain expertise + AU/NSW specifics
 - **What they look for / audit for** — concrete checklist
-- **NSW + Angela context** — how this role's lens shifts given NSW market + Angela's partnership / coordination-not-execution model
+- **NSW + Allan context** — how this role's lens shifts given NSW market + Allan's partnership / coordination-not-execution model
 - **Alignment with our goals** — easy/streamlined/accurate, 48–52% margin, lane discipline
 - **Research mandate** — must research current 2026 standards before recommending
 - **Output format** — triple-audit findings tagged 🔴/🟠/🟢/⚪, file:line refs, trade-off docs
 
 ---
 
-*The 26 roles cover every meaningful decision in the business. Built ones are immediately usable; pending ones get built when their phase activates.*
+*16 built (others planned). The role library covers every meaningful decision in the business. Built ones are immediately usable; pending ones get built when their phase activates.*

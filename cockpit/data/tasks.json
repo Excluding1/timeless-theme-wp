@@ -1,0 +1,289 @@
+{
+  "updated": "2026-06-03",
+  "note": "Master roadmap. Sub-tasks filled in as we tackle each task (Allan helps with UI/layout specifics, Clifford finalises). Edit via cockpit or here.",
+  "tasks": [
+    {
+      "id": "audit",
+      "title": "Doc-ecosystem audit + accuracy fixes",
+      "phase": "Now",
+      "status": "doing",
+      "subtasks": [
+        {
+          "title": "Insurance corrected to $10M (live theme + source-of-truth docs)",
+          "done": true
+        },
+        {
+          "title": "HANDOFF fake-licence + bulk-warranty-sed traps defused",
+          "done": true
+        },
+        {
+          "title": "Review-gating de-gated + regrout warranty card → ladder (ACCC)",
+          "done": true
+        },
+        {
+          "title": "Role files: Angela→Allan + $5M→$10M sub-min + README",
+          "done": true
+        },
+        {
+          "title": "$20M→$10M internal sweep (11 files)",
+          "done": true
+        },
+        {
+          "title": "GHL stage-number remap (expert-ghl-operator, auditor-webhook-integrity, BTH-01, README link)",
+          "done": true
+        },
+        {
+          "title": "SUPERSEDED banners on stale 'canonical' GHL specs + MEMORY-INDEX",
+          "done": true
+        },
+        {
+          "title": "Misc drift (em-dash clean, consent gate, DM SLA, sub-rate floors)",
+          "done": true
+        },
+        {
+          "title": "Cleo strategy peer-check (chunked, Rule 4)",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": "cockpit",
+      "title": "CEO Cockpit (localhost command-center)",
+      "phase": "Now",
+      "status": "doing",
+      "subtasks": [
+        {
+          "title": "v1: live session feed + tasks + Cleo + tech-stack + quote link",
+          "done": true
+        },
+        {
+          "title": "Cleo timeout fixed permanently (600→1800s)",
+          "done": true
+        },
+        {
+          "title": "v2: interactive task board with sub-tasks (this)",
+          "done": false
+        },
+        {
+          "title": "v2: tech-stack config registry (paste + timestamp + staleness)",
+          "done": false
+        },
+        {
+          "title": "v2: fold in both-CEO additions (money pulse, decision log, quote tracker — Allan picks)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "make",
+      "title": "Make.com — 5 scenarios (replicate Jordan)",
+      "phase": "Sprint",
+      "status": "doing",
+      "subtasks": [
+        {
+          "title": "Scenario 1 build sheet READY → docs/specs/make-scenario-1-main-build.md (verified vs SM8 API). Gate = SM8 key + 6 category UUIDs + ACT queue UUID. PIT NOT needed for Main.",
+          "done": true
+        },
+        {
+          "title": "SM8 write-path PROVEN live (test job 200/errorCode 0); key + 6 category UUIDs + ACT queue UUID captured to .secrets + cockpit config",
+          "done": true
+        },
+        {
+          "title": "Panel (3 experts) + Cleo co-judgment → build sheet v2: atomic dedup (opp_id), error→#automation-errors Slack, mobile-first client match, address guard, shared-secret. Trigger fixed (Pipeline Stage Changed), tokens→picker.",
+          "done": true
+        },
+        {
+          "title": "Main: GHL Trigger → Map Category → Create SM8 Job → Add Job Contact — ✅ v1 BUILT + WORKING 2026-06-04 (all-HTTP X-API-Key; dynamic category + ACT queue + address + structured contact, verified live). Deferred next session: find-or-create CLIENT (companycontact/email, invoicing-only) + safety (secret/dedup/error→Slack). Full state: docs/specs/make-scenario-1-STATE-2026-06-04.md",
+          "done": false
+        },
+        {
+          "title": "Helper: UUID cache (GHL opp ↔ SM8 job UUID)",
+          "done": false
+        },
+        {
+          "title": "Back-sync: SM8 complete → GHL 'Job Complete' (stage 15)",
+          "done": false
+        },
+        {
+          "title": "Accounts A: GHL Job Complete → Accounts pipeline (Awaiting Invoice)",
+          "done": false
+        },
+        {
+          "title": "Accounts B: Stripe final payment → Accounts 'Paid'",
+          "done": false
+        },
+        {
+          "title": "Region EU, X-API-Key auth, capture x-record-uuid, 180 req/min",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "subapp",
+      "title": "Custom contractor sub-app (wrapper on SM8) — build LAST (after internal backbone: Make/GHL/SM8/Slack/deploy), before launch — Allan resequence 2026-06-05. Blueprint being prepped so it's ready to execute.",
+      "phase": "Sprint",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "✅ Viability + feasibility study DONE 2026-06-05 (4-expert panel + Cleo): VERDICT = FEASIBLE; connects to SM8 (5/6 capabilities native; accept/decline = custom state machine, no SM8 API). Mandatory arch = sub-app → OUR backend (sole key-holder, per-sub auth, contact filter, rate governor) → SM8. Writeup: docs/specs/decision-sm8-keep-vs-build-2026-06-05.md §VIABILITY STUDY. Allan DECISION: BUILD FULL APP FIRST (before launch), eyes-open on ~2-4wk + guessed-workflow risk.",
+          "done": true
+        },
+        {
+          "title": "✅ Blueprint DELIVERED 2026-06-05 → docs/specs/contractor-app-blueprint-2026-06-05.md. Stack LOCKED (Vite React PWA + Supabase BFF/token-broker + Web Push/VAPID + Vercel); 6-phase plan ~3-4wk; data model + API contract + accept/decline state machine + rate governor + Allan setup checklist (Supabase Pro, Firebase/FCM, subdomain). Build scheduled AFTER internal backbone. Phase-1 Make strip-contact change is path-independent → folded into Make Scenario 1 finish.",
+          "done": true
+        },
+        {
+          "title": "Phase 1 — Foundation: secure backend (holds SM8 key; per-sub auth; sub↔job assignment table; contact-field filter; rate governor; SM8 webhook receiver) + SM8 read integration + Make change to STRIP customer contact from the SM8 job (name+address only; customer comms → GHL/Twilio)",
+          "done": false
+        },
+        {
+          "title": "Phase 2 — App core (PWA): per-sub login, My Jobs list, job detail (NAME+ADDRESS only), one-tap navigation",
+          "done": false
+        },
+        {
+          "title": "Phase 3 — Accept/Decline engine: custom state machine (offer → accept/decline → re-route), Fair-Work-safe (real decline, no penalty, offer-language, delegation right), mirrored to SM8 badge/queue for Marko",
+          "done": false
+        },
+        {
+          "title": "Phase 4 — Photos + complete: offline-tolerant before/after capture → SM8 Attachment (2-step); gated mark-complete → SM8 status + Make back-sync to GHL",
+          "done": false
+        },
+        {
+          "title": "Phase 5 — Notifications: push (FCM/web-push) on job offer + SMS fallback (Twilio/Make); access-issue 'Problem' button → Marko relay (masked number deferred to scale)",
+          "done": false
+        },
+        {
+          "title": "Phase 6 — End-to-end test (fake sub + real test job through GHL→Make→SM8→app) + security review (key isolation, contact-leak, rate limits) + onboard first real sub",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "sm8",
+      "title": "ServiceM8 finish + PIT rotation",
+      "phase": "Sprint",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Confirm category count: 6 vs 10 — ALLAN",
+          "done": true
+        },
+        {
+          "title": "Marko as Staff (invite + role)",
+          "done": false
+        },
+        {
+          "title": "Capture API key → .secrets/servicem8.key + read category/queue UUIDs + prove write-path (test job 200, errorCode 0)",
+          "done": true
+        },
+        {
+          "title": "Rotate SM8 key + exposed GHL PIT (after 5 Make scenarios stable)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "deploy",
+      "title": "Deploy theme live ($10M + audit fixes)",
+      "phase": "Sprint",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Build deploy zip (bulletproof exclusions incl. cockpit/*)",
+          "done": false
+        },
+        {
+          "title": "Upload via wp-admin (Replace current with uploaded)",
+          "done": false
+        },
+        {
+          "title": "Purge Cloudflare cache (Purge Everything)",
+          "done": false
+        },
+        {
+          "title": "Verify $10M live on /about + /terms; cache-bust timestamps OK",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "workflows",
+      "title": "Workflow completeness — every scenario covered",
+      "phase": "Sprint",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Customer doesn't pay → Accounts overdue chase (7/14d) → escalation",
+          "done": false
+        },
+        {
+          "title": "Customer no-show / cancels post-deposit",
+          "done": false
+        },
+        {
+          "title": "Sub can't attend → reassign",
+          "done": false
+        },
+        {
+          "title": "Damage / dispute handling",
+          "done": false
+        },
+        {
+          "title": "Asbestos found on site → pause to clearance pathway",
+          "done": false
+        },
+        {
+          "title": "Quote expires → win-back",
+          "done": false
+        },
+        {
+          "title": "W5 NPS (24h after Job Complete) + enable W2 abandoned-quote",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "customers",
+      "title": "Quote the lined-up customers (REVENUE)",
+      "phase": "Revenue",
+      "status": "todo",
+      "subtasks": []
+    },
+    {
+      "id": "site-inspection",
+      "title": "Sub-led site inspections for big jobs",
+      "phase": "Future (Phase 2-3)",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Spec captured (docs/specs/site-inspection-sub-led-spec.md)",
+          "done": true
+        },
+        {
+          "title": "Build trigger: 8-12 vetted subs across Sydney (2-3 inspection-capable per region)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "agents",
+      "title": "AI agents + Philippine VAs (slow build)",
+      "phase": "Future",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Quote-drafter agent (Override 6 — Week 4-5)",
+          "done": false
+        },
+        {
+          "title": "Philippine VAs onboarding",
+          "done": false
+        },
+        {
+          "title": "BigQuery metrics dashboard (after real job data)",
+          "done": false
+        }
+      ]
+    }
+  ]
+}

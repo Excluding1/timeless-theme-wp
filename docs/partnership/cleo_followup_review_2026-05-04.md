@@ -69,7 +69,7 @@ Must exist before Allan signs first quote:
 
 ## Q7: Comparison with earlier plan
 
-I read [QUOTE-FORM-GHL-MIGRATION-PLAN.md](/Users/angelapham/codex-peer-workspace/master-repo/docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md:1). Clifford built on it, but also drifted.
+I read [QUOTE-FORM-GHL-MIGRATION-PLAN.md](/Users/excluding/codex-peer-workspace/master-repo/docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md:1). Clifford built on it, but also drifted.
 
 Kept correctly:
 - GHL as CRM/nurture hub.

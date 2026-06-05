@@ -1,5 +1,7 @@
 # Master Setup Checklist — All Accounts, Access, Tools, Sequencing
 
+> ⚠️ **SUPERSEDED 2026-06-02 (audit) — not the live build plan.** Dated 2026-05-01; describes stale state: GHL "$136 May-27 trial conversion" (actual: PAID $155/mo since 2026-05-04, F3 LOCK), "13-stage pipeline" (actual: 15 Jordan-EXACT LIVE, Override 14 v4 / Decision 11), ServiceM8 deferred (actual: signed 2026-05-26), Linode-VPS daemon (no current doc references it). **Live sprint = `/tmp/task-checklist.md`; live tool/cost = `docs/STATE.md` §2/§6; strategy = `docs/CEO.md`.** Kept as a historical Phase-0 provisioning record only.
+
 **Purpose:** Single reference for everything Allan needs to provision / sign up / grant access to, organised by phase + criticality. Each item documents: **what / why / benefit / cost / Allan's action / CEO action / time / status.**
 
 **Last updated:** 2026-05-01 PM
@@ -10,7 +12,7 @@
 ## Executive summary — by status
 
 ### ✅ Already done (Phase 0)
-ABN, Public Liability $20M, Westpac business bank, ASIC business name, Cloudflare domains, Google Workspace email (admin@timelessresurfacing.com.au), WordPress theme + GitHub repo (Excluding1/timeless-theme-wp), TimelessDash quote form repo, Supabase dashboard backend, personal Claude Max subscription.
+ABN, Public Liability $10M, Westpac business bank, ASIC business name, Cloudflare domains, Google Workspace email (admin@timelessresurfacing.com.au), WordPress theme + GitHub repo (Excluding1/timeless-theme-wp), TimelessDash quote form repo, Supabase dashboard backend, personal Claude Max subscription.
 
 ### 🔴 BLOCKING — needed THIS WEEK to launch persistent CEO
 1. **Linode account + Sydney VPS** ($7.50 AUD/mo)

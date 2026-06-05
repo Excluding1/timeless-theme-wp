@@ -1,8 +1,10 @@
 # Timeless Resurfacing — WordPress Theme Session Handoff
 
+> ⚠️ **THEME-focused + partly stale (2026-05).** The CURRENT canonical state lives elsewhere: the **CEO Cockpit board** (`node cockpit/server.js` → http://localhost:4317), **`memory/SESSION_RESUME_2026-06-05.md`** (read first), and the decision docs in `docs/specs/` (esp. `decision-sm8-keep-vs-build-2026-06-05.md`, `contractor-app-blueprint-2026-06-05.md`, the `make-scenario-1-*` set). Business automation (GHL · Make · ServiceM8 · Slack · contractor sub-app) is tracked THERE, not here. **Plan order (2026-06-05): internal backbone → contractor app → launch.**
+
 ## Quick Start for New Session
 ```
-cd /Users/angelapham/Downloads/timeless-theme-wp
+cd /Users/excluding/Downloads/timeless-theme-wp
 ```
 
 ## GitHub Repo
@@ -65,16 +67,16 @@ timeless-theme-wp/
 ### What Still Needs Doing
 
 #### Immediate (upload to WordPress)
-1. **Upload updated theme zip** (`/Users/angelapham/Downloads/timeless-theme.zip`, 1.5MB)
+1. **Upload updated theme zip** (`/Users/excluding/Downloads/timeless-theme.zip`, 1.5MB)
    - wp-admin → Appearance → Themes → Add New → Upload → Replace current
 2. **Create all 25 WordPress pages** via plugin
-   - Upload `/Users/angelapham/Downloads/timeless-page-creator.zip`
+   - Upload `/Users/excluding/Downloads/timeless-page-creator.zip`
    - wp-admin → Plugins → Add New → Upload → Activate → then Deactivate & Delete
 3. **Set permalinks** to `/%postname%/` (plugin does this, but verify at Settings → Permalinks)
 4. **Configure Customizer** — wp-admin → Appearance → Customize → Business Details:
    - Real phone number (replace `0400 000 000`)
    - Real email (replace `info@timelessresurfacing.com.au`)
-   - NSW licence number (replace `345678C`)
+   - NSW licence: LEAVE BLANK — never claim "NSW Licensed" (Override 5 v2; jobs kept <$5K inc GST). Do NOT set a licence number.
    - ABN (once registered)
 
 #### Short-term
@@ -86,7 +88,7 @@ timeless-theme-wp/
    ```
 6. **Get www. SSL working** — currently only non-www is validated
 7. **Replace 30 placeholder Unsplash images** with real before/after photos as jobs are completed
-8. **Update warranty text** in ~27 page template files: "2-Year" → "Up to 5-Year" (bulk sed)
+8. **Warranty copy audit** (per-material — **NOT a bulk sed**; that would over-claim grout/silicone = ACL breach): keep cement grout 2yr / silicone 1yr / epoxy 5yr / resurface up-to-5yr private, 6mo rental. Reconcile the live "3yr vs Up to 5-Year" page contradictions case-by-case after Allan confirms the headline figure. See STATE.md §15.
 
 #### Medium-term (business setup)
 9. **GHL (GoHighLevel) account setup** — needed for:
@@ -107,9 +109,9 @@ timeless-theme-wp/
 18. **Google Analytics / Tag Manager** setup
 
 ## QuoteForm.jsx (React — separate repo)
-- File: `/Users/angelapham/Downloads/timeless-quote-app/src/QuoteForm.jsx` (v9.2)
+- File: `/Users/excluding/Downloads/timeless-quote-app/src/QuoteForm.jsx` (v9.2)
 - Repo: `TimelessDash` branch `quote-form/react-v8`
-- Has `REPLACE_ME` webhook URLs — needs GHL account first
+- ✅ NOW WIRED to LIVE GHL (W1 new-lead webhook + `secret_token` in `.env.local`; locationId `Uz8fQwDiUxAHVtlruspD`) — verified 2026-06-05; the `REPLACE_ME` note is stale. ⚠️ STILL TODO: `npm run build` + deploy the *wired* form to the live site (the currently-deployed bundle is the older, un-wired one)
 - 5-step wizard with photo upload, GCLID tracking, partial lead recovery
 - NOT part of the WordPress theme — it's a standalone React embed
 
@@ -121,9 +123,9 @@ timeless-theme-wp/
 - Before/after slider: pure CSS/JS (no library), uses `clip` technique with drag handle
 
 ## Deploying Theme Changes
-1. Make changes in `/Users/angelapham/Downloads/timeless-theme-wp/`
+1. Make changes in `/Users/excluding/Downloads/timeless-theme-wp/`
 2. Commit & push to GitHub
-3. Zip the theme: `cd /Users/angelapham/Downloads && zip -r timeless-theme.zip timeless-theme-wp/ --exclude "*/.DS_Store" "*/.git*"`
+3. Zip the theme: `cd /Users/excluding/Downloads && zip -r timeless-theme.zip timeless-theme-wp/ --exclude "*/.secrets/*" "*/.DS_Store" "*/.git*"`
 4. Upload via wp-admin → Appearance → Themes → Upload → Replace current
 
 ## For Blog Posts in the Future

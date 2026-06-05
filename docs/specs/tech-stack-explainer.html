@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeless Resurfacing — How the Stack Works</title>
+<style>
+  :root{
+    --navy:#041534; --navy2:#0a2350; --sec:#595e6d; --gold:#e7c08b;
+    --surface:#f7f9fb; --error:#ba1a1a; --line:#e4e8ef; --white:#fff;
+    --auto:#1e7d5a; --autobg:#e3f5ec; --allan:#1d4ed8; --allanbg:#e5edff;
+    --marko:#b45309; --markobg:#fdf0dd; --ai:#7c3aed; --aibg:#f1e9fe;
+    --va:#0e7490; --vabg:#e0f4f8; --cust:#475569; --custbg:#eef1f5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;background:var(--surface);color:var(--navy);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:var(--white);padding:38px 0 30px}
+  header .wrap{padding-bottom:0}
+  h1{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  h1 .acc{color:var(--gold)}
+  .sub{color:#b9c4d8;font-size:15px;margin-top:6px;max-width:680px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:24px}
+  .tab{background:rgba(255,255,255,.08);color:#cdd6e6;border:none;padding:10px 16px;border-radius:9px 9px 0 0;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+  .tab:hover{background:rgba(255,255,255,.16);color:#fff}
+  .tab.on{background:var(--surface);color:var(--navy)}
+  .view{display:none;padding-top:30px}
+  .view.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-size:21px;font-weight:800;margin-bottom:4px}
+  .lead{color:var(--sec);font-size:14.5px;margin-bottom:20px;max-width:780px}
+  .legend{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 24px;padding:12px;background:var(--white);border:1px solid var(--line);border-radius:10px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:20px}
+  .c-auto{background:var(--autobg);color:var(--auto)} .c-allan{background:var(--allanbg);color:var(--allan)}
+  .c-marko{background:var(--markobg);color:var(--marko)} .c-ai{background:var(--aibg);color:var(--ai)}
+  .c-va{background:var(--vabg);color:var(--va)} .c-cust{background:var(--custbg);color:var(--cust)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px;transition:.15s}
+  .card:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(4,21,52,.07);transform:translateY(-2px)}
+  .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .card h3{font-size:15.5px;font-weight:700}
+  .card .role{font-size:12px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin:2px 0 8px}
+  .card p{font-size:13px;color:var(--sec)}
+  .st{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap}
+  .st.live{background:var(--autobg);color:var(--auto)} .st.soon{background:#fff4e0;color:#b45309} .st.plan{background:#eef1f5;color:var(--sec)}
+  .scn-pick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .sbtn{background:var(--white);border:1.5px solid var(--line);padding:12px 14px;border-radius:11px;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--navy);text-align:left;flex:1;min-width:200px;transition:.15s}
+  .sbtn:hover{border-color:var(--gold)}
+  .sbtn.on{border-color:var(--navy);background:var(--navy);color:#fff}
+  .sbtn small{display:block;font-weight:500;font-size:11.5px;opacity:.7;margin-top:2px}
+  .step{display:flex;gap:14px}
+  .rail{display:flex;flex-direction:column;align-items:center;width:30px;flex-shrink:0}
+  .dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+  .line{width:2px;flex:1;background:var(--line);margin:2px 0;min-height:14px}
+  .body{padding-bottom:20px;flex:1}
+  .body .t{font-size:14.5px;font-weight:600;margin-bottom:3px}
+  .body .d{font-size:13px;color:var(--sec)}
+  .badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-bottom:5px;color:#fff}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .col{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px;border-top:4px solid}
+  .col.allan{border-top-color:var(--allan)} .col.marko{border-top-color:var(--marko)}
+  .col.auto{border-top-color:var(--auto)} .col.ai{border-top-color:var(--ai)} .col.va{border-top-color:var(--va)}
+  .col h3{font-size:14.5px;margin-bottom:10px}
+  .col ul{list-style:none} .col li{font-size:12.8px;color:var(--sec);padding:5px 0 5px 16px;position:relative;border-bottom:1px solid var(--surface)}
+  .col li:before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .phase{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+  .phase h3{font-size:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .phase .when{font-size:11px;background:var(--navy);color:#fff;padding:3px 9px;border-radius:20px;font-weight:700}
+  .phase .scale{font-size:11px;color:var(--marko);font-weight:700}
+  .phase p{font-size:13px;color:var(--sec);margin-top:8px}
+  .tag2{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:7px;margin:6px 5px 0 0}
+  .note{background:#fffaf0;border:1px solid var(--gold);border-radius:10px;padding:13px 15px;font-size:13px;color:#6b4f1d;margin:18px 0}
+  .note b{color:var(--navy)}
+  .agbox{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:8px}
+  .agbox h3{font-size:16px;margin-bottom:4px}
+  .agbox .sm{font-size:12.5px;color:var(--sec);margin-bottom:14px}
+  .ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+  .agent{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--surface)}
+  .agent .nm{font-size:13.5px;font-weight:700;display:flex;justify-content:space-between;gap:6px}
+  .agent .nm .pr{font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:12px;background:var(--aibg);color:var(--ai);white-space:nowrap}
+  .agent .nm .pr.now{background:var(--autobg);color:var(--auto)}
+  .agent .ds{font-size:12px;color:var(--sec);margin-top:4px}
+  .agent .src{font-size:10px;color:#9aa3b2;margin-top:5px;font-style:italic}
+  footer{text-align:center;color:var(--sec);font-size:12px;margin-top:40px}
+  @media(max-width:600px){h1{font-size:24px}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Timeless Resurfacing — <span class="acc">How It All Works</span></h1>
+    <div class="sub">The full tech stack, what's automated vs what you touch, walked through real job scenarios, plus where AI agents and hires come in as you scale. Click the tabs.</div>
+    <div class="tabs">
+      <button class="tab on" data-v="stack">The Stack</button>
+      <button class="tab" data-v="scn">Walk a Job Through</button>
+      <button class="tab" data-v="who">Who Does What</button>
+      <button class="tab" data-v="future">AI &amp; Hire Roadmap</button>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <div class="legend">
+    <span class="chip c-cust">Customer / Tool</span>
+    <span class="chip c-auto">Automated (Make/GHL)</span>
+    <span class="chip c-allan">Allan</span>
+    <span class="chip c-marko">Marko</span>
+    <span class="chip c-ai">AI-assist (future)</span>
+    <span class="chip c-va">Hire (future)</span>
+  </div>
+
+  <section class="view on" id="stack">
+    <h2>The 10 pieces, and what each one is FOR</h2>
+    <p class="lead">Think of it as a relay race. The customer touches the website; everything after that is the office machine (you + automations) handing the job from tool to tool until the sub shows up and the money lands.</p>
+    <div class="grid">
+      <div class="card"><div class="top"><h3>WordPress + Quote Form</h3><span class="st live">LIVE</span></div><div class="role">Front door</div><p>Service landing pages + the React quote form (photos, service, details). The only thing the customer actually sees.</p></div>
+      <div class="card"><div class="top"><h3>Cloudinary</h3><span class="st live">LIVE</span></div><div class="role">Photo vault</div><p>Stores bathroom photos from the form, strips EXIF, hands GHL clean URLs.</p></div>
+      <div class="card"><div class="top"><h3>GoHighLevel</h3><span class="st live">LIVE</span></div><div class="role">The brain</div><p>15-stage sales pipeline, all customer SMS/email, contact records, W1-W7 workflows. Everything routes through here.</p></div>
+      <div class="card"><div class="top"><h3>Make.com</h3><span class="st soon">SIGNING UP</span></div><div class="role">The glue</div><p>Moves data GHL &harr; ServiceM8 &harr; Stripe &harr; Sheets. The robot plumbing connecting tools that don't natively talk.</p></div>
+      <div class="card"><div class="top"><h3>ServiceM8</h3><span class="st soon">TRIAL</span></div><div class="role">Dispatch + job floor</div><p>Where a paid job becomes a dispatched job: queues, the sub's job card, scheduling, completion + photos.</p></div>
+      <div class="card"><div class="top"><h3>Stripe</h3><span class="st live">LIVE</span></div><div class="role">Money in</div><p>Takes deposit + final payment. Triggers automations when paid.</p></div>
+      <div class="card"><div class="top"><h3>Xero</h3><span class="st live">LIVE</span></div><div class="role">The books</div><p>Accounting ledger. Stripe + Westpac feed it. Tax, GST-ready, reconciliation.</p></div>
+      <div class="card"><div class="top"><h3>Slack</h3><span class="st live">LIVE</span></div><div class="role">Your pager</div><p>Real-time pings: new quote, hot lead, new job, job issue, automation error. Stay in the loop without watching screens.</p></div>
+      <div class="card"><div class="top"><h3>Westpac</h3><span class="st live">LIVE</span></div><div class="role">Money out</div><p>Business account. Sub payouts via EFT within 3 days of customer payment (SOPA-compliant).</p></div>
+      <div class="card"><div class="top"><h3>BigQuery</h3><span class="st plan">PHASE 1 schema</span></div><div class="role">Memory / data</div><p>Warehouse for every event so later AI + dashboards learn from history. Empty schema now, fills as jobs flow.</p></div>
+    </div>
+    <div class="note">The mental model: <b>GHL is the brain</b> (decides + remembers + talks to customers). <b>Make is the nervous system</b> (carries signals between organs). <b>ServiceM8 is the hands</b> (physical-job admin). <b>Stripe / Xero / Westpac are the wallet.</b> <b>Slack is your eyes + ears.</b> You sit on top making the calls a human should make.</div>
+  </section>
+
+  <section class="view" id="scn">
+    <h2>Watch a job travel through the machine</h2>
+    <p class="lead">Pick a scenario. Each step shows WHO does it. Notice how few steps are actually yours, most are automated or happen inside a tool. The blue Allan steps are where you add the human judgement that makes the brand.</p>
+    <div class="scn-pick">
+      <button class="sbtn on" data-s="0">1 · Lead fills the form<small>The happy path, online</small></button>
+      <button class="sbtn" data-s="1">2 · Customer accepts + pays<small>Quote, deposit, dispatch</small></button>
+      <button class="sbtn" data-s="2">3 · Job done + paid<small>Completion, money, review</small></button>
+      <button class="sbtn" data-s="3">4 · Phone / DM / referral<small>No-form lead (Customer #1 &amp; #2)</small></button>
+    </div>
+    <div id="steps"></div>
+  </section>
+
+  <section class="view" id="who">
+    <h2>Who does what (today)</h2>
+    <p class="lead">Your model copies Surface Care: the office runs ads + comms + quoting + dispatch + money; the sub just shows up and does the physical work. Here's the split right now, before AI agents or hires.</p>
+    <div class="cols">
+      <div class="col allan"><h3>Allan</h3><ul>
+        <li>All customer comms (SMS, email, calls), your voice</li>
+        <li>Review photos + write the quote</li>
+        <li>Google Ads + landing pages</li>
+        <li>Send quote, take the accept</li>
+        <li>Approve big decisions</li>
+        <li>Pay the sub (Westpac)</li></ul></div>
+      <div class="col marko"><h3>Marko</h3><ul>
+        <li>Recruit + onboard subs</li>
+        <li>Dispatch the job in ServiceM8</li>
+        <li>QC before/after photos</li>
+        <li>Handle sub questions (not customer)</li>
+        <li>Does first jobs himself (Phase 1)</li></ul></div>
+      <div class="col auto"><h3>Automated</h3><ul>
+        <li>Form &rarr; contact + opportunity (W1)</li>
+        <li>Slack pings + customer SMS acks</li>
+        <li>Quote follow-up cadence (W3)</li>
+        <li>Deposit-paid &rarr; create SM8 job (Make)</li>
+        <li>SM8 complete &rarr; GHL + Accounts (Make)</li>
+        <li>Invoice reminders, NPS request</li></ul></div>
+      <div class="col ai"><h3>AI-assist (soon)</h3><ul>
+        <li>Quote-drafting agent: reads photos + form, drafts the quote you approve</li>
+        <li>Hot-lead auto-scoring</li>
+        <li>Draft customer replies in your voice</li></ul></div>
+      <div class="col va"><h3>Hire (later)</h3><ul>
+        <li>Quote prep / photo + data admin</li>
+        <li>Customer-service replies (your voice)</li>
+        <li>Dispatch coordination</li>
+        <li>Human quoters on a framework</li></ul></div>
+    </div>
+    <div class="note">The rule we locked (Decision 7): every customer-facing word is Allan-owned + Allan-voiced. Marko is invisible to the customer. Subs only do physical work. When AI or a hire takes over comms later, they still write <i>as Allan</i>, under your accountability, so the brand stays one voice. <b>Jordan does the same</b>: his sales team quotes 180+ jobs/mo from a codified framework, never having touched a grinder (transcript 2026-04-30:465).</div>
+  </section>
+
+  <section class="view" id="future">
+    <h2>The AI &amp; hire roadmap (0 &rarr; 185 jobs/mo)</h2>
+    <p class="lead">Principle: automate the predictable, AI-assist the judgement-heavy-but-repetitive, hire humans for the relationship + edge cases + the physical supply. Add each layer only when volume makes the previous one hurt.</p>
+    <div id="road"></div>
+
+    <div class="agbox">
+      <h3>Jordan's actual AI agents — your build shopping list</h3>
+      <div class="sm">Cleo mined his transcripts. These are the AI agents Surface Care actually runs (the "5-6 agents on a VPS" Allan heard about). Evidence-cited. This is what to build, roughly in order.</div>
+      <div class="ag" id="agents"></div>
+    </div>
+
+    <div class="note" id="va-note"></div>
+  </section>
+</div>
+<footer>Timeless Resurfacing · internal explainer · built 2026-05-29 · Clifford &amp; Cleo</footer>
+
+<script>
+const C={cust:'var(--cust)',auto:'var(--auto)',allan:'var(--allan)',marko:'var(--marko)',ai:'var(--ai)',va:'var(--va)'};
+const scenarios=[
+ [['cust','Customer','Clicks your Google Ad','Lands on a service-specific page, e.g. Bath Resurfacing Sydney.'],
+  ['cust','Customer','Fills the quote form','Picks service, uploads bathroom photos, enters details.'],
+  ['auto','Automated','Photos to Cloudinary','Uploaded, EXIF stripped, URLs generated.'],
+  ['auto','Automated','Form to GHL (W1)','Creates Contact + Opportunity at Stage 1, maps every field + photo URL.'],
+  ['auto','Automated','Slack #quotes-in ping','You + Marko see the lead within seconds.'],
+  ['auto','Automated','SMS T1 to customer','"Got your enquiry Sarah, Allan from Timeless here. Quote within 24-48hr." Auto, in your voice.'],
+  ['allan','Allan','Review photos + write quote','You assess the bathroom, pick the tier, write the quote. Your biggest manual step.'],
+  ['ai','AI-assist (future)','Quote-drafting agent','Reads photos + form, drafts a quote range you just approve. Cuts the step above to ~30 sec.'],
+  ['allan','Allan','Send quote','Moves opp to Stage 6 Quote Sent.'],
+  ['auto','Automated','Follow-up cadence (W3)','24h + 72h nudges if no reply, auto.']],
+ [['cust','Customer','Replies yes, let’s book','Via SMS/email/call.'],
+  ['allan','Allan','Move to Stage 7 Quote Accepted','One click in GHL.'],
+  ['auto','Automated','Asbestos routing','Pre-1990 build to Stage 8 site inspection, else straight to prepayment. Auto rule.'],
+  ['auto','Automated','Deposit link sent','Stripe deposit link via GHL.'],
+  ['cust','Customer + Stripe','Pays deposit','Stripe confirms payment.'],
+  ['allan','Allan','Stage 11 Job in ServiceM8','The handoff trigger (or auto on deposit-paid).'],
+  ['auto','Automated','Make creates the SM8 job','Finds/creates client, creates job in the ACT queue, sets category + badges (asbestos / strip-back), attaches photos.'],
+  ['auto','Automated','SM8 job ID back to GHL','Both systems linked. Slack #new-jobs BOOM.'],
+  ['marko','Marko','Opens SM8, dispatches','Sees the job in ACT, assigns a sub + sets the date.']],
+ [['marko','Sub + Marko','Sub does the work','Marko QCs the before/after photos for quality.'],
+  ['marko','Marko','Marks SM8 job Complete','The completion trigger.'],
+  ['auto','Automated','Make back-sync to GHL Stage 15','Opportunity moves to Job Complete automatically.'],
+  ['auto','Automated','Accounts pipeline opp created','Make Scenario A spins up the finance-tracking opp.'],
+  ['auto','Automated','Final invoice sent','Via Xero/Stripe.'],
+  ['cust','Customer + Stripe','Pays final balance','Stripe confirms.'],
+  ['auto','Automated','Accounts to Paid','Make Scenario B advances it, mirrors Payment Status.'],
+  ['allan','Allan','Pay the sub','Westpac EFT within 3 days (SOPA-compliant).'],
+  ['auto','Automated','NPS request (W5, +24h)','Happy to Google review ask; unhappy routes to you first.'],
+  ['allan','Allan','Handle any detractor','You personally fix unhappy customers before any review ask (Jordan does this too).']],
+ [['cust','Customer','Enquires by phone / Instagram / referral','Like Marko’s referral (Customer #1) or the Glebe rental (Customer #2).'],
+  ['allan','Allan','Send quick-form link OR enter manually','Text them your form link, or type details + photos into GHL yourself.'],
+  ['auto','Automated','Joins the pipeline at Stage 1','From here identical to Scenario 1, step 5 onward.'],
+  ['allan','Allan','Review photos + quote','Your judgement on the bathroom.'],
+  ['va','Hire (future)','Quote prep / data entry','At volume, a VA does the manual entry + photo prep (Jordan’s Philippines team does exactly this), you just approve.'],
+  ['auto','Automated','...rest of the machine runs','Accept, deposit, SM8, complete, paid, as Scenarios 2 + 3.']]
+];
+const roadmap=[
+ ['Now — Phase 1','0–5 jobs/mo','Foundation','Stack live; you + Marko do everything manual; automations handle the plumbing. Goal: prove the machine on real jobs (Customer #1 & #2).',[['c-auto','Automations live'],['c-allan','You: comms+quotes'],['c-marko','Marko: sub+dispatch']]],
+ ['Soon — Phase 1b','5–15 jobs/mo','First AI agent','Quote-drafting AI agent (Override 6). Jordan’s quote app cut response from 4 days to 7 hours (transcript :41-49). Your #1 time-sink gets ~10x faster. Add hot-lead auto-scoring.',[['c-ai','AI: quote draft'],['c-allan','You: approve+send']]],
+ ['Phase 2','15–40 jobs/mo','AI comms + first hire','AI drafts customer replies in your voice (you approve). First hire: a VA for quote prep / photo + data admin / customer-service drafting (Jordan’s Philippines team does this).',[['c-ai','AI: reply drafts'],['c-va','Hire: VA admin']]],
+ ['Phase 3','40–100 jobs/mo','Quoters + dispatch + sub supply','Human quoters on a codified framework (Jordan’s sales team quotes 180+/mo, never touched a grinder). Dispatch/ops coordination. Aggressive sub recruitment, supply is the real bottleneck.',[['c-va','Hire: quoters+dispatch'],['c-marko','Marko: sub-network lead']]],
+ ['Phase 4 — Jordan-scale','100–185+ jobs/mo','Full agent fleet + team','5-6 AI agents across the funnel (see below) + sales team + admin team + custom contractor app. Demand outran his 70 techs, so technician supply runs in parallel forever.',[['c-va','Hire: sales+support team'],['c-ai','AI: full fleet']]]
+];
+const agents=[
+ ['Quote Estimator','BUILD FIRST','now','Photo of damage to a recommended quote range incl labour, travel, materials, parking, tolls + similar past jobs. This is Override 6.','2026-04-30:301-305'],
+ ['Abandoned-Quote SMS','soon','','Auto-nudges leads who got a quote but went quiet.','2026-03-06(1):468-474'],
+ ['Quote Integrity Analyst','soon','','Checks prior jobs at the same address so pricing stays consistent.','2026-04-30:159-163'],
+ ['CRM to Job-Card Mover','soon','','Moves photos/docs/address from GHL into the SM8 job card. Replaced his Philippines admin team.','2026-04-30:221-227'],
+ ['Ad + Profit Specialist','phase 2','','Audits Meta/Google ads against CRM profit-per-job, so spend follows margin.','2026-04-30:113-117'],
+ ['Content / Voice Agent','phase 2','','Drafts + voices before-after content for social.','2026-03-06(1):482'],
+ ['Landing-Page Builder','phase 2','','Claude builds new service/suburb landing pages on demand.','2026-04-30:393'],
+ ['Data Analyst','phase 3','','Analyses BigQuery job + customer data for pricing + demand insight.','2026-04-30:321']
+];
+function mk(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+function renderSteps(i){
+  const root=document.getElementById('steps');root.replaceChildren();
+  scenarios[i].forEach((s,n,arr)=>{
+    const step=mk('div','step');
+    const rail=mk('div','rail');
+    const dot=mk('div','dot',String(n+1));dot.style.background=C[s[0]];
+    rail.appendChild(dot);
+    if(n<arr.length-1)rail.appendChild(mk('div','line'));
+    const body=mk('div','body');
+    const b=mk('span','badge',s[1]);b.style.background=C[s[0]];
+    body.appendChild(b);body.appendChild(mk('div','t',s[2]));body.appendChild(mk('div','d',s[3]));
+    step.appendChild(rail);step.appendChild(body);root.appendChild(step);
+  });
+}
+function renderRoad(){
+  const root=document.getElementById('road');root.replaceChildren();
+  roadmap.forEach(p=>{
+    const ph=mk('div','phase');
+    const h=mk('h3');h.appendChild(mk('span','when',p[0]));h.appendChild(mk('span','scale',p[1]));h.appendChild(mk('span',null,' · '+p[2]));
+    ph.appendChild(h);ph.appendChild(mk('p',null,p[3]));
+    const tags=mk('div');p[4].forEach(t=>tags.appendChild(mk('span','tag2 '+t[0],t[1])));
+    ph.appendChild(tags);root.appendChild(ph);
+  });
+}
+function renderAgents(){
+  const root=document.getElementById('agents');root.replaceChildren();
+  agents.forEach(a=>{
+    const c=mk('div','agent');
+    const nm=mk('div','nm');nm.appendChild(mk('span',null,a[0]));
+    const pr=mk('span','pr'+(a[2]==='now'?' now':''),a[1]);nm.appendChild(pr);
+    c.appendChild(nm);c.appendChild(mk('div','ds',a[3]));c.appendChild(mk('div','src','Jordan transcript '+a[4]));
+    root.appendChild(c);
+  });
+}
+function renderVaNote(){
+  const n=document.getElementById('va-note');n.replaceChildren();
+  const parts=[
+    ['b','The "5 Philippine people" — corrected: '],
+    ['span','Cleo checked Jordan’s transcripts. There is NO mention of "5 people". What he says is (1) he runs '],
+    ['b','"five, six different agents on a VPS" — those are AI agents, not people '],
+    ['span','(transcript 2026-04-30:171), and (2) he separately has a '],
+    ['b','Philippines admin team '],
+    ['span','doing monotonous work: downloading/uploading photos, moving data into job cards (transcript :223). So what you heard is most likely his 5-6 AI agents. The high-leverage move to copy is building those agents, not hiring 5 people. A small offshore admin VA comes later for the repetitive data work (and an AI agent can replace even that, like Jordan’s CRM-to-job-card mover did).']
+  ];
+  parts.forEach(p=>n.appendChild(mk(p[0],null,p[1])));
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.getElementById(t.dataset.v).classList.add('on');
+});
+document.querySelectorAll('.sbtn').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.sbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  renderSteps(+b.dataset.s);
+});
+renderSteps(0);renderRoad();renderAgents();renderVaNote();
+</script>
+</body>
+</html>

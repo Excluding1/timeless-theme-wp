@@ -19,7 +19,7 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
   - **Employee** has: tax withheld (PAYG), tools provided, fixed hours, can't refuse work, paid per hour/salary, exclusive engagement
   - Cross the line in too many factors → ATO/Fair Work treats subcontractor as employee → super back-pay (10.5% of every payment), tax withholding obligations, leave entitlements owed
 - **Sham contracting** (Fair Work Act s357-359): treating someone as contractor when they're really an employee. Penalties up to $93,900 per contravention (corporate) / $18,780 per (individual).
-- **Insurance requirements for subcontractors**: minimum $5M PL. Annual cert sight. NSW WHS requires WorkCover for any worker, including contractors performing work.
+- **Insurance requirements for subcontractors**: minimum $10M PL. Annual cert sight. NSW WHS requires WorkCover for any worker, including contractors performing work.
 - **Asbestos competency**: subcontractors working pre-1990 must have asbestos awareness training (NSW SafeWork). Document sighted at onboarding + annual refresh.
 - **Subcontractor agreement essential clauses:**
   - Non-solicitation (can't poach your customers for 24 months post-engagement)
@@ -45,13 +45,13 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **NSW jurisdiction**: subcontractor agreement must specify NSW law + NSW courts.
 - **Bathroom-only scope**: agreements should reflect this (subcontractors not asked to do plumbing repairs, painting, etc — keep scope tight).
 - **Geographic spread**: aim for 2+ subcontractors per zone for redundancy. CBD, North Shore, East, Inner West, South, West, Sutherland, Hills, Northern Beaches, plus Wollongong + Central Coast.
-- **2-founder model**: subcontractors deal with co-founder for dispatch + payment. Subcontractors don't deal with Angela for ops.
-- **Coordination not execution**: subcontractors MUST understand they're the trade workforce. Angela and co-founder are not tradies.
+- **2-founder model**: subcontractors deal with co-founder for dispatch + payment. Subcontractors don't deal with Allan for ops.
+- **Coordination not execution**: subcontractors MUST understand they're the trade workforce. Allan and co-founder are not tradies.
 - **Cap subcontractors early**: aim for 3 vetted subcontractors before Phase 4 (job dispatch). 10 by Month 6. 20 by Month 12.
 
 ---
@@ -61,7 +61,7 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
 ### Subcontractor agreement
 1. **Plain English** — subcontractor must actually read and understand it
 2. **All 10 essential clauses present** (above)
-3. **Specific dollar amounts** for insurance ($5M PL minimum)
+3. **Specific dollar amounts** for insurance ($10M PL minimum)
 4. **Specific timeframes** for payment (3 business days)
 5. **Specific photo requirements** referenced (link to SM8 template)
 6. **NSW jurisdiction** specified
@@ -77,7 +77,7 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
 
 ### Onboarding checklist (per subcontractor)
 14. **Full legal name + ABN verified** via ABN Lookup (not just claimed)
-15. **PL insurance certificate sighted** ($5M+) — PDF stored
+15. **PL insurance certificate sighted** ($10M+) — PDF stored
 16. **Portfolio reviewed** (5+ real before/after bathroom jobs)
 17. **Suburb coverage confirmed** in writing
 18. **Skills confirmed**: shower regrout / bath resurface / silicone / epoxy / full bathroom (which they do)

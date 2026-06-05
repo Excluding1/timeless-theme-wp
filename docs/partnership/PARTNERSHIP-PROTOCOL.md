@@ -92,10 +92,10 @@ Cleo's working directory is `~/codex-peer-workspace/`. Every reference therein i
 
 | Symlink | Target | Implication |
 |---|---|---|
-| `memory/` | `/Users/angelapham/.claude/projects/.../memory/` | Either AI writing here updates the same file the other reads |
-| `master-repo/` | `/Users/angelapham/Downloads/timeless-theme-wp/` | Same repo both AIs operate on (CEO.md, STATE.md, docs/roles/, code) |
-| `secondary-repo-timelessdash/` | `/Users/angelapham/Downloads/TimelessDash` | Same React form repo |
-| `transcripts/` | `/Users/angelapham/Downloads/all-transcripts-*.md` | Same competitor playbook |
+| `memory/` | `/Users/excluding/.claude/projects/.../memory/` | Either AI writing here updates the same file the other reads |
+| `master-repo/` | `/Users/excluding/Downloads/timeless-theme-wp/` | Same repo both AIs operate on (CEO.md, STATE.md, docs/roles/, code) |
+| `secondary-repo-timelessdash/` | `/Users/excluding/Downloads/TimelessDash` | Same React form repo |
+| `transcripts/` | `/Users/excluding/Downloads/all-transcripts-*.md` | Same competitor playbook |
 
 **No copy/sync layer exists or is needed.** When Clifford writes to `memory/foo.md`, Cleo reads the new content next invocation via the symlink. Vice versa.
 

@@ -1,0 +1,2 @@
+opp_id,logged_at,sm8_job_uuid,customer_email,customer_phone,full_address,suburb,postcode,service_category,job_description,quote_amount,accepted_price,lead_source,ghl_stage,ghl_pipeline
+EXAMPLE_DELETE_ME,2026-06-05 14:30:00,abc12345-de67-89ab-cdef-0123456789ab,jane@example.com,+61412345678,"12 Sample St, Bondi NSW 2026",Bondi,2026,Resurfacing,Jane Doe | bath resurface + chip repair,1290,,Google Ads,Job in ServiceM8,Sales

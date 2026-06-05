@@ -29,12 +29,13 @@
 - **Expenses YTD:** $187.56 (ASIC $45 + Hosting $99 + GW Email $18.88 + Cloudflare $14.68 + International calls $10)
 - **Real cash:** $1,500 - $187.56 = **$1,312.44** (STATE.md says $1,500 — needs sync)
 
-### Subscriptions monthly burn
-- Google Workspace: $18.88/mo
+### Subscriptions monthly burn (STALE as of 2026-05-01 — see STATE.md §6 for current)
+- Google Workspace: $18.88/mo (rising to $22.95 from 2026-07-06)
 - Ventraip WP hosting: $222/yr ÷ 12 = $18.50/mo
 - Cloudflare domain: $14.68/yr ÷ 12 = $1.22/mo
-- **Current:** ~$38.60/mo
-- **Post May 27 (GHL paid):** +$155 = $193.60/mo
+- **Current at 2026-05-01 audit:** ~$38.60/mo
+- **GHL PAID $155 AUD/mo since 2026-05-04 per F3 LOCK 2026-05-16** (not "post May 27" — that date was the trial-end estimate, but Allan signed onto paid plan earlier)
+- **As of 2026-05-26 sprint signups:** + Make Plan $9/mo + Xero Grow $0 first 6mo then $75/mo + SM8 Starter $14.50/mo (from Day 15 trial conversion) = current ~$197/mo with 50% off promos, $271/mo at full price Month 13+
 
 ### Existing 49 tasks — broad picture
 - Phase 0 setup tasks (mostly): ABN registration, business name, dashboard setup, GHL trial, etc.

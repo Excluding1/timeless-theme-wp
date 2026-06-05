@@ -127,7 +127,7 @@ When CEO asks "which 3 auditors for this decision?", I help map:
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **2-founder partnership** — single-point-of-failure on EITHER founder is high risk; design for cross-coverage
 - **Coordination model** — every operational decision must NOT require founder execution (otherwise lane discipline breaks)

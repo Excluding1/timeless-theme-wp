@@ -80,7 +80,7 @@ Even if independent contractor test passes, if subcontractor gets >80% income fr
 - [ ] States subcontractor is **independent contractor**, not employee
 - [ ] **No PAYG language** ("salary", "wage", "annual leave")
 - [ ] Subcontractor's **ABN listed** on agreement
-- [ ] **PL insurance ≥$5M required** with annual cert
+- [ ] **PL insurance ≥$10M required** with annual cert
 - [ ] **Per-job payment** (not per hour)
 - [ ] Subcontractor can **refuse jobs** without penalty
 - [ ] Subcontractor **bears rectification cost** for substandard work
@@ -101,9 +101,11 @@ Even if independent contractor test passes, if subcontractor gets >80% income fr
 
 ### Dispatch logic risks
 - [ ] Tier system **doesn't punish** subcontractors for refusing jobs (decline doesn't = downgrade)
+- [ ] **A decline is NEVER penalised** — no decline-rate counter, no tier-downgrade-on-refusal, no "decline quota" surfaced to the sub. Penalising refusal is a top-tier employee indicator. If a sub consistently can't take work, that is a **capacity/fit conversation handled off-system** (commercial-supplier review), NOT discipline. (This is the binding reframe of any earlier field-ops "decline >35% → coaching" rule — see `expert-field-service-ops.md` + `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`.)
 - [ ] **No "must accept all jobs offered"** clause
 - [ ] **Same-day jobs offered**, not assigned
 - [ ] Dispatch communications use **offer language**, not directive
+- [ ] **Engagement via ServiceM8 NETWORK (sub on own SM8 account), NOT a Staff seat** — a Network Request is a genuine OFFER the sub Accepts/Declines (real right of refusal); Staff allocation (no right of refusal, sees the shared dispatch board) is employee-leaning. The accept/decline mechanic is itself an **independence signal** and should be preserved. Staff seats are for genuine employees only. (DECISION 2026-06-05.)
 
 ### Payment + integration risks
 - [ ] **No PAYG withholding** on subcontractor payments
@@ -120,12 +122,13 @@ Even if independent contractor test passes, if subcontractor gets >80% income fr
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **2-founder partnership** — neither founder is a subcontractor. You are the principal.
 - **Coordination model** — your role explicitly is NOT executing trade work. This SUPPORTS the contractor relationship classification.
 - **Geographic spread** — subcontractors in different zones make exclusivity less likely (they have local work too).
 - **NSW jurisdiction** — Fair Work + NSW Industrial Relations may both apply; NSW has additional protections.
+- **No cost pressure to mis-classify** — ServiceM8 is **per-JOB, flat monthly, UNLIMITED users** (NOT per-staff/per-seat; the old per-staff assumption is STALE — see `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`). Network seats for subs are a free add-on. So there is **zero cost incentive** to push subs onto Staff seats or to over-integrate them — the cheap, compliant path (Network OFFER → sub Accepts/Declines on their own account) is also the correct one. Watch the live regulatory context: Aug-2024 Closing Loopholes **s15AA whole-of-relationship test** + the **Mar-2026 ATO/FWO joint clampdown on building & construction** raise the audit stakes.
 
 ---
 
@@ -159,9 +162,10 @@ Plus:
 
 ## References
 
-- Fair Work Act 2009 (Cth) Part 3-1 (sham contracting)
-- Fair Work Ombudsman: Independent Contractors guidance
-- ATO: Employee or Contractor decision tool
+- Fair Work Act 2009 (Cth) Part 3-1 (sham contracting); **s15AA whole-of-relationship test** (Aug-2024 Closing Loopholes)
+- Fair Work Ombudsman: Independent Contractors guidance; **Mar-2026 ATO/FWO joint clampdown on building & construction**
+- ATO: Employee or Contractor decision tool; SG meaning-of-employee s.12(3)
 - ATO: Personal Services Income (PSI) rules
+- [decision-sm8-keep-vs-build-2026-06-05.md](../specs/decision-sm8-keep-vs-build-2026-06-05.md) — **canonical 2026-06-05**: SM8 per-job/unlimited (no cost pressure to mis-classify); Network OFFER = independence signal; never penalise a decline; ≥$10M PL gate before offers
 - [OPERATING-CONTEXT.md § 9.6 — Subcontractor agreement](../OPERATING-CONTEXT.md#96-subcontractor-agreement-must-be-signed-before-any-job)
 - [expert-trades-ops-contractor.md](expert-trades-ops-contractor.md)

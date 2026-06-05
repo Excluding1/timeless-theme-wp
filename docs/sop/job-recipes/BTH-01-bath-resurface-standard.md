@@ -228,7 +228,7 @@ photos_required:
    - No suction-cup mats
    - Warranty terms
 6. Photo upload to ServiceM8 (8 photos: 3 before + 2 during + 4 after = NO LESS)
-7. Mark job complete in SM8 — triggers Stage 11 in GHL pipeline
+7. Mark job complete in SM8 — triggers Job Complete (stage 15, terminal) in GHL pipeline
 8. Customer SMS auto-fires: cure-time warning (W9 workflow)
 
 ---

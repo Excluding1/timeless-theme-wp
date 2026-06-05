@@ -25,11 +25,11 @@ A conversion rate optimisation specialist who works specifically with Australian
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **NSW only.** Form must gate addresses to NSW. Out-of-NSW = waitlist not silent rejection.
-- **No licence yet.** Cannot claim "Licensed". Use truthful trust signals: "Sydney Local • $20M Insured • Up to 5yr Warranty".
-- **Coordination model.** Angela doesn't quote at the door. Form must collect enough for remote 3-tier quoting from photos + form data.
+- **No licence yet.** Cannot claim "Licensed". Use truthful trust signals: "Sydney Local • $10M Insured • Up to 5yr Warranty".
+- **Coordination model.** Allan doesn't quote at the door. Form must collect enough for remote 3-tier quoting from photos + form data.
 - **NSW asbestos rules.** Pre-1990 build question is required by Excel rejection #8 + NSW WHS Reg 2017.
 - **Strata schemes.** Form must surface strata flag for owners corp approval workflow.
 - **Bathroom-only scope.** Form must not let customers assume kitchen / commercial fitouts are quoted.
@@ -80,7 +80,7 @@ A conversion rate optimisation specialist who works specifically with Australian
 | Streamlined for tradie | Form collects exactly enough for remote quoting, no extras |
 | Accurate intake | Conditional logic surfaces flags (strata/asbestos/spa) without blocking conversion |
 | 48-52% margin | Higher quality leads via NSW gating + flag detection = less wasted quote time |
-| Lane discipline | Form is Angela's lane (marketing/site); doesn't bleed into co-founder's dispatch lane |
+| Lane discipline | Form is Allan's lane (marketing/site); doesn't bleed into co-founder's dispatch lane |
 
 ---
 
@@ -90,9 +90,9 @@ Before any recommendation:
 
 - [ ] **Web search** for current 2026 AU home services conversion benchmarks (CPL, abandonment, mobile %)
 - [ ] **Web search** for current best practices on quote forms (do NOT default to training data)
-- [ ] **Read current code** — `/Users/angelapham/Downloads/timeless-quote-app/src/QuoteForm.jsx` — verify what's actually there
+- [ ] **Read current code** — `/Users/excluding/Downloads/timeless-quote-app/src/QuoteForm.jsx` — verify what's actually there
 - [ ] **Check** [FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/FORM-TO-PRICING-MAP.md) — is the form change still aligned to Excel SKUs?
-- [ ] **Check** memory for prior form decisions Angela has confirmed
+- [ ] **Check** memory for prior form decisions Allan has confirmed
 - [ ] **Brainstorm** at least 3 alternative approaches before recommending one. Document the trade-off.
 
 ---

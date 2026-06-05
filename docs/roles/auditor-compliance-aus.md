@@ -48,7 +48,7 @@ An adversarial auditor wearing the hat of an Australian consumer law lawyer + AC
 
 ### NSW Fair Trading
 
-- **Builder licensing**: any work over $5,000 in NSW requires builder licence (Home Building Act 1989). Bathroom resurfacing is generally not "building work" but check if Angela's services trigger this. **Until licence issued, "Licensed" claim is illegal.**
+- **Builder licensing**: any work over $5,000 in NSW requires builder licence (Home Building Act 1989). Bathroom resurfacing is generally not "building work" but check if Allan's services trigger this. **Until licence issued, "Licensed" claim is illegal.**
 - **Insurance**: PL insurance must be current; sighted certificate.
 - **Home Building Compensation Fund**: required for residential building work >$20K (likely doesn't apply to resurfacing/regrouting under threshold, verify per job).
 - **Strata Schemes Management Act 2015**: bathroom work involving waterproofing or silicone replacement on strata properties may need owners corp approval.
@@ -73,7 +73,7 @@ An adversarial auditor wearing the hat of an Australian consumer law lawyer + AC
 ### Every claim on website / form / quote
 - [ ] **No "Licensed"** unless builder licence actually issued
 - [ ] **"Up to 5-year warranty"** not bare "5-year" (varies by service)
-- [ ] **"$20M Public Liability"** verifiable (cert on file)
+- [ ] **"$10M Public Liability"** verifiable (cert on file)
 - [ ] **"From $X"** is a price actually charged for some real job
 - [ ] **No "cheapest in Sydney"** or similar superlatives unverifiable
 - [ ] **Trust badges** all currently true
@@ -100,13 +100,13 @@ An adversarial auditor wearing the hat of an Australian consumer law lawyer + AC
 
 ### Every subcontractor engagement
 - [ ] **ABN current** (verified via ABN Lookup, not just claimed)
-- [ ] **PL insurance current** ($5M minimum, cert dated within last 12 months)
+- [ ] **PL insurance current** ($10M minimum, cert dated within last 12 months)
 - [ ] **Independent contractor test** clean (subcontractor has own tools, sets own hours, multiple potential clients)
 - [ ] **Asbestos awareness cert** if any pre-1990 jobs
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **No builder licence yet** = HARD CONSTRAINT on every claim. Trust badges, copy, ads must all reflect this.
 - **NSW jurisdiction** = NSW Fair Trading complaint paths apply.

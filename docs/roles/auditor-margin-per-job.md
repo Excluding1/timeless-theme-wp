@@ -96,10 +96,10 @@ Job Profit = Revenue − Subcontractor Cost − Materials − Travel/Mileage −
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **NSW Sydney sprawl**: travel costs are real. Bondi subcontractor vs Penrith subcontractor for a Penrith job = different effective margin.
-- **Coordination model**: Angela's time isn't directly billed but real. Each quote takes ~5-10 min of her time at $X/hr — factor into overhead.
+- **Coordination model**: Allan's time isn't directly billed but real. Each quote takes ~5-10 min of her time at $X/hr — factor into overhead.
 - **Bathroom-only**: prevents mission creep that erodes margin (kitchens, repairs, painting jobs that don't fit the rate card).
 - **No licence yet**: limits work types to those not requiring builder licence — keeps margin model consistent.
 - **2-founder partnership**: profit split 50/50 after costs. Margin needs to fund 2 living wages once full-time.

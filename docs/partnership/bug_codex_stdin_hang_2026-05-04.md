@@ -59,7 +59,7 @@ codex exec [flags] "prompt" < /dev/null
 
 ## Permanent enforcement
 
-`/Users/angelapham/codex-peer-workspace/scripts/cleo-run.sh` is the diagnostic harness for all Cleo invocations. It enforces:
+`/Users/excluding/codex-peer-workspace/scripts/cleo-run.sh` is the diagnostic harness for all Cleo invocations. It enforces:
 
 1. **stdin redirected to /dev/null** (the actual bug fix)
 2. **stderr captured to a log file** (so we can see errors, not /dev/null them away)

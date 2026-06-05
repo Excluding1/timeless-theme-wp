@@ -78,11 +78,11 @@ Your working directory is `~/codex-peer-workspace/`. Every reference therein is 
 
 | Symlink | Target |
 |---|---|
-| `memory/` | `/Users/angelapham/.claude/projects/.../memory/` (Clifford's source-of-truth memory dir) |
-| `master-repo/` | `/Users/angelapham/Downloads/timeless-theme-wp/` (master GitHub) |
-| `secondary-repo-timelessdash/` | `/Users/angelapham/Downloads/TimelessDash` (React form GitHub) |
-| `transcripts/` | `/Users/angelapham/Downloads/all-transcripts-*.md` (Jordan playbook) |
-| `pricing-data/` | `/Users/angelapham/Downloads/MASTER_PRICING_*.xlsx` |
+| `memory/` | `/Users/excluding/.claude/projects/.../memory/` (Clifford's source-of-truth memory dir) |
+| `master-repo/` | `/Users/excluding/Downloads/timeless-theme-wp/` (master GitHub) |
+| `secondary-repo-timelessdash/` | `/Users/excluding/Downloads/TimelessDash` (React form GitHub) |
+| `transcripts/` | `/Users/excluding/Downloads/all-transcripts-*.md` (Jordan playbook) |
+| `pricing-data/` | `/Users/excluding/Downloads/MASTER_PRICING_*.xlsx` |
 | `agents/` | `~/.claude/agents/` (11 GSD framework agents) |
 | `skill-codex/` | `~/.claude/skills/codex/` (your invocation contract) |
 
@@ -134,7 +134,7 @@ You run adversarial review specifically asking "what's the worst-case here?". Cl
 Clifford (the orchestrator) has demonstrated specific recurring failure patterns. You are uniquely positioned to catch them:
 
 1. **Operating without reading CEO.md / STATE.md.** Until 2026-05-04 Clifford was working from `memory/MEMORY.md` only, missing the 127KB CEO.md and 24KB STATE.md. If a Clifford-authored plan doesn't reference CEO.md or STATE.md, that's a flag.
-2. **Memory ↔ STATE.md drift.** Example: `memory/project_business_details.md` says PL insurance "amount not specified" but `STATE.md` says "$20M cover, active per saved memory". Catch these factual conflicts; STATE.md is canonical.
+2. **Memory ↔ STATE.md drift.** Example: `memory/project_business_details.md` says PL insurance "amount not specified" but `STATE.md` says "$10M cover, active per saved memory". Catch these factual conflicts; STATE.md is canonical.
 3. **Forgetting context across sessions.** See `memory/feedback_read_all_mds_fully.md`.
 4. **Punting to research agents on questions answerable from existing context.** See `memory/feedback_ceo_synthesis_first.md`.
 5. **Restructuring UX without explicit request.** See `memory/feedback_dont_restructure_unrequested.md`.
@@ -183,7 +183,7 @@ This is an Australian business. US/UK assumptions don't apply. When reviewing cu
 ~/codex-peer-workspace/
 ├── PEER-PROTOCOL.md                        # This file
 │
-├── master-repo/                            → /Users/angelapham/Downloads/timeless-theme-wp/
+├── master-repo/                            → /Users/excluding/Downloads/timeless-theme-wp/
 │   ├── .git/                               # Full git history — git log/blame/diff all work
 │   ├── CLAUDE.md                           # Project conventions
 │   ├── docs/                               # ★ THE REAL CEO BRAIN ★
@@ -204,9 +204,9 @@ This is an Australian business. US/UK assumptions don't apply. When reviewing cu
 │   └── quote-form/                         # The React 19 + Vite 6 form being wired into GHL
 │       └── src/QuoteForm.jsx               # 60+ field payload, photo upload gap
 │
-├── secondary-repo-timelessdash/            → /Users/angelapham/Downloads/TimelessDash
+├── secondary-repo-timelessdash/            → /Users/excluding/Downloads/TimelessDash
 │
-├── memory/                                 → /Users/angelapham/.claude/projects/.../memory/ (35+ MDs)
+├── memory/                                 → /Users/excluding/.claude/projects/.../memory/ (35+ MDs)
 │   ├── MEMORY.md                           # Index — read after CEO.md + STATE.md
 │   ├── partnership_clifford_cleo.md        # ★ Read on every invocation
 │   ├── plan_ghl_setup_draft_2026-05-04.md  # ★ Clifford's CURRENT plan (the target of inaugural review)
@@ -271,7 +271,7 @@ When invoked for peer-review, prioritise:
 - Customer-facing SMS copy quality (compliance + spam-trigger risk + STOP-rate)
 - Scale break points (50 / 200 / 500 jobs/month)
 - Divergence from `docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md` — has Clifford reinvented or improved on Allan's earlier plan?
-- STATE.md ↔ Clifford's plan factual alignment (PL insurance $20M, builder licence deferred, etc.)
+- STATE.md ↔ Clifford's plan factual alignment (PL insurance $10M, builder licence deferred, etc.)
 
 ---
 

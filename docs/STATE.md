@@ -9,7 +9,8 @@
 - ❓ Unknown — CEO needs to ask
 - 🔒 Sensitive — credentials handled separately
 
-**Last verified:** 2026-05-01
+**Last verified:** 2026-06-05 (SM8-keep decision + contractor-app planned + no-contact rule + data-capture sheet live)
+**Prior verifications:** 2026-05-01 (initial), 2026-05-16 (F-LOCKs), 2026-05-21 (Day 6 sync), 2026-05-26 PM (Day 1 sprint signups), 2026-06-02 ($10M PL + Cloudinary correction)
 
 ---
 
@@ -22,7 +23,7 @@
 | ABN — Pty Ltd company | ❌ | Deferred until revenue >$5K/mo for 3 months | — |
 | ASIC Business Name registration | ✅ | "Timeless Resurfacing" — 1 year, paid $45 on 2026-03-27 (per finance dashboard) | 2026-05-01 |
 | Business name renewal | ⏳ | Next due March 2027 | — |
-| Public Liability Insurance | ✅ Active | **F2 LOCK 2026-05-16:** Marko PL ACTIVE. Certificate of Currency arriving 2026-05-17 (Allan to file once received). $20M PL + Products Liability + Subcontractor Extension + $250K Statutory Liability via specialist trades broker. Locked in `memory/f_responses_locked_2026-05-16.md`. Unblocks customer-facing trust badge + Sub Service Agreement deployment. | 2026-05-16 |
+| Public Liability Insurance | ✅ Active | **F2 LOCK 2026-05-16, CORRECTED 2026-06-02:** Marko PL ACTIVE. Cover is **$10M PL** (Allan-confirmed 2026-06-02 — was mis-recorded as $20M; live theme + Terms corrected to $10M). Full schedule (products liability / sub extension / statutory liability) to verify against the Certificate of Currency (Allan sending). Locked in `memory/f_responses_locked_2026-05-16.md`. | 2026-06-02 |
 | Professional Indemnity | ❓ | CEO to ask | — |
 | WorkCover NSW | ❌ | Not required while no employees, only contractors | — |
 | Builder Licence | ❌ DEFERRED INDEFINITELY | **Allan's call 2026-05-01**: lengthy process (22-27 weeks via partner cert path; 13 weeks via licensed-supervisor hire) + insufficient funds. Strategy: keep all jobs <$5K HBA threshold via per-bathroom invoice splitting. Revisit when funds + revenue allow. Future pathway documented in [CEO.md § Compliance](CEO.md). | 2026-05-01 |
@@ -40,11 +41,11 @@
 | Business bank account | ✅ | **Westpac Business partnership account**, opened mid-April 2026. Partnership agreement + IDs used to open. | 2026-05-01 |
 | $100 bank signup bonus | ✅ Received | F10 LOCK 2026-05-16: $100 arrived. Cash on hand updated. | 2026-05-16 |
 | Current cash on hand | $1,600 | Per starting capital + $100 bank bonus, after $187.56 expenses tracked. F10 LOCK 2026-05-16. | 2026-05-16 |
-| Stripe account | ❌ | Sign up Phase 1 before first quote sent | — |
-| pay.com.au account | ❌ | Sign up before first subcontractor paid | — |
-| Rewards credit card linked to pay.com.au | ❓ | CEO to ask which card (Amex Explorer / Westpac Altitude / ANZ Rewards Black recommended per Jordan) | — |
-| Xero accounting | ❌ | Phase 1.7 in FUTURE-PLAN — connect bank feed when set up | — |
-| Bookkeeping current state | ⏳ | Tracked in custom dashboard (per Allan), not yet Xero | — |
+| Stripe account | ✅ **LIVE** | Production mode active since May 2 2026. Verified today (2026-05-26): "all green no banner" — full AU verification complete, Westpac payouts connected, payment methods Card + PayTo enabled (Zip skipped). | 2026-05-26 |
+| pay.com.au account | ❌ DEFERRED indefinitely | **Decision 12 v2 LOCKED 2026-05-25**: defer until first external sub onboarded AND volume justifies rewards-points optimization. Phase 1 sub payouts via Westpac EFT (free, SOPA-compliant). | 2026-05-25 |
+| Rewards credit card linked to pay.com.au | N/A while deferred | When pay.com.au activates (Phase 2+), revisit card choice | — |
+| Xero accounting | ✅ **LIVE — Grow tier** | Signed up 2026-05-26 with 100% off 6-month referral promo (saves $450 over standard pricing first 6mo). Standard Grow $75/mo from Month 7 (2026-11-26) — calendar reminder set for 2026-11-21 review. Stripe app installed + connected; Westpac bank feed REQUESTED (pending Westpac authorization 1-24h); invoice template with virtual address (AnyTime Mailbox Ultimo) + payment advice (BSB+account for Osko backup). | 2026-05-26 |
+| Bookkeeping current state | ✅ Xero LIVE | Stripe→Xero auto-sync configured. Westpac bank feed pending activation (async, no blocker). Chart of accounts default + Stripe Clearing Account added. | 2026-05-26 |
 
 ### Revenue & expenses (per Allan's dashboard, 2026-05-01)
 | Type | Amount |
@@ -126,15 +127,15 @@
 
 | Item | Status | Details | Last verified |
 |---|---|---|---|
-| Location (NEW master hub) | `/Users/angelapham/Downloads/timeless-theme-wp/quote-form/` | Absorbed into master repo 2026-05-01 PM. Old standalone folder `/Users/angelapham/Downloads/timeless-quote-app/` preserved for safety until Allan confirms migration works (then he can delete) | 2026-05-01 PM verified |
+| Location (NEW master hub) | `/Users/excluding/Downloads/timeless-theme-wp/quote-form/` | Absorbed into master repo 2026-05-01 PM. Old standalone folder `/Users/excluding/Downloads/timeless-quote-app/` preserved for safety until Allan confirms migration works (then he can delete) | 2026-05-01 PM verified |
 | GitHub | `Excluding1/timeless-theme-wp` (single repo now). TimelessDash repo holds historical quote-form/react-v8 branch — to be archived per WORKFLOW.md retire policy | | 2026-05-01 PM |
 | Build state | v10 GHL-wired (Day 8 prep complete) | v10.0 with NSW gating, asbestos check, multi-mode, photo upload + Day 8 prep applied (webhooks + secret_token + schema normalization). | 2026-05-21 |
 | GHL_WEBHOOK URL | ✅ Wired Day 8 prep 2026-05-21 | W1 webhook URL at QuoteForm.jsx:876 (was REPLACE_ME at :633 pre-Day-8; file grew to 1953 lines). End-to-end verified via Vite dev test: form complete → W1 LIVE → Slack #quotes-in + Contact + Opp Stage 1. | 2026-05-21 |
 | GHL_PARTIAL URL | ✅ Wired Day 8 prep 2026-05-21 | W2 webhook URL at QuoteForm.jsx:877 (was REPLACE_ME_PARTIAL at :634 pre-Day-8). W2 currently DRAFT — enable after Day 6 publish-readiness verified. | 2026-05-21 |
 | secret_token | ✅ Wired via VITE_GHL_SECRET_TOKEN env | TR_secret_v2_<32-byte random base64url>. Validates at W1/W2 Action 1 If/Else Security Gate (default-deny on mismatch). Stored in .env.local (gitignored via *.local). Commit 856722d on feature/day8-react-form-ghl-wire-2026-05-20. | 2026-05-21 |
 | Day 8 prep schema fixes | ✅ Applied 2026-05-21 | tenant_auth → tenant_authorisation (GHL key locked 2026-05-05); ventilation → has_ventilation; property_type apt/comm → apartment/commercial via propertyTypeMap; lead_source derived from UTM + referrer via deriveLeadSource() helper. Source: /tmp/day8-react-form-prep-plan-2026-05-20.md §3. | 2026-05-21 |
-| Cloudinary photo upload | ❌ TODO | Stub in QuoteForm.jsx — placeholder, not wired. Deferred Day 8 sub-task (separate from form-to-GHL prep complete 2026-05-21). | 2026-05-01 |
-| Trust badges | ✅ | "Sydney Local • $20M Insured • Up to 5yr Warranty" — corrected this session | 2026-05-01 |
+| Cloudinary photo upload | ✅ Wired | Wired via commit 2300503 (perAreaPhotoUrls + auto-upload to cloud `dysrfe5yh` / preset `timeless-form-photos`, unsigned Phase 1). ~~❌ TODO stub~~ superseded; matches §6 row. | 2026-06-02 |
+| Trust badges | ✅ | Target: "Sydney Local • **$10M Insured** • Up to 5yr Warranty" (corrected $20M→$10M 2026-06-02 per Allan). Live PHP pages currently show generic "Fully Insured"; React form shows "$10M Insured". | 2026-06-02 |
 | autoComplete attributes | ✅ | given-name, family-name, email — fixed this session | 2026-05-01 |
 | Ventilation Q gating | ✅ | Now includes regrout services — fixed this session | 2026-05-01 |
 | Bath bt4 silicone overlap note | ✅ | Fixed this session | 2026-05-01 |
@@ -149,15 +150,17 @@
 |---|---|---|
 | Google Workspace | ✅ Active | Email + Drive |
 | GoHighLevel | ✅ PAID $155/mo AUD | F3 LOCK 2026-05-16: trial converted to paid. Both founders signed up; Allan has watched tutorial. Day 1 of 2-week tech sprint kicks off 2026-05-17. |
-| Stripe | ❌ Not signed up | Need before first quote sent |
-| ServiceM8 | ❌ Not signed up | Deferred per Override 2 |
-| Slack | ❌ Workspace not created | Phase 1 task |
-| Zapier / Make | ❌ Not signed up | Need when GHL → SM8 sync needed |
-| Cloudinary | ❌ Not signed up | Need before photo upload works in form |
-| Xero | ❌ Not signed up | Need when bookkeeping volume justifies (~$5K/mo revenue) |
-| pay.com.au | ❌ Not signed up | Need before first subcontractor paid |
-| DocuSign | ❌ Not signed up | Need before first subcontractor signs |
-| Sprintlaw subcontractor template | ❌ Not purchased | Need before first subcontractor signs |
+| Stripe | ✅ **LIVE** | Production mode active since May 2 2026, verified 2026-05-26 ("all green no banner"). Card + PayTo enabled (Zip skipped). |
+| ServiceM8 | ✅ **Starter trial active — KEPT as field-service backbone** | Signed up 2026-05-26 with 50% off 12mo promo; trial converts to $14.50/mo at Day 14. Override 2 superseded by Decision 12 v2. **KEEP decision LOCKED 2026-06-05** ([decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)) — do NOT build a replacement. **Pricing = per-JOB, UNLIMITED users** (the "per-staff/per-seat" assumption is STALE). Subs via **SM8 Network** (own account + own ABN + ≥$10M PL, accept/decline); staff seats only for Marko/Allan/genuine employees. |
+| Custom contractor-VIEW app | 🟡 **Planned — APPROVED, blueprint ready, scheduled LAST** | A React PWA giving subs a NAME+ADDRESS-only view of offered jobs (accept/decline, photos, complete), mediated by our backend (Supabase BFF/token-broker, sole SM8 key-holder). A **VIEW on the same SM8+GHL+Sheet data — ZERO migration**, NOT an SM8 replacement. Built AFTER the internal backbone, before launch. Spec: [contractor-app-blueprint-2026-06-05](specs/contractor-app-blueprint-2026-06-05.md). |
+| Slack | ✅ Live | 6 channels (#quotes-in, #hot-leads, #pipeline-feed, #new-jobs, #job-issues, #automation-errors); +2 planned Day 2-3. |
+| Make.com | ✅ **Live — Scenario 1 built** | Make Plan $9/mo (replaces "Zapier or Make"); pay.com.au-style Phase 2 middleware per Decision 12 v2. **Scenario 1 state (2026-06-05):** core + SAFETY (secret gate · opp_id dedup · error→Slack · Sleep 3s) + DATA-CAPTURE = BUILT & working; find-or-create CLIENT deferred (SM8 client is internal/invoicing-only, never sub-facing); **strip-contact change pending** (drop `Add Job Contact` + remove customer phone/email from the SM8 job per the no-contact rule). GHL "Job in ServiceM8" workflow still DRAFT — publish before live. |
+| Cloudinary | ✅ Live | Cloud `dysrfe5yh`, preset `timeless-form-photos` unsigned Phase 1; signed upload Phase 2 migration per Override 6 reasoning. |
+| Per-job data-capture sheet (job log) | ✅ **Live** | Google Sheet — Make appends one row per job for future BigQuery + AI repeat-customer / household consistent-pricing. Capture-from-day-1 = one-way door; warehouse choice deferred/reversible. |
+| Xero | ✅ **Grow LIVE** | Signed up 2026-05-26 with 100% off 6mo referral promo; standard Grow $75/mo from Month 7 (calendar reminder 2026-11-21). Stripe app installed + Westpac bank feed pending Westpac authorization. |
+| pay.com.au | ❌ DEFERRED indefinitely | Decision 12 v2 LOCKED 2026-05-25: defer until first external sub onboarded AND volume justifies rewards-points optimization. Phase 1 sub payouts via Westpac EFT. |
+| DocuSign | ❌ Defer per Decision 12 v2 | Marko-as-sub Phase 1; engage when first external sub onboards. |
+| Sprintlaw subcontractor template | ❌ Deferred per Decision 12 v2 | Same trigger as DocuSign. |
 
 ---
 
@@ -207,6 +210,8 @@
 ---
 
 ## 9. Subcontractor Pipeline
+
+**Engagement model (LOCKED 2026-06-05 — [decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** Subs are engaged via **ServiceM8 Network** on their **own SM8 account** (browser-link fallback) + own ABN + ≥$10M PL — we never create/pay for sub accounts. A job is an **OFFER they accept/decline** (Staff seats reserved for Marko/Allan/genuine employees). **NO-CONTACT rule:** subs get **NAME + ADDRESS only — never customer phone/email** (anti-poaching); customer comms fire from GHL/Twilio. **Fair-Work guardrail:** **never penalise a decline** (reframe any "decline >X%" rule as a capacity/fit conversation off-system). PL minimum verified before any offer; they invoice us.
 
 | Item | Status | Details |
 |---|---|---|
@@ -269,7 +274,7 @@
 ### Quote app docs (separate repo)
 | Doc | Status | Location |
 |---|---|---|
-| FORM-TO-PRICING-MAP.md | ✅ Active | `/Users/angelapham/Downloads/timeless-quote-app/docs/` — keep in sync with form changes |
+| FORM-TO-PRICING-MAP.md | ✅ Active | `/Users/excluding/Downloads/timeless-quote-app/docs/` — keep in sync with form changes |
 | QUOTE-FORM-HARDENING-PLAN.md | ✅ Active | Same — 12-cycle audit log, current |
 | DEEP-AUDIT-2026-04-29.md | ✅ Active | Same — gap analysis, recent |
 
@@ -277,7 +282,7 @@
 | File | Type | Location |
 |---|---|---|
 | Bert/AUSTRS price list | CSV (96 lines) | `data/suppliers/austrs-bert-prices-2026-04-30.csv` |
-| Master pricing schedule | Excel (140 SKUs) | **Currently external**: `/Users/angelapham/Downloads/MASTER_PRICING_UPDATED 111.xlsx` — recommend moving to `data/pricing/` per CEO Decision 2026-05-01 PM |
+| Master pricing schedule | Excel (140 SKUs) | **Currently external**: `/Users/excluding/Downloads/MASTER_PRICING_UPDATED 111.xlsx` — recommend moving to `data/pricing/` per CEO Decision 2026-05-01 PM |
 | Data folder index | Markdown | [data/README.md](../data/README.md) |
 
 ---
@@ -322,7 +327,7 @@
 | Vendor | Role | Status | Notes |
 |---|---|---|---|
 | Bert Heynen / Australasian Resurfacing Supplies | ✅ Materials supplier + advisor | Tullamarine VIC, exclusive Hawk distributor for AU/NZ, 40+ years. info@austrs.com.au, 02 9098 0347 (Sydney), 03 9020 8127 (Melb). Equal pricing for all customers. No contract. **Will sell etch/cleaners ONLY after Marko has training cert (trip to Melbourne required).** Full spec: [specs/bert-supplier.md](specs/bert-supplier.md) | 2026-05-01 PM verified via emails + CSV + transcripts |
-| Insurance broker | ❓ | Active per $20M PL existing | CEO to ask which broker |
+| Insurance broker | ❓ | Active per $10M PL (corrected 2026-06-02) | CEO to ask which broker |
 | Materials suppliers (grout, silicone, paint) | ❓ | CEO to ask if any locked in |
 | Photographer (for first-job shoot) | ❌ | Need to source |
 | Print supplier (uniforms, livery) | ❌ | Need to source |
@@ -378,7 +383,7 @@
 14. **Logo file state** (Canva working file? Final SVG/PNG?)
 15. **www. SSL** — pending per HANDOFF; needs activation in Ventraip
 16. **HTTPS redirect** — pending per HANDOFF; needs .htaccess update
-17. **Warranty text bulk update** — pending per HANDOFF; "2-Year" → "Up to 5-Year" in 27 files
+17. ~~**Warranty text bulk update** — "2-Year" → "Up to 5-Year" in 27 files~~ **TRAP — DO NOT bulk-replace** (2026-06-02 audit, Clifford+Cleo). Live text already tier-aware/ACL-compliant per row :102. Blanket replace would over-claim silicone (1yr) + cement grout (2yr) = ACL/ACCC exposure. Re-scoped in pending-tasks list below.
 
 ### Pending tasks I now know about (from HANDOFF audit)
 **Pre-launch website cleanup:**
@@ -388,7 +393,7 @@
 - [ ] Configure Customizer real phone (0451 110 154), email (hello@timelessresurfacing.com.au), ABN, REMOVE licence placeholder
 - [ ] Add HTTPS redirect to .htaccess
 - [ ] Get www. SSL activated
-- [ ] Bulk update warranty text "2-Year" → "Up to 5-Year" in 27 files
+- [ ] ~~Bulk update warranty "2-Year" → "Up to 5-Year"~~ **RE-SCOPED 2026-06-02 (audit): do NOT bulk-replace.** Audit warranty copy per service/material — keep cement grout 2yr, silicone 1yr, chip repair 1yr, bath/basin/tile resurface up-to-5yr private / 6mo rental, epoxy grout 5yr. Use "Up to 5-Year" only on generic trust badges or resurfacing/epoxy contexts with nearby qualifying text. Fix contradictory docs (`aftercare-cards.md:77-78`, `SIL-01:188`) to the ladder.
 - [ ] Replace 30 placeholder Unsplash images (replace as real before/afters land)
 
 **Pre-Override 1:**

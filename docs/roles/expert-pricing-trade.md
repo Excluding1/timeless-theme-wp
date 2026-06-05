@@ -120,7 +120,7 @@ Per Bert's intel:
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **No licence yet** — pricing positioning shouldn't be "premium licensed" until licence issued
 - **Coordination model** — subcontractor gets fixed-rate-per-job, not hourly. Subcontractor bears job-time risk.

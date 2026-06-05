@@ -6,7 +6,9 @@
 
 **How to use:** Tick `[x]` as completed. Don't skip phases — each phase is a dependency for the next.
 
-**Last updated:** 2026-05-01
+**Last updated:** 2026-06-05 (SM8-keep + contractor-app sequencing + no-contact rule threaded in)
+
+> **⚠️ SEQUENCING OVERRIDE (Allan 2026-06-05, see [CEO.md Override 16](CEO.md) + [decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** The original Phase 1→7 numbering predates the current build order. **Actual order now = internal automation backbone FIRST → custom contractor-VIEW app → launch (run real jobs).** Concretely: finish Make scenarios (Scenario 1 + strip-contact + find-or-create, then 2–5) + publish/finish GHL workflows + SM8 config (Marko as staff) + Slack alerts + deploy the GHL-wired quote form + end-to-end test → THEN build the contractor app ([blueprint](specs/contractor-app-blueprint-2026-06-05.md), scheduled LAST, before launch) → THEN dispatch real jobs. **ServiceM8 is KEPT as the field-service backbone** (NOT replaced); the app is a VIEW on the same SM8+GHL+Sheet data — zero migration. See the new **Phase 4B** below.
 
 ---
 
@@ -15,7 +17,7 @@
 | Task | Status | Notes |
 |---|---|---|
 | ABN registered | ✅ | Per saved memory |
-| Public liability insurance ($20M) | ✅ | Per saved memory |
+| Public liability insurance ($10M) | ✅ | Per saved memory |
 | WordPress theme + 19 service landing pages | ✅ | `front-page.php` + `page-templates/page-*-sydney.php` |
 | Pricing schedule (140 SKUs, T1/T2/T3) | ✅ | `MASTER_PRICING_UPDATED 111.xlsx` |
 | Google Business Profile | ✅ | Set up |
@@ -67,18 +69,20 @@
   - [ ] Document: "tags are for filtering, fields are for storing data"
 - **Verify:** Tag a test contact with each prefix family, can filter contacts by each.
 
-### 1.4 13-stage pipeline (revised 2026-05-01 PM per CEO Override 14 v2)
+### 1.4 15-stage pipeline (LIVE — Decision 11 executed 2026-05-25 per Override 14 v4)
 - **Expert:** GHL operator + service business ops
 - **Auditor:** Pipeline integrity auditor — is every transition triggered by a system event, not manual drag?
-- **Setup steps:**
-  - [ ] Create pipeline "Bathroom Quote → Job"
-  - [ ] Add 13 stages per [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) (authoritative spec)
-  - [ ] Set default opportunity value field (filled by `quote_amount_final`)
-  - [ ] Each stage: who owns it (Auto / Allan / Marko)
-  - [ ] Implement ageing rules per stage (Prepayment 24hr/72hr/7d, Job in SM8 2hr alert, Job Invoiced 7d/14d/30d cascade, Sub-payout 72hr)
-  - [ ] Set up Slack alert channels per spec (`#quotes-in`, `#new-jobs`, `#job-issues`, `#nps-detractors`, `#sla-breach`, `#dispatch-stuck`, `#sub-payouts-overdue`, `#system-alerts`)
-- **Verify:** Drag a test opp through all 13 stages by hand — no missing transitions; ageing alerts fire on test cases.
-- **Note:** [OPERATING-CONTEXT § 8.4](OPERATING-CONTEXT.md#84-the-17-stage-pipeline) (17-stage version) is now historical. The 13-stage spec adopts Jordan Schofield's proven 15-stage Surface Care structure minus 2 sub-quote stages (we use fixed rate cards, not per-job bidding).
+- **Status (2026-05-27):** ✅ LIVE in GHL Sales pipeline `YTgWxSeFt2oyd3zBe2Xr` — 15 Jordan-exact stages per Allan eyewitness ×4 + Decision 11 execution.
+- **Setup steps (HISTORICAL — original spec; live pipeline already reshaped per Decision 11):**
+  - [x] Pipeline "Bathroom Quote → Job" — exists as Sales pipeline
+  - [x] 15 stages per [CEO.md Override 14 v4](CEO.md) (Jordan-exact list locked 2026-05-25); see [memory/decisions_locked_ghl_2026-05-05.md § Decision 11](../../.claude/projects/-Users-excluding-Downloads-timeless-theme-wp/memory/decisions_locked_ghl_2026-05-05.md) for stage IDs. Workflow + ageing rules in [docs/specs/ghl-pipeline-13-stage.md](specs/ghl-pipeline-13-stage.md) (filename stale; SUPERSEDED-IN-PART header inside).
+  - [x] Default opportunity value field (filled by `quote_amount_final`)
+  - [x] Each stage: who owns it (Auto / Allan / Marko) — per Decision 11 stage table
+  - [ ] **PENDING Day 2 sprint:** Stage 7 → 8/10 asbestos routing workflow (Decision 1, position-updated for 15-stage shape)
+  - [ ] **PENDING Day 2 sprint:** Accounts pipeline auto-age workflows (AC1 7d / AC2 14d / AC3 30d cascade — per Decision 12 v2; replaces "Job Invoiced 7d/14d/30d cascade" originally on Sales pipeline since Stages 14+15 deleted)
+  - [x] Slack alert channels exist: `#quotes-in`, `#hot-leads`, `#pipeline-feed`, `#new-jobs`, `#job-issues`, `#automation-errors` (`#finance-summary` + `#finance-overdue` planned Day 2-3)
+- **Verify:** Test opp drag through all 15 stages — ✅ done during pre-flight backup 2026-05-25; ageing alerts pending Day 2 build.
+- **Note:** [OPERATING-CONTEXT § 8.4](OPERATING-CONTEXT.md#84-the-17-stage-pipeline) (17-stage version) is historical. CEO.md Override 14 v4 (Jordan-EXACT) is authoritative — supersedes v3 (which had Job Invoiced + Job Paid as our interpolation). Per Decision 11 + 12 v2, finance moves to Custom Field `Payment Status` + Accounts pipeline (repurposed Marketing Pipeline).
 
 ### 1.5 Connect quote form to GHL (the critical hop)
 - **Expert:** Frontend dev (React) + GHL operator
@@ -86,7 +90,7 @@
 - **Setup steps:**
   - [ ] In GHL: create Inbound Webhook — copy webhook URL
   - [ ] In GHL: create second Inbound Webhook for partial leads — copy that URL
-  - [ ] In `/Users/angelapham/Downloads/timeless-quote-app/src/QuoteForm.jsx`:
+  - [ ] In `/Users/excluding/Downloads/timeless-quote-app/src/QuoteForm.jsx`:
     - [ ] Replace `GHL_WEBHOOK = "...REPLACE_ME"` with real URL ([line 633](../../timeless-quote-app/src/QuoteForm.jsx#L633))
     - [ ] Replace `GHL_PARTIAL = "...REPLACE_ME_PARTIAL"` with real URL ([line 634](../../timeless-quote-app/src/QuoteForm.jsx#L634))
   - [ ] In `.env.local`: store as `VITE_GHL_WEBHOOK` and `VITE_GHL_PARTIAL` (move out of source for repo safety)
@@ -194,8 +198,8 @@
 - **Setup steps:**
   - [ ] Stripe: create dynamic payment link template (use Stripe Checkout, $ amount = 10% of quote)
   - [ ] GHL workflow: Stage 7 (Quote Accepted) → calculate 10% → generate Stripe link → SMS to customer with link
-  - [ ] Stripe webhook: on `payment_intent.succeeded` with metadata `type=deposit` → GHL contact moves to Stage 10 + Slack `#new-jobs` BOOM message
-- **Verify:** Manually move test contact to Stage 7 → deposit SMS received → use Stripe test card 4242 4242 4242 4242 → Slack BOOM fires + Stage 10 entered.
+  - [ ] Stripe webhook: on `payment_intent.succeeded` with metadata `type=deposit` → GHL contact moves to Stage 11 (Job in ServiceM8) + Slack `#new-jobs` BOOM message
+- **Verify:** Manually move test contact to Stage 7 → deposit SMS received → use Stripe test card 4242 4242 4242 4242 → Slack BOOM fires + Stage 11 (Job in ServiceM8) entered.
 
 ### 2.5 Triple audit Phase 2
 - [ ] **Expert audit (quote operator):** Tier prices align with Excel, tier descriptions match scope, no orphaned services without templates
@@ -239,13 +243,13 @@
 - **Expert:** Service business ops + insurance auditor
 - **Auditor:** Documentation auditor (every subcontractor has every cert before going live)
 - **Setup steps:** Per subcontractor:
-  - [ ] Full legal name + ABN verified (ABN Lookup)
-  - [ ] PL insurance certificate ≥$5M sighted (subcontractor provides PDF, you store)
+  - [ ] Full legal name + ABN verified (ABN Lookup) — **own ABN required** (we never put subs on our ABN)
+  - [ ] PL insurance certificate **≥$10M** sighted (subcontractor provides PDF, you store) — **FLAG: raised from ≥$5M to ≥$10M per [decision-sm8-keep-vs-build 2026-06-05](specs/decision-sm8-keep-vs-build-2026-06-05.md); confirm the $10M gate with CEO/Allan + reconcile against the Sprintlaw sub-agreement minimum**
   - [ ] Portfolio reviewed (5+ real before/after bathroom jobs)
   - [ ] Suburb coverage confirmed (which postcodes they'll travel to)
   - [ ] Skill confirmation: shower regrout / bath resurface / silicone / epoxy / full bathroom (tick which)
   - [ ] Asbestos awareness training confirmed (cert sighted) — required for pre-1990 jobs
-  - [ ] ServiceM8 Network invite sent + accepted
+  - [ ] **ServiceM8 Network** invite sent + accepted — sub on their **own SM8 account** (browser-link fallback), job = an OFFER they accept/decline (NOT a Staff seat / allocation). No `@company` email / uniform / "our team" branding.
   - [ ] Subcontractor agreement signed via DocuSign
   - [ ] Bank details + pay.com.au setup
   - [ ] Tier 2 assigned by default (Tier 3 if green)
@@ -263,33 +267,36 @@
 
 ## Phase 4 — Job dispatch (ServiceM8) + completion
 
-**Goal:** Deposit-paid job → SM8 → assigned to right subcontractor → completed → photos reviewed → final payment → subcontractor paid → review request.
+> **Model correction 2026-06-05 ([Override 16](CEO.md) / [decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** Subs are dispatched via **SM8 Network** — each sub on their **own SM8 account**, a job is an **OFFER they accept/decline** (NOT a Staff seat with "limited access"). Staff seats are for Marko/Allan/genuine employees only. **NO-CONTACT rule:** the sub-facing job carries **NAME + ADDRESS only — never customer phone/email**; all customer comms fire from **GHL/Twilio**. SM8 pricing = **per-JOB, UNLIMITED users** (per-staff/seat assumption is STALE); Network is a free add-on. This Phase 4 wires the SM8 backbone; the optional **contractor-VIEW app** that puts a branded screen over the same data is **Phase 4B** (built before launch).
+
+**Goal:** Deposit-paid job → SM8 → **offered** to right subcontractor (accept/decline) → completed → photos reviewed → final payment → subcontractor paid → review request.
 
 **Phase 4 expert lens:** Service business ops + customer experience
-**Phase 4 auditor lens:** Photo quality + timeliness
+**Phase 4 auditor lens:** Photo quality + timeliness + Fair-Work (offer-not-order, no-penalty decline)
 
 ### 4.1 ServiceM8 setup
 - **Expert:** Service ops manager
-- **Auditor:** Field operations auditor (does it work on a subcontractor's mobile in a bathroom with bad signal?)
+- **Auditor:** Field operations auditor (does it work on a subcontractor's mobile in a bathroom with bad signal?) + Fair-Work auditor
 - **Setup steps:**
-  - [ ] Sign up SM8 Starter ($29/mo)
+  - [ ] Sign up SM8 Starter (✅ done 2026-05-26 — trial; per-JOB, unlimited users)
   - [ ] Company profile + branding
-  - [ ] Add yourself + co-founder as admins
-  - [ ] Add 3 onboarded subcontractors with limited access (their assigned jobs only)
+  - [ ] Add yourself + co-founder + **Marko as Staff** (genuine team only)
+  - [ ] **Connect subs via SM8 Network** (each on their own SM8 account / browser-link) — send a Network Request = an OFFER they Accept ("Convert to Job") or Decline; route to next on decline. **Do NOT add subs as Staff with "limited access."**
   - [ ] Build 5 job templates per [OPERATING-CONTEXT § 9.2](OPERATING-CONTEXT.md#92-job-templates-5-core)
   - [ ] Build SM8 custom fields per [OPERATING-CONTEXT § 9.3](OPERATING-CONTEXT.md#93-sm8-custom-fields)
   - [ ] Build job completion form per [OPERATING-CONTEXT § 9.4](OPERATING-CONTEXT.md#94-job-completion-form-sub-fills)
-- **Verify:** Subcontractor on their phone can open assigned job, see scope, upload before/after photos, fill completion form, mark complete.
+- **Verify:** Subcontractor on their own SM8 app can see an **offered** job, accept it, see scope (name + address, **no customer phone/email**), upload before/after photos, fill completion form, mark complete.
 
 ### 4.2 GHL → SM8 job sync
 - **Expert:** Integration architect
-- **Auditor:** Data integrity (every required field arrives) + cost auditor (is Zapier necessary?)
+- **Auditor:** Data integrity (every required field arrives) + cost auditor (is the middleware necessary?) + **no-contact-leak auditor**
 - **Setup steps:**
   - [ ] Check GHL marketplace for native SM8 integration (preferred)
-  - [ ] If no native: Zapier ($30/mo) — GHL Stage 10 trigger → SM8 Create Job action
+  - [ ] **Current build = GHL → Make → SM8** (Make Scenario 1, triggered at Stage 11 "Job in ServiceM8"). *(The old "Zapier $30/mo" line is superseded by Make per Decision 12 v2.)*
+  - [ ] **NO-CONTACT change (Make Scenario 1):** drop the `Add Job Contact` module + strip customer phone/email from `job_description` — the SM8 job gets **name + address + scope + GHL deep-link only**. Find-or-create still attaches the *client* for invoicing (internal/Marko-only, never sub-facing). Customer comms → GHL/Twilio. *(Supersedes the v1 "on-the-way SMS off the SM8 Job Contact" plan.)*
   - [ ] Field mapping per [OPERATING-CONTEXT § 12.3](OPERATING-CONTEXT.md#123-ghl--servicem8)
   - [ ] Photo URL passing — requires Phase 4.5 (Cloudinary) first
-- **Verify:** Test contact at Stage 10 → SM8 job appears within 30s with all fields.
+- **Verify:** Test contact at Stage 11 → SM8 job appears within 30s with name + address + scope but **no customer phone/email anywhere on the job**.
 
 ### 4.3 SM8 → GHL completion sync
 - **Expert:** Integration architect
@@ -330,8 +337,8 @@
 - **Setup steps:**
   - [ ] Stripe: same dynamic payment link pattern as deposit, this time for 90% balance
   - [ ] GHL workflow: Stage 15 (Job Complete) → check before/after photos uploaded by subcontractor → if yes → SMS final payment link to customer
-  - [ ] Stripe webhook on success → GHL Stage 16 + warranty email fires
-- **Verify:** Manually move test job to Stage 15 (with photos) → final SMS arrives → test card pays → Stage 16 + warranty email both fire.
+  - [ ] Stripe webhook on success → GHL `Payment Status` = paid (Accounts pipeline) + warranty workflow fires (after paid)
+- **Verify:** Manually move test job to Stage 15 (with photos) → final SMS arrives → test card pays → `Payment Status` = paid (Accounts pipeline) + warranty email both fire.
 
 ### 4.7 Cure-time SMS + NPS routing
 - **Expert:** CX specialist + GHL operator
@@ -352,15 +359,46 @@
   - [ ] pay.com.au account active with rewards card connected
   - [ ] Per completed job: Co-founder schedules subcontractor payment in pay.com.au within 3 business days of customer final payment clearing
   - [ ] Record subcontractor payment in Google Sheet tracker (Phase 5: replaced by BigQuery)
-  - [ ] Tag GHL opp `sub_paid` → moves to Stage 17 (closed)
+  - [ ] Tag GHL opp `sub_paid` → Accounts pipeline Paid; Sales stays at Stage 15 (Job Complete / closed)
 - **Verify:** First subcontractor paid within 3 business days as promised, points credited to your card.
 
 ### 4.9 Triple audit Phase 4
 - [ ] **Expert audit (service ops):** Subcontractor experience smooth, no SM8 confusion, completion form short enough to fill in 2 min
 - [ ] **Customer audit:** Cure-time message arrived right after job, NPS request felt natural not pushy, final payment link was simple
-- [ ] **Adversarial audit (data integrity):** Every Stage 10 in GHL has a corresponding SM8 job, no orphans either direction
+- [ ] **Adversarial audit (data integrity):** Every Stage 11 in GHL has a corresponding SM8 job, no orphans either direction
 
 **Phase 4 done when:** First 5 real jobs run end-to-end, customer ratings averaging 9+, no manual rescue interventions.
+
+---
+
+## Phase 4B — Custom contractor-VIEW app (scheduled LAST, before launch/scale)
+
+**Status:** APPROVED (Allan 2026-06-05). **Blueprint READY-TO-EXECUTE:** [`docs/specs/contractor-app-blueprint-2026-06-05.md`](specs/contractor-app-blueprint-2026-06-05.md) (read with [`decision-sm8-keep-vs-build`](specs/decision-sm8-keep-vs-build-2026-06-05.md) §VIABILITY STUDY).
+
+**Where it sits in the order:** **internal automation backbone (Make + GHL + SM8 + Slack + deploy + end-to-end test) FIRST → THIS app → THEN run real jobs at scale.** It is **scheduled LAST** in the build, but is *path-independent* in part — Phase 1 of the blueprint (the Make strip-contact change + the read path) is worth doing as part of the internal backbone now. Standing rec: prove the workflow on SM8's own app/Network over ~10 real jobs (or build Phases 1–3 in parallel) so the UI is built against the *real* workflow, not a guess.
+
+**What it is (and isn't):** a **React PWA** giving subs a **NAME + ADDRESS-only** view of *offered* jobs, real **accept/decline** (right of refusal), before/after photo capture, complete/problem actions — all mediated by **OUR backend (Supabase BFF/token-broker; sole SM8 key-holder; per-sub JWT+RLS; contact-field filter; rate governor)**. **SM8 stays the system of record; the app is a VIEW + action layer on the same SM8 + GHL + Sheet data → ZERO migration** (subs switch *screens*, not systems). It is **NOT an SM8 replacement.**
+
+**Two hard realities that force the design** (from the viability study):
+1. **SM8 key = full-account, no per-sub scoping** → subs never hold the key; all SM8 calls go through our backend, which also strips customer phone/email (enforces the no-contact rule).
+2. **Accept/Decline has NO SM8 API** → the one genuinely-new build piece is a custom **accept/decline state machine** (mirrored to SM8 via queue/badge so Marko's dispatch board sees it).
+
+**Expert lens:** solution architect + SM8-integration eng. **Auditor lens:** security (key isolation, contact-leak CI assertion) + webhook integrity (72h auto-cancel → polling fallback) + Fair-Work (offer-not-order, no-penalty decline) + general-operational (SPOF mitigation).
+
+**Setup checklist (when we reach the app phase) — full detail in the blueprint §3:**
+- [ ] Supabase project (Sydney `ap-southeast-2`, Pro $25/mo) — the whole backend
+- [ ] Store SM8 key as Supabase Edge secret (sole server-side home; never a DB row/client)
+- [ ] Firebase + Cloud Messaging + VAPID key pair (Web Push)
+- [ ] Subdomain `jobs.timelessresurfacing.com.au` (CNAME → Vercel) — PWA install target
+- [ ] Vercel project → frontend repo + subdomain
+- [ ] **Authorize the Make strip-contact change** (removes the contact leak at source — path-independent, do as part of the internal backbone)
+- [ ] (at scale) Twilio for masked proxy calls
+- [ ] Agree the SM8 "Accepted/Declined/Re-offer" queue+badge convention with Marko
+- [ ] Build phases 1–6 per blueprint §2 (Foundation → App core → Accept/Decline spine → Photos+Complete → Notifications → Test+Security incl. automated contact-leak assertion)
+
+**Fair-Work guardrails baked into the app (s15AA):** NO auto-assign (system offers, never silently allocates) · decline = silent + **zero penalty** (no counter, no gating, no coaching-trigger in code; reason optional) · re-route not re-assign · real delegation/hand-back path · offer-language UI ("New job available — Accept/Decline") · own-ABN + ≥$10M PL gate before any offer · no `@company` email / uniform / "our team" branding for subs.
+
+**Phase 4B done when:** subs use the branded app to see offered jobs (name+address only), accept/decline with no penalty, capture photos, and complete — with an automated CI assertion proving no sub-facing endpoint ever returns a customer phone/email, and SM8 still the system of record.
 
 ---
 
@@ -571,7 +609,7 @@
 ### 6.8 Triple audit Phase 6 (per agent)
 For **each** agent, run the audit:
 - [ ] **Expert audit (AI ops):** Prompt is specific, output is structured, errors handled
-- [ ] **Operator audit (Angela):** Does the agent's output save you time or create more cleanup?
+- [ ] **Operator audit (Allan):** Does the agent's output save you time or create more cleanup?
 - [ ] **Adversarial audit (AI safety):** What's the worst case if the agent hallucinates? Is there a kill switch?
 
 **Phase 6 done when:** All 7 agents running, each posting to Slack daily, total time saved ≥10 hours/week vs manual equivalents.
@@ -613,10 +651,10 @@ For **each** agent, run the audit:
 ### 7.5 Reviews & referral velocity
 - [ ] Goal: 50+ Google reviews in first 12 months
 - [ ] Referral program (Phase 4 NPS workflow already drafted) live from job 1
-- [ ] Track referral source field — top 5 referrers get a thank-you call from Angela
+- [ ] Track referral source field — top 5 referrers get a thank-you call from Allan
 
 ### 7.6 Triple audit Phase 7
-- [ ] **Expert audit (scaler):** No process is still "Angela does it manually" at 50 jobs/week
+- [ ] **Expert audit (scaler):** No process is still "the operator does it manually" at 50 jobs/week
 - [ ] **Subcontractor audit:** Subcontractor satisfaction surveys quarterly — they're getting paid on time, jobs are profitable for them, not getting overworked
 - [ ] **Adversarial audit (compliance):** All compliance gates still hold at 10x volume — strata holds aren't being skipped, asbestos checks aren't being rushed
 
@@ -815,7 +853,7 @@ These don't fit neatly in phases — they're ongoing or trigger-based.
 
 ### A9. Insurance broker relationship
 - **Owner:** Allan
-- **When:** Annually (for $20M PL renewal)
+- **When:** Annually (for $10M PL renewal)
 - **Steps:**
   - [ ] Confirm broker (CEO doesn't know who yet — ask in STATE.md ❓ queue)
   - [ ] Annual review of cover adequacy
@@ -860,8 +898,10 @@ For each task above:
 |---|---|
 | What do I do next on the quote form? | Phase 1.5 (replace REPLACE_ME webhooks) |
 | When do I start ads? | After Phase 1.9 audit passes |
-| When do I add subcontractors? | Phase 3 — before any real customer jobs |
-| When do I add BigQuery? | Phase 5 — once 50+ completed jobs exist |
+| When do I add subcontractors? | Phase 3 — before any real customer jobs. Via **SM8 Network** (own account, accept/decline), **name+address only** to subs. |
+| Do we keep ServiceM8 or build our own? | **KEEP SM8** as the backbone (Override 16 / [decision doc](specs/decision-sm8-keep-vs-build-2026-06-05.md)). Don't build a replacement. |
+| When do I build the custom contractor app? | **Phase 4B — scheduled LAST** (internal backbone → app → launch). It's a VIEW on the same data, zero migration. [Blueprint](specs/contractor-app-blueprint-2026-06-05.md). |
+| When do I add BigQuery? | **Empty schema NOW (Phase 1)** per Override 15 / F7 LOCK 2026-05-16. Populated automatically as events flow (the per-job data-capture Sheet is already live). Heavy analytical use Phase 5+ once 50+ jobs. |
 | When do I add AI agents? | Phase 6 — only after Phase 5 data layer is real |
 | Multi-household duplicate detection? | Phase 6.2 — needs BigQuery (Phase 5) first |
 

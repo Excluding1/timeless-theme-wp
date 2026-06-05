@@ -52,7 +52,8 @@ Run monthly. For each past customer, evaluate whether they're due for a seasonal
 ### Per-customer eligibility (filter)
 
 Send only if ALL of:
-- Customer has `consent_marketing = true` in GHL (set via initial form opt-in tickbox)
+- Customer has `completed_jobs > 0` in our history AND has not opted out (the quote form is intake-not-quoting and carries NO marketing opt-in tickbox — submitting it is inferred consent for service comms only, never ongoing marketing)
+- Customer has `consent_marketing = true` in GHL, captured as a SEPARATE explicit marketing-consent step at/after job completion (e.g. job-complete SMS/email opt-in or verbal-then-logged) — NOT derived from any form tickbox
 - Customer has at least 1 completed job in our history
 - Customer has NOT already received a nudge in the last 90 days (avoid fatigue)
 - Customer is NOT tagged `flag_complaint`, `nps_detractor`, `flag_legal_dispute`, or `unsubscribed`
@@ -173,7 +174,7 @@ Per cycle summary:
 @ai-maintenance-reminder: Run weekly maintenance nudge cycle.
 
 Inputs:
-- GHL contact list (tagged consent_marketing=true, has completed_jobs>0)
+- GHL contact list (has completed_jobs>0, consent_marketing=true captured separately at/after job completion — NOT from a form tickbox; the intake form has none — and not opted out)
 - Calendar context: today's date, season detection
 - Historical: past 90 days nudges sent
 

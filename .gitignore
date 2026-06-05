@@ -13,6 +13,9 @@ quote-form/.env.production
 .claude/
 .playwright-mcp/
 
+# CEO Cockpit — runtime config pastes (may hold business config; keep local, never commit)
+cockpit/data/config/
+
 # OS / Editor
 .DS_Store
 *.swp
@@ -49,3 +52,6 @@ images/**/*-[0-9]*w.png.webp
 
 # Deploy zip artifacts (zips of the theme go to ../timeless-theme.zip outside repo)
 *.zip
+
+# Local secrets (API keys) — never commit, never deploy
+.secrets/

@@ -10,6 +10,8 @@ date: 2026-05-05
 
 # GHL Setup Plan v2
 
+> ⚠️ **SUPERSEDED-IN-PART (2026-06-03).** This doc predates current locks. LIVE pipeline = 15 stages Jordan-EXACT, terminal "Job Complete" (no Job Invoiced/Paid — finance via `Payment Status` field + Accounts pipeline). Insurance = $10M. ServiceM8 = 6 categories. Owners = Allan + Marko. Canonical: `docs/CEO.md` Override 14 v4 + `memory/SESSION_RESUME_2026-06-03.md`. Body retained for historical/workflow reference only.
+
 **Supersedes:** `plan_ghl_setup_draft_2026-05-04.md` (v1). v1 had 14 errors flagged by Cleo's two peer-review passes + Clifford's STATE.md/role-file reads.
 
 **Goal:** Wire `quote-form/` into GoHighLevel so leads flow end-to-end (form → CRM → quote → deposit → ServiceM8 → invoice → paid → review request) with AU compliance, $130 USD/mo budget, and the 2-person partnership able to operate at 1-50 jobs/week without scaling labour.

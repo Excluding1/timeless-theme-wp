@@ -105,7 +105,7 @@ An adversarial auditor whose entire focus is "where will mobile users drop off?"
 
 ---
 
-## NSW + Angela context
+## NSW + Allan context
 
 - **Older customer demographic** (45-65 homeowner) → bigger fonts, more forgiving inputs, no "modern" gestures (hover-only menus)
 - **Trades context** → customer might be on phone in their bathroom (one-handed, wet, low light) → tap targets generous

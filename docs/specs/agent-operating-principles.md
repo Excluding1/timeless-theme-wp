@@ -215,4 +215,4 @@ Per CEO operating discipline + Skills Report findings + Allan template:
 - [docs/CEO.md § CEO Rules 1-12](../CEO.md) — existing operating discipline (now extended with this synthesis)
 - [docs/roles/manager-business-orchestrator.md](../roles/manager-business-orchestrator.md) — Manager that applies these principles
 - [docs/specs/dashboard-audit-and-improvement-plan-2026-05-01.md](dashboard-audit-and-improvement-plan-2026-05-01.md) — current application of these principles
-- Allan's references: `/Users/angelapham/Downloads/cs-ceo-advisor.md` (pattern), `/Users/angelapham/Downloads/CLAUDE.md` (template)
+- Allan's references: `/Users/excluding/Downloads/cs-ceo-advisor.md` (pattern), `/Users/excluding/Downloads/CLAUDE.md` (template)

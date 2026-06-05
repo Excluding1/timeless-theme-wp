@@ -1,23 +1,43 @@
-# Spec: GHL Pipeline — 13-Stage + 12 Workflows + Ageing Rules
+# Spec: GHL Pipeline — ~~13-Stage~~ ~~15-Stage~~ **15-Stage Jordan-EXACT** + Workflows + Ageing Rules
 
-**Source:** Derived from [CEO § Override 14 v2](../CEO.md#override-14-v2-revised-2026-05-01-pm-after-allan-challenged-jordan-does-2m-with-15-stages--there-must-be-a-reason-ghl-pipeline--13-stages-jordans-structure-minus-sub-quote-per-job) — Jordan Schofield's Surface Care 15-stage structure minus 2 sub-quote stages we don't need.
+## 🚨 SUPERSEDED-IN-PART 2026-05-25 (Decision 11 + Decision 12 v2)
+
+**This file's title says "13-stage" — that's STALE × 2.** F1 LOCK 2026-05-16 restored to 15. Then Allan's eyewitness ×4 + Decision 11 LOCKED 2026-05-25 reshaped to Jordan-EXACT 15 (different stage names than F1 v3). See [CEO.md Override 14 v4](../CEO.md) for canonical stage list + [memory/decisions_locked_ghl_2026-05-05.md § Decision 11](../../.claude/projects/-Users-excluding-Downloads-timeless-theme-wp/memory/decisions_locked_ghl_2026-05-05.md) for stage IDs.
+
+**What's still VALID in this file:**
+- Workflow specs (W1/W2/W3/W5/W6/W7) — mostly position-agnostic (reference by Stage ID, not number)
+- Custom field requirements (~95% intact; 5 new added 2026-05-25/26 — see Decision 11 + 12 v2)
+- Slack channel architecture (6 channels live; +2 planned Day 2-3 per `/tmp/task-checklist.md`)
+- Tag taxonomy
+- Auditing cadence + failure modes
+
+**What's CHANGED since this spec:**
+- Stages 13 (Job Invoiced) + 14 (Job Paid) → DELETED. Replaced by Custom Field `Payment Status` + Accounts pipeline (repurposed Marketing Pipeline, 6 stages: Awaiting Invoice → Invoice Sent → Customer Pay 7d → Customer Pay 14d → Overdue → Paid) — per Decision 12 v2 LOCKED 2026-05-25.
+- Stage 8 split: "Site Inspection" → "Organise Site Inspection" (rename) + "Site Inspection Organised" (new).
+- Stage 4 "Sub-quote Not Received" added between "Sub-quote Requested" and "Sub-quote Received".
+- "Prepayment" renamed to "Prepayment Invoice Sent".
+- Ageing rule "Job Invoiced 7d/14d/30d cascade" → moved to Accounts pipeline AC1/AC2/AC3 workflows (Day 3 sprint build).
+
+**This file should be renamed `ghl-pipeline-15-stage-jordan-exact.md` during Phase 9 cleanup.** Read [memory/decisions_locked_ghl_2026-05-05.md § Decision 11+12 v2] + [BRIEF_2026-05-16.md §4-5] + [pre-compression-sync-2026-05-26.md §12] for current pipeline state.
+
+---
+
+**Source:** Originally derived from CEO § Override 14 v3 (F1 LOCK 2026-05-16). NOW supersede source: [CEO.md § Override 14 v4](../CEO.md) (Decision 11 Jordan-EXACT 2026-05-25 — Allan eyewitness ×4 + Cleo Dispatch 16 ratify + Clifford API GET verification).
 **Audited via:** [expert-ghl-operator.md](../roles/expert-ghl-operator.md) + [auditor-general-operational.md](../roles/auditor-general-operational.md) + [auditor-webhook-integrity.md](../roles/auditor-webhook-integrity.md) + [auditor-customer-fairness.md](../roles/auditor-customer-fairness.md)
-**Replaces:** [OPERATING-CONTEXT § 8.4](../OPERATING-CONTEXT.md) 17-stage version (now historical — this doc is authoritative)
-**Companion to:** [docs/CEO.md § Override 14 v2](../CEO.md), [FUTURE-PLAN Phase 1.4](../FUTURE-PLAN.md), [sub-rate-schedule.md § D Payment process](sub-rate-schedule.md), [sub-sopa-protections.md](../sop/sub-sopa-protections.md)
+**Replaces:** [OPERATING-CONTEXT § 8.4](../OPERATING-CONTEXT.md) 17-stage version (now historical). **The workflow/ageing CONTENT below is reference-only; the STAGE LIST is superseded** — live = 15 stages Jordan-EXACT, terminal Job Complete (no Job Invoiced/Paid), see [CEO.md Override 14 v4](../CEO.md). Stage list per Override 14 v4 in CEO.md.
+**Companion to:** [docs/CEO.md § Override 14 v4](../CEO.md), [FUTURE-PLAN Phase 1.4](../FUTURE-PLAN.md), [sub-rate-schedule.md § D Payment process](sub-rate-schedule.md), [sub-sopa-protections.md](../sop/sub-sopa-protections.md), [memory/decisions_locked_ghl_2026-05-05.md § Decision 11 + 12 v2]
 
 ---
 
 ## ⚠️ Status
 
-This spec is the **authoritative blueprint** for building our GHL pipeline. When Allan signs up for GHL ($155/mo from May 27, 2026), this is the doc the GHL operator (Allan + this CEO assistant) follows step-by-step.
-
-If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-stage), audit before applying this spec — may need stage migration.
+This spec is the **authoritative blueprint for AGEING RULES + WORKFLOWS** of our GHL pipeline. The STAGE COUNT (15 Jordan-EXACT, not 13) is now in CEO.md Override 14 v4 + Decision 11. Finance stages 13+14 DELETED — moved to Custom Field `Payment Status` + separate Accounts pipeline (Decision 12 v2). **GHL is PAID $155 AUD/mo as of F3 LOCK 2026-05-16** — trial expired, paid plan active.
 
 ---
 
 ## Pipeline overview
 
-**Total stages:** 13
+**Total stages:** **15** (F1 LOCK 2026-05-16 — was 13, restored to Jordan's full model)
 **Pipeline name in GHL:** "Bathroom Quote → Job"
 **Default opportunity value field:** populated by quote drafting (T2 price unless tier upgraded)
 **Default currency:** AUD
@@ -48,9 +68,9 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
         ↓ (SM8 webhook: completion form submitted)
 11. Job Complete
         ↓ (auto: final invoice fires)
-12. Job Invoiced (awaiting customer payment)
+12. Job Invoiced (awaiting customer payment) **(DELETED — finance via `Payment Status` field + Accounts pipeline, not Sales stages)**
         ↓ (Stripe webhook: final payment cleared)
-13. Job Paid (terminal)
+13. Job Paid (terminal) **(DELETED — finance via `Payment Status` field + Accounts pipeline, not Sales stages)**
         ↓ (subcontractor paid via pay.com.au within 72hr per SOPA)
         [closed]
 ```
@@ -205,7 +225,7 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 | Tags applied | `job_complete` |
 | Workflows triggered | W9 (Cure Time Warning), W10 (NPS Routing 4hr later) |
 
-### Stage 12 — Job Invoiced (awaiting customer payment)
+### Stage 12 — Job Invoiced (awaiting customer payment) **(DELETED — finance via `Payment Status` field + Accounts pipeline, not Sales stages)**
 
 | Field | Value |
 |---|---|
@@ -218,7 +238,7 @@ If Allan has already done partial GHL setup using OPERATING-CONTEXT § 8.4 (17-s
 | Tags applied | `final_invoice_sent` |
 | Workflows triggered | Reminder cascade at 7/14/30 days |
 
-### Stage 13 — Job Paid (terminal happy path)
+### Stage 13 — Job Paid (terminal happy path) **(DELETED — finance via `Payment Status` field + Accounts pipeline, not Sales stages)**
 
 | Field | Value |
 |---|---|
@@ -471,7 +491,7 @@ Phase 1.1 → 1.9, in order. Critical: build custom fields + tags BEFORE workflo
 1. **1.1 GHL business setup** — sign up, profile, domain auth, Twilio number
 2. **1.2 Custom fields** — all 40+ per OPERATING-CONTEXT § 8.2
 3. **1.3 Tags library** — all per § 8.3
-4. **1.4 13-stage pipeline** — THIS spec (formerly 17-stage; OPERATING-CONTEXT § 8.4 historical)
+4. **1.4 13-stage pipeline** — THIS spec (formerly 17-stage; OPERATING-CONTEXT § 8.4 historical) *(superseded → 15-stage / Override 14 v4)*
 5. **1.5 Connect quote form to GHL** — webhook, custom field mapping, tags
 6. **1.6 Slack alert workflow** — `#quotes-in` first
 7. **1.7 W1 SMS acknowledgement workflow**
@@ -483,7 +503,7 @@ Phase 1.1 → 1.9, in order. Critical: build custom fields + tags BEFORE workflo
 
 ## Cross-references
 
-- [docs/CEO.md § Override 14 v2](../CEO.md) — strategic decision behind 13-stage
+- [docs/CEO.md § Override 14 v2](../CEO.md) — strategic decision behind 13-stage *(superseded → 15-stage / Override 14 v4)*
 - [docs/OPERATING-CONTEXT.md § 8.4](../OPERATING-CONTEXT.md) — historical 17-stage version (deprecated by this spec)
 - [docs/OPERATING-CONTEXT.md § 8.5](../OPERATING-CONTEXT.md) — 12-workflow original list (matched here with stage numbers updated)
 - [docs/FUTURE-PLAN.md § Phase 1](../FUTURE-PLAN.md) — implementation phases (note: § 1.4 still references 17-stage; should be updated to 13)
