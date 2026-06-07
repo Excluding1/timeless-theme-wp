@@ -101,8 +101,8 @@
           "done": true
         },
         {
-          "title": "Back-sync: SM8 Completed → GHL 'Job Complete' (stage 15) — ✅ BUILT + PROVEN 2026-06-07 (SM8 object-webhook job.status → Make: respond-200 → re-GET job → filter Completed → match sm8_jobs → PUT opp to stage 15 → Mark synced → Slack-on-err). Jordan Faketest opp advanced to stage 15, verified via GHL API. REMAINING for 'done': Stage C survivability (daily webhook health-check vs 72h auto-cancel + polling fallback) + idempotency re-test. Spec: make-scenario-2-3-backsync-build.md",
-          "done": false
+          "title": "Back-sync: SM8 Completed → GHL 'Job Complete' (stage 15) — ✅ DONE 2026-06-07. Built (webhook→respond-200→re-GET→filter Completed→match sm8_jobs→PUT stage 15→Mark synced→Slack). Happy-path PROVEN (Jordan Faketest opp→stage 15 via API). Idempotency re-test PASSED (re-fire blocked, timestamp unchanged). Stage C daily keep-alive scenario BUILT (re-asserts SM8 subscription vs 72h auto-cancel + Slack-on-fail; re-POST verified idempotent). Polling-reconciliation fallback DEFERRED (lower-freq hardening). Spec: make-scenario-2-3-backsync-build.md",
+          "done": true
         },
         {
           "title": "Accounts A: GHL Job Complete → Accounts pipeline (Awaiting Invoice)",
