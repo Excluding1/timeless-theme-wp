@@ -2,6 +2,8 @@
 
 **Purpose:** Single source of truth for the current state of every account, asset, account credential, and known fact about the business. CEO updates when verified. Allan + Marko update when they change something.
 
+> **⚠️ AUTHORITY RULE (added 2026-06-07): This file is THE source of truth for "is X set up / live."** No other doc (memory logs, roadmaps, specs) may assert an integration is done/connected/live — they defer HERE. On ANY setup change, update this file the **same day** (Rule 11). It drifted once: the Twilio row read `❌` here while Twilio→GHL had actually been **LIVE since 2026-05-16**, which produced a wrong "buy a Twilio number" instruction on 2026-06-07. Build-sequence / critical-path lives in `docs/specs/FINALIZATION-ROADMAP-2026-06-07.md`; for "is it set up," THIS file wins.
+
 **Status legend:**
 - ✅ Done / Active / Verified
 - ⏳ In progress / Pending
@@ -233,7 +235,7 @@
 | Allan personal email | ✅ | allanpham106@gmail.com |
 | Marko personal email | ❓ | CEO to ask |
 | Business phone | ✅ | 0451 110 154 (per saved memory) |
-| Twilio SMS number (via GHL) | ❌ | Set up when GHL goes paid |
+| Twilio SMS number (via GHL, BYOT) | ✅ | **LIVE since 2026-05-16** — Twilio→GHL BYOT flip COMPLETE (Allan's team); sends from **+61 485 056 656**; ACMA **TimelessRsf** alpha-sender APPROVED 2026-05-17 (removed from pool to enforce unified-thread phone sender; kept for future bulk). Src: memory/day_3_phase_1a_emails_2026-05-06.md:21-24,303 |
 | Slack workspace | ❌ | Phase 1 task |
 | WhatsApp Business | ❓ | CEO to ask if used |
 | Customer SMS history (pre-launch) | ❓ | CEO to ask |

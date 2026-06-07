@@ -93,7 +93,7 @@
           "done": true
         },
         {
-          "title": "Main + SAFETY + DATA-CAPTURE BUILT (2026-06-05): GHL Trigger → secret-gate → Reserve opp_id (dedup) → Map Category → Create SM8 Job → Mark created → Sleep+Add-Job-Contact → Log-to-Sheet. ACTIVE NEXT = strip-contact change (delete Add Job Contact + Sleep; job_description = name+category only) + 6 smoke-tests (prove no contact leak). find-or-create CLIENT deferred ~job 5. Roadmap: docs/specs/FINALIZATION-ROADMAP-2026-06-07.md",
+          "title": "SCENARIO 1 FULL LOOP PROVEN 2026-06-07 (SM8 API): job #14 Jordan Faketest = name + address ('42 Test Street Bondi') only, NO phone/email, NO contact record, + Sheet logged full_address. PASSED: secret-gate, dedup, dup-error, no-contact-leak, ADDRESS-flows (form W1 → GHL address1 → Make → SM8+Sheet). Form client-wiring AUDITED + live-tested correct (property_address lands). NEXT (minor) = fail-recover/Slack-proof + publish GHL 'Create Job on Stage 11' workflow. BIG GAP = deploy the wired form (live homepage still = preview stub → real leads come through bare). find-or-create CLIENT deferred ~job 5. Roadmap: docs/specs/FINALIZATION-ROADMAP-2026-06-07.md",
           "done": false
         },
         {

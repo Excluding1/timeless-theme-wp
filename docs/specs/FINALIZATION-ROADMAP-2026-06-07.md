@@ -45,7 +45,7 @@ GHL paid + **15-stage Sales pipeline live** · 6 Slack channels · **Stripe + Xe
   - ★ **6 smoke-tests:** secret gate · dup-key error text · dedup end-to-end · fail-then-recover · **SM8 shows name+address only (no contact leak)** · no-opp_id
 - **Find-or-create CLIENT** (internal/invoicing only, email-first match; inserts before Create-Job; never sub-facing) — *after Scenario 1 green, ~job 5*
 - **Photos → SM8 Attachment** (2-step binary, Cloudinary→GET→attach) — *fast-follow*
-- 🟦 **Rotate the exposed GHL PIT to write-scope** — *gates ALL of Scenarios 2-5*
+- ⚠️ **GHL PIT write-scope = ✅ VERIFIED PRESENT 2026-06-07** (tested a live opp update → HTTP 200; Scenarios 2-5 NOT blocked on a new PIT). *(STATE.md / earlier docs said "read-only, gates 2-5" — that was STALE.)* Still **security-rotate the PIT before go-live** (it was exposed in-session) — but that's hygiene, not a functional blocker.
 - **Scenario 2 — Helper:** write SM8 job UUID back to the GHL opp
 - **Scenario 3 — Back-sync:** SM8 "Completed" → GHL Stage 15 (via SM8 Object Webhook)
 - **Scenario 4 — Accounts A:** GHL Job Complete → Accounts "Awaiting Invoice"
@@ -53,7 +53,7 @@ GHL paid + **15-stage Sales pipeline live** · 6 Slack channels · **Stripe + Xe
 
 ## 2. GHL — *the customer brain: leads, comms, pipeline (Jordan's CRM)*
 - ★ **Publish "SM8 — Create Job on Stage 11"** (DRAFT → live) — gated on Scenario 1 green; heartbeat-test = exactly one SM8 job
-- ★ 🟦 **Customer-comms prerequisites:** buy an AU SMS-capable Twilio number + domain auth (DKIM/SPF/DMARC) — *without these, NO customer SMS/email*
+- ✅ **Twilio/SMS — DONE** (Twilio→GHL BYOT live since 2026-05-16; sends from +61 485 056 656; ACMA TimelessRsf approved 2026-05-17 — see STATE.md). ⚠️ **Still verify: email domain auth (DKIM/SPF/DMARC)** for email deliverability — status unconfirmed, confirm with Allan
 - ★ **Minimum workflows for job #1:** W1 ack · deposit (Stripe link) · booking confirm · cure-time reminder
 - **Full workflow set (trail after first job):** no-show/cancel-post-deposit · payment-fail/overdue chase (7/14/30d) · asbestos-found routing · sub-can't-attend reassign · damage/dispute · quote-expiry win-back · NPS (24h) · warranty · W2 abandoned-quote recovery
 - **Custom fields/tags completeness check** + Accounts pipeline build
@@ -117,7 +117,7 @@ GHL paid + **15-stage Sales pipeline live** · 6 Slack channels · **Stripe + Xe
 ---
 
 ## CRITICAL PATH (earliest real revenue)
-**0 → 1(Scenario 1) → 2(publish + Twilio + min comms) → 4(form/site live) → 3(Marko Staff + first SKU + purge) → 6(legal in parallel; Marko self-performs jobs 1-3) → first job.**
+**0 → 1(Scenario 1) → 2(publish + min comms; Twilio ✅ already live) → 4(form/site live) → 3(Marko Staff + first SKU + purge) → 6(legal in parallel; Marko self-performs jobs 1-3) → first job.**
 Scenarios 2-5, BigQuery, and the app can trail the first internal job. *Full* finalization = all 10 sections + the audit.
 
 ## CLOSEABLE vs PERPETUAL
