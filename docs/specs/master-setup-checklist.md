@@ -327,6 +327,7 @@ After deployment, this auto-alerts if `/health` returns non-200 for 3 consecutiv
 - ~$200 one-off legal package
 - Why: legally-vetted subcontractor agreement template (avoids sham contracting + UCT issues)
 - Time: 1 week turnaround from Sprintlaw
+- ⚠️ **Scope gap (2026-06-05):** the ~$200 Sprintlaw package = drafting + **UCT/ACL** review. It does **NOT** by itself deliver an **employment-law worker-classification opinion** (Fair Work s15AA whole-of-relationship) — a separate specialism. **MANDATORY GATE before the first sub signs:** an AU employment lawyer confirms the engagement posture. Brief: [legal-review-brief-sub-engagement-2026-06-05.md](legal-review-brief-sub-engagement-2026-06-05.md); canonical gate: [decision-sm8-keep-vs-build-2026-06-05.md](decision-sm8-keep-vs-build-2026-06-05.md) §SUB-ENGAGEMENT MODEL. Either expand Sprintlaw's **written** scope to include the classification opinion, or engage a specialist. Owner: **Allan**.
 
 ### D.6 Xero (Phase 1.7)
 - $35-70/mo

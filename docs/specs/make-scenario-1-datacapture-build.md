@@ -10,8 +10,8 @@
 
 ## The build (ONE module)
 - **Module:** `Google Sheets → Add a Row`.
-- **Placement:** LAST module, **after `Add Job Contact`** (logs only real, fully-succeeded jobs). *(Could sit after `Mark created`; end-of-chain is cleaner — sm8_job_uuid + contact success both known.)*
-- **Error handler:** **Resume/Skip → Slack note.** The log must NEVER roll back or block a job — analytics is observational. Mirrors the Add-Job-Contact rule.
+- **Placement:** LAST module, **after `Mark created`** (post-strip-contact: `Add Job Contact` was REMOVED by the no-contact rule, so the chain ends Create SM8 Job → Mark created → **Log to Sheet**). Logs only fully-succeeded jobs — `sm8_job_uuid` is known by this point.
+- **Error handler:** **Resume/Skip → Slack note.** The log must NEVER roll back or block a job — analytics is observational. (Mirrors the safety-pass rule: analytics must never block a job.)
 - **Target:** a PRIVATE `timeless_job_log` spreadsheet, one tab, **header row = schema below**. STABLE column order — don't reorder/rename (external tables are fragile to header drift).
 - **Cost:** +1 operation/job. Negligible at our volume.
 

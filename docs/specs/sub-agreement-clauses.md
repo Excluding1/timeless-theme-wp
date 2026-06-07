@@ -2,6 +2,8 @@
 
 **Purpose:** Brief for Sprintlaw (~$200) to draft the formal subcontractor agreement. Contains the structure, intent, and "why" for each clause. Sprintlaw turns these into proper legal language. **Do not use this raw — this is the brief, not the contract.**
 
+> ⚖️ **PRE-SIGNING LEGAL GATE (2026-06-05):** Sprintlaw drafting + UCT/ACL review is **not** an employment-law worker-classification opinion. Before the first sub signs, an **AU employment lawyer** must confirm the sub-engagement posture survives Fair Work **s15AA** (whole-of-relationship) + the Mar-2026 ATO/FWO construction sham-contracting clampdown. Brief: [legal-review-brief-sub-engagement-2026-06-05.md](legal-review-brief-sub-engagement-2026-06-05.md). Canonical gate: [decision-sm8-keep-vs-build-2026-06-05.md](decision-sm8-keep-vs-build-2026-06-05.md) §"SUB-ENGAGEMENT MODEL — LOCKED".
+
 **Owner:** Allan engages Sprintlaw; CEO designs spec; Marko enforces in operations.
 
 **Source:** Migrated from `data/archive/old-drafts-2026-04/sub-onboarding-system.xlsx` sheet 05. 3-lens audited 2026-05-01 PM.
