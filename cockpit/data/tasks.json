@@ -97,11 +97,11 @@
           "done": false
         },
         {
-          "title": "Helper: UUID cache (GHL opp ↔ SM8 job UUID)",
-          "done": false
+          "title": "Helper (UUID cache) — FOLDED + simplified 2026-06-07: reuse the existing sm8_jobs data store (already holds opp_id↔sm8_job_uuid via 'Mark created'); NO separate index needed (Allan caught the over-engineering). Back-sync searches sm8_jobs directly.",
+          "done": true
         },
         {
-          "title": "Back-sync: SM8 complete → GHL 'Job Complete' (stage 15)",
+          "title": "Back-sync: SM8 Completed → GHL 'Job Complete' (stage 15) — ✅ BUILT + PROVEN 2026-06-07 (SM8 object-webhook job.status → Make: respond-200 → re-GET job → filter Completed → match sm8_jobs → PUT opp to stage 15 → Mark synced → Slack-on-err). Jordan Faketest opp advanced to stage 15, verified via GHL API. REMAINING for 'done': Stage C survivability (daily webhook health-check vs 72h auto-cancel + polling fallback) + idempotency re-test. Spec: make-scenario-2-3-backsync-build.md",
           "done": false
         },
         {

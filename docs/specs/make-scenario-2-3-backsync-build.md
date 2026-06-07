@@ -6,9 +6,9 @@
 
 ## Architecture (verified decisions)
 - **Match SM8 job ↔ GHL opp via a Make data-store index — NOT a field on the sub-facing SM8 job** (that would re-leak the cross-ref, breaking the no-contact rule) and **NOT** the GHL opp custom field (repeat customers can share/overwrite it — `ghl_starter_capabilities_verified_2026-05-05.md:28`).
-- **Cleo refinement:** add a dedicated **`sm8_job_index`** store keyed by `sm8_job_uuid` → clean keyed lookup (vs searching `sm8_jobs` by a non-key field).
+- **Simplification (Allan, 2026-06-07):** reuse the existing **`sm8_jobs`** store — it already holds the `opp_id ↔ sm8_job_uuid` link (`sm8_job_uuid` field, written by "Mark created"). Back-sync **searches `sm8_jobs` by `sm8_job_uuid`** → opp_id. **No new store.** *(Cleo's dedicated `sm8_job_index` was a high-volume keyed-lookup optimization; at our scale a field-search is reliable + fewer moving parts to break. CEO override — add the index later only if volume demands.)*
 - **Helper (Scenario 2) = append to Scenario 1**, not standalone (the create path is the only moment both IDs are certain). The GHL opp-field write is **optional, human-visibility only**, never the join key.
-- **Idempotency = two belts:** (1) atomic `sm8_completion_syncs` store (overwrite-OFF dedup on `sm8_job_uuid`); (2) GET the opp + skip if already at Stage 15.
+- **Idempotency = two belts (no new store):** (1) the matched `sm8_jobs` row's `status` field — if already `completed`, stop (Sequential-processing-ON serialises webhook runs → no concurrent race); (2) GET the opp + skip if already at Stage 15.
 - **Survivability (Cleo's #1 concern):** daily subscription health-check + a polling reconciliation fallback. **Not "proven" until both exist.**
 
 ## Stage 15 / pipeline IDs
@@ -17,12 +17,8 @@
 
 ---
 
-## STAGE A — extend Scenario 1 (small, low-risk, build first)
-**A1. New data store `sm8_job_index`:** Data stores → Add data store → fields `sm8_job_uuid` (Text), `opp_id` (Text), `created_at` (Date), `generated_job_id` (Text). **Record Key = `sm8_job_uuid`.**
-**A2. Add one module to Scenario 1**, inserted after **`Mark created`** (before `Log to Sheet`):
-- **Data stores → Add a record** (name `Index by SM8 uuid`): store `sm8_job_index` · Key `{{4.`x-record-uuid`}}` (the SM8 job UUID from Create SM8 Job) · **Overwrite = ON** (idempotent on re-fire) · fields: `sm8_job_uuid`={{4.`x-record-uuid`}}, `opp_id`={{1.opp_id}}, `created_at`={{now}}.
-- **Error handler:** Resume/Skip (non-critical — the job is already created).
-**A3. (Optional) GHL Helper field** — skip for now; add later for human visibility (a GHL opp custom field `SM8 Job UUID` + a PUT to populate it).
+## STAGE A — NOT NEEDED ✅ (2026-06-07, Allan)
+The existing **`sm8_jobs`** store already carries the `opp_id ↔ sm8_job_uuid` link (the `sm8_job_uuid` field, written by "Mark created" in Scenario 1) — so **no new store and no Scenario-1 change.** Back-sync just searches `sm8_jobs` by `sm8_job_uuid`. *(Optional, later: a GHL opp custom field `SM8 Job UUID` for CRM visibility — not load-bearing, skip for now.)*
 
 ---
 
@@ -45,14 +41,13 @@ Handle the `challenge` handshake (temporary Webhook-response module echoing `{{1
 [3] Iterator over entry[]
 [4] HTTP GET the job   ({{resource_url}} OR /api_1.0/job/{{uuid}}.json, X-API-Key) → live status + generated_job_id + completion_date
 [5] Filter: lower(trim(status)) = "completed"   ← ignore all other status changes
-[6] Idempotency belt 1: Data store ADD `sm8_completion_syncs` key={{job uuid}} status="processing", overwrite OFF
-       └ duplicate-key error → Skip (already handled/in-progress) = stop silently
-[7] Data store SEARCH `sm8_job_index` by sm8_job_uuid = {{job uuid}} → opp_id   (the MATCH)
+[6] Data store SEARCH `sm8_jobs` where sm8_job_uuid = {{job uuid}} (limit 1) → opp_id + current status   (the MATCH)
        └ not found → Slack "unmatched SM8 completion" (manual job? Marko advances manually)
-[8] Idempotency belt 2: HTTP GET GHL opp → if pipelineStageId already = Stage 15 → mark synced + stop
-[9] HTTP PUT GHL opp → Stage 15   body {pipelineId, pipelineStageId}  (NO status field — Cleo: avoid side effects)
+[7] Idempotency belt 1: Filter — continue only if {{6.status}} ≠ "completed"  (already synced → stop; Sequential-ON = no race)
+[8] Idempotency belt 2: HTTP GET GHL opp → if pipelineStageId already = Stage 15 → stop
+[9] HTTP PUT GHL opp → Stage 15   body {pipelineId, pipelineStageId}  (NO status field — avoid side effects)
        └ retry 3×/15m on 5xx+429; 4xx → Slack (never retry)
-[10] Data store UPDATE `sm8_completion_syncs` key={{job uuid}} status="completed", opp_id, ghl_synced_at={{now}}
+[10] Data store UPDATE `sm8_jobs` key={{6.opp_id}} status="completed", ghl_synced_at={{now}}
 [ERR] Slack #automation-errors on any routed failure (never the key/PIT/secret in the message)
 ```
 
@@ -65,11 +60,11 @@ Handle the `challenge` handshake (temporary Webhook-response module echoing `{{1
 ---
 
 ## SMOKE-TESTS (before any real customer)
-1. **Helper/index:** drag a test opp to Stage 11 → confirm `sm8_job_index` row exists (key=sm8_job_uuid, value=opp_id).
+1. **Link present:** drag a test opp to Stage 11 → confirm the `sm8_jobs` row has `sm8_job_uuid` populated (the field back-sync searches on).
 2. **Webhook + 200-in-time:** change a test job's status → Make run starts, [2] returns 200, SM8 log shows success (no timeout).
 3. **Re-GET:** [4] pulls live `status=Completed` + `generated_job_id` (proves UUID-only payload expanded).
 4. **Match:** [7] finds the opp_id from the index.
-5. **Happy path (crux):** set test job → Completed → GHL opp moves to Stage 15 within ~30s, `sm8_completion_syncs` row = completed.
+5. **Happy path (crux):** set test job → Completed → GHL opp moves to Stage 15 within ~30s, the `sm8_jobs` row `status` = completed.
 6. **Idempotency:** toggle SM8 status Completed→Work Order→Completed → run stops at belt 1 or 2 → **exactly ONE stage move, ever.**
 7. **Non-completion ignored:** set to Work Order → [5] filters it out, no GHL change.
 8. **Unmatched:** complete an SM8 job not in the index → [7] not-found → Slack, no crash.
