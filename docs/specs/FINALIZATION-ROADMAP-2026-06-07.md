@@ -24,7 +24,7 @@ Owner tags: 🟦 Allan (accounts/credentials/clicks) · 🟩 Marko (ops decision
 GHL paid + **15-stage Sales pipeline live** · 6 Slack channels · **Stripe + Xero live** · **SM8: 6 categories + ACT queue + write-path proven** (real Job #8, HTTP 200/errorCode 0) · Make Scenario 1 **core + safety + data-capture built** (fired a real SM8 job; secret-gate + opp_id dedup + Slack errors + Sheet log) · Cloudinary wired · **$10M PL active** · theme + ~37 pages live (non-www SSL + HTTPS redirect) · quote-form **source** wired to W1/W2 + secret_token *(dev-only verified)*.
 
 ## 🟡 BUILT — but NOT safe / NOT shipped
-- Make **strip-contact pending** → customer phone/email would currently land on the SM8 job.
+- ✅ Make **strip-contact DONE + verified live 2026-06-07** — SM8 API confirmed jobs show name + address only (no phone/email, no contact record). *(was pending; now shipped.)*
 - Quote form wired **in source only** — deployed bundle = `REPLACE_ME`, homepage = dead `alert()` preview stub. *No real lead can enter the funnel today.*
 - GHL "Create Job on Stage 11" workflow built but **DRAFT** — never fired live.
 
