@@ -3,7 +3,7 @@
 // re-GET the job by UUID (SSRF-guarded) → contact-filter → upsert job_mirror → audit.
 // NEVER returns 410 (410 unsubscribes us). Auth failure = 401. Any processing failure is logged to
 // audit_log for the reconcile poll, but the HTTP response is always 200 so SM8 keeps the subscription.
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
 import { getJob } from '../_shared/sm8Client.ts';
 import { sm8JobToMirror, scrubPii, assertNoContact } from '../_shared/contactFilter.ts';
 import { isDuplicate } from '../_shared/dedup.ts';
