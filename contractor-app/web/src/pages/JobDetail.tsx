@@ -6,6 +6,7 @@ import {
   MapPin,
   Navigation,
   Camera,
+  MessageSquare,
   CheckCircle2,
   AlertTriangle,
   WifiOff,
@@ -41,6 +42,7 @@ export function JobDetail() {
     declineJob,
     submitAvailability,
     completeJob,
+    messageOffice,
     photosForJob,
     isOffline,
     error,
@@ -54,6 +56,8 @@ export function JobDetail() {
   const [showDeclineSheet, setShowDeclineSheet] = useState(false);
   const [showAvailabilitySheet, setShowAvailabilitySheet] = useState(false);
   const [showCompleteSheet, setShowCompleteSheet] = useState(false);
+  const [showMessageSheet, setShowMessageSheet] = useState(false);
+  const [messageText, setMessageText] = useState('');
 
   const [busy, setBusy] = useState(false);
   const [declineReason, setDeclineReason] = useState('');
@@ -185,6 +189,20 @@ export function JobDetail() {
       navigate('/');
     } catch {
       snackbar.show('Could not mark done — please try again.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleMessageOffice = async () => {
+    setBusy(true);
+    try {
+      await messageOffice(assignment.id, messageText.trim());
+      setShowMessageSheet(false);
+      setMessageText('');
+      snackbar.show('Sent to the office ✓');
+    } catch {
+      snackbar.show('Could not send — please try again.');
     } finally {
       setBusy(false);
     }
@@ -429,14 +447,27 @@ export function JobDetail() {
                   I have a problem
                 </Button>
 
-                {/* Hand back — distinct from Decline; for an accepted job (Fair-Work A6). */}
-                <Button
-                  variant="ghost"
-                  size="md"
-                  onClick={() => navigate(`/job/${assignment.id}/handback`)}
-                >
-                  Hand this job back
-                </Button>
+                {/* Soft actions — neither pauses the job nor changes its state. */}
+                <div className="flex gap-3">
+                  <Button
+                    variant="ghost"
+                    size="md"
+                    className="flex-1 gap-2"
+                    onClick={() => setShowMessageSheet(true)}
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Message office</span>
+                  </Button>
+                  {/* Hand back — distinct from Decline; for an accepted job (Fair-Work A6). */}
+                  <Button
+                    variant="ghost"
+                    size="md"
+                    className="flex-1"
+                    onClick={() => navigate(`/job/${assignment.id}/handback`)}
+                  >
+                    Hand back
+                  </Button>
+                </div>
               </div>
             )}
           </div>
@@ -525,6 +556,42 @@ export function JobDetail() {
             {busy ? 'Saving…' : 'Mark done'}
           </Button>
           <Button size="lg" variant="ghost" onClick={() => setShowCompleteSheet(false)} disabled={busy}>
+            Cancel
+          </Button>
+        </div>
+      </BottomSheet>
+
+      {/* Message the office — non-urgent note (e.g. running late). Does NOT pause the job. */}
+      <BottomSheet isOpen={showMessageSheet} onClose={() => setShowMessageSheet(false)}>
+        <h3 className="text-lg font-bold text-center mb-2">Message the office</h3>
+        <p className="text-sm text-[var(--color-secondary)] mb-5 text-center">
+          A quick note to the office — like running late or a question. For anything that stops the job,
+          use "I have a problem" instead.
+        </p>
+        <div className="flex flex-wrap gap-2 mb-4 justify-center">
+          {['Running late', 'On my way', 'Quick question'].map((chip) => (
+            <button
+              key={chip}
+              type="button"
+              onClick={() => setMessageText(chip)}
+              className="px-4 min-h-[44px] rounded-full border border-gray-200 text-xs font-bold text-[var(--color-secondary)] bg-white hover:bg-gray-50"
+            >
+              {chip}
+            </button>
+          ))}
+        </div>
+        <textarea
+          value={messageText}
+          onChange={(e) => setMessageText(e.target.value)}
+          placeholder="Type your message to the office…"
+          aria-label="Message to the office"
+          className="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 mb-6 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] min-h-[100px] text-base"
+        />
+        <div className="flex flex-col gap-3">
+          <Button size="lg" onClick={handleMessageOffice} disabled={busy || !messageText.trim()}>
+            {busy ? 'Sending…' : 'Send to office'}
+          </Button>
+          <Button size="lg" variant="ghost" onClick={() => setShowMessageSheet(false)} disabled={busy}>
             Cancel
           </Button>
         </div>

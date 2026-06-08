@@ -35,6 +35,7 @@ export interface ContractorApi {
   registerPhoto(id: string, photo: PhotoPayload): Promise<{ ok: boolean; photo_id: string }>;
   completeJob(id: string): Promise<Ok>;
   reportProblem(id: string, problem: ProblemPayload): Promise<Ok>;
+  messageOffice(id: string, text: string): Promise<Ok>;   // non-urgent note to the office; never pauses (Fair-Work safe)
   getProfile(): Promise<SubProfile>;
 }
 

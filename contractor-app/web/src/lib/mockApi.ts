@@ -188,6 +188,10 @@ export const mockApi: ContractorApi = {
     if (a) a.problem = { reason: problem.reason, note: problem.note, status: 'open' }; // -> Paused
     return { ok: true };
   },
+  async messageOffice() {
+    await delay(MOCK_DELAY);
+    return { ok: true }; // notifies the office (Marko); no job-state change
+  },
   async getProfile() {
     await delay(MOCK_DELAY);
     return PROFILE;

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { format } from 'date-fns';
-import { Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Loader2, BookOpen, ChevronRight } from 'lucide-react';
 import { useAppStore } from '../lib/store';
 import { Button, Badge } from '../components/ui';
 
@@ -11,6 +12,7 @@ function formatExpiry(iso: string): string {
 
 export function Profile() {
   const { profile, fetchProfile, setAuth } = useAppStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!profile) void fetchProfile();
@@ -57,6 +59,20 @@ export function Profile() {
               </p>
             </div>
           </div>
+
+          <button
+            onClick={() => navigate('/how-we-work')}
+            className="w-full bg-white rounded-2xl p-4 shadow-sm border border-gray-200 flex items-center gap-3 text-left active:scale-[0.99] transition-transform"
+          >
+            <span className="w-10 h-10 rounded-full bg-[var(--color-primary)]/5 flex items-center justify-center flex-shrink-0">
+              <BookOpen className="w-5 h-5 text-[var(--color-primary)]" />
+            </span>
+            <span className="flex-1">
+              <span className="block text-sm font-bold text-[var(--color-primary)]">How we work together</span>
+              <span className="block text-xs text-[var(--color-secondary)]">The 5 rules + answers for on-site situations</span>
+            </span>
+            <ChevronRight className="w-5 h-5 text-[var(--color-secondary)]" />
+          </button>
 
           <Button
             variant="ghost"

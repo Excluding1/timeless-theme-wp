@@ -10,6 +10,7 @@ import { CapturePhotos } from './pages/CapturePhotos';
 import { ReportProblem } from './pages/ReportProblem';
 import { HandBack } from './pages/HandBack';
 import { Profile } from './pages/Profile';
+import { HowWeWork } from './pages/HowWeWork';
 import { BottomSheet } from './components/BottomSheet';
 import { Button } from './components/ui';
 import { InstallPrompt } from './components/InstallPrompt';
@@ -57,6 +58,7 @@ function AppRoutes() {
           <Route path="/job/:id/problem" element={<ReportProblem />} />
           <Route path="/job/:id/handback" element={<HandBack />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/how-we-work" element={<HowWeWork />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

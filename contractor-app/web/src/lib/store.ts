@@ -39,6 +39,7 @@ interface AppState {
   handBack: (id: string, reason?: string) => Promise<void>;
   completeJob: (id: string) => Promise<void>;
   reportProblem: (id: string, problem: ProblemPayload) => Promise<void>;
+  messageOffice: (id: string, text: string) => Promise<void>;
 
   capturePhoto: (assignmentId: string, photo: CapturedPhoto) => Promise<void>;
   addPhoto: (photo: CapturedPhoto) => void;
@@ -94,6 +95,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   handBack: async (id, reason) => { await api.handBack(id, reason); await get().fetchJobs(); },
   completeJob: async (id) => { await api.completeJob(id); await get().fetchJobs(); await get().fetchJobDetail(id); },
   reportProblem: async (id, problem) => { await api.reportProblem(id, problem); await get().fetchJobs(); await get().fetchJobDetail(id); },
+  messageOffice: async (id, text) => { await api.messageOffice(id, text); },
 
   capturePhoto: async (assignmentId, photo) => {
     get().addPhoto(photo);                          // save to device first (offline-resilient)
