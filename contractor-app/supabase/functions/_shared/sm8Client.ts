@@ -7,17 +7,25 @@
 const SM8_BASE = 'https://api.servicem8.com/api_1.0';
 const SM8_HOST = 'api.servicem8.com';
 
-/** SM8 record UUIDs are opaque tokens; allow only a safe charset so a UUID can never manipulate the URL. */
+/** Strict UUID — prevents arbitrary ServiceM8 job-path probing + DB uuid errors (Cleo P2). */
 export function isValidUuid(uuid: unknown): uuid is string {
-  return typeof uuid === 'string' && /^[A-Za-z0-9-]{8,64}$/.test(uuid);
+  return typeof uuid === 'string' &&
+    /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(uuid);
 }
 
-/** Belt-and-braces: only ever attach the API key to an api.servicem8.com HTTPS URL. */
+/** Belt-and-braces: only ever attach the API key to an api.servicem8.com HTTPS job URL.
+ *  Rejects userinfo, non-443 ports, and off-path URLs too (hardened for any future resource_url use). */
 export function assertSm8Url(url: string): void {
   let u: URL;
   try { u = new URL(url); } catch { throw new Sm8Error(400, 'invalid URL'); }
-  if (u.protocol !== 'https:' || u.hostname !== SM8_HOST) {
-    throw new Sm8Error(400, 'refusing to attach key to non-ServiceM8 host'); // SSRF guard
+  if (
+    u.protocol !== 'https:' ||
+    u.hostname !== SM8_HOST ||
+    u.username !== '' || u.password !== '' ||
+    (u.port !== '' && u.port !== '443') ||
+    !u.pathname.startsWith('/api_1.0/')
+  ) {
+    throw new Sm8Error(400, 'refusing to attach key to non-ServiceM8 URL'); // SSRF guard
   }
 }
 

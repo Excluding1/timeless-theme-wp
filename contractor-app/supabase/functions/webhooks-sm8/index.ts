@@ -5,8 +5,9 @@
 // audit_log for the reconcile poll, but the HTTP response is always 200 so SM8 keeps the subscription.
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { getJob } from '../_shared/sm8Client.ts';
-import { sm8JobToMirror, scrubPii } from '../_shared/contactFilter.ts';
+import { sm8JobToMirror, scrubPii, assertNoContact } from '../_shared/contactFilter.ts';
 import { isDuplicate } from '../_shared/dedup.ts';
+import { secureCompare } from '../_shared/secure.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
@@ -16,13 +17,9 @@ function db(): SupabaseClient {
   return createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
 }
 
-// Length-safe constant-time-ish compare so we don't leak the secret via early-exit timing.
 function secretOk(req: Request): boolean {
   const got = req.headers.get('x-webhook-secret') ?? '';
-  if (!WEBHOOK_SECRET || got.length !== WEBHOOK_SECRET.length) return false;
-  let diff = 0;
-  for (let i = 0; i < got.length; i++) diff |= got.charCodeAt(i) ^ WEBHOOK_SECRET.charCodeAt(i);
-  return diff === 0;
+  return WEBHOOK_SECRET.length > 0 && secureCompare(got, WEBHOOK_SECRET);
 }
 
 async function audit(supabase: SupabaseClient, action: string, uuid: string | null, detail: unknown) {
@@ -41,7 +38,16 @@ async function processJob(uuid: string): Promise<void> {
   try {
     const raw = await getJob(uuid); // SSRF-guarded re-GET by validated UUID (never the webhook URL)
     const mirror = sm8JobToMirror(raw, new Date().toISOString());
-    if (!mirror.sm8_job_uuid) { await audit(supabase, 'sm8_sync_skip_no_uuid', uuid, {}); return; }
+    // The GET'd job must be the one we asked for (Cleo P2 — guards against a swapped/odd response).
+    if (!mirror.sm8_job_uuid || mirror.sm8_job_uuid !== uuid.toLowerCase()) {
+      await audit(supabase, 'sm8_sync_skip_uuid_mismatch', uuid, {});
+      return;
+    }
+    // Fail-closed: never store a row that still looks like it carries contact (Cleo P1 #3).
+    try { assertNoContact(mirror); } catch {
+      await audit(supabase, 'sm8_sync_contact_blocked', uuid, {});
+      return;
+    }
     const { error } = await supabase.from('job_mirror').upsert(mirror, { onConflict: 'sm8_job_uuid' });
     if (error) { await audit(supabase, 'sm8_sync_upsert_error', uuid, { message: error.message }); return; }
     await audit(supabase, 'sm8_sync_ok', uuid, { status: mirror.sm8_status });
@@ -61,7 +67,11 @@ Deno.serve(async (req) => {
   try { body = await req.json(); } catch { /* tolerate empty/garbage; still 200 below */ }
 
   // Subscription handshake — harmless echo, no secret required (SM8 may not send our header here).
-  if (typeof body.challenge === 'string') return jsonResponse({ challenge: body.challenge });
+  // Only a PURE handshake short-circuits; a real event that happens to carry a 'challenge' field
+  // still goes through the secret check + processing (Cleo P2).
+  if (typeof body.challenge === 'string' && !('uuid' in body) && !('object' in body)) {
+    return jsonResponse({ challenge: body.challenge });
+  }
 
   // Real events MUST carry the shared secret. Bad secret = 401 (NOT 410).
   if (!secretOk(req)) return new Response('unauthorized', { status: 401 });
