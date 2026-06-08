@@ -13,7 +13,8 @@ export function Layout() {
 
   const isHome = location.pathname === '/';
   const isProfile = location.pathname === '/profile';
-  
+  const showNav = isHome || isProfile; // hide the tab bar on drill-in flows (use the back button)
+
   const pendingPhotos = capturedPhotos.filter(p => ['queued', 'failed'].includes(p.upload_status)).length;
 
   if (!isAuthenticated) {
@@ -21,7 +22,7 @@ export function Layout() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--color-surface)] pb-20">
+    <div className={cn('flex flex-col min-h-screen bg-[var(--color-surface)]', showNav && 'pb-20')}>
       <AnimatePresence>
         {isOffline && (
           <motion.div
@@ -57,6 +58,7 @@ export function Layout() {
         <Outlet />
       </main>
 
+      {showNav && (
       <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-gray-100 px-6 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] flex justify-around items-center z-30 max-w-md mx-auto w-full shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
         <button 
           onClick={() => navigate('/')} 
@@ -73,6 +75,7 @@ export function Layout() {
           <span className="text-[10px] font-medium">Profile</span>
         </button>
       </nav>
+      )}
 
       <SnackbarContainer />
     </div>

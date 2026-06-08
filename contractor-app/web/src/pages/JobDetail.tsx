@@ -262,7 +262,7 @@ export function JobDetail() {
               </div>
             )}
 
-            <div className="p-4">
+            <div className="p-4 pb-96">
               {/* Title row */}
               <div className="flex justify-between items-start mb-4 gap-3">
                 <div>
@@ -313,8 +313,11 @@ export function JobDetail() {
 
               {/* Per-SKU photo checklist */}
               <div className="mb-6">
-                <p className="text-xs font-bold text-[var(--color-secondary)] tracking-widest mb-3 uppercase">
+                <p className="text-xs font-bold text-[var(--color-secondary)] tracking-widest mb-1 uppercase">
                   Photos you'll need
+                </p>
+                <p className="text-[11px] text-[var(--color-secondary)] mb-3">
+                  "During" = quick progress shots while you work.
                 </p>
                 <div className="space-y-2">
                   {job.required_photos.map((req) => {
@@ -427,12 +430,13 @@ export function JobDetail() {
                 </Button>
 
                 {/* Hand back — distinct from Decline; for an accepted job (Fair-Work A6). */}
-                <button
+                <Button
+                  variant="ghost"
+                  size="md"
                   onClick={() => navigate(`/job/${assignment.id}/handback`)}
-                  className="w-full text-center text-sm font-bold text-[var(--color-secondary)] underline py-3 min-h-[44px]"
                 >
                   Hand this job back
-                </button>
+                </Button>
               </div>
             )}
           </div>
