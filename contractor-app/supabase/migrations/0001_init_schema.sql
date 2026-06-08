@@ -49,7 +49,7 @@ create table if not exists job_assignments (
   offered_at timestamptz default now(),
   accepted_at timestamptz,
   sub_availability jsonb,        -- on ACCEPT: the sub's proposed availability window(s) — "when I can do it"
-  scheduled_at timestamptz,      -- the confirmed booking time → goes to the sub's calendar (.ics export)
+  scheduled_at timestamptz,      -- the confirmed booking time shown in "My Jobs" (native Add-to-Calendar = v2; .ics cut from v1 per README)
   declined_at timestamptz,
   decline_reason text,           -- OPTIONAL, NEVER required (Fair-Work: penalty-free decline)
   completed_at timestamptz,

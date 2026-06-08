@@ -8,7 +8,7 @@
 **The sub flow (the whole app):**
 1. 🔔 **Push** "New job available" (+ SMS fallback).
 2. 📋 **Job card:** photos · scope · address · category · **their pay** — NO customer phone/email.
-3. ↔️ **Slide-to-accept** (deliberate slide, not a tap) + 5-sec **Undo** snackbar · OR **Decline** (one tap, penalty-free, reason optional). **NO countdown timer** (gig-style timers cause panic-taps).
+3. ✅ **Accept** = a clear button → confirm sheet ("Accept this job?") + 5-sec **Undo** snackbar (**RESOLVED 2026-06-08:** button+confirm chosen over slide-to-accept — simpler/more familiar for a tradie; the non-negotiable is *never a bare single tap that commits*) · OR **Decline** (one tap, penalty-free, reason optional). **NO countdown timer** (gig-style timers cause panic-taps).
 4. 🗓️ On accept → **submit ONE availability window** → Marko confirms the time.
 5. 📋 Booked job → **"My Jobs"** list (today/upcoming) with date+time. *(NO `.ics` in v1 — Cleo cut it: update/cancel/timezone edge-cases aren't worth it. Native "Add to Calendar" = v2 nice-to-have.)*
 6. 🧭 **Navigate** → deep-link to Maps.

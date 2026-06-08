@@ -65,7 +65,7 @@ create table job_assignments ( id uuid pk default gen_random_uuid(), sm8_job_uui
   sub_id uuid not null references subs, status assignment_status not null default 'offered', offer_seq int default 1,
   offered_at timestamptz default now(), accepted_at timestamptz, declined_at timestamptz, decline_reason text,  -- OPTIONAL, never required
   completed_at timestamptz, expires_at timestamptz, created_at timestamptz default now() );
-create unique index one_live_assignment_per_job on job_assignments (sm8_job_uuid) where status in ('offered','accepted','in_progress');
+create unique index one_live_assignment_per_job_sub on job_assignments (sm8_job_uuid, sub_id) where status in ('offered','accepted','in_progress'); -- MULTI-SUB 2026-06-08: one live offer per (job,sub) so N subs hold one job; "all parts done" = live-count 0 -> SM8 Completed. Canonical = migration 0001.
 
 create type photo_upload_status as enum ('queued','uploaded','attaching','attached','failed');
 create table photos ( id uuid pk default gen_random_uuid(), sm8_job_uuid uuid not null references job_mirror, sub_id uuid not null references subs,

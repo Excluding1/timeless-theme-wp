@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-07",
+  "updated": "2026-06-08",
   "note": "CANONICAL human roadmap = docs/specs/FINALIZATION-ROADMAP-2026-06-07.md (this board mirrors it). Sub-tasks filled in as we tackle each task (Allan helps with UI/layout specifics, Clifford finalises). Edit via cockpit or here.",
   "tasks": [
     {
@@ -120,9 +120,9 @@
     },
     {
       "id": "subapp",
-      "title": "Custom contractor sub-app (wrapper on SM8) — build LAST (after internal backbone: Make/GHL/SM8/Slack/deploy), before launch — Allan resequence 2026-06-05. Blueprint being prepped so it's ready to execute.",
-      "phase": "Sprint",
-      "status": "todo",
+      "title": "Custom contractor sub-app (separate PWA on SM8) — 🔨 PULLED FORWARD + BUILDING 2026-06-08 (Allan: 1 job/wk = build window). v1 feature set LOCKED + schema scaffolded (contractor-app/). Form-deploy deferred but stays the gate before any web-traffic push. Next = Phase 1 backend (Supabase).",
+      "phase": "Now",
+      "status": "doing",
       "subtasks": [
         {
           "title": "✅ Viability + feasibility study DONE 2026-06-05 (4-expert panel + Cleo): VERDICT = FEASIBLE; connects to SM8 (5/6 capabilities native; accept/decline = custom state machine, no SM8 API). Mandatory arch = sub-app → OUR backend (sole key-holder, per-sub auth, contact filter, rate governor) → SM8. Writeup: docs/specs/decision-sm8-keep-vs-build-2026-06-05.md §VIABILITY STUDY. Allan DECISION: BUILD FULL APP FIRST (before launch), eyes-open on ~2-4wk + guessed-workflow risk.",
@@ -130,6 +130,22 @@
         },
         {
           "title": "✅ Blueprint DELIVERED 2026-06-05 → docs/specs/contractor-app-blueprint-2026-06-05.md. Stack LOCKED (Vite React PWA + Supabase BFF/token-broker + Web Push/VAPID + Vercel); 6-phase plan ~3-4wk; data model + API contract + accept/decline state machine + rate governor + Allan setup checklist (Supabase Pro, Firebase/FCM, subdomain). Build scheduled AFTER internal backbone. Phase-1 Make strip-contact change is path-independent → folded into Make Scenario 1 finish.",
+          "done": true
+        },
+        {
+          "title": "✅ PRD v1.1 WRITTEN + Cleo-hardened 2026-06-08 → contractor-app/PRD.md (12 screens, schema-aligned data model, API contract, Fair-Work UX A1-A9, multi-day + hand-back, ready-to-paste AI Studio prompt). Ready for Google AI Studio frontend draft → Clifford+Cleo build the secure Supabase backend.",
+          "done": true
+        },
+        {
+          "title": "✅ AI-Studio DRAFT AUDITED 2026-06-08 (7-perspective panel: Clifford + build/QA + Cleo + 4 expert auditors fair-work/mobile/field-ops/architecture) → contractor-app/AUDIT-2026-06-08.md. UNANIMOUS VERDICT = NO-GO to wire as-is (draft built from v1.0 prompt = pre-hardening spine; strong UI shell, KEEP it). GO after a bounded fix pass: UNIT1 spine-swap (types→PRD§9, kill 'booked' status, collapse state, lib/api.ts seam, strip cruft) → UNIT2 features (hand-back A6, per-SKU+during photos+gate, multi-day, paused/asbestos-STOP, edge states) → UNIT3 PWA+field-hardening (vite-plugin-pwa+SW+offline-persist, tap-targets, gold-pay contrast fail, iOS-zoom) → UNIT4 copy. Builds green, no-contact holds, Fair-Work mostly clean. Spec patch: add 'during' photo phase to PRD (recipes need before/during/after).",
+          "done": true
+        },
+        {
+          "title": "✅ FIX PASS EXECUTED 2026-06-08 (Allan: 'do all 4 units') → draft now in contractor-app/web/. Unit1 spine-swap (schema-aligned types, single lib/api.ts seam, single-source store + localStorage photo persistence, AI-Studio cruft stripped, tsconfig strict). Unit2 features (hand-back A6, per-SKU+during photos + completion GATE, multi-day Day1/2 lock, paused+asbestos-stop, edge states). Unit3 real PWA (vite-plugin-pwa → sw.js+manifest = installable/offline) + field-hardening (pay navy-not-gold, >=48px tap targets, >=16px inputs, ErrorBoundary, Inter loaded). Unit4 copy softened. RESULT: tsc strict CLEAN + vite build GREEN (PWA emitted). Pending: Cleo final review + PNG icons polish, THEN wire Supabase Phase 1 backend.",
+          "done": true
+        },
+        {
+          "title": "✅ CLEO FINAL REVIEW DONE + 2 blockers cleared 2026-06-08: (1) photo capture now flows through the lib/api.ts seam (store.capturePhoto → api.registerPhoto w/ client_idem_key) so Supabase will receive photos; (2) Undo + close tap-targets bumped to >=44px (the safety-net control). + added a Day-2 in_progress mock sample to exercise the multi-day lock. Re-verified: tsc strict CLEAN + build GREEN. >>> APP IS WIRE-READY. Both CEOs + 7-perspective panel signed off. NEXT (full circle) = Allan creates the Supabase project → Clifford writes supabaseApi.ts implementing ContractorApi + flips the api.ts export + builds Phase 1 backend (Edge fns, SM8 key-holder, contact-leak CI). Remaining polish: PNG app icons (192/512/apple-touch).",
           "done": true
         },
         {
