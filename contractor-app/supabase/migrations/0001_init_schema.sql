@@ -73,7 +73,7 @@ create table if not exists photos (
   id uuid primary key default gen_random_uuid(),
   sm8_job_uuid uuid not null references job_mirror(sm8_job_uuid),
   sub_id uuid not null references subs(id),
-  kind text not null,            -- before / after
+  kind text not null,            -- before / during / after (per PRD v1.2 + web types.ts PhotoKind)
   slot text,
   storage_path text,
   sm8_attachment_uuid uuid,

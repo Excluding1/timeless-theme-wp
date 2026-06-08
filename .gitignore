@@ -55,3 +55,6 @@ images/**/*-[0-9]*w.png.webp
 
 # Local secrets (API keys) — never commit, never deploy
 .secrets/
+
+# Stray root deno.lock (the canonical lock lives in contractor-app/supabase/functions/)
+/deno.lock

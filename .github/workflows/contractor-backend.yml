@@ -1,0 +1,33 @@
+name: contractor-backend
+
+# Security gate for the contractor-app Supabase backend. The contact-leak test is build-blocking:
+# if a contact column/field is ever added, or the filter regresses, this fails the PR.
+on:
+  push:
+    paths:
+      - 'contractor-app/supabase/**'
+      - '.github/workflows/contractor-backend.yml'
+  pull_request:
+    paths:
+      - 'contractor-app/supabase/**'
+
+permissions:
+  contents: read
+
+jobs:
+  edge-functions:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contractor-app/supabase/functions
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Type-check
+        run: deno check */index.ts
+      - name: Lint
+        run: deno lint
+      - name: Contact-leak CI — security gate (build-blocking)
+        run: deno test _tests/contact-leak.test.ts
