@@ -1,6 +1,8 @@
 # Contractor-View App — BUILD BLUEPRINT (Path B)
 
-**Status:** READY-TO-EXECUTE. Architect-produced 2026-06-05 (verified vs 2026 SM8 + Supabase + PWA docs). **Scheduled LAST** — built AFTER the internal backbone (Make/GHL/SM8/Slack/deploy) per Allan's 2026-06-05 resequence. Read with `decision-sm8-keep-vs-build-2026-06-05.md` (§VIABILITY STUDY).
+**Status:** 🔨 **BUILDING — PULLED FORWARD 2026-06-08** (Allan's call: "only 1 job/week — perfect low-pressure window to build + finalise everything"). Supersedes the "scheduled LAST" sequencing. Architect-produced 2026-06-05 (verified vs 2026 SM8 + Supabase + PWA docs) + panel-verified. Code lives in `/contractor-app/`. Read with `decision-sm8-keep-vs-build-2026-06-05.md` (§VIABILITY STUDY).
+
+> **MULTI-SUB AUTO-COMPLETION (added 2026-06-08, both CEOs + experts):** a multi-trade job (e.g. hotel, 20 sinks, 3-4 subs) = ONE SM8 job + N `job_assignments` (one per sub/part). Each sub self-completes THEIR part (with photos). The app's `/complete` checks "any live assignments left for this job?" — when count = 0, it flips the SM8 job to `Completed` → the existing Make Back-sync fires → GHL Stage 15. **No manual Marko gate.** ONE change to the data model: the `one_live_assignment_per_job` index is relaxed to **one-live-per-(job, sub)** so N subs can hold one job (see §4 / migration 0001). ONE customer invoice + one Xero supplier bill per sub.
 
 **MODEL LOCKED 2026-06-05:** this single-account app (subs auth to OUR app → OUR one SM8 account; the app's own logged accept/decline) IS the **canonical sub-engagement model** — SM8 Network (subs on their own accounts) is RETIRED to an app-less interim/fallback only. See [`decision-sm8-keep-vs-build-2026-06-05.md` §SUB-ENGAGEMENT MODEL — LOCKED](decision-sm8-keep-vs-build-2026-06-05.md). (This blueprint is already single-account — no structural change.)
 
