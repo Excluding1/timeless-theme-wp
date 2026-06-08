@@ -1,4 +1,6 @@
 # Dashboard Health Check — How an Agent (or You) Reads the Data
+
+> **📦 SUPERSEDED 2026-06-08 (doc-drift sweep).** Health-check baselines for the old Supabase `timeless-dash` SQL. The live CEO/ops surface is now the **cockpit** (`cockpit/`, zero-dep Node board) over the **GHL → Make → Google Sheet → BigQuery** spine — not this dashboard. Retained for history; do not action. SSOT: [STATE.md](../STATE.md) §14 + [FINALIZATION-ROADMAP-2026-06-07.md](FINALIZATION-ROADMAP-2026-06-07.md).
 **Date:** 2026-05-01
 **Companion to:** `dashboard/bathresurf-nsw-dashboard/supabase/health_check.sql`
 

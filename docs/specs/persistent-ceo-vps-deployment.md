@@ -1,5 +1,7 @@
 # Persistent CEO Deployment — VPS Architecture (24/7 Always-On)
 
+> **📦 SUPERSEDED 2026-06-08 (doc-drift sweep).** No persistent VPS daemon was deployed. The live architecture is the **cockpit** (`cockpit/`, run locally) + **GHL → Make → Google Sheet → BigQuery**; scheduled automation runs in Make.com, not a 24/7 VPS agent. Retained for history; do not action. SSOT: [STATE.md](../STATE.md) + [FINALIZATION-ROADMAP-2026-06-07.md](FINALIZATION-ROADMAP-2026-06-07.md).
+
 **Trigger:** Allan 2026-05-01 — *"why not just get a vps server now if we going to have to do it eventually so we dont deal with the switching in the future and also if theres something that comes up thats important before the scheduled task at least you can react to it your the ceo you need to react 24/7"*
 
 **Decision:** **VPS now, not Cloud Function.** Reasons in § 1.

@@ -18,11 +18,13 @@
 
 ---
 
-## Active specs (built ✅ / pending ⬜)
+## Active specs (built ✅ / planned ⬜)
+
+> **🔎 Index reality-check (2026-06-08 doc-drift sweep).** Only rows with a **clickable ✅ link** exist as files on disk. **Every ⬜ row is PLANNED — not yet written** (the named `*.md` does NOT exist in this directory yet). As of this sweep the **only** spec actually present from the table below is [ghl-pipeline-13-stage.md](ghl-pipeline-13-stage.md). This older index also omits the many specs since added (Make scenarios, SM8 config, contractor-app blueprint, decision/legal docs, the [FINALIZATION-ROADMAP](FINALIZATION-ROADMAP-2026-06-07.md)) — for the current build state read [STATE.md](../STATE.md) + that roadmap, not this table.
 
 | Spec | Status | Purpose | Phase | Owner |
 |---|---|---|---|---|
-| ✅ [form-auto-preselect.md](form-auto-preselect.md) | Ready | Quote form pre-fills service based on landing page URL | Week 2-3 | Allan |
+| ⬜ form-auto-preselect.md | Planned — not yet written (corrected 2026-06-08: was wrongly marked ✅ "Ready" + linked, but the file is absent on disk) | Quote form pre-fills service based on landing page URL | Week 2-3 | Allan |
 | ⬜ ghl-custom-fields.md | Pending | Click-by-click GHL setup for all 40+ custom fields | Week 1-2 | Allan (CEO designs) |
 | ⬜ ghl-workflows.md | Pending | All 12 GHL automation workflow specs (triggers, actions, conditions) | Week 2-3 | Allan (CEO designs) |
 | ✅ [ghl-pipeline-13-stage.md](ghl-pipeline-13-stage.md) | LIVE — pipeline reshape Decision 11 2026-05-25 | 15-stage Jordan-EXACT pipeline (filename stale; SUPERSEDED-IN-PART header inside); workflow + ageing rules still valid; finance stages moved to Accounts pipeline per Decision 12 v2 | Done | Allan (executed UI 2026-05-25) |

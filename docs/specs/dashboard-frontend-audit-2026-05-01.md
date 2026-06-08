@@ -1,5 +1,7 @@
 # Dashboard Frontend Audit — TimelessDash 2026-05-01
 
+> **📦 SUPERSEDED 2026-06-08 (doc-drift sweep).** Audit of the old Supabase `timeless-dash` frontend (TimelessDash repo). The live CEO/ops surface is now the **cockpit** (`cockpit/`, zero-dep Node board) over the **GHL → Make → Google Sheet → BigQuery** spine — not this dashboard. Retained for history; do not action. SSOT: [STATE.md](../STATE.md) §14 + [FINALIZATION-ROADMAP-2026-06-07.md](FINALIZATION-ROADMAP-2026-06-07.md).
+
 **Repo:** [github.com/Excluding1/TimelessDash](https://github.com/Excluding1/TimelessDash) (private)
 **App location:** `bathresurf-nsw-dashboard/` subfolder
 **Cloned to:** `~/Downloads/TimelessDash/`

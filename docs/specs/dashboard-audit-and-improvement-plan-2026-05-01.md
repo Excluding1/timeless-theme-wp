@@ -1,5 +1,7 @@
 # Dashboard Audit + Improvement Plan (2026-05-01)
 
+> **📦 SUPERSEDED 2026-06-08 (doc-drift sweep).** This targets the old Supabase `timeless-dash` (TimelessDash repo). The live CEO/ops surface is now the **cockpit** (`cockpit/`, zero-dep Node board) over the **GHL → Make → Google Sheet → BigQuery** spine — not this dashboard. Retained for history; do not action. SSOT: [STATE.md](../STATE.md) §14 + [FINALIZATION-ROADMAP-2026-06-07.md](FINALIZATION-ROADMAP-2026-06-07.md).
+
 **Trigger:** Allan's directive — *"fix, clean up, improve UI, improve architect, improve code, add goals, etc do everything give these tasks to your manager role md expert to delegate and plan out tasks to the employees expert"* + *"everything on the dashboard including data and ui code and code functions are a draft only, needs improving and fixing"*
 
 **Manager:** [manager-business-orchestrator.md](../roles/manager-business-orchestrator.md)

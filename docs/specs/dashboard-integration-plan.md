@@ -1,5 +1,7 @@
 # Spec: Dashboard Integration — CEO + AI Agent Access
 
+> **📦 SUPERSEDED 2026-06-08 (doc-drift sweep).** Integration plan for the old Supabase `timeless-dash` + the VPS-daemon access model (see superseded `persistent-ceo-vps-deployment.md`). The live CEO/ops surface is now the **cockpit** (`cockpit/`, zero-dep Node board) over the **GHL → Make → Google Sheet → BigQuery** spine — no Supabase dashboard, no 24/7 VPS agent. Retained for history; do not action. SSOT: [STATE.md](../STATE.md) §14 + [FINALIZATION-ROADMAP-2026-06-07.md](FINALIZATION-ROADMAP-2026-06-07.md).
+
 > **⚠️ Updated 2026-05-01 PM:** Allan elected VPS-first architecture (not Cloud Function). See [persistent-ceo-vps-deployment.md](persistent-ceo-vps-deployment.md) for the canonical deployment plan. This doc remains accurate for the **L1 (CEO direct) + L3 (Native UI) + access model**, but **L2 (AI agent)** is now spec'd as a VPS daemon, not a Cloud Function. Reasons in the new doc § 1.
 
 
