@@ -18,7 +18,8 @@ function db(): SupabaseClient {
 }
 
 function secretOk(req: Request): boolean {
-  const got = req.headers.get('x-webhook-secret') ?? '';
+  // SM8 object-webhooks can't send a custom header, so the shared secret also rides in the callback URL (?s=).
+  const got = req.headers.get('x-webhook-secret') ?? new URL(req.url).searchParams.get('s') ?? '';
   return WEBHOOK_SECRET.length > 0 && secureCompare(got, WEBHOOK_SECRET);
 }
 
@@ -66,26 +67,37 @@ Deno.serve(async (req) => {
   let body: Record<string, unknown> = {};
   try { body = await req.json(); } catch { /* tolerate empty/garbage; still 200 below */ }
 
-  // Subscription handshake — harmless echo, no secret required (SM8 may not send our header here).
-  // Only a PURE handshake short-circuits; a real event that happens to carry a 'challenge' field
-  // still goes through the secret check + processing (Cleo P2).
-  if (typeof body.challenge === 'string' && !('uuid' in body) && !('object' in body)) {
+  // Subscription handshake — echo the challenge so SM8 activates the subscription (no secret required;
+  // SM8 sends this on register). Guard: only when it is NOT a real job event (no uuid/entry/changed_fields).
+  if (
+    typeof body.challenge === 'string' &&
+    !('uuid' in body) && !('entry' in body) && !('changed_fields' in body) && !('resource_url' in body)
+  ) {
     return jsonResponse({ challenge: body.challenge });
   }
 
   // Real events MUST carry the shared secret. Bad secret = 401 (NOT 410).
   if (!secretOk(req)) return new Response('unauthorized', { status: 401 });
 
-  const obj = body.object as Record<string, unknown> | undefined;
-  const uuid = typeof body.uuid === 'string' ? body.uuid
-    : typeof obj?.uuid === 'string' ? String(obj.uuid) : '';
+  // Real SM8 object-webhook payload = { object, entry: [{uuid}], changed_fields, resource_url }.
+  // Collect each entry's uuid (fallback: a single top-level uuid).
+  const uuids: string[] = [];
+  if (Array.isArray(body.entry)) {
+    for (const e of body.entry) {
+      const u = (e as Record<string, unknown> | null)?.uuid;
+      if (typeof u === 'string') uuids.push(u);
+    }
+  } else if (typeof body.uuid === 'string') {
+    uuids.push(body.uuid);
+  }
 
-  // Validate + ACK 200 immediately; the SM8 round-trip runs in the background. NEVER block, NEVER 410.
-  if (uuid && !isDuplicate(uuid)) {
-    // EdgeRuntime.waitUntil keeps the async work alive after we respond (Supabase Edge runtime).
-    // @ts-ignore — EdgeRuntime is injected by the Supabase Edge runtime, absent in local `deno test`.
-    if (typeof EdgeRuntime !== 'undefined') EdgeRuntime.waitUntil(processJob(uuid));
-    else void processJob(uuid);
+  // ACK 200 immediately; the SM8 round-trips run in the background. NEVER block, NEVER 410.
+  for (const uuid of uuids) {
+    if (!isDuplicate(uuid)) {
+      // @ts-ignore — EdgeRuntime is injected by the Supabase Edge runtime, absent in local `deno test`.
+      if (typeof EdgeRuntime !== 'undefined') EdgeRuntime.waitUntil(processJob(uuid));
+      else void processJob(uuid);
+    }
   }
   return jsonResponse({ ok: true });
 });
