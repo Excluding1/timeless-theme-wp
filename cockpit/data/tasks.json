@@ -149,6 +149,10 @@
           "done": true
         },
         {
+          "title": "✅ BROWSER-TESTED + COMMITTED 2026-06-08 (Clifford drove every screen in a 375x812 phone viewport via preview). Found+fixed 2 runtime bugs that passed build/tsc/Cleo-code-review CLEAN: (1) infinite render-loop in all 4 detail pages (`detail` in useEffect deps → effect re-fires forever → 'couldn't load this job'); (2) multi-day premature completion (Mark Done now requires the final day). Verified live: sign-in, Home tabs+counts, job detail (per-SKU+during photo checklist, pay navy), accept (softened 'agreeing to take it on' copy + hand-back hint), My Jobs (Booked/Awaiting-time derived labels), Day1/Day2 lock, photo capture → Uploaded → localStorage-persisted (5/5), completion gate 0/5→enabled. tsc strict CLEAN + build GREEN + cold-load console CLEAN. Committed 261e6fe (36 files). Minor polish noted (non-blocking): image onError fallback + booked-detail footer bottom-padding. NEXT = Allan creates Supabase project → wire the api.ts seam (Phase 1 backend).",
+          "done": true
+        },
+        {
           "title": "Phase 1 — Foundation: secure backend (holds SM8 key; per-sub auth; sub↔job assignment table; contact-field filter; rate governor; SM8 webhook receiver) + SM8 read integration + Make change to STRIP customer contact from the SM8 job (name+address only; customer comms → GHL/Twilio)",
           "done": false
         },
