@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { Assignment, AvailabilityWindow, CapturedPhoto, SubProfile } from '../types';
 import { api } from './api';
 import type { ProblemPayload } from './api';
+import { playSound, type SoundId } from './sound';
 
 // Single source of truth: the store calls `api` and caches the result.
 // No optimistic dual-array. Lists/detail are caches; mutations re-fetch from `api`.
@@ -15,6 +16,9 @@ const savePhotos = (p: CapturedPhoto[]) => { try { localStorage.setItem(PHOTOS_K
 interface AppState {
   isAuthenticated: boolean;
   isOffline: boolean;
+  soundEnabled: boolean;
+  soundId: SoundId;
+  hasLoadedJobs: boolean;
 
   available: Assignment[];
   booked: Assignment[];
@@ -27,6 +31,8 @@ interface AppState {
 
   setAuth: (v: boolean) => void;
   setOffline: (v: boolean) => void;
+  setSoundEnabled: (v: boolean) => void;
+  setSoundId: (id: SoundId) => void;
 
   fetchJobs: () => Promise<void>;
   fetchJobDetail: (id: string) => Promise<Assignment | null>;
@@ -50,6 +56,9 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
   isAuthenticated: localStorage.getItem('tj_auth') === '1',
   isOffline: !navigator.onLine,
+  soundEnabled: localStorage.getItem('tj_sound_enabled') !== '0',
+  soundId: ((localStorage.getItem('tj_sound_id') as SoundId) || 'chime'),
+  hasLoadedJobs: false,
 
   available: [],
   booked: [],
@@ -62,12 +71,22 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   setAuth: (v) => { localStorage.setItem('tj_auth', v ? '1' : '0'); set({ isAuthenticated: v }); },
   setOffline: (v) => set({ isOffline: v }),
+  setSoundEnabled: (v) => { localStorage.setItem('tj_sound_enabled', v ? '1' : '0'); set({ soundEnabled: v }); },
+  setSoundId: (id) => { localStorage.setItem('tj_sound_id', id); set({ soundId: id }); },
 
   fetchJobs: async () => {
     set({ loading: true, error: null });
     try {
+      const prevIds = new Set(get().available.map((a) => a.id));
+      const firstLoad = !get().hasLoadedJobs;
       const [available, booked] = await Promise.all([api.getAvailableJobs(), api.getBookedJobs()]);
-      set({ available, booked, loading: false });
+      set({ available, booked, loading: false, hasLoadedJobs: true });
+      // New-job alert: a NEW offer appeared (not on first load) -> chime + buzz (Allan's BlueEye idea).
+      const fresh = available.filter((a) => !prevIds.has(a.id));
+      if (!firstLoad && fresh.length > 0 && get().soundEnabled) {
+        playSound(get().soundId);
+        try { if (typeof navigator.vibrate === 'function') navigator.vibrate([120, 60, 120]); } catch { /* unsupported */ }
+      }
     } catch (e: unknown) {
       set({ error: e instanceof Error ? e.message : 'Something went wrong', loading: false });
     }

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Loader2, BookOpen, ChevronRight } from 'lucide-react';
 import { useAppStore } from '../lib/store';
 import { Button, Badge } from '../components/ui';
+import { cn } from '../lib/utils';
+import { SOUND_OPTIONS, playSound } from '../lib/sound';
 
 function formatExpiry(iso: string): string {
   const d = new Date(iso);
@@ -11,7 +13,7 @@ function formatExpiry(iso: string): string {
 }
 
 export function Profile() {
-  const { profile, fetchProfile, setAuth } = useAppStore();
+  const { profile, fetchProfile, setAuth, soundEnabled, soundId, setSoundEnabled, setSoundId } = useAppStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,6 +60,55 @@ export function Profile() {
                 Expires {formatExpiry(profile.pl_insurance_expiry)}
               </p>
             </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200">
+            <h3 className="text-xs font-bold text-[var(--color-secondary)] tracking-widest mb-3 uppercase">
+              New job alerts
+            </h3>
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-sm font-bold text-[var(--color-primary)]">Sound when a new job arrives</span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={soundEnabled}
+                aria-label="Sound for new jobs"
+                onClick={() => { setSoundEnabled(!soundEnabled); if (!soundEnabled) playSound(soundId); }}
+                className={cn(
+                  'relative w-12 h-7 rounded-full transition-colors flex-shrink-0',
+                  soundEnabled ? 'bg-[var(--color-primary)]' : 'bg-gray-300',
+                )}
+              >
+                <span
+                  className={cn(
+                    'absolute top-1 w-5 h-5 rounded-full bg-white shadow transition-transform',
+                    soundEnabled ? 'translate-x-6' : 'translate-x-1',
+                  )}
+                />
+              </button>
+            </div>
+            {soundEnabled && (
+              <div className="mt-4">
+                <p className="text-xs text-[var(--color-secondary)] mb-2">Pick your sound (tap to hear it):</p>
+                <div className="flex gap-2">
+                  {SOUND_OPTIONS.map((o) => (
+                    <button
+                      key={o.id}
+                      type="button"
+                      onClick={() => { setSoundId(o.id); playSound(o.id); }}
+                      className={cn(
+                        'flex-1 min-h-[44px] rounded-xl border text-xs font-bold',
+                        soundId === o.id
+                          ? 'border-[var(--color-primary)] bg-[var(--color-primary)] text-white'
+                          : 'border-gray-200 bg-white text-[var(--color-secondary)]',
+                      )}
+                    >
+                      {o.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <button
