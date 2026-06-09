@@ -85,7 +85,7 @@ function timeless_shortcode_before_after( $atts ) {
         <div class="absolute inset-0 w-full h-full">
             <img src="<?php echo esc_url( $a['after'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — after' ); ?>" class="w-full h-full object-cover absolute inset-0" />
         </div>
-        <div class="ba-clip absolute top-0 left-0 bottom-0 overflow-hidden" style="width:50%;">
+        <div class="ba-clip absolute inset-0 overflow-hidden" style="clip-path:inset(0 50% 0 0);">
             <div class="ba-before absolute inset-0">
                 <img src="<?php echo esc_url( $a['before'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — before' ); ?>" class="w-full h-full object-cover absolute inset-0" />
             </div>
@@ -265,7 +265,7 @@ function timeless_blog_quote_cta_box() {
         <div class="p-6 -mt-12 relative">
             <span class="inline-block py-0.5 px-2 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded-sm mb-3">Free Quote</span>
             <h3 class="text-xl font-extrabold text-white tracking-tight leading-tight mb-2">Request A Free Quote</h3>
-            <p class="text-xs text-white/80 leading-relaxed mb-5">Send 3-4 photos. Fixed-price quote back within hours. No obligation.</p>
+            <p class="text-xs text-white/80 leading-relaxed mb-5">Send 3-4 photos. Fixed-price quote back within 1 business day. No obligation.</p>
             <a href="<?php echo $contact; ?>" class="block w-full text-center bg-white text-primary font-bold py-2.5 rounded-lg hover:bg-surface-container-low transition-colors text-sm mb-2">
                 Get Free Quote →
             </a>
@@ -364,7 +364,7 @@ function timeless_blog_end_of_article_cta() {
                 We offer fast, cost-effective resurfacing that restores surfaces without the cost or disruption of full replacements.
             </p>
             <p class="text-sm sm:text-base text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
-                Send 3-4 photos of your bathroom. We'll reply with a fixed-price quote within hours. No call-out fee, no obligation.
+                Send 3-4 photos of your bathroom. We'll reply with a fixed-price quote within 1 business day. No call-out fee, no obligation.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
                 <a href="<?php echo $contact; ?>" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
@@ -2359,7 +2359,7 @@ function timeless_handle_quote_form() {
     }
 
     if ( $sent ) {
-        wp_send_json_success( array( 'message' => 'Thanks! We\'ll have your quote ready within hours.' ) );
+        wp_send_json_success( array( 'message' => 'Thanks! We\'ll have your quote ready within 1 business day.' ) );
     } else {
         wp_send_json_error( array( 'message' => 'Something went wrong. Please call us directly.' ) );
     }
@@ -2487,7 +2487,7 @@ function timeless_render_chat_widget() {
                     </div>
                     <div>
                         <p class="font-bold text-sm"><?php esc_html_e( 'Have a Question?', 'timeless' ); ?></p>
-                        <p class="text-[0.65rem] text-white/70"><?php esc_html_e( 'We reply within hours', 'timeless' ); ?></p>
+                        <p class="text-[0.65rem] text-white/70"><?php esc_html_e( 'We reply within 1 business day', 'timeless' ); ?></p>
                     </div>
                 </div>
                 <button id="chat-widget-close" class="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="<?php esc_attr_e( 'Close chat', 'timeless' ); ?>">
@@ -2528,7 +2528,7 @@ function timeless_render_chat_widget() {
                         <span class="material-symbols-outlined text-3xl text-emerald-600" aria-hidden="true">check_circle</span>
                     </div>
                     <p class="font-bold text-primary mb-2"><?php esc_html_e( 'Message sent!', 'timeless' ); ?></p>
-                    <p class="text-xs text-secondary"><?php esc_html_e( "We'll reply within hours during business hours.", 'timeless' ); ?></p>
+                    <p class="text-xs text-secondary"><?php esc_html_e( "We'll reply within 1 business day during business hours.", 'timeless' ); ?></p>
                 </div>
                 <div id="cw-error" class="hidden p-3 mt-3 bg-red-50 border border-red-200 rounded-lg">
                     <p class="text-xs text-red-700 text-center" id="cw-error-message"></p>

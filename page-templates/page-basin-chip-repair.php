@@ -41,7 +41,7 @@
  { "@type": "Question", "name": "Is the repair waterproof?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The final coating is a sealed, waterproof finish designed for daily use. Water, soap and cleaning products won't penetrate the repaired area. It's built to withstand the same wear as the original basin surface." } },
  { "@type": "Question", "name": "Can you fix multiple chips at once?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. If your basin has several chips or a combination of chips and cracks, we address all damaged areas in the same visit. Repairing multiple spots at once is more efficient and cost-effective than booking separate jobs." } },
  { "@type": "Question", "name": "Can you also resurface the whole basin?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. If your basin has widespread damage, heavy staining, or you want a brand-new finish, a full basin resurfacing may be a better option. We recoat the entire basin with a durable new high-gloss white finish. See our basin restoration service for details." } },
- { "@type": "Question", "name": "How do I get a quote?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3-4 photos of the damaged basin through our contact page and we'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
+ { "@type": "Question", "name": "How do I get a quote?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3-4 photos of the damaged basin through our contact page and we'll have a fixed-price quote back to you within 1 business day. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
  ]
  }
  </script>
@@ -211,7 +211,7 @@
 <section class="py-12 bg-primary text-white">
  <div class="max-w-3xl mx-auto px-4 text-center">
  <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to Transform Your Bathroom?</h2>
- <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation.</p>
+ <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within 1 business day. No obligation.</p>
  <div class="flex flex-col sm:flex-row gap-3 justify-center">
  <a href="#quote" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
  <span class="material-symbols-outlined text-[20px]">photo_camera</span>
@@ -287,7 +287,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can you also resurface the whole basin?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. If your basin has widespread damage, heavy staining, or you want a brand-new finish, a full basin resurfacing may be a better option. We recoat the entire basin with a durable new high-gloss white finish. See our <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="text-primary underline font-medium">basin restoration service</a> for details.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of the damaged basin through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of the damaged basin through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within 1 business day. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
  </div>
 </section>
@@ -329,7 +329,7 @@
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Get Your Free Quote in 60 Seconds</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of the damage and we'll have a fixed-price quote back to you within hours. No obligation, no call-out fee.</p>
+ <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of the damage and we'll have a fixed-price quote back to you within 1 business day. No obligation, no call-out fee.</p>
  <div class="flex flex-col sm:flex-row gap-4 justify-center">
  <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>
  <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-10 py-4 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-base"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Or Call Us</a>

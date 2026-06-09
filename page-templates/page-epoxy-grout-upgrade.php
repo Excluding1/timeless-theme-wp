@@ -42,7 +42,7 @@
  { "@type": "Question", "name": "Does epoxy grout come in different colours?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Professional-grade epoxy grout is available in a wide range of colours to match or complement your existing tiles. We can help you choose a colour that suits your bathroom. The colour also stays consistent over time. Epoxy grout doesn't discolour or yellow with age like cement grout can." } },
  { "@type": "Question", "name": "How long does epoxy grout take to cure?", "acceptedAnswer": { "@type": "Answer", "text": "Epoxy grout typically reaches an initial cure within 24 hours, at which point the shower can be used. Full chemical cure takes around 7 days, during which the grout continues to harden and reach its maximum strength. We'll give you specific care instructions to follow during the curing period." } },
  { "@type": "Question", "name": "Do you need to seal epoxy grout?", "acceptedAnswer": { "@type": "Answer", "text": "No. And this is one of the biggest advantages of epoxy grout. Because it's non-porous, it never needs sealing. Standard cement grout should be sealed every 1-2 years to maintain moisture resistance, but epoxy grout is waterproof from day one and stays that way for its entire lifespan." } },
- { "@type": "Question", "name": "How do I get a quote for an epoxy grout upgrade?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3-4 photos of your shower through our contact page and we'll have a fixed-price quote back to you within hours. Let us know you're interested in epoxy grout and we'll include it as an option. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
+ { "@type": "Question", "name": "How do I get a quote for an epoxy grout upgrade?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3-4 photos of your shower through our contact page and we'll have a fixed-price quote back to you within 1 business day. Let us know you're interested in epoxy grout and we'll include it as an option. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
  ]
  }
  </script>
@@ -224,7 +224,7 @@
 <section class="py-12 bg-primary text-white">
  <div class="max-w-3xl mx-auto px-4 text-center">
  <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to Transform Your Bathroom?</h2>
- <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation.</p>
+ <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within 1 business day. No obligation.</p>
  <div class="flex flex-col sm:flex-row gap-3 justify-center">
  <a href="#quote" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
  <span class="material-symbols-outlined text-[20px]">photo_camera</span>
@@ -297,7 +297,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you need to seal epoxy grout?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">No. And this is one of the biggest advantages of epoxy grout. Because it's non-porous, it never needs sealing. Standard cement grout should be sealed every 1-2 years to maintain moisture resistance, but epoxy grout is waterproof from day one and stays that way for its entire lifespan. That's years of maintenance you'll never have to do.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for an epoxy grout upgrade?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your shower through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and mention you're interested in epoxy grout. We'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for an epoxy grout upgrade?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your shower through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and mention you're interested in epoxy grout. We'll have a fixed-price quote back to you within 1 business day. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
  </div>
 </section>
@@ -339,7 +339,7 @@
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Get Your Free Quote in 60 Seconds</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your shower grout and let us know you're interested in an epoxy upgrade. We'll have a fixed-price quote back to you within hours. No obligation, no call-out fee.</p>
+ <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your shower grout and let us know you're interested in an epoxy upgrade. We'll have a fixed-price quote back to you within 1 business day. No obligation, no call-out fee.</p>
  <div class="flex flex-col sm:flex-row gap-4 justify-center">
  <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>
  <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-10 py-4 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-base"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Or Call Us</a>

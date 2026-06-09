@@ -42,7 +42,7 @@
  { "@type": "Question", "name": "How long does the new coating take to cure?", "acceptedAnswer": { "@type": "Answer", "text": "The resurfaced bath is touch-dry within hours. We recommend waiting 24 hours before using the bath to allow the coating to fully cure and harden. After 24 hours it is ready for normal daily use." } },
  { "@type": "Question", "name": "What colour will my resurfaced bath be?", "acceptedAnswer": { "@type": "Answer", "text": "Standard finish is high-gloss white. The most popular choice and matches modern bathroom fittings. Light custom tints (cream, off-white) available by request if you have specific colour-matching needs." } },
  { "@type": "Question", "name": "Do you fix chips and damage as well as peeling?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Once we strip the old peeling coating, we repair any chips, cracks, or damage in the underlying bath surface before applying the new coating. The finished result is smooth and even across the entire bath." } },
- { "@type": "Question", "name": "How do I get a quote for my peeling bathtub?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3 to 4 photos of your peeling bath through our contact page and we will have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
+ { "@type": "Question", "name": "How do I get a quote for my peeling bathtub?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3 to 4 photos of your peeling bath through our contact page and we will have a fixed-price quote back to you within 1 business day. No call-out fee, no obligation. You can also call us directly on <?php echo timeless_phone(); ?>." } }
  ]
  }
  </script>
@@ -217,7 +217,7 @@
 <section class="py-12 bg-primary text-white">
  <div class="max-w-3xl mx-auto px-4 text-center">
  <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to Transform Your Bathroom?</h2>
- <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation.</p>
+ <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within 1 business day. No obligation.</p>
  <div class="flex flex-col sm:flex-row gap-3 justify-center">
  <a href="#quote" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
  <span class="material-symbols-outlined text-[20px]">photo_camera</span>
@@ -297,7 +297,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Do you fix chips and damage too?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. Once we strip the old peeling coating, we repair any <a href="<?php echo esc_url( home_url( '/services/chipped-bathtub-repair/' ) ); ?>" class="text-primary underline font-medium">chips, cracks, or damage</a> in the underlying bath surface before applying the new coating. The finished result is smooth and even across the entire bath. No bumps, ridges, or imperfections.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for my peeling bathtub?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your peeling bath through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within hours. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for my peeling bathtub?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3-4 photos of your peeling bath through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within 1 business day. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
  </div>
 </section>
@@ -339,7 +339,7 @@
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Get Your Free Quote in 60 Seconds</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your peeling bathtub and we'll have a fixed-price quote back to you within hours. No obligation, no call-out fee.</p>
+ <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your peeling bathtub and we'll have a fixed-price quote back to you within 1 business day. No obligation, no call-out fee.</p>
  <div class="flex flex-col sm:flex-row gap-4 justify-center">
  <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>
  <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-10 py-4 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-base"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Or Call Us</a>

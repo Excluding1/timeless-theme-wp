@@ -79,7 +79,7 @@
  </div>
  <h2 class="font-bold text-primary text-lg mb-2">Email</h2>
  <a href="mailto:<?php echo timeless_email(); ?>" class="text-sm font-bold text-primary hover:text-primary-soft transition-colors block mb-2 break-all"><?php echo timeless_email(); ?></a>
- <p class="text-xs text-secondary">We respond within hours</p>
+ <p class="text-xs text-secondary">We respond within 1 business day</p>
  </div>
  <!-- Service Area -->
  <div class="bg-white rounded-xl p-8 text-center hover:shadow-lg transition-all border border-surface-container">

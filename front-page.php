@@ -42,7 +42,7 @@ get_header(); ?>
  "@context": "https://schema.org", "@type": "FAQPage",
  "mainEntity": [
  { "@type": "Question", "name": "How long does bathroom resurfacing take?", "acceptedAnswer": { "@type": "Answer", "text": "Most jobs are completed in a single day (6-8 hours). Your bathroom is ready to use again 24 hours after completion." } },
- { "@type": "Question", "name": "How much does bathroom resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different, so we provide fixed-price quotes based on your photos. A complete bathroom resurfacing package typically saves 80-90% compared to a full renovation. Send us photos for an accurate quote within hours." } },
+ { "@type": "Question", "name": "How much does bathroom resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every bathroom is different, so we provide fixed-price quotes based on your photos. A complete bathroom resurfacing package typically saves 80-90% compared to a full renovation. Send us photos for an accurate quote within 1 business day." } },
  { "@type": "Question", "name": "How long does resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "With proper care, up to 10 years. We use commercial-grade two-part epoxy coatings resistant to chipping, peeling, and yellowing. All work backed by our workmanship warranty." } },
  { "@type": "Question", "name": "Is resurfacing worth it vs full renovation?", "acceptedAnswer": { "@type": "Answer", "text": "For most homeowners, yes. up to 80% cheaper, 1 day instead of 2-4 weeks, zero demolition, no construction waste. Ideal for rentals, pre-sale upgrades, and structurally sound bathrooms." } },
  { "@type": "Question", "name": "Do you check for asbestos?", "acceptedAnswer": { "@type": "Answer", "text": "If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed." } },
@@ -224,7 +224,7 @@ get_header(); ?>
 <section class="py-10 sm:py-14 bg-primary">
  <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center">
  <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">Ready for a Quote?</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-6 max-w-xl mx-auto">Send us a few photos and get a fixed-price quote within hours. No obligation.</p>
+ <p class="text-on-primary-container text-sm sm:text-base mb-6 max-w-xl mx-auto">Send us a few photos and get a fixed-price quote within 1 business day. No obligation.</p>
  <a href="#quote" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-xl transition-all">Get Your Free Quote <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
  </div>
 </section>
@@ -423,7 +423,7 @@ get_header(); ?>
 
 <!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
- <div class="max-w-4xl mx-auto px-6 sm:px-8">
+ <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
  <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Quote</h2>

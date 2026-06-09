@@ -206,7 +206,7 @@ updateVisibility();
  <div class="max-w-3xl mx-auto px-6 sm:px-8 text-center">
  <span class="material-symbols-outlined text-5xl text-tertiary-fixed-dim mb-4" aria-hidden="true">auto_awesome</span>
  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tighter mb-4">Ready for Your Transformation?</h2>
- <p class="text-on-primary-container text-base sm:text-lg mb-8 max-w-xl mx-auto">Send us photos of your bathroom and get a fixed-price quote within hours. No obligation, no surprises.</p>
+ <p class="text-on-primary-container text-base sm:text-lg mb-8 max-w-xl mx-auto">Send us photos of your bathroom and get a fixed-price quote within 1 business day. No obligation, no surprises.</p>
  <a class="inline-flex items-center gap-2 px-10 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-xl transition-all text-lg" href="<?php echo esc_url( home_url( '/#quote' ) ); ?>">Get a Free Quote <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
  </div>
 </section>

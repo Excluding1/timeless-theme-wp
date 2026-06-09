@@ -41,7 +41,7 @@
  { "@type": "Question", "name": "Can you respray the benchtop as well?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on the material. Laminate benchtops can be resprayed along with the vanity cabinet for a seamless look. Stone, engineered stone, and ceramic benchtops are not suitable for respraying. We'll advise you based on your specific vanity." } },
  { "@type": "Question", "name": "How long does the respray take to dry?", "acceptedAnswer": { "@type": "Answer", "text": "The coating is touch-dry within 2 to 4 hours. We recommend waiting 24 hours before placing items back inside the vanity and 48 hours before exposing the surface to water or heavy use. Full cure takes approximately 7 days." } },
  { "@type": "Question", "name": "Can I choose any colour for my vanity?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We can match any colour you like. Most clients choose modern whites, warm greys, charcoal, or matte black to update the look. We can also colour-match to an existing fixture or paint swatch if you want the vanity to tie in with your bathroom design." } },
- { "@type": "Question", "name": "How do I get a quote for a vanity respray?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3 to 4 photos of your vanity through our contact page and we'll have a fixed-price quote back to you within hours. Include a photo of the front, open doors showing the inside, and a close-up of the surface. No call-out fee, no obligation." } }
+ { "@type": "Question", "name": "How do I get a quote for a vanity respray?", "acceptedAnswer": { "@type": "Answer", "text": "Send us 3 to 4 photos of your vanity through our contact page and we'll have a fixed-price quote back to you within 1 business day. Include a photo of the front, open doors showing the inside, and a close-up of the surface. No call-out fee, no obligation." } }
  ]
  }
  </script>
@@ -221,7 +221,7 @@
 <section class="py-12 bg-primary text-white">
  <div class="max-w-3xl mx-auto px-4 text-center">
  <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to Transform Your Bathroom?</h2>
- <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation.</p>
+ <p class="text-white/80 mb-6">Send us a few photos and we'll have a fixed-price quote back to you within 1 business day. No obligation.</p>
  <div class="flex flex-col sm:flex-row gap-3 justify-center">
  <a href="#quote" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
  <span class="material-symbols-outlined text-[20px]">photo_camera</span>
@@ -297,7 +297,7 @@
 
  <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Can I choose any colour for my vanity?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Yes. We can match any colour you like. Most clients choose modern whites, warm greys, charcoal, or matte black to update the look. We can also colour-match to an existing fixture or paint swatch if you want the vanity to tie in with your bathroom design. Satin and semi-gloss finishes are most popular for vanities.</p></div></div>
 
- <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for a vanity respray?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3 to 4 photos of your vanity through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within hours. Include a photo of the front with doors closed, doors open showing the inside, and a close-up of the surface condition. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-surface-container-low"><button class="w-full flex justify-between items-center p-5 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How do I get a quote for a vanity respray?</h3><span class="material-symbols-outlined faq-chevron text-primary" aria-hidden="true">expand_more</span></button><div class="faq-answer px-5"><p class="text-sm text-secondary leading-relaxed pb-5">Send us 3 to 4 photos of your vanity through our <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="text-primary underline font-medium">contact page</a> and we'll have a fixed-price quote back to you within 1 business day. Include a photo of the front with doors closed, doors open showing the inside, and a close-up of the surface condition. No call-out fee, no obligation. You can also call us directly on <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline font-medium"><?php echo timeless_phone(); ?></a>.</p></div></div>
  </div>
  </div>
 </section>
@@ -339,7 +339,7 @@
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Get Your Free Vanity Respray Quote</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your vanity and we'll have a fixed-price quote back to you within hours. No obligation, no call-out fee.</p>
+ <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your vanity and we'll have a fixed-price quote back to you within 1 business day. No obligation, no call-out fee.</p>
  <div class="flex flex-col sm:flex-row gap-4 justify-center">
  <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>
  <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-10 py-4 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-base"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Or Call Us</a>

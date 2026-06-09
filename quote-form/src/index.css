@@ -9,9 +9,7 @@
   --text-h: #08060d;
   --bg: #fff;
   --border: #e5e4e7;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
+  /* --accent purple removed (dead Vite boilerplate — nothing renders it; was a loaded gun) */
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -26,6 +24,13 @@
 #quote-form-root textarea::placeholder {
   color: #6b7280;
   opacity: 1;
+}
+
+/* Visible keyboard focus ring (WCAG 2.4.7) — scoped to the form so it never touches the host page. */
+#quote-form-root :is(button, a, input, textarea, select, [role="radio"], [role="checkbox"], [role="option"]):focus-visible {
+  outline: 3px solid #041534;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 #quote-form-root h1,

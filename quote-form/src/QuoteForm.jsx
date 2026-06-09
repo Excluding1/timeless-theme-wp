@@ -16,7 +16,7 @@ import { resolveQuote } from "./lib/pricing-resolver";
 /* ─── BRAND PALETTE ─── */
 const C = {
   pri: "#041534", priC: "#1b2a4a", acc: "#e7c08b", accDk: "#281800",
-  sec: "#44495a", brd: "#9aa0a6", surf: "#f7f9fb", surfC: "#eceef0",
+  sec: "#44495a", brd: "#82888e", surf: "#f7f9fb", surfC: "#eceef0",
   surfLow: "#f2f4f6", white: "#ffffff", err: "#ba1a1a", errBg: "#ffdad6",
   warn: "#854F0B", warnBg: "#FFF8E1", green: "#0F6E56", greenBg: "#e1f5ee",
 };
@@ -839,7 +839,10 @@ export default function QuoteForm() {
   };
 
   /* ─── GATING ─── */
-  const can1 = fnOk && lnOk && phoneOk && emOk && cust && tenantOk && llEmOk;
+  // emOk is intentionally NOT required here: phoneOk already requires email on the
+  // landline / no-phone paths, so a valid MOBILE alone passes. Stops a paid click that
+  // gives name+mobile but stalls on email from being a dead end. (Panel rank #2)
+  const can1 = fnOk && lnOk && phoneOk && cust && tenantOk && llEmOk;
   const can2 = addr.length >= 6 && addrOk !== false && prop && bathroomCount && builtBefore1990 && (prop !== "apt" || lift);
   const can3 = notSureMode ? notSureText.trim().length >= 10 : fullBathroomMode ? !!fullScope : selectedAreas.length > 0;
 
@@ -1217,7 +1220,7 @@ export default function QuoteForm() {
       // had submitted. Now we keep their entered data + show an actionable recovery screen.
       console.error("All webhook retries failed — lead at risk:", { firstName: fn, phone, email: em });
       setSubmitError({
-        message: "We had trouble sending your quote. Please email us at quotes@timelessresurfacing.com.au with your details, or call/text 0451 110 154 — we'll respond within 24 hours.",
+        message: "We had trouble sending your quote. Please email us at quotes@timelessresurfacing.com.au with your details, or call/text 0451 110 154 — we'll respond within 1 business day.",
       });
       setSubmitting(false);
       return;
@@ -1334,7 +1337,7 @@ export default function QuoteForm() {
           {!noPhone ? (
             <div>
               <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone *</label>
-              <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUPhone(e.target.value))} placeholder="Mobile or landline" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} />
+              <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUPhone(e.target.value))} onBlur={() => { if (fnOk && lnOk && phOk) sendPartialLead(); }} placeholder="Mobile or landline" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} />
               {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We&rsquo;ll convert +61 to 0X format — keep typing" : "Enter an Australian phone (mobile starts 04, landline starts 02/03/07/08)"}</p>}
               {phSpam && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>That doesn&rsquo;t look like a real phone number. Please enter your actual contact number.</p>}
               {phIsMobile && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
@@ -1348,7 +1351,7 @@ export default function QuoteForm() {
               <button type="button" onClick={() => setNoPhone(false)} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", textDecoration: "underline", padding: "4px 0", minHeight: 32 }}>Actually, I do have a phone</button>
             </div>
           )}
-          <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Email *</label><input type="email" value={em} onChange={e => setEm(e.target.value)} placeholder="your@email.com" autoComplete="email" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${em.length > 3 && !emOk ? C.err : C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} />{em.length > 3 && !emOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>Please enter a valid email address</p>}</div>
+          <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Email *</label><input type="email" value={em} onChange={e => setEm(e.target.value)} onBlur={() => { if (fnOk && lnOk && (phOk || emOk)) sendPartialLead(); }} placeholder="your@email.com" autoComplete="email" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${em.length > 3 && !emOk ? C.err : C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} />{em.length > 3 && !emOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>Please enter a valid email address</p>}</div>
           <div>
             <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Who are you? *</label>
             <OptGrid label="Who are you?" opts={[{ id: "owner", icon: I.house(), label: "Owner / Landlord" }, { id: "pm", icon: I.apt(), label: "Property Manager" }, { id: "builder", icon: I.comm(), label: "Builder" }, { id: "tenant", icon: <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke={C.pri} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/><circle cx="10" cy="11" r="3"/><path d="M21 10.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14"/><path d="M16 7h2M16 11h2"/></svg>, label: "Tenant" }]} val={cust} set={(v) => { setCust(v); if (v !== "tenant") { setTenAuth(null); setLlEm(""); } }} cols={2} />
