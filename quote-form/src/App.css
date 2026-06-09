@@ -1,3 +1,16 @@
-/* Reset */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', system-ui, sans-serif; background: #f7f9fb; -webkit-font-smoothing: antialiased; }
+/* Reset — SCOPED to #quote-form-root so the embedded form can NEVER restyle the host page.
+   (Previously a global `*{margin:0;padding:0}` + `body{...}` reset that wiped the WordPress
+   homepage's spacing and repainted its background the moment the form was embedded. The form
+   mounts in #quote-form-root and is fully inline-styled.) */
+#quote-form-root,
+#quote-form-root *,
+#quote-form-root *::before,
+#quote-form-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#quote-form-root {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
