@@ -3,6 +3,7 @@ import type { Assignment, AvailabilityWindow, CapturedPhoto, SubProfile } from '
 import { api } from './api';
 import type { ProblemPayload } from './api';
 import { playSound, type SoundId } from './sound';
+import { supabase, supabaseConfigured } from './supabase';
 
 // Single source of truth: the store calls `api` and caches the result.
 // No optimistic dual-array. Lists/detail are caches; mutations re-fetch from `api`.
@@ -54,7 +55,7 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
-  isAuthenticated: localStorage.getItem('tj_auth') === '1',
+  isAuthenticated: supabaseConfigured ? false : localStorage.getItem('tj_auth') === '1',
   isOffline: !navigator.onLine,
   soundEnabled: localStorage.getItem('tj_sound_enabled') !== '0',
   soundId: ((localStorage.getItem('tj_sound_id') as SoundId) || 'chime'),
@@ -69,7 +70,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   loading: false,
   error: null,
 
-  setAuth: (v) => { localStorage.setItem('tj_auth', v ? '1' : '0'); set({ isAuthenticated: v }); },
+  setAuth: (v) => {
+    if (supabaseConfigured) { if (!v) void supabase.auth.signOut(); }
+    else { localStorage.setItem('tj_auth', v ? '1' : '0'); }
+    set({ isAuthenticated: v });
+  },
   setOffline: (v) => set({ isOffline: v }),
   setSoundEnabled: (v) => { localStorage.setItem('tj_sound_enabled', v ? '1' : '0'); set({ soundEnabled: v }); },
   setSoundId: (id) => { localStorage.setItem('tj_sound_id', id); set({ soundId: id }); },
@@ -150,4 +155,9 @@ export const useAppStore = create<AppState>((set, get) => ({
 if (typeof window !== 'undefined') {
   window.addEventListener('online', () => { useAppStore.getState().setOffline(false); void useAppStore.getState().fetchJobs(); });
   window.addEventListener('offline', () => useAppStore.getState().setOffline(true));
+  // Real mode: the Supabase session is the source of truth for auth.
+  if (supabaseConfigured) {
+    void supabase.auth.getSession().then(({ data }) => useAppStore.setState({ isAuthenticated: !!data.session }));
+    supabase.auth.onAuthStateChange((_e, session) => useAppStore.setState({ isAuthenticated: !!session }));
+  }
 }

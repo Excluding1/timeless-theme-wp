@@ -72,6 +72,15 @@ Deno.serve(async (req) => {
       // TODO Phase 3.5: when this job's live-assignment count hits 0, flip the SM8 job to Completed
       // (the existing Make back-sync then fires GHL Stage 15). SM8 write-back via the service-role key.
       break;
+    case 'undo': // the 5s undo window after accept
+      if (status !== 'accepted') return fail(409, 'not_accepted', origin);
+      patch.status = 'offered'; patch.accepted_at = null;
+      break;
+    case 'problem':
+      if (status !== 'accepted' && status !== 'in_progress') return fail(409, 'not_accepted', origin);
+      patch.problem_open = true;
+      patch.problem_reason = typeof payload.reason === 'string' ? payload.reason : null;
+      break;
     default:
       return fail(400, 'unknown_action', origin);
   }

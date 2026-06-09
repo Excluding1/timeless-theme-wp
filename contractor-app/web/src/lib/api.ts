@@ -39,6 +39,8 @@ export interface ContractorApi {
   getProfile(): Promise<SubProfile>;
 }
 
-// ---- Active implementation. Swap here when the Supabase backend is ready. ----
+// ---- Active implementation: the real backend when configured (VITE_SUPABASE_*), else mock data. ----
 import { mockApi } from './mockApi';
-export const api: ContractorApi = mockApi;
+import { supabaseApi } from './supabaseApi';
+import { supabaseConfigured } from './supabase';
+export const api: ContractorApi = supabaseConfigured ? supabaseApi : mockApi;

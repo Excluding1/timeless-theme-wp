@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui';
 import { useAppStore } from '../lib/store';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 
 // Mock auth rule (PRD §6.1): empty fields or a fail@ address = bad credentials; anything else succeeds.
 function isBadCredentials(email: string, password: string): boolean {
@@ -18,7 +19,7 @@ export function SignIn() {
   const { setAuth, isOffline } = useAppStore();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
@@ -28,6 +29,21 @@ export function SignIn() {
     }
 
     setLoading(true);
+
+    // Real backend: authenticate against Supabase. The store's auth listener flips isAuthenticated.
+    if (supabaseConfigured) {
+      const { error: authErr } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      setLoading(false);
+      if (authErr) {
+        setError("That email or password doesn't look right. Please try again.");
+        return;
+      }
+      setAuth(true);
+      navigate('/');
+      return;
+    }
+
+    // Mock fallback (no backend configured).
     window.setTimeout(() => {
       if (isBadCredentials(email, password)) {
         setLoading(false);

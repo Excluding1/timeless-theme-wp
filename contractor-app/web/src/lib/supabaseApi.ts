@@ -1,0 +1,73 @@
+// supabaseApi — the real ContractorApi: reads via the `my-jobs` Edge Function, writes via `job-actions`,
+// both carrying the sub's JWT so the database RLS scopes everything to them. Swap-in for mockApi.
+import type { ContractorApi, AcceptResult, Ok, ProblemPayload, PhotoPayload } from './api';
+import type { Assignment, AvailabilityWindow, SubProfile } from '../types';
+import { supabase, FUNCTIONS_URL, ANON_KEY } from './supabase';
+
+async function headers(): Promise<Record<string, string>> {
+  const { data } = await supabase.auth.getSession();
+  return {
+    'Content-Type': 'application/json',
+    'apikey': ANON_KEY,
+    'Authorization': `Bearer ${data.session?.access_token ?? ANON_KEY}`,
+  };
+}
+
+async function getView(view: string): Promise<Assignment[]> {
+  const res = await fetch(`${FUNCTIONS_URL}/my-jobs?view=${view}`, { headers: await headers() });
+  if (!res.ok) throw new Error(`my-jobs ${res.status}`);
+  const j = await res.json();
+  return (j.assignments ?? []) as Assignment[];
+}
+
+async function act(action: string, id: string, payload?: unknown): Promise<Ok> {
+  const res = await fetch(`${FUNCTIONS_URL}/job-actions`, {
+    method: 'POST',
+    headers: await headers(),
+    body: JSON.stringify({ action, id, payload }),
+  });
+  if (!res.ok) throw new Error(`${action} ${res.status}`);
+  return { ok: true };
+}
+
+export const supabaseApi: ContractorApi = {
+  getAvailableJobs: () => getView('available'),
+  getBookedJobs: () => getView('booked'),
+
+  async getJobDetail(id: string): Promise<Assignment> {
+    const res = await fetch(`${FUNCTIONS_URL}/my-jobs?view=detail&id=${encodeURIComponent(id)}`, {
+      headers: await headers(),
+    });
+    if (!res.ok) throw new Error('not_found');
+    const j = await res.json();
+    if (!j.assignment) throw new Error('not_found');
+    return j.assignment as Assignment;
+  },
+
+  async acceptJob(id: string): Promise<AcceptResult> {
+    await act('accept', id);
+    return { ok: true, undo_window_seconds: 5 };
+  },
+  undoAcceptJob: (id) => act('undo', id),
+  declineJob: (id, reason) => act('decline', id, { reason }),
+  submitAvailability: (id, window: AvailabilityWindow) => act('availability', id, { window }),
+  handBack: (id, reason) => act('handback', id, { reason }),
+  completeJob: (id) => act('complete', id),
+  reportProblem: (id, problem: ProblemPayload) => act('problem', id, { reason: problem.reason, note: problem.note }),
+
+  // Phase 5: route to Marko (Slack/SMS). Accepted now so the UX flows; not yet persisted/routed.
+  async messageOffice(): Promise<Ok> {
+    return { ok: true };
+  },
+  // Phase 4: upload to Supabase Storage + SM8 2-step attach. Photos already persist on-device meanwhile.
+  async registerPhoto(): Promise<{ ok: boolean; photo_id: string }> {
+    return { ok: true, photo_id: crypto.randomUUID() };
+  },
+
+  async getProfile(): Promise<SubProfile> {
+    const res = await fetch(`${FUNCTIONS_URL}/my-jobs?view=profile`, { headers: await headers() });
+    if (!res.ok) throw new Error('profile_failed');
+    const j = await res.json();
+    return j.profile as SubProfile;
+  },
+};

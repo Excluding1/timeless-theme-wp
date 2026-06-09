@@ -39,7 +39,7 @@ function toAssignment(a: Row, j: Row) {
     availability: a.sub_availability ?? null,
     scheduled_at: a.scheduled_at ?? null,
     current_day: 1,
-    problem: null,
+    problem: a.problem_open ? { reason: (a.problem_reason as string) ?? '', status: 'open' } : null,
     decline_reason: a.decline_reason ?? null,
   };
 }
