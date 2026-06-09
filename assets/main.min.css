@@ -3887,7 +3887,7 @@
     }
   }
   .sm\:w-\[calc\(50\%-0\.5rem\)\] {
-    @media (width >= 40rem) {
+    .w-full{width:100%}.h-full{height:100%}@media (width >= 40rem) {
       width: calc(50% - 0.5rem);
     }
   }
@@ -5079,5 +5079,3 @@
     }
   }
 }
-
-.w-full{width:100%}.h-full{height:100%}.object-cover{object-fit:cover}
