@@ -153,11 +153,23 @@
           "done": true
         },
         {
+          "title": "✅ TRACK B (in-app guide + office comms) BUILT + BROWSER-TESTED 2026-06-08: 'How we work together' screen (panel-reviewed 5 rules + 9-FAQ, under Profile, clause-numbers out/UCT-safe) + 'Message office' button on booked jobs (quick non-urgent note to Marko, does NOT pause — Fair-Work-safe, distinct from 'I have a problem'=pause + 'Hand back'=re-route); wired via lib/api.ts seam (messageOffice) so Supabase picks it up. PAY-TERM RECONCILED (Cleo+Clifford, Rule 8): invoice-anchored '7 days of you completing the job' (contractor/SOPA-safe, NOT employee pay-for-time). tsc strict CLEAN + vite build GREEN + preview-tested (How-we-work renders w/ updated pay line; Message sheet chip→fills→Send enables→sends→sheet closes; console clean). TODO before real sub: agreement Clause 3 + sub-rate-schedule pay patch (legal brief) + 3 Cleo-verified compliance drifts (accept-rate tiering ×3 docs, no-contact 'phone customer' SOP remnants ×3).",
+          "done": true
+        },
+        {
+          "title": "🟡 PHASE-1 BACKEND CODE BUILT + GREEN 2026-06-09 (committed a09bf38): Supabase Edge Functions (Deno) per PHASE-1-PLAN.md. The 3 security non-negotiables in code+tests — contact-leak filter (allowlist sm8JobToMirror, no contact columns, stripContact defence-in-depth; Layer-A leak test 7/7 vs poisoned jobs), SSRF guard (re-GET by validated UUID only, host-pinned before key, retries 5xx/429), never-410 webhook (ACK 200 + EdgeRuntime.waitUntil + audit_log on fail). + sm8-get-job probe (filtered shape), 3 stubs (501), cors/dedup/respond, contact-leak CI (.github, build-blocking) + test.sh. ✅ DEPLOYED + VERIFIED LIVE 2026-06-09: all 5 Edge functions live on Sydney project vyhtazylezuifxqlrnyw; migration 0001 pushed (6 tables, RLS-on); e2e PROVEN on real SM8 data — webhook POST → re-GET (X-API-Key, SSRF-guarded) → contact-filter → upsert wrote a contact-free job_mirror row (leak scan: no email/phone); sm8-get-job returns filtered shape; never-410 + auth all verified. SM8 key only as an Edge secret. ✅ SM8 Object Webhook REGISTERED + LIVE AUTO-SYNC PROVEN 2026-06-09 (sub uuid db6f59f8, unique_id timeless-contractor-jobsync-v1, active/no-failures): a real SM8 job status change → webhook (entry[] payload, secret in callback ?s=) → re-GET → filter → job_mirror auto-updates in ~5-7s, contact-free. Coexists with Make's Scenario-3 sub. Phase-1 read path now FULLY AUTOMATIC. deno check+lint+leak-test all green. Cleo adversarial review DONE 2026-06-09 (committed 589c8af) — she FAILED the v1 contact filter on obfuscation (unicode/zero-width/international/array shapes); ALL findings folded: NFKC de-obfuscate + digit-count phone detection + strictStr + fail-closed assertNoContact wired into both live functions + strict UUID + hardened URL guard + constant-time compares; leak-test now 10/10. Also: How-we-work copy simplified per Allan (dash-free, 'the office', tap-to-expand FAQ — browser-verified, console clean). NOT deployed — awaiting Allan: confirm region (Sydney ap-southeast-2) + service_role/DB-password/access-token → .secrets/ (SM8 key already in .secrets/servicem8.key). Then: link → db push → set 3 Edge secrets → deploy → create SM8 webhook → verify name+address-only job_mirror row.",
+          "done": true
+        },
+        {
+          "title": "✅ FRONTEND PREVIEW LIVE ON NETLIFY 2026-06-09: installable PWA at https://timeless-jobs-preview.netlify.app (deployed via Netlify API with Allan's token; root/manifest/sw/deep-link all 200). SAMPLE DATA (backend not wired — Phase 2). Allan+Marko can install on iOS/Android to test the UX. ⚠️ Netlify token was pasted in chat → ROTATE before go-live (added to the rotation list with SM8 key + GHL PIT). Backend deploy still pending the 3 Supabase creds.",
+          "done": true
+        },
+        {
           "title": "Phase 1 — Foundation: secure backend (holds SM8 key; per-sub auth; sub↔job assignment table; contact-field filter; rate governor; SM8 webhook receiver) + SM8 read integration + Make change to STRIP customer contact from the SM8 job (name+address only; customer comms → GHL/Twilio)",
           "done": false
         },
         {
-          "title": "Phase 2 — App core (PWA): per-sub login, My Jobs list, job detail (NAME+ADDRESS only), one-tap navigation",
+          "title": "✅ Phase 2 — App core DONE + LIVE 2026-06-09: per-sub Supabase Auth (RLS so each sub sees ONLY their own jobs — proven: sub2 sees 0, can't touch sub1's job 404), my-jobs read adapter + job-actions write path (accept/decline/availability/handback/complete/undo/problem, ownership+transition guarded). Frontend wired off mock onto the live backend (supabase.ts + supabaseApi.ts; api.ts flips on VITE_SUPABASE_*); real SignIn. PROVEN on preview + deployed: real sub logs in -> sees only their real job (Strathfield $350, contact-free). REMAINING: 'Invite a sub' tool for Marko (subs created via admin for now); messageOffice (Phase 5 route to Marko) + photo->SM8 attach (Phase 4) are honest stubs (photos persist on-device).",
           "done": false
         },
         {
@@ -169,7 +181,7 @@
           "done": false
         },
         {
-          "title": "Phase 5 — Notifications: push (FCM/web-push) on job offer + SMS fallback (Twilio/Make); access-issue 'Problem' button → Marko relay (masked number deferred to scale)",
+          "title": "Phase 5 — Notifications: push (FCM/web-push) on job offer + SMS fallback (Twilio/Make); access-issue 'Problem' button → Marko relay (masked number deferred to scale). ✅ IN-APP NEW-JOB SOUND BUILT + LIVE 2026-06-09 (Web Audio chime/bell/ping + pick-your-sound setting in Profile + vibrate; Allan's BlueEye idea; fires on a new offer when the app is open; push-with-sound for app-closed = rest of this phase)",
           "done": false
         },
         {
