@@ -20,6 +20,14 @@
   text-align: left;
 }
 
+/* Explicit placeholder colour — #6b7280 ≈ 4.8:1 on white (was browser-default, which can
+   fall below WCAG 4.5:1 on Safari). Scoped so it never touches the host WordPress page. */
+#quote-form-root input::placeholder,
+#quote-form-root textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
 #quote-form-root h1,
 #quote-form-root h2 {
   font-family: var(--heading);
