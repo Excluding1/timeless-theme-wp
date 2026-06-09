@@ -138,7 +138,7 @@ get_header(); ?>
  <p class="text-xs sm:text-sm text-secondary font-medium">Workmanship warranty in writing</p>
  </div>
  <div>
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">shield</span></div>
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified_user</span></div>
  <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Fully Insured</p>
  <p class="text-xs sm:text-sm text-secondary font-medium">Public liability cover on every job</p>
  </div>
@@ -148,7 +148,7 @@ get_header(); ?>
  <p class="text-xs sm:text-sm text-secondary font-medium">Locally owned and operated</p>
  </div>
  <div>
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified_user</span></div>
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">receipt_long</span></div>
  <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">ABN-registered</p>
  <p class="text-xs sm:text-sm text-secondary font-medium">Real business, real receipts</p>
  </div>
