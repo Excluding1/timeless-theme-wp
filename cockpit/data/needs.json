@@ -2,7 +2,7 @@
   "updated": "2026-06-09",
   "items": [
     {
-      "t": "★★ #1 REVENUE GATE — deploy the live quote form: npm run build (quote-form) → un-stub front-page.php (kill the alert() preview) → build+upload theme zip (bulletproof exclusions) → purge Cloudflare → live e2e test (public submit → GHL Contact + Opp Stage 1 → Slack #quotes-in). No form = no leads = no revenue. (Cleo + 6-agent deep-audit 2026-06-09: the single highest-leverage next task; the app is OFF the revenue path.)",
+      "t": "★★ #1 REVENUE GATE — quote form built + CSS-leak FIXED + verified locally (2026-06-09): un-stubbed homepage + 3 service pages -> [timeless_quote_form] shortcode (9390649); then FIXED the form's leftover Vite-template CSS that leaked global h1{color:#08060d}/*{margin:0;padding:0}/body{} onto the page + broke the homepage when the form was embedded -> scoped to #quote-form-root (3a2f200). Verified in real wp-now render: navy headline rgb(4,21,52), round circles 96x96 object-cover, form mounts, matches live. main.min.css = deployed-live v3 CSS + object-cover. ⚠️ DEPLOY ZIP ~/Downloads/timeless-theme.zip IS STALE (old leaky bundle) — REBUILD it (with the scope fix + un-stub + good main.min.css, bulletproof exclusions incl. contractor-app/*) BEFORE upload. THEN: wp-admin Upload (Replace) -> Cloudflare Purge -> live e2e (submit -> GHL Contact + Opp Stage 1 + Slack #quotes-in). done=true after live test.",
       "done": false
     },
     {
