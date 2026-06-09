@@ -58,6 +58,7 @@ export function HandBack() {
   const job = assignment.job;
 
   const handleConfirm = async () => {
+    if (busy) return; // guard a fast double-tap before the disabled state re-renders
     setBusy(true);
     try {
       await handBack(assignment.id, reason.trim() || undefined);

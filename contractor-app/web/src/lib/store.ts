@@ -133,7 +133,12 @@ export const useAppStore = create<AppState>((set, get) => ({
       get().updatePhotoStatus(photo.id, 'failed');  // stays on the device; retried later
     }
   },
-  addPhoto: (photo) => set((s) => { const next = [...s.capturedPhotos, photo]; savePhotos(next); return { capturedPhotos: next }; }),
+  addPhoto: (photo) => set((s) => {
+    // Dedup by (job, slot): a slot holds at most one photo — guards a rapid double-tap on the same slot.
+    const next = [...s.capturedPhotos.filter((p) => !(p.sm8_job_uuid === photo.sm8_job_uuid && p.slot === photo.slot)), photo];
+    savePhotos(next);
+    return { capturedPhotos: next };
+  }),
   updatePhotoStatus: (photoId, status) => set((s) => {
     const next = s.capturedPhotos.map((p) => (p.id === photoId ? { ...p, upload_status: status } : p));
     savePhotos(next);

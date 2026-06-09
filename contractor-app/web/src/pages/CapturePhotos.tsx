@@ -159,7 +159,8 @@ export function CapturePhotos() {
       kind,
       day,
       localUri: MOCK_IMG,
-      client_idem_key: crypto.randomUUID(),
+      // Deterministic per (job, slot) so a double-tap or re-take dedups at the backend (photos.client_idem_key UNIQUE).
+      client_idem_key: `${job.sm8_job_uuid}:${req.sku}-${kind}-${index + 1}`,
       upload_status: 'queued',
     };
     // Saves to the device immediately (offline-resilient), then registers through the api seam.

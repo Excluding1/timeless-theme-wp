@@ -35,7 +35,7 @@ export function ReportProblem() {
   const canSubmit = !!photo && !isOffline;
 
   const handleSubmit = async () => {
-    if (!photo || !id) return;
+    if (busy || !photo || !id) return; // guard a fast double-tap
     setBusy(true);
     try {
       await reportProblem(id, { reason, note: note.trim() || undefined, photoLocalUri: photo });

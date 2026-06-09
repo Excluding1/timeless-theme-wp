@@ -153,6 +153,7 @@ export function JobDetail() {
           : '';
 
   const handleDecline = async () => {
+    if (busy) return;
     setBusy(true);
     try {
       await declineJob(assignment.id, declineReason.trim() || undefined);
@@ -166,6 +167,7 @@ export function JobDetail() {
   };
 
   const handleAvailability = async () => {
+    if (busy) return;
     setBusy(true);
     try {
       await submitAvailability(assignment.id, { dates: [availDate], window: availWindow });
@@ -181,6 +183,7 @@ export function JobDetail() {
   };
 
   const handleComplete = async () => {
+    if (busy) return;
     setBusy(true);
     try {
       await completeJob(assignment.id);
@@ -195,6 +198,7 @@ export function JobDetail() {
   };
 
   const handleMessageOffice = async () => {
+    if (busy) return;
     setBusy(true);
     try {
       await messageOffice(assignment.id, messageText.trim());

@@ -69,6 +69,7 @@ export function JobAcceptConfirm() {
   const job = assignment.job;
 
   const handleConfirm = async () => {
+    if (busy) return; // guard a fast double-tap before the disabled state re-renders
     setBusy(true);
     try {
       await acceptJob(assignment.id);
