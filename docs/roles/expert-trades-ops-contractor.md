@@ -41,7 +41,7 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
   5. **Meta recruitment ad** — $7-15/day, target NSW + interests bathroom renovation
   6. **Word of mouth** — existing subcontractors refer others (small bonus per referred subcontractor)
 - **Onboarding cost vs LTV**: ~$500 to acquire + onboard a subcontractor. They generate $40-50k revenue/year. ROI is huge — invest in vetting.
-- **Tier system**: Tier 1 (4.5+ stars, 80%+ accept rate), Tier 2 (3.5-4.4, 65-79%), Tier 3 (probation new). Monthly review.
+- **Tier system**: Tier 1 (4.5+ stars, consistent quality), Tier 2 (3.5-4.4 quality), Tier 3 (probation/new). Monthly review on QUALITY outcomes only. ⚠️ **Acceptance/decline rate is NEVER a tier gate or scored metric** — declining an offer is penalty-free, always (Fair-Work s15AA; Mar-2026 ATO/FWO construction clampdown). Accept-rate is at most an off-system capacity/fit signal, never surfaced to the sub as a penalty.
 
 ---
 
@@ -82,7 +82,7 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
 17. **Suburb coverage confirmed** in writing
 18. **Skills confirmed**: shower regrout / bath resurface / silicone / epoxy / full bathroom (which they do)
 19. **Asbestos awareness training cert sighted** (required for any pre-1990 jobs)
-20. **ServiceM8 Network invite sent + accepted**
+20. **Dispatch-app access provisioned** (Supabase Auth invite) — subs engage via OUR app → our single SM8 account; NEVER as SM8 "Staff"/Network (that model is RETIRED — see decision-sm8-keep-vs-build-2026-06-05 §SUB-ENGAGEMENT)
 21. **Subcontractor agreement signed via DocuSign**
 22. **Bank details + pay.com.au setup**
 23. **Tier 2 default** (Tier 3 if green/test phase)
@@ -93,7 +93,7 @@ A trades ops manager paired with an Australian contracts lawyer's lens. Knows wh
 26. **Hard exclusions**: Tier 3 never to strata/commercial/full bath/pre-1990
 27. **Payment within 3 business days** of customer final payment cleared
 28. **pay.com.au with rewards card** to capture points on subcontractor payouts
-29. **Monthly tier review** with quality + acceptance rate scoring
+29. **Monthly tier review** on QUALITY outcomes only — NEVER acceptance-rate (penalty-free decline is locked; Fair-Work)
 
 ### Dispute resolution
 30. **Subcontractor photo issue**: refund customer or reschedule, then chase subcontractor for cause

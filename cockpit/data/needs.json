@@ -1,53 +1,65 @@
 {
-  "updated": "2026-06-03",
+  "updated": "2026-06-09",
   "items": [
     {
-      "t": "ServiceM8 job categories — 6 or 10? (sets Make 'Main' service_type→category mapping; RESOLVED 2026-06-03: 6 families)",
+      "t": "★★ #1 REVENUE GATE — deploy the live quote form: npm run build (quote-form) → un-stub front-page.php (kill the alert() preview) → build+upload theme zip (bulletproof exclusions) → purge Cloudflare → live e2e test (public submit → GHL Contact + Opp Stage 1 → Slack #quotes-in). No form = no leads = no revenue. (Cleo + 6-agent deep-audit 2026-06-09: the single highest-leverage next task; the app is OFF the revenue path.)",
+      "done": false
+    },
+    {
+      "t": "⚖️ LEGAL GATE (parallel, hard) — AU employment-lawyer Fair-Work classification review before ANY real sub is engaged (s15AA; survives Mar-2026 ATO/FWO construction clampdown; not a Part-3A platform). Marko self-performs jobs 1-3 while this clears. Route: expand-Sprintlaw vs specialist — Allan to decide.",
+      "done": false
+    },
+    {
+      "t": "🔐 ROTATE creds before go-live (all exposed in-session): Netlify token + 3 Supabase keys (service-role / db-password / access-token) + SM8 API key + GHL PIT. Hygiene, not a functional blocker.",
+      "done": false
+    },
+    {
+      "t": "Contractor app — accept→queue-move write-back is DEFERRED pending MARKO's dispatch-board call: which SM8 queue = 'sub accepted/booked'? (Live queues today: Workshop, Pending Quotes, Parts on Order, ACT — none means 'booked'.) Engineering is ready; only the ops taxonomy is missing.",
+      "done": false
+    },
+    {
+      "t": "Warranty headline — 3-year vs 'Up to 5-Year' for resurfacing/vanity/tile (live-site self-contradiction), + rental 6mo vs 3mo. Per-material ladder, ACL — Allan's direction before any sweep.",
+      "done": false
+    },
+    {
+      "t": "Insurance Certificate of Currency — send when ready (confirm $10M + products/sub-extension/$250K SL).",
+      "done": false
+    },
+    {
+      "t": "Trust badge wording — '$10M Insured' on all pages vs generic 'Fully Insured'?",
+      "done": false
+    },
+    {
+      "t": "Marko's email — for HIS OWN ServiceM8 Staff invite (Marko = genuine team member / Staff seat; subs are NOT Staff — they use the dispatch app).",
+      "done": false
+    },
+    {
+      "t": "Revenue model reconcile — $25K/mo ÷ 50 jobs = $500/job vs ~$1.5K AOV vs Jordan $764/job; pick one consistent model (Cleo strategic-check flag).",
+      "done": false
+    },
+    {
+      "t": "Materials model (sets EVERY resurface sub rate): subs supply own coatings (→ pay ~$650/bath to clear the $65/hr Fair-Work floor after materials) OR Timeless supplies (→ sub ~$495 + we buy ~$155)? Confirm with Marko + the first sub (open Q4).",
+      "done": false
+    },
+    {
+      "t": "Cockpit additions — which of Cleo's must-haves to build next (decision log, setup-readiness, money pulse…).",
+      "done": false
+    },
+    {
+      "t": "RESOLVED 2026-06-09: ServiceM8 6 categories created + API key in .secrets + Make Scenario 1 LIVE (revenue-build gate cleared).",
       "done": true
     },
     {
-      "t": "Warranty headline — 3-year vs 'Up to 5-Year' for resurfacing/vanity/tile (live site contradicts itself), + rental 6mo vs 3mo",
-      "done": false
+      "t": "RESOLVED: Sub-minimum PL = $10M (matches business PL; '$20M preferred' dropped).",
+      "done": true
     },
     {
-      "t": "Sub-minimum PL now business is $10M — keep sub-min at $10M and drop '$20M preferred'?",
-      "done": false
+      "t": "RESOLVED: Make.com region = EU (eu1) confirmed live.",
+      "done": true
     },
     {
-      "t": "Insurance Certificate of Currency — send when ready (confirm $10M + products/sub-extension/$250K SL)",
-      "done": false
-    },
-    {
-      "t": "Trust badge wording — show '$10M Insured' on all pages, or keep generic 'Fully Insured'?",
-      "done": false
-    },
-    {
-      "t": "★ GATE FOR REVENUE BUILD: (a) create the 6 SM8 categories (locked colours) + confirm the ACT queue, (b) generate SM8 API key → gitignored file ~/.../.secrets/servicem8.key (NEVER chat). Unlocks Make Scenario 1 (Main). Main does NOT need the PIT.",
-      "done": false
-    },
-    {
-      "t": "Marko's email — for the ServiceM8 Staff invite",
-      "done": false
-    },
-    {
-      "t": "Make.com region — confirm EU (eu1) is fine",
-      "done": false
-    },
-    {
-      "t": "PIT rotation — when to rotate the exposed GHL token",
-      "done": false
-    },
-    {
-      "t": "Cockpit additions — which of Cleo's must-haves to build next (decision log, setup-readiness, money pulse…)",
-      "done": false
-    },
-    {
-      "t": "Revenue model reconcile — $25K/mo ÷ 50 jobs = $500/job vs ~$1.5K AOV vs Jordan $764/job; pick one consistent model (Cleo strategic-check flag)",
-      "done": false
-    },
-    {
-      "t": "Materials model (sets EVERY resurface sub rate): do subs supply their own coatings (→ pay ~$650/bath so they clear the $65/hr fair-work floor after materials) OR does Timeless supply (→ sub ~$495 + we buy ~$155 materials)? Confirm with Marko + the first sub (open Q4). Surfaced by the metal-bath quote 2026-06-04.",
-      "done": false
+      "t": "RESOLVED 2026-06-07: GHL PIT write-scope VERIFIED present (Scenarios 2-5 not blocked); still rotate before go-live.",
+      "done": true
     }
   ]
 }
