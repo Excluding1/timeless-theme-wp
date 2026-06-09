@@ -233,7 +233,7 @@ Document reference call notes: `Subcontractors/{Name}/Documents/Reference-Call-N
 
 | Tool | Action | Test |
 |---|---|---|
-| **ServiceM8** | Add as "Staff" member; subcontractor installs SM8 Lite app | Dispatch dummy job → subcontractor sees it on phone, can navigate, can submit photos |
+| **Dispatch app** | Provision dispatch-app access (Supabase Auth invite) — subs engage via OUR app → OUR single SM8 account; **NEVER added as an SM8 "Staff" member or via the SM8 Network** (both RETIRED — see [decision-sm8-keep-vs-build-2026-06-05 §SUB-ENGAGEMENT](../specs/decision-sm8-keep-vs-build-2026-06-05.md)) | Send dummy offer → subcontractor sees it in the app on their phone, can accept/decline, navigate, submit photos |
 | **Slack** | Add to `#sub-dispatch`, `#sub-quality`, `#sub-general` channels | Send test message → subcontractor receives + replies |
 | **Xero** | Set up as supplier with bank details for EFT/pay.com.au routing | Dummy invoice payment test (low value, $10) |
 | **Google Drive** | Sub-specific folder: `Subcontractors/{FullLegalName}/` | Confirm subcontractor can access shared folders if needed |
@@ -331,9 +331,9 @@ Stored: `Subcontractors/{Name}/Onboarding-Signoff.pdf`
 
 ### Monthly tier review (1st of month)
 - Per [OPERATING-CONTEXT § 9.5](../OPERATING-CONTEXT.md#95-subcontractor-tier-system) ageing rules
-- Subcontractor's metrics: avg quality score, acceptance rate (% of offered jobs accepted), customer NPS contribution, time-to-complete vs estimate
+- Subcontractor's metrics: avg quality score, customer NPS contribution, time-to-complete vs estimate. ⚠️ **Acceptance/decline rate is NEVER scored or reviewed** — declining an offer is penalty-free, always (Fair-Work s15AA; see expert-trades-ops-contractor.md §Tier system)
 - Tier movement:
-  - Sustained 90%+ quality + 80%+ acceptance + 3+ months → Tier 1 promotion
+  - Sustained 90%+ quality + 3+ months → Tier 1 promotion (**QUALITY only — acceptance rate is never a promotion gate**; Fair-Work)
   - Drop to <75% quality 2 months running → Tier 2 → Tier 3 demotion warning
   - Tier 3 with no improvement after 60 days → removal
 
