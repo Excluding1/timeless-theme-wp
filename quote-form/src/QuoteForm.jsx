@@ -365,7 +365,7 @@ function OptGrid({ opts, val, set, cols = 3, label }) {
 function SvcCard({ s, on, onClick, expanded }) {
   const hasImages = s.befImg && s.aftImg;
   return (
-    <div onClick={onClick} style={{ background: C.white, border: s.bundle ? (on ? `2px solid ${C.pri}` : `1.5px solid ${C.acc}80`) : (on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`), borderRadius: 12, cursor: "pointer", overflow: "hidden", position: "relative", transition: "all 0.15s" }}>
+    <div onClick={onClick} role="button" tabIndex={0} aria-pressed={on} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } }} style={{ background: C.white, border: s.bundle ? (on ? `2px solid ${C.pri}` : `1.5px solid ${C.acc}80`) : (on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`), borderRadius: 12, cursor: "pointer", overflow: "hidden", position: "relative", transition: "all 0.15s" }}>
       {/* ALL-IN-ONE top banner: full-width gold strip above the card content. Communicates
           "this card is the services above + below combined" without competing with POPULAR for the corner.
           Customer's eye reads: banner first → BEFORE/AFTER → trade name. */}
@@ -1505,7 +1505,7 @@ export default function QuoteForm() {
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Pick everything that applies, or choose a full bathroom makeover.</p>
 
         {/* Full bathroom picture card */}
-        <div onClick={toggleFullBathroom} style={{ background: C.white, border: fullBathroomMode ? `2px solid ${C.pri}` : `2px solid ${C.acc}80`, borderRadius: 12, cursor: "pointer", overflow: "hidden", marginBottom: 14, transition: "all 0.15s", position: "relative" }}>
+        <div onClick={toggleFullBathroom} role="button" tabIndex={0} aria-pressed={fullBathroomMode} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFullBathroom(); } }} style={{ background: C.white, border: fullBathroomMode ? `2px solid ${C.pri}` : `2px solid ${C.acc}80`, borderRadius: 12, cursor: "pointer", overflow: "hidden", marginBottom: 14, transition: "all 0.15s", position: "relative" }}>
           <div style={{ position: "relative" }}>
             <img src={FULL_BATHROOM_HERO} alt="" style={{ width: "100%", height: 140, objectFit: "cover", display: "block" }} loading="lazy" />
             <span style={{ position: "absolute", top: 8, left: 8, background: C.acc, color: C.accDk, fontSize: 10, fontWeight: 700, padding: "4px 10px", borderRadius: 6, letterSpacing: "0.02em" }}>BUNDLE</span>
@@ -1527,7 +1527,7 @@ export default function QuoteForm() {
               {FULL_SCOPE_OPTIONS.map(o => {
                 const on = fullScope === o.id;
                 return (
-                  <div key={o.id} onClick={() => setFullScope(o.id)} style={{ borderRadius: 12, cursor: "pointer", background: C.white, border: o.bundle ? (on ? `2px solid ${C.pri}` : `1.5px solid ${C.acc}80`) : (on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`), overflow: "hidden", position: "relative", transition: "all 0.15s" }}>
+                  <div key={o.id} onClick={() => setFullScope(o.id)} role="button" tabIndex={0} aria-pressed={on} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFullScope(o.id); } }} style={{ borderRadius: 12, cursor: "pointer", background: C.white, border: o.bundle ? (on ? `2px solid ${C.pri}` : `1.5px solid ${C.acc}80`) : (on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`), overflow: "hidden", position: "relative", transition: "all 0.15s" }}>
                     {o.bundle && (
                       <div style={{ background: C.acc, color: C.accDk, fontSize: 10, fontWeight: 800, padding: "6px 12px", textAlign: "center", letterSpacing: "0.08em" }}>
                         ALL-IN-ONE — BOTH SERVICES COMBINED
@@ -1557,7 +1557,7 @@ export default function QuoteForm() {
               {AREAS.map(a => {
                 const on = selectedAreas.includes(a.id);
                 return (
-                  <div key={a.id} onClick={() => toggleArea(a.id)} style={{ background: C.white, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, borderRadius: 12, cursor: "pointer", overflow: "hidden", transition: "all 0.15s", position: "relative" }}>
+                  <div key={a.id} onClick={() => toggleArea(a.id)} role="button" tabIndex={0} aria-pressed={on} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleArea(a.id); } }} style={{ background: C.white, border: on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, borderRadius: 12, cursor: "pointer", overflow: "hidden", transition: "all 0.15s", position: "relative" }}>
                     <div style={{ position: "relative" }}>
                       <img src={a.img} alt="" style={{ width: "100%", height: 110, objectFit: "cover", display: "block" }} loading="lazy" />
                       <div style={{ position: "absolute", top: 6, left: 6, width: 22, height: 22, borderRadius: 5, background: on ? C.pri : "rgba(255,255,255,0.92)", border: on ? "none" : `1.5px solid ${C.brd}`, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 1px 2px rgba(0,0,0,0.08)" }}>
@@ -1576,7 +1576,7 @@ export default function QuoteForm() {
               })}
 
               {/* Not sure escape hatch — last tile in the grid, big "?" graphic. Border matches other area cards. */}
-              <div onClick={toggleNotSure} style={{ background: C.white, border: notSureMode ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, borderRadius: 12, cursor: "pointer", overflow: "hidden", transition: "all 0.15s", position: "relative" }}>
+              <div onClick={toggleNotSure} role="button" tabIndex={0} aria-pressed={notSureMode} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleNotSure(); } }} style={{ background: C.white, border: notSureMode ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, borderRadius: 12, cursor: "pointer", overflow: "hidden", transition: "all 0.15s", position: "relative" }}>
                 <div style={{ position: "relative", height: 110, background: notSureMode ? `${C.pri}10` : C.surfLow, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <span style={{ fontSize: 72, fontWeight: 800, color: C.pri, lineHeight: 1, letterSpacing: "-0.06em", fontFamily: "'Inter',system-ui,sans-serif" }}>?</span>
                   <div style={{ position: "absolute", top: 6, left: 6, width: 22, height: 22, borderRadius: 5, background: notSureMode ? C.pri : "rgba(255,255,255,0.92)", border: notSureMode ? "none" : `1.5px solid ${C.brd}`, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 1px 2px rgba(0,0,0,0.08)" }}>

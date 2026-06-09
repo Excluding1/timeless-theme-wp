@@ -299,7 +299,7 @@ get_header(); ?>
  <div class="flex gap-5 items-start bg-white rounded-xl p-5 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default reveal min-h-[88px]">
  <div class="shrink-0 w-14 h-14 rounded-full bg-[#e7c08b]/15 flex items-center justify-center"><span class="material-symbols-outlined text-2xl text-[#c99a55]" aria-hidden="true">request_quote</span></div>
  <div>
- <h3 class="font-bold text-primary text-base mb-0.5">Step 2: Quote Next Business Day</h3>
+ <h3 class="font-bold text-primary text-base mb-0.5">Step 2: Quote Within 1 Business Day</h3>
  <p class="text-sm text-secondary leading-relaxed">We review your photos and send a transparent fixed-price quote. No hidden fees.</p>
  </div>
  </div>

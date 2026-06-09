@@ -27,7 +27,7 @@
 }
 
 /* Visible keyboard focus ring (WCAG 2.4.7) — scoped to the form so it never touches the host page. */
-#quote-form-root :is(button, a, input, textarea, select, [role="radio"], [role="checkbox"], [role="option"]):focus-visible {
+#quote-form-root :is(button, a, input, textarea, select, [role="button"], [role="radio"], [role="checkbox"], [role="option"]):focus-visible {
   outline: 3px solid #041534;
   outline-offset: 2px;
   border-radius: 4px;
