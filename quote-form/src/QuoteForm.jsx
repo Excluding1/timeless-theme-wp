@@ -496,7 +496,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
             <>
               {I.camera(20)}
               <span style={{ fontSize: 10, fontWeight: 700, color: C.pri, lineHeight: 1.2, padding: "0 2px" }}>Photo {idx + 1}<span style={{ color: C.err }}> *</span></span>
-              <span style={{ fontSize: 9, color: C.sec, lineHeight: 1.3, padding: "0 2px" }}>{label}</span>
+              <span style={{ fontSize: 12, color: C.pri, lineHeight: 1.3, padding: "0 2px" }}>{label}</span>
             </>
           )}
         </label>
@@ -521,7 +521,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
             <>
               {I.camera(20)}
               <span style={{ fontSize: 10, fontWeight: 700, color: C.pri, lineHeight: 1.2, padding: "0 2px" }}>Tap to add photo</span>
-              <span style={{ fontSize: 9, color: C.sec, lineHeight: 1.3 }}>(optional)</span>
+              <span style={{ fontSize: 11, color: C.sec, lineHeight: 1.3 }}>(optional)</span>
             </>
           )}
         </label>
@@ -535,7 +535,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
       style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, minHeight: 96, border: "none", borderRadius: 10, padding: "8px 6px", textAlign: "center", background: "transparent", cursor: "pointer", color: "inherit", fontFamily: "inherit" }}>
       <span style={{ fontSize: 44, color: C.acc, fontWeight: 700, lineHeight: 1 }}>+</span>
       <span style={{ fontSize: 10, fontWeight: 700, color: C.pri, lineHeight: 1.2 }}>Add extra photos</span>
-      <span style={{ fontSize: 9, color: C.sec, lineHeight: 1.3 }}>(optional)</span>
+      <span style={{ fontSize: 11, color: C.sec, lineHeight: 1.3 }}>(optional)</span>
     </button>
   );
 
@@ -839,10 +839,13 @@ export default function QuoteForm() {
   };
 
   /* ─── GATING ─── */
-  // emOk is intentionally NOT required here: phoneOk already requires email on the
-  // landline / no-phone paths, so a valid MOBILE alone passes. Stops a paid click that
-  // gives name+mobile but stalls on email from being a dead end. (Panel rank #2)
-  const can1 = fnOk && lnOk && phoneOk && cust && tenantOk && llEmOk;
+  // Email is ALWAYS required — we email the quote PDF AND the tax invoice, and the CRM
+  // find-or-create match key is email-first (make-scenario-1) so a lead with no email
+  // cannot be invoiced/deduped cleanly. The only documented exception is the NO-PHONE
+  // path (email-only), never no-email. (Reverses the panel's phone-or-email CRO idea —
+  // it conflicts with our invoicing model. The partial-lead onBlur below still captures
+  // name+phone early so a stall-on-email lead is recoverable via SMS follow-up.)
+  const can1 = fnOk && lnOk && phoneOk && emOk && cust && tenantOk && llEmOk;
   const can2 = addr.length >= 6 && addrOk !== false && prop && bathroomCount && builtBefore1990 && (prop !== "apt" || lift);
   const can3 = notSureMode ? notSureText.trim().length >= 10 : fullBathroomMode ? !!fullScope : selectedAreas.length > 0;
 

@@ -216,7 +216,7 @@ get_header(); ?>
  <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
  </a>
  </div>
- <p class="text-center text-[0.6rem] text-secondary mt-3 sm:hidden">Swipe to see more services &rarr;</p>
+ <p class="text-center text-xs text-secondary mt-3 sm:hidden">Swipe to see more services &rarr;</p>
  </div>
 </section>
 
