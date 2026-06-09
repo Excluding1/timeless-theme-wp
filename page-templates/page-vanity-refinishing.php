@@ -598,7 +598,7 @@
  </div>
 </section>
 
-<!-- QUOTE FORM -->
+<!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-20 bg-white" id="quote">
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
@@ -615,26 +615,7 @@
  <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
  </div>
  </div>
- <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
- <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
- </div>
- <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
- <div>
- <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs refinishing?</label>
- <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Vanity cabinet doors</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Benchtop/countertop</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Full vanity unit</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Stone-fleck finish</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Basin too</label>
- </div>
- </div>
- <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. vanity material (timber, laminate), desired colour/finish, number of doors..."></textarea></div>
- <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Refinishing Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
- <p class="text-center text-[0.6rem] text-secondary">We respond within hours. No spam, ever.</p>
- </form>
+ <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
 </section>

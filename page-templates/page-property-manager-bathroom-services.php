@@ -473,53 +473,7 @@
  <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Approve &amp; book</strong> a date</span></div>
  </div>
  </div>
- <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6" onsubmit="event.preventDefault(); alert('Quote submitted! (Preview mode)');">
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Your Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Jane Smith" required /></div>
- <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
- </div>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Property Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
- <div><label for="company" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Company / Agency</label><input id="company" name="company" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Ray White Parramatta (optional)" /></div>
- </div>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div>
- <label for="property-type" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Property Type</label>
- <select id="property-type" name="property-type" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary">
- <option value="">Select type...</option>
- <option value="rental">Rental property</option>
- <option value="sale-prep">Sale preparation</option>
- <option value="owner-occupied">Owner-occupied</option>
- <option value="strata">Strata / Body corporate</option>
- </select>
- </div>
- <div>
- <label for="bathrooms" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Number of Bathrooms</label>
- <select id="bathrooms" name="bathrooms" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary">
- <option value="1">1 bathroom</option>
- <option value="2">2 bathrooms</option>
- <option value="3">3 bathrooms</option>
- <option value="4+">4+ bathrooms</option>
- <option value="multiple-properties">Multiple properties</option>
- </select>
- </div>
- </div>
- <div>
- <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Services needed (tick all that apply)</label>
- <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower regrouting</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bath resurfacing</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Tile resurfacing</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity respray</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Basin restoration</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Silicone replacement</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30 sm:col-span-2 md:col-span-3"><input type="checkbox" class="rounded-sm text-primary" /> Full bathroom makeover (everything above)</label>
- </div>
- </div>
- <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Additional details</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. end-of-lease turnover, need done by [date], key access details..."></textarea></div>
- <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Send Photos &amp; Get Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
- <p class="text-center text-[0.6rem] text-secondary">Fixed-price quote within hours. No call-out fee. No obligation.</p>
- </form>
+ <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
 </section>
