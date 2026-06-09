@@ -62,6 +62,22 @@ export async function withBackoff<T>(fn: () => Promise<T>, tries = 3, baseMs = 4
   throw lastErr;
 }
 
+/** Single fetch chokepoint. `redirect: 'manual'` so a 3xx can NEVER forward our method/body/X-API-Key
+ *  off the pinned URL (SSRF hardening — Cleo P1#5); any 3xx is treated as failure. Drains + hides SM8's
+ *  body on error (never surfaced to a caller). The caller has already assertSm8Url'd `url`. */
+async function sm8Fetch(url: string, init: RequestInit): Promise<Response> {
+  const res = await fetch(url, { ...init, redirect: 'manual' });
+  if (res.status >= 300 && res.status < 400) {            // a redirect we refuse to follow
+    await res.text().catch(() => {});                     // drain (null-safe); never follow
+    throw new Sm8Error(res.status, `sm8 ${init.method ?? 'GET'} redirect ${res.status}`);
+  }
+  if (!res.ok) {                                          // also catches the opaqueredirect (status 0) case
+    await res.text().catch(() => {});                     // drain; never surface SM8's body to callers
+    throw new Sm8Error(res.status, `sm8 ${init.method ?? 'GET'} ${res.status}`);
+  }
+  return res;
+}
+
 /**
  * GET a ServiceM8 job by UUID. The URL is RECONSTRUCTED from the validated UUID — we never fetch a
  * webhook-supplied resource_url. Returns RAW SM8 job JSON; the caller MUST pass it through
@@ -72,13 +88,49 @@ export async function getJob(uuid: string): Promise<Record<string, unknown>> {
   const url = `${SM8_BASE}/job/${uuid}.json`;
   assertSm8Url(url);
   return await withBackoff(async () => {
-    const res = await fetch(url, {
-      headers: { 'X-API-Key': apiKey(), 'Accept': 'application/json' },
-    });
-    if (!res.ok) {
-      await res.text().catch(() => {}); // drain; never surface SM8's body to callers
-      throw new Sm8Error(res.status, `sm8 GET job ${res.status}`);
-    }
+    const res = await sm8Fetch(url, { headers: { 'X-API-Key': apiKey(), 'Accept': 'application/json' } });
     return await res.json() as Record<string, unknown>;
+  });
+}
+
+// The ONLY job fields the backend may ever WRITE. Body is built field-by-field; NEVER spread caller
+// input — so customer contact has no path to ride along on a write (Cleo P1#6 / D). queue_uuid is
+// listed for the deferred accept-writeback; today only `status` is used.
+const WRITABLE_JOB_FIELDS = new Set(['status', 'queue_uuid']);
+
+/**
+ * Update a ServiceM8 job (PARTIAL update — POST only the changed fields, per developer.servicem8.com
+ * /reference/updatejobs). URL reconstructed from the validated UUID, host-pinned, manual-redirect.
+ * Body = ALLOWLIST (WRITABLE_JOB_FIELDS), asserted again immediately before the fetch.
+ * Verified live 2026-06-09: POST {status:"Completed"} -> 200 {"errorCode":0,"message":"OK"}, and SM8
+ * auto-stamps completion_date + completion_actioned_by_uuid (the account owner, NOT the sub) — so we
+ * send `status` ALONE; no completion_date/active needed.
+ */
+export async function updateJob(uuid: string, fields: Record<string, unknown>): Promise<void> {
+  if (!isValidUuid(uuid)) throw new Sm8Error(400, 'invalid job uuid');
+
+  const body: Record<string, string> = {};
+  for (const [k, v] of Object.entries(fields)) {
+    if (WRITABLE_JOB_FIELDS.has(k) && typeof v === 'string' && v.length > 0) body[k] = v;
+  }
+  if (Object.keys(body).length === 0) throw new Sm8Error(400, 'no writable fields');
+  // Defence-in-depth: refuse if ANY key slipped past the allowlist (guards a future spread/refactor).
+  if (!Object.keys(body).every((k) => WRITABLE_JOB_FIELDS.has(k))) {
+    throw new Sm8Error(400, 'disallowed write field');
+  }
+
+  const url = `${SM8_BASE}/job/${uuid}.json`;
+  assertSm8Url(url);
+  await withBackoff(async () => {
+    const res = await sm8Fetch(url, {
+      method: 'POST',
+      headers: { 'X-API-Key': apiKey(), 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    // SM8 signals app-level failure as errorCode!=0 even on HTTP 200 — treat as retryable (>=500).
+    const data = await res.json().catch(() => ({} as Record<string, unknown>));
+    if (data && typeof data.errorCode !== 'undefined' && Number(data.errorCode) !== 0) {
+      throw new Sm8Error(502, `sm8 errorCode ${data.errorCode}`);
+    }
   });
 }

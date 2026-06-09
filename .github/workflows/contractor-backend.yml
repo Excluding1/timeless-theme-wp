@@ -29,5 +29,5 @@ jobs:
         run: deno check */index.ts
       - name: Lint
         run: deno lint
-      - name: Contact-leak CI — security gate (build-blocking)
-        run: deno test _tests/contact-leak.test.ts
+      - name: Backend tests — contact-leak + write-back (build-blocking)
+        run: deno test --allow-env _tests/

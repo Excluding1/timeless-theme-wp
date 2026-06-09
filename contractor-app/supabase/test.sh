@@ -7,5 +7,5 @@ cd "$(dirname "$0")/functions"
 
 echo "▶ deno check";                        deno check */index.ts
 echo "▶ deno lint";                         deno lint
-echo "▶ contact-leak CI (security gate)";   deno test _tests/contact-leak.test.ts
+echo "▶ backend tests (contact-leak + write-back)"; deno test --allow-env _tests/
 echo "✅ contractor backend checks passed"
