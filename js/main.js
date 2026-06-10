@@ -595,4 +595,21 @@ document.addEventListener('DOMContentLoaded', function () {
         setInterval(stepOnce, 10000);
     })();
 
+    /* ── Renovation-vs-Resurfacing swipe progress thumb ──
+       The dark thumb under 'Swipe to compare' tracks the carousel's scroll
+       position (mobile only; the bar is display:none at md+). */
+    (function () {
+        var track = document.querySelector('.vs-track');
+        var thumb = document.querySelector('.vs-thumb');
+        if (!track || !thumb) return;
+        function sync() {
+            var max = track.scrollWidth - track.clientWidth;
+            if (max <= 0) return;
+            thumb.style.transform = 'translateX(' + (track.scrollLeft / max * 100) + '%)';
+        }
+        track.addEventListener('scroll', sync, { passive: true });
+        window.addEventListener('resize', sync);
+        sync();
+    })();
+
 });
