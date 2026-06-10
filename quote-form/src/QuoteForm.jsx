@@ -651,29 +651,7 @@ export default function QuoteForm() {
     });
   }, []);
 
-  /* ─── localStorage PERSISTENCE ─── */
-  const STORAGE_KEY = "timeless_quote_form_v10";
-  const restoredOnce = useRef(false);
-  useEffect(() => {
-    if (restoredOnce.current) return; restoredOnce.current = true;
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const d = JSON.parse(raw);
-      if (typeof d.fn === "string") setFn(d.fn);
-      if (typeof d.ln === "string") setLn(d.ln);
-      if (typeof d.ph === "string") setPh(d.ph);
-      if (typeof d.em === "string") setEm(d.em);
-      if (typeof d.addr === "string") setAddr(d.addr);
-    } catch { /* ignore */ }
-  }, []);
-  useEffect(() => {
-    const t = setTimeout(() => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ fn, ln, ph, em, addr })); }
-      catch { /* ignore */ }
-    }, 500);
-    return () => clearTimeout(t);
-  }, [fn, ln, ph, em, addr]);
+  /* localStorage persistence lives below the step declaration (it saves `step` too). */
 
   // When the Full Bathroom scope changes, sync default services per fixture. Customer can still
   // override individual fixtures after this, this just sets a sensible starting state.
@@ -716,6 +694,68 @@ export default function QuoteForm() {
 
   /* ─── NAV ─── */
   const [step, setStep] = useState("about");
+
+  /* ─── localStorage PERSISTENCE, full-funnel (panel #7, Allan 2026-06-11) ───
+     Saves every serialisable answer + the current step, so an accidental reload/
+     close never loses the customer's progress (backs the 🔒 badge claim). Photos
+     are NOT restored (File objects can't serialise); customer re-attaches them.
+     Cleared on successful submit (handleSubmit). */
+  const STORAGE_KEY = "timeless_quote_form_v10";
+  const restoredOnce = useRef(false);
+  useEffect(() => {
+    if (restoredOnce.current) return; restoredOnce.current = true;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      if (typeof d.fn === "string") setFn(d.fn);
+      if (typeof d.ln === "string") setLn(d.ln);
+      if (typeof d.ph === "string") setPh(d.ph);
+      if (typeof d.em === "string") setEm(d.em);
+      if (typeof d.addr === "string") setAddr(d.addr);
+      if (typeof d.noPhone === "boolean") setNoPhone(d.noPhone);
+      if (typeof d.cust === "string") setCust(d.cust);
+      if (typeof d.co === "string") setCo(d.co);
+      if (typeof d.tenAuth === "string") setTenAuth(d.tenAuth);
+      if (typeof d.llEm === "string") setLlEm(d.llEm);
+      if (d.addrOk === true || d.addrOk === false) setAddrOk(d.addrOk);
+      if (typeof d.prop === "string") setProp(d.prop);
+      if (typeof d.lift === "string") setLift(d.lift);
+      if (typeof d.bathroomCount === "string") setBathroomCount(d.bathroomCount);
+      if (typeof d.bathroomIndex === "number") setBathroomIndex(d.bathroomIndex);
+      if (typeof d.builtBefore1990 === "string") setBuiltBefore1990(d.builtBefore1990);
+      if (Array.isArray(d.selectedAreas)) setSelectedAreas(d.selectedAreas);
+      if (typeof d.fullBathroomMode === "boolean") setFullBathroomMode(d.fullBathroomMode);
+      if (typeof d.fullScope === "string") setFullScope(d.fullScope);
+      if (d.fullBathroomInventory && typeof d.fullBathroomInventory === "object") setFullBathroomInventory(v => ({ ...v, ...d.fullBathroomInventory }));
+      if (d.fullAreaServices && typeof d.fullAreaServices === "object") setFullAreaServices(v => ({ ...v, ...d.fullAreaServices }));
+      if (typeof d.notSureMode === "boolean") setNotSureMode(d.notSureMode);
+      if (typeof d.notSureText === "string") setNotSureText(d.notSureText);
+      if (d.areaServices && typeof d.areaServices === "object") setAreaServices(d.areaServices);
+      if (typeof d.epoxyMode === "string") setEpoxyMode(d.epoxyMode);
+      if (d.chipRepairAddon && typeof d.chipRepairAddon === "object") setChipRepairAddon(d.chipRepairAddon);
+      if (typeof d.basinFinish === "string") setBasinFinish(d.basinFinish);
+      if (d.basinCustomSurfaces && typeof d.basinCustomSurfaces === "object") setBasinCustomSurfaces(v => ({ ...v, ...d.basinCustomSurfaces }));
+      if (typeof d.notes === "string") setNotes(d.notes);
+      if (typeof d.prevResurfaced === "string") setPrevResurfaced(d.prevResurfaced);
+      if (typeof d.hasVentilation === "string") setHasVentilation(d.hasVentilation);
+      if (["about", "where", "what", "services", "photos"].includes(d.step)) setStep(d.step);
+    } catch { /* ignore */ }
+  }, []);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm,
+          addrOk, prop, lift, bathroomCount, bathroomIndex, builtBefore1990,
+          selectedAreas, fullBathroomMode, fullScope, fullBathroomInventory, fullAreaServices,
+          notSureMode, notSureText, areaServices, epoxyMode, chipRepairAddon,
+          basinFinish, basinCustomSurfaces, notes, prevResurfaced, hasVentilation, step,
+        }));
+      } catch { /* ignore */ }
+    }, 500);
+    return () => clearTimeout(t);
+  }, [fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm, addrOk, prop, lift, bathroomCount, bathroomIndex, builtBefore1990, selectedAreas, fullBathroomMode, fullScope, fullBathroomInventory, fullAreaServices, notSureMode, notSureText, areaServices, epoxyMode, chipRepairAddon, basinFinish, basinCustomSurfaces, notes, prevResurfaced, hasVentilation, step]);
 
   /* ─── PHONE / EMAIL VALIDATION ─── */
   // Accepts 10-digit AU numbers (mobile 04XXXXXXXX, landline 0[2-9]XXXXXXXX)
@@ -1280,9 +1320,9 @@ export default function QuoteForm() {
           <p style={{ fontSize: 12, color: C.acc, fontWeight: 600, margin: "0 0 8px" }}>Bathroom {bathroomIndex} of {bathroomCount === "3+" ? "3+" : bathroomCount} submitted</p>
         )}
         {noPhone || phIsLandline ? (
-          <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll email your quote to <strong style={{ color: C.pri }}>{em}</strong> within 1 business day.</p>
+          <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll email your quote to <strong style={{ color: C.pri }}>{em}</strong> within 24 hours.</p>
         ) : (<>
-          <p style={{ fontSize: 14, color: C.sec, margin: "0 0 6px" }}>We&rsquo;ll text <strong style={{ color: C.pri }}>{phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</strong> within 1 business day with your quote.</p>
+          <p style={{ fontSize: 14, color: C.sec, margin: "0 0 6px" }}>We&rsquo;ll text <strong style={{ color: C.pri }}>{phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</strong> within 24 hours with your quote.</p>
           <p style={{ fontSize: 13, color: C.sec, margin: "0 0 20px" }}>A copy is on its way to <strong>{em}</strong> too.</p>
         </>)}
         <div style={{ padding: 12, background: C.surfLow, borderRadius: 10, fontSize: 12, color: C.sec, marginBottom: 16 }}><span style={{ color: C.acc }}>&#9733;</span> 4.9 from Sydney bathrooms</div>
@@ -1331,7 +1371,7 @@ export default function QuoteForm() {
       {/* ═══ STEP 1, ABOUT YOU ═══ */}
       {step === "about" && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>Bathroom resurfacing quote</h2>
-        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll get back to you within 1 business day with your quote, no obligation</p>
+        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll get back to you within 24 hours with your quote, no obligation</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
             <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>First name *</label><input type="text" value={fn} onChange={e => setFn(e.target.value)} placeholder="First name" autoComplete="given-name" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} /></div>
@@ -2054,7 +2094,7 @@ export default function QuoteForm() {
         )}
 
         <Btn onClick={() => { setSubmitError(null); handleSubmit(); }} disabled={submitting || !can5}>{submitting ? "Sending…" : submitError ? "Try again" : !can5 ? (fullBathroomMode ? "Add at least one photo of your bathroom" : "Add at least one photo for each area above") : "Get my free quote →"}</Btn>
-        <p style={{ textAlign: "center", marginTop: 8, fontSize: 11, color: C.sec }}>Quote within 1 business day. No obligation.</p>
+        <p style={{ textAlign: "center", marginTop: 8, fontSize: 11, color: C.sec }}>Quote within 24 hours. No obligation.</p>
         <p style={{ textAlign: "center", marginTop: 4, fontSize: 10, color: C.sec, lineHeight: 1.5 }}>By submitting, you agree we&rsquo;ll contact you about this quote. Your details are handled per our <a href="https://timelessresurfacing.com.au/privacy/" target="_blank" rel="noopener noreferrer" style={{ color: C.pri, textDecoration: "underline" }}>Privacy Policy</a>.</p>
       </>}
 
@@ -2109,6 +2149,7 @@ export default function QuoteForm() {
           </div>
         </div>
       )}
+      <p style={{ textAlign: "center", marginTop: 16, fontSize: 11, color: C.sec, lineHeight: 1.5 }}>🔒 Your progress saves as you go, so you never lose your quote. Never&nbsp;shared.</p>
     </div>
   );
 }

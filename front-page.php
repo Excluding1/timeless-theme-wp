@@ -426,7 +426,7 @@ get_header(); ?>
  <div class="max-w-3xl mx-auto px-6 sm:px-8 text-center mb-8">
  <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today!</h2>
- <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:balance;">Send us a quick photo and a few details and we&rsquo;ll send back your fixed-price quote within 1 business day. No&nbsp;pressure. No&nbsp;hidden&nbsp;fees.</p>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:balance;">Send us a quick photo and a few details and we&rsquo;ll send you a fixed-price quote within 24 hours. No&nbsp;pressure. No&nbsp;hidden&nbsp;fees. Just&nbsp;your&nbsp;bathroom, renewed.</p>
  </div>
  <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
