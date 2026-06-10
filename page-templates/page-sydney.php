@@ -231,7 +231,7 @@ get_header(); ?>
 <section class="py-10 sm:py-14 bg-primary">
  <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center">
  <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">Ready for a Quote?</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-6 max-w-xl mx-auto">Send us a few photos and get a fixed-price quote within 1 business day. No obligation.</p>
+ <p class="text-on-primary-container text-sm sm:text-base mb-6 max-w-xl mx-auto">Send us a few photos and get a fixed-price quote within 24 hours. No obligation.</p>
  <a href="#quote" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-lg hover:shadow-xl transition-all">Get Your Free Quote <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
  </div>
 </section>
@@ -434,7 +434,7 @@ get_header(); ?>
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
  <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Quote</h2>
- <p class="text-on-primary-container text-sm">5 minutes. No obligation. We respond within 1 business day.</p>
+ <p class="text-on-primary-container text-sm">5 minutes. No obligation. We respond within 24 hours.</p>
  </div>
  <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>

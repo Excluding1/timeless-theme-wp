@@ -301,7 +301,7 @@
  <div class="bg-surface-container-low rounded-xl p-6 text-center reveal border border-surface-container hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out">
  <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">photo_camera</span>
  <h3 class="font-bold text-primary mb-2">Fixed-Price from Photos</h3>
- <p class="text-sm text-secondary leading-relaxed">No call-out fee. Send photos, get a fixed-price quote within 1 business day. Approve without a site visit.</p>
+ <p class="text-sm text-secondary leading-relaxed">No call-out fee. Send photos, get a fixed-price quote within 24 hours. Approve without a site visit.</p>
  </div>
  <div class="bg-surface-container-low rounded-xl p-6 text-center reveal border border-surface-container hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out">
  <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">compare</span>
@@ -468,7 +468,7 @@
  <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
  <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of the bathroom</span></div>
  <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
- <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within 1 business day</span></div>
+ <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within 24 hours</span></div>
  <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
  <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Approve &amp; book</strong> a date</span></div>
  </div>
