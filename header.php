@@ -47,8 +47,15 @@ $phone      = timeless_phone();
 <!-- NAV -->
 <header>
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl shadow-xs" id="main-nav">
+        <style>
+        /* Mobile: brand centred in the bar, hamburger pinned right (Allan 2026-06-11) */
+        @media (max-width:1023px){
+        #main-nav > div{position:relative;justify-content:center;}
+        #main-nav #menu-btn{position:absolute;right:16px;top:50%;transform:translateY(-50%);}
+        }
+        </style>
         <div class="flex justify-between items-center px-6 sm:px-8 py-3 max-w-7xl mx-auto">
-            <a class="flex items-center" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/brand/tr-lockup-nav.png" alt="Timeless Resurfacing" width="217" height="44" style="height:44px;width:auto;" /></a>
+            <a class="flex items-center" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/brand/tr-lockup-nav.png" alt="Timeless Resurfacing" width="217" height="44" style="height:44px;width:auto;mix-blend-mode:multiply;" /></a>
             <div class="hidden lg:flex items-center gap-8 font-medium text-sm">
                 <button id="services-btn" class="text-slate-500 hover:text-[#1B2A4A] transition-colors flex items-center gap-1 py-2" onmouseenter="showMega()" onclick="toggleMega()">Services <span class="material-symbols-outlined text-sm" aria-hidden="true">expand_more</span></button>
                 <a class="text-slate-500 hover:text-[#1B2A4A] transition-colors" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Before &amp; After</a>
@@ -102,7 +109,7 @@ $phone      = timeless_phone();
     <!-- MOBILE NAV -->
     <div id="mobile-nav" class="mobile-menu fixed inset-0 z-60 bg-white lg:hidden overflow-y-auto">
         <div class="flex justify-between items-center px-6 py-4">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/brand/tr-lockup-nav.png" alt="Timeless Resurfacing" width="177" height="36" style="height:36px;width:auto;" />
+            <img src="<?php echo get_template_directory_uri(); ?>/images/brand/tr-lockup-nav.png" alt="Timeless Resurfacing" width="177" height="36" style="height:36px;width:auto;mix-blend-mode:multiply;" />
             <button id="menu-close" class="p-2" aria-label="Close menu"><span class="material-symbols-outlined text-2xl text-primary">close</span></button>
         </div>
         <div class="flex flex-col px-6 pt-2 pb-8">

@@ -245,16 +245,14 @@ get_header(); ?>
  .vs-hint,.vs-bar{display:none;}
  @media (max-width:767px){
  .vs-head{margin-bottom:16px;}
- .vs-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding-bottom:6px;}
+ .vs-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding:10px 3px 14px;}
  .vs-track::-webkit-scrollbar{display:none;}
  .vs-track>div{flex:0 0 86%;scroll-snap-align:center;}
- .vs-hint{display:block;text-align:center;font-size:12px;font-weight:600;color:#595e6d;margin:0 0 8px;}
- .vs-bar{display:block;position:relative;overflow:hidden;width:72px;height:4px;border-radius:9999px;background:#dbe1e8;margin:0 auto 14px;}
+ .vs-hint{display:block;text-align:center;font-size:12px;font-weight:600;color:#595e6d;margin:10px 0 6px;}
+ .vs-bar{display:block;position:relative;overflow:hidden;width:72px;height:4px;border-radius:9999px;background:#dbe1e8;margin:0 auto;}
  .vs-thumb{position:absolute;left:0;top:0;height:100%;width:50%;border-radius:9999px;background:#041534;}
  }
  </style>
- <p class="vs-hint" aria-hidden="true">Swipe to compare &rarr;</p>
- <div class="vs-bar" data-for=".vs-track" aria-hidden="true"><span class="vs-thumb"></span></div>
  <div class="vs-track grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
  <div class="bg-red-50/50 rounded-2xl p-8 border-2 border-red-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
  <div class="absolute top-0 right-0 bg-red-100 text-red-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Expensive</div>
@@ -283,6 +281,8 @@ get_header(); ?>
  </div>
  </div>
  </div>
+ <p class="vs-hint" aria-hidden="true">Swipe to compare &rarr;</p>
+ <div class="vs-bar" data-for=".vs-track" aria-hidden="true"><span class="vs-thumb"></span></div>
  </div>
 </section>
 

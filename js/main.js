@@ -609,12 +609,28 @@ document.addEventListener('DOMContentLoaded', function () {
         function half() { return inner.scrollWidth / 2; }
         function wrap() { if (box.scrollLeft >= half()) { box.scrollLeft -= half(); } else if (box.scrollLeft <= 0) { box.scrollLeft += half(); } }
         box.scrollLeft = 1;
-        if (!reduce) {
-            (function tick() {
-                if (mq.matches && !paused && !drag && !document.hidden) { box.scrollLeft += 0.4; wrap(); }
-                requestAnimationFrame(tick);
-            })();
+        // one chip per 8s (Allan: stepped like the logo strip, not continuous)
+        var stepping = false;
+        function stepOnce() {
+            if (!mq.matches || paused || drag || stepping || document.hidden) { return; }
+            var kids = inner.children;
+            if (kids.length < 2) { return; }
+            // distance to the next chip = current first-pair spacing (uniform gap, variable widths)
+            var i = 0;
+            while (i < kids.length - 1 && kids[i + 1].offsetLeft <= box.scrollLeft + 2) { i++; }
+            var dist = kids[i + 1] ? (kids[i + 1].offsetLeft - kids[i].offsetLeft) : 0;
+            if (!dist) { return; }
+            stepping = true;
+            var from = box.scrollLeft, t0 = null;
+            function anim(ts) {
+                if (t0 === null) { t0 = ts; }
+                var p = Math.min((ts - t0) / 450, 1);
+                box.scrollLeft = from + dist * (1 - Math.pow(1 - p, 3));
+                if (p < 1) { requestAnimationFrame(anim); } else { wrap(); stepping = false; }
+            }
+            requestAnimationFrame(anim);
         }
+        if (!reduce) { setInterval(stepOnce, 8000); }
         box.addEventListener('touchstart', function (e) { drag = true; paused = true; startX = e.touches[0].pageX; scrollStart = box.scrollLeft; }, { passive: true });
         box.addEventListener('touchmove', function (e) { if (!drag) return; box.scrollLeft = scrollStart - (e.touches[0].pageX - startX); wrap(); }, { passive: true });
         box.addEventListener('touchend', function () { drag = false; setTimeout(function () { paused = false; }, 2000); }, { passive: true });
