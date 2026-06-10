@@ -595,21 +595,27 @@ document.addEventListener('DOMContentLoaded', function () {
         setInterval(stepOnce, 10000);
     })();
 
-    /* ── Renovation-vs-Resurfacing swipe progress thumb ──
-       The dark thumb under 'Swipe to compare' tracks the carousel's scroll
-       position (mobile only; the bar is display:none at md+). */
-    (function () {
-        var track = document.querySelector('.vs-track');
-        var thumb = document.querySelector('.vs-thumb');
+    /* ── Swipe progress thumbs (generic) ──
+       Any .vs-bar[data-for="<selector>"] becomes a scrollbar-style progress
+       indicator for that horizontal scroller: thumb width = visible fraction,
+       position synced to scroll. Self-hides when nothing scrolls (e.g. the
+       services row becomes a grid at sm+). */
+    document.querySelectorAll('.vs-bar[data-for]').forEach(function (bar) {
+        var track = document.querySelector(bar.getAttribute('data-for'));
+        var thumb = bar.querySelector('.vs-thumb');
         if (!track || !thumb) return;
         function sync() {
             var max = track.scrollWidth - track.clientWidth;
-            if (max <= 0) return;
-            thumb.style.transform = 'translateX(' + (track.scrollLeft / max * 100) + '%)';
+            if (max <= 0) { bar.style.visibility = 'hidden'; return; }
+            bar.style.visibility = '';
+            var barW = bar.clientWidth;
+            var thW = Math.max(barW * track.clientWidth / track.scrollWidth, 14);
+            thumb.style.width = thW + 'px';
+            thumb.style.transform = 'translateX(' + (track.scrollLeft / max * (barW - thW)) + 'px)';
         }
         track.addEventListener('scroll', sync, { passive: true });
         window.addEventListener('resize', sync);
         sync();
-    })();
+    });
 
 });
