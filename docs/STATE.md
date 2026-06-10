@@ -192,7 +192,7 @@
 
 | Item | Status | Details |
 |---|---|---|
-| Customer enquiries received historically | ❓ | CEO to ask if anyone enquired during build phase |
+| Customer enquiries received historically | ✅ At least 1 | **McGrath (real estate agency) PM called re a tenant's job** (Allan, mentioned 2026-06-11 — date/PM name/property/service/outcome ❓ CEO to capture). NOTE: an enquiry ≠ "trusted by"; no logo/endorsement use until a job completes AND written permission is obtained. |
 | Network outreach lists (Allan) | ❌ Not built | Override 1 priority — target 25 contacts |
 | Network outreach lists (Marko) | ❌ Not built | Same |
 | First 3 customers booked | ❌ 0/3 | Goal by 2026-05-27 |
@@ -203,6 +203,7 @@
 | # | Customer | Source | Service Needed | Status | Action needed |
 |---|---|---|---|---|---|
 | 1 | **Marko's prior regrouting customer** (name ❓) | Warm referral via Marko's previous job | Shower-over-bath resurface + strip-back (peeling existing coat) | 🟢 Soft-locked, "happy to wait until we establish business" | Marko: capture name, suburb, contact, photos. CEO: draft holding-quote message. |
+| 2 | **McGrath PM (tenant job)** (PM name ❓) | Inbound call from McGrath property manager | Tenant's bathroom job (details ❓) | ❓ Status unknown (Allan mentioned 2026-06-11) | Allan: capture PM name/office, property, service needed, outcome. If it converts: first agency job → ask written logo/testimonial permission after completion. |
 
 **Special considerations for this customer:**
 - Strip-back surcharge applies (Excel Modifier — Rejection #9 territory)
