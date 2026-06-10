@@ -123,7 +123,7 @@ get_header(); ?>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">receipt_long</span><span class="text-xs font-bold">ABN-Registered</span></div>
  </div>
 </section>
 
@@ -131,26 +131,25 @@ get_header(); ?>
 <section class="py-10 sm:py-12 bg-surface-container-low/50">
  <div class="max-w-6xl mx-auto px-6 sm:px-8">
  <p class="text-center text-sm text-secondary mb-8">Owner-run, fully insured, warranty in writing. Sydney bathrooms done properly.</p>
+ <?php /* PARKED icon badges (Allan 2026-06-11, keep for future): restore one per trust block above each heading:
+ <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">ICON</span></div>
+ icons in order: verified / verified_user / location_on / schedule */ ?>
  <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
  <div>
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span></div>
  <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Up to 5 Years</p>
  <p class="text-xs sm:text-sm text-secondary font-medium">Workmanship warranty in writing</p>
  </div>
  <div>
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified_user</span></div>
  <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Fully Insured</p>
  <p class="text-xs sm:text-sm text-secondary font-medium">Public liability cover on every job</p>
  </div>
  <div>
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">location_on</span></div>
  <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Sydney + NSW</p>
  <p class="text-xs sm:text-sm text-secondary font-medium">Locally owned and operated</p>
  </div>
  <div>
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">receipt_long</span></div>
- <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">ABN-registered</p>
- <p class="text-xs sm:text-sm text-secondary font-medium">Real business, real receipts</p>
+ <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Same-Day Service</p>
+ <p class="text-xs sm:text-sm text-secondary font-medium">Most jobs done in a single day</p>
  </div>
  </div>
  </div>

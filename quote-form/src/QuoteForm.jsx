@@ -1354,7 +1354,7 @@ export default function QuoteForm() {
   const stepLabel = step === "about" ? "About you" : step === "where" ? "Location" : step === "what" ? "Your bathroom" : step === "services" ? "Service details" : "Photos & submit";
 
   return (
-    <div style={{ fontFamily: "'Inter',system-ui,sans-serif", maxWidth: 480, margin: "0 auto", padding: "0 20px 32px" }}>
+    <div style={{ fontFamily: "'Inter',system-ui,sans-serif", maxWidth: 480, margin: "0 auto", padding: "0 20px 12px" }}>
       <Trust />
       <StepBar n={stepNum} total={totalSteps} label={stepLabel} />
       {step !== "about" && <Back onClick={back} />}
@@ -2149,7 +2149,7 @@ export default function QuoteForm() {
           </div>
         </div>
       )}
-      <p style={{ textAlign: "center", marginTop: 16, fontSize: 11, color: C.sec, lineHeight: 1.5 }}>🔒 Your progress saves as you go, so you never lose your quote. Never&nbsp;shared.</p>
+      <p style={{ textAlign: "center", margin: "16px 0 0", fontSize: 11, color: C.sec, lineHeight: 1.5 }}>🔒 Auto-saved as you type, so nothing is lost. Private and never&nbsp;shared.</p>
     </div>
   );
 }
