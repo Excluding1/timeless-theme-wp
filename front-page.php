@@ -424,11 +424,12 @@ get_header(); ?>
 <!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
  <div class="max-w-xl mx-auto px-6 sm:px-8">
- <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
- <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
- <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Quote</h2>
- <p class="text-on-primary-container text-sm">~90 seconds. No obligation. Quote within 1 business day.</p>
+ <div class="text-center mb-8">
+ <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
+ <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-3">Get Your Free Quote Today</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed">Send a quick photo and a few details &mdash; we&rsquo;ll send your fixed-price quote within 1 business day. No pressure, no hidden fees.</p>
  </div>
+ <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
  <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
