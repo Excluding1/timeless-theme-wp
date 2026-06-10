@@ -81,7 +81,7 @@ get_header(); ?>
  <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
  <div class="absolute bottom-3 left-3 right-3 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
  <span class="text-xs font-bold text-primary">Drag to Compare</span>
- <span class="text-xs font-bold text-primary-soft">Completed in 7 Hours</span>
+ <span class="text-xs font-bold text-primary-soft">Completed in 10 Hours</span>
  </div>
  </div>
  </div>
@@ -110,7 +110,7 @@ get_header(); ?>
  <span class="absolute top-3 right-3 bg-white/80 text-primary text-[0.6rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm" style="z-index:15;">After</span>
  <div class="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 p-3 bg-white/90 backdrop-blur-md rounded-lg flex justify-between items-center" style="z-index:15;">
  <span class="text-xs font-bold text-primary">Drag to Compare</span>
- <span class="text-xs font-bold text-primary-soft">Completed in 7 Hours</span>
+ <span class="text-xs font-bold text-primary-soft">Completed in 10 Hours</span>
  </div>
  </div>
  </div>
