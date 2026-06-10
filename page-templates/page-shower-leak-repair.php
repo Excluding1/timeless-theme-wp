@@ -193,7 +193,7 @@
  <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
  </div>
  <div class="order-1 lg:order-2">
- <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
+ <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
  <div class="absolute inset-0 w-full h-full"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/leaking-after.png" alt="Shower after silicone replacement" class="w-full h-full object-cover absolute inset-0" /></div>
  <div class="ba-clip absolute inset-0" style="clip-path:inset(0 50% 0 0);"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/leaking-before.png" alt="Leaking shower silicone" class="w-full h-full object-cover absolute inset-0" /></div></div>
  <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:50%;z-index:20;cursor:ew-resize;"></div>
@@ -219,7 +219,7 @@
  <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all mx-auto lg:mx-0">Get a Free Quote <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
  </div>
  <div class="order-1 lg:order-1">
- <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-md" style="aspect-ratio:3/2;cursor:ew-resize;">
+ <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none" style="aspect-ratio:3/2;cursor:ew-resize;">
  <div class="absolute inset-0 w-full h-full"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/mouldy-after.png" alt="Clean shower corners" class="w-full h-full object-cover absolute inset-0" /></div>
  <div class="ba-clip absolute inset-0" style="clip-path:inset(0 67% 0 0);"><div class="ba-before absolute inset-0 bg-linear-to-br from-slate-100 via-slate-200 to-slate-300 flex items-center justify-center"><img src="<?php echo get_template_directory_uri(); ?>/images/services/shower-leak-repair/mouldy-before.png" alt="Mouldy shower corners" class="w-full h-full object-cover absolute inset-0" /></div></div>
  <div class="ba-line absolute top-0 bottom-0 w-[2px] bg-white" style="left:33%;z-index:20;cursor:ew-resize;"></div>
