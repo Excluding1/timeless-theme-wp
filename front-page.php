@@ -222,7 +222,18 @@ get_header(); ?>
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Renovation vs Resurfacing</h2>
  <p class="text-secondary">Why thousands of Sydney homeowners choose resurfacing.</p>
  </div>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+ <!-- Mobile: swipe-to-compare carousel (scroll-snap + 86% cards = peek affordance, price-anchor card first); desktop grid unchanged -->
+ <style>
+ .vs-hint{display:none;}
+ @media (max-width:767px){
+ .vs-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding-bottom:6px;}
+ .vs-track::-webkit-scrollbar{display:none;}
+ .vs-track>div{flex:0 0 86%;scroll-snap-align:center;}
+ .vs-hint{display:block;text-align:center;font-size:12px;font-weight:600;color:#595e6d;margin:0 0 14px;}
+ }
+ </style>
+ <p class="vs-hint" aria-hidden="true">Swipe to compare &rarr;</p>
+ <div class="vs-track grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
  <div class="bg-red-50/50 rounded-2xl p-8 border-2 border-red-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
  <div class="absolute top-0 right-0 bg-red-100 text-red-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl">Expensive</div>
  <div class="flex items-center gap-3 mb-6">
