@@ -231,7 +231,21 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Repair vs Replace</h2>
  <p class="text-secondary max-w-3xl mb-10">Replacing a basin is expensive and disruptive. Here's how a professional repair compares.</p>
 
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+ <style>
+ .vs-hint,.vs-bar{display:none;}
+ @media (max-width:767px){
+ .vs-head{margin-bottom:16px;}
+ .vs-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding-bottom:6px;}
+ .vs-track::-webkit-scrollbar{display:none;}
+ .vs-track>div{flex:0 0 86%;scroll-snap-align:center;}
+ .vs-hint{display:block;text-align:center;font-size:12px;font-weight:600;color:#595e6d;margin:0 0 8px;}
+ .vs-bar{display:block;position:relative;overflow:hidden;width:72px;height:4px;border-radius:9999px;background:#dbe1e8;margin:0 auto 14px;}
+ .vs-thumb{position:absolute;left:0;top:0;height:100%;width:50%;border-radius:9999px;background:#041534;}
+ }
+ </style>
+ <p class="vs-hint" aria-hidden="true">Swipe to compare &rarr;</p>
+ <div class="vs-bar" data-for="#vs-cmp1" aria-hidden="true"><span class="vs-thumb"></span></div>
+ <div id="vs-cmp1" class="vs-track grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
  <div class="bg-white rounded-xl p-8 border-2 border-surface-container">
  <h3 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-error" aria-hidden="true">close</span> Replace the Basin</h3>
  <ul class="space-y-3 text-sm text-secondary">

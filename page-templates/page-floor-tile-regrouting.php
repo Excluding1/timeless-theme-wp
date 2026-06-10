@@ -242,11 +242,25 @@
 <!-- CEMENT vs EPOXY GROUT COMPARISON -->
 <section class="py-16 sm:py-20 bg-white">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
- <div class="text-center mb-12">
+ <div class="text-center mb-12 vs-head">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Cement vs Epoxy Floor Grout</h2>
  <p class="text-secondary max-w-2xl mx-auto">We offer both. Epoxy is especially valuable for floors because of foot traffic and mopping exposure.</p>
  </div>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+ <style>
+ .vs-hint,.vs-bar{display:none;}
+ @media (max-width:767px){
+ .vs-head{margin-bottom:16px;}
+ .vs-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding-bottom:6px;}
+ .vs-track::-webkit-scrollbar{display:none;}
+ .vs-track>div{flex:0 0 86%;scroll-snap-align:center;}
+ .vs-hint{display:block;text-align:center;font-size:12px;font-weight:600;color:#595e6d;margin:0 0 8px;}
+ .vs-bar{display:block;position:relative;overflow:hidden;width:72px;height:4px;border-radius:9999px;background:#dbe1e8;margin:0 auto 14px;}
+ .vs-thumb{position:absolute;left:0;top:0;height:100%;width:50%;border-radius:9999px;background:#041534;}
+ }
+ </style>
+ <p class="vs-hint" aria-hidden="true">Swipe to compare &rarr;</p>
+ <div class="vs-bar" data-for="#vs-cmp1" aria-hidden="true"><span class="vs-thumb"></span></div>
+ <div id="vs-cmp1" class="vs-track grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
  <div class="bg-blue-50/50 rounded-2xl border-2 border-blue-200 relative overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal">
  <div class="absolute top-0 right-0 bg-blue-100 text-blue-700 text-[0.6rem] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-xl z-10">Budget-Friendly</div>
  <div class="aspect-video bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center">

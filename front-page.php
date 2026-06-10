@@ -219,7 +219,7 @@ get_header(); ?>
 <!-- COST COMPARISON -->
 <section class="py-16 sm:py-20 bg-white">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
- <div class="max-w-3xl mx-auto text-center mb-12">
+ <div class="max-w-3xl mx-auto text-center mb-12 vs-head">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Renovation vs Resurfacing</h2>
  <p class="text-secondary">Why thousands of Sydney homeowners choose resurfacing.</p>
  </div>
@@ -227,6 +227,7 @@ get_header(); ?>
  <style>
  .vs-hint,.vs-bar{display:none;}
  @media (max-width:767px){
+ .vs-head{margin-bottom:16px;}
  .vs-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:14px;padding-bottom:6px;}
  .vs-track::-webkit-scrollbar{display:none;}
  .vs-track>div{flex:0 0 86%;scroll-snap-align:center;}
