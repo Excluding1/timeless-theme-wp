@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme Footer — Shared across all pages
+ * Theme Footer, Shared across all pages
  *
  * @package Timeless
  */

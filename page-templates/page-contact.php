@@ -128,7 +128,7 @@
  </div>
 </section>
 
-<!-- QUOTE FORM — embeds the React form via [timeless_quote_form] shortcode -->
+<!-- QUOTE FORM, embeds the React form via [timeless_quote_form] shortcode -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">

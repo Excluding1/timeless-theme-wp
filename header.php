@@ -1,7 +1,7 @@
 
 <?php
 /**
- * Theme Header — Shared across all pages
+ * Theme Header, Shared across all pages
  *
  * @package Timeless
  */
@@ -25,7 +25,7 @@ $phone      = timeless_phone();
 
     <?php // ─── Favicons (multi-format for full browser/device coverage) ─── ?>
     <?php $fav = get_template_directory_uri() . '/assets/favicon'; ?>
-    <?php // SVG favicon link is intentionally OMITTED — the supplied favicon.svg is 1.46 MB
+    <?php // SVG favicon link is intentionally OMITTED, the supplied favicon.svg is 1.46 MB
           // (a raster PNG embedded inside SVG via <image> + base64, not a real vector). Modern
           // browsers fall through to the PNG variants below which cover all use cases. To
           // restore SVG support, replace assets/favicon/favicon.svg with a real vector ≤5 KB
@@ -61,7 +61,7 @@ $phone      = timeless_phone();
             <button id="menu-btn" class="lg:hidden p-2" aria-label="Open menu"><span class="material-symbols-outlined text-2xl text-primary">menu</span></button>
         </div>
 
-        <!-- MEGA MENU (desktop only — mobile uses hamburger nav) -->
+        <!-- MEGA MENU (desktop only, mobile uses hamburger nav) -->
         <div id="mega-menu" class="mega-dropdown hidden lg:block bg-white border-t border-surface-container shadow-xl" onmouseenter="showMega()" onmouseleave="hideMega()">
             <div class="max-w-7xl mx-auto px-6 sm:px-8 py-6 grid grid-cols-3 gap-8">
                 <!-- Resurfacing -->

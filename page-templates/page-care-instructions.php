@@ -23,7 +23,7 @@
 
  <!-- THE FIRST 72 HOURS -->
  <div class="reveal bg-primary text-white p-6 sm:p-8 rounded-xl">
- <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">The first 72 hours &mdash; critical cure period</h2>
+ <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">The first 72 hours, critical cure period</h2>
  <p class="text-white/85 text-sm mb-4">If you remember nothing else from this page, remember this. Cure times are non-negotiable.</p>
  <div class="overflow-x-auto">
  <table class="w-full text-sm">
@@ -41,12 +41,12 @@
  <td class="p-2">No water, no rinsing, no leaning anything against it</td>
  </tr>
  <tr class="border-b border-white/15">
- <td class="p-2 font-medium">Tile resurfacing &mdash; walls</td>
+ <td class="p-2 font-medium">Tile resurfacing, walls</td>
  <td class="p-2">48 hours</td>
  <td class="p-2">No water, no scrubbing, ventilate the bathroom</td>
  </tr>
  <tr class="border-b border-white/15">
- <td class="p-2 font-medium">Tile resurfacing &mdash; floors</td>
+ <td class="p-2 font-medium">Tile resurfacing, floors</td>
  <td class="p-2">72 hours</td>
  <td class="p-2">No foot traffic, no furniture moved across</td>
  </tr>
@@ -90,7 +90,7 @@
 
  <!-- WEEKLY CLEANING -->
  <div class="reveal">
- <h2 class="text-xl font-bold text-primary mb-3">Weekly cleaning &mdash; what to use</h2>
+ <h2 class="text-xl font-bold text-primary mb-3">Weekly cleaning, what to use</h2>
  <p class="mb-3"><strong>Use these:</strong></p>
  <ul class="list-disc pl-6 space-y-2 mb-4">
  <li>Warm soapy water with a microfibre cloth (handles 90% of cleaning)</li>
@@ -101,11 +101,11 @@
  </ul>
  <p class="mb-3"><strong>Never use these:</strong></p>
  <ul class="list-disc pl-6 space-y-2">
- <li>Bleach (except diluted on grout &mdash; see below)</li>
+ <li>Bleach (except diluted on grout, see below)</li>
  <li>Ammonia, oven cleaner, drain cleaner</li>
  <li>Jif, Gumption, or other abrasive pastes</li>
  <li>Steel wool, scouring pads, melamine sponges (Magic Erasers)</li>
- <li>Acidic cleaners &mdash; vinegar, CLR, lime scale removers</li>
+ <li>Acidic cleaners, vinegar, CLR, lime scale removers</li>
  </ul>
  </div>
 
@@ -113,13 +113,13 @@
  <div class="reveal bg-white p-6 sm:p-8 rounded-xl border border-slate-200">
  <h2 class="text-xl font-bold text-primary mb-3">Sydney-specific care</h2>
  <p class="mb-3"><strong>Humid summers and mould</strong>. Sydney's humidity makes mould the #1 enemy of resurfaced bathrooms. Run the exhaust fan during AND 20 minutes after every shower. Squeegee walls. Wipe screens dry. Do these three things and you'll go years without spots.</p>
- <p class="mb-3"><strong>Hard water suburbs</strong>. Eastern suburbs (Bondi, Coogee, Maroubra) have noticeably harder water than the north shore (Lane Cove, Chatswood). Hard water leaves white mineral spots over weeks of buildup. Wiping dry after each use prevents this entirely &mdash; spots are surface deposits, not coating damage.</p>
+ <p class="mb-3"><strong>Hard water suburbs</strong>. Eastern suburbs (Bondi, Coogee, Maroubra) have noticeably harder water than the north shore (Lane Cove, Chatswood). Hard water leaves white mineral spots over weeks of buildup. Wiping dry after each use prevents this entirely, spots are surface deposits, not coating damage.</p>
  <p><strong>Coastal salt air</strong>. If your bathroom has external ventilation near the coast, the salt air can accelerate mould in the shower. Squeegee + ventilate becomes more important the closer you are to the ocean.</p>
  </div>
 
  <!-- BY SERVICE -->
  <div class="reveal">
- <h2 class="text-xl font-bold text-primary mb-4">By service &mdash; specific care</h2>
+ <h2 class="text-xl font-bold text-primary mb-4">By service, specific care</h2>
  <p class="mb-5 text-sm">Click any service for the specific care details.</p>
 
  <div class="space-y-4">
@@ -127,8 +127,8 @@
  <details class="bg-white p-5 rounded-lg border border-slate-200">
  <summary class="font-bold text-primary cursor-pointer">Bath resurfacing</summary>
  <div class="mt-4 space-y-2 text-sm">
- <p>72 hours no water cure. No bath mats, suction toys, or rubber stickers for 7 days &mdash; they bond to the coating.</p>
- <p>After cure: rinse and wipe dry after every use. For soap scum, soft sponge only &mdash; never the green scour side. Avoid hair dye spills (wipe immediately, they stain).</p>
+ <p>72 hours no water cure. No bath mats, suction toys, or rubber stickers for 7 days, they bond to the coating.</p>
+ <p>After cure: rinse and wipe dry after every use. For soap scum, soft sponge only, never the green scour side. Avoid hair dye spills (wipe immediately, they stain).</p>
  </div>
  </details>
 
@@ -136,7 +136,7 @@
  <summary class="font-bold text-primary cursor-pointer">Tile resurfacing (walls + floors)</summary>
  <div class="mt-4 space-y-2 text-sm">
  <p>48-hour cure on walls, 72 hours on floors. Use pH-neutral cleaner only. Squeegee shower walls after each use.</p>
- <p>Avoid acidic cleaners forever &mdash; vinegar, CLR, lime scale removers etch the coating over time.</p>
+ <p>Avoid acidic cleaners forever, vinegar, CLR, lime scale removers etch the coating over time.</p>
  </div>
  </details>
 
@@ -160,7 +160,7 @@
  <details class="bg-white p-5 rounded-lg border border-slate-200">
  <summary class="font-bold text-primary cursor-pointer">Epoxy regrouting</summary>
  <div class="mt-4 space-y-2 text-sm">
- <p>48-hour cure. Way more stain and mould-resistant than cement &mdash; but still avoid harsh acids and abrasive scrubbing.</p>
+ <p>48-hour cure. Way more stain and mould-resistant than cement, but still avoid harsh acids and abrasive scrubbing.</p>
  <p>Wipe with a damp microfibre weekly. That's it.</p>
  </div>
  </details>
@@ -168,7 +168,7 @@
  <details class="bg-white p-5 rounded-lg border border-slate-200">
  <summary class="font-bold text-primary cursor-pointer">Silicone replacement</summary>
  <div class="mt-4 space-y-2 text-sm">
- <p>24-hour cure before water exposure. Don't pick at edges &mdash; bonds harder over the first week.</p>
+ <p>24-hour cure before water exposure. Don't pick at edges, bonds harder over the first week.</p>
  <p>Small black spot at 12+ months = surface mould; wipe with diluted bleach. Black spot UNDER the silicone = call us back.</p>
  </div>
  </details>
@@ -187,7 +187,7 @@
  <!-- WHEN TO CALL US BACK -->
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">When to call us back</h2>
- <p class="mb-3">If you see any of the following, call us &mdash; these are workmanship issues we'll come back and fix under warranty:</p>
+ <p class="mb-3">If you see any of the following, call us, these are workmanship issues we'll come back and fix under warranty:</p>
  <ul class="list-disc pl-6 space-y-2">
  <li>Lifting silicone or grout that wasn't there at handover</li>
  <li>Cracking or crumbling grout under normal use</li>
@@ -195,10 +195,10 @@
  <li>Persistent stains that won't budge with normal cleaning</li>
  <li>Leaking from the shower screen bedding line under normal water exposure</li>
  </ul>
- <p class="mt-4 mb-3">Don't call us back for these &mdash; they're normal wear, and we'd quote you for repairs:</p>
+ <p class="mt-4 mb-3">Don't call us back for these, they're normal wear, and we'd quote you for repairs:</p>
  <ul class="list-disc pl-6 space-y-2">
  <li>Mould caused by ventilation issues or no fan use</li>
- <li>Hard water mineral spots (they wipe off &mdash; not coating damage)</li>
+ <li>Hard water mineral spots (they wipe off, not coating damage)</li>
  <li>Damage from cleaning products on the "avoid" list</li>
  <li>Impact damage (knocks, drops, hairline cracks from heavy items)</li>
  <li>Silicone wear after the warranted period (annual replacement is normal)</li>
@@ -222,7 +222,7 @@
  <!-- CONSUMER LAW -->
  <div class="reveal bg-surface border-l-4 border-primary p-5 rounded-r-lg">
  <h2 class="text-base font-bold text-primary mb-2">Your rights under the Australian Consumer Law</h2>
- <p class="text-sm">Your resurfacing is covered by our workmanship warranty and your rights under the Australian Consumer Law. Damage from neglect or wrong products isn't covered &mdash; but anything that fails on its own, we'll come back and fix.</p>
+ <p class="text-sm">Your resurfacing is covered by our workmanship warranty and your rights under the Australian Consumer Law. Damage from neglect or wrong products isn't covered, but anything that fails on its own, we'll come back and fix.</p>
  </div>
 
  </div>

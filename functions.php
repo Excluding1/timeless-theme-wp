@@ -70,7 +70,7 @@ add_action( 'init', 'timeless_register_article_cpt' );
    the site (before/after, icon callouts, process steps).
    ───────────────────────────────────────────── */
 
-/* [before_after before="url" after="url" alt="..."] — interactive slider */
+/* [before_after before="url" after="url" alt="..."], interactive slider */
 function timeless_shortcode_before_after( $atts ) {
     $a = shortcode_atts( array(
         'before' => '',
@@ -83,11 +83,11 @@ function timeless_shortcode_before_after( $atts ) {
     ob_start(); ?>
     <div class="ba-slider rounded-2xl overflow-hidden shadow-md relative select-none mx-auto w-full max-w-2xl my-8" style="aspect-ratio:3/2;cursor:ew-resize;">
         <div class="absolute inset-0 w-full h-full">
-            <img src="<?php echo esc_url( $a['after'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — after' ); ?>" class="w-full h-full object-cover absolute inset-0" />
+            <img src="<?php echo esc_url( $a['after'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ', after' ); ?>" class="w-full h-full object-cover absolute inset-0" />
         </div>
         <div class="ba-clip absolute inset-0 overflow-hidden" style="clip-path:inset(0 50% 0 0);">
             <div class="ba-before absolute inset-0">
-                <img src="<?php echo esc_url( $a['before'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ' — before' ); ?>" class="w-full h-full object-cover absolute inset-0" />
+                <img src="<?php echo esc_url( $a['before'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ', before' ); ?>" class="w-full h-full object-cover absolute inset-0" />
             </div>
         </div>
         <div class="ba-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left:50%;transform:translateX(-50%);cursor:ew-resize;">
@@ -103,7 +103,7 @@ function timeless_shortcode_before_after( $atts ) {
 }
 add_shortcode( 'before_after', 'timeless_shortcode_before_after' );
 
-/* [icon_callout icon="check_circle" title="..." content="..."] — themed callout */
+/* [icon_callout icon="check_circle" title="..." content="..."], themed callout */
 function timeless_shortcode_icon_callout( $atts, $content = null ) {
     $a = shortcode_atts( array(
         'icon'    => 'check_circle',
@@ -126,7 +126,7 @@ function timeless_shortcode_icon_callout( $atts, $content = null ) {
 }
 add_shortcode( 'icon_callout', 'timeless_shortcode_icon_callout' );
 
-/* [process_step number="1" title="..." duration="..." content="..."] — timeline step */
+/* [process_step number="1" title="..." duration="..." content="..."], timeline step */
 function timeless_shortcode_process_step( $atts, $content = null ) {
     $a = shortcode_atts( array(
         'number'   => '1',
@@ -184,7 +184,7 @@ function timeless_shortcode_stat_grid( $atts ) {
 add_shortcode( 'stat_grid', 'timeless_shortcode_stat_grid' );
 
 /* ─────────────────────────────────────────────────────────────────
- * [timeless_quote_form] — Embeds the React quote form anywhere.
+ * [timeless_quote_form], Embeds the React quote form anywhere.
  *
  * Use on any page/post via: [timeless_quote_form]
  * Or in PHP via: <?php echo do_shortcode('[timeless_quote_form]'); ?>
@@ -195,7 +195,7 @@ add_shortcode( 'stat_grid', 'timeless_shortcode_stat_grid' );
  *         and enqueues the built JS + CSS bundles.
  *
  * Image base: the form references images at /images/areas/... and
- * /images/services/... — those paths only resolve correctly when
+ * /images/services/..., those paths only resolve correctly when
  * window.TIMELESS_FORM_BASE is set to the theme's assets/quote-form/
  * URL (so /images/areas/shower.jpg becomes
  * /wp-content/themes/.../assets/quote-form/images/areas/shower.jpg).
@@ -248,7 +248,7 @@ add_action( 'init', 'timeless_flush_blog_rewrites', 99 );
    article content). Both reuse the same brand language for consistency.
    ───────────────────────────────────────────── */
 
-/* Sidebar quote box — image background + headline + button.
+/* Sidebar quote box, image background + headline + button.
    Used in: archive-article.php sidebar, single-article.php TOC sidebar.
    Returns rendered HTML so callers can echo or buffer it. */
 function timeless_blog_quote_cta_box() {
@@ -279,7 +279,7 @@ function timeless_blog_quote_cta_box() {
     return ob_get_clean();
 }
 
-/* Recent posts widget — 5 most recent articles for sidebar. */
+/* Recent posts widget, 5 most recent articles for sidebar. */
 function timeless_blog_recent_posts_widget( $limit = 5 ) {
     $recent = get_posts( array(
         'post_type'      => 'article',
@@ -360,7 +360,7 @@ function timeless_blog_end_of_article_cta() {
                 Save Time &amp; Money with Professional Resurfacing
             </h2>
             <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">
-                Cracks, chips, or stains can lead to bigger problems — repairing them quickly keeps your bathroom looking its best.
+                Cracks, chips, or stains can lead to bigger problems, repairing them quickly keeps your bathroom looking its best.
                 We offer fast, cost-effective resurfacing that restores surfaces without the cost or disruption of full replacements.
             </p>
             <p class="text-sm sm:text-base text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
@@ -386,7 +386,7 @@ function timeless_blog_end_of_article_cta() {
    1e. AUTO TABLE OF CONTENTS FOR ARTICLES
    ─────────────────────────────────────────────
    When an article has 3+ H2 headings, generate a sticky "On this page"
-   sidebar with jump links. Only triggers for substantive articles —
+   sidebar with jump links. Only triggers for substantive articles ,
    short posts (<3 H2s) skip the TOC to avoid visual clutter.
 
    Implementation: filters the_content output, injects id attributes
@@ -511,11 +511,11 @@ function timeless_create_pages() {
         array( 'title' => 'FAQs',    'slug' => 'faqs',    'template' => 'page-templates/page-faqs.php' ),
         array( 'title' => 'Privacy Policy', 'slug' => 'privacy', 'template' => 'page-templates/page-privacy.php' ),
         array( 'title' => 'Customer Terms of Service', 'slug' => 'terms', 'template' => 'page-templates/page-terms.php' ),
-        // City homepages — currently /sydney/ duplicates / for nationwide expansion staging.
+        // City homepages, currently /sydney/ duplicates / for nationwide expansion staging.
         // When Melbourne launches: / becomes Australia-neutral, /sydney/ keeps the Sydney
         // content (page-sydney.php diverges from front-page.php at that point).
         array( 'title' => 'Bathroom Resurfacing Sydney', 'slug' => 'sydney', 'template' => 'page-templates/page-sydney.php' ),
-        // Service pages — universal slugs (no -sydney suffix) for nationwide expansion
+        // Service pages, universal slugs (no -sydney suffix) for nationwide expansion
         array( 'title' => 'Shower Regrouting',           'slug' => 'services/shower-regrouting',           'template' => 'page-templates/page-shower-regrouting.php' ),
         array( 'title' => 'Shower Resurfacing',          'slug' => 'services/shower-resurfacing',          'template' => 'page-templates/page-shower-resurfacing.php' ),
         array( 'title' => 'Bath Resurfacing',            'slug' => 'services/bath-resurfacing',            'template' => 'page-templates/page-bath-resurfacing.php' ),
@@ -596,7 +596,7 @@ add_action( 'after_switch_theme', 'timeless_create_pages' );
  * needing a full theme switch. Fires once on init then sets a flag to prevent re-runs.
  *
  * Use case: when a new service page is added (e.g. shower-resurfacing 2026-05-04), the
- * `after_switch_theme` hook only fires on actual theme switches — not on file uploads /
+ * `after_switch_theme` hook only fires on actual theme switches, not on file uploads /
  * theme replacements. This backfill catches up any missing pages on the next admin or
  * front-end visit. Safe because timeless_create_pages() is idempotent (skips existing).
  *
@@ -617,10 +617,10 @@ add_action( 'init', 'timeless_pages_backfill_v4' );
  *
  * Why: Service pages were originally `/services/bath-resurfacing-sydney/`
  * which baked geography into URLs that should be national. New scheme:
- * `/services/bath-resurfacing/` — same page, universal URL, scales to
+ * `/services/bath-resurfacing/`, same page, universal URL, scales to
  * Melbourne/Brisbane without fragmenting authority.
  *
- * Idempotent via `timeless_url_migration_v2_done` option flag — runs once
+ * Idempotent via `timeless_url_migration_v2_done` option flag, runs once
  * and never again. Updates BOTH post_name (URL slug) AND _wp_page_template
  * meta (so renamed template files are found).
  *
@@ -658,7 +658,7 @@ function timeless_migrate_service_slugs_v2() {
     foreach ( $migrations as $old_slug => $new_slug ) {
         $page = get_page_by_path( 'services/' . $old_slug );
         if ( ! $page ) {
-            continue;  // Page doesn't exist yet (fresh install) — let create_pages handle it
+            continue;  // Page doesn't exist yet (fresh install), let create_pages handle it
         }
 
         wp_update_post( array(
@@ -692,7 +692,7 @@ add_action( 'init', 'timeless_migrate_service_slugs_v2', 99 );
  *   /services/bath-resurfacing-sydney/           → /services/bath-resurfacing/
  *   /services/bath-resurfacing-sydney/parramatta/ → /services/bath-resurfacing/parramatta/
  *
- * Runs at template_redirect priority 1 — BEFORE WordPress tries to render
+ * Runs at template_redirect priority 1, BEFORE WordPress tries to render
  * a 404 for the old URL.
  */
 function timeless_legacy_url_redirect() {
@@ -710,7 +710,7 @@ function timeless_legacy_url_redirect() {
         //   - DB migration hasn't run yet (slugs still have -sydney suffix)
         //   - Without this check, we'd redirect to a URL that doesn't exist,
         //     WP's canonical_redirect would send back to old URL, our redirect
-        //     would fire again — loop forever.
+        //     would fire again, loop forever.
         // With this check, we just let the request fall through to WordPress
         // until migration runs.
         $check_path = trim( strtok( $new_path, '?' ), '/' );  // strip query + leading/trailing slashes
@@ -745,7 +745,7 @@ function timeless_ensure_pages_exist() {
         return;
     }
 
-    // Cheap pre-checks BEFORE the transient gate — these run on every admin
+    // Cheap pre-checks BEFORE the transient gate, these run on every admin
     // page load but exit in <1ms when pages exist (single cached get_page_by_path).
     // This pattern catches "new pages added in theme update" without waiting
     // for the 1-hour transient to expire.
@@ -763,13 +763,13 @@ function timeless_ensure_pages_exist() {
         }
     }
 
-    // Run create_pages if /sydney/ is missing (bypasses transient — it's a cheap
+    // Run create_pages if /sydney/ is missing (bypasses transient, it's a cheap
     // recheck and we WANT new pages to materialize quickly post-deploy)
     if ( $needs_create_pages ) {
         timeless_create_pages();
     }
 
-    // Same self-heal pattern for suburb landing pages — bypasses transient too
+    // Same self-heal pattern for suburb landing pages, bypasses transient too
     if ( $needs_suburb_pages ) {
         timeless_create_suburb_pages();
     }
@@ -783,7 +783,7 @@ function timeless_ensure_pages_exist() {
 }
 
 /**
- * Programmatic suburb landing pages — auto-create on theme activation.
+ * Programmatic suburb landing pages, auto-create on theme activation.
  *
  * Iterates inc/service-data.php × inc/suburb-data.php and creates a page
  * for each combo at /services/{service-slug}/{suburb-slug}/.
@@ -806,7 +806,7 @@ function timeless_create_suburb_pages() {
     foreach ( $services as $service_slug => $service ) {
         $parent = get_page_by_path( 'services/' . $service_slug );
         if ( ! $parent ) {
-            continue;  // Parent service page doesn't exist yet — skip
+            continue;  // Parent service page doesn't exist yet, skip
         }
 
         foreach ( $suburbs as $suburb_slug => $suburb ) {
@@ -832,7 +832,7 @@ function timeless_create_suburb_pages() {
 add_action( 'after_switch_theme', 'timeless_create_suburb_pages', 20 );
 
 /**
- * Aggressive permalink self-heal — runs on every `init` until permalinks are set.
+ * Aggressive permalink self-heal, runs on every `init` until permalinks are set.
  *
  * Why a separate hook from after_switch_theme:
  * Some WordPress install methods (notably wp-now for local dev) bypass the
@@ -866,7 +866,7 @@ add_action( 'admin_init', 'timeless_ensure_pages_exist' );
    ───────────────────────────────────────────── */
 function timeless_scripts() {
     /**
-     * COMPILED Tailwind CSS v4.2.4 — replaces the previous CDN runtime.
+     * COMPILED Tailwind CSS v4.2.4, replaces the previous CDN runtime.
      * Source: src/main.css → built via `npm run build` → assets/main.min.css
      *
      * Performance gain vs CDN:
@@ -882,7 +882,7 @@ function timeless_scripts() {
     wp_enqueue_style( 'timeless-tailwind', $tailwind_url, array(), $tailwind_ver );
 
     /**
-     * Inter — Self-hosted variable font subset (~99 KB, all weights via wght axis).
+     * Inter, Self-hosted variable font subset (~99 KB, all weights via wght axis).
      *
      * Replaces Google Fonts CDN. Eliminates two third-party DNS+TLS lookups
      * (fonts.googleapis.com + fonts.gstatic.com) and 6+ separate weight requests
@@ -891,7 +891,7 @@ function timeless_scripts() {
      * The font is the official Inter Variable from rsms/inter v4, subset to
      * Latin (Basic Latin + Latin-1 + essential punctuation/currency). wght axis
      * preserved continuous 100..900, opsz axis preserved 14..32 for optical
-     * sizing. No italic variant — theme has zero italic usage.
+     * sizing. No italic variant, theme has zero italic usage.
      *
      * Tailwind classes like `font-bold` (700), `font-extrabold` (800), etc. all
      * resolve to the correct visual weight via the variable axis.
@@ -913,7 +913,7 @@ function timeless_scripts() {
                 font-family: 'Inter';
                 font-style: normal;
                 /* Variable axis covers all weights from 100 (thin) to 900 (black).
-                   Browser auto-detects variations from the woff2 — no `format('woff2-variations')`
+                   Browser auto-detects variations from the woff2, no `format('woff2-variations')`
                    hint needed (that token was a 2016-era vendor proposal, never standardized). */
                 font-weight: 100 900;
                 font-display: swap;
@@ -927,7 +927,7 @@ function timeless_scripts() {
     // brief swap window.
 
     /**
-     * Material Symbols — Self-hosted subset (96 icons, ~10 KB).
+     * Material Symbols, Self-hosted subset (96 icons, ~10 KB).
      *
      * Replaces Google Fonts CDN (1.06 MB shipped). 99.7% size reduction.
      * Variable font instanced at wght=400/GRAD=0/opsz=24, FILL axis kept as 0..1
@@ -939,8 +939,8 @@ function timeless_scripts() {
      * <span class="material-symbols-outlined">home</span> →
      * <span class="material-symbols-outlined">&#xe9b2;</span> at output time.
      *
-     * Source markup stays the same (icon names) — easy to maintain. Browser receives
-     * codepoints — works with the tiny font.
+     * Source markup stays the same (icon names), easy to maintain. Browser receives
+     * codepoints, works with the tiny font.
      *
      * To regenerate after adding/removing icons:
      *   1. bash scripts/audit-icons.sh
@@ -959,7 +959,7 @@ function timeless_scripts() {
             font-family: 'Material Symbols Outlined';
             font-style: normal;
             font-weight: 400;
-            /* swap (not block) per Lighthouse — minor codepoint flash on first uncached
+            /* swap (not block) per Lighthouse, minor codepoint flash on first uncached
                load is acceptable trade for FCP improvement. Font is preloaded + tiny
                (~10KB subset) + Cloudflare-cached, so flash window is <100ms in practice. */
             font-display: swap;
@@ -968,7 +968,7 @@ function timeless_scripts() {
         /* CRITICAL: bind the class to the @font-face. Without this, .material-symbols-outlined
            inherits the body font (Inter), which has no glyphs at the icon codepoints, so the
            browser falls back to system fonts and renders garbage at U+F0BE etc.
-           (Google Fonts CDN CSS used to do this for us — when we self-hosted we dropped it.)
+           (Google Fonts CDN CSS used to do this for us, when we self-hosted we dropped it.)
 
            Wrapped in @layer base so Tailwind v4 utility classes (text-2xl, text-base, etc.)
            still win for font-size. Without the layer, this would beat utilities and every
@@ -992,7 +992,7 @@ function timeless_scripts() {
         }
     " );
     } // end Material Symbols file_exists guard
-    // If MS font is missing, no @font-face is emitted — icons will render as
+    // If MS font is missing, no @font-face is emitted, icons will render as
     // their literal codepoint chars in fallback fonts (notdef boxes), making
     // the missing-deploy state visually obvious instead of silently broken.
 
@@ -1003,7 +1003,7 @@ function timeless_scripts() {
     wp_enqueue_style( 'timeless-style', get_stylesheet_uri(), array(), $style_ver );
 
     // Theme JavaScript (mobile menu, FAQ toggle, scroll reveal, slider handle init)
-    // Cache-bust via filemtime — REQUIRED so JS updates reach browsers on theme upload
+    // Cache-bust via filemtime, REQUIRED so JS updates reach browsers on theme upload
     $main_js_path = get_template_directory() . '/js/main.js';
     $main_js_ver  = file_exists( $main_js_path ) ? filemtime( $main_js_path ) : '1.0.0';
     wp_enqueue_script( 'timeless-main', get_template_directory_uri() . '/js/main.js', array(), $main_js_ver, true );
@@ -1014,7 +1014,7 @@ add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
  * Material Symbols ligature → codepoint replacement (output buffer filter).
  *
  * Why: We use a ~10 KB icon font subset that contains ONLY the 96 icons we use,
- * stored at their Unicode codepoints (no GSUB ligature lookup table — dropping that
+ * stored at their Unicode codepoints (no GSUB ligature lookup table, dropping that
  * is most of the savings; the FILL variable axis is preserved for filled variants).
  *
  * The browser still receives <span class="material-symbols-outlined">home</span>
@@ -1026,7 +1026,7 @@ add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
  * cache for all subsequent visitors → effectively zero overhead.
  *
  * Failure mode: if an icon name isn't in the codepoints map, the original
- * span is preserved (will render as text — visible bug, easy to spot).
+ * span is preserved (will render as text, visible bug, easy to spot).
  */
 function timeless_replace_icon_ligatures( $html ) {
     static $codepoints = null;
@@ -1038,7 +1038,7 @@ function timeless_replace_icon_ligatures( $html ) {
     // Regex tolerates BOTH double-quoted and single-quoted class attributes.
     // The symmetric lookarounds `(?<![\w-])material-symbols-outlined(?![\w-])` prevent
     // false-matching prefixed/suffixed classes like `material-symbols-outlined-extra`
-    // (the standard `\b` word-boundary doesn't help — `-` is non-word and matches `\b`,
+    // (the standard `\b` word-boundary doesn't help, `-` is non-word and matches `\b`,
     // so `\b` at end of token is satisfied by a following hyphen, e.g.
     // `class="my-material-symbols-outlined-rounded"` would falsely match without these).
     // Capture group 1: the opening <span ...>
@@ -1051,7 +1051,7 @@ function timeless_replace_icon_ligatures( $html ) {
             if ( isset( $codepoints[ $name ] ) ) {
                 return $matches[1] . '&#x' . $codepoints[ $name ] . ';' . $matches[3];
             }
-            return $matches[0]; // Icon name not in map — leave unchanged for visibility
+            return $matches[0]; // Icon name not in map, leave unchanged for visibility
         },
         $html
     );
@@ -1061,7 +1061,7 @@ function timeless_replace_icon_ligatures( $html ) {
  * WebP picture-tag rewrite (output buffer filter).
  *
  * Why: images/** /*.webp companions exist alongside many JPG/PNG files
- * (generated by scripts/convert-images-to-webp.py — only when WebP beats the
+ * (generated by scripts/convert-images-to-webp.py, only when WebP beats the
  * source by size). This filter wraps `<img src="x.jpg" ...>` →
  * `<picture><source srcset="x.jpg.webp" type="image/webp"><img src="x.jpg" ...></picture>`
  * so WebP-capable browsers (96%+ of users) get the smaller file while older
@@ -1075,16 +1075,16 @@ function timeless_replace_icon_ligatures( $html ) {
  *   - Skips data: URIs and external URLs (only theme-relative paths).
  *   - Preserves all attributes on the original <img> (loading, srcset, alt, …).
  *   - Naturally won't double-wrap because the regex captures `<img...>` and
- *     wraps the WHOLE thing in <picture> — re-running the regex on already-
+ *     wraps the WHOLE thing in <picture>, re-running the regex on already-
  *     wrapped output won't re-match (because the inner img is now inside
  *     <picture>...</picture> which makes the surrounding context different).
- *   - Cache-busted URLs (`?v=1`) currently fall through unwrapped — the regex
+ *   - Cache-busted URLs (`?v=1`) currently fall through unwrapped, the regex
  *     requires the extension to immediately precede the closing quote. If the
  *     theme ever adds query strings to image URLs, extend the regex.
  *
  * Limitation: only handles theme-bundled images (`get_template_directory_uri()`).
  * Future WP Media Library uploads (`/wp-content/uploads/`) won't get WebP
- * delivery via this filter — would need a separate pipeline that runs on
+ * delivery via this filter, would need a separate pipeline that runs on
  * `add_attachment` to generate companions, plus path-resolution extension here.
  */
 function timeless_webp_picture_filter( $html ) {
@@ -1094,7 +1094,7 @@ function timeless_webp_picture_filter( $html ) {
         $template_url = get_template_directory_uri();
     }
 
-    // Widths generated by scripts/generate-responsive-images.py — kept in sync.
+    // Widths generated by scripts/generate-responsive-images.py, kept in sync.
     $RESPONSIVE_WIDTHS = array( 400, 800, 1600 );
     // Default sizes attribute. Tells the browser how WIDE the image renders at
     // each breakpoint so it can pick the right srcset variant. Hero images on
@@ -1171,7 +1171,7 @@ function timeless_webp_picture_filter( $html ) {
                      . '</picture>';
             }
 
-            // Branch 2: No responsive variants — fall back to single-source webp wrap (existing behavior)
+            // Branch 2: No responsive variants, fall back to single-source webp wrap (existing behavior)
             $webp_url = $src . '.webp';
             return '<picture><source srcset="' . esc_url( $webp_url ) . '" type="image/webp">' . $img_tag . '</picture>';
         },
@@ -1179,7 +1179,7 @@ function timeless_webp_picture_filter( $html ) {
     );
 }
 
-/** Combined output filter — runs all theme HTML transformations on flush. */
+/** Combined output filter, runs all theme HTML transformations on flush. */
 function timeless_combined_output_filter( $html ) {
     $html = timeless_replace_icon_ligatures( $html );
     $html = timeless_webp_picture_filter( $html );
@@ -1197,7 +1197,7 @@ function timeless_start_icon_buffer() {
 add_action( 'template_redirect', 'timeless_start_icon_buffer', 1 );
 
 /* ────────────────────────────���────────────────
-   3. CUSTOMIZER — Editable Business Settings
+   3. CUSTOMIZER, Editable Business Settings
    ───────────────────────────────────────────── */
 function timeless_customizer( $wp_customize ) {
 
@@ -1229,7 +1229,7 @@ function timeless_customizer( $wp_customize ) {
         'type'        => 'text',
     ) );
 
-    // NSW Licence Number — leave empty until you hold a contractor licence.
+    // NSW Licence Number, leave empty until you hold a contractor licence.
     // Under NSW Home Building Act 1989, residential work $5,000 or less does
     // not require a licence. Only display a licence number once you hold one.
     $wp_customize->add_setting( 'timeless_licence', array(
@@ -1275,7 +1275,7 @@ function timeless_customizer( $wp_customize ) {
     $wp_customize->add_setting( 'timeless_google_api_key', array(
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
-        'capability'        => 'manage_options', // Sensitive — admin only
+        'capability'        => 'manage_options', // Sensitive, admin only
     ) );
     $wp_customize->add_control( 'timeless_google_api_key', array(
         'label'       => __( 'Google Places API Key', 'timeless' ),
@@ -1292,10 +1292,10 @@ function timeless_customizer( $wp_customize ) {
         'label'       => __( 'Business identifier (optional)', 'timeless' ),
         'section'     => 'timeless_google_reviews',
         'type'        => 'text',
-        'description' => __( 'Accepts Place ID, business name, or Maps URL. Service-area businesses are often NOT yet indexed in the Places API — leave this blank and use the static reviews textarea below instead. We fall back to that when the API returns no results.', 'timeless' ),
+        'description' => __( 'Accepts Place ID, business name, or Maps URL. Service-area businesses are often NOT yet indexed in the Places API, leave this blank and use the static reviews textarea below instead. We fall back to that when the API returns no results.', 'timeless' ),
     ) );
 
-    // Public-facing GBP link — used for the "See all reviews on Google" CTA.
+    // Public-facing GBP link, used for the "See all reviews on Google" CTA.
     // Works even when business isn't in Places API yet (most common case for trades).
     $wp_customize->add_setting( 'timeless_google_business_url', array(
         'default'           => '',
@@ -1308,7 +1308,7 @@ function timeless_customizer( $wp_customize ) {
         'description' => __( 'The public link to your reviews on Google. Visit your Google Business Profile or Maps listing → click "Share" → copy the link. Used for the "See all reviews on Google" button below the review cards.', 'timeless' ),
     ) );
 
-    // Static curated reviews — most reliable path for service-area trades businesses.
+    // Static curated reviews, most reliable path for service-area trades businesses.
     // Format: one review per line, pipe-separated:
     //   Author Name | Time label | Rating (1-5) | Review text
     $wp_customize->add_setting( 'timeless_reviews_static', array(
@@ -1356,7 +1356,7 @@ function timeless_customizer( $wp_customize ) {
 add_action( 'customize_register', 'timeless_customizer' );
 
 /* ─────────────────────────────────────────────
-   3b. GOOGLE REVIEWS — Self-hosted Places API integration
+   3b. GOOGLE REVIEWS, Self-hosted Places API integration
    ─────────────────────────────────────────────
    Why custom (not Trustindex/Featurable):
      - Zero third-party CDN requests (matches our self-host-everything pattern)
@@ -1368,7 +1368,7 @@ add_action( 'customize_register', 'timeless_customizer' );
    Strategy:
      - WordPress transient caches reviews for 24 hours (DAY_IN_SECONDS).
      - On cache miss, fetch from Google Places API server-side.
-     - Render directly in PHP — no JS, no CLS, no async injection.
+     - Render directly in PHP, no JS, no CLS, no async injection.
      - Graceful fallback: if API fails or keys not set, render a "See reviews
        on Google" link to the GBP listing instead of an empty section.
    ───────────────────────────────────────────── */
@@ -1377,9 +1377,9 @@ add_action( 'customize_register', 'timeless_customizer' );
  * Resolve a user-pasted business identifier to a real Google Place ID.
  *
  * Accepts:
- *   - Place ID directly (`ChIJ...`)        — passes through unchanged
- *   - Maps URL (`https://...maps/place/...`) — extracts business name segment
- *   - Plain business name text             — used as-is
+ *   - Place ID directly (`ChIJ...`)       , passes through unchanged
+ *   - Maps URL (`https://...maps/place/...`), extracts business name segment
+ *   - Plain business name text            , used as-is
  *
  * Non-Place-ID inputs go through Google's `findplacefromtext` API once,
  * then the resolved Place ID is cached in a long-lived transient so we
@@ -1440,7 +1440,7 @@ function timeless_resolve_place_id( $input, $api_key ) {
         return false;
     }
 
-    // Cache the resolved Place ID for 30 days — businesses don't change Place IDs
+    // Cache the resolved Place ID for 30 days, businesses don't change Place IDs
     set_transient( $cache_key, $place_id, 30 * DAY_IN_SECONDS );
     return $place_id;
 }
@@ -1472,7 +1472,7 @@ function timeless_get_google_reviews() {
     // ── NEW Places API (places.googleapis.com/v1/places/{id}) ──────────
     // The legacy Places API endpoint (maps.googleapis.com/maps/api/place/details)
     // returns NOT_FOUND for many newer service-area businesses even when the Place ID
-    // is valid. The new Places API has those records — and is what Google is pushing
+    // is valid. The new Places API has those records, and is what Google is pushing
     // forward as the legacy one is deprecated.
     //
     // Differences vs legacy:
@@ -1496,7 +1496,7 @@ function timeless_get_google_reviews() {
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         // Cache a failure SENTINEL (not literal false) for 1 hour so we don't hammer
         // the API on every page hit. We can't cache `false` because get_transient()
-        // returns false for "not set" — same as our cached failure → no backoff.
+        // returns false for "not set", same as our cached failure → no backoff.
         set_transient( $cache_key, array( '_failed' => true ), HOUR_IN_SECONDS );
         return false;
     }
@@ -1529,7 +1529,7 @@ function timeless_get_google_reviews() {
                 }
                 $publish_full_label = $dt->format( 'F j, Y \a\t g:i A' ) . ' GMT' . $offset;
 
-                // Precise days-based relative label — overrides Google's vague defaults.
+                // Precise days-based relative label, overrides Google's vague defaults.
                 $now      = new DateTime( 'now', new DateTimeZone( 'Australia/Sydney' ) );
                 $days_ago = (int) $now->diff( $dt )->days;
                 $hours    = (int) ( ( $now->getTimestamp() - $dt->getTimestamp() ) / 3600 );
@@ -1646,7 +1646,7 @@ function timeless_render_google_reviews() {
     $data = timeless_get_google_reviews();
 
     // FALLBACK 1: Places API didn't return reviews (no key, business not yet indexed,
-    // API failure, etc.) — try static curated reviews from Customizer textarea.
+    // API failure, etc.), try static curated reviews from Customizer textarea.
     if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
         $static_reviews = timeless_parse_static_reviews();
         if ( ! empty( $static_reviews ) ) {
@@ -1663,8 +1663,8 @@ function timeless_render_google_reviews() {
         }
     }
 
-    // FALLBACK 2: No Places API data AND no static reviews — show "see reviews on Google" link.
-    // Note: $data may be `false` (not an array), so we can't subscript it directly —
+    // FALLBACK 2: No Places API data AND no static reviews, show "see reviews on Google" link.
+    // Note: $data may be `false` (not an array), so we can't subscript it directly ,
     // PHP 8.1+ would warn "Trying to access array offset on value of type bool".
     if ( ! is_array( $data ) || empty( $data['reviews'] ) ) {
         $configured_url = trim( get_theme_mod( 'timeless_google_business_url', '' ) );
@@ -1774,7 +1774,7 @@ function timeless_render_google_reviews() {
         </button>
     </div>
 
-    <!-- Review modal (full text popup, JS-injected per-click) — single instance for all cards on this section -->
+    <!-- Review modal (full text popup, JS-injected per-click), single instance for all cards on this section -->
     <div class="timeless-review-modal fixed inset-0 z-[200] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="timeless-review-modal-author" aria-hidden="true">
         <!-- Overlay (click to close) -->
         <div class="modal-overlay absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" data-close-modal></div>
@@ -1835,7 +1835,7 @@ function timeless_render_google_reviews() {
 }
 
 /** Clear the reviews cache (e.g. after Customizer save). The next page hit will
- *  refetch lazily — we deliberately don't refetch synchronously here because
+ *  refetch lazily, we deliberately don't refetch synchronously here because
  *  customize_save_after fires for ANY Customizer save (phone, email, etc.), and
  *  a 5-second wp_remote_get on every save would make the admin UX painful.
  *  Also clears any resolved-Place-ID caches so a changed business identifier
@@ -1890,7 +1890,7 @@ function timeless_email() {
 }
 
 /* ─────────────────────────────────────────────
-   5. SEO — Remove WordPress clutter + hide server fingerprinting
+   5. SEO, Remove WordPress clutter + hide server fingerprinting
    ───────────────────────────────────────────── */
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
@@ -1906,7 +1906,7 @@ function timeless_hide_powered_by() {
 add_action( 'send_headers', 'timeless_hide_powered_by', 1 );
 add_action( 'init', 'timeless_hide_powered_by', 1 );
 
-/* Self-referencing canonical URL — fixes "Duplicate without user-selected canonical" */
+/* Self-referencing canonical URL, fixes "Duplicate without user-selected canonical" */
 function timeless_canonical_url() {
     if ( is_front_page() ) {
         $url = home_url( '/' );
@@ -1923,18 +1923,18 @@ function timeless_canonical_url() {
 remove_action( 'wp_head', 'rel_canonical' );
 add_action( 'wp_head', 'timeless_canonical_url', 1 );
 
-/* Remove WordPress default robots meta — our timeless_seo_meta() outputs a more complete one */
+/* Remove WordPress default robots meta, our timeless_seo_meta() outputs a more complete one */
 remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
 
 /* ─────────────────────────────────────────────
-   5b. SEO — Meta descriptions + Open Graph tags
+   5b. SEO, Meta descriptions + Open Graph tags
    ───────────────────────────────────────────── */
 function timeless_seo_meta() {
     $site = 'Timeless Resurfacing';
     $tpl  = get_template_directory_uri();
     $img  = $tpl . '/images/homepage/after.jpg';
 
-    /* Per-page meta descriptions — unique for each service page */
+    /* Per-page meta descriptions, unique for each service page */
     $desc_map = array(
         'shower-regrouting'              => 'Professional shower regrouting in Sydney. Full grout removal and waterproof epoxy replacement. Same-day service, free quotes.',
         'bath-resurfacing'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, 80-90% cheaper than replacement.',
@@ -1972,7 +1972,7 @@ function timeless_seo_meta() {
     } elseif ( is_singular() ) {
         $title = get_the_title() . ' | ' . $site;
         $slug  = get_post_field( 'post_name', get_post() );
-        $desc  = isset( $desc_map[ $slug ] ) ? $desc_map[ $slug ] : get_the_title() . ' — professional bathroom resurfacing in Sydney. Free quotes. ' . $site;
+        $desc  = isset( $desc_map[ $slug ] ) ? $desc_map[ $slug ] : get_the_title() . ', professional bathroom resurfacing in Sydney. Free quotes. ' . $site;
     } else {
         $title = wp_title( '|', false, 'right' ) . $site;
         $desc  = 'Professional bathroom resurfacing and shower regrouting across Greater Sydney. Free photo-based quotes. ' . $site;
@@ -2001,7 +2001,7 @@ function timeless_seo_meta() {
 add_action( 'wp_head', 'timeless_seo_meta', 2 );
 
 /* ─────────────────────────────────────────────
-   5b. ANALYTICS — GA4 + Microsoft Clarity (Customizer-driven)
+   5b. ANALYTICS, GA4 + Microsoft Clarity (Customizer-driven)
    ─────────────────────────────────────────────
    Both tracking scripts are gated by:
      - Empty ID → no script injected (clean source)
@@ -2027,11 +2027,11 @@ function timeless_analytics_scripts() {
     }
 
     // Defer all analytics until first user interaction OR 2.5s after page load.
-    // This frees the main thread during the LCP measurement window — without
+    // This frees the main thread during the LCP measurement window, without
     // this, GTM (172 KB) creates 200+ ms long tasks at 3-5s on slow 4G mobile,
     // which pushes Lighthouse LCP past 5s. The tracking still fires for any
     // engaged visitor (anyone who scrolls/clicks within 2.5s) so we don't
-    // lose meaningful analytics data — just bot impressions.
+    // lose meaningful analytics data, just bot impressions.
     ?>
 <!-- Analytics (deferred until interaction or 2.5s) -->
 <script>
@@ -2074,7 +2074,7 @@ function timeless_analytics_scripts() {
   // measurement window has closed (Lighthouse uses load + 250ms as the LCP
   // boundary). Loading earlier than this can race with LCP measurement and
   // cause NO_LCP errors. Loading later than this means tracking still works
-  // for engaged visitors — they triggered the interaction handlers above.
+  // for engaged visitors, they triggered the interaction handlers above.
   function deferredFallback(){ setTimeout(loadAnalytics, 500); }
   if (document.readyState === 'complete') {
     deferredFallback();
@@ -2092,7 +2092,7 @@ function timeless_analytics_scripts() {
 add_action( 'wp_head', 'timeless_analytics_scripts', 99 );  // Priority 99 = late in head, after most other tags
 
 /* ─────────────────────────────────────────────
-   5c. XML SITEMAP — Auto-generated at /sitemap.xml
+   5c. XML SITEMAP, Auto-generated at /sitemap.xml
    Defense in depth: runs via rewrite rule AND early URI check
    ───────────────────────────────────────────── */
 
@@ -2156,7 +2156,7 @@ function timeless_output_sitemap() {
 }
 
 /**
- * Intercept /sitemap.xml early — before WordPress tries to route it.
+ * Intercept /sitemap.xml early, before WordPress tries to route it.
  * This runs on 'parse_request' which fires BEFORE template_redirect AND
  * before any 404 routing. Works even if rewrite rules haven't been flushed.
  */
@@ -2204,7 +2204,7 @@ add_action( 'after_switch_theme', 'timeless_flush_rewrites_on_activation' );
 /* Disable WordPress default sitemaps (wp-sitemap.xml) to avoid duplicates */
 add_filter( 'wp_sitemaps_enabled', '__return_false' );
 
-/* Custom robots.txt — block crawl-budget-wasting URLs */
+/* Custom robots.txt, block crawl-budget-wasting URLs */
 function timeless_robots_txt( $output, $public ) {
     $output  = "User-agent: *\n";
     $output .= "Disallow: /wp-admin/\n";
@@ -2226,7 +2226,7 @@ function timeless_robots_txt( $output, $public ) {
 add_filter( 'robots_txt', 'timeless_robots_txt', 10, 2 );
 
 /* ─────────────────────────────────────────────
-   5d. SEO — Related Services internal links (speeds up crawl discovery)
+   5d. SEO, Related Services internal links (speeds up crawl discovery)
    ───────────────────────────────────────────── */
 function timeless_related_services() {
     if ( ! is_singular( 'page' ) ) return;
@@ -2241,7 +2241,7 @@ function timeless_related_services() {
         'shower-leak-repair'    => array( 'label' => 'Shower Sealing',     'icon' => 'water_damage' ),
     );
 
-    // Only render on service pages — check if current slug is a service
+    // Only render on service pages, check if current slug is a service
     if ( ! isset( $services[ $slug ] ) ) return;
 
     // Remove current page from list
@@ -2284,7 +2284,7 @@ add_image_size( 'og-image', 1200, 630, true );
 add_image_size( 'gallery-card', 600, 338, true );
 
 /* ─────────────────────────────────────────────
-   8. QUOTE FORM HANDLER — Processes form submissions + sends email
+   8. QUOTE FORM HANDLER, Processes form submissions + sends email
    ───────────────────────────────────────────── */
 
 /** Register AJAX handler for quote form */
@@ -2295,7 +2295,7 @@ function timeless_handle_quote_form() {
         wp_send_json_error( array( 'message' => 'Security check failed. Please refresh and try again.' ) );
     }
 
-    // Rate limiting — max 3 submissions per IP per hour
+    // Rate limiting, max 3 submissions per IP per hour
     $ip = $_SERVER['REMOTE_ADDR'];
     $rate_key = 'quote_rate_' . md5( $ip );
     $submissions = get_transient( $rate_key );
@@ -2313,7 +2313,7 @@ function timeless_handle_quote_form() {
     $notes    = sanitize_textarea_field( $_POST['notes'] ?? '' );
     $page     = sanitize_text_field( $_POST['source_page'] ?? 'Unknown' );
 
-    // Services (checkboxes — array of values)
+    // Services (checkboxes, array of values)
     $services_raw = isset( $_POST['services'] ) ? (array) $_POST['services'] : array();
     $services = array_map( 'sanitize_text_field', $services_raw );
 
@@ -2324,7 +2324,7 @@ function timeless_handle_quote_form() {
 
     // Build email
     $to      = timeless_email();
-    $subject = 'New Quote Request from ' . $name . ' — ' . $page;
+    $subject = 'New Quote Request from ' . $name . ', ' . $page;
     $body    = "NEW QUOTE REQUEST\n";
     $body   .= "═══════════════════════════\n\n";
     $body   .= "Name:      {$name}\n";
@@ -2377,12 +2377,12 @@ function timeless_form_scripts() {
 add_action( 'wp_enqueue_scripts', 'timeless_form_scripts' );
 
 /* ─────────────────────────────────────────────
-   8b. CHAT WIDGET — Floating "Have a Question?" bubble
+   8b. CHAT WIDGET, Floating "Have a Question?" bubble
    Separate from quote form so we can track widget leads
    distinctly in the inbox and tune each flow independently.
    ───────────────────────────────────────────── */
 
-/** Valid customer types — validates against dropdown options */
+/** Valid customer types, validates against dropdown options */
 function timeless_chat_widget_customer_types() {
     return array( 'Home Owner', 'Renter', 'Construction', 'Real Estate', 'Business' );
 }
@@ -2394,7 +2394,7 @@ function timeless_handle_chat_widget() {
         wp_send_json_error( array( 'message' => 'Security check failed. Please refresh the page.' ) );
     }
 
-    // Rate limit — max 5 submissions per IP per hour
+    // Rate limit, max 5 submissions per IP per hour
     $ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
     $rate_key = 'cw_rate_' . md5( $ip );
     $submissions = get_transient( $rate_key );
@@ -2427,7 +2427,7 @@ function timeless_handle_chat_widget() {
 
     // Build email notification
     $to      = timeless_email();
-    $subject = '[Chat Widget] ' . $name . ' — ' . $ctype;
+    $subject = '[Chat Widget] ' . $name . ', ' . $ctype;
     $body    = "NEW CHAT WIDGET MESSAGE\n";
     $body   .= "═══════════════════════════\n\n";
     $body   .= "Name:          {$name}\n";
@@ -2473,7 +2473,7 @@ function timeless_render_chat_widget() {
     }
     $customer_types = timeless_chat_widget_customer_types();
     ?>
-    <!-- CHAT WIDGET — Floating "Have a Question?" bubble -->
+    <!-- CHAT WIDGET, Floating "Have a Question?" bubble -->
     <div id="chat-widget-container">
         <button id="chat-widget-toggle" class="fixed bottom-24 md:bottom-6 right-6 z-60 w-14 h-14 rounded-full bg-teal-700 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-200" aria-label="<?php esc_attr_e( 'Open chat', 'timeless' ); ?>">
             <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1;" aria-hidden="true">chat</span>
@@ -2541,7 +2541,7 @@ function timeless_render_chat_widget() {
 add_action( 'wp_footer', 'timeless_render_chat_widget', 5 );
 
 /**
- * Inline JS for the chat widget — open/close behaviour + real AJAX submission.
+ * Inline JS for the chat widget, open/close behaviour + real AJAX submission.
  * Hooked after the HTML so DOM elements exist when the script runs.
  */
 function timeless_chat_widget_script() {
@@ -2664,7 +2664,7 @@ function timeless_chat_widget_script() {
 add_action( 'wp_footer', 'timeless_chat_widget_script', 10 );
 
 /* ─────────────────────────────────────────────
-   9. SECURITY HARDENING — Anti brute-force + lockdown
+   9. SECURITY HARDENING, Anti brute-force + lockdown
    ───────────────────────────────────────────── */
 
 /** Hide WordPress version from source code */
@@ -2722,7 +2722,7 @@ if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
     define( 'DISALLOW_FILE_EDIT', true );
 }
 
-/** Limit login attempts — basic rate limiting via failed login tracking */
+/** Limit login attempts, basic rate limiting via failed login tracking */
 function timeless_limit_login_attempts( $user, $username, $password ) {
     $ip = $_SERVER['REMOTE_ADDR'];
     $transient_key = 'login_attempts_' . md5( $ip );
@@ -2803,10 +2803,10 @@ remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 remove_action( 'wp_head', 'wp_resource_hints', 2 );
 
 /** Preload our self-hosted Inter font for faster first paint.
- *  Inter is the body font — without preload, the browser only discovers the
+ *  Inter is the body font, without preload, the browser only discovers the
  *  @font-face URL after parsing the inline <style> tag, costing ~50-100ms.
  *  Preload tells the browser to fetch it in parallel with the HTML parse.
- *  (Google Fonts preconnects removed — Inter + Material Symbols are now local.) */
+ *  (Google Fonts preconnects removed, Inter + Material Symbols are now local.) */
 function timeless_preload_inter() {
     $url = get_template_directory_uri() . '/assets/fonts/inter-variable-latin.woff2';
     $path = get_template_directory() . '/assets/fonts/inter-variable-latin.woff2';
@@ -2821,7 +2821,7 @@ add_action( 'wp_head', 'timeless_preload_inter', 1 );
 /** Preload hero LCP image on homepage only.
  *  Without this, Lighthouse sometimes can't detect LCP (NO_LCP error) because
  *  the hero image is discovered late in the load sequence. With preload, the
- *  browser fetches it in parallel with HTML — making LCP measurement
+ *  browser fetches it in parallel with HTML, making LCP measurement
  *  deterministic + reducing actual LCP time by 100-300ms.
  *
  *  Mobile gets the 800w variant (responsive). Desktop gets the full image.
@@ -2849,7 +2849,7 @@ function timeless_preload_hero_lcp() {
     // Preload the WebP variants directly. type="image/webp" makes non-WebP
     // browsers skip this preload and fall back to the picture element's
     // <img> srcset (JPG). WebP browsers (95%+ of traffic) preload the
-    // right size — no duplicate JPG fetch (was costing ~30 KB + 100ms LCP).
+    // right size, no duplicate JPG fetch (was costing ~30 KB + 100ms LCP).
     printf(
         '<link rel="preload" as="image" type="image/webp" imagesrcset="%s?v=%d 400w, %s?v=%d 800w" imagesizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" fetchpriority="high" />' . "\n",
         esc_url( $w400_webp ), $ver,

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { resolveQuote } from "./lib/pricing-resolver";
 
 /* ═══════════════════════════════════════════════
-   TIMELESS RESURFACING — QUOTE FORM v10
+   TIMELESS RESURFACING, QUOTE FORM v10
    Locked spec:
      - 5-area picker (shower / bath / basin & vanity / walls / floor)
      - Full bathroom toggle with 3 scope chips (regrout / resurface / both)
@@ -37,13 +37,13 @@ const I = {
   basinVanity: (s = 26) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={C.pri} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M3 11h18"/><circle cx="12" cy="14" r="1.5"/><path d="M9 18v3M15 18v3"/></svg>,
 };
 
-// Image base — set by WP shortcode in production via window.TIMELESS_FORM_BASE.
+// Image base, set by WP shortcode in production via window.TIMELESS_FORM_BASE.
 // In Vite dev (localhost:5174), this is undefined and IMG_BASE is empty so the
 // public/ folder serves images from the site root (e.g. /images/areas/shower.jpg).
 const IMG_BASE = (typeof window !== "undefined" && window.TIMELESS_FORM_BASE) ? window.TIMELESS_FORM_BASE : "";
 const img = (path) => `${IMG_BASE}${path}`;
 
-/* ─── 5 AREAS — customer-language-first labels (Step 3 picture cards) ─── */
+/* ─── 5 AREAS, customer-language-first labels (Step 3 picture cards) ─── */
 const AREAS = [
   { id: "shower",       label: "Shower",         desc: "Grout, silicone, or tile colour",                icon: I.shower,      img: img("/images/areas/shower.jpg") },
   { id: "bath",         label: "Bathtub / spa bath", desc: "Resurface, repair chips or stains",          icon: I.bath,        img: img("/images/areas/bath.jpg") },
@@ -54,20 +54,20 @@ const AREAS = [
 
 const FULL_BATHROOM_HERO = img("/images/areas/full-bathroom.jpg");
 
-/* ─── PHOTO PROMPTS PER AREA — 3 specifically-named shots that capture what questions would, then "+" extras ─── */
+/* ─── PHOTO PROMPTS PER AREA, 3 specifically-named shots that capture what questions would, then "+" extras ─── */
 const PHOTO_PROMPTS = {
-  shower:       ["Wide shot — stand at the bathroom door, capture the whole shower (and the bath if it sits next to or under the shower)", "Close-up — corner where walls meet (silicone seal)", "Close-up — tile grout lines"],
-  bath:         ["Wide shot — whole bath from above, including the rim and surroundings",                                                  "Side angle — the bath rim, side panel, and any jets (if it's a spa)",     "Close-up — interior surface (any chips, stains, scratches or burns)"],
-  basin_vanity: ["Wide shot — all basins and the full vanity benchtop in one shot",                                                        "Close-up — basin interior (and any chips on the rim)",                    "Close-up — vanity top edge (so we can see the material — laminate, solid, or moulded)"],
-  walls:        ["Wide shot — full wall, stand back so we can see the size",                                                               "Close-up — grout lines and any surface chips or small cracks",                  "Close-up — any white chalky residue, discolouration or unusual marks"],
-  floor:        ["Wide shot — stand in the doorway, capture the whole floor (the doorway gives us scale)",                                 "Close-up — grout lines and any surface chips or small cracks",                  "Close-up — any white chalky residue, discolouration or unusual marks"],
-  unsure:       ["Wide shot — whole bathroom from the doorway",                                                                            "Close-up — main concern area",                                            "Any other angle that shows what you want done"],
-  // full bathroom prompts are dynamic — see getFullBathroomPrompts() below.
+  shower:       ["Wide shot: stand at the bathroom door, capture the whole shower (and the bath if it sits next to or under the shower)", "Close-up: corner where walls meet (silicone seal)", "Close-up: tile grout lines"],
+  bath:         ["Wide shot: whole bath from above, including the rim and surroundings",                                                  "Side angle: the bath rim, side panel, and any jets (if it's a spa)",     "Close-up: interior surface (any chips, stains, scratches or burns)"],
+  basin_vanity: ["Wide shot: all basins and the full vanity benchtop in one shot",                                                        "Close-up: basin interior (and any chips on the rim)",                    "Close-up: vanity top edge (so we can see the material, laminate, solid, or moulded)"],
+  walls:        ["Wide shot: full wall, stand back so we can see the size",                                                               "Close-up: grout lines and any surface chips or small cracks",                  "Close-up: any white chalky residue, discolouration or unusual marks"],
+  floor:        ["Wide shot: stand in the doorway, capture the whole floor (the doorway gives us scale)",                                 "Close-up: grout lines and any surface chips or small cracks",                  "Close-up: any white chalky residue, discolouration or unusual marks"],
+  unsure:       ["Wide shot: whole bathroom from the doorway",                                                                            "Close-up: main concern area",                                            "Any other angle that shows what you want done"],
+  // full bathroom prompts are dynamic, see getFullBathroomPrompts() below.
 };
 
 /**
  * Build full-bathroom photo SECTIONS from the customer's inventory of fixtures.
- * Returns an array of { id, label, icon, prompts } — one section per area type.
+ * Returns an array of { id, label, icon, prompts }, one section per area type.
  * Step 5 renders each as its own card (divider header + photo grid + counter), mirroring
  * the per-area photo pattern so the page doesn't become a 10-cell flat grid.
  *
@@ -75,13 +75,13 @@ const PHOTO_PROMPTS = {
  * so multi-fixture bathrooms get clean per-card grids and counts.
  */
 function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
-  // Filter out sections the customer marked as "skip" — they don't need quoting OR photos.
+  // Filter out sections the customer marked as "skip", they don't need quoting OR photos.
   const skip = (areaKey) => services[areaKey] === "skip";
   const sections = [{
     id: "full-overview",
     label: "Bathroom overview",
     icon: I.sparkle,
-    prompts: ["Wide shot — from the doorway, capture the whole bathroom"],
+    prompts: ["Wide shot: from the doorway, capture the whole bathroom"],
   }];
   if (!skip("shower")) {
     for (let i = 0; i < (inv.showers || 0); i++) {
@@ -91,8 +91,8 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
         label: `Shower${tag}`,
         icon: I.shower,
         prompts: [
-          "Wide shot — from outside the shower screen, whole shower visible",
-          "Inside — tiles, grout, base, corners (step in for the detail shot)",
+          "Wide shot: from outside the shower screen, whole shower visible",
+          "Inside, tiles, grout, base, corners (step in for the detail shot)",
         ],
       });
     }
@@ -105,7 +105,7 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
         label: inv.baths > 1 ? `Bath${tag}` : "Bath / spa bath",
         icon: I.bath,
         prompts: [
-          "Interior wide from above — any chips, stains, scratches",
+          "Interior wide from above, any chips, stains, scratches",
           "Rim and side panel",
         ],
       });
@@ -131,8 +131,8 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
       label: inv.tiledWalls > 1 ? `Tiled walls (${inv.tiledWalls === 2 ? "2+" : inv.tiledWalls})` : "Tiled walls",
       icon: I.wall,
       prompts: inv.tiledWalls > 1
-        ? ["Wide shot — main tiled wall (splashback or behind vanity)", "Wide shot — second tiled wall", "Close-up — grout lines or any damage"]
-        : ["Wide shot — full tiled wall outside shower (splashback or behind vanity)", "Close-up — grout lines or any damage"],
+        ? ["Wide shot: main tiled wall (splashback or behind vanity)", "Wide shot: second tiled wall", "Close-up: grout lines or any damage"]
+        : ["Wide shot: full tiled wall outside shower (splashback or behind vanity)", "Close-up: grout lines or any damage"],
     });
   }
   if (!skip("floor") && (inv.tiledFloor || 0) > 0) {
@@ -141,12 +141,12 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
       label: "Tiled floor",
       icon: I.floor,
       prompts: [
-        "Wide shot — from the doorway, whole floor",
-        "Close-up — grout lines or any surface chips/cracks (no full tile replacement — we're not tilers)",
+        "Wide shot: from the doorway, whole floor",
+        "Close-up: grout lines or any surface chips/cracks (no full tile replacement, we're not tilers)",
       ],
     });
   }
-  // Chip / scratch / crack damage close-ups — only when the chip-repair upgrade is toggled on.
+  // Chip / scratch / crack damage close-ups, only when the chip-repair upgrade is toggled on.
   // We need photos to colour-match the filler, so this section's photos are required.
   if (chipRepairOn) {
     sections.push({
@@ -154,7 +154,7 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
       label: "Chip / crack damage close-ups",
       icon: I.camera,
       prompts: [
-        "Close-up — first chip, crack or scratch (so we can colour-match)",
+        "Close-up: first chip, crack or scratch (so we can colour-match)",
       ],
     });
   }
@@ -182,13 +182,13 @@ const SVCS = {
   shower: {
     question: "What needs doing in your shower?",
     options: [
-      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works — full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
+      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
         befImg: img("/images/services/shower/bundle-before.jpg"), aftImg: img("/images/services/shower/bundle-after.jpg"),
         befTxt: "Tired and dated", aftTxt: "Brand new shower" },
-      { id: "resurface", tradeName: "Just tile resurfacing", easy: "change the tile colour — includes spot grout repair, not a full regrout",
+      { id: "resurface", tradeName: "Just tile resurfacing", easy: "change the tile colour, includes spot grout repair, not a full regrout",
         befImg: img("/images/services/shower/resurface-before.jpg"), aftImg: img("/images/services/shower/resurface-after.jpg"),
         befTxt: "Dated tile colour", aftTxt: "Modern white finish" },
-      { id: "full_regrout", tradeName: "Just full shower regrouting", easy: "every grout line replaced + new silicone — keeps the same tile colour", regrout: true,
+      { id: "full_regrout", tradeName: "Just full shower regrouting", easy: "every grout line replaced + new silicone, keeps the same tile colour", regrout: true,
         befImg: img("/images/services/shower/regrout-before.jpg"), aftImg: img("/images/services/shower/regrout-after.jpg"),
         befTxt: "Mouldy grout lines", aftTxt: "Bright white grout" },
     ],
@@ -199,7 +199,7 @@ const SVCS = {
       { id: "both", tradeName: "Resurface + repair", easy: "resurface AND fix any chips, scratches, burns or stains", popular: true, bundle: true,
         befImg: img("/images/services/bath/bundle-before.jpg"), aftImg: img("/images/services/bath/bundle-after.jpg"),
         befTxt: "Worn and chipped", aftTxt: "Like new" },
-      { id: "resurface", tradeName: "Just bath resurfacing", easy: "make it look brand new — works on baths and spas", popular: true,
+      { id: "resurface", tradeName: "Just bath resurfacing", easy: "make it look brand new, works on baths and spas", popular: true,
         befImg: img("/images/services/bath/resurface-before.jpg"), aftImg: img("/images/services/bath/resurface-after.jpg"),
         befTxt: "Yellowed enamel", aftTxt: "Glossy white finish" },
       { id: "chip", tradeName: "Just chip, scratch, burn or stain repair", easy: "fix any damage or marks, colour-matched",
@@ -215,10 +215,10 @@ const SVCS = {
         befTxt: "Dated vanity", aftTxt: "Like new" },
       // "custom" = expandable checklist below the card. SVCS render handles the expander.
       // Has before/after images so the card has visual context even though the chooser opens below.
-      { id: "custom", tradeName: "Custom — pick what needs work", easy: "tick(s) the surfaces you want resurfaced (basin / bench / cabinet)",
+      { id: "custom", tradeName: "Custom, pick what needs work", easy: "tick(s) the surfaces you want resurfaced (basin / bench / cabinet)",
         befImg: img("/images/services/vanity/custom-before.jpg"), aftImg: img("/images/services/vanity/custom-after.jpg"),
         befTxt: "Mix-and-match", aftTxt: "Pick your scope" },
-      { id: "chip_only", tradeName: "Just chip or scratch repair", easy: "fix damage on the basin or top — no resurfacing",
+      { id: "chip_only", tradeName: "Just chip or scratch repair", easy: "fix damage on the basin or top, no resurfacing",
         befImg: img("/images/services/basin/chip-before.jpg"), aftImg: img("/images/services/basin/chip-after.jpg"),
         befTxt: "Chipped surface", aftTxt: "Invisible repair" },
     ],
@@ -226,7 +226,7 @@ const SVCS = {
   walls: {
     question: "What needs doing with your tiled walls?",
     options: [
-      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works — full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
+      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
         befImg: img("/images/services/walls/bundle-before.jpg"), aftImg: img("/images/services/walls/bundle-after.jpg"),
         befTxt: "Tired walls", aftTxt: "Like new walls" },
       { id: "resurface", tradeName: "Just wall tile resurfacing", easy: "change the tile colour",
@@ -235,7 +235,7 @@ const SVCS = {
       { id: "regrout", tradeName: "Just wall regrouting", easy: "refresh the grout lines on tiled walls", regrout: true,
         befImg: img("/images/services/walls/regrout-before.jpg"), aftImg: img("/images/services/walls/regrout-after.jpg"),
         befTxt: "Stained wall grout", aftTxt: "Clean new grout" },
-      { id: "chip_repair", tradeName: "Just chip or small-crack repair", easy: "fix surface chips and small cracks — colour-matched (we don't replace whole tiles)",
+      { id: "chip_repair", tradeName: "Just chip or small-crack repair", easy: "fix surface chips and small cracks, colour-matched (we don't replace whole tiles)",
         befImg: img("/images/services/walls/chip-before.jpg"), aftImg: img("/images/services/walls/chip-after.jpg"),
         befTxt: "Damaged tile", aftTxt: "Repaired and matched" },
     ],
@@ -243,7 +243,7 @@ const SVCS = {
   floor: {
     question: "What needs doing with your bathroom floor?",
     options: [
-      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works — full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
+      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
         befImg: img("/images/services/floor/bundle-before.jpg"), aftImg: img("/images/services/floor/bundle-after.jpg"),
         befTxt: "Tired floor", aftTxt: "Like new floor" },
       { id: "resurface", tradeName: "Just floor tile resurfacing", easy: "change the tile colour with anti-slip coating",
@@ -252,7 +252,7 @@ const SVCS = {
       { id: "regrout", tradeName: "Just floor regrouting", easy: "refresh the grout lines", regrout: true,
         befImg: img("/images/services/floor/regrout-before.jpg"), aftImg: img("/images/services/floor/regrout-after.jpg"),
         befTxt: "Dark cracked grout", aftTxt: "Clean uniform grout" },
-      { id: "chip_repair", tradeName: "Just chip or small-crack repair", easy: "fix surface chips and small cracks — colour-matched (we don't replace whole tiles)",
+      { id: "chip_repair", tradeName: "Just chip or small-crack repair", easy: "fix surface chips and small cracks, colour-matched (we don't replace whole tiles)",
         befImg: img("/images/services/floor/chip-before.jpg"), aftImg: img("/images/services/floor/chip-after.jpg"),
         befTxt: "Damaged tile", aftTxt: "Repaired and matched" },
     ],
@@ -261,14 +261,14 @@ const SVCS = {
 
 /* ─── FULL BATHROOM SCOPE OPTIONS (bundle first, "Just" prefix on individuals; same pattern as shower/bath/walls/floor) ─── */
 const FULL_SCOPE_OPTIONS = [
-  { id: "both",           tradeName: "Resurfacing + Regrouting", easy: "the works — full regrout AND new tile colour everywhere",                                desc: "Like a brand new bathroom",                                              bundle: true, popular: true },
-  { id: "regrout_only",   tradeName: "Just full regrouting",     easy: "every grout line replaced + new silicone — keeps the same tile colour",                  desc: "All grout lines and every silicone joint redone, no colour change" },
-  { id: "resurface_only", tradeName: "Just full resurfacing",    easy: "change the colour of everything — includes spot grout repair, not a full regrout",       desc: "Bath, tiles and vanity all coated; grout cleaned up but not replaced" },
+  { id: "both",           tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour everywhere",                                desc: "Like a brand new bathroom",                                              bundle: true, popular: true },
+  { id: "regrout_only",   tradeName: "Just full regrouting",     easy: "every grout line replaced + new silicone, keeps the same tile colour",                  desc: "All grout lines and every silicone joint redone, no colour change" },
+  { id: "resurface_only", tradeName: "Just full resurfacing",    easy: "change the colour of everything, includes spot grout repair, not a full regrout",       desc: "Bath, tiles and vanity all coated; grout cleaned up but not replaced" },
 ];
 
 /**
  * Map a Full-Bathroom scope choice + an area to the default service for that area.
- * "skip" means the area shouldn't be included in this scope (e.g. you can't regrout a bath — it has no grout).
+ * "skip" means the area shouldn't be included in this scope (e.g. you can't regrout a bath, it has no grout).
  * Customer can override any default in the inventory dropdowns.
  */
 function scopeDefaultForArea(scope, area) {
@@ -371,7 +371,7 @@ function SvcCard({ s, on, onClick, expanded }) {
           Customer's eye reads: banner first → BEFORE/AFTER → trade name. */}
       {s.bundle && (
         <div style={{ background: C.acc, color: C.accDk, fontSize: 10, fontWeight: 800, padding: "6px 12px", textAlign: "center", letterSpacing: "0.08em" }}>
-          ALL-IN-ONE — BOTH SERVICES COMBINED
+          ALL-IN-ONE, BOTH SERVICES COMBINED
         </div>
       )}
       {/* POPULAR badge: top-right corner of the image, doesn't conflict with the all-in-one banner. */}
@@ -404,7 +404,7 @@ function SvcCard({ s, on, onClick, expanded }) {
             <div style={{ fontSize: 12, color: C.sec, marginTop: 2, lineHeight: 1.4 }}>({s.easy})</div>
           </div>
         </div>
-        {/* Expanded content (e.g. Custom basin/vanity checklist) — rendered INSIDE the card so it
+        {/* Expanded content (e.g. Custom basin/vanity checklist), rendered INSIDE the card so it
             visually belongs to the same selection rather than being a separate panel below. */}
         {on && expanded && (
           <div style={{ marginTop: 12, paddingTop: 12, borderTop: `1px dashed ${C.brd}` }} onClick={e => e.stopPropagation()}>
@@ -416,21 +416,21 @@ function SvcCard({ s, on, onClick, expanded }) {
   );
 }
 
-/* ─── THUMBNAIL — renders a File as an <img> using a blob URL ─── */
+/* ─── THUMBNAIL, renders a File as an <img> using a blob URL ─── */
 // StrictMode-safe: blob URL is created via useMemo (stable per File reference) and NOT
 // explicitly revoked. Reason: React 18 StrictMode dev-mode mounts components twice
 // (mount → unmount → re-mount); the old `useEffect(() => () => revokeObjectURL(url))`
 // cleanup ran on the first unmount and revoked the URL, then re-mount tried to display
 // the revoked URL → broken thumbnail. Fix surfaced during Cloudinary wire-up 2026-05-22
 // when additional perAreaPhotoUrls state updates triggered more renders, making the bug
-// reliably reproducible. Browser GCs blob URLs on page unload — memory cost at our
+// reliably reproducible. Browser GCs blob URLs on page unload, memory cost at our
 // scale (~10-20 photos × small URL refs) is negligible.
 function ThumbImage({ file, alt, style }) {
   const url = useMemo(() => URL.createObjectURL(file), [file]);
   return <img src={url} alt={alt} style={style} loading="lazy" />;
 }
 
-/* ─── PER-AREA PHOTOS — N required slots + tap "+" to spawn an empty extras slot, then tap the slot to upload.
+/* ─── PER-AREA PHOTOS, N required slots + tap "+" to spawn an empty extras slot, then tap the slot to upload.
        Filled slots show the actual photo as a thumbnail (not just a check icon). ─── */
 function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], maxExtras = 3 }) {
   const [busy, setBusy] = useState(false);
@@ -453,7 +453,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
     }
   };
 
-  // "+" handler — appends an empty extras slot to the current array. The slot itself opens the picker on click.
+  // "+" handler, appends an empty extras slot to the current array. The slot itself opens the picker on click.
   const addExtraSlot = () => {
     setPhotos(prev => ({ ...prev, [areaId]: [...(prev[areaId] || []), undefined] }));
   };
@@ -473,7 +473,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
   const extraSlots = current.slice(required); // includes empty (undefined) extras placeholders too
   const canAddMoreExtras = extraSlots.length < maxExtras;
 
-  // Filled slot — shows actual photo thumbnail with × to remove
+  // Filled slot, shows actual photo thumbnail with × to remove
   const renderFilledSlot = (file, idx) => (
     <div key={`filled-${idx}`} style={{ position: "relative", border: `2px solid ${C.green}`, borderRadius: 10, minHeight: 96, overflow: "hidden", background: C.greenBg }}>
       <ThumbImage file={file} alt="" style={{ width: "100%", height: 96, objectFit: "cover", display: "block" }} />
@@ -481,7 +481,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
     </div>
   );
 
-  // Empty REQUIRED slot — camera icon + "Photo N *" + prompt; click → file picker
+  // Empty REQUIRED slot, camera icon + "Photo N *" + prompt; click → file picker
   const renderRequiredEmpty = (idx, label) => {
     const slotId = `photo-${areaId}-req-${idx}`;
     return (
@@ -504,8 +504,8 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
     );
   };
 
-  // Empty EXTRAS slot — looks identical to required slots (grey dashed border, surfLow bg) so the
-  // grid stays visually consistent. No × — empty extras are harmless (filtered out on submit).
+  // Empty EXTRAS slot, looks identical to required slots (grey dashed border, surfLow bg) so the
+  // grid stays visually consistent. No ×, empty extras are harmless (filtered out on submit).
   const renderExtraEmpty = (eidx) => {
     const absIdx = required + eidx;
     const slotId = `photo-${areaId}-extra-${eidx}`;
@@ -529,7 +529,7 @@ function PerAreaPhotos({ areaId, photos, setPhotos, prompts = ["Add a photo"], m
     );
   };
 
-  // "+" button — borderless action button (visually distinct from the slots). Spawns an empty extras slot.
+  // "+" button, borderless action button (visually distinct from the slots). Spawns an empty extras slot.
   const renderPlusButton = () => (
     <button key="plus-btn" type="button" onClick={addExtraSlot}
       style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, minHeight: 96, border: "none", borderRadius: 10, padding: "8px 6px", textAlign: "center", background: "transparent", cursor: "pointer", color: "inherit", fontFamily: "inherit" }}>
@@ -589,7 +589,7 @@ export default function QuoteForm() {
   const [selectedAreas, setSelectedAreas] = useState([]);
   const [fullBathroomMode, setFullBathroomMode] = useState(false);
   const [fullScope, setFullScope] = useState(null);
-  // Full-bathroom inventory — every bathroom is different. Customer tells us what's in their room
+  // Full-bathroom inventory, every bathroom is different. Customer tells us what's in their room
   // so we can ask for the right photos and scope the quote accurately. Sensible defaults: typical AU bathroom = 1 shower + 1 bath + 1 vanity.
   const [fullBathroomInventory, setFullBathroomInventory] = useState({ showers: 1, baths: 1, vanities: 1, tiledWalls: 1, tiledFloor: 1 });
   // Per-fixture SERVICE override inside Full Bathroom mode. Defaults are derived from the scope picked
@@ -612,12 +612,12 @@ export default function QuoteForm() {
   // Per-area chip/crack repair add-on (walls, floor, basin_vanity). Toggled below the area's service cards
   // when the customer picks a service that's NOT the chip-only one (so it stacks rather than duplicates).
   const [chipRepairAddon, setChipRepairAddon] = useState({});
-  // Basin/vanity finish upgrade — only shown when a basin/vanity resurface card is picked.
+  // Basin/vanity finish upgrade, only shown when a basin/vanity resurface card is picked.
   const [basinFinish, setBasinFinish] = useState("standard");
-  // Basin/vanity "Custom" card — checklist state for which surfaces the customer wants resurfaced.
+  // Basin/vanity "Custom" card, checklist state for which surfaces the customer wants resurfaced.
   // Active only when areaServices.basin_vanity[0] === "custom".
   const [basinCustomSurfaces, setBasinCustomSurfaces] = useState({ basin: false, bench: false, cabinet: false });
-  // "Continue on mobile" modal — skeletal Phase 2 feature. Backend wiring documented in
+  // "Continue on mobile" modal, skeletal Phase 2 feature. Backend wiring documented in
   // ~/.claude/.../memory/quote_form_requirements.md (D2). For now: UI only, no real session token.
   const [showMobileModal, setShowMobileModal] = useState(false);
   const [mobileModalTab, setMobileModalTab] = useState("qr"); // "qr" | "link"
@@ -628,7 +628,7 @@ export default function QuoteForm() {
   const [notes, setNotes] = useState("");
   const [prevResurfaced, setPrevResurfaced] = useState(null);
   const [hasVentilation, setHasVentilation] = useState(null);
-  // Marketing opt-in checkbox dropped Allan 2026-05-05 — form is a quote request, not marketing.
+  // Marketing opt-in checkbox dropped Allan 2026-05-05, form is a quote request, not marketing.
   // If we ever add newsletter / promotional outreach, re-add a checkbox + state then.
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
@@ -676,7 +676,7 @@ export default function QuoteForm() {
   }, [fn, ln, ph, em, addr]);
 
   // When the Full Bathroom scope changes, sync default services per fixture. Customer can still
-  // override individual fixtures after this — this just sets a sensible starting state.
+  // override individual fixtures after this, this just sets a sensible starting state.
   useEffect(() => {
     if (!fullScope) return;
     setFullAreaServices({
@@ -696,7 +696,7 @@ export default function QuoteForm() {
   useEffect(() => {
     Object.entries(perAreaPhotos).forEach(([areaId, files]) => {
       (files || []).forEach((file, idx) => {
-        if (!file) return; // empty slot — required slot not yet filled
+        if (!file) return; // empty slot, required slot not yet filled
         if (perAreaPhotoUrls[areaId]?.[idx]) return; // already uploaded
         const key = `${areaId}-${idx}`;
         if (inFlightUploads.current[key]) return; // upload in flight
@@ -719,12 +719,12 @@ export default function QuoteForm() {
 
   /* ─── PHONE / EMAIL VALIDATION ─── */
   // Accepts 10-digit AU numbers (mobile 04XXXXXXXX, landline 0[2-9]XXXXXXXX)
-  // AND 8-digit landlines without area code (9XXXXXXX, 8XXXXXXX) — auto-prepends 02 (Sydney NSW).
+  // AND 8-digit landlines without area code (9XXXXXXX, 8XXXXXXX), auto-prepends 02 (Sydney NSW).
   const normPhone = (raw) => {
     let n = raw.replace(/[\s\-\(\)\.]/g, "");
     if (n.startsWith("+61")) n = "0" + n.slice(3);
     else if (n.startsWith("61") && n.length >= 11) n = "0" + n.slice(2);
-    // 8-digit landline without area code — assume Sydney (02) for now since we're NSW-only
+    // 8-digit landline without area code, assume Sydney (02) for now since we're NSW-only
     if (/^[2-9]\d{7}$/.test(n)) n = "02" + n;
     return n;
   };
@@ -760,10 +760,10 @@ export default function QuoteForm() {
   const fnOk = fn.trim().length >= 1;
   const lnOk = ln.trim().length >= 1;
 
-  /* ─── ADDRESS AUTOCOMPLETE — tuned for instant-feel response ─── */
+  /* ─── ADDRESS AUTOCOMPLETE, tuned for instant-feel response ─── */
   async function fetchAddrSuggestions(text) {
     const apiKey = import.meta.env.VITE_GOOGLE_PLACES_KEY || "";
-    // 2-char minimum (was 3) — kicks in sooner, feels more responsive.
+    // 2-char minimum (was 3), kicks in sooner, feels more responsive.
     if (!apiKey || text.length < 2) { setAddrSuggestions([]); return; }
     const cached = addrCache.current.get(text);
     if (cached) {
@@ -839,10 +839,10 @@ export default function QuoteForm() {
   };
 
   /* ─── GATING ─── */
-  // Email is ALWAYS required — we email the quote PDF AND the tax invoice, and the CRM
+  // Email is ALWAYS required, we email the quote PDF AND the tax invoice, and the CRM
   // find-or-create match key is email-first (make-scenario-1) so a lead with no email
   // cannot be invoiced/deduped cleanly. The only documented exception is the NO-PHONE
-  // path (email-only), never no-email. (Reverses the panel's phone-or-email CRO idea —
+  // path (email-only), never no-email. (Reverses the panel's phone-or-email CRO idea ,
   // it conflicts with our invoicing model. The partial-lead onBlur below still captures
   // name+phone early so a stall-on-email lead is recoverable via SMS follow-up.)
   const can1 = fnOk && lnOk && phoneOk && emOk && cust && tenantOk && llEmOk;
@@ -856,12 +856,12 @@ export default function QuoteForm() {
   const basinCustomValid = !selectedAreas.includes("basin_vanity")
     || (areaServices.basin_vanity || [])[0] !== "custom"
     || Object.values(basinCustomSurfaces).some(Boolean);
-  // Full-bathroom inventory must have at least 1 fixture or tiled surface total — otherwise the
+  // Full-bathroom inventory must have at least 1 fixture or tiled surface total, otherwise the
   // photos collapse to just the doorway wide shot which doesn't give enough quote signal.
   const fullInventoryValid = !fullBathroomMode
     || (fullBathroomInventory.showers + fullBathroomInventory.baths + fullBathroomInventory.vanities + fullBathroomInventory.tiledWalls + fullBathroomInventory.tiledFloor) >= 1;
   // If Full Bathroom mode picked "custom" for the vanity AND has a vanity in inventory, at least
-  // one surface (basin/bench/cabinet) must be ticked — same rule as per-area mode.
+  // one surface (basin/bench/cabinet) must be ticked, same rule as per-area mode.
   const fullBasinCustomValid = !fullBathroomMode
     || fullBathroomInventory.vanities === 0
     || fullAreaServices.basin_vanity !== "custom"
@@ -922,7 +922,7 @@ export default function QuoteForm() {
   const GHL_PARTIAL = "https://services.leadconnectorhq.com/hooks/Uz8fQwDiUxAHVtlruspD/webhook-trigger/11247014-933d-4731-ba38-8990256113ca";
   // secret_token validates inbound webhooks at W1/W2 Action 1 Security Gate (If/Else default-deny).
   // Source: day_4_w1_w2_build_2026-05-18.md:32-45. Stored in .env.local (gitignored via *.local).
-  // Placeholder fallback prevents accidental deploy without env — but real value must be set in production.
+  // Placeholder fallback prevents accidental deploy without env, but real value must be set in production.
   const GHL_SECRET_TOKEN = import.meta.env.VITE_GHL_SECRET_TOKEN || "TR_secret_v1_PLACEHOLDER";
 
   // Map UTM / referrer signals to canonical GHL lead_source dropdown value.
@@ -941,7 +941,7 @@ export default function QuoteForm() {
   };
 
   /* ─── CLOUDINARY PHOTO UPLOAD CONFIG ─── */
-  // Phase 1 unsigned upload — preset enforces restrictions (10MB, jpg/png/heic/webp,
+  // Phase 1 unsigned upload, preset enforces restrictions (10MB, jpg/png/heic/webp,
   // EXIF strip, downsize to 1920px, auto format). API secret NOT needed for unsigned.
   // Phase 2 upgrade: backend signer Cloud Function + switch to signed preset (50+ leads/mo).
   // Source: /tmp/cloudinary-plan-2026-05-21.md §1.
@@ -950,10 +950,10 @@ export default function QuoteForm() {
 
   // Upload a single photo File to Cloudinary. Returns secure_url on success, null on failure.
   // Photos go into folder timeless-quotes/YYYY/MM/ with auto-generated unguessable public IDs
-  // (per preset config — privacy: no customer filenames in URLs).
+  // (per preset config, privacy: no customer filenames in URLs).
   const uploadPhotoToCloudinary = async (file, areaId) => {
     if (!CLOUDINARY_CLOUD || !CLOUDINARY_PRESET) {
-      console.warn("Cloudinary not configured — VITE_CLOUDINARY_CLOUD_NAME / VITE_CLOUDINARY_UPLOAD_PRESET missing. Photo skipped.");
+      console.warn("Cloudinary not configured, VITE_CLOUDINARY_CLOUD_NAME / VITE_CLOUDINARY_UPLOAD_PRESET missing. Photo skipped.");
       return null;
     }
     const now = new Date();
@@ -1053,7 +1053,7 @@ export default function QuoteForm() {
       for (const sId of serviceIds) {
         const opt = SVCS[a]?.options.find(o => o.id === sId);
         if (!opt || !areaCfg) continue;
-        // Custom basin/vanity — synthesise tradeName + easy from the ticked surfaces
+        // Custom basin/vanity, synthesise tradeName + easy from the ticked surfaces
         if (a === "basin_vanity" && sId === "custom") {
           const ticked = Object.entries(basinCustomSurfaces).filter(([, v]) => v).map(([k]) => k);
           if (!ticked.length) continue;
@@ -1090,7 +1090,7 @@ export default function QuoteForm() {
     has_ventilation: hasVentilation,
   });
 
-  /* ─── COUNT PHOTOS (filter undefineds — required-slot model creates sparse arrays) ─── */
+  /* ─── COUNT PHOTOS (filter undefineds, required-slot model creates sparse arrays) ─── */
   const totalPhotoCount = () => Object.values(perAreaPhotos).reduce((sum, arr) => sum + (arr || []).filter(Boolean).length, 0);
 
   /* ─── SUBMIT ─── */
@@ -1126,12 +1126,12 @@ export default function QuoteForm() {
         customer_type: cust || "",
         company_name: co || "",
         // Field key was `tenant_auth` (Day 8 prep 2026-05-20: corrected to `tenant_authorisation`
-        // — GHL key locked 2026-05-05 per ghl_setup_spec_v2:171, can't be edited post-save).
+        //, GHL key locked 2026-05-05 per ghl_setup_spec_v2:171, can't be edited post-save).
         tenant_authorisation: tenAuth || "n/a",
         landlord_email: llEm || "",
         // Lead source mapped from UTM + referrer signals (ghl_setup_spec_v2:176).
         lead_source: deriveLeadSource(),
-        // Property — normalize apt/comm to GHL canonical apartment/commercial (ghl_setup_spec_v2:165).
+        // Property, normalize apt/comm to GHL canonical apartment/commercial (ghl_setup_spec_v2:165).
         property_type: propertyTypeMap[prop] || "",
         property_address: addr,
         lift_access: prop === "apt" ? (lift || "not_specified") : "n/a",
@@ -1153,13 +1153,13 @@ export default function QuoteForm() {
         chip_repair_addon_json: JSON.stringify(chipRepairAddon),
         basin_finish: basinFinish,
         basin_custom_surfaces_json: JSON.stringify(basinCustomSurfaces),
-        // Conditional — `ventilation` key corrected to `has_ventilation` per ghl_setup_spec_v2:184
+        // Conditional, `ventilation` key corrected to `has_ventilation` per ghl_setup_spec_v2:184
         prev_resurfaced: prevResurfaced || "not_asked",
         has_ventilation: hasVentilation || "not_asked",
-        // Notes (consent is inferred from the act of submission — Allan call 2026-05-05)
+        // Notes (consent is inferred from the act of submission, Allan call 2026-05-05)
         customer_notes: notes,
-        // Photos — Cloudinary URLs per area (Day 6 Cloudinary wire 2026-05-21).
-        // Per ghl_setup_spec_v2:236: photos_*_urls = Long text (JSON array) — one per area.
+        // Photos, Cloudinary URLs per area (Day 6 Cloudinary wire 2026-05-21).
+        // Per ghl_setup_spec_v2:236: photos_*_urls = Long text (JSON array), one per area.
         // filter(Boolean) strips holes in sparse arrays (empty slots that were never filled).
         photos_shower_urls: JSON.stringify((perAreaPhotoUrls.shower || []).filter(Boolean)),
         photos_bath_urls: JSON.stringify((perAreaPhotoUrls.bath || []).filter(Boolean)),
@@ -1176,7 +1176,7 @@ export default function QuoteForm() {
         ),
         // "Not sure" mode photos
         photos_unsure_urls: JSON.stringify((perAreaPhotoUrls.unsure || []).filter(Boolean)),
-        // Existing metadata (counts) — kept for backward compat + summary signal
+        // Existing metadata (counts), kept for backward compat + summary signal
         photo_count_total: String(totalPhotoCount()),
         photo_count_by_area: JSON.stringify(Object.fromEntries(Object.entries(perAreaPhotos).map(([k, v]) => [k, v?.length || 0]))),
         photos_uploaded: totalPhotoCount() > 0 ? "yes" : "no",
@@ -1221,15 +1221,15 @@ export default function QuoteForm() {
       // 2026-05-05 (auditor-webhook-integrity lens): the prior code lied to the customer by setting
       // done=true even after all retries failed, so leads vanished while customers thought they
       // had submitted. Now we keep their entered data + show an actionable recovery screen.
-      console.error("All webhook retries failed — lead at risk:", { firstName: fn, phone, email: em });
+      console.error("All webhook retries failed, lead at risk:", { firstName: fn, phone, email: em });
       setSubmitError({
-        message: "We had trouble sending your quote. Please email us at quotes@timelessresurfacing.com.au with your details, or call/text 0451 110 154 — we'll respond within 1 business day.",
+        message: "We had trouble sending your quote. Please email us at quotes@timelessresurfacing.com.au with your details, or call/text 0451 110 154, we'll respond within 1 business day.",
       });
       setSubmitting(false);
       return;
     }
     try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
-    // GA4 conversion event — fires on a successful webhook submit. This is THE conversion
+    // GA4 conversion event, fires on a successful webhook submit. This is THE conversion
     // signal for Google Ads attribution. Includes minimal context (no PII).
     fireGA4Event("quote_submit", {
       areas_count: selectedAreas.length,
@@ -1262,7 +1262,7 @@ export default function QuoteForm() {
     setPrevResurfaced(null);
     setHasVentilation(null);
     setNotes("");
-    // setConsent removed — marketing opt-in checkbox dropped 2026-05-05
+    // setConsent removed, marketing opt-in checkbox dropped 2026-05-05
     setBathroomIndex(prev => prev + 1);
     partialSent.current = false;
     setResetCount(c => c + 1);
@@ -1301,7 +1301,7 @@ export default function QuoteForm() {
             Have another bathroom? Quote it here →
           </button>
         )}
-        <p style={{ fontSize: 11, color: C.sec, marginTop: 6 }}>Your contact details are saved — just pick the areas</p>
+        <p style={{ fontSize: 11, color: C.sec, marginTop: 6 }}>Your contact details are saved, just pick the areas</p>
       </div>
     );
   }
@@ -1318,7 +1318,7 @@ export default function QuoteForm() {
       <Trust />
       <StepBar n={stepNum} total={totalSteps} label={stepLabel} />
       {step !== "about" && <Back onClick={back} />}
-      {/* Multi-bathroom context banner — shows whenever the customer is past bathroom 1
+      {/* Multi-bathroom context banner, shows whenever the customer is past bathroom 1
           OR when they originally said multiple bathrooms. Covers both flows:
           (a) "I have 2 bathrooms" → banner from bathroom 1 of 2 onwards
           (b) "Just 1" → submit → "Have another bathroom?" → banner appears on bathroom 2 (no total since they originally said 1) */}
@@ -1328,10 +1328,10 @@ export default function QuoteForm() {
         </div>
       )}
 
-      {/* ═══ STEP 1 — ABOUT YOU ═══ */}
+      {/* ═══ STEP 1, ABOUT YOU ═══ */}
       {step === "about" && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>Bathroom resurfacing quote</h2>
-        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll get back to you within 1 business day with your quote — no obligation</p>
+        <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We&rsquo;ll get back to you within 1 business day with your quote, no obligation</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
             <div><label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>First name *</label><input type="text" value={fn} onChange={e => setFn(e.target.value)} placeholder="First name" autoComplete="given-name" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} /></div>
@@ -1341,7 +1341,7 @@ export default function QuoteForm() {
             <div>
               <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone *</label>
               <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUPhone(e.target.value))} onBlur={() => { if (fnOk && lnOk && phOk) sendPartialLead(); }} placeholder="Mobile or landline" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We&rsquo;ll convert +61 to 0X format — keep typing" : "Enter an Australian phone (mobile starts 04, landline starts 02/03/07/08)"}</p>}
+              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We&rsquo;ll convert +61 to 0X format, keep typing" : "Enter an Australian phone (mobile starts 04, landline starts 02/03/07/08)"}</p>}
               {phSpam && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>That doesn&rsquo;t look like a real phone number. Please enter your actual contact number.</p>}
               {phIsMobile && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
               {phIsLandline && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
@@ -1349,7 +1349,7 @@ export default function QuoteForm() {
             </div>
           ) : (
             <div style={{ padding: 14, background: C.greenBg, borderRadius: 10, borderLeft: `3px solid ${C.green}` }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>{I.check(18)}<div style={{ fontSize: 13, fontWeight: 700, color: C.green }}>That&rsquo;s okay — we&rsquo;ll email you</div></div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>{I.check(18)}<div style={{ fontSize: 13, fontWeight: 700, color: C.green }}>That&rsquo;s okay, we&rsquo;ll email you</div></div>
               <p style={{ fontSize: 12, color: C.sec, margin: "4px 0 8px", lineHeight: 1.4 }}>Your quote will be sent to your email below. No phone needed.</p>
               <button type="button" onClick={() => setNoPhone(false)} style={{ fontSize: 12, color: C.sec, background: "none", border: "none", cursor: "pointer", textDecoration: "underline", padding: "4px 0", minHeight: 32 }}>Actually, I do have a phone</button>
             </div>
@@ -1363,7 +1363,7 @@ export default function QuoteForm() {
           </div>
         </div>
         <Btn onClick={() => { sendPartialLead(); setStep("where"); }} disabled={!can1}>
-          {can1 ? "Next — where's the job? →"
+          {can1 ? "Next, where's the job? →"
             : (!fnOk || !lnOk) ? "Add your name to continue"
             : (!phoneOk && !noPhone) ? "Enter a valid phone (or click \"I don't have a phone\")"
             : !emOk ? "Enter a valid email to continue"
@@ -1375,7 +1375,7 @@ export default function QuoteForm() {
         <p style={{ textAlign: "center", marginTop: 8, fontSize: 11, color: C.sec }}>Takes ~90 seconds. No obligation.</p>
       </>}
 
-      {/* ═══ STEP 2 — WHERE ═══ */}
+      {/* ═══ STEP 2, WHERE ═══ */}
       {step === "where" && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>Where&rsquo;s the job?</h2>
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 20px" }}>We service all of Greater Sydney &amp; NSW</p>
@@ -1391,7 +1391,7 @@ export default function QuoteForm() {
                 const v = e.target.value;
                 setAddr(v);
                 setAddrOk(chkAddr(v));
-                // Synchronous cache check — if we've seen this exact prefix before, render
+                // Synchronous cache check, if we've seen this exact prefix before, render
                 // suggestions IMMEDIATELY (0 ms) before any debounce. Re-typing common
                 // queries (e.g. backspace + retype) feels instant.
                 const cached = addrCache.current.get(v);
@@ -1399,7 +1399,7 @@ export default function QuoteForm() {
                   setAddrSuggestions(cached);
                   setShowAddrDropdown(cached.length > 0);
                 }
-                // 50 ms debounce on the network call (was 150) — fast enough to feel instant
+                // 50 ms debounce on the network call (was 150), fast enough to feel instant
                 // while avoiding 1 Google Places request per keystroke. Session token caps
                 // the billable cost regardless of how many keystrokes hit the API.
                 clearTimeout(addrDebounce.current);
@@ -1447,7 +1447,7 @@ export default function QuoteForm() {
                 <div style={{ fontSize: 12, color: C.err, fontWeight: 600, marginBottom: waitlistSent ? 0 : 8 }}>We only service NSW currently.</div>
                 {!waitlistSent ? (
                   <>
-                    <div style={{ fontSize: 11, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>We&rsquo;re growing — want a heads-up when we expand to your area? We&rsquo;ll use the email + phone you already entered.</div>
+                    <div style={{ fontSize: 11, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>We&rsquo;re growing, want a heads-up when we expand to your area? We&rsquo;ll use the email + phone you already entered.</div>
                     <button type="button" onClick={sendWaitlistSignup} disabled={!emOk || !fnOk} style={{ padding: "10px 14px", borderRadius: 8, border: "none", background: emOk && fnOk ? C.pri : C.brd, color: C.white, fontSize: 12, fontWeight: 600, cursor: emOk && fnOk ? "pointer" : "not-allowed", fontFamily: "inherit" }}>Notify me when we expand →</button>
                     {(!emOk || !fnOk) && <div style={{ fontSize: 10, color: C.sec, marginTop: 6 }}>Fill in your name + email above first.</div>}
                   </>
@@ -1479,7 +1479,7 @@ export default function QuoteForm() {
 
           <div style={{ padding: 12, background: C.warnBg, borderRadius: 10, borderLeft: `3px solid ${C.warn}` }}>
             <div style={{ fontSize: 13, fontWeight: 700, color: C.warn, marginBottom: 4 }}>When was the property built? *</div>
-            <div style={{ fontSize: 11, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>NSW asbestos check — pre-1990 properties may need clearance</div>
+            <div style={{ fontSize: 11, color: C.sec, marginBottom: 8, lineHeight: 1.4 }}>NSW asbestos check, pre-1990 properties may need clearance</div>
             <div role="group" aria-label="When was the property built?" style={{ display: "flex", gap: 6 }}>
               {[{ id: "no", l: "After 1990" }, { id: "yes", l: "Before 1990" }, { id: "unsure", l: "Not sure" }].map(o => (
                 <button key={o.id} type="button" onClick={() => setBuiltBefore1990(o.id)} aria-pressed={builtBefore1990 === o.id} style={{ flex: 1, padding: "10px 8px", minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: "pointer", border: builtBefore1990 === o.id ? `2px solid ${C.warn}` : `1.5px solid ${C.brd}`, background: C.white, color: builtBefore1990 === o.id ? C.warn : C.sec }}>{o.l}</button>
@@ -1489,17 +1489,17 @@ export default function QuoteForm() {
               <div style={{ marginTop: 8, padding: "10px 12px", background: C.white, borderRadius: 8, border: `1px solid ${C.warn}30` }}>
                 <p style={{ fontSize: 11, color: C.pri, lineHeight: 1.5, margin: "0 0 6px", fontWeight: 600 }}>What this means for you:</p>
                 <p style={{ fontSize: 11, color: C.sec, lineHeight: 1.5, margin: "0 0 6px" }}>Pre-1990 properties may contain asbestos in tile adhesive or fibro sheeting. Before we can disturb the surface to regrout or resurface, NSW SafeWork rules say we need a licensed asbestos test (~$300–500, takes half a day).</p>
-                <p style={{ fontSize: 11, color: C.sec, lineHeight: 1.5, margin: "0 0 6px" }}>We&rsquo;ll recommend a tester and walk you through the steps when we send your quote — <strong style={{ color: C.pri }}>by call or text, whichever you prefer</strong>. If the test comes back clear, we proceed normally. If asbestos is found, we coordinate a licensed remover for the affected area first.</p>
+                <p style={{ fontSize: 11, color: C.sec, lineHeight: 1.5, margin: "0 0 6px" }}>We&rsquo;ll recommend a tester and walk you through the steps when we send your quote, <strong style={{ color: C.pri }}>by call or text, whichever you prefer</strong>. If the test comes back clear, we proceed normally. If asbestos is found, we coordinate a licensed remover for the affected area first.</p>
                 <p style={{ fontSize: 10, color: C.sec, lineHeight: 1.5, margin: 0, fontStyle: "italic" }}>Adds 3–7 days to scheduling. No charge from us for the consultation.</p>
               </div>
             )}
-            {builtBefore1990 === "unsure" && <p style={{ fontSize: 11, color: C.sec, marginTop: 8, lineHeight: 1.4 }}>No problem — we&rsquo;ll check with you when we send your quote (by call or text, your choice).</p>}
+            {builtBefore1990 === "unsure" && <p style={{ fontSize: 11, color: C.sec, marginTop: 8, lineHeight: 1.4 }}>No problem, we&rsquo;ll check with you when we send your quote (by call or text, your choice).</p>}
           </div>
         </div>
-        <Btn onClick={() => setStep("what")} disabled={!can2}>Next — what does your bathroom need? →</Btn>
+        <Btn onClick={() => setStep("what")} disabled={!can2}>Next, what does your bathroom need? →</Btn>
       </>}
 
-      {/* ═══ STEP 3 — WHAT NEEDS WORK ═══ */}
+      {/* ═══ STEP 3, WHAT NEEDS WORK ═══ */}
       {step === "what" && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>What needs work?</h2>
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>Pick everything that applies, or choose a full bathroom makeover.</p>
@@ -1530,7 +1530,7 @@ export default function QuoteForm() {
                   <div key={o.id} onClick={() => setFullScope(o.id)} role="button" tabIndex={0} aria-pressed={on} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFullScope(o.id); } }} style={{ borderRadius: 12, cursor: "pointer", background: C.white, border: o.bundle ? (on ? `2px solid ${C.pri}` : `1.5px solid ${C.acc}80`) : (on ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`), overflow: "hidden", position: "relative", transition: "all 0.15s" }}>
                     {o.bundle && (
                       <div style={{ background: C.acc, color: C.accDk, fontSize: 10, fontWeight: 800, padding: "6px 12px", textAlign: "center", letterSpacing: "0.08em" }}>
-                        ALL-IN-ONE — BOTH SERVICES COMBINED
+                        ALL-IN-ONE, BOTH SERVICES COMBINED
                       </div>
                     )}
                     <div style={{ padding: "12px 14px", background: on ? `${C.pri}06` : "transparent", position: "relative" }}>
@@ -1541,7 +1541,7 @@ export default function QuoteForm() {
                         <input type="radio" checked={on} readOnly style={{ marginTop: 2, accentColor: C.pri }} />
                         <div style={{ flex: 1, paddingRight: o.popular ? 60 : 0 }}>
                           <div style={{ fontSize: 14, fontWeight: 700, color: C.pri }}>{o.tradeName}</div>
-                          <div style={{ fontSize: 12, color: C.sec, marginTop: 2, lineHeight: 1.4 }}>({o.easy}) — {o.desc}</div>
+                          <div style={{ fontSize: 12, color: C.sec, marginTop: 2, lineHeight: 1.4 }}>({o.easy}), {o.desc}</div>
                         </div>
                       </div>
                     </div>
@@ -1575,7 +1575,7 @@ export default function QuoteForm() {
                 );
               })}
 
-              {/* Not sure escape hatch — last tile in the grid, big "?" graphic. Border matches other area cards. */}
+              {/* Not sure escape hatch, last tile in the grid, big "?" graphic. Border matches other area cards. */}
               <div onClick={toggleNotSure} role="button" tabIndex={0} aria-pressed={notSureMode} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleNotSure(); } }} style={{ background: C.white, border: notSureMode ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, borderRadius: 12, cursor: "pointer", overflow: "hidden", transition: "all 0.15s", position: "relative" }}>
                 <div style={{ position: "relative", height: 110, background: notSureMode ? `${C.pri}10` : C.surfLow, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <span style={{ fontSize: 72, fontWeight: 800, color: C.pri, lineHeight: 1, letterSpacing: "-0.06em", fontFamily: "'Inter',system-ui,sans-serif" }}>?</span>
@@ -1596,7 +1596,7 @@ export default function QuoteForm() {
                 <label style={{ fontSize: 13, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Describe your bathroom problem *</label>
                 <textarea value={notSureText} onChange={e => setNotSureText(e.target.value)} placeholder="e.g. Black mould everywhere, yellowed bath, grout cracking, tiles look dated…" rows={3} style={{ width: "100%", padding: 12, borderRadius: 10, border: `1.5px solid ${C.brd}`, fontSize: 14, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box", lineHeight: 1.5 }} />
                 {notSureText.length > 0 && notSureText.trim().length < 10 && <p style={{ fontSize: 11, color: C.sec, marginTop: 4 }}>Tell us a bit more ({10 - notSureText.trim().length} more characters)</p>}
-                {notSureText.trim().length >= 10 && <p style={{ fontSize: 11, color: C.green, marginTop: 4, fontWeight: 600 }}>Got it — photos on the next step will help us quote.</p>}
+                {notSureText.trim().length >= 10 && <p style={{ fontSize: 11, color: C.green, marginTop: 4, fontWeight: 600 }}>Got it, photos on the next step will help us quote.</p>}
               </div>
             )}
           </>
@@ -1613,7 +1613,7 @@ export default function QuoteForm() {
                 style={{ background: "none", border: "none", color: C.accDk, fontWeight: 700, textDecoration: "underline", cursor: "pointer", fontSize: 12, padding: 0, fontFamily: "inherit" }}>
                 Full Bathroom Makeover
               </button>{" "}
-              instead? One scope decision covers the lot — faster than picking a service per area.
+              instead? One scope decision covers the lot, faster than picking a service per area.
             </div>
           </div>
         )}
@@ -1626,12 +1626,12 @@ export default function QuoteForm() {
                   ? "Pick a makeover scope above"
                   : "Tick(s) at least one area")
             : notSureMode
-              ? "Next — upload photos →"
-              : "Next — service details →"}
+              ? "Next, upload photos →"
+              : "Next, service details →"}
         </Btn>
       </>}
 
-      {/* ═══ STEP 4 — SERVICE DETAILS (before/after cards per area, no photos) ═══ */}
+      {/* ═══ STEP 4, SERVICE DETAILS (before/after cards per area, no photos) ═══ */}
       {step === "services" && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>{fullBathroomMode ? "Your full bathroom makeover" : "Service details"}</h2>
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 16px" }}>{fullBathroomMode ? `You picked: ${FULL_SCOPE_OPTIONS.find(s => s.id === fullScope)?.tradeName}. Photos come next.` : "Pick the service for each area. We'll grab photos on the next step."}</p>
@@ -1643,10 +1643,10 @@ export default function QuoteForm() {
                 {I.sparkle(22)}
                 <div style={{ fontSize: 16, fontWeight: 700, color: C.pri }}>{FULL_SCOPE_OPTIONS.find(s => s.id === fullScope)?.tradeName}</div>
               </div>
-              <div style={{ fontSize: 13, color: C.sec, lineHeight: 1.5 }}>({FULL_SCOPE_OPTIONS.find(s => s.id === fullScope)?.easy}) — {FULL_SCOPE_OPTIONS.find(s => s.id === fullScope)?.desc}</div>
+              <div style={{ fontSize: 13, color: C.sec, lineHeight: 1.5 }}>({FULL_SCOPE_OPTIONS.find(s => s.id === fullScope)?.easy}), {FULL_SCOPE_OPTIONS.find(s => s.id === fullScope)?.desc}</div>
             </div>
 
-            {/* Inventory — every bathroom is different. Customer tells us how many of each fixture
+            {/* Inventory, every bathroom is different. Customer tells us how many of each fixture
                 they have so the photo prompts on the next step ask for the right shots. */}
             <div style={{ padding: 14, border: `1.5px solid ${C.brd}`, borderRadius: 12, background: C.white, marginBottom: 14 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: C.pri, marginBottom: 4 }}>What&rsquo;s in your bathroom?</div>
@@ -1692,11 +1692,11 @@ export default function QuoteForm() {
                             {serviceOptions.map(o => (
                               <option key={o.id} value={o.id}>{o.tradeName}</option>
                             ))}
-                            <option value="skip">— Skip this fixture (already done / not needed)</option>
+                            <option value="skip">, Skip this fixture (already done / not needed)</option>
                           </select>
                         </div>
                       )}
-                      {/* Vanity "Custom" — when picked, expose basin/bench/cabinet checkboxes inline so
+                      {/* Vanity "Custom", when picked, expose basin/bench/cabinet checkboxes inline so
                           customer can specify which surfaces they want resurfaced. Same data model as
                           per-area mode (basinCustomSurfaces). */}
                       {showService && row.serviceArea === "basin_vanity" && currentService === "custom" && (
@@ -1714,7 +1714,7 @@ export default function QuoteForm() {
                                   <input type="checkbox" checked={checked} onChange={e => setBasinCustomSurfaces(prev => ({ ...prev, [s.id]: e.target.checked }))} style={{ accentColor: C.acc, width: 14, height: 14, flexShrink: 0 }} />
                                   <div>
                                     <span style={{ fontWeight: 700, color: C.pri }}>{s.l}</span>
-                                    <span style={{ color: C.sec, fontStyle: "italic" }}> — {s.sub}</span>
+                                    <span style={{ color: C.sec, fontStyle: "italic" }}>, {s.sub}</span>
                                   </div>
                                 </label>
                               );
@@ -1731,14 +1731,14 @@ export default function QuoteForm() {
               </div>
             </div>
 
-            {/* Chip / scratch repair upgrade for full bathroom — same pattern as per-area. Stacks on top of
+            {/* Chip / scratch repair upgrade for full bathroom, same pattern as per-area. Stacks on top of
                 the resurface/regrout scope. Only meaningful when there's at least one fixture. */}
             <div style={{ padding: 12, background: C.surfLow, borderRadius: 10, border: `1px solid ${C.brd}`, marginBottom: 14 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: C.pri, marginBottom: 4 }}>
                 Any chips, scratches or burns to fix as well? <span style={{ fontWeight: 400, color: C.sec }}>Filled and colour-matched on bath, basin, or tile</span>
               </div>
               <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-                {[{ id: false, l: "No, just the work above" }, { id: true, l: "Yes — add chip/crack repair (+)" }].map(o => (
+                {[{ id: false, l: "No, just the work above" }, { id: true, l: "Yes, add chip/crack repair (+)" }].map(o => (
                   <button key={String(o.id)} type="button" onClick={() => setChipRepairAddon(prev => ({ ...prev, full: o.id }))} aria-pressed={!!chipRepairAddon.full === o.id}
                     style={{ flex: 1, padding: 10, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: !!chipRepairAddon.full === o.id ? `2px solid ${C.acc}` : `1.5px solid ${C.brd}`, background: !!chipRepairAddon.full === o.id ? `${C.acc}1a` : C.white, color: !!chipRepairAddon.full === o.id ? C.accDk : C.sec }}>{o.l}</button>
                 ))}
@@ -1753,7 +1753,7 @@ export default function QuoteForm() {
               const selectedService = (areaServices[areaId] || [])[0];
               return (
                 <div key={areaId}>
-                  {/* Centered divider header — clearer section break when multiple areas selected.
+                  {/* Centered divider header, clearer section break when multiple areas selected.
                       Pattern: ───── icon Label ───── with horizontal lines flanking the centered label. */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "0 0 6px" }}>
                     <div style={{ flex: 1, height: 1, background: C.brd }} />
@@ -1766,7 +1766,7 @@ export default function QuoteForm() {
                   <div style={{ fontSize: 13, color: C.sec, marginBottom: 12, textAlign: "center" }}>{svcCfg.question}</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                     {svcCfg.options.map(o => {
-                      // Inline expander content for the basin/vanity Custom card — passed INTO SvcCard
+                      // Inline expander content for the basin/vanity Custom card, passed INTO SvcCard
                       // so the checklist is visually part of the same card (one unit, not two).
                       const isCustomCard = areaId === "basin_vanity" && o.id === "custom";
                       const expanded = isCustomCard ? (
@@ -1784,7 +1784,7 @@ export default function QuoteForm() {
                                   <input type="checkbox" checked={checked} onChange={e => setBasinCustomSurfaces(prev => ({ ...prev, [s.id]: e.target.checked }))} style={{ accentColor: C.acc, width: 16, height: 16, flexShrink: 0 }} />
                                   <div style={{ fontSize: 13, lineHeight: 1.4 }}>
                                     <span style={{ fontWeight: 700, color: C.pri }}>{s.l}</span>
-                                    <span style={{ color: C.sec, fontStyle: "italic" }}> — {s.sub}</span>
+                                    <span style={{ color: C.sec, fontStyle: "italic" }}>, {s.sub}</span>
                                   </div>
                                 </label>
                               );
@@ -1792,7 +1792,7 @@ export default function QuoteForm() {
                           </div>
                           {basinCustomSurfaces.basin && basinCustomSurfaces.bench && basinCustomSurfaces.cabinet && (
                             <div style={{ marginTop: 10, padding: 10, background: `${C.green}15`, borderRadius: 8, fontSize: 11, color: C.green, fontWeight: 600 }}>
-                              ✓ That's the same as <button type="button" onClick={() => { setBasinCustomSurfaces({ basin: false, bench: false, cabinet: false }); setServiceForArea("basin_vanity", "full"); }} style={{ background: "none", border: "none", color: C.green, fontWeight: 700, textDecoration: "underline", cursor: "pointer", fontSize: 11, padding: 0 }}>Full vanity resurfacing</button> — switch to the bundle?
+                              ✓ That's the same as <button type="button" onClick={() => { setBasinCustomSurfaces({ basin: false, bench: false, cabinet: false }); setServiceForArea("basin_vanity", "full"); }} style={{ background: "none", border: "none", color: C.green, fontWeight: 700, textDecoration: "underline", cursor: "pointer", fontSize: 11, padding: 0 }}>Full vanity resurfacing</button>, switch to the bundle?
                             </div>
                           )}
                         </div>
@@ -1804,7 +1804,7 @@ export default function QuoteForm() {
                   </div>
 
 
-                  {/* Chip/crack repair add-on — for walls, floor, basin_vanity. Only shown when the
+                  {/* Chip/crack repair add-on, for walls, floor, basin_vanity. Only shown when the
                       customer picked a base service that's NOT the chip/repair-only card (so the add-on
                       stacks the work rather than duplicating it). Same upgrade pattern as epoxy. */}
                   {(areaId === "walls" || areaId === "floor" || areaId === "basin_vanity")
@@ -1817,14 +1817,14 @@ export default function QuoteForm() {
                         <span style={{ fontWeight: 400, color: C.sec }}> Filled and colour-matched</span>
                       </div>
                       <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-                        {[{ id: false, l: "No, just the work above" }, { id: true, l: "Yes — add chip/crack repair (+)" }].map(o => (
+                        {[{ id: false, l: "No, just the work above" }, { id: true, l: "Yes, add chip/crack repair (+)" }].map(o => (
                           <button key={String(o.id)} type="button" onClick={() => setChipRepairAddon(prev => ({ ...prev, [areaId]: o.id }))} aria-pressed={!!chipRepairAddon[areaId] === o.id} style={{ flex: 1, padding: 10, minHeight: 44, borderRadius: 7, fontSize: 12, fontWeight: 500, cursor: "pointer", border: !!chipRepairAddon[areaId] === o.id ? `2px solid ${C.acc}` : `1.5px solid ${C.brd}`, background: !!chipRepairAddon[areaId] === o.id ? `${C.acc}1a` : C.white, color: !!chipRepairAddon[areaId] === o.id ? C.accDk : C.sec }}>{o.l}</button>
                         ))}
                       </div>
                     </div>
                   )}
 
-                  {/* Stone-fleck premium finish — basin/vanity only, applies to the BENCHTOP.
+                  {/* Stone-fleck premium finish, basin/vanity only, applies to the BENCHTOP.
                       Hidden when chip-only and when Custom card has no bench ticked (no benchtop in scope). */}
                   {areaId === "basin_vanity" && selectedService && selectedService !== "chip_only"
                     && (selectedService !== "custom" || basinCustomSurfaces.bench) && (
@@ -1846,7 +1846,7 @@ export default function QuoteForm() {
           </div>
         )}
 
-        {/* Epoxy upgrade — shown when at least one regrout service is selected */}
+        {/* Epoxy upgrade, shown when at least one regrout service is selected */}
         {hasRegroutWork && (
           <div style={{ marginTop: 18, padding: 12, background: C.greenBg, borderRadius: 10 }}>
             <div style={{ fontSize: 13, fontWeight: 700, color: C.green, marginBottom: 4 }}>Premium grout? <span style={{ fontWeight: 400 }}>Epoxy lasts 20+ years vs cement's 5-7</span></div>
@@ -1859,16 +1859,16 @@ export default function QuoteForm() {
         )}
 
         <Btn onClick={() => setStep("photos")} disabled={!can4}>
-          {!can4 ? (fullBathroomMode ? "Pick a scope on previous step" : "Pick a service for each area") : "Next — upload photos →"}
+          {!can4 ? (fullBathroomMode ? "Pick a scope on previous step" : "Pick a service for each area") : "Next, upload photos →"}
         </Btn>
       </>}
 
-      {/* ═══ STEP 5 — PHOTOS + DETAILS + SUBMIT ═══ */}
+      {/* ═══ STEP 5, PHOTOS + DETAILS + SUBMIT ═══ */}
       {step === "photos" && <>
         <h2 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 6px", color: C.pri, letterSpacing: "-0.02em" }}>Almost done!</h2>
         <p style={{ fontSize: 14, color: C.sec, margin: "0 0 8px" }}>A few photos so we can quote accurately.</p>
 
-        {/* Continue-on-mobile button — gated behind ENABLE_MOBILE_HANDOFF feature flag because the QR + SMS
+        {/* Continue-on-mobile button, gated behind ENABLE_MOBILE_HANDOFF feature flag because the QR + SMS
             backend (session-token + state-save API + Twilio/GHL SMS) is not yet wired. Cleo audit 2026-05-05. */}
         {ENABLE_MOBILE_HANDOFF && (
           <button type="button" onClick={() => { setShowMobileModal(true); setSmsSent(false); setLinkCopied(false); }}
@@ -1879,7 +1879,7 @@ export default function QuoteForm() {
           </button>
         )}
 
-        <div style={{ padding: "8px 12px", background: C.warnBg, borderRadius: 10, fontSize: 11, color: C.warn, marginBottom: 16, lineHeight: 1.5 }}>Tip: Daylight or bathroom lights on — no flash. Stand back for wide shots, get close for damage.</div>
+        <div style={{ padding: "8px 12px", background: C.warnBg, borderRadius: 10, fontSize: 11, color: C.warn, marginBottom: 16, lineHeight: 1.5 }}>Tip: Daylight or bathroom lights on, no flash. Stand back for wide shots, get close for damage.</div>
 
         {notSureMode ? (
           <div style={{ padding: 14, border: `1.5px solid ${C.brd}`, borderRadius: 12, background: C.white, marginBottom: 16 }}>
@@ -1925,23 +1925,23 @@ export default function QuoteForm() {
                           const svc = (areaServices.basin_vanity || [])[0];
                           if (svc === "custom") {
                             const ticked = Object.entries(basinCustomSurfaces).filter(([, v]) => v).map(([k]) => k);
-                            const p = ["Wide shot — the whole vanity area for context"];
-                            if (ticked.includes("basin")) p.push("Close-up — basin interior (and any chips on the rim)");
-                            if (ticked.includes("bench")) p.push("Close-up — benchtop edge (so we can see the material)");
-                            if (ticked.includes("cabinet")) p.push("Close-up — cabinet doors and drawer fronts");
-                            return p.length > 1 ? p : ["Wide shot — the whole vanity area", "Close-up — main concern"];
+                            const p = ["Wide shot: the whole vanity area for context"];
+                            if (ticked.includes("basin")) p.push("Close-up: basin interior (and any chips on the rim)");
+                            if (ticked.includes("bench")) p.push("Close-up: benchtop edge (so we can see the material)");
+                            if (ticked.includes("cabinet")) p.push("Close-up: cabinet doors and drawer fronts");
+                            return p.length > 1 ? p : ["Wide shot: the whole vanity area", "Close-up: main concern"];
                           }
                           if (svc === "chip_only") {
                             return [
-                              "Wide shot — the area with the damage (for context)",
-                              "Close-up — the chip or scratch (so we can colour-match)",
+                              "Wide shot: the area with the damage (for context)",
+                              "Close-up: the chip or scratch (so we can colour-match)",
                             ];
                           }
                         }
                         return PHOTO_PROMPTS[areaId] || PHOTO_PROMPTS.unsure;
                       })()} />
                   </div>
-                  {/* Chip-repair add-on photo section — appears when the customer toggled chip-repair upgrade
+                  {/* Chip-repair add-on photo section, appears when the customer toggled chip-repair upgrade
                       for this area. We need a close-up to colour-match the filler. */}
                   {chipRepairAddon[areaId] && (
                     <div style={{ padding: 14, border: `1.5px solid ${C.acc}`, borderRadius: 12, background: `${C.acc}08` }}>
@@ -1958,16 +1958,16 @@ export default function QuoteForm() {
           </div>
         )}
 
-        {/* Conditional details — only show questions photos can't fully answer */}
+        {/* Conditional details, only show questions photos can't fully answer */}
         {hasResurfaceWork && (
           <div style={{ marginBottom: 14, padding: 14, background: C.surfLow, borderRadius: 12, border: `1px solid ${C.brd}` }}>
             <label style={{ fontSize: 12, fontWeight: 500, color: C.pri, display: "block", marginBottom: 6 }}>Has any surface been resurfaced or recoated before?</label>
             <div style={{ display: "flex", gap: 6 }}>
-              {[{ id: "no", l: "No" }, { id: "yes", l: "Yes — previously resurfaced" }, { id: "unsure", l: "Not sure" }].map(o => (
+              {[{ id: "no", l: "No" }, { id: "yes", l: "Yes, previously resurfaced" }, { id: "unsure", l: "Not sure" }].map(o => (
                 <button key={o.id} onClick={() => setPrevResurfaced(o.id)} style={{ flex: 1, padding: 9, borderRadius: 8, fontSize: 11, fontWeight: 500, cursor: "pointer", border: prevResurfaced === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: prevResurfaced === o.id ? `${C.pri}08` : C.white, color: prevResurfaced === o.id ? C.pri : C.sec }}>{o.l}</button>
               ))}
             </div>
-            {prevResurfaced === "yes" && <p style={{ fontSize: 11, color: C.warn, marginTop: 6, padding: "4px 8px", background: C.warnBg, borderRadius: 6 }}>Previous coatings need to be stripped back first — we&rsquo;ll factor this into your quote.</p>}
+            {prevResurfaced === "yes" && <p style={{ fontSize: 11, color: C.warn, marginTop: 6, padding: "4px 8px", background: C.warnBg, borderRadius: 6 }}>Previous coatings need to be stripped back first, we&rsquo;ll factor this into your quote.</p>}
           </div>
         )}
 
@@ -1975,16 +1975,16 @@ export default function QuoteForm() {
           <div style={{ marginBottom: 14, padding: 14, background: C.surfLow, borderRadius: 12, border: `1px solid ${C.brd}` }}>
             <label style={{ fontSize: 12, fontWeight: 500, color: C.pri, display: "block", marginBottom: 6 }}>Does the bathroom have a window or exhaust fan?</label>
             <div style={{ display: "flex", gap: 6 }}>
-              {[{ id: "yes", l: "Yes — window or fan" }, { id: "no", l: "No ventilation" }].map(o => (
+              {[{ id: "yes", l: "Yes, window or fan" }, { id: "no", l: "No ventilation" }].map(o => (
                 <button key={o.id} onClick={() => setHasVentilation(o.id)} style={{ flex: 1, padding: 9, borderRadius: 8, fontSize: 11, fontWeight: 500, cursor: "pointer", border: hasVentilation === o.id ? `2px solid ${C.pri}` : `1.5px solid ${C.brd}`, background: hasVentilation === o.id ? `${C.pri}08` : C.white, color: hasVentilation === o.id ? C.pri : C.sec }}>{o.l}</button>
               ))}
             </div>
-            {hasVentilation === "no" && <p style={{ fontSize: 11, color: C.warn, marginTop: 6, padding: "4px 8px", background: C.warnBg, borderRadius: 6 }}>No worries — our technician will set up temporary ventilation. This may add a small amount to the quote.</p>}
+            {hasVentilation === "no" && <p style={{ fontSize: 11, color: C.warn, marginTop: 6, padding: "4px 8px", background: C.warnBg, borderRadius: 6 }}>No worries, our technician will set up temporary ventilation. This may add a small amount to the quote.</p>}
           </div>
         )}
 
 
-        {/* Summary — receipt-style, left-aligned list. Each area block is stacked: area label, service, easy text.
+        {/* Summary, receipt-style, left-aligned list. Each area block is stacked: area label, service, easy text.
             Separator lines between blocks make it scannable. */}
         <div style={{ padding: "14px 16px", background: C.surfLow, borderRadius: 10, border: `1px solid ${C.brd}`, marginBottom: 14 }}>
           <div style={{ fontSize: 11, fontWeight: 700, color: C.pri, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10, paddingBottom: 8, borderBottom: `1px solid ${C.brd}` }}>Quote summary</div>
@@ -2039,7 +2039,7 @@ export default function QuoteForm() {
           style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0, pointerEvents: "none" }}
         />
 
-        {/* Webhook-failure recovery surface — shows when submitError is set (all 3 retry attempts failed).
+        {/* Webhook-failure recovery surface, shows when submitError is set (all 3 retry attempts failed).
             Don't redirect to the success screen; keep the user's data + give them a real way to reach us.
             Cleo audit 2026-05-05 (auditor-webhook-integrity lens). */}
         {submitError && (
@@ -2058,12 +2058,12 @@ export default function QuoteForm() {
         <p style={{ textAlign: "center", marginTop: 4, fontSize: 10, color: C.sec, lineHeight: 1.5 }}>By submitting, you agree we&rsquo;ll contact you about this quote. Your details are handled per our <a href="https://timelessresurfacing.com.au/privacy/" target="_blank" rel="noopener noreferrer" style={{ color: C.pri, textDecoration: "underline" }}>Privacy Policy</a>.</p>
       </>}
 
-      {/* ═══ CONTINUE-ON-MOBILE MODAL — skeletal Phase 2 feature ═══
+      {/* ═══ CONTINUE-ON-MOBILE MODAL, skeletal Phase 2 feature ═══
           UI only. The QR points at a fake URL (/?qf=stub). The "Send SMS" button shows a "coming soon"
           confirmation but doesn't actually send. Production wiring needs:
-          1. POST /wp-json/timeless/v1/quote-state — save state, return UUID token (24hr WP transient)
-          2. GET /wp-json/timeless/v1/quote-state/{token} — fetch state on mobile resume
-          3. POST /wp-json/timeless/v1/quote-state/{token}/sms — send SMS via Twilio/GHL using phone in state
+          1. POST /wp-json/timeless/v1/quote-state, save state, return UUID token (24hr WP transient)
+          2. GET /wp-json/timeless/v1/quote-state/{token}, fetch state on mobile resume
+          3. POST /wp-json/timeless/v1/quote-state/{token}/sms, send SMS via Twilio/GHL using phone in state
           4. Form rehydrates from URL ?qf=token on mount if present
           5. QR rendered with a self-hosted lib (qrcode-svg) instead of the api.qrserver.com stub */}
       {ENABLE_MOBILE_HANDOFF && showMobileModal && (
@@ -2071,7 +2071,7 @@ export default function QuoteForm() {
           <div onClick={e => e.stopPropagation()} style={{ background: C.white, borderRadius: 14, maxWidth: 420, width: "100%", maxHeight: "90vh", overflow: "auto", padding: 20, position: "relative", boxShadow: "0 12px 40px rgba(0,0,0,0.25)" }}>
             <button type="button" onClick={() => setShowMobileModal(false)} aria-label="Close" style={{ position: "absolute", top: 12, right: 12, width: 32, height: 32, borderRadius: "50%", border: "none", background: C.surfLow, color: C.sec, fontSize: 20, lineHeight: 1, cursor: "pointer", fontWeight: 700 }}>×</button>
             <h2 style={{ fontSize: 18, fontWeight: 800, color: C.pri, margin: "0 0 6px", letterSpacing: "-0.02em" }}>Continue on another device</h2>
-            <p style={{ fontSize: 12, color: C.sec, margin: "0 0 16px", lineHeight: 1.5 }}>Pick up where you left off on your phone — handy for taking photos with your phone camera. No app to download.</p>
+            <p style={{ fontSize: 12, color: C.sec, margin: "0 0 16px", lineHeight: 1.5 }}>Pick up where you left off on your phone, handy for taking photos with your phone camera. No app to download.</p>
 
             {/* Tabs */}
             <div style={{ display: "flex", gap: 6, marginBottom: 14, padding: 4, background: C.surfLow, borderRadius: 10 }}>
@@ -2083,10 +2083,10 @@ export default function QuoteForm() {
             {mobileModalTab === "qr" ? (
               <div style={{ textAlign: "center" }}>
                 <div style={{ display: "inline-block", padding: 16, background: C.white, border: `1px solid ${C.brd}`, borderRadius: 10 }}>
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Ftimelessresurfacing.com.au%2F%3Fqf%3Dstub-token-abc123" alt="QR code (skeleton — points at stub URL)" width={200} height={200} style={{ display: "block" }} />
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Ftimelessresurfacing.com.au%2F%3Fqf%3Dstub-token-abc123" alt="QR code (skeleton, points at stub URL)" width={200} height={200} style={{ display: "block" }} />
                 </div>
                 <p style={{ fontSize: 12, color: C.sec, margin: "12px 0 4px", lineHeight: 1.5 }}>Open your phone&rsquo;s camera and point it at the code.</p>
-                <p style={{ fontSize: 10, color: C.sec, fontStyle: "italic", margin: 0 }}>Skeleton — QR points at a stub URL until backend is wired.</p>
+                <p style={{ fontSize: 10, color: C.sec, fontStyle: "italic", margin: 0 }}>Skeleton, QR points at a stub URL until backend is wired.</p>
               </div>
             ) : (
               <div>
@@ -2100,7 +2100,7 @@ export default function QuoteForm() {
                   <label style={{ fontSize: 11, fontWeight: 700, color: C.sec, textTransform: "uppercase", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>Or text it to your phone</label>
                   <p style={{ fontSize: 12, color: C.sec, margin: "0 0 10px", lineHeight: 1.5 }}>We&rsquo;ll send the link via SMS to <strong style={{ color: C.pri }}>{ph || "your phone number"}</strong></p>
                   <button type="button" onClick={() => { setSmsSent(true); setTimeout(() => setSmsSent(false), 3000); }} disabled={!ph || smsSent} style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "none", background: smsSent ? C.green : C.pri, color: C.white, fontSize: 13, fontWeight: 700, cursor: smsSent || !ph ? "default" : "pointer", opacity: !ph ? 0.5 : 1 }}>{smsSent ? "✓ SMS sent" : !ph ? "Enter phone in Step 1 first" : "Send SMS to my phone"}</button>
-                  <p style={{ fontSize: 10, color: C.sec, fontStyle: "italic", margin: "8px 0 0", textAlign: "center" }}>Skeleton — no SMS is actually sent until backend is wired.</p>
+                  <p style={{ fontSize: 10, color: C.sec, fontStyle: "italic", margin: "8px 0 0", textAlign: "center" }}>Skeleton, no SMS is actually sent until backend is wired.</p>
                 </div>
               </div>
             )}

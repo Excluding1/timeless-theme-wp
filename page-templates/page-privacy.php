@@ -78,7 +78,7 @@
  </ul>
  <p class="mb-3">We treat photographs of your property as <strong>personal information</strong> under the Privacy Act, consistent with OAIC guidance. Photos can identify you directly (a person in the frame) or by context (the property address linked to your contact record). Photos are handled with the same care as your name and contact details.</p>
  <div class="bg-surface-container border border-surface-container rounded-xl p-4 mb-3">
- <p class="font-semibold text-primary mb-2">Customer guidance &mdash; please help us help you:</p>
+ <p class="font-semibold text-primary mb-2">Customer guidance, please help us help you:</p>
  <p class="mb-2">When uploading bathroom photos, please <strong>avoid uploading photos showing</strong>:</p>
  <ul class="list-disc pl-6 space-y-1">
  <li>People (especially children)</li>
@@ -118,9 +118,9 @@
  <h3 class="text-lg font-bold text-primary mt-6 mb-2">3.7 What we do not ask for</h3>
  <p class="mb-2">We do not ask for, and you should not provide:</p>
  <ul class="list-disc pl-6 space-y-1">
- <li>Government identifiers (Medicare number, driver&rsquo;s licence, passport, Tax File Number) &mdash; APP 9</li>
+ <li>Government identifiers (Medicare number, driver&rsquo;s licence, passport, Tax File Number), APP 9</li>
  <li>Financial account numbers beyond what Stripe needs for payment</li>
- <li>Sensitive information (health, race, religion, politics) &mdash; these are not relevant to bathroom resurfacing</li>
+ <li>Sensitive information (health, race, religion, politics), these are not relevant to bathroom resurfacing</li>
  </ul>
  </div>
 
@@ -128,10 +128,10 @@
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">4. How we collect personal information</h2>
  <ul class="list-disc pl-6 space-y-2">
- <li><strong>Directly from you</strong> &mdash; when you submit our quote form, call, email, SMS, message us via our website chat, or otherwise communicate.</li>
- <li><strong>Automatically</strong> &mdash; via website analytics (Google Analytics 4) and cookies.</li>
- <li><strong>From third parties</strong> (limited cases) &mdash; for example, your landlord, property manager, or owners corporation if they engage us on your behalf, or a referrer who introduces you with your knowledge.</li>
- <li><strong>From our technicians</strong> &mdash; site notes and photos taken in the course of quoting or performing work.</li>
+ <li><strong>Directly from you</strong>, when you submit our quote form, call, email, SMS, message us via our website chat, or otherwise communicate.</li>
+ <li><strong>Automatically</strong>, via website analytics (Google Analytics 4) and cookies.</li>
+ <li><strong>From third parties</strong> (limited cases), for example, your landlord, property manager, or owners corporation if they engage us on your behalf, or a referrer who introduces you with your knowledge.</li>
+ <li><strong>From our technicians</strong>, site notes and photos taken in the course of quoting or performing work.</li>
  </ul>
  <p class="mt-3">We will tell you, at the point of collection, what we are collecting and why (APP 5 notification). The quote form contains a short collection notice with a link to this Policy.</p>
  </div>
@@ -147,7 +147,7 @@
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">6. Anonymity and pseudonymity (APP 2)</h2>
  <p class="mb-3">Where it is lawful and practicable, you may interact with us anonymously or under a pseudonym. For example, we can provide an indicative price guide on the phone without you giving us your full name. However, to provide a written quote, schedule work, send a confirmation, or issue an invoice we must collect your real name, contact details, and property address.</p>
- <p>If anonymity is important to you for an initial enquiry, please tell us &mdash; we will help you stay anonymous as far as it is workable.</p>
+ <p>If anonymity is important to you for an initial enquiry, please tell us, we will help you stay anonymous as far as it is workable.</p>
  </div>
 
  <!-- 7. PURPOSES -->
@@ -167,12 +167,12 @@
  <li>Sending direct-marketing communications <strong>only where you have given consent</strong> under the Spam Act 2003</li>
  <li>Defending or pursuing a complaint, claim, or dispute</li>
  </ul>
- <p class="mt-3">We will not use your personal information for any purpose <strong>inconsistent</strong> with these without your consent or as otherwise permitted by law. Reasonable extensions of these purposes &mdash; for example, sending you a maintenance reminder for a previous job, contacting you about repeat-customer offers, or using anonymised job data for business analysis and benchmarking &mdash; are within these purposes and do not require fresh consent.</p>
+ <p class="mt-3">We will not use your personal information for any purpose <strong>inconsistent</strong> with these without your consent or as otherwise permitted by law. Reasonable extensions of these purposes, for example, sending you a maintenance reminder for a previous job, contacting you about repeat-customer offers, or using anonymised job data for business analysis and benchmarking, are within these purposes and do not require fresh consent.</p>
  </div>
 
  <!-- 8. PHOTOS -->
  <div class="reveal">
- <h2 class="text-xl font-bold text-primary mb-3">8. Photographs &mdash; special handling and retention</h2>
+ <h2 class="text-xl font-bold text-primary mb-3">8. Photographs, special handling and retention</h2>
  <p class="mb-3">Photos you submit (and that our team takes on-site) are used to:</p>
  <ul class="list-disc pl-6 space-y-2 mb-3">
  <li>Prepare an accurate quote</li>
@@ -180,7 +180,7 @@
  <li>Verify scope at job commencement</li>
  <li>Record before-and-after states for warranty and quality records</li>
  <li>Defend a warranty claim or insurance matter if necessary</li>
- <li><strong>Optionally</strong> &mdash; feature in our portfolio, website, social media, or marketing materials, <strong>only with your express consent</strong> (which may be obtained electronically, e.g. ticking a box on the quote form, replying YES to an email, or signing a consent at the job site &mdash; separate from the quote/booking consent)</li>
+ <li><strong>Optionally</strong>, feature in our portfolio, website, social media, or marketing materials, <strong>only with your express consent</strong> (which may be obtained electronically, e.g. ticking a box on the quote form, replying YES to an email, or signing a consent at the job site, separate from the quote/booking consent)</li>
  </ul>
  <p class="mb-3">We do <strong>not</strong> publish, share, or use photographs in marketing materials without your consent. The quote form does not assume marketing consent.</p>
 
@@ -193,8 +193,8 @@
  <li>Reference for potential follow-up service or repeat engagement</li>
  <li>Defence of any complaint, warranty claim, or insurance matter</li>
  </ul>
- <p class="mb-3">There is no automatic delete schedule. You can ask us to delete photos at any time by emailing <a href="mailto:support@timelessresurfacing.com.au" class="text-primary underline">support@timelessresurfacing.com.au</a> &mdash; we will delete them unless we have a legal obligation to retain them (e.g. an open warranty claim or a current tax-record retention requirement).</p>
- <p>You can withdraw consent for <strong>marketing use</strong> of your photos at any time by emailing the same address &mdash; we will stop using them for marketing purposes within a reasonable time.</p>
+ <p class="mb-3">There is no automatic delete schedule. You can ask us to delete photos at any time by emailing <a href="mailto:support@timelessresurfacing.com.au" class="text-primary underline">support@timelessresurfacing.com.au</a>, we will delete them unless we have a legal obligation to retain them (e.g. an open warranty claim or a current tax-record retention requirement).</p>
+ <p>You can withdraw consent for <strong>marketing use</strong> of your photos at any time by emailing the same address, we will stop using them for marketing purposes within a reasonable time.</p>
  </div>
 
  <!-- 9. DISCLOSURE -->
@@ -277,12 +277,12 @@
  <ul class="list-disc pl-6 space-y-2 mb-3">
  <li><strong>Access</strong> the personal information we hold about you</li>
  <li><strong>Request correction</strong> of inaccurate or out-of-date information</li>
- <li><strong>Request deletion</strong> of personal information we hold (subject to legal obligations to retain certain records &mdash; for example, tax invoices must be kept for at least 5 years per ATO requirements, and warranty records for the warranty period plus 7 years)</li>
+ <li><strong>Request deletion</strong> of personal information we hold (subject to legal obligations to retain certain records, for example, tax invoices must be kept for at least 5 years per ATO requirements, and warranty records for the warranty period plus 7 years)</li>
  <li><strong>Withdraw consent</strong> for marketing communications at any time</li>
  <li><strong>Make a complaint</strong> at any time, with us or directly with the OAIC (see &sect; 17)</li>
  </ul>
  <p class="mb-3">To exercise these rights, contact us at <a href="mailto:support@timelessresurfacing.com.au" class="text-primary underline">support@timelessresurfacing.com.au</a>. We aim to respond within a reasonable time, generally within 30 calendar days. For unusually complex or large requests, the response may take longer; we will let you know in advance and keep you updated.</p>
- <p class="mb-3">We may need to verify your identity before granting access, making changes, or deleting data &mdash; this is to protect you from someone else impersonating you.</p>
+ <p class="mb-3">We may need to verify your identity before granting access, making changes, or deleting data, this is to protect you from someone else impersonating you.</p>
  <p>There is <strong>no charge</strong> for normal access or correction. We may charge a reasonable cost-recovery fee for unusually complex or large access requests, but only after notifying you of the expected cost in advance and giving you the option to refine the scope.</p>
  </div>
 
@@ -317,7 +317,7 @@
  <!-- 16. CHILDREN -->
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">16. Children</h2>
- <p class="mb-3">Our services are directed at property owners, property managers, builders, and tenants &mdash; generally adults. We do <strong>not</strong> knowingly collect personal information from individuals under 18.</p>
+ <p class="mb-3">Our services are directed at property owners, property managers, builders, and tenants, generally adults. We do <strong>not</strong> knowingly collect personal information from individuals under 18.</p>
  <p>If you believe we have collected information from a child without parental consent, please contact us at <a href="mailto:support@timelessresurfacing.com.au" class="text-primary underline">support@timelessresurfacing.com.au</a> and we will delete it.</p>
  </div>
 
@@ -331,7 +331,7 @@
  <p class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary" aria-hidden="true">location_on</span> Timeless Resurfacing, 87 Woodlands Road, Liverpool NSW 2170</p>
  </div>
  <p class="mb-3">We will acknowledge your complaint promptly and aim to respond substantively within a reasonable time, generally within 30 calendar days.</p>
- <p class="mb-3">You may also lodge a complaint <strong>directly</strong> with the <strong>Office of the Australian Information Commissioner (OAIC)</strong> &mdash; you do not have to contact us first:</p>
+ <p class="mb-3">You may also lodge a complaint <strong>directly</strong> with the <strong>Office of the Australian Information Commissioner (OAIC)</strong>, you do not have to contact us first:</p>
  <div class="bg-surface-container border border-surface-container rounded-xl p-4 space-y-2 text-sm">
  <p><strong>Website:</strong> <a href="https://www.oaic.gov.au" class="text-primary underline" rel="noopener" target="_blank">https://www.oaic.gov.au</a></p>
  <p><strong>Phone:</strong> 1300 363 992</p>

@@ -598,7 +598,7 @@
  </div>
 </section>
 
-<!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
+<!-- QUOTE FORM, live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-20 bg-white" id="quote">
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">

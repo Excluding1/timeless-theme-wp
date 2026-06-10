@@ -127,10 +127,10 @@ get_header(); ?>
  </div>
 </section>
 
-<!-- TRUST STRIP — concrete signals (no placeholder partner logos; ACL §18 compliant) -->
+<!-- TRUST STRIP, concrete signals (no placeholder partner logos; ACL §18 compliant) -->
 <section class="py-10 sm:py-12 bg-surface-container-low/50">
  <div class="max-w-6xl mx-auto px-6 sm:px-8">
- <p class="text-center text-sm text-secondary mb-8">Owner-led, fully insured, warranty in writing — Sydney bathrooms done properly</p>
+ <p class="text-center text-sm text-secondary mb-8">Owner-led, fully insured, warranty in writing, Sydney bathrooms done properly</p>
  <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
  <div>
  <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span></div>
@@ -385,8 +385,8 @@ get_header(); ?>
 <section class="py-16 sm:py-24 bg-primary" id="warranty">
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <div>
- <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tighter mb-4 sm:mb-6">Warranties up to 5 years &mdash; every service, in writing</h2>
- <p class="text-sm sm:text-base text-white/70 leading-relaxed mb-6 sm:mb-8">Every job backed in writing. Different services have different warranty periods because materials genuinely have different lifespans &mdash; 5 years on bath resurfacing (private home), 5 years on epoxy regrouting, 12 months on silicone (annual replacement is normal). <a href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>" class="underline hover:no-underline">See full matrix &rarr;</a></p>
+ <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tighter mb-4 sm:mb-6">Warranties up to 5 years, every service, in writing</h2>
+ <p class="text-sm sm:text-base text-white/70 leading-relaxed mb-6 sm:mb-8">Every job backed in writing. Different services have different warranty periods because materials genuinely have different lifespans, 5 years on bath resurfacing (private home), 5 years on epoxy regrouting, 12 months on silicone (annual replacement is normal). <a href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>" class="underline hover:no-underline">See full matrix &rarr;</a></p>
  <div class="space-y-3">
  <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">shield</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Peeling &amp; Bubbling Cover</h3><p class="text-xs text-white/60">Coating peels or bubbles? We resurface again, free.</p></div></div>
  <div class="flex items-start gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/15 transition-all duration-300"><div class="shrink-0 w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center"><span class="material-symbols-outlined text-lg text-[#e7c08b]" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-white text-sm mb-0.5">Adhesion Guarantee</h3><p class="text-xs text-white/60">Multi-step prep ensures permanent bonding. Failure covered in full.</p></div></div>
@@ -421,7 +421,7 @@ get_header(); ?>
  </div>
 </section>
 
-<!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
+<!-- QUOTE FORM, live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
  <div class="max-w-3xl mx-auto px-6 sm:px-8 text-center mb-8">
  <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
