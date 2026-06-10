@@ -127,33 +127,7 @@ get_header(); ?>
  </div>
 </section>
 
-<!-- TRUST STRIP, concrete signals (no placeholder partner logos; ACL §18 compliant) -->
-<section class="py-10 sm:py-12 bg-surface-container-low/50">
- <div class="max-w-6xl mx-auto px-6 sm:px-8">
- <p class="text-center text-sm text-secondary mb-8">Owner-run, fully insured, warranty in writing. Sydney bathrooms done properly.</p>
- <?php /* PARKED icon badges (Allan 2026-06-11, keep for future): restore one per trust block above each heading:
- <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">ICON</span></div>
- icons in order: verified / verified_user / location_on / schedule */ ?>
- <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
- <div>
- <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Up to 5 Years</p>
- <p class="text-xs sm:text-sm text-secondary font-medium">Workmanship warranty in writing</p>
- </div>
- <div>
- <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Fully Insured</p>
- <p class="text-xs sm:text-sm text-secondary font-medium">Public liability cover on every job</p>
- </div>
- <div>
- <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Sydney + NSW</p>
- <p class="text-xs sm:text-sm text-secondary font-medium">Locally owned and operated</p>
- </div>
- <div>
- <p class="text-xl sm:text-2xl font-extrabold text-primary tracking-tighter">Same-Day Service</p>
- <p class="text-xs sm:text-sm text-secondary font-medium">Most jobs done in a single day</p>
- </div>
- </div>
- </div>
-</section>
+<!-- TRUST STRIP removed 2026-06-11 (Allan: keep for maybe in future) - restore: git show 0d0063d:front-page.php lines ~130-160 -->
 
 <!-- TRUSTED-BY LOGO STRIP (Allan's call 2026-06-11; auto-steps via js/main.js) -->
 <section class="py-8 sm:py-10 bg-surface-container-low/50">
