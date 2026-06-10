@@ -595,6 +595,31 @@ document.addEventListener('DOMContentLoaded', function () {
         setInterval(stepOnce, 10000);
     })();
 
+    /* ── Trust chip bar: one-line auto-drift marquee on mobile ──
+       (Allan 2026-06-11: the 2x2 grid looked off; now a single drifting row,
+       chips duplicated for a seamless loop, manual touch-drag, pauses on touch,
+       desktop keeps the original flex layout via the scoped style.) */
+    (function () {
+        var box = document.getElementById('chipbar');
+        var inner = document.getElementById('chipbar-inner');
+        if (!box || !inner) return;
+        var mq = window.matchMedia('(max-width: 639px)');
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var paused = false, drag = false, startX = 0, scrollStart = 0;
+        function half() { return inner.scrollWidth / 2; }
+        function wrap() { if (box.scrollLeft >= half()) { box.scrollLeft -= half(); } else if (box.scrollLeft <= 0) { box.scrollLeft += half(); } }
+        box.scrollLeft = 1;
+        if (!reduce) {
+            (function tick() {
+                if (mq.matches && !paused && !drag && !document.hidden) { box.scrollLeft += 0.4; wrap(); }
+                requestAnimationFrame(tick);
+            })();
+        }
+        box.addEventListener('touchstart', function (e) { drag = true; paused = true; startX = e.touches[0].pageX; scrollStart = box.scrollLeft; }, { passive: true });
+        box.addEventListener('touchmove', function (e) { if (!drag) return; box.scrollLeft = scrollStart - (e.touches[0].pageX - startX); wrap(); }, { passive: true });
+        box.addEventListener('touchend', function () { drag = false; setTimeout(function () { paused = false; }, 2000); }, { passive: true });
+    })();
+
     /* ── Swipe progress thumbs (generic) ──
        Any .vs-bar[data-for="<selector>"] becomes a scrollbar-style progress
        indicator for that horizontal scroller: thumb width = visible fraction,
