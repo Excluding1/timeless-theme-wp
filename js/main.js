@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 dotsBox.children[i].style.background = (i === idx) ? '#041534' : '#cbd5e1';
             }
         }
-        el.scrollLeft = 1;
+        el.scrollLeft = half / 3 || 1; // start ~1/3 in so the active dot sits a third along (Allan 2026-06-11)
         updateDots();
 
         var drag = false, hover = false, startX = 0, scrollStart = 0;
