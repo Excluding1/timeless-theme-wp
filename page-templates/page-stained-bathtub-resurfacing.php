@@ -72,11 +72,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Stained &amp; Yellow Bathtub? <span class="text-primary-soft">We Make It Look Brand New</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Your bath has gone yellow. Or brown. Maybe there are rust rings around the drain and hard water marks you can't scrub off no matter what product you try. You've used bleach, bathroom cleaner, bicarb. Nothing works. <strong>The staining isn't on the surface anymore. It's in the surface.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Your bath has gone yellow. Or&nbsp;brown. Maybe&nbsp;there&nbsp;are rust rings around the drain and hard water marks you can't scrub off no matter what product you try. You've&nbsp;used&nbsp;bleach, bathroom cleaner, bicarb. Nothing&nbsp;works. <strong>The&nbsp;staining&nbsp;isn't on the surface anymore. It's&nbsp;in&nbsp;the surface.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Replacing the bath means $3,000-$8,000+ for demolition, plumbing, a new tub, and retiling. Our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional bath resurfacing</a> gives you a factory-smooth, brilliant white finish over the existing bath. In just one day, at a fraction of that cost.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Replacing the bath means $3,000-$8,000+ for demolition, plumbing, a new tub, and retiling. Our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional bath resurfacing</a> gives you a factory-smooth, brilliant white finish over the existing bath. In&nbsp;just&nbsp;one day, at a fraction of that cost.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

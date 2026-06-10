@@ -72,11 +72,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Is Your Shower Grout <span class="text-primary-soft">Black &amp; Mouldy?</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Those black lines between your tiles. The musty smell every time you shower. No matter how much you scrub with bleach or bathroom cleaner, it keeps coming back within weeks. <strong>That's because the mould is growing inside the grout, not just on the surface.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Those black lines between your tiles. The&nbsp;musty&nbsp;smell every time you shower. No&nbsp;matter&nbsp;how much you scrub with bleach or bathroom cleaner, it keeps coming back within weeks. <strong>That's&nbsp;because&nbsp;the mould is growing inside the grout, not just on the surface.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The only permanent fix is to <strong>remove all the old grout</strong> and replace it with fresh, mould-resistant material. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional shower regrouting</a> service does. And most jobs are finished in a single day.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ The only permanent fix is to <strong>remove all the old grout</strong> and replace it with fresh, mould-resistant material. That's&nbsp;exactly&nbsp;what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional shower regrouting</a> service does. And&nbsp;most&nbsp;jobs are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

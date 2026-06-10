@@ -78,8 +78,8 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[0.95] mb-5">
  Property Manager &amp;<br/><span class="text-tertiary-fixed-dim">Landlord Services</span>
  </h1>
- <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mb-6">
- The bathroom is the #1 reason tenants complain and buyers walk away. We fix rental bathrooms fast. 1-3 days. with fixed-price quotes from photos so you can approve without site visits.
+ <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mb-6" style="text-wrap:pretty;">
+ The bathroom is the #1 reason tenants complain and buyers walk away. We&nbsp;fix&nbsp;rental bathrooms fast. 1-3 days. with fixed-price quotes from photos so you can approve without site visits.
  </p>
  <!-- Service badge pills -->
  <div class="flex flex-wrap gap-2 mb-6">

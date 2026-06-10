@@ -45,11 +45,11 @@ const img = (path) => `${IMG_BASE}${path}`;
 
 /* ─── 5 AREAS, customer-language-first labels (Step 3 picture cards) ─── */
 const AREAS = [
-  { id: "shower",       label: "Shower",         desc: "Grout, silicone, or tile colour",                icon: I.shower,      img: img("/images/areas/shower.jpg") },
+  { id: "shower",       label: "Shower",         desc: "Grout, silicone, or tile resurfacing",                icon: I.shower,      img: img("/images/areas/shower.jpg") },
   { id: "bath",         label: "Bathtub / spa bath", desc: "Resurface, repair chips or stains",          icon: I.bath,        img: img("/images/areas/bath.jpg") },
   { id: "basin_vanity", label: "Basin / vanity", desc: "Basin, benchtop, or full vanity",                icon: I.basinVanity, img: img("/images/areas/basin-vanity.jpg") },
   { id: "walls",        label: "Tiled walls",    desc: "Splashback, behind vanity, or full-height",      icon: I.wall,        img: img("/images/areas/walls.jpg") },
-  { id: "floor",        label: "Floor",          desc: "Grout, tile colour, or fix chips & small cracks", icon: I.floor,       img: img("/images/areas/floor.jpg") },
+  { id: "floor",        label: "Floor",          desc: "Grout, tile resurfacing, or fix chips & small cracks", icon: I.floor,       img: img("/images/areas/floor.jpg") },
 ];
 
 const FULL_BATHROOM_HERO = img("/images/areas/full-bathroom.jpg");
@@ -182,12 +182,12 @@ const SVCS = {
   shower: {
     question: "What needs doing in your shower?",
     options: [
-      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
+      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works: full regrout plus tiles resurfaced to like-new, same colour or a new one", regrout: true, popular: true, bundle: true,
         befImg: img("/images/services/shower/bundle-before.jpg"), aftImg: img("/images/services/shower/bundle-after.jpg"),
         befTxt: "Tired and dated", aftTxt: "Brand new shower" },
-      { id: "resurface", tradeName: "Just tile resurfacing", easy: "change the tile colour, includes spot grout repair, not a full regrout",
+      { id: "resurface", tradeName: "Just tile resurfacing", easy: "renew tired, stained or dated tiles to a like-new finish, same colour or a new one. Includes spot grout repair, not a full regrout",
         befImg: img("/images/services/shower/resurface-before.jpg"), aftImg: img("/images/services/shower/resurface-after.jpg"),
-        befTxt: "Dated tile colour", aftTxt: "Modern white finish" },
+        befTxt: "Tired, stained tiles", aftTxt: "Like-new finish" },
       { id: "full_regrout", tradeName: "Just full shower regrouting", easy: "every grout line replaced + new silicone, keeps the same tile colour", regrout: true,
         befImg: img("/images/services/shower/regrout-before.jpg"), aftImg: img("/images/services/shower/regrout-after.jpg"),
         befTxt: "Mouldy grout lines", aftTxt: "Bright white grout" },
@@ -226,12 +226,12 @@ const SVCS = {
   walls: {
     question: "What needs doing with your tiled walls?",
     options: [
-      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
+      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works: full regrout plus tiles resurfaced to like-new, same colour or a new one", regrout: true, popular: true, bundle: true,
         befImg: img("/images/services/walls/bundle-before.jpg"), aftImg: img("/images/services/walls/bundle-after.jpg"),
         befTxt: "Tired walls", aftTxt: "Like new walls" },
-      { id: "resurface", tradeName: "Just wall tile resurfacing", easy: "change the tile colour",
+      { id: "resurface", tradeName: "Just wall tile resurfacing", easy: "bring dated or stained wall tiles back to like-new, keep the colour or change it",
         befImg: img("/images/services/walls/resurface-before.jpg"), aftImg: img("/images/services/walls/resurface-after.jpg"),
-        befTxt: "Dated wall tiles", aftTxt: "Modern colour" },
+        befTxt: "Dated wall tiles", aftTxt: "Like-new finish" },
       { id: "regrout", tradeName: "Just wall regrouting", easy: "refresh the grout lines on tiled walls", regrout: true,
         befImg: img("/images/services/walls/regrout-before.jpg"), aftImg: img("/images/services/walls/regrout-after.jpg"),
         befTxt: "Stained wall grout", aftTxt: "Clean new grout" },
@@ -243,12 +243,12 @@ const SVCS = {
   floor: {
     question: "What needs doing with your bathroom floor?",
     options: [
-      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour", regrout: true, popular: true, bundle: true,
+      { id: "both", tradeName: "Resurfacing + Regrouting", easy: "the works: full regrout plus tiles resurfaced to like-new, same colour or a new one", regrout: true, popular: true, bundle: true,
         befImg: img("/images/services/floor/bundle-before.jpg"), aftImg: img("/images/services/floor/bundle-after.jpg"),
         befTxt: "Tired floor", aftTxt: "Like new floor" },
-      { id: "resurface", tradeName: "Just floor tile resurfacing", easy: "change the tile colour with anti-slip coating",
+      { id: "resurface", tradeName: "Just floor tile resurfacing", easy: "renew worn or dated floor tiles to like-new with a built-in anti-slip finish, keep the colour or change it",
         befImg: img("/images/services/floor/resurface-before.jpg"), aftImg: img("/images/services/floor/resurface-after.jpg"),
-        befTxt: "Outdated colour", aftTxt: "Modern colour" },
+        befTxt: "Worn, dated tiles", aftTxt: "Like-new, anti-slip" },
       { id: "regrout", tradeName: "Just floor regrouting", easy: "refresh the grout lines", regrout: true,
         befImg: img("/images/services/floor/regrout-before.jpg"), aftImg: img("/images/services/floor/regrout-after.jpg"),
         befTxt: "Dark cracked grout", aftTxt: "Clean uniform grout" },
@@ -261,9 +261,9 @@ const SVCS = {
 
 /* ─── FULL BATHROOM SCOPE OPTIONS (bundle first, "Just" prefix on individuals; same pattern as shower/bath/walls/floor) ─── */
 const FULL_SCOPE_OPTIONS = [
-  { id: "both",           tradeName: "Resurfacing + Regrouting", easy: "the works, full regrout AND new tile colour everywhere",                                desc: "Like a brand new bathroom",                                              bundle: true, popular: true },
+  { id: "both",           tradeName: "Resurfacing + Regrouting", easy: "the works: full regrout plus every surface resurfaced to like-new, same colours or new ones",                                desc: "Like a brand new bathroom",                                              bundle: true, popular: true },
   { id: "regrout_only",   tradeName: "Just full regrouting",     easy: "every grout line replaced + new silicone, keeps the same tile colour",                  desc: "All grout lines and every silicone joint redone, no colour change" },
-  { id: "resurface_only", tradeName: "Just full resurfacing",    easy: "change the colour of everything, includes spot grout repair, not a full regrout",       desc: "Bath, tiles and vanity all coated; grout cleaned up but not replaced" },
+  { id: "resurface_only", tradeName: "Just full resurfacing",    easy: "renew every surface to like-new, bath, tiles and vanity, same colours or new ones. Includes spot grout repair, not a full regrout",       desc: "Bath, tiles and vanity all coated; grout cleaned up but not replaced" },
 ];
 
 /**

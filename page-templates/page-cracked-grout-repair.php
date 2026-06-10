@@ -72,11 +72,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Shower Grout <span class="text-primary-soft">Cracking &amp; Falling Out?</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- You can see the gaps between your tiles. Pieces of grout crumbling into the shower tray. Hairline cracks spreading across the joints. Maybe water is starting to seep behind the tiles. <strong>That cracked grout isn't just ugly. It's letting water into your walls.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ You can see the gaps between your tiles. Pieces&nbsp;of&nbsp;grout crumbling into the shower tray. Hairline&nbsp;cracks&nbsp;spreading across the joints. Maybe&nbsp;water&nbsp;is starting to seep behind the tiles. <strong>That&nbsp;cracked&nbsp;grout isn't just ugly. It's&nbsp;letting&nbsp;water into your walls.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The proper fix is to <strong>remove all the old, damaged grout</strong> and replace it with fresh material that bonds cleanly to your tiles. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional regrouting service</a> does. And most jobs are finished in a single day.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ The proper fix is to <strong>remove all the old, damaged grout</strong> and replace it with fresh material that bonds cleanly to your tiles. That's&nbsp;exactly&nbsp;what our <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">professional regrouting service</a> does. And&nbsp;most&nbsp;jobs are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

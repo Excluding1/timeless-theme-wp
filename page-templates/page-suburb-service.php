@@ -96,11 +96,11 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  <?php echo esc_html( $service['name'] ); ?> in <span class="text-primary-soft"><?php echo esc_html( $suburb['name'] ); ?></span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
  <?php echo esc_html( $service['description'] ); ?>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- We service <?php echo esc_html( $suburb['name'] ); ?> and surrounding suburbs including <?php echo esc_html( $neighborhoods_natural ); ?>. Most jobs completed in a single visit.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ We service <?php echo esc_html( $suburb['name'] ); ?> and surrounding suburbs including <?php echo esc_html( $neighborhoods_natural ); ?>. Most&nbsp;jobs&nbsp;completed in a single visit.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

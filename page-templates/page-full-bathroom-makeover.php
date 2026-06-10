@@ -78,8 +78,8 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter leading-[0.95] mb-5">
  Complete Bathroom Makeover<br/><span class="text-tertiary-fixed-dim">New Look. No Renovation.</span>
  </h1>
- <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mb-6">
- Your entire bathroom looks tired. The bath is stained, tiles are dated, grout is cracked. You&rsquo;ve been quoted $25,000-$50,000 for a full renovation. There&rsquo;s a smarter way. One team, one visit, done in days.
+ <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mb-6" style="text-wrap:pretty;">
+ Your entire bathroom looks tired. The&nbsp;bath&nbsp;is stained, tiles are dated, grout is cracked. You&rsquo;ve&nbsp;been&nbsp;quoted $25,000-$50,000 for a full renovation. There&rsquo;s&nbsp;a&nbsp;smarter way. One&nbsp;team,&nbsp;one visit, done in days.
  </p>
  <!-- Service badge pills -->
  <div class="flex flex-wrap gap-2 mb-6">

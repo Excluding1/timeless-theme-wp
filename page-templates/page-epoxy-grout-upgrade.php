@@ -72,11 +72,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Upgrade to Waterproof <span class="text-primary-soft">Epoxy Grout</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- You've regrouted before. You've scrubbed the mould. You've sealed the grout. Twice. And yet, your shower grout keeps staining, cracking, and growing mould within a year or two. <strong>The problem isn't how the grout was applied. It's the grout itself.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ You've regrouted before. You've&nbsp;scrubbed&nbsp;the mould. You've&nbsp;sealed&nbsp;the grout. Twice. And&nbsp;yet,&nbsp;your shower grout keeps staining, cracking, and growing mould within a year or two. <strong>The&nbsp;problem&nbsp;isn't how the grout was applied. It's&nbsp;the&nbsp;grout itself.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Standard cement grout is porous. It absorbs water, traps dirt, and feeds mould no matter how well you maintain it. Epoxy grout is different. It's a <strong>resin-based material that's 100% waterproof from day one</strong>. No sealing, no staining, no mould. We remove your old cement grout completely and replace it with professional-grade epoxy. And most <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower regrouting jobs</a> are finished in a single day.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Standard cement grout is porous. It&nbsp;absorbs&nbsp;water, traps dirt, and feeds mould no matter how well you maintain it. Epoxy&nbsp;grout&nbsp;is different. It's&nbsp;a <strong>resin-based material that's 100% waterproof from day one</strong>. No&nbsp;sealing,&nbsp;no staining, no mould. We&nbsp;remove&nbsp;your old cement grout completely and replace it with professional-grade epoxy. And&nbsp;most <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">shower regrouting jobs</a> are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

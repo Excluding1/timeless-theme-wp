@@ -75,11 +75,11 @@
  <p class="text-base sm:text-lg text-primary-soft font-semibold max-w-xl mb-4">
  We Strip It Back &amp; Resurface It Properly
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Flakes of coating lifting off the bath surface. Chunks peeling away every time you run the water. That rough, patchy look where the old paint has failed. <strong>Whether it was a previous DIY job or a cheap coating that didn't last, a peeling bath looks terrible and only gets worse.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Flakes of coating lifting off the bath surface. Chunks&nbsp;peeling&nbsp;away every time you run the water. That&nbsp;rough,&nbsp;patchy look where the old paint has failed. <strong>Whether&nbsp;it&nbsp;was a previous DIY job or a cheap coating that didn't last, a peeling bath looks terrible and only gets worse.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The fix isn't to paint over it again. It's to <strong>strip the old coating completely</strong> and resurface with a professional two-part acrylic that bonds properly to the bare substrate. That's exactly what our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">bath resurfacing service</a> does. And most jobs are finished in a single day.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ The fix isn't to paint over it again. It's&nbsp;to <strong>strip the old coating completely</strong> and resurface with a professional two-part acrylic that bonds properly to the bare substrate. That's&nbsp;exactly&nbsp;what our <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="text-primary underline font-medium hover:text-primary-container">bath resurfacing service</a> does. And&nbsp;most&nbsp;jobs are finished in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

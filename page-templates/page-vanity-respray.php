@@ -71,11 +71,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Dated Bathroom Vanity? <span class="text-primary-soft">Respray It. Modern Look, Fraction of the Cost</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- That tired oak vanity from the 90s. The yellowed laminate cabinet that looked dated a decade ago. Dark timber that makes your whole bathroom feel small. You know it needs to go. But a new custom vanity costs <strong>$1,500 to $5,000+</strong>, plus a plumber to disconnect and reconnect everything.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ That tired oak vanity from the 90s. The&nbsp;yellowed&nbsp;laminate cabinet that looked dated a decade ago. Dark&nbsp;timber&nbsp;that makes your whole bathroom feel small. You&nbsp;know&nbsp;it needs to go. But&nbsp;a&nbsp;new custom vanity costs <strong>$1,500 to $5,000+</strong>, plus a plumber to disconnect and reconnect everything.
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- There's a smarter option. <strong>A professional vanity respray</strong> transforms your existing cabinet into a modern white, grey, or dark-toned finish. Spray-applied for a factory-smooth result with no brush marks. Same vanity, completely different look, done in a single day.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ There's a smarter option. <strong>A&nbsp;professional&nbsp;vanity respray</strong> transforms your existing cabinet into a modern white, grey, or dark-toned finish. Spray-applied&nbsp;for&nbsp;a factory-smooth result with no brush marks. Same&nbsp;vanity,&nbsp;completely different look, done in a single day.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

@@ -72,11 +72,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Dated Bathroom Tiles? <span class="text-primary-soft">Resurface Them. No Retiling Required</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Still staring at those pink, brown, or green tiles from the 80s? Faded, scratched, or just plain ugly? You're not alone. Thousands of Sydney bathrooms are stuck with dated tiles that make the whole room feel tired. <strong>But retiling costs $15,000-$30,000 and takes weeks.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Still staring at those pink, brown, or green tiles from the 80s? Faded,&nbsp;scratched,&nbsp;or just plain ugly? You're&nbsp;not&nbsp;alone. Thousands&nbsp;of&nbsp;Sydney bathrooms are stuck with dated tiles that make the whole room feel tired. <strong>But&nbsp;retiling&nbsp;costs $15,000-$30,000 and takes weeks.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- There's a smarter option. We <strong>resurface your existing tiles</strong> with a durable professional coating. Giving them a fresh high-gloss white finish. No demolition. No waterproofing. No retiling. Just a modern bathroom in 1-2 days.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ There's a smarter option. We <strong>resurface your existing tiles</strong> with a durable professional coating. Giving&nbsp;them&nbsp;a fresh high-gloss white finish. No&nbsp;demolition. No&nbsp;waterproofing. No&nbsp;retiling. Just&nbsp;a&nbsp;modern bathroom in 1-2 days.
  </p>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-8">
  <div class="text-center">

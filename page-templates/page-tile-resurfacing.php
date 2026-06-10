@@ -68,8 +68,8 @@
  Tile Resurfacing
  </h1>
  <div class="h-0 mb-3"></div>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Dated tiles dragging down your bathroom? We spray them in a clean high-gloss white finish. <strong>No ripping them out, no tiler, no weeks of mess.</strong> Most jobs done in 1-2 days.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Dated tiles dragging down your bathroom? We&nbsp;spray&nbsp;them in a clean high-gloss white finish. <strong>No&nbsp;ripping&nbsp;them out, no tiler, no weeks of mess.</strong> Most&nbsp;jobs&nbsp;done in 1-2 days.
  </p>
  <!-- MOBILE: Hero image between paragraph and stats -->
  <div class="md:hidden mb-6">
@@ -503,26 +503,7 @@
  <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
  </div>
  </div>
- <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 pt-6 space-y-6">
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
- <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="0400 000 000" type="tel" required /></div>
- </div>
- <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Suburb *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. Parramatta, Bondi, Surry Hills" required /></div>
- <div>
- <label class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">What needs resurfacing?</label>
- <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" checked /> Shower wall tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bathroom wall tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Floor tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Full bathroom</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Splashback</label>
- </div>
- </div>
- <div><label for="notes" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Anything else?</label><textarea id="notes" name="notes" rows="3" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" placeholder="e.g. tiles are pink from the 80s, want to change to white, grout is cracked too..."></textarea></div>
- <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Tile Resurfacing Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
- <p class="text-center text-[0.6rem] text-secondary">We respond within 1 business day. No spam, ever.</p>
- </form>
+ <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
 </section>

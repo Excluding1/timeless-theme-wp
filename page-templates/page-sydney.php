@@ -72,7 +72,7 @@ get_header(); ?>
  <h1 class="text-[35px] sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
  Bathroom<br class="sm:hidden" /> Resurfacing<br /> <span class="text-primary-soft">Sydney Specialists</span>
  </h1>
- <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
+ <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
  One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and an up to 3-year workmanship warranty.
  </p>
  <!-- MOBILE: Image between text and CTA -->
@@ -436,39 +436,7 @@ get_header(); ?>
  <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Quote</h2>
  <p class="text-on-primary-container text-sm">5 minutes. No obligation. We respond within 1 business day.</p>
  </div>
- <form class="timeless-quote-form p-6 sm:p-8 lg:p-12 space-y-8">
- <fieldset>
- <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">1</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Contact Info</legend></div>
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div><label for="name" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Full Name *</label><input id="name" name="name" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Citizen" required /></div>
- <div><label for="phone" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Phone *</label><input id="phone" name="phone" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="<?php echo timeless_phone(); ?>" type="tel" required /></div>
- <div class="md:col-span-2"><label for="email" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Email</label><input id="email" name="email" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="john@example.com" type="email" /></div>
- </div>
- </fieldset>
- <fieldset>
- <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">2</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">Property</legend></div>
- <div><label for="address" class="text-[0.75rem] sm:text-[0.65rem] font-black uppercase text-secondary tracking-widest block mb-2">Address *</label><input id="address" name="address" class="w-full bg-surface-container-low border border-surface-container rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Street, Suburb, NSW Postcode" required /></div>
- <div class="mt-4 p-4 bg-error-container/20 rounded-lg flex items-start gap-4 border-l-4 border-error">
- <span class="material-symbols-outlined text-error shrink-0" aria-hidden="true">warning</span>
- <div><p class="text-xs font-bold text-on-error-container mb-1">Asbestos Check (NSW)</p><p class="text-[0.7rem] text-on-error-container/80">Home built before 1990?</p>
- <div class="mt-2 flex gap-4"><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="yes" class="text-primary" /> Yes</label><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="no" class="text-primary" /> No</label><label class="flex items-center gap-2 text-xs font-bold text-primary cursor-pointer"><input name="asbestos" type="radio" value="unsure" class="text-primary" /> Unsure</label></div>
- </div>
- </div>
- </fieldset>
- <fieldset>
- <div class="flex items-center gap-3 mb-6"><span class="text-xs font-black bg-primary text-white w-6 h-6 flex items-center justify-center rounded-sm">3</span><legend class="font-bold text-primary uppercase tracking-wider text-sm">What Needs Work?</legend></div>
- <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Bathtub</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Wall Tiles</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Vanity Top</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Shower Base</label>
- <label class="p-3 bg-surface-container-low rounded-lg flex items-center gap-2 text-xs font-medium cursor-pointer border border-surface-container hover:border-primary/30"><input type="checkbox" class="rounded-sm text-primary" /> Floor Tiles</label>
- </div>
- </fieldset>
- <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Submit Free Quote Request <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
- <p class="text-center text-[0.6rem] text-secondary">By submitting you agree to our Terms &amp; Privacy Policy.</p>
- </form>
+ <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
 </section>

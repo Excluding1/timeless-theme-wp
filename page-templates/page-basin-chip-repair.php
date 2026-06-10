@@ -71,11 +71,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Chipped or Cracked Basin? <span class="text-primary-soft">Repair It. Don't Replace It</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- That chip on your basin isn't just unsightly. It catches dirt, harbours bacteria, and can spread into a larger crack over time. Every time you wash your hands, you notice it. <strong>Left alone, a small chip can become a costly problem.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ That chip on your basin isn't just unsightly. It&nbsp;catches&nbsp;dirt, harbours bacteria, and can spread into a larger crack over time. Every&nbsp;time&nbsp;you wash your hands, you notice it. <strong>Left&nbsp;alone,&nbsp;a small chip can become a costly problem.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- Replacing a basin means calling a plumber, buying a new basin, and risking damage to your vanity or benchtop during removal. <strong>A professional repair fixes the damage in hours</strong>. No plumber, no new basin, no disruption to your bathroom.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Replacing a basin means calling a plumber, buying a new basin, and risking damage to your vanity or benchtop during removal. <strong>A&nbsp;professional&nbsp;repair fixes the damage in hours</strong>. No&nbsp;plumber,&nbsp;no new basin, no disruption to your bathroom.
  </p>
  <div class="flex items-center gap-6 mb-8">
  <div class="text-center">

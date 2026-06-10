@@ -65,8 +65,8 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] mb-6 underline decoration-[#c9a060] decoration-[5px] underline-offset-8 [text-decoration-skip-ink:none]">
  Vanity <span class="text-tertiary-fixed-dim">Refinishing</span>
  </h1>
- <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6">
- Tired-looking vanity dragging down your bathroom? We refinish benchtops, resurface vanity tops, and respray cabinets with professional-grade coatings. Transform your vanity in hours, no replacement needed.
+ <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Tired-looking vanity dragging down your bathroom? We&nbsp;refinish&nbsp;benchtops, resurface vanity tops, and respray cabinets with professional-grade coatings. Transform&nbsp;your&nbsp;vanity in hours, no replacement needed.
  </p>
  <!-- MOBILE: Hero image between paragraph and stats -->
  <div class="md:hidden mb-6">

@@ -71,11 +71,11 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6">
  Black Mouldy Silicone <span class="text-primary-soft">in Your Shower?</span>
  </h1>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- That black stuff in the corners of your shower and along the floor-wall join? That's mouldy silicone. You've probably tried bleach, mould sprays, even scrubbing with a toothbrush. It comes back every time. <strong>That's because the mould has grown inside the silicone itself. Cleaning only touches the surface.</strong>
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ That black stuff in the corners of your shower and along the floor-wall join? That's&nbsp;mouldy&nbsp;silicone. You've&nbsp;probably&nbsp;tried bleach, mould sprays, even scrubbing with a toothbrush. It&nbsp;comes&nbsp;back every time. <strong>That's&nbsp;because&nbsp;the mould has grown inside the silicone itself. Cleaning&nbsp;only&nbsp;touches the surface.</strong>
  </p>
- <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6">
- The only permanent fix is to <strong>strip the old silicone out completely</strong> and replace it with fresh, premium sealant rated for long-term mould resistance. It's a quick job. Most showers are done same day. And it makes a dramatic difference to how your bathroom looks and seals.
+ <p class="text-base sm:text-lg text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ The only permanent fix is to <strong>strip the old silicone out completely</strong> and replace it with fresh, premium sealant rated for long-term mould resistance. It's&nbsp;a&nbsp;quick job. Most&nbsp;showers&nbsp;are done same day. And&nbsp;it&nbsp;makes a dramatic difference to how your bathroom looks and seals.
  </p>
  <div class="flex items-center gap-6 mb-8">
  <div class="text-center">

@@ -61,7 +61,7 @@ get_header(); ?>
  <h1 class="text-[35px] sm:text-5xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-6 sm:mb-8">
  Bathroom<br class="sm:hidden" /> Resurfacing<br /> <span class="text-primary-soft">Sydney Specialists</span>
  </h1>
- <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6">
+ <p class="text-base sm:text-lg lg:text-xl text-secondary leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
  One-day bathroom transformations across Greater Sydney. Save <strong>up to 80% versus full renovation</strong> with zero demolition, zero mess, and warranties up to 5 years in writing.
  </p>
  <!-- MOBILE: Image between text and CTA -->
@@ -130,7 +130,7 @@ get_header(); ?>
 <!-- TRUST STRIP, concrete signals (no placeholder partner logos; ACL §18 compliant) -->
 <section class="py-10 sm:py-12 bg-surface-container-low/50">
  <div class="max-w-6xl mx-auto px-6 sm:px-8">
- <p class="text-center text-sm text-secondary mb-8">Owner-led, fully insured, warranty in writing, Sydney bathrooms done properly</p>
+ <p class="text-center text-sm text-secondary mb-8">Owner-run, fully insured, warranty in writing. Sydney bathrooms done properly.</p>
  <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
  <div>
  <div class="flex justify-center mb-2"><span class="material-symbols-outlined text-3xl text-tertiary-fixed-dim" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span></div>
@@ -425,8 +425,8 @@ get_header(); ?>
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
  <div class="max-w-3xl mx-auto px-6 sm:px-8 text-center mb-8">
  <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
- <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today</h2>
- <p class="text-secondary text-base sm:text-lg leading-relaxed">Send a quick photo and a few details, and your fixed-price quote lands within 1 business day. No pressure, no hidden fees, just an honest price from a Sydney resurfacing team.</p>
+ <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today!</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:balance;">Send us a quick photo and a few details and we&rsquo;ll send back your fixed-price quote within 1 business day. No&nbsp;pressure. No&nbsp;hidden&nbsp;fees.</p>
  </div>
  <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">

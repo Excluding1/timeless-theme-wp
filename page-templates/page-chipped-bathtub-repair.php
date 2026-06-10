@@ -66,8 +66,8 @@
  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter leading-[0.95] mb-6 underline decoration-[#c9a060] decoration-[5px] underline-offset-8 [text-decoration-skip-ink:none]">
  Chip <span class="text-tertiary-fixed-dim">Repair</span>
  </h1>
- <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6">
- Chip in your bath, basin, or tiles? Hairline crack spreading? We fill, shape, and colour-match every repair so it&rsquo;s invisible. Works on porcelain, enamel, acrylic, ceramic, and fibreglass. Done in hours, not days.
+ <p class="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl mb-6" style="text-wrap:pretty;">
+ Chip in your bath, basin, or tiles? Hairline&nbsp;crack&nbsp;spreading? We&nbsp;fill,&nbsp;shape, and colour-match every repair so it&rsquo;s invisible. Works&nbsp;on&nbsp;porcelain, enamel, acrylic, ceramic, and fibreglass. Done&nbsp;in&nbsp;hours, not days.
  </p>
  <!-- MOBILE: Hero image between paragraph and stats -->
  <div class="md:hidden mb-6">
@@ -407,27 +407,7 @@
  <div class="shrink-0 w-8 h-px bg-surface-container"></div>
  <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">3</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Book a date</strong> that suits you</p></div>
  </div>
- <form class="space-y-4" id="quote-form">
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
- <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Full Name *</label><input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="John Citizen" /></div>
- <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Phone *</label><input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="0400 000 000" /></div>
- </div>
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
- <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Suburb *</label><input type="text" name="suburb" required class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="e.g. Bondi, Parramatta" /></div>
- <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Email</label><input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" placeholder="you@email.com" /></div>
- </div>
- <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">What do you need? *</label>
- <div class="grid grid-cols-2 gap-2">
- <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Chip Repair" checked class="text-primary rounded-sm" /> Chip Repair</label>
- <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Bath Resurfacing" class="text-primary rounded-sm" /> Bath Resurfacing</label>
- <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Basin Restoration" class="text-primary rounded-sm" /> Basin Restoration</label>
- <label class="flex items-center gap-2 px-4 py-3 border border-surface-container rounded-lg cursor-pointer hover:border-primary transition-colors bg-surface-container-low text-sm"><input type="checkbox" name="service" value="Tile Resurfacing" class="text-primary rounded-sm" /> Tile Resurfacing</label>
- </div>
- </div>
- <div><label class="text-xs font-bold text-primary uppercase tracking-wider block mb-1.5">Anything else?</label><textarea name="message" rows="3" class="w-full px-4 py-3 rounded-lg border border-surface-container bg-surface-container-low text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden resize-none" placeholder="e.g. 2 chips on the bath rim, 1 crack near the drain. Also interested in basin chip repair."></textarea></div>
- <button class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">Get My Free Chip Repair Quote <span class="material-symbols-outlined" aria-hidden="true">send</span></button>
- <p class="text-center text-[0.6rem] text-secondary">We respond within 1 business day. No spam, ever.</p>
- </form>
+ <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
  </div>
