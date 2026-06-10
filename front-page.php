@@ -169,7 +169,7 @@ get_header(); ?>
  </div>
  </div>
  <div class="max-w-7xl mx-auto pl-6 sm:px-8">
- <div id="services-scroll" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pr-6 sm:pr-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:pb-0" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+ <div id="services-scroll" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pt-2 px-1 pb-4 pr-6 sm:pr-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:pb-0" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
  <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal block shrink-0 text-center">
  <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting-400w.jpg 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg 800w" sizes="(max-width: 640px) 200px, 250px" alt="Shower regrouting service" class="absolute inset-0 w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" />
