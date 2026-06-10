@@ -486,23 +486,15 @@
 </section>
 
 <!-- QUOTE FORM -->
-<section class="py-16 sm:py-20 bg-surface-container-low" id="quote">
- <div class="max-w-4xl mx-auto px-6 sm:px-8">
+<!-- QUOTE FORM, homepage-style section (badge + heading + clean card), unified per Allan 2026-06-11 -->
+<section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center mb-8">
+ <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
+ <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today!</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:pretty;">Send us a quick photo and a few details and we&rsquo;ll send you a fixed-price quote within 24 hours.<br />No&nbsp;pressure. No&nbsp;hidden&nbsp;fees. Just&nbsp;your&nbsp;bathroom, renewed.</p>
+ </div>
+ <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
- <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
- <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Tile Resurfacing Quote</h2>
- <p class="text-on-primary-container text-sm">5 minutes. No obligation. Fixed pricing guaranteed.</p>
- </div>
- <!-- How quoting works -->
- <div class="px-6 sm:px-8 lg:px-12 pt-8 pb-4">
- <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center text-center sm:text-left">
- <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">1</span><span class="text-xs text-secondary"><strong class="text-primary">Send photos</strong> of your tiles</span></div>
- <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
- <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">2</span><span class="text-xs text-secondary"><strong class="text-primary">Fixed-price quote</strong> within 24 hours</span></div>
- <span class="hidden sm:block text-surface-container-highest">&rarr;</span>
- <div class="flex items-center gap-3"><span class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-xs font-bold text-primary shrink-0">3</span><span class="text-xs text-secondary"><strong class="text-primary">Book a date</strong> that suits you</span></div>
- </div>
- </div>
  <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>

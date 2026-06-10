@@ -392,23 +392,16 @@
 </section>
 
 <!-- QUOTE FORM -->
-<section class="py-16 sm:py-20 bg-white" id="quote">
- <div class="max-w-4xl mx-auto px-6 sm:px-8">
+<!-- QUOTE FORM, homepage-style section (badge + heading + clean card), unified per Allan 2026-06-11 -->
+<section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center mb-8">
+ <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
+ <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today!</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:pretty;">Send us a quick photo and a few details and we&rsquo;ll send you a fixed-price quote within 24 hours.<br />No&nbsp;pressure. No&nbsp;hidden&nbsp;fees. Just&nbsp;your&nbsp;bathroom, renewed.</p>
+ </div>
+ <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
- <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
- <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Floor Regrouting Quote</h2>
- <p class="text-on-primary-container text-sm">5 minutes. No obligation. Fixed pricing guaranteed.</p>
- </div>
- <div class="p-6 sm:p-8 lg:p-12">
- <div class="flex items-center justify-between gap-4 mb-8 text-center">
- <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">1</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Send photos</strong> of your floor grout</p></div>
- <div class="shrink-0 w-8 h-px bg-surface-container"></div>
- <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">2</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Fixed-price quote</strong> within 24 hours</p></div>
- <div class="shrink-0 w-8 h-px bg-surface-container"></div>
- <div class="flex-1"><div class="w-8 h-8 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto mb-2">3</div><p class="text-[0.65rem] text-secondary font-medium"><strong class="text-primary block">Book a date</strong> that suits you</p></div>
- </div>
  <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
- </div>
  </div>
  </div>
 </section>

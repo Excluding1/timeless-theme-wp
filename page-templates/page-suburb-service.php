@@ -160,7 +160,7 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
 <section id="quote" class="py-16 sm:py-20 bg-primary text-white">
  <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center">
  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tighter mb-4">Free <?php echo esc_html( $suburb['name'] ); ?> Quote</h2>
- <p class="text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">Send 3-4 photos of your bath. Fixed-price quote back within 1 business day. No call-out fee, no obligation.</p>
+ <p class="text-white/80 leading-relaxed max-w-2xl mx-auto mb-8">Send 3-4 photos of your bath. Fixed-price quote back within 24 hours. No call-out fee, no obligation.</p>
  <div class="flex flex-col sm:flex-row gap-3 justify-center">
  <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">Send Photos for Quote</a>
  <a href="tel:<?php echo timeless_phone_link(); ?>" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Call <?php echo timeless_phone(); ?></a>
