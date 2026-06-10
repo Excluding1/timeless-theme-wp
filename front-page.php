@@ -153,50 +153,20 @@ get_header(); ?>
  <p class="text-xs sm:text-sm text-secondary font-medium">Real business, real receipts</p>
  </div>
  </div>
- <!-- AREA MARQUEE, honest social-texture strip (real service areas; NO partner logos, ACL-safe). Auto-drifts; pauses on hover/touch; respects prefers-reduced-motion. -->
- <div class="mt-10">
- <p class="text-center text-sm text-secondary mb-6">Servicing homeowners, property managers and builders across Sydney</p>
- <div id="suburb-scroller" class="cursor-grab active:cursor-grabbing" style="overflow:hidden;-webkit-overflow-scrolling:touch;" aria-label="Areas we service">
- <div id="suburb-inner" class="flex items-center w-max" style="gap:10px;padding:2px 32px 6px;">
- <?php
- $timeless_marquee_areas = array( 'Bondi', 'Mosman', 'Manly', 'Chatswood', 'Parramatta', 'Castle Hill', 'Penrith', 'Surry Hills', 'Strathfield', 'Hornsby', 'Inner West', 'Eastern Suburbs', 'North Shore', 'Northern Beaches', 'Western Sydney', 'Sutherland Shire' );
- for ( $timeless_set = 0; $timeless_set < 2; $timeless_set++ ) : // two copies = seamless loop
- foreach ( $timeless_marquee_areas as $timeless_area ) : ?>
- <span <?php echo $timeless_set ? 'aria-hidden="true"' : ''; ?> style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ffffff;border-radius:9999px;font-size:14px;font-weight:600;color:#041534;box-shadow:0 1px 2px rgba(0,0,0,0.06);white-space:nowrap;"><span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-size:16px;" aria-hidden="true">location_on</span><?php echo esc_html( $timeless_area ); ?></span>
- <?php endforeach; endfor; ?>
+ </div>
+</section>
+
+<!-- TRUSTED-BY LOGO STRIP (Allan's call 2026-06-11; auto-steps via js/main.js) -->
+<section class="py-8 sm:py-10 bg-surface-container-low/50">
+ <div class="max-w-7xl mx-auto px-6 sm:px-8">
+ <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
+ </div>
+ <div class="max-w-6xl mx-auto px-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing" id="logo-scroller" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;">
+ <div class="flex items-center gap-5 sm:gap-8 w-max px-8" id="logo-inner">
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-1.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-2.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-3.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-4.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-5.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-6.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-7.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-8.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-9.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" /><img src="<?php echo get_template_directory_uri(); ?>/images/homepage/logos/logo-10.png" alt="Partner" class="h-8 sm:h-10 w-auto opacity-60 hover:opacity-100 transition-opacity select-none" width="480" height="144" loading="lazy" draggable="false" />
  </div>
  </div>
- <div id="suburb-dots" class="flex justify-center gap-1.5 mt-4" aria-hidden="true"></div>
- </div>
- <script>
- (function(){
- var el = document.getElementById('suburb-scroller'), inner = document.getElementById('suburb-inner');
- if(!el || !inner) return;
- var half = 0, paused = false, drag = false, startX = 0, scrollStart = 0;
- function measure(){ half = inner.scrollWidth / 2; }
- measure();
- if(document.fonts && document.fonts.ready){ document.fonts.ready.then(measure); }
- window.addEventListener('resize', measure);
- var dotsBox = document.getElementById('suburb-dots');
- if(dotsBox && dotsBox.children.length === 0){
- for(var i = 0; i < 8; i++){ var d = document.createElement('span'); d.style.cssText = 'display:inline-block;width:8px;height:8px;border-radius:9999px;background:#cbd5e1;transition:all .2s;'; dotsBox.appendChild(d); }
- }
- function loopFix(){ if(half && el.scrollLeft >= half){ el.scrollLeft -= half; } else if(el.scrollLeft <= 0){ el.scrollLeft += half; } }
- function updateDots(){ if(!dotsBox || !half) return; var idx = Math.round(((el.scrollLeft % half) / half) * 7) % 8; for(var i = 0; i < dotsBox.children.length; i++){ dotsBox.children[i].style.width = (i === idx) ? '18px' : '8px'; dotsBox.children[i].style.background = (i === idx) ? '#041534' : '#cbd5e1'; } }
- var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- el.scrollLeft = 1;
- (function tick(){ if(!reduce && !paused && !drag){ el.scrollLeft += 0.5; loopFix(); updateDots(); } requestAnimationFrame(tick); })();
- el.addEventListener('mouseenter', function(){ paused = true; });
- el.addEventListener('mouseleave', function(){ paused = false; });
- el.addEventListener('mousedown', function(e){ drag = true; startX = e.pageX; scrollStart = el.scrollLeft; e.preventDefault(); });
- window.addEventListener('mousemove', function(e){ if(!drag) return; el.scrollLeft = scrollStart - (e.pageX - startX); loopFix(); updateDots(); });
- window.addEventListener('mouseup', function(){ drag = false; });
- el.addEventListener('touchstart', function(e){ paused = true; drag = true; startX = e.touches[0].pageX; scrollStart = el.scrollLeft; }, { passive: true });
- el.addEventListener('touchmove', function(e){ if(!drag) return; el.scrollLeft = scrollStart - (e.touches[0].pageX - startX); loopFix(); updateDots(); }, { passive: true });
- el.addEventListener('touchend', function(){ drag = false; setTimeout(function(){ paused = false; }, 2500); }, { passive: true });
- })();
- </script>
- </div>
+ <div id="logo-dots" class="flex justify-center gap-1.5 mt-4"></div>
 </section>
 
 <!-- SERVICES. Circle images, horizontal scroll on mobile -->

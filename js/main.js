@@ -518,4 +518,81 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })();
 
+    /* ── Trusted-by logo strip: dots + drag + auto-step ──
+       Canonical impl (2026-06-11) replacing the per-page inline "Momentum Carousel"
+       scripts that were drag-only (no timer) and missing entirely on /sydney/.
+       Markup: #logo-scroller > #logo-inner (logo set x2 = seamless wrap) + #logo-dots.
+       Auto-steps ONE logo left every 10s; pauses on hover/drag/touch/hidden tab;
+       auto-step disabled under prefers-reduced-motion (drag still works). */
+    (function () {
+        var el = document.getElementById('logo-scroller');
+        var inner = document.getElementById('logo-inner');
+        if (!el || !inner) return;
+        el.style.overflow = 'hidden';
+
+        var half = 0, step = 0;
+        function measure() {
+            half = inner.scrollWidth / 2;
+            var kids = inner.children;
+            // all logos are 480x144 (uniform rendered width), so first-pair distance = exact step
+            step = kids.length > 1 ? (kids[1].getBoundingClientRect().left - kids[0].getBoundingClientRect().left) : 160;
+        }
+        measure();
+        window.addEventListener('load', measure);
+        window.addEventListener('resize', measure);
+
+        var dotsBox = document.getElementById('logo-dots');
+        if (dotsBox && dotsBox.children.length === 0) {
+            for (var i = 0; i < 8; i++) {
+                var d = document.createElement('span');
+                d.style.cssText = 'display:inline-block;width:8px;height:8px;border-radius:9999px;background:#cbd5e1;transition:all .2s;';
+                dotsBox.appendChild(d);
+            }
+        }
+        function wrap() {
+            if (!half) return;
+            if (el.scrollLeft >= half) { el.scrollLeft -= half; }
+            else if (el.scrollLeft < 0) { el.scrollLeft += half; }
+        }
+        function updateDots() {
+            if (!dotsBox || !half) return;
+            var idx = Math.round(((el.scrollLeft % half) / half) * 7) % 8;
+            for (var i = 0; i < dotsBox.children.length; i++) {
+                dotsBox.children[i].style.width = (i === idx) ? '18px' : '8px';
+                dotsBox.children[i].style.background = (i === idx) ? '#041534' : '#cbd5e1';
+            }
+        }
+        el.scrollLeft = 1;
+        updateDots();
+
+        var drag = false, hover = false, startX = 0, scrollStart = 0;
+        el.addEventListener('mousedown', function (e) { drag = true; startX = e.pageX; scrollStart = el.scrollLeft; e.preventDefault(); });
+        window.addEventListener('mousemove', function (e) { if (!drag) return; el.scrollLeft = scrollStart - (e.pageX - startX); wrap(); updateDots(); });
+        window.addEventListener('mouseup', function () { drag = false; });
+        el.addEventListener('mouseenter', function () { hover = true; });
+        el.addEventListener('mouseleave', function () { hover = false; });
+        el.addEventListener('touchstart', function (e) { drag = true; startX = e.touches[0].pageX; scrollStart = el.scrollLeft; }, { passive: true });
+        el.addEventListener('touchmove', function (e) { if (!drag) return; el.scrollLeft = scrollStart - (e.touches[0].pageX - startX); wrap(); updateDots(); }, { passive: true });
+        el.addEventListener('touchend', function () { setTimeout(function () { drag = false; }, 1500); }, { passive: true });
+
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) return;
+        var stepping = false;
+        function stepOnce() {
+            if (drag || hover || stepping || document.hidden || !step) return;
+            stepping = true;
+            var from = el.scrollLeft, t0 = null;
+            function anim(ts) {
+                if (t0 === null) { t0 = ts; }
+                var pr = Math.min((ts - t0) / 500, 1);
+                el.scrollLeft = from + step * (1 - Math.pow(1 - pr, 3));
+                updateDots();
+                if (pr < 1) { requestAnimationFrame(anim); }
+                else { wrap(); updateDots(); stepping = false; }
+            }
+            requestAnimationFrame(anim);
+        }
+        setInterval(stepOnce, 10000);
+    })();
+
 });
