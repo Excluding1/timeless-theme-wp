@@ -423,13 +423,24 @@ get_header(); ?>
 
 <!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
- <div class="max-w-xl mx-auto px-6 sm:px-8">
- <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
- <div class="p-6 sm:p-8 lg:p-12 bg-primary text-white">
- <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">Get Your Free Quote</h2>
- <p class="text-on-primary-container text-sm">~90 seconds. No obligation. Quote within 1 business day.</p>
+ <div class="max-w-6xl mx-auto px-6 sm:px-8">
+ <div class="text-center max-w-2xl mx-auto mb-10">
+ <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tight mb-3">Get Your Free Quote Today</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed">Send a quick photo and a few details &mdash; we&rsquo;ll send your fixed-price quote within 1 business day. No pressure, no hidden fees.</p>
  </div>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+ <div>
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/after.jpg" alt="Finished bathroom resurfacing result in Sydney" class="w-full rounded-2xl shadow-lg object-cover mb-6" style="aspect-ratio:4/3;object-position:center 70%;" width="800" height="600" loading="lazy" />
+ <ul class="space-y-3">
+ <li class="flex items-start gap-3"><span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified</span><span class="text-primary font-semibold">Up to 5-Year Warranty, in writing</span></li>
+ <li class="flex items-start gap-3"><span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">verified_user</span><span class="text-primary font-semibold">Fully Insured &mdash; public liability on every job</span></li>
+ <li class="flex items-start gap-3"><span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">location_on</span><span class="text-primary font-semibold">Sydney-wide &mdash; locally owned &amp; operated</span></li>
+ <li class="flex items-start gap-3"><span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">receipt_long</span><span class="text-primary font-semibold">No-obligation &mdash; fixed-price, no hidden fees</span></li>
+ </ul>
+ </div>
+ <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
  <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
+ </div>
  </div>
  </div>
 </section>
