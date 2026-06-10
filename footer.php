@@ -19,6 +19,10 @@ $phone      = timeless_phone();
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-12">
             <!-- Brand -->
             <div class="col-span-2 md:col-span-1">
+                <?php // TR monogram above the name; renders only once images/brand/tr-mark.png exists (drop pending from Allan 2026-06-11)
+                if ( file_exists( get_template_directory() . '/images/brand/tr-mark.png' ) ) : ?>
+                <img src="<?php echo get_template_directory_uri(); ?>/images/brand/tr-mark.png" alt="Timeless Resurfacing TR logo" class="h-14 w-auto mb-3" width="112" height="112" loading="lazy" />
+                <?php endif; ?>
                 <span class="text-2xl font-black tracking-tighter text-white block mb-4">Timeless Resurfacing</span>
                 <p class="text-sm text-white/60 leading-relaxed max-w-xs">Revive, Restore, Renew. Sydney&rsquo;s bathroom resurfacing specialists.</p>
             </div>
