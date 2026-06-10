@@ -423,12 +423,12 @@ get_header(); ?>
 
 <!-- QUOTE FORM — live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
- <div class="max-w-xl mx-auto px-6 sm:px-8">
- <div class="text-center mb-8">
- <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
- <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-3">Get Your Free Quote Today</h2>
- <p class="text-secondary text-base sm:text-lg leading-relaxed">Send a quick photo and a few details &mdash; we&rsquo;ll send your fixed-price quote within 1 business day. No pressure, no hidden fees.</p>
+ <div class="max-w-3xl mx-auto px-6 sm:px-8 text-center mb-8">
+ <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
+ <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed">Send a quick photo and a few details, and your fixed-price quote lands within 1 business day. No pressure, no hidden fees, just an honest price from a Sydney resurfacing team.</p>
  </div>
+ <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
  <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
