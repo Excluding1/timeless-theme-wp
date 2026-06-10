@@ -423,10 +423,10 @@ get_header(); ?>
 
 <!-- QUOTE FORM, live React form via the [timeless_quote_form] shortcode (GHL-wired, deployed 2026-06-09) -->
 <section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
- <div class="max-w-3xl mx-auto px-6 sm:px-8 text-center mb-8">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center mb-8">
  <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today!</h2>
- <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:balance;">Send us a quick photo and a few details and we&rsquo;ll send you a fixed-price quote within 24 hours. No&nbsp;pressure. No&nbsp;hidden&nbsp;fees. Just&nbsp;your&nbsp;bathroom, renewed.</p>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:pretty;">Send us a quick photo and a few details and we&rsquo;ll send you a fixed-price quote within 24 hours.<br />No&nbsp;pressure. No&nbsp;hidden&nbsp;fees. Just&nbsp;your&nbsp;bathroom, renewed.</p>
  </div>
  <div class="max-w-xl mx-auto px-6 sm:px-8">
  <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
