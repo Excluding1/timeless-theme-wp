@@ -38,7 +38,7 @@ Custom WordPress theme for **timelessresurfacing.com.au** — a bathroom resurfa
     ├── page-gallery.php
     ├── page-areas.php
     ├── page-privacy.php
-    └── page-*-sydney.php  # 19 service pages
+    └── page-*.php         # 19 service pages (no -sydney suffix; URLs are /services/<slug>/)
 ```
 
 ## Image Organization
@@ -83,14 +83,14 @@ cd /Users/excluding/Downloads/timeless-theme-wp
 zip -rq ../timeless-theme.zip . \
   -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
   ".secrets/*" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
-  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" \
+  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" "contractor-app/*" \
   "src/*" "postcss.config.js" "package.json" "package-lock.json" \
   "memory/*" "*.log" "*.zip" "*.map"
 ```
 
 **Includes:** all theme PHP, `images/` (incl. responsive variants), `assets/main.min.css` (compiled Tailwind), `assets/quote-form/` (React form build, untracked but required for homepage shortcode), `js/main.js`, `style.css`.
 
-**Excludes:** `.secrets/` (⚠️ live API credentials — ServiceM8 / GHL PIT / Make webhook secret; NEVER deploy to the public site), `.git/`, `.claude/` (dev tooling + screenshots — anything dev-side goes here), `docs/`/`data/`/`memory/` (CEO/AI internal), sibling apps in master-repo (`dashboard/`, `daemon/`, `scripts/`), build pipeline (`node_modules/`, `src/`).
+**Excludes:** `.secrets/` (⚠️ live API credentials — ServiceM8 / GHL PIT / Make webhook secret; NEVER deploy to the public site), `.git/`, `.claude/` (dev tooling + screenshots — anything dev-side goes here), `docs/`/`data/`/`memory/` (CEO/AI internal), sibling apps in master-repo (`dashboard/`, `daemon/`, `scripts/`, `contractor-app/`), build pipeline (`node_modules/`, `src/`).
 
 ### 4. Upload via wp-admin
 Appearance → Themes → Upload → **"Replace current with uploaded"**
