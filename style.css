@@ -386,3 +386,21 @@ html, body {
     background: rgb(4, 21, 52);
     color: white;
 }
+
+/* ── Interaction polish (Allan 2026-06-11): hover/press feedback for elements that lacked it ── */
+/* FAQ accordion rows: tint on hover so they read as clickable */
+.faq-item > button { transition: background-color 0.2s ease; border-radius: 0.75rem; }
+.faq-item > button:hover { background-color: #f7f9fb; }
+/* Before/after slider handles: grow on hover, invites the drag */
+.ba-slider .ba-handle.ba-handle-ready, .ba-handle, [id$="-handle"], #ba-handle, #mob-handle { transition: opacity 0.2s, transform 0.2s ease, box-shadow 0.2s ease; }
+.ba-handle:hover, #ba-handle:hover, #mob-handle:hover { transform: scale(1.12); box-shadow: 0 8px 24px rgba(4,21,52,0.25); }
+/* Gallery cards: subtle image zoom alongside the existing shadow lift */
+.gallery-card img { transition: transform 0.35s ease; }
+.gallery-card:hover img { transform: scale(1.04); }
+/* Quote form (inline-styled React): gentle press/hover feedback on every control */
+#quote-form-root button:not([disabled]), #quote-form-root [role="button"] { transition: filter 0.15s ease, transform 0.15s ease; }
+#quote-form-root button:not([disabled]):hover, #quote-form-root [role="button"]:hover { filter: brightness(0.96); }
+#quote-form-root button:not([disabled]):active, #quote-form-root [role="button"]:active { transform: scale(0.985); }
+/* Nav logo: standard clickable-logo affordance */
+#main-nav a > img { transition: opacity 0.2s ease; }
+#main-nav a:hover > img { opacity: 0.8; }
