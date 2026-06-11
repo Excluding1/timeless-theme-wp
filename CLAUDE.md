@@ -94,10 +94,13 @@ zip -rq ../timeless-theme.zip . \
 
 ### 4. Upload via wp-admin
 Appearance → Themes → Upload → **"Replace current with uploaded"**
+⚠️ **WP may instead install a SUFFIXED COPY (e.g. `timeless-theme-2`) and leave the old theme active** (happened 2026-06-11: live kept serving the old theme after "upload done"). After every upload: Appearance → Themes → open **Theme Details** on each "Timeless Resurfacing" card → ACTIVATE the one whose URL says the newest `theme=` slug. **Customizer values (phone/email/ABN) are stored PER theme folder** — note them before switching, re-enter after. Delete stale inactive copies to keep this from recurring.
 
-### 5. Purge Cloudflare cache (REQUIRED — the step everyone forgets)
-Cloudflare dashboard → select `timelessresurfacing.com.au` → **Caching → Configuration → Purge Everything**.
+### 5. Purge BOTH caches (REQUIRED — the step everyone forgets)
+1. **SpeedyCache** (WP plugin): admin bar → SpeedyCache → Purge/Delete cache.
+2. **Cloudflare**: dashboard → `timelessresurfacing.com.au` → **Caching → Configuration → Purge Everything**.
 Without this, customers see cached HTML referencing old assets for up to 1 hour.
+⚠️ The Cloudflare Cache Rule "Cache HTML pages" MUST keep its `Cookie does not contain wordpress_logged_in` condition (added 2026-06-11). Without it, an admin browsing the site right after a purge gets their ADMIN-BAR view cached and served to every visitor (this happened; diagnose via `curl -s site | grep -c wpadminbar` + `cf-cache-status`). Always verify the live site in INCOGNITO, never logged in.
 
 ### 6. Hard-refresh your browser
 Mac: `Cmd + Shift + R`, or open in Incognito.
