@@ -47,13 +47,6 @@ $phone      = timeless_phone();
 <!-- NAV -->
 <header>
     <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl shadow-xs" id="main-nav">
-        <style>
-        /* Mobile: brand centred in the bar, hamburger pinned right (Allan 2026-06-11) */
-        @media (max-width:1023px){
-        #main-nav > div{position:relative;justify-content:center;}
-        #main-nav #menu-btn{position:absolute;right:16px;top:50%;transform:translateY(-50%);}
-        }
-        </style>
         <div class="flex justify-between items-center px-6 sm:px-8 py-3 max-w-7xl mx-auto">
             <a class="flex items-center" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/brand/tr-lockup-nav.png" alt="Timeless Resurfacing" width="217" height="44" style="height:44px;width:auto;" /></a>
             <div class="hidden lg:flex items-center gap-8 font-medium text-sm">

@@ -80,7 +80,10 @@ git push
 ### 3. Build the deploy zip (bulletproof exclusions)
 ```bash
 cd /Users/excluding/Downloads/timeless-theme-wp
-zip -rq ../timeless-theme.zip . \
+# ⚠️ NAME THE ZIP AFTER THE *ACTIVE* THEME FOLDER (currently timeless-theme-2) — WP derives the
+# install folder from the zip name; a mismatched name installs a NEW suffixed copy instead of
+# offering "Replace current with uploaded" (the 2026-06-11 lesson).
+zip -rq ../timeless-theme-2.zip . \
   -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
   ".secrets/*" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
   "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" "contractor-app/*" \
@@ -109,7 +112,7 @@ Mac: `Cmd + Shift + R`, or open in Incognito.
 - View page source → search `main.js?ver=` → should be a timestamp, NOT `1.0.0` (filemtime cache-bust working)
 - View page source → search `main.min.css?ver=` → should also be a timestamp
 - Service page → Section 2B before/after slider has visible white circle handle + arrow SVG
-- wp-admin → Themes → Theme Details → version reads `1.4.0`
+- wp-admin → Themes → Theme Details → version reads `1.5.0`
 
 ### Common deploy regressions to avoid (learned 2026-05-05)
 | Mistake | Symptom | Prevention |
