@@ -2,8 +2,8 @@
  "updated": "2026-06-11",
  "items": [
   {
-   "t": "★★ #1 REVENUE GATE — DEPLOY ZIP REBUILT + verified 2026-06-11 (supersedes the 06-09 zip): form on ALL 13 pages (8 dead-end static forms replaced), one homepage-style quote section everywhere, copy pack (heading! / one-line 24hr description / Owner-run trust line / resurfacing renew-reframe), full-funnel save-as-you-go + 🔒 badge, 182 nbsp glue points + text-wrap, logo strip on homepage + 10s auto-step (Allan's call, ACL advice on record), trust-strip section removed, section-2B sliders uncapped, gap fixes. READY TO UPLOAD: wp-admin Upload (Replace) -> Cloudflare Purge -> hard-refresh -> live e2e (submit -> GHL Contact + Opp Stage 1 + Slack #quotes-in). done=true after live test.",
-   "done": false
+   "t": "★★ #1 REVENUE GATE — DEPLOY ZIP REBUILT + verified 2026-06-11 (supersedes the 06-09 zip): form on ALL 13 pages (8 dead-end static forms replaced), one homepage-style quote section everywhere, copy pack (heading! / one-line 24hr description / Owner-run trust line / resurfacing renew-reframe), full-funnel save-as-you-go + 🔒 badge, 182 nbsp glue points + text-wrap, logo strip on homepage + 10s auto-step (Allan's call, ACL advice on record), trust-strip section removed, section-2B sliders uncapped, gap fixes. READY TO UPLOAD: wp-admin Upload (Replace) -> Cloudflare Purge -> hard-refresh -> live e2e (submit -> GHL Contact + Opp Stage 1 + Slack #quotes-in). done=true after live test. ✅✅ LIVE E2E PASSED 2026-06-11: theme deployed (timeless-theme-2 active, cache rules fixed), test lead fired via the W1 pipeline (Cloudinary photo + webhook 200) -> Allan confirmed GHL Contact + Opp Stage 1 + Slack #quotes-in. THE FORM IS LIVE AND TAKING LEADS.",
+   "done": true
   },
   {
    "t": "⚖️ LEGAL GATE (parallel, hard) — AU employment-lawyer Fair-Work classification review before ANY real sub is engaged (s15AA; survives Mar-2026 ATO/FWO construction clampdown; not a Part-3A platform). Marko self-performs jobs 1-3 while this clears. Route: expand-Sprintlaw vs specialist — Allan to decide.",
