@@ -119,7 +119,7 @@ This folder lives under `assets/brand/` but is **NOT excluded** from the theme z
 
 ```bash
 # Add a new logo variant
-cp ~/Downloads/logo-final.svg /Users/angelapham/Downloads/timeless-theme-wp/assets/brand/logo/
+cp ~/Downloads/logo-final.svg /Users/excluding/Downloads/timeless-theme-wp/assets/brand/logo/
 
 # Stage + commit
 git add assets/brand/logo/logo-final.svg

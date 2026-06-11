@@ -58,3 +58,4 @@ images/**/*-[0-9]*w.png.webp
 
 # Stray root deno.lock (the canonical lock lives in contractor-app/supabase/functions/)
 /deno.lock
+contractor-app/supabase/.temp/

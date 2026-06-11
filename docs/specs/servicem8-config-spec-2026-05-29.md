@@ -5,6 +5,8 @@
 **Sources:** (1) Clifford web searches, (2) Cleo Jordan-transcripts + reasoning (`/tmp/cleo-sm8-deep-research-2026-05-29-output.txt`), (3) general-purpose deep agent (SM8 API `developer.servicem8.com/llms.txt` + help docs + Make docs + forums)
 **Next audit:** post-Customer-#1 SM8 live run
 
+> ⚠️ **SUPERSEDED-IN-PART 2026-06-08 (no-contact rule):** the **Job Contact (`jobcontact.json`)** object below is **NO LONGER the home for customer contact.** Per `decision-sm8-keep-vs-build-2026-06-05.md` + the Make Scenario 1 strip-contact change (DONE + verified live 2026-06-07), **customer phone/email NEVER land on the SM8 job** — subs see **NAME + ADDRESS only**, the `Add Job Contact` Make module is DROPPED, and customer comms fire from **GHL/Twilio**. Treat any "Job Contact / Create Job Contact" reference in §1 / the Make-modules list below as **historical** (the API object still exists; we just don't write customer contact to it). Everything else here (categories, queues, badges, job materials, field config) remains canonical.
+
 ---
 
 ## §1 — SM8 data model (API-confirmed cardinality)

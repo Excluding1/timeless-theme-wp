@@ -16,6 +16,13 @@
    based on what's actually used in the content config (page-templates/*.php, js/*.js, etc.) */
 @import 'tailwindcss';
 
+/* Explicit cascade layer order — REQUIRED so utilities beat base layer's preflight reset
+   (e.g. utility .py-4 must beat base's `* { padding: 0 }`). Without this declaration,
+   cssnano in production builds was stripping the implicit order Tailwind sets via @import,
+   causing utilities to silently lose to the base reset on real pages.
+   Bug surfaced 2026-05-04: nav was 36px tall instead of ~80px because py-4 was being beaten. */
+@layer theme, base, components, utilities;
+
 @config '../tailwind.config.js';
 
 /*

@@ -261,7 +261,7 @@ Already in `.gitignore`:
 ### Local development
 ```bash
 # Start local WordPress (in your own Terminal — keeps running)
-cd /Users/angelapham/Downloads/timeless-theme-wp
+cd /Users/excluding/Downloads/timeless-theme-wp
 npx @wp-now/wp-now start --port=8881
 
 # Open browser
@@ -286,14 +286,14 @@ npm run build:dev
 
 ### Theme zip for deploy
 ```bash
-cd /Users/angelapham/Downloads/timeless-theme-wp
+cd /Users/excluding/Downloads/timeless-theme-wp
 zip -r ../timeless-theme.zip . \
   -x ".git/*" -x ".gitignore" -x "node_modules/*" \
   -x "package*.json" -x "postcss.config.js" \
   -x "tailwind.config.js" -x "src/*" \
   -x "AUDIT.md" -x "BUILD.md" -x "WORKFLOW.md" -x "CHANGELOG.md" \
   -x "CLAUDE.md" -x "HANDOFF.md" -x ".DS_Store" \
-  -x ".claude/*" -x ".playwright-mcp/*" \
+  -x ".secrets/*" -x ".claude/*" -x ".playwright-mcp/*" \
   -x "homepage-mobile-full.png" -x "vanity-desktop-full.png" \
   -x "thesis-*.png"
 ```
@@ -392,7 +392,7 @@ When we change a process or rule, we record it here so we know WHY in 6 months.
 ```bash
 pkill -f wp-now
 rm -rf ~/.wp-now/wp-content/database
-cd /Users/angelapham/Downloads/timeless-theme-wp
+cd /Users/excluding/Downloads/timeless-theme-wp
 npx @wp-now/wp-now start --port=8881
 ```
 Fresh WordPress install, theme auto-activates, all 27 pages recreated. No effect on live site.

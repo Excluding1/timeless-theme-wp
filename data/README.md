@@ -34,7 +34,7 @@ data/
 
 | File | Source | Date | Use case |
 |---|---|---|---|
-| TBC: `MASTER_PRICING_v1.xlsx` (currently external at `/Users/angelapham/Downloads/MASTER_PRICING_UPDATED 111.xlsx`) | Allan's authoritative pricing schedule | TBD | 140 SKUs T1/T2/T3 tiers — feeds quote tier templates |
+| TBC: `MASTER_PRICING_v1.xlsx` (currently external at `/Users/excluding/Downloads/MASTER_PRICING_UPDATED 111.xlsx`) | Allan's authoritative pricing schedule | TBD | 140 SKUs T1/T2/T3 tiers — feeds quote tier templates |
 
 **Recommendation (CEO):** move MASTER_PRICING.xlsx into this folder + commit. Otherwise if Allan's laptop dies, the only authoritative pricing source is gone. ASK ALLAN before moving.
 

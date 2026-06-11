@@ -4,7 +4,7 @@
   "private": true,
   "description": "Build pipeline for Timeless Resurfacing WordPress theme. Compiles Tailwind CSS locally to replace CDN.",
   "scripts": {
-    "build": "postcss src/main.css -o assets/main.min.css --env production",
+    "build": "postcss src/main.css -o assets/main.min.css --env production && node -e \"const f='assets/main.min.css';const s=require('fs').readFileSync(f,'utf8');if(!s.includes('@layer theme,base,components,utilities')){require('fs').writeFileSync(f,'@layer theme,base,components,utilities;'+s);console.log('Injected @layer order declaration');}\"",
     "watch": "postcss src/main.css -o assets/main.min.css --env development --watch",
     "build:dev": "postcss src/main.css -o assets/main.css --env development"
   },

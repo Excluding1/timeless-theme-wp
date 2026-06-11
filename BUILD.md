@@ -100,9 +100,9 @@ The theme zip workflow is unchanged. After making changes:
 2. Verify the change locally if possible
 3. Re-zip the theme:
    ```bash
-   cd /Users/angelapham/Downloads/timeless-theme-wp
+   cd /Users/excluding/Downloads/timeless-theme-wp
    zip -r ../timeless-theme.zip . -x ".git/*" "node_modules/*" "AUDIT.md" "BUILD.md" \
-     "CLAUDE.md" "HANDOFF.md" ".DS_Store" ".claude/*" ".playwright-mcp/*" \
+     "CLAUDE.md" "HANDOFF.md" ".DS_Store" ".secrets/*" ".claude/*" ".playwright-mcp/*" \
      "package*.json" "postcss.config.js" "tailwind.config.js" "src/*"
    ```
 4. Upload via wp-admin → Appearance → Themes → Replace
