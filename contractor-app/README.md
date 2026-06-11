@@ -37,12 +37,12 @@
 - **Push:** Web Push + VAPID via FCM HTTP v1 · **Hosting:** Vercel (PWA) + Supabase (backend)
 
 ## Build phases (~3–4 wk, AI-assisted)
-- [ ] **1. Foundation** — Supabase up · schema migrated (`supabase/migrations/0001_init_schema.sql` ✅ written) · SM8 key as Edge secret · Edge Fn does authed SM8 `GET job.json` · webhook receiver re-GETs → writes `job_mirror` (contact-filtered). *Read path live.*
-- [ ] **2. App core** — Vite PWA installable · Supabase Auth (per-sub login) · `GET /my/jobs` + detail w/ RLS · list+detail UI
-- [ ] **3. Accept/Decline (spine)** — state machine · `/accept` `/decline` · audit_log · SM8 badge/queue mirror · Fair-Work guardrails · **multi-sub: N assignments per job**
-- [ ] **4. Photos + Complete** — resumable IndexedDB→Storage · server worker SM8 2-step attach via rate governor · `/complete` (with the **all-parts-done roll-up** → SM8 Completed) · `/problem`
-- [ ] **5. Notifications** — Web Push (VAPID/FCM) on `offered` · Make SMS fallback · pgmq + pg_cron rate governor + polling fallback
-- [ ] **6. Test + Security** — E2E · **automated contact-leak assertion (no sub endpoint ever returns phone/email → fail build)** · webhook dedup/replay · rate soak · JWT/RLS · Fair-Work copy review
+- [x] **1. Foundation** — ✅ **DEPLOYED LIVE 2026-06-09** (`84a88f2`) — Supabase up · schema migrated · SM8 key as Edge secret · authed SM8 `GET job.json` · webhook receiver re-GETs → writes `job_mirror` (contact-filtered). *Read path live + verified e2e.*
+- [x] **2. App core** — ✅ **DEPLOYED 2026-06-09** (`d7bb48e` backend + `59ee0ba` frontend) — PWA installable · per-sub Auth + RLS · `my-jobs` + detail · real login + real jobs proven.
+- [x] **3. Accept/Decline (spine)** — ✅ **DEPLOYED 2026-06-09** (`ba71db1`) — accept/decline/availability/handback/complete state machine, ownership-isolated, Fair-Work guardrails. ⏳ Residual: **accept→SM8 queue-move write-back** waits ONLY on Marko's "which queue = booked" taxonomy.
+- [x] **4. Photos + Complete** — ✅ **SM8 write-back LIVE 2026-06-09** (`7762bf4`: complete→SM8 Completed, atomic RPC + durable outbox + reconcile drain).
+- [ ] **5. Notifications** — Web Push (VAPID/FCM) on `offered` · Make SMS fallback · pgmq + pg_cron rate governor + polling fallback *(interim today: Make→Twilio SMS)*
+- [ ] **6. Test + Security** — contact-leak CI assertion ✅ already in place; remaining: final E2E · webhook dedup/replay soak · JWT/RLS review · Fair-Work copy review — before first real sub (legal-gated)
 
 ## Allan setup checklist (in order)
 1. **Supabase project** — Sydney `ap-southeast-2`, **Pro $25/mo** (Free pauses when idle = unacceptable for a live field app). ← **DO THIS FIRST**

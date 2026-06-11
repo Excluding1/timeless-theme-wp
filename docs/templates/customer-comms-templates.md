@@ -34,10 +34,12 @@ Per ACMA guidance:
 **Type:** Transactional | **Workflow:** W1
 
 ```
-Thanks {{contact.first_name}}! We've got your bathroom photos and we're reviewing them now. You'll have your quote within 2 hours. 📱
+Thanks {{contact.first_name}}! We've got your bathroom photos and we're reviewing them now. You'll have your quote within 24 hours. 📱
 
 - Timeless Resurfacing
 ```
+
+> ⚠️ **SUPERSEDED IN PRACTICE (2026-06-12):** the LIVE W1 ack is the Cleo-approved 24-hour pack already pasted in GHL (see memory/pending_copy_packs_2026-06-12.md §3) — "within 2 hours" was never shipped; locked promise = **within 24 hours** (FAQs deliberately say 1 business day).
 
 **Psychology:** Speed sets expectation + proves responsiveness. Commitment validates form effort immediately. (Industry data: 78% of leads choose first responder.)
 
@@ -114,7 +116,7 @@ That's a fraction of the cost of a full reno. Lock in your date with a small ${{
 ```
 [HEADER — above the fold]
 Logo (left) + "Your Bathroom Quote" (centre)
-Subline: "Fixed price. No surprises. Valid 7 days."
+Subline: "Fixed price. No surprises. Valid 14 days."  <!-- 14 days per CEO.md quote-validity lock; was 7 -->
 
 [THEIR PHOTO]
 Display Photo 1 from their submission.
@@ -136,7 +138,7 @@ Yours is done for a fraction of that, in just one day."
 [3 BULLETS — what's included]
 ✅ All labour + professional-grade materials
 ✅ Ready to use within 24-48 hours
-✅ Written guarantee on all work
+✅ Up to 5-year workmanship warranty (per service)  <!-- "written/in writing" banned site-wide 2026-06-11; cert delivery TBD -->
 
 [HOW IT WORKS — 3 steps]
 1️⃣ Pay a small 10% deposit (${{custom.deposit_amount}})
@@ -150,7 +152,7 @@ Yours is done for a fraction of that, in just one day."
 "Questions? Just reply to this email or text us on [phone]"
 
 Timeless Resurfacing | ABN [XXX XXX XXX] | [phone]
-"This quote is valid for 7 days from today"
+"This quote is valid for 14 days from today"
 Your rights under Australian Consumer Law are not affected.
 Unsubscribe | Privacy Policy
 ```

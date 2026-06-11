@@ -93,8 +93,8 @@
           "done": true
         },
         {
-          "title": "SCENARIO 1 FULL LOOP PROVEN 2026-06-07 (SM8 API): job #14 Jordan Faketest = name + address ('42 Test Street Bondi') only, NO phone/email, NO contact record, + Sheet logged full_address. PASSED: secret-gate, dedup, dup-error, no-contact-leak, ADDRESS-flows (form W1 → GHL address1 → Make → SM8+Sheet). Form client-wiring AUDITED + live-tested correct (property_address lands). NEXT (minor) = fail-recover/Slack-proof + publish GHL 'Create Job on Stage 11' workflow. BIG GAP = deploy the wired form (live homepage still = preview stub → real leads come through bare). find-or-create CLIENT deferred ~job 5. Roadmap: docs/specs/FINALIZATION-ROADMAP-2026-06-07.md",
-          "done": false
+          "title": "SCENARIO 1 FULL LOOP PROVEN 2026-06-07 (SM8 API): job #14 Jordan Faketest = name + address ('42 Test Street Bondi') only, NO phone/email, NO contact record, + Sheet logged full_address. PASSED: secret-gate, dedup, dup-error, no-contact-leak, ADDRESS-flows (form W1 → GHL address1 → Make → SM8+Sheet). Form client-wiring AUDITED + live-tested correct (property_address lands). RESOLVED 2026-06-11: GHL stage-11 workflow PUBLISHED + heartbeat ×5 passed incl. #new-jobs ping (TEST5); form DEPLOYED + live e2e passed (the old 'BIG GAP' lines were closed on launch day). find-or-create CLIENT deferred ~job 5. Roadmap: docs/specs/FINALIZATION-ROADMAP-2026-06-07.md",
+          "done": true
         },
         {
           "title": "Helper (UUID cache) — FOLDED + simplified 2026-06-07: reuse the existing sm8_jobs data store (already holds opp_id↔sm8_job_uuid via 'Mark created'); NO separate index needed (Allan caught the over-engineering). Back-sync searches sm8_jobs directly.",
@@ -216,25 +216,25 @@
     },
     {
       "id": "deploy",
-      "title": "Deploy theme live ($10M + audit fixes)",
+      "title": "Deploy theme live — ✅ DONE 2026-06-11 (timeless-theme-2 active; form on 13 pages; live e2e passed; both caches purged + CF cookie rule fixed)",
       "phase": "Sprint",
-      "status": "todo",
+      "status": "done",
       "subtasks": [
         {
           "title": "Build deploy zip (bulletproof exclusions incl. cockpit/*)",
-          "done": false
+          "done": true
         },
         {
           "title": "Upload via wp-admin (Replace current with uploaded)",
-          "done": false
+          "done": true
         },
         {
           "title": "Purge Cloudflare cache (Purge Everything)",
-          "done": false
+          "done": true
         },
         {
           "title": "Verify $10M live on /about + /terms; cache-bust timestamps OK",
-          "done": false
+          "done": true
         }
       ]
     },

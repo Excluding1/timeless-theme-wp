@@ -264,13 +264,13 @@ I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record.
 | Hard runway at current burn | ~41 months — but irrelevant once we add GHL and ads |
 | Hard runway from May 27 (no revenue, no ads) | **~9 months** |
 | Hard runway from May 27 (with $20/day Google Ads, no revenue) | **~2.5 months** |
-| Critical date | ~~**2026-05-27** — GHL paid kicks in~~ **SUPERSEDED 2026-05-16 by F3 LOCK** — GHL is PAID $155 AUD/mo (trial closed). No forcing date — sprint pace per Day 1-N task checklist. Current Customer #1 quote in progress 2026-05-26. |
+| Critical date | ~~**2026-05-27** — GHL paid kicks in~~ **SUPERSEDED 2026-05-16 by F3 LOCK** — GHL is PAID $155 AUD/mo (trial closed). No forcing date — sprint pace per Day 1-N task checklist. **FIRST REAL CUSTOMER: Lisa Vruwink (organic, completed form 2026-06-11) — quote due 2026-06-12 under the gates below (HBA <$5k, $300 floor, 3-tier, 10% deposit, 14-day validity).** |
 
 ### Build state
 | Asset | State | Live revenue impact |
 |---|---|---|
 | WordPress site + 19 service pages | ✅ Live | Critical — front door |
-| Quote form | ✅ **v10 GHL-wired** — W1/W2 webhooks + secret_token + Cloudinary (commit 2300503). ~~95% — REPLACE_ME webhooks block GHL~~ resolved 2026-05-21. | Live deploy pending (sprint Day 2). |
+| Quote form | ✅ **LIVE on the real site 2026-06-11** — v10 GHL-wired (W1/W2 + secret_token + Cloudinary), deployed on 13 pages, live e2e certified ×5, taking real leads (Lisa = first). ~~Live deploy pending~~ | LIVE — the front door is open. |
 | Pricing schedule (140 SKUs) | ✅ Drafted | Useful, but unproven on real customer yet |
 | Google Business Profile | ✅ Set up | Will drive first organic leads |
 | GHL CRM | ✅ **PAID** $155 AUD/mo (F3 LOCK 2026-05-16; trial closed). Sales pipeline 15 stages Jordan-exact LIVE per Override 14 v4. | Live. |

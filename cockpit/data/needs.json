@@ -1,6 +1,26 @@
 {
- "updated": "2026-06-11",
+ "updated": "2026-06-12",
  "items": [
+  {
+   "t": "★★ #1 TODAY — QUOTE LISA VRUWINK (first real customer; promised 'tomorrow' on 06-11 night = DUE NOW). Gates (CEO.md): <$5k inc-GST per bathroom (HBA) · 3-tier T1/T2/T3 · $300 margin floor (hard) · 10% deposit · 14-day validity · never 'Licensed'. Deliver via SMS (her thread is SMS; DKIM not ready — DNS verified 06-12: SPF ✅, DMARC ✅ p=none, Google DKIM ❌, GHL sending domain ❌). Needs from Allan: her GHL form details/photos + GST-registered yes/no (changes 'inc GST' wording).",
+   "done": false
+  },
+  {
+   "t": "★ #2 SAME-DAY — DEPOSIT PATH: Stripe payment link (10% of accepted quote) + GHL booking-confirm message. Lisa's 'yes' currently has nowhere to land. Then: manual Xero invoice SOP (Clifford drafts).",
+   "done": false
+  },
+  {
+   "t": "#3 — Test-data purge: SM8 ~14 test jobs (Marko) + GHL TEST1-5 contacts/opps + Allan's self-test partial (Allan).",
+   "done": false
+  },
+  {
+   "t": "#4 — GA4 ID + Search Console + sitemap (Allan, ~15 min) · W3 cadence 3 SMS pastes + privacy-paragraph 'yes' (paste-ready in memory/pending_copy_packs_2026-06-12.md) → then rebuild timeless-theme-2.zip · Customizer email/ABN check · one phone-browser form submit (proves real-number ack SMS).",
+   "done": false
+  },
+  {
+   "t": "#5 — Email plumbing (this week, post-Lisa): enable Google Workspace DKIM (admin.google.com → Apps → Gmail → Authenticate email → TXT in Cloudflare) + create quotes@/support@/billing@ aliases + GHL dedicated sending domain. SPF already includes Google+LeadConnector+Mailgun (verified 2026-06-12).",
+   "done": false
+  },
   {
    "t": "★★ #1 REVENUE GATE — DEPLOY ZIP REBUILT + verified 2026-06-11 (supersedes the 06-09 zip): form on ALL 13 pages (8 dead-end static forms replaced), one homepage-style quote section everywhere, copy pack (heading! / one-line 24hr description / Owner-run trust line / resurfacing renew-reframe), full-funnel save-as-you-go + 🔒 badge, 182 nbsp glue points + text-wrap, logo strip on homepage + 10s auto-step (Allan's call, ACL advice on record), trust-strip section removed, section-2B sliders uncapped, gap fixes. READY TO UPLOAD: wp-admin Upload (Replace) -> Cloudflare Purge -> hard-refresh -> live e2e (submit -> GHL Contact + Opp Stage 1 + Slack #quotes-in). done=true after live test. ✅✅ LIVE E2E PASSED 2026-06-11: theme deployed (timeless-theme-2 active, cache rules fixed), test lead fired via the W1 pipeline (Cloudinary photo + webhook 200) -> Allan confirmed GHL Contact + Opp Stage 1 + Slack #quotes-in. THE FORM IS LIVE AND TAKING LEADS.",
    "done": true

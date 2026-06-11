@@ -11,7 +11,7 @@
 - ❓ Unknown — CEO needs to ask
 - 🔒 Sensitive — credentials handled separately
 
-**Last verified:** 2026-06-08 (Make Scenario 1 strip-contact DONE+verified live + Scenario 3 back-sync DONE+proven + GHL PIT write-scope verified + contractor app PULLED FORWARD/building). Prior: 2026-06-05 (SM8-keep + no-contact + data-capture sheet live)
+**Last verified:** 2026-06-12 (full-repo Pattern-C audit: site+form LIVE 06-11, pipeline certified ×5, first customer Lisa Vruwink, email-DNS state verified, board refreshed). Prior: 2026-06-08 (Make Scenario 1 strip-contact + Scenario 3 back-sync + PIT write-scope + contractor app building), 2026-06-05 (SM8-keep + no-contact + data-capture sheet live)
 **Prior verifications:** 2026-05-01 (initial), 2026-05-16 (F-LOCKs), 2026-05-21 (Day 6 sync), 2026-05-26 PM (Day 1 sprint signups + canonical updates), 2026-06-02 ($10M PL + Cloudinary correction)
 
 ---
@@ -89,7 +89,7 @@
 | WordPress admin URL | ✅ | https://timelessresurfacing.com.au/wp-admin/ | 2026-05-01 |
 | WordPress admin credentials | 🔒 | Allan has, Marko ❓ | — |
 | WordPress theme | ✅ | Custom — `timeless-theme-wp/` repo at https://github.com/Excluding1/timeless-theme-wp | 2026-05-01 |
-| Theme on live site | ✅ Verified | `timeless-theme-1` loading from /wp-content/ — latest deployed | 2026-05-01 verified |
+| Theme on live site | ✅ Verified | **`timeless-theme-2`** active (v1.5, deployed 2026-06-11; stale copies deleted). Deploy zip MUST be named `timeless-theme-2.zip` (CLAUDE.md runbook) | 2026-06-11 verified |
 | WP pages on live | ✅ ~37 pages | Per sitemap.xml: home + 7 main + 19 service pages + 10 suburb (bath-resurfacing) + faqs + sydney + privacy | 2026-05-01 verified |
 | WP Customizer phone | ✅ 0451 110 154 | Allan confirmed + curl verified | 2026-05-01 |
 | WP Customizer email | ❓ | CEO to verify | — |
@@ -115,12 +115,12 @@
 | Homepage (front-page.php) | ✅ Live | Hero slider, services grid, FAQ | 2026-05-01 |
 | 19 service landing pages | ✅ Live | `page-templates/page-*-sydney.php` | 2026-05-01 |
 | Page templates by service | ✅ | shower-regrouting, bath-resurfacing, tile-resurfacing, etc | 2026-05-01 |
-| Privacy policy page | ❓ | CEO to verify exists at /privacy/ | — |
-| Terms of service page | ❓ | CEO to verify | — |
-| About page | ❓ | CEO to verify | — |
-| Contact page | ❓ | CEO to verify | — |
+| Privacy policy page | ✅ Live | /privacy/ live (62-URL audit 2026-06-11). ⏳ 3 approved-pending paragraphs (sub-disclosure, records, AI use) await Allan's "privacy yes" — text in memory/pending_copy_packs_2026-06-12.md | 2026-06-11 |
+| Terms of service page | ✅ Live | /terms/ live; Allan has WIP edits in local working tree (uncommitted page-terms.php) | 2026-06-11 |
+| About page | ✅ Live | Allan WIP edits local (page-about.php) | 2026-06-11 |
+| Contact page | ✅ Live | Part of 62-URL audit pass | 2026-06-11 |
 | 404 page | ✅ | Custom 404.php | 2026-05-01 |
-| Quote form embed location | ❓ | CEO to verify which pages have it | — |
+| Quote form embed location | ✅ 13 pages | Homepage + sydney + 11 service pages via `[timeless_quote_form]` shortcode | 2026-06-11 |
 | Mobile responsive | ✅ Tested | Per past audits | 2026-05-01 |
 
 ---
@@ -155,7 +155,7 @@
 | Stripe | ✅ **LIVE** | Production mode active since May 2 2026, verified 2026-05-26 ("all green no banner"). Card + PayTo enabled (Zip skipped). |
 | ServiceM8 | ✅ **Starter trial active — KEPT as field-service backbone** | Signed up 2026-05-26 with 50% off 12mo promo; trial converts to $14.50/mo at Day 14. Override 2 superseded by Decision 12 v2. **KEEP decision LOCKED 2026-06-05** ([decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)) — do NOT build a replacement. **Pricing = per-JOB, UNLIMITED users** (the "per-staff/per-seat" assumption is STALE). **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05:** subs via the **Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; the app's own logged accept/decline); subs = app users, NOT SM8 Staff (Staff seats only for Marko/Allan/genuine employees); own ABN + ≥$10M PL gate. **SM8 Network = app-less interim/fallback only** — see [decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md). |
 | Custom contractor-VIEW app | 🔨 **BUILDING — PULLED FORWARD 2026-06-08** (Allan: 1 job/wk = build window; supersedes "scheduled LAST") | A **separate, fresh** React PWA giving subs a NAME+ADDRESS-only view of offered jobs (accept/decline, availability, photos, complete), mediated by our backend (Supabase BFF/token-broker, sole SM8 key-holder). A **VIEW on the same SM8+GHL+Sheet data — ZERO migration**, NOT an SM8 replacement. **v1 feature set LOCKED + schema scaffolded** (`contractor-app/` — README + migration 0001). Next = Phase 1 backend (Supabase project). Specs: [blueprint](specs/contractor-app-blueprint-2026-06-05.md) + `contractor-app/README.md`. |
-| Supabase (contractor-app backend) | ✅ **DEPLOYED + verified live 2026-06-09** | Ref `vyhtazylezuifxqlrnyw` · URL https://vyhtazylezuifxqlrnyw.supabase.co · Free tier (build phase, no real subs/legal gate). **Region ❓ confirm Sydney `ap-southeast-2`** (Allan). anon key → `contractor-app/web/.env.local` (public/RLS-gated, safe). 🔒 **service_role + DB password + access token → `.secrets/` (pending Allan)** — never chat/git. Phase-1 backend building per `contractor-app/supabase/PHASE-1-PLAN.md`: **FULL secure-read backend BUILT + hardened + Cleo-reviewed, leak-test 10/10 green** (committed 589c8af, 2026-06-09); SSRF-guarded SM8 client + webhooks-sm8/sm8-get-job + never-410 + contact-leak CI next; then Cleo security review → deploy. |
+| Supabase (contractor-app backend) | ✅ **DEPLOYED + verified live 2026-06-09** | Ref `vyhtazylezuifxqlrnyw` · URL https://vyhtazylezuifxqlrnyw.supabase.co · Free tier (build phase, no real subs/legal gate). **Region ❓ confirm Sydney `ap-southeast-2`** (Allan). anon key → `contractor-app/web/.env.local` (public/RLS-gated, safe). 🔒 **service_role + DB password + access token → `.secrets/` (pending Allan)** — never chat/git. **Phases 1-3 + SM8 write-back DEPLOYED + proven 2026-06-09** (commits 84a88f2 Phase-1 live · d7bb48e Phase-2 auth/RLS/my-jobs · ba71db1 Phase-3 accept/decline/availability/handback/complete · 7762bf4 complete→SM8 write-back; contact-leak CI in place). Remaining: Phase 5 notifications (interim = Make→Twilio SMS) · accept→queue-move write-back (blocked ONLY on Marko's "which SM8 queue = booked" taxonomy) · Phase 6 final security review + first real sub (legal-gated). |
 | Netlify (contractor-app frontend host) | ✅ **Preview LIVE 2026-06-09** | PWA deployed via Netlify API → **https://timeless-jobs-preview.netlify.app** (site id cccfd488; installable iOS/Android; SPA redirect + manifest + sw verified 200). **Sample/mock data** (backend not wired — Phase 2). Token → `.secrets/netlify-token.key`. ⚠️ **Exposed in chat → ROTATE before go-live** (with SM8 key + GHL PIT). Same Netlify-front/Supabase-back combo as TimelessDash. |
 | Slack | ✅ Live | 6 channels (#quotes-in, #hot-leads, #pipeline-feed, #new-jobs, #job-issues, #automation-errors); +2 planned Day 2-3. |
 | Make.com | ✅ **Live — Scenarios 1 + 3 built & proven** | Make Plan $9/mo. **Scenario 1 (DONE+verified live 2026-06-07):** core + SAFETY (secret gate · opp_id dedup · error→Slack) + DATA-CAPTURE + **strip-contact = DONE** (SM8 jobs show NAME + ADDRESS only, no customer phone/email — job #14 Jordan Faketest passed; `Add Job Contact` dropped). **HEARTBEAT PASSED 2026-06-11 ×5 runs: stage-11 drag → ONE SM8 job each (name+address only, 0 contact records, dedup held) + #new-jobs Slack ping CERTIFIED (TEST5 23:5x)** — Slack module lessons: the Make bot must be /invited to the channel AND the message goes in the TEXT field (plain text in the Blocks field = invalid_blocks rejection). W1→W2 disarm fix LIVE + proven (completed forms can no longer receive the abandoned-quote SMS; the Lisa bug class is dead). — root cause of the initial silence: the scenario's 'Immediately as data arrives' toggle was OFF since the Jun-7 tests (⚠️ checklist item: verify the toggle after ANY scenario editing). **Scenario 3 back-sync = DONE+PROVEN** (SM8 Completed → GHL Stage 15, idempotent + daily keep-alive). find-or-create CLIENT deferred (internal/invoicing-only). Scenario 4 buildable; Scenario 5 deferred (billing Qs). ✅ GHL "SM8 – Create Job on Stage 11" workflow **PUBLISHED** (Allan screenshot 2026-06-11; last updated Jun 04 — the earlier "DRAFT" note was stale). ✅ **Quote form DEPLOYED + live e2e PASSED 2026-06-11** (test lead → Cloudinary + W1 webhook → GHL Contact + Opp Stage 1 + Slack #quotes-in, Allan eyewitness). |
@@ -234,7 +234,8 @@
 
 | Channel | Status | Details |
 |---|---|---|
-| hello@timelessresurfacing.com.au | ❓ | CEO to verify exists + who has access |
+| hello@timelessresurfacing.com.au | ❓ | CEO to verify exists + who has access. **quotes@/support@/billing@ aliases: ❌ not created (Allan, ~5 min in admin.google.com)** |
+| Email DNS state (verified 2026-06-12 via dig) | ⏳ Partial | MX → Google ✅ · SPF includes Google + LeadConnector + Mailgun ✅ · DMARC p=none ✅ · **Google Workspace DKIM ❌ NOT enabled** (no google._domainkey) · **GHL dedicated sending domain ❌ none**. Email quoting deferred until DKIM on; SMS = the quote channel meanwhile |
 | Allan personal email | ✅ | allanpham106@gmail.com |
 | Marko personal email | ❓ | CEO to ask |
 | Business phone | ✅ | 0451 110 154 (per saved memory) |
@@ -257,8 +258,8 @@
 | FUTURE-PLAN.md | ✅ | `docs/FUTURE-PLAN.md` — phased task checklist |
 | Specs README + form-auto-preselect | ✅ | `docs/specs/` — 1 built, 16 pending |
 | Role library README | ✅ | `docs/roles/README.md` |
-| Expert role files | ✅ | 6 built (CRO, GHL, copywriters, field ops, trades ops) |
-| Auditor role files | ✅ | 5 built (compliance, mobile-abandon, webhook, margin, fair-work) |
+| Expert role files | ✅ | 8 built (per roles/README.md:28-54 — CRO, GHL, copywriters ×2, field ops, trades ops, pricing-trade, Make-automation). ⚠️ Audit 2026-06-12: pricing-trade + conversion-copywriter = built-but-never-dispatched | 2026-06-12 |
+| Auditor role files | ✅ | 7 built (compliance, mobile-abandon, webhook, margin, fair-work, customer-fairness, general-operational). ⚠️ Audit 2026-06-12: margin-per-job + customer-fairness never formally run — run margin lens on first real quotes | 2026-06-12 |
 | Pending role files | ⏳ | 14 stubbed in roles/README, build when phase activates |
 
 ### Pre-CEO project docs (audited 2026-05-01 — disposition decided)
@@ -287,7 +288,7 @@
 | File | Type | Location |
 |---|---|---|
 | Bert/AUSTRS price list | CSV (96 lines) | `data/suppliers/austrs-bert-prices-2026-04-30.csv` |
-| Master pricing schedule | Excel (140 SKUs) | **Currently external**: `/Users/excluding/Downloads/MASTER_PRICING_UPDATED 111.xlsx` — recommend moving to `data/pricing/` per CEO Decision 2026-05-01 PM |
+| Master pricing schedule | Excel (102 SKUs, 8 sheets) | ✅ **CANONICAL: `data/pricing/master-pricing-2026-05-01-snapshot.xlsx`** (All Services & Pricing T1/T2/T3 + modifiers + travel zones + multi-bathroom + rejection criteria). Pre-audit copy archived alongside. (Old external-Downloads note resolved.) |
 | Data folder index | Markdown | [data/README.md](../data/README.md) |
 
 ---
@@ -372,7 +373,7 @@
 - ~~Allan's hours~~ → ✅ 21 hr/week
 
 ### Current ❓ priority queue
-1. **Live WP site state** — is the LATEST theme zip uploaded? Are the 25 pages created on live? Is Customizer set with real values (not placeholder phone `0400 000 000` and licence `345678C`)? **HIGH PRIORITY** — Override 1 sends customers to live site.
+1. ~~**Live WP site state**~~ ✅ RESOLVED 2026-06-11 — latest theme (v1.5, `timeless-theme-2`) live, form on 13 pages, 62-URL audit passed. Residual: Customizer email + ABN values ❓ (licence stays BLANK per Override 5).
 2. **Bert (supplier) — voice transcripts** + relationship type (materials? consultant?)
 3. **Pricing top-5 services** — T1/T2/T3 actual dollar values for margin audit
 4. **TimelessDash repo branches** — which branch holds dashboard code (vs `quote-form/react-v8`)?
@@ -386,8 +387,8 @@
 12. **TASK-D-CLOUDFLARE.md status** — commit exists, is .htaccess + Cloudflare cache config actually implemented on live?
 13. **PERFORMANCE-AUDIT-FIX-PLAN.md open items** — Tier 1 fixes done? Tier 2 deferred or done?
 14. **Logo file state** (Canva working file? Final SVG/PNG?)
-15. **www. SSL** — pending per HANDOFF; needs activation in Ventraip
-16. **HTTPS redirect** — pending per HANDOFF; needs .htaccess update
+15. ~~**www. SSL**~~ ✅ already verified (§3 row: www 301s to non-www with valid cert, 2026-05-01) — HANDOFF claim was stale
+16. ~~**HTTPS redirect**~~ ✅ already verified (§3 row: http 301s to https, 2026-05-01) — HANDOFF claim was stale
 17. ~~**Warranty text bulk update** — "2-Year" → "Up to 5-Year" in 27 files~~ **TRAP — DO NOT bulk-replace** (2026-06-02 audit, Clifford+Cleo). Live text already tier-aware/ACL-compliant per row :102. Blanket replace would over-claim silicone (1yr) + cement grout (2yr) = ACL/ACCC exposure. Re-scoped in pending-tasks list below.
 
 ### Pending tasks I now know about (from HANDOFF audit)

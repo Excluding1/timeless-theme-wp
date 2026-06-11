@@ -1,6 +1,6 @@
 # Timeless Resurfacing — WordPress Theme Session Handoff
 
-> ⚠️ **THEME-focused + partly stale (2026-05).** The CURRENT canonical state lives elsewhere: the **CEO Cockpit board** (`node cockpit/server.js` → http://localhost:4317), **`memory/SESSION_RESUME_2026-06-05.md`** (read first), and the decision docs in `docs/specs/` (esp. `decision-sm8-keep-vs-build-2026-06-05.md`, `contractor-app-blueprint-2026-06-05.md`, the `make-scenario-1-*` set). Business automation (GHL · Make · ServiceM8 · Slack · contractor sub-app) is tracked THERE, not here. **Plan order (2026-06-05): internal backbone → contractor app → launch.**
+> ⚠️ **HISTORICAL — THEME-focused, STALE below this banner (last real update 2026-05).** Do NOT act on task lists in this file (its "upload theme / create pages / SSL" items were all completed by 2026-06-11 — **site + GHL-wired quote form are LIVE and certified end-to-end; first real customer captured 2026-06-11**). CURRENT canonical state: **`docs/STATE.md`** (the authority) + the newest `memory/SESSION_RESUME_*.md` (06-12 at time of writing) + **`docs/specs/FINALIZATION-ROADMAP-2026-06-07.md`** + the CEO Cockpit board (`node cockpit/server.js` → http://localhost:4317). Kept only as the historical theme-architecture reference.
 
 ## Quick Start for New Session
 ```

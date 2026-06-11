@@ -53,7 +53,7 @@ GHL paid + **15-stage Sales pipeline live** · 6 Slack channels · **Stripe + Xe
 
 ## 2. GHL — *the customer brain: leads, comms, pipeline (Jordan's CRM)*
 - ★ **Publish "SM8 — Create Job on Stage 11"** (DRAFT → live) — gated on Scenario 1 green; heartbeat-test = exactly one SM8 job
-- ✅ **Twilio/SMS — DONE** (Twilio→GHL BYOT live since 2026-05-16; sends from +61 485 056 656; ACMA TimelessRsf approved 2026-05-17 — see STATE.md). ⚠️ **Still verify: email domain auth (DKIM/SPF/DMARC)** for email deliverability — status unconfirmed, confirm with Allan
+- ✅ **Twilio/SMS — DONE** (Twilio→GHL BYOT live since 2026-05-16; sends from +61 485 056 656; ACMA TimelessRsf approved 2026-05-17 — see STATE.md). ⚠️ **Email domain auth VERIFIED 2026-06-12 (dig):** SPF ✅ (Google+LeadConnector+Mailgun) · DMARC ✅ p=none · **Google DKIM ❌ not enabled · GHL dedicated sending domain ❌ none · quotes@ alias ❌** → quotes go by SMS until Allan flips DKIM + creates aliases (this-week task, see STATE.md §10)
 - ★ **Minimum workflows for job #1:** W1 ack · deposit (Stripe link) · booking confirm · cure-time reminder
 - **Full workflow set (trail after first job):** no-show/cancel-post-deposit · payment-fail/overdue chase (7/14/30d) · asbestos-found routing · sub-can't-attend reassign · damage/dispute · quote-expiry win-back · NPS (24h) · warranty · W2 abandoned-quote recovery
 - **Custom fields/tags completeness check** + Accounts pipeline build
