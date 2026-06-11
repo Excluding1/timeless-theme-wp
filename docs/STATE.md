@@ -22,6 +22,7 @@
 |---|---|---|---|
 | ABN — Allan | ✅ | Per saved memory | 2026-05-01 |
 | ABN — Marko | ❓ | CEO to ask | — |
+| **GST registration** | ✅ **REGISTERED** | **Allan confirmed 2026-06-12** — quotes/invoices say "inc GST"; Xero invoices must apply GST; BAS lodgement cycle applies (add to tax calendar). Resolves open design decision #3. | 2026-06-12 |
 | ABN — Pty Ltd company | ❌ | Deferred until revenue >$5K/mo for 3 months | — |
 | ASIC Business Name registration | ✅ | "Timeless Resurfacing" — 1 year, paid $45 on 2026-03-27 (per finance dashboard) | 2026-05-01 |
 | Business name renewal | ⏳ | Next due March 2027 | — |
@@ -141,7 +142,7 @@
 | autoComplete attributes | ✅ | given-name, family-name, email — fixed this session | 2026-05-01 |
 | Ventilation Q gating | ✅ | Now includes regrout services — fixed this session | 2026-05-01 |
 | Bath bt4 silicone overlap note | ✅ | Fixed this session | 2026-05-01 |
-| Form deployed to live site? | ✅ **LIVE 2026-06-11** | Theme v1.5 (timeless-theme-2) active; form on 13 pages; live e2e passed (GHL+Slack confirmed) | 2026-06-11 |
+| Form deployed to live site? | ✅ **LIVE 2026-06-11** | Theme v1.5 (timeless-theme-2) active; form on 13 pages; live e2e passed (GHL+Slack confirmed). **Mobile-handoff (desktop→phone QR) zip re-uploaded — Allan confirmed 2026-06-12 → handoff LIVE** | 2026-06-12 |
 | Google Ads conversion fires on thank-you page | ❓ | Need to verify when Google Ads is set up | — |
 
 ---
