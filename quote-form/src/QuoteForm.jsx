@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { resolveQuote } from "./lib/pricing-resolver";
+import QRCode from "qrcode-svg";
 
 /* ═══════════════════════════════════════════════
    TIMELESS RESURFACING, QUOTE FORM v10
@@ -162,9 +163,23 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
 }
 
 /* ─── SERVICE OPTIONS PER AREA (trade name on top, plain English in parens below) ─── */
-// Feature flag: hides the "Continue on mobile" CTA + modal until the QR/SMS
-// session-transfer backend is real (see modal block + planning notes for the wiring needed).
-const ENABLE_MOBILE_HANDOFF = false;
+// Continue-on-mobile handoff (LIVE 2026-06-11): the form state travels INSIDE the link's
+// #qf= fragment (base64url JSON) - no server, no token, nothing logged; the phone decodes,
+// restores and strips the hash. Photos don't transfer (File objects) - that's the point:
+// the customer adds them on the phone. QR is generated locally (qrcode-svg), no external API.
+const ENABLE_MOBILE_HANDOFF = true;
+
+const encodeHandoffState = (state) => {
+  const json = JSON.stringify(state);
+  const b64 = btoa(unescape(encodeURIComponent(json)));
+  return b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+};
+const decodeHandoffState = (blob) => {
+  try {
+    const b64 = blob.replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(decodeURIComponent(escape(atob(b64))));
+  } catch (e) { return null; }
+};
 
 // GA4 conversion event helper. Defensive: when window.gtag isn't loaded (e.g. local dev,
 // page without GA4 snippet), this no-ops with a console.debug instead of throwing. WordPress
@@ -705,9 +720,16 @@ export default function QuoteForm() {
   useEffect(() => {
     if (restoredOnce.current) return; restoredOnce.current = true;
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const d = JSON.parse(raw);
+      let d = null;
+      if (window.location.hash && window.location.hash.indexOf("#qf=") === 0) {
+        d = decodeHandoffState(window.location.hash.slice(4));
+        if (d) { try { window.history.replaceState(null, "", window.location.pathname + window.location.search); } catch (e) { /* ignore */ } }
+      }
+      if (!d) {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        d = JSON.parse(raw);
+      }
       if (typeof d.fn === "string") setFn(d.fn);
       if (typeof d.ln === "string") setLn(d.ln);
       if (typeof d.ph === "string") setPh(d.ph);
@@ -742,17 +764,17 @@ export default function QuoteForm() {
       if (["about", "where", "what", "services", "photos"].includes(d.step)) setStep(d.step);
     } catch { /* ignore */ }
   }, []);
+  const buildPersistState = () => ({
+    fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm,
+    addrOk, prop, lift, bathroomCount, bathroomIndex, builtBefore1990,
+    selectedAreas, fullBathroomMode, fullScope, fullBathroomInventory, fullAreaServices,
+    notSureMode, notSureText, areaServices, epoxyMode, chipRepairAddon,
+    basinFinish, basinCustomSurfaces, notes, prevResurfaced, hasVentilation, step,
+  });
   useEffect(() => {
     const t = setTimeout(() => {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({
-          fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm,
-          addrOk, prop, lift, bathroomCount, bathroomIndex, builtBefore1990,
-          selectedAreas, fullBathroomMode, fullScope, fullBathroomInventory, fullAreaServices,
-          notSureMode, notSureText, areaServices, epoxyMode, chipRepairAddon,
-          basinFinish, basinCustomSurfaces, notes, prevResurfaced, hasVentilation, step,
-        }));
-      } catch { /* ignore */ }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(buildPersistState())); }
+      catch { /* ignore */ }
     }, 500);
     return () => clearTimeout(t);
   }, [fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm, addrOk, prop, lift, bathroomCount, bathroomIndex, builtBefore1990, selectedAreas, fullBathroomMode, fullScope, fullBathroomInventory, fullAreaServices, notSureMode, notSureText, areaServices, epoxyMode, chipRepairAddon, basinFinish, basinCustomSurfaces, notes, prevResurfaced, hasVentilation, step]);
@@ -1910,7 +1932,7 @@ export default function QuoteForm() {
 
         {/* Continue-on-mobile button, gated behind ENABLE_MOBILE_HANDOFF feature flag because the QR + SMS
             backend (session-token + state-save API + Twilio/GHL SMS) is not yet wired. Cleo audit 2026-05-05. */}
-        {ENABLE_MOBILE_HANDOFF && (
+        {ENABLE_MOBILE_HANDOFF && typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches && (
           <button type="button" onClick={() => { setShowMobileModal(true); setSmsSent(false); setLinkCopied(false); }}
             style={{ width: "100%", padding: "10px 14px", marginBottom: 12, borderRadius: 10, border: `1.5px solid ${C.acc}`, background: `${C.acc}15`, color: C.accDk, fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
             <span style={{ fontSize: 16 }}>📱</span>
@@ -2098,15 +2120,14 @@ export default function QuoteForm() {
         <p style={{ textAlign: "center", marginTop: 4, fontSize: 10, color: C.sec, lineHeight: 1.5 }}>By submitting, you agree we&rsquo;ll contact you about this quote. Your details are handled per our <a href="https://timelessresurfacing.com.au/privacy/" target="_blank" rel="noopener noreferrer" style={{ color: C.pri, textDecoration: "underline" }}>Privacy Policy</a>.</p>
       </>}
 
-      {/* ═══ CONTINUE-ON-MOBILE MODAL, skeletal Phase 2 feature ═══
-          UI only. The QR points at a fake URL (/?qf=stub). The "Send SMS" button shows a "coming soon"
-          confirmation but doesn't actually send. Production wiring needs:
-          1. POST /wp-json/timeless/v1/quote-state, save state, return UUID token (24hr WP transient)
-          2. GET /wp-json/timeless/v1/quote-state/{token}, fetch state on mobile resume
-          3. POST /wp-json/timeless/v1/quote-state/{token}/sms, send SMS via Twilio/GHL using phone in state
-          4. Form rehydrates from URL ?qf=token on mount if present
-          5. QR rendered with a self-hosted lib (qrcode-svg) instead of the api.qrserver.com stub */}
-      {ENABLE_MOBILE_HANDOFF && showMobileModal && (
+      {/* ═══ CONTINUE-ON-MOBILE MODAL (LIVE) ═══
+          The whole form state rides the link's #qf= fragment (serverless + private: fragments are
+          never sent in HTTP requests or logs). QR generated locally via qrcode-svg. Photos excluded
+          (File objects can't serialise) - the customer adds them on the phone, which is the point. */}
+      {ENABLE_MOBILE_HANDOFF && showMobileModal && (() => {
+        const handoffUrl = window.location.origin + window.location.pathname + "#qf=" + encodeHandoffState(buildPersistState());
+        const qrSvg = new QRCode({ content: handoffUrl, width: 200, height: 200, padding: 0, ecl: "M", join: true }).svg();
+        return (
         <div onClick={() => setShowMobileModal(false)} style={{ position: "fixed", inset: 0, background: "rgba(4, 21, 52, 0.55)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
           <div onClick={e => e.stopPropagation()} style={{ background: C.white, borderRadius: 14, maxWidth: 420, width: "100%", maxHeight: "90vh", overflow: "auto", padding: 20, position: "relative", boxShadow: "0 12px 40px rgba(0,0,0,0.25)" }}>
             <button type="button" onClick={() => setShowMobileModal(false)} aria-label="Close" style={{ position: "absolute", top: 12, right: 12, width: 32, height: 32, borderRadius: "50%", border: "none", background: C.surfLow, color: C.sec, fontSize: 20, lineHeight: 1, cursor: "pointer", fontWeight: 700 }}>×</button>
@@ -2122,33 +2143,26 @@ export default function QuoteForm() {
 
             {mobileModalTab === "qr" ? (
               <div style={{ textAlign: "center" }}>
-                <div style={{ display: "inline-block", padding: 16, background: C.white, border: `1px solid ${C.brd}`, borderRadius: 10 }}>
-                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Ftimelessresurfacing.com.au%2F%3Fqf%3Dstub-token-abc123" alt="QR code (skeleton, points at stub URL)" width={200} height={200} style={{ display: "block" }} />
-                </div>
-                <p style={{ fontSize: 12, color: C.sec, margin: "12px 0 4px", lineHeight: 1.5 }}>Open your phone&rsquo;s camera and point it at the code.</p>
-                <p style={{ fontSize: 10, color: C.sec, fontStyle: "italic", margin: 0 }}>Skeleton, QR points at a stub URL until backend is wired.</p>
+                <div role="img" aria-label="QR code that opens this quote on your phone" style={{ display: "inline-block", padding: 16, background: C.white, border: `1px solid ${C.brd}`, borderRadius: 10, lineHeight: 0 }} dangerouslySetInnerHTML={{ __html: qrSvg }} />
+                <p style={{ fontSize: 12, color: C.sec, margin: "12px 0 4px", lineHeight: 1.5 }}>Open your phone&rsquo;s camera and point it at the code, then tap the link.</p>
+                <p style={{ fontSize: 10, color: C.sec, margin: 0 }}>Your answers carry over. Add the photos on your phone.</p>
               </div>
             ) : (
               <div>
                 <label style={{ fontSize: 11, fontWeight: 700, color: C.sec, textTransform: "uppercase", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>Your link</label>
-                <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
-                  <input type="text" readOnly value="https://timelessresurfacing.com.au/?qf=stub-token-abc123" style={{ flex: 1, padding: "10px 12px", borderRadius: 8, border: `1.5px solid ${C.brd}`, background: C.surfLow, fontSize: 12, fontFamily: "monospace", color: C.pri, minWidth: 0 }} />
-                  <button type="button" onClick={() => { navigator.clipboard?.writeText("https://timelessresurfacing.com.au/?qf=stub-token-abc123"); setLinkCopied(true); setTimeout(() => setLinkCopied(false), 2000); }} style={{ padding: "10px 14px", borderRadius: 8, border: `1.5px solid ${linkCopied ? C.green : C.brd}`, background: linkCopied ? C.greenBg : C.white, color: linkCopied ? C.green : C.pri, fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>{linkCopied ? "✓ Copied" : "Copy"}</button>
+                <div style={{ display: "flex", gap: 6 }}>
+                  <input type="text" readOnly value={handoffUrl} style={{ flex: 1, padding: "10px 12px", borderRadius: 8, border: `1.5px solid ${C.brd}`, background: C.surfLow, fontSize: 12, fontFamily: "monospace", color: C.pri, minWidth: 0 }} />
+                  <button type="button" onClick={() => { navigator.clipboard?.writeText(handoffUrl); setLinkCopied(true); setTimeout(() => setLinkCopied(false), 2000); }} style={{ padding: "10px 14px", borderRadius: 8, border: `1.5px solid ${linkCopied ? C.green : C.brd}`, background: linkCopied ? C.greenBg : C.white, color: linkCopied ? C.green : C.pri, fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>{linkCopied ? "✓ Copied" : "Copy"}</button>
                 </div>
-
-                <div style={{ paddingTop: 14, borderTop: `1px dashed ${C.brd}` }}>
-                  <label style={{ fontSize: 11, fontWeight: 700, color: C.sec, textTransform: "uppercase", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>Or text it to your phone</label>
-                  <p style={{ fontSize: 12, color: C.sec, margin: "0 0 10px", lineHeight: 1.5 }}>We&rsquo;ll send the link via SMS to <strong style={{ color: C.pri }}>{ph || "your phone number"}</strong></p>
-                  <button type="button" onClick={() => { setSmsSent(true); setTimeout(() => setSmsSent(false), 3000); }} disabled={!ph || smsSent} style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: "none", background: smsSent ? C.green : C.pri, color: C.white, fontSize: 13, fontWeight: 700, cursor: smsSent || !ph ? "default" : "pointer", opacity: !ph ? 0.5 : 1 }}>{smsSent ? "✓ SMS sent" : !ph ? "Enter phone in Step 1 first" : "Send SMS to my phone"}</button>
-                  <p style={{ fontSize: 10, color: C.sec, fontStyle: "italic", margin: "8px 0 0", textAlign: "center" }}>Skeleton, no SMS is actually sent until backend is wired.</p>
-                </div>
+                <p style={{ fontSize: 11, color: C.sec, margin: "8px 0 0", lineHeight: 1.5 }}>Open it on your phone (email it to yourself, or AirDrop/message it). Your answers carry over.</p>
               </div>
             )}
 
-            <p style={{ fontSize: 10, color: C.sec, margin: "16px 0 0", lineHeight: 1.5, textAlign: "center" }}>Link works on the same form for 24 hours. Your progress (photos, choices) carries over.</p>
+            <p style={{ fontSize: 10, color: C.sec, margin: "16px 0 0", lineHeight: 1.5, textAlign: "center" }}>Your answers travel inside the link itself, never through a server. Photos don&rsquo;t transfer, add them on your phone.</p>
           </div>
         </div>
-      )}
+        );
+      })()}
       <p style={{ textAlign: "center", margin: "16px 0 0", fontSize: 11, color: C.sec, lineHeight: 1.5 }}>🔒 Auto-saved as you type, so nothing is lost. Private and never&nbsp;shared.</p>
     </div>
   );
