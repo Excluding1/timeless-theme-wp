@@ -25,7 +25,7 @@ GHL paid + **15-stage Sales pipeline live** · 6 Slack channels · **Stripe + Xe
 
 ## 🟡 BUILT — but NOT safe / NOT shipped
 - ✅ Make **strip-contact DONE + verified live 2026-06-07** — SM8 API confirmed jobs show name + address only (no phone/email, no contact record). *(was pending; now shipped.)*
-- ✅ **Quote form LIVE 2026-06-11** — theme v1.5 deployed (`timeless-theme-2` active), form on 13 pages, live e2e PASSED (test lead → Cloudinary + W1 webhook → GHL Contact + Opp Stage 1 + Slack #quotes-in). **First REAL lead (partial) captured within the first hour** (Lisa V., into W2). *(was: source-only/stub.)*
+- ✅ **Quote form LIVE 2026-06-11** — theme v1.5 deployed (`timeless-theme-2` active), form on 13 pages, live e2e PASSED (test lead → Cloudinary + W1 webhook → GHL Contact + Opp Stage 1 + Slack #quotes-in). **First REAL customer within the first hour: Lisa V. COMPLETED the form (details + photos in GHL; Allan eyewitness 06-11), engaged via SMS, quote due 2026-06-12.** *(was: source-only/stub.)*
 - ✅ GHL "Create Job on Stage 11" **PUBLISHED** (verified 2026-06-11 via Allan's workflow screenshot; W1/W2/W3/W6/W7 also published). Heartbeat drag-test pending.
 
 ---

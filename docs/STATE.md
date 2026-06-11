@@ -196,7 +196,7 @@
 | Network outreach lists (Allan) | ❌ Not built | Override 1 priority — target 25 contacts |
 | Network outreach lists (Marko) | ❌ Not built | Same |
 | First 3 customers booked | ❌ 0/3 | Goal by 2026-05-27 |
-| Customer database (CRM contacts) | ❌ | Empty — GHL not yet connected |
+| Customer database (CRM contacts) | ✅ LIVE | GHL connected + taking leads since 2026-06-11; **first real customer Lisa Vruwink (completed form + photos, quote due 2026-06-12)** + test contacts pending purge |
 
 ### Active customer pipeline (CONFIRMED 2026-05-01 PM)
 
