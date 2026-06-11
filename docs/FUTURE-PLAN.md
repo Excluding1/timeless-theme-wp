@@ -6,7 +6,7 @@
 
 **How to use:** Tick `[x]` as completed. Don't skip phases — each phase is a dependency for the next.
 
-**Last updated:** 2026-06-12 (audit sweep). **Supersessions since the 06-05 banner below:** contractor app PULLED FORWARD 2026-06-08 and **Phases 1-4 DEPLOYED 2026-06-09** ("scheduled LAST" is stale) · **site + GHL-wired form LIVE 2026-06-11, pipeline certified end-to-end, first real customer in funnel.** STATE.md = the authority for live-state.
+**Last updated:** 2026-06-12 (audit sweep). **Supersessions since the 06-05 banner below:** contractor app PULLED FORWARD 2026-06-08 and **Phases 1-4 DEPLOYED 2026-06-09** ("scheduled LAST" is stale) · **site + GHL-wired form LIVE 2026-06-11, pipeline certified end-to-end, first quote-form customer in funnel.** STATE.md = the authority for live-state.
 
 > **⚠️ SEQUENCING OVERRIDE (Allan 2026-06-05, see [CEO.md Override 16](CEO.md) + [decision-sm8-keep-vs-build](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** The original Phase 1→7 numbering predates the current build order. **Actual order now = internal automation backbone FIRST → custom contractor-VIEW app → launch (run real jobs).** Concretely: finish Make scenarios (Scenario 1 + strip-contact + find-or-create, then 2–5) + publish/finish GHL workflows + SM8 config (Marko as staff) + Slack alerts + deploy the GHL-wired quote form + end-to-end test → THEN build the contractor app ([blueprint](specs/contractor-app-blueprint-2026-06-05.md), scheduled LAST, before launch) → THEN dispatch real jobs. **ServiceM8 is KEPT as the field-service backbone** (NOT replaced); the app is a VIEW on the same SM8+GHL+Sheet data — zero migration. See the new **Phase 4B** below.
 

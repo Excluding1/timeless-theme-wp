@@ -264,7 +264,7 @@ I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record.
 | Hard runway at current burn | ~41 months — but irrelevant once we add GHL and ads |
 | Hard runway from May 27 (no revenue, no ads) | **~9 months** |
 | Hard runway from May 27 (with $20/day Google Ads, no revenue) | **~2.5 months** |
-| Critical date | ~~**2026-05-27** — GHL paid kicks in~~ **SUPERSEDED 2026-05-16 by F3 LOCK** — GHL is PAID $155 AUD/mo (trial closed). No forcing date — sprint pace per Day 1-N task checklist. **FIRST REAL CUSTOMER: Lisa Vruwink (organic, completed form 2026-06-11) — quote due 2026-06-12 under the gates below (HBA <$5k, $300 floor, 3-tier, 10% deposit, 14-day validity).** |
+| Critical date | ~~**2026-05-27** — GHL paid kicks in~~ **SUPERSEDED 2026-05-16 by F3 LOCK** — GHL is PAID $155 AUD/mo (trial closed). No forcing date — sprint pace per Day 1-N task checklist. **FIRST QUOTE-FORM CUSTOMER: Lisa Vruwink (first website-inbound, completed form 2026-06-11; NOT first customer overall — Marko's warm-referral customer + McGrath PM enquiry pre-date her, STATE.md §8) — quote due 2026-06-12 under the gates below (HBA <$5k, $300 floor, 3-tier, 10% deposit, 14-day validity).** |
 
 ### Build state
 | Asset | State | Live revenue impact |
