@@ -172,7 +172,7 @@
 
 | Item | Status | Details |
 |---|---|---|
-| Google Business Profile | ✅ Active | Per saved memory |
+| Google Business Profile | ✅ Active | **5+ Google reviews live** (Allan 2026-06-11 — supports the site's 4.9★ claims; verify the actual average ≈4.9 and consider wiring the real count into the guarded `timeless_get_google_reviews()` schema) |
 | GBP photos (real jobs) | ❌ | None — first job not done yet |
 | GBP regular posts | ❌ | Not started — start Week 2 |
 | Facebook Business page | ❓ | CEO to ask if exists |
