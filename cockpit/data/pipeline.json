@@ -186,7 +186,7 @@
           "title": "Operational snippet pack in GHL (the manual-send library)",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 \u2014 manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not). Mystery-shop upgrade (2026-06-13): the rejection snippet INCLUDES a referral pathway (licensed renovator / hipages direction) \u2014 Surface Care's rejection dead-ends with 'we do not know who to refer'; ours banks the goodwill.",
+          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 \u2014 manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not). Mystery-shop upgrade (2026-06-13): the rejection snippet INCLUDES a referral pathway (licensed renovator / hipages direction) \u2014 Surface Care's rejection dead-ends with 'we do not know who to refer'; ours banks the goodwill. Decision 13 (2026-06-13): rejection snippet sends as 'Timeless Resurfacing Quotes Team' role-voice (never a fake name); moves to email once DKIM is live.",
           "dod": "Every snippet sendable in 2 clicks; intake SOP written into the money-lane doc.",
           "est": "1.5 hr",
           "estH": 1.5
@@ -384,7 +384,7 @@
           "title": "Email twin-set of the whole lifecycle",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Email versions of ack, quote delivery (the 2B template \u2014 already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements).",
+          "detail": "Email versions of ack, quote delivery (the 2B template \u2014 already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements). Decision 13: rejections + M7/M8 escalations move to EMAIL (role-voiced) once this lands.",
           "dod": "Renders on Gmail+Outlook+mobile, SPF/DKIM/DMARC pass, reply route proven, screenshots archived.",
           "est": "4 hr",
           "estH": 4

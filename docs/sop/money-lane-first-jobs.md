@@ -106,6 +106,10 @@ clients don't break the URL):
 > Hi {{first_name}}, Allan here. Friendly nudge that your invoice is still open. The card link takes about
 > a minute, and if anything on the invoice looks wrong tell me and I will fix it: {{xero_invoice_link}}
 
+> **Decision 13 (2026-06-13): M7 and M8 send as "Accounts, Timeless Resurfacing" role-voice (not Allan's
+> personal sign-off, never an invented name) and move to EMAIL once DKIM is live — formal record + keeps
+> the SMS thread warm. M1-M6 stay Allan-voiced.**
+
 **M7 — day 14:**
 > Hi {{first_name}}, your invoice from {{job_date}} is now two weeks overdue. If something is holding
 > things up, reply and we will sort it together. Otherwise I would appreciate it being settled this week.
