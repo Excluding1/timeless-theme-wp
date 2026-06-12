@@ -1,89 +1,89 @@
 {
- "updated": "2026-06-12",
- "items": [
-  {
-   "t": "📋 THE CANONICAL WORK PLAN (Allan's completion-first reframe 2026-06-12): docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md — v1.0 CO-SIGNED (Cleo amendments + completeness-critic merged). Phases: 1 core pipeline (ALL GHL workflows a-s + ALL Make scenarios + form hardening incl multi-bathroom convention + quote-acceptance flow) → 2 comms/email twin-set + Terms + photo-consent → 3 money automation → 4 field/sub system + legal + AI employees → 5 data/BigQuery → 6 hardening (rotation, monitoring, backups, WP ops, CoC) → 7 E2E dry-run + FINAL AUDIT vs the 12-point pass-bar → 8 growth (GBP/blog/socials/ads) LAST. Manual ops continue throughout via money-lane SOP; two hard gates stand (legal, stage-11 deposit).",
-   "done": false
-  },
-  {
-   "t": "★★ #1 TODAY — QUOTE LISA VRUWINK (first QUOTE-FORM customer, i.e. first website-inbound — not first customer overall; promised 'tomorrow' on 06-11 night = DUE NOW). Gates (CEO.md): <$5k inc-GST per bathroom (HBA) · 3-tier T1/T2/T3 · $300 margin floor (hard) · 10% deposit · 14-day validity · never 'Licensed'. Deliver via SMS (her thread is SMS; DKIM not ready). GST = REGISTERED (Allan 06-12) so 'inc GST' wording is correct. Needs from Allan: her GHL form details/photos paste.",
-   "done": false
-  },
-  {
-   "t": "★ #2 — MONEY LANE: ✅ SOP + Cleo-approved M1-M8 message pack BUILT 2026-06-12 (docs/sop/money-lane-first-jobs.md: Stripe deposit link steps, stage-gate rule = never drag to 11 before deposit paid, Xero invoice SOP w/ GST + deposit part-payment, RG96-safe overdue cadence, refund ladder). REMAINING: Allan executes it when Lisa says yes (2-min Stripe link → M1). Automation version = after job #1.",
-   "done": false
-  },
-  {
-   "t": "#3 — Test-data purge: SM8 ~14 test jobs (Marko) + GHL TEST1-5 contacts/opps + Allan's self-test partial (Allan).",
-   "done": false
-  },
-  {
-   "t": "#4 — GA4 ID + Search Console + sitemap (Allan, ~15 min) · W3 cadence 3 SMS pastes + privacy-paragraph 'yes' (paste-ready in memory/pending_copy_packs_2026-06-12.md) → then rebuild timeless-theme-2.zip · Customizer email/ABN check · one phone-browser form submit (proves real-number ack SMS).",
-   "done": false
-  },
-  {
-   "t": "#5 — Email plumbing (this week, post-Lisa): enable Google Workspace DKIM (admin.google.com → Apps → Gmail → Authenticate email → TXT in Cloudflare) + create quotes@/support@/billing@ aliases + GHL dedicated sending domain. SPF already includes Google+LeadConnector+Mailgun (verified 2026-06-12).",
-   "done": false
-  },
-  {
-   "t": "★★ #1 REVENUE GATE — DEPLOY ZIP REBUILT + verified 2026-06-11 (supersedes the 06-09 zip): form on ALL 13 pages (8 dead-end static forms replaced), one homepage-style quote section everywhere, copy pack (heading! / one-line 24hr description / Owner-run trust line / resurfacing renew-reframe), full-funnel save-as-you-go + 🔒 badge, 182 nbsp glue points + text-wrap, logo strip on homepage + 10s auto-step (Allan's call, ACL advice on record), trust-strip section removed, section-2B sliders uncapped, gap fixes. READY TO UPLOAD: wp-admin Upload (Replace) -> Cloudflare Purge -> hard-refresh -> live e2e (submit -> GHL Contact + Opp Stage 1 + Slack #quotes-in). done=true after live test. ✅✅ LIVE E2E PASSED 2026-06-11: theme deployed (timeless-theme-2 active, cache rules fixed), test lead fired via the W1 pipeline (Cloudinary photo + webhook 200) -> Allan confirmed GHL Contact + Opp Stage 1 + Slack #quotes-in. THE FORM IS LIVE AND TAKING LEADS.",
-   "done": true
-  },
-  {
-   "t": "⚖️ LEGAL GATE (parallel, hard) — AU employment-lawyer Fair-Work classification review before ANY real sub is engaged (s15AA; survives Mar-2026 ATO/FWO construction clampdown; not a Part-3A platform). Marko self-performs jobs 1-3 while this clears. Route: expand-Sprintlaw vs specialist — Allan to decide.",
-   "done": false
-  },
-  {
-   "t": "🔐 ROTATE creds before go-live (all exposed in-session): Netlify token + 3 Supabase keys (service-role / db-password / access-token) + SM8 API key + GHL PIT. Hygiene, not a functional blocker.",
-   "done": false
-  },
-  {
-   "t": "Contractor app — accept→queue-move write-back is DEFERRED pending MARKO's dispatch-board call: which SM8 queue = 'sub accepted/booked'? (Live queues today: Workshop, Pending Quotes, Parts on Order, ACT — none means 'booked'.) Engineering is ready; only the ops taxonomy is missing.",
-   "done": false
-  },
-  {
-   "t": "Warranty headline — 3-year vs 'Up to 5-Year' for resurfacing/vanity/tile (live-site self-contradiction), + rental 6mo vs 3mo. Per-material ladder, ACL — Allan's direction before any sweep.",
-   "done": false
-  },
-  {
-   "t": "Insurance Certificate of Currency — send when ready (confirm $10M + products/sub-extension/$250K SL).",
-   "done": false
-  },
-  {
-   "t": "Trust badge wording — '$10M Insured' on all pages vs generic 'Fully Insured'?",
-   "done": false
-  },
-  {
-   "t": "Marko's email — for HIS OWN ServiceM8 Staff invite (Marko = genuine team member / Staff seat; subs are NOT Staff — they use the dispatch app).",
-   "done": false
-  },
-  {
-   "t": "Revenue model reconcile — $25K/mo ÷ 50 jobs = $500/job vs ~$1.5K AOV vs Jordan $764/job; pick one consistent model (Cleo strategic-check flag).",
-   "done": false
-  },
-  {
-   "t": "Materials model (sets EVERY resurface sub rate): subs supply own coatings (→ pay ~$650/bath to clear the $65/hr Fair-Work floor after materials) OR Timeless supplies (→ sub ~$495 + we buy ~$155)? Confirm with Marko + the first sub (open Q4).",
-   "done": false
-  },
-  {
-   "t": "Cockpit additions — which of Cleo's must-haves to build next (decision log, setup-readiness, money pulse…).",
-   "done": false
-  },
-  {
-   "t": "RESOLVED 2026-06-09: ServiceM8 6 categories created + API key in .secrets + Make Scenario 1 LIVE (revenue-build gate cleared).",
-   "done": true
-  },
-  {
-   "t": "RESOLVED: Sub-minimum PL = $10M (matches business PL; '$20M preferred' dropped).",
-   "done": true
-  },
-  {
-   "t": "RESOLVED: Make.com region = EU (eu1) confirmed live.",
-   "done": true
-  },
-  {
-   "t": "RESOLVED 2026-06-07: GHL PIT write-scope VERIFIED present (Scenarios 2-5 not blocked); still rotate before go-live.",
-   "done": true
-  }
- ]
+  "updated": "2026-06-12",
+  "items": [
+    {
+      "t": "\ud83d\udccb THE CANONICAL WORK PLAN (Allan's completion-first reframe 2026-06-12): docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md \u2014 v1.0 CO-SIGNED (Cleo amendments + completeness-critic merged). Phases: 1 core pipeline (ALL GHL workflows a-s + ALL Make scenarios + form hardening incl multi-bathroom convention + quote-acceptance flow) \u2192 2 comms/email twin-set + Terms + photo-consent \u2192 3 money automation \u2192 4 field/sub system + legal + AI employees \u2192 5 data/BigQuery \u2192 6 hardening (rotation, monitoring, backups, WP ops, CoC) \u2192 7 E2E dry-run + FINAL AUDIT vs the 12-point pass-bar \u2192 8 growth (GBP/blog/socials/ads) LAST. Manual ops continue throughout via money-lane SOP; two hard gates stand (legal, stage-11 deposit).",
+      "done": false
+    },
+    {
+      "t": "RESOLVED 2026-06-13: Lisa = ALLAN HANDLES MANUALLY (his call: ignore in all system work; he's offering a two-solution format, replace vs reglaze, not a tiered quote). No system action ever needed for her.",
+      "done": true
+    },
+    {
+      "t": "\u2605 #2 \u2014 MONEY LANE: \u2705 SOP + Cleo-approved M1-M8 message pack BUILT 2026-06-12 (docs/sop/money-lane-first-jobs.md: Stripe deposit link steps, stage-gate rule = never drag to 11 before deposit paid, Xero invoice SOP w/ GST + deposit part-payment, RG96-safe overdue cadence, refund ladder). REMAINING: Allan executes it when Lisa says yes (2-min Stripe link \u2192 M1). Automation version = after job #1.",
+      "done": false
+    },
+    {
+      "t": "#3 \u2014 Test-data purge: SM8 ~14 test jobs (Marko) + GHL TEST1-5 contacts/opps + Allan's self-test partial (Allan).",
+      "done": false
+    },
+    {
+      "t": "#4 \u2014 GA4 ID + Search Console + sitemap (Allan, ~15 min) \u00b7 W3 cadence 3 SMS pastes + privacy-paragraph 'yes' (paste-ready in memory/pending_copy_packs_2026-06-12.md) \u2192 then rebuild timeless-theme-2.zip \u00b7 Customizer email/ABN check \u00b7 one phone-browser form submit (proves real-number ack SMS).",
+      "done": false
+    },
+    {
+      "t": "#5 \u2014 Email plumbing (this week, post-Lisa): enable Google Workspace DKIM (admin.google.com \u2192 Apps \u2192 Gmail \u2192 Authenticate email \u2192 TXT in Cloudflare) + create quotes@/support@/billing@ aliases + GHL dedicated sending domain. SPF already includes Google+LeadConnector+Mailgun (verified 2026-06-12).",
+      "done": false
+    },
+    {
+      "t": "\u2605\u2605 #1 REVENUE GATE \u2014 DEPLOY ZIP REBUILT + verified 2026-06-11 (supersedes the 06-09 zip): form on ALL 13 pages (8 dead-end static forms replaced), one homepage-style quote section everywhere, copy pack (heading! / one-line 24hr description / Owner-run trust line / resurfacing renew-reframe), full-funnel save-as-you-go + \ud83d\udd12 badge, 182 nbsp glue points + text-wrap, logo strip on homepage + 10s auto-step (Allan's call, ACL advice on record), trust-strip section removed, section-2B sliders uncapped, gap fixes. READY TO UPLOAD: wp-admin Upload (Replace) -> Cloudflare Purge -> hard-refresh -> live e2e (submit -> GHL Contact + Opp Stage 1 + Slack #quotes-in). done=true after live test. \u2705\u2705 LIVE E2E PASSED 2026-06-11: theme deployed (timeless-theme-2 active, cache rules fixed), test lead fired via the W1 pipeline (Cloudinary photo + webhook 200) -> Allan confirmed GHL Contact + Opp Stage 1 + Slack #quotes-in. THE FORM IS LIVE AND TAKING LEADS.",
+      "done": true
+    },
+    {
+      "t": "\u2696\ufe0f LEGAL GATE (parallel, hard) \u2014 AU employment-lawyer Fair-Work classification review before ANY real sub is engaged (s15AA; survives Mar-2026 ATO/FWO construction clampdown; not a Part-3A platform). Marko self-performs jobs 1-3 while this clears. Route: expand-Sprintlaw vs specialist \u2014 Allan to decide.",
+      "done": false
+    },
+    {
+      "t": "\ud83d\udd10 ROTATE creds before go-live (all exposed in-session): Netlify token + 3 Supabase keys (service-role / db-password / access-token) + SM8 API key + GHL PIT. Hygiene, not a functional blocker.",
+      "done": false
+    },
+    {
+      "t": "Contractor app \u2014 accept\u2192queue-move write-back is DEFERRED pending MARKO's dispatch-board call: which SM8 queue = 'sub accepted/booked'? (Live queues today: Workshop, Pending Quotes, Parts on Order, ACT \u2014 none means 'booked'.) Engineering is ready; only the ops taxonomy is missing.",
+      "done": false
+    },
+    {
+      "t": "Warranty headline \u2014 3-year vs 'Up to 5-Year' for resurfacing/vanity/tile (live-site self-contradiction), + rental 6mo vs 3mo. Per-material ladder, ACL \u2014 Allan's direction before any sweep.",
+      "done": false
+    },
+    {
+      "t": "Insurance Certificate of Currency \u2014 send when ready (confirm $10M + products/sub-extension/$250K SL).",
+      "done": false
+    },
+    {
+      "t": "Trust badge wording \u2014 '$10M Insured' on all pages vs generic 'Fully Insured'?",
+      "done": false
+    },
+    {
+      "t": "Marko's email \u2014 for HIS OWN ServiceM8 Staff invite (Marko = genuine team member / Staff seat; subs are NOT Staff \u2014 they use the dispatch app).",
+      "done": false
+    },
+    {
+      "t": "Revenue model reconcile \u2014 $25K/mo \u00f7 50 jobs = $500/job vs ~$1.5K AOV vs Jordan $764/job; pick one consistent model (Cleo strategic-check flag).",
+      "done": false
+    },
+    {
+      "t": "Materials model (sets EVERY resurface sub rate): subs supply own coatings (\u2192 pay ~$650/bath to clear the $65/hr Fair-Work floor after materials) OR Timeless supplies (\u2192 sub ~$495 + we buy ~$155)? Confirm with Marko + the first sub (open Q4).",
+      "done": false
+    },
+    {
+      "t": "Cockpit additions \u2014 which of Cleo's must-haves to build next (decision log, setup-readiness, money pulse\u2026).",
+      "done": false
+    },
+    {
+      "t": "RESOLVED 2026-06-09: ServiceM8 6 categories created + API key in .secrets + Make Scenario 1 LIVE (revenue-build gate cleared).",
+      "done": true
+    },
+    {
+      "t": "RESOLVED: Sub-minimum PL = $10M (matches business PL; '$20M preferred' dropped).",
+      "done": true
+    },
+    {
+      "t": "RESOLVED: Make.com region = EU (eu1) confirmed live.",
+      "done": true
+    },
+    {
+      "t": "RESOLVED 2026-06-07: GHL PIT write-scope VERIFIED present (Scenarios 2-5 not blocked); still rotate before go-live.",
+      "done": true
+    }
+  ]
 }

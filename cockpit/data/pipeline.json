@@ -52,7 +52,7 @@
           "title": "Quote #1 sent-ready (Lisa, basin) under all gates + GST resolved",
           "owner": "done",
           "status": "done",
-          "detail": "3 tiers $590/$680/$760 inc GST, margin floor enforced (caught the sheet's $560 T1 breach), 14-day validity, Cleo-approved SMS. GST = REGISTERED.",
+          "detail": "3 tiers $590/$680/$760 inc GST, margin floor enforced (caught the sheet's $560 T1 breach), 14-day validity, Cleo-approved SMS. GST = REGISTERED. (2026-06-13: Allan took Lisa fully manual \u2014 two-solution format, replace vs reglaze. IGNORE her in system work.)",
           "dod": "Package delivered to Allan; sending + her reply are operational, not build work."
         }
       ]
@@ -216,7 +216,7 @@
           "title": "Quote-drafter v0 (checklist + template \u2014 pulled forward by the simulation)",
           "owner": "clifford",
           "status": "todo",
-          "detail": "The 1,000-scenario simulation showed pricing sits in 87% of all journeys, and Override 6 already says the quote-drafting agent starts with the first paying customer. v0 = a repeatable drafting kit (pricing-sheet lookup, margin-floor check, 3-tier template, gate checklist, Rule-8 send) so ANY quote takes under 10 minutes consistently. The full AI agent stays in 6.11.",
+          "detail": "The 1,000-scenario simulation showed pricing sits in 87% of all journeys, and Override 6 already says the quote-drafting agent starts with the first paying customer. v0 = a repeatable drafting kit (pricing-sheet lookup, margin-floor check, 3-tier template, gate checklist, Rule-8 send) so ANY quote takes under 10 minutes consistently. The full AI agent stays in 6.11. Format note (Allan 2026-06-13): the kit must support BOTH shapes \u2014 3-tier (the CEO.md default) AND a two-solution offer (e.g. replace vs reglaze) for damage-triage cases.",
           "dod": "Two consecutive real quotes drafted via the kit in under 10 min each, both pass the margin lens.",
           "est": "2 hr",
           "estH": 2
