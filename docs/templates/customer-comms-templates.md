@@ -15,6 +15,11 @@ These templates are **drafts derived from old Excel + Jordan-style psychology re
 3. **Custom field audit** — every `{{custom.X}}` placeholder must exist in GHL custom fields (per [ghl-pipeline-13-stage.md § Custom fields required](../specs/ghl-pipeline-13-stage.md))
 4. **Variable consistency** — use `{{contact.first_name}}`, `{{opportunity.monetary_value}}`, `{{custom.deposit_amount}}` etc consistently across all templates
 
+> ⚠️ **TIMING SUPERSESSION (2026-06-12 audit):** any "valid 7 days" / "expires day 7" wording in this file
+> (§2F Expired Quote etc.) is STALE — the locked rule is **14-day quote validity** (CEO.md Pricing §Quote
+> validity), so expiry messaging fires **day 15** (the win-back). The 72h/§2E email is NOT a W3 step — W3 is
+> SMS-only (d1/d3/d7, Cleo-approved); email variants arrive with the post-DKIM email set.
+
 ### Spam Act 2003 classification
 
 Per ACMA guidance:

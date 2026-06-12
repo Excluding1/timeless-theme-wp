@@ -51,6 +51,39 @@
   .subs{padding:4px 14px 12px 40px;display:none}.tk.open .subs{display:block}
   .sub{display:flex;gap:9px;align-items:flex-start;padding:5px 0}.sub input{margin-top:3px;accent-color:var(--gold);cursor:pointer}.sub.done span{text-decoration:line-through;color:var(--muted)}
   .addsub{color:var(--muted);font-size:12px;cursor:pointer;margin-top:6px;display:inline-block}.addsub:hover{color:var(--gold)}
+  /* pipeline (the new Task Board — explainer-style vertical flow) */
+  .pl-wrap{max-width:880px;margin:0 auto}
+  .pl-head{padding:14px 4px 6px}
+  .pl-head h1{margin:0 0 6px;font-size:20px;color:#fff}
+  .pl-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+  .pl-prog{display:flex;gap:14px;align-items:center;margin:12px 0 4px;font-size:12px;color:var(--muted)}
+  .pl-prog .bar{flex:1;height:6px;margin:0}
+  .pl-rule{margin:10px 0 18px;padding:10px 14px;border:1px solid var(--err);border-radius:10px;background:rgba(255,107,107,.08);font-size:12.5px;color:#ffd9d9;line-height:1.6}
+  .ph{margin:26px 0 0}
+  .ph-hd{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--gold);padding-bottom:6px}
+  .ph-hd h2{margin:0;font-size:16px;color:var(--gold);letter-spacing:.04em}
+  .ph-hd .ph-pct{margin-left:auto;font-size:11px;color:var(--muted)}
+  .ph-goal{color:#c8d8f5;font-size:13px;line-height:1.65;margin:8px 0 14px}
+  .step{position:relative;padding:0 0 0 34px}
+  .step:before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--line)}
+  .nd{position:relative;margin:0 0 14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .nd:before{content:'';position:absolute;left:-29px;top:14px;width:14px;height:14px;border-radius:50%;background:#0e2748;border:2px solid var(--muted)}
+  .nd.done:before{background:var(--ok);border-color:var(--ok)}
+  .nd.active:before{background:var(--warn);border-color:var(--warn);box-shadow:0 0 10px var(--warn)}
+  .nd.gated:before{background:#3a0f17;border-color:var(--err)}
+  .nd.done{opacity:.6}
+  .nd .ti2{display:flex;gap:8px;align-items:center;flex-wrap:wrap;cursor:pointer}
+  .nd .ti2 b{font-size:14px}
+  .chip{font-size:10px;font-weight:800;letter-spacing:.06em;padding:2px 8px;border-radius:10px;text-transform:uppercase}
+  .chip.allan{background:rgba(231,192,139,.16);color:var(--gold)} .chip.marko{background:rgba(92,214,160,.14);color:#5cd6a0}
+  .chip.clifford{background:rgba(127,176,255,.14);color:#7fb0ff} .chip.ceos{background:rgba(84,214,255,.13);color:var(--cleo)}
+  .chip.gate{background:rgba(255,107,107,.15);color:var(--err)}
+  .nd .dt{color:#c8d8f5;font-size:12.5px;line-height:1.65;margin:8px 0 0}
+  .nd .dod{margin-top:8px;font-size:12px;color:#9fd8b9;border-top:1px dashed #16335f;padding-top:7px}
+  .nd .dod b{color:var(--ok)}
+  .here{margin:-2px 0 10px -34px;padding-left:34px}
+  .here span{display:inline-block;background:var(--gold);color:#041534;font-weight:900;font-size:11px;letter-spacing:.1em;padding:4px 12px;border-radius:8px}
+  .nd .ck{margin-left:auto;accent-color:var(--gold);cursor:pointer;width:16px;height:16px}
   /* config */
   .cfg{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:12px}
   .cfg .ch{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line)}
@@ -90,9 +123,9 @@
     <div class="meta"><span id="dot"></span><span id="sync">connecting…</span> · <span id="sess" style="color:#5e79a8"></span></div>
   </header>
   <nav>
-    <button data-v="live" class="active">● Live</button>
+    <button data-v="live">● Live</button>
     <button data-v="crew">🚀 Crew Map</button>
-    <button data-v="board">☑ Task Board</button>
+    <button data-v="board" class="active">▼ Pipeline</button>
     <button data-v="config">⚙ Tech-Stack Config</button>
     <button data-v="stack">◰ Explainer</button>
   </nav>
@@ -100,7 +133,7 @@
   <div class="banner"><span class="lbl">▶ NEXT</span><span id="next">—</span></div>
 
   <!-- LIVE -->
-  <section class="view active" id="v-live">
+  <section class="view" id="v-live">
     <div class="grid2">
       <div class="scard"><div class="shd"><span class="who" style="color:var(--gold)">CLIFFORD</span><span class="sdot on"></span></div><div class="snow" id="cliffNow">—</div></div>
       <div class="scard"><div class="shd"><span class="who" style="color:var(--cleo)">CLEO</span><span id="cleobadge" class="badge idle">idle</span></div><div class="snow" id="cleoNow">—</div></div>
@@ -123,10 +156,17 @@
     <div class="panel" style="margin-top:12px;max-height:none"><h2>Crew roster — who's doing what</h2><div class="body" id="roster" style="padding:0"><div class="empty" style="padding:10px 14px">loading…</div></div></div>
   </section>
 
-  <!-- BOARD -->
-  <section class="view" id="v-board">
-    <div class="row" style="margin-bottom:6px"><span id="boardprog" class="age"></span><span class="addsub" onclick="addTask()">+ add task</span></div>
-    <div id="board"><div class="empty">loading…</div></div>
+  <!-- PIPELINE (the Task Board, rebuilt 2026-06-12: explainer-style, strict vertical order; DEFAULT view) -->
+  <section class="view active" id="v-board">
+    <div class="pl-wrap">
+      <div class="pl-head">
+        <h1>The Build Pipeline — work top to bottom, no jumping</h1>
+        <p id="plsrc"></p>
+        <div class="pl-prog"><span id="plprog"></span><div class="bar"><i id="plbar" style="width:0%"></i></div></div>
+        <div class="pl-rule" id="plrule"></div>
+      </div>
+      <div id="pipeline"><div class="empty">loading…</div></div>
+    </div>
   </section>
 
   <!-- CONFIG -->
@@ -157,7 +197,7 @@ async function poll(){
     SESS=await(await fetch('/api/session')).json();
     $('dot').classList.add('on');$('sync').textContent='synced '+hhmmss();$('sess').textContent=SESS.file?'session '+SESS.file.slice(0,8):'';
     const T=SESS.tasks||[]; const nxt=T.find(t=>t.status==='in_progress')||T.find(t=>t.status==='pending');
-    $('next').textContent=nxt?(nxt.activeForm||nxt.content):(T.length?'Session tasks complete.':'See Task Board.');
+    $('next').textContent=nxt?(nxt.activeForm||nxt.content):(T.length?'Session tasks complete.':'See the Pipeline tab — work top to bottom.');
     const E=SESS.events||[]; const last=E[E.length-1];
     $('cliffNow').textContent=last?cleanline(last.text):'idle';
     $('feed').innerHTML=E.length?E.slice(-16).map(ev).join(''):'<div class="empty">No activity.</div>'; const f=$('feed');f.scrollTop=f.scrollHeight;
@@ -169,27 +209,24 @@ async function poll(){
     $('cleoNow').textContent=(CLEO.status==='running')?(cl?cleanline(cl.text):'working…'):((CLEO.status==='done'&&cl)?cleanline(cl.text):'idle — runs in bursts');
     $('cfeed').innerHTML=(CFEED.events&&CFEED.events.length)?CFEED.events.slice(-16).map(ev).join(''):'<div class="empty">idle — runs in bursts</div>'; const cf=$('cfeed');cf.scrollTop=cf.scrollHeight; }catch(e){}
   try{ NEEDS=await(await fetch('/api/needs')).json(); renderNeeds(); const owe=(NEEDS.items||[]).filter(i=>!i.done).length; const nc=$('needcount'); if(nc)nc.textContent=owe+' open'; }catch(e){}
-  if(!$('v-board').classList.contains('active')){ try{ BOARD=await(await fetch('/api/board')).json(); }catch(e){} }
+  if(!$('v-board').classList.contains('active')){ try{ PIPE=await(await fetch('/api/pipeline')).json(); }catch(e){} }
   buildSummary(); buildCrew();
 }
 function ev(e){ const cls=e.kind==='tool'?'tool':e.kind==='think'?'think':(e.who==='You'?'you':'clifford');
   const who=e.kind&&e.kind!=='text'?'':`<b>${e.who||''}:</b> `;
   return `<div class="ev ${cls}" title="${esc(e.text)}"><span class="t">${clk(e.ts)}</span>${who}${esc(cleanline(e.text))}</div>`; }
-poll();setInterval(poll,3000);
+poll();setInterval(poll,3000);loadBoard();
 
 // ---------- SUMMARY ----------
 function buildSummary(){
-  const T=BOARD.tasks||[]; let s=0,d=0; T.forEach(t=>(t.subtasks||[]).forEach(x=>{s++;if(x.done)d++;}));
-  const doing=T.filter(t=>{const ss=t.subtasks||[];const dd=ss.filter(z=>z.done).length;return (ss.length&&dd<ss.length&&dd>0)||t.status==='doing';}).map(t=>t.title);
-  const next=T.find(t=>t.status==='todo'); const owe=(NEEDS.items||[]).filter(i=>!i.done);
+  const c=plCounts(); const open=firstOpen(); const owe=(NEEDS.items||[]).filter(i=>!i.done);
   const out=[];
-  out.push(`<b>Progress:</b> ${d}/${s} sub-tasks done across ${T.length} tasks.`);
-  if(doing.length) out.push(`<b>In progress now:</b> ${esc(doing.slice(0,3).join('; '))}.`);
-  if(next) out.push(`<b>Next up:</b> ${esc(next.title)}.`);
+  out.push(`<b>Pipeline:</b> ${c.d}/${c.t} steps done (${c.t?Math.round(c.d/c.t*100):0}%).`);
+  if(open) out.push(`<b>Next step (work in order):</b> ${esc(open.item.id)} · ${esc(open.item.title)}.`);
   out.push(`<b>Waiting on you:</b> ${owe.length} item${owe.length===1?'':'s'}${owe.length?` — top: ${esc(owe[0].t)}`:''}.`);
   out.push(`<b>Cleo:</b> ${CLEO.status||'idle'}. <b>Clifford:</b> ${SESS.events&&SESS.events.length?'active':'idle'}.`);
   $('summary').innerHTML=out.map(x=>`<li>${x}</li>`).join('');
-  $('sumage').textContent=BOARD.updated?'board saved '+BOARD.updated:'';
+  $('sumage').textContent=PIPE.updated?'pipeline saved '+PIPE.updated:'';
 }
 
 // ---------- NEEDS ----------
@@ -201,30 +238,36 @@ async function saveNeeds(){ try{await fetch('/api/needs',{method:'POST',headers:
 function toggleNeed(i){ NEEDS.items[i].done=!NEEDS.items[i].done; renderNeeds(); buildSummary(); saveNeeds(); }
 function addNeed(){ const v=$('newneed').value.trim(); if(!v)return; (NEEDS.items=NEEDS.items||[]).push({t:v,done:false}); $('newneed').value=''; renderNeeds(); buildSummary(); saveNeeds(); }
 
-// ---------- BOARD ----------
-function tkStatus(t){ const ss=t.subtasks||[]; if(ss.length){const d=ss.filter(s=>s.done).length;return d===ss.length?'done':(d>0?'doing':(t.status==='doing'?'doing':'todo'));} return t.status||'todo'; }
-async function loadBoard(){ try{BOARD=await(await fetch('/api/board')).json();}catch{BOARD={tasks:[]};} renderBoard(); buildSummary(); }
-function renderBoard(){
-  const T=BOARD.tasks||[]; const phases=[...new Set(T.map(t=>t.phase||'Other'))];
-  let s=0,d=0;T.forEach(t=>(t.subtasks||[]).forEach(x=>{s++;if(x.done)d++;}));
-  $('boardprog').textContent=T.length+' tasks · '+d+'/'+s+' sub-tasks'+(BOARD.updated?' · saved '+BOARD.updated:'');
-  $('board').innerHTML=phases.map(ph=>{
-    const items=T.map((t,i)=>[t,i]).filter(([t])=>(t.phase||'Other')===ph);
-    return `<div class="phase">${esc(ph)}</div>`+items.map(([t,i])=>{
-      const st=tkStatus(t),ic=st==='done'?'<span class="ic c">✓</span>':st==='doing'?'<span class="ic d">◐</span>':'<span class="ic p">○</span>';
-      const ss=t.subtasks||[];const dd=ss.filter(x=>x.done).length;const pct=ss.length?Math.round(dd/ss.length*100):0;
-      return `<div class="tk ${st==='done'?'done':''}">
-        <div class="hd" onclick="this.parentNode.classList.toggle('open')">${ic}<span class="ti">${esc(t.title)}</span><span class="prog">${ss.length?dd+'/'+ss.length:''}</span></div>
-        ${ss.length?`<div class="bar"><i style="width:${pct}%"></i></div>`:''}
-        <div class="subs">${ss.map((x,j)=>`<label class="sub ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} onchange="toggleSub(${i},${j})"><span>${esc(x.title)}</span></label>`).join('')}<span class="addsub" onclick="addSub(${i})">+ add sub-task</span></div>
+// ---------- PIPELINE (the Task Board, rebuilt 2026-06-12) ----------
+let PIPE={phases:[]};
+async function loadBoard(){ try{PIPE=await(await fetch('/api/pipeline')).json();}catch{PIPE={phases:[]};} renderPipeline(); buildSummary(); }
+function plCounts(){ let t=0,d=0; (PIPE.phases||[]).forEach(p=>(p.items||[]).forEach(i=>{t++;if(i.status==='done')d++;})); return {t,d}; }
+function firstOpen(){ const ph=PIPE.phases||[]; for(let pi=0;pi<ph.length;pi++){ const it=ph[pi].items||[]; for(let ii=0;ii<it.length;ii++){ if(it[ii].status!=='done') return {pi,ii,item:it[ii]}; } } return null; }
+function renderPipeline(){
+  const ph=PIPE.phases||[]; const c=plCounts(); const open=firstOpen();
+  $('plsrc').textContent='Source of truth: '+(PIPE.source||'')+(PIPE.updated?' · saved '+PIPE.updated:'');
+  $('plprog').textContent=c.d+'/'+c.t+' steps done ('+(c.t?Math.round(c.d/c.t*100):0)+'%)';
+  $('plbar').style.width=(c.t?c.d/c.t*100:0)+'%';
+  $('plrule').innerHTML=PIPE.rules?('⚠ <b>STANDING GATES:</b> '+esc(PIPE.rules)):'';
+  $('pipeline').innerHTML=ph.map((p,pi)=>{
+    const items=p.items||[]; const pd=items.filter(i=>i.status==='done').length;
+    return `<div class="ph"><div class="ph-hd"><h2>${esc(p.title)}</h2><span class="ph-pct">${pd}/${items.length} done</span></div>
+    <div class="ph-goal">${esc(p.goal||'')}</div>
+    <div class="step">`+items.map((i,ii)=>{
+      const st=i.status||'todo'; const isHere=open&&open.pi===pi&&open.ii===ii;
+      const owners=(i.owner||'').split('+').filter(Boolean).map(o=>`<span class="chip ${o}">${o==='ceos'?'both CEOs':o}</span>`).join('');
+      const gate=i.gate?`<span class="chip gate">⚠ ${esc(i.gate)}</span>`:'';
+      return (isHere?'<div class="here"><span>▼ YOU ARE HERE — do this next</span></div>':'')+
+      `<div class="nd ${st}${isHere?' active':''}">
+        <div class="ti2" onclick="toggleStep(${pi},${ii})"><b>${esc(i.id)} · ${esc(i.title)}</b>${owners}${gate}<input class="ck" type="checkbox" ${st==='done'?'checked':''} onclick="event.stopPropagation()" onchange="toggleStep(${pi},${ii})"></div>
+        <div class="dt">${esc(i.detail||'')}</div>
+        ${i.dod?`<div class="dod"><b>✓ Done when:</b> ${esc(i.dod)}</div>`:''}
       </div>`;
-    }).join('');
+    }).join('')+`</div></div>`;
   }).join('');
 }
-async function saveBoard(){ try{await fetch('/api/board',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(BOARD)});}catch{} }
-function toggleSub(i,j){ BOARD.tasks[i].subtasks[j].done=!BOARD.tasks[i].subtasks[j].done; renderBoard(); buildSummary(); saveBoard(); }
-function addSub(i){ const t=prompt('New sub-task for: '+BOARD.tasks[i].title); if(!t)return; (BOARD.tasks[i].subtasks=BOARD.tasks[i].subtasks||[]).push({title:t,done:false}); renderBoard(); saveBoard(); }
-function addTask(){ const t=prompt('New task title'); if(!t)return; const ph=prompt('Phase (Now/Sprint/Revenue/Future)','Sprint')||'Sprint'; BOARD.tasks.push({id:'t'+Date.now(),title:t,phase:ph,status:'todo',subtasks:[]}); renderBoard(); saveBoard(); }
+async function savePipe(){ try{await fetch('/api/pipeline',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(PIPE)});}catch{} }
+function toggleStep(pi,ii){ const it=PIPE.phases[pi].items[ii]; it.status=(it.status==='done')?'todo':'done'; renderPipeline(); buildSummary(); savePipe(); }
 
 // ---------- CONFIG ----------
 async function loadConfig(){ let d;try{d=await(await fetch('/api/config')).json();}catch{d={items:[]};} renderConfig(d.items||[]); }

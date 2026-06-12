@@ -22,6 +22,7 @@ const DATA_DIR = path.join(__dirname, 'data');
 const CONFIG_DIR = path.join(DATA_DIR, 'config');
 const TASKS_FILE = path.join(DATA_DIR, 'tasks.json');
 const NEEDS_FILE = path.join(DATA_DIR, 'needs.json');
+const PIPELINE_FILE = path.join(DATA_DIR, 'pipeline.json');
 
 const trunc = (s, n) => { s = String(s == null ? '' : s); return s.length > n ? s.slice(0, n) + '…' : s; };
 
@@ -116,6 +117,8 @@ function readBoard() { try { return JSON.parse(fs.readFileSync(TASKS_FILE, 'utf8
 function writeBoard(o) { o.updated = new Date().toISOString().slice(0, 10); fs.mkdirSync(DATA_DIR, { recursive: true }); fs.writeFileSync(TASKS_FILE, JSON.stringify(o, null, 2)); return o; }
 function readNeeds() { try { return JSON.parse(fs.readFileSync(NEEDS_FILE, 'utf8')); } catch { return { updated: null, items: [] }; } }
 function writeNeeds(o) { o.updated = new Date().toISOString().slice(0, 10); fs.mkdirSync(DATA_DIR, { recursive: true }); fs.writeFileSync(NEEDS_FILE, JSON.stringify(o, null, 2)); return o; }
+function readPipeline() { try { return JSON.parse(fs.readFileSync(PIPELINE_FILE, 'utf8')); } catch { return { updated: null, source: '', phases: [] }; } }
+function writePipeline(o) { o.updated = new Date().toISOString().slice(0, 10); fs.mkdirSync(DATA_DIR, { recursive: true }); fs.writeFileSync(PIPELINE_FILE, JSON.stringify(o, null, 2)); return o; }
 function listConfig() {
   let files = []; try { files = fs.readdirSync(CONFIG_DIR).filter(f => f.endsWith('.md')); } catch {}
   return files.map(f => { const p = path.join(CONFIG_DIR, f); const st = fs.statSync(p); const content = fs.readFileSync(p, 'utf8');
@@ -147,6 +150,8 @@ http.createServer(async (req, res) => {
     if (url === '/api/board' && m === 'POST') return json(res, writeBoard(JSON.parse((await readBody(req)) || '{}')));
     if (url === '/api/needs' && m === 'GET') return json(res, readNeeds());
     if (url === '/api/needs' && m === 'POST') return json(res, writeNeeds(JSON.parse((await readBody(req)) || '{}')));
+    if (url === '/api/pipeline' && m === 'GET') return json(res, readPipeline());
+    if (url === '/api/pipeline' && m === 'POST') return json(res, writePipeline(JSON.parse((await readBody(req)) || '{}')));
     if (url === '/api/config' && m === 'GET') return json(res, { items: listConfig() });
     if (url === '/api/config' && m === 'POST') { const b = JSON.parse((await readBody(req)) || '{}'); return json(res, { ok: true, name: saveConfig(b.name, b.content) }); }
     if (url === '/api/sprint') return json(res, { md: tasksFromMd() });

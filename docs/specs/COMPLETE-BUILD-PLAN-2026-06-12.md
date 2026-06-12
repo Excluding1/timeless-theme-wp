@@ -5,6 +5,13 @@ matching+recruitment · Terms+warranty-copy pass · before/after library automat
 Completeness-critic merged: quote-acceptance flow · photo-marketing consent · insurance CoC verification ·
 WordPress ops policy · AI-employee deployment phases · Marko pre-flight · uptime monitoring.**
 
+**FINAL PARITY AUDIT (2026-06-12, Cleo + traceability panel): Jordan-model walk = every link matched —
+96% parity; 64/64 scenarios homed (12 orphans found → homed; 2 timing conflicts resolved — see
+[scenario-matrix-2026-06-12.md](scenario-matrix-2026-06-12.md), the by-ID appendix); ZERO over-build.
+pay.com.au = the one Jordan practice we deliberately skip (Decision 12 v2: Westpac EFT until first external
+sub + volume justifies card-points). THE WORKING BOARD = `cockpit/data/pipeline.json` — the cockpit's
+Pipeline tab renders this plan as a strict top-to-bottom flow; work it vertically.**
+
 **Allan's framing (2026-06-12):** do NOT sequence by revenue urgency — he runs jobs manually meanwhile
 (texts subs, quotes, completes, invoices by hand using the money-lane SOP). This plan = COMPLETE the system:
 every fix / improvement / addition / removal, all scenarios, to the 12-point pass-bar in
