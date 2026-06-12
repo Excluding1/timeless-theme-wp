@@ -78,6 +78,7 @@
   .chip.allan{background:rgba(231,192,139,.16);color:var(--gold)} .chip.marko{background:rgba(92,214,160,.14);color:#5cd6a0}
   .chip.clifford{background:rgba(127,176,255,.14);color:#7fb0ff} .chip.ceos{background:rgba(84,214,255,.13);color:var(--cleo)}
   .chip.gate{background:rgba(255,107,107,.15);color:var(--err)}
+  .chip.time{background:#0e2748;color:#9bb0d0;text-transform:none;letter-spacing:0}
   .nd .dt{color:#c8d8f5;font-size:12.5px;line-height:1.65;margin:8px 0 0}
   .nd .dod{margin-top:8px;font-size:12px;color:#9fd8b9;border-top:1px dashed #16335f;padding-top:7px}
   .nd .dod b{color:var(--ok)}
@@ -246,20 +247,23 @@ function firstOpen(){ const ph=PIPE.phases||[]; for(let pi=0;pi<ph.length;pi++){
 function renderPipeline(){
   const ph=PIPE.phases||[]; const c=plCounts(); const open=firstOpen();
   $('plsrc').textContent='Source of truth: '+(PIPE.source||'')+(PIPE.updated?' · saved '+PIPE.updated:'');
-  $('plprog').textContent=c.d+'/'+c.t+' steps done ('+(c.t?Math.round(c.d/c.t*100):0)+'%)';
+  let remH=0;(PIPE.phases||[]).forEach(p=>(p.items||[]).forEach(i=>{if(i.status!=='done')remH+=(i.estH||0);}));
+  $('plprog').textContent=c.d+'/'+c.t+' steps done ('+(c.t?Math.round(c.d/c.t*100):0)+'%) · ≈'+Math.round(remH)+'h hands-on left';
   $('plbar').style.width=(c.t?c.d/c.t*100:0)+'%';
   $('plrule').innerHTML=PIPE.rules?('⚠ <b>STANDING GATES:</b> '+esc(PIPE.rules)):'';
   $('pipeline').innerHTML=ph.map((p,pi)=>{
     const items=p.items||[]; const pd=items.filter(i=>i.status==='done').length;
-    return `<div class="ph"><div class="ph-hd"><h2>${esc(p.title)}</h2><span class="ph-pct">${pd}/${items.length} done</span></div>
+    const phH=items.reduce((a,i)=>a+(i.status!=='done'?(i.estH||0):0),0);
+    return `<div class="ph"><div class="ph-hd"><h2>${esc(p.title)}</h2><span class="ph-pct">${pd}/${items.length} done${phH?' · ≈'+(phH%1?phH.toFixed(1):phH)+'h left':''}</span></div>
     <div class="ph-goal">${esc(p.goal||'')}</div>
     <div class="step">`+items.map((i,ii)=>{
       const st=i.status||'todo'; const isHere=open&&open.pi===pi&&open.ii===ii;
       const owners=(i.owner||'').split('+').filter(Boolean).map(o=>`<span class="chip ${o}">${o==='ceos'?'both CEOs':o}</span>`).join('');
       const gate=i.gate?`<span class="chip gate">⚠ ${esc(i.gate)}</span>`:'';
+      const tchip=i.est&&st!=='done'?`<span class="chip time">⏱ ${esc(i.est)}</span>`:'';
       return (isHere?'<div class="here"><span>▼ YOU ARE HERE — do this next</span></div>':'')+
       `<div class="nd ${st}${isHere?' active':''}">
-        <div class="ti2" onclick="toggleStep(${pi},${ii})"><b>${esc(i.id)} · ${esc(i.title)}</b>${owners}${gate}<input class="ck" type="checkbox" ${st==='done'?'checked':''} onclick="event.stopPropagation()" onchange="toggleStep(${pi},${ii})"></div>
+        <div class="ti2" onclick="toggleStep(${pi},${ii})"><b>${esc(i.id)} · ${esc(i.title)}</b>${owners}${tchip}${gate}<input class="ck" type="checkbox" ${st==='done'?'checked':''} onclick="event.stopPropagation()" onchange="toggleStep(${pi},${ii})"></div>
         <div class="dt">${esc(i.detail||'')}</div>
         ${i.dod?`<div class="dod"><b>✓ Done when:</b> ${esc(i.dod)}</div>`:''}
       </div>`;

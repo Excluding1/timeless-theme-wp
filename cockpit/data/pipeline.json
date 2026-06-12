@@ -1,151 +1,860 @@
 {
   "updated": "2026-06-12",
   "source": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md (v1.0 co-signed) + parity audit (Cleo 96%, traceability 64-scenario)",
-  "rules": "Never drag an opp to stage 11 before its deposit is PAID (that drag fires the live SM8 pipeline). No external sub signs before the lawyer clears Fair-Work (Marko self-performs meanwhile). Work this list TOP TO BOTTOM — if you want to skip, say why out loud first.",
+  "rules": "Never drag an opp to stage 11 before its deposit is PAID (that drag fires the live SM8 pipeline). No external sub signs before the lawyer clears Fair-Work (Marko self-performs meanwhile). Work this list TOP TO BOTTOM \u2014 if you want to skip, say why out loud first.",
   "phases": [
     {
-      "title": "PHASE 0 — THE CERTIFIED BASE (done — what everything below builds on)",
+      "title": "PHASE 0 \u2014 THE CERTIFIED BASE (done \u2014 what everything below builds on)",
       "goal": "Launched 2026-06-11/12 and proven live. Kept here so progress is visible and so nobody rebuilds what already works.",
       "items": [
-        { "id": "0.1", "title": "Site v1.5 live + form on 13 pages + mobile QR handoff", "owner": "done", "status": "done", "detail": "timeless-theme-2 active, 62-URL audit passed, desktop-to-phone #qf= handoff confirmed re-uploaded.", "dod": "Public verification passed in incognito." },
-        { "id": "0.2", "title": "Lead pipeline certified ×5 end-to-end", "owner": "done", "status": "done", "detail": "Form → Cloudinary → W1 secret gate → GHL Contact+Opp 01 → Slack #quotes-in → stage-11 drag → Make Scenario 1 (dedup, strip-contact) → SM8 job name+address only → Sheet log → #new-jobs ping.", "dod": "TEST1-5 all passed, Allan eyewitness." },
-        { "id": "0.3", "title": "W1 ack + W2 abandoned-recovery live, W2-misfire bug dead", "owner": "done", "status": "done", "detail": "W1 disarms W2 + clears form-partial-pending on completion. The Lisa bug class cannot recur.", "dod": "Proven live on TEST3 (removed 37s into the timer)." },
-        { "id": "0.4", "title": "Scenario 3 back-sync + contractor app Phases 1-4 deployed", "owner": "done", "status": "done", "detail": "SM8 Completed → GHL stage 15 idempotent. App: read path, per-sub auth+RLS, accept/decline/handback/complete, SM8 write-back, contact-leak CI.", "dod": "Commits 84a88f2/d7bb48e/ba71db1/7762bf4 verified." },
-        { "id": "0.5", "title": "Money lane manual SOP + M1-M8 message pack (Cleo-approved)", "owner": "done", "status": "done", "detail": "docs/sop/money-lane-first-jobs.md: Stripe deposit steps, stage mapping, Xero+GST invoice SOP, RG96-safe overdue cadence, refund ladder. This is how jobs run manually while the phases below complete.", "dod": "Committed ff9edd2; Allan executes per job." },
-        { "id": "0.6", "title": "Quote #1 sent-ready (Lisa, basin) under all gates + GST resolved", "owner": "done", "status": "done", "detail": "3 tiers $590/$680/$760 inc GST, margin floor enforced (caught the sheet's $560 T1 breach), 14-day validity, Cleo-approved SMS. GST = REGISTERED.", "dod": "Package delivered to Allan; sending + her reply are operational, not build work." }
+        {
+          "id": "0.1",
+          "title": "Site v1.5 live + form on 13 pages + mobile QR handoff",
+          "owner": "done",
+          "status": "done",
+          "detail": "timeless-theme-2 active, 62-URL audit passed, desktop-to-phone #qf= handoff confirmed re-uploaded.",
+          "dod": "Public verification passed in incognito."
+        },
+        {
+          "id": "0.2",
+          "title": "Lead pipeline certified \u00d75 end-to-end",
+          "owner": "done",
+          "status": "done",
+          "detail": "Form \u2192 Cloudinary \u2192 W1 secret gate \u2192 GHL Contact+Opp 01 \u2192 Slack #quotes-in \u2192 stage-11 drag \u2192 Make Scenario 1 (dedup, strip-contact) \u2192 SM8 job name+address only \u2192 Sheet log \u2192 #new-jobs ping.",
+          "dod": "TEST1-5 all passed, Allan eyewitness."
+        },
+        {
+          "id": "0.3",
+          "title": "W1 ack + W2 abandoned-recovery live, W2-misfire bug dead",
+          "owner": "done",
+          "status": "done",
+          "detail": "W1 disarms W2 + clears form-partial-pending on completion. The Lisa bug class cannot recur.",
+          "dod": "Proven live on TEST3 (removed 37s into the timer)."
+        },
+        {
+          "id": "0.4",
+          "title": "Scenario 3 back-sync + contractor app Phases 1-4 deployed",
+          "owner": "done",
+          "status": "done",
+          "detail": "SM8 Completed \u2192 GHL stage 15 idempotent. App: read path, per-sub auth+RLS, accept/decline/handback/complete, SM8 write-back, contact-leak CI.",
+          "dod": "Commits 84a88f2/d7bb48e/ba71db1/7762bf4 verified."
+        },
+        {
+          "id": "0.5",
+          "title": "Money lane manual SOP + M1-M8 message pack (Cleo-approved)",
+          "owner": "done",
+          "status": "done",
+          "detail": "docs/sop/money-lane-first-jobs.md: Stripe deposit steps, stage mapping, Xero+GST invoice SOP, RG96-safe overdue cadence, refund ladder. This is how jobs run manually while the phases below complete.",
+          "dod": "Committed ff9edd2; Allan executes per job."
+        },
+        {
+          "id": "0.6",
+          "title": "Quote #1 sent-ready (Lisa, basin) under all gates + GST resolved",
+          "owner": "done",
+          "status": "done",
+          "detail": "3 tiers $590/$680/$760 inc GST, margin floor enforced (caught the sheet's $560 T1 breach), 14-day validity, Cleo-approved SMS. GST = REGISTERED.",
+          "dod": "Package delivered to Allan; sending + her reply are operational, not build work."
+        }
       ]
     },
     {
-      "title": "PHASE 1 — GHL WORKFLOWS (finish the customer brain)",
+      "title": "PHASE 1 \u2014 GHL WORKFLOWS (finish the customer brain)",
       "goal": "Every customer lifecycle moment gets its workflow or snippet so nothing depends on memory. Copy is already approved where noted; the rest is draft-with-Cleo then build. One workflow at a time, test each before the next.",
       "items": [
-        { "id": "1.1", "title": "Paste the 3 W3 quote-cadence SMS (day 1 / 3 / 7)", "owner": "allan", "status": "todo", "detail": "Exact approved text sits in memory/pending_copy_packs_2026-06-12.md. Paste into the W3 workflow steps in GHL. Guardrails: send before 8pm, cadence stops the moment they reply.", "dod": "Fires on a test opp, stops on reply, day-7 message states the 14-day validity." },
-        { "id": "1.2", "title": "Quote-expiry win-back (day 15)", "owner": "ceos+allan", "status": "todo", "detail": "CONFLICT RESOLVED by the locked rule: quotes are valid 14 days (CEO.md lock) so the win-back fires day 15 — the old template saying day 7 was stale and has been patched. Clifford+Cleo draft the one message; Allan builds the workflow on quote_expires_at.", "dod": "Expired test opp gets exactly one win-back, then silence." },
-        { "id": "1.3", "title": "Booking-confirm workflow (stage 14 entry)", "owner": "clifford+allan", "status": "todo", "detail": "Automates M2 from the money-lane pack: when an opp enters 14 Job Booked, send the booking confirmation with date + arrival window from the appointment fields.", "dod": "Stage-14 test fires once with correct merge fields." },
-        { "id": "1.4", "title": "Day-before reminder (appointment minus 1 day)", "owner": "clifford+allan", "status": "todo", "detail": "Automates M3. Needs the GHL calendar/appointment field convention agreed first so the trigger has a real date to count from.", "dod": "Test appointment fires the reminder the afternoon before." },
-        { "id": "1.5", "title": "Cure-time aftercare (stage 15 entry)", "owner": "clifford+allan", "status": "todo", "detail": "Automates M4: 24h (basin) / 24-48h (bath/shower) no-use message, correct variant by job category.", "dod": "Stage-15 test fires once, correct variant." },
-        { "id": "1.6", "title": "NPS ask (stage 15 + 24h) with detractor routing", "owner": "clifford+allan", "status": "todo", "detail": "Score 1-10 by SMS. 9-10 → review ask path. 1-6 → tag nps_detractor + Slack #job-issues + a task for Allan to call within 60 min (the locked SLA).", "dod": "Test contact scores both ways and routes correctly." },
-        { "id": "1.7", "title": "Google-review ask (ALL customers — no gating)", "owner": "clifford+allan", "status": "todo", "detail": "Fires post-NPS to everyone regardless of score (review-gating breaches ACCC guidance — the old spec line saying promoters-only is quarantined). Uses the real GBP review link.", "dod": "Fires with the working GBP link; copy Rule-8 approved." },
-        { "id": "1.8", "title": "Hot-lead alert verify (score ≥40 → #hot-leads)", "owner": "allan", "status": "todo", "detail": "Decision 3 v2 locked this. Confirm the workflow exists + is published; build if not.", "dod": "A high-score test lead pings #hot-leads." },
-        { "id": "1.9", "title": "W4 missed-call text-back", "owner": "allan", "status": "todo", "detail": "Caller who hangs up gets an automatic 'Allan here, saw your call' text within a minute. Old spec had it parked; Cleo pulled it in — phone callers are the F8 intake path.", "dod": "A missed test call triggers exactly one text." },
-        { "id": "1.10", "title": "W7 stage-transition logger + workflow-error routing", "owner": "allan", "status": "todo", "detail": "Every stage move posts one line to #pipeline-feed; any workflow error alerts #automation-errors. This is how silent breakage gets caught.", "dod": "A test drag posts; a forced error alerts." },
-        { "id": "1.11", "title": "Stage-02 Q&A + stage-03/04 sub-quote conventions", "owner": "ceos+allan", "status": "todo", "detail": "Lock how Q&A is tracked (snippets + an SLA task) and how a sub-quote request/receipt is recorded in 03/04 — Jordan runs these stages actively; ours sit empty until the convention exists.", "dod": "A test opp moves 02→05 with the Q&A logged; a sub-quote request is visible in 03/04." },
-        { "id": "1.12", "title": "Stage-10 hold-reason taxonomy", "owner": "allan", "status": "todo", "detail": "One dropdown field with the locked reasons: strata approval, landlord authority, asbestos assessment, margin review. Stops 'Job on Hold' becoming a black hole.", "dod": "Hold reasons selectable and reportable." },
-        { "id": "1.13", "title": "Operational snippet pack in GHL (the manual-send library)", "owner": "clifford+allan", "status": "todo", "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 — manual entry into stage 01 with a source tag).", "dod": "Every snippet sendable in 2 clicks; intake SOP written into the money-lane doc." },
-        { "id": "1.14", "title": "Custom-fields + merge-tag audit", "owner": "clifford", "status": "todo", "detail": "Walk every {{merge}} in every template/workflow against the form payload contract so a renamed field can never silently blank a message again.", "dod": "Every merge resolves on a test contact; contract doc updated." },
-        { "id": "1.15", "title": "Warranty certificate (design + build — needs DKIM first)", "owner": "ceos+allan", "status": "todo", "detail": "Resolves open decision #4: an emailed certificate (HTML/PDF) delivered by a stage-15 step, stating the per-material warranty ladder. Built after Phase 4 email plumbing.", "dod": "Stage-15 test delivers the certificate with correct service + term." }
+        {
+          "id": "1.1",
+          "title": "Paste the 3 W3 quote-cadence SMS (day 1 / 3 / 7)",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Exact approved text sits in memory/pending_copy_packs_2026-06-12.md. Paste into the W3 workflow steps in GHL. Guardrails: send before 8pm, cadence stops the moment they reply.",
+          "dod": "Fires on a test opp, stops on reply, day-7 message states the 14-day validity.",
+          "est": "15 min",
+          "estH": 0.25
+        },
+        {
+          "id": "1.2",
+          "title": "Quote-expiry win-back (day 15)",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "CONFLICT RESOLVED by the locked rule: quotes are valid 14 days (CEO.md lock) so the win-back fires day 15 \u2014 the old template saying day 7 was stale and has been patched. Clifford+Cleo draft the one message; Allan builds the workflow on quote_expires_at.",
+          "dod": "Expired test opp gets exactly one win-back, then silence.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "1.3",
+          "title": "Booking-confirm workflow (stage 14 entry)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Automates M2 from the money-lane pack: when an opp enters 14 Job Booked, send the booking confirmation with date + arrival window from the appointment fields.",
+          "dod": "Stage-14 test fires once with correct merge fields.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "1.4",
+          "title": "Day-before reminder (appointment minus 1 day)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Automates M3. Needs the GHL calendar/appointment field convention agreed first so the trigger has a real date to count from.",
+          "dod": "Test appointment fires the reminder the afternoon before.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "1.5",
+          "title": "Cure-time aftercare (stage 15 entry)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Automates M4: 24h (basin) / 24-48h (bath/shower) no-use message, correct variant by job category.",
+          "dod": "Stage-15 test fires once, correct variant.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "1.6",
+          "title": "NPS ask (stage 15 + 24h) with detractor routing",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Score 1-10 by SMS. 9-10 \u2192 review ask path. 1-6 \u2192 tag nps_detractor + Slack #job-issues + a task for Allan to call within 60 min (the locked SLA).",
+          "dod": "Test contact scores both ways and routes correctly.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "1.7",
+          "title": "Google-review ask (ALL customers \u2014 no gating)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Fires post-NPS to everyone regardless of score (review-gating breaches ACCC guidance \u2014 the old spec line saying promoters-only is quarantined). Uses the real GBP review link.",
+          "dod": "Fires with the working GBP link; copy Rule-8 approved.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "1.8",
+          "title": "Hot-lead alert verify (score \u226540 \u2192 #hot-leads)",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Decision 3 v2 locked this. Confirm the workflow exists + is published; build if not.",
+          "dod": "A high-score test lead pings #hot-leads.",
+          "est": "30 min",
+          "estH": 0.5
+        },
+        {
+          "id": "1.9",
+          "title": "W4 missed-call text-back",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Caller who hangs up gets an automatic 'Allan here, saw your call' text within a minute. Old spec had it parked; Cleo pulled it in \u2014 phone callers are the F8 intake path.",
+          "dod": "A missed test call triggers exactly one text.",
+          "est": "30 min",
+          "estH": 0.5
+        },
+        {
+          "id": "1.10",
+          "title": "W7 stage-transition logger + workflow-error routing",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Every stage move posts one line to #pipeline-feed; any workflow error alerts #automation-errors. This is how silent breakage gets caught.",
+          "dod": "A test drag posts; a forced error alerts.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "1.11",
+          "title": "Stage-02 Q&A + stage-03/04 sub-quote conventions",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Lock how Q&A is tracked (snippets + an SLA task) and how a sub-quote request/receipt is recorded in 03/04 \u2014 Jordan runs these stages actively; ours sit empty until the convention exists.",
+          "dod": "A test opp moves 02\u219205 with the Q&A logged; a sub-quote request is visible in 03/04.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "1.12",
+          "title": "Stage-10 hold-reason taxonomy",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "One dropdown field with the locked reasons: strata approval, landlord authority, asbestos assessment, margin review. Stops 'Job on Hold' becoming a black hole.",
+          "dod": "Hold reasons selectable and reportable.",
+          "est": "30 min",
+          "estH": 0.5
+        },
+        {
+          "id": "1.13",
+          "title": "Operational snippet pack in GHL (the manual-send library)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 \u2014 manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not).",
+          "dod": "Every snippet sendable in 2 clicks; intake SOP written into the money-lane doc.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "1.14",
+          "title": "Custom-fields + merge-tag audit",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Walk every {{merge}} in every template/workflow against the form payload contract so a renamed field can never silently blank a message again.",
+          "dod": "Every merge resolves on a test contact; contract doc updated.",
+          "est": "2 hr",
+          "estH": 2
+        },
+        {
+          "id": "1.15",
+          "title": "Warranty certificate (design + build \u2014 needs DKIM first)",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Resolves open decision #4: an emailed certificate (HTML/PDF) delivered by a stage-15 step, stating the per-material warranty ladder. Built after Phase 4 email plumbing.",
+          "dod": "Stage-15 test delivers the certificate with correct service + term.",
+          "est": "2.5 hr",
+          "estH": 2.5
+        },
+        {
+          "id": "1.16",
+          "title": "Quote-drafter v0 (checklist + template \u2014 pulled forward by the simulation)",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "The 1,000-scenario simulation showed pricing sits in 87% of all journeys, and Override 6 already says the quote-drafting agent starts with the first paying customer. v0 = a repeatable drafting kit (pricing-sheet lookup, margin-floor check, 3-tier template, gate checklist, Rule-8 send) so ANY quote takes under 10 minutes consistently. The full AI agent stays in 6.11.",
+          "dod": "Two consecutive real quotes drafted via the kit in under 10 min each, both pass the margin lens.",
+          "est": "2 hr",
+          "estH": 2
+        }
       ]
     },
     {
-      "title": "PHASE 2 — MAKE SCENARIOS (finish the automation spine)",
+      "title": "PHASE 2 \u2014 MAKE SCENARIOS (finish the automation spine)",
       "goal": "Scenarios 1 and 3 are proven. These five complete Jordan's automation layer so money and photos flow without hands.",
       "items": [
-        { "id": "2.1", "title": "Scenario 4: stage 15 → Accounts 'Awaiting Invoice'", "owner": "clifford+allan", "status": "todo", "detail": "Spec exists (make-scenario-4-5-accounts-build.md). When a job completes, an Accounts-pipeline opp is created so invoicing has a queue instead of memory.", "dod": "Test completion creates exactly ONE accounts opp; double-fire blocked." },
-        { "id": "2.2", "title": "Scenario 5: payments → Accounts 'Paid' (decide R2 first)", "owner": "ceos+allan", "status": "todo", "detail": "R2 decision: DEPOSIT = Stripe payment-link event; FINAL = Xero invoice.paid as the single source of truth. Then build with event-id dedup.", "dod": "Test deposit + test final each move one stage; replayed events do nothing." },
-        { "id": "2.3", "title": "Photo-FILE attach (Cloudinary → SM8 two-step)", "owner": "clifford", "status": "todo", "detail": "Today the SM8 job carries a photo LINK; this attaches the actual files (Jordan's iterator pattern: GET bytes → Attachment.json → Attachment/{uuid}.file).", "dod": "Photos appear ON the SM8 job for a test lead." },
-        { "id": "2.4", "title": "Find-or-create CLIENT (invoicing only)", "owner": "clifford", "status": "todo", "detail": "Repeat customers match by email/phone instead of duplicating. Never sub-facing. Target around job 5.", "dod": "A repeat test customer matches; no duplicate clients." },
-        { "id": "2.5", "title": "Scenario heartbeat + toggle monitor", "owner": "clifford", "status": "todo", "detail": "Daily health ping per scenario + a check that 'Immediately as data arrives' is ON — the toggle that silently ate the first heartbeat. Alerts #automation-errors.", "dod": "A deliberately-paused scenario alerts within 24h." }
+        {
+          "id": "2.1",
+          "title": "Scenario 4: stage 15 \u2192 Accounts 'Awaiting Invoice'",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Spec exists (make-scenario-4-5-accounts-build.md). When a job completes, an Accounts-pipeline opp is created so invoicing has a queue instead of memory.",
+          "dod": "Test completion creates exactly ONE accounts opp; double-fire blocked.",
+          "est": "2 hr",
+          "estH": 2
+        },
+        {
+          "id": "2.2",
+          "title": "Scenario 5: payments \u2192 Accounts 'Paid' (decide R2 first)",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "R2 decision: DEPOSIT = Stripe payment-link event; FINAL = Xero invoice.paid as the single source of truth. Then build with event-id dedup.",
+          "dod": "Test deposit + test final each move one stage; replayed events do nothing.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "2.3",
+          "title": "Photo-FILE attach (Cloudinary \u2192 SM8 two-step)",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Today the SM8 job carries a photo LINK; this attaches the actual files (Jordan's iterator pattern: GET bytes \u2192 Attachment.json \u2192 Attachment/{uuid}.file).",
+          "dod": "Photos appear ON the SM8 job for a test lead.",
+          "est": "2.5 hr",
+          "estH": 2.5
+        },
+        {
+          "id": "2.4",
+          "title": "Find-or-create CLIENT (invoicing only)",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Repeat customers match by email/phone instead of duplicating. Never sub-facing. Target around job 5.",
+          "dod": "A repeat test customer matches; no duplicate clients.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "2.5",
+          "title": "Scenario heartbeat + toggle monitor",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Daily health ping per scenario + a check that 'Immediately as data arrives' is ON \u2014 the toggle that silently ate the first heartbeat. Alerts #automation-errors.",
+          "dod": "A deliberately-paused scenario alerts within 24h.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        }
       ]
     },
     {
-      "title": "PHASE 3 — FORM + FRONT DOOR HARDENING",
+      "title": "PHASE 3 \u2014 FORM + FRONT DOOR HARDENING",
       "goal": "The form takes real traffic safely: tested on real phones, abuse-proof, and with the multi-bathroom + acceptance conventions locked.",
       "items": [
-        { "id": "3.1", "title": "Real-device pass: iPhone + Android + real-number SMS", "owner": "allan", "status": "todo", "detail": "One full submit on each phone, the QR handoff desktop→phone, and one submit with a REAL number to see the ack SMS actually arrive (the test numbers always 30008-fail by design).", "dod": "Screenshots + the ack SMS received." },
-        { "id": "3.2", "title": "Abuse controls: honeypot + rate-limit + E.164 + SIGNED Cloudinary", "owner": "clifford", "status": "todo", "detail": "Bot honeypot field, client rate-limit, strict phone validation, and migrate the upload preset from unsigned to signed (anyone holding the preset name can spam our cloud today).", "dod": "Bot script blocked; invalid phone blocked; unsigned preset disabled." },
-        { "id": "3.3", "title": "Multi-bathroom convention + end-to-end test", "owner": "ceos+allan", "status": "todo", "detail": "One opp per bathroom linked by property, each invoice under $5k (HBA), discounts 10%/15% applied, quoter SOP written. The form already captures multiple areas.", "dod": "A 2-bathroom test = 2 opps, 2 quotes, discount noted." },
-        { "id": "3.4", "title": "Duplicate-submission test (30-day window)", "owner": "clifford+allan", "status": "todo", "detail": "The spec says re-submits update the existing opp instead of duplicating — it has never been proven end-to-end.", "dod": "Same contact re-submits; exactly one opp exists after." },
-        { "id": "3.5", "title": "Quote-acceptance flow (terms visible before money)", "owner": "ceos", "status": "todo", "detail": "ACL fix from the audit: M1 already carries 'by paying the deposit you accept the quote and terms'. V2 = a proper accept page with a terms checkbox. Depends on Terms going final (4.3).", "dod": "Every paid deposit has a terms-visible trail." },
-        { "id": "3.6", "title": "Verify CSS cache-busting on live", "owner": "clifford", "status": "todo", "detail": "Live serves main.min.css?ver=1.5.0 but the code uses filemtime — suspect SpeedyCache rewriting. Harmless until the next CSS-only change, then it bites.", "dod": "A CSS change visibly busts on live." }
+        {
+          "id": "3.1",
+          "title": "Real-device pass: iPhone + Android + real-number SMS",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "One full submit on each phone, the QR handoff desktop\u2192phone, and one submit with a REAL number to see the ack SMS actually arrive (the test numbers always 30008-fail by design).",
+          "dod": "Screenshots + the ack SMS received.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "3.2",
+          "title": "Abuse controls: honeypot + rate-limit + E.164 + SIGNED Cloudinary",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Bot honeypot field, client rate-limit, strict phone validation, and migrate the upload preset from unsigned to signed (anyone holding the preset name can spam our cloud today).",
+          "dod": "Bot script blocked; invalid phone blocked; unsigned preset disabled.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "3.3",
+          "title": "Multi-bathroom convention + end-to-end test",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "One opp per bathroom linked by property, each invoice under $5k (HBA), discounts 10%/15% applied, quoter SOP written. The form already captures multiple areas.",
+          "dod": "A 2-bathroom test = 2 opps, 2 quotes, discount noted.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "3.4",
+          "title": "Duplicate-submission test (30-day window)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "The spec says re-submits update the existing opp instead of duplicating \u2014 it has never been proven end-to-end.",
+          "dod": "Same contact re-submits; exactly one opp exists after.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "3.5",
+          "title": "Quote-acceptance flow (terms visible before money)",
+          "owner": "ceos",
+          "status": "todo",
+          "detail": "ACL fix from the audit: M1 already carries 'by paying the deposit you accept the quote and terms'. V2 = a proper accept page with a terms checkbox. Depends on Terms going final (4.3).",
+          "dod": "Every paid deposit has a terms-visible trail.",
+          "est": "1 hr (v1)",
+          "estH": 1
+        },
+        {
+          "id": "3.6",
+          "title": "Verify CSS cache-busting on live",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Live serves main.min.css?ver=1.5.0 but the code uses filemtime \u2014 suspect SpeedyCache rewriting. Harmless until the next CSS-only change, then it bites.",
+          "dod": "A CSS change visibly busts on live.",
+          "est": "30 min",
+          "estH": 0.5
+        }
       ]
     },
     {
-      "title": "PHASE 4 — COMMS COMPLETION (email twin-set + the legal copy layer)",
-      "goal": "Email becomes a real channel (it is SMS-only today) and the words customers rely on — terms, warranty, consent — go final.",
+      "title": "PHASE 4 \u2014 COMMS COMPLETION (email twin-set + the legal copy layer)",
+      "goal": "Email becomes a real channel (it is SMS-only today) and the words customers rely on \u2014 terms, warranty, consent \u2014 go final.",
       "items": [
-        { "id": "4.1", "title": "DKIM + quotes@/support@/billing@ + GHL sending domain", "owner": "allan", "status": "todo", "detail": "admin.google.com → Apps → Gmail → Authenticate email → add the TXT in Cloudflare; create the three aliases; add the GHL dedicated sending domain. SPF + DMARC already pass (verified by dig).", "dod": "DKIM passes on mail-tester; aliases deliver." },
-        { "id": "4.2", "title": "Email twin-set of the whole lifecycle", "owner": "ceos+allan", "status": "todo", "detail": "Email versions of ack, quote delivery (the 2B template — already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements).", "dod": "Renders on Gmail+Outlook+mobile, SPF/DKIM/DMARC pass, reply route proven, screenshots archived." },
-        { "id": "4.3", "title": "Customer TERMS final + warranty-copy ladder pass", "owner": "ceos+allan", "status": "todo", "detail": "Allan's WIP terms page goes final (ACL-checked) and gets linked from quote messages, invoices, footer. Same pass kills the 3yr-vs-'Up to 5-Year' contradictions per the per-material ladder.", "dod": "Terms live; every warranty claim on the site matches the ladder." },
-        { "id": "4.4", "title": "Photo-marketing consent (field + ask)", "owner": "ceos+allan", "status": "todo", "detail": "GHL field photo_consent_marketing + a one-line ask at job completion. No before/after gets published without it — the audit caught that we had no consent trail at all.", "dod": "Field exists; ask approved; gallery SOP checks consent first." },
-        { "id": "4.5", "title": "Inbox routing decision", "owner": "allan", "status": "todo", "detail": "Where does a customer email reply land — quotes@ forwarded to you, GHL conversation sync, or both? Pick one so replies can never be missed.", "dod": "A customer reply reaches exactly one watched place." }
+        {
+          "id": "4.1",
+          "title": "DKIM + quotes@/support@/billing@ + GHL sending domain",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "admin.google.com \u2192 Apps \u2192 Gmail \u2192 Authenticate email \u2192 add the TXT in Cloudflare; create the three aliases; add the GHL dedicated sending domain. SPF + DMARC already pass (verified by dig).",
+          "dod": "DKIM passes on mail-tester; aliases deliver.",
+          "est": "30 min + DNS propagation",
+          "estH": 0.5
+        },
+        {
+          "id": "4.2",
+          "title": "Email twin-set of the whole lifecycle",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Email versions of ack, quote delivery (the 2B template \u2014 already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements).",
+          "dod": "Renders on Gmail+Outlook+mobile, SPF/DKIM/DMARC pass, reply route proven, screenshots archived.",
+          "est": "4 hr",
+          "estH": 4
+        },
+        {
+          "id": "4.3",
+          "title": "Customer TERMS final + warranty-copy ladder pass",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Allan's WIP terms page goes final (ACL-checked) and gets linked from quote messages, invoices, footer. Same pass kills the 3yr-vs-'Up to 5-Year' contradictions per the per-material ladder.",
+          "dod": "Terms live; every warranty claim on the site matches the ladder.",
+          "est": "2.5 hr",
+          "estH": 2.5
+        },
+        {
+          "id": "4.4",
+          "title": "Photo-marketing consent (field + ask)",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "GHL field photo_consent_marketing + a one-line ask at job completion. No before/after gets published without it \u2014 the audit caught that we had no consent trail at all.",
+          "dod": "Field exists; ask approved; gallery SOP checks consent first.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "4.5",
+          "title": "Inbox routing decision",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Where does a customer email reply land \u2014 quotes@ forwarded to you, GHL conversation sync, or both? Pick one so replies can never be missed.",
+          "dod": "A customer reply reaches exactly one watched place.",
+          "est": "30 min",
+          "estH": 0.5
+        }
       ]
     },
     {
-      "title": "PHASE 5 — MONEY AUTOMATION (on top of the manual SOP)",
+      "title": "PHASE 5 \u2014 MONEY AUTOMATION (on top of the manual SOP)",
       "goal": "The money-lane SOP keeps working by hand; this phase makes the system do it: pipeline, statuses, reconciliation, and the sub-pay model locked.",
       "items": [
-        { "id": "5.1", "title": "Build the Accounts pipeline (AC stages incl. partial payment)", "owner": "allan", "status": "todo", "detail": "Per Decision 12 v2. Stages for Awaiting Invoice → Sent → 7d → 14d → Overdue → Paid (+ partial-payment handling the audit flagged as missing).", "dod": "Stages + fields exist; a test opp ages through them." },
-        { "id": "5.2", "title": "Wire Scenarios 4/5 + automated payment chase (M6/M7/M8)", "owner": "clifford+allan", "status": "todo", "detail": "Connects Phase-2 scenarios to the Accounts pipeline and automates the RG96-safe overdue cadence on stage ages — max three messages, business hours only.", "dod": "Aged test invoice fires the right step; zero manual status edits on a test job." },
-        { "id": "5.3", "title": "Deposit mechanism v2 decision", "owner": "ceos+allan", "status": "todo", "detail": "Per-job Stripe Payment Links (current, 2 min each) vs GHL-native Stripe invoices. Decide once volume shows the pain.", "dod": "Decision logged + built." },
-        { "id": "5.4", "title": "Xero: Westpac feed verify + invoice branding + defaults", "owner": "allan", "status": "todo", "detail": "Confirm the bank feed actually activated (requested 05-26, never verified), upload tr-lockup.png to the invoice template, default terms 7 days, Stripe pay-now on.", "dod": "Feed rows reconcile; logo on a test invoice." },
-        { "id": "5.5", "title": "Refund / chargeback drill", "owner": "clifford+allan", "status": "todo", "detail": "One test refund in Stripe test mode + walk the chargeback evidence pack (quote thread, photos, completion, invoice) so the first real dispute isn't the rehearsal.", "dod": "Drill done; runbook updated with screenshots." },
-        { "id": "5.6", "title": "Sub-rate schedule FINAL + materials model (Marko)", "owner": "marko+ceos", "status": "todo", "detail": "Resolve the standalone-basin floor clash found on quote #1 ($250 sub pay breaks the $300 floor at T1/T2) + decide subs-supply vs we-supply materials. Marko signs the schedule.", "dod": "Signed schedule; every SKU clears the floor at T2." },
-        { "id": "5.7", "title": "pay.com.au: deferred ON PURPOSE (decision on record)", "owner": "done", "status": "done", "detail": "Jordan runs a pay.com.au card-points payout lane; we deliberately defer per Decision 12 v2 — Westpac EFT is free and SOPA-compliant at our volume. Revisit trigger: first external sub onboarded AND volume justifies the points. (Recorded so the parity audit shows intent, not a gap.)", "dod": "Decision 12 v2 locked 2026-05-25." },
-        { "id": "5.8", "title": "Job-log Sheet: margin + lead-source columns", "owner": "clifford", "status": "todo", "detail": "Each job row gains net margin (auditor-margin lens made permanent) and lead source (feeds attribution in Phase 7).", "dod": "A test row shows margin and source." }
+        {
+          "id": "5.1",
+          "title": "Build the Accounts pipeline (AC stages incl. partial payment)",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Per Decision 12 v2. Stages for Awaiting Invoice \u2192 Sent \u2192 7d \u2192 14d \u2192 Overdue \u2192 Paid (+ partial-payment handling the audit flagged as missing).",
+          "dod": "Stages + fields exist; a test opp ages through them.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "5.2",
+          "title": "Wire Scenarios 4/5 + automated payment chase (M6/M7/M8)",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "Connects Phase-2 scenarios to the Accounts pipeline and automates the RG96-safe overdue cadence on stage ages \u2014 max three messages, business hours only.",
+          "dod": "Aged test invoice fires the right step; zero manual status edits on a test job.",
+          "est": "2.5 hr",
+          "estH": 2.5
+        },
+        {
+          "id": "5.3",
+          "title": "Deposit mechanism v2 decision",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Per-job Stripe Payment Links (current, 2 min each) vs GHL-native Stripe invoices. Decide once volume shows the pain.",
+          "dod": "Decision logged + built.",
+          "est": "30 min",
+          "estH": 0.5
+        },
+        {
+          "id": "5.4",
+          "title": "Xero: Westpac feed verify + invoice branding + defaults",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Confirm the bank feed actually activated (requested 05-26, never verified), upload tr-lockup.png to the invoice template, default terms 7 days, Stripe pay-now on.",
+          "dod": "Feed rows reconcile; logo on a test invoice.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "5.5",
+          "title": "Refund / chargeback drill",
+          "owner": "clifford+allan",
+          "status": "todo",
+          "detail": "One test refund in Stripe test mode + walk the chargeback evidence pack (quote thread, photos, completion, invoice) so the first real dispute isn't the rehearsal.",
+          "dod": "Drill done; runbook updated with screenshots.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "5.6",
+          "title": "Sub-rate schedule FINAL + materials model (Marko)",
+          "owner": "marko+ceos",
+          "status": "todo",
+          "detail": "Resolve the standalone-basin floor clash found on quote #1 ($250 sub pay breaks the $300 floor at T1/T2) + decide subs-supply vs we-supply materials. Marko signs the schedule.",
+          "dod": "Signed schedule; every SKU clears the floor at T2.",
+          "est": "1.5 hr (Marko session)",
+          "estH": 1.5
+        },
+        {
+          "id": "5.7",
+          "title": "pay.com.au: deferred ON PURPOSE (decision on record)",
+          "owner": "done",
+          "status": "done",
+          "detail": "Jordan runs a pay.com.au card-points payout lane; we deliberately defer per Decision 12 v2 \u2014 Westpac EFT is free and SOPA-compliant at our volume. Revisit trigger: first external sub onboarded AND volume justifies the points. (Recorded so the parity audit shows intent, not a gap.)",
+          "dod": "Decision 12 v2 locked 2026-05-25."
+        },
+        {
+          "id": "5.8",
+          "title": "Job-log Sheet: margin + lead-source columns",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Each job row gains net margin (auditor-margin lens made permanent) and lead source (feeds attribution in Phase 7).",
+          "dod": "A test row shows margin and source.",
+          "est": "45 min",
+          "estH": 0.75
+        }
       ]
     },
     {
-      "title": "PHASE 6 — FIELD OPS + THE SUB SYSTEM",
+      "title": "PHASE 6 \u2014 FIELD OPS + THE SUB SYSTEM",
       "goal": "Marko fully operational in SM8, the contractor app finished, and the sub machine (legal, matching, recruitment) ready for the first external sub.",
       "items": [
-        { "id": "6.1", "title": "Marko: SM8 Staff invite + first-service SKUs + queue taxonomy", "owner": "marko", "status": "todo", "detail": "His own Staff seat, the launch-service line items, and the 'which queue = booked' call that unblocks the app's queue-move write-back.", "dod": "Marko dispatches a test job end-to-end; taxonomy answered." },
-        { "id": "6.2", "title": "App: accept→queue-move write-back", "owner": "clifford", "status": "todo", "detail": "Engineering is ready; it was waiting only on 6.1's taxonomy.", "dod": "Test accept moves the SM8 job to the agreed queue." },
-        { "id": "6.3", "title": "App Phase 5: push notifications", "owner": "clifford", "status": "todo", "detail": "Web Push (VAPID/FCM) on job offer + SMS fallback + rate governor. Interim Make→Twilio SMS keeps working until this lands.", "dod": "Test sub gets a push on offer." },
-        { "id": "6.4", "title": "App Phase 6: final security review", "owner": "ceos", "status": "todo", "detail": "The named checklist: RLS negative tests, JWT expiry behaviour, contact-leak CI green, exposed-token rotation confirmed, Fair-Work copy pass.", "dod": "Every checklist line passes; PASS doc archived." },
-        { "id": "6.5", "title": "LEGAL GATE: route → engage → s15AA clearance", "owner": "allan", "status": "todo", "gate": "HARD GATE", "detail": "Pick expand-Sprintlaw vs specialist (brief is ready in docs/specs/), commit the budget, engage. Longest lead-time item in the whole plan — start it before anything else in this phase finishes. No external sub signs before the letter.", "dod": "Lawyer clearance letter on file." },
-        { "id": "6.6", "title": "Sub matching + quality system", "owner": "marko+ceos", "status": "todo", "detail": "Sub profile fields (skills, suburbs, availability), offer-order convention, and the quality rubric wired post-job — Jordan's system does this and ours had no plan item until the parity audit.", "dod": "A test job offers to the right sub first; rubric row per job." },
-        { "id": "6.7", "title": "Sub recruitment pipeline live", "owner": "marko", "status": "todo", "detail": "Hipages + Airtasker + Meta + business-audit sourcing, candidates tracked. Supply is Jordan's stated bottleneck — recruitment starts before the legal gate clears so candidates are ready the day it does.", "dod": "Pipeline sheet with 5+ candidates." },
-        { "id": "6.8", "title": "Marko pre-flight: asbestos cert + ABN/PL + tools + vehicle", "owner": "marko", "status": "todo", "detail": "His own asbestos awareness cert confirmed or booked, ABN/PL sighted, tools checklist from the 'Tools - Sub Must Own' sheet, vehicle check.", "dod": "All sighted and filed." },
-        { "id": "6.9", "title": "Job recipes: BSN-01 basin + launch gaps", "owner": "clifford", "status": "todo", "detail": "The basin recipe is missing (found via Lisa's job — the first real job has no recipe). Just-in-time per the recipes README, not all 140.", "dod": "Recipe per launch SKU family." },
-        { "id": "6.10", "title": "Aftercare cards printed + in the van", "owner": "marko", "status": "todo", "detail": "A5 ×100 from customer-aftercare-cards.md. The physical half of cure-time compliance.", "dod": "Cards in the vehicle." },
-        { "id": "6.11", "title": "AI employees (phased deployments)", "owner": "clifford", "status": "todo", "detail": "Quote-drafter: Clifford performs it for jobs 1-5, agent later. Photo-quality-reviewer with 3.2. Maintenance-reminder after job ~10 (drives repeat rate). DM-handler with Phase 10 socials. Business-analyst with Phase 7 data.", "dod": "Each agent: spec → build → one proven run." }
+        {
+          "id": "6.1",
+          "title": "Marko: SM8 Staff invite + first-service SKUs + queue taxonomy",
+          "owner": "marko",
+          "status": "todo",
+          "detail": "His own Staff seat, the launch-service line items, and the 'which queue = booked' call that unblocks the app's queue-move write-back.",
+          "dod": "Marko dispatches a test job end-to-end; taxonomy answered.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "6.2",
+          "title": "App: accept\u2192queue-move write-back",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Engineering is ready; it was waiting only on 6.1's taxonomy.",
+          "dod": "Test accept moves the SM8 job to the agreed queue.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "6.3",
+          "title": "App Phase 5: push notifications",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Web Push (VAPID/FCM) on job offer + SMS fallback + rate governor. Interim Make\u2192Twilio SMS keeps working until this lands.",
+          "dod": "Test sub gets a push on offer.",
+          "est": "4 hr",
+          "estH": 4
+        },
+        {
+          "id": "6.4",
+          "title": "App Phase 6: final security review",
+          "owner": "ceos",
+          "status": "todo",
+          "detail": "The named checklist: RLS negative tests, JWT expiry behaviour, contact-leak CI green, exposed-token rotation confirmed, Fair-Work copy pass.",
+          "dod": "Every checklist line passes; PASS doc archived.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "6.5",
+          "title": "LEGAL GATE: route \u2192 engage \u2192 s15AA clearance",
+          "owner": "allan",
+          "status": "todo",
+          "gate": "HARD GATE",
+          "detail": "Pick expand-Sprintlaw vs specialist (brief is ready in docs/specs/), commit the budget, engage. Longest lead-time item in the whole plan \u2014 start it before anything else in this phase finishes. No external sub signs before the letter.",
+          "dod": "Lawyer clearance letter on file.",
+          "est": "2 hr effort + 2-6 wk elapsed",
+          "estH": 2
+        },
+        {
+          "id": "6.6",
+          "title": "Sub matching + quality system",
+          "owner": "marko+ceos",
+          "status": "todo",
+          "detail": "Sub profile fields (skills, suburbs, availability), offer-order convention, and the quality rubric wired post-job \u2014 Jordan's system does this and ours had no plan item until the parity audit.",
+          "dod": "A test job offers to the right sub first; rubric row per job.",
+          "est": "2 hr",
+          "estH": 2
+        },
+        {
+          "id": "6.7",
+          "title": "Sub recruitment pipeline live",
+          "owner": "marko",
+          "status": "todo",
+          "detail": "Hipages + Airtasker + Meta + business-audit sourcing, candidates tracked. Supply is Jordan's stated bottleneck \u2014 recruitment starts before the legal gate clears so candidates are ready the day it does.",
+          "dod": "Pipeline sheet with 5+ candidates.",
+          "est": "2 hr setup, then ongoing",
+          "estH": 2
+        },
+        {
+          "id": "6.8",
+          "title": "Marko pre-flight: asbestos cert + ABN/PL + tools + vehicle",
+          "owner": "marko",
+          "status": "todo",
+          "detail": "His own asbestos awareness cert confirmed or booked, ABN/PL sighted, tools checklist from the 'Tools - Sub Must Own' sheet, vehicle check.",
+          "dod": "All sighted and filed.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "6.9",
+          "title": "Job recipes: BSN-01 basin + launch gaps",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "The basin recipe is missing (found via Lisa's job \u2014 the first real job has no recipe). Just-in-time per the recipes README, not all 140.",
+          "dod": "Recipe per launch SKU family.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "6.10",
+          "title": "Aftercare cards printed + in the van",
+          "owner": "marko",
+          "status": "todo",
+          "detail": "A5 \u00d7100 from customer-aftercare-cards.md. The physical half of cure-time compliance.",
+          "dod": "Cards in the vehicle.",
+          "est": "30 min + print turnaround",
+          "estH": 0.5
+        },
+        {
+          "id": "6.11",
+          "title": "AI employees (phased deployments)",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Quote-drafter: Clifford performs it for jobs 1-5, agent later. Photo-quality-reviewer with 3.2. Maintenance-reminder after job ~10 (drives repeat rate). DM-handler with Phase 10 socials. Business-analyst with Phase 7 data.",
+          "dod": "Each agent: spec \u2192 build \u2192 one proven run.",
+          "est": "6 hr staged",
+          "estH": 6
+        }
       ]
     },
     {
-      "title": "PHASE 7 — DATA + ANALYTICS",
+      "title": "PHASE 7 \u2014 DATA + ANALYTICS",
       "goal": "Own the numbers like Jordan does: traffic, conversions, attribution, and a warehouse seam that's already filling.",
       "items": [
-        { "id": "7.1", "title": "GA4 + Search Console + sitemap", "owner": "allan", "status": "todo", "detail": "Paste the GA4 ID into the Customizer, verify GSC, submit the sitemap. Fifteen minutes that should have happened pre-launch; traffic is accruing unmeasured.", "dod": "Traffic visible in GA4; site indexed in GSC." },
-        { "id": "7.2", "title": "Conversion events + Ads tag pre-wiring", "owner": "clifford", "status": "todo", "detail": "quote_submit already fires; add deposit-paid and final-paid events + the Google Ads conversion tag so day one of ads has history.", "dod": "Events visible in GA4 DebugView." },
-        { "id": "7.3", "title": "BigQuery: project + Sydney dataset + external table over the Sheet", "owner": "allan+clifford", "status": "todo", "detail": "Zero-ETL: the job-log Sheet becomes queryable SQL. The capture has been running since day one precisely for this.", "dod": "A SQL query returns real job rows." },
-        { "id": "7.4", "title": "Reconciliation tie-out + weekly Slack digest", "owner": "clifford", "status": "todo", "detail": "GHL ↔ Sheet ↔ SM8 row counts tie by opp_id weekly, posted to Slack. This is pass-bar #1 made routine.", "dod": "First weekly digest posts with matching counts." },
-        { "id": "7.5", "title": "Lead-source attribution check", "owner": "clifford", "status": "todo", "detail": "form lead_source → GHL field → Sheet column → GA4 dimension all agree, so 'where did this job come from' has one answer.", "dod": "A test lead shows the same source in all four places." }
+        {
+          "id": "7.1",
+          "title": "GA4 + Search Console + sitemap",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Paste the GA4 ID into the Customizer, verify GSC, submit the sitemap. Fifteen minutes that should have happened pre-launch; traffic is accruing unmeasured.",
+          "dod": "Traffic visible in GA4; site indexed in GSC.",
+          "est": "30 min",
+          "estH": 0.5
+        },
+        {
+          "id": "7.2",
+          "title": "Conversion events + Ads tag pre-wiring",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "quote_submit already fires; add deposit-paid and final-paid events + the Google Ads conversion tag so day one of ads has history.",
+          "dod": "Events visible in GA4 DebugView.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "7.3",
+          "title": "BigQuery: project + Sydney dataset + external table over the Sheet",
+          "owner": "allan+clifford",
+          "status": "todo",
+          "detail": "Zero-ETL: the job-log Sheet becomes queryable SQL. The capture has been running since day one precisely for this.",
+          "dod": "A SQL query returns real job rows.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "7.4",
+          "title": "Reconciliation tie-out + weekly Slack digest",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "GHL \u2194 Sheet \u2194 SM8 row counts tie by opp_id weekly, posted to Slack. This is pass-bar #1 made routine.",
+          "dod": "First weekly digest posts with matching counts.",
+          "est": "2 hr",
+          "estH": 2
+        },
+        {
+          "id": "7.5",
+          "title": "Lead-source attribution check",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "form lead_source \u2192 GHL field \u2192 Sheet column \u2192 GA4 dimension all agree, so 'where did this job come from' has one answer.",
+          "dod": "A test lead shows the same source in all four places.",
+          "est": "1 hr",
+          "estH": 1
+        }
       ]
     },
     {
-      "title": "PHASE 8 — HARDENING + OPS MATURITY",
+      "title": "PHASE 8 \u2014 HARDENING + OPS MATURITY",
       "goal": "The boring layer that makes 'finalised' true: keys rotated, failures noticed, backups restorable, policies written.",
       "items": [
-        { "id": "8.1", "title": "Rotate all 7 exposed credentials + rotation runbooks", "owner": "allan+clifford", "status": "todo", "detail": "SM8 key, GHL PIT, Netlify, 3× Supabase, Make webhook secret — one at a time, verifying the scenarios after each. Then write the runbook so next time is 10 minutes.", "dod": "Zero old keys valid; every scenario green after." },
-        { "id": "8.2", "title": "Monitoring + vendor-outage runbooks + uptime monitor", "owner": "clifford", "status": "todo", "detail": "Who notices a dead vendor and how fast, with the manual fallback steps per vendor; free uptime checks on the site + form asset alerting Slack.", "dod": "One forced failure per vendor with owner, detection time, fallback used, recovery — evidenced in a drill log." },
-        { "id": "8.3", "title": "Backup/restore drills (WP, Supabase, Sheet, GHL/SM8/Xero exports)", "owner": "allan+clifford", "status": "todo", "detail": "A backup that has never been restored is a hope, not a backup.", "dod": "One restore proven per system." },
-        { "id": "8.4", "title": "Privacy paragraphs live + retention policy + zip redeploy", "owner": "ceos+allan", "status": "todo", "detail": "Allan approves the 3 drafted paragraphs (sub-disclosure, records, AI use) → page-privacy.php updated → rebuild timeless-theme-2.zip (carries the llms.txt overclaim fixes) → upload → both cache purges.", "dod": "Live privacy page shows the additions; live llms.txt clean." },
-        { "id": "8.5", "title": "Accessibility pass", "owner": "clifford", "status": "todo", "detail": "Keyboard, labels, contrast, reduced-motion on the form + key pages.", "dod": "axe scan + manual pass logged." },
-        { "id": "8.6", "title": "WordPress ops policy", "owner": "allan+clifford", "status": "todo", "detail": "Minor auto-updates ON, majors via wp-now staging first, security plugin, monthly plugin audit, rollback = the previous zip.", "dod": "Policy doc + settings screenshot." },
-        { "id": "8.7", "title": "Insurance Certificate of Currency VERIFIED", "owner": "allan", "status": "todo", "detail": "Get the CoC from the broker and confirm in writing it covers resurfacing AND regrouting + the sub extension. The audit found we have never actually sighted it — if there's an exclusion, we find out now, not at a claim.", "dod": "CoC on file; coverage confirmed in writing." },
-        { "id": "8.8", "title": "Renewals + expiry calendar", "owner": "clifford", "status": "todo", "detail": "Domains (Mar/Apr 2027), Workspace price rise (Jul), Xero promo end (26 Nov), SM8 promo end (May 2027), insurance, ACMA, ABN/ASIC, key ages — all in one calendar with alerts.", "dod": "Calendar entries + a board card." },
-        { "id": "8.9", "title": "Doc quarantine: stale stage names + old review-gating + template timings", "owner": "clifford", "status": "todo", "detail": "Banner the CEO.md passages still reading '14 Invoiced / 15 Paid', the promoter-only review line in the old GHL specs, and the comms-template day-7 expiry (the 14-day lock won).", "dod": "Each stale passage carries a supersession banner." }
+        {
+          "id": "8.1",
+          "title": "Rotate all 7 exposed credentials + rotation runbooks",
+          "owner": "allan+clifford",
+          "status": "todo",
+          "detail": "SM8 key, GHL PIT, Netlify, 3\u00d7 Supabase, Make webhook secret \u2014 one at a time, verifying the scenarios after each. Then write the runbook so next time is 10 minutes.",
+          "dod": "Zero old keys valid; every scenario green after.",
+          "est": "2 hr",
+          "estH": 2
+        },
+        {
+          "id": "8.2",
+          "title": "Monitoring + vendor-outage runbooks + uptime monitor",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Who notices a dead vendor and how fast, with the manual fallback steps per vendor; free uptime checks on the site + form asset alerting Slack.",
+          "dod": "One forced failure per vendor with owner, detection time, fallback used, recovery \u2014 evidenced in a drill log.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "8.3",
+          "title": "Backup/restore drills (WP, Supabase, Sheet, GHL/SM8/Xero exports)",
+          "owner": "allan+clifford",
+          "status": "todo",
+          "detail": "A backup that has never been restored is a hope, not a backup.",
+          "dod": "One restore proven per system.",
+          "est": "2.5 hr",
+          "estH": 2.5
+        },
+        {
+          "id": "8.4",
+          "title": "Privacy paragraphs live + retention policy + zip redeploy",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Allan approves the 3 drafted paragraphs (sub-disclosure, records, AI use) \u2192 page-privacy.php updated \u2192 rebuild timeless-theme-2.zip (carries the llms.txt overclaim fixes) \u2192 upload \u2192 both cache purges.",
+          "dod": "Live privacy page shows the additions; live llms.txt clean.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "8.5",
+          "title": "Accessibility pass",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Keyboard, labels, contrast, reduced-motion on the form + key pages.",
+          "dod": "axe scan + manual pass logged.",
+          "est": "2 hr",
+          "estH": 2
+        },
+        {
+          "id": "8.6",
+          "title": "WordPress ops policy",
+          "owner": "allan+clifford",
+          "status": "todo",
+          "detail": "Minor auto-updates ON, majors via wp-now staging first, security plugin, monthly plugin audit, rollback = the previous zip.",
+          "dod": "Policy doc + settings screenshot.",
+          "est": "1 hr",
+          "estH": 1
+        },
+        {
+          "id": "8.7",
+          "title": "Insurance Certificate of Currency VERIFIED",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Get the CoC from the broker and confirm in writing it covers resurfacing AND regrouting + the sub extension. The audit found we have never actually sighted it \u2014 if there's an exclusion, we find out now, not at a claim.",
+          "dod": "CoC on file; coverage confirmed in writing.",
+          "est": "30 min effort + broker turnaround",
+          "estH": 0.5
+        },
+        {
+          "id": "8.8",
+          "title": "Renewals + expiry calendar",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Domains (Mar/Apr 2027), Workspace price rise (Jul), Xero promo end (26 Nov), SM8 promo end (May 2027), insurance, ACMA, ABN/ASIC, key ages \u2014 all in one calendar with alerts.",
+          "dod": "Calendar entries + a board card.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "8.9",
+          "title": "Doc quarantine: stale stage names + old review-gating + template timings",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Banner the CEO.md passages still reading '14 Invoiced / 15 Paid', the promoter-only review line in the old GHL specs, and the comms-template day-7 expiry (the 14-day lock won).",
+          "dod": "Each stale passage carries a supersession banner.",
+          "est": "45 min",
+          "estH": 0.75
+        }
       ]
     },
     {
-      "title": "PHASE 9 — VERIFICATION GATES (the finalised stamp)",
+      "title": "PHASE 9 \u2014 VERIFICATION GATES (the finalised stamp)",
       "goal": "Prove the whole machine, then audit it adversarially. Pass = the business is 'guaranteed finalised'.",
       "items": [
-        { "id": "9.1", "title": "FULL E2E dry-run with forced failures", "owner": "ceos+allan+marko", "status": "todo", "detail": "Fake customer end-to-end (Stripe TEST deposit + final) + fake sub (offer→accept→photos→complete→back-sync→invoice→paid) + one forced failure at EVERY handoff to prove each runbook actually recovers.", "dod": "Script + drill log committed." },
-        { "id": "9.2", "title": "FINAL DEEP AUDIT vs the 12-point pass-bar", "owner": "ceos", "status": "todo", "gate": "PASS = FINALISED", "detail": "Pattern-C multi-agent audit against MASTER-FINALIZATION-MAP §1: data ties out, zero contact leaks, idempotency, secrets, legal, money lane, live QA, dispatch, real-SMS, accessibility+abuse, backups, outage runbooks.", "dod": "Zero P0/P1 findings → STATE.md stamped FINALISED." }
+        {
+          "id": "9.1",
+          "title": "FULL E2E dry-run with forced failures",
+          "owner": "ceos+allan+marko",
+          "status": "todo",
+          "detail": "Fake customer end-to-end (Stripe TEST deposit + final) + fake sub (offer\u2192accept\u2192photos\u2192complete\u2192back-sync\u2192invoice\u2192paid) + one forced failure at EVERY handoff to prove each runbook actually recovers.",
+          "dod": "Script + drill log committed.",
+          "est": "4 hr (all hands)",
+          "estH": 4
+        },
+        {
+          "id": "9.2",
+          "title": "FINAL DEEP AUDIT vs the 12-point pass-bar",
+          "owner": "ceos",
+          "status": "todo",
+          "gate": "PASS = FINALISED",
+          "detail": "Pattern-C multi-agent audit against MASTER-FINALIZATION-MAP \u00a71: data ties out, zero contact leaks, idempotency, secrets, legal, money lane, live QA, dispatch, real-SMS, accessibility+abuse, backups, outage runbooks.",
+          "dod": "Zero P0/P1 findings \u2192 STATE.md stamped FINALISED.",
+          "est": "4 hr",
+          "estH": 4
+        }
       ]
     },
     {
-      "title": "PHASE 10 — GROWTH LAYER (deliberately last)",
-      "goal": "Only after the machine is finalised: feed it. Content, reviews, ads, referral — the Jordan flywheel.",
+      "title": "PHASE 10 \u2014 GROWTH LAYER (deliberately last)",
+      "goal": "Only after the machine is finalised: feed it. Content, reviews, ads, referral \u2014 the Jordan flywheel.",
       "items": [
-        { "id": "10.1", "title": "GBP engine running", "owner": "allan+clifford", "status": "todo", "detail": "Weekly posts, per-job photos, Q&A seeding, review velocity tracked.", "dod": "Four dated posts + photos + Q&A live; review count tracked; UTM log running." },
-        { "id": "10.2", "title": "Before/after content loop + automated library", "owner": "clifford", "status": "todo", "detail": "Job-complete photos flow to an auto-categorised library (Jordan automates this), consent-checked via 4.4, then progressively replace the site's placeholder images.", "dod": "First real pair flows job→library→site without manual sorting." },
-        { "id": "10.3", "title": "Blog activation + 5-post seed", "owner": "clifford", "status": "todo", "detail": "The theme already ships archive-article.php + single-article.php. Activate, publish 5 posts against suburb/service intents, keep llms.txt in sync.", "dod": "First post indexed by Google." },
-        { "id": "10.4", "title": "Socials: FB + IG pages + cadence", "owner": "allan", "status": "todo", "detail": "Confirm/create the business pages, cross-post from the content loop. DM-handler AI employee joins here.", "dod": "Pages live + 4 posts." },
-        { "id": "10.5", "title": "Google Ads: compliance audit → top-5 campaigns", "owner": "allan+clifford", "status": "todo", "detail": "Landing-page policy audit first (claims, pricing wording), then campaigns on the locked top-5 pages at a capped test budget.", "dod": "First conversion tracked end-to-end; zero policy flags." },
-        { "id": "10.6", "title": "Lifecycle marketing pack: referral + win-back + persona nurture", "owner": "ceos+allan", "status": "todo", "detail": "Homes the audit orphans: referral ask (incentive structure decided FIRST — none exists), 30/90-day win-backs, PM/builder/landlord nurture sequences (templates 5A-5D exist). All commercial = STOP line required, Rule-8 approved.", "dod": "Each sequence live with STOP; first sends logged." },
-        { "id": "10.7", "title": "Suburb-page expansion batch 2", "owner": "clifford", "status": "todo", "detail": "Data-driven new suburb pages + FAQ/schema refresh from real customer questions.", "dod": "Batch 2 live + indexed." }
+        {
+          "id": "10.1",
+          "title": "GBP engine running",
+          "owner": "allan+clifford",
+          "status": "todo",
+          "detail": "Weekly posts, per-job photos, Q&A seeding, review velocity tracked.",
+          "dod": "Four dated posts + photos + Q&A live; review count tracked; UTM log running.",
+          "est": "2 hr setup",
+          "estH": 2
+        },
+        {
+          "id": "10.2",
+          "title": "Before/after content loop + automated library",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Job-complete photos flow to an auto-categorised library (Jordan automates this), consent-checked via 4.4, then progressively replace the site's placeholder images.",
+          "dod": "First real pair flows job\u2192library\u2192site without manual sorting.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "10.3",
+          "title": "Blog activation + 5-post seed",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "The theme already ships archive-article.php + single-article.php. Activate, publish 5 posts against suburb/service intents, keep llms.txt in sync.",
+          "dod": "First post indexed by Google.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "10.4",
+          "title": "Socials: FB + IG pages + cadence",
+          "owner": "allan",
+          "status": "todo",
+          "detail": "Confirm/create the business pages, cross-post from the content loop. DM-handler AI employee joins here.",
+          "dod": "Pages live + 4 posts.",
+          "est": "1.5 hr",
+          "estH": 1.5
+        },
+        {
+          "id": "10.5",
+          "title": "Google Ads: compliance audit \u2192 top-5 campaigns",
+          "owner": "allan+clifford",
+          "status": "todo",
+          "detail": "Landing-page policy audit first (claims, pricing wording), then campaigns on the locked top-5 pages at a capped test budget.",
+          "dod": "First conversion tracked end-to-end; zero policy flags.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "10.6",
+          "title": "Lifecycle marketing pack: referral + win-back + persona nurture",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Homes the audit orphans: referral ask (incentive structure decided FIRST \u2014 none exists), 30/90-day win-backs, PM/builder/landlord nurture sequences (templates 5A-5D exist). All commercial = STOP line required, Rule-8 approved.",
+          "dod": "Each sequence live with STOP; first sends logged.",
+          "est": "3 hr",
+          "estH": 3
+        },
+        {
+          "id": "10.7",
+          "title": "Suburb-page expansion batch 2",
+          "owner": "clifford",
+          "status": "todo",
+          "detail": "Data-driven new suburb pages + FAQ/schema refresh from real customer questions.",
+          "dod": "Batch 2 live + indexed.",
+          "est": "2 hr",
+          "estH": 2
+        }
       ]
     }
   ]

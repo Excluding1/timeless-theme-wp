@@ -1,0 +1,491 @@
+{
+ "runs": 1000,
+ "classification": {
+  "operable_manual_automated_by_planned_step": 692,
+  "operable_today_manual_SOP": 308
+ },
+ "uncovered_touchpoints": [],
+ "planned_step_demand": [
+  [
+   "6.11",
+   870
+  ],
+  [
+   "4.2",
+   870
+  ],
+  [
+   "1.13",
+   542
+  ],
+  [
+   "1.11",
+   504
+  ],
+  [
+   "1.1",
+   487
+  ],
+  [
+   "3.5",
+   473
+  ],
+  [
+   "5.3",
+   473
+  ],
+  [
+   "1.3",
+   421
+  ],
+  [
+   "1.4",
+   421
+  ],
+  [
+   "1.5",
+   421
+  ],
+  [
+   "2.1",
+   421
+  ],
+  [
+   "1.15",
+   421
+  ],
+  [
+   "2.2",
+   420
+  ],
+  [
+   "6.1",
+   232
+  ],
+  [
+   "5.2",
+   196
+  ]
+ ],
+ "touchpoint_hits": [
+  [
+   "lead.ack",
+   983
+  ],
+  [
+   "quote.priced",
+   870
+  ],
+  [
+   "quote.sent_sms",
+   870
+  ],
+  [
+   "quote.cadence",
+   487
+  ],
+  [
+   "accept.terms_trail",
+   473
+  ],
+  [
+   "money.deposit_link",
+   473
+  ],
+  [
+   "intake.form_complete",
+   431
+  ],
+  [
+   "pipeline.stage11_dispatch",
+   421
+  ],
+  [
+   "book.confirm",
+   421
+  ],
+  [
+   "book.day_before",
+   421
+  ],
+  [
+   "job.complete_backsync",
+   421
+  ],
+  [
+   "post.cure_sms",
+   421
+  ],
+  [
+   "money.invoice",
+   421
+  ],
+  [
+   "post.warranty_cert",
+   421
+  ],
+  [
+   "lead.qna_stage02",
+   421
+  ],
+  [
+   "money.payment_ok",
+   401
+  ],
+  [
+   "lead.photo_resend",
+   249
+  ],
+  [
+   "dispatch.marko",
+   232
+  ],
+  [
+   "gate.external_sub_legal",
+   189
+  ],
+  [
+   "dispatch.sub_offer",
+   189
+  ]
+ ],
+ "samples": [
+  {
+   "n": 0,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "form_complete",
+    "persona": "owner_occupier",
+    "service": "chip_repair",
+    "property": "house",
+    "prop_age": "1990_2000",
+    "bathrooms": 2,
+    "photos": "clear",
+    "quote_path": "photo_priced",
+    "outcome": "no_reply_expire",
+    "deposit": "pays",
+    "sched": "reschedule",
+    "executor": "marko",
+    "sub_event": "accepts",
+    "job_event": "clean",
+    "payment": "partial",
+    "post": "repeat_customer",
+    "consent": "yes",
+    "failure": "none",
+    "mode": "today"
+   },
+   "path": [
+    "intake.form_complete",
+    "intake.duplicate",
+    "lead.ack",
+    "quote.priced",
+    "quote.multi_bathroom",
+    "quote.sent_sms",
+    "quote.cadence"
+   ]
+  },
+  {
+   "n": 1,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "form_complete",
+    "persona": "landlord_self",
+    "service": "chip_repair",
+    "property": "house",
+    "prop_age": "2010_plus",
+    "bathrooms": 1,
+    "photos": "blurry",
+    "quote_path": "photo_priced",
+    "outcome": "accept_after_cadence",
+    "deposit": "pays",
+    "sched": "smooth",
+    "executor": "external_sub",
+    "sub_event": "accepts",
+    "job_event": "clean",
+    "payment": "immediate",
+    "post": "quiet",
+    "consent": "yes",
+    "failure": "none",
+    "mode": "scale"
+   },
+   "path": [
+    "intake.form_complete",
+    "lead.ack",
+    "lead.photo_resend",
+    "quote.priced",
+    "quote.sent_sms",
+    "quote.cadence",
+    "accept.terms_trail",
+    "money.deposit_link",
+    "pipeline.stage11_dispatch",
+    "book.confirm",
+    "book.day_before",
+    "gate.external_sub_legal",
+    "dispatch.sub_offer",
+    "job.complete_backsync",
+    "post.cure_sms",
+    "money.invoice",
+    "money.payment_ok",
+    "post.warranty_cert"
+   ]
+  },
+  {
+   "n": 2,
+   "worst": "MANUAL",
+   "s": {
+    "lead": "form_complete",
+    "persona": "owner_occupier",
+    "service": "basin",
+    "property": "house",
+    "prop_age": "1990_2000",
+    "bathrooms": 1,
+    "photos": "blurry",
+    "quote_path": "site_inspection",
+    "outcome": "accept_fast",
+    "deposit": "cancels_post_deposit",
+    "sched": "smooth",
+    "executor": "marko",
+    "sub_event": "accepts",
+    "job_event": "unhappy_midjob",
+    "payment": "immediate",
+    "post": "nps_promoter_review",
+    "consent": "not_asked",
+    "failure": "none",
+    "mode": "today"
+   },
+   "path": [
+    "intake.form_complete",
+    "lead.ack",
+    "lead.photo_resend",
+    "quote.site_inspection",
+    "quote.priced",
+    "quote.sent_sms",
+    "accept.terms_trail",
+    "money.deposit_link",
+    "book.cancel_post_deposit",
+    "money.refund"
+   ]
+  },
+  {
+   "n": 3,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "referral_warm",
+    "persona": "landlord_self",
+    "service": "silicone",
+    "property": "house",
+    "prop_age": "1990_2000",
+    "bathrooms": 1,
+    "photos": "clear",
+    "quote_path": "photo_priced",
+    "outcome": "accept_after_cadence",
+    "deposit": "delays",
+    "sched": "smooth",
+    "executor": "external_sub",
+    "sub_event": "handback",
+    "job_event": "clean",
+    "payment": "immediate",
+    "post": "quiet",
+    "consent": "not_asked",
+    "failure": "none",
+    "mode": "scale"
+   },
+   "path": [
+    "intake.referral_warm",
+    "lead.ack",
+    "quote.priced",
+    "quote.sent_sms",
+    "quote.cadence",
+    "accept.terms_trail",
+    "money.deposit_link",
+    "money.deposit_chase",
+    "pipeline.stage11_dispatch",
+    "book.confirm",
+    "book.day_before",
+    "gate.external_sub_legal",
+    "dispatch.sub_offer",
+    "dispatch.sub_handback",
+    "job.complete_backsync",
+    "post.cure_sms",
+    "money.invoice",
+    "money.payment_ok",
+    "post.warranty_cert"
+   ]
+  },
+  {
+   "n": 4,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "sms_photos",
+    "persona": "owner_occupier",
+    "service": "shower_regrout",
+    "property": "commercial",
+    "prop_age": "2000_2010",
+    "bathrooms": 1,
+    "photos": "clear",
+    "quote_path": "photo_priced",
+    "outcome": "accept_after_cadence",
+    "deposit": "pays",
+    "sched": "smooth",
+    "executor": "marko",
+    "sub_event": "accepts",
+    "job_event": "extra_scope",
+    "payment": "immediate",
+    "post": "nps_promoter_review",
+    "consent": "no",
+    "failure": "none",
+    "mode": "today"
+   },
+   "path": [
+    "intake.sms_photos",
+    "lead.ack",
+    "lead.qna_stage02",
+    "quote.priced",
+    "quote.sent_sms",
+    "quote.cadence",
+    "accept.terms_trail",
+    "money.deposit_link",
+    "pipeline.stage11_dispatch",
+    "book.confirm",
+    "book.day_before",
+    "dispatch.marko",
+    "job.extra_scope",
+    "job.complete_backsync",
+    "post.cure_sms",
+    "money.invoice",
+    "money.payment_ok",
+    "post.warranty_cert",
+    "post.nps",
+    "post.review_ask",
+    "post.photo_consent"
+   ]
+  },
+  {
+   "n": 5,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "form_complete",
+    "persona": "property_manager",
+    "service": "shower_regrout",
+    "property": "pre1990",
+    "prop_age": "2000_2010",
+    "bathrooms": 1,
+    "photos": "clear",
+    "quote_path": "site_inspection",
+    "outcome": "accept_fast",
+    "deposit": "pays",
+    "sched": "smooth",
+    "executor": "marko",
+    "sub_event": "accepts",
+    "job_event": "asbestos_found",
+    "payment": "immediate",
+    "post": "nps_promoter_review",
+    "consent": "yes",
+    "failure": "none",
+    "mode": "today"
+   },
+   "path": [
+    "intake.form_complete",
+    "lead.ack",
+    "quote.site_inspection",
+    "quote.priced",
+    "quote.sent_sms",
+    "accept.terms_trail",
+    "money.deposit_link",
+    "pipeline.stage11_dispatch",
+    "book.confirm",
+    "book.day_before",
+    "dispatch.marko",
+    "job.asbestos_found",
+    "job.complete_backsync",
+    "post.cure_sms",
+    "money.invoice",
+    "money.payment_ok",
+    "post.warranty_cert",
+    "post.nps",
+    "post.review_ask",
+    "post.photo_consent"
+   ]
+  },
+  {
+   "n": 6,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "form_complete",
+    "persona": "landlord_self",
+    "service": "silicone",
+    "property": "pre1990",
+    "prop_age": "pre_1990",
+    "bathrooms": 1,
+    "photos": "clear",
+    "quote_path": "photo_priced",
+    "outcome": "winback_return",
+    "deposit": "cancels_pre_deposit",
+    "sched": "smooth",
+    "executor": "external_sub",
+    "sub_event": "runs_long",
+    "job_event": "asbestos_found",
+    "payment": "immediate",
+    "post": "repeat_customer",
+    "consent": "not_asked",
+    "failure": "none",
+    "mode": "scale"
+   },
+   "path": [
+    "intake.form_complete",
+    "lead.ack",
+    "quote.priced",
+    "quote.sent_sms",
+    "quote.cadence",
+    "quote.expiry_winback",
+    "accept.terms_trail",
+    "money.deposit_link"
+   ]
+  },
+  {
+   "n": 7,
+   "worst": "PLANNED",
+   "s": {
+    "lead": "form_complete",
+    "persona": "owner_occupier",
+    "service": "silicone",
+    "property": "house",
+    "prop_age": "2000_2010",
+    "bathrooms": 1,
+    "photos": "clear",
+    "quote_path": "photo_priced",
+    "outcome": "accept_after_cadence",
+    "deposit": "delays",
+    "sched": "smooth",
+    "executor": "external_sub",
+    "sub_event": "accepts",
+    "job_event": "clean",
+    "payment": "immediate",
+    "post": "quiet",
+    "consent": "yes",
+    "failure": "none",
+    "mode": "scale"
+   },
+   "path": [
+    "intake.form_complete",
+    "lead.ack",
+    "quote.priced",
+    "quote.sent_sms",
+    "quote.cadence",
+    "accept.terms_trail",
+    "money.deposit_link",
+    "money.deposit_chase",
+    "pipeline.stage11_dispatch",
+    "book.confirm",
+    "book.day_before",
+    "gate.external_sub_legal",
+    "dispatch.sub_offer",
+    "job.complete_backsync",
+    "post.cure_sms",
+    "money.invoice",
+    "money.payment_ok",
+    "post.warranty_cert"
+   ]
+  }
+ ]
+}
