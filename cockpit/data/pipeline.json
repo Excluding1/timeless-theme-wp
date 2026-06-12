@@ -66,20 +66,20 @@
           "title": "Paste the 3 W3 quote-cadence SMS (day 1 / 3 / 7)",
           "owner": "allan",
           "status": "todo",
-          "detail": "API-VERIFIED 2026-06-13: the W3 workflow EXISTS + is PUBLISHED (id 00ba607e\u2026). The ONLY open question is whether its 3 SMS bodies are the approved pack \u2014 open W3, check the day-7 SMS: if it says 'valid for 14 days' this step is DONE; if it says 'written quote' / '24-48 hours', paste the approved pack from memory/pending_copy_packs_2026-06-12.md. Guardrails: 8am-8pm window, stop-on-reply.",
+          "detail": "REAL W3 SHAPE (Allan screenshots 2026-06-13): trigger Quote Sent \u2192 Non-tenant+Margin-OK filter \u2192 set quote_sent_at \u2192 24h \u2192 SMS T5 (day-1) \u2192 48h \u2192 SMS T6 (day-3) \u2192 7d \u2192 EMAIL day-10 \u2192 4d \u2192 day-14 stage check \u2192 Mark Lost + Tag flag-quote-expired. EDITS: paste approved Day-1/Day-3 into T5/T6; REPLACE the day-10 email with a day-7 SMS (approved text) \u2014 waits become 24h/48h/4d/7d (email returns in Phase 4 post-DKIM as touch 4); record the old email body before deleting.",
           "dod": "Fires on a test opp, stops on reply, day-7 message states the 14-day validity.",
-          "est": "10 min check (or 15 min paste)",
-          "estH": 0.25
+          "est": "30 min",
+          "estH": 0.5
         },
         {
           "id": "1.2",
           "title": "Quote-expiry win-back (day 15)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "CONFLICT RESOLVED by the locked rule: quotes are valid 14 days (CEO.md lock) so the win-back fires day 15 \u2014 the old template saying day 7 was stale and has been patched. Clifford+Cleo draft the one message; Allan builds the workflow on quote_expires_at.",
+          "detail": "EASIER THAN SCOPED: W3 already marks Lost + tags flag-quote-expired at day 14. Build = after the Tag step add Wait 1 day \u2192 SMS (approved win-back w/ STOP line) \u2192 End. Test with 2-min waits alongside 1.1.",
           "dod": "Expired test opp gets exactly one win-back, then silence.",
-          "est": "45 min",
-          "estH": 0.75
+          "est": "15 min",
+          "estH": 0.25
         },
         {
           "id": "1.3",
