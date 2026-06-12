@@ -186,7 +186,7 @@
           "title": "Operational snippet pack in GHL (the manual-send library)",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 \u2014 manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not).",
+          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 \u2014 manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not). Mystery-shop upgrade (2026-06-13): the rejection snippet INCLUDES a referral pathway (licensed renovator / hipages direction) \u2014 Surface Care's rejection dead-ends with 'we do not know who to refer'; ours banks the goodwill.",
           "dod": "Every snippet sendable in 2 clicks; intake SOP written into the money-lane doc.",
           "est": "1.5 hr",
           "estH": 1.5
@@ -220,6 +220,26 @@
           "dod": "Two consecutive real quotes drafted via the kit in under 10 min each, both pass the margin lens.",
           "est": "2 hr",
           "estH": 2
+        },
+        {
+          "id": "1.17",
+          "title": "\"Reply URGENT\" triage (adopted from the Surface Care mystery shop)",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Their ack SMS says: if your job is urgent (within 7 days), reply 'Urgent' to prioritise. Zero-friction urgency capture \u2014 our simulation had urgency as an axis with NO capture mechanism. Add the line to our W1 ack (Rule-8 wording) + a GHL trigger on inbound 'urgent' that tags the contact, pings #hot-leads and creates a priority task.",
+          "dod": "A test reply of 'urgent' tags the opp, pings #hot-leads and creates the task; ack copy Rule-8 approved.",
+          "est": "45 min",
+          "estH": 0.75
+        },
+        {
+          "id": "1.18",
+          "title": "W2 recovery v2: resume link + second-reminder decision (mystery-shop adopted)",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "detail": "Surface Care's abandoned-form recovery sends TWO reminders, each with a deep link that resumes the form with details prefilled. Ours sends one SMS with no link. v2: include the form URL in the W2 SMS (localStorage restores the draft on the same device; the QR/#qf= handoff covers cross-device) and decide (both CEOs) whether a +24h second nudge is worth the pester-risk under ACMA inferred-consent.",
+          "dod": "A test partial gets a link that resumes their draft; the one-vs-two-reminder decision is logged with reasoning.",
+          "est": "1 hr",
+          "estH": 1
         }
       ]
     },
