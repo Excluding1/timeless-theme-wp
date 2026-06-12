@@ -50,7 +50,7 @@ Once validated, this doc becomes the canonical attachment to the Subcontractor A
 | Bath resurface — Large/clawfoot | $600 | $660 | Freestanding or oversized |
 | Tile recoat — Small (<4sqm) | $400 | $440 | Shower or splashback tiles |
 | Tile recoat — Medium (4-8sqm) | $550 | $605 | Full shower or bathroom walls |
-| Basin/sink resurface | $250 | $275 | Single basin, chip repair included |
+| Basin/sink resurface | $250 | $275 | Single basin, chip repair included. ⚠️ **MARGIN-FLOOR CLASH (found on quote #1, 2026-06-12):** at $250 sub pay, a STANDALONE basin job breaches the $300 floor at T1/T2 (T2 $680 → $618 ex-GST − $88 mat − $250 = $280). The master sheet's internal labour model is $160 (= its $400 T2 margin). Resolution options for Marko+Allan when external subs start: standalone basins stay self-performed · sub does basins as ADD-ONs only (BSN-02 economics) · raise standalone T2 to ~$750 · or set small-job sub rate $180-200 (still $72-80/hr > $65 Fair-Work floor). Self-performed (Marko, jobs 1-3) this is moot — his labour comp + business profit both land with founders. |
 | Vanity benchtop resurface | $350 | $385 | Benchtop surface only |
 | Cabinet respray — per door | $80 | $88 | Per cabinet door/drawer front |
 | Chip repair — per chip | $120 | $132 | Single chip on bath/basin/tile |
