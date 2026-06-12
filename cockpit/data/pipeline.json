@@ -63,20 +63,20 @@
       "items": [
         {
           "id": "1.1",
-          "title": "Paste the 3 W3 quote-cadence SMS (day 1 / 3 / 7)",
+          "title": "W3 cadence: bodies VERIFIED GOOD (keep Allan's copy) \u2014 final test only",
           "owner": "allan",
           "status": "todo",
-          "detail": "REAL W3 SHAPE (Allan screenshots 2026-06-13): trigger Quote Sent \u2192 Non-tenant+Margin-OK filter \u2192 set quote_sent_at \u2192 24h \u2192 SMS T5 (day-1) \u2192 48h \u2192 SMS T6 (day-3) \u2192 7d \u2192 EMAIL day-10 \u2192 4d \u2192 day-14 stage check \u2192 Mark Lost + Tag flag-quote-expired. EDITS: paste approved Day-1/Day-3 into T5/T6; REPLACE the day-10 email with a day-7 SMS (approved text) \u2014 waits become 24h/48h/4d/7d (email returns in Phase 4 post-DKIM as touch 4); record the old email body before deleting.",
+          "detail": "2026-06-13: Allan pasted the real bodies \u2014 T5 day-1, T6 day-3 (correct 14-day validity) and the day-10 email (well-written, ABN, unsubscribe, no stale claims) are ALL compliant. The 'paste the pack' task was based on a stale record \u2014 DO NOT overwrite. The approved pack's day-7 SMS = spare (archived). Remaining: the 2-minute-wait cadence test + one DKIM eyeball (send the day-10 email to yourself \u2192 Gmail \u22ee \u2192 Show original \u2192 SPF/DKIM/DMARC all PASS).",
           "dod": "Fires on a test opp, stops on reply, day-7 message states the 14-day validity.",
-          "est": "30 min",
-          "estH": 0.5
+          "est": "20 min test",
+          "estH": 0.3
         },
         {
           "id": "1.2",
           "title": "Quote-expiry win-back (day 15)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "EASIER THAN SCOPED: W3 already marks Lost + tags flag-quote-expired at day 14. Build = after the Tag step add Wait 1 day \u2192 SMS (approved win-back w/ STOP line) \u2192 End. Test with 2-min waits alongside 1.1.",
+          "detail": "Allan confirmed the gap by eye: at day 14 the workflow ONLY marks Lost + tags flag-quote-expired \u2014 nothing is sent. The build: click + AFTER the 'Tag flag-quote-expired' step \u2192 Wait 1 day \u2192 + \u2192 Send SMS \u2192 paste the approved win-back (ends 'Reply STOP to opt out') \u2192 End. Why: expired customers currently get silence; this one message recovers the last few percent and closes politely.",
           "dod": "Expired test opp gets exactly one win-back, then silence.",
           "est": "15 min",
           "estH": 0.25
@@ -206,7 +206,7 @@
           "title": "Warranty certificate (design + build \u2014 needs DKIM first)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Resolves open decision #4: an emailed certificate (HTML/PDF) delivered by a stage-15 step, stating the per-material warranty ladder. Built after Phase 4 email plumbing.",
+          "detail": "Resolves open decision #4: an emailed certificate (HTML/PDF) delivered by a stage-15 step, stating the per-material warranty ladder. Built after Phase 4 email plumbing. Delivery vehicle decided (Allan 06-13): part of the completion-pack email (4.2) \u2014 warranty certificate rides with photos + invoice + care PDF.",
           "dod": "Stage-15 test delivers the certificate with correct service + term.",
           "est": "2.5 hr",
           "estH": 2.5
@@ -374,17 +374,17 @@
           "title": "DKIM + quotes@/support@/billing@ + GHL sending domain",
           "owner": "allan",
           "status": "todo",
-          "detail": "admin.google.com \u2192 Apps \u2192 Gmail \u2192 Authenticate email \u2192 add the TXT in Cloudflare; create the three aliases; add the GHL dedicated sending domain. SPF + DMARC already pass (verified by dig).",
+          "detail": "SCOPE NARROWED 2026-06-13: the GHL dedicated sending domain ALREADY EXISTS + verifies (email.timelessresurfacing.com.au \u2192 Mailgun). Remaining: Google WORKSPACE DKIM (for manual Gmail sends: admin.google.com \u2192 Apps \u2192 Gmail \u2192 Authenticate email \u2192 TXT in Cloudflare) + the quotes@/support@/billing@ aliases.",
           "dod": "DKIM passes on mail-tester; aliases deliver.",
-          "est": "30 min + DNS propagation",
-          "estH": 0.5
+          "est": "20 min",
+          "estH": 0.3
         },
         {
           "id": "4.2",
           "title": "Email twin-set of the whole lifecycle",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Email versions of ack, quote delivery (the 2B template \u2014 already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements). Decision 13: rejections + M7/M8 escalations move to EMAIL (role-voiced) once this lands.",
+          "detail": "Email versions of ack, quote delivery (the 2B template \u2014 already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements). Decision 13: rejections + M7/M8 escalations move to EMAIL (role-voiced) once this lands. Allan 2026-06-13: include the COMPLETION PACK email (after stage 15): before/after photos + invoice link + warranty certificate + care-instructions PDF, one email. Dual-channel principle: mirror key touches SMS+email; stop-on-reply + Allan replying in-channel = follow-up continues on whichever channel the customer chose. GHL sending domain verified ACTIVE 06-13 so this phase is UNGATED for GHL-sent email (Workspace DKIM flip still in 4.1 for manual Gmail sends).",
           "dod": "Renders on Gmail+Outlook+mobile, SPF/DKIM/DMARC pass, reply route proven, screenshots archived.",
           "est": "4 hr",
           "estH": 4

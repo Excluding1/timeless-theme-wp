@@ -236,7 +236,7 @@
 | Channel | Status | Details |
 |---|---|---|
 | hello@timelessresurfacing.com.au | ❓ | CEO to verify exists + who has access. **quotes@/support@/billing@ aliases: ❌ not created (Allan, ~5 min in admin.google.com)** |
-| Email DNS state (verified 2026-06-12 via dig) | ⏳ Partial | MX → Google ✅ · SPF includes Google + LeadConnector + Mailgun ✅ · DMARC p=none ✅ · **Google Workspace DKIM ❌ NOT enabled** (no google._domainkey) · **GHL dedicated sending domain ❌ none**. Email quoting deferred until DKIM on; SMS = the quote channel meanwhile |
+| Email DNS state (re-verified 2026-06-13 via dig) | ✅ GHL emails authenticated | MX → Google ✅ · SPF includes Google + LeadConnector + Mailgun ✅ · DMARC p=none ✅ · **GHL dedicated sending domain ACTIVE: `email.timelessresurfacing.com.au` → Mailgun CNAME + strict SPF + verification keys (GHL only verifies with DKIM passing) → GHL automation emails (W3 day-10 etc.) ARE authenticated** — the 06-12 "GHL sending domain ❌" row was WRONG (selectors live on the subdomain, not root). Remaining gap: **Google Workspace DKIM ❌** (manual Gmail sends sign as gappssmtp → weaker; 10-min flip = board 4.1). Definitive per-email check: Gmail → Show original → SPF/DKIM/DMARC PASS |
 | Allan personal email | ✅ | allanpham106@gmail.com |
 | Marko personal email | ❓ | CEO to ask |
 | Business phone | ✅ | 0451 110 154 (per saved memory) |
