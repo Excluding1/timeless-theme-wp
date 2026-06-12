@@ -2,6 +2,10 @@
  "updated": "2026-06-12",
  "items": [
   {
+   "t": "📋 THE CANONICAL WORK PLAN (Allan's completion-first reframe 2026-06-12): docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md — v1.0 CO-SIGNED (Cleo amendments + completeness-critic merged). Phases: 1 core pipeline (ALL GHL workflows a-s + ALL Make scenarios + form hardening incl multi-bathroom convention + quote-acceptance flow) → 2 comms/email twin-set + Terms + photo-consent → 3 money automation → 4 field/sub system + legal + AI employees → 5 data/BigQuery → 6 hardening (rotation, monitoring, backups, WP ops, CoC) → 7 E2E dry-run + FINAL AUDIT vs the 12-point pass-bar → 8 growth (GBP/blog/socials/ads) LAST. Manual ops continue throughout via money-lane SOP; two hard gates stand (legal, stage-11 deposit).",
+   "done": false
+  },
+  {
    "t": "★★ #1 TODAY — QUOTE LISA VRUWINK (first QUOTE-FORM customer, i.e. first website-inbound — not first customer overall; promised 'tomorrow' on 06-11 night = DUE NOW). Gates (CEO.md): <$5k inc-GST per bathroom (HBA) · 3-tier T1/T2/T3 · $300 margin floor (hard) · 10% deposit · 14-day validity · never 'Licensed'. Deliver via SMS (her thread is SMS; DKIM not ready). GST = REGISTERED (Allan 06-12) so 'inc GST' wording is correct. Needs from Allan: her GHL form details/photos paste.",
    "done": false
   },
