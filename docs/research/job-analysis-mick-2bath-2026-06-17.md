@@ -33,10 +33,23 @@ the resurfacer's TSR scope, not the painter's).
 | Customer (T3→T2) | ~$4,400–6,600 | ~$3,500–5,400 (− $200/−10% multi-bath) |
 | Our cost | ~$2,600 | ~$2,100 |
 
-**Combined all-in (incl painting): ~$9,000–13,000 inc GST** · our cost ~$6,700 · gross profit ~$4,000–6,000
-(~46-48%, clears the $300 floor). ⇒ **Claremont Meadows defaults to the T3 (Western Sydney) tier**, not T2 — choose consciously.
+**Combined all-in (line-item estimate, all trades): ~$8,800–10,900 inc GST** (main ~$6,900 / ensuite ~$4,010
+at T2; ~$8,750 at T3) · our cost ~$6,000 · gross profit ~$4,300–4,900 (~45-48%, clears the $300 floor).
+⇒ **Claremont Meadows defaults to the T3 (Western Sydney) tier**, not T2 — choose consciously.
 
-## Trades (⇒ 3 distinct skills, not one "bathroom guy")
+⇒ **WALLS ARE HALF-TILED (Allan corrected 2026-06-17):** a tiled dado (~1.2m) + painted plaster above,
+EXCEPT the showers which are full-height tile. So tile-resurface = shower + dado + floor only; the upper
+walls are the painter's. Don't price full-height tile resurface on the whole room.
+⇒ **GOLD/BRASS tapware → customer wants CHROME = a PLUMBER swaps tapware + re-seats wastes** (resurfacing
+can't recolour metal). 4th trade. Also the plumber checks the cornice for a leak before coating.
+⇒ Per-bathroom line items (T2): MAIN = tile-resurface $2,600 + bath $1,290 + basin $580 + epoxy regrout/sil
+$750 + paint+cornice $800 + plumbing $650 + make-good $250. ENSUITE = tile $2,100 + basin $580 + regrout
+$600 + paint $700 + plumbing $480, −10% multi-bath.
+
+## Trades (⇒ 4 distinct skills, not one "bathroom guy"; all coordinated in-house via our subbies)
+**4th trade = PLUMBER** (gold→chrome tapware swap, re-seat wastes, leak check). Clean job-package webapp built
++ Netlify-ready: `/Users/excluding/Downloads/mick-job-sheet-netlify/` (index.html + Bathroom-1-MAIN/ +
+Bathroom-2-ENSUITE/); served locally at http://localhost:8910 (photos grouped per bathroom, click to enlarge).
 1. **Regrouter** — epoxy rake-out + re-grout + silicone.
 2. **Resurfacer** — HVLP spray; ONE person does bath (main) + basins + ALL tile recolour (walls white, floor
    grey + anti-slip additive). Tile recolour = same skill as bath resurface.
