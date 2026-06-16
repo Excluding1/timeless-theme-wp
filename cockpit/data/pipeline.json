@@ -336,13 +336,14 @@
         },
         {
           "id": "3.3",
-          "title": "Multi-bathroom convention + end-to-end test",
+          "title": "Multi-bathroom = ONE opp today (DATA LOSS: bathroom 2 overwrites bathroom 1) \u2014 make it real",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "CONFIRMED MECHANISM (code-read 2026-06-13): the form already creates one opp per bathroom (per-bathroom submission loop) \u2014 that's correct for HBA <$5k-per-invoice. Gaps: (1) the two opps are NOT linked, so Allan sees two separate 'Mick Connolly' opps and must join them by address by eye \u2192 add a shared property_submission_id generated at form start, included in every fire (small form change, ships next deploy); (2) discounts 10%/15% auto-noted; (3) quoter SOP. The duplicate-ACK half is handled GHL-side in step 1.0. DoD test: a 2-bathroom test = 2 linked opps + 1 ack.",
+          "detail": "API-CONFIRMED 2026-06-13 (opportunities/search): Mick Connolly = 1 contact, 1 OPPORTUNITY \u2014 NOT two. GHL dedupes the contact by phone/email and the W1 'create opportunity' action UPDATES the existing opp on the 2nd submission instead of creating a new one. Consequence: bathroom 2 OVERWRITES bathroom 1's custom fields (shared fixtures clobbered, e.g. photos_shower_urls) \u2014 bathroom 1's data is partly LOST (survives only in Cloudinary, bundled). So the HBA 'one opp/invoice per bathroom <$5k' strategy is NOT happening in the CRM today. FIX options (both-CEOs call): (A) make W1 genuinely create a SEPARATE opp per bathroom \u2014 set 'allow duplicate opportunity' / key the opp by property_submission_id + bathroom_index \u2014 so each bathroom has its own fields, photos, invoice; OR (B) accept one opp but write per-bathroom field sets (photos_b1_shower_urls\u2026) so nothing overwrites. (A) matches the HBA intent. Either needs a small form change (a property_submission_id generated at form start) + the GHL opp config. DoD: a 2-bathroom test = each bathroom's photos/scope retrievable separately, nothing overwritten.",
           "dod": "A 2-bathroom test = 2 opps, 2 quotes, discount noted.",
-          "est": "1.5 hr",
-          "estH": 1.5
+          "est": "2 hr",
+          "estH": 2,
+          "gate": "DATA LOSS"
         },
         {
           "id": "3.4",
