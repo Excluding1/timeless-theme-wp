@@ -39,6 +39,18 @@ grout must be raked first). ⇒ **Resurface area was understated**: MAIN ~18.2 m
 bath surround), ENSUITE ~11.7 m² (a TSR-12 *small* band, not TSR-13 — I'd over-scoped that one).
 **Combined all-in: ~$9,844 (T3, the correct default) – $11,384 (T2) inc GST** — MAIN ~$7,370 / ENSUITE ~$4,014
 (after −10% multi-bath).
+⇒ **⚠ SUPERSEDED 2026-06-17 PM — grounded in the master sheet (Allan: "actually look at the pricing sheet").**
+The bottom-up estimate in this section is being rebuilt from `data/pricing/master-pricing-2026-05-01-snapshot.xlsx`.
+Corrections found there: (1) **a SPA bath SKU EXISTS** — BTV-05 spa-standard sub **$483** / BTV-06 large-corner
+sub **$578** (T2 $1,440/$1,820, 47-50% margin), vs the **$880** used here — RECONCILE with Allan (is $880 his
+real current rate → sheet stale, or is the sheet right?). (2) **TSR-12/13/14 + FBR-01..04 are FULLY COSTED** in
+the sheet (sub labour + T1/T2/T3 + 55-62% margin) — the "UNCOSTED placeholder" note below is **WRONG**. (3)
+Multi-service jobs price off **COMBO SKUs** (e.g. TRC-03 regrout+full-tile+bath+basin = T2 $5,280, sub $1,494,
+62%), NOT summed individual lines (summing over-counts shared setup/masking/travel). (4) Multi-bath = **flat
+−$200 off the 2nd bathroom** (off OUR margin, sub unchanged), NOT −10%/−$448. (5) Only **PAINTING + PLUMBING**
+are genuinely off-sheet. (6) Western-Sydney upcharges that apply to Mick: hard-water +$50, custom GREY floor
+colour +$80, epoxy upgrade +$250, Penrith travel zone. Full rebuild pending Allan's spa-rate confirm.
+
 ⇒ **COST RE-AUDITED 2026-06-17 (Allan caught the resurfacer split — he was right):** the cost was first
 allocated TOP-DOWN to hit ~46%, which produced an incoherent lumped "$2,180 resurfacer" line. Rebuilt
 BOTTOM-UP per task: tile recolour ~30 m² two-colour ~$1,800 (the labour hog) + **spa bath ~$880** + 2 basins
