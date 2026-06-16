@@ -21,8 +21,10 @@ natural white. Decor is dated "**federation STYLE**" (floral border tiles, octag
 ⇒ **A bath only exists in the room that has one — don't price a bath into a bathless ensuite.**
 ⇒ **"Painted/recoloured tiles" = tile RESURFACING (TSR), not the FBP package** — FBP-02 keeps tiles their
 old colour, so for a colour-change brief you need FBP/RGE **+ TSR-13**, never FBP alone.
-⇒ **Wall/ceiling painting is NOT in our SKU list** — sub a painter (~$450-650/bathroom) or refer; never
-quote painting as if we deliver it.
+⇒ **Painting IS an offered service** (Allan 2026-06-17: we have a painter subbie) — include it as a
+quote LINE (our painter cost ~$450-500/bathroom, charge ~$600-900). ⇒ **No painting SKU exists yet — add
+one** so it's priced consistently, not ad-hoc. Bare upper walls + ceiling only (the tiled walls/shower are
+the resurfacer's TSR scope, not the painter's).
 
 | | Bathroom 1 (main, has bath) | Bathroom 2 (ensuite, no bath) |
 |---|---|---|
@@ -31,15 +33,16 @@ quote painting as if we deliver it.
 | Customer (T3→T2) | ~$4,400–6,600 | ~$3,500–5,400 (− $200/−10% multi-bath) |
 | Our cost | ~$2,600 | ~$2,100 |
 
-**Combined: ~$8,000–11,800 inc GST** (+ painting) · our cost ~$5,700 · gross profit ~$3,500–5,500 (~46-48%,
-clears the $300 floor). ⇒ **Claremont Meadows defaults to the T3 (Western Sydney) tier**, not T2 — choose consciously.
+**Combined all-in (incl painting): ~$9,000–13,000 inc GST** · our cost ~$6,700 · gross profit ~$4,000–6,000
+(~46-48%, clears the $300 floor). ⇒ **Claremont Meadows defaults to the T3 (Western Sydney) tier**, not T2 — choose consciously.
 
 ## Trades (⇒ 3 distinct skills, not one "bathroom guy")
 1. **Regrouter** — epoxy rake-out + re-grout + silicone.
 2. **Resurfacer** — HVLP spray; ONE person does bath (main) + basins + ALL tile recolour (walls white, floor
    grey + anti-slip additive). Tile recolour = same skill as bath resurface.
-3. **Painter** — bare walls + ceiling + patch the cornice. Separate trade, separate sub. A solo sub who does
-   all three is rare in NSW — vet, don't assume.
+3. **Painter** — bare walls + ceiling + patch the cornice. Separate trade, but **we have a painter subbie**
+   (Allan 2026-06-17) so it's in-house — Mick deals with one company. A solo sub who does all three trades
+   is rare in NSW — keep them as separate subbies.
 
 ## Process ⇒ order is fixed by physics
 Regrout (dirtiest) → paint walls → spray-resurface (last, so nothing contaminates the fresh coating) →
