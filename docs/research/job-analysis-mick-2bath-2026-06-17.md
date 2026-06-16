@@ -33,9 +33,22 @@ the resurfacer's TSR scope, not the painter's).
 | Customer (T3→T2) | ~$4,400–6,600 | ~$3,500–5,400 (− $200/−10% multi-bath) |
 | Our cost | ~$2,600 | ~$2,100 |
 
-**Combined all-in (line-item estimate, all trades): ~$8,800–10,900 inc GST** (main ~$6,900 / ensuite ~$4,010
-at T2; ~$8,750 at T3) · our cost ~$6,000 · gross profit ~$4,300–4,900 (~45-48%, clears the $300 floor).
-⇒ **Claremont Meadows defaults to the T3 (Western Sydney) tier**, not T2 — choose consciously.
+**AUDITED + CORRECTED (both CEOs + contractor expert, 2026-06-17 — Allan was right on both pushes):**
+⇒ **Regrout = WHOLE bathroom**, not shower-only (coating is cosmetic, not waterproofing per AS 3740; failed
+grout must be raked first). ⇒ **Resurface area was understated**: MAIN ~18.2 m² (was 16; the tiled dado +
+bath surround), ENSUITE ~11.7 m² (a TSR-12 *small* band, not TSR-13 — I'd over-scoped that one).
+**Combined all-in: ~$9,844 (T3, the correct default) – $11,384 (T2) inc GST** — MAIN ~$7,370 / ENSUITE ~$4,014
+(after −10% multi-bath); our cost ~$5,563 · gross profit ~$4,786 = **46% true margin** (in 45-50% target,
+far above $300 floor). The prior $8.8–10.9k was too low; corrected sits at the top of / above that band.
+⇒ Audit landmines applied to the webapp: justify every recommended line (leak/cornice/basin/anti-slip) vs a
+visible issue or the chrome ask (else reads as padding) · clarify "repaint the rest" scope (trim/doors?) ·
+basin resurface = optional/colour-match · TSR tile-resurface sub pay must clear the $70/hr resurfacing floor
+(bundle/lift) · add prep/masking + extra primer-coats on dark tiles + cure-day labour + spa-jet masking +
+Penrith travel. Honest customer anchor: a full rip-out reno of two bathrooms = ~$35–60k+; this is the
+low-disruption alternative. ⇒ **SYSTEM GAPS** (background tasks): TSR-12/13/14 + FBR rows are UNCOSTED
+placeholders in the pricing sheet (every makeover reverse-engineers them) — cost them properly; and add
+PAINTING + PLUMBING SKUs (both are now real offered trades). Day-by-day program built (sequential, one
+bathroom always usable, 48-72h cure each = ~10-11 days / ~2 weeks).
 
 ⇒ **WALLS ARE HALF-TILED (Allan corrected 2026-06-17):** a tiled dado (~1.2m) + painted plaster above,
 EXCEPT the showers which are full-height tile. So tile-resurface = shower + dado + floor only; the upper
