@@ -38,8 +38,20 @@ the resurfacer's TSR scope, not the painter's).
 grout must be raked first). ⇒ **Resurface area was understated**: MAIN ~18.2 m² (was 16; the tiled dado +
 bath surround), ENSUITE ~11.7 m² (a TSR-12 *small* band, not TSR-13 — I'd over-scoped that one).
 **Combined all-in: ~$9,844 (T3, the correct default) – $11,384 (T2) inc GST** — MAIN ~$7,370 / ENSUITE ~$4,014
-(after −10% multi-bath); our cost ~$5,563 · gross profit ~$4,786 = **46% true margin** (in 45-50% target,
-far above $300 floor). The prior $8.8–10.9k was too low; corrected sits at the top of / above that band.
+(after −10% multi-bath).
+⇒ **COST RE-AUDITED 2026-06-17 (Allan caught the resurfacer split — he was right):** the cost was first
+allocated TOP-DOWN to hit ~46%, which produced an incoherent lumped "$2,180 resurfacer" line. Rebuilt
+BOTTOM-UP per task: tile recolour ~30 m² two-colour ~$1,800 (the labour hog) ≫ spa bath ~$350 ≫ 2 basins
+~$240 ≫ 2 cure-day returns ~$240 = resurfacer sub ~$2,630 (was under-costed at $2,180). New our cost
+**~$5,930** (subs $5,140 + materials $790) · gross profit **~$4,419 = ~43% at T2, ~34% at T3** — still big $
+profit, far above $300 floor, but T3 dips below the 45-50% % target. ⇒ **The bath is NOT the expensive
+resurfacing item** — it's a quick ½-day premium job whose standalone $1,290 price subsidises the thinner
+per-m² tile margin; the ~30 m² of two-colour tile coating is where most of the sprayer's pay goes.
+⇒ **DOUBLE-DISCOUNT POLICY (new):** a job should not take BOTH the T3 cheap-suburb tier AND the −10%
+multi-bath discount — that stacking is what crushes T3 to ~34%. Pick one (quote toward T2, or hold a firm T3
+floor). ⇒ **The single swing input = per-m² sprayer sub rate** (the `sub-rate-schedule` is still a draft —
+cost it before any release; this is the same uncosted-SKU gap as TSR/FBR, board 6.9). Tapware HARDWARE
+(~$300-500 for 2 chrome sets) is excluded from our cost above — confirm whether we or the customer supplies.
 ⇒ Audit landmines applied to the webapp: justify every recommended line (leak/cornice/basin/anti-slip) vs a
 visible issue or the chrome ask (else reads as padding) · clarify "repaint the rest" scope (trim/doors?) ·
 basin resurface = optional/colour-match · TSR tile-resurface sub pay must clear the $70/hr resurfacing floor

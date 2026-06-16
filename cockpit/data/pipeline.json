@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-12",
-  "source": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md (v1.0 co-signed) + parity audit (Cleo 96%, traceability 64-scenario)",
+  "updated": "2026-06-17",
+  "source": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md (v1.0 co-signed) + parity audit (Cleo 96%, traceability 64-scenario); body carries 06-13/06-17 updates (multi-bath fix 3.3, Mick worked-example, painting/plumbing SKUs 6.9)",
   "rules": "Never drag an opp to stage 11 before its deposit is PAID (that drag fires the live SM8 pipeline). No external sub signs before the lawyer clears Fair-Work (Marko self-performs meanwhile). Work this list TOP TO BOTTOM \u2014 if you want to skip, say why out loud first.",
   "phases": [
     {
