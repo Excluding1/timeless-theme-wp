@@ -62,6 +62,17 @@
       "goal": "Every customer lifecycle moment gets its workflow or snippet so nothing depends on memory. Copy is already approved where noted; the rest is draft-with-Cleo then build. One workflow at a time, test each before the next.",
       "items": [
         {
+          "id": "1.0",
+          "title": "FIX THE LIVE W1 ACK (stale copy + duplicate-on-multi-bathroom) \u2014 GHL only, no redeploy",
+          "owner": "ceos+allan",
+          "status": "todo",
+          "gate": "LIVE BUG",
+          "detail": "Allan's screenshot 2026-06-13 (Mick Connolly opp): live W1 ack reads 'I'll have a WRITTEN quote back within 24-48 hours' = BANNED word 'written' + wrong turnaround (locked = 'within 24 hours'). First thing every lead reads. ALSO: 2-bathroom submissions fire W1 twice (the form is a per-bathroom loop, startNextBathroom:1307 \u2192 handleSubmit:1265 fires W1 each time; 6-min gap in the screenshot = time on bathroom 2). The payload ALREADY carries bathroom_index + bathroom_count (QuoteForm.jsx:1140-1141), so the fix is GHL-ONLY: (a) replace the ack body with the approved 24h pack, count-aware ('quotes for your {{bathroom_count}} bathrooms'); (b) add condition \u2014 send ack only when bathroom_index = 1, suppress on 2+. Rule-8 copy sign-off before publish.",
+          "dod": "Live W1 ack uses approved copy (no 'written', 'within 24 hours'); a 2-bathroom test sends ONE ack that mentions the count; single-bathroom unchanged.",
+          "est": "30 min",
+          "estH": 0.5
+        },
+        {
           "id": "1.1",
           "title": "W3 cadence: bodies VERIFIED GOOD (keep Allan's copy) \u2014 final test only",
           "owner": "allan",
@@ -272,7 +283,7 @@
           "title": "Photo-FILE attach (Cloudinary \u2192 SM8 two-step)",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Today the SM8 job carries a photo LINK; this attaches the actual files (Jordan's iterator pattern: GET bytes \u2192 Attachment.json \u2192 Attachment/{uuid}.file).",
+          "detail": "Today the SM8 job carries a photo LINK; this attaches the actual files (Jordan's iterator pattern: GET bytes \u2192 Attachment.json \u2192 Attachment/{uuid}.file). ALSO (Allan 2026-06-13, Cloudinary-is-bundled): change the upload to put each submission in its OWN folder/tag (e.g. timeless-quotes/YYYY/MM/{lastname}-{addr-slug}-b{bathroom_index} + context customer/opp/bathroom) so Cloudinary is navigable per-job, not one monthly pile. (Interim: Allan reads photos off the GHL contact custom fields photos_*_urls \u2014 already grouped per area, per opp/bathroom \u2014 NOT off Cloudinary.) Upload code: QuoteForm.jsx:1016-1030.",
           "dod": "Photos appear ON the SM8 job for a test lead.",
           "est": "2.5 hr",
           "estH": 2.5
@@ -328,7 +339,7 @@
           "title": "Multi-bathroom convention + end-to-end test",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "One opp per bathroom linked by property, each invoice under $5k (HBA), discounts 10%/15% applied, quoter SOP written. The form already captures multiple areas.",
+          "detail": "CONFIRMED MECHANISM (code-read 2026-06-13): the form already creates one opp per bathroom (per-bathroom submission loop) \u2014 that's correct for HBA <$5k-per-invoice. Gaps: (1) the two opps are NOT linked, so Allan sees two separate 'Mick Connolly' opps and must join them by address by eye \u2192 add a shared property_submission_id generated at form start, included in every fire (small form change, ships next deploy); (2) discounts 10%/15% auto-noted; (3) quoter SOP. The duplicate-ACK half is handled GHL-side in step 1.0. DoD test: a 2-bathroom test = 2 linked opps + 1 ack.",
           "dod": "A 2-bathroom test = 2 opps, 2 quotes, discount noted.",
           "est": "1.5 hr",
           "estH": 1.5
