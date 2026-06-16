@@ -41,14 +41,17 @@ bath surround), ENSUITE ~11.7 m² (a TSR-12 *small* band, not TSR-13 — I'd ove
 (after −10% multi-bath).
 ⇒ **COST RE-AUDITED 2026-06-17 (Allan caught the resurfacer split — he was right):** the cost was first
 allocated TOP-DOWN to hit ~46%, which produced an incoherent lumped "$2,180 resurfacer" line. Rebuilt
-BOTTOM-UP per task: tile recolour ~30 m² two-colour ~$1,800 (the labour hog) ≫ spa bath ~$350 ≫ 2 basins
-~$240 ≫ 2 cure-day returns ~$240 = resurfacer sub ~$2,630 (was under-costed at $2,180). New our cost
-**~$5,930** (subs $5,140 + materials $790) · gross profit **~$4,419 = ~43% at T2, ~34% at T3** — still big $
-profit, far above $300 floor, but T3 dips below the 45-50% % target. ⇒ **The bath is NOT the expensive
-resurfacing item** — it's a quick ½-day premium job whose standalone $1,290 price subsidises the thinner
-per-m² tile margin; the ~30 m² of two-colour tile coating is where most of the sprayer's pay goes.
+BOTTOM-UP per task: tile recolour ~30 m² two-colour ~$1,800 (the labour hog) + **spa bath ~$880** + 2 basins
+~$240 + 2 cure-day returns ~$240 = resurfacer sub ~$3,160 (was under-costed at $2,180). New our cost
+**~$6,460** (subs $5,670 + materials $790) · gross profit **~$3,889 = ~38% at T2, ~28% at T3** — still a solid $
+profit, clear of the $300 floor, but T3 sits well below the 45-50% % target.
+⇒ **SPA BATH = ~$880 sub (Allan's real rate, 2026-06-17 — he pays it), NOT my $350 estimate.** A SPA (jets +
+curved edges + high-gloss finish) is genuinely real work, not a quick standard bath. ⇒ **A spa needs its OWN
+higher SKU** than the standard $1,290 bath (board 6.9). The ~30 m² two-colour tile coating is still the single
+biggest line, but the bath is no longer trivial. My earlier "bath is cheap incremental labour" framing held
+for a PLAIN bath, not this spa.
 ⇒ **DOUBLE-DISCOUNT POLICY (new):** a job should not take BOTH the T3 cheap-suburb tier AND the −10%
-multi-bath discount — that stacking is what crushes T3 to ~34%. Pick one (quote toward T2, or hold a firm T3
+multi-bath discount — that stacking crushes T3 to ~28%. Pick one (quote toward T2 ~38%, or hold a firm T3
 floor). ⇒ **The single swing input = per-m² sprayer sub rate** (the `sub-rate-schedule` is still a draft —
 cost it before any release; this is the same uncosted-SKU gap as TSR/FBR, board 6.9). Tapware HARDWARE
 (~$300-500 for 2 chrome sets) is excluded from our cost above — confirm whether we or the customer supplies.
