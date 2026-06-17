@@ -1,10 +1,10 @@
 {
   "updated": "2026-06-17",
   "source": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md (v1.0 co-signed) + parity audit (Cleo 96%, traceability 64-scenario); body carries 06-13/06-17 updates (multi-bath fix 3.3, Mick worked-example, painting/plumbing SKUs 6.9)",
-  "rules": "Never drag an opp to stage 11 before its deposit is PAID (that drag fires the live SM8 pipeline). No external sub signs before the lawyer clears Fair-Work (Marko self-performs meanwhile). Work this list TOP TO BOTTOM \u2014 if you want to skip, say why out loud first.",
+  "rules": "Never drag an opp to stage 11 before its deposit is PAID (that drag fires the live SM8 pipeline). No external sub signs before the lawyer clears Fair-Work (Marko self-performs meanwhile). Work this list TOP TO BOTTOM — if you want to skip, say why out loud first.",
   "phases": [
     {
-      "title": "PHASE 0 \u2014 THE CERTIFIED BASE (done \u2014 what everything below builds on)",
+      "title": "PHASE 0 — THE CERTIFIED BASE (done — what everything below builds on)",
       "goal": "Launched 2026-06-11/12 and proven live. Kept here so progress is visible and so nobody rebuilds what already works.",
       "items": [
         {
@@ -17,10 +17,10 @@
         },
         {
           "id": "0.2",
-          "title": "Lead pipeline certified \u00d75 end-to-end",
+          "title": "Lead pipeline certified ×5 end-to-end",
           "owner": "done",
           "status": "done",
-          "detail": "Form \u2192 Cloudinary \u2192 W1 secret gate \u2192 GHL Contact+Opp 01 \u2192 Slack #quotes-in \u2192 stage-11 drag \u2192 Make Scenario 1 (dedup, strip-contact) \u2192 SM8 job name+address only \u2192 Sheet log \u2192 #new-jobs ping.",
+          "detail": "Form → Cloudinary → W1 secret gate → GHL Contact+Opp 01 → Slack #quotes-in → stage-11 drag → Make Scenario 1 (dedup, strip-contact) → SM8 job name+address only → Sheet log → #new-jobs ping.",
           "dod": "TEST1-5 all passed, Allan eyewitness."
         },
         {
@@ -36,7 +36,7 @@
           "title": "Scenario 3 back-sync + contractor app Phases 1-4 deployed",
           "owner": "done",
           "status": "done",
-          "detail": "SM8 Completed \u2192 GHL stage 15 idempotent. App: read path, per-sub auth+RLS, accept/decline/handback/complete, SM8 write-back, contact-leak CI.",
+          "detail": "SM8 Completed → GHL stage 15 idempotent. App: read path, per-sub auth+RLS, accept/decline/handback/complete, SM8 write-back, contact-leak CI.",
           "dod": "Commits 84a88f2/d7bb48e/ba71db1/7762bf4 verified."
         },
         {
@@ -52,32 +52,32 @@
           "title": "Quote #1 sent-ready (Lisa, basin) under all gates + GST resolved",
           "owner": "done",
           "status": "done",
-          "detail": "3 tiers $590/$680/$760 inc GST, margin floor enforced (caught the sheet's $560 T1 breach), 14-day validity, Cleo-approved SMS. GST = REGISTERED. (2026-06-13: Allan took Lisa fully manual \u2014 two-solution format, replace vs reglaze. IGNORE her in system work.)",
+          "detail": "3 tiers $590/$680/$760 inc GST, margin floor enforced (caught the sheet's $560 T1 breach), 14-day validity, Cleo-approved SMS. GST = REGISTERED. (2026-06-13: Allan took Lisa fully manual — two-solution format, replace vs reglaze. IGNORE her in system work.)",
           "dod": "Package delivered to Allan; sending + her reply are operational, not build work."
         }
       ]
     },
     {
-      "title": "PHASE 1 \u2014 GHL WORKFLOWS (finish the customer brain)",
+      "title": "PHASE 1 — GHL WORKFLOWS (finish the customer brain)",
       "goal": "Every customer lifecycle moment gets its workflow or snippet so nothing depends on memory. Copy is already approved where noted; the rest is draft-with-Cleo then build. One workflow at a time, test each before the next.",
       "items": [
         {
           "id": "1.0",
-          "title": "FIX THE LIVE W1 ACK (stale copy + duplicate-on-multi-bathroom) \u2014 GHL only, no redeploy",
+          "title": "FIX THE LIVE W1 ACK (stale copy + duplicate-on-multi-bathroom) — GHL only, no redeploy",
           "owner": "ceos+allan",
           "status": "todo",
           "gate": "LIVE BUG",
-          "detail": "Allan's screenshot 2026-06-13 (Mick Connolly opp): live W1 ack reads 'I'll have a WRITTEN quote back within 24-48 hours' = BANNED word 'written' + wrong turnaround (locked = 'within 24 hours'). First thing every lead reads. ALSO: 2-bathroom submissions fire W1 twice (the form is a per-bathroom loop, startNextBathroom:1307 \u2192 handleSubmit:1265 fires W1 each time; 6-min gap in the screenshot = time on bathroom 2). The payload ALREADY carries bathroom_index + bathroom_count (QuoteForm.jsx:1140-1141), so the fix is GHL-ONLY: (a) replace the ack body with the approved 24h pack, count-aware ('quotes for your {{bathroom_count}} bathrooms'); (b) add condition \u2014 send ack only when bathroom_index = 1, suppress on 2+. Rule-8 copy sign-off before publish.",
+          "detail": "Allan's screenshot 2026-06-13 (Mick Connolly opp): live W1 ack reads 'I'll have a WRITTEN quote back within 24-48 hours' = BANNED word 'written' + wrong turnaround (locked = 'within 24 hours'). First thing every lead reads. ALSO: 2-bathroom submissions fire W1 twice (the form is a per-bathroom loop, startNextBathroom:1307 → handleSubmit:1265 fires W1 each time; 6-min gap in the screenshot = time on bathroom 2). The payload ALREADY carries bathroom_index + bathroom_count (QuoteForm.jsx:1140-1141), so the fix is GHL-ONLY: (a) replace the ack body with the approved 24h pack, count-aware ('quotes for your {{bathroom_count}} bathrooms'); (b) add condition — send ack only when bathroom_index = 1, suppress on 2+. Rule-8 copy sign-off before publish.",
           "dod": "Live W1 ack uses approved copy (no 'written', 'within 24 hours'); a 2-bathroom test sends ONE ack that mentions the count; single-bathroom unchanged.",
           "est": "30 min",
           "estH": 0.5
         },
         {
           "id": "1.1",
-          "title": "W3 cadence: bodies VERIFIED GOOD (keep Allan's copy) \u2014 final test only",
+          "title": "W3 cadence: bodies VERIFIED GOOD (keep Allan's copy) — final test only",
           "owner": "allan",
           "status": "todo",
-          "detail": "2026-06-13: Allan pasted the real bodies \u2014 T5 day-1, T6 day-3 (correct 14-day validity) and the day-10 email (well-written, ABN, unsubscribe, no stale claims) are ALL compliant. The 'paste the pack' task was based on a stale record \u2014 DO NOT overwrite. The approved pack's day-7 SMS = spare (archived). Remaining: the 2-minute-wait cadence test + one DKIM eyeball (send the day-10 email to yourself \u2192 Gmail \u22ee \u2192 Show original \u2192 SPF/DKIM/DMARC all PASS).",
+          "detail": "2026-06-13: Allan pasted the real bodies — T5 day-1, T6 day-3 (correct 14-day validity) and the day-10 email (well-written, ABN, unsubscribe, no stale claims) are ALL compliant. The 'paste the pack' task was based on a stale record — DO NOT overwrite. The approved pack's day-7 SMS = spare (archived). Remaining: the 2-minute-wait cadence test + one DKIM eyeball (send the day-10 email to yourself → Gmail ⋮ → Show original → SPF/DKIM/DMARC all PASS).",
           "dod": "Fires on a test opp, stops on reply, day-7 message states the 14-day validity.",
           "est": "20 min test",
           "estH": 0.3
@@ -87,7 +87,7 @@
           "title": "Quote-expiry win-back (day 15)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Allan confirmed the gap by eye: at day 14 the workflow ONLY marks Lost + tags flag-quote-expired \u2014 nothing is sent. The build: click + AFTER the 'Tag flag-quote-expired' step \u2192 Wait 1 day \u2192 + \u2192 Send SMS \u2192 paste the approved win-back (ends 'Reply STOP to opt out') \u2192 End. Why: expired customers currently get silence; this one message recovers the last few percent and closes politely.",
+          "detail": "Allan confirmed the gap by eye: at day 14 the workflow ONLY marks Lost + tags flag-quote-expired — nothing is sent. The build: click + AFTER the 'Tag flag-quote-expired' step → Wait 1 day → + → Send SMS → paste the approved win-back (ends 'Reply STOP to opt out') → End. Why: expired customers currently get silence; this one message recovers the last few percent and closes politely.",
           "dod": "Expired test opp gets exactly one win-back, then silence.",
           "est": "15 min",
           "estH": 0.25
@@ -127,24 +127,24 @@
           "title": "NPS ask (stage 15 + 24h) with detractor routing",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "Score 1-10 by SMS. 9-10 \u2192 review ask path. 1-6 \u2192 tag nps_detractor + Slack #job-issues + a task for Allan to call within 60 min (the locked SLA).",
+          "detail": "Score 1-10 by SMS. 9-10 → review ask path. 1-6 → tag nps_detractor + Slack #job-issues + a task for Allan to call within 60 min (the locked SLA).",
           "dod": "Test contact scores both ways and routes correctly.",
           "est": "1.5 hr",
           "estH": 1.5
         },
         {
           "id": "1.7",
-          "title": "Google-review ask (ALL customers \u2014 no gating)",
+          "title": "Google-review ask (ALL customers — no gating)",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "Fires post-NPS to everyone regardless of score (review-gating breaches ACCC guidance \u2014 the old spec line saying promoters-only is quarantined). Uses the real GBP review link.",
+          "detail": "Fires post-NPS to everyone regardless of score (review-gating breaches ACCC guidance — the old spec line saying promoters-only is quarantined). Uses the real GBP review link.",
           "dod": "Fires with the working GBP link; copy Rule-8 approved.",
           "est": "45 min",
           "estH": 0.75
         },
         {
           "id": "1.8",
-          "title": "Hot-lead alert verify (score \u226540 \u2192 #hot-leads)",
+          "title": "Hot-lead alert verify (score ≥40 → #hot-leads)",
           "owner": "allan",
           "status": "todo",
           "detail": "API-VERIFIED 2026-06-13: 'W6 - Hot Lead Alert' EXISTS + PUBLISHED. Remaining = one test: push a high-score test lead through and confirm the #hot-leads ping.",
@@ -157,7 +157,7 @@
           "title": "W4 missed-call text-back",
           "owner": "allan",
           "status": "todo",
-          "detail": "Caller who hangs up gets an automatic 'Allan here, saw your call' text within a minute. Old spec had it parked; Cleo pulled it in \u2014 phone callers are the F8 intake path.",
+          "detail": "Caller who hangs up gets an automatic 'Allan here, saw your call' text within a minute. Old spec had it parked; Cleo pulled it in — phone callers are the F8 intake path.",
           "dod": "A missed test call triggers exactly one text.",
           "est": "30 min",
           "estH": 0.5
@@ -167,7 +167,7 @@
           "title": "W7 stage-transition logger + workflow-error routing",
           "owner": "allan",
           "status": "todo",
-          "detail": "Smaller than scoped (API 2026-06-13): 'W7 - Stage 6 Quote Accepted Logger' already EXISTS published \u2014 extend it (or clone) to log ALL stage transitions to #pipeline-feed + route workflow errors to #automation-errors.",
+          "detail": "Smaller than scoped (API 2026-06-13): 'W7 - Stage 6 Quote Accepted Logger' already EXISTS published — extend it (or clone) to log ALL stage transitions to #pipeline-feed + route workflow errors to #automation-errors.",
           "dod": "A test drag posts; a forced error alerts.",
           "est": "30 min",
           "estH": 0.5
@@ -177,8 +177,8 @@
           "title": "Stage-02 Q&A + stage-03/04 sub-quote conventions",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Lock how Q&A is tracked (snippets + an SLA task) and how a sub-quote request/receipt is recorded in 03/04 \u2014 Jordan runs these stages actively; ours sit empty until the convention exists.",
-          "dod": "A test opp moves 02\u219205 with the Q&A logged; a sub-quote request is visible in 03/04.",
+          "detail": "Lock how Q&A is tracked (snippets + an SLA task) and how a sub-quote request/receipt is recorded in 03/04 — Jordan runs these stages actively; ours sit empty until the convention exists.",
+          "dod": "A test opp moves 02→05 with the Q&A logged; a sub-quote request is visible in 03/04.",
           "est": "1.5 hr",
           "estH": 1.5
         },
@@ -197,7 +197,7 @@
           "title": "Operational snippet pack in GHL (the manual-send library)",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 \u2014 manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not). Mystery-shop upgrade (2026-06-13): the rejection snippet INCLUDES a referral pathway (licensed renovator / hipages direction) \u2014 Surface Care's rejection dead-ends with 'we do not know who to refer'; ours banks the goodwill. Decision 13 (2026-06-13): rejection snippet sends as 'Timeless Resurfacing Quotes Team' role-voice (never a fake name); moves to email once DKIM is live.",
+          "detail": "Homes the audit orphans: quote-delayed (1C), photo-resend (1B), polite rejection/scope-out (2G), on-my-way (3C/M3.5), out-of-area decline, and the phone-call / customer-texts-photos intake SOP (F8/F9 — manual entry into stage 01 with a source tag), plus price-negotiation and deposit-negotiation reply snippets (Cleo: policy existed, written replies did not). Mystery-shop upgrade (2026-06-13): the rejection snippet INCLUDES a referral pathway (licensed renovator / hipages direction) — Surface Care's rejection dead-ends with 'we do not know who to refer'; ours banks the goodwill. Decision 13 (2026-06-13): rejection snippet sends as 'Timeless Resurfacing Quotes Team' role-voice (never a fake name); moves to email once DKIM is live.",
           "dod": "Every snippet sendable in 2 clicks; intake SOP written into the money-lane doc.",
           "est": "1.5 hr",
           "estH": 1.5
@@ -214,20 +214,20 @@
         },
         {
           "id": "1.15",
-          "title": "Warranty certificate (design + build \u2014 needs DKIM first)",
+          "title": "Warranty certificate (design + build — needs DKIM first)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Resolves open decision #4: an emailed certificate (HTML/PDF) delivered by a stage-15 step, stating the per-material warranty ladder. Built after Phase 4 email plumbing. Delivery vehicle decided (Allan 06-13): part of the completion-pack email (4.2) \u2014 warranty certificate rides with photos + invoice + care PDF.",
+          "detail": "Resolves open decision #4: an emailed certificate (HTML/PDF) delivered by a stage-15 step, stating the per-material warranty ladder. Built after Phase 4 email plumbing. Delivery vehicle decided (Allan 06-13): part of the completion-pack email (4.2) — warranty certificate rides with photos + invoice + care PDF.",
           "dod": "Stage-15 test delivers the certificate with correct service + term.",
           "est": "2.5 hr",
           "estH": 2.5
         },
         {
           "id": "1.16",
-          "title": "Quote-drafter v0 (checklist + template \u2014 pulled forward by the simulation)",
+          "title": "Quote-drafter v0 (checklist + template — pulled forward by the simulation)",
           "owner": "clifford",
-          "status": "todo",
-          "detail": "The 1,000-scenario simulation showed pricing sits in 87% of all journeys, and Override 6 already says the quote-drafting agent starts with the first paying customer. v0 = a repeatable drafting kit (pricing-sheet lookup, margin-floor check, 3-tier template, gate checklist, Rule-8 send) so ANY quote takes under 10 minutes consistently. The full AI agent stays in 6.11. Format note (Allan 2026-06-13): the kit must support BOTH shapes \u2014 3-tier (the CEO.md default) AND a two-solution offer (e.g. replace vs reglaze) for damage-triage cases.",
+          "status": "done",
+          "detail": "The 1,000-scenario simulation showed pricing sits in 87% of all journeys, and Override 6 already says the quote-drafting agent starts with the first paying customer. v0 = a repeatable drafting kit (pricing-sheet lookup, margin-floor check, 3-tier template, gate checklist, Rule-8 send) so ANY quote takes under 10 minutes consistently. The full AI agent stays in 6.11. Format note (Allan 2026-06-13): the kit must support BOTH shapes — 3-tier (the CEO.md default) AND a two-solution offer (e.g. replace vs reglaze) for damage-triage cases. → v0 BUILT 2026-06-17: docs/specs/quote-drafter-kit-2026-06-17.md (10-min workflow + 14 rules + 3 shapes: 3-tier / two-solution / package + pre-send gate), seeded from the Mick worked example. Full AI agent stays 6.11. Cleo Rule-8 review in flight.",
           "dod": "Two consecutive real quotes drafted via the kit in under 10 min each, both pass the margin lens.",
           "est": "2 hr",
           "estH": 2
@@ -237,7 +237,7 @@
           "title": "\"Reply URGENT\" triage (adopted from the Surface Care mystery shop)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Their ack SMS says: if your job is urgent (within 7 days), reply 'Urgent' to prioritise. Zero-friction urgency capture \u2014 our simulation had urgency as an axis with NO capture mechanism. Add the line to our W1 ack (Rule-8 wording) + a GHL trigger on inbound 'urgent' that tags the contact, pings #hot-leads and creates a priority task.",
+          "detail": "Their ack SMS says: if your job is urgent (within 7 days), reply 'Urgent' to prioritise. Zero-friction urgency capture — our simulation had urgency as an axis with NO capture mechanism. Add the line to our W1 ack (Rule-8 wording) + a GHL trigger on inbound 'urgent' that tags the contact, pings #hot-leads and creates a priority task.",
           "dod": "A test reply of 'urgent' tags the opp, pings #hot-leads and creates the task; ack copy Rule-8 approved.",
           "est": "45 min",
           "estH": 0.75
@@ -255,12 +255,12 @@
       ]
     },
     {
-      "title": "PHASE 2 \u2014 MAKE SCENARIOS (finish the automation spine)",
+      "title": "PHASE 2 — MAKE SCENARIOS (finish the automation spine)",
       "goal": "Scenarios 1 and 3 are proven. These five complete Jordan's automation layer so money and photos flow without hands.",
       "items": [
         {
           "id": "2.1",
-          "title": "Scenario 4: stage 15 \u2192 Accounts 'Awaiting Invoice'",
+          "title": "Scenario 4: stage 15 → Accounts 'Awaiting Invoice'",
           "owner": "clifford+allan",
           "status": "todo",
           "detail": "Spec exists (make-scenario-4-5-accounts-build.md). When a job completes, an Accounts-pipeline opp is created so invoicing has a queue instead of memory.",
@@ -270,7 +270,7 @@
         },
         {
           "id": "2.2",
-          "title": "Scenario 5: payments \u2192 Accounts 'Paid' (decide R2 first)",
+          "title": "Scenario 5: payments → Accounts 'Paid' (decide R2 first)",
           "owner": "ceos+allan",
           "status": "todo",
           "detail": "R2 decision: DEPOSIT = Stripe payment-link event; FINAL = Xero invoice.paid as the single source of truth. Then build with event-id dedup.",
@@ -280,10 +280,10 @@
         },
         {
           "id": "2.3",
-          "title": "Photo-FILE attach (Cloudinary \u2192 SM8 two-step)",
+          "title": "Photo-FILE attach (Cloudinary → SM8 two-step)",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Today the SM8 job carries a photo LINK; this attaches the actual files (Jordan's iterator pattern: GET bytes \u2192 Attachment.json \u2192 Attachment/{uuid}.file). ALSO (Allan 2026-06-13, Cloudinary-is-bundled): change the upload to put each submission in its OWN folder/tag (e.g. timeless-quotes/YYYY/MM/{lastname}-{addr-slug}-b{bathroom_index} + context customer/opp/bathroom) so Cloudinary is navigable per-job, not one monthly pile. (Interim: Allan reads photos off the GHL contact custom fields photos_*_urls \u2014 already grouped per area, per opp/bathroom \u2014 NOT off Cloudinary.) Upload code: QuoteForm.jsx:1016-1030.",
+          "detail": "Today the SM8 job carries a photo LINK; this attaches the actual files (Jordan's iterator pattern: GET bytes → Attachment.json → Attachment/{uuid}.file). ALSO (Allan 2026-06-13, Cloudinary-is-bundled): change the upload to put each submission in its OWN folder/tag (e.g. timeless-quotes/YYYY/MM/{lastname}-{addr-slug}-b{bathroom_index} + context customer/opp/bathroom) so Cloudinary is navigable per-job, not one monthly pile. (Interim: Allan reads photos off the GHL contact custom fields photos_*_urls — already grouped per area, per opp/bathroom — NOT off Cloudinary.) Upload code: QuoteForm.jsx:1016-1030.",
           "dod": "Photos appear ON the SM8 job for a test lead.",
           "est": "2.5 hr",
           "estH": 2.5
@@ -303,7 +303,7 @@
           "title": "Scenario heartbeat + toggle monitor",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Daily health ping per scenario + a check that 'Immediately as data arrives' is ON \u2014 the toggle that silently ate the first heartbeat. Alerts #automation-errors.",
+          "detail": "Daily health ping per scenario + a check that 'Immediately as data arrives' is ON — the toggle that silently ate the first heartbeat. Alerts #automation-errors.",
           "dod": "A deliberately-paused scenario alerts within 24h.",
           "est": "1.5 hr",
           "estH": 1.5
@@ -311,7 +311,7 @@
       ]
     },
     {
-      "title": "PHASE 3 \u2014 FORM + FRONT DOOR HARDENING",
+      "title": "PHASE 3 — FORM + FRONT DOOR HARDENING",
       "goal": "The form takes real traffic safely: tested on real phones, abuse-proof, and with the multi-bathroom + acceptance conventions locked.",
       "items": [
         {
@@ -319,7 +319,7 @@
           "title": "Real-device pass: iPhone + Android + real-number SMS",
           "owner": "allan",
           "status": "todo",
-          "detail": "One full submit on each phone, the QR handoff desktop\u2192phone, and one submit with a REAL number to see the ack SMS actually arrive (the test numbers always 30008-fail by design).",
+          "detail": "One full submit on each phone, the QR handoff desktop→phone, and one submit with a REAL number to see the ack SMS actually arrive (the test numbers always 30008-fail by design).",
           "dod": "Screenshots + the ack SMS received.",
           "est": "1 hr",
           "estH": 1
@@ -336,10 +336,10 @@
         },
         {
           "id": "3.3",
-          "title": "Multi-bathroom fix \u2014 Option A LOCKED (separate opp per bathroom) \u2014 build-spec ready",
+          "title": "Multi-bathroom fix — Option A LOCKED (separate opp per bathroom) — build-spec ready",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "DECIDED + co-signed 2026-06-13 (both CEOs): OPTION A \u2014 separate opportunity per bathroom. Full build spec = docs/specs/multi-bathroom-fix-spec-2026-06-13.md. 3 layers: (1) FORM adds a property_submission_id UUID at session start, sent in W1/W2 (ships next deploy); (2) GHL W1 dedupe key = property_submission_id + bathroom_index (creates a NEW opp per bathroom instead of overwriting), opp name 'Bathroom X of Y', ack only on index=1 (ties to 1.0); (3) carry property_submission_id + index/count through Make/back-sync/#new-jobs. Customer gets ONE transparent package quote (total + GST + discount shown, invoiced as Bathroom 1 + Bathroom 2 \u2014 ACL/ACCC clean), split internally. Verified safe across the certified pipeline (Make dedups on unique opp_id \u2192 2 opps = 2 SM8 jobs by design). INTERIM until shipped: reconstruct bathroom 1 from the 60-day opp audit log + note, ask customer only if needed.",
+          "detail": "DECIDED + co-signed 2026-06-13 (both CEOs): OPTION A — separate opportunity per bathroom. Full build spec = docs/specs/multi-bathroom-fix-spec-2026-06-13.md. 3 layers: (1) FORM adds a property_submission_id UUID at session start, sent in W1/W2 (ships next deploy); (2) GHL W1 dedupe key = property_submission_id + bathroom_index (creates a NEW opp per bathroom instead of overwriting), opp name 'Bathroom X of Y', ack only on index=1 (ties to 1.0); (3) carry property_submission_id + index/count through Make/back-sync/#new-jobs. Customer gets ONE transparent package quote (total + GST + discount shown, invoiced as Bathroom 1 + Bathroom 2 — ACL/ACCC clean), split internally. Verified safe across the certified pipeline (Make dedups on unique opp_id → 2 opps = 2 SM8 jobs by design). INTERIM until shipped: reconstruct bathroom 1 from the 60-day opp audit log + note, ask customer only if needed.",
           "dod": "A 2-bathroom test = 2 opps, 2 quotes, discount noted.",
           "est": "2.5 hr (form + GHL + downstream)",
           "estH": 2.5,
@@ -350,7 +350,7 @@
           "title": "Duplicate-submission test (30-day window)",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "The spec says re-submits update the existing opp instead of duplicating \u2014 it has never been proven end-to-end.",
+          "detail": "The spec says re-submits update the existing opp instead of duplicating — it has never been proven end-to-end.",
           "dod": "Same contact re-submits; exactly one opp exists after.",
           "est": "45 min",
           "estH": 0.75
@@ -370,7 +370,7 @@
           "title": "Verify CSS cache-busting on live",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Live serves main.min.css?ver=1.5.0 but the code uses filemtime \u2014 suspect SpeedyCache rewriting. Harmless until the next CSS-only change, then it bites.",
+          "detail": "Live serves main.min.css?ver=1.5.0 but the code uses filemtime — suspect SpeedyCache rewriting. Harmless until the next CSS-only change, then it bites.",
           "dod": "A CSS change visibly busts on live.",
           "est": "30 min",
           "estH": 0.5
@@ -378,15 +378,15 @@
       ]
     },
     {
-      "title": "PHASE 4 \u2014 COMMS COMPLETION (email twin-set + the legal copy layer)",
-      "goal": "Email becomes a real channel (it is SMS-only today) and the words customers rely on \u2014 terms, warranty, consent \u2014 go final.",
+      "title": "PHASE 4 — COMMS COMPLETION (email twin-set + the legal copy layer)",
+      "goal": "Email becomes a real channel (it is SMS-only today) and the words customers rely on — terms, warranty, consent — go final.",
       "items": [
         {
           "id": "4.1",
           "title": "DKIM + quotes@/support@/billing@ + GHL sending domain",
           "owner": "allan",
           "status": "todo",
-          "detail": "SCOPE NARROWED 2026-06-13: the GHL dedicated sending domain ALREADY EXISTS + verifies (email.timelessresurfacing.com.au \u2192 Mailgun). Remaining: Google WORKSPACE DKIM (for manual Gmail sends: admin.google.com \u2192 Apps \u2192 Gmail \u2192 Authenticate email \u2192 TXT in Cloudflare) + the quotes@/support@/billing@ aliases. PROVEN BY TEST 2026-06-13 (Allan's Show-original): GHL emails route via GOOGLE SMTP and sign with the gappssmtp FALLBACK (= Workspace DKIM off) \u2014 SPF/DMARC still PASS, but the flip makes DKIM sign as our own domain. This step is now the highest-value email task.",
+          "detail": "SCOPE NARROWED 2026-06-13: the GHL dedicated sending domain ALREADY EXISTS + verifies (email.timelessresurfacing.com.au → Mailgun). Remaining: Google WORKSPACE DKIM (for manual Gmail sends: admin.google.com → Apps → Gmail → Authenticate email → TXT in Cloudflare) + the quotes@/support@/billing@ aliases. PROVEN BY TEST 2026-06-13 (Allan's Show-original): GHL emails route via GOOGLE SMTP and sign with the gappssmtp FALLBACK (= Workspace DKIM off) — SPF/DMARC still PASS, but the flip makes DKIM sign as our own domain. This step is now the highest-value email task.",
           "dod": "DKIM passes on mail-tester; aliases deliver.",
           "est": "20 min",
           "estH": 0.3
@@ -396,7 +396,7 @@
           "title": "Email twin-set of the whole lifecycle",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Email versions of ack, quote delivery (the 2B template \u2014 already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements). Decision 13: rejections + M7/M8 escalations move to EMAIL (role-voiced) once this lands. Allan 2026-06-13: include the COMPLETION PACK email (after stage 15): before/after photos + invoice link + warranty certificate + care-instructions PDF, one email. Dual-channel principle: mirror key touches SMS+email; stop-on-reply + Allan replying in-channel = follow-up continues on whichever channel the customer chose. GHL sending domain verified ACTIVE 06-13 so this phase is UNGATED for GHL-sent email (Workspace DKIM flip still in 4.1 for manual Gmail sends). Deliverability rule learned 06-13 (ours hit Promotions, Surface Care's hits Primary): TRANSACTIONAL emails (quote delivery, booking, completion pack) get designed plain-personal \u2014 short, no bullets, no unsubscribe link (not legally required on transactional), person-signed; unsubscribe stays ONLY on commercial sends (win-backs, nurture). Day-10 cadence email gets a 'look personal' pass here too.",
+          "detail": "Email versions of ack, quote delivery (the 2B template — already re-aligned to 14-day/no-'written'), booking, invoice cover, NPS, review, warranty cert. Includes the day-3 72h-email variant decision the audit flagged (W3 stays SMS-only; emails are additions, not replacements). Decision 13: rejections + M7/M8 escalations move to EMAIL (role-voiced) once this lands. Allan 2026-06-13: include the COMPLETION PACK email (after stage 15): before/after photos + invoice link + warranty certificate + care-instructions PDF, one email. Dual-channel principle: mirror key touches SMS+email; stop-on-reply + Allan replying in-channel = follow-up continues on whichever channel the customer chose. GHL sending domain verified ACTIVE 06-13 so this phase is UNGATED for GHL-sent email (Workspace DKIM flip still in 4.1 for manual Gmail sends). Deliverability rule learned 06-13 (ours hit Promotions, Surface Care's hits Primary): TRANSACTIONAL emails (quote delivery, booking, completion pack) get designed plain-personal — short, no bullets, no unsubscribe link (not legally required on transactional), person-signed; unsubscribe stays ONLY on commercial sends (win-backs, nurture). Day-10 cadence email gets a 'look personal' pass here too.",
           "dod": "Renders on Gmail+Outlook+mobile, SPF/DKIM/DMARC pass, reply route proven, screenshots archived.",
           "est": "4 hr",
           "estH": 4
@@ -416,7 +416,7 @@
           "title": "Photo-marketing consent (field + ask)",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "GHL field photo_consent_marketing + a one-line ask at job completion. No before/after gets published without it \u2014 the audit caught that we had no consent trail at all.",
+          "detail": "GHL field photo_consent_marketing + a one-line ask at job completion. No before/after gets published without it — the audit caught that we had no consent trail at all.",
           "dod": "Field exists; ask approved; gallery SOP checks consent first.",
           "est": "1 hr",
           "estH": 1
@@ -426,7 +426,7 @@
           "title": "Inbox routing decision",
           "owner": "allan",
           "status": "todo",
-          "detail": "Where does a customer email reply land \u2014 quotes@ forwarded to you, GHL conversation sync, or both? Pick one so replies can never be missed.",
+          "detail": "Where does a customer email reply land — quotes@ forwarded to you, GHL conversation sync, or both? Pick one so replies can never be missed.",
           "dod": "A customer reply reaches exactly one watched place.",
           "est": "30 min",
           "estH": 0.5
@@ -434,7 +434,7 @@
       ]
     },
     {
-      "title": "PHASE 5 \u2014 MONEY AUTOMATION (on top of the manual SOP)",
+      "title": "PHASE 5 — MONEY AUTOMATION (on top of the manual SOP)",
       "goal": "The money-lane SOP keeps working by hand; this phase makes the system do it: pipeline, statuses, reconciliation, and the sub-pay model locked.",
       "items": [
         {
@@ -442,7 +442,7 @@
           "title": "Build the Accounts pipeline (AC stages incl. partial payment)",
           "owner": "allan",
           "status": "todo",
-          "detail": "Per Decision 12 v2. Stages for Awaiting Invoice \u2192 Sent \u2192 7d \u2192 14d \u2192 Overdue \u2192 Paid (+ partial-payment handling the audit flagged as missing).",
+          "detail": "Per Decision 12 v2. Stages for Awaiting Invoice → Sent → 7d → 14d → Overdue → Paid (+ partial-payment handling the audit flagged as missing).",
           "dod": "Stages + fields exist; a test opp ages through them.",
           "est": "1 hr",
           "estH": 1
@@ -452,7 +452,7 @@
           "title": "Wire Scenarios 4/5 + automated payment chase (M6/M7/M8)",
           "owner": "clifford+allan",
           "status": "todo",
-          "detail": "Connects Phase-2 scenarios to the Accounts pipeline and automates the RG96-safe overdue cadence on stage ages \u2014 max three messages, business hours only.",
+          "detail": "Connects Phase-2 scenarios to the Accounts pipeline and automates the RG96-safe overdue cadence on stage ages — max three messages, business hours only.",
           "dod": "Aged test invoice fires the right step; zero manual status edits on a test job.",
           "est": "2.5 hr",
           "estH": 2.5
@@ -502,7 +502,7 @@
           "title": "pay.com.au: deferred ON PURPOSE (decision on record)",
           "owner": "done",
           "status": "done",
-          "detail": "Jordan runs a pay.com.au card-points payout lane; we deliberately defer per Decision 12 v2 \u2014 Westpac EFT is free and SOPA-compliant at our volume. Revisit trigger: first external sub onboarded AND volume justifies the points. (Recorded so the parity audit shows intent, not a gap.)",
+          "detail": "Jordan runs a pay.com.au card-points payout lane; we deliberately defer per Decision 12 v2 — Westpac EFT is free and SOPA-compliant at our volume. Revisit trigger: first external sub onboarded AND volume justifies the points. (Recorded so the parity audit shows intent, not a gap.)",
           "dod": "Decision 12 v2 locked 2026-05-25."
         },
         {
@@ -518,7 +518,7 @@
       ]
     },
     {
-      "title": "PHASE 6 \u2014 FIELD OPS + THE SUB SYSTEM",
+      "title": "PHASE 6 — FIELD OPS + THE SUB SYSTEM",
       "goal": "Marko fully operational in SM8, the contractor app finished, and the sub machine (legal, matching, recruitment) ready for the first external sub.",
       "items": [
         {
@@ -533,7 +533,7 @@
         },
         {
           "id": "6.2",
-          "title": "App: accept\u2192queue-move write-back",
+          "title": "App: accept→queue-move write-back",
           "owner": "clifford",
           "status": "todo",
           "detail": "Engineering is ready; it was waiting only on 6.1's taxonomy.",
@@ -546,7 +546,7 @@
           "title": "App Phase 5: push notifications",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Web Push (VAPID/FCM) on job offer + SMS fallback + rate governor. Interim Make\u2192Twilio SMS keeps working until this lands.",
+          "detail": "Web Push (VAPID/FCM) on job offer + SMS fallback + rate governor. Interim Make→Twilio SMS keeps working until this lands.",
           "dod": "Test sub gets a push on offer.",
           "est": "4 hr",
           "estH": 4
@@ -563,11 +563,11 @@
         },
         {
           "id": "6.5",
-          "title": "LEGAL GATE: route \u2192 engage \u2192 s15AA clearance",
+          "title": "LEGAL GATE: route → engage → s15AA clearance",
           "owner": "allan",
           "status": "todo",
           "gate": "HARD GATE",
-          "detail": "Pick expand-Sprintlaw vs specialist (brief is ready in docs/specs/), commit the budget, engage. Longest lead-time item in the whole plan \u2014 start it before anything else in this phase finishes. No external sub signs before the letter.",
+          "detail": "Pick expand-Sprintlaw vs specialist (brief is ready in docs/specs/), commit the budget, engage. Longest lead-time item in the whole plan — start it before anything else in this phase finishes. No external sub signs before the letter.",
           "dod": "Lawyer clearance letter on file.",
           "est": "2 hr effort + 2-6 wk elapsed",
           "estH": 2
@@ -577,7 +577,7 @@
           "title": "Sub matching + quality system",
           "owner": "marko+ceos",
           "status": "todo",
-          "detail": "Sub profile fields (skills, suburbs, availability), offer-order convention, and the quality rubric wired post-job \u2014 Jordan's system does this and ours had no plan item until the parity audit.",
+          "detail": "Sub profile fields (skills, suburbs, availability), offer-order convention, and the quality rubric wired post-job — Jordan's system does this and ours had no plan item until the parity audit.",
           "dod": "A test job offers to the right sub first; rubric row per job.",
           "est": "2 hr",
           "estH": 2
@@ -587,7 +587,7 @@
           "title": "Sub recruitment pipeline live",
           "owner": "marko",
           "status": "todo",
-          "detail": "Hipages + Airtasker + Meta + business-audit sourcing, candidates tracked. Supply is Jordan's stated bottleneck \u2014 recruitment starts before the legal gate clears so candidates are ready the day it does.",
+          "detail": "Hipages + Airtasker + Meta + business-audit sourcing, candidates tracked. Supply is Jordan's stated bottleneck — recruitment starts before the legal gate clears so candidates are ready the day it does.",
           "dod": "Pipeline sheet with 5+ candidates.",
           "est": "2 hr setup, then ongoing",
           "estH": 2
@@ -607,7 +607,7 @@
           "title": "Job recipes: BSN-01 basin + launch gaps",
           "owner": "clifford",
           "status": "todo",
-          "detail": "The basin recipe is missing (found via Lisa's job \u2014 the first real job has no recipe). Just-in-time per the recipes README, not all 140. ALSO add a PAINTING SKU (Allan 2026-06-17: we have a painter subbie, so painting is now an offered line \u2014 needs a priced SKU: bare-wall + ceiling repaint, sub cost ~$450-500, not ad-hoc per job). + NOTE TSR-12/13/14 + FBR-01..04 ARE fully costed in the sheet (verified 06-17 \u2014 the old 'uncosted placeholder' claim was WRONG); the real gap is a COMBO recipe for full-makeover scopes the sheet has no single SKU for (epoxy full-regrout + full tile recolour + spa + basin) so quoters anchor on a bundle instead of summing+over-counting individual lines; + reconcile the SPA rate (sheet BTV-05/06 $483-578 sub vs Allan's $880) + add a PLUMBING SKU (chrome tapware swap is a real offered trade now). Source: docs/research/job-analysis-mick-2bath-2026-06-17.md.",
+          "detail": "The basin recipe is missing (found via Lisa's job — the first real job has no recipe). Just-in-time per the recipes README, not all 140. ALSO add a PAINTING SKU (Allan 2026-06-17: we have a painter subbie, so painting is now an offered line — needs a priced SKU: bare-wall + ceiling repaint, sub cost ~$450-500, not ad-hoc per job). + NOTE TSR-12/13/14 + FBR-01..04 ARE fully costed in the sheet (verified 06-17 — the old 'uncosted placeholder' claim was WRONG); the real gap is a COMBO recipe for full-makeover scopes the sheet has no single SKU for (epoxy full-regrout + full tile recolour + spa + basin) so quoters anchor on a bundle instead of summing+over-counting individual lines; + reconcile the SPA rate (sheet BTV-05/06 $483-578 sub vs Allan's $880) + add a PLUMBING SKU (chrome tapware swap is a real offered trade now). Source: docs/research/job-analysis-mick-2bath-2026-06-17.md.",
           "dod": "Recipe per launch SKU family.",
           "est": "1.5 hr",
           "estH": 1.5
@@ -617,7 +617,7 @@
           "title": "Aftercare cards printed + in the van",
           "owner": "marko",
           "status": "todo",
-          "detail": "A5 \u00d7100 from customer-aftercare-cards.md. The physical half of cure-time compliance.",
+          "detail": "A5 ×100 from customer-aftercare-cards.md. The physical half of cure-time compliance.",
           "dod": "Cards in the vehicle.",
           "est": "30 min + print turnaround",
           "estH": 0.5
@@ -628,14 +628,14 @@
           "owner": "clifford",
           "status": "todo",
           "detail": "Quote-drafter: Clifford performs it for jobs 1-5, agent later. Photo-quality-reviewer with 3.2. Maintenance-reminder after job ~10 (drives repeat rate). DM-handler with Phase 10 socials. Business-analyst with Phase 7 data.",
-          "dod": "Each agent: spec \u2192 build \u2192 one proven run.",
+          "dod": "Each agent: spec → build → one proven run.",
           "est": "6 hr staged",
           "estH": 6
         }
       ]
     },
     {
-      "title": "PHASE 7 \u2014 DATA + ANALYTICS",
+      "title": "PHASE 7 — DATA + ANALYTICS",
       "goal": "Own the numbers like Jordan does: traffic, conversions, attribution, and a warehouse seam that's already filling.",
       "items": [
         {
@@ -673,7 +673,7 @@
           "title": "Reconciliation tie-out + weekly Slack digest",
           "owner": "clifford",
           "status": "todo",
-          "detail": "GHL \u2194 Sheet \u2194 SM8 row counts tie by opp_id weekly, posted to Slack. This is pass-bar #1 made routine.",
+          "detail": "GHL ↔ Sheet ↔ SM8 row counts tie by opp_id weekly, posted to Slack. This is pass-bar #1 made routine.",
           "dod": "First weekly digest posts with matching counts.",
           "est": "2 hr",
           "estH": 2
@@ -683,7 +683,7 @@
           "title": "Lead-source attribution check",
           "owner": "clifford",
           "status": "todo",
-          "detail": "form lead_source \u2192 GHL field \u2192 Sheet column \u2192 GA4 dimension all agree, so 'where did this job come from' has one answer.",
+          "detail": "form lead_source → GHL field → Sheet column → GA4 dimension all agree, so 'where did this job come from' has one answer.",
           "dod": "A test lead shows the same source in all four places.",
           "est": "1 hr",
           "estH": 1
@@ -691,7 +691,7 @@
       ]
     },
     {
-      "title": "PHASE 8 \u2014 HARDENING + OPS MATURITY",
+      "title": "PHASE 8 — HARDENING + OPS MATURITY",
       "goal": "The boring layer that makes 'finalised' true: keys rotated, failures noticed, backups restorable, policies written.",
       "items": [
         {
@@ -699,7 +699,7 @@
           "title": "Rotate all 7 exposed credentials + rotation runbooks",
           "owner": "allan+clifford",
           "status": "todo",
-          "detail": "SM8 key, GHL PIT, Netlify, 3\u00d7 Supabase, Make webhook secret \u2014 one at a time, verifying the scenarios after each. Then write the runbook so next time is 10 minutes.",
+          "detail": "SM8 key, GHL PIT, Netlify, 3× Supabase, Make webhook secret — one at a time, verifying the scenarios after each. Then write the runbook so next time is 10 minutes.",
           "dod": "Zero old keys valid; every scenario green after.",
           "est": "2 hr",
           "estH": 2
@@ -710,7 +710,7 @@
           "owner": "clifford",
           "status": "todo",
           "detail": "Who notices a dead vendor and how fast, with the manual fallback steps per vendor; free uptime checks on the site + form asset alerting Slack.",
-          "dod": "One forced failure per vendor with owner, detection time, fallback used, recovery \u2014 evidenced in a drill log.",
+          "dod": "One forced failure per vendor with owner, detection time, fallback used, recovery — evidenced in a drill log.",
           "est": "3 hr",
           "estH": 3
         },
@@ -729,7 +729,7 @@
           "title": "Privacy paragraphs live + retention policy + zip redeploy",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Allan approves the 3 drafted paragraphs (sub-disclosure, records, AI use) \u2192 page-privacy.php updated \u2192 rebuild timeless-theme-2.zip (carries the llms.txt overclaim fixes) \u2192 upload \u2192 both cache purges.",
+          "detail": "Allan approves the 3 drafted paragraphs (sub-disclosure, records, AI use) → page-privacy.php updated → rebuild timeless-theme-2.zip (carries the llms.txt overclaim fixes) → upload → both cache purges.",
           "dod": "Live privacy page shows the additions; live llms.txt clean.",
           "est": "1.5 hr",
           "estH": 1.5
@@ -759,7 +759,7 @@
           "title": "Insurance Certificate of Currency VERIFIED",
           "owner": "allan",
           "status": "todo",
-          "detail": "Get the CoC from the broker and confirm in writing it covers resurfacing AND regrouting + the sub extension. The audit found we have never actually sighted it \u2014 if there's an exclusion, we find out now, not at a claim.",
+          "detail": "Get the CoC from the broker and confirm in writing it covers resurfacing AND regrouting + the sub extension. The audit found we have never actually sighted it — if there's an exclusion, we find out now, not at a claim.",
           "dod": "CoC on file; coverage confirmed in writing.",
           "est": "30 min effort + broker turnaround",
           "estH": 0.5
@@ -769,7 +769,7 @@
           "title": "Renewals + expiry calendar",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Domains (Mar/Apr 2027), Workspace price rise (Jul), Xero promo end (26 Nov), SM8 promo end (May 2027), insurance, ACMA, ABN/ASIC, key ages \u2014 all in one calendar with alerts.",
+          "detail": "Domains (Mar/Apr 2027), Workspace price rise (Jul), Xero promo end (26 Nov), SM8 promo end (May 2027), insurance, ACMA, ABN/ASIC, key ages — all in one calendar with alerts.",
           "dod": "Calendar entries + a board card.",
           "est": "45 min",
           "estH": 0.75
@@ -787,7 +787,7 @@
       ]
     },
     {
-      "title": "PHASE 9 \u2014 VERIFICATION GATES (the finalised stamp)",
+      "title": "PHASE 9 — VERIFICATION GATES (the finalised stamp)",
       "goal": "Prove the whole machine, then audit it adversarially. Pass = the business is 'guaranteed finalised'.",
       "items": [
         {
@@ -795,7 +795,7 @@
           "title": "FULL E2E dry-run with forced failures",
           "owner": "ceos+allan+marko",
           "status": "todo",
-          "detail": "Fake customer end-to-end (Stripe TEST deposit + final) + fake sub (offer\u2192accept\u2192photos\u2192complete\u2192back-sync\u2192invoice\u2192paid) + one forced failure at EVERY handoff to prove each runbook actually recovers.",
+          "detail": "Fake customer end-to-end (Stripe TEST deposit + final) + fake sub (offer→accept→photos→complete→back-sync→invoice→paid) + one forced failure at EVERY handoff to prove each runbook actually recovers.",
           "dod": "Script + drill log committed.",
           "est": "4 hr (all hands)",
           "estH": 4
@@ -806,16 +806,16 @@
           "owner": "ceos",
           "status": "todo",
           "gate": "PASS = FINALISED",
-          "detail": "Pattern-C multi-agent audit against MASTER-FINALIZATION-MAP \u00a71: data ties out, zero contact leaks, idempotency, secrets, legal, money lane, live QA, dispatch, real-SMS, accessibility+abuse, backups, outage runbooks.",
-          "dod": "Zero P0/P1 findings \u2192 STATE.md stamped FINALISED.",
+          "detail": "Pattern-C multi-agent audit against MASTER-FINALIZATION-MAP §1: data ties out, zero contact leaks, idempotency, secrets, legal, money lane, live QA, dispatch, real-SMS, accessibility+abuse, backups, outage runbooks.",
+          "dod": "Zero P0/P1 findings → STATE.md stamped FINALISED.",
           "est": "4 hr",
           "estH": 4
         }
       ]
     },
     {
-      "title": "PHASE 10 \u2014 GROWTH LAYER (deliberately last)",
-      "goal": "Only after the machine is finalised: feed it. Content, reviews, ads, referral \u2014 the Jordan flywheel.",
+      "title": "PHASE 10 — GROWTH LAYER (deliberately last)",
+      "goal": "Only after the machine is finalised: feed it. Content, reviews, ads, referral — the Jordan flywheel.",
       "items": [
         {
           "id": "10.1",
@@ -833,7 +833,7 @@
           "owner": "clifford",
           "status": "todo",
           "detail": "Job-complete photos flow to an auto-categorised library (Jordan automates this), consent-checked via 4.4, then progressively replace the site's placeholder images.",
-          "dod": "First real pair flows job\u2192library\u2192site without manual sorting.",
+          "dod": "First real pair flows job→library→site without manual sorting.",
           "est": "3 hr",
           "estH": 3
         },
@@ -859,7 +859,7 @@
         },
         {
           "id": "10.5",
-          "title": "Google Ads: compliance audit \u2192 top-5 campaigns",
+          "title": "Google Ads: compliance audit → top-5 campaigns",
           "owner": "allan+clifford",
           "status": "todo",
           "detail": "Landing-page policy audit first (claims, pricing wording), then campaigns on the locked top-5 pages at a capped test budget.",
@@ -872,7 +872,7 @@
           "title": "Lifecycle marketing pack: referral + win-back + persona nurture",
           "owner": "ceos+allan",
           "status": "todo",
-          "detail": "Homes the audit orphans: referral ask (incentive structure decided FIRST \u2014 none exists), 30/90-day win-backs, PM/builder/landlord nurture sequences (templates 5A-5D exist). All commercial = STOP line required, Rule-8 approved.",
+          "detail": "Homes the audit orphans: referral ask (incentive structure decided FIRST — none exists), 30/90-day win-backs, PM/builder/landlord nurture sequences (templates 5A-5D exist). All commercial = STOP line required, Rule-8 approved.",
           "dod": "Each sequence live with STOP; first sends logged.",
           "est": "3 hr",
           "estH": 3
