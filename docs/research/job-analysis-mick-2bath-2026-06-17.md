@@ -49,7 +49,15 @@ Multi-service jobs price off **COMBO SKUs** (e.g. TRC-03 regrout+full-tile+bath+
 62%), NOT summed individual lines (summing over-counts shared setup/masking/travel). (4) Multi-bath = **flat
 −$200 off the 2nd bathroom** (off OUR margin, sub unchanged), NOT −10%/−$448. (5) Only **PAINTING + PLUMBING**
 are genuinely off-sheet. (6) Western-Sydney upcharges that apply to Mick: hard-water +$50, custom GREY floor
-colour +$80, epoxy upgrade +$250, Penrith travel zone. Full rebuild pending Allan's spa-rate confirm.
+colour +$80, epoxy upgrade +$250, Penrith travel zone.
+⇒ **REBUILT 2026-06-17 PM (done, Cleo-verified "sound, adjust"):** quote re-derived from the sheet —
+combo **TRC-03** anchors each bathroom (NOT summing standalone FBR-03+TSR-13, which over-counts), spa
+repriced to **~$2,200** (real $880 sub; sheet BTV-05/06 stale), multi-bath **flat −$200**, plus a
+**whole-bathroom regrout uplift** (~$600/$550 — TRC-03 only prices the shower regrout; Cleo's catch).
+**New combined = ~$12,550 (T3, Western-Syd default) – ~$14,300 (T2) inc GST · our cost ~$6,800 · gross
+profit ~$4,600–6,200 = ~40% T3 / ~48% T2.** The OLD bottom-up numbers below this banner are superseded by
+this sheet-grounded rebuild (now live in the webapp). Open for Allan: confirm the spa price (margin vs
+price) + the whole-bath regrout extent at the site measure.
 
 ⇒ **COST RE-AUDITED 2026-06-17 (Allan caught the resurfacer split — he was right):** the cost was first
 allocated TOP-DOWN to hit ~46%, which produced an incoherent lumped "$2,180 resurfacer" line. Rebuilt
