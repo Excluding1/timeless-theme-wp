@@ -2,7 +2,9 @@
 
 **Goal:** any quote drafted in **under 10 minutes**, consistently, grounded in the master pricing sheet — never eyeballed. Manual now (Allan); becomes the AI quote-drafter agent later (board 6.11 / Override 6).
 
-**Canonical price source:** `data/pricing/master-pricing-2026-05-01-snapshot.xlsx` → sheet **"All Services & Pricing"**. Every line has: Avg Hours · Materials · Sub Labour · Total Cost · **T1/T2/T3 (inc GST)** · Profit@T2 · True Margin% · Sub $/hr. **Use these columns — do NOT reinvent sub costs.** Supporting sheets: Upcharges & Modifiers, Travel Zones, Multi-Bathroom Pricing, Rejection Criteria.
+**Canonical price source:** `data/pricing/master-pricing-2026-05-01-snapshot.xlsx` → sheet **"All Services & Pricing"** (Avg Hours · Materials · Sub Labour · Total Cost · **T1/T2/T3 inc GST** · Profit@T2 · True Margin% · Sub $/hr). Supporting sheets: Upcharges & Modifiers, Travel Zones, Multi-Bathroom Pricing, Rejection Criteria.
+
+> ⚠️ **PRICE off the sheet, but COST off real sub quotes — they are NOT the same column** (calibrated against a real completed job, 2026-06-18). The sheet's **T1/T2/T3 customer prices are market-validated** (a real strip-back bath got the customer to exactly the sheet's **$1,540**). BUT the sheet's **Sub Labour / Cost / True-Margin% columns are OPTIMISTIC** — real subs have charged ~**2× the sheet** (that same bath: sub **$980** incl glass removal/reinstall vs the sheet's ~$490). **So real margin on core resurfacing runs ~20-30%, NOT the sheet's ~55%.** Cost every job off **real sub quotes** (Marko's collated method); treat the sheet's cost/margin cells as a planning floor, not fact. Re-pegging the sheet's cost columns against real quotes = a board item (affects every quote).
 
 Worked reference example: `docs/research/job-analysis-mick-2bath-2026-06-17.md` (Mick, 2-bathroom package).
 
