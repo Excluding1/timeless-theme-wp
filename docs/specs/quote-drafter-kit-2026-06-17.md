@@ -53,8 +53,10 @@ The floor is always the customer's informed choice. Put all three on ONE page so
 **1. Keep your floor — $0** *(included: regrout + deep-clean)*
 > "Your floor tiles are sound — it's just the colour that's dated. We'll regrout and deep-clean them so they come up fresh, and you put your budget into the walls, bath and shower where the change really shows. The smart-money pick if the floor colour doesn't bother you."
 
-**2. Recolour the floor — budget refresh** *(cheapest, +~1 day)*
-> "We can spray-recolour the floor tiles to grey while we're doing the walls. I'll be straight with you: a floor isn't like a wall — it takes daily foot traffic and standing water, so a floor coating is a **cosmetic refresh that holds about 2–3 years** before it shows wear at the doorway and wet spots, and we **can't coat the shower floor** at all (it has to stay watertight). Pick this if you want the grey look now on a budget and you're fine refreshing it down the track."
+**2. Keep the floor + make it safe — anti-slip ETCH** *(cheapest, no peel; keeps the colour)*
+> "If you're happy keeping your floor tiles, we deep-clean + regrout them and apply an invisible penetrating anti-slip treatment — it etches grip into the tile, so it's **not a coating** (can't peel), and it doesn't change the colour. The floor reads as a deliberate feature against the fresh white walls. Sound, grippy, warrantable."
+
+*(NOTE — revised 2026-06-18 after Sydney competitor research: we do **NOT** spray a colour COAT onto a tiled floor — a floor takes foot traffic + standing water so a colour coat lifts (worst at the shower drain), and no competitor warrants a coated tiled floor. To **change** the floor colour it's a re-tile (option 3). A one-piece moulded shower BASE/tray is the only floor surface that can be reglazed — with mandatory anti-slip — but Mick's is tiled, so that doesn't apply.)*
 
 **3. New grey tile — the proper job** *(dearest, adds ~3 weeks; recommended for longevity)*
 > "We strip the old floor, lay a new waterproof membrane to the right fall, and tile your grey — shower floor included, done to code. This is a **real new floor that lasts 15–25 years**, not a coating. It's the dearest option and it adds time (a new floor cures in stages), but it's the one that genuinely lasts and matches a full renovation."
