@@ -47,6 +47,23 @@ Worked reference example: `docs/research/job-analysis-mick-2bath-2026-06-17.md` 
 
 ---
 
+## Floor-options customer script (reusable — present all 3, never silently coat a floor)
+The floor is always the customer's informed choice. Put all three on ONE page so the upgrade reads as *their* decision, not our markup.
+
+**1. Keep your floor — $0** *(included: regrout + deep-clean)*
+> "Your floor tiles are sound — it's just the colour that's dated. We'll regrout and deep-clean them so they come up fresh, and you put your budget into the walls, bath and shower where the change really shows. The smart-money pick if the floor colour doesn't bother you."
+
+**2. Recolour the floor — budget refresh** *(cheapest, +~1 day)*
+> "We can spray-recolour the floor tiles to grey while we're doing the walls. I'll be straight with you: a floor isn't like a wall — it takes daily foot traffic and standing water, so a floor coating is a **cosmetic refresh that holds about 2–3 years** before it shows wear at the doorway and wet spots, and we **can't coat the shower floor** at all (it has to stay watertight). Pick this if you want the grey look now on a budget and you're fine refreshing it down the track."
+
+**3. New grey tile — the proper job** *(dearest, adds ~3 weeks; recommended for longevity)*
+> "We strip the old floor, lay a new waterproof membrane to the right fall, and tile your grey — shower floor included, done to code. This is a **real new floor that lasts 15–25 years**, not a coating. It's the dearest option and it adds time (a new floor cures in stages), but it's the one that genuinely lasts and matches a full renovation."
+
+**The one-line story (the honest version of Sam's "it won't last"):**
+> "The floor's the one surface we *won't* sell you a coating on as if it'll last — underfoot, it just doesn't. So it's keep it, refresh it cheap knowing it's temporary, or do it properly in new tile. Your call — we'll quote all three."
+
+**ACL guardrails:** (a) keep it SPECIFIC to FLOORS — it's floor coatings in the wet/high-traffic zone that are short-life, NOT our wall/bath/basin resurfacing (durable core, up-to-5yr); never let the floor story cast doubt on the rest. (b) NEVER coat a shower floor (safety + waterproofing). (c) Quote all three openly = informed consent.
+
 ## Pre-send gate checklist
 - [ ] Every line traces to a real sheet SKU (or is a clearly-labelled off-sheet trade).
 - [ ] Anchored on a combo, not summed standalone SKUs.
