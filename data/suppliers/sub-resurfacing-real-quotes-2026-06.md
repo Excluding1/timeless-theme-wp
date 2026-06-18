@@ -6,11 +6,15 @@ These are the REAL prices from the resurfacing subbies we've actually been able 
 wholesale rate only comes once we *sell the promise* (we run the ads, own the customer + comms/follow-ups,
 give consistent volume) — see CEO.md Pricing Principle 4 + `memory/pricing-margin-calibration-2026-06-18`.
 
-## SAM (did the real strip-back bath job)
-- Job: strip-back bathtub + glass panel removal & reinstall. **Customer paid $1,540 inc GST; we paid Sam $980.**
-  (Allan's *ideal* breakdown was $785 = base $530 + travel $30 + strip-back share $125 + glass $100 — i.e. the
-  $980 was ~$195 over the ideal. But see Petr below: even a "company trade price" for a bath runs ~$890-980,
-  so $530 base may be aspirational, not current-market.)
+## SAM (real strip-back bath job) — PRECISE COST DECOMPOSITION (Allan, 2026-06-18)
+- Customer paid **$1,540 inc GST**; we paid Sam **$980 inc GST** (that $980 INCLUDED glass-panel removal + reinstall).
+- **Sam's bath alone (NO glass) = $880 inc GST**, and it breaks down as:
+  - **Travel $30** — our standard 2-hr travel charge, EXCL tolls + parking (those are extra, distance-dependent; Penrith/far jobs run higher)
+  - **Strip-back $125** — removing the existing coating
+  - **Materials + labour $725** — the core resurface ("the rest")
+  - → $30 + $125 + $725 = **$880**  ·  **+ $100 glass removal/reinstall = $980.**  ($880 ≈ Petr's acrylic $890 — consistent.)
+- ⇒ **COST-LINE TEMPLATE (use for every resurfacing line):** `[materials + labour] + travel ($30 std/2hr; + tolls/parking/distance) + applicable upcharges (strip-back $125 · dark-substrate · two-colour · glass · etc.)`. The **materials+labour core is the negotiable part**; travel + upcharges are fixed pass-throughs.
+- Reconciliation: Sam's mat+labour **$725** vs the earlier "$530 ideal" → the ~$195 gap = Sam's PREMIUM (3-week-booked-out) markup. The negotiated / hungry-sub target ≈ the rate card's **$520-560 core** + travel + upcharges. Sam's ~$755 (mat+labour+travel) ≈ Petr's $890 acrylic = the **premium/near-retail ceiling, NOT the negotiated target.**
 
 ## PETR GOERNER — Diamond Bathroom Resurfacing
 - Contact: 0404 109 303 · pgs@diamondbathroomresurfacing.com.au · 24 Macintyre Crescent, Ruse NSW 2560
