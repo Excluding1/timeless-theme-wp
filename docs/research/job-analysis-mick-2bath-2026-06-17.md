@@ -1,5 +1,16 @@
 # Job analysis — Mick Connolly, 1 Pearra Way Claremont Meadows (2 bathrooms) — 2026-06-17
 
+## ⭐ FINAL DECISION — 2026-06-18 (12-agent workflow: 6 experts → Clifford+Cleo → converge → 3 adversarial verifiers; margin/method/ACL all verifier-corrected)
+- **FLOOR (pivotal):** NEVER spray-coat floors — our OWN sheet rates floor coatings ~3yr vs 10-15yr walls (the sub is right; web-research + our data agree). MAIN floor grey = **tile-over-tile** (tiler sub, durable, ~$1,800/room, ~46%) offered as a **priced 3-option block** (tile-over recommended / resurface-with-written-3yr-caveat / leave-as-is $0). **SHOWER floors = epoxy regrout + re-silicone existing ONLY — never coat, never tile-over** (AS 3740 fall + waterproof membrane); re-tile only if the site finds failed falls/membrane (separate licensed line).
+- **PRICE:** CORE **~$12,200 inc GST** (B1 ~$7,300 / B2 ~$4,900), combo-anchored, **T3-only** (do NOT also stack the −$200 multi-bath). Floor add-on +~$1,800/room → **all-in both floors ~$15,800**.
+- **TRUE MARGIN = ~33%** (verifier-corrected: GP ~$3,656 / ex-GST ~$11,091 = 33%; the converge's "40-42%" was a wrong-base error). Profitable, clears the $300 floor 5-7×, BUT below the 45-60% target — and hitting target needs ~$14k core, which breaks the ~market price. So: **competitive + profitable + below-target.** Accept, or trim scope.
+- **vs MARKO'S $10,725:** NOT a markup — Marko OMITS the floor entirely + runs 4 lines at/below sub cost (spa $925 vs $880 cost!). On like-for-like scope ~$11.5–12.2k IS the correct competitive price.
+- **FIX MARKO'S QUOTE:** +floor (3-option) · spa $925→~$1,550 (own SKU) · whole-bathroom epoxy regrout (not shower-only) · plumbing labour-only + **customer supplies chrome tapware** (kills ~$400-800 hardware drag) · rename "wardrobes"→**vanity cabinetry** · combo-anchor · per-material warranty.
+- **WORK ORDER (verifier-corrected):** plumber (leak-test cornice FIRST) → **[tiler FIRST + fully cured 48-72h, if tile-over]** → epoxy regrout → paint → **resurfacer LAST** → 48-72h cure. Run MAIN then ENSUITE. **~12-14 days with tile-over floors** (~7 if floors left). Add an **SM8 Tiler/Floor category + tile-overlay SKU** (gap).
+- **PRESENT TO CUSTOMER:** show the at-market fallback (leave/resurface floor) NEXT TO the recommended tile-over on the same page (ACL — the upgrade must read as Mick's choice, not our markup); "we recommend tile-over (lasts longer)" — NOT absolute disparagement of coatings we sell; gate the firm price behind the site visit.
+- **OPEN SITE ITEMS:** cornice leak diagnosis · spa acrylic flex-test · exact tile m² · shower fall/membrane · is the "(painted)" floor already tile? + door clearance if tile-over · exact grey/white tints.
+
+
 First full worked example of a 2-bathroom full-makeover quote. Built by the contractor-persona expert +
 Cleo + Clifford from Mick's real photos (grouped by Allan) + the recovered CRM scope. **Reusable rules for
 the quote-drafter kit (pipeline 1.16) are flagged ⇒.**
