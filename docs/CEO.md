@@ -1859,7 +1859,7 @@ Lawyer + insurance: formal dispute resolution
 | Discount type | When allowed | Authority |
 |---|---|---|
 | Override 1 "first 10 customers" $X off | Until first 10 paid customers, max 30% off T2 | CEO authorises by date |
-| Multi-bathroom in same property | 10% off second + 15% off third | Allan auto-apply |
+| Multi-bathroom in same property | **Flat −$200 off 2nd, −$300 off 3rd** (same visit; off OUR margin, sub pay unchanged) — per the master pricing sheet's Multi-Bathroom tab. *(The old "10%/15%" was stale; the sheet is the operational source — corrected 2026-06-17, Cleo-caught.)* | Allan auto-apply |
 | Property manager bulk (3+ properties same month) | 10% off | Allan negotiates |
 | Returning customer (job >12 months ago) | 10% off | Allan auto-apply |
 | Negotiation request from customer | NEVER unless above categories — say "this is our fair price" politely | Allan + me on tough cases |
