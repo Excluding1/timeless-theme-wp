@@ -1,5 +1,38 @@
 # Job analysis — Mick Connolly, 1 Pearra Way Claremont Meadows (2 bathrooms) — 2026-06-17
 
+## ★ DEFINITIVE RESOLUTION — 2026-06-18 (13-agent DEEP workflow: web/competitor research + 5 experts + Clifford+Cleo + 3 verifiers; margin/markup verifier-corrected). **SUPERSEDES all blocks below.**
+
+**Q1 — Sheet viable as a negotiated sub rate? NO at face value → re-peg UP, 4 lines (not a doubling):** bath $368→~$530 · spa $483→~$880 (own SKU) · full-room tile $845→~$1,150-1,300 base + **dark +$200** + **two-colour +$180** (the real defect = the sheet doesn't escalate HOURS for dark/two-colour/dado) · vanity $220→~$480. **HOLD** regrout (FBR-03 $1,005 ≈ market), basin add-on, silicone. Realistic negotiated rate = **retail − 15-30%** (NOT 50%); past ~30% off breaks the sub's ~$65/hr floor and they walk. Net honest margin: **~40% at signed-partner rates, ~25-30% at the retail one-offs we pay today** — not the sheet's 55%.
+
+**Q2 — PERMANENT RATE CARD** (durable wholesale COST, inc GST; anchored off Petr/Diamond trade list − partner discount, every figure clears the sub's hourly floor):
+
+| Service | Retail | Our wholesale (LOCK) |
+|---|--:|--:|
+| Standard bath | $400-600 | **$520-560** |
+| Cast-iron/large bath | $900-1,200 | **$620-680** |
+| Spa bath | $1,000-1,500 | **$850-900** |
+| Full-room tile resurface (15-20 m²) | $1,500-2,500 | **$1,150-1,300** +dark $200 +two-colour $180 +per-m² >20 m² |
+| Small-room/band tile | $800-1,400 | **$900-1,000** |
+| Vanity + 3-door cabinetry | ~$500+ | **$450-500** |
+| Standalone basin / add-on | $790-840 | **$400-450** / add-on **$110-150** |
+| Whole-bathroom epoxy regrout | $1,400-2,800 | **$1,000-1,200** |
+| Silicone reseal | — | **$250-350** |
+| Painting (walls + ceiling) | — | **$450-550/room** |
+| Plumbing (labour-only, cust. supplies tapware) | — | **$350-450/visit** |
+| Floor strip + retile | $40-120/m² | **$2,500-3,500/room — OPTION ONLY, never base** |
+
+**Q3 — Mick full all-in COST:** RETAIL world (today, no signed sub) floor-left **≈ $10,700** (= Marko's $10,725 ✓), floor-tiled ≈ $13,900. NEGOTIATED world (once partner subs signed) ≈ **$8,000 / $11,200** — the ~$2,700 spread = the unsigned-sub risk, all in the wall-tile line. **#1 cost driver + uncertainty = wall-tile resurface (~$1,900 mid → ~$4,000 retail) — get a real per-m² quote before firming.**
+
+**Q4 — FLOOR:** Base = **LEAVE ($0)** (tiles sound). Durable colour change = **STRIP + new AS-4858 membrane + re-graded screed (fall 1:80-1:50 per AS 3740:2021) + retile** — NOT overlay (overlay raises threshold ~20mm; **strip is ~HEIGHT-NEUTRAL** — corrects the earlier "30-50mm rise" worry). **Shower floor = STRIP ONLY, always** (can't re-establish a compliant fall/membrane by overlay; replacing shower tiles triggers full AS 3740). **NEVER coat** (fails in weeks; AU epoxy installers refuse showers; coating ≠ membrane). Floor = priced **OPTION** (~$6k both rooms tiled), not base scope.
+
+**Q5 — Mick estimate + process. ⚠ VERIFIER CORRECTION (markup ≠ margin):** at retail cost $10,700, **30% MARGIN needs customer ~$16,800**; $13,500-15,500 is only **~13-24% margin** (≈26-45% markup — the synthesis confused the two). So today, fully subbed, Mick at $13.5-15.5k = **~13-24% margin**, not 30%. **Process (locked, matches GHL):** confirm cost → margin → **indicative RANGE from photos ("subject to site measure")** → customer agrees → **SITE INSPECTION (the gate)** → fixed itemised price. Site visit must confirm: m² walls/floor, shower leak/movement + substrate soundness, shower fall + waste/threshold IF floor option, spa plumbing isolation, Penrith access, two-colour cut-lines. **PLAY: Marko self-performs jobs 1-3** (legal gate + converts Sam's $6,475 cost to retained margin → ~60% effective; **hold the customer price regardless of who holds the trowel**).
+
+**Q6 — VIABILITY (honest, both CEOs + adversarial): a ~25-35% blended business at maturity, NOT 44-55%.** 44%+ shows only on regrout/silicone-only/Marko-performed SKUs (low material, low CAC). Plan the P&L at 25-30%; treat above as upside. Customer prices off the sheet = fine (market-real, $1,540 matched); pricing the MODEL off sheet "cost" = the trap.
+
+**🔴 MAKE-OR-BREAK RISK: sub supply.** Sam (3-wk booked) + Petr (trade-list, near-retail) prove premium subs WON'T concede 20-30% — they don't need us yet. The 30%+ thesis collapses to a ~15-20% broker unless we recruit HUNGRY partner subs. **Sign 2-3 partner subs to a written per-SKU card BEFORE scaling ad spend — that's the unlock, not the rate card.**
+
+**4 GATES (Allan/Marko) before Clifford patches the sheet:** (1) sign 2-3 partner subs to the Q2 card *[the gate]*; (2) confirm Marko self-performs Mick jobs 1-3; (3) real per-m² tile sub quote before firming Mick; (4) ratify the 4-line re-peg + the "cost at retail until partner subs signed" rule. On Allan's go → patch the master-sheet COST column + the quote-drafter kit. *(Evidence: competitor/floor research with sources in the workflow output; AS 3740:2021, ARDEX TB251, AU epoxy-installer refusals on showers, GC-markup 25-35% norm.)*
+
 ## ⭐⭐⭐⭐ REALITY CHECK — 2026-06-18 PM (Petr's real trade list + Cleo's by-SKU verdict — refines the "$785 ideal / ~44%" below; NEWEST)
 **The $785 "ideal" was aspirational — current REAL accessible sub rates are higher.** Petr / Diamond's *confidential trade* list: acrylic bath **$890** / cast-iron **$980** / basin **$790-840** (`data/suppliers/sub-resurfacing-real-quotes-2026-06.md`); Sam **$980**. These are the *cheapest we can access* — because they're premium, ~3-week-booked-out subs who don't need our work yet, so they quote near-retail. The sheet's bath cost ($368-483) is ~2× below even these TRADE rates.
 - **IS THE SHEET REAL/FAIR RIGHT NOW? Both-CEOs verdict (Clifford + Cleo):** **CUSTOMER-PRICE side = YES** (market-real, $1,540 matched — keep using it to quote). **COST/MARGIN side = NO, not right now** — it assumes a wholesale rate we can't yet command. Planning off its 55% would have us think we're a 55% business when **today we're ~20-35%.**
