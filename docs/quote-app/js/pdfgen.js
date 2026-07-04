@@ -145,7 +145,8 @@
         var top = y - h1 - 2;
         var fy = 0;
         fy += block(settings.businessName, LM, colW - 8, top - fy, fonts.helvB, 9.5, 14, INK);
-        [ 'ABN ' + settings.abn, settings.cityLine, settings.phone, settings.email, settings.website ]
+        [ 'ABN ' + settings.abn, settings.licenceNo ? 'Licence ' + settings.licenceNo : '',
+          settings.cityLine, settings.phone, settings.email, settings.website ]
           .filter(Boolean).forEach(function (l) { fy += block(l, LM, colW - 8, top - fy, fonts.helv, 9.5, 14, INK); });
         var ty2 = 0;
         ty2 += block(doc.customer.name || '', LM + colW, colW - 8, top - ty2, fonts.helvB, 9.5, 14, INK);
@@ -333,7 +334,7 @@
         page.drawImage(mk, { x: LM + CW - mkW, y: y - mkH, width: mkW, height: mkH });
         y -= Math.max(34, mkH + 4);
         y -= block(settings.businessName, LM, CW - mkW - 10, y, fonts.helvB, 10.5, 14, INK);
-        y -= block('ABN ' + settings.abn, LM, CW - mkW - 10, y, fonts.helv, 9.5, 13, INK);
+        y -= block('ABN ' + settings.abn + (settings.licenceNo ? '   ·   Licence ' + settings.licenceNo : ''), LM, CW - mkW - 10, y, fonts.helv, 9.5, 13, INK);
         y -= block([settings.phone, settings.email, settings.website].filter(Boolean).join('   ·   '), LM, CW - mkW - 10, y, fonts.helv, 9, 13, MUTED);
         y -= 10;
 
@@ -357,11 +358,15 @@
         y = top - Math.max(by, my) - 7;
         hr(y, 1.4, GOLD); y -= 1.4 + 9;
 
-        /* items table */
-        line('DESCRIPTION', LM, y, fonts.din, 12.5, NAVY);
-        line('AMOUNT', function (w) { return LM + CW - w; }, y, fonts.din, 12.5, NAVY);
-        y -= 15;
-        hr(y, 1, RUST); y -= 1 + 7;
+        /* items table (header repeats on every continuation page) */
+        function tableHead() {
+          line('DESCRIPTION', LM, y, fonts.din, 12.5, NAVY);
+          line('AMOUNT', function (w) { return LM + CW - w; }, y, fonts.din, 12.5, NAVY);
+          y -= 15;
+          hr(y, 1, RUST); y -= 1 + 7;
+        }
+        function tableEnsure(h) { if (y - h < BM) { addPage(); tableHead(); } }
+        tableHead();
         var amtW = 34 * MM, descW = CW - amtW - 8;
         var multi = (doc.options || []).length > 1;
         var firstTot = null;
@@ -371,12 +376,12 @@
                  amount: parseFloat(String(o.price || '').replace(/[^0-9.]/g, '')) || 0 }]
             : (o.lines || []);
           if (multi && o.mode !== 'feature' && o.title) {
-            ensure(18);
+            tableEnsure(18);
             line(o.title, LM, y, fonts.din, 12, NAVY); y -= 16;
           }
           oLines.forEach(function (l) {
             var rows = wrap(l.desc, fonts.helv, 9.5, descW);
-            ensure(Math.min(rows.length, 3) * 13 + 5);   // start the row where at least a few lines fit
+            tableEnsure(Math.min(rows.length, 3) * 13 + 5);   // start the row where at least a few lines fit
             var first = true;
             while (rows.length) {
               var avail = Math.max(1, Math.floor((y - BM - 4) / 13));
@@ -391,7 +396,7 @@
                 first = false;
               }
               y -= chunk.length * 13;
-              if (rows.length) addPage(); else y -= 5;
+              if (rows.length) { addPage(); tableHead(); } else y -= 5;
             }
           });
           if (firstTot === null) {
@@ -403,7 +408,7 @@
 
         /* totals block */
         var tot = firstTot || 0;
-        ensure(70);
+        tableEnsure(70);
         y -= 2; hr(y, 0.8, LINE); y -= 0.8 + 8;
         var lbl = 'Total (inc GST)';
         var lw = fonts.din.widthOfTextAtSize(lbl, 14);
@@ -526,6 +531,38 @@
             ensure(nh + 5);
             block(doc.optionsNote, LM, CW, y, fonts.helv, 8, 12, MUTED, 'left');
             y -= nh + 6;
+          }
+
+          /* optional acceptance sign-off: with the licence number this doubles as the
+             written acceptance NSW wants on $5k-$20k small jobs */
+          if (doc.acceptSection) {
+            function acceptance(dry) {
+              var top0 = y, h = 0;
+              h += line('Acceptance', LM, top0, fonts.din, 11.5, NAVY, dry) + 4;
+              h += block('I accept quote ' + (doc.docNo || '') + ' and authorise ' + settings.businessName +
+                ' to carry out the work' + ((doc.options || []).length > 1 ? ' for the option selected below' : '') + '.',
+                LM, CW, top0 - h, fonts.helv, 9, 13, INK, 'left', dry);
+              var multi2 = (doc.options || []).length > 1;
+              var labels = multi2 ? ['Option', 'Full name', 'Signature', 'Date'] : ['Full name', 'Signature', 'Date'];
+              var fr = multi2 ? [0.14, 0.32, 0.34, 0.20] : [0.36, 0.38, 0.26];
+              var gap = 12, usable = CW - gap * (fr.length - 1);
+              var yLine = top0 - h - 18;
+              if (!dry) {
+                var x = LM;
+                fr.forEach(function (f, i) {
+                  var w = usable * f;
+                  page.drawLine({ start: { x: x, y: yLine }, end: { x: x + w, y: yLine }, thickness: 0.7, color: MUTED });
+                  page.drawText(labels[i], { x: x, y: yLine - 10, size: 7.5, font: fonts.helv, color: MUTED });
+                  x += w + gap;
+                });
+              }
+              h += 18 + 14;
+              return h;
+            }
+            var accH = acceptance(true);
+            ensure(accH + 4);
+            acceptance(false);
+            y -= accH + 4;
           }
         }
 

@@ -316,10 +316,13 @@
       '<label>What to expect (one per line)<textarea id="expect" rows="3">' + esc((d.expect || []).join('\n')) + '</textarea></label>' +
       '</div>' +
       '<div class="grid4"><label>Expect preset <select id="expreset"><option value="">choose…</option><option value="halfday">Half day</option><option value="day">1 day</option><option value="days23">2 to 3 days</option></select></label>' +
-      '<label class="chk"><input type="checkbox" id="footbottom" ' + (d.footerBottom !== false ? 'checked' : '') + '> Pin footer to the page bottom</label></div></section>' +
+      '<label class="chk"><input type="checkbox" id="footbottom" ' + (d.footerBottom !== false ? 'checked' : '') + '> Pin footer to the page bottom</label>' +
+      (!isInv ? '<label class="chk"><input type="checkbox" id="acceptsec" ' + (d.acceptSection ? 'checked' : '') + '> Print an acceptance sign-off block (name / signature / date)</label>' : '') +
+      '</div></section>' +
 
       '<div class="actions"><button id="save" class="primary big">Save</button>' +
       '<button id="download" class="big">Download PDF</button>' +
+      '<button id="copymsg" title="Copies a ready-to-send email/SMS message for this document">Copy send message</button>' +
       '<button id="back">Back to list</button></div>' +
       '<div id="valwarn"></div>' +
 
@@ -374,6 +377,7 @@
     d.warranty = $('#warr').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     d.expect = $('#expect').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     d.footerBottom = $('#footbottom').checked;
+    var ac = $('#acceptsec'); if (ac) d.acceptSection = ac.checked;
     showValidation();
   }
 
@@ -583,6 +587,30 @@
       readForm();
       try { await downloadPdf(S.doc); } catch (e) { toast('PDF failed: ' + (e.message || e), true); }
     };
+    $('#copymsg').onclick = async function () {
+      readForm();
+      var d = S.doc, s = S.settings;
+      var first = (d.customer.name || '').split(' ')[0] || 'there';
+      var total = '$' + R.money(R.docTotal(d));
+      var msg;
+      if (d.docType === 'invoice') {
+        var bal = R.docTotal(d) - (Number(d.depositPaid) || 0);
+        msg = 'Hi ' + first + ', your invoice ' + d.docNo + ' for ' + total + ' (inc GST) is attached.' +
+          (Number(d.depositPaid) > 0 ? ' With your deposit received, the balance due is $' + R.money(bal) + '.' : '') +
+          (d.dueDate ? ' Payment is due by ' + d.dueDate + '.' : '') +
+          ' Pay to ' + s.bankName + ', BSB ' + s.bsb + ', Acc ' + s.account + ', reference ' + d.docNo + '.' +
+          ' Thanks again, ' + s.businessName + ' ' + s.phone;
+      } else {
+        var opts = (d.options || []).map(function (o) { return o.title; }).filter(Boolean);
+        msg = 'Hi ' + first + ', thanks for reaching out. Your quote ' + (d.docNo || '') + ' is attached' +
+          (opts.length > 1 ? ' with ' + opts.length + ' options to choose from' : (opts[0] ? ' for the ' + opts[0].toLowerCase() : '')) + '.' +
+          (d.validUntil ? ' It is valid until ' + d.validUntil + '.' : '') +
+          ' A ' + (s.depositPct || 10) + '% deposit locks in your date. Any questions at all, just call ' + s.phone + '. ' + s.businessName;
+      }
+      msg = R.sanitize(msg);
+      try { await navigator.clipboard.writeText(msg); toast('Send message copied, paste it into your email or SMS'); }
+      catch (e) { prompt('Copy this message:', msg); }
+    };
     $('#back').onclick = async function () { S.view = 'list'; await refreshList(); render(); };
   }
 
@@ -634,6 +662,7 @@
       '<section><h3>Business details (printed on every PDF)</h3><div class="grid2">' +
       '<label>Business name <input id="s_name" value="' + esc(s.businessName) + '"></label>' +
       '<label>ABN <input id="s_abn" value="' + esc(s.abn) + '"></label>' +
+      '<label>NSW licence no <input id="s_lic" value="' + esc(s.licenceNo || '') + '" placeholder="prints under the ABN once you have it"></label>' +
       '<label>City line <input id="s_city" value="' + esc(s.cityLine) + '"></label>' +
       '<label>Phone <input id="s_phone" value="' + esc(s.phone) + '"></label>' +
       '<label>Email <input id="s_email" value="' + esc(s.email) + '"></label>' +
@@ -686,7 +715,7 @@
     bindNav(app);
 
     $('#savesettings').onclick = async function () {
-      s.businessName = $('#s_name').value; s.abn = $('#s_abn').value; s.cityLine = $('#s_city').value;
+      s.businessName = $('#s_name').value; s.abn = $('#s_abn').value; s.licenceNo = $('#s_lic').value.trim(); s.cityLine = $('#s_city').value;
       s.phone = $('#s_phone').value; s.email = $('#s_email').value; s.website = $('#s_web').value;
       s.tagline = $('#s_tag').value; s.bankName = $('#s_bank').value; s.bsb = $('#s_bsb').value;
       s.account = $('#s_acc').value; s.depositPct = Number($('#s_dep').value) || 10;

@@ -89,7 +89,9 @@
     }
     var total = R.docTotal(doc);
     if (total > 5000) {
-      warnings.push('Job over $5,000 inc GST: NSW requires a contractor licence + a written contract for residential work at this value, check before sending');
+      warnings.push(settings && settings.licenceNo
+        ? 'Job over $5,000 inc GST: NSW requires a written small-jobs contract at this value (the quote acceptance block + licence number can serve for $5k-$20k)'
+        : 'Job over $5,000 inc GST: NSW requires a contractor licence + a written contract for residential work at this value, check before sending');
     }
     return warnings;
   };
@@ -109,6 +111,7 @@
   R.DEFAULT_SETTINGS = {
     businessName: 'Timeless Resurfacing',
     abn: '30 412 161 602',
+    licenceNo: '',           // NSW contractor licence: prints under the ABN once held
     cityLine: 'Sydney, NSW',
     phone: '0451 110 154',
     email: 'quotes@timelessresurfacing.com.au',
