@@ -60,7 +60,8 @@
     S.assets = {
       dinBytes: await get('fonts/BarlowCondensed-Bold.ttf'),
       scriptBytes: await get('fonts/GreatVibes-Regular.ttf'),
-      logoBytes: await get('assets/tr-lockup.png')
+      logoBytes: await get('assets/tr-lockup.png'),
+      markBytes: await get('assets/tr-mark.png')
     };
     return S.assets;
   }
@@ -69,6 +70,7 @@
   function newDoc() {
     return {
       id: '', docType: 'quote', docNo: '', date: todayStr(), availableFrom: '',
+      validUntil: plusDaysStr((S.settings && S.settings.validityDays) || 7),
       dueDate: '', depositPaid: 0, status: 'draft',
       customer: { name: '', address: '', access: '', phone: '', email: '' },
       jobIntro: '', photos: [], photoIndex: -1,
@@ -95,7 +97,7 @@
 
   async function generatePdfBytes(doc) {
     var assets = await loadAssets();
-    var a = { dinBytes: assets.dinBytes, scriptBytes: assets.scriptBytes, logoBytes: assets.logoBytes, photoBytes: null, photoIsPng: false };
+    var a = { dinBytes: assets.dinBytes, scriptBytes: assets.scriptBytes, logoBytes: assets.logoBytes, markBytes: assets.markBytes, photoBytes: null, photoIsPng: false };
     var d = JSON.parse(JSON.stringify(doc));
     if (doc.photoIndex >= 0 && doc.photos[doc.photoIndex]) {
       var p = doc.photos[doc.photoIndex];
@@ -189,12 +191,14 @@
           else if (act === 'dup') {
             var c = await TQ.db.getQuote(id);
             c.id = ''; c.docNo = ''; c.status = 'draft'; c.date = todayStr();
+            c.validUntil = plusDaysStr(S.settings.validityDays);
             S.doc = c; S.view = 'editor'; render(); toast('Duplicated, save to keep it');
           }
           else if (act === 'inv') {
             var d2 = await TQ.db.getQuote(id);
-            d2.id = ''; d2.docNo = ''; d2.docType = 'invoice'; d2.status = 'draft';
+            d2.id = ''; d2.quoteRef = d2.docNo; d2.docNo = ''; d2.docType = 'invoice'; d2.status = 'draft';
             d2.date = todayStr(); d2.dueDate = plusDaysStr(S.settings.invoiceDueDays);
+            d2.validUntil = '';
             S.doc = d2; S.view = 'editor'; render(); toast('Invoice drafted from the quote, review and save');
           }
           else if (act === 'del') {
@@ -239,6 +243,7 @@
       '<input class="otitle" data-oi="' + oi + '" placeholder="Option title, e.g. Option A: New floor tiles + wall resurfacing" value="' + esc(o.title) + '">' +
       '<select class="omode" data-oi="' + oi + '"><option value="itemised"' + (o.mode !== 'feature' ? ' selected' : '') + '>Itemised (prices per line)</option>' +
       '<option value="feature"' + (o.mode === 'feature' ? ' selected' : '') + '>Feature (one price + bullets)</option></select>' +
+      '<button data-act="savetpl" data-oi="' + oi + '" title="Save this option to your library for reuse">☆ Save</button>' +
       '<button class="danger" data-act="delopt" data-oi="' + oi + '">Remove</button></div>' + body + '</div>';
   }
 
@@ -261,7 +266,10 @@
       '<section class="ai"><h3>Quick Draft <span class="tag">built-in, offline</span></h3>' +
       '<p class="hint">Paste the job in your own words (names, address, prices like “2250 tiling on top”, “option a / option b”…). It fills the form below from the price book. You always review before the PDF exists.</p>' +
       '<textarea id="aitext" rows="4" placeholder="name is Neil Prout address is 29/43 Hereford Street, Glebe, nsw 2037, 2250 for new floor tiles on top and upskirting, 1000 strip out, 700 tipping the old tiles"></textarea>' +
-      '<button id="draftbtn" class="primary">Draft it</button><div id="aiwarn"></div></section>' +
+      '<div class="actions"><button id="draftbtn" class="primary">Draft it</button>' +
+      '<button id="polishbtn" title="Rewrites THE JOB wording with a local AI model. Runs entirely in your browser; prices and numbers are never touched.">✨ Polish wording (local AI)</button>' +
+      '<span id="llmstatus" class="muted" style="font-size:12px"></span></div>' +
+      '<div id="aiwarn"></div></section>' +
 
       '<section><h3>Document</h3><div class="grid4">' +
       '<label>Type <select id="doctype"><option value="quote"' + (!isInv ? ' selected' : '') + '>Quote</option><option value="invoice"' + (isInv ? ' selected' : '') + '>' + (S.settings.gstRegistered ? 'Tax invoice' : 'Invoice') + '</option></select></label>' +
@@ -269,9 +277,11 @@
       '<label>Date <input id="docdate" value="' + esc(d.date) + '"></label>' +
       (isInv
         ? '<label>Due date <input id="duedate" value="' + esc(d.dueDate || plusDaysStr(S.settings.invoiceDueDays)) + '"></label>'
-        : '<label>Available from <input id="avail" value="' + esc(d.availableFrom || '') + '" placeholder="optional"></label>') +
+        : '<label>Valid until <input id="validuntil" value="' + esc(d.validUntil || plusDaysStr(S.settings.validityDays)) + '"></label>' +
+          '<label>Available from <input id="avail" value="' + esc(d.availableFrom || '') + '" placeholder="optional"></label>') +
       '</div>' +
-      (isInv ? '<div class="grid4"><label>Deposit already received ($) <input id="deposit" type="number" min="0" step="0.01" value="' + esc(d.depositPaid || 0) + '"></label></div>' : '') +
+      (isInv ? '<div class="grid4"><label>Deposit already received ($) <input id="deposit" type="number" min="0" step="0.01" value="' + esc(d.depositPaid || 0) + '"></label>' +
+        '<label>Quote ref <input id="quoteref" value="' + esc(d.quoteRef || '') + '" placeholder="e.g. TR-1022"></label></div>' : '') +
       '</section>' +
 
       '<section><h3>Customer</h3><div class="grid2">' +
@@ -291,7 +301,13 @@
 
       '<section><h3>Options / line items</h3><div id="opts">' +
       (d.options || []).map(optionHtml).join('') +
-      '</div><button class="ghost" id="addopt">+ Add option</button>' +
+      '</div><div class="actions"><button class="ghost" id="addopt">+ Add option</button>' +
+      ((S.settings.optionTemplates || []).length
+        ? '<select id="tpllist">' + (S.settings.optionTemplates || []).map(function (t, ti) {
+            return '<option value="' + ti + '">' + esc(t.name) + '</option>';
+          }).join('') + '</select><button class="ghost" id="tplinsert">+ From library</button>'
+        : '<span class="muted" style="font-size:12px">(“☆ Save” an option to build your library)</span>') +
+      '</div>' +
       '<label class="mt">Note under the options</label>' +
       '<textarea id="optnote" rows="2" placeholder="Option B keeps your existing tiles for less; we confirm the scope on site.">' + esc(d.optionsNote) + '</textarea></section>' +
 
@@ -343,8 +359,10 @@
     d.docNo = $('#docno').value.trim();
     d.date = $('#docdate').value.trim();
     var av = $('#avail'); if (av) d.availableFrom = av.value.trim();
+    var vu = $('#validuntil'); if (vu) d.validUntil = vu.value.trim();
     var du = $('#duedate'); if (du) d.dueDate = du.value.trim();
     var dep = $('#deposit'); if (dep) d.depositPaid = parseFloat(dep.value) || 0;
+    var qr = $('#quoteref'); if (qr) d.quoteRef = qr.value.trim();
     d.customer.name = $('#cname').value.trim();
     d.customer.address = $('#caddr').value.trim();
     d.customer.access = $('#caccess').value.trim();
@@ -415,7 +433,9 @@
       if (out.customer.email) d.customer.email = out.customer.email;
       if (out.availableFrom) d.availableFrom = out.availableFrom;
       if (out.options.length) d.options = out.options;
-      if (out.jobIntro && !d.jobIntro) d.jobIntro = out.jobIntro;
+      if (out.jobIntro) d.jobIntro = out.jobIntro;
+      if (out.expect && out.expect.length) d.expect = out.expect;
+      if (out.warranty && out.warranty.length) d.warranty = out.warranty;
       var aitxt = $('#aitext').value;
       render();
       $('#aitext').value = aitxt;
@@ -424,7 +444,37 @@
         : '<div class="okbox">Drafted cleanly, review the form below.</div>';
     };
 
-    $('#doctype').onchange = function () { readForm(); if (S.doc.docType === 'invoice' && !S.doc.dueDate) S.doc.dueDate = plusDaysStr(S.settings.invoiceDueDays); render(); };
+    $('#polishbtn').onclick = async function () {
+      readForm();
+      if (!S.doc.jobIntro && !(S.doc.options || []).some(function (o) { return (o.lines || []).length || (o.items || []).length; })) {
+        toast('Nothing to polish yet, draft or fill the job first', true); return;
+      }
+      var st = $('#llmstatus');
+      try {
+        st.textContent = 'Starting the local AI…';
+        await TQ.minillm.ensure(S.settings.webllmEnabled, function (t) { st.textContent = t; });
+        st.textContent = 'Polishing… (' + TQ.minillm.detail + ')';
+        var better = await TQ.minillm.polish(S.doc);
+        if (better) {
+          S.doc.jobIntro = better;
+          $('#jobintro').value = better;
+          st.textContent = 'Done, review THE JOB text.';
+          schedulePreview(0);
+          toast('Wording polished, review it before sending');
+        } else {
+          st.textContent = 'The AI result broke the house rules, kept your wording.';
+        }
+      } catch (e) {
+        st.textContent = String(e.message || e);
+      }
+    };
+
+    $('#doctype').onchange = function () {
+      readForm();
+      if (S.doc.docType === 'invoice' && !S.doc.dueDate) S.doc.dueDate = plusDaysStr(S.settings.invoiceDueDays);
+      if (S.doc.docType === 'quote') S.doc.validUntil = plusDaysStr(S.settings.validityDays);   // never resurrect a stale date
+      render();
+    };
     $('#expreset').onchange = function () {
       if (this.value) { S.doc.expect = R.EXPECT_PRESETS[this.value].slice(); $('#expect').value = S.doc.expect.join('\n'); schedulePreview(); }
     };
@@ -437,7 +487,7 @@
       render();
     };
     $$('#opts [data-act]', app).forEach(function (b) {
-      b.onclick = function () {
+      b.onclick = async function () {
         readForm();
         var oi = Number(b.getAttribute('data-oi') || b.closest('[data-oi]').getAttribute('data-oi'));
         var act = b.getAttribute('data-act');
@@ -447,9 +497,28 @@
           S.doc.options[oi].lines.splice(li, 1);
         }
         else if (act === 'delopt') S.doc.options.splice(oi, 1);
+        else if (act === 'savetpl') {
+          var opt = JSON.parse(JSON.stringify(S.doc.options[oi]));
+          var name = (opt.title || '').trim() || 'Untitled option';
+          var tpls = (S.settings.optionTemplates || []).filter(function (t) { return t.name !== name; });
+          tpls.push({ name: name, option: opt });
+          S.settings.optionTemplates = tpls;
+          try { await TQ.db.saveSettings(S.settings); toast('Saved "' + name + '" to your option library'); }
+          catch (e) { toast(String(e.message || e), true); }
+        }
         render();
       };
     });
+    var tplBtn = $('#tplinsert');
+    if (tplBtn) tplBtn.onclick = function () {
+      readForm();
+      var t = (S.settings.optionTemplates || [])[Number($('#tpllist').value)];
+      if (t) {
+        S.doc.options.push(JSON.parse(JSON.stringify(t.option)));
+        render();
+        toast('Inserted "' + t.name + '" from the library');
+      }
+    };
     $$('#opts .omode', app).forEach(function (sel) {
       sel.onchange = function () {
         readForm();
@@ -518,6 +587,45 @@
   }
 
   /* ============ SETTINGS ============ */
+  function effectiveBook() {
+    return (S.settings.priceBook && S.settings.priceBook.length) ? S.settings.priceBook : TQ.CATALOGUE;
+  }
+
+  function priceRowHtml(e, i) {
+    return '<div class="pbrow" data-i="' + i + '" data-id="' + esc(e.id || '') + '">' +
+      '<input class="pbdesc" placeholder="Line wording shown on the quote" value="' + esc(e.desc || '') + '">' +
+      '<input class="pbprice" placeholder="$ (blank = job-dependent)" value="' + (e.price == null ? '' : esc(e.price)) + '">' +
+      '<input class="pbkw" placeholder="keywords, comma separated" value="' + esc((e.keywords || []).join(', ')) + '">' +
+      '<label class="chk" title="Main jobs headline the option title"><input type="checkbox" class="pbprim" ' + (e.primary ? 'checked' : '') + '> main</label>' +
+      '<button class="danger" data-act="pbdel">✕</button></div>';
+  }
+
+  /* read the rows as-is (empty rows kept, so indexes stay aligned for add/delete);
+     filter the empties out only when SAVING */
+  function readPriceBookInputs() {
+    var book = [];
+    var byId = {};
+    effectiveBook().forEach(function (e) { if (e.id) byId[e.id] = e; });
+    $$('.pbrow').forEach(function (row, i) {
+      /* identity travels on the row itself (data-id), never derived from position */
+      var old = byId[row.getAttribute('data-id')] || {};
+      var desc = $('.pbdesc', row).value.trim();
+      var pv = $('.pbprice', row).value.replace(/[$,\s]/g, '');
+      var id = old.id || 'custom-' + (desc.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30) || 'new');
+      var base = id, n = 2;
+      while (book.some(function (b) { return b.id === id; })) id = base + '-' + n++;
+      /* keep the composer metadata (phrase/process/expectLines/warrantyLines/cure/intro) */
+      book.push(Object.assign({}, old, {
+        id: id,
+        desc: desc,
+        price: pv === '' ? null : (parseFloat(pv) || null),
+        keywords: $('.pbkw', row).value.split(',').map(function (k) { return k.trim().toLowerCase(); }).filter(Boolean),
+        primary: $('.pbprim', row).checked
+      }));
+    });
+    return book;
+  }
+
   function renderSettings(app) {
     var s = S.settings;
     var conn = TQ.db.conn || { url: '', anonKey: '' };
@@ -540,9 +648,17 @@
       '<label>Quote valid (days) <input id="s_valid" type="number" value="' + esc(s.validityDays) + '"></label>' +
       '<label>Invoice due (days) <input id="s_due" type="number" value="' + esc(s.invoiceDueDays) + '"></label>' +
       '<label>Next document number <input id="s_next" type="number" value="' + esc(s.nextDocNo) + '"></label>' +
-      '<label>Number prefix <input id="s_prefix" value="' + esc(s.docPrefix) + '" placeholder="optional, e.g. TR-"></label>' +
-      '<label class="chk"><input type="checkbox" id="s_gst" ' + (s.gstRegistered ? 'checked' : '') + '> Registered for GST (prints TAX INVOICE + GST lines)</label>' +
-      '</div><button id="savesettings" class="primary">Save settings</button></section>' +
+      '<label>Number prefix <input id="s_prefix" value="' + esc(s.docPrefix) + '" placeholder="e.g. TR-"></label>' +
+      '</div><p class="hint">GST: registered (tax invoices print "TAX INVOICE" with the GST shown). Numbers print as prefix + counter, e.g. TR-1022.</p>' +
+      '<button id="savesettings" class="primary">Save settings</button></section>' +
+
+      '<section><h3>Price book (drives Quick Draft + your defaults)</h3>' +
+      '<p class="hint">These are the services Quick Draft recognises. Edit the wording and prices to match how you sell; add your own; blank price = job-dependent (you set it per quote). "main" marks a headline job (resurfacing, tiling, regrout) so it titles the option.</p>' +
+      '<div class="pbhead"><span>Line wording</span><span>Price inc GST</span><span>Keywords it listens for</span><span></span><span></span></div>' +
+      '<div id="pbrows">' + effectiveBook().map(priceRowHtml).join('') + '</div>' +
+      '<div class="actions"><button class="ghost" id="pbadd">+ Add service</button>' +
+      '<button class="primary" id="pbsave">Save price book</button>' +
+      '<button id="pbreset">Reset to built-in defaults</button></div></section>' +
 
       '<section><h3>Online saving (Supabase)</h3>' +
       '<p class="hint">Free tier is fine. Create a project at supabase.com, run <code>supabase-schema.sql</code> (in this folder) in the SQL editor, create a user under Authentication, then connect here. Until then everything saves to this browser only.</p>' +
@@ -558,6 +674,11 @@
       '<button id="sb_signout">Sign out</button>' +
       '</div><div id="sb_status" class="hint">' + (TQ.db.mode === 'cloud' ? 'Connected and signed in.' : 'Not connected: local mode.') + '</div></section>' +
 
+      '<section><h3>Mini AI (runs in your browser, nothing leaves this device)</h3>' +
+      '<p class="hint">"✨ Polish wording" in the editor rewrites THE JOB text only. Prices, totals, GST, warranty periods and durations always come from the rules and your price book, and the AI output is checked against the house rules before it can replace anything. It uses your browser\'s built-in model when available; otherwise it can download a small open model (about 1GB, one time, cached) and run it on your graphics chip.</p>' +
+      '<label class="chk"><input type="checkbox" id="s_webllm" ' + (s.webllmEnabled ? 'checked' : '') + '> Allow the one-time ~1GB local model download (WebLLM fallback)</label>' +
+      '<div id="llmprobe" class="hint">Checking what this browser supports…</div></section>' +
+
       '<section><h3>Backup</h3><div class="actions">' +
       '<button id="exp">Export everything (JSON)</button>' +
       '<label class="filebtn">Import JSON<input type="file" id="imp" accept="application/json" hidden></label>' +
@@ -571,9 +692,58 @@
       s.account = $('#s_acc').value; s.depositPct = Number($('#s_dep').value) || 10;
       s.validityDays = Number($('#s_valid').value) || 30; s.invoiceDueDays = Number($('#s_due').value) || 7;
       s.nextDocNo = Number($('#s_next').value) || s.nextDocNo; s.docPrefix = $('#s_prefix').value;
-      s.gstRegistered = $('#s_gst').checked;
+      s.gstRegistered = true;   // settled: the business is GST-registered
       try { await TQ.db.saveSettings(s); toast('Settings saved'); } catch (e) { toast(String(e.message || e), true); }
     };
+
+    /* ---- mini AI ---- */
+    $('#s_webllm').onchange = async function () {
+      S.settings.webllmEnabled = this.checked;
+      try { await TQ.db.saveSettings(S.settings); toast(this.checked ? 'WebLLM fallback enabled' : 'WebLLM fallback disabled'); }
+      catch (e) { toast(String(e.message || e), true); }
+    };
+    TQ.minillm.probe().then(function (p) {
+      var el = $('#llmprobe'); if (!el) return;
+      el.textContent = p === 'chrome'
+        ? 'This browser has a built-in local model: the mini AI works with no download.'
+        : p === 'webllm-possible'
+          ? 'No built-in browser model, but WebGPU is available: tick the box above and the mini AI will download a local model on first use.'
+          : 'This browser supports neither a built-in model nor WebGPU: the mini AI is unavailable here (everything else works normally).';
+    });
+
+    /* ---- price book ---- */
+    $('#pbadd').onclick = function () {
+      var book = readPriceBookInputs();
+      var id = 'custom-' + (book.length + 1), n = 1;
+      while (book.some(function (b) { return b.id === id; })) id = 'custom-' + (book.length + 1) + '-' + n++;
+      book.push({ id: id, desc: '', price: null, keywords: [], primary: false });
+      S.settings.priceBook = book;
+      render();
+    };
+    $('#pbsave').onclick = async function () {
+      var book = readPriceBookInputs().filter(function (e) { return e.desc; });
+      S.settings.priceBook = book;
+      TQ.userCatalogue = book.length ? TQ.mergeBook(book) : null;
+      try { await TQ.db.saveSettings(S.settings); toast('Price book saved (' + book.length + ' services)'); }
+      catch (e) { toast(String(e.message || e), true); }
+      render();   // realign the rows with the saved book (empty rows are dropped on save)
+    };
+    $('#pbreset').onclick = async function () {
+      if (!confirm('Replace your edited price book with the built-in defaults?')) return;
+      S.settings.priceBook = null;
+      TQ.userCatalogue = null;
+      try { await TQ.db.saveSettings(S.settings); } catch (e) {}
+      render();
+      toast('Price book reset to defaults');
+    };
+    $$('#pbrows [data-act="pbdel"]', app).forEach(function (b) {
+      b.onclick = function () {
+        var book = readPriceBookInputs();
+        book.splice(Number(b.closest('.pbrow').getAttribute('data-i')), 1);
+        S.settings.priceBook = book;
+        render();
+      };
+    });
 
     $('#sb_connect').onclick = async function () {
       try {
@@ -582,6 +752,7 @@
         var em = await TQ.db.signIn($('#sb_email').value.trim(), $('#sb_pass').value);
         $('#sb_status').textContent = 'Connected as ' + em + '. Everything now saves online.';
         S.settings = await TQ.db.getSettings();
+        TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
         toast('Connected to Supabase');
         render();
       } catch (e) { $('#sb_status').textContent = 'Failed: ' + (e.message || e); toast(String(e.message || e), true); }
@@ -590,7 +761,13 @@
       try { var n = await TQ.db.migrateLocalToCloud(); toast('Copied ' + n + ' documents to the cloud'); }
       catch (e) { toast(String(e.message || e), true); }
     };
-    $('#sb_signout').onclick = async function () { await TQ.db.signOut(); toast('Signed out, back to local mode'); render(); };
+    $('#sb_signout').onclick = async function () {
+      await TQ.db.signOut();
+      S.settings = await TQ.db.getSettings();   // back to the local settings + price book
+      TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
+      toast('Signed out, back to local mode');
+      render();
+    };
 
     $('#exp').onclick = async function () {
       try {
@@ -616,6 +793,7 @@
     var st = await TQ.db.init();
     if (st.needsSignIn) S.banner = 'Supabase is configured but you are signed out: open Settings to sign back in (working locally until then).';
     S.settings = await TQ.db.getSettings();
+    TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
     await refreshList();
     render();
     loadAssets().catch(function (e) { toast('Could not load fonts/logo: ' + e.message, true); });

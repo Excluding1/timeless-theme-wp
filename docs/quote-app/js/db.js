@@ -134,8 +134,22 @@
       } else {
         s = lsGet(LS_SETTINGS, {});
       }
-      var out = {};
-      Object.keys(defaults).forEach(function (k) { out[k] = (s[k] !== undefined ? s[k] : defaults[k]); });
+      /* keep unknown keys too (priceBook, optionTemplates, migration flags) */
+      var out = Object.assign({}, defaults, s);
+      /* one-time upgrade to the 2026-07-05 defaults (7-day validity, TR-2026- numbering) */
+      if (!s._v2) {
+        if (out.validityDays === 30) out.validityDays = 7;
+        if (!out.docPrefix) out.docPrefix = 'TR-2026-';
+        if (out.nextDocNo >= 1043 && out.nextDocNo <= 1100) out.nextDocNo = 704;  // pre-v2 test counter
+        out._v2 = true;
+      }
+      /* v3 (Allan, 2026-07-05): numbering is TR-1022 style (no year), GST registration is settled */
+      if (!s._v3) {
+        if (out.docPrefix === '' || out.docPrefix === 'TR-2026-') out.docPrefix = 'TR-';
+        if ((out.nextDocNo >= 704 && out.nextDocNo <= 800) || (out.nextDocNo >= 1043 && out.nextDocNo <= 1100)) out.nextDocNo = 1022;
+        out.gstRegistered = true;
+        out._v3 = true;
+      }
       return out;
     },
 
@@ -147,13 +161,15 @@
       }
     },
 
-    /* sequential numbering (single user: read-bump-write is fine) */
+    /* sequential numbering: prefix + zero-padded counter, e.g. TR-2026-0703 -> TR-2026-0704 */
     async nextDocNo() {
       var s = await db.getSettings();
-      var n = Number(s.nextDocNo) || 1043;
+      var n = Number(s.nextDocNo) || 1022;
       s.nextDocNo = n + 1;
       await db.saveSettings(s);
-      return (s.docPrefix || '') + n;
+      var num = String(n);
+      while (num.length < 4) num = '0' + num;
+      return (s.docPrefix || '') + num;
     },
 
     /* ---------- backup / migration ---------- */

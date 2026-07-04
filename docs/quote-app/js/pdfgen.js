@@ -112,6 +112,7 @@
 
       var gstShown = settings.gstRegistered !== false;
       var isInvoice = doc.docType === 'invoice';
+      var markImg = null;   // square TR mark for the invoice header (falls back to the lockup)
 
       /* ================= header ================= */
       function drawHeader() {
@@ -119,6 +120,7 @@
         var logoH = logoW * logoImg.height / logoImg.width;
         var title = isInvoice ? (gstShown ? 'TAX INVOICE' : 'INVOICE') : 'QUOTE';
         var meta = ['No. ' + (doc.docNo || ''), 'Date: ' + (doc.date || '')];
+        if (!isInvoice && doc.validUntil) meta.push('Valid until: ' + doc.validUntil);
         var metaBold = null;
         if (isInvoice && doc.dueDate) metaBold = 'Due: ' + doc.dueDate;
         else if (!isInvoice && doc.availableFrom) metaBold = 'Available from: ' + doc.availableFrom;
@@ -317,6 +319,122 @@
         y -= h + 5;
       }
 
+      /* ================= TAX INVOICE layout =================
+         Distinct from the quote per ATO QC22438 + GSTR 2013/1: "TAX INVOICE" heading,
+         seller identity + ABN, issue date, buyer identity, itemised description table,
+         and "Total price includes GST of $X" (GST = total / 11). A deposit shows
+         BENEATH the full total with the balance due, never instead of it. */
+      function drawInvoice() {
+        /* header: title left, mark right, seller identity under */
+        line(gstShown ? 'TAX INVOICE' : 'INVOICE', LM, y, fonts.din, 30, NAVY);
+        var mk = markImg || logoImg;
+        var mkW = markImg ? 18 * MM : 45 * MM;
+        var mkH = mkW * mk.height / mk.width;
+        page.drawImage(mk, { x: LM + CW - mkW, y: y - mkH, width: mkW, height: mkH });
+        y -= Math.max(34, mkH + 4);
+        y -= block(settings.businessName, LM, CW - mkW - 10, y, fonts.helvB, 10.5, 14, INK);
+        y -= block('ABN ' + settings.abn, LM, CW - mkW - 10, y, fonts.helv, 9.5, 13, INK);
+        y -= block([settings.phone, settings.email, settings.website].filter(Boolean).join('   ·   '), LM, CW - mkW - 10, y, fonts.helv, 9, 13, MUTED);
+        y -= 10;
+
+        /* BILL TO | invoice meta */
+        var top = y;
+        var lh = line('BILL TO', LM, top, fonts.din, 13, NAVY) + 5;
+        var by = lh;
+        by += block(doc.customer.name || '', LM, 95 * MM, top - by, fonts.helvB, 10, 14, INK);
+        [doc.customer.address, doc.customer.phone, doc.customer.email].filter(Boolean).forEach(function (t) {
+          by += block(t, LM, 95 * MM, top - by, fonts.helv, 9.5, 14, INK);
+        });
+        var metaPairs = [['INVOICE #', doc.docNo || ''], ['DATE', doc.date || '']];
+        if (doc.dueDate) metaPairs.push(['DUE', doc.dueDate]);
+        if (doc.quoteRef) metaPairs.push(['QUOTE REF', doc.quoteRef]);
+        var my = 0;
+        metaPairs.forEach(function (p) {
+          line(p[0], LM + CW - 62 * MM, top - my, fonts.din, 11, NAVY);
+          line(p[1], function (w) { return LM + CW - w; }, top - my, fonts.helv, 10, INK);
+          my += 15;
+        });
+        y = top - Math.max(by, my) - 7;
+        hr(y, 1.4, GOLD); y -= 1.4 + 9;
+
+        /* items table */
+        line('DESCRIPTION', LM, y, fonts.din, 12.5, NAVY);
+        line('AMOUNT', function (w) { return LM + CW - w; }, y, fonts.din, 12.5, NAVY);
+        y -= 15;
+        hr(y, 1, RUST); y -= 1 + 7;
+        var amtW = 34 * MM, descW = CW - amtW - 8;
+        var multi = (doc.options || []).length > 1;
+        var firstTot = null;
+        (doc.options || []).forEach(function (o, oi) {
+          var oLines = o.mode === 'feature'
+            ? [{ desc: o.title + (o.items && o.items.length ? ': ' + o.items.join('; ') : ''),
+                 amount: parseFloat(String(o.price || '').replace(/[^0-9.]/g, '')) || 0 }]
+            : (o.lines || []);
+          if (multi && o.mode !== 'feature' && o.title) {
+            ensure(18);
+            line(o.title, LM, y, fonts.din, 12, NAVY); y -= 16;
+          }
+          oLines.forEach(function (l) {
+            var rows = wrap(l.desc, fonts.helv, 9.5, descW);
+            ensure(Math.min(rows.length, 3) * 13 + 5);   // start the row where at least a few lines fit
+            var first = true;
+            while (rows.length) {
+              var avail = Math.max(1, Math.floor((y - BM - 4) / 13));
+              var chunk = rows.splice(0, avail);
+              chunk.forEach(function (r, i) {
+                if (r) page.drawText(r, { x: LM, y: y - i * 13 - 9.5 * 0.88, size: 9.5, font: fonts.helv, color: INK });
+              });
+              if (first) {
+                var at = typeof l.amount === 'number' ? money(l.amount) : clean(l.amount);
+                var aw = fonts.helv.widthOfTextAtSize(at, 9.5);
+                page.drawText(at, { x: LM + CW - aw, y: y - 9.5 * 0.88, size: 9.5, font: fonts.helv, color: INK });
+                first = false;
+              }
+              y -= chunk.length * 13;
+              if (rows.length) addPage(); else y -= 5;
+            }
+          });
+          if (firstTot === null) {
+            firstTot = o.mode === 'feature'
+              ? (parseFloat(String(o.price || '').replace(/[^0-9.]/g, '')) || 0)
+              : optionTotal(o.lines);
+          }
+        });
+
+        /* totals block */
+        var tot = firstTot || 0;
+        ensure(70);
+        y -= 2; hr(y, 0.8, LINE); y -= 0.8 + 8;
+        var lbl = 'Total (inc GST)';
+        var lw = fonts.din.widthOfTextAtSize(lbl, 14);
+        page.drawText(lbl, { x: LM + descW - lw, y: y - 14 * 0.88, size: 14, font: fonts.din, color: NAVY });
+        var tt = '$' + money(tot);
+        var tw = fonts.din.widthOfTextAtSize(tt, 14);
+        page.drawText(tt, { x: LM + CW - tw, y: y - 14 * 0.88, size: 14, font: fonts.din, color: NAVY });
+        y -= 18;
+        if (gstShown) {
+          var g = 'Total price includes GST of $' + money(gstOf(tot));   // ATO wording, GST = total / 11
+          var gw = fonts.helv.widthOfTextAtSize(g, 9.3);
+          page.drawText(g, { x: LM + CW - gw, y: y - 9.3 * 0.88, size: 9.3, font: fonts.helv, color: INK });
+          y -= 14;
+        }
+        if (Number(doc.depositPaid) > 0) {
+          var dep = Number(doc.depositPaid);
+          var rows2 = [
+            ['Deposit received', '-' + money(dep), fonts.helv, 9.5, INK, 14],
+            ['Balance due', '$' + money(Math.round((tot - dep) * 100) / 100), fonts.din, 13.5, NAVY, 17]
+          ];
+          rows2.forEach(function (r) {
+            var lw2 = r[2].widthOfTextAtSize(r[0], r[3]);
+            page.drawText(r[0], { x: LM + descW - lw2, y: y - r[3] * 0.88, size: r[3], font: r[2], color: r[4] });
+            var vw = r[2].widthOfTextAtSize(r[1], r[3]);
+            page.drawText(r[1], { x: LM + CW - vw, y: y - r[3] * 0.88, size: r[3], font: r[2], color: r[4] });
+            y -= r[5];
+          });
+        }
+        y -= 6;
+      }
+
       /* ================= footer block ================= */
       function footerBlock(dry, top) {
         var start = top;
@@ -324,7 +442,7 @@
         var lh = line('Warranty & cover', LM, top, fonts.din, 11.5, NAVY, dry) + 5;
         var wh = lh + bullets(doc.warranty, LM, wcolW - 8, top - lh, 9.3, 13, 2.5, dry);
         var eh = 0;
-        if (doc.expect && doc.expect.length) {
+        if (!isInvoice && doc.expect && doc.expect.length) {
           var ehh = line('What to expect', LM + wcolW, top, fonts.din, 11.5, NAVY, dry) + 5;
           eh = ehh + bullets(doc.expect, LM + wcolW, ecolW, top - ehh, 9.3, 13, 2.5, dry);
         }
@@ -335,10 +453,12 @@
         var c1 = 52 * MM, c2 = 68 * MM, c3 = 54 * MM;
         var bookHead = isInvoice ? 'Payment' : 'To book';
         var bookBody = isInvoice
-          ? ('Payment is due within ' + (settings.invoiceDueDays || 7) + ' days of the invoice date. Please use ' +
-             (gstShown ? 'invoice' : 'invoice') + ' ' + (doc.docNo || '') + ' as the payment reference.' + (gstShown ? ' Total includes GST.' : ''))
-          : ('A ' + (settings.depositPct || 10) + '% deposit secures your date. Valid ' + (settings.validityDays || 30) +
-             ' days' + (gstShown ? '; prices inc GST' : '') + '. Reply to this quote or call ' + settings.phone + ' to go ahead.');
+          ? ((doc.dueDate ? 'Payment is due by ' + doc.dueDate + '.' :
+              'Payment is due within ' + (settings.invoiceDueDays || 7) + ' days of the invoice date.') +
+             ' Please use ' + (doc.docNo || 'the invoice number') + ' as the payment reference.')
+          : ('A ' + (settings.depositPct || 10) + '% deposit secures your date. ' +
+             (doc.validUntil ? 'Valid until ' + doc.validUntil : 'Valid for ' + (settings.validityDays || 7) + ' days') +
+             (gstShown ? '; prices inc GST' : '') + '. Reply to this quote or call ' + settings.phone + ' to go ahead.');
         var payLines = [settings.bankName, 'BSB ' + settings.bsb + '   Acc ' + settings.account];
 
         var bH = 13 + 2 + wrap(bookBody, fonts.helv, 8.3, c2 - 20).length * 11.5;
@@ -374,29 +494,39 @@
           helvB: await pdf.embedFont(StandardFonts.HelveticaBold),
           helvO: await pdf.embedFont(StandardFonts.HelveticaOblique)
         };
-        logoImg = await pdf.embedPng(assets.logoBytes);
+        /* embed only the artwork this document type draws (keeps the PDF small) */
+        if (isInvoice && assets.markBytes && assets.markBytes.length) {
+          markImg = await pdf.embedPng(assets.markBytes);
+          logoImg = markImg;                       // fallback slot; the invoice draws the mark
+        } else {
+          logoImg = await pdf.embedPng(assets.logoBytes);
+        }
         photoImg = null;
         if (assets.photoBytes && assets.photoBytes.length) {
           photoImg = assets.photoIsPng ? await pdf.embedPng(assets.photoBytes) : await pdf.embedJpg(assets.photoBytes);
         }
-        pdf.setTitle('Timeless Resurfacing ' + (isInvoice ? 'Invoice' : 'Quote'));
+        pdf.setTitle('Timeless Resurfacing ' + (isInvoice ? 'Tax Invoice' : 'Quote'));
 
         addPage();
-        drawHeader();
-        drawFromTo();
-        drawJob();
+        if (isInvoice) {
+          drawInvoice();
+        } else {
+          drawHeader();
+          drawFromTo();
+          drawJob();
 
-        (doc.options || []).forEach(function (opt) {
-          splitForPage(opt).forEach(function (chunk) {
-            ensure(measureCard(chunk) + 5);
-            drawCard(chunk);
+          (doc.options || []).forEach(function (opt) {
+            splitForPage(opt).forEach(function (chunk) {
+              ensure(measureCard(chunk) + 5);
+              drawCard(chunk);
+            });
           });
-        });
-        if (doc.optionsNote) {
-          var nh = block(doc.optionsNote, LM, CW, 0, fonts.helv, 8, 12, MUTED, 'left', true);
-          ensure(nh + 5);
-          block(doc.optionsNote, LM, CW, y, fonts.helv, 8, 12, MUTED, 'left');
-          y -= nh + 6;
+          if (doc.optionsNote) {
+            var nh = block(doc.optionsNote, LM, CW, 0, fonts.helv, 8, 12, MUTED, 'left', true);
+            ensure(nh + 5);
+            block(doc.optionsNote, LM, CW, y, fonts.helv, 8, 12, MUTED, 'left');
+            y -= nh + 6;
+          }
         }
 
         var fH = footerBlock(true, y);

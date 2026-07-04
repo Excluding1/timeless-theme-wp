@@ -1,75 +1,82 @@
 # Timeless Resurfacing — Quote & Invoice Web App
 
-Branded quote + tax-invoice PDFs in the browser. Same premium template as
-`docs/templates/quote-generator/quote.py` (navy cards, condensed headers, script
-Thank-you, gold rule), rebuilt with pdf-lib so it runs anywhere with zero server.
+Branded quote + tax-invoice PDFs in the browser. The quote uses the premium card template
+(navy cards, condensed headers, script Thank-you, gold rule); the TAX INVOICE uses a distinct
+invoice-form layout modelled on the business's original invoice and the ATO's requirements.
 
 **Features**
-- **Quick Draft (built-in AI, offline):** paste the job in your own words
-  ("name is Neil… 2250 tiling on top… option a / option b") and it fills the form
-  from the trade price book (`js/catalogue.js`). No API keys, nothing leaves the browser.
-  You always review before a PDF exists.
-- Quote **and** Tax Invoice (one click converts a quote; deposit received / balance due rows).
-- Two option-card styles: itemised (price per line, "included" allowed) and feature (one price + bullets).
-- Photos: upload, auto-compressed, pick which one prints, caption it.
-- Live PDF preview, download, duplicate, status pipeline (draft → sent → accepted → invoiced → paid).
-- Sequential numbering, GST-inclusive maths (GST shown = total ÷ 11), house rules enforced
-  (em-dashes stripped, banned-word warnings: written / guarantee / certificate).
-- Saves **locally** out of the box; connect **Supabase** in Settings to save online across devices.
-- JSON export/import backup.
+- **Quick Draft (built-in, offline):** paste the job in your own words ("$1,300 tiles on top,
+  wall resurfacing and stripback - 1800, regrout 1000…") and it binds each price to the right
+  service from the price book, headlines the main job, and composes THE JOB description
+  (all services + how we do each), "What to expect" (real durations per service) and the
+  exact per-material warranty (resurfacing up to 5yr / grout 2yr / silicone 1yr). No API keys,
+  nothing leaves the browser. You always review before a PDF exists.
+- **Mini AI (optional, local):** "✨ Polish wording" rewrites THE JOB text with a language model
+  running entirely in the browser — Chrome's built-in model when available, else a one-time
+  ~1GB WebLLM download (opt-in, Settings). Output is validated against the house rules
+  (banned words, no invented numbers) before it can replace anything. Prices/totals/warranty
+  are NEVER produced by the AI.
+- **Price book (Settings):** every service, wording, price, keywords and "main job" flag is
+  editable; add your own services; Quick Draft uses your edited book. **Option library:**
+  "☆ Save" any option and re-insert it on future quotes.
+- Quote **and** TAX INVOICE (one click converts; deposit received / balance due under the full
+  total; quote reference carried over).
+- Photos (upload, auto-compress, pick one, caption), live PDF preview, duplicate, statuses
+  (draft → sent → accepted → invoiced → paid), JSON backup.
+- **Numbering:** prefix + counter, prints as `TR-1022`, `TR-1023`, … (Settings). Quotes are
+  **valid 7 days** ("Valid until" printed top-right and in the footer).
+- GST: the business IS registered — totals are GST-inclusive, GST shown = total ÷ 11.
+- Saves locally out of the box; connect **Supabase** in Settings to save online across devices.
 
 ## Run it
-Any static host or local server — there is no build step.
-```bash
-cd docs/quote-app && python3 -m http.server 8920   # then open http://localhost:8920
-```
+Any static host or local server — no build step. Locally: serve this folder on any port
+(e.g. the `quote-app` launch config, port 8920).
 
 ## Go online (once)
-1. **Supabase** (free tier): create a project at supabase.com →
-   SQL Editor → paste + run `supabase-schema.sql` →
-   Authentication → Users → **Add user** (your email + a strong password; this is the app login) →
-   Project Settings → API: copy the **Project URL** and the **anon public key**.
-2. **Deploy to Netlify:** drag the `quote-app` folder onto app.netlify.com (or
-   `netlify deploy --prod --dir=docs/quote-app`). Password-protect the site if on a paid plan;
-   otherwise the Supabase login already gates all data (the anon key alone can read nothing).
-3. Open the site → **Settings → Online saving** → paste URL + anon key, sign in with the
-   user you created → **Copy this browser's quotes → cloud** if you drafted any locally.
+1. **Supabase** (free): create a project → SQL Editor → run `supabase-schema.sql` →
+   Authentication → Users → **Add user** (your email + strong password = the app login) →
+   Project Settings → API: copy the **Project URL** + **anon public key**.
+2. **Netlify:** drag this folder onto app.netlify.com (or `netlify deploy --prod --dir=docs/quote-app`).
+3. In the app: **Settings → Online saving** → paste URL + key, sign in →
+   "Copy this browser's quotes → cloud" if you drafted any locally.
 
-The Supabase **anon key is safe to enter in the app** (it is designed to be public;
-row-level security + your login protect the data). Never put the `service_role` key anywhere.
+The anon key is safe in the app (public by design; login + row security protect the data).
+Never use the `service_role` key anywhere.
 
-## House rules baked in (keep)
-- Prices are **GST-inclusive**: Total = sum of lines; "GST included" = total ÷ 11.
-- No em-dashes in customer copy (auto-replaced); en-dash ranges become "X to Y".
-- Banned words flagged: written / guarantee / certificate / in writing.
-- Warranty default: "Up to 5-year workmanship warranty" (+ lifespan + $10M PL).
-- Account: Timeless Resurfacing · BSB 032146 · Acc 025303 · 10% deposit.
-- Fonts: Barlow Condensed Bold + Great Vibes (open licence, embeddable — the desktop
-  script's DIN Condensed / Snell Roundhand are Apple system fonts we cannot ship on the web).
+## Tax invoice compliance (researched 2026-07-05, primary sources)
+The TAX INVOICE layout carries everything the ATO requires (QC22438 + GSTR 2013/1):
+"TAX INVOICE" heading · seller identity + ABN · issue date · buyer identity (required at
+$1,000+, we always print it) · itemised description with prices · **"Total price includes GST
+of $X"** (ATO-endorsed wording when GST is exactly 1/11th, which is our case) · when a deposit
+was taken: full total first, then "Deposit received" and "Balance due" (GSTR 2013/1 pattern —
+never a balance-only invoice). Payment reference = the invoice number. Issue within 28 days
+of a request.
 
-## Quote vs invoice (AU/NSW, plain English)
-A **quote** is the offer before work; an **invoice** requests payment after (or for a deposit).
-The app converts a quote to a **TAX INVOICE** that carries what the ATO requires: the words
-"Tax Invoice", business name + ABN, date, description, buyer identity, and "Total includes GST"
-with the GST amount shown. Only use TAX INVOICE if registered for GST (Settings toggle;
-unticked it prints "INVOICE" and hides GST lines — you must not charge or show GST unregistered).
-NSW note: residential building work priced **over $5,000 inc GST** needs a written contract
-(and contractor licensing applies over that threshold) — a signed quote acceptance with the
-required details can serve for small jobs; confirm the licensing position with the lawyer.
+**NSW flags (Home Building Act):**
+- Bathroom resurfacing IS licensable "minor maintenance" work in NSW when a job is worth
+  **more than $5,000 in labour + materials inc GST** — the app warns on any document over
+  $5,000. Until a contractor licence is held, keep jobs under that threshold (lawyer question
+  is already queued with the Fair-Work brief).
+- Once licensed, the licence number legally belongs on all stationery/advertising — add it
+  to Settings → it prints under the ABN (field to be enabled at that point).
+- Jobs $5,000–$20,000 need a written small-jobs contract containing the licence number;
+  NSW caps home-building deposits at **10%** (our standard).
 
 ## Files
 ```
-index.html            app shell (script order matters: vendor → rules → catalogue → draft → pdfgen → db → app)
+index.html            app shell (script order matters: vendor → rules → catalogue → draft → pdfgen → db → minillm → app)
 css/app.css           brand styling, responsive
-js/rules.js           GST maths, sanitiser, banned words, defaults
-js/catalogue.js       trade price book (edit prices here)
-js/draft.js           Quick Draft parser (the built-in "AI")
-js/pdfgen.js          the PDF template engine (pdf-lib port of quote.py; UMD, node-testable)
-js/db.js              localStorage ↔ Supabase storage layer
-js/vendor/            pdf-lib, fontkit, supabase-js (vendored, no CDN)
-fonts/ assets/        embeddable fonts + logo
+js/rules.js           GST maths, sanitiser, banned words, validation (incl. the >$5k NSW warning)
+js/catalogue.js       price book defaults + composer metadata (phrase/process/expect/warranty per service)
+js/draft.js           Quick Draft parser (run-binding engine) + THE JOB / warranty / expect composer
+js/pdfgen.js          PDF engine: quote card template + distinct TAX INVOICE layout
+js/minillm.js         local mini AI (Chrome built-in → WebLLM), validated output
+js/db.js              localStorage ↔ Supabase, settings migrations, TR- numbering
+js/vendor/            pdf-lib, fontkit, supabase-js, webllm (all vendored, no CDN)
+fonts/ assets/        embeddable fonts (Barlow Condensed / Great Vibes) + logos
 supabase-schema.sql   run once in Supabase
 netlify.toml          security headers (noindex)
 ```
-Node smoke test (same code path as the browser): see the session scratchpad `test-pdf.js`
-pattern — `require(js/pdfgen.js)(PDFLib, fontkit).generate(doc, settings, assets)`.
+House rules baked in: GST-inclusive (÷11) · no em-dashes · banned words flagged
+(written/guarantee/certificate) · account Timeless Resurfacing BSB 032146 Acc 025303 ·
+10% deposit · warranty per material, never overclaimed.

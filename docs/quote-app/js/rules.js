@@ -84,6 +84,13 @@
     if (doc.docType === 'invoice' && settings && !settings.gstRegistered) {
       warnings.push('Business is not marked GST-registered in Settings: the PDF will say "INVOICE" (not "TAX INVOICE") and hide GST lines');
     }
+    if (doc.docType === 'invoice' && (doc.options || []).length > 1) {
+      warnings.push('An invoice should bill ONE agreed scope: remove the extra option(s) (quotes can have options, invoices should not)');
+    }
+    var total = R.docTotal(doc);
+    if (total > 5000) {
+      warnings.push('Job over $5,000 inc GST: NSW requires a contractor licence + a written contract for residential work at this value, check before sending');
+    }
     return warnings;
   };
 
@@ -111,10 +118,10 @@
     bsb: '032146',
     account: '025303',
     depositPct: 10,
-    validityDays: 30,
+    validityDays: 7,
     invoiceDueDays: 7,
-    gstRegistered: true,
-    nextDocNo: 1043,
-    docPrefix: ''
+    gstRegistered: true,     // Timeless IS registered for GST (Allan confirmed 2026-07-05)
+    nextDocNo: 1022,         // prints TR-1022, then TR-1023, ...
+    docPrefix: 'TR-'
   };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -71,7 +71,7 @@ section.ai { border-left: 4px solid var(--gold); }
 .warnbox ul { margin: 6px 0 0; padding-left: 18px; }
 
 .optcard { border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 10px; background: var(--surf); }
-.opthead { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; margin-bottom: 10px; }
+.opthead { display: grid; grid-template-columns: 1fr auto auto auto; gap: 8px; margin-bottom: 10px; }
 .opthead .otitle { font-weight: 600; }
 .opthead select { width: auto; }
 .lrow { display: grid; grid-template-columns: 1fr 130px 36px; gap: 8px; margin-bottom: 8px; }
@@ -104,6 +104,15 @@ main.settings section { background: #fff; border: 1px solid var(--line); border-
 main.settings h3 { margin: 0 0 10px; color: var(--navy); }
 main.settings button { margin-top: 10px; }
 code { background: var(--surf); padding: 2px 6px; border-radius: 5px; font-size: 13px; }
+
+/* ---- price book ---- */
+.pbhead, .pbrow { display: grid; grid-template-columns: 2.4fr 0.9fr 2fr auto 34px; gap: 8px; align-items: center; }
+.pbhead { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+.pbrow { margin-bottom: 6px; }
+.pbrow input { padding: 6px 8px; font-size: 13px; }
+.pbrow .chk { font-size: 12px; white-space: nowrap; }
+.pbrow button { padding: 4px 8px; }
+@media (max-width: 1020px) { .pbhead { display: none; } .pbrow { grid-template-columns: 1fr 90px; } }
 
 /* ---- toast ---- */
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); background: var(--navy2); color: #fff; padding: 11px 22px; border-radius: 10px; opacity: 0; transition: all .3s; z-index: 99; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
