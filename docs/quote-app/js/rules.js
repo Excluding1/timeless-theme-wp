@@ -1,0 +1,120 @@
+/* Timeless Resurfacing — house rules (shared by the form, the AI drafter and the PDF).
+   GST is INCLUSIVE: total = sum of line items; "GST included" = total / 11.
+   No em-dashes in customer copy. No banned words (written / guarantee / certificate / in writing). */
+(function (root) {
+  var TQ = root.TQ = root.TQ || {};
+
+  var R = TQ.rules = {};
+
+  R.money = function (x) {
+    return Number(x).toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
+  R.round2 = function (x) { return Math.round(x * 100) / 100; };
+
+  /* GST portion inside a GST-inclusive total */
+  R.gstOf = function (total) { return R.round2(total / 11); };
+
+  R.optionTotal = function (lines) {
+    var t = 0;
+    (lines || []).forEach(function (l) {
+      var a = l.amount;
+      if (typeof a === 'number' && isFinite(a)) t += a;
+    });
+    return R.round2(t);
+  };
+
+  R.docTotal = function (doc) {
+    /* the headline total = the first option's total (options are alternatives, not additive) */
+    var o = (doc.options || [])[0];
+    if (!o) return 0;
+    if (o.mode === 'feature') {
+      var n = parseFloat(String(o.price || '').replace(/[^0-9.]/g, ''));
+      return isFinite(n) ? n : 0;
+    }
+    return R.optionTotal(o.lines);
+  };
+
+  /* Replace em-dashes (and stray en-dashes not inside number ranges) per the house style. */
+  R.sanitize = function (text) {
+    if (!text) return text;
+    var t = String(text);
+    t = t.replace(/\s*—\s*/g, ', ');                 // em-dash
+    t = t.replace(/(\d)\s*–\s*(\d)/g, '$1 to $2');   // en-dash in ranges -> "to"
+    t = t.replace(/\s*–\s*/g, ', ');                 // any other en-dash
+    t = t.replace(/ ,/g, ',').replace(/,{2,}/g, ',');
+    return t;
+  };
+
+  var BANNED = /\b(written|guarantee[ds]?|certificate|in writing)\b/i;
+
+  R.bannedIn = function (text) {
+    var m = String(text || '').match(BANNED);
+    return m ? m[0] : null;
+  };
+
+  /* Walk every customer-facing string in the doc; return a list of warnings. */
+  R.validate = function (doc, settings) {
+    var warnings = [];
+    function check(label, text) {
+      if (!text) return;
+      var b = R.bannedIn(text);
+      if (b) warnings.push(label + ': contains the banned word "' + b + '"');
+      if (/—/.test(text)) warnings.push(label + ': contains an em-dash (house style: use a comma or colon)');
+    }
+    check('Job intro', doc.jobIntro);
+    check('Options note', doc.optionsNote);
+    (doc.options || []).forEach(function (o, i) {
+      check('Option ' + (i + 1) + ' title', o.title);
+      (o.lines || []).forEach(function (l) { check('Option ' + (i + 1) + ' line', l.desc); });
+      (o.items || []).forEach(function (it) { check('Option ' + (i + 1) + ' bullet', it); });
+    });
+    (doc.warranty || []).forEach(function (w) {
+      if (/\bguarantee/i.test(w)) warnings.push('Warranty: use "warranty", never "guarantee"');
+    });
+    if (!doc.customer || !doc.customer.name) warnings.push('No customer name set');
+    if ((doc.options || []).length === 0) warnings.push('No options / line items yet');
+    (doc.options || []).forEach(function (o, i) {
+      if (o.mode !== 'feature') {
+        (o.lines || []).forEach(function (l) {
+          if (l.amount === 0) warnings.push('Option ' + (i + 1) + ': a line has a $0.00 amount, set its price');
+        });
+      }
+    });
+    if (doc.docType === 'invoice' && settings && !settings.gstRegistered) {
+      warnings.push('Business is not marked GST-registered in Settings: the PDF will say "INVOICE" (not "TAX INVOICE") and hide GST lines');
+    }
+    return warnings;
+  };
+
+  /* House defaults */
+  R.WARRANTY_5YR = [
+    'Up to 5-year workmanship warranty',
+    'Coating lifespan 10+ years with proper care',
+    '$10M public liability insurance'
+  ];
+  R.EXPECT_PRESETS = {
+    halfday: ['About half a day on site', 'Bath ready to use the next morning (full cure 24 to 48h)', 'Fixed price, no hidden fees'],
+    day: ['About 1 day on site', 'Bath ready to use the next morning (full cure 24 to 48h)', 'Fixed price, no hidden fees'],
+    days23: ['2 to 3 days on site', '24 to 48 hours to cure before use', 'Fixed price, no hidden fees']
+  };
+
+  R.DEFAULT_SETTINGS = {
+    businessName: 'Timeless Resurfacing',
+    abn: '30 412 161 602',
+    cityLine: 'Sydney, NSW',
+    phone: '0451 110 154',
+    email: 'quotes@timelessresurfacing.com.au',
+    website: 'timelessresurfacing.com.au',
+    tagline: "Beautiful bathrooms shouldn't cost a fortune.",
+    bankName: 'Timeless Resurfacing',
+    bsb: '032146',
+    account: '025303',
+    depositPct: 10,
+    validityDays: 30,
+    invoiceDueDays: 7,
+    gstRegistered: true,
+    nextDocNo: 1043,
+    docPrefix: ''
+  };
+})(typeof window !== 'undefined' ? window : globalThis);

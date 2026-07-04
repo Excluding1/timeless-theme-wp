@@ -1,0 +1,8 @@
+# Timeless Resurfacing quote app — Netlify config (deploy this folder as the site root)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex, nofollow"
