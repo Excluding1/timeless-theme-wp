@@ -118,17 +118,72 @@
   }
 
   function header(active) {
-    var modeBadge = TQ.db.mode === 'cloud'
-      ? '<span class="badge cloud">online · saved to cloud</span>'
-      : '<span class="badge local">local only · this browser</span>';
+    var badge;
+    if (TQ.db.mode === 'cloud') {
+      badge = '<span class="badge cloud" title="Saved to your shared cloud">Synced' + (S.userEmail ? ' · ' + esc(S.userEmail) : '') + '</span>';
+    } else if (TQ.db.conn) {
+      badge = '<button class="badge signin" data-act="signin" title="Sign in to sync with your team">Sign in to sync</button>';
+    } else {
+      badge = '<span class="badge local" title="Saved on this device only">On this device</span>';
+    }
     return '<header class="top">' +
       '<div class="brand"><img src="assets/tr-mark.png" alt=""><div><strong>Timeless Resurfacing</strong><span>Quotes &amp; invoices</span></div></div>' +
       '<nav>' +
       '<button data-nav="list" class="' + (active === 'list' ? 'on' : '') + '">Quotes</button>' +
       '<button data-nav="new" class="primary">+ New quote</button>' +
       '<button data-nav="settings" class="' + (active === 'settings' ? 'on' : '') + '">Settings</button>' +
-      '</nav>' + modeBadge + '</header>' +
+      '</nav>' + badge + '</header>' +
       (S.banner ? '<div class="banner">' + esc(S.banner) + '</div>' : '');
+  }
+
+  /* inline sign-in popup (no digging in Settings). Resolves true on success. */
+  function signInModal() {
+    return new Promise(function (resolve) {
+      var back = document.createElement('div');
+      back.className = 'modalback';
+      back.innerHTML =
+        '<div class="modal">' +
+        '<h3>Sign in</h3>' +
+        '<p class="hint">Sign in to sync your quotes with your team across devices.</p>' +
+        '<label>Email <input id="siEmail" type="email" autocomplete="username"></label>' +
+        '<label class="mt">Password <input id="siPass" type="password" autocomplete="current-password"></label>' +
+        '<div id="siErr" class="sierr"></div>' +
+        '<div class="actions"><span style="flex:1"></span><button id="siCancel">Cancel</button><button id="siOk" class="primary">Sign in</button></div>' +
+        '</div>';
+      document.body.appendChild(back);
+      var email = back.querySelector('#siEmail'), pass = back.querySelector('#siPass'), err = back.querySelector('#siErr'), ok = back.querySelector('#siOk');
+      email.focus();
+      function close(v) { back.remove(); resolve(v); }
+      back.querySelector('#siCancel').onclick = function () { close(false); };
+      back.onclick = function (e) { if (e.target === back) close(false); };
+      async function go() {
+        if (!email.value.trim() || !pass.value) { err.textContent = 'Enter your email and password.'; return; }
+        ok.disabled = true; ok.textContent = 'Signing in…'; err.textContent = '';
+        try { await TQ.db.signIn(email.value.trim(), pass.value); close(true); }
+        catch (e) { ok.disabled = false; ok.textContent = 'Sign in'; err.textContent = /invalid|credential/i.test(String(e.message || e)) ? 'Wrong email or password.' : String(e.message || e); }
+      }
+      ok.onclick = go;
+      pass.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+    });
+  }
+
+  async function doSignIn() {
+    var okv = await signInModal();
+    if (!okv) return;
+    S.userEmail = await TQ.db.userEmail();
+    S.settings = await TQ.db.getSettings();
+    TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
+    await refreshList();
+    toast('Signed in' + (S.userEmail ? ' as ' + S.userEmail : '') + ', your quotes are syncing');
+    render();
+  }
+
+  /* subtle "AI ready" note in the editor so nobody has to hunt in Settings or fear a download */
+  function setAiStatus() {
+    var el = $('#llmstatus'); if (!el || el.textContent) return;
+    if (S.aiSupport === 'chrome' || (S.aiSupport === 'webllm-possible' && S.settings && S.settings.webllmEnabled)) el.innerHTML = '<span class="airdy">✓ AI ready</span>';
+    else if (S.aiSupport === 'webllm-possible') el.textContent = 'AI needs a one-time download, turn it on in Settings';
+    else el.textContent = '';
   }
 
   function bindNav(app) {
@@ -140,6 +195,8 @@
         else { S.settings = await TQ.db.getSettings(); S.view = 'settings'; render(); }
       };
     });
+    var si = $('[data-act="signin"]', app);
+    if (si) si.onclick = doSignIn;
   }
 
   /* ============ LIST ============ */
@@ -342,6 +399,7 @@
 
     bindNav(app);
     bindEditor(app);
+    setAiStatus();
     schedulePreview(200);
   }
 
@@ -839,9 +897,10 @@
       '</div><div id="sb_status" class="hint">' + (TQ.db.mode === 'cloud' ? 'Connected and signed in.' : 'Not connected: local mode.') + '</div></section>' +
 
       '<section><h3>Mini AI (runs in your browser, nothing leaves this device)</h3>' +
-      '<p class="hint">"✨ Polish wording" in the editor rewrites THE JOB text only. Prices, totals, GST, warranty periods and durations always come from the rules and your price book, and the AI output is checked against the house rules before it can replace anything. It uses your browser\'s built-in model when available; otherwise it can download a small open model (about 1GB, one time, cached) and run it on your graphics chip.</p>' +
-      '<label class="chk"><input type="checkbox" id="s_webllm" ' + (s.webllmEnabled ? 'checked' : '') + '> Allow the one-time ~1GB local model download (WebLLM fallback)</label>' +
-      '<div id="llmprobe" class="hint">Checking what this browser supports…</div></section>' +
+      '<div id="llmprobe" class="aistat">Checking your device…</div>' +
+      '<p class="hint">The AI helps draft and polish quotes. Prices, totals, GST, warranty periods and durations always come from your price book and the house rules, never the AI, and its wording is checked before it can replace anything.</p>' +
+      '<label class="chk" id="webllm_row" style="display:none"><input type="checkbox" id="s_webllm" ' + (s.webllmEnabled ? 'checked' : '') + '> Allow a one-time ~1GB model download so the AI works on this browser too</label>' +
+      '</section>' +
 
       '<section><h3>Warranty signing</h3>' +
       '<p class="hint">Each warranty is signed fresh in a popup when you download it. Set the people who can sign (comma separated) so they show as quick-pick buttons.</p>' +
@@ -874,17 +933,17 @@
     /* ---- mini AI ---- */
     $('#s_webllm').onchange = async function () {
       S.settings.webllmEnabled = this.checked;
-      try { await TQ.db.saveSettings(S.settings); toast(this.checked ? 'WebLLM fallback enabled' : 'WebLLM fallback disabled'); }
+      try { await TQ.db.saveSettings(S.settings); toast(this.checked ? 'Model download allowed' : 'Model download turned off'); }
       catch (e) { toast(String(e.message || e), true); }
     };
-    TQ.minillm.probe().then(function (p) {
-      var el = $('#llmprobe'); if (!el) return;
-      el.textContent = p === 'chrome'
-        ? 'This browser has a built-in local model: the mini AI works with no download.'
-        : p === 'webllm-possible'
-          ? 'No built-in browser model, but WebGPU is available: tick the box above and the mini AI will download a local model on first use.'
-          : 'This browser supports neither a built-in model nor WebGPU: the mini AI is unavailable here (everything else works normally).';
-    });
+    function paintAiSupport(p) {
+      var el = $('#llmprobe'), row = $('#webllm_row'); if (!el) return;
+      if (p === 'chrome') { el.className = 'aistat ok'; el.textContent = '✓ Your browser has a built-in AI model. The AI is ready to use, no download needed.'; if (row) row.style.display = 'none'; }
+      else if (p === 'webllm-possible') { el.className = 'aistat'; el.textContent = S.settings.webllmEnabled ? '✓ AI ready (will load a local model on first use).' : 'Your browser has no built-in AI, but it can run one locally. Tick the box to allow the one-time download.'; if (row) row.style.display = ''; }
+      else { el.className = 'aistat off'; el.textContent = 'This browser can\'t run the on-device AI (everything else works normally). Try Chrome for the built-in model.'; if (row) row.style.display = ''; }
+    }
+    if (S.aiSupport !== undefined) paintAiSupport(S.aiSupport);
+    else TQ.minillm.probe().then(function (p) { S.aiSupport = p; paintAiSupport(p); });
 
     /* ---- signature pad ---- */
     (function () {
@@ -969,6 +1028,7 @@
     };
     $('#sb_signout').onclick = async function () {
       await TQ.db.signOut();
+      S.userEmail = '';
       S.settings = await TQ.db.getSettings();   // back to the local settings + price book
       TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
       toast('Signed out, back to local mode');
@@ -997,11 +1057,14 @@
   /* ---------------- boot ---------------- */
   (async function boot() {
     var st = await TQ.db.init();
-    if (st.needsSignIn) S.banner = 'Supabase is configured but you are signed out: open Settings to sign back in (working locally until then).';
+    if (st.user) S.userEmail = st.user;                    // already-signed-in session
     S.settings = await TQ.db.getSettings();
     TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
     await refreshList();
     render();
     loadAssets().catch(function (e) { toast('Could not load fonts/logo: ' + e.message, true); });
+    /* check the on-device AI up front so the app can say "ready" (or "needs a one-time
+       download") without the user hunting through Settings */
+    TQ.minillm.probe().then(function (p) { S.aiSupport = p; if (S.view === 'editor') setAiStatus(); }).catch(function () { S.aiSupport = null; });
   })();
 })();

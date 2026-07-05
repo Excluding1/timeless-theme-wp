@@ -52,7 +52,7 @@
     clearConn() { localStorage.removeItem(LS_CONN); client = null; mode = 'local'; },
 
     async signIn(email, password) {
-      var conn = lsGet(LS_CONN, null);
+      var conn = lsGet(LS_CONN, null) || (root.TQ_CONN && root.TQ_CONN.url ? root.TQ_CONN : null);
       if (!conn) throw new Error('Enter the Supabase URL and anon key first');
       client = root.supabase.createClient(conn.url, conn.anonKey);
       var r = await client.auth.signInWithPassword({ email: email, password: password });

@@ -17,10 +17,19 @@ header nav { display: flex; gap: 8px; margin-left: auto; }
 header nav button { background: transparent; border: 1px solid rgba(255,255,255,.25); color: #fff; }
 header nav button.on { border-color: var(--gold); color: var(--gold); }
 header nav button.primary { background: var(--gold); border-color: var(--gold); color: var(--navy2); font-weight: 700; }
-.badge { font-size: 11px; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
-.badge.cloud { background: #143c1e; color: #7ee2a0; }
-.badge.local { background: #3c3214; color: var(--gold); }
+.badge { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border: 0; }
+.badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+.badge.cloud { background: rgba(126,226,160,.14); color: #7ee2a0; }
+.badge.local { background: rgba(255,255,255,.1); color: #aeb6c6; }
+.badge.signin { background: var(--gold); color: var(--navy2); cursor: pointer; }
+.badge.signin::before { background: var(--navy2); }
+.badge.signin:hover { filter: brightness(1.06); }
 .banner { background: #fff6e3; border-bottom: 1px solid var(--gold); padding: 8px 18px; font-size: 13px; }
+.sierr { color: var(--err); font-size: 13px; min-height: 16px; margin-top: 4px; }
+.aistat { font-size: 13px; font-weight: 600; color: var(--muted); padding: 8px 12px; background: var(--surf); border-radius: 8px; margin-bottom: 8px; }
+.aistat.ok { color: #1e6b34; background: #eefaf0; border: 1px solid #bfe7c8; }
+.aistat.off { color: var(--muted); }
+.airdy { color: #1e6b34; font-weight: 600; }
 
 main { padding: 18px; max-width: 1400px; margin: 0 auto; }
 
