@@ -269,7 +269,8 @@
       '<p class="hint">Paste the job in your own words (names, address, prices like “2250 tiling on top”, “option a / option b”…). It fills the form below from the price book. You always review before the PDF exists.</p>' +
       '<textarea id="aitext" rows="4" placeholder="name is Neil Prout address is 29/43 Hereford Street, Glebe, nsw 2037, 2250 for new floor tiles on top and upskirting, 1000 strip out, 700 tipping the old tiles"></textarea>' +
       '<div class="actions"><button id="draftbtn" class="primary">Draft it</button>' +
-      '<button id="polishbtn" title="Rewrites THE JOB wording with a local AI model. Runs entirely in your browser; prices and numbers are never touched.">✨ Polish wording (local AI)</button>' +
+      '<button id="aidraftbtn" title="Uses the local AI to read messy notes and fill the form. Validated against your price book; it can never set a price you did not type.">✨ AI draft</button>' +
+      '<button id="polishbtn" title="Rewrites the job wording and options note with the local AI. Runs entirely in your browser; prices, numbers and warranty are never touched.">✨ Polish wording</button>' +
       '<span id="llmstatus" class="muted" style="font-size:12px"></span></div>' +
       '<div id="aiwarn"></div></section>' +
 
@@ -326,6 +327,7 @@
       '<p class="hint">Downloads a signed single-page warranty PDF matching the services on this document, modelled on the operator card with our brand and the Australian Consumer Law text. Send it WITH the final invoice at completion (the law requires the warranty be given at the time of supply, a website link alone is not enough). Draw your signature once in Settings. Special conditions below are drafted from the job, edit freely.</p>' +
       '<label>Special conditions (one per line)<textarea id="wspecial" rows="3">' + esc((d.warrantySpecial && d.warrantySpecial.length ? d.warrantySpecial : TQ.warranty.composeSpecial(d)).join('\n')) + '</textarea></label>' +
       '<div class="actions"><button id="wdownload">Download warranty PDF</button>' +
+      '<button id="wpolish" title="Tidies the special conditions with the local AI. Keeps every instruction and number; never invents anything.">✨ Tidy conditions</button>' +
       (S.settings.signatureDataUrl ? '' : '<span class="muted" style="font-size:12px">(no signature saved yet: Settings → Signature)</span>') +
       '</div></section>' +
 
@@ -460,41 +462,66 @@
       });
     }
 
-    $('#draftbtn').onclick = function () {
-      var out = TQ.draft.parse($('#aitext').value);
+    /* apply a draft result (from the offline parser OR the local LLM extract) to the form */
+    function applyDraftResult(out, method) {
       var d = S.doc;
       if (out.customer.name) d.customer.name = out.customer.name;
       if (out.customer.address) d.customer.address = out.customer.address;
       if (out.customer.phone) d.customer.phone = out.customer.phone;
       if (out.customer.email) d.customer.email = out.customer.email;
       if (out.availableFrom) d.availableFrom = out.availableFrom;
-      if (out.options.length) d.options = out.options;
+      if (out.options && out.options.length) d.options = out.options;
       if (out.jobIntro) d.jobIntro = out.jobIntro;
       if (out.expect && out.expect.length) d.expect = out.expect;
       if (out.warranty && out.warranty.length) d.warranty = out.warranty;
       var aitxt = $('#aitext').value;
       render();
       $('#aitext').value = aitxt;
-      $('#aiwarn').innerHTML = out.warnings.length
-        ? '<div class="warnbox"><strong>Drafted, review these:</strong><ul>' + out.warnings.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>'
-        : '<div class="okbox">Drafted cleanly, review the form below.</div>';
+      $('#aiwarn').innerHTML = (out.warnings && out.warnings.length)
+        ? '<div class="warnbox"><strong>' + esc(method) + ', review these:</strong><ul>' + out.warnings.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('') + '</ul></div>'
+        : '<div class="okbox">' + esc(method) + ' cleanly, review the form below.</div>';
+    }
+
+    $('#draftbtn').onclick = function () {
+      applyDraftResult(TQ.draft.parse($('#aitext').value), 'Drafted');
+    };
+
+    $('#aidraftbtn').onclick = async function () {
+      if (S.aiBusy) return; S.aiBusy = true;
+      var text = $('#aitext').value.trim();
+      if (!text) { S.aiBusy = false; toast('Paste the job notes first', true); return; }
+      var st = $('#llmstatus');
+      try {
+        st.textContent = 'Starting the local AI…';
+        await TQ.minillm.ensure(S.settings.webllmEnabled, function (t) { st.textContent = t; });
+        st.textContent = 'Reading your notes… (' + TQ.minillm.detail + ')';
+        var out = await TQ.minillm.extract(text);
+        if (out) { applyDraftResult(out, 'AI drafted'); toast('AI drafted from your notes, review it'); }
+        else { applyDraftResult(TQ.draft.parse(text), 'Drafted (AI unclear, used the offline draft)'); }
+      } catch (e) {
+        applyDraftResult(TQ.draft.parse(text), 'Drafted (AI unavailable, used the offline draft)');
+        toast(String(e.message || e), true);
+      } finally { S.aiBusy = false; }
     };
 
     $('#polishbtn').onclick = async function () {
+      if (S.aiBusy) return;
       readForm();
-      if (!S.doc.jobIntro && !(S.doc.options || []).some(function (o) { return (o.lines || []).length || (o.items || []).length; })) {
+      if (!S.doc.jobIntro && !S.doc.optionsNote) {
         toast('Nothing to polish yet, draft or fill the job first', true); return;
       }
+      S.aiBusy = true;
       var st = $('#llmstatus');
       try {
         st.textContent = 'Starting the local AI…';
         await TQ.minillm.ensure(S.settings.webllmEnabled, function (t) { st.textContent = t; });
         st.textContent = 'Polishing… (' + TQ.minillm.detail + ')';
-        var better = await TQ.minillm.polish(S.doc);
-        if (better) {
-          S.doc.jobIntro = better;
-          $('#jobintro').value = better;
-          st.textContent = 'Done, review THE JOB text.';
+        var res = await TQ.minillm.polishBundle(S.doc);
+        var n = 0;
+        if (res.jobIntro) { S.doc.jobIntro = res.jobIntro; var ji = $('#jobintro'); if (ji) ji.value = res.jobIntro; n++; }
+        if (res.optionsNote) { S.doc.optionsNote = res.optionsNote; var on = $('#optnote'); if (on) on.value = res.optionsNote; n++; }
+        if (n) {
+          st.textContent = 'Polished ' + n + ' section' + (n > 1 ? 's' : '') + ', review it.';
           schedulePreview(0);
           toast('Wording polished, review it before sending');
         } else {
@@ -502,7 +529,7 @@
         }
       } catch (e) {
         st.textContent = String(e.message || e);
-      }
+      } finally { S.aiBusy = false; }
     };
 
     $('#doctype').onchange = function () {
@@ -604,6 +631,19 @@
     $('#wdownload').onclick = async function () {
       readForm();
       try { await downloadWarranty(S.doc); } catch (e) { toast('Warranty PDF failed: ' + (e.message || e), true); }
+    };
+    $('#wpolish').onclick = async function () {
+      if (S.aiBusy) return; S.aiBusy = true;
+      readForm();
+      var cur = (S.doc.warrantySpecial && S.doc.warrantySpecial.length) ? S.doc.warrantySpecial : TQ.warranty.composeSpecial(S.doc);
+      try {
+        toast('Starting the local AI…');
+        await TQ.minillm.ensure(S.settings.webllmEnabled, function () {});
+        var tidied = await TQ.minillm.polishConditions(S.doc, cur);
+        S.doc.warrantySpecial = tidied;
+        var ws = $('#wspecial'); if (ws) ws.value = tidied.join('\n');
+        toast(tidied.join('\n') === cur.join('\n') ? 'Kept your conditions (AI result was not cleaner)' : 'Conditions tidied, review them');
+      } catch (e) { toast(String(e.message || e), true); } finally { S.aiBusy = false; }
     };
 
     $('#refreshpv').onclick = function () { readForm(); schedulePreview(0); };

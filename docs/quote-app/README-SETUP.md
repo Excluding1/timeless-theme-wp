@@ -11,11 +11,16 @@ invoice-form layout modelled on the business's original invoice and the ATO's re
   (all services + how we do each), "What to expect" (real durations per service) and the
   exact per-material warranty (resurfacing up to 5yr / grout 2yr / silicone 1yr). No API keys,
   nothing leaves the browser. You always review before a PDF exists.
-- **Mini AI (optional, local):** "✨ Polish wording" rewrites THE JOB text with a language model
-  running entirely in the browser — Chrome's built-in model when available, else a one-time
-  ~1GB WebLLM download (opt-in, Settings). Output is validated against the house rules
-  (banned words, no invented numbers) before it can replace anything. Prices/totals/warranty
-  are NEVER produced by the AI.
+- **Mini AI (optional, local, works throughout):** a language model that runs entirely in the
+  browser — Chrome's built-in model when available, else a one-time ~1GB WebLLM download
+  (opt-in, Settings). It helps at three points: **✨ AI draft** reads messy notes and fills the
+  form; **✨ Polish wording** rewrites the job description + options note; **✨ Tidy conditions**
+  cleans the warranty special conditions. **Guardrails (verified with a 21-case adversarial
+  test):** every AI output is validated before it's applied — an amount is accepted only if that
+  exact number appears in your notes (a hallucinated or 10× price is dropped and flagged), no
+  banned words, no invented numbers or dates, and warranty/period/totals always come from the
+  price book, never the model. If the AI result breaks a rule, your original text is kept. AI
+  draft falls back to the offline parser if no model is available.
 - **Price book (Settings):** every service, wording, price, keywords and "main job" flag is
   editable; add your own services; Quick Draft uses your edited book. **Option library:**
   "☆ Save" any option and re-insert it on future quotes.

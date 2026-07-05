@@ -222,7 +222,36 @@
     return lines;
   }
 
+  /* The set of price magnitudes the user actually TYPED as prices: numbers that survive the
+     same postcode / phone / quantity-unit guards the parser uses. This is what a price can be
+     in these notes, so binding the local LLM's amounts to it stops the model from ever turning
+     a postcode / phone digit into a line price (parity with the offline parser, no stricter). */
+  function collectPriceTokens(text) {
+    var src = String(text || '');
+    /* strip contacts + address the same way parse() does, so their digits (postcode, unit
+       number, phone) can never be read as a price, but a real price sitting in the same
+       sentence as the address still survives */
+    var em = src.match(EMAIL_RE); if (em) src = src.replace(em[0], ' ');
+    var ph = src.match(PHONE_RE); if (ph) src = src.replace(ph[0], ' ');
+    src = src.replace(/address is\s+.{5,90}?(?:(?:nsw|qld|vic|act|wa|sa|nt|tas)[,\s]*\d{4}|\d{4}|nsw|qld|vic|act|wa|sa|nt|tas)/i, ' ');
+    var am = src.match(ADDR_RE); if (am) src = src.replace(am[1], ' ');
+    src = src.replace(/\b(?:at|in)\s+[a-z][a-z'’ ]{2,25}?\s+\d{4}\b/ig, ' ');
+    var set = {};
+    src.split(/option\s*(?:a|b|c|1|2|3)\s*[:\-.]?/i).forEach(function (block) {
+      var normalised = String(block).replace(/(\d),(?=\d{3}(?:\D|$))/g, '$1');
+      normalised.split(/\n|(?:\s[-–—]+\s)|,|;|(?:\s\+\s)|\band\b|\balso\b|\bplus\b/i)
+        .map(function (t) { return t.trim(); }).filter(Boolean)
+        .forEach(function (seg) {
+          var amt = findAmount(seg, !!matchCatalogue(seg));
+          if (typeof amt === 'number') set[amt] = 1;
+        });
+    });
+    return set;
+  }
+
   TQ.draft = {
+    priceTokens: function (text) { return collectPriceTokens(text); },
+
     parse: function (text) {
       var warnings = [];
       var src = String(text || '').trim();
@@ -317,33 +346,42 @@
         }
       }
 
-      /* ---- headline: the biggest PRIMARY service wins the option title ---- */
+      TQ.draft.compose(out);
+      return out;
+    },
+
+    /* Shared composer: from out.options[].lines (each with a catId), derive the option
+       titles, THE JOB intro + process, "what to expect" durations, and the EXACT
+       per-material warranty. Deterministic and price-book driven, so it is identical
+       whether the lines came from the offline parser or the local LLM extract.
+       Every number here comes from the price book, never from free text or a model. */
+    compose: function (out) {
       var book = cat();
       var byId = {};
       book.forEach(function (c) { byId[c.id] = c; });
-      out.options.forEach(function (o) {
+
+      /* headline: the biggest PRIMARY service wins the option title */
+      (out.options || []).forEach(function (o) {
         var main = null, bestKey = -1;
-        o.lines.forEach(function (l) {
+        (o.lines || []).forEach(function (l) {
           if (!l.catId) return;
           var a = typeof l.amount === 'number' ? l.amount : 0;
-          var key = (l.primary ? 1e9 : 0) + a;     // primary always beats add-ons; amount breaks ties
+          var key = (l.primary ? 1e9 : 0) + a;
           if (key > bestKey) { bestKey = key; main = l.catId; }
         });
-        if (main && o.title.indexOf(':') === -1) {
+        if (main && (o.title || '').indexOf(':') === -1) {
           var c = byId[main];
           if (c) {
             var short = c.desc.split('(')[0].split(',')[0].split(';')[0].trim();
-            o.title = (o.title === 'The work' ? short : o.title + ': ' + short);
+            o.title = (!o.title || o.title === 'The work') ? short : o.title + ': ' + short;
           }
         }
       });
 
-      /* ---- compose THE JOB + warranty + what-to-expect from EVERY detected service ----
-         (the intro names all the work, then explains the process; warranty is exact per
-         material: resurfacing up to 5yr, grout 2yr, silicone 1yr; durations per service) */
+      /* THE JOB + warranty + what-to-expect from EVERY detected service */
       var seen = [], seenIds = {};
-      out.options.forEach(function (o) {
-        o.lines.forEach(function (l) {
+      (out.options || []).forEach(function (o) {
+        (o.lines || []).forEach(function (l) {
           if (l.catId && !seenIds[l.catId] && byId[l.catId]) { seenIds[l.catId] = 1; seen.push(byId[l.catId]); }
         });
       });
@@ -356,7 +394,7 @@
         var intro = opener.charAt(0).toUpperCase() + opener.slice(1) + '.';
         var procs = ordered.map(function (c) { return c.process; }).filter(Boolean).slice(0, 3);
         if (procs.length) intro += ' ' + procs.join(' ');
-        if (out.options.length > 1) intro += ' ' + (out.options.length === 2 ? 'Two options below.' : 'Options below.');
+        if ((out.options || []).length > 1) intro += ' ' + (out.options.length === 2 ? 'Two options below.' : 'Options below.');
         out.jobIntro = intro;
       } else if (ordered[0] && ordered[0].intro) {
         out.jobIntro = ordered[0].intro;
