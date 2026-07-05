@@ -165,6 +165,7 @@
           '<button data-act="pdf">PDF</button>' +
           '<button data-act="dup">Copy</button>' +
           (q.docType === 'quote' ? '<button data-act="inv">→ Invoice</button>' : '') +
+          '<button data-act="warr" title="Download the signed warranty PDF for this job">Warranty</button>' +
           '<button data-act="del" class="danger">✕</button>' +
         '</td></tr>';
     }).join('');
@@ -188,6 +189,7 @@
         try {
           if (act === 'edit') { S.doc = await TQ.db.getQuote(id); S.view = 'editor'; render(); }
           else if (act === 'pdf') { var d = await TQ.db.getQuote(id); await downloadPdf(d); }
+          else if (act === 'warr') { var dw = await TQ.db.getQuote(id); await downloadWarranty(dw); }
           else if (act === 'dup') {
             var c = await TQ.db.getQuote(id);
             c.id = ''; c.docNo = ''; c.status = 'draft'; c.date = todayStr();
@@ -426,6 +428,28 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
   }
 
+  /* shared by the editor button and the list-row Warranty button */
+  async function downloadWarranty(doc) {
+    if (!S.settings.signatureDataUrl) { toast('Draw and save your signature first: Settings → Signature', true); return; }
+    if (!S.settings.businessAddress) toast('Tip: add your business/postal address in Settings, the warranty rules require a claims address', true);
+    var assets = await loadAssets();
+    var model = TQ.warranty.buildModel(doc, S.settings);
+    model.aclText = R.ACL_WARRANTY_TEXT;
+    var a = {
+      dinBytes: assets.dinBytes, scriptBytes: assets.scriptBytes, logoBytes: assets.logoBytes,
+      sigBytes: dataUrlToBytes(S.settings.signatureDataUrl)
+    };
+    var bytes = await TQPDF.generateWarranty(model, S.settings, a);
+    var blob = new Blob([bytes], { type: 'application/pdf' });
+    var el = document.createElement('a');
+    el.href = URL.createObjectURL(blob);
+    el.download = 'Timeless-Warranty' + (doc.docNo ? '-' + doc.docNo : '') +
+      (doc.customer && doc.customer.name ? '-' + doc.customer.name.replace(/[^\w-]+/g, '-') : '') + '.pdf';
+    document.body.appendChild(el); el.click(); el.remove();
+    setTimeout(function () { URL.revokeObjectURL(el.href); }, 5000);
+    toast('Warranty PDF downloaded, signed and ready to send');
+  }
+
   function bindEditor(app) {
     /* every text input updates the model + preview (no re-render, keeps focus).
        #app persists across renders, so bind this exactly once. */
@@ -579,26 +603,7 @@
 
     $('#wdownload').onclick = async function () {
       readForm();
-      if (!S.settings.signatureDataUrl) { toast('Draw and save your signature first: Settings → Signature', true); return; }
-      if (!S.settings.businessAddress) toast('Tip: add your business/postal address in Settings, the warranty rules require a claims address', true);
-      try {
-        var assets = await loadAssets();
-        var model = TQ.warranty.buildModel(S.doc, S.settings);
-        model.aclText = R.ACL_WARRANTY_TEXT;
-        var a = {
-          dinBytes: assets.dinBytes, scriptBytes: assets.scriptBytes, logoBytes: assets.logoBytes,
-          sigBytes: dataUrlToBytes(S.settings.signatureDataUrl)
-        };
-        var bytes = await TQPDF.generateWarranty(model, S.settings, a);
-        var blob = new Blob([bytes], { type: 'application/pdf' });
-        var el = document.createElement('a');
-        el.href = URL.createObjectURL(blob);
-        el.download = 'Timeless-Warranty' + (S.doc.docNo ? '-' + S.doc.docNo : '') +
-          (S.doc.customer.name ? '-' + S.doc.customer.name.replace(/[^\w-]+/g, '-') : '') + '.pdf';
-        document.body.appendChild(el); el.click(); el.remove();
-        setTimeout(function () { URL.revokeObjectURL(el.href); }, 5000);
-        toast('Warranty PDF downloaded, signed and ready to send');
-      } catch (e) { toast('Warranty PDF failed: ' + (e.message || e), true); }
+      try { await downloadWarranty(S.doc); } catch (e) { toast('Warranty PDF failed: ' + (e.message || e), true); }
     };
 
     $('#refreshpv').onclick = function () { readForm(); schedulePreview(0); };
