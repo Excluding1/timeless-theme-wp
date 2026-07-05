@@ -385,10 +385,21 @@ function buildVideoCard(v) {
   return el("div", { class: "video" }, media, body);
 }
 
+function applyView() {
+  const list = localStorage.getItem("view") === "list";
+  $("videos").classList.toggle("list", list);
+  $("viewToggle").textContent = list ? "▦ Grid" : "☰ List";
+}
+
 function wireLibrary() {
   let t;
   $("search").addEventListener("input", () => { clearTimeout(t); t = setTimeout(loadVideos, 300); });
   $("filterProfile").addEventListener("change", loadVideos);
+  $("viewToggle").addEventListener("click", () => {
+    localStorage.setItem("view", localStorage.getItem("view") === "list" ? "grid" : "list");
+    applyView();
+  });
+  applyView();
 }
 
 /* ---------- boot ---------- */

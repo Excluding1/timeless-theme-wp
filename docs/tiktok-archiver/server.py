@@ -6,7 +6,7 @@ from pathlib import Path
 
 import uvicorn
 from fastapi import Body, FastAPI, HTTPException
-from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
 from archiver import db, downloader, jobs, transcriber
@@ -50,7 +50,12 @@ def _publicize(v):
 
 @app.get("/")
 def index():
-    return FileResponse(BASE / "static" / "index.html")
+    # stamp asset links with file mtimes so a changed app.css/app.js always busts
+    # the browser cache (belt-and-braces alongside the no-store header)
+    static = BASE / "static"
+    html = (static / "index.html").read_text(encoding="utf-8")
+    ver = str(int(max((static / "app.css").stat().st_mtime, (static / "app.js").stat().st_mtime)))
+    return HTMLResponse(html.replace("__V__", ver))
 
 
 @app.get("/api/state")

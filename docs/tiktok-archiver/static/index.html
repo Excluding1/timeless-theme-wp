@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TikTok Profile Archiver</title>
-<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/app.css?v=__V__">
 </head>
 <body>
 <header>
@@ -96,6 +96,7 @@
       <div class="row">
         <select id="filterProfile"><option value="">All profiles</option></select>
         <input id="search" placeholder="Search titles + transcripts…" spellcheck="false">
+        <button id="viewToggle" class="ghost small" title="Toggle grid / list view">☰ List</button>
         <a id="exportBtn" class="button ghost" href="/api/export">Export transcripts</a>
       </div>
     </div>
@@ -104,6 +105,6 @@
   </section>
 </main>
 
-<script src="/static/app.js"></script>
+<script src="/static/app.js?v=__V__"></script>
 </body>
 </html>
