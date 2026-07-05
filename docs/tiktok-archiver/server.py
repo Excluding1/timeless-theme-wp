@@ -162,27 +162,84 @@ def transcript_file(vid: str, kind: str):
     return FileResponse(path, filename=f"{v['username']}-{vid}.{kind}")
 
 
-@app.get("/api/export")
-def export(username: str = None, q: str = None):
-    rows = db.transcripts(username or None, q or None)
+def _fmt_date(d):
+    return f"{d[:4]}-{d[4:6]}-{d[6:]}" if d and len(d) == 8 else (d or "")
+
+
+def _fmt_dur(s):
+    if not s and s != 0:
+        return ""
+    s = int(s)
+    return f"{s // 60}:{s % 60:02d}"
+
+
+def _fmt_views(n):
+    if n is None:
+        return ""
+    if n >= 1_000_000:
+        return f"{n / 1e6:.1f}M views"
+    if n >= 1000:
+        return f"{n / 1e3:.1f}K views"
+    return f"{n} views"
+
+
+def _export_text(rows):
     blocks = []
     for r in rows:
         date = r.get("upload_date") or "no date"
-        # collapse whitespace/newlines so the header stays a single parseable line
         title = " ".join((r.get("title") or "").split())[:120] or "(no title)"
         body = ""
         if r.get("transcript"):
             body += f"[transcript]\n{r['transcript']}\n"
         if r.get("visual"):
             body += f"\n[on-screen / visual]\n{r['visual']}\n"
+        if not body and r.get("status") == "no-speech":
+            body = "(no speech detected — music/text-only clip)\n"
         blocks.append(
             f"===== @{r['username']} — {date} — {title} (id {r['id']}) =====\n"
             f"{r.get('url') or ''}\n\n{body}"
         )
-    name = f"transcripts-{username or 'all'}.txt"
+    return "\n".join(blocks) or "No transcripts yet.\n"
+
+
+def _export_markdown(rows, scope_label):
+    from datetime import datetime
+    out = [f"# TikTok transcripts — {scope_label}", ""]
+    out.append(f"*{len(rows)} video(s) · exported {datetime.now():%Y-%m-%d %H:%M}*")
+    for r in rows:
+        title = " ".join((r.get("title") or "").split()) or "(no title)"
+        meta = [f"**@{r['username']}**"]
+        for part in (_fmt_date(r.get("upload_date")), _fmt_dur(r.get("duration")),
+                     _fmt_views(r.get("view_count"))):
+            if part:
+                meta.append(part)
+        out += ["", "---", "", f"## {title}", "", " · ".join(meta)]
+        if r.get("url"):
+            out.append(f"[Watch on TikTok]({r['url']})")
+        if r.get("transcript"):
+            out += ["", "**Transcript**", "", r["transcript"]]
+        elif r.get("status") == "no-speech":
+            out += ["", "*No speech detected (music/text-only clip).*"]
+        if r.get("visual"):
+            out += ["", "**On-screen / scene**", "", "```", r["visual"], "```"]
+    return "\n".join(out) + "\n"
+
+
+@app.get("/api/export")
+def export(username: str = None, q: str = None, format: str = "txt", ids: str = None):
+    id_list = [i for i in (ids or "").split(",") if i] or None
+    rows = db.transcripts(username or None, q or None, ids=id_list)
+    scope = "selected" if id_list else (username or "all")
+    if format == "md":
+        label = (f"{len(id_list)} selected" if id_list
+                 else (f"@{username}" if username else "all profiles"))
+        return PlainTextResponse(
+            _export_markdown(rows, label), media_type="text/markdown",
+            headers={"Content-Disposition": f'attachment; filename="transcripts-{scope}.md"'},
+        )
     return PlainTextResponse(
-        "\n".join(blocks) or "No transcripts yet.\n",
-        headers={"Content-Disposition": f'attachment; filename="{name}"'},
+        _export_text(rows),
+        headers={"Content-Disposition": f'attachment; filename="transcripts-{scope}.txt"'},
     )
 
 

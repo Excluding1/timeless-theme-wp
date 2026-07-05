@@ -302,9 +302,17 @@ def videos(username=None, q=None):
     return rows
 
 
-def transcripts(username=None, q=None):
-    sql = "SELECT id, username, url, title, upload_date, transcript, visual FROM videos"
-    where, params = ["(NULLIF(transcript,'') IS NOT NULL OR NULLIF(visual,'') IS NOT NULL)"], []
+def transcripts(username=None, q=None, ids=None):
+    sql = ("SELECT id, username, url, title, upload_date, duration, view_count, "
+           "status, transcript, visual FROM videos")
+    where, params = [], []
+    if ids:
+        # explicit selection → include exactly those (even a no-speech pick)
+        where.append(f"id IN ({','.join('?' * len(ids))})")
+        params += list(ids)
+    else:
+        # bulk/filtered → only rows that actually have content
+        where.append("(NULLIF(transcript,'') IS NOT NULL OR NULLIF(visual,'') IS NOT NULL)")
     if username:
         where.append("username=?")
         params.append(username)

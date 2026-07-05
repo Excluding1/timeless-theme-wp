@@ -90,7 +90,10 @@ button.small { padding: 5px 10px; font-size: 13px; }
 }
 .video .media .noThumb { display:flex; align-items:center; justify-content:center; height:100%; color: var(--muted); font-size: 13px; }
 .video .body { padding: 11px 12px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
-.video .title { font-size: 13.5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.video .title { font-size: 13.5px; line-height: 1.4; }
+.video .title .sel { vertical-align: middle; width: 15px; height: 15px; accent-color: var(--cyan); cursor: pointer; }
+#selBar { background: var(--card2); border: 1px solid #1f3a44; border-radius: 10px; padding: 10px 14px; margin: 4px 0 10px; }
+#selBar strong { color: var(--cyan); }
 .video .meta { color: var(--muted); font-size: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
 .video .snippet { color: var(--muted); font-size: 12.5px; line-height: 1.45; border-top: 1px dashed var(--line); padding-top: 7px; }
 .video .snippet.full { color: var(--text); white-space: pre-wrap; max-height: 300px; overflow-y: auto; }

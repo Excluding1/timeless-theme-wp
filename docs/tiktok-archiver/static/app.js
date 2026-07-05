@@ -11,6 +11,7 @@ const state = {
   job: null,
   lastJobState: null,
   videos: [],
+  selected: new Set(),
 };
 
 function el(tag, attrs = {}, ...children) {
@@ -277,7 +278,23 @@ async function loadVideos() {
     state.videos = r.videos;
   } catch (e) { return; }
   renderVideos();
-  $("exportBtn").href = "/api/export?" + params.toString();
+  const qs = params.toString();
+  $("exportBtn").href = "/api/export?" + qs;
+  $("exportMd").href = "/api/export?format=md" + (qs ? "&" + qs : "");
+}
+
+function toggleSel(id, on) {
+  if (on) state.selected.add(id); else state.selected.delete(id);
+  updateSelBar();
+}
+
+function updateSelBar() {
+  const ids = [...state.selected];
+  $("selBar").hidden = ids.length === 0;
+  $("selCount").textContent = ids.length;
+  const idParam = ids.map(encodeURIComponent).join(",");
+  $("dlSelMd").href = "/api/export?format=md&ids=" + idParam;
+  $("dlSelTxt").href = "/api/export?ids=" + idParam;
 }
 
 function fmtDate(d) { return d && d.length === 8 ? `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6)}` : ""; }
@@ -336,8 +353,13 @@ function buildVideoCard(v) {
     media.append(el("div", { class: "noThumb", text: v.status === "pending" ? "queued" : "no file" }));
   }
 
+  const id = String(v.id);
+  const sel = el("input", { type: "checkbox", class: "sel", title: "Select for download" });
+  sel.checked = state.selected.has(id);
+  sel.addEventListener("change", () => toggleSel(id, sel.checked));
+
   const body = el("div", { class: "body" },
-    el("div", { class: "title", text: v.title || "(no title)" }),
+    el("div", { class: "title" }, sel, el("span", { text: " " + (v.title || "(no title)") })),
     el("div", { class: "meta" },
       el("span", { text: "@" + v.username }),
       el("span", { text: fmtDate(v.upload_date) }),
@@ -466,6 +488,11 @@ function wireLibrary() {
   $("viewToggle").addEventListener("click", () => {
     localStorage.setItem("view", localStorage.getItem("view") === "list" ? "grid" : "list");
     applyView();
+  });
+  $("selClear").addEventListener("click", () => {
+    state.selected.clear();
+    document.querySelectorAll("#videos .sel").forEach((c) => { c.checked = false; });
+    updateSelBar();
   });
   applyView();
 }
