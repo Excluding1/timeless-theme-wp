@@ -52,7 +52,16 @@
           <option value="24">Daily</option>
         </select>
       </label>
+      <label>Visual scan (on-screen text + scene)
+        <select id="visualScan">
+          <option value="0">Off</option>
+          <option value="1">On — also scan frames during sync</option>
+        </select>
+      </label>
     </div>
+    <p class="hint" id="visualHint">Visual scan reads burned-in captions/overlays and tags what's on
+      screen (people, place, objects) at each scene change — extra context beyond the spoken transcript.
+      Runs locally via Apple Vision; adds a few seconds per video.</p>
     <div id="cookiePaste" hidden>
       <p class="hint">Export cookies with a browser extension like “Get cookies.txt LOCALLY”
         while logged into tiktok.com, then paste the file contents here:</p>

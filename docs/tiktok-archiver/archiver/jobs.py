@@ -4,7 +4,7 @@ import time
 import traceback
 from datetime import datetime
 
-from . import db, downloader, transcriber
+from . import db, downloader, transcriber, visual
 
 _lock = threading.Lock()
 _job = None  # mutated only via _set/_log below
@@ -95,6 +95,16 @@ def start_transcribe_one(vid):
     threading.Thread(target=_run_safe, args=(_transcribe_rows, [v], True), daemon=True).start()
 
 
+def start_visual_one(vid):
+    v = db.video(vid)
+    if not v or not v.get("file_path"):
+        raise ValueError("That video hasn't been downloaded yet.")
+    if not visual.available():
+        raise ValueError(visual.unavailable_reason())
+    _new_job("visual", v["username"])
+    threading.Thread(target=_run_safe, args=(_visual_rows, [v], True), daemon=True).start()
+
+
 def _run_sync(username, limit, do_transcribe):
     url = db.profile_url(username)
     if not url:
@@ -156,6 +166,9 @@ def _run_sync(username, limit, do_transcribe):
 
     if do_transcribe and not _cancelled():
         _transcribe_rows(db.to_transcribe(username), False)
+
+    if db.get_setting("visual_scan") == "1" and visual.available() and not _cancelled():
+        _visual_rows(db.to_visual(username), False)
 
     db.touch_profile(username)
 
@@ -221,6 +234,51 @@ def _transcribe_rows(rows, force):
             db.update_video(v["id"], error=f"transcribe: {e}"[:500])
             _bump_errors()
             _log(f"ERROR transcribing {v['id']}: {str(e)[:160]}")
+    _set(current="")
+
+
+def _reuse_visual(v):
+    """A visual-scan file on disk (e.g. after a DB reset) is reused, not regenerated."""
+    path = visual.VISUAL_DIR / v["username"] / f"{v['id']}.txt"
+    if not path.exists():
+        return False
+    db.update_video(v["id"], visual=path.read_text(encoding="utf-8").strip(),
+                    visual_path=db.rel_path(path), scanned_at=_now())
+    return True
+
+
+def _visual_rows(rows, force):
+    if not rows:
+        return
+    if not visual.available():
+        _log(f"Visual Scan unavailable: {visual.unavailable_reason()}")
+        return
+    _set(phase="scanning", total=len(rows), done=0,
+         current="Scanning frames for on-screen text + scene tags…")
+    for i, v in enumerate(rows):
+        if _cancelled():
+            _log("Stopped by user.")
+            break
+        _set(current=f"Visual scan {v['id']} ({i + 1}/{len(rows)})", done=i)
+        try:
+            if not force and _reuse_visual(v):
+                _log(f"Reused existing visual scan for {v['id']}")
+                _set(done=i + 1)
+                continue
+            track, path = visual.analyse(db.abs_path(v["file_path"]), v["username"], v["id"])
+            # clear only a stale *visual* error — keep a transcribe error from this sync
+            err = v.get("error") or ""
+            db.update_video(v["id"], visual=track, visual_path=path, scanned_at=_now(),
+                            error=None if err.startswith("visual") else (err or None))
+            _log(f"Visual-scanned {v['id']} ({len(track)} chars)")
+            _set(done=i + 1)
+        except Exception as e:
+            # visual scan is local & deterministic — a failure will recur, so mark it
+            # scanned-with-error instead of retrying it on every sync forever
+            db.update_video(v["id"], error=f"visual: {e}"[:500],
+                            visual=f"(visual scan failed: {e})"[:500], scanned_at=_now())
+            _bump_errors()
+            _log(f"ERROR visual-scanning {v['id']}: {str(e)[:160]}")
     _set(current="")
 
 

@@ -93,6 +93,11 @@ button.small { padding: 5px 10px; font-size: 13px; }
 .video .meta { color: var(--muted); font-size: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
 .video .snippet { color: var(--muted); font-size: 12.5px; line-height: 1.45; border-top: 1px dashed var(--line); padding-top: 7px; }
 .video .snippet.full { color: var(--text); white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+.video .vlabel { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--cyan); margin-top: 4px; }
+.video .snippet.visual { border-top: 1px dashed var(--line); color: var(--muted); white-space: pre-wrap; }
+.video .snippet.visual.full { color: var(--text); max-height: 300px; overflow-y: auto; }
+.video .actions a.vscan { color: var(--cyan); border-color: #1f3a44; }
+.chip.scanning { color: var(--cyan); }
 .video .actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
 .video .actions a { color: var(--cyan); font-size: 12.5px; text-decoration: none; border: 1px solid var(--line); border-radius: 7px; padding: 4px 9px; }
 .video .err { color: var(--red); font-size: 12px; }

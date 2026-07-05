@@ -47,6 +47,8 @@ async function poll() {
     state.settings = s.settings;
     state.whisperModels = s.whisper_models;
     state.cookieFilePresent = s.cookie_file_present;
+    state.visualAvailable = s.visual_available;
+    state.visualReason = s.visual_reason;
     state.job = s.job;
     renderProfiles();
     renderJob();
@@ -76,6 +78,7 @@ function syncSettingsForm() {
   if (state.settings.whisper_model) $("whisperModel").value = state.settings.whisper_model;
   $("language").value = state.settings.language || "auto";
   $("autoSync").value = state.settings.auto_sync || "0";
+  $("visualScan").value = state.settings.visual_scan || "0";
   updateSettingsVisibility();
 }
 
@@ -87,11 +90,18 @@ function updateSettingsVisibility() {
   if (Date.now() > cookieMsgUntil) {
     $("cookieStatus").textContent = state.cookieFilePresent ? "A cookies.txt is saved ✓" : "";
   }
+  const vs = $("visualScan");
+  if (state.visualAvailable === false) {
+    vs.disabled = true;
+    $("visualHint").textContent = "Visual scan unavailable on this machine: " + (state.visualReason || "");
+  } else {
+    vs.disabled = false;
+  }
 }
 
 function wireSettings() {
   $("settingsBtn").addEventListener("click", () => { $("settings").hidden = !$("settings").hidden; });
-  for (const id of ["cookieMode", "cookieBrowser", "whisperModel", "language", "autoSync"]) {
+  for (const id of ["cookieMode", "cookieBrowser", "whisperModel", "language", "autoSync", "visualScan"]) {
     $(id).addEventListener("change", () => { settingsDirty = true; updateSettingsVisibility(); });
   }
   const saveSettings = async () => {
@@ -103,6 +113,7 @@ function wireSettings() {
         whisper_model: $("whisperModel").value,
         language: $("language").value,
         auto_sync: $("autoSync").value,
+        visual_scan: $("visualScan").value,
       }),
     });
     settingsDirty = false;
@@ -235,7 +246,8 @@ function renderJob() {
   const j = state.job;
   $("jobCard").hidden = !j;
   if (!j) return;
-  $("jobTitle").textContent = (j.kind === "sync" ? "Syncing @" : "Transcribing for @") + j.username;
+  const verb = { sync: "Syncing @", transcribe: "Transcribing for @", visual: "Visual-scanning for @" };
+  $("jobTitle").textContent = (verb[j.kind] || "Working on @") + j.username;
   const phase = $("jobPhase");
   phase.textContent = j.state === "running" ? j.phase : j.state;
   phase.className = "chip " + (j.state === "running" ? "running" : j.state === "done" ? "done" : "error");
@@ -382,7 +394,51 @@ function buildVideoCard(v) {
     if (actions.children.length) body.append(actions);
   }
 
+  buildVisualBlock(v, body);
   return el("div", { class: "video" }, media, body);
+}
+
+function buildVisualBlock(v, body) {
+  if (v.has_visual) {
+    const vis = el("div", { class: "snippet visual", text: v.visual_snippet || "(no on-screen text or scene tags detected)" });
+    body.append(el("div", { class: "vlabel", text: "👁 On-screen / scene" }), vis);
+    const acts = el("div", { class: "actions" },
+      el("a", { href: "#", text: "Full", onclick: async (e) => {
+        e.preventDefault();
+        try {
+          const d = await api("/api/videos/" + encodeURIComponent(v.id));
+          vis.textContent = d.visual || "(empty)";
+          vis.classList.add("full");
+          e.target.remove();
+        } catch (err) { alert("Could not load visual scan: " + err.message); }
+      } }),
+      el("a", { href: "#", text: "Copy", onclick: async (e) => {
+        e.preventDefault();
+        const link = e.target;
+        try {
+          const d = await api("/api/videos/" + encodeURIComponent(v.id));
+          await navigator.clipboard.writeText(d.visual || "");
+          link.textContent = "Copied ✓";
+        } catch (err) { link.textContent = "Copy failed"; }
+        setTimeout(() => { link.textContent = "Copy"; }, 1500);
+      } }),
+    );
+    if (state.visualAvailable) {
+      acts.append(el("a", { href: "#", text: "Re-scan", onclick: (e) => runVisual(e, v.id, true) }));
+    }
+    body.append(acts);
+  } else if (v.media_url && state.visualAvailable) {
+    body.append(el("div", { class: "actions" },
+      el("a", { href: "#", class: "vscan", text: "👁 Visual scan", onclick: (e) => runVisual(e, v.id, false) }),
+    ));
+  }
+}
+
+async function runVisual(e, vid, rescan) {
+  e.preventDefault();
+  if (rescan && !confirm("Re-scan this video's frames with the current settings?")) return;
+  try { await api("/api/visual/" + encodeURIComponent(vid), { method: "POST" }); }
+  catch (err) { alert(err.message); }
 }
 
 function applyView() {

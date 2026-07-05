@@ -9,7 +9,7 @@ from fastapi import Body, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
-from archiver import db, downloader, jobs, transcriber
+from archiver import db, downloader, jobs, transcriber, visual
 
 BASE = Path(__file__).resolve().parent
 
@@ -45,6 +45,7 @@ def _publicize(v):
                 pass
     out.pop("transcript_path", None)
     out.pop("srt_path", None)
+    out.pop("visual_path", None)
     return out
 
 
@@ -65,6 +66,8 @@ def state():
         "settings": db.all_settings(),
         "cookie_file_present": downloader.COOKIE_FILE.exists(),
         "whisper_models": list(transcriber.MODEL_CHOICES),
+        "visual_available": visual.available(),
+        "visual_reason": "" if visual.available() else visual.unavailable_reason(),
         "job": jobs.status(),
     }
 
@@ -124,6 +127,17 @@ def transcribe_one(vid: str):
     return {"ok": True}
 
 
+@app.post("/api/visual/{vid}")
+def visual_one(vid: str):
+    try:
+        jobs.start_visual_one(vid)
+    except jobs.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True}
+
+
 @app.get("/api/videos")
 def videos(username: str = None, q: str = None):
     return {"videos": [_publicize(v) for v in db.videos(username or None, q or None)]}
@@ -156,9 +170,14 @@ def export(username: str = None, q: str = None):
         date = r.get("upload_date") or "no date"
         # collapse whitespace/newlines so the header stays a single parseable line
         title = " ".join((r.get("title") or "").split())[:120] or "(no title)"
+        body = ""
+        if r.get("transcript"):
+            body += f"[transcript]\n{r['transcript']}\n"
+        if r.get("visual"):
+            body += f"\n[on-screen / visual]\n{r['visual']}\n"
         blocks.append(
             f"===== @{r['username']} — {date} — {title} (id {r['id']}) =====\n"
-            f"{r.get('url') or ''}\n\n{r['transcript']}\n"
+            f"{r.get('url') or ''}\n\n{body}"
         )
     name = f"transcripts-{username or 'all'}.txt"
     return PlainTextResponse(

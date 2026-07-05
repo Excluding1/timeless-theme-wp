@@ -33,6 +33,14 @@ uv pip install --python .venv/bin/python -r requirements.txt`)
 4. **Auto-sync (optional)** — Settings → *Auto-sync all profiles* (hourly / 6h /
    daily). While the server is running it re-checks every profile on that
    schedule and downloads + transcribes only what's new — no clicking needed.
+5. **Visual scan (optional, on/off)** — Settings → *Visual scan*. When On, each
+   sync also walks the video at its scene changes and records the **on-screen
+   text** (burned-in captions / overlays) plus **scene tags** (people, place,
+   objects) at each change — context the spoken transcript alone doesn't give.
+   Runs fully locally via Apple's Vision framework (macOS), a few seconds per
+   video. Also available per-video via the **👁 Visual scan** button, shown in
+   each card under "On-screen / scene", searchable, and included in exports.
+   Dedup applies here too: a video already scanned is never re-scanned.
 
 ## TikTok login (needed if TikTok blocks anonymous access)
 

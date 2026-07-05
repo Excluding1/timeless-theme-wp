@@ -23,6 +23,7 @@ DEFAULTS = {
     "whisper_model": "base",      # tiny | base | small | medium | large-v3
     "language": "auto",           # auto or an ISO code like "en"
     "auto_sync": "0",             # hours between automatic syncs of all profiles; 0 = off
+    "visual_scan": "0",           # 1 = also OCR/scene-tag each video (on-screen text + what's showing)
 }
 
 SCHEMA = """
@@ -48,8 +49,11 @@ CREATE TABLE IF NOT EXISTS videos (
     transcript      TEXT,
     transcript_path TEXT,
     srt_path        TEXT,
+    visual          TEXT,
+    visual_path     TEXT,
     downloaded_at   TEXT,
     transcribed_at  TEXT,
+    scanned_at      TEXT,
     attempts        INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS idx_videos_username ON videos(username);
@@ -59,6 +63,9 @@ CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 # guarded ALTERs for databases created before a column existed
 MIGRATIONS = [
     "ALTER TABLE videos ADD COLUMN attempts INTEGER NOT NULL DEFAULT 0",
+    "ALTER TABLE videos ADD COLUMN visual TEXT",
+    "ALTER TABLE videos ADD COLUMN visual_path TEXT",
+    "ALTER TABLE videos ADD COLUMN scanned_at TEXT",
 ]
 
 _lock = threading.RLock()
@@ -199,7 +206,8 @@ def add_pending_video(vid, username, url, title):
 _UPDATABLE = {
     "url", "title", "upload_date", "duration", "view_count", "like_count",
     "file_path", "thumb_path", "status", "error", "transcript",
-    "transcript_path", "srt_path", "downloaded_at", "transcribed_at",
+    "transcript_path", "srt_path", "visual", "visual_path",
+    "downloaded_at", "transcribed_at", "scanned_at",
 }
 
 
@@ -245,6 +253,15 @@ def to_transcribe(username):
         return [dict(r) for r in rows]
 
 
+def to_visual(username):
+    with _lock:
+        rows = _db().execute(
+            "SELECT * FROM videos WHERE username=? AND file_path IS NOT NULL AND visual IS NULL",
+            (username,),
+        ).fetchall()
+        return [dict(r) for r in rows]
+
+
 def video(vid):
     with _lock:
         row = _db().execute("SELECT * FROM videos WHERE id=?", (vid,)).fetchone()
@@ -253,8 +270,9 @@ def video(vid):
 
 def _search_clause(q, where, params):
     esc = q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
-    where.append("(title LIKE ? ESCAPE '\\' OR transcript LIKE ? ESCAPE '\\')")
-    params += [f"%{esc}%", f"%{esc}%"]
+    where.append("(title LIKE ? ESCAPE '\\' OR transcript LIKE ? ESCAPE '\\' "
+                 "OR visual LIKE ? ESCAPE '\\')")
+    params += [f"%{esc}%"] * 3
 
 
 def videos(username=None, q=None):
@@ -275,12 +293,15 @@ def videos(username=None, q=None):
         t = r.pop("transcript", None)
         r["has_transcript"] = t is not None
         r["snippet"] = (t[:280] + "…") if t and len(t) > 280 else t
+        v = r.pop("visual", None)
+        r["has_visual"] = v is not None
+        r["visual_snippet"] = (v[:280] + "…") if v and len(v) > 280 else v
     return rows
 
 
 def transcripts(username=None, q=None):
-    sql = "SELECT id, username, url, title, upload_date, transcript FROM videos"
-    where, params = ["transcript IS NOT NULL"], []
+    sql = "SELECT id, username, url, title, upload_date, transcript, visual FROM videos"
+    where, params = ["(NULLIF(transcript,'') IS NOT NULL OR NULLIF(visual,'') IS NOT NULL)"], []
     if username:
         where.append("username=?")
         params.append(username)
