@@ -13,8 +13,11 @@ repeated, but a new/added caption always shows up with its timestamp.
 """
 import difflib
 import io
+import re
 
 from . import db
+
+_DIGITS = re.compile(r"\d+")
 
 VISUAL_DIR = db.DATA_DIR / "visual"
 
@@ -83,6 +86,26 @@ def _jaccard(a, b):
     return len(a & b) / len(union) if union else 1.0
 
 
+def _text_changed(norm, last):
+    """True if `norm` is a meaningfully different caption than the last emitted one.
+
+    A plain character-similarity ratio merges captions that differ in only a few
+    characters — but a changed digit (price/phone/stat) or a changed leading word
+    (before/after) IS the meaning. So force "changed" on those, then fall back to
+    the ratio for reworded / OCR-jittered text.
+    """
+    if not norm:
+        return False
+    if not last:
+        return True
+    if _DIGITS.findall(norm) != _DIGITS.findall(last):
+        return True
+    nw, lw = norm.split(), last.split()
+    if nw and lw and nw[0] != lw[0]:
+        return True
+    return difflib.SequenceMatcher(None, norm, last).ratio() < SAME_TEXT_RATIO
+
+
 def _analyse_image(img, Vision, Quartz):
     """Run OCR + classification + face count on one PIL image."""
     buf = io.BytesIO()
@@ -136,10 +159,12 @@ def analyse(media_path, username, vid, progress_cb=None):
     tb = stream.time_base or (stream.average_rate and (1 / stream.average_rate))
     duration = float(stream.duration * tb) if (stream.duration and tb) else None
 
-    # spread the frame budget across the WHOLE clip so the end is covered too
+    # spread the frame budget across the WHOLE clip so the end is covered too.
+    # divide by (MAX_FRAMES-1) so the last of the N samples lands at ~duration,
+    # not one interval short (which would leave the final CTA un-scanned).
     interval = SAMPLE_EVERY
-    if duration and duration > SAMPLE_EVERY * MAX_FRAMES:
-        interval = duration / MAX_FRAMES
+    if duration and duration > SAMPLE_EVERY * (MAX_FRAMES - 1):
+        interval = duration / (MAX_FRAMES - 1)
 
     entries = []             # (timestamp, text, scene)
     last_sample_t = None
@@ -169,9 +194,7 @@ def analyse(media_path, username, vid, progress_cb=None):
                 progress_cb(min(t / duration, 1.0))
 
             norm = " ".join(text.split()).lower()
-            text_changed = bool(norm) and (
-                difflib.SequenceMatcher(None, norm, last_text).ratio() < SAME_TEXT_RATIO
-            )
+            text_changed = _text_changed(norm, last_text)
             scene_key = _scene_tags(scene)
             scene_changed = bool(scene_key) and (
                 last_scene_key is None or _jaccard(scene_key, last_scene_key) < SCENE_SIM
