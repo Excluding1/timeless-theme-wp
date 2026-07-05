@@ -117,6 +117,17 @@ code { background: var(--surf); padding: 2px 6px; border-radius: 5px; font-size:
 /* ---- signature pad ---- */
 #sigpad { border: 1px dashed var(--line); border-radius: 10px; background: #fff; touch-action: none; max-width: 100%; cursor: crosshair; }
 
+/* ---- sign-warranty modal ---- */
+.modalback { position: fixed; inset: 0; background: rgba(4,21,52,.5); display: flex; align-items: center; justify-content: center; z-index: 200; padding: 16px; }
+.modal { background: #fff; border-radius: 14px; padding: 20px; width: 100%; max-width: 520px; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+.modal h3 { margin: 0 0 6px; color: var(--navy); }
+.modal input { margin-bottom: 4px; }
+.modal #wsig { border: 1px dashed var(--line); border-radius: 10px; background: #fff; touch-action: none; max-width: 100%; cursor: crosshair; width: 100%; }
+.modal .actions { margin: 12px 0 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.chip { background: var(--surf); border: 1px solid var(--line); border-radius: 20px; padding: 5px 14px; font-weight: 600; color: var(--navy); }
+.chip:hover { border-color: var(--gold); background: #fff; }
+
 /* ---- toast ---- */
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); background: var(--navy2); color: #fff; padding: 11px 22px; border-radius: 10px; opacity: 0; transition: all .3s; z-index: 99; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }

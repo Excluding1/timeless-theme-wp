@@ -133,6 +133,8 @@
     bankName: 'Timeless Resurfacing',
     bsb: '032146',
     account: '025303',
+    operators: 'Allan, Marko',   // the people who sign warranties (quick-pick in the sign popup)
+    lastSigner: '',
     depositPct: 10,
     validityDays: 7,
     invoiceDueDays: 7,

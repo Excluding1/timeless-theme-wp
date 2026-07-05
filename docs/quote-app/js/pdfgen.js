@@ -766,7 +766,7 @@
           page.drawImage(sigImg, { x: LM + 4, y: sigLineY + 2, width: sigH * sigImg.width / sigImg.height, height: sigH });
         }
         page.drawLine({ start: { x: LM, y: sigLineY }, end: { x: LM + sigW + 30, y: sigLineY }, thickness: 0.7, color: MUTED });
-        line('Signed for ' + settings.businessName + '   ·   ' + w.date, LM, sigLineY - 2, fonts.helv, 7.5, MUTED);
+        line((w.signerName ? 'Signed by ' + w.signerName + ' for ' : 'Signed for ') + settings.businessName + '   ·   ' + w.date, LM, sigLineY - 2, fonts.helv, 7.5, MUTED);
         line('Thank you', function (tw) { return LM + CW - tw - 10; }, sigLineY + 24, fonts.script, 25, NAVY);
 
         /* ---- footer links ---- */

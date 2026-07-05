@@ -324,7 +324,7 @@
       '</div></section>' +
 
       '<section><h3>Warranty (send after the job is done and paid)</h3>' +
-      '<p class="hint">Downloads a signed single-page warranty PDF matching the services on this document, modelled on the operator card with our brand and the Australian Consumer Law text. Send it WITH the final invoice at completion (the law requires the warranty be given at the time of supply, a website link alone is not enough). Draw your signature once in Settings. Special conditions below are drafted from the job, edit freely.</p>' +
+      '<p class="hint">Downloads a signed single-page warranty PDF matching the services on this document, modelled on the operator card with our brand and the Australian Consumer Law text. Clicking below opens a popup to pick who is signing and sign it fresh, then it downloads. Send it WITH the final invoice at completion (the law requires the warranty be given at the time of supply, a website link alone is not enough). Special conditions below are drafted from the job, edit freely.</p>' +
       '<label>Special conditions (one per line)<textarea id="wspecial" rows="3">' + esc((d.warrantySpecial && d.warrantySpecial.length ? d.warrantySpecial : TQ.warranty.composeSpecial(d)).join('\n')) + '</textarea></label>' +
       '<div class="actions"><button id="wdownload">Download warranty PDF</button>' +
       '<button id="wpolish" title="Tidies the special conditions with the local AI. Keeps every instruction and number; never invents anything.">✨ Tidy conditions</button>' +
@@ -430,16 +430,71 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
   }
 
+  /* sign-warranty popup: pick who is signing + sign fresh, every time. Resolves
+     { sigDataUrl, signerName } or null if cancelled. */
+  function signWarrantyModal(doc) {
+    return new Promise(function (resolve) {
+      var ops = String(S.settings.operators || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+      var back = document.createElement('div');
+      back.className = 'modalback';
+      back.innerHTML =
+        '<div class="modal">' +
+        '<h3>Sign the warranty</h3>' +
+        '<p class="hint">This warranty' + (doc && doc.docNo ? ' (' + esc(doc.docNo) + ')' : '') +
+        (doc && doc.customer && doc.customer.name ? ' for ' + esc(doc.customer.name) : '') +
+        ' is signed fresh on issue. Pick who is signing and sign below.</p>' +
+        '<label>Signed by</label>' +
+        (ops.length ? '<div class="chips">' + ops.map(function (o) { return '<button type="button" class="chip" data-op="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div>' : '') +
+        '<input id="signerName" placeholder="Name of the person signing" value="' + esc(S.settings.lastSigner || '') + '">' +
+        '<label class="mt">Signature</label>' +
+        '<canvas id="wsig" width="460" height="150"></canvas>' +
+        '<div class="actions"><button id="wsigclear" class="ghost">Clear</button>' +
+        (S.settings.signatureDataUrl ? '<button id="wsigsaved">Use my saved signature</button>' : '') +
+        '<span style="flex:1"></span>' +
+        '<button id="wsigcancel">Cancel</button>' +
+        '<button id="wsigok" class="primary">Sign &amp; download</button></div>' +
+        '</div>';
+      document.body.appendChild(back);
+
+      var c = back.querySelector('#wsig'), ctx = c.getContext('2d');
+      ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1c2333';
+      var drawing = false, drew = false;
+      function pos(e) { var r = c.getBoundingClientRect(); var p = e.touches ? e.touches[0] : e; return [(p.clientX - r.left) * (c.width / r.width), (p.clientY - r.top) * (c.height / r.height)]; }
+      c.addEventListener('pointerdown', function (e) { drawing = true; drew = true; var p = pos(e); ctx.beginPath(); ctx.moveTo(p[0], p[1]); e.preventDefault(); });
+      c.addEventListener('pointermove', function (e) { if (!drawing) return; var p = pos(e); ctx.lineTo(p[0], p[1]); ctx.stroke(); e.preventDefault(); });
+      c.addEventListener('pointerup', function () { drawing = false; });
+      c.addEventListener('pointerleave', function () { drawing = false; });
+
+      var nameInput = back.querySelector('#signerName');
+      $$('.chip', back).forEach(function (b) { b.onclick = function () { nameInput.value = b.getAttribute('data-op'); }; });
+      back.querySelector('#wsigclear').onclick = function () { ctx.clearRect(0, 0, c.width, c.height); drew = false; };
+      var savedBtn = back.querySelector('#wsigsaved');
+      if (savedBtn) savedBtn.onclick = function () {
+        var im = new Image(); im.onload = function () { ctx.clearRect(0, 0, c.width, c.height); ctx.drawImage(im, 0, 0, c.width, c.height); drew = true; }; im.src = S.settings.signatureDataUrl;
+      };
+      function close(val) { back.remove(); resolve(val); }
+      back.querySelector('#wsigcancel').onclick = function () { close(null); };
+      back.onclick = function (e) { if (e.target === back) close(null); };
+      back.querySelector('#wsigok').onclick = function () {
+        if (!drew) { toast('Please sign first', true); return; }
+        if (!nameInput.value.trim()) { toast('Enter who is signing', true); return; }
+        close({ sigDataUrl: c.toDataURL('image/png'), signerName: nameInput.value.trim() });
+      };
+    });
+  }
+
   /* shared by the editor button and the list-row Warranty button */
   async function downloadWarranty(doc) {
-    if (!S.settings.signatureDataUrl) { toast('Draw and save your signature first: Settings → Signature', true); return; }
     if (!S.settings.businessAddress) toast('Tip: add your business/postal address in Settings, the warranty rules require a claims address', true);
+    var signed = await signWarrantyModal(doc);
+    if (!signed) return;                       // cancelled
     var assets = await loadAssets();
     var model = TQ.warranty.buildModel(doc, S.settings);
     model.aclText = R.ACL_WARRANTY_TEXT;
+    model.signerName = signed.signerName;
     var a = {
       dinBytes: assets.dinBytes, scriptBytes: assets.scriptBytes, logoBytes: assets.logoBytes,
-      sigBytes: dataUrlToBytes(S.settings.signatureDataUrl)
+      sigBytes: dataUrlToBytes(signed.sigDataUrl)
     };
     var bytes = await TQPDF.generateWarranty(model, S.settings, a);
     var blob = new Blob([bytes], { type: 'application/pdf' });
@@ -449,7 +504,9 @@
       (doc.customer && doc.customer.name ? '-' + doc.customer.name.replace(/[^\w-]+/g, '-') : '') + '.pdf';
     document.body.appendChild(el); el.click(); el.remove();
     setTimeout(function () { URL.revokeObjectURL(el.href); }, 5000);
-    toast('Warranty PDF downloaded, signed and ready to send');
+    S.settings.lastSigner = signed.signerName;
+    try { await TQ.db.saveSettings(S.settings); } catch (e) { /* non-blocking */ }
+    toast('Warranty signed by ' + signed.signerName + ' and downloaded');
   }
 
   function bindEditor(app) {
@@ -786,11 +843,13 @@
       '<label class="chk"><input type="checkbox" id="s_webllm" ' + (s.webllmEnabled ? 'checked' : '') + '> Allow the one-time ~1GB local model download (WebLLM fallback)</label>' +
       '<div id="llmprobe" class="hint">Checking what this browser supports…</div></section>' +
 
-      '<section><h3>Signature (printed on the warranty PDF)</h3>' +
-      '<p class="hint">Draw with your mouse or finger, then Save. It prints above the sign-off line on every warranty you download.</p>' +
+      '<section><h3>Warranty signing</h3>' +
+      '<p class="hint">Each warranty is signed fresh in a popup when you download it. Set the people who can sign (comma separated) so they show as quick-pick buttons.</p>' +
+      '<label>Who can sign <input id="s_ops" value="' + esc(s.operators || '') + '" placeholder="Allan, Marko"></label>' +
+      '<p class="hint mt">Optional: draw a saved signature that the popup can load with one tap (for whoever wants to reuse theirs instead of signing every time).</p>' +
       '<canvas id="sigpad" width="440" height="130"></canvas>' +
       '<div class="actions"><button id="sigclear">Clear</button><button id="sigsave" class="primary">Save signature</button>' +
-      (s.signatureDataUrl ? '<span class="okbox" style="margin:0">Signature saved ✓</span>' : '<span class="muted" style="font-size:12px">No signature saved yet</span>') +
+      (s.signatureDataUrl ? '<span class="okbox" style="margin:0">Saved signature ✓</span>' : '<span class="muted" style="font-size:12px">No saved signature</span>') +
       '</div></section>' +
 
       '<section><h3>Backup</h3><div class="actions">' +
@@ -804,6 +863,7 @@
       s.businessAddress = $('#s_baddr').value.trim(); s.cityLine = $('#s_city').value;
       s.phone = $('#s_phone').value; s.email = $('#s_email').value; s.website = $('#s_web').value;
       s.tagline = $('#s_tag').value; s.bankName = $('#s_bank').value; s.bsb = $('#s_bsb').value;
+      var opsEl = $('#s_ops'); if (opsEl) s.operators = opsEl.value;
       s.account = $('#s_acc').value; s.depositPct = Number($('#s_dep').value) || 10;
       s.validityDays = Number($('#s_valid').value) || 30; s.invoiceDueDays = Number($('#s_due').value) || 7;
       s.nextDocNo = Number($('#s_next').value) || s.nextDocNo; s.docPrefix = $('#s_prefix').value;
