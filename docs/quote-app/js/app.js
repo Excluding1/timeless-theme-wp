@@ -882,19 +882,17 @@
       '<button class="primary" id="pbsave">Save price book</button>' +
       '<button id="pbreset">Reset to built-in defaults</button></div></section>' +
 
-      '<section><h3>Online saving (Supabase)</h3>' +
-      '<p class="hint">Free tier is fine. Create a project at supabase.com, run <code>supabase-schema.sql</code> (in this folder) in the SQL editor, create a user under Authentication, then connect here. Until then everything saves to this browser only.</p>' +
-      '<div class="grid2">' +
-      '<label>Project URL <input id="sb_url" value="' + esc(conn.url) + '" placeholder="https://xxxx.supabase.co"></label>' +
-      '<label>Anon (public) key <input id="sb_key" value="' + esc(conn.anonKey) + '" placeholder="eyJ…"></label>' +
-      '<label>Login email <input id="sb_email" placeholder="you@…"></label>' +
-      '<label>Password <input id="sb_pass" type="password"></label>' +
-      '</div>' +
-      '<div class="actions">' +
-      '<button id="sb_connect" class="primary">Connect &amp; sign in</button>' +
-      '<button id="sb_migrate">Copy this browser’s quotes → cloud</button>' +
-      '<button id="sb_signout">Sign out</button>' +
-      '</div><div id="sb_status" class="hint">' + (TQ.db.mode === 'cloud' ? 'Connected and signed in.' : 'Not connected: local mode.') + '</div></section>' +
+      '<section><h3>Online sync</h3>' +
+      (TQ.db.mode === 'cloud'
+        ? '<div class="aistat ok">✓ Signed in' + (S.userEmail ? ' as ' + esc(S.userEmail) : '') + '. Your quotes save online and sync with your team.</div>' +
+          '<div class="actions"><button id="sb_migrate">Copy this browser’s quotes → cloud</button><button id="sb_signout">Sign out</button></div>'
+        : (window.TQ_CONN && window.TQ_CONN.url
+            ? '<div class="aistat">Working on this device. Sign in to sync your quotes with your team across devices.</div>' +
+              '<div class="actions"><button id="sb_signin_settings" class="primary">Sign in</button></div>'
+            : '<p class="hint">Advanced: connect a Supabase project to sync across devices. Paste the Project URL and anon key, then sign in.</p>' +
+              '<div class="grid2"><label>Project URL <input id="sb_url" value="' + esc(conn.url) + '"></label><label>Anon (public) key <input id="sb_key" value="' + esc(conn.anonKey) + '"></label><label>Login email <input id="sb_email"></label><label>Password <input id="sb_pass" type="password"></label></div>' +
+              '<div class="actions"><button id="sb_connect" class="primary">Connect &amp; sign in</button></div>')) +
+      '<div id="sb_status" class="hint"></div></section>' +
 
       '<section><h3>Mini AI (runs in your browser, nothing leaves this device)</h3>' +
       '<div id="llmprobe" class="aistat">Checking your device…</div>' +
@@ -1010,23 +1008,28 @@
       };
     });
 
-    $('#sb_connect').onclick = async function () {
+    var sbSigninBtn = $('#sb_signin_settings');
+    if (sbSigninBtn) sbSigninBtn.onclick = doSignIn;
+    var sbConnect = $('#sb_connect');
+    if (sbConnect) sbConnect.onclick = async function () {
       try {
         TQ.db.saveConn($('#sb_url').value, $('#sb_key').value);
         await TQ.db.init();
         var em = await TQ.db.signIn($('#sb_email').value.trim(), $('#sb_pass').value);
-        $('#sb_status').textContent = 'Connected as ' + em + '. Everything now saves online.';
+        S.userEmail = em;
         S.settings = await TQ.db.getSettings();
         TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
-        toast('Connected to Supabase');
+        toast('Connected and signed in as ' + em);
         render();
-      } catch (e) { $('#sb_status').textContent = 'Failed: ' + (e.message || e); toast(String(e.message || e), true); }
+      } catch (e) { var st = $('#sb_status'); if (st) st.textContent = 'Failed: ' + (e.message || e); toast(String(e.message || e), true); }
     };
-    $('#sb_migrate').onclick = async function () {
+    var sbMigrate = $('#sb_migrate');
+    if (sbMigrate) sbMigrate.onclick = async function () {
       try { var n = await TQ.db.migrateLocalToCloud(); toast('Copied ' + n + ' documents to the cloud'); }
       catch (e) { toast(String(e.message || e), true); }
     };
-    $('#sb_signout').onclick = async function () {
+    var sbSignout = $('#sb_signout');
+    if (sbSignout) sbSignout.onclick = async function () {
       await TQ.db.signOut();
       S.userEmail = '';
       S.settings = await TQ.db.getSettings();   // back to the local settings + price book
