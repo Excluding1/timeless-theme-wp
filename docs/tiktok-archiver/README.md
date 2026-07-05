@@ -10,7 +10,15 @@ Everything runs and stays on this Mac — no cloud services, no accounts.
 
 ## Start it
 
-Double-click **`start.command`** in Finder (opens the app in your browser), or:
+**Easiest — a real Mac app icon:** double-click **`make-app.command`** once. It
+installs **“TikTok Archiver.app”** into your Applications folder. From then on,
+launch it from **Launchpad / Spotlight / the Dock** like any app — it starts the
+server and opens the app in your browser automatically, no Terminal, nothing to
+type. Quitting the app (⌘Q) stops the server. Re-run `make-app.command` if you
+ever move the project folder. (First launch: if macOS says “unidentified
+developer”, right-click the app → **Open** once.)
+
+**Or** double-click **`start.command`** in Finder, **or** from a terminal:
 
 ```bash
 cd docs/tiktok-archiver
