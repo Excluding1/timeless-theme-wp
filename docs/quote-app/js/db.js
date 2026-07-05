@@ -23,10 +23,13 @@
 
   var db = TQ.db = {
     get mode() { return mode; },
-    get conn() { return lsGet(LS_CONN, null); },
+    get conn() { return lsGet(LS_CONN, null) || (root.TQ_CONN && root.TQ_CONN.url ? root.TQ_CONN : null); },
 
     async init() {
+      /* pre-wired connection (optional config.js, kept out of git) so a deployed app points
+         at Supabase with no key-pasting; a connection saved in this browser still wins */
       var conn = lsGet(LS_CONN, null);
+      if (!conn && root.TQ_CONN && root.TQ_CONN.url && root.TQ_CONN.anonKey) { conn = root.TQ_CONN; }
       if (conn && conn.url && conn.anonKey && root.supabase) {
         try {
           client = root.supabase.createClient(conn.url, conn.anonKey);
