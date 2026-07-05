@@ -65,6 +65,7 @@ button.small { padding: 5px 10px; font-size: 13px; }
 .chip.transcribed { color: var(--green); }
 .chip.error { color: var(--red); }
 .chip.unsupported { color: var(--amber); }
+.chip.no-speech { color: var(--muted); }
 .chip.running { color: var(--cyan); }
 .chip.done { color: var(--green); }
 

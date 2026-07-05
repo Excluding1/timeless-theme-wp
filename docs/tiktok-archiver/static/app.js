@@ -184,6 +184,7 @@ function renderProfiles() {
     transcribeBox.checked = prev[p.username] ? prev[p.username].transcribe : true;
 
     const counts = `${p.known} known · ${p.downloaded} downloaded · ${p.transcribed} transcribed` +
+      (p.no_speech ? ` · ${p.no_speech} no-speech` : "") +
       (p.errors ? ` · ${p.errors} errors` : "") +
       (p.last_sync_at ? ` · last sync ${p.last_sync_at.slice(0, 16)}` : " · never synced");
 
@@ -381,6 +382,17 @@ function buildVideoCard(v) {
       } }),
       v.url ? el("a", { href: v.url, target: "_blank", rel: "noopener", text: "TikTok ↗" }) : null,
     ));
+  } else if (v.status === "no-speech") {
+    body.append(el("div", { class: "snippet", text: "🔇 No speech detected (music/text-only clip)." }));
+    const actions = el("div", { class: "actions" },
+      el("a", { href: "#", text: "Transcribe anyway", onclick: async (e) => {
+        e.preventDefault();
+        try { await api("/api/transcribe/" + encodeURIComponent(v.id), { method: "POST" }); }
+        catch (err) { alert(err.message); }
+      } }),
+      v.url ? el("a", { href: v.url, target: "_blank", rel: "noopener", text: "TikTok ↗" }) : null,
+    );
+    body.append(actions);
   } else {
     const actions = el("div", { class: "actions" });
     if (v.media_url) {

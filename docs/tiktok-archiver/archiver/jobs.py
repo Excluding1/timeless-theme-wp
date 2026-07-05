@@ -226,9 +226,12 @@ def _transcribe_rows(rows, force):
                 db.abs_path(v["file_path"]), v["username"], v["id"],
                 size=size, language=language,
             )
-            db.update_video(v["id"], status="transcribed", error=None, transcript=text,
+            # a video with no spoken words (music/text-only hook) transcribes to ''
+            # — mark it 'no-speech' so it reads honestly, not as an empty "transcribed"
+            status = "transcribed" if text.strip() else "no-speech"
+            db.update_video(v["id"], status=status, error=None, transcript=text,
                             transcript_path=txt_path, srt_path=srt_path, transcribed_at=_now())
-            _log(f"Transcribed {v['id']} ({len(text)} chars)")
+            _log(f"{'Transcribed' if text.strip() else 'No speech in'} {v['id']} ({len(text)} chars)")
             _set(done=i + 1)
         except Exception as e:
             db.update_video(v["id"], error=f"transcribe: {e}"[:500])

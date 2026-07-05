@@ -20,7 +20,7 @@ DB_PATH = DATA_DIR / "archive.db"
 DEFAULTS = {
     "cookie_mode": "none",        # none | browser | file
     "cookie_browser": "chrome",   # chrome | safari | firefox | edge | brave
-    "whisper_model": "base",      # tiny | base | small | medium | large-v3
+    "whisper_model": "small",     # tiny | base | small | medium | large-v3 (small = better accuracy)
     "language": "auto",           # auto or an ISO code like "en"
     "auto_sync": "0",             # hours between automatic syncs of all profiles; 0 = off
     "visual_scan": "0",           # 1 = also OCR/scene-tag each video (on-screen text + what's showing)
@@ -154,7 +154,8 @@ def profiles():
             SELECT p.username, p.url, p.last_sync_at,
                    COUNT(v.id) AS known,
                    COALESCE(SUM(CASE WHEN v.file_path IS NOT NULL THEN 1 ELSE 0 END), 0) AS downloaded,
-                   COALESCE(SUM(CASE WHEN v.transcript IS NOT NULL THEN 1 ELSE 0 END), 0) AS transcribed,
+                   COALESCE(SUM(CASE WHEN NULLIF(v.transcript,'') IS NOT NULL THEN 1 ELSE 0 END), 0) AS transcribed,
+                   COALESCE(SUM(CASE WHEN v.status = 'no-speech' THEN 1 ELSE 0 END), 0) AS no_speech,
                    COALESCE(SUM(CASE WHEN v.status = 'error' THEN 1 ELSE 0 END), 0) AS errors
             FROM profiles p LEFT JOIN videos v ON v.username = p.username
             GROUP BY p.username ORDER BY p.added_at
@@ -245,9 +246,11 @@ def to_download(username):
 
 
 def to_transcribe(username):
+    # transcript IS NULL → not yet done; status != 'no-speech' → don't retry silent clips
     with _lock:
         rows = _db().execute(
-            "SELECT * FROM videos WHERE username=? AND file_path IS NOT NULL AND transcript IS NULL",
+            "SELECT * FROM videos WHERE username=? AND file_path IS NOT NULL "
+            "AND transcript IS NULL AND status != 'no-speech'",
             (username,),
         ).fetchall()
         return [dict(r) for r in rows]
