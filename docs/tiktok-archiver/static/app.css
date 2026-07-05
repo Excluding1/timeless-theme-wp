@@ -1,4 +1,5 @@
 * { box-sizing: border-box; margin: 0; }
+[hidden] { display: none !important; }  /* beat .row/.card display so the attr works */
 :root {
   --bg: #0b0b10; --card: #15151e; --card2: #1c1c27; --line: #262633;
   --text: #eceef2; --muted: #8a8ea0; --cyan: #25f4ee; --pink: #fe2c55;

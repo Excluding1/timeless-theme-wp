@@ -105,6 +105,24 @@ def start_visual_one(vid):
     threading.Thread(target=_run_safe, args=(_visual_rows, [v], True), daemon=True).start()
 
 
+def start_retranscribe_all(username):
+    rows = db.downloaded(username)
+    if not rows:
+        raise ValueError("No downloaded videos to transcribe yet.")
+    _new_job("transcribe", username)
+    threading.Thread(target=_run_safe, args=(_transcribe_rows, rows, True), daemon=True).start()
+
+
+def start_rescan_all(username):
+    if not visual.available():
+        raise ValueError(visual.unavailable_reason())
+    rows = db.downloaded(username)
+    if not rows:
+        raise ValueError("No downloaded videos to scan yet.")
+    _new_job("visual", username)
+    threading.Thread(target=_run_safe, args=(_visual_rows, rows, True), daemon=True).start()
+
+
 def _run_sync(username, limit, do_transcribe):
     url = db.profile_url(username)
     if not url:

@@ -138,6 +138,32 @@ def visual_one(vid: str):
     return {"ok": True}
 
 
+@app.post("/api/retranscribe/{username}")
+def retranscribe_all(username: str):
+    if not db.profile_url(username):
+        raise HTTPException(404, "Unknown profile")
+    try:
+        jobs.start_retranscribe_all(username)
+    except jobs.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True}
+
+
+@app.post("/api/rescan/{username}")
+def rescan_all(username: str):
+    if not db.profile_url(username):
+        raise HTTPException(404, "Unknown profile")
+    try:
+        jobs.start_rescan_all(username)
+    except jobs.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True}
+
+
 @app.get("/api/videos")
 def videos(username: str = None, q: str = None):
     return {"videos": [_publicize(v) for v in db.videos(username or None, q or None)]}

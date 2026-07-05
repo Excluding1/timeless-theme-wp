@@ -265,6 +265,17 @@ def to_visual(username):
         return [dict(r) for r in rows]
 
 
+def downloaded(username):
+    """Every video with a file on disk — used by the bulk re-transcribe / re-scan."""
+    with _lock:
+        rows = _db().execute(
+            "SELECT * FROM videos WHERE username=? AND file_path IS NOT NULL "
+            "ORDER BY upload_date DESC, id DESC",
+            (username,),
+        ).fetchall()
+        return [dict(r) for r in rows]
+
+
 def video(vid):
     with _lock:
         row = _db().execute("SELECT * FROM videos WHERE id=?", (vid,)).fetchone()

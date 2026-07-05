@@ -197,6 +197,14 @@ function renderProfiles() {
         el("label", { class: "sub" }, transcribeBox, "transcribe"),
         el("button", { class: "small", text: busy ? "Busy…" : "Sync", disabled: busy ? "" : null,
           onclick: () => startSync(p.username, limitInput.value, transcribeBox.checked) }),
+        el("button", { class: "small ghost", text: "Re-transcribe all", disabled: busy ? "" : null,
+          onclick: () => bulkAction("retranscribe", p.username,
+            `Re-transcribe ALL ${p.downloaded} downloaded videos for @${p.username} with the current Whisper model? This overwrites existing transcripts and can take several minutes.`) }),
+        state.visualAvailable
+          ? el("button", { class: "small ghost", text: "Re-OCR all", disabled: busy ? "" : null,
+              onclick: () => bulkAction("rescan", p.username,
+                `Re-scan (OCR + scene) ALL ${p.downloaded} downloaded videos for @${p.username}? This overwrites existing visual scans and can take a few minutes.`) })
+          : null,
         el("button", { class: "small danger", text: "Remove",
           onclick: () => removeProfile(p.username) }),
       ),
@@ -218,6 +226,12 @@ async function startSync(username, limit, transcribe) {
       body: JSON.stringify({ username, limit: limit ? Number(limit) : null, transcribe }),
     });
   } catch (e) { alert("Sync failed to start: " + e.message); }
+}
+
+async function bulkAction(kind, username, confirmMsg) {
+  if (!confirm(confirmMsg)) return;
+  try { await api(`/api/${kind}/${encodeURIComponent(username)}`, { method: "POST" }); }
+  catch (e) { alert(e.message); }
 }
 
 async function removeProfile(username) {
