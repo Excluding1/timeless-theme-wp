@@ -320,6 +320,13 @@
       (!isInv ? '<label class="chk"><input type="checkbox" id="acceptsec" ' + (d.acceptSection ? 'checked' : '') + '> Print an acceptance sign-off block (name / signature / date)</label>' : '') +
       '</div></section>' +
 
+      '<section><h3>Warranty (send after the job is done and paid)</h3>' +
+      '<p class="hint">Downloads a signed single-page warranty PDF matching the services on this document, modelled on the operator card with our brand and the Australian Consumer Law text. Send it WITH the final invoice at completion (the law requires the warranty be given at the time of supply, a website link alone is not enough). Draw your signature once in Settings. Special conditions below are drafted from the job, edit freely.</p>' +
+      '<label>Special conditions (one per line)<textarea id="wspecial" rows="3">' + esc((d.warrantySpecial && d.warrantySpecial.length ? d.warrantySpecial : TQ.warranty.composeSpecial(d)).join('\n')) + '</textarea></label>' +
+      '<div class="actions"><button id="wdownload">Download warranty PDF</button>' +
+      (S.settings.signatureDataUrl ? '' : '<span class="muted" style="font-size:12px">(no signature saved yet: Settings → Signature)</span>') +
+      '</div></section>' +
+
       '<div class="actions"><button id="save" class="primary big">Save</button>' +
       '<button id="download" class="big">Download PDF</button>' +
       '<button id="copymsg" title="Copies a ready-to-send email/SMS message for this document">Copy send message</button>' +
@@ -378,6 +385,7 @@
     d.expect = $('#expect').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     d.footerBottom = $('#footbottom').checked;
     var ac = $('#acceptsec'); if (ac) d.acceptSection = ac.checked;
+    var ws = $('#wspecial'); if (ws) d.warrantySpecial = ws.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     showValidation();
   }
 
@@ -569,6 +577,30 @@
       };
     });
 
+    $('#wdownload').onclick = async function () {
+      readForm();
+      if (!S.settings.signatureDataUrl) { toast('Draw and save your signature first: Settings → Signature', true); return; }
+      if (!S.settings.businessAddress) toast('Tip: add your business/postal address in Settings, the warranty rules require a claims address', true);
+      try {
+        var assets = await loadAssets();
+        var model = TQ.warranty.buildModel(S.doc, S.settings);
+        model.aclText = R.ACL_WARRANTY_TEXT;
+        var a = {
+          dinBytes: assets.dinBytes, scriptBytes: assets.scriptBytes, logoBytes: assets.logoBytes,
+          sigBytes: dataUrlToBytes(S.settings.signatureDataUrl)
+        };
+        var bytes = await TQPDF.generateWarranty(model, S.settings, a);
+        var blob = new Blob([bytes], { type: 'application/pdf' });
+        var el = document.createElement('a');
+        el.href = URL.createObjectURL(blob);
+        el.download = 'Timeless-Warranty' + (S.doc.docNo ? '-' + S.doc.docNo : '') +
+          (S.doc.customer.name ? '-' + S.doc.customer.name.replace(/[^\w-]+/g, '-') : '') + '.pdf';
+        document.body.appendChild(el); el.click(); el.remove();
+        setTimeout(function () { URL.revokeObjectURL(el.href); }, 5000);
+        toast('Warranty PDF downloaded, signed and ready to send');
+      } catch (e) { toast('Warranty PDF failed: ' + (e.message || e), true); }
+    };
+
     $('#refreshpv').onclick = function () { readForm(); schedulePreview(0); };
     $('#save').onclick = async function () {
       readForm();
@@ -663,6 +695,7 @@
       '<label>Business name <input id="s_name" value="' + esc(s.businessName) + '"></label>' +
       '<label>ABN <input id="s_abn" value="' + esc(s.abn) + '"></label>' +
       '<label>NSW licence no <input id="s_lic" value="' + esc(s.licenceNo || '') + '" placeholder="prints under the ABN once you have it"></label>' +
+      '<label>Business/postal address <input id="s_baddr" value="' + esc(s.businessAddress || '') + '" placeholder="required on the warranty PDF (claims address)"></label>' +
       '<label>City line <input id="s_city" value="' + esc(s.cityLine) + '"></label>' +
       '<label>Phone <input id="s_phone" value="' + esc(s.phone) + '"></label>' +
       '<label>Email <input id="s_email" value="' + esc(s.email) + '"></label>' +
@@ -708,6 +741,13 @@
       '<label class="chk"><input type="checkbox" id="s_webllm" ' + (s.webllmEnabled ? 'checked' : '') + '> Allow the one-time ~1GB local model download (WebLLM fallback)</label>' +
       '<div id="llmprobe" class="hint">Checking what this browser supports…</div></section>' +
 
+      '<section><h3>Signature (printed on the warranty PDF)</h3>' +
+      '<p class="hint">Draw with your mouse or finger, then Save. It prints above the sign-off line on every warranty you download.</p>' +
+      '<canvas id="sigpad" width="440" height="130"></canvas>' +
+      '<div class="actions"><button id="sigclear">Clear</button><button id="sigsave" class="primary">Save signature</button>' +
+      (s.signatureDataUrl ? '<span class="okbox" style="margin:0">Signature saved ✓</span>' : '<span class="muted" style="font-size:12px">No signature saved yet</span>') +
+      '</div></section>' +
+
       '<section><h3>Backup</h3><div class="actions">' +
       '<button id="exp">Export everything (JSON)</button>' +
       '<label class="filebtn">Import JSON<input type="file" id="imp" accept="application/json" hidden></label>' +
@@ -715,7 +755,8 @@
     bindNav(app);
 
     $('#savesettings').onclick = async function () {
-      s.businessName = $('#s_name').value; s.abn = $('#s_abn').value; s.licenceNo = $('#s_lic').value.trim(); s.cityLine = $('#s_city').value;
+      s.businessName = $('#s_name').value; s.abn = $('#s_abn').value; s.licenceNo = $('#s_lic').value.trim();
+      s.businessAddress = $('#s_baddr').value.trim(); s.cityLine = $('#s_city').value;
       s.phone = $('#s_phone').value; s.email = $('#s_email').value; s.website = $('#s_web').value;
       s.tagline = $('#s_tag').value; s.bankName = $('#s_bank').value; s.bsb = $('#s_bsb').value;
       s.account = $('#s_acc').value; s.depositPct = Number($('#s_dep').value) || 10;
@@ -739,6 +780,37 @@
           ? 'No built-in browser model, but WebGPU is available: tick the box above and the mini AI will download a local model on first use.'
           : 'This browser supports neither a built-in model nor WebGPU: the mini AI is unavailable here (everything else works normally).';
     });
+
+    /* ---- signature pad ---- */
+    (function () {
+      var c = $('#sigpad'); if (!c) return;
+      var ctx = c.getContext('2d');
+      ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1c2333';
+      var drawing = false, drew = false;
+      if (s.signatureDataUrl) {
+        var im = new Image();
+        im.onload = function () { ctx.drawImage(im, 0, 0, c.width, c.height); };
+        im.src = s.signatureDataUrl;
+        drew = true;
+      }
+      function pos(e) {
+        var r = c.getBoundingClientRect();
+        var p = e.touches ? e.touches[0] : e;
+        return [(p.clientX - r.left) * (c.width / r.width), (p.clientY - r.top) * (c.height / r.height)];
+      }
+      function down(e) { drawing = true; drew = true; var p = pos(e); ctx.beginPath(); ctx.moveTo(p[0], p[1]); e.preventDefault(); }
+      function move(e) { if (!drawing) return; var p = pos(e); ctx.lineTo(p[0], p[1]); ctx.stroke(); e.preventDefault(); }
+      function up() { drawing = false; }
+      c.addEventListener('pointerdown', down); c.addEventListener('pointermove', move);
+      c.addEventListener('pointerup', up); c.addEventListener('pointerleave', up);
+      $('#sigclear').onclick = function () { ctx.clearRect(0, 0, c.width, c.height); drew = false; };
+      $('#sigsave').onclick = async function () {
+        if (!drew) { toast('Draw a signature first', true); return; }
+        s.signatureDataUrl = c.toDataURL('image/png');
+        try { await TQ.db.saveSettings(s); toast('Signature saved'); render(); }
+        catch (e) { toast(String(e.message || e), true); }
+      };
+    })();
 
     /* ---- price book ---- */
     $('#pbadd').onclick = function () {

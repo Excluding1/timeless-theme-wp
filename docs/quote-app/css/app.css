@@ -114,6 +114,9 @@ code { background: var(--surf); padding: 2px 6px; border-radius: 5px; font-size:
 .pbrow button { padding: 4px 8px; }
 @media (max-width: 1020px) { .pbhead { display: none; } .pbrow { grid-template-columns: 1fr 90px; } }
 
+/* ---- signature pad ---- */
+#sigpad { border: 1px dashed var(--line); border-radius: 10px; background: #fff; touch-action: none; max-width: 100%; cursor: crosshair; }
+
 /* ---- toast ---- */
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); background: var(--navy2); color: #fff; padding: 11px 22px; border-radius: 10px; opacity: 0; transition: all .3s; z-index: 99; box-shadow: 0 8px 30px rgba(0,0,0,.25); }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }

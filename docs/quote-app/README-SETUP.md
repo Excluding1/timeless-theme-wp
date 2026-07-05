@@ -21,6 +21,17 @@ invoice-form layout modelled on the business's original invoice and the ATO's re
   "☆ Save" any option and re-insert it on future quotes.
 - Quote **and** TAX INVOICE (one click converts; deposit received / balance due under the full
   total; quote reference carried over).
+- **Warranty PDF (after the job):** a signed single-page "Limited Workmanship Warranty" that
+  matches the services on the document — per-material periods (resurfacing up to 5yr / tiling
+  up to 5yr / grout 2yr / silicone 12mo), auto-composed special conditions + care + exclusions
+  (incl. tile-over specifics), the **exact ACL reg 90(4) mandatory text** verbatim, a claims
+  address, and your drawn signature. Draw the signature once in **Settings → Signature**; add
+  a **business/postal address** (the warranty rules require a claims address). Legally it must
+  be given WITH the final invoice at completion, not just linked — the app reminds you.
+  Adapted from our subbie's Ultra Glaze operator card, rebuilt to our brand + ACL rules.
+- **Clickable links** to `/warranty/`, `/care-instructions/` and `/terms/` on your site print
+  in the footer of every quote, invoice and warranty PDF.
+- **Copy send message** button: one-click email/SMS text for a quote or invoice.
 - Photos (upload, auto-compress, pick one, caption), live PDF preview, duplicate, statuses
   (draft → sent → accepted → invoiced → paid), JSON backup.
 - **Numbering:** prefix + counter, prints as `TR-1022`, `TR-1023`, … (Settings). Quotes are

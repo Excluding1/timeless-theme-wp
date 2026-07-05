@@ -108,10 +108,23 @@
     days23: ['2 to 3 days on site', '24 to 48 hours to cure before use', 'Fixed price, no hidden fees']
   };
 
+  /* Mandatory text for a "warranty against defects" document covering goods AND services
+     (reg 90(2), Competition and Consumer Regulations 2010). Statutory wording: print verbatim,
+     never edit (it intentionally overrides our banned-word style rule). */
+  R.ACL_WARRANTY_TEXT =
+    'Our goods and services come with guarantees that cannot be excluded under the Australian Consumer Law. ' +
+    'For major failures with the service, you are entitled: to cancel your service contract with us; and to a refund ' +
+    'for the unused portion, or to compensation for its reduced value. You are also entitled to choose a refund or ' +
+    'replacement for major failures with goods. If a failure with the goods or a service does not amount to a major ' +
+    'failure, you are entitled to have the failure rectified in a reasonable time. If this is not done you are entitled ' +
+    'to a refund for the goods and to cancel the contract for the service and obtain a refund of any unused portion. ' +
+    'You are also entitled to be compensated for any other reasonably foreseeable loss or damage from a failure in the goods or service.';
+
   R.DEFAULT_SETTINGS = {
     businessName: 'Timeless Resurfacing',
     abn: '30 412 161 602',
     licenceNo: '',           // NSW contractor licence: prints under the ABN once held
+    businessAddress: '',     // street/postal address: reg 90 requires it on the warranty PDF (claims address)
     cityLine: 'Sydney, NSW',
     phone: '0451 110 154',
     email: 'quotes@timelessresurfacing.com.au',

@@ -22,7 +22,7 @@
 
   function hx(h) { return rgb(parseInt(h.substr(1, 2), 16) / 255, parseInt(h.substr(3, 2), 16) / 255, parseInt(h.substr(5, 2), 16) / 255); }
   var NAVY = hx('#1f3a5f'), GOLD = hx('#e7c08b'), MUTED = hx('#5f6b85'), INK = hx('#1c2333'),
-      LINE = hx('#dfe5ee'), RUST = hx('#b0452e'), WHITE = rgb(1, 1, 1);
+      LINE = hx('#dfe5ee'), RUST = hx('#b0452e'), WHITE = rgb(1, 1, 1), SURF = hx('#f4f7fb');
 
   function money(x) {
     var s = Math.abs(Number(x)).toFixed(2);
@@ -44,6 +44,21 @@
       .replace(/…/g, '...').replace(/[‘’ʼ]/g, "'").replace(/[“”]/g, '"')
       .replace(/—/g, ', ').replace(/(\d)\s*–\s*(\d)/g, '$1 to $2').replace(/–/g, ', ')
       .replace(/[^\x0a\x20-\x7e\xa0-\xff]/g, '');
+  }
+
+  /* clickable link rectangle (URI annotation) */
+  function addLink(pdf, page, x, y, w, h, url) {
+    var ref = pdf.context.register(pdf.context.obj({
+      Type: 'Annot', Subtype: 'Link', Rect: [x, y, x + w, y + h], Border: [0, 0, 0],
+      A: { Type: 'Action', S: 'URI', URI: PDFLib.PDFString.of(url) }
+    }));
+    var key = PDFLib.PDFName.of('Annots');
+    var annots = page.node.lookup(key);
+    if (annots) annots.push(ref);
+    else page.node.set(key, pdf.context.obj([ref]));
+  }
+  function siteBase(settings) {
+    return 'https://' + String(settings.website || 'timelessresurfacing.com.au').replace(/^https?:\/\//, '').replace(/\/+$/, '');
   }
 
   /* ---- text wrapping ---- */
@@ -485,6 +500,26 @@
         if (settings.tagline) {
           top -= block(settings.tagline, LM, CW, top, fonts.helvO, 8, 12, MUTED, 'center', dry);
         }
+        /* clickable links to the site's customer pages (like the big players do) */
+        var linksRow = [['Warranty', '/warranty/'], ['Care instructions', '/care-instructions/'], ['Terms', '/terms/']];
+        var sep = '   ·   ';
+        var rowTxt = linksRow.map(function (l) { return l[0]; }).join(sep);
+        var rowW = fonts.helv.widthOfTextAtSize(rowTxt, 8);
+        if (!dry) {
+          var lx = LM + (CW - rowW) / 2;
+          var base = siteBase(settings);
+          linksRow.forEach(function (l, i) {
+            var wl = fonts.helv.widthOfTextAtSize(l[0], 8);
+            page.drawText(l[0], { x: lx, y: top - 8 * 0.88, size: 8, font: fonts.helv, color: NAVY });
+            addLink(pdf, page, lx - 1, top - 10, wl + 2, 11, base + l[1]);
+            lx += wl;
+            if (i < linksRow.length - 1) {
+              page.drawText(sep, { x: lx, y: top - 8 * 0.88, size: 8, font: fonts.helv, color: MUTED });
+              lx += fonts.helv.widthOfTextAtSize(sep, 8);
+            }
+          });
+        }
+        top -= 12;
         return start - top;
       }
 
@@ -570,6 +605,186 @@
         if (y - fH < BM) { addPage(); }
         if (doc.footerBottom !== false) footerBlock(false, BM + fH);
         else footerBlock(false, y);
+
+        return pdf.save();
+      })();
+    },
+
+    /* ============ LIMITED WORKMANSHIP WARRANTY (after-job, single page) ============
+       Adapted from the Ultra Glaze operator card; ACL "warranty against defects"
+       mandatory text + provider/claim details included (s102 ACL + reg 90). */
+    generateWarranty: function (w, settings, assets) {
+      return (async function () {
+        var pdf = await PDFLib.PDFDocument.create();
+        pdf.registerFontkit(fontkit);
+        var fonts = {
+          din: await pdf.embedFont(assets.dinBytes, { subset: true }),
+          script: await pdf.embedFont(assets.scriptBytes, { subset: true }),
+          helv: await pdf.embedFont(StandardFonts.Helvetica),
+          helvB: await pdf.embedFont(StandardFonts.HelveticaBold),
+          helvO: await pdf.embedFont(StandardFonts.HelveticaOblique)
+        };
+        var logoImg = await pdf.embedPng(assets.logoBytes);
+        var sigImg = (assets.sigBytes && assets.sigBytes.length) ? await pdf.embedPng(assets.sigBytes) : null;
+        pdf.setTitle('Timeless Resurfacing Warranty');
+        var page = pdf.addPage([PW, PH]);
+        var y = PH - TM;
+
+        function line(txt, x, top, font, size, color) {
+          txt = clean(txt);
+          var xx = typeof x === 'function' ? x(font.widthOfTextAtSize(txt, size)) : x;
+          page.drawText(txt, { x: xx, y: top - size * 0.88, size: size, font: font, color: color });
+          return size;
+        }
+        function block(txt, x, wd, top, font, size, leading, color) {
+          var ls = wrap(txt, font, size, wd);
+          ls.forEach(function (l, i) {
+            if (l) page.drawText(l, { x: x, y: top - i * leading - size * 0.88, size: size, font: font, color: color });
+          });
+          return ls.length * leading;
+        }
+        function bullets(items, x, wd, top, size, leading, gap) {
+          var h = 0;
+          (items || []).forEach(function (it) {
+            page.drawText('•', { x: x, y: top - h - size * 0.88, size: size, font: fonts.helv, color: RUST });
+            h += block(String(it), x + 8, wd - 8, top - h, fonts.helv, size, leading, INK) + gap;
+          });
+          return h;
+        }
+
+        /* ---- header ---- */
+        var logoW = 46 * MM, logoH = logoW * logoImg.height / logoImg.width;
+        page.drawImage(logoImg, { x: LM, y: y - logoH, width: logoW, height: logoH });
+        line('LIMITED WORKMANSHIP WARRANTY', function (tw) { return LM + CW - tw; }, y - 2, fonts.din, 21, NAVY);
+        line('Please read carefully and keep this document', function (tw) { return LM + CW - tw; }, y - 26, fonts.helvO, 8, MUTED);
+        y -= Math.max(logoH, 38) + 5;
+        page.drawLine({ start: { x: LM, y: y }, end: { x: LM + CW, y: y }, thickness: 2, color: GOLD });
+        y -= 10;
+
+        /* ---- issued panel ---- */
+        var panelTop = y, px = LM + 10;
+        var col2x = LM + CW * 0.56;
+        var fields1 = [['ISSUED TO', w.customer, true], ['ADDRESS', w.address, false]];
+        var fields2 = [['DATE', w.date, false], ['INVOICE NO', w.invNo, false], ['YOUR OPERATOR', w.operator, false]];
+        var fy = 8;
+        fields1.forEach(function (f) {
+          line(f[0], px, panelTop - fy, fonts.din, 9.5, NAVY);
+          fy += 11 + block(f[1] || '', px, col2x - px - 14, panelTop - fy - 11, f[2] ? fonts.helvB : fonts.helv, 9.5, 12, INK) + 3;
+        });
+        var fy2 = 8;
+        fields2.forEach(function (f) {
+          line(f[0], col2x, panelTop - fy2, fonts.din, 9.5, NAVY);
+          fy2 += 11 + block(f[1] || '', col2x, LM + CW - col2x - 10, panelTop - fy2 - 11, fonts.helv, 9.5, 12, INK) + 3;
+        });
+        var panelH = Math.max(fy, fy2) + 4;
+        page.drawRectangle({ x: LM, y: panelTop - panelH, width: CW, height: panelH, borderColor: NAVY, borderWidth: 1 });
+        y = panelTop - panelH - 8;
+
+        /* ---- periods + special conditions, side by side ---- */
+        var half = (CW - 12) / 2;
+        function bar(title, x, top, wd) {
+          page.drawRectangle({ x: x, y: top - 18, width: wd, height: 18, color: NAVY });
+          page.drawText(clean(title), { x: x + 8, y: top - 13, size: 10.5, font: fonts.din, color: WHITE });
+          return 18;
+        }
+        var t1 = y, h1 = bar('YOUR WARRANTY PERIODS', LM, t1, half) + 6;
+        (w.forWork || []).forEach(function (r) {
+          var lh = Math.max(block(r.label, LM + 8, half - 90, t1 - h1, fonts.helv, 8.5, 11, INK), 11);
+          line(r.period, function (tw) { return LM + half - 8 - tw; }, t1 - h1, fonts.helvB, 8.5, NAVY);
+          h1 += lh + 3;
+        });
+        var t2 = y, h2 = bar('SPECIAL CONDITIONS', LM + half + 12, t2, half) + 6;
+        h2 += bullets(w.special, LM + half + 12 + 8, half - 16, t2 - h2, 7.8, 10, 2);
+        var boxH = Math.max(h1, h2) + 4;
+        page.drawRectangle({ x: LM, y: y - boxH, width: half, height: boxH, borderColor: NAVY, borderWidth: 1 });
+        page.drawRectangle({ x: LM + half + 12, y: y - boxH, width: half, height: boxH, borderColor: NAVY, borderWidth: 1 });
+        y -= boxH + 10;
+
+        /* ---- two columns: covers/claim/care | exclusions ---- */
+        var colW = (CW - 16) / 2, cx1 = LM, cx2 = LM + colW + 16;
+        var COVERS = settings.businessName + ' warrants its workmanship on the services listed above for the periods shown, starting on the completion date. If adhesion or workmanship fails under normal domestic use within the period, for example a resurfaced coating peeling or lifting, or grout or tiling failing because of defective installation, we will repair, re-coat or redo the affected area at our discretion, at no cost to you. For tiles laid on top of an existing floor, this warranty covers the bond of the new tile layer to the surface we prepared. This warranty is conditional on the invoice above being paid in full and applies to the property address shown.';
+        var CLAIM = 'Call ' + settings.phone + ', email ' + settings.email +
+          (settings.businessAddress ? ', or write to ' + settings.businessAddress : '') +
+          ', with your invoice number and a photo of the issue. We assess it promptly and carry out valid warranty work at no charge: we bear the cost of a valid claim, and if you incur reasonable expenses making one, tell us and we will reimburse them. Repairs of excluded damage can usually be arranged for a reasonable fee, and accidental impact damage can often be spot-repaired without redoing the whole item.';
+        var CARE = [
+          'Clean with a liquid cream or non-abrasive bathroom cleaner; never powder or abrasive cleaners.',
+          'Wipe the surface dry after use and keep the bathroom ventilated.',
+          'No rubber-backed or suction mats on resurfaced surfaces.',
+          'Fix dripping taps promptly and never store water in the bath.',
+          'Full care guide: ' + String(settings.website || '').replace(/^https?:\/\//, '') + '/care-instructions'
+        ];
+        var EXCL = [
+          'Dulling or damage from powder or abrasive cleaners, bleach or ammonia.',
+          'Damage from objects left on the surface, or rubber and suction mats.',
+          'Staining from strong dyes, hair dye, bath bombs and similar products.',
+          'Chips, scratches and impact damage from dropped objects or mistreatment.',
+          'Mould or mildew in poorly ventilated bathrooms.',
+          'Damage from dripping taps or standing water (incl. water stored in the bath or left under mats), improper drainage, or an oversize waste flange pooling water around the fitting.',
+          'Pre-existing rust, substrate or waterproofing failure beneath the surface.',
+          'Plumbing, mixer or shower-screen leaks, and water entering from adjoining areas.',
+          'Building or substrate movement, including hairline cracks in grout or tiles caused by movement.',
+          'Efflorescence (a natural condition of cement grout, not a defect).',
+          'For tiles laid over an existing floor: failure originating in the concealed original tile bed or substrate beneath the new layer.',
+          'Defects in tiles or materials supplied by you; we warrant our installation workmanship.',
+          'Damage caused by other trades or renovation work after completion.',
+          'Use of the surface before it fully cured (24 to 48 hours after the final coat).'
+        ];
+        var cy1 = 0, cy2 = 0, colTop = y;
+        cy1 += line('WHAT THIS WARRANTY COVERS', cx1, colTop, fonts.din, 10, NAVY) + 3;
+        cy1 += block(COVERS, cx1, colW, colTop - cy1, fonts.helv, 7.2, 9.1, INK) + 6;
+        cy1 += line('HOW TO CLAIM', cx1, colTop - cy1, fonts.din, 10, NAVY) + 3;
+        cy1 += block(CLAIM, cx1, colW, colTop - cy1, fonts.helv, 7.2, 9.1, INK) + 6;
+        cy1 += line('CARING FOR YOUR NEW SURFACE', cx1, colTop - cy1, fonts.din, 10, NAVY) + 3;
+        cy1 += bullets(CARE, cx1, colW, colTop - cy1, 7.2, 9.1, 1.5);
+        cy2 += line('WHAT IS NOT COVERED', cx2, colTop, fonts.din, 10, NAVY) + 3;
+        EXCL.forEach(function (e, i) {
+          var n = (i + 1) + '.';
+          page.drawText(n, { x: cx2, y: colTop - cy2 - 7.2 * 0.88, size: 7.2, font: fonts.helvB, color: RUST });
+          cy2 += block(e, cx2 + 12, colW - 12, colTop - cy2, fonts.helv, 7.2, 9.1, INK) + 1.5;
+        });
+        y = colTop - Math.max(cy1, cy2) - 8;
+
+        /* ---- ACL mandatory text box ---- */
+        var aclTop = y;
+        var aclPad = 8;
+        var aclHead = 'YOUR RIGHTS UNDER THE AUSTRALIAN CONSUMER LAW';
+        var aclBody = (w.aclText || '') + ' ' +
+          'This warranty is given by ' + settings.businessName + ' (ABN ' + settings.abn + '), ' +
+          (settings.businessAddress || settings.cityLine || 'Sydney, NSW') + ', phone ' + settings.phone + ', email ' + settings.email +
+          '. The benefits given to you by this warranty are in addition to other rights and remedies you have under law in relation to the goods and services to which this warranty relates, including the statutory warranties under the NSW Home Building Act 1989. Nothing in this document excludes or limits those rights.';
+        var aclH = aclPad + 11 + wrap(aclBody, fonts.helv, 7.1, CW - aclPad * 2).length * 9 + aclPad - 2;
+        page.drawRectangle({ x: LM, y: aclTop - aclH, width: CW, height: aclH, color: SURF, borderColor: LINE, borderWidth: 0.8 });
+        line(aclHead, LM + aclPad, aclTop - aclPad + 2, fonts.din, 8.8, NAVY);
+        block(aclBody, LM + aclPad, CW - aclPad * 2, aclTop - aclPad - 10, fonts.helv, 7.1, 9, INK);
+        y = aclTop - aclH - 8;
+
+        /* ---- signature (anchored just above the footer links; flows up if content is long) ---- */
+        var sigW = 42 * MM;
+        var sigH = sigImg ? Math.min(15 * MM, sigW * sigImg.height / sigImg.width) : 24;
+        var sigLineY = Math.min(BM + 32, y - sigH - 6);
+        if (sigImg) {
+          page.drawImage(sigImg, { x: LM + 4, y: sigLineY + 2, width: sigH * sigImg.width / sigImg.height, height: sigH });
+        }
+        page.drawLine({ start: { x: LM, y: sigLineY }, end: { x: LM + sigW + 30, y: sigLineY }, thickness: 0.7, color: MUTED });
+        line('Signed for ' + settings.businessName + '   ·   ' + w.date, LM, sigLineY - 2, fonts.helv, 7.5, MUTED);
+        line('Thank you', function (tw) { return LM + CW - tw - 10; }, sigLineY + 24, fonts.script, 25, NAVY);
+
+        /* ---- footer links ---- */
+        var base = siteBase(settings);
+        var parts = [['Warranty statement', '/warranty/'], ['Care instructions', '/care-instructions/'], ['Terms', '/terms/']];
+        var sep = '   ·   ';
+        var totalTxt = parts.map(function (p) { return p[0]; }).join(sep);
+        var lx = LM + (CW - fonts.helv.widthOfTextAtSize(totalTxt, 8)) / 2;
+        parts.forEach(function (p, i) {
+          var wl = fonts.helv.widthOfTextAtSize(p[0], 8);
+          page.drawText(p[0], { x: lx, y: BM, size: 8, font: fonts.helv, color: NAVY });
+          addLink(pdf, page, lx - 1, BM - 2, wl + 2, 11, base + p[1]);
+          lx += wl;
+          if (i < parts.length - 1) {
+            page.drawText(sep, { x: lx, y: BM, size: 8, font: fonts.helv, color: MUTED });
+            lx += fonts.helv.widthOfTextAtSize(sep, 8);
+          }
+        });
 
         return pdf.save();
       })();
