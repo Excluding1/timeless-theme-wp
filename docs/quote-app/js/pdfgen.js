@@ -702,12 +702,12 @@
 
         /* ---- two columns: covers/claim/care | exclusions ---- */
         var colW = (CW - 16) / 2, cx1 = LM, cx2 = LM + colW + 16;
-        var COVERS = settings.businessName + ' warrants its workmanship on the services listed above for the periods shown, starting on the completion date. If adhesion or workmanship fails under normal domestic use within the period, for example a resurfaced coating peeling or lifting, or grout or tiling failing because of defective installation, we will repair, re-coat or redo the affected area at our discretion, at no cost to you. For tiles laid on top of an existing floor, this warranty covers the bond of the new tile layer to the surface we prepared. This warranty is conditional on the invoice above being paid in full and applies to the property address shown.';
+        var COVERS = settings.businessName + ' warrants its workmanship on the services listed above for the periods shown, starting on the completion date. If adhesion or workmanship fails under normal domestic use within the period, for example a resurfaced coating peeling or lifting, or grout or tiling failing because of defective installation, we will repair, re-coat or redo the affected area at our discretion, at no cost to you. Genuine adhesion failure shows as large sheets of coating lifting, usually within the first 3 to 6 months, not as small chips, which are impact damage. We also pass on to you in full any warranty the product manufacturers give us on the materials used on your job. For tiles laid on top of an existing floor, this warranty covers the bond of the new tile layer to the surface we prepared. This warranty is conditional on the invoice above being paid in full and applies to the property address shown.';
         var CLAIM = 'Call ' + settings.phone + ', email ' + settings.email +
           (settings.businessAddress ? ', or write to ' + settings.businessAddress : '') +
           ', with your invoice number and a photo of the issue. We assess it promptly and carry out valid warranty work at no charge: we bear the cost of a valid claim, and if you incur reasonable expenses making one, tell us and we will reimburse them. Repairs of excluded damage can usually be arranged for a reasonable fee, and accidental impact damage can often be spot-repaired without redoing the whole item.';
         var CARE = [
-          'Clean with a liquid cream or non-abrasive bathroom cleaner; never powder or abrasive cleaners.',
+          'Clean with a liquid cream cleaner such as Kleen Up or Ajax Cream Cleanser; never powder or abrasive cleaners.',
           'Wipe the surface dry after use and keep the bathroom ventilated.',
           'No rubber-backed or suction mats on resurfaced surfaces.',
           'Fix dripping taps promptly and never store water in the bath.',
@@ -730,19 +730,19 @@
           'Use of the surface before it fully cured (24 to 48 hours after the final coat).'
         ];
         var cy1 = 0, cy2 = 0, colTop = y;
-        cy1 += line('WHAT THIS WARRANTY COVERS', cx1, colTop, fonts.din, 10, NAVY) + 3;
-        cy1 += block(COVERS, cx1, colW, colTop - cy1, fonts.helv, 7.2, 9.1, INK) + 6;
-        cy1 += line('HOW TO CLAIM', cx1, colTop - cy1, fonts.din, 10, NAVY) + 3;
-        cy1 += block(CLAIM, cx1, colW, colTop - cy1, fonts.helv, 7.2, 9.1, INK) + 6;
-        cy1 += line('CARING FOR YOUR NEW SURFACE', cx1, colTop - cy1, fonts.din, 10, NAVY) + 3;
-        cy1 += bullets(CARE, cx1, colW, colTop - cy1, 7.2, 9.1, 1.5);
-        cy2 += line('WHAT IS NOT COVERED', cx2, colTop, fonts.din, 10, NAVY) + 3;
+        cy1 += line('WHAT THIS WARRANTY COVERS', cx1, colTop, fonts.din, 9.5, NAVY) + 2;
+        cy1 += block(COVERS, cx1, colW, colTop - cy1, fonts.helv, 6.9, 8.5, INK) + 5;
+        cy1 += line('HOW TO CLAIM', cx1, colTop - cy1, fonts.din, 9.5, NAVY) + 2;
+        cy1 += block(CLAIM, cx1, colW, colTop - cy1, fonts.helv, 6.9, 8.5, INK) + 5;
+        cy1 += line('CARING FOR YOUR NEW SURFACE', cx1, colTop - cy1, fonts.din, 9.5, NAVY) + 2;
+        cy1 += bullets(CARE, cx1, colW, colTop - cy1, 6.9, 8.5, 1.3);
+        cy2 += line('WHAT IS NOT COVERED', cx2, colTop, fonts.din, 9.5, NAVY) + 2;
         EXCL.forEach(function (e, i) {
           var n = (i + 1) + '.';
-          page.drawText(n, { x: cx2, y: colTop - cy2 - 7.2 * 0.88, size: 7.2, font: fonts.helvB, color: RUST });
-          cy2 += block(e, cx2 + 12, colW - 12, colTop - cy2, fonts.helv, 7.2, 9.1, INK) + 1.5;
+          page.drawText(n, { x: cx2, y: colTop - cy2 - 6.9 * 0.88, size: 6.9, font: fonts.helvB, color: RUST });
+          cy2 += block(e, cx2 + 12, colW - 12, colTop - cy2, fonts.helv, 6.9, 8.5, INK) + 1.3;
         });
-        y = colTop - Math.max(cy1, cy2) - 8;
+        y = colTop - Math.max(cy1, cy2) - 7;
 
         /* ---- ACL mandatory text box ---- */
         var aclTop = y;
@@ -758,10 +758,10 @@
         block(aclBody, LM + aclPad, CW - aclPad * 2, aclTop - aclPad - 10, fonts.helv, 7.1, 9, INK);
         y = aclTop - aclH - 8;
 
-        /* ---- signature (anchored just above the footer links; flows up if content is long) ---- */
+        /* ---- signature (pinned just above the footer links, never below them) ---- */
         var sigW = 42 * MM;
         var sigH = sigImg ? Math.min(15 * MM, sigW * sigImg.height / sigImg.width) : 24;
-        var sigLineY = Math.min(BM + 32, y - sigH - 6);
+        var sigLineY = BM + 30;
         if (sigImg) {
           page.drawImage(sigImg, { x: LM + 4, y: sigLineY + 2, width: sigH * sigImg.width / sigImg.height, height: sigH });
         }
