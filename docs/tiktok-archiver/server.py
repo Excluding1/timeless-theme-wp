@@ -15,6 +15,16 @@ BASE = Path(__file__).resolve().parent
 
 app = FastAPI(title="TikTok Profile Archiver")
 
+
+@app.middleware("http")
+async def no_cache(request, call_next):
+    """Localhost app — stale cached JS/HTML after an update is worse than no cache."""
+    response = await call_next(request)
+    if not request.url.path.startswith("/media"):
+        response.headers["Cache-Control"] = "no-store"
+    return response
+
+
 downloader.DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/static", StaticFiles(directory=BASE / "static"), name="static")
 app.mount("/media", StaticFiles(directory=downloader.DOWNLOADS_DIR), name="media")
@@ -156,6 +166,11 @@ def export(username: str = None, q: str = None):
 def set_settings(body: dict = Body(...)):
     db.set_settings(body)
     return {"ok": True, "settings": db.all_settings()}
+
+
+@app.get("/api/login-check")
+def login_check():
+    return downloader.check_login()
 
 
 @app.post("/api/cookies")

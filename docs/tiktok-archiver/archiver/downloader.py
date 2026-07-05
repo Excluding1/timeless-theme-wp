@@ -1,5 +1,8 @@
 """yt-dlp integration: list a TikTok profile and download individual videos."""
+import http.cookiejar
+import json
 import re
+import urllib.request
 from pathlib import Path
 
 import yt_dlp
@@ -55,6 +58,58 @@ def _base_opts():
             )
         opts["cookiefile"] = str(COOKIE_FILE)
     return opts
+
+
+def _cookie_jar(mode):
+    if mode == "file":
+        if not COOKIE_FILE.exists():
+            raise ProfileError("no cookies.txt has been saved yet")
+        jar = http.cookiejar.MozillaCookieJar(str(COOKIE_FILE))
+        jar.load(ignore_discard=True, ignore_expires=True)
+        return jar
+    from yt_dlp.cookies import extract_cookies_from_browser
+    return extract_cookies_from_browser(db.get_setting("cookie_browser") or "chrome")
+
+
+def check_login():
+    """Verify TikTok login for the current cookie settings. Returns {ok, detail}."""
+    mode = db.get_setting("cookie_mode")
+    if mode == "none":
+        return {"ok": False, "detail":
+                "TikTok access is set to Anonymous — no login is used. Downloads of public "
+                "profiles still work until TikTok rate-limits you. To log in, pick "
+                "'Use my browser login' or paste a cookies.txt, save, then re-check."}
+    try:
+        jar = _cookie_jar(mode)
+    except Exception as e:
+        return {"ok": False, "detail": f"Could not read cookies ({mode}): {e}"}
+    if not any(c.name == "sessionid" and "tiktok.com" in (c.domain or "") for c in jar):
+        src = ("that browser — log into tiktok.com there first"
+               if mode == "browser" else
+               "the pasted cookies.txt — re-export it while logged into tiktok.com")
+        return {"ok": False, "detail": f"No TikTok session cookie found in {src}, then re-check."}
+    # confirm the session is alive by asking TikTok who it belongs to
+    try:
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+        req = urllib.request.Request(
+            "https://www.tiktok.com/passport/web/account/info/",
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"},
+        )
+        with opener.open(req, timeout=15) as resp:
+            data = json.load(resp)
+        info = data.get("data") or {}
+        who = (info.get("username") or info.get("screen_name")
+               or info.get("user_id_str") or info.get("user_id"))
+        if who:
+            return {"ok": True, "detail": f"Logged in ✓ — TikTok confirms this session (account: {who})."}
+        return {"ok": False, "detail":
+                "A session cookie exists but TikTok did not recognise it — the login is "
+                "probably stale. Log into tiktok.com again, then re-check."}
+    except Exception as e:
+        return {"ok": True, "detail":
+                f"Session cookie found ✓ — downloads will use it. "
+                f"(Couldn't fully verify with TikTok: {str(e)[:120]})"}
 
 
 def _friendly(msg):

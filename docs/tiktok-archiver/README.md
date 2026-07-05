@@ -46,6 +46,12 @@ Settings → **TikTok access**:
   cookies.txt LOCALLY"), export while on tiktok.com, paste into Settings.
   Most reliable option.
 
+**To know you're logged in:** Settings → **Check TikTok login**. It reads the
+cookies for the mode you picked and asks TikTok to confirm the session —
+✅ names the account it belongs to; ❌ tells you exactly what's missing.
+Anonymous mode works for public profiles until TikTok rate-limits you, so
+only set up login when downloads start failing (or to be safe up front).
+
 ## Where things live
 
 ```

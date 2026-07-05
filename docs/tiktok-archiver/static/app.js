@@ -94,22 +94,35 @@ function wireSettings() {
   for (const id of ["cookieMode", "cookieBrowser", "whisperModel", "language", "autoSync"]) {
     $(id).addEventListener("change", () => { settingsDirty = true; updateSettingsVisibility(); });
   }
+  const saveSettings = async () => {
+    await api("/api/settings", {
+      method: "POST",
+      body: JSON.stringify({
+        cookie_mode: $("cookieMode").value,
+        cookie_browser: $("cookieBrowser").value,
+        whisper_model: $("whisperModel").value,
+        language: $("language").value,
+        auto_sync: $("autoSync").value,
+      }),
+    });
+    settingsDirty = false;
+  };
   $("saveSettings").addEventListener("click", async () => {
     try {
-      await api("/api/settings", {
-        method: "POST",
-        body: JSON.stringify({
-          cookie_mode: $("cookieMode").value,
-          cookie_browser: $("cookieBrowser").value,
-          whisper_model: $("whisperModel").value,
-          language: $("language").value,
-          auto_sync: $("autoSync").value,
-        }),
-      });
-      settingsDirty = false;
+      await saveSettings();
       $("settingsStatus").textContent = "Saved ✓";
       setTimeout(() => { $("settingsStatus").textContent = ""; }, 2500);
     } catch (e) { $("settingsStatus").textContent = "Error: " + e.message; }
+  });
+  $("checkLogin").addEventListener("click", async () => {
+    const out = $("loginStatus");
+    out.textContent = "Saving settings, then asking TikTok… " +
+      "(if macOS asks about Keychain access for browser cookies, click Always Allow)";
+    try {
+      await saveSettings();
+      const r = await api("/api/login-check");
+      out.textContent = (r.ok ? "✅ " : "❌ ") + r.detail;
+    } catch (e) { out.textContent = "❌ Check failed: " + e.message; }
   });
   $("saveCookies").addEventListener("click", async () => {
     try {

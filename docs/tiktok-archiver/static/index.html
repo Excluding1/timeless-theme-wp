@@ -61,7 +61,10 @@
     </div>
     <p class="hint" id="browserHint" hidden>“Use my browser login”: log into tiktok.com in that browser first.
       On macOS, reading Chrome cookies may pop a Keychain permission prompt — click “Always Allow”.</p>
-    <div class="row"><button id="saveSettings">Save settings</button><span id="settingsStatus" class="hint"></span></div>
+    <div class="row"><button id="saveSettings">Save settings</button>
+      <button id="checkLogin" class="ghost">Check TikTok login</button>
+      <span id="settingsStatus" class="hint"></span></div>
+    <p class="hint" id="loginStatus"></p>
   </section>
 
   <section class="card" id="addCard">
