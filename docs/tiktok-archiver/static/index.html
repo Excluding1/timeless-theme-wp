@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok Profile Archiver</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header>
+  <div class="logo"><span class="tick">◗</span> TikTok Profile Archiver</div>
+  <button id="settingsBtn" class="ghost">⚙ Settings</button>
+</header>
+
+<main>
+  <section id="settings" class="card" hidden>
+    <h2>Settings</h2>
+    <div class="settings-grid">
+      <label>TikTok access
+        <select id="cookieMode">
+          <option value="none">Anonymous (public profiles only)</option>
+          <option value="browser">Use my browser login</option>
+          <option value="file">Pasted cookies.txt</option>
+        </select>
+      </label>
+      <label id="browserRow">Browser
+        <select id="cookieBrowser">
+          <option value="chrome">Chrome</option>
+          <option value="safari">Safari</option>
+          <option value="firefox">Firefox</option>
+          <option value="edge">Edge</option>
+          <option value="brave">Brave</option>
+        </select>
+      </label>
+      <label>Whisper model (accuracy ↔ speed)
+        <select id="whisperModel"></select>
+      </label>
+      <label>Language
+        <select id="language">
+          <option value="auto">Auto-detect</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="zh">Chinese</option>
+          <option value="vi">Vietnamese</option>
+        </select>
+      </label>
+      <label>Auto-sync all profiles
+        <select id="autoSync">
+          <option value="0">Off (manual Sync only)</option>
+          <option value="1">Every hour</option>
+          <option value="6">Every 6 hours</option>
+          <option value="24">Daily</option>
+        </select>
+      </label>
+    </div>
+    <div id="cookiePaste" hidden>
+      <p class="hint">Export cookies with a browser extension like “Get cookies.txt LOCALLY”
+        while logged into tiktok.com, then paste the file contents here:</p>
+      <textarea id="cookieText" rows="5" placeholder="# Netscape HTTP Cookie File&#10;.tiktok.com&#9;TRUE&#9;/&#9;…"></textarea>
+      <div class="row"><button id="saveCookies">Save cookies</button><span id="cookieStatus" class="hint"></span></div>
+    </div>
+    <p class="hint" id="browserHint" hidden>“Use my browser login”: log into tiktok.com in that browser first.
+      On macOS, reading Chrome cookies may pop a Keychain permission prompt — click “Always Allow”.</p>
+    <div class="row"><button id="saveSettings">Save settings</button><span id="settingsStatus" class="hint"></span></div>
+  </section>
+
+  <section class="card" id="addCard">
+    <h2>Profiles</h2>
+    <div class="row">
+      <input id="profileInput" placeholder="@username or https://www.tiktok.com/@username" spellcheck="false">
+      <button id="addProfile">Add profile</button>
+    </div>
+    <p class="hint" id="addStatus"></p>
+    <div id="profiles"></div>
+  </section>
+
+  <section class="card job" id="jobCard" hidden>
+    <div class="row spread">
+      <strong id="jobTitle"></strong>
+      <div class="row">
+        <span id="jobPhase" class="chip"></span>
+        <button id="jobStop" class="small danger" hidden>Stop</button>
+      </div>
+    </div>
+    <div class="bar"><div id="jobBar"></div></div>
+    <div id="jobCurrent" class="hint"></div>
+    <pre id="jobLog"></pre>
+  </section>
+
+  <section class="card">
+    <div class="row spread wrap">
+      <h2>Library</h2>
+      <div class="row">
+        <select id="filterProfile"><option value="">All profiles</option></select>
+        <input id="search" placeholder="Search titles + transcripts…" spellcheck="false">
+        <a id="exportBtn" class="button ghost" href="/api/export">Export transcripts</a>
+      </div>
+    </div>
+    <div id="videos" class="grid"></div>
+    <p class="hint" id="libraryEmpty" hidden>Nothing here yet — add a profile above and hit Sync.</p>
+  </section>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

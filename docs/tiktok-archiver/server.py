@@ -1,0 +1,172 @@
+"""TikTok Profile Archiver — local web app.
+
+Run:  .venv/bin/python server.py   →   http://127.0.0.1:8317
+"""
+from pathlib import Path
+
+import uvicorn
+from fastapi import Body, FastAPI, HTTPException
+from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.staticfiles import StaticFiles
+
+from archiver import db, downloader, jobs, transcriber
+
+BASE = Path(__file__).resolve().parent
+
+app = FastAPI(title="TikTok Profile Archiver")
+
+downloader.DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/static", StaticFiles(directory=BASE / "static"), name="static")
+app.mount("/media", StaticFiles(directory=downloader.DOWNLOADS_DIR), name="media")
+
+jobs.start_auto_loop()
+
+
+def _publicize(v):
+    """Map stored file paths to /media URLs; drop paths from the payload."""
+    out = dict(v)
+    for key, target in (("file_path", "media_url"), ("thumb_path", "thumb_url")):
+        p = db.abs_path(out.pop(key, None))
+        out[target] = None
+        if p:
+            try:
+                out[target] = "/media/" + str(Path(p).relative_to(downloader.DOWNLOADS_DIR))
+            except ValueError:
+                pass
+    out.pop("transcript_path", None)
+    out.pop("srt_path", None)
+    return out
+
+
+@app.get("/")
+def index():
+    return FileResponse(BASE / "static" / "index.html")
+
+
+@app.get("/api/state")
+def state():
+    return {
+        "profiles": db.profiles(),
+        "settings": db.all_settings(),
+        "cookie_file_present": downloader.COOKIE_FILE.exists(),
+        "whisper_models": list(transcriber.MODEL_CHOICES),
+        "job": jobs.status(),
+    }
+
+
+@app.post("/api/profiles")
+def add_profile(body: dict = Body(...)):
+    try:
+        username, url = downloader.normalize_profile(body.get("profile", ""))
+    except downloader.ProfileError as e:
+        raise HTTPException(400, str(e))
+    db.add_profile(username, url)
+    return {"ok": True, "username": username}
+
+
+@app.delete("/api/profiles/{username}")
+def delete_profile(username: str):
+    j = jobs.status()
+    if j and j["state"] == "running" and j["username"] == username:
+        raise HTTPException(409, "A job is running for this profile — stop it first.")
+    db.remove_profile(username)  # DB rows only — downloaded files stay on disk
+    return {"ok": True}
+
+
+@app.post("/api/sync")
+def sync(body: dict = Body(...)):
+    username = body.get("username")
+    if not db.profile_url(username):
+        raise HTTPException(404, "Unknown profile")
+    limit = body.get("limit") or None
+    if limit is not None:
+        try:
+            limit = max(1, int(limit))
+        except (TypeError, ValueError):
+            limit = None
+    try:
+        jobs.start_sync(username, limit=limit, do_transcribe=bool(body.get("transcribe", True)))
+    except jobs.Busy as e:
+        raise HTTPException(409, str(e))
+    return {"ok": True}
+
+
+@app.post("/api/job/cancel")
+def cancel_job():
+    if not jobs.request_cancel():
+        raise HTTPException(400, "No job is running.")
+    return {"ok": True}
+
+
+@app.post("/api/transcribe/{vid}")
+def transcribe_one(vid: str):
+    try:
+        jobs.start_transcribe_one(vid)
+    except jobs.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True}
+
+
+@app.get("/api/videos")
+def videos(username: str = None, q: str = None):
+    return {"videos": [_publicize(v) for v in db.videos(username or None, q or None)]}
+
+
+@app.get("/api/videos/{vid}")
+def video_detail(vid: str):
+    v = db.video(vid)
+    if not v:
+        raise HTTPException(404, "Unknown video")
+    return _publicize(v)
+
+
+@app.get("/api/videos/{vid}/download/{kind}")
+def transcript_file(vid: str, kind: str):
+    v = db.video(vid)
+    if not v:
+        raise HTTPException(404, "Unknown video")
+    path = db.abs_path({"txt": v.get("transcript_path"), "srt": v.get("srt_path")}.get(kind))
+    if not path or not Path(path).exists():
+        raise HTTPException(404, "No transcript file for this video yet")
+    return FileResponse(path, filename=f"{v['username']}-{vid}.{kind}")
+
+
+@app.get("/api/export")
+def export(username: str = None, q: str = None):
+    rows = db.transcripts(username or None, q or None)
+    blocks = []
+    for r in rows:
+        date = r.get("upload_date") or "no date"
+        # collapse whitespace/newlines so the header stays a single parseable line
+        title = " ".join((r.get("title") or "").split())[:120] or "(no title)"
+        blocks.append(
+            f"===== @{r['username']} — {date} — {title} (id {r['id']}) =====\n"
+            f"{r.get('url') or ''}\n\n{r['transcript']}\n"
+        )
+    name = f"transcripts-{username or 'all'}.txt"
+    return PlainTextResponse(
+        "\n".join(blocks) or "No transcripts yet.\n",
+        headers={"Content-Disposition": f'attachment; filename="{name}"'},
+    )
+
+
+@app.post("/api/settings")
+def set_settings(body: dict = Body(...)):
+    db.set_settings(body)
+    return {"ok": True, "settings": db.all_settings()}
+
+
+@app.post("/api/cookies")
+def set_cookies(body: dict = Body(...)):
+    content = (body.get("content") or "").strip()
+    if not content:
+        raise HTTPException(400, "Paste the contents of a cookies.txt export first.")
+    downloader.COOKIE_FILE.write_text(content + "\n", encoding="utf-8")
+    db.set_settings({"cookie_mode": "file"})
+    return {"ok": True}
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8317)
