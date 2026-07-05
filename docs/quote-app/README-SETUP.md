@@ -14,8 +14,10 @@ invoice-form layout modelled on the business's original invoice and the ATO's re
 - **Mini AI (optional, local, works throughout):** a language model that runs entirely in the
   browser — Chrome's built-in model when available, else a one-time ~1GB WebLLM download
   (opt-in, Settings). It helps at three points: **✨ AI draft** reads messy notes and fills the
-  form; **✨ Polish wording** rewrites the job description + options note; **✨ Tidy conditions**
-  cleans the warranty special conditions. **Guardrails (verified with a 21-case adversarial
+  form — including **identifying options** (it splits "resurface 1540 or strip back and
+  resurface 1990" into Option A / Option B, keeps shared work in both, and handles "included"
+  items and "3 tiles at 90 each"); **✨ Polish wording** rewrites the job description + options
+  note; **✨ Tidy conditions** cleans the warranty special conditions. **Guardrails (verified with a 21-case adversarial
   test):** every AI output is validated before it's applied — an amount is accepted only if that
   exact number appears in your notes (a hallucinated or 10× price is dropped and flagged), no
   banned words, no invented numbers or dates, and warranty/period/totals always come from the

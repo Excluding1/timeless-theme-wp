@@ -71,7 +71,8 @@
       return M.provider;
     },
 
-    async _complete(system, user) {
+    async _complete(system, user, opts) {
+      opts = opts || {};
       if (M.provider === 'chrome') {
         var s = await (root.LanguageModel || root.ai.languageModel).create({ initialPrompts: [{ role: 'system', content: system }] });
         var out = await s.prompt(user);
@@ -80,7 +81,7 @@
       }
       var r = await M._engine.chat.completions.create({
         messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
-        temperature: 0.4, max_tokens: 220
+        temperature: opts.temperature || 0.3, max_tokens: opts.maxTokens || 220
       });
       return r.choices[0].message.content;
     },
@@ -201,70 +202,174 @@
     },
 
     /* LLM-assisted DRAFT from free text. Returns the same shape as TQ.draft.parse
-       (customer, options, jobIntro, expect, warranty, warnings) or null on failure.
-       Hard-validated: services must map to the price book, and every amount MUST
-       appear in the source notes, or it is dropped/flagged. The model never sets a
-       price the tradesperson did not type. Composition (titles/job/warranty/expect)
-       is done by the deterministic composer, not the model. */
+       (customer, options[], jobIntro, expect, warranty, warnings) or null on failure.
+
+       The model does ONLY routing: which service, which OPTION each line belongs to, and
+       which price token in the notes to attach. Every price magnitude is bound to a PER-BLOCK
+       ledger (TQ.draft.priceTokensByBlock) and consumed with multiplicity, so a price typed
+       only in Option A can never fund a fabricated Option B line (options are alternatives, and
+       the headline total shows options[0] only). All titles, THE JOB, warranty and expect come
+       from the deterministic composer, never the model. Any structural failure returns null so
+       the caller falls back to the offline parser. */
     async extract(text) {
       var src = String(text || '').trim();
       if (!src) return null;
       var book = (TQ.getCatalogue ? TQ.getCatalogue() : TQ.CATALOGUE) || [];
       var byId = {}; book.forEach(function (c) { byId[c.id] = c; });
-      var menu = book.map(function (c) { return c.id + ' = ' + c.desc.split('(')[0].trim(); }).join('\n');
+      var menu = book.map(function (c) {
+        return c.id + ' = ' + c.desc.split('(')[0].split(';')[0].trim().split(/\s+/).slice(0, 6).join(' ');
+      }).join('\n');
+
       var system =
-        'You extract a bathroom-resurfacing quote from a tradesperson\'s rough notes. ' +
-        'Reply with STRICT JSON only, no prose:\n' +
-        '{"customer":{"name":"","address":"","phone":"","email":""},"items":[{"service_id":"","amount":0}]}\n' +
-        'Rules: service_id MUST be one of the MENU ids below (or "other" with a short "desc"). ' +
-        'amount MUST be a number that literally appears in the notes for that item; if no price is ' +
-        'stated for an item, use null. NEVER invent or estimate a price. One item per distinct job.\n\nMENU:\n' + menu;
-      var parsed = M._safeJson(await M._complete(system, 'NOTES:\n' + src));
-      if (!parsed || !Array.isArray(parsed.items)) return null;
+        'You turn an Australian bathroom-resurfacing tradesperson\'s rough notes into structured quote data.\n' +
+        'Reply with STRICT JSON only. No prose, no markdown, no code fences.\n\n' +
+        'SHAPE:\n' +
+        '{"customer":{"name":"","address":"","phone":"","email":"","access":""},"available_from":"",' +
+        '"items":[{"service_id":"","desc":"","amount":0,"option_group":0,"source_key":"","variant_label":"","area":"","qty":null,"unit_amount":null,"included":false}]}\n\n' +
+        'HOW TO GROUP (most important rule):\n' +
+        '- AND, plus, +, comma, new line, "also", or two bathrooms named together (ensuite and main, bath 1 and bath 2) => the SAME option. Keep option_group the same. The customer gets ALL of these.\n' +
+        '- OR, vs, instead of, rather than, "upgrade to", "optional", "if you want", "can also do" => a NEW option: increase option_group by 1. This is an ALTERNATIVE the customer chooses between. NEVER add options together.\n' +
+        '- "Option A ... Option B ..." => A is option_group 1, B is option_group 2; set source_key "A" or "B". Work stated BEFORE the first Option word is shared: option_group 0, source_key "".\n' +
+        '- "everything in A plus X" => copy option A\'s items into this group AND add X.\n' +
+        '- Only split when BOTH sides are a real priced job. "epoxy or standard grout", "cream or white", "Thursday or Friday" are just descriptions: keep them in ONE item, do not split.\n\n' +
+        'PRICES:\n' +
+        '- amount MUST be a number that literally appears in the notes for that item (it may come before OR after the service words). If no price is stated, use null. NEVER invent, estimate or round a price.\n' +
+        '- "3 tiles at 90 each" => qty:3, unit_amount:90, amount null.\n' +
+        '- "included", "free", "no charge" => included:true, amount null.\n\n' +
+        'FIELDS: service_id MUST be a MENU id, or "other" with a short plain "desc". variant_label only for same-service tiers (e.g. "Premium finish"). area = the room if named. available_from = start date if stated. customer.access = parking/entry/tenant notes if stated.\n\n' +
+        'MENU (id = service):\n' + menu + '\n\n' +
+        'EXAMPLE 1 (OR => two options):\n' +
+        'NOTES: dave 0412 345 678, 14 rose st marrickville. bath resurface 1540, or strip it right back first and resurface for 1990.\n' +
+        'JSON: {"customer":{"name":"Dave","address":"14 Rose St Marrickville","phone":"0412 345 678","email":"","access":""},"available_from":"","items":[{"service_id":"bath-resurface","amount":1540,"option_group":1,"source_key":""},{"service_id":"bath-resurface","amount":1990,"option_group":2,"source_key":""},{"service_id":"strip-back","amount":null,"option_group":2,"source_key":""}]}\n\n' +
+        'EXAMPLE 2 (AND => one option):\n' +
+        'NOTES: full reno at 22 hill st. strip out 1000, tipping 700, new wall tiles 2000, regrout shower 1000, new silicone included.\n' +
+        'JSON: {"customer":{"name":"","address":"22 Hill St","phone":"","email":"","access":""},"available_from":"","items":[{"service_id":"strip-out","amount":1000,"option_group":0},{"service_id":"tipping","amount":700,"option_group":0},{"service_id":"wall-tiles-new","amount":2000,"option_group":0},{"service_id":"shower-regrout","amount":1000,"option_group":0},{"service_id":"silicone","amount":null,"option_group":0,"included":true}]}';
 
-      /* Authoritative price tokens = the amounts the DETERMINISTIC parser recognises as
-         prices in these notes. It already excludes postcodes, phone numbers and other
-         non-price digits, so binding the model to this set stops it from turning a
-         "2037" postcode into a $2037 line. The model's job is picking WHICH service each
-         price belongs to; the price magnitudes themselves come from the safe parser. */
-      var priceSet = {};
-      try { priceSet = TQ.draft.priceTokens(src); } catch (e) { /* fall back to no accepted amounts */ }
+      var parsed = M._safeJson(await M._complete(system, 'NOTES:\n' + src, { maxTokens: 500, temperature: 0.2 }));
+      if (!parsed || !Array.isArray(parsed.items) || !parsed.items.length || parsed.items.length > 200) return null;
 
-      var warnings = [], lines = [];
+      /* per-block price ledger (multiset per block) */
+      var ledger = [];
+      try { ledger = TQ.draft.priceTokensByBlock(src); } catch (e) { ledger = []; }
+      var byKey = {}; ledger.forEach(function (l) { byKey[l.key] = l; });
+      var head = byKey._head || { counts: {} };
+      function consume(block, v) { if (block && block.counts[v] > 0) { block.counts[v]--; return true; } return false; }
+      function tc(s) { return String(s).replace(/\w\S*/g, function (t) { return t.charAt(0).toUpperCase() + t.slice(1).toLowerCase(); }); }
+      function safeText(t, min, max) {
+        var s = TQ.rules.sanitize(String(t || '')).slice(0, max);
+        return (s && s.length >= (min || 2) && M.textIsSafe(s, src, { min: min || 2, max: max }) && M.claimWordsSafe(s, src) && !TQ.rules.bannedIn(s)) ? s : '';
+      }
+
+      var warnings = [], groups = {};
       parsed.items.forEach(function (it) {
         if (!it || typeof it !== 'object') return;
-        var cat = it.service_id && byId[it.service_id];
-        var desc = cat ? cat.desc : (it.desc ? TQ.rules.sanitize(String(it.desc)).slice(0, 90) : null);
-        if (!desc) return;
-        var amt = null;
-        if (it.amount != null && isFinite(Number(it.amount))) {
+
+        /* desc + catId (book descs are safe by construction; model 'other' text is safety-checked) */
+        var cat = it.service_id && byId[it.service_id], desc, catId = null, primary = false;
+        if (cat) { desc = cat.desc; catId = cat.id; primary = !!cat.primary; }
+        else { desc = safeText(it.desc, 2, 90); if (!desc) return; }
+        var area = it.area ? safeText(it.area, 2, 40) : '';
+        if (area) desc += ' (' + tc(area) + ')';
+
+        var g = (typeof it.option_group === 'number' && it.option_group >= 0) ? Math.floor(it.option_group) : 0;
+        /* which price block this line may draw from: an explicit source_key wins, else the
+           option-group position (group 1 -> block A, group 2 -> B), else the shared head.
+           This is what stops a price typed only in one option from funding another. */
+        var block = (/^[A-C]$/.test(String(it.source_key)) && byKey[it.source_key]) ? byKey[it.source_key] : (ledger[g] || head);
+
+        /* amount: included sentinel / qty*unit / literal price, consumed from the ledger */
+        var amt = null, priced = false;
+        if (it.included === true || it.amount === 'included') {
+          amt = 'included';
+        } else if (Number.isInteger(it.qty) && it.qty > 0 && it.unit_amount != null && isFinite(Number(it.unit_amount))) {
+          var u = Number(it.unit_amount);
+          if (consume(block, u) || consume(head, u)) { amt = Math.round(it.qty * u * 100) / 100; priced = true; }
+          else warnings.push('AI read a $' + u + ' unit price for "' + desc + '" that is not in your notes, ignored it');
+        } else if (it.amount != null && isFinite(Number(it.amount))) {
           var a = Number(it.amount);
-          if (priceSet[a]) amt = a;                      // must be a price the parser saw in the notes
-          else warnings.push('AI read $' + a + ' for "' + desc + '" but that is not a price in your notes, ignored it');
+          if (consume(block, a) || consume(head, a)) { amt = a; priced = true; }
+          else warnings.push('AI read $' + a + ' for "' + desc + '" but that is not a price in this option, ignored it');
         }
-        if (amt == null) {
+        if (amt === null) {
           if (cat && cat.price != null) { amt = cat.price; warnings.push('"' + cat.desc + '": no price in your notes, used the price book default $' + cat.price + ' (review)'); }
           else { amt = 0; warnings.push('"' + desc + '": set the price manually'); }
         }
-        if (!lines.some(function (l) { return l.desc === desc; })) {
-          lines.push({ desc: desc, amount: amt, catId: cat ? cat.id : null, primary: !!(cat && cat.primary) });
-        }
+
+        (groups[g] = groups[g] || []).push({ desc: desc, amount: amt, catId: catId, primary: primary, _priced: priced, _variant: safeText(it.variant_label, 2, 30) });
       });
-      if (!lines.length) return null;
+
+      /* assemble options: group 0 is shared, prepended to each alternative group.
+         A non-zero group with NO ledger-priced line of its own is a spurious "descriptive or"
+         split, so if none of the alternatives are really priced we collapse to one option. */
+      function dedupe(ls) {
+        var seen = {}, out = [];
+        ls.forEach(function (l) { if (!seen[l.desc]) { seen[l.desc] = 1; out.push(l); } });
+        return out;
+      }
+      var shared = groups[0] || [];
+      var nonZero = Object.keys(groups).map(Number).filter(function (g) { return g > 0; }).sort(function (a, b) { return a - b; });
+      /* a non-zero group is a REAL alternative if it has its own priced line OR introduces a
+         service no other alternative has; otherwise it is a spurious "or" split of the same
+         thing (e.g. "epoxy or standard grout") and gets folded into one additive option */
+      var realAlts = nonZero.filter(function (g) {
+        if (groups[g].some(function (l) { return l._priced; })) return true;
+        return groups[g].some(function (l) {
+          return l.catId && !nonZero.some(function (h) { return h !== g && groups[h].some(function (x) { return x.catId === l.catId; }); });
+        });
+      });
+
+      var options = [];
+      if (realAlts.length >= 2) {
+        realAlts.forEach(function (g) {
+          var v = (groups[g].filter(function (l) { return l._variant; })[0] || {})._variant || '';
+          options.push({ lines: dedupe(shared.concat(groups[g])), _variant: v });
+        });
+      } else {
+        var all = shared.slice();
+        nonZero.forEach(function (g) { all = all.concat(groups[g]); });
+        if (all.length) options.push({ lines: dedupe(all), _variant: '' });
+      }
+      options = options.filter(function (o) { return o.lines.length; });
+      if (options.length > 8) return null;
+      var truncated = false;
+      if (options.length > 3) { options = options.slice(0, 3); truncated = true; }
+      options.forEach(function (o) { if (o.lines.length > 12) { o.lines = o.lines.slice(0, 12); truncated = true; } });
+      if (truncated) warnings.push('Too many options or lines, trimmed to fit, review carefully');
+      if (!options.length) return null;
 
       var c = parsed.customer || {};
       var out = {
         customer: {
           name: TQ.rules.sanitize(String(c.name || '')).slice(0, 80),
           address: TQ.rules.sanitize(String(c.address || '')).slice(0, 120),
-          access: '',
+          access: safeText(c.access, 2, 120),
           phone: String(c.phone || '').replace(/[^\d +()-]/g, '').slice(0, 40),
           email: String(c.email || '').slice(0, 80)
         },
-        options: [{ title: 'The work', mode: 'itemised', lines: lines, totalLabel: 'Total (inc GST)' }],
+        availableFrom: parsed.available_from ? tc(TQ.rules.sanitize(String(parsed.available_from)).slice(0, 40)) : '',
+        options: options.map(function (o, i) {
+          var multi = options.length > 1;
+          return {
+            title: multi && o._variant ? tc(o._variant) : (multi ? '' : ''),
+            mode: 'itemised', lines: o.lines,
+            totalLabel: multi ? 'Option ' + String.fromCharCode(65 + i) + ' total (inc GST)' : 'Total (inc GST)',
+            _optLetter: multi ? String.fromCharCode(65 + i) : ''
+          };
+        }),
         warnings: warnings
       };
-      if (TQ.draft && TQ.draft.compose) TQ.draft.compose(out);   // titles + job + warranty + expect (deterministic)
+      /* prefix "Option A/B:" to the composed titles for multi-option quotes */
+      out.options.forEach(function (o) {
+        if (o._optLetter && o.title.indexOf('Option') !== 0) o.title = o.title ? 'Option ' + o._optLetter + ': ' + o.title : '';
+        delete o._optLetter;
+      });
+      if (TQ.draft && TQ.draft.compose) TQ.draft.compose(out);   // titles + THE JOB + warranty + expect (deterministic)
+      /* ensure multi-option titles carry the Option letter even after compose set them from the book */
+      if (out.options.length > 1) {
+        out.options.forEach(function (o, i) {
+          if (o.title.indexOf('Option') !== 0) o.title = 'Option ' + String.fromCharCode(65 + i) + ': ' + o.title;
+        });
+      }
       return out;
     }
   };

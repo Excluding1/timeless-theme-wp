@@ -222,35 +222,62 @@
     return lines;
   }
 
-  /* The set of price magnitudes the user actually TYPED as prices: numbers that survive the
-     same postcode / phone / quantity-unit guards the parser uses. This is what a price can be
-     in these notes, so binding the local LLM's amounts to it stops the model from ever turning
-     a postcode / phone digit into a line price (parity with the offline parser, no stricter). */
-  function collectPriceTokens(text) {
-    var src = String(text || '');
-    /* strip contacts + address the same way parse() does, so their digits (postcode, unit
-       number, phone) can never be read as a price, but a real price sitting in the same
-       sentence as the address still survives */
+  /* Strip contacts + address the same way parse() does, so their digits (postcode, unit
+     number, phone) can never be read as a price, but a real price sitting in the same
+     sentence as the address still survives. */
+  function stripNonPrice(src) {
+    src = String(src || '');
     var em = src.match(EMAIL_RE); if (em) src = src.replace(em[0], ' ');
     var ph = src.match(PHONE_RE); if (ph) src = src.replace(ph[0], ' ');
     src = src.replace(/address is\s+.{5,90}?(?:(?:nsw|qld|vic|act|wa|sa|nt|tas)[,\s]*\d{4}|\d{4}|nsw|qld|vic|act|wa|sa|nt|tas)/i, ' ');
-    var am = src.match(ADDR_RE); if (am) src = src.replace(am[1], ' ');
+    /* only strip a bare street address when it is confirmed by a nearby postcode or state,
+       so ordinary words that end in a street-type token ("either way", "the best st-andard")
+       are never mistaken for an address and don't eat a price */
+    var am = src.match(ADDR_RE);
+    if (am) {
+      var ctx = src.slice(am.index, am.index + am[0].length + 12);
+      if (/\d{4}|\b(?:nsw|qld|vic|act|wa|sa|nt|tas)\b/i.test(ctx)) src = src.replace(am[1], ' ');
+    }
     src = src.replace(/\b(?:at|in)\s+[a-z][a-z'’ ]{2,25}?\s+\d{4}\b/ig, ' ');
+    return src;
+  }
+  /* count each price magnitude in ONE block as a MULTISET (how many times it was typed as a price) */
+  function scanBlockCounts(block) {
+    var counts = {}, norm = String(block).replace(/(\d),(?=\d{3}(?:\D|$))/g, '$1');
+    norm.split(/\n|(?:\s[-–—]+\s)|,|;|(?:\s\+\s)|\band\b|\balso\b|\bplus\b/i)
+      .map(function (t) { return t.trim(); }).filter(Boolean)
+      .forEach(function (seg) {
+        var amt = findAmount(seg, !!matchCatalogue(seg));
+        if (typeof amt === 'number') counts[amt] = (counts[amt] || 0) + 1;
+      });
+    /* also capture unit prices phrased "at 90 each", "@90", "90 each", "90 per" (not at a
+       segment end, so findAmount misses them) so qty x unit pricing can be validated */
+    var m, ure = /(?:\bat\s*|@\s*)\$?\s?(\d{2,5})(?:\s*(?:each|ea|per)\b)?|\b(\d{2,5})\s*(?:each|ea|per)\b/gi;
+    while ((m = ure.exec(norm))) { var v = Number(m[1] || m[2]); if (v) counts[v] = (counts[v] || 0) + 1; }
+    return counts;
+  }
+  /* The set of price magnitudes the user actually TYPED as prices (flattened). */
+  function collectPriceTokens(text) {
     var set = {};
-    src.split(/option\s*(?:a|b|c|1|2|3)\s*[:\-.]?/i).forEach(function (block) {
-      var normalised = String(block).replace(/(\d),(?=\d{3}(?:\D|$))/g, '$1');
-      normalised.split(/\n|(?:\s[-–—]+\s)|,|;|(?:\s\+\s)|\band\b|\balso\b|\bplus\b/i)
-        .map(function (t) { return t.trim(); }).filter(Boolean)
-        .forEach(function (seg) {
-          var amt = findAmount(seg, !!matchCatalogue(seg));
-          if (typeof amt === 'number') set[amt] = 1;
-        });
+    stripNonPrice(text).split(/option\s*(?:a|b|c|1|2|3)\s*[:\-.]?/i).forEach(function (block) {
+      var c = scanBlockCounts(block);
+      Object.keys(c).forEach(function (k) { set[k] = 1; });
     });
     return set;
+  }
+  /* Per-block price ledger: an ORDERED array of {key, counts}. key '_head' = text before the
+     first "Option X"; then 'A','B','C',... in order. counts is a multiset per block. Binding a
+     model's amounts to the RIGHT block stops a price typed only in Option A from silently
+     funding a fabricated Option B line (which the headline total, options[0], never shows). */
+  function collectPriceTokensByBlock(text) {
+    var parts = stripNonPrice(text).split(/option\s*(?:a|b|c|1|2|3)\s*[:\-.]?/i);
+    var keys = ['_head', 'A', 'B', 'C', 'D', 'E'];
+    return parts.map(function (block, i) { return { key: keys[i] || ('G' + i), counts: scanBlockCounts(block) }; });
   }
 
   TQ.draft = {
     priceTokens: function (text) { return collectPriceTokens(text); },
+    priceTokensByBlock: function (text) { return collectPriceTokensByBlock(text); },
 
     parse: function (text) {
       var warnings = [];
