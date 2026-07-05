@@ -1,12 +1,15 @@
-"""Visual Scan — sample a video at scene changes and describe each keyframe.
+"""Visual Scan — read on-screen text + describe every part of a video.
 
 Fully local & offline on macOS via Apple's Vision framework (no cloud, no torch):
  - on-screen TEXT via VNRecognizeTextRequest (TikTok captions / overlays)
  - what's SHOWING via VNClassifyImageRequest (scene/object tags) + face count
 
-Frames are decoded with PyAV (no ffmpeg needed). We walk the video ~once per
-second and only analyse a frame when it differs enough from the last analysed
-one ("scan for new changes"), so static stretches are cheap.
+Frames are decoded with PyAV (no ffmpeg needed). We sample at a steady cadence
+across the WHOLE clip (the frame budget is spread over the full duration) and
+OCR every sample, so text that appears later in the video is never missed. The
+OUTPUT is then de-duplicated: a line is emitted only when the on-screen text
+meaningfully changes or the scene changes — so a persistent caption isn't
+repeated, but a new/added caption always shows up with its timestamp.
 """
 import difflib
 import io
@@ -15,12 +18,12 @@ from . import db
 
 VISUAL_DIR = db.DATA_DIR / "visual"
 
-SAMPLE_EVERY = 2.0     # seconds between candidate frames
-CHANGE_THRESH = 12     # mean abs diff (0-255, 32x32 gray) to count as a new scene
-MAX_FRAMES = 40        # hard cap on analysed keyframes per video
+SAMPLE_EVERY = 1.5     # min seconds between sampled frames (denser = catches quick captions)
+MAX_FRAMES = 60        # frame budget; on longer clips the interval stretches to still cover the end
 MIN_TAG_CONF = 0.15    # drop low-confidence scene tags
 MIN_OCR_CONF = 0.45    # drop low-confidence OCR lines (kills jittery garbage)
-SAME_TEXT_RATIO = 0.6  # caption counted "unchanged" above this similarity
+SAME_TEXT_RATIO = 0.85  # emit new text when it differs this much from the last emitted text
+SCENE_SIM = 0.5        # emit a scene-only line when tag overlap drops below this
 NO_CONTENT = "(no on-screen text or scene tags detected)"
 
 _probe = None  # cache the availability check
@@ -32,7 +35,6 @@ def available():
     if _probe is None:
         try:
             import av  # noqa: F401
-            import numpy  # noqa: F401
             import Vision  # noqa: F401
             import Quartz  # noqa: F401
             from PIL import Image  # noqa: F401
@@ -48,7 +50,7 @@ def unavailable_reason():
 
 
 def _fmt_ts(seconds):
-    m, s = divmod(int(seconds), 60)
+    m, s = divmod(int(max(seconds, 0)), 60)
     return f"{m:02d}:{s:02d}"
 
 
@@ -66,6 +68,21 @@ def _keep_ocr(s):
     return letters / len(s) >= 0.6 if s else False
 
 
+def _scene_tags(scene):
+    """Tag set for a scene string, ignoring the leading face count."""
+    return frozenset(
+        p.strip() for p in scene.split(",")
+        if p.strip() and "face" not in p
+    )
+
+
+def _jaccard(a, b):
+    if not a and not b:
+        return 1.0
+    union = a | b
+    return len(a & b) / len(union) if union else 1.0
+
+
 def _analyse_image(img, Vision, Quartz):
     """Run OCR + classification + face count on one PIL image."""
     buf = io.BytesIO()
@@ -75,7 +92,7 @@ def _analyse_image(img, Vision, Quartz):
     src = Quartz.CGImageSourceCreateWithData(cfdata, None)
     cg = Quartz.CGImageSourceCreateImageAtIndex(src, 0, None)
     if cg is None:
-        return "", []
+        return "", ""
     handler = Vision.VNImageRequestHandler.alloc().initWithCGImage_options_(cg, None)
 
     ocr = Vision.VNRecognizeTextRequest.alloc().init()
@@ -112,21 +129,23 @@ def analyse(media_path, username, vid, progress_cb=None):
     import av
     import Vision
     import Quartz
-    from PIL import Image
-    import numpy as np
 
     container = av.open(str(media_path))
     stream = container.streams.video[0]
     stream.thread_type = "AUTO"
-    tb = stream.time_base or stream.average_rate and (1 / stream.average_rate)
+    tb = stream.time_base or (stream.average_rate and (1 / stream.average_rate))
     duration = float(stream.duration * tb) if (stream.duration and tb) else None
 
-    entries = []           # (timestamp, text, scene)
-    last_small = None      # 32x32 gray array of the last analysed frame
-    last_sample_t = None   # timestamp of the last frame we let through the gate
-    synth_t = 0.0          # fallback clock for streams with no usable pts/timebase
-    last_text = ""
-    last_scene = None
+    # spread the frame budget across the WHOLE clip so the end is covered too
+    interval = SAMPLE_EVERY
+    if duration and duration > SAMPLE_EVERY * MAX_FRAMES:
+        interval = duration / MAX_FRAMES
+
+    entries = []             # (timestamp, text, scene)
+    last_sample_t = None
+    synth_t = 0.0            # fallback clock for streams with no usable pts/timebase
+    last_text = ""           # last EMITTED (normalised) text — for dedup
+    last_scene_key = None    # last EMITTED scene tag-set
     analysed = 0
 
     try:
@@ -135,40 +154,33 @@ def analyse(media_path, username, vid, progress_cb=None):
                 break
             if frame.pts is not None and tb:
                 t = float(frame.pts * tb)
-            else:                       # no presentation timestamp — use a synthetic clock
+            else:                       # no presentation timestamp — synthetic clock
                 t = synth_t
-                synth_t += SAMPLE_EVERY
+                synth_t += interval
             t = max(t, 0.0)
-            if last_sample_t is not None and t - last_sample_t < SAMPLE_EVERY:
+            if last_sample_t is not None and t - last_sample_t < interval - 0.05:
                 continue
             last_sample_t = t
 
             img = frame.to_image()
-            small = np.asarray(img.convert("L").resize((32, 32)), dtype="int16")
-            if last_small is not None:
-                diff = float(np.abs(small - last_small).mean())
-                if diff < CHANGE_THRESH:
-                    continue  # too similar to the last keyframe — skip
-            last_small = small
-
             text, scene = _analyse_image(img, Vision, Quartz)
             analysed += 1
             if progress_cb and duration:
                 progress_cb(min(t / duration, 1.0))
 
-            # collapse a caption that persists (with OCR jitter) across frames
             norm = " ".join(text.split()).lower()
-            if norm:
-                if difflib.SequenceMatcher(None, norm, last_text).ratio() >= SAME_TEXT_RATIO:
-                    text = ""  # same caption still on screen — don't repeat it
-                else:
+            text_changed = bool(norm) and (
+                difflib.SequenceMatcher(None, norm, last_text).ratio() < SAME_TEXT_RATIO
+            )
+            scene_key = _scene_tags(scene)
+            scene_changed = bool(scene_key) and (
+                last_scene_key is None or _jaccard(scene_key, last_scene_key) < SCENE_SIM
+            )
+            if text_changed or scene_changed:
+                entries.append((t, text if text_changed else "", scene))
+                if text_changed:
                     last_text = norm
-            # skip a frame that adds nothing new (no fresh text, same scene tags)
-            if not text and scene == last_scene:
-                continue
-            last_scene = scene
-            if text or scene:
-                entries.append((t, text, scene))
+                last_scene_key = scene_key
     finally:
         container.close()
 
