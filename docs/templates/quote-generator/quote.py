@@ -304,7 +304,7 @@ NEIL2 = {
 }
 
 ISABELLA = {
-    "customer": "Isabella Comber", "address": "3 Nova Place, South Penrith NSW 2750", "access": "",
+    "customer": "AitkenRE", "address": "Attn: Isabella Comber<br/>Property: 3 Nova Place, South Penrith NSW 2750", "access": "",
     "quote_no": "TR-1024", "date": "6 July 2026", "available": "",
     "job_intro": ("Resurfacing of your vanity benchtop and its built-in basin. From your photo the cream "
                   "benchtop and basin are worn and discoloured. We prep the surface, then bring it back to "
