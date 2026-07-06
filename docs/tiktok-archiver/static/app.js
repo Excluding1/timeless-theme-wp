@@ -91,6 +91,10 @@ function updateSettingsVisibility() {
   if (Date.now() > cookieMsgUntil) {
     $("cookieStatus").textContent = state.cookieFilePresent ? "A cookies.txt is saved ✓" : "";
   }
+  const m = $("whisperModel").value;
+  $("modelHint").textContent = (m === "large-v3" || m === "medium")
+    ? "⚠ Slow on a Mac CPU (~30-90s/video) + a large one-time download. 'small' is the fast, accurate default."
+    : "";
   const vs = $("visualScan");
   if (state.visualAvailable === false) {
     vs.disabled = true;

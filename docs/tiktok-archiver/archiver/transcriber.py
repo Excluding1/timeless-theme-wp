@@ -7,6 +7,11 @@ TRANSCRIPTS_DIR = db.DATA_DIR / "transcripts"
 
 MODEL_CHOICES = ("tiny", "base", "small", "medium", "large-v3")
 
+
+class Cancelled(Exception):
+    """Raised when a Stop is requested mid-transcription so the batch can bail out."""
+
+
 _model = None
 _model_size = None
 _model_lock = threading.Lock()
@@ -30,8 +35,13 @@ def _fmt_ts(seconds):
     return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
 
-def transcribe(media_path, username, vid, size=None, language=None, progress_cb=None):
-    """Transcribe a media file → (text, txt_path, srt_path). Paths are DATA_DIR-relative."""
+def transcribe(media_path, username, vid, size=None, language=None,
+               progress_cb=None, should_cancel=None):
+    """Transcribe a media file → (text, txt_path, srt_path). Paths are DATA_DIR-relative.
+
+    should_cancel: optional callable checked between segments; if it returns True
+    the transcription is abandoned (raises Cancelled) so Stop works mid-video.
+    """
     size = size or db.get_setting("whisper_model") or "base"
     if size not in MODEL_CHOICES:
         size = "base"
@@ -48,6 +58,8 @@ def transcribe(media_path, username, vid, size=None, language=None, progress_cb=
     lines, srt_blocks = [], []
     n = 0
     for seg in segments:  # generator — transcription happens as we iterate
+        if should_cancel and should_cancel():
+            raise Cancelled()
         text = seg.text.strip()
         if not text:
             continue
