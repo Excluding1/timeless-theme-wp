@@ -109,8 +109,9 @@
   };
 
   /* Mandatory text for a "warranty against defects" document covering goods AND services
-     (reg 90(2), Competition and Consumer Regulations 2010). Statutory wording: print verbatim,
-     never edit (it intentionally overrides our banned-word style rule). */
+     (reg 90(4), Competition and Consumer Regulations 2010 — verified verbatim against the
+     in-force compilation). Statutory wording: print verbatim, never edit (it intentionally
+     overrides our banned-word style rule). */
   R.ACL_WARRANTY_TEXT =
     'Our goods and services come with guarantees that cannot be excluded under the Australian Consumer Law. ' +
     'For major failures with the service, you are entitled: to cancel your service contract with us; and to a refund ' +

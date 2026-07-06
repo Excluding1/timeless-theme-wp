@@ -153,6 +153,22 @@
         out.gstRegistered = true;
         out._v3 = true;
       }
+      /* v4 (Allan, 2026-07-07): resurfacing no longer implies strip-back — update SAVED price
+         books whose wording still exactly matches the old defaults (customised text untouched) */
+      if (!s._v4) {
+        (out.priceBook || []).forEach(function (e) {
+          if (e.id === 'wall-resurface' && e.desc === 'Wall and bathtub-side resurfacing (strip back, then resurface)') {
+            e.desc = 'Wall and bathtub-side resurfacing';
+          }
+          if (e.id === 'wall-resurface' && e.process === 'For the walls we strip the old coatings back, repair and prep the surface, mask everything off, then apply a commercial 3-pack coating in gloss white.') {
+            e.process = 'For the walls we prep and repair the surface, mask everything off, then apply a commercial 3-pack coating in gloss white.';
+          }
+          if (e.id === 'bath-resurface' && e.process === 'For the bath we repair any chips, strip and sand back the old surface, prep and mask everything off, then apply a commercial 3-pack coating in gloss white.') {
+            e.process = 'For the bath we repair any chips, prep and mask everything off, then apply a commercial 3-pack coating in gloss white.';
+          }
+        });
+        out._v4 = true;
+      }
       return out;
     },
 
@@ -164,7 +180,7 @@
       }
     },
 
-    /* sequential numbering: prefix + zero-padded counter, e.g. TR-2026-0703 -> TR-2026-0704 */
+    /* sequential numbering: prefix + zero-padded counter, e.g. TR-1022 -> TR-1023 */
     async nextDocNo() {
       var s = await db.getSettings();
       var n = Number(s.nextDocNo) || 1022;

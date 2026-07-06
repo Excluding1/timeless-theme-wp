@@ -259,6 +259,17 @@
         var s = TQ.rules.sanitize(String(t || '')).slice(0, max);
         return (s && s.length >= (min || 2) && M.textIsSafe(s, src, { min: min || 2, max: max }) && M.claimWordsSafe(s, src) && !TQ.rules.bannedIn(s)) ? s : '';
       }
+      /* short customer-facing labels (variant/area) must also be WORD-provenanced: every
+         significant word stem must appear in the notes, so the model can't invent scope
+         wording like "includes waterproofing upgrade" that no digit check would catch */
+      function safeLabel(t, max) {
+        var s = safeText(t, 2, max);
+        if (!s || /^option\b/i.test(s)) return '';
+        var srcStems = M._sigWords(src);
+        return M._sigWords(s).every(function (w) { return srcStems.indexOf(w) !== -1; }) ? s : '';
+      }
+      var srcHasIncluded = /(?:^|\s)(included|free|no charge|no cost|no extra charge)(?=[\s.,;!)]|$)/i.test(src);
+      var srcDigits = M.digitsOf(src);
 
       var warnings = [], groups = {};
       parsed.items.forEach(function (it) {
@@ -268,23 +279,34 @@
         var cat = it.service_id && byId[it.service_id], desc, catId = null, primary = false;
         if (cat) { desc = cat.desc; catId = cat.id; primary = !!cat.primary; }
         else { desc = safeText(it.desc, 2, 90); if (!desc) return; }
-        var area = it.area ? safeText(it.area, 2, 40) : '';
+        var area = it.area ? safeLabel(it.area, 40) : '';
         if (area) desc += ' (' + tc(area) + ')';
 
         var g = (typeof it.option_group === 'number' && it.option_group >= 0) ? Math.floor(it.option_group) : 0;
-        /* which price block this line may draw from: an explicit source_key wins, else the
-           option-group position (group 1 -> block A, group 2 -> B), else the shared head.
-           This is what stops a price typed only in one option from funding another. */
-        var block = (/^[A-C]$/.test(String(it.source_key)) && byKey[it.source_key]) ? byKey[it.source_key] : (ledger[g] || head);
+        /* which price block this line may draw from: the option-group POSITION first
+           (group 1 -> block A, group 2 -> B). source_key is only a fallback when the
+           positional block doesn't exist (skipped group numbers) — never an override,
+           so a group-2 line can't name source_key "A" and drain Option A's typed prices. */
+        var block = ledger[g] || ((/^[A-C]$/.test(String(it.source_key)) && byKey[it.source_key]) ? byKey[it.source_key] : head);
 
         /* amount: included sentinel / qty*unit / literal price, consumed from the ledger */
         var amt = null, priced = false;
         if (it.included === true || it.amount === 'included') {
-          amt = 'included';
+          /* only honour "included" when the notes actually say included/free/no charge */
+          if (srcHasIncluded) amt = 'included';
+          else warnings.push('AI marked "' + desc + '" as included but your notes never say included or free, set its price manually');
         } else if (Number.isInteger(it.qty) && it.qty > 0 && it.unit_amount != null && isFinite(Number(it.unit_amount))) {
+          /* the qty itself must be a number the tradie typed (and sane), or the model could
+             multiply a real $90 unit into a total that appears nowhere in the notes */
           var u = Number(it.unit_amount);
-          if (consume(block, u) || consume(head, u)) { amt = Math.round(it.qty * u * 100) / 100; priced = true; }
-          else warnings.push('AI read a $' + u + ' unit price for "' + desc + '" that is not in your notes, ignored it');
+          if (it.qty > 50 || srcDigits.indexOf(String(it.qty)) === -1) {
+            warnings.push('AI used a quantity of ' + it.qty + ' for "' + desc + '" that is not in your notes, ignored it');
+          } else if (consume(block, u) || consume(head, u)) {
+            amt = Math.round(it.qty * u * 100) / 100; priced = true;
+            desc += ' (' + it.qty + ' x $' + u + ')';        // make the maths visible for review
+          } else {
+            warnings.push('AI read a $' + u + ' unit price for "' + desc + '" that is not in your notes, ignored it');
+          }
         } else if (it.amount != null && isFinite(Number(it.amount))) {
           var a = Number(it.amount);
           if (consume(block, a) || consume(head, a)) { amt = a; priced = true; }
@@ -295,15 +317,20 @@
           else { amt = 0; warnings.push('"' + desc + '": set the price manually'); }
         }
 
-        (groups[g] = groups[g] || []).push({ desc: desc, amount: amt, catId: catId, primary: primary, _priced: priced, _variant: safeText(it.variant_label, 2, 30) });
+        (groups[g] = groups[g] || []).push({ desc: desc, amount: amt, catId: catId, primary: primary, _priced: priced, _variant: safeLabel(it.variant_label, 30) });
       });
 
       /* assemble options: group 0 is shared, prepended to each alternative group.
          A non-zero group with NO ledger-priced line of its own is a spurious "descriptive or"
          split, so if none of the alternatives are really priced we collapse to one option. */
+      /* dedupe on desc AND amount: two same-service lines with different typed prices
+         (e.g. main bath 1540 + ensuite bath 1300 with no area labels) must BOTH survive */
       function dedupe(ls) {
         var seen = {}, out = [];
-        ls.forEach(function (l) { if (!seen[l.desc]) { seen[l.desc] = 1; out.push(l); } });
+        ls.forEach(function (l) {
+          var k = l.desc + '|' + String(l.amount);
+          if (!seen[k]) { seen[k] = 1; out.push(l); }
+        });
         return out;
       }
       var shared = groups[0] || [];
@@ -323,6 +350,11 @@
         realAlts.forEach(function (g) {
           var v = (groups[g].filter(function (l) { return l._variant; })[0] || {})._variant || '';
           options.push({ lines: dedupe(shared.concat(groups[g])), _variant: v });
+          /* an alternative built entirely from book defaults (no typed price) may be a
+             phantom the model spun out of a passing mention — make the human look at it */
+          if (!groups[g].some(function (l) { return l._priced; })) {
+            warnings.push('An option was drafted with NO typed price (book defaults only), check it is a real alternative you offered');
+          }
         });
       } else {
         var all = shared.slice();
@@ -338,13 +370,19 @@
       if (!options.length) return null;
 
       var c = parsed.customer || {};
+      /* contact details must literally appear in the notes — a hallucinated email/phone is
+         worse than a blank one (the quote could be sent to the wrong person) */
+      var email = String(c.email || '').slice(0, 80);
+      if (email && src.toLowerCase().indexOf(email.toLowerCase()) === -1) email = '';
+      var phone = String(c.phone || '').replace(/[^\d +()-]/g, '').slice(0, 40);
+      if (phone && src.replace(/[^\d]/g, '').indexOf(phone.replace(/[^\d]/g, '')) === -1) phone = '';
       var out = {
         customer: {
           name: TQ.rules.sanitize(String(c.name || '')).slice(0, 80),
           address: TQ.rules.sanitize(String(c.address || '')).slice(0, 120),
           access: safeText(c.access, 2, 120),
-          phone: String(c.phone || '').replace(/[^\d +()-]/g, '').slice(0, 40),
-          email: String(c.email || '').slice(0, 80)
+          phone: phone,
+          email: email
         },
         availableFrom: parsed.available_from ? tc(TQ.rules.sanitize(String(parsed.available_from)).slice(0, 40)) : '',
         options: options.map(function (o, i) {

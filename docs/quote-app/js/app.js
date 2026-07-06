@@ -385,7 +385,7 @@
       '<label>Special conditions (one per line)<textarea id="wspecial" rows="3">' + esc((d.warrantySpecial && d.warrantySpecial.length ? d.warrantySpecial : TQ.warranty.composeSpecial(d)).join('\n')) + '</textarea></label>' +
       '<div class="actions"><button id="wdownload">Download warranty PDF</button>' +
       '<button id="wpolish" title="Tidies the special conditions with the local AI. Keeps every instruction and number; never invents anything.">✨ Tidy conditions</button>' +
-      (S.settings.signatureDataUrl ? '' : '<span class="muted" style="font-size:12px">(no signature saved yet: Settings → Signature)</span>') +
+      '<span class="muted" style="font-size:12px">(you sign it in a popup on download)</span>' +
       '</div></section>' +
 
       '<div class="actions"><button id="save" class="primary big">Save</button>' +

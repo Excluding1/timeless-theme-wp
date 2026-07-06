@@ -31,11 +31,13 @@ invoice-form layout modelled on the business's original invoice and the ATO's re
 - **Warranty PDF (after the job):** a signed single-page "Limited Workmanship Warranty" that
   matches the services on the document — per-material periods (resurfacing up to 5yr / tiling
   up to 5yr / grout 2yr / silicone 12mo), auto-composed special conditions + care + exclusions
-  (incl. tile-over specifics), the **exact ACL reg 90(4) mandatory text** verbatim, a claims
-  address, and your drawn signature. Draw the signature once in **Settings → Signature**; add
-  a **business/postal address** (the warranty rules require a claims address). Legally it must
-  be given WITH the final invoice at completion, not just linked — the app reminds you.
-  Adapted from our subbie's Ultra Glaze operator card, rebuilt to our brand + ACL rules.
+  (incl. tile-over specifics), the **exact ACL reg 90(4) mandatory text** verbatim, and a claims
+  address. **Signing:** clicking Warranty opens a popup where you pick who is signing (Allan /
+  Marko, editable in Settings → Warranty signing) and sign fresh on the spot; the signer's name
+  prints on the PDF. A saved signature is optional (one-tap reuse in the popup). Add a
+  **business/postal address** in Settings (the warranty rules require a claims address).
+  Legally it must be given WITH the final invoice at completion, not just linked — the app
+  reminds you. Adapted from our subbie's Ultra Glaze operator card, rebuilt to our brand + ACL rules.
 - **Clickable links** to `/warranty/`, `/care-instructions/` and `/terms/` on your site print
   in the footer of every quote, invoice and warranty PDF.
 - **Copy send message** button: one-click email/SMS text for a quote or invoice.
@@ -55,7 +57,7 @@ Any static host or local server — no build step. Locally: serve this folder on
    Authentication → Users → **Add user** (your email + strong password = the app login) →
    Project Settings → API: copy the **Project URL** + **anon public key**.
 2. **Netlify:** drag this folder onto app.netlify.com (or `netlify deploy --prod --dir=docs/quote-app`).
-3. In the app: **Settings → Online saving** → paste URL + key, sign in →
+3. In the app: click the gold **Sign in to sync** badge (the connection is pre-wired) →
    "Copy this browser's quotes → cloud" if you drafted any locally.
 
 The anon key is safe in the app (public by design; login + row security protect the data).
@@ -76,13 +78,14 @@ of a request.
   $5,000. Until a contractor licence is held, keep jobs under that threshold (lawyer question
   is already queued with the Fair-Work brief).
 - Once licensed, the licence number legally belongs on all stationery/advertising — add it
-  to Settings → it prints under the ABN (field to be enabled at that point).
+  to Settings (the "NSW licence no" field is already there) → it prints under the ABN.
 - Jobs $5,000–$20,000 need a written small-jobs contract containing the licence number;
   NSW caps home-building deposits at **10%** (our standard).
 
 ## Files
 ```
-index.html            app shell (script order matters: vendor → rules → catalogue → draft → pdfgen → db → minillm → app)
+index.html            app shell (script order matters: config → vendor → rules → catalogue → warranty → draft → pdfgen → db → minillm → app)
+js/warranty.js        warranty model: per-service periods, special-condition composer
 css/app.css           brand styling, responsive
 js/rules.js           GST maths, sanitiser, banned words, validation (incl. the >$5k NSW warning)
 js/catalogue.js       price book defaults + composer metadata (phrase/process/expect/warranty per service)

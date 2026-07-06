@@ -241,19 +241,31 @@
     src = src.replace(/\b(?:at|in)\s+[a-z][a-z'’ ]{2,25}?\s+\d{4}\b/ig, ' ');
     return src;
   }
-  /* count each price magnitude in ONE block as a MULTISET (how many times it was typed as a price) */
+  /* count each price magnitude in ONE block as a MULTISET (how many times it was typed as a
+     price). One physical occurrence must count EXACTLY once: the unit-price scan runs per
+     segment and skips a value findAmount already counted for that same segment, so "at 1540"
+     or "$90 each" can never enter the ledger twice and fund two lines. */
   function scanBlockCounts(block) {
     var counts = {}, norm = String(block).replace(/(\d),(?=\d{3}(?:\D|$))/g, '$1');
     norm.split(/\n|(?:\s[-–—]+\s)|,|;|(?:\s\+\s)|\band\b|\balso\b|\bplus\b/i)
       .map(function (t) { return t.trim(); }).filter(Boolean)
       .forEach(function (seg) {
+        var already = {};
         var amt = findAmount(seg, !!matchCatalogue(seg));
-        if (typeof amt === 'number') counts[amt] = (counts[amt] || 0) + 1;
+        if (typeof amt === 'number') {
+          counts[amt] = (counts[amt] || 0) + 1;
+          already[amt] = (already[amt] || 0) + 1;
+        }
+        /* unit prices phrased "at 90 each", "@90", "90 each", "90 per" (mid-segment, so
+           findAmount misses them) — skipping any value findAmount took from THIS segment */
+        var m, ure = /(?:\bat\s*|@\s*)\$?\s?(\d{2,5})(?:\s*(?:each|ea|per)\b)?|\b(\d{2,5})\s*(?:each|ea|per)\b/gi;
+        while ((m = ure.exec(seg))) {
+          var v = Number(m[1] || m[2]);
+          if (!v) continue;
+          if (already[v] > 0) { already[v]--; continue; }
+          counts[v] = (counts[v] || 0) + 1;
+        }
       });
-    /* also capture unit prices phrased "at 90 each", "@90", "90 each", "90 per" (not at a
-       segment end, so findAmount misses them) so qty x unit pricing can be validated */
-    var m, ure = /(?:\bat\s*|@\s*)\$?\s?(\d{2,5})(?:\s*(?:each|ea|per)\b)?|\b(\d{2,5})\s*(?:each|ea|per)\b/gi;
-    while ((m = ure.exec(norm))) { var v = Number(m[1] || m[2]); if (v) counts[v] = (counts[v] || 0) + 1; }
     return counts;
   }
   /* The set of price magnitudes the user actually TYPED as prices (flattened). */
