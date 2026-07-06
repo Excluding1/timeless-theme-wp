@@ -308,9 +308,10 @@ ISABELLA = {
     "quote_no": "TR-1024", "date": "6 July 2026", "available": "",
     "job_intro": ("Resurfacing of your vanity benchtop and its built-in basin. From your photo the cream "
                   "benchtop and basin are worn and discoloured. We prep the surface, then bring it back to "
-                  "a smooth, fresh gloss finish that looks and feels like new."),
+                  "a smooth gloss-white finish, a clean white in place of the current cream, that looks and "
+                  "feels like new."),
     "options": [{"title": "Benchtop and basin resurfacing", "total_label": "Total (inc GST)", "lines": [
-        ("The full vanity benchtop and the built-in basin resurfaced as one seamless finish", 1050.00),
+        ("The full vanity benchtop and the built-in basin resurfaced to a smooth gloss-white finish, as one seamless surface", 1050.00),
         ("Surface prep, etch and masking, then a commercial 3-pack coating", "included"),
         ("Existing tap and fittings worked around and cleaned up on completion", "included")]}],
     "options_note": ("This price assumes the benchtop and basin are free of cracks or chips. If there are "
