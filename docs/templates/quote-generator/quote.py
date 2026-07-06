@@ -319,7 +319,9 @@ ISABELLA = {
     "warranty": WARRANTY_5YR,
     "expect": ["About 3 to 5 hours on site", "Ready to use the next morning (full cure 24 to 48h)",
                "Fixed price, no hidden fees"],
-    "photo": "", "photo_caption": "", "footer_bottom": True,
+    "photo": "/Users/excluding/Downloads/timeless-theme-wp/docs/templates/quote-generator/photos/isabella-vanity.jpg",
+    "photo_caption": "Your vanity, from your photo",
+    "footer_bottom": True,
     "out": "/Users/excluding/Downloads/Timeless-Quote-Isabella-Comber.pdf",
 }
 
