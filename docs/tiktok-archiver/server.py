@@ -226,12 +226,14 @@ def _export_text(rows):
         date = r.get("upload_date") or "no date"
         title = " ".join((r.get("title") or "").split())[:120] or "(no title)"
         body = ""
+        if r.get("caption"):
+            body += f"[caption]\n{r['caption']}\n\n"
         if r.get("transcript"):
             body += f"[transcript]\n{r['transcript']}\n"
         if r.get("visual"):
             body += f"\n[on-screen / visual]\n{r['visual']}\n"
-        if not body and r.get("status") == "no-speech":
-            body = "(no speech detected — music/text-only clip)\n"
+        if not body.strip() and r.get("status") == "no-speech":
+            body += "(no speech detected — music/text-only clip)\n"
         blocks.append(
             f"===== @{r['username']} — {date} — {title} (id {r['id']}) =====\n"
             f"{r.get('url') or ''}\n\n{body}"
@@ -253,6 +255,8 @@ def _export_markdown(rows, scope_label):
         out += ["", "---", "", f"## {title}", "", " · ".join(meta)]
         if r.get("url"):
             out.append(f"[Watch on TikTok]({r['url']})")
+        if r.get("caption"):
+            out += ["", "**Caption**", "", r["caption"]]
         if r.get("transcript"):
             out += ["", "**Transcript**", "", r["transcript"]]
         elif r.get("status") == "no-speech":

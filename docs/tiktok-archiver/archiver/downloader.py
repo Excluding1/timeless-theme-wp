@@ -152,8 +152,12 @@ def list_profile(url, limit=None):
 
 
 def _meta_fields(info, fallback_url):
+    # `title` is yt-dlp's short (often truncated) heading; `description` is the FULL
+    # post caption with all the hashtags — keep both.
+    caption = (info.get("description") or info.get("title") or "").strip()
     return {
         "title": (info.get("title") or info.get("description") or "").strip(),
+        "caption": caption,
         "upload_date": info.get("upload_date"),
         "duration": info.get("duration"),
         "view_count": info.get("view_count"),

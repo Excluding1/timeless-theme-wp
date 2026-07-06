@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS videos (
     username        TEXT NOT NULL,
     url             TEXT,
     title           TEXT,
+    caption         TEXT,
     upload_date     TEXT,
     duration        REAL,
     view_count      INTEGER,
@@ -66,6 +67,7 @@ MIGRATIONS = [
     "ALTER TABLE videos ADD COLUMN visual TEXT",
     "ALTER TABLE videos ADD COLUMN visual_path TEXT",
     "ALTER TABLE videos ADD COLUMN scanned_at TEXT",
+    "ALTER TABLE videos ADD COLUMN caption TEXT",
 ]
 
 _lock = threading.RLock()
@@ -205,7 +207,7 @@ def add_pending_video(vid, username, url, title):
 
 
 _UPDATABLE = {
-    "url", "title", "upload_date", "duration", "view_count", "like_count",
+    "url", "title", "caption", "upload_date", "duration", "view_count", "like_count",
     "file_path", "thumb_path", "status", "error", "transcript",
     "transcript_path", "srt_path", "visual", "visual_path",
     "downloaded_at", "transcribed_at", "scanned_at",
@@ -284,9 +286,9 @@ def video(vid):
 
 def _search_clause(q, where, params):
     esc = q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
-    where.append("(title LIKE ? ESCAPE '\\' OR transcript LIKE ? ESCAPE '\\' "
-                 "OR visual LIKE ? ESCAPE '\\')")
-    params += [f"%{esc}%"] * 3
+    where.append("(title LIKE ? ESCAPE '\\' OR caption LIKE ? ESCAPE '\\' "
+                 "OR transcript LIKE ? ESCAPE '\\' OR visual LIKE ? ESCAPE '\\')")
+    params += [f"%{esc}%"] * 4
 
 
 def videos(username=None, q=None):
@@ -314,7 +316,7 @@ def videos(username=None, q=None):
 
 
 def transcripts(username=None, q=None, ids=None):
-    sql = ("SELECT id, username, url, title, upload_date, duration, view_count, "
+    sql = ("SELECT id, username, url, title, caption, upload_date, duration, view_count, "
            "status, transcript, visual FROM videos")
     where, params = [], []
     if ids:

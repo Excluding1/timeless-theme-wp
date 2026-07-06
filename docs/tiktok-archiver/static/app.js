@@ -394,6 +394,12 @@ function buildVideoCard(v) {
 
   if (v.error) body.append(el("div", { class: "err", text: v.error }));
 
+  // full post caption (hashtags and all) — the short title above is often truncated
+  if (v.caption && v.caption !== v.title) {
+    body.append(el("div", { class: "vlabel", text: "Caption" }),
+                el("div", { class: "snippet caption", text: v.caption }));
+  }
+
   if (v.has_transcript && v.snippet) {
     const snip = el("div", { class: "snippet", text: v.snippet });
     body.append(snip);
