@@ -78,7 +78,7 @@ def _card_style(extra):
         ("LEFTPADDING", (0, 0), (-1, -1), 11), ("RIGHTPADDING", (0, 0), (-1, -1), 11),
         ("TOPPADDING", (0, 0), (-1, -1), 2), ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
-        ("BACKGROUND", (0, 0), (1, 0), NAVY), ("SPAN", (0, 0), (1, 0)),
+        ("BACKGROUND", (0, 0), (1, 0), NAVY),
         ("VALIGN", (0, 0), (1, 0), "MIDDLE"),
         ("TOPPADDING", (0, 0), (1, 0), 6), ("BOTTOMPADDING", (0, 0), (1, 0), 6),
     ] + extra)
@@ -95,7 +95,8 @@ def _option_card(opt):
     tot_r = len(rows)
     rows.append([Paragraph(opt.get("total_label", "Total (inc GST)"), TOTL_L), Paragraph("$" + _money(tot), TOTL_A)])
     rows.append([Paragraph("GST included", SUBL), Paragraph(_money(gst), SUBL)])
-    extra = [("LINEABOVE", (0, tot_r), (-1, tot_r), 0.6, LINE), ("TOPPADDING", (0, tot_r), (-1, tot_r), 5)]
+    extra = [("SPAN", (0, 0), (1, 0)),   # itemised: the title bar spans full width (no price on the bar)
+             ("LINEABOVE", (0, tot_r), (-1, tot_r), 0.6, LINE), ("TOPPADDING", (0, tot_r), (-1, tot_r), 5)]
     t = Table(rows, colWidths=[140 * mm, 34 * mm]); t.setStyle(_card_style(extra))
     return t
 
@@ -167,7 +168,7 @@ def build_quote(cfg):
     wt.setStyle(TableStyle([("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
                             ("VALIGN", (0, 0), (-1, -1), "TOP")]))
     _book = [Paragraph("To book", FOOTH),
-             Paragraph("A 10% deposit secures your date. Valid 30 days; prices inc GST. Reply to this quote or "
+             Paragraph("A 10% deposit secures your date. Valid 7 days; prices inc GST. Reply to this quote or "
                        "call 0451 110 154 to go ahead.", FBODY)]
     _pay = [Paragraph("Deposit &amp; payment", FOOTH),
             Paragraph("Timeless Resurfacing<br/>BSB 032146&nbsp;&nbsp;&nbsp;Acc 025303", FBODY)]
@@ -302,7 +303,27 @@ NEIL2 = {
     "out": "/Users/excluding/Downloads/Timeless-Quote-Neil-Prout-retile.pdf",
 }
 
-CONFIGS = {"JOHN": JOHN, "STEPHANIE": STEPHANIE, "TILEQ": TILEQ, "NEIL2": NEIL2}
+ISABELLA = {
+    "customer": "Isabella Comber", "address": "3 Nova Place, South Penrith NSW 2750", "access": "",
+    "quote_no": "TR-1024", "date": "6 July 2026", "available": "",
+    "job_intro": ("Resurfacing of your vanity benchtop and its built-in basin. From your photo the cream "
+                  "benchtop and basin are worn and discoloured. We strip and prep the surface, then bring "
+                  "it back to a smooth, fresh gloss finish that looks and feels like new."),
+    "options": [{"title": "Benchtop and basin resurfacing", "price": "$1,050", "items": [
+        "The full vanity benchtop and the built-in basin resurfaced as one seamless finish",
+        "Strip back, surface prep, etch and masking, then a commercial 3-pack coating",
+        "Existing tap and fittings worked around and cleaned up on completion"]}],
+    "options_note": ("This price assumes the benchtop and basin are free of cracks or chips. We confirm the "
+                     "surface on arrival, and if any cracks or chips are found we will talk you through any "
+                     "change before we start. The price you agree is the price you pay."),
+    "warranty": WARRANTY_5YR,
+    "expect": ["About 3 to 5 hours on site", "Ready to use the next morning (full cure 24 to 48h)",
+               "Fixed price, no hidden fees"],
+    "photo": "", "photo_caption": "", "footer_bottom": True,
+    "out": "/Users/excluding/Downloads/Timeless-Quote-Isabella-Comber.pdf",
+}
+
+CONFIGS = {"JOHN": JOHN, "STEPHANIE": STEPHANIE, "TILEQ": TILEQ, "NEIL2": NEIL2, "ISABELLA": ISABELLA}
 
 if __name__ == "__main__":
     for n in (sys.argv[1:] or list(CONFIGS)):
