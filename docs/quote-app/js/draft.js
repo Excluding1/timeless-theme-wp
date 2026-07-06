@@ -222,13 +222,16 @@
     return lines;
   }
 
-  /* Strip contacts + address the same way parse() does, so their digits (postcode, unit
-     number, phone) can never be read as a price, but a real price sitting in the same
-     sentence as the address still survives. */
+  /* Strip contacts + name + address the same way parse() does, so their digits (postcode,
+     unit number, phone) can never be read as a price, but a real price sitting in the same
+     sentence still survives. Also removes the dangling "at/in" an address strip leaves
+     behind ("...1050 at ,") so a price stays at its segment end and keeps binding. */
   function stripNonPrice(src) {
     src = String(src || '');
     var em = src.match(EMAIL_RE); if (em) src = src.replace(em[0], ' ');
     var ph = src.match(PHONE_RE); if (ph) src = src.replace(ph[0], ' ');
+    var nm = src.match(/(?:name is|customer is|client is|for|quote for)\s+((?:[A-Z][a-zA-Z'’-]+)(?:\s+[A-Z][a-zA-Z'’-]+){0,2})\b/);
+    if (nm) src = src.replace(nm[0], ' ');
     src = src.replace(/address is\s+.{5,90}?(?:(?:nsw|qld|vic|act|wa|sa|nt|tas)[,\s]*\d{4}|\d{4}|nsw|qld|vic|act|wa|sa|nt|tas)/i, ' ');
     /* only strip a bare street address when it is confirmed by a nearby postcode or state,
        so ordinary words that end in a street-type token ("either way", "the best st-andard")
@@ -239,6 +242,7 @@
       if (/\d{4}|\b(?:nsw|qld|vic|act|wa|sa|nt|tas)\b/i.test(ctx)) src = src.replace(am[1], ' ');
     }
     src = src.replace(/\b(?:at|in)\s+[a-z][a-z'’ ]{2,25}?\s+\d{4}\b/ig, ' ');
+    src = src.replace(/\b(?:at|in)\s*(?=[,.;]|$)/gi, ' ');   // dangler left where an address was removed
     return src;
   }
   /* count each price magnitude in ONE block as a MULTISET (how many times it was typed as a
@@ -352,6 +356,10 @@
           warnings.push('No address found, add it manually');
         }
       }
+
+      /* clean the dangling "at/in" an address strip leaves behind, so a price that sat
+         before the address ("...benchtop 1050 at 3 Nova Place...") stays at its segment end */
+      src = src.replace(/\b(?:at|in)\s*(?=[,.;]|$)/gi, ' ');
 
       /* ---- date hints (before item parsing so they never read as items) ---- */
       var av = src.match(/\b(?:available|can do it|start)(?:\s+\w+){0,3}?\s+(\d{1,2}\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*(?:\s+\d{4})?)/i);

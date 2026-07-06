@@ -324,7 +324,7 @@
 
       '<section class="ai"><h3>Quick Draft <span class="tag">built-in, offline</span></h3>' +
       '<p class="hint">Paste the job in your own words (names, address, prices like “2250 tiling on top”, “option a / option b”…). It fills the form below from the price book. You always review before the PDF exists.</p>' +
-      '<textarea id="aitext" rows="4" placeholder="name is Neil Prout address is 29/43 Hereford Street, Glebe, nsw 2037, 2250 for new floor tiles on top and upskirting, 1000 strip out, 700 tipping the old tiles"></textarea>' +
+      '<textarea id="aitext" rows="4" placeholder="resurface the benchtop and basin 1050 for Isabella Comber at 3 Nova Place, South Penrith nsw 2750"></textarea>' +
       '<div class="actions"><button id="draftbtn" class="primary">Draft it</button>' +
       '<button id="aidraftbtn" title="Uses the local AI to read messy notes and fill the form. Validated against your price book; it can never set a price you did not type.">✨ AI draft</button>' +
       '<button id="polishbtn" title="Rewrites the job wording and options note with the local AI. Runs entirely in your browser; prices, numbers and warranty are never touched.">✨ Polish wording</button>' +
