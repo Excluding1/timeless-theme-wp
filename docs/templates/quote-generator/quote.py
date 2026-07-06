@@ -313,9 +313,9 @@ ISABELLA = {
         "The full vanity benchtop and the built-in basin resurfaced as one seamless finish",
         "Surface prep, etch and masking, then a commercial 3-pack coating",
         "Existing tap and fittings worked around and cleaned up on completion"]}],
-    "options_note": ("This price assumes the benchtop and basin are free of cracks or chips. We confirm the "
-                     "surface on arrival, and if any cracks or chips are found we will talk you through any "
-                     "change before we start. The price you agree is the price you pay."),
+    "options_note": ("This price assumes the benchtop and basin are free of cracks or chips. If there are "
+                     "any, please let us know beforehand and send us a photo of the crack or chip, so we can "
+                     "confirm the work and the price before we book you in. The price you agree is the price you pay."),
     "warranty": WARRANTY_5YR,
     "expect": ["About 3 to 5 hours on site", "Ready to use the next morning (full cure 24 to 48h)",
                "Fixed price, no hidden fees"],
