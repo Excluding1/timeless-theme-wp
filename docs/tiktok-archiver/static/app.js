@@ -258,15 +258,20 @@ function wireAddProfile() {
   };
   $("addProfile").addEventListener("click", add);
   $("profileInput").addEventListener("keydown", (e) => { if (e.key === "Enter") add(); });
+  $("syncAll").addEventListener("click", async () => {
+    try { await api("/api/sync-all", { method: "POST", body: JSON.stringify({ transcribe: true }) }); }
+    catch (e) { alert("Sync all failed to start: " + e.message); }
+  });
 }
 
 /* ---------- job banner ---------- */
 
 function renderJob() {
   const j = state.job;
+  $("syncAll").disabled = !!(j && j.state === "running");
   $("jobCard").hidden = !j;
   if (!j) return;
-  const verb = { sync: "Syncing @", transcribe: "Transcribing for @", visual: "Visual-scanning for @" };
+  const verb = { sync: "Syncing @", "sync-all": "Syncing ", transcribe: "Transcribing for @", visual: "Visual-scanning for @" };
   $("jobTitle").textContent = (verb[j.kind] || "Working on @") + j.username;
   const phase = $("jobPhase");
   phase.textContent = j.state === "running" ? j.phase : j.state;

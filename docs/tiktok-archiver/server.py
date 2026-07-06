@@ -109,6 +109,17 @@ def sync(body: dict = Body(...)):
     return {"ok": True}
 
 
+@app.post("/api/sync-all")
+def sync_all(body: dict = Body(default={})):
+    try:
+        jobs.start_sync_all(do_transcribe=bool(body.get("transcribe", True)))
+    except jobs.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return {"ok": True}
+
+
 @app.post("/api/job/cancel")
 def cancel_job():
     if not jobs.request_cancel():

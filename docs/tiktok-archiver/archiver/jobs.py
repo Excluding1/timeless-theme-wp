@@ -86,6 +86,33 @@ def start_sync(username, limit=None, do_transcribe=True):
     ).start()
 
 
+def start_sync_all(do_transcribe=True):
+    if not db.profiles():
+        raise ValueError("No profiles added yet.")
+    _new_job("sync-all", "all profiles")
+    threading.Thread(
+        target=_run_safe, args=(_run_sync_all, do_transcribe), daemon=True
+    ).start()
+
+
+def _run_sync_all(do_transcribe):
+    profiles = db.profiles()
+    for idx, p in enumerate(profiles):
+        if _cancelled():
+            _log("Stopped by user.")
+            break
+        _set(username=p["username"])
+        _log(f"=== Syncing @{p['username']} ({idx + 1}/{len(profiles)}) ===")
+        try:
+            _run_sync(p["username"], None, do_transcribe)
+        except transcriber.Cancelled:  # mid-transcription stop
+            _log("Stopped by user.")
+            break
+        except Exception as e:  # one bad profile must not abort the rest
+            _bump_errors()
+            _log(f"@{p['username']} sync failed: {str(e)[:160]}")
+
+
 def start_transcribe_one(vid):
     v = db.video(vid)
     if not v or not v.get("file_path"):
