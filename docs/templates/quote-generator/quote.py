@@ -307,11 +307,11 @@ ISABELLA = {
     "customer": "Isabella Comber", "address": "3 Nova Place, South Penrith NSW 2750", "access": "",
     "quote_no": "TR-1024", "date": "6 July 2026", "available": "",
     "job_intro": ("Resurfacing of your vanity benchtop and its built-in basin. From your photo the cream "
-                  "benchtop and basin are worn and discoloured. We strip and prep the surface, then bring "
-                  "it back to a smooth, fresh gloss finish that looks and feels like new."),
+                  "benchtop and basin are worn and discoloured. We prep the surface, then bring it back to "
+                  "a smooth, fresh gloss finish that looks and feels like new."),
     "options": [{"title": "Benchtop and basin resurfacing", "price": "$1,050", "items": [
         "The full vanity benchtop and the built-in basin resurfaced as one seamless finish",
-        "Strip back, surface prep, etch and masking, then a commercial 3-pack coating",
+        "Surface prep, etch and masking, then a commercial 3-pack coating",
         "Existing tap and fittings worked around and cleaned up on completion"]}],
     "options_note": ("This price assumes the benchtop and basin are free of cracks or chips. We confirm the "
                      "surface on arrival, and if any cracks or chips are found we will talk you through any "
