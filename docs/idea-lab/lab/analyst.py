@@ -8,6 +8,7 @@ import re
 import subprocess
 import tempfile
 import threading
+import time
 import traceback
 from datetime import date
 from pathlib import Path
@@ -67,6 +68,30 @@ def start_engine_detection():
         if _engine_state["engine"] is None and not getattr(start_engine_detection, "_started", False):
             start_engine_detection._started = True
             threading.Thread(target=_detect_worker, daemon=True).start()
+            threading.Thread(target=_auto_upgrade_loop, daemon=True).start()
+
+
+def _auto_upgrade_loop():
+    """Once running on the Codex fallback, keep quietly re-checking so that the
+    moment the user logs into the Claude CLI, the app upgrades itself — no button."""
+    while True:
+        time.sleep(90)
+        if _engine_state.get("engine") == "claude":
+            return                       # already best engine — stop checking
+        claude_bin = next((c for c in CLAUDE_CANDIDATES if c and Path(c).exists()), None)
+        if not claude_bin:
+            continue
+        try:
+            r = subprocess.run(
+                [claude_bin, "-p", "Reply with the single word: ok", "--output-format", "text"],
+                stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=60,
+                cwd=str(BASE_DIR))
+            out = (r.stdout or "") + (r.stderr or "")
+            if r.returncode == 0 and "not logged in" not in out.lower():
+                _engine_state.update(engine="claude", claude_bin=claude_bin,
+                                     detail="Claude subscription (web research enabled) — auto-connected")
+        except Exception:
+            pass
 
 
 def _detect_engine():

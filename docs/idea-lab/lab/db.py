@@ -1,5 +1,6 @@
 """SQLite persistence for Idea Lab: scraped ideas + analyst reports."""
 import json
+import re
 import sqlite3
 import threading
 from pathlib import Path
@@ -183,6 +184,46 @@ def idea(idea_id):
     with _lock:
         row = _db().execute("SELECT * FROM ideas WHERE id=?", (idea_id,)).fetchone()
         return dict(row) if row else None
+
+
+_STOP = set(("the a an and or for to of in on with your you our we is are be this that it "
+             "how i my me app tool platform service business make build using based new "
+             "get all can from at as by").split())
+
+
+def _tokens(text):
+    return {w for w in re.findall(r"[a-z0-9]{3,}", (text or "").lower()) if w not in _STOP}
+
+
+def similar_ideas(idea_id, n=8):
+    """Top-n ideas most similar to this one by keyword overlap (Jaccard)."""
+    target = idea(idea_id)
+    if not target:
+        return []
+    tt = _tokens(target["title"] + " " + (target.get("description") or ""))
+    if not tt:
+        return []
+    with _lock:
+        rows = _db().execute(
+            "SELECT id, origin, title, description, url, traction, category FROM ideas "
+            "WHERE id != ?", (idea_id,)).fetchall()
+    scored = []
+    for r in rows:
+        ot = _tokens(r["title"] + " " + (r["description"] or ""))
+        if not ot:
+            continue
+        inter = len(tt & ot)
+        if inter < 2:
+            continue
+        score = inter / len(tt | ot)
+        scored.append((score, dict(r)))
+    scored.sort(key=lambda x: -x[0])
+    out = []
+    for score, r in scored[:n]:
+        r.pop("description", None)
+        r["similarity"] = round(score, 3)
+        out.append(r)
+    return out
 
 
 def new_analysis(idea_id, panel_size):

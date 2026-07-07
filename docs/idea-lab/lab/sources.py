@@ -549,8 +549,19 @@ BUILTINS = [
     {"id": "ks", "name": "Kickstarter", "desc": "Crowdfunded products (category RSS)"},
     {"id": "rd", "name": "Reddit", "desc": "~30 business subreddits (paced JSON)"},
     {"id": "v2", "name": "V2EX (China)", "desc": "Chinese dev/startup community (official API)"},
+    {"id": "eu", "name": "EU-Startups", "desc": "European startups (RSS)"},
+    {"id": "te", "name": "Tech.eu", "desc": "European startup funding news (RSS)"},
+    {"id": "sf", "name": "Sifted", "desc": "European startup analysis (RSS)"},
+    {"id": "tv", "name": "Trends.vc", "desc": "Vetted business-trend reports (RSS)"},
     {"id": "ss", "name": "Starter Story", "desc": "Your local video archive"},
 ]
+
+_RSS_BUILTINS = {
+    "eu": ("EU-Startups", "https://www.eu-startups.com/feed/"),
+    "te": ("Tech.eu", "https://tech.eu/feed/"),
+    "sf": ("Sifted", "https://sifted.eu/feed"),
+    "tv": ("Trends.vc", "https://trends.vc/feed/"),
+}
 
 # deep defaults for the "fetch everything" run — aim for volume
 _BUILTIN_FNS = {
@@ -565,6 +576,10 @@ _BUILTIN_FNS = {
     "ks": lambda: fetch_kickstarter(),
     "rd": lambda: fetch_reddit(),
     "v2": lambda: fetch_v2ex(),
+    "eu": lambda: fetch_rss(_RSS_BUILTINS["eu"][1], name=_RSS_BUILTINS["eu"][0], prefix="eu"),
+    "te": lambda: fetch_rss(_RSS_BUILTINS["te"][1], name=_RSS_BUILTINS["te"][0], prefix="te"),
+    "sf": lambda: fetch_rss(_RSS_BUILTINS["sf"][1], name=_RSS_BUILTINS["sf"][0], prefix="sf"),
+    "tv": lambda: fetch_rss(_RSS_BUILTINS["tv"][1], name=_RSS_BUILTINS["tv"][0], prefix="tv"),
     "ss": lambda: fetch_starterstory_local(),
 }
 

@@ -84,11 +84,19 @@ function renderEngine() {
   const b = $("engineBadge");
   if (!e) { b.hidden = true; return; }
   b.hidden = false;
-  b.textContent = e.engine === "claude" ? "🧠 Claude + web research"
-    : e.engine === "codex" ? "🧠 Codex (log into Claude CLI to upgrade)"
+  b.textContent = e.engine === "claude" ? "🧠 Claude + web research ✓"
+    : e.engine === "codex" ? "🧠 Codex — click to upgrade to Claude"
+    : e.engine === "detecting" ? "🧠 detecting engine…"
     : "⚠ no AI engine";
   b.title = e.detail || "";
-  b.className = "chip " + (e.engine === "none" ? "error" : "");
+  b.className = "chip " + (e.engine === "none" ? "error" : e.engine === "claude" ? "good" : "");
+  b.style.cursor = e.engine === "codex" ? "pointer" : "default";
+  b.onclick = e.engine === "codex" ? () => {
+    alert("To upgrade to Claude (better AI + live web research):\n\n" +
+      "1. On your Desktop, double-click \"Log in to Claude (for Idea Lab).command\"\n" +
+      "2. Approve in the browser window that opens\n\n" +
+      "That's it — Idea Lab auto-connects within ~90 seconds. You never press anything here.");
+  } : null;
 }
 
 function renderJob() {
@@ -172,6 +180,8 @@ function renderIdeas() {
       el("button", { class: "small ghost", text: "Full pipeline", title: "Analyze + full execution plan in one run",
         disabled: busy ? "" : null,
         onclick: () => pipeline(i.id) }),
+      el("button", { class: "small ghost", text: "Similar", title: "Find related ideas",
+        onclick: (e) => showSimilar(i.id, row) }),
     );
     box.append(row);
   }
@@ -188,6 +198,29 @@ function renderIdeas() {
 
 function vclass(v) {
   return { strong: "good", promising: "good", average: "mid", weak: "bad", avoid: "bad" }[v] || "mid";
+}
+
+async function showSimilar(id, row) {
+  let existing = row.nextSibling;
+  if (existing && existing.classList && existing.classList.contains("similarbox")) {
+    existing.remove(); return;   // toggle off
+  }
+  const box = el("div", { class: "similarbox hint", text: "Finding similar…" });
+  row.after(box);
+  try {
+    const r = await api("/api/ideas/" + encodeURIComponent(id) + "/similar");
+    box.replaceChildren();
+    if (!r.similar.length) { box.textContent = "No closely-related ideas found."; return; }
+    box.append(el("strong", { text: "Similar ideas:" }));
+    for (const s of r.similar) {
+      box.append(el("div", { class: "simrow" },
+        el("span", { class: "obadge " + s.origin, text: ORIGIN[s.origin] || s.origin }),
+        s.url ? el("a", { href: s.url, target: "_blank", rel: "noopener", text: " " + s.title })
+              : el("span", { text: " " + s.title }),
+        el("span", { class: "simscore", text: ` ${Math.round(s.similarity * 100)}% match` }),
+      ));
+    }
+  } catch (e) { box.textContent = "Error: " + e.message; }
 }
 
 async function analyze(id) {

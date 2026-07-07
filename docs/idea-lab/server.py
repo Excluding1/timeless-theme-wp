@@ -213,6 +213,11 @@ def analyze(idea_id: str, body: dict = Body(default={})):
     return {"ok": True, "analysis_id": aid}
 
 
+@app.get("/api/ideas/{idea_id:path}/similar")
+def similar(idea_id: str):
+    return {"similar": db.similar_ideas(idea_id)}
+
+
 @app.post("/api/plan/{idea_id:path}")
 def make_plan(idea_id: str):
     try:
