@@ -92,6 +92,34 @@ You'll have your quote by [time/today/tomorrow morning]. Sorry for the wait!
 
 ---
 
+### 1D. W2 abandoned-form SMS — WITH RESUME LINK (PROPOSED 2026-07-07, PENDING Rule-8 Cleo sign-off)
+**Type:** Transactional recovery | **Workflow:** W2 (replaces the current no-link body — the June
+mystery shop found Surface Care prefills a resume link; ours said "we can reopen it" with nothing
+to tap). **Form side SHIPPED 2026-07-07:** the partial webhook payload now carries
+`resume_link` (a `#qf=` deep link that restores the whole draft on ANY device — private: URL
+fragments never reach servers or logs) and `resume_link_short` (bare form URL; same-device
+visitors auto-restore from localStorage). ⚠️ LIVE only after the next theme deploy ships the
+rebuilt `assets/quote-form` bundle — do not update W2 in GHL before that, the merge field would
+render empty.
+
+```
+Hey {{contact.first_name}}, it's Timeless Resurfacing. Your quote request is saved but not finished.
+
+Pick up exactly where you left off: {{inboundWebhookRequest.customData.resume_link}}
+
+You'll just need:
+- Photos of the damage
+- A quick description
+
+Then your quote lands within 24 hours. 📱
+```
+
+**GHL wiring (Allan):** W2's SMS step → insert the merge field for the inbound webhook payload's
+`customData.resume_link` (use GHL's merge-field picker on the trigger data; exact token name shows
+there). Second reminder (+22h, per board 1.18) reuses the same field.
+
+---
+
 ## Section 2: Quote delivery + follow-up
 
 ### 2A. Quote Delivery SMS (0-2hr after submit, paired with Quote Email)

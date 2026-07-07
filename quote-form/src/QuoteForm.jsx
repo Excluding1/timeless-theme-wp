@@ -716,6 +716,15 @@ export default function QuoteForm() {
      are NOT restored (File objects can't serialise); customer re-attaches them.
      Cleared on successful submit (handleSubmit). */
   const STORAGE_KEY = "timeless_quote_form_v10";
+  /* One id per PROPERTY submission flow (multi-bathroom spec 3.3, 2026-06-13): every bathroom's
+     W1 payload carries the same property_submission_id + its bathroom_index, so GHL can key one
+     opportunity per bathroom instead of overwriting bathroom 1 with bathroom 2. Survives
+     startNextBathroom (ref) and page reloads (persisted as `psid`). */
+  const propertySubmissionId = useRef(null);
+  const newPsid = () =>
+    (window.crypto && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : "psid-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
   const restoredOnce = useRef(false);
   useEffect(() => {
     if (restoredOnce.current) return; restoredOnce.current = true;
@@ -762,9 +771,12 @@ export default function QuoteForm() {
       if (typeof d.prevResurfaced === "string") setPrevResurfaced(d.prevResurfaced);
       if (typeof d.hasVentilation === "string") setHasVentilation(d.hasVentilation);
       if (["about", "where", "what", "services", "photos"].includes(d.step)) setStep(d.step);
+      if (typeof d.psid === "string" && d.psid) propertySubmissionId.current = d.psid;
     } catch { /* ignore */ }
+    finally { if (!propertySubmissionId.current) propertySubmissionId.current = newPsid(); }
   }, []);
   const buildPersistState = () => ({
+    psid: propertySubmissionId.current,
     fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm,
     addrOk, prop, lift, bathroomCount, bathroomIndex, builtBefore1990,
     selectedAreas, fullBathroomMode, fullScope, fullBathroomInventory, fullAreaServices,
@@ -1063,6 +1075,13 @@ export default function QuoteForm() {
           step_reached: step,
           customer_type: cust || "",
           lead_source: deriveLeadSource(),
+          property_submission_id: propertySubmissionId.current || "",
+          // Resume links for the W2 abandoned-quote SMS/email (mystery-shop gap fix, 2026-07-07):
+          // resume_link carries the whole draft in the #qf= fragment (serverless + private,
+          // fragments never reach servers/logs) so it restores on ANY device; resume_link_short
+          // is the bare form URL (same-device visitors auto-restore from localStorage anyway).
+          resume_link: window.location.origin + window.location.pathname + "#qf=" + encodeHandoffState(buildPersistState()),
+          resume_link_short: window.location.origin + window.location.pathname,
           ...tracking,
         },
       }),
@@ -1198,7 +1217,8 @@ export default function QuoteForm() {
         property_address: addr,
         lift_access: prop === "apt" ? (lift || "not_specified") : "n/a",
         built_before_1990: builtBefore1990 || "not_asked",
-        // Multi-bathroom
+        // Multi-bathroom (spec 3.3: one opportunity per bathroom, keyed on this pair)
+        property_submission_id: propertySubmissionId.current || "",
         bathroom_count: bathroomCount || "1",
         bathroom_index: String(bathroomIndex),
         // Services
