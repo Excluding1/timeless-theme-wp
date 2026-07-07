@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Archiver</title>
+<link rel="stylesheet" href="/static/app.css?v=__V__">
+</head>
+<body>
+<header>
+  <div class="logo"><span class="tick">◗</span> Media Archiver <span class="sub">TikTok · YouTube · Instagram</span></div>
+  <button id="settingsBtn" class="ghost">⚙ Settings</button>
+</header>
+
+<main>
+  <section id="settings" class="card" hidden>
+    <h2>Settings</h2>
+    <div class="settings-grid">
+      <label>Site login (Instagram needs it)
+        <select id="cookieMode">
+          <option value="none">Anonymous (public TikTok / YouTube)</option>
+          <option value="browser">Use my browser login</option>
+          <option value="file">Pasted cookies.txt</option>
+        </select>
+      </label>
+      <label id="browserRow">Browser
+        <select id="cookieBrowser">
+          <option value="chrome">Chrome</option>
+          <option value="safari">Safari</option>
+          <option value="firefox">Firefox</option>
+          <option value="edge">Edge</option>
+          <option value="brave">Brave</option>
+        </select>
+      </label>
+      <label>Whisper model (accuracy ↔ speed)
+        <select id="whisperModel"></select>
+        <span class="hint" id="modelHint"></span>
+      </label>
+      <label>Language
+        <select id="language">
+          <option value="auto">Auto-detect</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="zh">Chinese</option>
+          <option value="vi">Vietnamese</option>
+        </select>
+      </label>
+      <label>Auto-sync all profiles
+        <select id="autoSync">
+          <option value="0">Off (manual Sync only)</option>
+          <option value="1">Every hour</option>
+          <option value="6">Every 6 hours</option>
+          <option value="24">Daily</option>
+        </select>
+      </label>
+      <label>Visual scan (on-screen text + scene)
+        <select id="visualScan">
+          <option value="0">Off</option>
+          <option value="1">On — also scan frames during sync</option>
+        </select>
+      </label>
+    </div>
+    <p class="hint" id="visualHint">Visual scan reads burned-in captions/overlays and tags what's on
+      screen (people, place, objects) at each scene change — extra context beyond the spoken transcript.
+      Runs locally via Apple Vision; adds a few seconds per video.</p>
+    <div id="cookiePaste" hidden>
+      <p class="hint">Export cookies with a browser extension like “Get cookies.txt LOCALLY”
+        while logged into the site (instagram.com for Instagram), then paste the file contents here:</p>
+      <textarea id="cookieText" rows="5" placeholder="# Netscape HTTP Cookie File&#10;.instagram.com&#9;TRUE&#9;/&#9;…"></textarea>
+      <div class="row"><button id="saveCookies">Save cookies</button><span id="cookieStatus" class="hint"></span></div>
+    </div>
+    <p class="hint" id="browserHint" hidden>“Use my browser login”: log into the site in that browser first
+      (Instagram especially). On macOS, reading Chrome cookies may pop a Keychain prompt — click “Always Allow”.</p>
+    <div class="row"><button id="saveSettings">Save settings</button>
+      <select id="loginPlatform" class="small">
+        <option value="instagram">Instagram</option>
+        <option value="youtube">YouTube</option>
+        <option value="tiktok">TikTok</option>
+      </select>
+      <button id="checkLogin" class="ghost">Check login</button>
+      <span id="settingsStatus" class="hint"></span></div>
+    <p class="hint" id="loginStatus"></p>
+  </section>
+
+  <section class="card" id="addCard">
+    <div class="row spread">
+      <h2>Profiles</h2>
+      <button id="syncAll" class="small">↻ Sync all</button>
+    </div>
+    <div class="row">
+      <select id="platformSel">
+        <option value="tiktok">TikTok</option>
+        <option value="youtube">YouTube</option>
+        <option value="instagram">Instagram</option>
+      </select>
+      <input id="profileInput" placeholder="@handle, or paste a full profile / channel URL" spellcheck="false">
+      <button id="addProfile">Add profile</button>
+    </div>
+    <p class="hint" id="addStatus">Pick a platform for a bare @handle, or just paste any TikTok / YouTube / Instagram profile URL.</p>
+    <div id="profiles"></div>
+  </section>
+
+  <section class="card job" id="jobCard" hidden>
+    <div class="row spread">
+      <strong id="jobTitle"></strong>
+      <div class="row">
+        <span id="jobPhase" class="chip"></span>
+        <button id="jobStop" class="small danger" hidden>Stop</button>
+      </div>
+    </div>
+    <div class="bar"><div id="jobBar"></div></div>
+    <div id="jobCurrent" class="hint"></div>
+    <pre id="jobLog"></pre>
+  </section>
+
+  <section class="card">
+    <div class="row spread wrap">
+      <h2>Library</h2>
+      <div class="row wrap">
+        <select id="filterProfile"><option value="">All profiles</option></select>
+        <input id="search" placeholder="Search titles + transcripts…" spellcheck="false">
+        <button id="viewToggle" class="ghost small" title="Toggle grid / list view">☰ List</button>
+        <a id="exportMd" class="button ghost" href="/api/export?format=md" title="Download all shown as Markdown">⬇ .md</a>
+        <a id="exportBtn" class="button ghost" href="/api/export" title="Download all shown as plain text">.txt</a>
+      </div>
+    </div>
+    <div id="selBar" class="row spread" hidden>
+      <span><strong id="selCount">0</strong> selected</span>
+      <div class="row">
+        <a id="dlSelMd" class="button" href="#">⬇ Download selected (.md)</a>
+        <a id="dlSelTxt" class="button ghost" href="#">.txt</a>
+        <button id="selClear" class="ghost small">Clear</button>
+      </div>
+    </div>
+    <div id="videos" class="grid"></div>
+    <p class="hint" id="libraryEmpty" hidden>Nothing here yet — add a profile above and hit Sync.</p>
+  </section>
+</main>
+
+<script src="/static/app.js?v=__V__"></script>
+</body>
+</html>

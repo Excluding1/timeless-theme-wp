@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+yt-dlp
+faster-whisper
+# Visual Scan (on-screen text + scene tags). Vision/Quartz are macOS-only;
+# on other platforms Visual Scan is simply unavailable and the app still runs.
+av        # PyAV — frame decoding for Visual Scan (also a faster-whisper dep)
+pillow
+numpy
+pyobjc-framework-Vision; sys_platform == "darwin"
+pyobjc-framework-Quartz; sys_platform == "darwin"

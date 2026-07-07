@@ -1,0 +1,544 @@
+/* Media Archiver (TikTok · YouTube · Instagram) — frontend. All rendering via DOM APIs (no innerHTML with data). */
+"use strict";
+
+const $ = (id) => document.getElementById(id);
+
+const state = {
+  profiles: [],
+  settings: {},
+  whisperModels: [],
+  cookieFilePresent: false,
+  job: null,
+  lastJobState: null,
+  videos: [],
+  selected: new Set(),
+};
+
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k === "text") node.textContent = v;
+    else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+    else if (v !== null && v !== undefined) node.setAttribute(k, v);
+  }
+  for (const c of children) if (c) node.append(c);
+  return node;
+}
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, {
+    headers: { "Content-Type": "application/json" },
+    ...opts,
+  });
+  if (!res.ok) {
+    let msg = `${res.status}`;
+    try { msg = (await res.json()).detail || msg; } catch (_) {}
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
+/* ---------- polling ---------- */
+
+async function poll() {
+  try {
+    const s = await api("/api/state");
+    state.profiles = s.profiles;
+    state.settings = s.settings;
+    state.whisperModels = s.whisper_models;
+    state.cookieFilePresent = s.cookie_file_present;
+    state.visualAvailable = s.visual_available;
+    state.visualReason = s.visual_reason;
+    state.platformLabels = s.platform_labels || {};
+    state.job = s.job;
+    renderProfiles();
+    renderJob();
+    syncSettingsForm();
+    // refresh the library when a job progresses or finishes
+    const js = s.job ? `${s.job.state}:${s.job.phase}:${s.job.done}` : "idle";
+    if (js !== state.lastJobState) {
+      state.lastJobState = js;
+      loadVideos();
+    }
+  } catch (e) { /* server briefly unavailable — keep polling */ }
+  setTimeout(poll, 1500);
+}
+
+/* ---------- settings ---------- */
+
+let settingsDirty = false;
+let cookieMsgUntil = 0; // keep transient save feedback from being clobbered by the poll
+
+function syncSettingsForm() {
+  if (settingsDirty) return; // don't clobber edits in progress
+  if (!$("whisperModel").options.length && state.whisperModels.length) {
+    for (const m of state.whisperModels) $("whisperModel").append(el("option", { value: m, text: m }));
+  }
+  $("cookieMode").value = state.settings.cookie_mode || "none";
+  $("cookieBrowser").value = state.settings.cookie_browser || "chrome";
+  if (state.settings.whisper_model) $("whisperModel").value = state.settings.whisper_model;
+  $("language").value = state.settings.language || "auto";
+  $("autoSync").value = state.settings.auto_sync || "0";
+  $("visualScan").value = state.settings.visual_scan || "0";
+  updateSettingsVisibility();
+}
+
+function updateSettingsVisibility() {
+  const mode = $("cookieMode").value;
+  $("browserRow").style.display = mode === "browser" ? "" : "none";
+  $("browserHint").hidden = mode !== "browser";
+  $("cookiePaste").hidden = mode !== "file";
+  if (Date.now() > cookieMsgUntil) {
+    $("cookieStatus").textContent = state.cookieFilePresent ? "A cookies.txt is saved ✓" : "";
+  }
+  const m = $("whisperModel").value;
+  $("modelHint").textContent = (m === "large-v3" || m === "medium")
+    ? "⚠ Slow on a Mac CPU (~30-90s/video) + a large one-time download. 'small' is the fast, accurate default."
+    : "";
+  const vs = $("visualScan");
+  if (state.visualAvailable === false) {
+    vs.disabled = true;
+    $("visualHint").textContent = "Visual scan unavailable on this machine: " + (state.visualReason || "");
+  } else {
+    vs.disabled = false;
+  }
+}
+
+function wireSettings() {
+  $("settingsBtn").addEventListener("click", () => { $("settings").hidden = !$("settings").hidden; });
+  for (const id of ["cookieMode", "cookieBrowser", "whisperModel", "language", "autoSync", "visualScan"]) {
+    $(id).addEventListener("change", () => { settingsDirty = true; updateSettingsVisibility(); });
+  }
+  const saveSettings = async () => {
+    await api("/api/settings", {
+      method: "POST",
+      body: JSON.stringify({
+        cookie_mode: $("cookieMode").value,
+        cookie_browser: $("cookieBrowser").value,
+        whisper_model: $("whisperModel").value,
+        language: $("language").value,
+        auto_sync: $("autoSync").value,
+        visual_scan: $("visualScan").value,
+      }),
+    });
+    settingsDirty = false;
+  };
+  $("saveSettings").addEventListener("click", async () => {
+    try {
+      await saveSettings();
+      $("settingsStatus").textContent = "Saved ✓";
+      setTimeout(() => { $("settingsStatus").textContent = ""; }, 2500);
+    } catch (e) { $("settingsStatus").textContent = "Error: " + e.message; }
+  });
+  $("checkLogin").addEventListener("click", async () => {
+    const out = $("loginStatus");
+    out.textContent = "Saving settings, then checking with the platform… " +
+      "(if macOS asks about Keychain access for browser cookies, click Always Allow)";
+    try {
+      await saveSettings();
+      const r = await api("/api/login-check?platform=" + encodeURIComponent($("loginPlatform").value));
+      out.textContent = (r.ok ? "✅ " : "❌ ") + r.detail;
+    } catch (e) { out.textContent = "❌ Check failed: " + e.message; }
+  });
+  $("saveCookies").addEventListener("click", async () => {
+    try {
+      await api("/api/cookies", { method: "POST", body: JSON.stringify({ content: $("cookieText").value }) });
+      $("cookieText").value = "";
+      settingsDirty = false;
+      cookieMsgUntil = Date.now() + 5000;
+      $("cookieStatus").textContent = "Cookies saved ✓ (mode set to cookies.txt)";
+    } catch (e) {
+      cookieMsgUntil = Date.now() + 15000;
+      $("cookieStatus").textContent = "Error: " + e.message;
+    }
+  });
+}
+
+/* ---------- profiles ---------- */
+
+let lastProfilesKey = "";
+
+function renderProfiles() {
+  const busy = !!(state.job && state.job.state === "running");
+  // only rebuild when data changed — a rebuild on every poll would wipe
+  // whatever the user typed into the limit box
+  const key = JSON.stringify(state.profiles) + busy;
+  if (key === lastProfilesKey) return;
+  lastProfilesKey = key;
+
+  const box = $("profiles");
+  // preserve per-row inputs across rebuilds (counts change during a sync)
+  const prev = {};
+  for (const row of box.querySelectorAll(".profile")) {
+    prev[row.dataset.key] = {
+      limit: row.querySelector("input.limit").value,
+      transcribe: row.querySelector("input[type=checkbox]").checked,
+    };
+  }
+  box.replaceChildren();
+  const filter = $("filterProfile");
+  const selected = filter.value;
+  filter.replaceChildren(el("option", { value: "", text: "All profiles" }));
+
+  for (const p of state.profiles) {
+    const label = state.platformLabels[p.platform] || p.platform;
+    filter.append(el("option", { value: p.key, text: `[${label}] @${p.username}` }));
+
+    const limitInput = el("input", { class: "limit", type: "number", min: "1", placeholder: "all" });
+    const transcribeBox = el("input", { type: "checkbox" });
+    limitInput.value = prev[p.key] ? prev[p.key].limit : "";
+    transcribeBox.checked = prev[p.key] ? prev[p.key].transcribe : true;
+
+    const counts = `${p.known} known · ${p.downloaded} downloaded · ${p.transcribed} transcribed` +
+      (p.no_speech ? ` · ${p.no_speech} no-speech` : "") +
+      (p.errors ? ` · ${p.errors} errors` : "") +
+      (p.last_sync_at ? ` · last sync ${p.last_sync_at.slice(0, 16)}` : " · never synced");
+
+    const card = el("div", { class: "profile" },
+      el("div", { class: "row" },
+        el("span", { class: "pbadge " + p.platform, text: label }),
+        el("span", { class: "name", text: "@" + p.username }),
+        el("span", { class: "counts", text: counts }),
+        limitInput,
+        el("label", { class: "sub" }, transcribeBox, "transcribe"),
+        el("button", { class: "small", text: busy ? "Busy…" : "Sync", disabled: busy ? "" : null,
+          onclick: () => startSync(p.key, limitInput.value, transcribeBox.checked) }),
+        el("button", { class: "small ghost", text: "Re-transcribe all", disabled: busy ? "" : null,
+          onclick: () => bulkAction("retranscribe", p.key,
+            `Re-transcribe ALL ${p.downloaded} downloaded videos for @${p.username} with the current Whisper model? This overwrites existing transcripts and can take several minutes.`) }),
+        state.visualAvailable
+          ? el("button", { class: "small ghost", text: "Re-OCR all", disabled: busy ? "" : null,
+              onclick: () => bulkAction("rescan", p.key,
+                `Re-scan (OCR + scene) ALL ${p.downloaded} downloaded videos for @${p.username}? This overwrites existing visual scans and can take a few minutes.`) })
+          : null,
+        el("button", { class: "small danger", text: "Remove",
+          onclick: () => removeProfile(p.key, p.username) }),
+      ),
+    );
+    card.dataset.key = p.key;
+    box.append(card);
+  }
+  filter.value = selected;
+  if (filter.value !== selected) { // selected profile was removed — reset the filter
+    filter.value = "";
+    loadVideos();
+  }
+}
+
+async function startSync(key, limit, transcribe) {
+  try {
+    await api("/api/sync", {
+      method: "POST",
+      body: JSON.stringify({ key, limit: limit ? Number(limit) : null, transcribe }),
+    });
+  } catch (e) { alert("Sync failed to start: " + e.message); }
+}
+
+async function bulkAction(kind, key, confirmMsg) {
+  if (!confirm(confirmMsg)) return;
+  try { await api(`/api/${kind}`, { method: "POST", body: JSON.stringify({ key }) }); }
+  catch (e) { alert(e.message); }
+}
+
+async function removeProfile(key, username) {
+  if (!confirm(`Remove @${username} from the library? Downloaded files stay on disk.`)) return;
+  try { await api(`/api/profiles?key=${encodeURIComponent(key)}`, { method: "DELETE" }); }
+  catch (e) { alert(e.message); }
+  loadVideos();
+}
+
+function wireAddProfile() {
+  const add = async () => {
+    const value = $("profileInput").value.trim();
+    if (!value) return;
+    $("addStatus").textContent = "Adding…";
+    try {
+      const r = await api("/api/profiles", {
+        method: "POST",
+        body: JSON.stringify({ profile: value, platform: $("platformSel").value }),
+      });
+      $("profileInput").value = "";
+      $("addStatus").textContent = `Added [${r.platform}] @${r.username} — hit Sync to fetch videos.`;
+    } catch (e) { $("addStatus").textContent = "Error: " + e.message; }
+  };
+  $("addProfile").addEventListener("click", add);
+  $("profileInput").addEventListener("keydown", (e) => { if (e.key === "Enter") add(); });
+  $("syncAll").addEventListener("click", async () => {
+    try { await api("/api/sync-all", { method: "POST", body: JSON.stringify({ transcribe: true }) }); }
+    catch (e) { alert("Sync all failed to start: " + e.message); }
+  });
+}
+
+/* ---------- job banner ---------- */
+
+function renderJob() {
+  const j = state.job;
+  $("syncAll").disabled = !!(j && j.state === "running");
+  $("jobCard").hidden = !j;
+  if (!j) return;
+  const verb = { sync: "Syncing @", "sync-all": "Syncing ", transcribe: "Transcribing for @", visual: "Visual-scanning for @" };
+  $("jobTitle").textContent = (verb[j.kind] || "Working on @") + j.username;
+  const phase = $("jobPhase");
+  phase.textContent = j.state === "running" ? j.phase : j.state;
+  phase.className = "chip " + (j.state === "running" ? "running" : j.state === "done" ? "done" : "error");
+  $("jobStop").hidden = j.state !== "running";
+  const pct = j.total ? Math.round((j.done / j.total) * 100) : (j.state === "running" ? 5 : 100);
+  $("jobBar").style.width = pct + "%";
+  $("jobCurrent").textContent = j.state === "error" ? j.message : j.current;
+  $("jobLog").textContent = (j.log || []).join("\n");
+}
+
+function wireJob() {
+  $("jobStop").addEventListener("click", async () => {
+    try { await api("/api/job/cancel", { method: "POST" }); }
+    catch (e) { alert(e.message); }
+  });
+}
+
+/* ---------- library ---------- */
+
+async function loadVideos() {
+  const params = new URLSearchParams();
+  if ($("filterProfile").value) params.set("key", $("filterProfile").value);
+  if ($("search").value.trim()) params.set("q", $("search").value.trim());
+  try {
+    const r = await api("/api/videos?" + params.toString());
+    state.videos = r.videos;
+  } catch (e) { return; }
+  renderVideos();
+  const qs = params.toString();
+  $("exportBtn").href = "/api/export?" + qs;
+  $("exportMd").href = "/api/export?format=md" + (qs ? "&" + qs : "");
+}
+
+function toggleSel(id, on) {
+  if (on) state.selected.add(id); else state.selected.delete(id);
+  updateSelBar();
+}
+
+function updateSelBar() {
+  const ids = [...state.selected];
+  $("selBar").hidden = ids.length === 0;
+  $("selCount").textContent = ids.length;
+  const idParam = ids.map(encodeURIComponent).join(",");
+  $("dlSelMd").href = "/api/export?format=md&ids=" + idParam;
+  $("dlSelTxt").href = "/api/export?ids=" + idParam;
+}
+
+function watchLabel(v) { return (state.platformLabels[v.platform] || v.platform || "Watch") + " ↗"; }
+function fmtDate(d) { return d && d.length === 8 ? `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6)}` : ""; }
+function fmtDur(s) {
+  if (!s && s !== 0) return "";
+  const m = Math.floor(s / 60), sec = Math.round(s % 60);
+  return `${m}:${String(sec).padStart(2, "0")}`;
+}
+function fmtViews(n) {
+  if (n === null || n === undefined) return "";
+  return n >= 1e6 ? (n / 1e6).toFixed(1) + "M views" : n >= 1e3 ? (n / 1e3).toFixed(1) + "K views" : n + " views";
+}
+
+function renderVideos() {
+  const grid = $("videos");
+  $("libraryEmpty").hidden = state.videos.length > 0;
+
+  // keyed reconcile: untouched cards keep their DOM (a playing <video>,
+  // an expanded transcript) instead of being rebuilt on every poll tick
+  const byId = new Map();
+  for (const node of [...grid.children]) byId.set(node.dataset.id, node);
+  const seen = new Set();
+  let prev = null;
+  for (const v of state.videos) {
+    const id = String(v.id);
+    seen.add(id);
+    const key = JSON.stringify(v);
+    let node = byId.get(id);
+    if (!node || node.dataset.key !== key) {
+      const fresh = buildVideoCard(v);
+      fresh.dataset.id = id;
+      fresh.dataset.key = key;
+      if (node) node.replaceWith(fresh);
+      else grid.append(fresh);
+      node = fresh;
+    }
+    if (prev) { if (prev.nextSibling !== node) prev.after(node); }
+    else if (grid.firstChild !== node) grid.prepend(node);
+    prev = node;
+  }
+  for (const [id, node] of byId) if (!seen.has(id)) node.remove();
+}
+
+function buildVideoCard(v) {
+  const media = el("div", { class: "media" });
+  if (v.media_url) {
+    if (v.thumb_url) {
+      media.append(el("img", { src: v.thumb_url, loading: "lazy", alt: "" }), el("div", { class: "play", text: "▶" }));
+    } else {
+      media.append(el("div", { class: "noThumb", text: "▶ play" }));
+    }
+    media.addEventListener("click", () => {
+      media.replaceChildren(el("video", { src: v.media_url, controls: "", autoplay: "", poster: v.thumb_url || null }));
+    }, { once: true });
+  } else {
+    media.append(el("div", { class: "noThumb", text: v.status === "pending" ? "queued" : "no file" }));
+  }
+
+  const id = String(v.id);
+  const sel = el("input", { type: "checkbox", class: "sel", title: "Select for download" });
+  sel.checked = state.selected.has(id);
+  sel.addEventListener("change", () => toggleSel(id, sel.checked));
+
+  const body = el("div", { class: "body" },
+    el("div", { class: "title" }, sel, el("span", { text: " " + (v.title || "(no title)") })),
+    el("div", { class: "meta" },
+      el("span", { class: "pbadge " + v.platform, text: state.platformLabels[v.platform] || v.platform }),
+      el("span", { text: "@" + v.username }),
+      el("span", { text: fmtDate(v.upload_date) }),
+      el("span", { text: fmtDur(v.duration) }),
+      el("span", { text: fmtViews(v.view_count) }),
+      el("span", { class: "chip " + v.status, text: v.status }),
+    ),
+  );
+
+  if (v.error) body.append(el("div", { class: "err", text: v.error }));
+
+  // full post caption/description (hashtags and all) — the short title above is often truncated
+  if (v.caption && v.caption !== v.title) {
+    body.append(el("div", { class: "vlabel", text: "Caption" }),
+                el("div", { class: "snippet caption", text: v.caption }));
+  }
+
+  if (v.has_transcript && v.snippet) {
+    const snip = el("div", { class: "snippet", text: v.snippet });
+    body.append(snip);
+    body.append(el("div", { class: "actions" },
+      el("a", { href: "#", text: "Full transcript", onclick: async (e) => {
+        e.preventDefault();
+        try {
+          const d = await api("/api/videos/" + encodeURIComponent(v.id));
+          snip.textContent = d.transcript || "(empty)";
+          snip.classList.add("full");
+          e.target.remove();
+        } catch (err) { alert("Could not load transcript: " + err.message); }
+      } }),
+      el("a", { href: "#", text: "Copy", onclick: async (e) => {
+        e.preventDefault();
+        const link = e.target;
+        try {
+          const d = await api("/api/videos/" + encodeURIComponent(v.id));
+          await navigator.clipboard.writeText(d.transcript || "");
+          link.textContent = "Copied ✓";
+        } catch (err) { link.textContent = "Copy failed"; }
+        setTimeout(() => { link.textContent = "Copy"; }, 1500);
+      } }),
+      el("a", { href: `/api/videos/${encodeURIComponent(v.id)}/download/txt`, text: ".txt" }),
+      el("a", { href: `/api/videos/${encodeURIComponent(v.id)}/download/srt`, text: ".srt" }),
+      el("a", { href: "#", text: "Re-transcribe", onclick: async (e) => {
+        e.preventDefault();
+        if (!confirm("Overwrite this transcript using the current Whisper model?")) return;
+        try { await api("/api/transcribe/" + encodeURIComponent(v.id), { method: "POST" }); }
+        catch (err) { alert(err.message); }
+      } }),
+      v.url ? el("a", { href: v.url, target: "_blank", rel: "noopener", text: watchLabel(v) }) : null,
+    ));
+  } else if (v.status === "no-speech") {
+    body.append(el("div", { class: "snippet", text: "🔇 No speech detected (music/text-only clip)." }));
+    const actions = el("div", { class: "actions" },
+      el("a", { href: "#", text: "Transcribe anyway", onclick: async (e) => {
+        e.preventDefault();
+        try { await api("/api/transcribe/" + encodeURIComponent(v.id), { method: "POST" }); }
+        catch (err) { alert(err.message); }
+      } }),
+      v.url ? el("a", { href: v.url, target: "_blank", rel: "noopener", text: watchLabel(v) }) : null,
+    );
+    body.append(actions);
+  } else {
+    const actions = el("div", { class: "actions" });
+    if (v.media_url) {
+      actions.append(el("a", { href: "#", text: "Transcribe", onclick: async (e) => {
+        e.preventDefault();
+        try { await api("/api/transcribe/" + encodeURIComponent(v.id), { method: "POST" }); }
+        catch (err) { alert(err.message); }
+      } }));
+    }
+    if (v.url) actions.append(el("a", { href: v.url, target: "_blank", rel: "noopener", text: watchLabel(v) }));
+    if (actions.children.length) body.append(actions);
+  }
+
+  buildVisualBlock(v, body);
+  return el("div", { class: "video" }, media, body);
+}
+
+function buildVisualBlock(v, body) {
+  if (v.has_visual) {
+    const vis = el("div", { class: "snippet visual", text: v.visual_snippet || "(no on-screen text or scene tags detected)" });
+    body.append(el("div", { class: "vlabel", text: "👁 On-screen / scene" }), vis);
+    const acts = el("div", { class: "actions" },
+      el("a", { href: "#", text: "Full", onclick: async (e) => {
+        e.preventDefault();
+        try {
+          const d = await api("/api/videos/" + encodeURIComponent(v.id));
+          vis.textContent = d.visual || "(empty)";
+          vis.classList.add("full");
+          e.target.remove();
+        } catch (err) { alert("Could not load visual scan: " + err.message); }
+      } }),
+      el("a", { href: "#", text: "Copy", onclick: async (e) => {
+        e.preventDefault();
+        const link = e.target;
+        try {
+          const d = await api("/api/videos/" + encodeURIComponent(v.id));
+          await navigator.clipboard.writeText(d.visual || "");
+          link.textContent = "Copied ✓";
+        } catch (err) { link.textContent = "Copy failed"; }
+        setTimeout(() => { link.textContent = "Copy"; }, 1500);
+      } }),
+    );
+    if (state.visualAvailable) {
+      acts.append(el("a", { href: "#", text: "Re-scan", onclick: (e) => runVisual(e, v.id, true) }));
+    }
+    body.append(acts);
+  } else if (v.media_url && state.visualAvailable) {
+    body.append(el("div", { class: "actions" },
+      el("a", { href: "#", class: "vscan", text: "👁 Visual scan", onclick: (e) => runVisual(e, v.id, false) }),
+    ));
+  }
+}
+
+async function runVisual(e, vid, rescan) {
+  e.preventDefault();
+  if (rescan && !confirm("Re-scan this video's frames with the current settings?")) return;
+  try { await api("/api/visual/" + encodeURIComponent(vid), { method: "POST" }); }
+  catch (err) { alert(err.message); }
+}
+
+function applyView() {
+  const list = localStorage.getItem("view") === "list";
+  $("videos").classList.toggle("list", list);
+  $("viewToggle").textContent = list ? "▦ Grid" : "☰ List";
+}
+
+function wireLibrary() {
+  let t;
+  $("search").addEventListener("input", () => { clearTimeout(t); t = setTimeout(loadVideos, 300); });
+  $("filterProfile").addEventListener("change", loadVideos);
+  $("viewToggle").addEventListener("click", () => {
+    localStorage.setItem("view", localStorage.getItem("view") === "list" ? "grid" : "list");
+    applyView();
+  });
+  $("selClear").addEventListener("click", () => {
+    state.selected.clear();
+    document.querySelectorAll("#videos .sel").forEach((c) => { c.checked = false; });
+    updateSelBar();
+  });
+  applyView();
+}
+
+/* ---------- boot ---------- */
+
+wireSettings();
+wireAddProfile();
+wireJob();
+wireLibrary();
+poll();
+loadVideos();
