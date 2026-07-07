@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-12",
+  "updated": "2026-07-07",
   "items": [
     {
       "t": "\ud83d\udccb THE CANONICAL WORK PLAN (Allan's completion-first reframe 2026-06-12): docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md \u2014 v1.0 CO-SIGNED (Cleo amendments + completeness-critic merged). Phases: 1 core pipeline (ALL GHL workflows a-s + ALL Make scenarios + form hardening incl multi-bathroom convention + quote-acceptance flow) \u2192 2 comms/email twin-set + Terms + photo-consent \u2192 3 money automation \u2192 4 field/sub system + legal + AI employees \u2192 5 data/BigQuery \u2192 6 hardening (rotation, monitoring, backups, WP ops, CoC) \u2192 7 E2E dry-run + FINAL AUDIT vs the 12-point pass-bar \u2192 8 growth (GBP/blog/socials/ads) LAST. Manual ops continue throughout via money-lane SOP; two hard gates stand (legal, stage-11 deposit).",
@@ -84,6 +84,22 @@
     {
       "t": "RESOLVED 2026-06-07: GHL PIT write-scope VERIFIED present (Scenarios 2-5 not blocked); still rotate before go-live.",
       "done": true
+    },
+    {
+      "t": "Allan: Netlify drop + Supabase auth user (quote app go-live) — docs/quote-app, Netlify-ready zip in Downloads, ~10 min.",
+      "done": false
+    },
+    {
+      "t": "Allan: apply W1 ack fix in GHL (pipeline 1.0, 10-30 min) — paste-ready copy in customer-comms §1A (committed e66a0b5).",
+      "done": false
+    },
+    {
+      "t": "Allan decision: margin plan ~25-30% blended (log in CEO.md).",
+      "done": false
+    },
+    {
+      "t": "Allan: confirm 4.9-star Google rating claim or remove from llms.txt.",
+      "done": false
     }
   ]
 }

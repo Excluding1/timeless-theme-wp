@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-08",
+  "updated": "2026-07-07",
   "note": "CANONICAL human roadmap = docs/specs/FINALIZATION-ROADMAP-2026-06-07.md (this board mirrors it). Sub-tasks filled in as we tackle each task (Allan helps with UI/layout specifics, Clifford finalises). Edit via cockpit or here.",
   "tasks": [
     {
@@ -278,8 +278,13 @@
       "id": "customers",
       "title": "Quote the lined-up customers (REVENUE)",
       "phase": "Revenue",
-      "status": "todo",
-      "subtasks": []
+      "status": "doing",
+      "subtasks": [
+        {
+          "title": "Isabella Comber / AitkenRE quoted TR-1024 2026-07-07 ($1,050 benchtop + basin) via the quote web app",
+          "done": true
+        }
+      ]
     },
     {
       "id": "site-inspection",
@@ -304,8 +309,8 @@
       "status": "todo",
       "subtasks": [
         {
-          "title": "Quote-drafter agent (Override 6 — Week 4-5)",
-          "done": false
+          "title": "Quote-drafter agent (Override 6 — Week 4-5) — ✅ delivered as the quote web app (docs/quote-app) 07-07",
+          "done": true
         },
         {
           "title": "Philippine VAs onboarding",
@@ -313,6 +318,41 @@
         },
         {
           "title": "BigQuery metrics dashboard (after real job data)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "w1-ack-fix",
+      "title": "★★ NEXT: Apply W1 ack fix in GHL (pipeline 1.0 — copy ready in customer-comms §1A)",
+      "phase": "Now",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Paste-ready copy committed e66a0b5 (docs/templates/customer-comms-templates.md §1A) — Allan applies in GHL",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "quote-app-golive",
+      "title": "Netlify drop + Supabase auth user for quote app (Allan, 10 min)",
+      "phase": "Now",
+      "status": "todo",
+      "subtasks": []
+    },
+    {
+      "id": "sub-outreach",
+      "title": "Sub outreach — call the 58-lead list (docs/lead-gen)",
+      "phase": "Now",
+      "status": "todo",
+      "subtasks": [
+        {
+          "title": "Lead-gen Runs 1-4 DONE: 58 verified NSW sub recruits + 126-contact call list",
+          "done": true
+        },
+        {
+          "title": "Start outreach calls (not started)",
           "done": false
         }
       ]

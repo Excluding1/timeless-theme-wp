@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17",
+  "updated": "2026-07-07",
   "source": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md (v1.0 co-signed) + parity audit (Cleo 96%, traceability 64-scenario); body carries 06-13/06-17 updates (multi-bath fix 3.3, Mick worked-example, painting/plumbing SKUs 6.9)",
   "rules": "Never drag an opp to stage 11 before its deposit is PAID (that drag fires the live SM8 pipeline). No external sub signs before the lawyer clears Fair-Work (Marko self-performs meanwhile). Work this list TOP TO BOTTOM — if you want to skip, say why out loud first.",
   "phases": [
@@ -227,7 +227,7 @@
           "title": "Quote-drafter v0 (checklist + template — pulled forward by the simulation)",
           "owner": "clifford",
           "status": "done",
-          "detail": "The 1,000-scenario simulation showed pricing sits in 87% of all journeys, and Override 6 already says the quote-drafting agent starts with the first paying customer. v0 = a repeatable drafting kit (pricing-sheet lookup, margin-floor check, 3-tier template, gate checklist, Rule-8 send) so ANY quote takes under 10 minutes consistently. The full AI agent stays in 6.11. Format note (Allan 2026-06-13): the kit must support BOTH shapes — 3-tier (the CEO.md default) AND a two-solution offer (e.g. replace vs reglaze) for damage-triage cases. → v0 BUILT 2026-06-17: docs/specs/quote-drafter-kit-2026-06-17.md (10-min workflow + 14 rules + 3 shapes: 3-tier / two-solution / package + pre-send gate), seeded from the Mick worked example. Full AI agent stays 6.11. Cleo Rule-8 review in flight.",
+          "detail": "SUPERSEDED+EXCEEDED by the quote WEB APP (docs/quote-app, v9.1, finished 2026-07-07): quote↔tax-invoice↔signed-warranty, options-aware local AI, Supabase sync. Allan: Netlify drop + auth user.",
           "dod": "Two consecutive real quotes drafted via the kit in under 10 min each, both pass the margin lens.",
           "est": "2 hr",
           "estH": 2
@@ -251,6 +251,14 @@
           "dod": "A test partial gets a link that resumes their draft; the one-vs-two-reminder decision is logged with reasoning.",
           "est": "1 hr",
           "estH": 1
+        },
+        {
+          "id": "1.19",
+          "title": "Quote web app shipped (07-07) — the quoting engine",
+          "owner": "clifford",
+          "status": "done",
+          "detail": "docs/quote-app v9.1 finished 2026-07-07: quote ↔ tax-invoice ↔ signed-warranty, options-aware local AI extraction (per-block price ledger, 82-case test batteries), editable price book, Supabase sync pre-wired. Netlify-ready zip + launcher in Downloads. First real quote through it: Isabella Comber / AitkenRE TR-1024 ($1,050 benchtop + basin, 2026-07-07). Supersedes the 1.16 kit; delivers the 6.11 quote-drafter line. Remaining go-live = Allan: Netlify drop + Supabase auth user (~10 min).",
+          "dod": "A real customer quote produced end-to-end in the app (TR-1024, 2026-07-07)."
         }
       ]
     },
@@ -627,7 +635,7 @@
           "title": "AI employees (phased deployments)",
           "owner": "clifford",
           "status": "todo",
-          "detail": "Quote-drafter: Clifford performs it for jobs 1-5, agent later. Photo-quality-reviewer with 3.2. Maintenance-reminder after job ~10 (drives repeat rate). DM-handler with Phase 10 socials. Business-analyst with Phase 7 data.",
+          "detail": "Quote-drafter: DELIVERED as the quote web app (docs/quote-app, shipped 2026-07-07) — it is the quoting engine from job 1 (first real quote: Isabella/AitkenRE TR-1024). Photo-quality-reviewer with 3.2. Maintenance-reminder after job ~10 (drives repeat rate). DM-handler with Phase 10 socials. Business-analyst with Phase 7 data.",
           "dod": "Each agent: spec → build → one proven run.",
           "est": "6 hr staged",
           "estH": 6
