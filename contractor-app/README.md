@@ -41,14 +41,36 @@
 - [x] **2. App core** — ✅ **DEPLOYED 2026-06-09** (`d7bb48e` backend + `59ee0ba` frontend) — PWA installable · per-sub Auth + RLS · `my-jobs` + detail · real login + real jobs proven.
 - [x] **3. Accept/Decline (spine)** — ✅ **DEPLOYED 2026-06-09** (`ba71db1`) — accept/decline/availability/handback/complete state machine, ownership-isolated, Fair-Work guardrails. ⏳ Residual: **accept→SM8 queue-move write-back** waits ONLY on Marko's "which queue = booked" taxonomy.
 - [x] **4. Photos + Complete** — ✅ **SM8 write-back LIVE 2026-06-09** (`7762bf4`: complete→SM8 Completed, atomic RPC + durable outbox + reconcile drain).
-- [ ] **5. Notifications** — Web Push (VAPID/FCM) on `offered` · Make SMS fallback · pgmq + pg_cron rate governor + polling fallback *(interim today: Make→Twilio SMS)*
-- [ ] **6. Test + Security** — contact-leak CI assertion ✅ already in place; remaining: final E2E · webhook dedup/replay soak · JWT/RLS review · Fair-Work copy review — before first real sub (legal-gated)
+- [x] **5. Notifications** — ✅ **CODE-COMPLETE 2026-07-07** (`fe1bfb8`) — Web Push (VAPID) subscribe flow + service-worker `push`/`notificationclick` handlers + `push_subscriptions` table (migration `0006`) + send-push Edge Function. **Only remaining = Allan's console step: mint the VAPID key pair** (checklist #3) and set it as an Edge secret. Make→Twilio SMS stays as the interim/fallback path.
+- [x] **5b. Masked job-chat relay + ETA** — ✅ **CODE-COMPLETE 2026-07-07** (`62cb11c`, migration `0007`) — `JobChat.tsx` preset-first chat (one-tap chips) + "On my way" ETA picker (15/30/45/60 min); DB guards: contact-leak block (phone/email, both directions), 10/hour + 30/day rate limit, per-job `chat_enabled` kill switch. Customer↔worker via GHL number ↔ Make ↔ app; nobody sees a number. Serves subs AND future employees (see `docs/specs/booking-coordination-plan-2026-07-07.md`). **Remaining = 2 GHL workflows + 2 Make scenarios** per the relay contract below.
+- [x] **6. Test + Security** — ✅ **RLS hardening applied 2026-07-07** (`0008_rls_hardening.sql`): tightened per-sub ownership policies, storage-bucket access, message insert constraints. Contact-leak CI assertion in place. **Remaining before first real sub (legal-gated):** final E2E soak · webhook dedup/replay soak · Fair-Work copy review.
 
 ## Allan setup checklist (in order)
 1. **Supabase project** — Sydney `ap-southeast-2`, **Pro $25/mo** (Free pauses when idle = unacceptable for a live field app). ← **DO THIS FIRST**
 2. SM8 key as Supabase Edge secret (`supabase secrets set SM8_API_KEY=…`).
-3. Firebase project + Cloud Messaging + VAPID pair (Phase 5).
+3. **VAPID key pair for push** (Phase 5, ~5 min): `npx web-push generate-vapid-keys` → set `VAPID_PUBLIC_KEY` in the web build env + `VAPID_PRIVATE_KEY`/`VAPID_SUBJECT` as Supabase Edge secrets. Code is done; this is the only push step left. (Firebase FCM is an alternative to raw VAPID if preferred.)
 4. Subdomain `jobs.timelessresurfacing.com.au` (DNS CNAME → Vercel) (Phase 2+).
 5. Vercel project → frontend (Phase 2+).
 6. Make strip-contact change — ✅ already done.
 7. Agree the SM8 Accepted/Declined/Re-offer queue+badge convention with Marko (Phase 3).
+
+## Masked chat relay contract (for the GHL + Make build, later)
+
+The app side is DONE. To go live, wire these (customer never sees the worker's number, worker
+never sees the customer's — see `docs/specs/booking-coordination-plan-2026-07-07.md`):
+
+**Inbound (customer SMS → app):**
+1. GHL workflow, trigger "Customer Replied" (SMS), filter: contact has an active job tag.
+2. → webhook to Make with `{ contact_id, message_body }`.
+3. Make resolves the contact's current `sm8_job_uuid`, then INSERTs into `job_messages`:
+   `{ sm8_job_uuid, sender: 'customer', kind: 'chat', body: message_body }`.
+   The DB trigger strip/blocks any phone/email in `body` automatically.
+
+**Outbound (worker reply → customer SMS):**
+4. Make subscribes to new `job_messages` rows where `sender = 'sub'` (Supabase Realtime or a
+   webhook on insert; index `job_messages_outbound` exists for polling).
+5. → GHL API "send SMS" from the business number to the job's customer contact.
+6. **Priority:** rows with `kind = 'eta'` relay IMMEDIATELY (the "on my way" promise).
+
+**Never:** put a customer phone/email into any Make step that reaches the worker; the app only
+ever exposes job + suburb + first name. Test the leak-block by trying to send a number in chat.
