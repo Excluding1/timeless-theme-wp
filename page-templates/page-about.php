@@ -195,7 +195,7 @@
  <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Up to 5-Year Warranty</p>
  </div>
  <div class="reveal">
- <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">$20<span class="text-tertiary-fixed-dim">M</span></p>
+ <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">$10<span class="text-tertiary-fixed-dim">M</span></p>
  <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Public Liability Insurance</p>
  </div>
  <div class="reveal">
@@ -221,7 +221,7 @@
 <section class="py-20 sm:py-24 bg-primary-container">
  <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center reveal">
  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6">Ready to Transform Your Bathroom?</h2>
- <p class="text-lg text-on-primary-container mb-10 max-w-2xl mx-auto">Send us a few photos and we'll have a fixed-price quote back to you within hours. No obligation, no pressure.</p>
+ <p class="text-lg text-on-primary-container mb-10 max-w-2xl mx-auto">Send us a few photos and we'll have a fixed-price quote back to you within 1 business day. No obligation, no pressure.</p>
  <div class="flex flex-col sm:flex-row gap-4 justify-center">
  <a class="bg-tertiary-fixed text-on-tertiary-fixed px-10 py-5 rounded-lg font-bold text-sm tracking-wide uppercase hover:opacity-90 transition-all" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Get a Free Quote</a>
  <a class="border border-white/20 text-white px-10 py-5 rounded-lg font-bold text-sm tracking-wide uppercase hover:bg-white/10 transition-all" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">View Before &amp; After</a>

@@ -44,7 +44,14 @@ Thanks {{contact.first_name}}! We've got your bathroom photos and we're reviewin
 - Timeless Resurfacing
 ```
 
-> ⚠️ **SUPERSEDED IN PRACTICE (2026-06-12):** the LIVE W1 ack is the Cleo-approved 24-hour pack already pasted in GHL (see memory/pending_copy_packs_2026-06-12.md §3) — "within 2 hours" was never shipped; locked promise = **within 24 hours** (FAQs deliberately say 1 business day).
+**Multiple bathrooms** (`bathroom_count` ≥ 2, same property):
+```
+Thanks {{contact.first_name}}! We've got the photos for your {{bathroom_count}} bathrooms and we're reviewing them now. You'll have your quotes within 24 hours. 📱
+
+- Timeless Resurfacing
+```
+
+> ⚠️ **LIVE FIX (pipeline 1.0, 2026-06-18):** the live ack carried the BANNED word "written" plus a wrong turnaround ("within 24-48 hours"). Locked promise = **within 24 hours**, no "written". GHL config (no redeploy; the payload already carries `bathroom_index`/`bathroom_count` from QuoteForm.jsx:1140-1141): **send the ack ONLY when `bathroom_index` = 1** (or absent/null on legacy single-area submits), **suppress on 2+** so there is one ack per property; **branch the body on `bathroom_count`** (IF ≥ 2, use the multi copy above). Rule-8 copy sign-off (Cleo) before publish. History: "within 2 hours" was never shipped; FAQs deliberately say 1 business day.
 
 **Psychology:** Speed sets expectation + proves responsiveness. Commitment validates form effort immediately. (Industry data: 78% of leads choose first responder.)
 

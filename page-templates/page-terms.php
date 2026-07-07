@@ -35,7 +35,7 @@
  <p><strong>Phone:</strong> <a href="tel:<?php echo timeless_phone_link(); ?>" class="text-primary underline"><?php echo timeless_phone(); ?></a></p>
  <p><strong>Email:</strong> <a href="mailto:support@timelessresurfacing.com.au" class="text-primary underline">support@timelessresurfacing.com.au</a></p>
  <p><strong>Website:</strong> <a href="https://timelessresurfacing.com.au" class="text-primary underline">https://timelessresurfacing.com.au</a></p>
- <p><strong>Public Liability Insurance:</strong> $20,000,000 cover, current &mdash; Certificate of Currency available on request</p>
+ <p><strong>Public Liability Insurance:</strong> $10,000,000 cover, current, Certificate of Currency available on request</p>
  </div>
  <p>Work is performed by our qualified technicians. Timeless Resurfacing is the contracting party and stands behind the work performed under these Terms.</p>
  </div>
@@ -69,9 +69,9 @@
 
  <h3 class="text-lg font-bold text-primary mt-6 mb-2">4.1 What we do</h3>
  <ul class="list-disc pl-6 space-y-1 mb-3">
- <li>Bathroom resurfacing &mdash; bath, tile, wall, floor, vanity, basin</li>
- <li>Shower regrouting &mdash; cement-based grout</li>
- <li>Shower regrouting &mdash; epoxy grout</li>
+ <li>Bathroom resurfacing, bath, tile, wall, floor, vanity, basin</li>
+ <li>Shower regrouting, cement-based grout</li>
+ <li>Shower regrouting, epoxy grout</li>
  <li>Silicone replacement</li>
  <li>Chip repair, surface preparation, aftercare assessment, and warranty assessment as quoted</li>
  <li>Related restoration work as expressly set out in a Quote</li>
@@ -344,7 +344,7 @@
  <p class="mb-3">Bathtubs, wall tiles, and basins are generally offered in <strong>gloss white only</strong> unless we expressly quote a bespoke tint. Vanity cabinets and benchtops may have broader colour options where quoted. Our material supplier (Hawk via Australasian Resurfacing Supplies) constrains the colour palette.</p>
 
  <h3 class="text-lg font-bold text-primary mt-6 mb-2">15.2 Appearance limits</h3>
- <p>Exact colour match, gloss match, texture match, tile uniformity, and &ldquo;as new&rdquo; appearance are not guaranteed unless expressly stated in the Quote. Resurfacing restores existing surfaces &mdash; it does not replace them.</p>
+ <p>Exact colour match, gloss match, texture match, tile uniformity, and &ldquo;as new&rdquo; appearance are not guaranteed unless expressly stated in the Quote. Resurfacing restores existing surfaces, it does not replace them.</p>
  </div>
 
  <!-- 16. STATUTORY WARRANTIES -->
@@ -414,7 +414,7 @@
  <li>Damage from use before the cure time has elapsed (see &sect; 13)</li>
  <li>Mould, mildew, and bacteria growth (maintenance issues, not workmanship)</li>
  <li>&ldquo;Bleed-back&rdquo; or leaching of substances from the original substrate that was not visible at the time of work</li>
- <li>Periodic cleaning, re-sealing, and maintenance &mdash; these are your responsibility</li>
+ <li>Periodic cleaning, re-sealing, and maintenance, these are your responsibility</li>
  <li>Silicone after the 12-month warranty period (silicone is a maintenance item)</li>
  <li>Damage from movement of the building structure (settlement, subsidence)</li>
  <li>Damage from water ingress through unrelated waterproofing failure</li>
@@ -467,13 +467,13 @@
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">19. Limits on liability</h2>
  <p class="mb-3">19.1 Nothing in these Terms excludes, restricts, or modifies any right, guarantee, warranty, or remedy that cannot lawfully be excluded, restricted, or modified, including under the ACL.</p>
- <p>19.2 To the extent permitted by law, we are not liable for indirect, consequential, special, or economic loss; loss of rent; loss of use; loss of opportunity; inconvenience; emotional distress; alternative-accommodation costs; or third-party costs &mdash; unless the law otherwise requires.</p>
+ <p>19.2 To the extent permitted by law, we are not liable for indirect, consequential, special, or economic loss; loss of rent; loss of use; loss of opportunity; inconvenience; emotional distress; alternative-accommodation costs; or third-party costs, unless the law otherwise requires.</p>
  </div>
 
  <!-- 20. PL INSURANCE -->
  <div class="reveal">
  <h2 class="text-xl font-bold text-primary mb-3">20. Public Liability Insurance</h2>
- <p class="mb-3">We carry <strong>$20,000,000 Public Liability</strong> insurance. A current Certificate of Currency is available on request.</p>
+ <p class="mb-3">We carry <strong>$10,000,000 Public Liability</strong> insurance. A current Certificate of Currency is available on request.</p>
  <p>This insurance covers third-party property damage and injury arising from our work. It does <strong>not</strong> replace your home and contents insurance and does not cover your own property except to the extent of damage we cause through our negligence.</p>
  </div>
 
@@ -491,7 +491,7 @@
  <p class="mb-3">22.1 The work is performed by qualified technicians that we engage. Each technician:</p>
  <ul class="list-disc pl-6 space-y-1 mb-3">
  <li>Holds a current ABN</li>
- <li>Holds current Public Liability insurance ($5M minimum, with our $20M as backstop)</li>
+ <li>Holds current Public Liability insurance ($10M minimum)</li>
  <li>Has been vetted by us for relevant trade experience and conduct</li>
  <li>Where the property is pre-1990, holds asbestos-awareness training (NSW SafeWork-approved provider)</li>
  </ul>
@@ -558,10 +558,10 @@
  <p class="mb-3">If a dispute arises, you must first contact us in writing (email is acceptable) and give us a reasonable opportunity, no less than 14 days, to resolve it before commencing any external dispute-resolution process or proceedings (other than where the law requires earlier action, or where you are seeking urgent injunctive relief). Most disputes are resolved by a phone call.</p>
  <p class="mb-2">If we cannot resolve the dispute directly:</p>
  <ol class="list-decimal pl-6 space-y-1 mb-3">
- <li><strong>Independent expert</strong> (for technical / warranty disputes) &mdash; see &sect; 17.5</li>
- <li><strong>NSW Fair Trading</strong> &mdash; <a href="https://www.fairtrading.nsw.gov.au" rel="noopener" target="_blank" class="text-primary underline">fairtrading.nsw.gov.au</a> or 13 32 20</li>
- <li><strong>Building Commission NSW</strong> &mdash; for building-defect complaints (where applicable)</li>
- <li><strong>NSW Civil and Administrative Tribunal (NCAT)</strong> &mdash; Consumer &amp; Commercial Division</li>
+ <li><strong>Independent expert</strong> (for technical / warranty disputes), see &sect; 17.5</li>
+ <li><strong>NSW Fair Trading</strong>, <a href="https://www.fairtrading.nsw.gov.au" rel="noopener" target="_blank" class="text-primary underline">fairtrading.nsw.gov.au</a> or 13 32 20</li>
+ <li><strong>Building Commission NSW</strong>, for building-defect complaints (where applicable)</li>
+ <li><strong>NSW Civil and Administrative Tribunal (NCAT)</strong>, Consumer &amp; Commercial Division</li>
  <li>The Local Court of New South Wales, where appropriate</li>
  </ol>
  <p>We are committed to good-faith dispute resolution.</p>

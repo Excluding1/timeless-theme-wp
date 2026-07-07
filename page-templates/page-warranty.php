@@ -23,7 +23,7 @@
 
  <!-- HEADLINE STATEMENT -->
  <div class="reveal bg-primary text-white p-6 sm:p-8 rounded-xl">
- <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">Warranties up to 5 years &mdash; every service, in writing.</h2>
+ <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">Warranties up to 5 years, every service, in writing.</h2>
  <p class="text-white/80 text-sm sm:text-base">No fine-print games, no "industry standard" weasel-wording. Below is the full matrix of what we cover, by service and by property type.</p>
  </div>
 
@@ -45,27 +45,27 @@
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Bath resurfacing</td>
  <td class="p-3">5 years</td>
- <td class="p-3">3 months</td>
+ <td class="p-3">6 months</td>
  </tr>
  <tr class="border-b border-slate-200">
- <td class="p-3 font-medium text-primary">Tile resurfacing &mdash; walls</td>
+ <td class="p-3 font-medium text-primary">Tile resurfacing, walls</td>
  <td class="p-3">5 years</td>
- <td class="p-3">3 months</td>
+ <td class="p-3">6 months</td>
  </tr>
  <tr class="border-b border-slate-200">
- <td class="p-3 font-medium text-primary">Tile resurfacing &mdash; floors</td>
- <td class="p-3">3 years</td>
- <td class="p-3">3 months</td>
+ <td class="p-3 font-medium text-primary">Tile resurfacing, floors</td>
+ <td class="p-3">5 years</td>
+ <td class="p-3">6 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Vanity resurfacing</td>
  <td class="p-3">5 years</td>
- <td class="p-3">3 months</td>
+ <td class="p-3">6 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Kitchen benchtop resurfacing</td>
- <td class="p-3">3 years</td>
- <td class="p-3">3 months</td>
+ <td class="p-3">5 years</td>
+ <td class="p-3">6 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Cement regrouting</td>
@@ -99,11 +99,11 @@
  <h2 class="text-xl font-bold text-primary mb-3">Why the numbers differ</h2>
  <p class="mb-3">A blanket warranty across every service is dishonest because the materials don't behave the same way:</p>
  <ul class="list-disc pl-6 space-y-2">
- <li><strong>Resurfacing</strong>. Application defects (peeling, bubbling, adhesion failure) show in the first 30-60 days. The 5-year warranty covers any genuine workmanship issue across the realistic life of the coating.</li>
+ <li><strong>Resurfacing</strong>. Application defects (peeling, bubbling, adhesion failure) show in the first 30-60 days. The 5-year private home warranty (6 months rental) covers any genuine workmanship issue across the realistic life of the coating. Source: AU resurfacing supplier industry-standard.</li>
  <li><strong>Cement regrouting</strong>. Cement grout naturally lasts 5-7 years before reaching end-of-life. Our 2-year warranty covers craftsmanship defects (cracks, falling out) within the early portion of that life.</li>
  <li><strong>Epoxy regrouting</strong>. Epoxy grout is the premium option and genuinely lasts 20+ years. Our 5-year warranty matches the upper tier of the AU industry.</li>
  <li><strong>Silicone</strong>. Silicone is a consumable. Even premium silicone fails in 1-3 years from mould, water exposure, and natural compression. We recommend annual replacement and warrant only the install for 12 months.</li>
- <li><strong>Rental properties</strong>. Tenant care is variable and uncontrollable. Rental warranties cover genuine workmanship defects only &mdash; the failure modes that come from how the job was done, not how the surface has been used.</li>
+ <li><strong>Rental properties</strong>. Tenant care is variable and uncontrollable. Rental warranties cover genuine workmanship defects only, the failure modes that come from how the job was done, not how the surface has been used.</li>
  </ul>
  </div>
 
@@ -124,17 +124,17 @@
  <h2 class="text-xl font-bold text-primary mb-3">What the warranty does not cover</h2>
  <p class="mb-3">Damage from external causes is excluded:</p>
  <ol class="list-decimal pl-6 space-y-2">
- <li><strong>Impact damage</strong> &mdash; dropped objects, knocks, hairline cracks from heavy items</li>
- <li><strong>Wrong cleaning products</strong> &mdash; bleach (except diluted on grout), ammonia, oven cleaner, drain cleaner, abrasive pastes (Jif, Gumption), scouring pads, steel wool, melamine sponges (Magic Erasers), acidic cleaners (vinegar, CLR)</li>
- <li><strong>Standing water</strong> &mdash; mats, bottles, soap or shampoo containers left on resurfaced surfaces for prolonged periods</li>
- <li><strong>Substrate movement</strong> &mdash; building settlement, tile de-bonding, structural cracks</li>
- <li><strong>Pre-existing waterproofing failure</strong> &mdash; behind tiles or beneath baths</li>
- <li><strong>UV colour fade</strong> &mdash; in north or west-facing windows over time</li>
- <li><strong>Damage by other trades</strong> &mdash; plumbers, builders, or contractors after our work</li>
- <li><strong>Tenant wilful damage</strong> &mdash; on rental warranties</li>
- <li><strong>Silicone wear</strong> &mdash; after the warranted install period; silicone is a wear item, replacement recommended every 12-24 months</li>
- <li><strong>Use within cure times</strong> &mdash; before the 24-72 hour cure window we specify on your job card</li>
- <li><strong>Non-transferable</strong> &mdash; warranty is for the original customer; if you sell the property, the new owner can register the remaining warranty within 30 days of settlement</li>
+ <li><strong>Impact damage</strong>, dropped objects, knocks, hairline cracks from heavy items</li>
+ <li><strong>Wrong cleaning products</strong>, bleach (except diluted on grout), ammonia, oven cleaner, drain cleaner, abrasive pastes (Jif, Gumption), scouring pads, steel wool, melamine sponges (Magic Erasers), acidic cleaners (vinegar, CLR)</li>
+ <li><strong>Standing water</strong>, mats, bottles, soap or shampoo containers left on resurfaced surfaces for prolonged periods</li>
+ <li><strong>Substrate movement</strong>, building settlement, tile de-bonding, structural cracks</li>
+ <li><strong>Pre-existing waterproofing failure</strong>, behind tiles or beneath baths</li>
+ <li><strong>UV colour fade</strong>, in north or west-facing windows over time</li>
+ <li><strong>Damage by other trades</strong>, plumbers, builders, or contractors after our work</li>
+ <li><strong>Tenant wilful damage</strong>, on rental warranties</li>
+ <li><strong>Silicone wear</strong>, after the warranted install period; silicone is a wear item, replacement recommended every 12-24 months</li>
+ <li><strong>Use within cure times</strong>, before the 24-72 hour cure window we specify on your job card</li>
+ <li><strong>Non-transferable</strong>, warranty is for the original customer; if you sell the property, the new owner can register the remaining warranty within 30 days of settlement</li>
  </ol>
  </div>
 
@@ -146,9 +146,9 @@
  <li><strong>Cement regrouting</strong>: 6 months</li>
  <li><strong>Epoxy regrouting</strong>: 12 months</li>
  <li><strong>Silicone</strong>: 90 days defect-only</li>
- <li><strong>Resurfacing services</strong>: 3 months</li>
+ <li><strong>Resurfacing services</strong>: 6 months</li>
  </ul>
- <p class="mb-3">This covers any failure caused by our workmanship &mdash; bond loss, lifting, gaps, peeling. It excludes wear, harsh-cleaner damage, and impact from third parties &mdash; which are the rental-specific risks tenants control. Most landlords find this fair: epoxy backed for a full year, cement double the standard supplier defect window, and silicone treated honestly as the consumable it is.</p>
+ <p class="mb-3">This covers any failure caused by our workmanship, bond loss, lifting, gaps, peeling. It excludes wear, harsh-cleaner damage, and impact from third parties, which are the rental-specific risks tenants control. Most landlords find this fair: epoxy backed for a full year, cement double the standard supplier defect window, and silicone treated honestly as the consumable it is.</p>
  <p class="text-sm text-secondary italic">Your statutory rights under the Australian Consumer Law are unaffected.</p>
  </div>
 
@@ -166,7 +166,7 @@
  <!-- ACL CLAUSE -->
  <div class="reveal bg-surface border-l-4 border-primary p-5 rounded-r-lg">
  <h2 class="text-base font-bold text-primary mb-2">Your rights under the Australian Consumer Law</h2>
- <p class="text-sm">This warranty does not exclude or limit your rights under the Australian Consumer Law. Our services come with consumer guarantees that cannot be excluded under Australian Consumer Law &mdash; including that services be provided with due care and skill, and within a reasonable time. The warranty above is in addition to those statutory rights, not a replacement.</p>
+ <p class="text-sm">This warranty does not exclude or limit your rights under the Australian Consumer Law. Our services come with consumer guarantees that cannot be excluded under Australian Consumer Law, including that services be provided with due care and skill, and within a reasonable time. The warranty above is in addition to those statutory rights, not a replacement.</p>
  </div>
 
  <!-- CARE INSTRUCTIONS LINK -->
