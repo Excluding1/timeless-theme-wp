@@ -34,17 +34,32 @@ async function poll() {
     const s = await api("/api/state");
     state.job = s.job;
     state.engine = s.engine;
+    state.fetch = s.fetch;
     renderJob();
     renderEngine();
+    renderFetch();
     const key = s.job ? `${s.job.state}:${s.job.phase}` : "idle";
-    if (key !== state.lastJob) {
+    const fkey = s.fetch ? `${s.fetch.running}:${s.fetch.phase}` : "";
+    if (key !== state.lastJob || fkey !== state.lastFetch) {
       state.lastJob = key;
+      state.lastFetch = fkey;
       loadIdeas();
       loadAnalyses();
       loadPlans();
     }
   } catch (_) {}
   setTimeout(poll, 2000);
+}
+
+function renderFetch() {
+  const f = state.fetch;
+  $("fetchAll").disabled = !!(f && f.running);
+  if (f && f.running) {
+    $("fetchStatus").textContent = "Fetching everything… " + (f.phase || "");
+  } else if (f && f.phase === "done" && f.results && Object.keys(f.results).length) {
+    const parts = Object.entries(f.results).map(([k, v]) => `${k}: ${v}`);
+    $("fetchStatus").textContent = "Last full fetch — " + parts.join(" · ");
+  }
 }
 
 function renderEngine() {
@@ -380,10 +395,60 @@ function wireSources() {
   simpleFetch("fetchPh", "ph", "Product Hunt");
   simpleFetch("fetchRd", "rd", "Reddit");
   simpleFetch("fetchSs", "ss", "your Starter Story archive");
+  $("fetchAll").addEventListener("click", async () => {
+    $("fetchStatus").textContent = "Starting full fetch across every source…";
+    try { await api("/api/fetch-all", { method: "POST", body: "{}" }); } catch (e) { alert(e.message); }
+  });
+  $("toggleSources").addEventListener("click", () => {
+    const m = $("sourceManager");
+    m.hidden = !m.hidden;
+    if (!m.hidden) loadSources();
+  });
+  $("addRss").addEventListener("click", async () => {
+    const url = $("rssUrl").value.trim();
+    if (!url) return;
+    try {
+      await api("/api/sources/custom", { method: "POST",
+        body: JSON.stringify({ kind: "rss", url, name: $("rssName").value.trim() }) });
+      $("rssUrl").value = ""; $("rssName").value = "";
+      loadSources();
+    } catch (e) { alert(e.message); }
+  });
+  $("importChannel").addEventListener("click", async () => {
+    const ref = $("archiveSel").value;
+    if (!ref) return;
+    try {
+      await api("/api/sources/custom", { method: "POST",
+        body: JSON.stringify({ kind: "archive-channel", ref, name: ref.split(":")[1] }) });
+      await api("/api/fetch-all", { method: "POST", body: "{}" });  // pull it in now
+      loadSources();
+    } catch (e) { alert(e.message); }
+  });
   let t;
   $("search").addEventListener("input", () => { clearTimeout(t); t = setTimeout(loadIdeas, 300); });
   $("originFilter").addEventListener("change", loadIdeas);
   $("categoryFilter").addEventListener("change", loadIdeas);
+}
+
+async function loadSources() {
+  let s;
+  try { s = await api("/api/sources"); } catch (_) { return; }
+  $("builtinList").textContent = "Built-in: " + s.builtins.map((b) => b.name).join(" · ");
+  const arch = $("archiveSel");
+  arch.replaceChildren(el("option", { value: "", text: "— choose a channel —" }));
+  for (const c of s.archive_channels) {
+    arch.append(el("option", { value: `${c.platform}:${c.username}`,
+      text: `${c.platform}/${c.username} (${c.usable} usable)` }));
+  }
+  const cl = $("customList");
+  cl.replaceChildren();
+  for (const c of s.custom) {
+    cl.append(el("div", { class: "row spread srcrow" },
+      el("span", { class: "sub", text: `${c.kind === "rss" ? "🔗" : "📺"} ${c.name} — ${c.ref}` }),
+      el("button", { class: "small ghost", text: "Remove",
+        onclick: async () => { await api("/api/sources/custom?id=" + c.id, { method: "DELETE" }); loadSources(); } }),
+    ));
+  }
 }
 
 wireSources();

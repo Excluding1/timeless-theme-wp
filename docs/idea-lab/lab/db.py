@@ -57,6 +57,14 @@ CREATE TABLE IF NOT EXISTS plans (
     final_plan   TEXT       -- markdown
 );
 CREATE INDEX IF NOT EXISTS idx_plans_idea ON plans(idea_id);
+CREATE TABLE IF NOT EXISTS custom_sources (
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    kind    TEXT NOT NULL,          -- rss | archive-channel
+    name    TEXT NOT NULL,
+    ref     TEXT NOT NULL,          -- feed URL, or "<platform>:<username>" for archive
+    enabled INTEGER NOT NULL DEFAULT 1,
+    added_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
+);
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 """
 
@@ -122,7 +130,7 @@ def upsert_idea(idea):
             )
 
 
-def ideas(origin=None, q=None, limit=300, category=None):
+def ideas(origin=None, q=None, limit=3000, category=None):
     # score/verdict from the latest COMPLETED analysis; activity status from the latest of any
     sql = ("SELECT i.*, a.composite, a.verdict, a.effort_roi, r.status AS an_status FROM ideas i "
            "LEFT JOIN analyses a ON a.id = (SELECT id FROM analyses WHERE idea_id=i.id "
@@ -244,3 +252,28 @@ def plans(limit=50):
             "SELECT p.*, i.title FROM plans p JOIN ideas i ON i.id=p.idea_id "
             "ORDER BY p.id DESC LIMIT ?", (limit,)).fetchall()
         return [dict(r) for r in rows]
+
+
+def add_custom_source(kind, name, ref):
+    with _lock:
+        con = _db()
+        with con:
+            cur = con.execute(
+                "INSERT INTO custom_sources(kind,name,ref) VALUES(?,?,?)", (kind, name, ref))
+        return cur.lastrowid
+
+
+def custom_sources(enabled_only=False):
+    sql = "SELECT * FROM custom_sources"
+    if enabled_only:
+        sql += " WHERE enabled=1"
+    sql += " ORDER BY id"
+    with _lock:
+        return [dict(r) for r in _db().execute(sql).fetchall()]
+
+
+def remove_custom_source(sid):
+    with _lock:
+        con = _db()
+        with con:
+            con.execute("DELETE FROM custom_sources WHERE id=?", (sid,))

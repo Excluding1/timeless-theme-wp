@@ -14,15 +14,27 @@ cd docs/idea-lab
 
 ## What it does
 
-1. **Sources** — one-click fetch of:
-   - **Show HN** (Hacker News launches) via the official Algolia API — includes
-     upvotes/comments, filter by days + min points.
-   - **Product Hunt** via its public feed (latest launches; the feed carries no
-     vote counts — official PH API support is a possible later upgrade).
-   - Every fetched idea gets an instant **traction score** (points + comments
-     weighted by launch-day velocity). De-duplicated; re-fetch any time.
-   - *IndieHackers is intentionally not scraped in v1: no public API and a
-     JS-only site — scraping it is fragile and against their terms.*
+1. **Sources** — **⚡ Fetch everything** pulls from every source at once, or fetch
+   individually. Built-ins (all official APIs / public feeds — they won't block you):
+   - **Show HN** & **Ask HN** (Hacker News, Algolia API) — launches + problem threads.
+   - **GitHub** — new fast-growing repos (dev-tool / OSS signal), official search API.
+   - **Dev.to** — startup/SaaS/indiehackers articles (official API).
+   - **Lobsters** — tech launches (official JSON).
+   - **Product Hunt** — daily launches (public feed).
+   - **Reddit** — top posts from r/SaaS, r/Entrepreneur, r/sweatystartup, r/smallbusiness,
+     r/sidehustle, r/indiehackers (best-effort — Reddit rate-limits scripts).
+   - **Starter Story** — imported from your **local media-archiver** video archive
+     (titles, captions, transcript excerpts) — copyright-safe, no site scraping.
+   - Every idea gets a **traction score**; all de-duplicated; re-fetch any time.
+
+   **Add your own sources** (＋ Add source): paste any **RSS/Atom feed URL**, or
+   **import any channel** you've archived in the media-archiver. So new sites/creators
+   are added with no code.
+
+   *IndieHackers, Google Trends, TikTok trends and Chinese-market data aren't scraped
+   (no clean APIs / anti-bot walls / ToS). They're covered reliably by the **Claude
+   research pass** — live web search inside every scorecard — once you log into the
+   Claude CLI. That's the sanctioned, un-blockable way to reach them.*
 
 2. **AI Analyst scorecard** — hit *Analyze* on any idea (scraped or your own):
    a 12-factor expert evaluation (problem severity, market size, timing,

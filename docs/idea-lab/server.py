@@ -4,6 +4,7 @@ Run:  .venv/bin/python server.py   →   http://127.0.0.1:8319
 """
 import hashlib
 import json
+import re
 from pathlib import Path
 
 import uvicorn
@@ -61,8 +62,50 @@ def state():
         "settings": db.all_settings(),
         "job": analyst.job_status(),
         "engine": analyst.engine_info(),
-        "counts": {o: len(db.ideas(origin=o)) for o in ("hn", "ph", "custom")},
+        "fetch": sources.fetch_status(),
     }
+
+
+@app.get("/api/sources")
+def list_sources():
+    return {
+        "builtins": sources.BUILTINS,
+        "custom": db.custom_sources(),
+        "archive_channels": sources.archive_channels(),
+    }
+
+
+@app.post("/api/sources/custom")
+def add_custom_source(body: dict = Body(...)):
+    kind = body.get("kind")
+    if kind == "rss":
+        url = (body.get("url") or "").strip()
+        if not re.match(r"^https?://", url):
+            raise HTTPException(400, "Enter a valid RSS/Atom feed URL (http/https).")
+        name = (body.get("name") or url.split("//")[-1].split("/")[0])[:60]
+        sid = db.add_custom_source("rss", name, url)
+    elif kind == "archive-channel":
+        ref = (body.get("ref") or "").strip()   # "<platform>:<username>"
+        if ":" not in ref:
+            raise HTTPException(400, "Pick a channel to import.")
+        name = (body.get("name") or ref)[:60]
+        sid = db.add_custom_source("archive-channel", name, ref)
+    else:
+        raise HTTPException(400, "kind must be 'rss' or 'archive-channel'")
+    return {"ok": True, "id": sid}
+
+
+@app.delete("/api/sources/custom")
+def del_custom_source(id: int):
+    db.remove_custom_source(id)
+    return {"ok": True}
+
+
+@app.post("/api/fetch-all")
+def fetch_all():
+    if not sources.fetch_all_bg():
+        raise HTTPException(409, "A full fetch is already running.")
+    return {"ok": True}
 
 
 @app.post("/api/engine/refresh")

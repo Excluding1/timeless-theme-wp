@@ -22,11 +22,27 @@
       <div class="row wrap">
         <label class="sub">last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
           ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> pts</label>
-        <button id="fetchHn" class="small">Show HN</button>
-        <button id="fetchRd" class="small">Reddit</button>
-        <button id="fetchSs" class="small">Starter Story</button>
+        <button id="fetchAll">⚡ Fetch everything</button>
+        <button id="fetchHn" class="small ghost">Show HN</button>
+        <button id="fetchRd" class="small ghost">Reddit</button>
+        <button id="fetchSs" class="small ghost">Starter Story</button>
         <button id="fetchPh" class="small ghost">Product Hunt</button>
+        <button id="toggleSources" class="small ghost">＋ Add source</button>
       </div>
+    </div>
+    <div id="sourceManager" class="submgr" hidden>
+      <div class="row wrap">
+        <input id="rssUrl" placeholder="Paste any RSS / Atom feed URL to add as a source" spellcheck="false">
+        <input id="rssName" class="tiny-name" placeholder="name (optional)" spellcheck="false">
+        <button id="addRss" class="small">Add feed</button>
+      </div>
+      <div class="row wrap">
+        <label class="sub">Import a channel from your video archive:</label>
+        <select id="archiveSel"></select>
+        <button id="importChannel" class="small">Import</button>
+      </div>
+      <div id="builtinList" class="hint"></div>
+      <div id="customList"></div>
     </div>
     <p class="hint" id="fetchStatus">Show HN (official API) · Starter Story (your local video archive) ·
       Product Hunt (public feed) · Reddit (best-effort — Reddit rate-limits scripts; the Claude research
