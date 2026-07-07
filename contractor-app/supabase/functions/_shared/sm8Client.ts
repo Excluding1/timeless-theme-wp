@@ -93,6 +93,63 @@ export async function getJob(uuid: string): Promise<Record<string, unknown>> {
   });
 }
 
+/**
+ * Attach a photo to a ServiceM8 job — the documented 2-step flow (blueprint §7):
+ *   ① POST Attachment.json {related_object:'job', related_object_uuid, attachment_name, file_type, active:1}
+ *      → the new attachment uuid arrives in the `x-record-uuid` response header;
+ *   ② POST Attachment/{uuid}.file with the raw bytes.
+ * URL reconstructed + host-pinned both steps; attachment_name is OUR slot label (never caller free-text).
+ * Returns the SM8 attachment uuid. Caller drives retries (both steps are idempotent-safe to redo:
+ * a duplicate attachment is cosmetic, never a correctness problem).
+ */
+export async function attachPhotoToJob(
+  jobUuid: string,
+  attachmentName: string,
+  bytes: Uint8Array,
+  contentType = 'image/jpeg',
+): Promise<string> {
+  if (!isValidUuid(jobUuid)) throw new Sm8Error(400, 'invalid job uuid');
+  if (!/^[\w .()-]{1,80}$/.test(attachmentName)) throw new Sm8Error(400, 'invalid attachment name');
+  if (bytes.byteLength === 0 || bytes.byteLength > 8 * 1024 * 1024) throw new Sm8Error(400, 'invalid photo size');
+
+  const ext = contentType === 'image/png' ? '.png' : contentType === 'image/webp' ? '.webp' : '.jpg';
+
+  // Step 1 — create the attachment record.
+  const createUrl = `${SM8_BASE}/Attachment.json`;
+  assertSm8Url(createUrl);
+  const attachmentUuid = await withBackoff(async () => {
+    const res = await sm8Fetch(createUrl, {
+      method: 'POST',
+      headers: { 'X-API-Key': apiKey(), 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        related_object: 'job',
+        related_object_uuid: jobUuid,
+        attachment_name: attachmentName,
+        file_type: ext,
+        active: 1,
+      }),
+    });
+    await res.text().catch(() => {}); // drain; the uuid is in the header
+    const uuid = res.headers.get('x-record-uuid') ?? '';
+    if (!isValidUuid(uuid)) throw new Sm8Error(502, 'sm8 attachment create: no x-record-uuid');
+    return uuid;
+  });
+
+  // Step 2 — upload the bytes.
+  const fileUrl = `${SM8_BASE}/Attachment/${attachmentUuid}.file`;
+  assertSm8Url(fileUrl);
+  await withBackoff(async () => {
+    const res = await sm8Fetch(fileUrl, {
+      method: 'POST',
+      headers: { 'X-API-Key': apiKey(), 'Content-Type': contentType },
+      body: bytes.buffer as ArrayBuffer, // exact-length buffer (constructed by our callers)
+    });
+    await res.text().catch(() => {});
+  });
+
+  return attachmentUuid;
+}
+
 // The ONLY job fields the backend may ever WRITE. Body is built field-by-field; NEVER spread caller
 // input — so customer contact has no path to ride along on a write (Cleo P1#6 / D). queue_uuid is
 // listed for the deferred accept-writeback; today only `status` is used.

@@ -65,12 +65,13 @@ export type Assignment = {          // <- job_assignments
 
 export type CapturedPhoto = {       // <- photos
   id: string;
+  assignment_id: string;            // the assignment this photo proves (server re-derives the job)
   sm8_job_uuid: string;
   slot: string;                     // "BTH-01-before-1"
   sku: string;
-  kind: PhotoKind;
+  kind: PhotoKind | 'problem';      // 'problem' = evidence photo for a problem report (never gates SKUs)
   day?: 1 | 2;
-  localUri: string;
+  localUri: string;                 // session object URL (display only; the blob persists in IndexedDB)
   client_idem_key: string;          // idempotent upload (schema: photos.client_idem_key UNIQUE)
   upload_status: PhotoUploadStatus;
 };

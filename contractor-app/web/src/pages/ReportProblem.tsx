@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Camera as CameraIcon, AlertOctagon } from 'lucide-react';
 import { useAppStore } from '../lib/store';
+import { compressImage } from '../lib/image';
 import { Button } from '../components/ui';
 import { BottomSheet } from '../components/BottomSheet';
 import { useSnackbar } from '../components/Snackbar';
+import type { Assignment, CapturedPhoto } from '../types';
 
 const REASONS = [
   "Can't get access",
@@ -17,28 +19,61 @@ const REASONS = [
 type Reason = (typeof REASONS)[number];
 
 const ASBESTOS: Reason = 'Asbestos / pre-1990 suspected';
-const MOCK_IMG = 'https://images.unsplash.com/photo-1584622789178-0195ad9c54e1?w=400&q=80';
 
 export function ReportProblem() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { reportProblem, isOffline } = useAppStore();
+  const { detail, fetchJobDetail, reportProblem, capturePhoto, isOffline } = useAppStore();
   const snackbar = useSnackbar();
 
+  const [assignment, setAssignment] = useState<Assignment | null>(id ? detail[id] ?? null : null);
   const [reason, setReason] = useState<Reason>(REASONS[0]);
   const [note, setNote] = useState('');
-  const [photo, setPhoto] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<{ blob: Blob; contentType: string; previewUrl: string } | null>(null);
   const [showConfirm, setShowConfirm] = useState(false);
   const [busy, setBusy] = useState(false);
+  const fileInput = useRef<HTMLInputElement>(null);
+
+  // Need the job uuid so the evidence photo rides the same never-lost queue as job photos.
+  useEffect(() => {
+    if (!id || detail[id]) return;
+    let active = true;
+    void fetchJobDetail(id).then((res) => { if (active && res) setAssignment(res); });
+    return () => { active = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- `detail` is written by fetchJobDetail; including it loops.
+  }, [id, fetchJobDetail]);
 
   const isAsbestos = reason === ASBESTOS;
   const canSubmit = !!photo && !isOffline;
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    const { blob, contentType } = await compressImage(file);
+    setPhoto({ blob, contentType, previewUrl: URL.createObjectURL(blob) });
+  };
 
   const handleSubmit = async () => {
     if (busy || !photo || !id) return; // guard a fast double-tap
     setBusy(true);
     try {
-      await reportProblem(id, { reason, note: note.trim() || undefined, photoLocalUri: photo });
+      // Evidence photo first: persists to the device instantly and uploads via the resilient queue
+      // (kind 'problem' never counts toward any SKU photo gate).
+      const jobUuid = assignment?.job.sm8_job_uuid ?? detail[id]?.job.sm8_job_uuid;
+      if (jobUuid) {
+        const meta: Omit<CapturedPhoto, 'localUri' | 'upload_status'> = {
+          id: crypto.randomUUID(),
+          assignment_id: id,
+          sm8_job_uuid: jobUuid,
+          slot: 'PROBLEM-1',
+          sku: 'PROBLEM',
+          kind: 'problem',
+          client_idem_key: `${jobUuid}:PROBLEM-1`,
+        };
+        void capturePhoto(meta, photo.blob, photo.contentType);
+      }
+      await reportProblem(id, { reason, note: note.trim() || undefined, photoLocalUri: photo.previewUrl });
       setShowConfirm(false);
       snackbar.show('Reported — the office will be in touch.');
       navigate(`/job/${id}`, { replace: true });
@@ -136,11 +171,20 @@ export function ReportProblem() {
           <span className="block text-xs font-bold tracking-widest text-[var(--color-error)] mb-2 uppercase">
             Photo (required)
           </span>
+          <input
+            ref={fileInput}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            className="hidden"
+            aria-hidden
+            onChange={(e) => void handleFile(e)}
+          />
           {photo ? (
             <div className="relative w-full h-48 bg-gray-100 rounded-xl overflow-hidden border border-gray-200">
-              <img src={photo} alt="Problem evidence" className="w-full h-full object-cover" />
+              <img src={photo.previewUrl} alt="Problem evidence" className="w-full h-full object-cover" />
               <button
-                onClick={() => setPhoto(null)}
+                onClick={() => { setPhoto(null); fileInput.current?.click(); }}
                 aria-label="Retake photo"
                 className="absolute top-2 right-2 bg-black/50 text-white rounded-full px-3 h-11 min-w-[44px] flex items-center text-xs font-bold"
               >
@@ -149,7 +193,7 @@ export function ReportProblem() {
             </div>
           ) : (
             <button
-              onClick={() => setPhoto(MOCK_IMG)}
+              onClick={() => fileInput.current?.click()}
               aria-label="Add a photo of the problem"
               className="w-full h-48 bg-[var(--color-error)]/5 border-2 border-dashed border-[var(--color-error)]/20 rounded-xl flex flex-col items-center justify-center text-[var(--color-error)] hover:bg-[var(--color-error)]/10 transition-colors"
             >

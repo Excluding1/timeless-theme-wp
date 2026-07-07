@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   ChevronLeft,
@@ -10,6 +10,7 @@ import {
   Lock,
 } from 'lucide-react';
 import { useAppStore } from '../lib/store';
+import { compressImage } from '../lib/image';
 import type {
   Assignment,
   CapturedPhoto,
@@ -86,8 +87,6 @@ const PHASE_LABEL: Record<PhotoKind, string> = {
   after: 'After',
 };
 
-const MOCK_IMG = 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=200&h=200&fit=crop';
-
 export function CapturePhotos() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -101,6 +100,10 @@ export function CapturePhotos() {
 
   const [assignment, setAssignment] = useState<Assignment | null>(id ? detail[id] ?? null : null);
   const [loading, setLoading] = useState(!assignment);
+
+  // One hidden camera input shared by every slot; the tapped slot is remembered until the file lands.
+  const fileInput = useRef<HTMLInputElement>(null);
+  const pendingSlot = useRef<{ req: PhotoRequirement; kind: PhotoKind; index: number } | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -149,22 +152,36 @@ export function CapturePhotos() {
   const photos = id ? photosForJob(job.sm8_job_uuid) : [];
   const paused = assignment.problem?.status === 'open';
 
+  // Slot tap -> open the device camera (or gallery on desktop).
   const handleCapture = (req: PhotoRequirement, kind: PhotoKind, index: number) => {
     if (!id) return;
-    const photo: CapturedPhoto = {
+    pendingSlot.current = { req, kind, index };
+    fileInput.current?.click();
+  };
+
+  // Real file captured -> compress on-device -> persist to IndexedDB -> upload through the api seam.
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // allow re-selecting the same file (retake)
+    const ctx = pendingSlot.current;
+    pendingSlot.current = null;
+    if (!file || !ctx || !id) return;
+
+    const { blob, contentType } = await compressImage(file);
+    const slot = `${ctx.req.sku}-${ctx.kind}-${ctx.index + 1}`;
+    const meta: Omit<CapturedPhoto, 'localUri' | 'upload_status'> = {
       id: crypto.randomUUID(),
+      assignment_id: id,
       sm8_job_uuid: job.sm8_job_uuid,
-      slot: `${req.sku}-${kind}-${index + 1}`,
-      sku: req.sku,
-      kind,
+      slot,
+      sku: ctx.req.sku,
+      kind: ctx.kind,
       day,
-      localUri: MOCK_IMG,
       // Deterministic per (job, slot) so a double-tap or re-take dedups at the backend (photos.client_idem_key UNIQUE).
-      client_idem_key: `${job.sm8_job_uuid}:${req.sku}-${kind}-${index + 1}`,
-      upload_status: 'queued',
+      client_idem_key: `${job.sm8_job_uuid}:${slot}`,
     };
     // Saves to the device immediately (offline-resilient), then registers through the api seam.
-    void capturePhoto(id, photo);
+    void capturePhoto(meta, blob, contentType);
   };
 
   const renderSlot = (req: PhotoRequirement, kind: PhotoKind, index: number) => {
@@ -237,6 +254,16 @@ export function CapturePhotos() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-surface)]">
+      {/* The real camera input — hidden; every slot routes through it. */}
+      <input
+        ref={fileInput}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        className="hidden"
+        aria-hidden
+        onChange={(e) => void handleFile(e)}
+      />
       <div className="bg-[var(--color-primary)] text-white px-2 py-2 flex items-center sticky top-0 z-20">
         <button
           onClick={() => navigate(-1)}

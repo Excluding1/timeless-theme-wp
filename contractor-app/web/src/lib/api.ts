@@ -18,9 +18,10 @@ export type PhotoPayload = {
   client_idem_key: string;
   slot: string;
   sku: string;
-  kind: PhotoKind;
+  kind: PhotoKind | 'problem';
   day?: 1 | 2;
-  localUri: string;
+  blob: Blob;              // the real (compressed) image bytes — uploaded, never just referenced
+  contentType: string;
 };
 
 export interface ContractorApi {

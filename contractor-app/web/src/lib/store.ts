@@ -4,15 +4,13 @@ import { api } from './api';
 import type { ProblemPayload } from './api';
 import { playSound, type SoundId } from './sound';
 import { supabase, supabaseConfigured } from './supabase';
+import { putPhoto, getAllPhotos, getPhoto, updatePhotoStatusDb } from './photoDb';
 
 // Single source of truth: the store calls `api` and caches the result.
 // No optimistic dual-array. Lists/detail are caches; mutations re-fetch from `api`.
-
-const PHOTOS_KEY = 'tj_captured_photos';
-const loadPhotos = (): CapturedPhoto[] => {
-  try { return JSON.parse(localStorage.getItem(PHOTOS_KEY) || '[]'); } catch { return []; }
-};
-const savePhotos = (p: CapturedPhoto[]) => { try { localStorage.setItem(PHOTOS_KEY, JSON.stringify(p)); } catch { /* quota */ } };
+// Photos: blobs persist in IndexedDB from the moment of capture (photoDb.ts); the in-memory list
+// mirrors it with session object URLs for display. The drain loop retries queued/failed uploads
+// whenever the app comes online or regains focus — "a photo is never lost".
 
 interface AppState {
   isAuthenticated: boolean;
@@ -48,10 +46,11 @@ interface AppState {
   reportProblem: (id: string, problem: ProblemPayload) => Promise<void>;
   messageOffice: (id: string, text: string) => Promise<void>;
 
-  capturePhoto: (assignmentId: string, photo: CapturedPhoto) => Promise<void>;
+  capturePhoto: (photo: Omit<CapturedPhoto, 'localUri' | 'upload_status'>, blob: Blob, contentType: string) => Promise<void>;
   addPhoto: (photo: CapturedPhoto) => void;
   updatePhotoStatus: (photoId: string, status: CapturedPhoto['upload_status']) => void;
   photosForJob: (jobUuid: string) => CapturedPhoto[];
+  drainPhotoQueue: () => Promise<void>;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -65,7 +64,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   booked: [],
   detail: {},
   profile: null,
-  capturedPhotos: loadPhotos(),
+  capturedPhotos: [], // hydrated async from IndexedDB below
 
   loading: false,
   error: null,
@@ -121,40 +120,99 @@ export const useAppStore = create<AppState>((set, get) => ({
   reportProblem: async (id, problem) => { await api.reportProblem(id, problem); await get().fetchJobs(); await get().fetchJobDetail(id); },
   messageOffice: async (id, text) => { await api.messageOffice(id, text); },
 
-  capturePhoto: async (assignmentId, photo) => {
-    get().addPhoto(photo);                          // save to device first (offline-resilient)
-    get().updatePhotoStatus(photo.id, 'uploading');
-    try {
-      await api.registerPhoto(assignmentId, {
-        client_idem_key: photo.client_idem_key,
-        slot: photo.slot,
-        sku: photo.sku,
-        kind: photo.kind,
-        day: photo.day,
-        localUri: photo.localUri,
-      });
-      get().updatePhotoStatus(photo.id, 'uploaded');
-    } catch {
-      get().updatePhotoStatus(photo.id, 'failed');  // stays on the device; retried later
-    }
+  capturePhoto: async (meta, blob, contentType) => {
+    // 1) Persist to the DEVICE first (IndexedDB) — offline capture must survive a reload/crash.
+    const photo: CapturedPhoto = { ...meta, localUri: URL.createObjectURL(blob), upload_status: 'queued' };
+    await putPhoto({ ...meta, blob, upload_status: 'queued', created_at: Date.now() });
+    get().addPhoto(photo);
+
+    // 2) Then try the upload; failure just leaves it queued for the drain loop.
+    await uploadOne(photo, blob, contentType, get());
   },
   addPhoto: (photo) => set((s) => {
-    // Dedup by (job, slot): a slot holds at most one photo — guards a rapid double-tap on the same slot.
-    const next = [...s.capturedPhotos.filter((p) => !(p.sm8_job_uuid === photo.sm8_job_uuid && p.slot === photo.slot)), photo];
-    savePhotos(next);
+    // Dedup by idempotency key (job+slot): a retake replaces; a double-tap collapses.
+    const next = [...s.capturedPhotos.filter((p) => p.client_idem_key !== photo.client_idem_key), photo];
     return { capturedPhotos: next };
   }),
   updatePhotoStatus: (photoId, status) => set((s) => {
+    const target = s.capturedPhotos.find((p) => p.id === photoId);
+    if (target) void updatePhotoStatusDb(target.client_idem_key, status);
     const next = s.capturedPhotos.map((p) => (p.id === photoId ? { ...p, upload_status: status } : p));
-    savePhotos(next);
     return { capturedPhotos: next };
   }),
   photosForJob: (jobUuid) => get().capturedPhotos.filter((p) => p.sm8_job_uuid === jobUuid),
+
+  drainPhotoQueue: async () => {
+    if (draining) return; // one drain at a time
+    draining = true;
+    try {
+      const pending = get().capturedPhotos.filter((p) => p.upload_status === 'queued' || p.upload_status === 'failed');
+      for (const p of pending) {
+        const stored = await getPhoto(p.client_idem_key);
+        if (!stored) continue; // blob unavailable (private mode) — nothing to retry
+        await uploadOne(p, stored.blob, stored.blob.type || 'image/jpeg', get());
+      }
+    } finally {
+      draining = false;
+    }
+  },
 }));
 
+let draining = false;
+
+/** Upload one photo through the api seam; flips uploading -> uploaded/failed in state + IndexedDB. */
+async function uploadOne(
+  photo: CapturedPhoto,
+  blob: Blob,
+  contentType: string,
+  s: Pick<AppState, 'updatePhotoStatus'>,
+): Promise<void> {
+  s.updatePhotoStatus(photo.id, 'uploading');
+  try {
+    await api.registerPhoto(photo.assignment_id, {
+      client_idem_key: photo.client_idem_key,
+      slot: photo.slot,
+      sku: photo.sku,
+      kind: photo.kind,
+      day: photo.day,
+      blob,
+      contentType,
+    });
+    s.updatePhotoStatus(photo.id, 'uploaded');
+  } catch {
+    s.updatePhotoStatus(photo.id, 'failed'); // stays on the device; retried by the drain loop
+  }
+}
+
+// Hydrate captured photos from IndexedDB (blobs -> session object URLs), then retry any stragglers.
 if (typeof window !== 'undefined') {
-  window.addEventListener('online', () => { useAppStore.getState().setOffline(false); void useAppStore.getState().fetchJobs(); });
+  void getAllPhotos().then((stored) => {
+    if (stored.length === 0) return;
+    const photos: CapturedPhoto[] = stored.map(({ blob, created_at: _t, ...meta }) => ({
+      ...meta,
+      localUri: URL.createObjectURL(blob),
+      // anything that was mid-upload when the app closed goes back to queued
+      upload_status: meta.upload_status === 'uploading' ? 'queued' : meta.upload_status,
+    }));
+    useAppStore.setState((s) => ({
+      capturedPhotos: [
+        ...photos,
+        ...s.capturedPhotos.filter((p) => !photos.some((q) => q.client_idem_key === p.client_idem_key)),
+      ],
+    }));
+    if (navigator.onLine) void useAppStore.getState().drainPhotoQueue();
+  });
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('online', () => {
+    useAppStore.getState().setOffline(false);
+    void useAppStore.getState().fetchJobs();
+    void useAppStore.getState().drainPhotoQueue(); // reception is back — push waiting photos up
+  });
   window.addEventListener('offline', () => useAppStore.getState().setOffline(true));
+  // iOS PWAs get no Background Sync — drain whenever the sub brings the app back to the foreground.
+  window.addEventListener('focus', () => { if (navigator.onLine) void useAppStore.getState().drainPhotoQueue(); });
   // Real mode: the Supabase session is the source of truth for auth.
   if (supabaseConfigured) {
     void supabase.auth.getSession().then(({ data }) => useAppStore.setState({ isAuthenticated: !!data.session }));

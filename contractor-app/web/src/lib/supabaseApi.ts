@@ -3,6 +3,7 @@
 import type { ContractorApi, AcceptResult, Ok, ProblemPayload, PhotoPayload } from './api';
 import type { Assignment, AvailabilityWindow, SubProfile } from '../types';
 import { supabase, FUNCTIONS_URL, ANON_KEY } from './supabase';
+import { blobToBase64 } from './image';
 
 async function headers(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
@@ -59,9 +60,29 @@ export const supabaseApi: ContractorApi = {
   async messageOffice(): Promise<Ok> {
     return { ok: true };
   },
-  // Phase 4: upload to Supabase Storage + SM8 2-step attach. Photos already persist on-device meanwhile.
-  async registerPhoto(): Promise<{ ok: boolean; photo_id: string }> {
-    return { ok: true, photo_id: crypto.randomUUID() };
+
+  // Phase 4 (real): upload the bytes to the `photos` Edge Function -> private Storage bucket ->
+  // photos row -> durable SM8 2-step attach. The blob also stays in IndexedDB, so a failure here
+  // is retried by the store's drain loop — a photo is never lost.
+  async registerPhoto(id: string, photo: PhotoPayload): Promise<{ ok: boolean; photo_id: string }> {
+    const data = await blobToBase64(photo.blob);
+    const res = await fetch(`${FUNCTIONS_URL}/photos`, {
+      method: 'POST',
+      headers: await headers(),
+      body: JSON.stringify({
+        assignment_id: id,
+        slot: photo.slot,
+        sku: photo.sku,
+        kind: photo.kind,
+        day: photo.day ?? 1,
+        client_idem_key: photo.client_idem_key,
+        content_type: photo.contentType,
+        data,
+      }),
+    });
+    if (!res.ok) throw new Error(`photo_upload ${res.status}`);
+    const j = await res.json();
+    return { ok: true, photo_id: String(j.photo_id ?? '') };
   },
 
   async getProfile(): Promise<SubProfile> {
