@@ -74,6 +74,16 @@ $phone      = timeless_phone();
 
 <!-- Mobile sticky CTA bar removed 2026-05-05 per Allan: blocking content + duplicate CTA (each page already has Get Quote + phone in nav + footer + section CTAs) -->
 
+<?php
+// GHL chat widget (SMS-chat mode) — renders ONLY when a widget ID is set in the Customizer.
+// Activation: docs/specs/ai-employees/social-agents-activation-runbook-2026-07-07.md (Agent B).
+$timeless_chat_id = get_theme_mod( 'timeless_chat_widget_id', '' );
+if ( $timeless_chat_id ) : ?>
+<script src="https://widgets.leadconnectorhq.com/loader.js"
+        data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+        data-widget-id="<?php echo esc_attr( $timeless_chat_id ); ?>" defer></script>
+<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>

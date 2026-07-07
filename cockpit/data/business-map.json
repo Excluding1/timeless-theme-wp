@@ -9,11 +9,29 @@
       "icon": "👑",
       "status": "live",
       "summary": "Allan + Marko own it. Clifford (Claude) + Cleo (Codex) run as co-CEOs with 17 expert/auditor lenses. CEO.md = supreme authority, STATE.md = what is live, this cockpit = the board.",
-      "watch": ["decision", "margin plan", "4.9", "cleo"],
+      "watch": [
+        "decision",
+        "margin plan",
+        "4.9"
+      ],
       "confirmations": [
-        {"q": "Who decides what?", "state": "confirmed", "a": "Allan+Marko final say. Clifford orchestrates, Cleo peer-reviews. Customer-facing copy needs BOTH CEOs to verify against canonical docs (Rule 8)."},
-        {"q": "Margin plan decision logged?", "state": "ask", "a": "", "hint": "Recommended: plan at ~25-30% blended honest margin (procurement-disciplined target 40%+). Say yes and Clifford logs it in CEO.md."},
-        {"q": "4.9-star Google rating claim on llms.txt: real or remove?", "state": "ask", "a": "", "hint": "If it is not a genuine rating from real reviews, it must come off (ACL false-review risk)."}
+        {
+          "q": "Who decides what?",
+          "state": "confirmed",
+          "a": "Allan+Marko final say. Clifford orchestrates, Cleo peer-reviews. Customer-facing copy needs BOTH CEOs to verify against canonical docs (Rule 8)."
+        },
+        {
+          "q": "Margin plan decision logged?",
+          "state": "ask",
+          "a": "",
+          "hint": "Recommended: plan at ~25-30% blended honest margin (procurement-disciplined target 40%+). Say yes and Clifford logs it in CEO.md."
+        },
+        {
+          "q": "4.9-star Google rating claim on llms.txt: real or remove?",
+          "state": "ask",
+          "a": "",
+          "hint": "If it is not a genuine rating from real reviews, it must come off (ACL false-review risk)."
+        }
       ],
       "next": [
         "Give the margin decision (~25-30% blended) so every quote and forecast uses one number",
@@ -21,13 +39,42 @@
         "Restart the weekly Friday review: 15 minutes over the cockpit Monday-brief numbers once the brief bot ships"
       ],
       "docs": [
-        {"label": "CEO.md (rules + decision log)", "path": "docs/CEO.md"},
-        {"label": "STATE.md (what is live)", "path": "docs/STATE.md"},
-        {"label": "Partnership protocol (Clifford+Cleo)", "path": "docs/partnership/PARTNERSHIP-PROTOCOL.md"}
+        {
+          "label": "CEO.md (rules + decision log)",
+          "path": "docs/CEO.md"
+        },
+        {
+          "label": "STATE.md (what is live)",
+          "path": "docs/STATE.md"
+        },
+        {
+          "label": "Partnership protocol (Clifford+Cleo)",
+          "path": "docs/partnership/PARTNERSHIP-PROTOCOL.md"
+        }
       ],
       "personas": [
-        {"name": "Jordan Schofield (Surface Care operator lens)", "verdict": "Your governance stack is stronger than ours was at this stage. What we had that you lack: a Monday 7am brief with real numbers in Slack.", "findings": ["Surface Care runs on 4 numbers: CAC, cost-to-deliver, margin, volume. You have the docs but not the weekly pulse.", "Their pipeline runs $1.4M / 1,235 opportunities with the founder touching none of it. Yours needs the W1 ack fixed first."], "adds": ["Ship the Monday CEO brief bot (specced under Tech)", "Report the 4 numbers weekly even while they are small numbers"]},
-        {"name": "Adam Hall (financial discipline lens)", "verdict": "Track leading indicators, not lagging: quotes sent per week, sub calls made per week, follow-ups done.", "findings": ["Markup is not margin: a 25% markup is a 20% margin. The old 47-55% margin docs made exactly this class of error against real sub quotes."], "adds": ["Put quotes/week and outreach-calls/week on the cockpit board as counters"]}
+        {
+          "name": "Jordan Schofield (Surface Care operator lens)",
+          "verdict": "Your governance stack is stronger than ours was at this stage. What we had that you lack: a Monday 7am brief with real numbers in Slack.",
+          "findings": [
+            "Surface Care runs on 4 numbers: CAC, cost-to-deliver, margin, volume. You have the docs but not the weekly pulse.",
+            "Their pipeline runs $1.4M / 1,235 opportunities with the founder touching none of it. Yours needs the W1 ack fixed first."
+          ],
+          "adds": [
+            "Ship the Monday CEO brief bot (specced under Tech)",
+            "Report the 4 numbers weekly even while they are small numbers"
+          ]
+        },
+        {
+          "name": "Adam Hall (financial discipline lens)",
+          "verdict": "Track leading indicators, not lagging: quotes sent per week, sub calls made per week, follow-ups done.",
+          "findings": [
+            "Markup is not margin: a 25% markup is a 20% margin. The old 47-55% margin docs made exactly this class of error against real sub quotes."
+          ],
+          "adds": [
+            "Put quotes/week and outreach-calls/week on the cockpit board as counters"
+          ]
+        }
       ],
       "deep": "How the company actually runs today:\n\n- Allan is the only customer-facing human (Decision 7). Marko handles field/supplier side and will become the trainer under the employee plan.\n- Clifford (this AI) does research, builds, docs, quoting support and orchestration. Cleo (Codex) is the peer reviewer; anything customer-facing needs both to check the canonical source independently before it ships (Rule 8).\n- The 17 role files in docs/roles/ are lenses, not people: when a decision comes up, load the relevant expert + the most-affected-stakeholder + one adversarial lens (Rule 2 triple audit).\n- Authority order when docs disagree: CEO.md beats OPERATING-CONTEXT.md and FUTURE-PLAN.md; STATE.md is the only source of truth for whether something is live.\n\nThe honest 2026-07-07 position: first-job-capable with manual workarounds. Site live, W1 form live, one completed paid job (Mick, 2 bathrooms via ad-hoc sub), one quote out (Isabella / AitkenRE TR-1024, $1,050). The gap between here and finalised is the money lane + workflow build in the pipeline board, not strategy.",
       "children": [
@@ -38,11 +85,28 @@
           "status": "todo",
           "summary": "Three decisions only Allan can make, all surfaced by the June audit and still open.",
           "confirmations": [
-            {"q": "1. Margin plan ~25-30% blended?", "state": "ask", "a": "", "hint": "Grounded by the Mick analysis (43% T2 / 34% T3 before overheads) + real sub quotes."},
-            {"q": "2. 4.9-star claim keep/remove?", "state": "ask", "a": "", "hint": "Remove unless genuine."},
-            {"q": "3. Dashboard .env: untrack + rotate keys?", "state": "ask", "a": "", "hint": "A tracked .env in dashboard/bathresurf-nsw-dashboard should be git rm --cached + rotated."}
+            {
+              "q": "1. Margin plan ~25-30% blended?",
+              "state": "ask",
+              "a": "",
+              "hint": "Grounded by the Mick analysis (43% T2 / 34% T3 before overheads) + real sub quotes."
+            },
+            {
+              "q": "2. 4.9-star claim keep/remove?",
+              "state": "ask",
+              "a": "",
+              "hint": "Remove unless genuine."
+            },
+            {
+              "q": "3. Dashboard .env: untrack + rotate keys?",
+              "state": "ask",
+              "a": "",
+              "hint": "A tracked .env in dashboard/bathresurf-nsw-dashboard should be git rm --cached + rotated."
+            }
           ],
-          "next": ["Answer all three in one sitting; Clifford applies and logs them in CEO.md the same day"]
+          "next": [
+            "Answer all three in one sitting; Clifford applies and logs them in CEO.md the same day"
+          ]
         }
       ]
     },
@@ -52,12 +116,37 @@
       "icon": "📣",
       "status": "partial",
       "summary": "Website live and SEO-structured (19 service pages). Instagram + Facebook accounts created, no posts engine yet. Paid ads NOT started (deliberate: fix the ack + money lane first). The growth playbook is fully mapped from Surface Care.",
-      "watch": ["review", "ads", "instagram", "facebook", "seo", "blog", "4.9"],
+      "watch": [
+        "4.9",
+        "gbp",
+        "google business",
+        "instagram",
+        "facebook",
+        "review link"
+      ],
       "confirmations": [
-        {"q": "Website live?", "state": "confirmed", "a": "timelessresurfacing.com.au live since 2026-06-11, theme v1.5.0, GHL-wired quote form."},
-        {"q": "Social accounts?", "state": "confirmed", "a": "Instagram + Facebook business accounts created (July 2026). No advertising yet. TikTok not created."},
-        {"q": "Google Business Profile live with photos?", "state": "ask", "a": "", "hint": "GBP is the single highest-leverage free lead source for local trades. Status was 'waiting on first job photos'; Mick job photos may qualify now."},
-        {"q": "Google Ads account created (not spending)?", "state": "ask", "a": "", "hint": "Creating it early ages the account and lets conversion tracking be wired before dollar one."}
+        {
+          "q": "Website live?",
+          "state": "confirmed",
+          "a": "timelessresurfacing.com.au live since 2026-06-11, theme v1.5.0, GHL-wired quote form."
+        },
+        {
+          "q": "Social accounts?",
+          "state": "confirmed",
+          "a": "Instagram + Facebook business accounts created (July 2026). No advertising yet. TikTok not created."
+        },
+        {
+          "q": "Google Business Profile live with photos?",
+          "state": "ask",
+          "a": "",
+          "hint": "GBP is the single highest-leverage free lead source for local trades. Status was 'waiting on first job photos'; Mick job photos may qualify now."
+        },
+        {
+          "q": "Google Ads account created (not spending)?",
+          "state": "ask",
+          "a": "",
+          "hint": "Creating it early ages the account and lets conversion tracking be wired before dollar one."
+        }
       ],
       "next": [
         "Get the Google Business Profile fully live with the Mick before/after photos",
@@ -65,14 +154,56 @@
         "When ads start (Phase 8, after money lane): search-only, one campaign per theme, one ad group per service, one dedicated landing page per ad group, measure to the job level from day one (Jordan's exact rules)"
       ],
       "docs": [
-        {"label": "SEO baseline audit", "path": "AUDIT.md"},
-        {"label": "Review strategy + vetoed tactics", "path": "docs/CEO.md"},
-        {"label": "Blog automation idea (deferred)", "path": "docs/AI-BLOG-AUTOMATION-IDEA.md"}
+        {
+          "label": "SEO baseline audit",
+          "path": "AUDIT.md"
+        },
+        {
+          "label": "Review strategy + vetoed tactics",
+          "path": "docs/CEO.md"
+        },
+        {
+          "label": "Blog automation idea (deferred)",
+          "path": "docs/AI-BLOG-AUTOMATION-IDEA.md"
+        }
       ],
       "personas": [
-        {"name": "Jordan Schofield (paid ads lens)", "verdict": "Do not touch paid until you can track a click to a completed job's profit. Then start at $5/day and never hand it to an agency.", "findings": ["We went $5/day to $500+/day only because every keyword had profit attached (POAS not ROAS, 2.5x floor).", "Dedicated per-service landing pages dropped our cost per lead 17% ($1.86/lead at best).", "Meta strategy that worked: post organic, amplify only what passes 60k views, keep only ads that lower cost per lead.", "One warning: holidays kill the pipeline for 2 weeks. Plan cashflow around it."], "adds": ["Your 19 service pages ARE the landing-page library. Wire GHL to fire offline conversions (job accepted + value) back to Google before spending.", "Steal our landing-page prompt structure: hero with objection subheadline, 3-4 pain points, 3-step how-it-works, social proof, 5 FAQs, CTA form."]},
-        {"name": "David List (local-marketing lens)", "verdict": "Cheapest wins first: GBP, a free Yellow Pages listing (it outranks you for 'X near me'), tel: links everywhere, 3 CTAs above the fold.", "findings": ["Websites are judged on exactly two questions: what do you do, and what have you done. Your service pages answer #1; the gallery must keep answering #2 with REAL jobs.", "Missed-call-text-back is the highest ROI automation in trades: if you miss a call, an SMS goes out in seconds."], "adds": ["Add missed-call-text-back in GHL for the business number (workflow, 30 min)", "Run 5-8 creatives per campaign when ads start or you learn nothing"]},
-        {"name": "Joel Kleber (content lens, ex-Jim's Group CMO)", "verdict": "Founder-story content at volume beats polish. Allan's build-in-public angle (replacing a $2M model with AI co-CEOs) is genuinely rare content.", "findings": ["Jim's grew to a $1B valuation on volume + founder story. Nobody expects polish from a tradie account; they expect proof and personality."], "adds": ["Film 60 seconds on every job: the before, the spray, the after. The archivers you built are the swipe-file of what works (628 competitor videos transcribed + searchable)."]}
+        {
+          "name": "Jordan Schofield (paid ads lens)",
+          "verdict": "Do not touch paid until you can track a click to a completed job's profit. Then start at $5/day and never hand it to an agency.",
+          "findings": [
+            "We went $5/day to $500+/day only because every keyword had profit attached (POAS not ROAS, 2.5x floor).",
+            "Dedicated per-service landing pages dropped our cost per lead 17% ($1.86/lead at best).",
+            "Meta strategy that worked: post organic, amplify only what passes 60k views, keep only ads that lower cost per lead.",
+            "One warning: holidays kill the pipeline for 2 weeks. Plan cashflow around it."
+          ],
+          "adds": [
+            "Your 19 service pages ARE the landing-page library. Wire GHL to fire offline conversions (job accepted + value) back to Google before spending.",
+            "Steal our landing-page prompt structure: hero with objection subheadline, 3-4 pain points, 3-step how-it-works, social proof, 5 FAQs, CTA form."
+          ]
+        },
+        {
+          "name": "David List (local-marketing lens)",
+          "verdict": "Cheapest wins first: GBP, a free Yellow Pages listing (it outranks you for 'X near me'), tel: links everywhere, 3 CTAs above the fold.",
+          "findings": [
+            "Websites are judged on exactly two questions: what do you do, and what have you done. Your service pages answer #1; the gallery must keep answering #2 with REAL jobs.",
+            "Missed-call-text-back is the highest ROI automation in trades: if you miss a call, an SMS goes out in seconds."
+          ],
+          "adds": [
+            "Add missed-call-text-back in GHL for the business number (workflow, 30 min)",
+            "Run 5-8 creatives per campaign when ads start or you learn nothing"
+          ]
+        },
+        {
+          "name": "Joel Kleber (content lens, ex-Jim's Group CMO)",
+          "verdict": "Founder-story content at volume beats polish. Allan's build-in-public angle (replacing a $2M model with AI co-CEOs) is genuinely rare content.",
+          "findings": [
+            "Jim's grew to a $1B valuation on volume + founder story. Nobody expects polish from a tradie account; they expect proof and personality."
+          ],
+          "adds": [
+            "Film 60 seconds on every job: the before, the spray, the after. The archivers you built are the swipe-file of what works (628 competitor videos transcribed + searchable)."
+          ]
+        }
       ],
       "deep": "The engine, in the order it should be built:\n\n1. FREE LAYER (now): GBP with real job photos + posts, IG/FB organic (3 posts/week from job content), Yellow Pages free listing, review engine (ask EVERY customer, no gating, per ACCC rules; template 4B ready).\n2. TRACKING LAYER (before any spend): GA4 + Search Console + GHL attribution fields + offline-conversion wiring so a Google click can be traced to job profit. Jordan tracked EVERYTHING to the ad level; that is the entire reason his ads printed money.\n3. PAID LAYER (Phase 8, after money lane): Google search-only per his 3 rules. Budget formula: needed CPL x lead-to-customer rate = cost per customer; customers wanted per day sets the daily budget. Benchmarks from their real data: ~$20/lead, 1-in-5 leads convert, ~$100/customer CAC on a $530-1,300 ticket.\n4. CONTENT LAYER (parallel, cheap): the TikTok/media archivers hold every video from jordan.schofield, jamesnlwebster, the_adamhall and davidlist.me, transcribed and searchable. That library shows exactly which hooks worked (job-story before/after, 'we tried to damage the repair', pricing transparency, weekly-numbers posts).\n\nWhat NOT to do: no paid ads before tracking, no review gating, no fake ratings, no agency retainers, no PMax campaigns (Jordan: search-only converts for trades)."
     },
@@ -82,13 +213,42 @@
       "icon": "💬",
       "status": "partial",
       "summary": "Lead capture live (form + W1). Quoting engine finished (the quote web app). The broken piece is the FIRST TOUCH: the live W1 ack SMS has banned wording and double-fires on 2-bathroom leads. Fix = pipeline 1.0, copy is paste-ready.",
-      "watch": ["quote", "W1", "ack", "netlify", "supabase auth"],
+      "watch": [
+        "w1 ack",
+        "quote app",
+        "netlify",
+        "supabase auth",
+        "tr-10",
+        "quote the lined"
+      ],
       "confirmations": [
-        {"q": "Quote promise", "state": "confirmed", "a": "Within 24 hours (FAQs say 1 business day). Never say 'written' or 'guarantee' in customer copy."},
-        {"q": "Quote validity", "state": "confirmed", "a": "7 days (Allan decision 2026-07-07: urgency, no month-old chase-backs). Expiry/win-back fires day 8; countdown nudge ~day 5. Deposit 10% MAX (NSW Home Building Act cap)."},
-        {"q": "Quoting engine", "state": "confirmed", "a": "Quote web app v9.1 finished 07-07: quote, tax invoice, signed warranty, options-aware local AI, price book, TR-numbering. First real output: TR-1024 Isabella/AitkenRE."},
-        {"q": "W1 ack fix applied in GHL?", "state": "ask", "a": "", "hint": "Pipeline 1.0. Paste-ready copy in customer-comms §1A (commit e66a0b5): send only when bathroom_index is 1 or blank, branch body on bathroom_count. 10-30 min in GHL."},
-        {"q": "Quote app deployed to Netlify + Supabase user created?", "state": "ask", "a": "", "hint": "Drag ~/Downloads/timeless-quote-app.zip onto app.netlify.com/drop, then Supabase > Authentication > Add user, then Sign in to sync."}
+        {
+          "q": "Quote promise",
+          "state": "confirmed",
+          "a": "Within 24 hours (FAQs say 1 business day). Never say 'written' or 'guarantee' in customer copy."
+        },
+        {
+          "q": "Quote validity",
+          "state": "confirmed",
+          "a": "7 days (Allan decision 2026-07-07: urgency, no month-old chase-backs). Expiry/win-back fires day 8; countdown nudge ~day 5. Deposit 10% MAX (NSW Home Building Act cap)."
+        },
+        {
+          "q": "Quoting engine",
+          "state": "confirmed",
+          "a": "Quote web app v9.1 finished 07-07: quote, tax invoice, signed warranty, options-aware local AI, price book, TR-numbering. First real output: TR-1024 Isabella/AitkenRE."
+        },
+        {
+          "q": "W1 ack fix applied in GHL?",
+          "state": "ask",
+          "a": "",
+          "hint": "Pipeline 1.0. Paste-ready copy in customer-comms §1A (commit e66a0b5): send only when bathroom_index is 1 or blank, branch body on bathroom_count. 10-30 min in GHL."
+        },
+        {
+          "q": "Quote app deployed to Netlify + Supabase user created?",
+          "state": "ask",
+          "a": "",
+          "hint": "Drag ~/Downloads/timeless-quote-app.zip onto app.netlify.com/drop, then Supabase > Authentication > Add user, then Sign in to sync."
+        }
       ],
       "next": [
         "Apply the W1 ack fix in GHL (the single next pipeline action)",
@@ -96,14 +256,54 @@
         "Adopt the 60-second call-back rule on every inbound lead: it is the #1 stated reason Surface Care wins"
       ],
       "docs": [
-        {"label": "Customer comms templates (all 21)", "path": "docs/templates/customer-comms-templates.md"},
-        {"label": "Quote app", "path": "docs/quote-app/README-SETUP.md"},
-        {"label": "Quote rules (15 house rules)", "path": "docs/specs/quote-drafter-kit-2026-06-17.md"}
+        {
+          "label": "Customer comms templates (all 21)",
+          "path": "docs/templates/customer-comms-templates.md"
+        },
+        {
+          "label": "Quote app",
+          "path": "docs/quote-app/README-SETUP.md"
+        },
+        {
+          "label": "Quote rules (15 house rules)",
+          "path": "docs/specs/quote-drafter-kit-2026-06-17.md"
+        }
       ],
       "personas": [
-        {"name": "Jordan Schofield (speed-to-lead lens)", "verdict": "We call every inbound lead within 60 seconds. Most clients are so shocked they just say thank you. That habit alone is worth more than your whole ads budget.", "findings": ["Our call script: greet by name, describe THEIR damage from the photos, explain the repair method, promise the quote within hours with price and availability, tell them the email is coming.", "Quote follow-up is automated: abandoned quote forms get an SMS 4-5 hours later. That one automation adds 30-40% more completed leads.", "We score every job before accepting: expected revenue, expected cost (sub + materials + travel), margin left. Below threshold = polite no. We rejected $65,610 of bad jobs in one month on purpose."], "adds": ["Your W2 abandoned-form SMS is already live: good. Fix the W1 ack copy today.", "Add the job-score gate to the quote app flow: your quote-drafter rules already carry the floor policy, keep enforcing it."]},
-        {"name": "Adam Hall (estimating lens)", "verdict": "The quote IS the budget. Every line you quote becomes the cost budget the job must beat.", "findings": ["Square-metre rates send you broke: you systematically win only the underpriced jobs (adverse selection). Your per-SKU price book approach is right.", "A 10% discount at 20% margin gives away half your profit. Hold the line; walk from bad jobs: the two most profitable projects each year are the two bad ones you turn down."], "adds": ["Track profit-per-hour per job type as soon as you have 10 jobs of data: it will tell you which services to push in ads"]},
-        {"name": "Customer-fairness auditor", "verdict": "Quote copy is compliant after the July fixes; keep the discipline.", "findings": ["Rental warranty now consistent at 6 months everywhere. Conditions put the onus on the customer BEFOREHAND with a photo, never 'checked on arrival'. Colour change must be explicit (gloss white vs existing cream)."], "adds": ["Every new quote: run the banned-word check (no 'written', no 'guarantee') and state the exact colour"]}
+        {
+          "name": "Jordan Schofield (speed-to-lead lens)",
+          "verdict": "We call every inbound lead within 60 seconds. Most clients are so shocked they just say thank you. That habit alone is worth more than your whole ads budget.",
+          "findings": [
+            "Our call script: greet by name, describe THEIR damage from the photos, explain the repair method, promise the quote within hours with price and availability, tell them the email is coming.",
+            "Quote follow-up is automated: abandoned quote forms get an SMS 4-5 hours later. That one automation adds 30-40% more completed leads.",
+            "We score every job before accepting: expected revenue, expected cost (sub + materials + travel), margin left. Below threshold = polite no. We rejected $65,610 of bad jobs in one month on purpose."
+          ],
+          "adds": [
+            "Your W2 abandoned-form SMS is already live: good. Fix the W1 ack copy today.",
+            "Add the job-score gate to the quote app flow: your quote-drafter rules already carry the floor policy, keep enforcing it."
+          ]
+        },
+        {
+          "name": "Adam Hall (estimating lens)",
+          "verdict": "The quote IS the budget. Every line you quote becomes the cost budget the job must beat.",
+          "findings": [
+            "Square-metre rates send you broke: you systematically win only the underpriced jobs (adverse selection). Your per-SKU price book approach is right.",
+            "A 10% discount at 20% margin gives away half your profit. Hold the line; walk from bad jobs: the two most profitable projects each year are the two bad ones you turn down."
+          ],
+          "adds": [
+            "Track profit-per-hour per job type as soon as you have 10 jobs of data: it will tell you which services to push in ads"
+          ]
+        },
+        {
+          "name": "Customer-fairness auditor",
+          "verdict": "Quote copy is compliant after the July fixes; keep the discipline.",
+          "findings": [
+            "Rental warranty now consistent at 6 months everywhere. Conditions put the onus on the customer BEFOREHAND with a photo, never 'checked on arrival'. Colour change must be explicit (gloss white vs existing cream)."
+          ],
+          "adds": [
+            "Every new quote: run the banned-word check (no 'written', no 'guarantee') and state the exact colour"
+          ]
+        }
       ],
       "deep": "The full sales motion, step by step:\n\n1. LEAD IN: website form (photos + details, W1 fires: GHL contact + opportunity + Slack #quotes-in + ack SMS) or phone call. Multi-bathroom leads create one opportunity per bathroom (spec 3.3), ack fires once.\n2. FIRST TOUCH (target: 60 seconds for calls, instant SMS for forms): the ack promises the quote within 24 hours. For phone leads use the Surface Care script shape: name, their damage, the method, the promise.\n3. QUOTE (within 24h, usually same day): photos reviewed, priced in the quote app from the price book, margin gate checked, PDF generated (itemised card, GST-inclusive, 7-day validity), sent by SMS + email (full email set after DKIM flip).\n4. FOLLOW-UP: nudge at 24h (2C), 48h (2D), countdown ~day 5, expiry day 8 with win-back (2F/6A). Rejections get the referral ask (2G).\n5. ACCEPT: customer replies YES / e-accepts. Deposit request follows (money lane). Stage moves; Make Scenario 1 creates the ServiceM8 job automatically at stage 11 with contact details stripped.\n\nBenchmark funnel (Surface Care record week): 1,900 site visits, 260 quote submissions, 188 quotes sent, 53 signed, ~$57K revenue. Their steady state: ~1,000 quote requests/month, ~20% acceptance, $890 avg job. Your funnel targets from their mined benchmarks: 13% visit-to-lead, 70% lead-to-quote, 28% quote-to-job."
     },
@@ -113,12 +313,37 @@
       "icon": "🔧",
       "status": "partial",
       "summary": "GHL 15-stage pipeline live (Jordan-exact). Make Scenario 1 (stage 11 creates the SM8 job, contact-stripped) + Scenario 3 back-sync live. Booking, dispatch and job-day flow are designed but not yet exercised at volume.",
-      "watch": ["servicem8", "sm8", "make", "booking", "dispatch", "scenario"],
+      "watch": [
+        "scenario 1",
+        "scenario 4",
+        "scenario 5",
+        "servicem8 job",
+        "booking link",
+        "dispatch"
+      ],
       "confirmations": [
-        {"q": "Pipeline", "state": "confirmed", "a": "15-stage Sales pipeline in GHL (Override 14 v4, Jordan-exact), finance via Payment Status + Accounts pipeline."},
-        {"q": "GHL to ServiceM8 bridge", "state": "confirmed", "a": "Make Scenario 1 live: drag to stage 11 creates the SM8 client+job (name+address only, no contact leak), idempotent by opp_id, Slack error channel. Never drag to stage 11 before the deposit."},
-        {"q": "SM8 booking links + automations enabled?", "state": "ask", "a": "", "hint": "Free add-ons: Online Booking + Automation. They let the customer self-pick a slot filtered to the assigned tech and auto-confirm. Setup steps in the booking research note."},
-        {"q": "Insurance Certificate of Currency sighted?", "state": "ask", "a": "", "hint": "$10M public liability. CoC on file before the next job."}
+        {
+          "q": "Pipeline",
+          "state": "confirmed",
+          "a": "15-stage Sales pipeline in GHL (Override 14 v4, Jordan-exact), finance via Payment Status + Accounts pipeline."
+        },
+        {
+          "q": "GHL to ServiceM8 bridge",
+          "state": "confirmed",
+          "a": "Make Scenario 1 live: drag to stage 11 creates the SM8 client+job (name+address only, no contact leak), idempotent by opp_id, Slack error channel. Never drag to stage 11 before the deposit."
+        },
+        {
+          "q": "SM8 booking links + automations enabled?",
+          "state": "ask",
+          "a": "",
+          "hint": "Free add-ons: Online Booking + Automation. They let the customer self-pick a slot filtered to the assigned tech and auto-confirm. Setup steps in the booking research note."
+        },
+        {
+          "q": "Insurance Certificate of Currency sighted?",
+          "state": "ask",
+          "a": "",
+          "hint": "$10M public liability. CoC on file before the next job."
+        }
       ],
       "next": [
         "Enable SM8 Online Booking + Automation add-ons and define the 6 service categories with durations",
@@ -126,14 +351,48 @@
         "Photo discipline: before/during/after on every job (feeds warranty, gallery, GBP, socials and the future photo-harvest automation)"
       ],
       "docs": [
-        {"label": "SM8 keep-vs-build decision (locked)", "path": "docs/specs/decision-sm8-keep-vs-build-2026-06-05.md"},
-        {"label": "Make Scenario 1 as-built", "path": "docs/specs/make-scenario-1-STATE.md"},
-        {"label": "Job recipes (5 SKUs)", "path": "docs/sop/job-recipes"},
-        {"label": "Tech-customer booking research", "path": "docs/specs/booking-coordination-plan-2026-07-07.md"}
+        {
+          "label": "SM8 keep-vs-build decision (locked)",
+          "path": "docs/specs/decision-sm8-keep-vs-build-2026-06-05.md"
+        },
+        {
+          "label": "Make Scenario 1 as-built",
+          "path": "docs/specs/make-scenario-1-STATE.md"
+        },
+        {
+          "label": "Job recipes (5 SKUs)",
+          "path": "docs/sop/job-recipes"
+        },
+        {
+          "label": "Tech-customer booking research",
+          "path": "docs/specs/booking-coordination-plan-2026-07-07.md"
+        }
       ],
       "personas": [
-        {"name": "James Webster (fulfilment lens)", "verdict": "Fulfilment is the growth ceiling, not leads. Our #1 KPI for 2025 is getting jobs completed sooner.", "findings": ["Only 20-25% of customers will wait 3 weeks for a booking; the rest churn silently. Speed-to-book is revenue.", "Our ops heartbeat is a Slack channel where the system posts job-created and job-completed-for-review, and a human confirms invoice-ready. Simple, auditable, cheap."], "adds": ["Wire SM8 webhooks to Slack #bookings-and-operations the way we do (job created / completed for review / invoice ready)", "Your employee plan is the right answer to the 3-week wait; we made the same pivot"]},
-        {"name": "David List (integration lens)", "verdict": "Optimize, then Automate, then Customize. Use ServiceM8's built-in add-ons before building anything.", "findings": ["SM8's free Automation + Booking add-ons cover confirmations, reminders and on-my-way messages without a line of code.", "SM8 event webhooks silently drop add-then-remove-in-one-session events; always test automations with real traffic.", "SM8 v14 shipped an official n8n node and an MCP endpoint: job creation, badges, queues are all scriptable now."], "adds": ["The property-manager email-to-job parser (agency emails a work order, a job appears in SM8 with the agent as contact and an auto-SMS back) is THE automation for the AitkenRE relationship: build it when PM volume starts"]}
+        {
+          "name": "James Webster (fulfilment lens)",
+          "verdict": "Fulfilment is the growth ceiling, not leads. Our #1 KPI for 2025 is getting jobs completed sooner.",
+          "findings": [
+            "Only 20-25% of customers will wait 3 weeks for a booking; the rest churn silently. Speed-to-book is revenue.",
+            "Our ops heartbeat is a Slack channel where the system posts job-created and job-completed-for-review, and a human confirms invoice-ready. Simple, auditable, cheap."
+          ],
+          "adds": [
+            "Wire SM8 webhooks to Slack #bookings-and-operations the way we do (job created / completed for review / invoice ready)",
+            "Your employee plan is the right answer to the 3-week wait; we made the same pivot"
+          ]
+        },
+        {
+          "name": "David List (integration lens)",
+          "verdict": "Optimize, then Automate, then Customize. Use ServiceM8's built-in add-ons before building anything.",
+          "findings": [
+            "SM8's free Automation + Booking add-ons cover confirmations, reminders and on-my-way messages without a line of code.",
+            "SM8 event webhooks silently drop add-then-remove-in-one-session events; always test automations with real traffic.",
+            "SM8 v14 shipped an official n8n node and an MCP endpoint: job creation, badges, queues are all scriptable now."
+          ],
+          "adds": [
+            "The property-manager email-to-job parser (agency emails a work order, a job appears in SM8 with the agent as contact and an auto-SMS back) is THE automation for the AitkenRE relationship: build it when PM volume starts"
+          ]
+        }
       ],
       "deep": "How a job flows once accepted:\n\n1. Deposit paid (Stripe link or Westpac EFT) and confirmed. ONLY then drag to stage 11.\n2. Stage 11 fires Make Scenario 1: SM8 job created under the right category queue, name+address only. Scenario 3 syncs SM8 status changes back to GHL.\n3. BOOKING (per the 2026-07-07 plan): office sends the customer an SM8 booking link filtered to the assigned worker's availability; customer self-picks; SM8 auto-schedules and sends confirmation + day-before reminder. The worker NEVER gets the customer's phone number (sub data-leak control); day-of coordination goes through the office or the office-triggered on-my-way SMS.\n4. JOB DAY: worker follows the job recipe for that SKU (docs/sop/job-recipes), photographs before/during/after, completes the SM8 checklist. Cure-time rules: coatings need 24-48h before use; the customer gets the aftercare card.\n5. COMPLETE: job-complete SMS with balance request (3D), warranty PDF generated in the quote app, SIGNED fresh in the popup (Allan or Marko), delivered WITH the final invoice (ACL time-of-supply requirement).\n6. QA: any defect within the first 30-60 days is an application defect; fix fast and photograph the fix. Surface Care turns repair complaints into content and 24-hour goodwill stories.\n\nSurface Care contrast: their 70 subs coordinate dates with customers directly through SM8 two-way SMS from the job card (masked company number). We deliberately do NOT give subs that access; the booking-link flow gives the same customer experience with zero contact leakage. Employees (Phase E2+) CAN get SM8 logins."
     },
@@ -143,13 +402,42 @@
       "icon": "👷",
       "status": "gated",
       "summary": "Plan ratified 07-07: subs carry the work NOW; when savings allow, Marko trains, then we hire immigrant employees (Vietnamese/Nepalese communities) with company tools + vehicle. Sub path stays legally gated until the s15AA review.",
-      "watch": ["sub", "lawyer", "legal", "outreach", "employee", "marko", "recruit"],
+      "watch": [
+        "sub outreach",
+        "lawyer",
+        "legal brief",
+        "s15aa",
+        "rate card",
+        "employee"
+      ],
       "confirmations": [
-        {"q": "Strategy", "state": "confirmed", "a": "Subs now, Marko-trained employees later. Canonical doc: docs/specs/employee-transition-plan-2026-07-07.md. Same pivot Surface Care made (subbie-only ceiling ~$1.7M)."},
-        {"q": "Recruit pipeline", "state": "confirmed", "a": "58 verified NSW spray resurfacers (Tier A ~20) + 126-contact call list ready in docs/lead-gen. Outreach NOT started."},
-        {"q": "Legal gate", "state": "confirmed", "a": "HARD GATE: no external sub signs until an AU employment lawyer clears Fair Work s15AA. Brief is ready to send. Recruiting conversations are allowed; signing is not."},
-        {"q": "Lawyer engaged yet?", "state": "ask", "a": "", "hint": "The brief (docs/specs/legal-review-brief-sub-engagement-2026-06-05.md) is ready. 2-6 week turnaround: send it NOW so it is not the bottleneck. Add the employee award-classification question to the same engagement."},
-        {"q": "Sub outreach started?", "state": "ask", "a": "", "hint": "Marko calls the Tier A list: goal is 2-3 partner subs on a written per-SKU rate card at disciplined rates."}
+        {
+          "q": "Strategy",
+          "state": "confirmed",
+          "a": "Subs now, Marko-trained employees later. Canonical doc: docs/specs/employee-transition-plan-2026-07-07.md. Same pivot Surface Care made (subbie-only ceiling ~$1.7M)."
+        },
+        {
+          "q": "Recruit pipeline",
+          "state": "confirmed",
+          "a": "58 verified NSW spray resurfacers (Tier A ~20) + 126-contact call list ready in docs/lead-gen. Outreach NOT started."
+        },
+        {
+          "q": "Legal gate",
+          "state": "confirmed",
+          "a": "HARD GATE: no external sub signs until an AU employment lawyer clears Fair Work s15AA. Brief is ready to send. Recruiting conversations are allowed; signing is not."
+        },
+        {
+          "q": "Lawyer engaged yet?",
+          "state": "ask",
+          "a": "",
+          "hint": "The brief (docs/specs/legal-review-brief-sub-engagement-2026-06-05.md) is ready. 2-6 week turnaround: send it NOW so it is not the bottleneck. Add the employee award-classification question to the same engagement."
+        },
+        {
+          "q": "Sub outreach started?",
+          "state": "ask",
+          "a": "",
+          "hint": "Marko calls the Tier A list: goal is 2-3 partner subs on a written per-SKU rate card at disciplined rates."
+        }
       ],
       "next": [
         "Send the legal brief this week (longest lead item on the whole critical path)",
@@ -158,15 +446,59 @@
         "Define the employee trigger on the cockpit: cash buffer $25-30k + 6-8 booked jobs/week for 4 weeks"
       ],
       "docs": [
-        {"label": "Employee transition plan (canonical)", "path": "docs/specs/employee-transition-plan-2026-07-07.md"},
-        {"label": "Sub recruit list + playbook", "path": "docs/lead-gen/README.md"},
-        {"label": "Legal review brief (ready to send)", "path": "docs/specs/legal-review-brief-sub-engagement-2026-06-05.md"},
-        {"label": "Real sub quotes (cost truth)", "path": "data/suppliers/sub-resurfacing-real-quotes-2026-06.md"}
+        {
+          "label": "Employee transition plan (canonical)",
+          "path": "docs/specs/employee-transition-plan-2026-07-07.md"
+        },
+        {
+          "label": "Sub recruit list + playbook",
+          "path": "docs/lead-gen/README.md"
+        },
+        {
+          "label": "Legal review brief (ready to send)",
+          "path": "docs/specs/legal-review-brief-sub-engagement-2026-06-05.md"
+        },
+        {
+          "label": "Real sub quotes (cost truth)",
+          "path": "data/suppliers/sub-resurfacing-real-quotes-2026-06.md"
+        }
       ],
       "personas": [
-        {"name": "Jordan Schofield (sub-scale lens)", "verdict": "We run 70 subs we have mostly never met: matched by location, skill and availability, paid within 7 days. The 7-day payment IS the recruiting pitch.", "findings": ["Sub acquisition cost us ~$500 each via ads and each is worth $40-50k/year of capacity.", "But the model ceilings: we cut from national to NSW+VIC and started hiring employees for speed and consistency. Your plan skips straight to the lesson."], "adds": ["When you pitch subs: lead with 'no marketing, no admin, paid in 7 days'. That closed ours.", "Keep a sub overflow network even after employees: geography and spikes."]},
-        {"name": "Fair Work auditor", "verdict": "Employee path is legally SIMPLER than the sub path: no sham-contracting exposure. It swaps s15AA risk for standard payroll compliance.", "findings": ["From employee #1: workers comp (icare NSW) is mandatory, super 12%, PAYG withholding, award coverage (likely Building & Construction On-site MA000020), written contract, VEVO work-rights check per hire.", "The sub no-customer-contact and no-uniform guardrails exist to avoid sham contracting; they do NOT apply to employees."], "adds": ["One lawyer engagement, two questions: s15AA clearance for subs AND award classification for the first employees"]},
-        {"name": "Adam Hall (people lens)", "verdict": "Hire for attitude, train skill. Attitude is not coachable.", "findings": ["Top staff are never on job boards; they come when the business looks worth joining. The immigrant-community channel is smart: hungry, loyal, referral-rich.", "Document everything: three written warnings saved us in a Fair Work claim. From hire #1, keep a paper trail."], "adds": ["Write the 4-week training curriculum with Marko BEFORE hiring (week 1 prep/mask, week 2 spray, week 3 repairs/regrout, week 4 supervised solo)", "$50 spot-cash values quizzes sound silly and work"]}
+        {
+          "name": "Jordan Schofield (sub-scale lens)",
+          "verdict": "We run 70 subs we have mostly never met: matched by location, skill and availability, paid within 7 days. The 7-day payment IS the recruiting pitch.",
+          "findings": [
+            "Sub acquisition cost us ~$500 each via ads and each is worth $40-50k/year of capacity.",
+            "But the model ceilings: we cut from national to NSW+VIC and started hiring employees for speed and consistency. Your plan skips straight to the lesson."
+          ],
+          "adds": [
+            "When you pitch subs: lead with 'no marketing, no admin, paid in 7 days'. That closed ours.",
+            "Keep a sub overflow network even after employees: geography and spikes."
+          ]
+        },
+        {
+          "name": "Fair Work auditor",
+          "verdict": "Employee path is legally SIMPLER than the sub path: no sham-contracting exposure. It swaps s15AA risk for standard payroll compliance.",
+          "findings": [
+            "From employee #1: workers comp (icare NSW) is mandatory, super 12%, PAYG withholding, award coverage (likely Building & Construction On-site MA000020), written contract, VEVO work-rights check per hire.",
+            "The sub no-customer-contact and no-uniform guardrails exist to avoid sham contracting; they do NOT apply to employees."
+          ],
+          "adds": [
+            "One lawyer engagement, two questions: s15AA clearance for subs AND award classification for the first employees"
+          ]
+        },
+        {
+          "name": "Adam Hall (people lens)",
+          "verdict": "Hire for attitude, train skill. Attitude is not coachable.",
+          "findings": [
+            "Top staff are never on job boards; they come when the business looks worth joining. The immigrant-community channel is smart: hungry, loyal, referral-rich.",
+            "Document everything: three written warnings saved us in a Fair Work claim. From hire #1, keep a paper trail."
+          ],
+          "adds": [
+            "Write the 4-week training curriculum with Marko BEFORE hiring (week 1 prep/mask, week 2 spray, week 3 repairs/regrout, week 4 supervised solo)",
+            "$50 spot-cash values quizzes sound silly and work"
+          ]
+        }
       ],
       "deep": "The four phases (full detail in the canonical doc):\n\nE0 NOW: subs do the work. Sign 2-3 partner subs on a written per-SKU card at disciplined rates. This is the #1 unit-economics action available today. Legal gate applies to SIGNING only.\n\nE1 TRAIN (trigger: $25-30k buffer + 6-8 jobs/week for 4 weeks): Marko trains via the supplier (Hawk/ARS) + paid ride-alongs with a top partner sub, then writes the training curriculum as the company standard.\n\nE2 FIRST EMPLOYEES: 1-2 techs hired from Vietnamese/Nepalese communities. Company supplies tools (~$5-8k/kit) + vehicle. Compliance before day 1: VEVO, icare workers comp, award-rate contract, STP payroll in Xero, super 12%. Economics: ~$85-90k fully loaded = ~$180-220/job at 8-10 jobs/week vs $483+ (54-70% of ticket) for a sub. Employees beat subs from ~4-5 jobs/week utilisation.\n\nE3 SCALE: hire in pairs, Marko moves to training + QA. Employee margin at volume: 55-65% vs 25-44% today.\n\nRisk control: never hire into idle payroll (demand trigger first), Marko signs off the first 10 solo jobs, keep the sub network for overflow."
     },
@@ -176,12 +508,36 @@
       "icon": "💰",
       "status": "partial",
       "summary": "GST registered, Stripe + Xero live, Twilio live. The money LANE (deposit request, payment matching, sub payout, reconciliation) is designed (M1-M8) but the automation (Make Scenarios 4+5) is unbuilt. Biggest finalisation gap per the master audit.",
-      "watch": ["stripe", "xero", "invoice", "payment", "deposit", "margin", "payout"],
+      "watch": [
+        "margin plan",
+        "stripe",
+        "xero",
+        "deposit",
+        "payout",
+        "accounts pipeline"
+      ],
       "confirmations": [
-        {"q": "GST", "state": "confirmed", "a": "Registered (confirmed 2026-06-12). All prices GST-INCLUSIVE; invoices say 'Total price includes GST of $X'; TAX INVOICE wording applies."},
-        {"q": "Rails", "state": "confirmed", "a": "Stripe (card deposits) + Westpac EFT (bank transfer) + Xero (books). pay.com.au deferred."},
-        {"q": "Real unit economics", "state": "confirmed", "a": "Honest blended margin ~25-44% at current sub rates (Mick: 43% T2 / 34% T3). Old 47-55% docs are superseded. Lever = procurement discipline (partner-sub rate card)."},
-        {"q": "Deposit % policy set?", "state": "ask", "a": "", "hint": "Money-lane SOP uses a deposit before stage 11. Confirm the standard % (recommend 20-30% or a flat $200 on small jobs)."}
+        {
+          "q": "GST",
+          "state": "confirmed",
+          "a": "Registered (confirmed 2026-06-12). All prices GST-INCLUSIVE; invoices say 'Total price includes GST of $X'; TAX INVOICE wording applies."
+        },
+        {
+          "q": "Rails",
+          "state": "confirmed",
+          "a": "Stripe (card deposits) + Westpac EFT (bank transfer) + Xero (books). pay.com.au deferred."
+        },
+        {
+          "q": "Real unit economics",
+          "state": "confirmed",
+          "a": "Honest blended margin ~25-44% at current sub rates (Mick: 43% T2 / 34% T3). Old 47-55% docs are superseded. Lever = procurement discipline (partner-sub rate card)."
+        },
+        {
+          "q": "Deposit % policy set?",
+          "state": "ask",
+          "a": "",
+          "hint": "Money-lane SOP uses a deposit before stage 11. Confirm the standard % (recommend 20-30% or a flat $200 on small jobs)."
+        }
       ],
       "next": [
         "Work the money lane manually (M1-M8 SOP) for the first jobs; automate with Scenarios 4+5 after the R1/R2 answers (which Stripe/Xero event carries the opp id)",
@@ -189,13 +545,43 @@
         "After 10 jobs: build the unit-economics dashboard (revenue, sub cost, margin per job) exactly like Jordan's Looker board"
       ],
       "docs": [
-        {"label": "Money lane SOP (M1-M8)", "path": "docs/sop/money-lane-first-jobs.md"},
-        {"label": "Accounts automation design (gated)", "path": "docs/specs/make-scenario-4-5-accounts.md"},
-        {"label": "Margin calibration (why 25-44%)", "path": "docs/research/job-analysis-mick-2bath-2026-06-17.md"}
+        {
+          "label": "Money lane SOP (M1-M8)",
+          "path": "docs/sop/money-lane-first-jobs.md"
+        },
+        {
+          "label": "Accounts automation design (gated)",
+          "path": "docs/specs/make-scenario-4-5-accounts.md"
+        },
+        {
+          "label": "Margin calibration (why 25-44%)",
+          "path": "docs/research/job-analysis-mick-2bath-2026-06-17.md"
+        }
       ],
       "personas": [
-        {"name": "Jordan Schofield (numbers lens)", "verdict": "Our dashboard runs the business: avg job $890, avg sub $483, margin 45.7%, net per job ~$407, projection $3.35M. Every Slack quote-accepted post shows Total AND Net. Copy that habit from job #1.", "findings": ["Profit is calculated BEFORE a technician arrives: the job-score gate keeps margin baked into every acceptance.", "POAS beat ROAS: a 4x ROAS campaign was losing money until we optimised for profit per keyword."], "adds": ["Your Slack quote-accepted webhook should show Total and Net from day one (net = total minus the sub quote)"]},
-        {"name": "Adam Hall (cash lens)", "verdict": "Revenue is not profit, profit is not cash. Resurfacing is blessed: you get paid on completion, not 60 days later. Do not squander that with slow invoicing.", "findings": ["BAS sneaks up on people: it is a quarterly balance-sheet cash event, plan for it.", "More than 90% of small businesses run under 10% net after tax and principal. Your overheads floor sets your minimum margin: never quote below overheads/revenue ratio."], "adds": ["Invoice the balance the moment the job completes (3D template does this): same-day payment should be the norm", "Open a separate tax-savings account and sweep GST + income tax % on every payment"]}
+        {
+          "name": "Jordan Schofield (numbers lens)",
+          "verdict": "Our dashboard runs the business: avg job $890, avg sub $483, margin 45.7%, net per job ~$407, projection $3.35M. Every Slack quote-accepted post shows Total AND Net. Copy that habit from job #1.",
+          "findings": [
+            "Profit is calculated BEFORE a technician arrives: the job-score gate keeps margin baked into every acceptance.",
+            "POAS beat ROAS: a 4x ROAS campaign was losing money until we optimised for profit per keyword."
+          ],
+          "adds": [
+            "Your Slack quote-accepted webhook should show Total and Net from day one (net = total minus the sub quote)"
+          ]
+        },
+        {
+          "name": "Adam Hall (cash lens)",
+          "verdict": "Revenue is not profit, profit is not cash. Resurfacing is blessed: you get paid on completion, not 60 days later. Do not squander that with slow invoicing.",
+          "findings": [
+            "BAS sneaks up on people: it is a quarterly balance-sheet cash event, plan for it.",
+            "More than 90% of small businesses run under 10% net after tax and principal. Your overheads floor sets your minimum margin: never quote below overheads/revenue ratio."
+          ],
+          "adds": [
+            "Invoice the balance the moment the job completes (3D template does this): same-day payment should be the norm",
+            "Open a separate tax-savings account and sweep GST + income tax % on every payment"
+          ]
+        }
       ],
       "deep": "The money lane for the first jobs (manual, proven SOP):\n\nM1 quote accepted, confirm scope. M2 deposit request (Stripe link or EFT details) with the acceptance reply. M3 deposit confirmed = booking unlocked (only now drag to stage 11). M4 job completes, balance invoice out same day (TAX INVOICE from the quote app, GST shown). M5 payment matched in Xero. M6 sub invoice received, checked against the agreed per-SKU rate. M7 sub paid within 7 days (the recruiting promise). M8 job closed: revenue, sub cost, margin logged on the job sheet.\n\nAutomation roadmap: Scenario 4 (Stripe payment event moves Payment Status pipeline) and Scenario 5 (Xero paid trigger for EFT) are designed and gated on two open questions (R1/R2: exact event + metadata carrying the opportunity id). The Oct-2026 card-surcharge ban means the EFT path must stay first-class.\n\nTargets: hold blended margin at 25-30% floor now; partner-sub rate card moves it to 40%+; employees at volume move it to 55%+. Every week report: quotes sent, accepted, revenue, net, margin %, cash buffer vs the $25-30k employee trigger."
     },
@@ -205,13 +591,40 @@
       "icon": "⚖️",
       "status": "partial",
       "summary": "Strong paper position: ACL-compliant warranty system, terms live, insurance corrected to $10M. Two open gates: the s15AA lawyer review (sub path) and the NSW licensing threshold watch (jobs over $5k inc GST).",
-      "watch": ["acl", "warranty", "licence", "license", "insurance", "s15aa", "lawyer"],
+      "watch": [
+        "lawyer",
+        "licence",
+        "insurance",
+        "coc",
+        "s15aa"
+      ],
       "confirmations": [
-        {"q": "Warranty ladder", "state": "confirmed", "a": "Resurfacing/tiling up to 5yr (private) / 6mo rental; grout 2yr; silicone 12mo / 90-day rental. Warranty PDF carries the mandatory ACL reg 90(4) text VERBATIM and is signed fresh per job."},
-        {"q": "Public liability", "state": "confirmed", "a": "$10M policy. Site copy corrected 07-07 (was overstating $20M). CoC available on request."},
-        {"q": "Licensing", "state": "confirmed", "a": "No builder/trade licence held. NSW requires a licence for residential work over $5,000 inc GST. The quote app warns on quotes over $5k. Keep single-job scope under the threshold until licensed."},
-        {"q": "Terms + privacy pages", "state": "confirmed", "a": "Live at /terms/ and /privacy/ since June."},
-        {"q": "Lawyer brief sent?", "state": "ask", "a": "", "hint": "Same ask as Workforce: send it, add the award question."}
+        {
+          "q": "Warranty ladder",
+          "state": "confirmed",
+          "a": "Resurfacing/tiling up to 5yr (private) / 6mo rental; grout 2yr; silicone 12mo / 90-day rental. Warranty PDF carries the mandatory ACL reg 90(4) text VERBATIM and is signed fresh per job."
+        },
+        {
+          "q": "Public liability",
+          "state": "confirmed",
+          "a": "$10M policy. Site copy corrected 07-07 (was overstating $20M). CoC available on request."
+        },
+        {
+          "q": "Licensing",
+          "state": "confirmed",
+          "a": "No builder/trade licence held. NSW requires a licence for residential work over $5,000 inc GST. The quote app warns on quotes over $5k. Keep single-job scope under the threshold until licensed."
+        },
+        {
+          "q": "Terms + privacy pages",
+          "state": "confirmed",
+          "a": "Live at /terms/ and /privacy/ since June."
+        },
+        {
+          "q": "Lawyer brief sent?",
+          "state": "ask",
+          "a": "",
+          "hint": "Same ask as Workforce: send it, add the award question."
+        }
       ],
       "next": [
         "Send the legal brief (covers the sub model; add employee award classification)",
@@ -219,13 +632,40 @@
         "Before any job over $5k inc GST: split scope or get licensed. No exceptions."
       ],
       "docs": [
-        {"label": "Warranty page (live copy)", "path": "page-templates/page-warranty.php"},
-        {"label": "Sub agreement clauses (Sprintlaw brief)", "path": "docs/specs/sub-agreement-clauses.md"},
-        {"label": "Risk scenarios playbook (28)", "path": "docs/sop/sub-risk-scenarios-playbook.md"}
+        {
+          "label": "Warranty page (live copy)",
+          "path": "page-templates/page-warranty.php"
+        },
+        {
+          "label": "Sub agreement clauses (Sprintlaw brief)",
+          "path": "docs/specs/sub-agreement-clauses.md"
+        },
+        {
+          "label": "Risk scenarios playbook (28)",
+          "path": "docs/sop/sub-risk-scenarios-playbook.md"
+        }
       ],
       "personas": [
-        {"name": "Compliance auditor (AUS)", "verdict": "The July sweep closed the big exposures ($20M claim, 'written warranty certificate', rental-period contradiction). The remaining risk is drift, not structure.", "findings": ["ACL rule to never break: the warranty-against-defects text must appear verbatim; reviews must never be gated; claims must be physically true (the Mick cornice lesson: never keep a claim for parity that is not true of THIS job)."], "adds": ["Any new customer-facing page or template gets the Rule-8 double-check before publish, no exceptions"]},
-        {"name": "Customer-fairness auditor", "verdict": "The condition style is now customer-fair: onus BEFORE the job with photos, explicit colour statements, per-material warranty honesty.", "findings": ["The 'why the numbers differ' warranty section is genuinely good consumer communication; it converts because it is honest."], "adds": ["Mirror the same honesty in the sales conversation: tell customers what resurfacing does NOT do (not a replacement, no exact colour match unless quoted)"]}
+        {
+          "name": "Compliance auditor (AUS)",
+          "verdict": "The July sweep closed the big exposures ($20M claim, 'written warranty certificate', rental-period contradiction). The remaining risk is drift, not structure.",
+          "findings": [
+            "ACL rule to never break: the warranty-against-defects text must appear verbatim; reviews must never be gated; claims must be physically true (the Mick cornice lesson: never keep a claim for parity that is not true of THIS job)."
+          ],
+          "adds": [
+            "Any new customer-facing page or template gets the Rule-8 double-check before publish, no exceptions"
+          ]
+        },
+        {
+          "name": "Customer-fairness auditor",
+          "verdict": "The condition style is now customer-fair: onus BEFORE the job with photos, explicit colour statements, per-material warranty honesty.",
+          "findings": [
+            "The 'why the numbers differ' warranty section is genuinely good consumer communication; it converts because it is honest."
+          ],
+          "adds": [
+            "Mirror the same honesty in the sales conversation: tell customers what resurfacing does NOT do (not a replacement, no exact colour match unless quoted)"
+          ]
+        }
       ],
       "deep": "The compliance stack, bottom to top:\n\n1. ACL consumer guarantees (cannot be excluded): due care and skill, fit for purpose, reasonable time. The warranty is IN ADDITION and says so.\n2. NSW Home Building Act: statutory warranties (2yr general / 6yr major defects) apply to residential building work and cannot be contracted out. Licensing threshold $5k inc GST per job.\n3. The warranty document (generated + signed per job in the quote app): per-material periods, reg 90(4) mandatory text verbatim, provider details, claims address, who-bears-costs, non-exclusion statements.\n4. The sub path (gated): sham-contracting protections, SOPA payment law, TPAR reporting, the s15AA review before any signature.\n5. The employee path (simpler): award + super + workers comp + VEVO, standard payroll compliance.\n\nInsurance: $10M public liability current. Workers comp becomes mandatory at employee #1 (icare NSW). Tool/vehicle insurance at Phase E2."
     },
@@ -235,13 +675,42 @@
       "icon": "🤖",
       "status": "partial",
       "summary": "The stack mirrors Surface Care's ($750/mo scale-proven): GHL + ServiceM8 + Make + Twilio + Stripe + Xero + Slack, WordPress front, plus our local fleet (cockpit, quote app, archivers, lead-gen, contractor app). Security hygiene (7 exposed credentials) is the open sore.",
-      "watch": ["credential", "rotate", "dkim", "backup", "monitoring", "cockpit", "archiver"],
+      "watch": [
+        "rotate",
+        "credential",
+        "dkim",
+        "backup",
+        "monitoring drill",
+        ".env"
+      ],
       "confirmations": [
-        {"q": "SMS", "state": "confirmed", "a": "Twilio BYOT into GHL, number +61 485 056 656, ACMA sender ID 'TimelessRsf' approved. Business line 0451 110 154."},
-        {"q": "Email deliverability", "state": "confirmed", "a": "SPF + DMARC live; Google DKIM NOT flipped; GHL sending domain + quotes@ alias missing. Quotes go by SMS until DKIM is done."},
-        {"q": "Local app fleet", "state": "confirmed", "a": "Cockpit :4317 (board + this map + journey), quote app :8920 (+ Netlify), TikTok archiver :8317 (5 competitor profiles, 628 transcripts), media archiver :8318 (TikTok+YouTube+Instagram), contractor app (Netlify preview, phases 1-4)."},
-        {"q": "DKIM flipped yet?", "state": "ask", "a": "", "hint": "Google Admin > Apps > Gmail > Authenticate email. 15 minutes. Unlocks the whole email template set."},
-        {"q": "Credentials rotated?", "state": "ask", "a": "", "hint": "7 exposed in repo history: SM8 key, GHL PIT, Make webhook secret, Netlify token, 3x Supabase. Rotate before scale traffic; PIT rotation required before Make writes to GHL."}
+        {
+          "q": "SMS",
+          "state": "confirmed",
+          "a": "Twilio BYOT into GHL, number +61 485 056 656, ACMA sender ID 'TimelessRsf' approved. Business line 0451 110 154."
+        },
+        {
+          "q": "Email deliverability",
+          "state": "confirmed",
+          "a": "SPF + DMARC live; Google DKIM NOT flipped; GHL sending domain + quotes@ alias missing. Quotes go by SMS until DKIM is done."
+        },
+        {
+          "q": "Local app fleet",
+          "state": "confirmed",
+          "a": "Cockpit :4317 (board + this map + journey), quote app :8920 (+ Netlify), TikTok archiver :8317 (5 competitor profiles, 628 transcripts), media archiver :8318 (TikTok+YouTube+Instagram), contractor app (Netlify preview, phases 1-4)."
+        },
+        {
+          "q": "DKIM flipped yet?",
+          "state": "ask",
+          "a": "",
+          "hint": "Google Admin > Apps > Gmail > Authenticate email. 15 minutes. Unlocks the whole email template set."
+        },
+        {
+          "q": "Credentials rotated?",
+          "state": "ask",
+          "a": "",
+          "hint": "7 exposed in repo history: SM8 key, GHL PIT, Make webhook secret, Netlify token, 3x Supabase. Rotate before scale traffic; PIT rotation required before Make writes to GHL."
+        }
       ],
       "next": [
         "Flip DKIM (15 min) then ship the email twin-set of every SMS template",
@@ -250,13 +719,44 @@
         "Keep BigQuery on the roadmap: Jordan syncs everything out of GHL (~$50/mo) so AI can query the business"
       ],
       "docs": [
-        {"label": "Complete build plan (plan of record)", "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md"},
-        {"label": "AI employee specs (6 ready)", "path": "docs/specs/ai-employees"},
-        {"label": "Deploy runbook (theme)", "path": "CLAUDE.md"}
+        {
+          "label": "Complete build plan (plan of record)",
+          "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md"
+        },
+        {
+          "label": "AI employee specs (6 ready)",
+          "path": "docs/specs/ai-employees"
+        },
+        {
+          "label": "Deploy runbook (theme)",
+          "path": "CLAUDE.md"
+        }
       ],
       "personas": [
-        {"name": "Jordan Schofield (AI-agent lens)", "verdict": "We run 10 production agents on a $6/month VPS with Claude Code and BigQuery. None of them are magic: each replaces one documented human workflow.", "findings": ["The 10: business analyst (Monday brief), social replier, paid-ads auditor, tracking engineer, website auditor, TikTok analytics, DM handler, operations agent (form to job), quote-integrity checker (same-address duplicate pricing), live chat.", "First-agent advice: document the workflow on paper first, THEN hand the list to the AI. Do not start with the agent.", "Every morning the first thing I check is the agent activity log, not email."], "adds": ["Your first three should be: CEO brief bot, quote-integrity check, social replier. You already beat us on quoting (your quote app runs LOCAL AI: no API bills)."]},
-        {"name": "David List (build-quality lens)", "verdict": "Vibe-code the MVP, production-harden what survives. Own your infrastructure: client VPS, not rented platforms.", "findings": ["Prompt injection is the real security risk for business agents: never wire an agent that reads untrusted input to tools that can spend or delete.", "n8n (or Make) still wins for production automations: hosted execution, error handling, retry. Claude Code wins for authoring them."], "adds": ["Add a global error-handler route to every Make scenario (you have Slack #automation-errors: good, keep it mandatory)", "Never commit secrets; the .secrets/ discipline is right, finish the rotation"]}
+        {
+          "name": "Jordan Schofield (AI-agent lens)",
+          "verdict": "We run 10 production agents on a $6/month VPS with Claude Code and BigQuery. None of them are magic: each replaces one documented human workflow.",
+          "findings": [
+            "The 10: business analyst (Monday brief), social replier, paid-ads auditor, tracking engineer, website auditor, TikTok analytics, DM handler, operations agent (form to job), quote-integrity checker (same-address duplicate pricing), live chat.",
+            "First-agent advice: document the workflow on paper first, THEN hand the list to the AI. Do not start with the agent.",
+            "Every morning the first thing I check is the agent activity log, not email."
+          ],
+          "adds": [
+            "Your first three should be: CEO brief bot, quote-integrity check, social replier. You already beat us on quoting (your quote app runs LOCAL AI: no API bills)."
+          ]
+        },
+        {
+          "name": "David List (build-quality lens)",
+          "verdict": "Vibe-code the MVP, production-harden what survives. Own your infrastructure: client VPS, not rented platforms.",
+          "findings": [
+            "Prompt injection is the real security risk for business agents: never wire an agent that reads untrusted input to tools that can spend or delete.",
+            "n8n (or Make) still wins for production automations: hosted execution, error handling, retry. Claude Code wins for authoring them."
+          ],
+          "adds": [
+            "Add a global error-handler route to every Make scenario (you have Slack #automation-errors: good, keep it mandatory)",
+            "Never commit secrets; the .secrets/ discipline is right, finish the rotation"
+          ]
+        }
       ],
       "deep": "The full stack map:\n\nCUSTOMER-FACING: WordPress theme (server-rendered, Tailwind CDN, no build step) on VentraIP behind Cloudflare. React quote form embedded (assets/quote-form) wired to GHL W1 webhook. Deploy = zip + wp-admin upload + BOTH cache purges (runbook in CLAUDE.md with all known gotchas).\n\nPIPELINE: GHL (CRM, SMS via Twilio BYOT, 15-stage pipeline) > Make (Scenario 1 job creation, Scenario 3 back-sync, 4+5 money pending) > ServiceM8 (jobs, categories, queues) > Slack (quotes-in, automation-errors, + planned bookings-and-operations, sc-quote-accepted equivalents).\n\nLOCAL FLEET (this Mac): cockpit :4317 (board, business map, customer journey, live Clifford/Cleo feeds), quote app :8920 + Netlify (quote/invoice/warranty engine, Supabase sync), TikTok archiver :8317 + media archiver :8318 (competitor intelligence library), lead-gen scripts (sub recruiting), contractor app (sub dispatch PWA, phases 5-6 pending, legal-gated).\n\nAI LAYER (planned, specs ready): 6 ai-employee specs written (pricing researcher, materials validator, competitive intel, trades researcher, maintenance reminder, DM handler) + the CEO brief bot and quote-integrity checker from the Surface Care playbook. Jordan's architecture to copy: data synced out of the CRM into BigQuery, agents query the warehouse, everything logged.\n\nSECURITY: .secrets/ holds live keys (never deploy, never commit). 7 credentials exposed in old commits need rotation. Cloudflare cache rule must keep the logged-in-cookie bypass (the admin-bar-cache incident). Backups + uptime monitoring = Phase 6."
     },
@@ -266,11 +766,28 @@
       "icon": "🤝",
       "status": "partial",
       "summary": "The full journey (lead to repeat) lives on its own tree: open the Customer Journey page. This node holds the cross-cutting rules and the after-job engine (reviews, referrals, win-back).",
-      "watch": ["review", "nps", "referral", "win-back", "complaint"],
+      "watch": [
+        "nps",
+        "review link",
+        "referral",
+        "win-back"
+      ],
       "confirmations": [
-        {"q": "Voice + banned words", "state": "confirmed", "a": "Plain, honest, no hype. Never 'written' or 'guarantee' in customer copy. No em-dashes. Promise 24 hours, deliver faster."},
-        {"q": "Review policy", "state": "confirmed", "a": "Ask EVERY customer (no gating, ACCC rule). Template 4B. Detractors get a personal call from Allan (Decision 7)."},
-        {"q": "Referral offer", "state": "confirmed", "a": "$50 referral credit (template 4D)."}
+        {
+          "q": "Voice + banned words",
+          "state": "confirmed",
+          "a": "Plain, honest, no hype. Never 'written' or 'guarantee' in customer copy. No em-dashes. Promise 24 hours, deliver faster."
+        },
+        {
+          "q": "Review policy",
+          "state": "confirmed",
+          "a": "Ask EVERY customer (no gating, ACCC rule). Template 4B. Detractors get a personal call from Allan (Decision 7)."
+        },
+        {
+          "q": "Referral offer",
+          "state": "confirmed",
+          "a": "$50 referral credit (template 4D)."
+        }
       ],
       "next": [
         "Open /journey for the step-by-step operations tree",
@@ -278,13 +795,40 @@
         "Log every customer question you get asked into QUESTIONS.md; the answers become FAQ + template updates"
       ],
       "docs": [
-        {"label": "Customer Journey tree", "path": "/journey"},
-        {"label": "Comms templates", "path": "docs/templates/customer-comms-templates.md"},
-        {"label": "Aftercare cards", "path": "docs/templates/customer-aftercare-cards.md"}
+        {
+          "label": "Customer Journey tree",
+          "path": "/journey"
+        },
+        {
+          "label": "Comms templates",
+          "path": "docs/templates/customer-comms-templates.md"
+        },
+        {
+          "label": "Aftercare cards",
+          "path": "docs/templates/customer-aftercare-cards.md"
+        }
       ],
       "personas": [
-        {"name": "James Webster (service-recovery lens)", "verdict": "A 1-star review from a person who was never a customer came off Google in 24 hours because the owner called, listened and asked politely. Do that.", "findings": ["We call inbound leads in under a minute and customers literally do not know what to say other than thank you. The bar in trades is on the floor: answering the phone IS the differentiation."], "adds": ["Answer or call back inside 60 seconds during business hours; the ack SMS covers you after hours"]},
-        {"name": "John Dwyer (incentive lens)", "verdict": "97% of businesses never give customers an incentive to come back or refer. A real one (your $50 referral) puts you in the 3%.", "findings": ["Wow-factor moments create word of mouth: the signed warranty handed over WITH the invoice is exactly that kind of artifact; nobody else in this trade does it."], "adds": ["Consider a small loyalty credit for repeat customers (Jordan is building one: 20-25% of his business is repeat, targeting 35-40%)"]}
+        {
+          "name": "James Webster (service-recovery lens)",
+          "verdict": "A 1-star review from a person who was never a customer came off Google in 24 hours because the owner called, listened and asked politely. Do that.",
+          "findings": [
+            "We call inbound leads in under a minute and customers literally do not know what to say other than thank you. The bar in trades is on the floor: answering the phone IS the differentiation."
+          ],
+          "adds": [
+            "Answer or call back inside 60 seconds during business hours; the ack SMS covers you after hours"
+          ]
+        },
+        {
+          "name": "John Dwyer (incentive lens)",
+          "verdict": "97% of businesses never give customers an incentive to come back or refer. A real one (your $50 referral) puts you in the 3%.",
+          "findings": [
+            "Wow-factor moments create word of mouth: the signed warranty handed over WITH the invoice is exactly that kind of artifact; nobody else in this trade does it."
+          ],
+          "adds": [
+            "Consider a small loyalty credit for repeat customers (Jordan is building one: 20-25% of his business is repeat, targeting 35-40%)"
+          ]
+        }
       ],
       "deep": "The experience contract we are building, in the customer's words:\n\n- I sent photos and got a real answer the same day, with a price that did not change later.\n- They told me what could NOT be fixed and what the coating will not do. I trusted them more, not less.\n- Booking was one tap. I knew who was coming and when. I was told when they were on the way.\n- The job finished when they said. I got care instructions and a warranty signed by the owner, with the invoice.\n- A week later they asked how it went. When I left a review they thanked me; when my neighbour asked, I got $50 off my next job for the referral.\n\nEvery template, automation and SOP exists to make those sentences true. When a step fails, the crisis playbook (CEO.md) applies: acknowledge fast, fix faster, photograph the fix."
     }

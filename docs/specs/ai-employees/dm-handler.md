@@ -33,7 +33,7 @@
 ### Persona disclosure rule (ACCC misleading-conduct compliance)
 
 If customer asks "are you a person?" or "is this AI?" or "is this automated?" → reply truthfully:
-> "Yes — I'm an AI assistant for Timeless. I'm helping gather your details so the team can come back with a proper quote within 2 hours. Happy to keep chatting, or if you'd prefer a human, just say 'human' and I'll hand you over."
+> "Yes — I'm an AI assistant for Timeless. I'm helping gather your details so the team can come back with a proper quote within 24 hours. Happy to keep chatting, or if you'd prefer a human, just say 'human' and I'll hand you over."
 
 This avoids ACCC misleading-conduct exposure (Australian Consumer Law s18) and aligns with consumer expectations for AI transparency.
 
@@ -53,7 +53,7 @@ When a customer DMs our FB/IG, agent reads the message + thread history, decides
 | 2 | Understand what they want done | Service type (regrout / bath resurface / silicone / full bathroom) |
 | 3 | Where are they | Suburb + property type (apartment / house / strata) |
 | 4 | What's the situation | Photos request (essential — Allan/Marko need photos to quote) |
-| 5 | Set expectation | "Team will come back with quote within 2 hours, ok?" + handover to human |
+| 5 | Set expectation | "Team will come back with quote within 24 hours, ok?" + handover to human |
 
 ### Hard rules per exchange
 

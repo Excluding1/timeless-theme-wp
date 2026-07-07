@@ -1352,6 +1352,20 @@ function timeless_customizer( $wp_customize ) {
         'type'        => 'text',
         'description' => __( '10-character lowercase alphanumeric ID (e.g. <code>p7q3k9z2x1</code>). Leave blank to disable.', 'timeless' ),
     ) );
+
+    // GHL chat widget (SMS-chat mode). Ships DARK: nothing renders until the widget ID is pasted
+    // here (activation runbook: docs/specs/ai-employees/social-agents-activation-runbook-2026-07-07.md).
+    $wp_customize->add_setting( 'timeless_chat_widget_id', array(
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'capability'        => 'manage_options',
+    ) );
+    $wp_customize->add_control( 'timeless_chat_widget_id', array(
+        'label'       => __( 'GHL Chat Widget ID', 'timeless' ),
+        'section'     => 'timeless_analytics',
+        'type'        => 'text',
+        'description' => __( 'From GHL &rarr; Sites &rarr; Chat Widget. Leave blank to disable the website chat bubble.', 'timeless' ),
+    ) );
 }
 add_action( 'customize_register', 'timeless_customizer' );
 
