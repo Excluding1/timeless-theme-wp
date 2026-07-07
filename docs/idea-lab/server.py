@@ -10,11 +10,25 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from lab import analyst, db, sources
+from lab import analyst, db, planner, sources
 
 BASE = Path(__file__).resolve().parent
 
 app = FastAPI(title="Idea Lab")
+
+analyst.start_engine_detection()   # probe engines in the background at boot
+
+
+def _panel_size(body):
+    """Parse panel_size defensively: bad input falls back, always clamped 0-100."""
+    try:
+        n = int(float(body.get("panel_size")))
+    except (TypeError, ValueError):
+        try:
+            n = int(float(db.get_setting("panel_size") or 20))
+        except (TypeError, ValueError):
+            n = 20
+    return max(0, min(100, n))
 
 
 @app.middleware("http")
@@ -46,20 +60,33 @@ def state():
     return {
         "settings": db.all_settings(),
         "job": analyst.job_status(),
+        "engine": analyst.engine_info(),
         "counts": {o: len(db.ideas(origin=o)) for o in ("hn", "ph", "custom")},
     }
 
 
+@app.post("/api/engine/refresh")
+def engine_refresh():
+    return analyst.reset_engine()
+
+
 @app.post("/api/fetch/{source}")
 def fetch(source: str, body: dict = Body(default={})):
+    if source not in ("hn", "ph"):
+        raise HTTPException(400, "Unknown source")
+    try:
+        days = max(1, min(365, int(float(body.get("days") or 30))))
+    except (TypeError, ValueError):
+        days = 30
+    try:
+        min_points = max(0, int(float(body.get("min_points") or 20)))
+    except (TypeError, ValueError):
+        min_points = 20
     try:
         if source == "hn":
-            n = sources.fetch_show_hn(days=int(body.get("days", 30)),
-                                      min_points=int(body.get("min_points", 20)))
-        elif source == "ph":
-            n = sources.fetch_product_hunt()
+            n = sources.fetch_show_hn(days=days, min_points=min_points)
         else:
-            raise HTTPException(400, "Unknown source")
+            n = sources.fetch_product_hunt()
     except Exception as e:
         raise HTTPException(502, f"Fetch failed: {str(e)[:200]}")
     return {"ok": True, "fetched": n}
@@ -76,7 +103,7 @@ def add_custom_idea(body: dict = Body(...)):
     desc = (body.get("description") or "").strip()
     if not title:
         raise HTTPException(400, "Give the idea a one-line title.")
-    iid = "custom:" + hashlib.sha1((title + desc).encode()).hexdigest()[:16]
+    iid = "custom:" + hashlib.sha1(f"{title}\x1f{desc}".encode()).hexdigest()[:16]
     db.upsert_idea({"id": iid, "origin": "custom", "title": title[:300],
                     "description": desc[:4000], "url": None, "points": None,
                     "comments": None, "posted_at": None, "traction": 0})
@@ -85,7 +112,7 @@ def add_custom_idea(body: dict = Body(...)):
 
 @app.post("/api/analyze/{idea_id:path}")
 def analyze(idea_id: str, body: dict = Body(default={})):
-    panel = int(body.get("panel_size") or db.get_setting("panel_size") or 20)
+    panel = _panel_size(body)
     try:
         aid = analyst.start_analysis(idea_id, panel)
     except analyst.Busy as e:
@@ -93,6 +120,55 @@ def analyze(idea_id: str, body: dict = Body(default={})):
     except ValueError as e:
         raise HTTPException(404, str(e))
     return {"ok": True, "analysis_id": aid}
+
+
+@app.post("/api/plan/{idea_id:path}")
+def make_plan(idea_id: str):
+    try:
+        pid = planner.start_plan(idea_id)
+    except analyst.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(404, str(e))
+    return {"ok": True, "plan_id": pid}
+
+
+@app.post("/api/pipeline/{idea_id:path}")
+def run_pipeline(idea_id: str, body: dict = Body(default={})):
+    panel = _panel_size(body)
+    try:
+        ids = planner.start_pipeline(idea_id, panel)
+    except analyst.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(404, str(e))
+    return {"ok": True, **ids}
+
+
+@app.get("/api/plans")
+def list_plans():
+    out = []
+    for p in db.plans():
+        for k in ("candidates", "judge_scores"):
+            if p.get(k):
+                try:
+                    p[k] = json.loads(p[k])
+                except (TypeError, json.JSONDecodeError):
+                    pass
+        out.append(p)
+    return {"plans": out}
+
+
+@app.get("/api/plans/{pid}/download")
+def download_plan(pid: int):
+    p = db.plan(pid)
+    if not p or not p.get("final_plan"):
+        raise HTTPException(404, "No finished plan with that id")
+    safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in (p.get("idea_id") or "plan"))[:40]
+    return PlainTextResponse(
+        p["final_plan"], media_type="text/markdown",
+        headers={"Content-Disposition": f'attachment; filename="plan-{safe}-{pid}.md"'},
+    )
 
 
 @app.get("/api/analyses")
@@ -111,7 +187,10 @@ def list_analyses():
 
 @app.post("/api/settings")
 def set_settings(body: dict = Body(...)):
-    db.set_settings(body)
+    clean = {}
+    if "panel_size" in body:
+        clean["panel_size"] = _panel_size(body)
+    db.set_settings(clean)
     return {"ok": True, "settings": db.all_settings()}
 
 

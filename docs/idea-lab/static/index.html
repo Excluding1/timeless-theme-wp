@@ -8,8 +8,11 @@
 </head>
 <body>
 <header>
-  <div class="logo"><span class="tick">◆</span> Idea Lab <span class="sub">scrape · rank · stress-test</span></div>
-  <span id="jobBadge" class="chip" hidden></span>
+  <div class="logo"><span class="tick">◆</span> Idea Lab <span class="sub">scrape · rank · stress-test · plan</span></div>
+  <div class="row">
+    <span id="engineBadge" class="chip" title=""></span>
+    <span id="jobBadge" class="chip" hidden></span>
+  </div>
 </header>
 
 <main>
@@ -60,6 +63,15 @@
     <h2>Analyses</h2>
     <div id="analyses"></div>
     <p class="hint" id="analysesEmpty" hidden>No analyses yet — hit Analyze on an idea above.</p>
+  </section>
+
+  <section class="card">
+    <h2>Execution Plans</h2>
+    <p class="hint">Each plan is a judged tournament: 3 candidate strategies (lean / product-led /
+      sales-led vertical) scored blind by 3 independent judge lenses, then synthesized into one
+      final plan — stack, pricing, customers, marketing, week-by-week roadmap.</p>
+    <div id="plans"></div>
+    <p class="hint" id="plansEmpty" hidden>No plans yet — hit “Full pipeline” or “Plan” on an idea.</p>
   </section>
 </main>
 

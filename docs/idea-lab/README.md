@@ -17,8 +17,8 @@ cd docs/idea-lab
 1. **Sources** — one-click fetch of:
    - **Show HN** (Hacker News launches) via the official Algolia API — includes
      upvotes/comments, filter by days + min points.
-   - **Product Hunt** via its public feed (latest launches; add an official PH
-     API token later for votes/topics).
+   - **Product Hunt** via its public feed (latest launches; the feed carries no
+     vote counts — official PH API support is a possible later upgrade).
    - Every fetched idea gets an instant **traction score** (points + comments
      weighted by launch-day velocity). De-duplicated; re-fetch any time.
    - *IndieHackers is intentionally not scraped in v1: no public API and a
@@ -43,12 +43,35 @@ cd docs/idea-lab
    the exact same scorecard + panel, so you can compare your idea's score
    against everything scraped.
 
+5. **Execution Plans (judged tournament)** — hit *Plan* on any analyzed idea
+   (or *Full pipeline* to run analyze → plan start-to-finish in one job).
+   Three candidate plans are generated from deliberately different strategic
+   postures — **bootstrapped/lean**, **product-led**, **sales-led vertical** —
+   then judged **blind** (anonymised A/B/C) by three independent judge lenses
+   (skeptical CTO, growth strategist, bootstrapped founder) on a fixed rubric
+   (realism, cost accuracy, speed-to-revenue, GTM strength, pricing soundness,
+   risk). The winner is synthesized into the final plan: build method + stack,
+   MVP scope, pricing points, target customers, marketing plan, week-by-week
+   90-day roadmap, costs & break-even, metrics, risks — plus a **"How this plan
+   was chosen"** scoreboard so the selection is auditable, not vibes.
+   Download any finished plan as `.md`.
+
 ## How the AI part works
 
-Analysis calls run through the **local Codex CLI** (`codex exec`, read-only
-sandbox) using the Mac's existing Codex login — no API keys stored in this app.
-Each analysis = 1 scorecard call + 1 call per 10 panelists (a 20-persona run ≈
-2–5 minutes). One analysis runs at a time; watch the badge in the header.
+The engine is pluggable and auto-detected (badge in the header):
+
+- **Claude subscription (preferred)** — if the Claude Code CLI is logged in,
+  all analysis runs through it, and the scorecard gets **live web research**
+  (WebSearch) for current market/competitor facts. One-time setup: open
+  Terminal, run `claude`, then `/login` with your Claude account. Hit
+  "engine refresh" (POST /api/engine/refresh) or restart the app after.
+- **Codex CLI (fallback)** — works out of the box on this Mac (`codex exec`,
+  read-only sandbox). No web access in this mode; scores come from model
+  knowledge.
+
+No API keys are stored in this app. Each analysis = 1 scorecard call + 1 call
+per 10 panelists; a full plan = 3 candidates + 3 judges + 1 synthesis. A
+"Full pipeline" run ≈ 10–25 minutes. One job runs at a time (header badge).
 
 **Honesty note:** scores are an informed expert *estimate* from the model's
 knowledge — great for triage and comparison, not a substitute for talking to

@@ -3,7 +3,7 @@
 
 const $ = (id) => document.getElementById(id);
 
-const state = { ideas: [], analyses: [], job: null, lastJob: "" };
+const state = { ideas: [], analyses: [], plans: [], job: null, lastJob: "", engine: null };
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -33,19 +33,35 @@ async function poll() {
   try {
     const s = await api("/api/state");
     state.job = s.job;
+    state.engine = s.engine;
     renderJob();
+    renderEngine();
     const key = s.job ? `${s.job.state}:${s.job.phase}` : "idle";
     if (key !== state.lastJob) {
       state.lastJob = key;
       loadIdeas();
       loadAnalyses();
+      loadPlans();
     }
   } catch (_) {}
   setTimeout(poll, 2000);
 }
 
+function renderEngine() {
+  const e = state.engine;
+  const b = $("engineBadge");
+  if (!e) { b.hidden = true; return; }
+  b.hidden = false;
+  b.textContent = e.engine === "claude" ? "🧠 Claude + web research"
+    : e.engine === "codex" ? "🧠 Codex (log into Claude CLI to upgrade)"
+    : "⚠ no AI engine";
+  b.title = e.detail || "";
+  b.className = "chip " + (e.engine === "none" ? "error" : "");
+}
+
 function renderJob() {
   const j = state.job;
+  $("testIdea").disabled = !!(j && j.state === "running");
   const badge = $("jobBadge");
   if (j && j.state === "running") {
     badge.hidden = false;
@@ -72,6 +88,10 @@ async function loadIdeas() {
 
 const ORIGIN = { hn: "Show HN", ph: "Product Hunt", custom: "Mine" };
 
+function safeUrl(u) {
+  return u && /^https?:\/\//i.test(u) ? u : null;
+}
+
 function renderIdeas() {
   const box = $("ideas");
   box.replaceChildren();
@@ -81,8 +101,8 @@ function renderIdeas() {
       el("div", { class: "col grow" },
         el("div", { class: "ititle" },
           el("span", { class: "obadge " + i.origin, text: ORIGIN[i.origin] || i.origin }),
-          i.url ? el("a", { href: i.url, target: "_blank", rel: "noopener", text: " " + i.title })
-                : el("span", { text: " " + i.title }),
+          safeUrl(i.url) ? el("a", { href: safeUrl(i.url), target: "_blank", rel: "noopener", text: " " + i.title })
+                         : el("span", { text: " " + i.title }),
         ),
         i.description ? el("div", { class: "idesc", text: i.description.slice(0, 220) }) : null,
         el("div", { class: "imeta" },
@@ -94,11 +114,17 @@ function renderIdeas() {
       el("button", { class: "small", text: i.an_status === "running" ? "…" : (i.composite != null ? "Re-analyze" : "Analyze"),
         disabled: busy ? "" : null,
         onclick: () => analyze(i.id) }),
+      el("button", { class: "small ghost", text: "Full pipeline", title: "Analyze + full execution plan in one run",
+        disabled: busy ? "" : null,
+        onclick: () => pipeline(i.id) }),
     );
     box.append(row);
   }
   if (!state.ideas.length) {
     box.append(el("p", { class: "hint", text: "Nothing yet — fetch a source above." }));
+  } else if (state.ideas.length > 120) {
+    box.append(el("p", { class: "hint",
+      text: `Showing 120 of ${state.ideas.length} — use search or the source filter to narrow.` }));
   }
 }
 
@@ -112,6 +138,23 @@ async function analyze(id) {
       method: "POST",
       body: JSON.stringify({ panel_size: Number($("panelSize").value) }),
     });
+    state.lastJob = "";
+  } catch (e) { alert(e.message); }
+}
+
+async function pipeline(id) {
+  try {
+    await api("/api/pipeline/" + encodeURIComponent(id), {
+      method: "POST",
+      body: JSON.stringify({ panel_size: Number($("panelSize").value) }),
+    });
+    state.lastJob = "";
+  } catch (e) { alert(e.message); }
+}
+
+async function makePlan(id) {
+  try {
+    await api("/api/plan/" + encodeURIComponent(id), { method: "POST" });
     state.lastJob = "";
   } catch (e) { alert(e.message); }
 }
@@ -133,9 +176,17 @@ function renderAnalyses() {
         el("strong", { text: a.title }),
         el("span", { class: "hint", text: `  ${a.created_at} · panel ${a.panel_size || 0}` }),
       ),
-      a.status === "done"
-        ? el("span", { class: "score big " + vclass(a.verdict), text: `${a.composite}/100 ${a.verdict}` })
-        : el("span", { class: "chip " + (a.status === "running" ? "running" : "error"), text: a.status }),
+      el("div", { class: "row" },
+        a.status === "done"
+          ? el("span", { class: "score big " + vclass(a.verdict), text: `${a.composite}/100 ${a.verdict}` })
+          : el("span", { class: "chip " + (a.status === "running" ? "running" : "error"), text: a.status }),
+        a.status === "done"
+          ? el("button", { class: "small ghost", text: "Plan",
+              title: "Generate the full execution plan for this idea",
+              disabled: (state.job && state.job.state === "running") ? "" : null,
+              onclick: (e) => { e.stopPropagation(); makePlan(a.idea_id); } })
+          : null,
+      ),
     );
     const details = el("div", { class: "adetails", hidden: "" });
     if (a.status === "done") {
@@ -171,6 +222,56 @@ function renderAnalyses() {
       if (a.wedge) details.append(el("p", {}, el("strong", { text: "Suggested wedge: " }), el("span", { text: a.wedge })));
     } else if (a.error) {
       details.append(el("p", { class: "err", text: a.error }));
+    }
+    head.addEventListener("click", () => { details.hidden = !details.hidden; });
+    box.append(el("div", { class: "analysis" }, head, details));
+  }
+}
+
+/* ---------- plans ---------- */
+
+async function loadPlans() {
+  try { state.plans = (await api("/api/plans")).plans; } catch (_) { return; }
+  renderPlans();
+}
+
+function renderPlans() {
+  const box = $("plans");
+  box.replaceChildren();
+  $("plansEmpty").hidden = state.plans.length > 0;
+  for (const p of state.plans) {
+    const head = el("div", { class: "row spread ahead" },
+      el("div", {},
+        el("strong", { text: p.title }),
+        el("span", { class: "hint", text: `  ${p.created_at}` + (p.winner ? ` · winner: ${p.winner}` : "") }),
+      ),
+      el("div", { class: "row" },
+        p.status === "done"
+          ? el("a", { class: "button small", href: `/api/plans/${p.id}/download`, text: "⬇ .md",
+              onclick: (e) => e.stopPropagation() })
+          : null,
+        el("span", { class: "chip " + (p.status === "running" ? "running" : p.status === "done" ? "" : "error"),
+          text: p.status }),
+      ),
+    );
+    const details = el("div", { class: "adetails", hidden: "" });
+    if (p.status === "done") {
+      if (p.judge_scores && p.judge_scores.totals) {
+        const t = p.judge_scores.totals;
+        const cand = p.candidates || {};
+        const grid = el("div", { class: "fgrid" });
+        for (const L of Object.keys(t)) {
+          grid.append(el("div", { class: "factor" },
+            el("div", { class: "fname", text: `plan ${L} — ${(cand[L] && cand[L]._posture) || ""}` }),
+            el("div", { class: "fscore " + (p.winner && p.winner.startsWith(L) ? "good" : "mid"),
+              text: `${Math.round(t[L] * 10) / 10} pts` }),
+          ));
+        }
+        details.append(grid);
+      }
+      details.append(el("pre", { class: "plantext", text: p.final_plan || "" }));
+    } else if (p.error) {
+      details.append(el("p", { class: "err", text: p.error }));
     }
     head.addEventListener("click", () => { details.hidden = !details.hidden; });
     box.append(el("div", { class: "analysis" }, head, details));
@@ -225,3 +326,4 @@ wireTester();
 poll();
 loadIdeas();
 loadAnalyses();
+loadPlans();

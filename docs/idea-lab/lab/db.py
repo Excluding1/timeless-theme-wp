@@ -10,7 +10,6 @@ DB_PATH = DATA_DIR / "lab.db"
 
 DEFAULTS = {
     "panel_size": "20",     # personas consulted per analysis (10/25/50/100)
-    "ph_token": "",         # optional Product Hunt API token for richer data
 }
 
 SCHEMA = """
@@ -46,6 +45,18 @@ CREATE TABLE IF NOT EXISTS analyses (
     panel      TEXT         -- JSON raw persona verdicts
 );
 CREATE INDEX IF NOT EXISTS idx_analyses_idea ON analyses(idea_id);
+CREATE TABLE IF NOT EXISTS plans (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    idea_id      TEXT NOT NULL,
+    created_at   TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+    status       TEXT NOT NULL DEFAULT 'running',   -- running | done | error
+    error        TEXT,
+    candidates   TEXT,      -- JSON {A|B|C: candidate plan}
+    judge_scores TEXT,      -- JSON {totals, judges, picks}
+    winner       TEXT,
+    final_plan   TEXT       -- markdown
+);
+CREATE INDEX IF NOT EXISTS idx_plans_idea ON plans(idea_id);
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 """
 
@@ -99,8 +110,11 @@ def upsert_idea(idea):
 
 
 def ideas(origin=None, q=None, limit=300):
-    sql = ("SELECT i.*, a.composite, a.verdict, a.status AS an_status FROM ideas i "
+    # score/verdict from the latest COMPLETED analysis; activity status from the latest of any
+    sql = ("SELECT i.*, a.composite, a.verdict, r.status AS an_status FROM ideas i "
            "LEFT JOIN analyses a ON a.id = (SELECT id FROM analyses WHERE idea_id=i.id "
+           "AND status='done' ORDER BY id DESC LIMIT 1) "
+           "LEFT JOIN analyses r ON r.id = (SELECT id FROM analyses WHERE idea_id=i.id "
            "ORDER BY id DESC LIMIT 1)")
     where, params = [], []
     if origin:
@@ -159,4 +173,40 @@ def analyses(limit=100):
         rows = _db().execute(
             "SELECT a.*, i.title, i.origin, i.url FROM analyses a "
             "JOIN ideas i ON i.id=a.idea_id ORDER BY a.id DESC LIMIT ?", (limit,)).fetchall()
+        return [dict(r) for r in rows]
+
+
+def new_plan(idea_id):
+    with _lock:
+        con = _db()
+        with con:
+            cur = con.execute("INSERT INTO plans(idea_id) VALUES(?)", (idea_id,))
+        return cur.lastrowid
+
+
+def update_plan(pid, **fields):
+    allowed = {"status", "error", "candidates", "judge_scores", "winner", "final_plan"}
+    cols = [k for k in fields if k in allowed]
+    if not cols:
+        return
+    vals = [json.dumps(fields[c]) if isinstance(fields[c], (dict, list)) else fields[c]
+            for c in cols]
+    with _lock:
+        con = _db()
+        with con:
+            con.execute(f"UPDATE plans SET {', '.join(c + '=?' for c in cols)} WHERE id=?",
+                        vals + [pid])
+
+
+def plan(pid):
+    with _lock:
+        row = _db().execute("SELECT * FROM plans WHERE id=?", (pid,)).fetchone()
+        return dict(row) if row else None
+
+
+def plans(limit=50):
+    with _lock:
+        rows = _db().execute(
+            "SELECT p.*, i.title FROM plans p JOIN ideas i ON i.id=p.idea_id "
+            "ORDER BY p.id DESC LIMIT ?", (limit,)).fetchall()
         return [dict(r) for r in rows]
