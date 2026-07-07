@@ -33,6 +33,11 @@ import urllib.parse
 import urllib.request
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# The cockpit renders agent cards from ~/.timeless/cards/ (a spool OUTSIDE
+# ~/Downloads: macOS TCC blocks launchd-run python from touching Downloads).
+# Writing here makes the Monday brief visible with no Slack setup required.
+COCKPIT_CARD = os.path.join(os.path.expanduser("~"), ".timeless", "cards",
+                            "ceo-brief-latest.md")
 API_BASE = "https://services.leadconnectorhq.com"
 API_VERSION = "2021-07-28"
 # GHL sits behind Cloudflare, which rejects the default "Python-urllib/3.x"
@@ -731,6 +736,25 @@ def run(mode):
         print(brief)
         return 0
 
+    if mode == "cockpit":
+        # Write the brief as a cockpit card (localhost:4317 renders every .md
+        # in cockpit/data/config/) so Monday's numbers appear with no Slack
+        # required; Slack becomes a bonus channel when the webhook exists.
+        now = res["now"]
+        card = ("Last updated: %s\n\n" % now.strftime("%Y-%m-%d")) + brief + "\n"
+        os.makedirs(os.path.dirname(COCKPIT_CARD), exist_ok=True)
+        with open(COCKPIT_CARD, "w") as fh:
+            fh.write(card)
+        print("CEO brief written to the cockpit card.")
+        webhook, _src = find_slack_webhook(cfg)
+        if webhook:
+            try:
+                post_to_slack(webhook, brief)
+                print("(also posted to Slack)")
+            except Exception as exc:  # noqa: BLE001 — Slack is the bonus channel
+                print("(Slack post failed: %s)" % exc, file=sys.stderr)
+        return 0
+
     webhook, source = find_slack_webhook(cfg)
     if mode == "dry-run":
         print(brief)
@@ -762,8 +786,13 @@ def main(argv=None):
                        help="fetch + compute, show what WOULD post and where")
     group.add_argument("--slack", action="store_true",
                        help="post the brief to Slack")
+    group.add_argument("--cockpit", action="store_true",
+                       help="write the brief as a cockpit card + Slack when "
+                            "available — the fully-automatic mode launchd runs")
     args = parser.parse_args(argv)
-    mode = "slack" if args.slack else ("dry-run" if args.dry_run else "stdout")
+    mode = ("cockpit" if args.cockpit
+            else "slack" if args.slack
+            else "dry-run" if args.dry_run else "stdout")
 
     try:
         return run(mode)

@@ -124,13 +124,22 @@ function readPipeline() { try { return JSON.parse(fs.readFileSync(PIPELINE_FILE,
 function writePipeline(o) { o.updated = new Date().toISOString().slice(0, 10); fs.mkdirSync(DATA_DIR, { recursive: true }); fs.writeFileSync(PIPELINE_FILE, JSON.stringify(o, null, 2)); return o; }
 function readScoreboard() { try { return JSON.parse(fs.readFileSync(SCOREBOARD_FILE, 'utf8')); } catch { return { updated: null, weeks: {} }; } }
 function writeScoreboard(o) { o.updated = new Date().toISOString().slice(0, 10); fs.mkdirSync(DATA_DIR, { recursive: true }); fs.writeFileSync(SCOREBOARD_FILE, JSON.stringify(o, null, 2)); return o; }
+const AGENT_CARDS_DIR = path.join(HOME, '.timeless', 'cards'); // launchd agents spool here (TCC keeps them out of ~/Downloads)
 function listConfig() {
-  let files = []; try { files = fs.readdirSync(CONFIG_DIR).filter(f => f.endsWith('.md')); } catch {}
-  return files.map(f => { const p = path.join(CONFIG_DIR, f); const st = fs.statSync(p); const content = fs.readFileSync(p, 'utf8');
-    const m = content.match(/Last updated:\s*(\d{4}-\d{2}-\d{2})/i); const stamp = m ? m[1] : null;
-    const ageDays = Math.floor((Date.now() - (stamp ? new Date(stamp).getTime() : st.mtimeMs)) / 86400000);
-    return { name: f.replace(/\.md$/, ''), content, stamp, ageDays };
-  }).sort((a, b) => a.name.localeCompare(b.name));
+  const dirs = [CONFIG_DIR, AGENT_CARDS_DIR];
+  const seen = new Map();
+  for (const dir of dirs) {
+    let files = []; try { files = fs.readdirSync(dir).filter(f => f.endsWith('.md')); } catch { continue; }
+    for (const f of files) {
+      try {
+        const p = path.join(dir, f); const st = fs.statSync(p); const content = fs.readFileSync(p, 'utf8');
+        const m = content.match(/Last updated:\s*(\d{4}-\d{2}-\d{2})/i); const stamp = m ? m[1] : null;
+        const ageDays = Math.floor((Date.now() - (stamp ? new Date(stamp).getTime() : st.mtimeMs)) / 86400000);
+        seen.set(f.replace(/\.md$/, ''), { name: f.replace(/\.md$/, ''), content, stamp, ageDays }); // later dir (agent spool) wins on name clash
+      } catch { /* unreadable card — skip */ }
+    }
+  }
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 function saveConfig(name, content) {
   const safe = String(name || '').replace(/[^a-z0-9_-]/gi, '').toLowerCase(); if (!safe) throw new Error('bad config name');

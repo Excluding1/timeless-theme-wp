@@ -30,7 +30,7 @@
     <array>
         <string>/usr/bin/python3</string>
         <string>/Users/excluding/Downloads/timeless-theme-wp/scripts/ceo-brief/brief.py</string>
-        <string>--slack</string>
+        <string>--cockpit</string>
     </array>
 
     <key>WorkingDirectory</key>

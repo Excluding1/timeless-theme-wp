@@ -44,7 +44,7 @@
     <array>
         <string>/usr/bin/python3</string>
         <string>/Users/excluding/Downloads/timeless-theme-wp/scripts/pipeline-watchdog/watchdog.py</string>
-        <string>--slack</string>
+        <string>--cockpit</string>
         <string>--scheduled</string>
     </array>
 

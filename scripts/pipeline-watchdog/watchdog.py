@@ -714,6 +714,47 @@ def post_to_slack(webhook_url, text):
                             % resp[:120])
 
 
+# ------------------------------------------------------- cockpit card
+
+# The cockpit (localhost:4317) renders agent cards from ~/.timeless/cards/
+# (a spool OUTSIDE ~/Downloads, because macOS TCC blocks launchd-run python
+# from touching Downloads). Writing here makes the watchdog visible with ZERO
+# extra services; Slack becomes a bonus channel the moment the webhook exists.
+COCKPIT_CARD = os.path.join(os.path.expanduser("~"), ".timeless", "cards",
+                            "watchdog-latest.md")
+
+
+def write_cockpit_card(alerts, now, excluded, checked, error=None):
+    lines = ["Last updated: %s" % now.strftime("%Y-%m-%d"), "",
+             "# \U0001F436 Watchdog — %s" % now.strftime("%a %d %b %H:%M"), ""]
+    if error is not None:
+        lines.append("⚠️ **Watchdog FAILED:** %s" % error)
+        lines.append("")
+        lines.append("A failed run is never silent. Check the log: "
+                     "~/Library/Logs/pipeline-watchdog.log")
+    elif not alerts:
+        lines.append(CLEAN_LINE + " (checked %d cards)" % checked)
+    else:
+        counts = {}
+        for a in alerts:
+            counts[a["severity"]] = counts.get(a["severity"], 0) + 1
+        lines.append("**%d alert%s** (%s)"
+                     % (len(alerts), "" if len(alerts) == 1 else "s",
+                        ", ".join("%d %s" % (counts[s], s)
+                                  for s in ("critical", "warn", "info")
+                                  if s in counts)))
+        lines.append("")
+        for a in alerts:
+            lines.append("- " + a["message"])
+        if excluded:
+            lines.append("")
+            lines.append("_%d test record%s excluded_"
+                         % (excluded, "" if excluded == 1 else "s"))
+    os.makedirs(os.path.dirname(COCKPIT_CARD), exist_ok=True)
+    with open(COCKPIT_CARD, "w") as fh:
+        fh.write("\n".join(lines) + "\n")
+
+
 # ---------------------------------------------------------------- main
 
 def within_active_window(cfg, now):
@@ -771,6 +812,22 @@ def run(mode, scheduled):
         print(batch_text(alerts, now, excluded))
         return 0
 
+    if mode == "cockpit":
+        # ALWAYS write the card (a clean card proves the run happened), and
+        # post to Slack too when a webhook exists and there is news.
+        write_cockpit_card(alerts, now, excluded, len(cards))
+        print(("%d alert(s) — card written to the cockpit" % len(alerts))
+              if alerts else (CLEAN_LINE + " — card written to the cockpit"))
+        if alerts:
+            webhook, _src = find_slack_webhook(cfg)
+            if webhook:
+                try:
+                    post_to_slack(webhook, batch_text(alerts, now, excluded))
+                    print("(also posted to Slack)")
+                except Exception as exc:  # noqa: BLE001 — Slack is the bonus channel
+                    print("(Slack post failed: %s)" % exc, file=sys.stderr)
+        return 0
+
     # mode == "slack"
     webhook, source = find_slack_webhook(cfg)
     if not webhook:
@@ -802,17 +859,29 @@ def main(argv=None):
                        help="machine-readable output (for the cockpit)")
     group.add_argument("--slack", action="store_true",
                        help="post the alert batch to Slack (silent if clean)")
+    group.add_argument("--cockpit", action="store_true",
+                       help="write the result as a cockpit card (config/"
+                            "watchdog-latest.md) + Slack when available — "
+                            "the fully-automatic mode launchd runs")
     parser.add_argument("--scheduled", action="store_true",
                         help="launchd mode: skip quietly outside the "
                              "07:00-19:00 active window")
     args = parser.parse_args(argv)
-    mode = "slack" if args.slack else ("json" if args.json else "stdout")
+    mode = ("cockpit" if args.cockpit
+            else "slack" if args.slack
+            else "json" if args.json else "stdout")
 
     try:
         return run(mode, args.scheduled)
     except WatchdogError as exc:
         # An API failure must be LOUD — silence must never look like health.
         sys.stderr.write("Watchdog failed: %s\n" % exc)
+        if mode == "cockpit":
+            try:
+                write_cockpit_card([], datetime.datetime.now().astimezone(),
+                                   0, 0, error=str(exc))
+            except Exception as exc2:  # noqa: BLE001
+                sys.stderr.write("(could not write failure card: %s)\n" % exc2)
         if mode == "json":
             print(json.dumps({"error": str(exc)}))
         if mode == "slack":

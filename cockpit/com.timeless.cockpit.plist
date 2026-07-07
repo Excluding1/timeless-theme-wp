@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Timeless CEO Cockpit, always on at http://localhost:4317.
+     KeepAlive restarts it if it ever crashes; RunAtLoad starts it at login.
+     Install:  cp cockpit/com.timeless.cockpit.plist ~/Library/LaunchAgents/
+               launchctl load ~/Library/LaunchAgents/com.timeless.cockpit.plist
+     Logs:     ~/Library/Logs/timeless-cockpit.log -->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.timeless.cockpit</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/excluding/.local/bin/node</string>
+        <string>/Users/excluding/Downloads/timeless-theme-wp/cockpit/server.js</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/excluding/Downloads/timeless-theme-wp</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/excluding/Library/Logs/timeless-cockpit.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/excluding/Library/Logs/timeless-cockpit.log</string>
+</dict>
+</plist>
