@@ -11,7 +11,7 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from lab import analyst, db, planner, sources
+from lab import analyst, batch, db, planner, sources
 
 BASE = Path(__file__).resolve().parent
 
@@ -63,7 +63,28 @@ def state():
         "job": analyst.job_status(),
         "engine": analyst.engine_info(),
         "fetch": sources.fetch_status(),
+        "batch": batch.status(),
     }
+
+
+@app.post("/api/batch")
+def start_batch(body: dict = Body(default={})):
+    origin = body.get("origin")
+    limit = max(1, min(200, int(body.get("limit") or 10)))
+    panel = int(body.get("panel_size") or db.get_setting("panel_size") or 10)
+    rows = db.ideas(origin or None, limit=limit)
+    ids = [r["id"] for r in rows][:limit]
+    if not ids:
+        raise HTTPException(400, "No ideas to run — fetch some first.")
+    if not batch.start_batch(ids, panel):
+        raise HTTPException(409, "A batch is already running.")
+    return {"ok": True, "queued": len(ids)}
+
+
+@app.post("/api/batch/stop")
+def stop_batch():
+    batch.stop_batch()
+    return {"ok": True}
 
 
 @app.get("/api/sources")
@@ -106,6 +127,11 @@ def fetch_all():
     if not sources.fetch_all_bg():
         raise HTTPException(409, "A full fetch is already running.")
     return {"ok": True}
+
+
+@app.post("/api/prune")
+def prune():
+    return {"ok": True, "removed": sources.prune_junk()}
 
 
 @app.post("/api/engine/refresh")

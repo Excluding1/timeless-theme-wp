@@ -35,9 +35,11 @@ async function poll() {
     state.job = s.job;
     state.engine = s.engine;
     state.fetch = s.fetch;
+    state.batch = s.batch;
     renderJob();
     renderEngine();
     renderFetch();
+    renderBatch();
     const key = s.job ? `${s.job.state}:${s.job.phase}` : "idle";
     const fkey = s.fetch ? `${s.fetch.running}:${s.fetch.phase}` : "";
     if (key !== state.lastJob || fkey !== state.lastFetch) {
@@ -59,6 +61,21 @@ function renderFetch() {
   } else if (f && f.phase === "done" && f.results && Object.keys(f.results).length) {
     const parts = Object.entries(f.results).map(([k, v]) => `${k}: ${v}`);
     $("fetchStatus").textContent = "Last full fetch — " + parts.join(" · ");
+  }
+}
+
+function renderBatch() {
+  const b = state.batch;
+  if (!b) return;
+  $("stopBatch").hidden = !b.running;
+  $("startBatch").disabled = !!b.running;
+  if (b.running) {
+    $("batchStatus").textContent =
+      `Batch running — ${b.done}/${b.total} done` + (b.failed ? ` (${b.failed} failed)` : "") +
+      (b.current_title ? ` · now: ${b.current_title}` : "") + ` · ${b.queued} queued`;
+  } else if (b.total) {
+    $("batchStatus").textContent = `Last batch: ${b.done}/${b.total} completed` +
+      (b.failed ? ` (${b.failed} failed)` : "") + " — see Execution Plans below.";
   }
 }
 
@@ -118,7 +135,7 @@ function renderCategories(cats) {
 }
 
 const ORIGIN = { ih: "IndieHackers", hn: "Show HN", ahn: "Ask HN", ph: "Product Hunt",
-  gh: "GitHub", dt: "Dev.to", lb: "Lobsters", rd: "Reddit", ss: "Starter Story",
+  gh: "GitHub", dt: "Dev.to", lb: "Lobsters", rd: "Reddit", v2: "V2EX·CN", ss: "Starter Story",
   feed: "Feed", vid: "Video", custom: "Mine" };
 
 function safeUrl(u) {
@@ -360,6 +377,22 @@ function renderMermaid(target, code) {
 
 /* ---------- idea tester ---------- */
 
+function wireBatch() {
+  $("startBatch").addEventListener("click", async () => {
+    const limit = Number($("batchLimit").value) || 10;
+    if (!confirm(`Run the FULL pipeline (polish → score → panel → plan) on the top ${limit} ideas?\nThis runs unattended in the background and can take a while.`)) return;
+    try {
+      await api("/api/batch", { method: "POST",
+        body: JSON.stringify({ origin: $("originFilter").value || null, limit,
+          panel_size: Number($("panelSize").value) }) });
+      state.lastJob = "";
+    } catch (e) { alert(e.message); }
+  });
+  $("stopBatch").addEventListener("click", async () => {
+    try { await api("/api/batch/stop", { method: "POST", body: "{}" }); } catch (e) { alert(e.message); }
+  });
+}
+
 function wireTester() {
   $("testIdea").addEventListener("click", async () => {
     const title = $("ideaTitle").value.trim();
@@ -460,6 +493,7 @@ async function loadSources() {
 
 wireSources();
 wireTester();
+wireBatch();
 poll();
 loadIdeas();
 loadAnalyses();

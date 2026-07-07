@@ -296,6 +296,53 @@ def fetch_indiehackers(include_zero_revenue=False):
     return added
 
 
+def fetch_v2ex():
+    """V2EX (major Chinese dev/startup community) via its official public API.
+    Content is Chinese — the AI analyst reads it natively, no bulk translation.
+    Nodes: 创业(startup), 分享创造(show/made), 程序员(programmers), 商业模式."""
+    added = 0
+    for node in ("create", "startup", "programmer", "career", "ideas"):
+        try:
+            data = _getj(f"https://www.v2ex.com/api/topics/latest.json?node_name={node}")
+        except Exception:
+            # the latest.json returns a global list; node filter may 404 — fall back once
+            try:
+                data = _getj("https://www.v2ex.com/api/topics/latest.json")
+            except Exception:
+                continue
+        for t in (data or [])[:100]:
+            title = (t.get("title") or "").strip()
+            if not title:
+                continue
+            db.upsert_idea({
+                "id": f"v2:{t.get('id')}", "origin": "v2",
+                "title": ("[CN] " + title)[:300],
+                "description": re.sub(r"\s+", " ", (t.get("content") or "")).strip()[:2000],
+                "url": t.get("url") or "",
+                "points": t.get("replies") or 0, "comments": t.get("replies") or 0,
+                "posted_at": None,
+                "traction": float((t.get("replies") or 0) * 3),
+            })
+            added += 1
+        break  # global latest.json already covers all nodes
+    return added
+
+
+def prune_junk():
+    """Delete obvious junk across ALL sources: empty/too-short titles with no
+    description, pure-URL titles, and known spam markers. Conservative."""
+    con = db._db()
+    spam = "%[url=%"
+    with con:
+        cur = con.execute(
+            "DELETE FROM ideas WHERE "
+            "(LENGTH(TRIM(title)) < 6 AND (description IS NULL OR TRIM(description)='')) "
+            "OR title LIKE ? "
+            "OR title GLOB 'http*://*'",
+            (spam,))
+        return cur.rowcount
+
+
 def fetch_kickstarter():
     """Live crowdfunded products via Kickstarter's public category RSS feeds —
     real products with real funding demand."""
@@ -501,6 +548,7 @@ BUILTINS = [
     {"id": "lb", "name": "Lobsters", "desc": "Tech launches (official JSON)"},
     {"id": "ks", "name": "Kickstarter", "desc": "Crowdfunded products (category RSS)"},
     {"id": "rd", "name": "Reddit", "desc": "~30 business subreddits (paced JSON)"},
+    {"id": "v2", "name": "V2EX (China)", "desc": "Chinese dev/startup community (official API)"},
     {"id": "ss", "name": "Starter Story", "desc": "Your local video archive"},
 ]
 
@@ -516,6 +564,7 @@ _BUILTIN_FNS = {
     "lb": lambda: fetch_lobsters(),
     "ks": lambda: fetch_kickstarter(),
     "rd": lambda: fetch_reddit(),
+    "v2": lambda: fetch_v2ex(),
     "ss": lambda: fetch_starterstory_local(),
 }
 
@@ -541,6 +590,12 @@ def fetch_all(progress=None):
                 results[cs["name"]] = fetch_archive_channel(plat, user)
         except Exception as e:
             results[cs["name"]] = f"error: {str(e)[:80]}"
+    try:
+        pruned = prune_junk()
+        if pruned:
+            results["(junk removed)"] = pruned
+    except Exception:
+        pass
     return results
 
 

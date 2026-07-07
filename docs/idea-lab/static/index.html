@@ -82,6 +82,23 @@
     </div>
   </section>
 
+  <section class="card" id="batchCard">
+    <div class="row spread wrap">
+      <h2>Auto-run pipeline (batch)</h2>
+      <div class="row wrap">
+        <label class="sub">Top
+          <input id="batchLimit" type="number" value="10" min="1" max="200" class="tiny">
+          ideas by rank</label>
+        <button id="startBatch">▶ Run full pipeline on all of them</button>
+        <button id="stopBatch" class="small ghost" hidden>Stop batch</button>
+      </div>
+    </div>
+    <p class="hint">Unattended: each idea gets polish → score + Effort ROI → persona panel →
+      judged 3-way plan tournament → final downloadable plan. Runs one at a time in the
+      background — leave it going and check back. (Far faster once the Claude CLI is logged in.)</p>
+    <div id="batchStatus" class="hint"></div>
+  </section>
+
   <section class="card">
     <h2>Analyses</h2>
     <div id="analyses"></div>
