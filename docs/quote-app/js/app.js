@@ -78,7 +78,8 @@
       optionsNote: '',
       warranty: R.WARRANTY_5YR.slice(),
       expect: R.EXPECT_PRESETS.day.slice(),
-      footerBottom: true
+      footerBottom: true,
+      costEstimate: null   // internal job score: estimated cost to deliver, never printed
     };
   }
 
@@ -105,6 +106,7 @@
       a.photoIsPng = /^data:image\/png/.test(p.dataUrl);
       d.photoCaption = p.caption || '';
     }
+    delete d.costEstimate;   // internal job-score field: belt-and-braces, never reaches the customer PDF
     sanitizeDoc(d);
     return TQPDF.generate(d, S.settings, a);
   }
@@ -199,6 +201,45 @@
     if (si) si.onclick = doSignIn;
   }
 
+  /* ---------------- internal job score (never on any customer document) ---------------- */
+  function marginFloor() {
+    var f = parseFloat(S.settings && S.settings.marginFloorPct);
+    return isFinite(f) ? f : 25;
+  }
+  function scoreOutHtml(d) {
+    var floor = marginFloor();
+    var cost = (typeof d.costEstimate === 'number' && isFinite(d.costEstimate)) ? d.costEstimate : null;
+    var sc = R.jobScore(R.docTotal(d), cost, floor);
+    if (sc.verdict === 'none') {
+      return '<div class="scoreread"><span class="scorechip">no score yet</span>' +
+        '<span class="muted">Enter the cost to see profit, margin and the call.</span></div>';
+    }
+    var profitStr = sc.profit < 0 ? '-$' + R.money(-sc.profit) : '$' + R.money(sc.profit);
+    var chip, note;
+    if (sc.verdict === 'accept') {
+      chip = '<span class="scorechip ok">🟢 ACCEPT</span>';
+      note = 'Clears the $' + R.MIN_PROFIT + ' profit floor and the ' + floor + '% margin floor.';
+    } else if (sc.verdict === 'thin') {
+      chip = '<span class="scorechip thin">🟠 THIN</span>';
+      note = 'Margin under ' + floor + '%: renegotiate cost or lift price.';
+    } else {
+      chip = '<span class="scorechip bad">🔴 DECLINE</span>';
+      note = 'Profit under $' + R.MIN_PROFIT + ': send the rejection with the referral line (template 2G).';
+    }
+    return '<div class="scoreread">' + chip +
+      '<span>Profit <strong>' + profitStr + '</strong></span>' +
+      '<span>Margin <strong>' + Math.round(sc.marginPct) + '%</strong></span>' +
+      '<span class="muted">' + note + '</span></div>';
+  }
+  /* small margin chip on a list row when a saved quote has a score */
+  function marginChip(q) {
+    if (typeof q.costEstimate !== 'number' || !isFinite(q.costEstimate)) return '';
+    var sc = R.jobScore(q.total || 0, q.costEstimate, marginFloor());
+    var cls = sc.verdict === 'accept' ? 'ok' : (sc.verdict === 'thin' ? 'thin' : 'bad');
+    return ' <span class="mchip ' + cls + '" title="Internal job score: est. cost $' + R.money(q.costEstimate) + ', profit ' +
+      (sc.profit < 0 ? '-$' + R.money(-sc.profit) : '$' + R.money(sc.profit)) + '">' + Math.round(sc.marginPct) + '%</span>';
+  }
+
   /* ============ LIST ============ */
   async function refreshList() {
     try { S.quotes = await TQ.db.listQuotes(); }
@@ -211,7 +252,7 @@
         '<td>' + esc(q.docNo || '(draft)') + '</td>' +
         '<td class="cust">' + esc(q.customerName || '') + '</td>' +
         '<td><span class="pill ' + esc(q.docType) + '">' + (q.docType === 'invoice' ? 'Invoice' : 'Quote') + '</span></td>' +
-        '<td class="num">$' + R.money(q.total || 0) + '</td>' +
+        '<td class="num">$' + R.money(q.total || 0) + marginChip(q) + '</td>' +
         '<td><select class="status" data-act="status">' +
           ['draft', 'sent', 'accepted', 'invoiced', 'paid', 'declined'].map(function (st) {
             return '<option value="' + st + '"' + (q.status === st ? ' selected' : '') + '>' + st + '</option>';
@@ -371,6 +412,11 @@
       '<label class="mt">Note under the options</label>' +
       '<textarea id="optnote" rows="2" placeholder="Option B keeps your existing tiles for less; we confirm the scope on site.">' + esc(d.optionsNote) + '</textarea></section>' +
 
+      '<section><h3>Job score <span class="tag">internal, never printed</span></h3>' +
+      '<p class="hint">Score before accepting (the Surface Care discipline): enter what the job costs to deliver — sub quote + materials + travel, GST inclusive. The verdict is advice, not a blocker.</p>' +
+      '<div class="grid4"><label>Estimated cost to deliver ($) <input id="costest" type="number" min="0" step="1" value="' + (typeof d.costEstimate === 'number' && isFinite(d.costEstimate) ? esc(d.costEstimate) : '') + '"></label></div>' +
+      '<div id="scoreout">' + scoreOutHtml(d) + '</div></section>' +
+
       '<section><h3>Footer</h3><div class="grid2">' +
       '<label>Warranty &amp; cover (one per line)<textarea id="warr" rows="3">' + esc((d.warranty || []).join('\n')) + '</textarea></label>' +
       '<label>What to expect (one per line)<textarea id="expect" rows="3">' + esc((d.expect || []).join('\n')) + '</textarea></label>' +
@@ -448,6 +494,12 @@
     d.footerBottom = $('#footbottom').checked;
     var ac = $('#acceptsec'); if (ac) d.acceptSection = ac.checked;
     var ws = $('#wspecial'); if (ws) d.warrantySpecial = ws.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    var ce = $('#costest');
+    if (ce) {
+      var cv = parseFloat(ce.value);
+      d.costEstimate = isFinite(cv) && ce.value.trim() !== '' ? cv : null;
+      var so = $('#scoreout'); if (so) so.innerHTML = scoreOutHtml(d);
+    }
     showValidation();
   }
 
@@ -867,6 +919,7 @@
       '<label>BSB <input id="s_bsb" value="' + esc(s.bsb) + '"></label>' +
       '<label>Account number <input id="s_acc" value="' + esc(s.account) + '"></label>' +
       '<label>Deposit % <input id="s_dep" type="number" value="' + esc(s.depositPct) + '"></label>' +
+      '<label>Margin floor % (job score) <input id="s_mfloor" type="number" value="' + esc(s.marginFloorPct != null ? s.marginFloorPct : 25) + '"></label>' +
       '<label>Quote valid (days) <input id="s_valid" type="number" value="' + esc(s.validityDays) + '"></label>' +
       '<label>Invoice due (days) <input id="s_due" type="number" value="' + esc(s.invoiceDueDays) + '"></label>' +
       '<label>Next document number <input id="s_next" type="number" value="' + esc(s.nextDocNo) + '"></label>' +
@@ -922,7 +975,8 @@
       s.tagline = $('#s_tag').value; s.bankName = $('#s_bank').value; s.bsb = $('#s_bsb').value;
       var opsEl = $('#s_ops'); if (opsEl) s.operators = opsEl.value;
       s.account = $('#s_acc').value; s.depositPct = Number($('#s_dep').value) || 10;
-      s.validityDays = Number($('#s_valid').value) || 30; s.invoiceDueDays = Number($('#s_due').value) || 7;
+      var mf = $('#s_mfloor'); if (mf) s.marginFloorPct = isFinite(parseFloat(mf.value)) ? parseFloat(mf.value) : 25;
+      s.validityDays = Number($('#s_valid').value) || 7; s.invoiceDueDays = Number($('#s_due').value) || 7;
       s.nextDocNo = Number($('#s_next').value) || s.nextDocNo; s.docPrefix = $('#s_prefix').value;
       s.gstRegistered = true;   // settled: the business is GST-registered
       try { await TQ.db.saveSettings(s); toast('Settings saved'); } catch (e) { toast(String(e.message || e), true); }

@@ -73,16 +73,22 @@
     /* ---------- quotes ---------- */
     async listQuotes() {
       if (mode === 'cloud') {
-        var r = await client.from('quotes').select('id,doc_no,doc_type,customer,status,total,updated_at').order('updated_at', { ascending: false });
+        /* costEstimate rides inside the data JSON blob (no schema change): pull just that key.
+           If this PostgREST JSON-path select ever fails, fall back to the plain column list so
+           listing never breaks (the margin chip simply won't show). */
+        var r = await client.from('quotes').select('id,doc_no,doc_type,customer,status,total,updated_at,costEstimate:data->costEstimate').order('updated_at', { ascending: false });
+        if (r.error) r = await client.from('quotes').select('id,doc_no,doc_type,customer,status,total,updated_at').order('updated_at', { ascending: false });
         if (r.error) throw r.error;
         return r.data.map(function (row) {
           return { id: row.id, docNo: row.doc_no, docType: row.doc_type, customerName: row.customer,
-                   status: row.status, total: Number(row.total), updatedAt: row.updated_at };
+                   status: row.status, total: Number(row.total), updatedAt: row.updated_at,
+                   costEstimate: typeof row.costEstimate === 'number' ? row.costEstimate : null };
         });
       }
       return lsGet(LS_QUOTES, []).map(function (q) {
         return { id: q.id, docNo: q.docNo, docType: q.docType, customerName: (q.customer || {}).name || '',
-                 status: q.status, total: TQ.rules.docTotal(q), updatedAt: q.updatedAt };
+                 status: q.status, total: TQ.rules.docTotal(q), updatedAt: q.updatedAt,
+                 costEstimate: typeof q.costEstimate === 'number' ? q.costEstimate : null };
       }).sort(function (a, b) { return (b.updatedAt || '').localeCompare(a.updatedAt || ''); });
     },
 

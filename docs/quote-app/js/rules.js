@@ -121,6 +121,24 @@
     'to a refund for the goods and to cancel the contract for the service and obtain a refund of any unused portion. ' +
     'You are also entitled to be compensated for any other reasonably foreseeable loss or damage from a failure in the goods or service.';
 
+  /* ---- internal job-score gate (Surface Care discipline; NEVER printed on any customer
+     document). Score before accepting: profit = quote total - estimated cost to deliver
+     (sub quote + materials + travel, GST inclusive); margin = profit / total.
+     Verdicts: accept  = profit >= $300 AND margin >= the settings floor
+               thin    = profit >= $300 but margin under the floor (renegotiate cost or lift price)
+               decline = profit under $300
+               none    = no cost entered yet (the gate informs, it never blocks). */
+  R.MIN_PROFIT = 300;
+  R.jobScore = function (total, cost, floorPct) {
+    if (typeof cost !== 'number' || !isFinite(cost)) return { verdict: 'none', profit: null, marginPct: null };
+    var t = (typeof total === 'number' && isFinite(total)) ? total : 0;
+    var profit = R.round2(t - cost);
+    var marginPct = t > 0 ? (profit / t) * 100 : 0;
+    var floor = (typeof floorPct === 'number' && isFinite(floorPct)) ? floorPct : 25;
+    var verdict = profit < R.MIN_PROFIT ? 'decline' : (marginPct >= floor ? 'accept' : 'thin');
+    return { verdict: verdict, profit: profit, marginPct: marginPct };
+  };
+
   R.DEFAULT_SETTINGS = {
     businessName: 'Timeless Resurfacing',
     abn: '30 412 161 602',
@@ -137,6 +155,7 @@
     operators: 'Allan, Marko',   // the people who sign warranties (quick-pick in the sign popup)
     lastSigner: '',
     depositPct: 10,
+    marginFloorPct: 25,      // job-score gate: margin under this = THIN (internal, never printed)
     validityDays: 7,
     invoiceDueDays: 7,
     gstRegistered: true,     // Timeless IS registered for GST (Allan confirmed 2026-07-05)
