@@ -21,6 +21,19 @@ app = FastAPI(title="Idea Lab")
 analyst.start_engine_detection()   # probe engines in the background at boot
 
 
+def _int(val, default, lo=None, hi=None):
+    """Coerce a raw JSON value ('3', 3, '3.7', 'abc', None) to an int, clamped."""
+    try:
+        n = int(float(val))
+    except (TypeError, ValueError):
+        n = int(default)
+    if lo is not None:
+        n = max(lo, n)
+    if hi is not None:
+        n = min(hi, n)
+    return n
+
+
 def _panel_size(body):
     """Parse panel_size defensively: bad input falls back, always clamped 0-100."""
     try:
@@ -77,8 +90,8 @@ def start_batch(body: dict = Body(default={})):
     category = body.get("category")
     q = body.get("q")
     mode = "analyze" if body.get("mode") == "analyze" else "pipeline"
-    limit = max(1, min(500, int(body.get("limit") or 10)))
-    panel = int(body.get("panel_size") or db.get_setting("panel_size") or 10)
+    limit = _int(body.get("limit"), 10, 1, 500)
+    panel = _int(body.get("panel_size"), db.get_setting("panel_size") or 10, 0, 100)
     rows = db.ideas(origin or None, q or None, limit=limit, category=category or None)
     ids = [r["id"] for r in rows][:limit]
     if not ids:
@@ -98,7 +111,7 @@ def categorize_all(body: dict = Body(default={})):
 
 @app.post("/api/generate")
 def generate(body: dict = Body(default={})):
-    n = max(1, min(20, int(body.get("n") or 10)))
+    n = _int(body.get("n"), 10, 1, 20)
     theme = (body.get("theme") or "").strip() or None
     if not ideagen.start_generation(n, theme):
         raise HTTPException(409, "Idea generation already running.")

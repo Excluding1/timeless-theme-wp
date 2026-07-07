@@ -8,8 +8,10 @@ IndieHackers is deliberately NOT scraped in v1: it has no public API and the sit
 is a JS app — scraping it is fragile and against their terms. Revisit if needed.
 """
 import hashlib
+import ipaddress
 import json
 import re
+import socket
 import threading
 import time
 import urllib.parse
@@ -20,6 +22,23 @@ from datetime import datetime, timedelta
 from . import db
 
 UA = {"User-Agent": "IdeaLab/1.0 (local personal research tool)"}
+
+
+def _assert_public_url(url):
+    """Reject URLs that resolve to a private/loopback/link-local/reserved host, so
+    a user-supplied RSS feed can't be pointed at internal services (SSRF guard)."""
+    host = urllib.parse.urlparse(url).hostname
+    if not host:
+        raise ValueError("URL has no host")
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror as e:
+        raise ValueError(f"cannot resolve host: {e}")
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if (ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved
+                or ip.is_multicast or ip.is_unspecified):
+            raise ValueError(f"refusing to fetch a non-public address ({ip})")
 
 
 def _get(url, timeout=25):
@@ -441,6 +460,7 @@ MEDIA_ARCHIVER_DB = db.BASE_DIR.parent / "media-archiver" / "data" / "archive.db
 
 def fetch_rss(url, name=None, prefix=None):
     """Ingest any RSS 2.0 or Atom feed. Powers user-added custom sources."""
+    _assert_public_url(url)          # SSRF guard: no internal/loopback/link-local hosts
     raw = _get(url, timeout=30)
     root = ET.fromstring(raw)
     prefix = prefix or ("rss:" + hashlib.sha1(url.encode()).hexdigest()[:8])

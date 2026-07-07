@@ -277,7 +277,7 @@ async function showSimilar(id, row) {
     for (const s of r.similar) {
       box.append(el("div", { class: "simrow" },
         el("span", { class: "obadge " + s.origin, text: ORIGIN[s.origin] || s.origin }),
-        s.url ? el("a", { href: s.url, target: "_blank", rel: "noopener", text: " " + s.title })
+        safeUrl(s.url) ? el("a", { href: safeUrl(s.url), target: "_blank", rel: "noopener", text: " " + s.title })
               : el("span", { text: " " + s.title }),
         el("span", { class: "simscore", text: ` ${Math.round(s.similarity * 100)}% match` }),
       ));
@@ -375,8 +375,10 @@ function renderAnalyses() {
         }
         details.append(grid);
       }
-      if (a.estimates) {
-        const e = typeof a.estimates === "string" ? JSON.parse(a.estimates) : a.estimates;
+      let estObj = null;
+      try { estObj = typeof a.estimates === "string" ? JSON.parse(a.estimates) : a.estimates; } catch (_) {}
+      if (estObj) {
+        const e = estObj;
         details.append(el("p", { class: "panelstats" },
           el("strong", { text: `Effort ROI ${a.effort_roi != null ? a.effort_roi + "×" : "—"}: ` }),
           el("span", { text: `~${Math.round(e.build_hours)}h build · $${Math.round(e.monthly_cost_usd)}/mo costs` +
