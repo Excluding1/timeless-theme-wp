@@ -171,6 +171,19 @@ def _friendly(msg, platform):
 
 def list_profile(platform, url, limit=None):
     """Return [{id, url, title}] for a profile/channel, newest first. [] is valid."""
+    entries = _list_one(platform, url, limit)
+    # YouTube keeps Shorts on a separate tab — "all videos" should include them
+    if platform == "youtube" and url.endswith("/videos"):
+        try:
+            shorts = _list_one(platform, url[: -len("/videos")] + "/shorts", limit)
+        except ProfileError:
+            shorts = []  # channel has no Shorts tab
+        seen = {e["id"] for e in entries}
+        entries += [s for s in shorts if s["id"] not in seen]
+    return entries
+
+
+def _list_one(platform, url, limit=None):
     opts = _base_opts() | {"extract_flat": "in_playlist", "skip_download": True}
     if limit:
         opts["playlistend"] = int(limit)

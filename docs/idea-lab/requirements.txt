@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+# LLM analysis runs through the local Codex CLI (brew install codex; logged in) —
+# no API keys are stored in this app.

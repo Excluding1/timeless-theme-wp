@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Idea Lab</title>
+<link rel="stylesheet" href="/static/app.css?v=__V__">
+</head>
+<body>
+<header>
+  <div class="logo"><span class="tick">◆</span> Idea Lab <span class="sub">scrape · rank · stress-test</span></div>
+  <span id="jobBadge" class="chip" hidden></span>
+</header>
+
+<main>
+  <section class="card">
+    <div class="row spread wrap">
+      <h2>Sources</h2>
+      <div class="row wrap">
+        <label class="sub">Show HN: last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
+          ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> points</label>
+        <button id="fetchHn" class="small">Fetch Show HN</button>
+        <button id="fetchPh" class="small ghost">Fetch Product Hunt</button>
+      </div>
+    </div>
+    <p class="hint" id="fetchStatus">Hacker News “Show HN” (official API) and Product Hunt (public feed).
+      Each fetched idea gets a traction score; hit Analyze for the full AI scorecard + persona panel.</p>
+    <div class="row wrap">
+      <select id="originFilter">
+        <option value="">All sources</option>
+        <option value="hn">Show HN</option>
+        <option value="ph">Product Hunt</option>
+        <option value="custom">My ideas</option>
+      </select>
+      <input id="search" placeholder="Search ideas…" spellcheck="false">
+      <label class="sub">Panel size
+        <select id="panelSize">
+          <option value="10">10 personas</option>
+          <option value="20" selected>20 personas</option>
+          <option value="50">50 personas</option>
+          <option value="100">100 personas</option>
+        </select>
+      </label>
+    </div>
+    <div id="ideas"></div>
+  </section>
+
+  <section class="card">
+    <h2>Idea Tester</h2>
+    <p class="hint">Type your own business idea — same expert scorecard + persona panel as the scraped ones.</p>
+    <input id="ideaTitle" placeholder="One-line idea (e.g. AI quote-follow-up bot for trade businesses)" spellcheck="false">
+    <textarea id="ideaDesc" rows="3" placeholder="A few sentences: who it's for, what it does, how it makes money…"></textarea>
+    <div class="row">
+      <button id="testIdea">Analyze my idea</button>
+      <span id="testStatus" class="hint"></span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Analyses</h2>
+    <div id="analyses"></div>
+    <p class="hint" id="analysesEmpty" hidden>No analyses yet — hit Analyze on an idea above.</p>
+  </section>
+</main>
+
+<script src="/static/app.js?v=__V__"></script>
+</body>
+</html>
