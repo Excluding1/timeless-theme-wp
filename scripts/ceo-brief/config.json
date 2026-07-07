@@ -1,0 +1,21 @@
+{
+  "_comment": "CEO Brief bot config — NO SECRETS in this file. Secret paths are relative to this directory.",
+  "location_id": "Uz8fQwDiUxAHVtlruspD",
+  "pipeline_id": "YTgWxSeFt2oyd3zBe2Xr",
+  "pipeline_name": "Sales",
+  "quote_sent_stage_name": "Quote Sent",
+  "quote_accepted_stage_name": "Quote Accepted",
+  "margin_assumption": 0.30,
+  "ghl_pit_file": "../../.secrets/ghl-pit.key",
+  "slack_webhook_file": "../../.secrets/slack-webhook.key",
+  "net_profit_field_key": "opportunity.estimated_profit",
+  "sub_cost_field_key": null,
+  "quote_sent_at_field_key": "opportunity.quote_sent_at",
+  "exclude_name_regex": "(?i)(clifford ai|faketest|dtest|w6test|\\btest\\b|test\\d|allan pham|marko spasojevic)",
+  "baseline_weeks": 4,
+  "trend_weeks": 4,
+  "top_jobs": 5,
+  "stale_quote_days": 7,
+  "no_sent_alert_days": 3,
+  "no_request_alert_days": 3
+}

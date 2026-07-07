@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Monday CEO Brief — launchd agent template.
+
+  Install (as the logged-in user, NOT sudo):
+    cp com.timeless.ceobrief.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.timeless.ceobrief.plist
+
+  Test-fire immediately (posts to Slack for real!):
+    launchctl start com.timeless.ceobrief
+
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.timeless.ceobrief.plist
+    rm ~/Library/LaunchAgents/com.timeless.ceobrief.plist
+
+  Logs: ~/Library/Logs/ceo-brief.log (stdout+stderr).
+  Schedule: every Monday 07:00 local time (Weekday 1 = Monday).
+  If the Mac is asleep at 7:00 the job fires once on next wake;
+  if it's powered off it is skipped for that week (launchd behaviour).
+  No secrets here — brief.py reads them from .secrets/ per config.json.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.timeless.ceobrief</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/excluding/Downloads/timeless-theme-wp/scripts/ceo-brief/brief.py</string>
+        <string>--slack</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/excluding/Downloads/timeless-theme-wp/scripts/ceo-brief</string>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>1</integer>
+        <key>Hour</key>
+        <integer>7</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/excluding/Library/Logs/ceo-brief.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/excluding/Library/Logs/ceo-brief.log</string>
+
+    <!-- Uncomment to pass the Slack webhook via env instead of
+         .secrets/slack-webhook.key (file is preferred):
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SLACK_WEBHOOK_URL</key>
+        <string>https://hooks.slack.com/services/XXX/YYY/ZZZ</string>
+    </dict>
+    -->
+</dict>
+</plist>
