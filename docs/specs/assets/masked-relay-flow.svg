@@ -1,0 +1,29 @@
+<svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" font-family="Inter, system-ui, sans-serif">
+<title>Masked chat relay: customer to field worker without sharing numbers</title>
+<rect width="720" height="400" fill="#ffffff"/>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#334155"/></marker>
+</defs>
+<text x="360" y="26" text-anchor="middle" font-size="16" font-weight="600" fill="#0f172a">How the field worker books a time without ever seeing the number</text>
+<g><rect x="16" y="48" width="118" height="74" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/><text x="75" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#1d4ed8">Customer</text><text x="75" y="96" text-anchor="middle" font-size="10" fill="#475569">texts 0485 056 656</text></g>
+<g><rect x="166" y="48" width="118" height="74" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/><text x="225" y="72" text-anchor="middle" font-size="13" font-weight="600" fill="#047857">GoHighLevel</text><text x="225" y="90" text-anchor="middle" font-size="10" fill="#475569">business number</text><text x="225" y="104" text-anchor="middle" font-size="10" fill="#475569">workflow fires</text></g>
+<g><rect x="316" y="48" width="118" height="74" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/><text x="375" y="72" text-anchor="middle" font-size="13" font-weight="600" fill="#b45309">Make.com</text><text x="375" y="90" text-anchor="middle" font-size="10" fill="#475569">the bridge</text><text x="375" y="104" text-anchor="middle" font-size="10" fill="#475569">both directions</text></g>
+<g><rect x="466" y="48" width="118" height="74" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/><text x="525" y="72" text-anchor="middle" font-size="12" font-weight="600" fill="#047857">Contractor app</text><text x="525" y="90" text-anchor="middle" font-size="10" fill="#475569">job chat thread</text><text x="525" y="104" text-anchor="middle" font-size="10" fill="#475569">push notification</text></g>
+<g><rect x="616" y="48" width="88" height="74" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/><text x="660" y="78" text-anchor="middle" font-size="13" font-weight="600" fill="#1d4ed8">Worker</text><text x="660" y="96" text-anchor="middle" font-size="10" fill="#475569">replies in app</text></g>
+<g fill="none" stroke="#334155" stroke-width="1.5">
+<path d="M134 72 H166" marker-end="url(#ar)"/><path d="M284 72 H316" marker-end="url(#ar)"/><path d="M434 72 H466" marker-end="url(#ar)"/><path d="M584 72 H616" marker-end="url(#ar)"/>
+<path d="M616 100 H584" marker-end="url(#ar)"/><path d="M466 100 H434" marker-end="url(#ar)"/><path d="M316 100 H284" marker-end="url(#ar)"/><path d="M166 100 H134" marker-end="url(#ar)"/>
+</g>
+<text x="75" y="146" text-anchor="middle" font-size="10" fill="#64748b">sees only the</text>
+<text x="75" y="160" text-anchor="middle" font-size="10" fill="#64748b">business number</text>
+<text x="660" y="146" text-anchor="middle" font-size="10" fill="#64748b">sees job + suburb,</text>
+<text x="660" y="160" text-anchor="middle" font-size="10" fill="#64748b">never the number</text>
+<text x="360" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0f172a">What each hop does</text>
+<g font-size="12" fill="#0f172a">
+<rect x="40" y="212" width="640" height="32" rx="8" fill="#f8fafc" stroke="#cbd5e1"/><text x="56" y="233">1. Customer texts a time question to the business number, like any normal SMS</text>
+<rect x="40" y="252" width="640" height="32" rx="8" fill="#f8fafc" stroke="#cbd5e1"/><text x="56" y="273">2. GHL workflow (trigger: customer replied) sends it to Make via webhook</text>
+<rect x="40" y="292" width="640" height="32" rx="8" fill="#f8fafc" stroke="#cbd5e1"/><text x="56" y="313">3. Make writes it into the job's chat in the app and pushes to the worker's phone</text>
+<rect x="40" y="332" width="640" height="32" rx="8" fill="#f8fafc" stroke="#cbd5e1"/><text x="56" y="353">4. Worker replies in the app; Make sends it back as an SMS from the business number</text>
+</g>
+<text x="360" y="392" text-anchor="middle" font-size="10" fill="#94a3b8">Applies to subs AND future employees — one comms system for every field worker · ratified 2026-07-08</text>
+</svg>
