@@ -672,6 +672,37 @@ def check_stale(cards, cfg, now, stages, alerts):
         })
 
 
+def check_winback(cards, cfg, now, alerts):
+    """Lost/abandoned cards hitting the win-back milestones: day 30 = the 6A
+    SMS ('reply QUOTE for a fresh one'), day 90 = the 6B email. Each nags for
+    a 7-day window so a missed Monday still gets caught, then goes quiet."""
+    windows = [(30, "6A win-back SMS"), (90, "6B win-back email")]
+    span = 7
+    for c in cards:
+        if c["status"] not in ("lost", "abandoned"):
+            continue
+        lost_at = c["last_status_change"] or c["last_stage_change"]
+        if not lost_at:
+            continue
+        age = age_days(lost_at, now)
+        if age is None:
+            continue
+        for day, label in windows:
+            if day <= age < day + span:
+                val = " %s ·" % money(c["value"]) if c["value"] else ""
+                alerts.append({
+                    "check": "winback",
+                    "severity": "info",
+                    "opportunity_ids": [c["id"]],
+                    "name": short_name(c["name"]),
+                    "age_days": round(age, 1),
+                    "message": "\U0001F501 WIN-BACK due: %s —%s lost %dd ago "
+                               "— send the %s (customer-comms §6)"
+                               % (short_name(c["name"]), val, int(age), label),
+                })
+                break
+
+
 def run_checks(cards, cfg, stages, sent_pos, accepted_pos, now):
     alerts = []
     check_speed_to_lead(cards, cfg, now, alerts)
@@ -679,6 +710,7 @@ def run_checks(cards, cfg, stages, sent_pos, accepted_pos, now):
     check_followup_due(cards, cfg, now, sent_pos, accepted_pos, alerts)
     check_duplicates(cards, cfg, now, alerts)
     check_stale(cards, cfg, now, stages, alerts)
+    check_winback(cards, cfg, now, alerts)
     alerts.sort(key=lambda a: SEVERITY_RANK.get(a["severity"], 9))
     return alerts
 
