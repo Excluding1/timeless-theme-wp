@@ -1,5 +1,7 @@
 # Spec: Subcontractor Rate Schedule + Payment Process
 
+> ⚠️ **COST FIGURES SUPERSEDED 2026-06/07:** real sub quotes run **$890-980** for jobs this sheet prices at **$368-483** ([data/suppliers/sub-resurfacing-real-quotes-2026-06.md](../../data/suppliers/sub-resurfacing-real-quotes-2026-06.md)). **Re-peg every rate off the Mick analysis ([docs/research/job-analysis-mick-2bath-2026-06-17.md](../research/job-analysis-mick-2bath-2026-06-17.md)) + real quotes before ANY sub sees this.**
+
 **Source:** Migrated from `data/archive/old-drafts-2026-04/extracted-sub-onboarding/13-rate-schedule-+-payments.md` (sub-onboarding-system.xlsx Sheet 13).
 **Audited via:** [auditor-margin-per-job.md](../roles/auditor-margin-per-job.md) + [auditor-fair-work.md](../roles/auditor-fair-work.md) + [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md)
 **Companion to:** [sub-agreement-clauses.md § Clause 15](sub-agreement-clauses.md), [sub-sopa-protections.md](../sop/sub-sopa-protections.md), [sub-tax-compliance.md](../sop/sub-tax-compliance.md), the master pricing Excel ([data/pricing/master-pricing-2026-05-01-snapshot.xlsx](../../data/pricing/master-pricing-2026-05-01-snapshot.xlsx))

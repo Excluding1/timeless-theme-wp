@@ -1,5 +1,7 @@
 # SOP: Subcontractor Recruitment Channels — Where to Find Subcontractors
 
+> ⚖️ **HARD GATE: no external sub signs an agreement until an AU employment lawyer clears the model (Fair Work s15AA) — see [docs/specs/legal-review-brief-sub-engagement-2026-06-05.md](../specs/legal-review-brief-sub-engagement-2026-06-05.md). Recruiting/conversations OK; signing blocked.**
+
 **Source:** Migrated from `data/archive/old-drafts-2026-04/extracted-sub-onboarding/09-where-to-find-subs.md` (sub-onboarding-system.xlsx Sheet 09).
 **Audited via:** [auditor-fair-work.md](../roles/auditor-fair-work.md) (recruitment language must reflect contractor-not-employee) + [auditor-compliance-aus.md](../roles/auditor-compliance-aus.md)
 **Companion to:** [sub-vetting-checklist.md](sub-vetting-checklist.md) (next step after candidate found), [sub-onboarding-master.md](sub-onboarding-master.md), [docs/templates/recruitment-ads.md](../templates/recruitment-ads.md) (ad copy)

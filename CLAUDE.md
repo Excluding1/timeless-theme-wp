@@ -138,13 +138,13 @@ Mac: `Cmd + Shift + R`, or open in Incognito.
 ## Related Repos
 - **React Quote Form:** https://github.com/Excluding1/TimelessDash (branch `quote-form/react-v8`)
   - Standalone React embed, NOT part of this WordPress theme
-  - ✅ Wired to LIVE GHL (W1 webhook + `secret_token`) as of 2026-06-05 — the old `REPLACE_ME` note is stale; TODO is to `npm run build` + deploy the wired bundle to the live site.
+  - ✅ Wired to LIVE GHL (W1 webhook + `secret_token`) — ✅ deployed to the live site 2026-06-11 (theme v1.5, form live on 13 pages).
 
 ## Pending Work
 **Business-automation roadmap (GHL · Make · ServiceM8 · Slack · contractor sub-app) — canonical = the CEO Cockpit board (localhost:4317) + `memory/SESSION_RESUME_2026-06-05.md` + `docs/specs/decision-sm8-keep-vs-build-2026-06-05.md`. Plan order (2026-06-05): internal backbone → contractor app → launch.**
-THEME pending items (older full list in `HANDOFF.md`):
-- Upload this theme + page-creator plugin to live WordPress
-- Configure Customizer (real phone, email, licence)
+THEME pending items (older full list in `docs/archive/HANDOFF.md`):
+- ~~Upload this theme + page-creator plugin to live WordPress~~ ✅ done — site LIVE since 2026-06-11
+- ~~Configure Customizer (real phone, email, licence)~~ ✅ done — site live (licence stays blank per Override 5)
 - Replace placeholder images with real job photos over time
 - Add HTTPS redirect in .htaccess
 - Warranty copy audit (per-material; **NOT a bulk replace** — see STATE.md §15): keep grout 2yr / silicone 1yr / resurface up-to-5yr; use "Up to 5-Year" only with nearby qualifying text (ACL)

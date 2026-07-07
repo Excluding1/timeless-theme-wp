@@ -11,13 +11,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased] — `develop` branch (v1.3.0)
+## [Unreleased]
 
 ### Coming next
 - Day 4: Schema-as-code audit + GA4 + Microsoft Clarity setup
 - Day 5: Suburb programmatic landing pages (`/services/X/parramatta/` etc.)
 - Day 6: Service page polish (H1 tweaks, customer-language audit)
 - Off-page (parallel, 4-6 weeks): GBP claim, citations, reviews campaign
+
+---
+
+## [1.5.0] — bumped 2026-05-05, **deployed LIVE 2026-06-11** (current stable)
+
+*(Entries for 1.3.0-1.5.0 back-filled 2026-07-07 from `git log` — the changelog had
+stopped at 1.2.0 while style.css moved on.)*
+
+### Added
+- **GHL-wired React quote form embed** — `[timeless_quote_form]` shortcode live on
+  13 pages (homepage + sydney + 11 service pages); W1/W2 webhooks + `secret_token`
+  + Cloudinary photo upload; live e2e certified (GHL Contact + Opp + Slack).
+- Homepage inline preview form; desktop→phone mobile-handoff QR (live 2026-06-12).
+- Logo lockup in nav, footer mark, homepage logo strip + chip-bar marquee.
+- Swipe-progress indicators on mobile carousels.
+
+### Changed
+- Site-wide copy pack + typography pass; no-em-dash sweep (337 → 0) per brand rule.
+- Form a11y: keyboard-operable selection cards, 16px inputs (kill iOS zoom),
+  3:1 input borders, email always required.
+
+### Fixed
+- Removed "in writing" warranty claims (ACL, Allan 2026-06-11).
+- Quote-form CSS scoped to `#quote-form-root` (was leaking onto homepage).
+- Single canonical slider handler (removed 21 duplicated inline scripts);
+  Section 2B `clip-path` sliders; rebuilt `main.min.css`.
+
+---
+
+## [1.4.0] — 2026-05-05
+
+### Changed
+- `filemtime()` cache-busting on JS/CSS enqueues (updates reach browsers without
+  manual version bumps — the `?ver=1.0.0` deploy regression class is dead).
+
+### Fixed
+- Tailwind v4 syntax regressions (slider handle visibility, `-mt-[22px]` /
+  `w-[2px]` class fixes); page autocreate.
+
+---
+
+## [1.3.0] — 2026-04-28 → 2026-05-05 (`1.3.0-dev`, rolled straight into 1.4.0 — never cut standalone)
+
+### Added
+- Blog system: custom post type + flexible content blocks, article navigation
+  (category pills + auto-TOC), conversion-focused sidebar + end-of-article CTA.
+- Legal pages deployed: Privacy Policy + Customer Terms of Service (+ footer link).
+- `/warranty` + `/care-instructions` pages with ACL-compliant copy.
+- Quote form: consent audit trail + GA4 conversion events; SVCS overhaul +
+  P0 production-readiness fixes.
+
+### Fixed
+- NO_LCP error — hero slider visible from initial paint.
+- Nav cleanup: removed desktop top-right phone + Shower Resurfacing menu items.
 
 ---
 
@@ -191,6 +245,9 @@ This release moves the theme from a CDN-runtime architecture to a properly compi
 
 | Version | Date | Branch | Status |
 |---------|------|--------|--------|
-| 1.2.0 | TBD | `develop` | In development |
-| **1.1.0** | **2026-04-27** | **`main`** | **Current stable** |
+| **1.5.0** | **bumped 2026-05-05; LIVE on production 2026-06-11** (as `timeless-theme-2`) | `feature/day8-react-form-ghl-wire-2026-05-20` (deploy branch — check STATE.md before deploying) | **Current stable** |
+| 1.4.0 | 2026-05-05 | (historical) | Superseded same day |
+| 1.3.0 | 2026-04-28 → 2026-05-05 | `develop` (as 1.3.0-dev) | Rolled into 1.4.0, never cut standalone |
+| 1.2.0 | 2026-04-28 | `main` | Superseded |
+| 1.1.0 | 2026-04-27 | `main` | Superseded |
 | 1.0.0 | 2026-04 | (historical) | Initial release |

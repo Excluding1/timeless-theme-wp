@@ -260,7 +260,7 @@ When you and Clifford disagree, both perspectives surface to Allan with evidence
 
 - Clifford's plan: `memory/plan_ghl_setup_draft_2026-05-04.md` (37KB)
 - Clifford's research: `memory/research_ghl_pipeline_2026-05-04.md` (21KB)
-- Allan's earlier plan: `master-repo/docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md` (10KB, 2026-04-28)
+- Allan's earlier plan: `master-repo/docs/archive/QUOTE-FORM-GHL-MIGRATION-PLAN.md` (10KB, 2026-04-28; moved to docs/archive/ 2026-07-07)
 - Form code: `master-repo/quote-form/src/QuoteForm.jsx`
 - Critical role files: `expert-ghl-operator.md`, `expert-trades-ops-contractor.md`, `auditor-compliance-aus.md`, `auditor-webhook-integrity.md`, `auditor-mobile-abandonment.md`
 
@@ -270,7 +270,7 @@ When invoked for peer-review, prioritise:
 - Photo upload wiring correctness (does the GHL multipart File Upload API behave as Clifford described?)
 - Customer-facing SMS copy quality (compliance + spam-trigger risk + STOP-rate)
 - Scale break points (50 / 200 / 500 jobs/month)
-- Divergence from `docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md` — has Clifford reinvented or improved on Allan's earlier plan?
+- Divergence from `docs/archive/QUOTE-FORM-GHL-MIGRATION-PLAN.md` — has Clifford reinvented or improved on Allan's earlier plan?
 - STATE.md ↔ Clifford's plan factual alignment (PL insurance $10M, builder licence deferred, etc.)
 
 ---

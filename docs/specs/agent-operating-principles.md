@@ -190,7 +190,7 @@ Per CEO operating discipline + Skills Report findings + Allan template:
 ### Code discipline
 - ❌ Never modify customer PII tables without audit log entry
 - ❌ Never push to main without local test (when frontend repo accessible)
-- ❌ Never delete bulk data without inline approval (per dashboard-integration-plan.md)
+- ❌ Never delete bulk data without inline approval (per dashboard-integration-plan.md, now `docs/archive/`)
 
 ### CEO discipline
 - ❌ Never gather data CEO should be analysing (Override 13 — delegate to AI employees)
@@ -214,5 +214,5 @@ Per CEO operating discipline + Skills Report findings + Allan template:
 - [Claude Code Skills Report v1 — Apr 27, 2026](https://clskillshub.com) — full source for primitive findings
 - [docs/CEO.md § CEO Rules 1-12](../CEO.md) — existing operating discipline (now extended with this synthesis)
 - [docs/roles/manager-business-orchestrator.md](../roles/manager-business-orchestrator.md) — Manager that applies these principles
-- [docs/specs/dashboard-audit-and-improvement-plan-2026-05-01.md](dashboard-audit-and-improvement-plan-2026-05-01.md) — current application of these principles
+- [docs/archive/dashboard-audit-and-improvement-plan-2026-05-01.md](../archive/dashboard-audit-and-improvement-plan-2026-05-01.md) — earlier application of these principles (archived 2026-07-07; dashboard superseded by cockpit) 
 - Allan's references: `/Users/excluding/Downloads/cs-ceo-advisor.md` (pattern), `/Users/excluding/Downloads/CLAUDE.md` (template)

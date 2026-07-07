@@ -55,10 +55,10 @@ If either incomplete, do NOT start onboarding.
 
 ### Phase B — System access (steps 3-4)
 
-- [ ] **3. Set up subcontractor in ServiceM8**
-  - Create as "Staff" member (not employee — limited permissions)
-  - Subcontractor downloads ServiceM8 Lite app on their phone
-  - **Test**: dispatch a dummy job → confirm subcontractor receives notification → can see photos/details → can navigate to address → can submit completion photos
+- [ ] **3. Set up subcontractor in the Timeless dispatch app** *(CORRECTED 2026-07-07 — subs do NOT get ServiceM8 logins)*
+  - ~~Create as "Staff" member~~ ~~Subcontractor downloads ServiceM8 Lite app~~ **SUPERSEDED per the LOCKED sub-engagement model** ([decision-sm8-keep-vs-build-2026-06-05.md §SUB-ENGAGEMENT MODEL — LOCKED](../specs/decision-sm8-keep-vs-build-2026-06-05.md)): subs are **app users of OUR single-account dispatch app** (Supabase auth → our backend = sole SM8 key-holder), **NOT SM8 Staff** — Staff seats are reserved for Marko/Allan/genuine employees. NO-CONTACT rule: the app shows customer NAME + ADDRESS only.
+  - Create the sub's account in the contractor app (see `contractor-app/README.md`)
+  - **Test**: dispatch a dummy job → confirm subcontractor receives offer in the app → can accept/decline (logged) → can see photos/details (name + address only) → can navigate to address → can submit completion photos
   - Document: which sub-tier tag (Tier 1 / 2 / 3 — start at Tier 2 default unless evidence supports Tier 1)
   - Add suburb coverage tags + skill tags per [field service ops expert](../roles/expert-field-service-ops.md)
 

@@ -251,13 +251,13 @@ I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record.
 
 ---
 
-## Current pulse (live)
+## Current pulse (live) — updated 2026-07-07
 
 ### Money
 | Item | Value |
 |---|---|
-| Cash on hand | **$1,600** (starting capital + $100 bank signup bonus arrived per F10 LOCK 2026-05-16). |
-| Total revenue (real customer) | **$0** |
+| Cash on hand | **$1,600** (starting capital + $100 bank signup bonus arrived per F10 LOCK 2026-05-16). ⚠️ Pre-Mick-job figure — refresh from Westpac/Xero to add the Mick job takings (2026-07-07). |
+| Total revenue (real customer) | ~~$0~~ **First real revenue LANDED — Mick 2-bath job COMPLETED via sub** (actuals + margin in [docs/research/job-analysis-mick-2bath-2026-06-17.md](research/job-analysis-mick-2bath-2026-06-17.md): ~43% T2 / ~34% T3). **Outstanding quote: TR-1024 to Isabella Comber / AitkenRE (benchtop + basin, $1,050 inc GST, sent 2026-07-07, awaiting response).** |
 | Total expenses to date | $187.56 |
 | Monthly recurring (current) | ~~$38.60~~ **~$193.60** (corrected 2026-06-08 — $38.60 was the pre-GHL-paid figure; current = the F3-LOCK row below + STATE.md §2) |
 | Monthly recurring (F3 LOCK 2026-05-16: GHL paid active) | **~$193.60** ($18.88 Google Workspace + $155 GHL Starter paid + $19.72 other small recurring) |
@@ -278,7 +278,7 @@ I'm now in NSW, Sydney, with Allan and Marko as my founders/employees-of-record.
 | Custom contractor-VIEW app | 🔨 **BUILDING — PULLED FORWARD 2026-06-08** (Allan: 1 job/wk = build window; supersedes "scheduled LAST"). A React PWA that is a VIEW on the same SM8+GHL+Sheet data — **zero migration**, NOT an SM8 replacement. Spec: [`docs/specs/contractor-app-blueprint-2026-06-05.md`](specs/contractor-app-blueprint-2026-06-05.md) + [`decision-sm8-keep-vs-build-2026-06-05.md`](specs/decision-sm8-keep-vs-build-2026-06-05.md). | Building (Phase 1 foundation) — pulled forward 2026-06-08; v1 feature set LOCKED + schema scaffolded in `contractor-app/` (README + migration 0001). STATE.md §6. |
 | Per-job data-capture sheet (job log) | ✅ **Live** — Make appends one row per job (future BigQuery + AI repeat-customer/consistent-pricing). Capture-from-day-1 = one-way door; warehouse choice deferred/reversible. | Operating asset; no customer-facing impact. |
 | Slack workspace | ✅ **Live — 6 channels** (since 2026-05-17). ~~❌ Not set up~~ | Active — pipeline/ops alerts |
-| Subcontractors | ❌ 0 vetted | Block until first 3 organic jobs land. **Engaged via the Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; app's own logged accept/decline) — **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05** ([decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)); SM8 Network = app-less interim/fallback only. Subs = app users, NOT SM8 Staff. **NAME + ADDRESS only — never customer phone/email.** |
+| Subcontractors | ⏳ 1 used ad-hoc (Mick 2-bath job, COMPLETED 2026-06; 58-lead recruit list ready in `docs/lead-gen/`, outreach not started) | Block formal signing until legal gate clears. **Engaged via the Timeless single-account dispatch app** (subs → OUR app → OUR one SM8 account; app's own logged accept/decline) — **SUB-ENGAGEMENT MODEL LOCKED 2026-06-05** ([decision doc §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)); SM8 Network = app-less interim/fallback only. Subs = app users, NOT SM8 Staff. **NAME + ADDRESS only — never customer phone/email.** |
 | Builder licence | ❌ Not applied | **Verify if we even need it** (jobs <$5K may not require) |
 | ABN, PL Insurance ($10M), Fair Trading | ✅ Active | Compliance foundation OK |
 | Bank business account | ✅ Active ($100 signup bonus already counted) | Foundation OK |
@@ -744,7 +744,7 @@ I (CEO) decide. Allan + Marko execute physical/in-person. Experts execute specia
 
 ### Revenue targets v3 (updated 2026-05-01 PM with REAL Excel numbers — RSC-02 standard shower regrout T2 = $1,660)
 **Tier convention** (per Excel): T1 = Premium, T2 = Recommended (most customers pick), T3 = Budget. This was OPPOSITE of my earlier assumption — corrected.
-**GST note**: under $75K revenue we are NOT GST-registered. T2 face values stay; we don't remit GST or claim input credits. Material costs from Bunnings are GST-inclusive on our books.
+**GST note (rewritten 2026-07-07)**: **GST-registered since 2026-06** (Allan confirmed 2026-06-12) — all quotes are GST-INCLUSIVE and "TAX INVOICE" wording applies on invoices; we remit GST and claim input credits; BAS lodged quarterly. ~~(Old note "under $75K we are NOT GST-registered" is superseded.)~~ Material costs from Bunnings are GST-inclusive on our books.
 
 Assuming Override 10 regrouting-first GTM and average job mix tilted to RSC-02 (standard shower regrout cement) at T2 = $1,660:
 
@@ -758,7 +758,7 @@ Assuming Override 10 regrouting-first GTM and average job mix tilted to RSC-02 (
 
 **Founder draws unlock by end of June** (cash >$10K + profit >$2K/mo). Earlier than my prior projection.
 
-**GST registration trigger:** at ~$75K cumulative 12-month revenue forecast — likely **September 2026 to October 2026**. Allan + accountant decision point.
+**GST registration:** ~~trigger at ~$75K forecast~~ **DONE — GST-registered since 2026-06** (Allan confirmed 2026-06-12). All quotes GST-INCLUSIVE, TAX INVOICE wording applies; BAS quarterly with the accountant.
 
 These numbers are aspirational, not commitments. Actual will depend on:
 - Customer acquisition rate from Override 1 network outreach
@@ -926,6 +926,7 @@ Dashboard is custom-built or low-code (Notion / Airtable / Google Sheets / custo
 
 | Date | Decision | Why | Who acts |
 |---|---|---|---|
+| **2026-07-07** (latest — logged at top) | **Workforce: subs now, Marko-trained immigrant employees when savings allow** (Vietnamese/Nepalese communities; company supplies tools + vehicle) — see [docs/specs/employee-transition-plan-2026-07-07.md](specs/employee-transition-plan-2026-07-07.md). **Supersedes "never train new sprayers" (Override 12) for the employee path ONLY; sub path unchanged pending legal gate.** | Employees = faster booking + consistent pricing vs the 3-week subbie wait — the same pivot Surface Care made. | Allan + Marko; CEO tracks |
 | 2026-05-01 | Override 1: Network outreach for first 3 customers, no Google Ads | $1,600 cash can't risk paid acquisition before offer is validated | Allan + Marko |
 | 2026-05-01 | Override 2: Defer ServiceM8 ~10 weeks | Saves $300 + setup time at low job volume | Marko (no action — defer) |
 | 2026-05-01 | ~~Override 3: Skip BigQuery indefinitely~~ **(REVERSED 2026-05-01 PM by Override 15 + F7 LOCK 2026-05-16 — set up BigQuery NOW)** | ~~Looker Studio on Sheets sufficient for <50 jobs/month~~ | Allan |
@@ -1141,7 +1142,7 @@ Weekly review tab becomes the source of truth I check every Friday. KPIs tab sho
 |---|---|---|
 | Cash on hand | Bank balance + unsettled Stripe | Never <$3K floor (per cash safety rules) |
 | Profit per completed job | Revenue − materials − sub-labour − PPE − allocated overhead | $362-$366 average (Jordan benchmark) |
-| Margin % | Profit ÷ Revenue per job | ≥47% (Jordan benchmark, soft target) |
+| Margin % | Profit ÷ Revenue per job | ≥25-30% blended honest floor (procurement-disciplined target 40%+) per pricing-margin-calibration 2026-06-18 + [Mick analysis](research/job-analysis-mick-2bath-2026-06-17.md). ~~≥47% Jordan benchmark~~ superseded — not honest for our cost base. |
 | POAS (per CEO Override 2 — Jordan V22) | Profit / Ad Spend per campaign per 14-day window | ≥2.5 healthy; pause keyword if POAS <2.5 (Jordan locked benchmark) |
 | NPS distribution | After-job 1-10 score, distribution | ≥50% promoters (9-10), <10% detractors (1-6) |
 | Subcontractor acceptance rate | % of *offered* jobs a sub accepts — **internal capacity/coverage signal ONLY; never a target a sub is penalised against or tiered on** (a decline is consequence-free — Fair-Work s15AA, per `decision-sm8-keep-vs-build-2026-06-05.md`) | (no sub-facing target — track for routing/coverage) |
@@ -1890,8 +1891,8 @@ What's due when. CEO tracks against this monthly.
 | ASIC business name renewal | Every 3yr (paid March 2026) | March 2029 | Allan |
 | Public Liability insurance renewal | Annual | Per policy date | Allan |
 | Domain renewals | Various | Apr 2027 (Cloudflare), Mar 2027 (Ventraip domain), Apr 2027 (hosting) | Allan |
-| GST registration | When 12-month forecast >$75K | Estimated Q4 2026 | Allan + accountant |
-| BAS lodgement | Quarterly once GST-registered | TBD | Allan + accountant |
+| GST registration | ✅ **REGISTERED since 2026-06** (confirmed 2026-06-12) — all quotes GST-INCLUSIVE, TAX INVOICE wording applies | Done | Allan + accountant |
+| BAS lodgement | Quarterly (GST-registered since 2026-06) | Next quarterly cycle — confirm dates with accountant | Allan + accountant |
 | Income tax return | Annual (Oct following EOFY) | Oct 2026 (FY26 return) | Allan + accountant |
 | Subcontractor PL certificate refresh | Annual per subcontractor | Per subcontractor | Marko |
 | Subcontractor asbestos awareness refresh | Annual per subcontractor | Per subcontractor | Marko |

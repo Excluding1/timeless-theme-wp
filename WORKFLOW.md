@@ -285,21 +285,11 @@ npm run build:dev
 ```
 
 ### Theme zip for deploy
-```bash
-cd /Users/excluding/Downloads/timeless-theme-wp
-zip -r ../timeless-theme.zip . \
-  -x ".git/*" -x ".gitignore" -x "node_modules/*" \
-  -x "package*.json" -x "postcss.config.js" \
-  -x "tailwind.config.js" -x "src/*" \
-  -x "AUDIT.md" -x "BUILD.md" -x "WORKFLOW.md" -x "CHANGELOG.md" \
-  -x "CLAUDE.md" -x "HANDOFF.md" -x ".DS_Store" \
-  -x ".secrets/*" -x ".claude/*" -x ".playwright-mcp/*" \
-  -x "homepage-mobile-full.png" -x "vanity-desktop-full.png" \
-  -x "thesis-*.png"
-```
+
+> ⚠️ **The canonical deploy zip command lives in CLAUDE.md (Deploy Workflow §3) — use it verbatim** (zip name = ACTIVE theme folder, currently `timeless-theme-2.zip`). The command that used to live here drifted from the canonical exclusion list and is removed to prevent a stale copy shipping secrets or missing assets.
 
 ### Deploy to live site
-1. Always deploy from `main` branch (never `develop`)
+1. Deploy from the branch that holds the **verified state** (check STATE.md / memory "check deploy branch first" rule); merge to `main` after
 2. wp-admin → Appearance → Themes → Add New → Upload → Replace
 3. Verify live site loads correctly
 4. Test 3-5 service URLs (not just homepage)

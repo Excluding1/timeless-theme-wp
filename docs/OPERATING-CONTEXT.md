@@ -14,6 +14,9 @@
 - **NO-CUSTOMER-CONTACT rule (LOCKED 2026-06-05) — affects §4, §9, §12:** subs get **customer NAME + ADDRESS only**, NEVER phone/email (anti-poaching). Customer "on-the-way"/reminder/cure-time/NPS SMS fire from **GHL/Twilio**, NOT off an SM8 Job Contact (which we leave empty by design). Make Scenario 1 **dropped "Add Job Contact" + strips contact from the SM8 job — ✅ DONE + verified live 2026-06-07** (SM8 jobs show name + address only; job #14 passed; STATE.md §6). Wherever this doc says "SM8 fires customer SMS" or passes `mobile`/`email` into SM8, read it as SUPERSEDED → GHL/Twilio. Source: same decision doc (UPDATE 2026-06-05) + `docs/specs/contractor-app-blueprint-2026-06-05.md`.
 - **Custom contractor-VIEW app** is APPROVED and **PULLED FORWARD 2026-06-08; Phases 1-4 DEPLOYED + proven 2026-06-09** (read path, per-sub auth, accept/decline spine, SM8 write-back; see STATE.md §6 + contractor-app/README.md) — a **VIEW on the same SM8+GHL+Sheet data (zero migration)**, NOT an SM8 replacement. Remaining: Phase 5 notifications + queue-move (Marko taxonomy) + final security review.
 - **LAUNCH UPDATE (2026-06-11/12 audit):** any "❌ Not set up" rows (§3: GHL/SM8/Slack), "quote form v9.x in progress", or "REPLACE_ME webhook" lines below are HISTORICAL. Reality: **site + GHL-wired form LIVE on 13 pages since 2026-06-11; full pipeline certified ×5 end-to-end; Slack live (6 channels); first QUOTE-FORM customer Lisa Vruwink captured 2026-06-11 (first website-inbound; warm-referral + McGrath enquiries pre-date her, STATE.md §8).** For any "is X live" question, **STATE.md is the authority**, not this file.
+- **Lane table §2 "Customer phone calls / NPS escalation calls = Marko" → SUPERSEDED** by CEO.md Decision 7: **Allan owns ALL customer-facing contact**; Marko is ops/sub-facing only.
+- **"Target margin: 48-52%" (§1 and anywhere below) → SUPERSEDED.** Honest blended margin is **~25-44%** (44% only at disciplined sub rates) — see `memory/pricing-margin-calibration-2026-06-18.md` + `docs/research/job-analysis-mick-2bath-2026-06-17.md` (Mick actuals: ~43% T2 / ~34% T3).
+- **pay.com.au journey references (sub paid "via pay.com.au within 3 business days" etc.) → DEFERRED indefinitely** (Decision 12 v2; STATE.md §2/§6 payments rows). Phase 1 sub payouts = Westpac EFT.
 
 ---
 
@@ -893,8 +896,8 @@ When advising on this business, I should:
 | Doc | Purpose |
 |---|---|
 | [CLAUDE.md](../CLAUDE.md) | WP theme conventions, file structure, deploy workflow |
-| [HANDOFF.md](../HANDOFF.md) | Active task list across the project |
-| [docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md](QUOTE-FORM-GHL-MIGRATION-PLAN.md) | Detailed plan for moving quote form into GHL native (if/when) |
+| [docs/archive/HANDOFF.md](archive/HANDOFF.md) | ~~Active task list across the project~~ (archived 2026-07-07 — superseded by CEO.md + STATE.md) |
+| [docs/archive/QUOTE-FORM-GHL-MIGRATION-PLAN.md](archive/QUOTE-FORM-GHL-MIGRATION-PLAN.md) | ~~Detailed plan for moving quote form into GHL native~~ (archived 2026-07-07 — form live via React embed) |
 | [../timeless-quote-app/docs/FORM-TO-PRICING-MAP.md](../../timeless-quote-app/docs/FORM-TO-PRICING-MAP.md) | Form picks → Excel SKU map, kept in sync with form changes |
 | [../timeless-quote-app/docs/QUOTE-FORM-HARDENING-PLAN.md](../../timeless-quote-app/docs/QUOTE-FORM-HARDENING-PLAN.md) | 12-cycle audit log of quote form fixes |
 | [../timeless-quote-app/docs/DEEP-AUDIT-2026-04-29.md](../../timeless-quote-app/docs/DEEP-AUDIT-2026-04-29.md) | Form gaps + Excel pricing review (the audit that found the epoxy SKU gap) |

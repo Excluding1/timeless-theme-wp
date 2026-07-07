@@ -799,7 +799,7 @@ These don't fit neatly in phases — they're ongoing or trigger-based.
 
 ### A4. Google Search Console setup
 - **Owner:** Allan
-- **When:** Phase 1 (should already be there per HANDOFF.md but flagged as ❓)
+- **When:** Phase 1 (should already be there per HANDOFF.md — now `docs/archive/` — but flagged as ❓)
 - **Steps:**
   - [ ] Verify timelessresurfacing.com.au at search.google.com/search-console
   - [ ] Submit sitemap.xml (already exists at /sitemap.xml)

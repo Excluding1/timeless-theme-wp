@@ -18,38 +18,46 @@
 
 ---
 
-## Active specs (built ✅ / planned ⬜)
+## Index — every file in this directory (regenerated 2026-07-07 sync sweep)
 
-> **🔎 Index reality-check (2026-06-08 doc-drift sweep).** Only rows with a **clickable ✅ link** exist as files on disk. **Every ⬜ row is PLANNED — not yet written** (the named `*.md` does NOT exist in this directory yet). As of this sweep the **only** spec actually present from the table below is [ghl-pipeline-13-stage.md](ghl-pipeline-13-stage.md). This older index also omits the many specs since added (Make scenarios, SM8 config, contractor-app blueprint, decision/legal docs, the [FINALIZATION-ROADMAP](FINALIZATION-ROADMAP-2026-06-07.md)) — for the current build state read [STATE.md](../STATE.md) + that roadmap, not this table.
+> One line per file on disk. Status legend: **LIVE** (operating truth / built + running) · **LOCKED** (decision/spec locked, follow as written) · **SUPERSEDED** (in whole or part — read the banner inside) · **GATED** (blocked on an external gate) · **REF** (reference/artifact). For "is X live" the authority is always [STATE.md](../STATE.md). Superseded specs formerly here (master-setup-checklist, persistent-ceo-vps-deployment, dashboard-*) moved to [docs/archive/](../archive/README.md) 2026-07-07.
 
-| Spec | Status | Purpose | Phase | Owner |
-|---|---|---|---|---|
-| ⬜ form-auto-preselect.md | Planned — not yet written (corrected 2026-06-08: was wrongly marked ✅ "Ready" + linked, but the file is absent on disk) | Quote form pre-fills service based on landing page URL | Week 2-3 | Allan |
-| ⬜ ghl-custom-fields.md | Pending | Click-by-click GHL setup for all 40+ custom fields | Week 1-2 | Allan (CEO designs) |
-| ⬜ ghl-workflows.md | Pending | All 12 GHL automation workflow specs (triggers, actions, conditions) | Week 2-3 | Allan (CEO designs) |
-| ✅ [ghl-pipeline-13-stage.md](ghl-pipeline-13-stage.md) | LIVE — pipeline reshape Decision 11 2026-05-25 | 15-stage Jordan-EXACT pipeline (filename stale; SUPERSEDED-IN-PART header inside); workflow + ageing rules still valid; finance stages moved to Accounts pipeline per Decision 12 v2 | Done | Allan (executed UI 2026-05-25) |
-| ⬜ network-outreach-script.md | Pending | Exact SMS + DM scripts for Allan + Marko's network outreach | Week 1 | Both founders |
-| ⬜ marko-first-job-prep.md | Pending | Checklist + materials list + customer comms for Marko's first solo jobs | Week 3-4 | Marko |
-| ⬜ sub-onboarding-checklist.md | Pending | Per-sub onboarding executable checklist (per Override 9 timing) | Month 2 | Marko |
-| ⬜ stripe-deposit-final-links.md | Pending | Stripe Checkout dynamic link configuration | Week 2-3 | Allan |
-| ⬜ cloudinary-photo-upload.md | Pending | Quote form photo URL pipeline implementation | Week 2 | Allan |
-| ⬜ slack-channels-setup.md | Pending | Channel creation + integration with GHL | Week 2 | Allan |
-| ⬜ dashboard-audit-and-connect.md | Pending | Audit timeless-dash repo + plan GHL/Stripe → Supabase webhooks | After GitHub access | Coding expert (CEO directs) |
-| ⬜ google-ads-campaign-structure.md | Pending | Campaign / ad group / keyword setup per Override 4 + 10 | Phase 2 | Allan |
-| ⬜ first-3-quotes-template.md | Pending | 3-tier quote templates for shower regrout / bath resurface / full bathroom | Week 2-3 | Allan |
-| ⬜ npS-routing-workflow.md | Pending | NPS detection + service recovery + review request workflow | Phase 4 | Allan |
-| ⬜ google-business-profile-posts.md | Pending | Weekly GBP post template + content calendar | Week 2 onwards | Allan |
-| ⬜ ai-quote-drafter-spec.md | Pending | Spec for the AI quote drafter agent | Week 4-5 | AI ops expert |
+| File | What it is | Status |
+|---|---|---|
+| [COMPLETE-BUILD-PLAN-2026-06-12.md](COMPLETE-BUILD-PLAN-2026-06-12.md) | Completion-first master build plan v1.0 (phases 0-8), Cleo co-signed | LOCKED |
+| [FINALIZATION-ROADMAP-2026-06-07.md](FINALIZATION-ROADMAP-2026-06-07.md) | Canonical human-readable finalization tracker (cockpit board mirrors it) | LIVE |
+| [MASTER-FINALIZATION-MAP-2026-06-12.md](MASTER-FINALIZATION-MAP-2026-06-12.md) | The "everything" done/not-done map to a finalised full stack | LIVE |
+| [agent-operating-principles.md](agent-operating-principles.md) | How the CEO/Manager/Expert/Auditor/AI-employee stack operates | LIVE (REF) |
+| [ai-employees/](ai-employees/) | AI employee role specs (README + 6: competitive-intel, dm-handler, maintenance-reminder, materials-validator, pricing-researcher, trades-researcher) | REF (deploy per phases) |
+| [bert-supplier.md](bert-supplier.md) | Bert Heynen / AUSTRS supplier relationship spec | LIVE |
+| [contractor-app-blueprint-2026-06-05.md](contractor-app-blueprint-2026-06-05.md) | Contractor-VIEW app build blueprint (code in `contractor-app/`; Phases 1-4 deployed) | LIVE (building) |
+| [decision-sm8-keep-vs-build-2026-06-05.md](decision-sm8-keep-vs-build-2026-06-05.md) | KEEP ServiceM8 + §SUB-ENGAGEMENT MODEL (single-account dispatch app; subs ≠ SM8 Staff) | LOCKED |
+| [employee-transition-plan-2026-07-07.md](employee-transition-plan-2026-07-07.md) | Workforce plan: subbies now → Marko-trained employees when savings allow (ratified by Allan 2026-07-07) | LOCKED (canonical) |
+| [ghl-pipeline-13-stage.md](ghl-pipeline-13-stage.md) | GHL pipeline + W-workflow specs (filename stale ×2 — canonical stage list = CEO.md Override 14 v4) | SUPERSEDED-IN-PART |
+| [jordan-make-reference.md](jordan-make-reference.md) | Jordan/Surface Care Make blueprint as observed by Allan (primary source) | REF |
+| [legal-review-brief-sub-engagement-2026-06-05.md](legal-review-brief-sub-engagement-2026-06-05.md) | Brief for the AU employment lawyer (Fair Work s15AA classification opinion) | GATED (⚖️ no sub signs until cleared) |
+| [make-scenario-1-STATE-2026-06-04.md](make-scenario-1-STATE-2026-06-04.md) | Scenario 1 build-state handoff — wins over the build sheets where they differ | LIVE (Scenario 1 done + proven) |
+| [make-scenario-1-datacapture-build.md](make-scenario-1-datacapture-build.md) | Per-job data-capture row (Google Sheet job log) | LOCKED + built |
+| [make-scenario-1-findorcreate-build.md](make-scenario-1-findorcreate-build.md) | Find-or-create SM8 CLIENT (internal/invoicing-only) | SPEC READY — deferred |
+| [make-scenario-1-main-build.md](make-scenario-1-main-build.md) | Scenario 1 "Main" build sheet v2 (GHL → SM8 job create) | Built (strip-contact banner overrides contact steps) |
+| [make-scenario-1-safety-build.md](make-scenario-1-safety-build.md) | Scenario 1 SAFETY pass (secret gate, dedup, error→Slack) | LOCKED + built + verified |
+| [make-scenario-2-3-backsync-build.md](make-scenario-2-3-backsync-build.md) | Completion loop: SM8 Completed → GHL Stage 15 (idempotent) | LOCKED; Scenario 3 built + proven |
+| [make-scenario-4-5-accounts-build.md](make-scenario-4-5-accounts-build.md) | Financial close (Accounts pipeline; Xero invoices, GHL status, Stripe rail) | DESIGN — Scenario 4 buildable; 5 gated on Allan billing Qs |
+| [multi-bathroom-fix-spec-2026-06-13.md](multi-bathroom-fix-spec-2026-06-13.md) | Option A: one GHL opp per bathroom (fixes the Mick overwrite bug) | LOCKED |
+| [pricing-audit-2026-05-findings.md](pricing-audit-2026-05-findings.md) | Phase A pricing audit findings + applied changes (⚠️ its output `master-pricing-2026-05-01-audited.xlsx` is NOT on disk — flagged 2026-07-07 in data/README) | Done (REF) |
+| [pricing-audit-2026-05.md](pricing-audit-2026-05.md) | Pricing audit methodology (⚠️ its 47% margin benchmark is superseded — honest ~25-44%, see memory/pricing-margin-calibration-2026-06-18) | SUPERSEDED-IN-PART |
+| [quote-drafter-kit-2026-06-17.md](quote-drafter-kit-2026-06-17.md) | Manual quote-drafting kit + ideal-sub-rate costing rules (calibrated on a real job) | LIVE (quote WEB APP `docs/quote-app/` now does the drafting) |
+| [scenario-matrix-2026-06-12.md](scenario-matrix-2026-06-12.md) | 64-scenario traceability matrix (appendix to the build plan) | REF |
+| [servicem8-config-spec-2026-05-29.md](servicem8-config-spec-2026-05-29.md) | SM8 configuration (categories, queues, badges) | LOCKED (canonical) |
+| [sim-report-2026-06-12.md](sim-report-2026-06-12.md) | 1,000-scenario coverage simulation report | REF (point-in-time) |
+| [sim-results-2026-06-12.json](sim-results-2026-06-12.json) | Raw results for the sim report | REF (artifact) |
+| [site-inspection-sub-led-spec.md](site-inspection-sub-led-spec.md) | Sub-led site inspections for big jobs (exception layer, not default) | GATED (Phase 2-3 sub density) |
+| [sub-agreement-clauses.md](sub-agreement-clauses.md) | 32-clause Sprintlaw brief for the sub agreement (brief, NOT the contract) | GATED (⚖️ s15AA legal review before any signing) |
+| [sub-rate-schedule.md](sub-rate-schedule.md) | Sub rate schedule + payment process | SUPERSEDED (cost figures — re-peg off Mick analysis + real quotes before ANY sub sees it) |
+| [tech-stack-explainer.html](tech-stack-explainer.html) | Visual explainer of the tech stack | REF (artifact) |
+| [timeless_job_log_template.csv](timeless_job_log_template.csv) | Column template for the per-job data-capture Sheet | REF (template) |
 
-## Future specs (built when phase activates)
-
-- bert-supplier-conversation-questions.md (after CEO learns what Bert supplies)
-- pricing-tier-confirmation.md (after Allan provides T1/T2/T3 numbers)
-- builder-licence-decision.md (after Fair Trading call outcome)
-- subcontractor-agreement.md (engaged via Sprintlaw)
-- ai-photo-quality-agent-spec.md (Phase 6)
-- ai-multi-household-detector-spec.md (Phase 6)
-- ai-ad-watchdog-spec.md (Phase 6)
+> **Planned-but-never-written specs** from the old index (form-auto-preselect, ghl-custom-fields, ghl-workflows, network-outreach-script, marko-first-job-prep, stripe-deposit-final-links, cloudinary-photo-upload, slack-channels-setup, dashboard-audit-and-connect, google-ads-campaign-structure, first-3-quotes-template, nps-routing-workflow, google-business-profile-posts, ai-quote-drafter-spec, plus the "future specs" list) were dropped from this index 2026-07-07 — most were absorbed into the build plan / roadmap / cockpit board or overtaken by shipped work (Cloudinary + Slack + form live; quote app built). If one becomes real, add it back as a file + row.
 
 ---
 

@@ -116,12 +116,9 @@
 - Voicemail-to-text setup?
 
 ### Q13. GHL Twilio number purchase / SMS sender setup
-**Status:** ❓ Open (will surface during Phase 1 GHL setup)
-**Why I need it:** SMS deliverability.
+**Status:** ✅ RESOLVED 2026-07-07 (was live since 2026-05-16)
+**Resolution:** Twilio→GHL BYOT flip LIVE since 2026-05-16 — sends from **+61 485 056 656**; ACMA alpha sender ID **"TimelessRsf"** approved 2026-05-17 (removed from pool to enforce unified-thread phone sender; kept for future bulk). See STATE.md §10.
 **Affects:** Phase 1 GHL workflows
-**Questions:**
-- Has Allan bought an AU SMS-capable number through GHL yet?
-- Will sender ID be the Twilio number or separate?
 
 ### Q14. Customer #1 (Marko's referrer customer) full details
 **Status:** 🟡 DEFERRED 2026-05-01 PM — Allan's direction: leave until system built + Marko onboards + tests first resurfacing subcontractor. Then capture customer #1 details, run her through full system as the proving customer.
@@ -180,9 +177,9 @@ Get answer in writing.
 - Run [auditor-fair-work](roles/auditor-fair-work.md) lens — subcontractor $/hr ≥$70 resurface / ≥$60 regrout / ≥$50 silicone-only?
 
 ### Q19. Supabase dashboard access for CEO + Agent integration (raised 2026-05-01 PM)
-**Status:** ❓ Open — needed to enable [dashboard-integration-plan.md L1 + L2](specs/dashboard-integration-plan.md)
+**Status:** ✅ RESOLVED 2026-07-07 — SUPERSEDED by the CEO Cockpit (localhost:4317), which replaced the TimelessDash-integration plan as the ops board. No dashboard Supabase access needed.
 **Why I need it:** CEO direct access (L1) for in-session reads/writes; AI Agent (L2 Phase 6.6a) for 24/7 persistent management. Per Allan's ask for "best method to manage and edit and add stuff like add tasks to the task board."
-**Affects:** [docs/specs/dashboard-integration-plan.md](specs/dashboard-integration-plan.md), [CEO.md § Dashboard integration plan](CEO.md), [CEO.md § Founder draw policy](CEO.md#founder-draw-policy-formalised-2026-05-01-pm-per-allans-direction) (which references dashboard as canonical)
+**Affects:** [docs/archive/dashboard-integration-plan.md](archive/dashboard-integration-plan.md) (archived 2026-07-07), [CEO.md § Dashboard integration plan](CEO.md), [CEO.md § Founder draw policy](CEO.md#founder-draw-policy-formalised-2026-05-01-pm-per-allans-direction) (which references dashboard as canonical)
 **Action needed (Allan provides):**
 1. **Supabase URL** (e.g., `https://xxxxx.supabase.co`)
 2. **Supabase API key** (anon key first; service_role only if RLS too restrictive — handle as secret)
@@ -191,9 +188,9 @@ Get answer in writing.
 **Security discipline (per spec):** customer PII tables read-only or excluded; quarterly key rotation; audit log every CEO write; no bulk DELETE without inline approval.
 
 ### Q21. Persistent CEO VPS provisioning (revised 2026-05-01 PM — Linode Sydney + personal Claude Max)
-**Status:** ❓ Open — needed to enable 24/7 CEO daemon per [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md)
+**Status:** ✅ RESOLVED 2026-07-07 — SUPERSEDED: the VPS daemon plan was replaced by the local CEO Cockpit (localhost:4317). No Linode provisioning needed.
 **Why I need it:** Allan elected VPS-first architecture for 24/7 reactivity. Reliability priority drove revision from Oracle Free Tier to Linode (Akamai-owned, established 2003, 99.99% SLA, Sydney Equinix datacenter). Personal Claude Max for daemon AI calls until business Max trigger (Q23).
-**Affects:** [persistent-ceo-vps-deployment.md](specs/persistent-ceo-vps-deployment.md), all AI employee specs (they'll run on this VPS), dashboard integration L2 layer.
+**Affects:** [persistent-ceo-vps-deployment.md](archive/persistent-ceo-vps-deployment.md) (archived 2026-07-07), all AI employee specs (they'll run on this VPS), dashboard integration L2 layer.
 **Action needed (Allan, total ~30min over 7 days):**
 1. Sign up at [linode.com](https://login.linode.com/signup) — Akamai-owned
 2. Provision Sydney "Nanode 1GB" plan ($5 USD/mo), Ubuntu 24.04, SSH key auth
@@ -207,9 +204,9 @@ Get answer in writing.
 **Trigger to migrate to business Max:** see Q23
 
 ### Q23. Personal → Business Claude Max migration trigger (raised 2026-05-01 PM)
-**Status:** ❓ Open — recurring monitor question
+**Status:** ✅ RESOLVED 2026-07-07 — SUPERSEDED: no VPS daemon exists (plan replaced by the local CEO Cockpit, localhost:4317), so the personal-Max-on-VPS migration question is moot.
 **Why I need it:** Allan elected to use personal Claude Max for daemon now (zero marginal cost) + migrate to business Max when triggered. Need to monitor triggers + execute migration cleanly.
-**Affects:** [persistent-ceo-vps-deployment.md § 9](specs/persistent-ceo-vps-deployment.md), tax bookkeeping, business expense deductibility
+**Affects:** [persistent-ceo-vps-deployment.md § 9](archive/persistent-ceo-vps-deployment.md) (archived 2026-07-07), tax bookkeeping, business expense deductibility
 **Migration triggers (whichever fires first):**
 1. Revenue ≥ $10K/mo for 2 consecutive months
 2. Pty Ltd formation per [Anytime A2 in FUTURE-PLAN](FUTURE-PLAN.md)
@@ -226,7 +223,7 @@ Get answer in writing.
 - Optional: business reimburses Allan retroactively when cash allows
 
 ### Q22. Service_role key rotation timing (raised 2026-05-01 PM)
-**Status:** ❓ Open — security hygiene
+**Status:** ✅ RESOLVED 2026-07-07 — SUPERSEDED: the VPS daemon this rotation was scheduled around was never deployed (replaced by CEO Cockpit :4317). General hygiene note stands: rotate any key exposed in chat (STATE.md §6 tracks the GHL PIT / SM8 / Netlify rotations pre-go-live).
 **Why I need it:** Service_role key was shared in chat 2026-05-01 PM. Standard practice = rotate within 14 days of any exposure, even if low-risk.
 **Affects:** Supabase access for both CEO + future Dashboard Connector agent
 **Action needed:** Rotate via Supabase → Settings → API → "Reset" service_role key. Update the new key in the VPS daemon's `.env` file (after VPS deployed). Don't rotate BEFORE VPS is using it stably — would break this session's tooling. Target: ~Day 14 of VPS deployment, when daemon is stable.
@@ -247,6 +244,11 @@ Get answer in writing.
 
 | # | Question | Resolution | Date |
 |---|---|---|---|
+| Q13 | GHL Twilio SMS number | Twilio→GHL BYOT live since 2026-05-16; +61 485 056 656; "TimelessRsf" alpha sender approved | 2026-07-07 |
+| Q19 | Supabase dashboard access | Superseded — CEO Cockpit (localhost:4317) replaced the dashboard-integration plan | 2026-07-07 |
+| Q21 | CEO VPS provisioning | Superseded — VPS daemon plan replaced by CEO Cockpit (localhost:4317) | 2026-07-07 |
+| Q22 | Service_role key rotation timing | Superseded — VPS never deployed; general rotate-on-exposure hygiene stands (STATE.md §6) | 2026-07-07 |
+| Q23 | Personal→business Claude Max migration | Superseded — no VPS daemon; question moot | 2026-07-07 |
 | Q11 | Pricing top-5 T2 numbers | Extracted from Excel; Allan confirmed Excel canonical | 2026-05-01 PM |
 | - | GitHub repo URLs | HANDOFF.md confirmed `Excluding1/timeless-theme-wp` + `TimelessDash` | 2026-05-01 PM |
 | - | Bert (supplier) details | Extensive intel from voice call transcripts + email + CSV | 2026-05-01 PM |

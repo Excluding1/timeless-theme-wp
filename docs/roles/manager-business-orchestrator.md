@@ -184,5 +184,5 @@ Quarterly review of these metrics via [auditor-general-operational](auditor-gene
 
 - [CEO.md § Override 13 + Rule 2 + Rule 11](../CEO.md) — CEO methodology Manager inherits
 - [docs/specs/ai-employees/](../specs/ai-employees/) — AI employees Manager delegates to
-- [docs/specs/dashboard-integration-plan.md](../specs/dashboard-integration-plan.md) — Manager's dashboard tooling
+- [docs/archive/dashboard-integration-plan.md](../archive/dashboard-integration-plan.md) — Manager's dashboard tooling (archived 2026-07-07; dashboard superseded by cockpit :4317)
 - [Multi-agent parallel execution pattern](../CEO.md) — built-in via Agent tool with multiple subagent_type calls in one message

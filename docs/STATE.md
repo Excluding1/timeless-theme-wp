@@ -11,7 +11,7 @@
 - ❓ Unknown — CEO needs to ask
 - 🔒 Sensitive — credentials handled separately
 
-**Last verified:** 2026-06-17 (PIT contacts/notes/opportunities READ verified via live HTTP 200 on the Mick opp — §6 corrected per Rule 11; deep-dive Pattern-C audit, cockpit Pipeline = live board). Prior: 2026-06-12 (full-repo Pattern-C audit: site+form LIVE 06-11, pipeline certified ×5, first customer Lisa Vruwink, email-DNS state verified, board refreshed). Prior: 2026-06-08 (Make Scenario 1 strip-contact + Scenario 3 back-sync + PIT write-scope + contractor app building), 2026-06-05 (SM8-keep + no-contact + data-capture sheet live)
+**Last verified:** 2026-07-07 (major sync sweep — GST/socials/customers/quote-app/subs rows refreshed; internal contradictions closed). Prior: 2026-06-17 (PIT contacts/notes/opportunities READ verified via live HTTP 200 on the Mick opp — §6 corrected per Rule 11; deep-dive Pattern-C audit, cockpit Pipeline = live board). Prior: 2026-06-12 (full-repo Pattern-C audit: site+form LIVE 06-11, pipeline certified ×5, first customer Lisa Vruwink, email-DNS state verified, board refreshed). Prior: 2026-06-08 (Make Scenario 1 strip-contact + Scenario 3 back-sync + PIT write-scope + contractor app building), 2026-06-05 (SM8-keep + no-contact + data-capture sheet live)
 **Prior verifications:** 2026-05-01 (initial), 2026-05-16 (F-LOCKs), 2026-05-21 (Day 6 sync), 2026-05-26 PM (Day 1 sprint signups + canonical updates), 2026-06-02 ($10M PL + Cloudinary correction)
 
 ---
@@ -30,8 +30,8 @@
 | Professional Indemnity | ❓ | CEO to ask | — |
 | WorkCover NSW | ❌ | Not required while no employees, only contractors | — |
 | Builder Licence | ❌ DEFERRED INDEFINITELY | **Allan's call 2026-05-01**: lengthy process (22-27 weeks via partner cert path; 13 weeks via licensed-supervisor hire) + insufficient funds. Strategy: keep all jobs <$5K HBA threshold via per-bathroom invoice splitting. Revisit when funds + revenue allow. Future pathway documented in [CEO.md § Compliance](CEO.md). | 2026-05-01 |
-| Privacy Policy (published) | ❓ | CEO to ask if exists on website + linked from quote form | — |
-| Terms of Service (customer-facing) | ❌ | Need to draft before first quote | — |
+| Privacy Policy (published) | ✅ | Live at /privacy/ (see §4) | 2026-07-07 |
+| Terms of Service (customer-facing) | ✅ | Live at /terms/ (see §4) | 2026-07-07 |
 | Subcontractor Agreement template | ❌ | Engage Sprintlaw (~$200) before first subcontractor signs | — |
 | Founder Partnership Agreement | ❌ | Defer to Pty Ltd setup OR draft when going formal | — |
 
@@ -85,7 +85,7 @@
 |---|---|---|---|
 | timelessresurfacing.com.au | ✅ Active | Via Ventraip, expires 23 Mar 2027 | 2026-05-01 |
 | timelessresurfacing.com | ✅ Active | Via Cloudflare, expires 28 Apr 2027 | 2026-05-01 |
-| Domain DNS configured | ✅ | Cloudflare proxying, hosting on Ventraip cPanel (IP 110.232.143.168) per HANDOFF.md | 2026-05-01 |
+| Domain DNS configured | ✅ | Cloudflare proxying, hosting on Ventraip cPanel (IP 110.232.143.168) per HANDOFF.md (now `docs/archive/`) | 2026-05-01 |
 | WordPress installation | ✅ | On Ventraip cPanel, live at https://timelessresurfacing.com.au | 2026-05-01 |
 | WordPress admin URL | ✅ | https://timelessresurfacing.com.au/wp-admin/ | 2026-05-01 |
 | WordPress admin credentials | 🔒 | Allan has, Marko ❓ | — |
@@ -166,6 +166,10 @@
 | pay.com.au | ❌ DEFERRED indefinitely | Decision 12 v2 LOCKED 2026-05-25: defer until first external sub onboarded AND volume justifies rewards-points optimization. Phase 1 sub payouts via Westpac EFT. |
 | DocuSign | ❌ Defer per Decision 12 v2 | Marko-as-sub Phase 1; engage when first external sub onboards. |
 | Sprintlaw subcontractor template | ❌ Deferred per Decision 12 v2 | Same trigger as DocuSign. |
+| Quote web app (internal tool) | ✅ **FINISHED 2026-07-07** | `docs/quote-app/` (local, port 8920) — quote ↔ TAX-INVOICE ↔ signed WARRANTY, options-aware local mini-LLM, editable price book, Supabase `psqnhjzvqdlzgrtycygg` pre-wired via git-ignored config.js. Netlify-ready zip in Allan's Downloads; Allan's remaining steps = Netlify drop + Supabase auth user. First real output: Isabella TR-1024. |
+| TikTok archiver (internal tool) | ✅ Built 2026-07-05 | `docs/tiktok-archiver/` (local, port 8317) — profile video download + Whisper transcription + Visual Scan; competitor-content research. |
+| Media archiver (internal tool) | ✅ Built 2026-07-07 | `docs/media-archiver/` (local, port 8318) — multi-platform successor to the TikTok archiver. |
+| Lead-gen dataset (sub recruiting) | ✅ Built 2026-07-02+ | `docs/lead-gen/` — 58 verified NSW resurfacing sole-trader leads + call list (`data/` xlsx/csv). Outreach NOT started (legal gate on signing; conversations OK). |
 
 ---
 
@@ -176,9 +180,9 @@
 | Google Business Profile | ✅ Active | **5+ Google reviews live** (Allan 2026-06-11 — supports the site's 4.9★ claims; verify the actual average ≈4.9 and consider wiring the real count into the guarded `timeless_get_google_reviews()` schema) |
 | GBP photos (real jobs) | ❌ | None — first job not done yet |
 | GBP regular posts | ❌ | Not started — start Week 2 |
-| Facebook Business page | ❓ | CEO to ask if exists |
-| Instagram business account | ❓ | CEO to ask |
-| TikTok business account | ❓ | CEO to ask |
+| Facebook Business page | ✅ Created | Created ~early Jul 2026. No advertising yet. |
+| Instagram business account | ✅ Created | Created ~early Jul 2026. No advertising yet. |
+| TikTok business account | ❌ Not created | (research tooling exists: docs/tiktok-archiver + docs/media-archiver) |
 | Logo files | ❓ | CEO to ask format/locations |
 | Brand colour palette documented | ✅ | In CLAUDE.md — Navy `#041534`, Gold `#e7c08b` |
 | Vehicle livery designed | ❌ | Phase 4 (with first job) |
@@ -196,7 +200,7 @@
 | Customer enquiries received historically | ✅ At least 1 | **McGrath (real estate agency) PM called re a tenant's job** (Allan, mentioned 2026-06-11 — date/PM name/property/service/outcome ❓ CEO to capture). NOTE: an enquiry ≠ "trusted by"; no logo/endorsement use until a job completes AND written permission is obtained. |
 | Network outreach lists (Allan) | ❌ Not built | Override 1 priority — target 25 contacts |
 | Network outreach lists (Marko) | ❌ Not built | Same |
-| First 3 customers booked | ❌ 0/3 | Goal by 2026-05-27 |
+| First 3 customers booked | ⏳ 1 completed + 1 quoted | Mick 2-bath job COMPLETED (via sub); Isabella Comber/AitkenRE quoted TR-1024 (2026-07-07, awaiting response) — see pipeline table below |
 | Customer database (CRM contacts) | ✅ LIVE | GHL connected + taking leads since 2026-06-11; **first QUOTE-FORM customer Lisa Vruwink** (first website-inbound — completed form + photos, quote due 2026-06-12; the warm-referral + McGrath enquiries in the table below pre-date her) + test contacts pending purge |
 
 ### Active customer pipeline (CONFIRMED 2026-05-01 PM)
@@ -205,6 +209,8 @@
 |---|---|---|---|---|---|
 | 1 | **Marko's prior regrouting customer** (name ❓) | Warm referral via Marko's previous job | Shower-over-bath resurface + strip-back (peeling existing coat) | 🟢 Soft-locked, "happy to wait until we establish business" | Marko: capture name, suburb, contact, photos. CEO: draft holding-quote message. |
 | 2 | **McGrath PM (tenant job)** (PM name ❓) | Inbound call from McGrath property manager | Tenant's bathroom job (details ❓) | ❓ Status unknown (Allan mentioned 2026-06-11) | Allan: capture PM name/office, property, service needed, outcome. If it converts: first agency job → ask written logo/testimonial permission after completion. |
+| 3 | **Mick (2-bathroom job)** | — | 2-bathroom resurface | ✅ **COMPLETED via sub — revenue real** | Done. Full margin/cost analysis: [docs/research/job-analysis-mick-2bath-2026-06-17.md](research/job-analysis-mick-2bath-2026-06-17.md) (~43% T2 / ~34% T3 actuals). |
+| 4 | **Isabella Comber / AitkenRE** | Real estate agency (AitkenRE) | Benchtop + basin resurface | 🟡 **Quote TR-1024 sent 2026-07-07** — $1,050 inc GST, awaiting response | Follow up if no reply; quote produced via docs/quote-app. |
 
 **Special considerations for this customer:**
 - Strip-back surcharge applies (Excel Modifier — Rejection #9 territory)
@@ -219,9 +225,11 @@
 
 **Engagement model (SUB-ENGAGEMENT MODEL LOCKED 2026-06-05 — [decision-sm8-keep-vs-build §SUB-ENGAGEMENT MODEL — LOCKED](specs/decision-sm8-keep-vs-build-2026-06-05.md)):** Subs engage via the **Timeless single-account dispatch app** — they authenticate to **OUR app** (Supabase Auth) → **OUR one SM8 account** (our backend = sole SM8 key-holder); the app's own built-in, **logged accept/decline = the right of refusal**. **Subs = app users, NOT SM8 "Staff"** (Staff seats reserved for Marko/Allan/genuine employees). **SM8 Network (subs on their own accounts) is RETIRED as the canonical model — kept ONLY as a documented app-less interim/fallback (Path A) if we launch before the app ships.** Subs supply own ABN + ≥$10M PL (verified before any offer); they invoice us per job; SM8 is per-JOB / unlimited users so subs cost nothing extra. **NO-CONTACT rule:** subs get **NAME + ADDRESS only — never customer phone/email** (anti-poaching); customer comms fire from GHL/Twilio. **Fair-Work guardrail (now applies to the app):** **never penalise a decline** — no counter/score/coaching-trigger in code; reframe any "decline >X%" idea as a capacity/fit conversation off-system. ⚖️ Legal review of the sub agreement before the first sub signs.
 
+**Workforce plan 2026-07-07: subs now → Marko-trained employees later — see [docs/specs/employee-transition-plan-2026-07-07.md](specs/employee-transition-plan-2026-07-07.md).**
+
 | Item | Status | Details |
 |---|---|---|
-| Subcontractors vetted + signed | ❌ 0 signed | Phase 3 target |
+| Subcontractors vetted + signed | ⏳ | 1 used ad-hoc (Mick job); 58-lead recruit list ready (docs/lead-gen), outreach not started |
 | Subcontractors in conversation | ❓ | CEO to ask if any informal conversations started |
 | Bert (supplier) | ❓ | Voice transcripts pending — relationship type unknown |
 | Hipages account (for subcontractor recruitment) | ❓ | CEO to ask |
@@ -267,23 +275,25 @@
 | Doc | Status | Disposition | Notes |
 |---|---|---|---|
 | `CLAUDE.md` | ✅ KEEP | Active — primary onboarding for AI sessions | Project conventions still valid |
-| `HANDOFF.md` | ⏳ INTEGRATE | Source of truth on GitHub URLs + pending tasks | Now superseded by CEO.md + STATE.md but useful as historical session-handoff format |
+| `HANDOFF.md` | 📦 ARCHIVED 2026-07-07 → `docs/archive/HANDOFF.md` | Source of truth on GitHub URLs + pending tasks | Superseded by CEO.md + STATE.md; kept as historical session-handoff format |
 | `WORKFLOW.md` | ✅ KEEP | Active — branching, versioning, build/deploy rules | Aligned with CEO.md methodology; rule 4a (audit-fix-audit) matches my triple audit |
 | `BUILD.md` | ✅ KEEP | Active — Tailwind PostCSS build process | Technical reference for dev sessions |
 | `CHANGELOG.md` | ✅ KEEP | Active — semver release history | Tracks v1.x.x releases |
 | `AUDIT.md` | 📦 ARCHIVE-EVENTUALLY | 2026-04-26 website audit | Historical baseline; findings from this should have been ticked off through CHANGELOG |
 | `TASK-D-CLOUDFLARE.md` | ❓ VERIFY | Cloudflare/.htaccess cache config task | CEO to verify if implemented (commit message exists 2026-04-29 but live state ❓) |
 | `docs/AI-BLOG-AUTOMATION-IDEA.md` | ✅ KEEP (deferred) | Future build idea | Revisit Month 12+ |
-| `docs/PERFORMANCE-AUDIT-FIX-PLAN.md` | ⏳ VERIFY OPEN ITEMS | Lighthouse audit-fix work | CEO to check which Tier 1/2 items still pending |
-| `docs/QUOTE-FORM-GHL-MIGRATION-PLAN.md` | 📦 SUPERSEDED | Older GHL plan | Replaced by CEO.md + FUTURE-PLAN.md but kept for historical context (Angela's original words on stack vision) |
-| `docs/plans/2026-04-10-service-page-section-2b-fix-design.md` | 📦 ARCHIVE | One-off design doc | Likely already implemented |
+| `docs/archive/PERFORMANCE-AUDIT-FIX-PLAN.md` | 📦 ARCHIVED 2026-07-07 | Lighthouse audit-fix work | Perf work shipped in v1.2.0; open-item check still owed (§15 item 13) |
+| `docs/archive/QUOTE-FORM-GHL-MIGRATION-PLAN.md` | 📦 ARCHIVED 2026-07-07 | Older GHL plan | Replaced by CEO.md + FUTURE-PLAN.md but kept for historical context (Angela's original words on stack vision) |
+| `docs/archive/2026-04-10-service-page-section-2b-fix-design.md` | 📦 ARCHIVED 2026-07-07 | One-off design doc | Implemented (Section 2B clip-path fix shipped) |
 
-### Quote app docs (separate repo)
+### Quote tooling docs (updated 2026-07-07)
 | Doc | Status | Location |
 |---|---|---|
-| FORM-TO-PRICING-MAP.md | ✅ Active | `/Users/excluding/Downloads/timeless-quote-app/docs/` — keep in sync with form changes |
-| QUOTE-FORM-HARDENING-PLAN.md | ✅ Active | Same — 12-cycle audit log, current |
-| DEEP-AUDIT-2026-04-29.md | ✅ Active | Same — gap analysis, recent |
+| Quote WEB APP (quote↔invoice↔warranty) | ✅ Active | `docs/quote-app/` (README-SETUP.md) — FINISHED 2026-07-07, see §6 row |
+| Quote generator (reportlab, scriptable fallback) | ✅ Active | `docs/templates/quote-generator/` (quote.py + invoice_style.py) |
+| FORM-TO-PRICING-MAP.md | ✅ Active | `quote-form/docs/` (in this repo) — keep in sync with form changes |
+| QUOTE-FORM-HARDENING-PLAN.md | ✅ Active | Same — 12-cycle audit log |
+| DEEP-AUDIT-2026-04-29.md | ✅ Active | Same — gap analysis |
 
 ### Data files (in master repo, excluded from theme deploys)
 | File | Type | Location |
@@ -349,7 +359,7 @@
 |---|---|---|
 | Dashboard URL (live) | ❓ | CEO to ask |
 | Dashboard platform | ✅ Custom build | React frontend on Netlify + Supabase backend |
-| Dashboard repo | ✅ Confirmed exists | `https://github.com/Excluding1/TimelessDash` per HANDOFF.md (NOTE: repo also contains React quote form on branch `quote-form/react-v8`) |
+| Dashboard repo | ✅ Confirmed exists | `https://github.com/Excluding1/TimelessDash` per HANDOFF.md (now `docs/archive/`) (NOTE: repo also contains React quote form on branch `quote-form/react-v8`) |
 | Dashboard branch | ❓ | CEO to ask which branch holds dashboard code |
 | Dashboard tabs | ✅ Listed | Dashboard, Tasks, Messages, Calendar, Finances, Cashflow, KPIs, Subscriptions, Subcontractors Tracker, Contacts, Credentials, Goals, Weekly Review, Notes, Links & Sheets, Notifications |
 | Dashboard data flows in | Manual entry | Per Allan |
@@ -382,11 +392,11 @@
 6. **Network depth lists** — both founders need 25-prospect outreach lists
 7. **Day job status both founders** (financial pressure context)
 8. **Existing customer enquiries** — any informal interest from the WP site since launch?
-9. **GBP, Facebook, IG, TikTok account states** — exist? credentials shared?
+9. ~~**GBP, Facebook, IG, TikTok account states**~~ ✅ RESOLVED 2026-07-07 — GBP active; Facebook + Instagram business accounts created ~early Jul 2026 (no ads yet); TikTok not created (§7). Residual: credentials shared? ❓
 10. **Insurance broker name** + PL policy expiry date
 11. **Builder licence Fair Trading outcome** (after Allan calls 1300 224 988)
 12. **TASK-D-CLOUDFLARE.md status** — commit exists, is .htaccess + Cloudflare cache config actually implemented on live?
-13. **PERFORMANCE-AUDIT-FIX-PLAN.md open items** — Tier 1 fixes done? Tier 2 deferred or done?
+13. **PERFORMANCE-AUDIT-FIX-PLAN.md open items** (now `docs/archive/`) — Tier 1 fixes done? Tier 2 deferred or done?
 14. **Logo file state** (Canva working file? Final SVG/PNG?)
 15. ~~**www. SSL**~~ ✅ already verified (§3 row: www 301s to non-www with valid cert, 2026-05-01) — HANDOFF claim was stale
 16. ~~**HTTPS redirect**~~ ✅ already verified (§3 row: http 301s to https, 2026-05-01) — HANDOFF claim was stale

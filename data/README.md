@@ -29,20 +29,28 @@ data/
 | File | Source | Date | Use case |
 |---|---|---|---|
 | `austrs-bert-prices-2026-04-30.csv` | Australasian Resurfacing Supplies (Bert Heynen) website scrape | 2026-04-30 | Material cost lookup for resurfacing margin model. Cross-referenced in [docs/specs/bert-supplier.md](../docs/specs/bert-supplier.md) |
+| `sub-resurfacing-real-quotes-2026-06.md` | Real sub quotes collected 2026-06 | 2026-06 | REAL sub cost data ($890-980 range) — supersedes sub-rate-schedule draft figures |
 
 ### data/pricing/
 
 | File | Source | Date | Use case |
 |---|---|---|---|
-| TBC: `MASTER_PRICING_v1.xlsx` (currently external at `/Users/excluding/Downloads/MASTER_PRICING_UPDATED 111.xlsx`) | Allan's authoritative pricing schedule | TBD | 140 SKUs T1/T2/T3 tiers — feeds quote tier templates |
+| `master-pricing-2026-05-01-snapshot.xlsx` | Allan's authoritative pricing schedule (in-repo CANONICAL snapshot) | 2026-05-01 | 140 SKUs T1/T2/T3 tiers — feeds quote drafting (STATE.md §11 agrees this is canonical) |
+| `master-pricing-2026-04-archived-pre-audit.xlsx` | Pre-audit copy archived alongside | 2026-04 | Provenance only |
 
-**Recommendation (CEO):** move MASTER_PRICING.xlsx into this folder + commit. Otherwise if Allan's laptop dies, the only authoritative pricing source is gone. ASK ALLAN before moving.
+> ⚠️ **`master-pricing-2026-05-01-audited.xlsx` — referenced as the output of [docs/specs/pricing-audit-2026-05-findings.md](../docs/specs/pricing-audit-2026-05-findings.md) — is NOT on disk. Regenerate it or re-point the findings doc at the snapshot (flagged 2026-07-07).**
+
+*(The old "TBC: external at `/Users/excluding/Downloads/MASTER_PRICING_UPDATED 111.xlsx`" row is resolved — the in-repo snapshot above is canonical.)*
 
 ### data/research/
 
 | File | Source | Date | Use case |
 |---|---|---|---|
-| (none yet) | | | |
+| `jordan-transcripts-mined-2026-05-01.md` | Jordan Schofield (Surface Care) video transcripts, mined | 2026-05-01 | Benchmark model — cited across CEO.md / SOPs |
+| `nsw-bathroom-trade-tam-2026-05-01.md` | Market research | 2026-05-01 | NSW TAM sizing |
+| `surfacecare-mystery-shop-2026-06-13.md` | Mystery shop of Surface Care | 2026-06-13 | Competitor pricing/process intel |
+
+*(Job-level analyses live in `docs/research/` — e.g. [job-analysis-mick-2bath-2026-06-17.md](../docs/research/job-analysis-mick-2bath-2026-06-17.md), the real-margin calibration source.)*
 
 ---
 
