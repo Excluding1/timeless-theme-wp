@@ -316,7 +316,9 @@ export function resolveQuote(form) {
   const epoxyMode = form.epoxy_mode || "standard";
 
   // FULL BATHROOM PATH — overrides per-area selections
-  if (form.full_bathroom_scope) {
+  // Guard against unknown scope values (e.g. a corrupted resume payload):
+  // cfg would be undefined and cfg.pool would throw, killing the submit.
+  if (form.full_bathroom_scope && FULL_BATHROOM_SKUS[form.full_bathroom_scope]) {
     const cfg = FULL_BATHROOM_SKUS[form.full_bathroom_scope];
     let pool = cfg.pool || [];
     if (cfg.cement && cfg.epoxy) {

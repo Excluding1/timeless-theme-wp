@@ -757,7 +757,9 @@ export default function QuoteForm() {
       if (typeof d.builtBefore1990 === "string") setBuiltBefore1990(d.builtBefore1990);
       if (Array.isArray(d.selectedAreas)) setSelectedAreas(d.selectedAreas);
       if (typeof d.fullBathroomMode === "boolean") setFullBathroomMode(d.fullBathroomMode);
-      if (typeof d.fullScope === "string") setFullScope(d.fullScope);
+      // Validate against the known scopes — a corrupted/hand-edited #qf= fragment must not
+      // inject an arbitrary scope (unknown scopes have no SKU config downstream).
+      if (["both", "regrout_only", "resurface_only"].includes(d.fullScope)) setFullScope(d.fullScope);
       if (d.fullBathroomInventory && typeof d.fullBathroomInventory === "object") setFullBathroomInventory(v => ({ ...v, ...d.fullBathroomInventory }));
       if (d.fullAreaServices && typeof d.fullAreaServices === "object") setFullAreaServices(v => ({ ...v, ...d.fullAreaServices }));
       if (typeof d.notSureMode === "boolean") setNotSureMode(d.notSureMode);
@@ -1060,7 +1062,9 @@ export default function QuoteForm() {
   const sendPartialLead = () => {
     if (partialSent.current) return;
     partialSent.current = true;
-    const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
+    // Only send a phone when it's actually valid — email-onBlur can fire this with the
+    // phone still empty/partial, and `+61` + garbage pollutes the CRM phone field.
+    const phone = (noPhone || !phOk) ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1095,7 +1099,8 @@ export default function QuoteForm() {
   const sendWaitlistSignup = () => {
     if (waitlistSent) return;
     setWaitlistSent(true);
-    const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
+    // Waitlist only gates on name+email, so the phone may be empty/partial here too.
+    const phone = (noPhone || !phOk) ? "" : `+61${phNorm.replace(/^0/, "")}`;
     fetch(GHL_PARTIAL, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1175,7 +1180,13 @@ export default function QuoteForm() {
   const totalPhotoCount = () => Object.values(perAreaPhotos).reduce((sum, arr) => sum + (arr || []).filter(Boolean).length, 0);
 
   /* ─── SUBMIT ─── */
+  // Ref-based double-submit lock: two rapid clicks land in the same render batch, so both
+  // closures still see submitting === false — the ref blocks the second fire synchronously.
+  const submitLock = useRef(false);
   const handleSubmit = async () => {
+    if (submitLock.current) return;
+    submitLock.current = true;
+    try {
     if (honeypot) {
       setSubmitting(false);
       setDone(true);
@@ -1184,9 +1195,17 @@ export default function QuoteForm() {
     setSubmitting(true);
     const phone = noPhone ? "" : `+61${phNorm.replace(/^0/, "")}`;
 
-    // Resolve quote (narrows SKU pools, applies modifiers, rejection flags)
+    // Resolve quote (narrows SKU pools, applies modifiers, rejection flags).
+    // Never let a resolver bug lose the lead — fall back to an empty skeleton and
+    // still send the webhook (Marko quotes from photos + services_summary anyway).
     const resolverInput = buildResolverInput();
-    const resolved = resolveQuote(resolverInput);
+    let resolved;
+    try {
+      resolved = resolveQuote(resolverInput);
+    } catch (err) {
+      console.error("Pricing resolver failed, submitting without resolved skeleton:", err);
+      resolved = { line_items: [], modifiers: [], rejection_flags: [], tier_default: "T2", multi_bathroom_discount: 0 };
+    }
 
     // Services text summary for human reading in CRM
     const servicesText = buildSummaryItems().map(i => `${i.area}: ${i.tradeName} (${i.easy})`).join(" | ");
@@ -1322,6 +1341,9 @@ export default function QuoteForm() {
     });
     setSubmitting(false);
     setDone(true);
+    } finally {
+      submitLock.current = false;
+    }
   };
 
   /* ─── MULTI-BATHROOM RESET (preserves person + property; clears bathroom-specific state) ─── */
@@ -1337,6 +1359,11 @@ export default function QuoteForm() {
     setNotSureText("");
     setAreaServices({});
     setPerAreaPhotos({});
+    // Clear the parallel Cloudinary-URL map too. Without this, bathroom 2's payload reuses
+    // bathroom 1's photo URLs AND new photos at the same indices never upload (the auto-upload
+    // effect skips any slot that already has a URL).
+    setPerAreaPhotoUrls({});
+    inFlightUploads.current = {};
     setEpoxyMode("standard");
     setChipRepairAddon({});
     setBasinFinish("standard");
@@ -1423,7 +1450,7 @@ export default function QuoteForm() {
             <div>
               <label style={{ fontSize: 14, fontWeight: 600, color: C.pri, display: "block", marginBottom: 6 }}>Phone *</label>
               <input type="tel" inputMode="numeric" autoComplete="tel" value={ph} onChange={e => setPh(formatAUPhone(e.target.value))} onBlur={() => { if (fnOk && lnOk && phOk) sendPartialLead(); }} placeholder="Mobile or landline" style={{ width: "100%", padding: "13px 14px", borderRadius: 10, border: `1.5px solid ${ph.length > 3 && !phOk ? C.err : C.brd}`, fontSize: 16, fontFamily: "inherit", boxSizing: "border-box" }} />
-              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We&rsquo;ll convert +61 to 0X format, keep typing" : "Enter an Australian phone (mobile starts 04, landline starts 02/03/07/08)"}</p>}
+              {ph.length > 3 && !phFormatOk && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>{ph.replace(/[\s\-\(\)\.]/g,"").startsWith("61") || ph.startsWith("+61") ? "We’ll convert +61 to 0X format, keep typing" : "Enter an Australian phone (mobile starts 04, landline starts 02/03/07/08)"}</p>}
               {phSpam && <p style={{ fontSize: 12, color: C.err, marginTop: 5 }}>That doesn&rsquo;t look like a real phone number. Please enter your actual contact number.</p>}
               {phIsMobile && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll text your quote to {phNorm.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3")}</p>}
               {phIsLandline && phOk && <p style={{ fontSize: 12, color: C.green, marginTop: 5 }}>We&rsquo;ll email your quote (landline can&rsquo;t receive SMS)</p>}
