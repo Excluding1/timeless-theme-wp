@@ -1978,6 +1978,16 @@ function timeless_seo_meta() {
         'privacy'  => 'Privacy policy for Timeless Resurfacing. How we collect, use, and protect your personal information.',
         'warranty' => 'Timeless Resurfacing warranty terms by service. Bath resurfacing 5 years, epoxy regrouting 5 years, cement regrouting 2 years. ACL-compliant.',
         'care-instructions' => 'How to care for your resurfaced bathroom. Cure times, cleaning products to use and avoid, Sydney climate-specific advice, lifespan expectations.',
+        // Blog articles (CPT 'article' at /blog/{slug}/). is_singular() + post_name matching below
+        // covers articles too, so plain slug keys work. Source: docs/content/blog/*.html headers.
+        'resurface-or-replace-bathtub'                 => 'Resurface or replace your bathtub? An honest guide from a Sydney resurfacing business. Free quote within 24 hours. Call 0451 110 154.',
+        'how-long-does-bath-resurfacing-last'          => 'How long does bath resurfacing last, and why do some baths peel in a year? Honest answers from Sydney resurfacers. Free 24-hour quote: 0451 110 154.',
+        'regrout-or-retile-shower'                     => 'Regrout or retile your shower? A 3-minute self-check from Sydney regrouting specialists. Free quote within 24 hours. Call 0451 110 154.',
+        'why-is-my-bathtub-peeling'                    => 'Why is my bathtub peeling? A failing coating is the usual cause. Here is the proper fix, from Sydney resurfacers. Free 24-hour quote: 0451 110 154.',
+        'bathtub-chip-repair'                          => 'Most chipped baths can be spot repaired in a couple of hours. How we fix chips, match colour honestly, and when a full resurface is the smarter job.',
+        'mouldy-shower-grout-fix'                      => 'Surface mould cleans off. Mould that returns in weeks lives inside the grout or silicone and needs replacing. An honest fix guide from Sydney regrouters.',
+        'bathroom-resurfacing-rental-property'         => 'Tired rental bathroom? Resurfacing turns it around in days, not the weeks a renovation takes. A property manager\'s guide to scoping it by photo.',
+        'leaking-shower-repair-without-removing-tiles' => 'Most shower leaks start at grout and silicone, not the membrane, and can be fixed without lifting a tile. How to tell the difference before a rip-out.',
     );
 
     if ( is_front_page() ) {
