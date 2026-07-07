@@ -1,0 +1,21 @@
+{
+  "_comment": "Pipeline Watchdog config — NO SECRETS in this file. Secret paths are relative to this directory. Thresholds: speed-to-lead 15min; 24h quote promise (warn 20h); follow-up nudge 5d / expiry 8d on a 7-day quote validity (Allan decision 2026-07-07); stale 20d. active_hours = [start, end) local hours for --scheduled runs.",
+  "location_id": "Uz8fQwDiUxAHVtlruspD",
+  "pipeline_id": "YTgWxSeFt2oyd3zBe2Xr",
+  "pipeline_name": "Sales",
+  "quote_sent_stage_name": "Quote Sent",
+  "quote_accepted_stage_name": "Quote Accepted",
+  "ghl_pit_file": "../../.secrets/ghl-pit.key",
+  "slack_webhook_file": "../../.secrets/slack-webhook.key",
+  "quote_sent_at_field_key": "opportunity.quote_sent_at",
+  "exclude_name_regex": "(?i)(clifford ai|faketest|dtest|w6test|\\btest\\b|test\\d|allan pham|marko spasojevic)",
+  "speed_to_lead_minutes": 15,
+  "speed_to_lead_max_age_hours": 24,
+  "quote_promise_warn_hours": 20,
+  "quote_promise_breach_hours": 24,
+  "followup_nudge_days": 5,
+  "followup_expiry_days": 8,
+  "quote_validity_days": 7,
+  "stale_days": 20,
+  "active_hours": [7, 19]
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Pipeline Watchdog — launchd agent template.
+
+  Schedule design: StartInterval fires every 1800s (30 min) around the clock;
+  the "scheduled" flag (see ProgramArguments below; XML comments cannot
+  contain double hyphens) makes watchdog.py enforce the 07:00-19:00 window
+  and logs a one-line "skipped" outside it. This was chosen over a
+  StartCalendarInterval array (25 dict entries for every half-hour slot)
+  because it is one key instead of fifty lines, and a skipped run still
+  leaves a log line — liveness is always visible. Trade-off: runs are spaced
+  30 min from LOAD time, not aligned to :00/:30 wall-clock (irrelevant here).
+
+  launchd quirks: with StartInterval, time asleep does NOT count — after a
+  long sleep the job fires once shortly after wake, then every 30 min again.
+  If the Mac is off, nothing runs (obviously).
+
+  Install (as the logged-in user, NOT sudo):
+    cp com.timeless.watchdog.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.timeless.watchdog.plist
+
+  Test-fire immediately (posts to Slack for real if there are alerts!):
+    launchctl start com.timeless.watchdog
+
+  Uninstall:
+    launchctl unload ~/Library/LaunchAgents/com.timeless.watchdog.plist
+    rm ~/Library/LaunchAgents/com.timeless.watchdog.plist
+
+  Logs: ~/Library/Logs/pipeline-watchdog.log (stdout+stderr).
+  Clean pipeline = nothing posted to Slack, but the log line proves the run
+  happened. Failures are posted to Slack AND logged — never silent.
+  No secrets here — watchdog.py reads them from .secrets/ per config.json.
+  If the repo ever moves out of ~/Downloads/timeless-theme-wp, update the
+  two absolute paths below.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.timeless.watchdog</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/excluding/Downloads/timeless-theme-wp/scripts/pipeline-watchdog/watchdog.py</string>
+        <string>--slack</string>
+        <string>--scheduled</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/excluding/Downloads/timeless-theme-wp/scripts/pipeline-watchdog</string>
+
+    <!-- every 30 minutes; the 07:00-19:00 window lives in watchdog.py -->
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/excluding/Library/Logs/pipeline-watchdog.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/excluding/Library/Logs/pipeline-watchdog.log</string>
+
+    <!-- Uncomment to pass the Slack webhook via env instead of
+         .secrets/slack-webhook.key (file is preferred):
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SLACK_WEBHOOK_URL</key>
+        <string>https://hooks.slack.com/services/XXX/YYY/ZZZ</string>
+    </dict>
+    -->
+</dict>
+</plist>
