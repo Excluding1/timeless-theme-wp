@@ -1,0 +1,19 @@
+{
+  "maps_enrichments": [
+    {"name":"AB Resurfacing","rating":"4.5","reviews":"21","address":"Unit 168/18-34 Waverley St","phone":"0414 257 746"},
+    {"name":"Alpha Bathroom Resurfacing","rating":"5.0","reviews":"8","address":"97 Prince Edward Ave","phone":"0424 807 802"},
+    {"name":"Sydney Resurfacing Services","rating":"5.0","reviews":"26","address":"88B Mount St","phone":"0400 376 679"},
+    {"name":"Apex Resurfacing AUS","rating":"4.9","reviews":"68","phone":"1300 030 351"},
+    {"name":"Jim's Bathrooms and Resurfacing","rating":"4.9","reviews":"141","phone":"13 15 46"},
+    {"name":"ThermoGlaze Sydney","rating":"4.9","reviews":"97","address":"122/126 Old Pittwater Rd","phone":"(02) 9898 0606"}
+  ],
+  "maps_new_candidates": [
+    {"name":"Professional Bathware Repairs","source":"gmaps pin","note":"bathware repairs - likely resurfacing/chip repair"},
+    {"name":"JG Bathrooms","source":"gmaps pin"},
+    {"name":"Faucet Bathrooms Australia","source":"gmaps pin"},
+    {"name":"Modern Bathroom Upgrades","source":"gmaps pin"},
+    {"name":"Expert Rennovation Group Pty Ltd","source":"gmaps sponsored","phone":"0416 224 505","note":"property maintenance - check scope"},
+    {"name":"Alpha Renovations","source":"gmaps sponsored","phone":"1800 025 742","note":"remodeller - check scope"},
+    {"name":"Clearview Renovations","source":"gmaps","phone":"0416 961 772","note":"bathroom reno - likely OOS"}
+  ]
+}
