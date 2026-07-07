@@ -71,8 +71,86 @@ function parseDeep(text) {
   return out;
 }
 
+// Diagram-view box height estimate used by layoutTree. Must track the .at-box CSS metrics:
+// 10px vertical padding ×2 + 1.5px border ×2 + 20px icon line + 2px gap = 45px chrome,
+// plus 17px per label line (CSS clamps at 3 lines). Conservative chars-per-line so we
+// over-estimate wrap (extra whitespace beats clipped text).
+function estimateBoxHeight(node, boxW) {
+  const cpl = Math.max(8, Math.floor(((boxW || 200) - 27) / 7.5));
+  const label = String((node && (node.label || node.id)) || '');
+  const lines = Math.max(1, Math.min(3, Math.ceil(label.length / cpl)));
+  return 45 + lines * 17;
+}
+
+// Tidy top-down org-chart layout for the diagram view. Pure — node-testable.
+// roots: array of tree nodes ({id,label,children,...}) laid side-by-side at depth 0.
+// opts: { boxW, gapX, levelGap, isOpen(id)→bool, heightOf(node,depth)→px }.
+// Returns { boxes:[{id,x,y,w,h,cx,depth,sw,branch}], edges:[{from,to}], width, height, rowY }.
+// Algorithm — classic two-pass tidy tree:
+//   pass 1 (post-order): subtree width sw(n) = max(boxW, Σ sw(visible children) + gaps);
+//   pass 2 (pre-order): children packed left→right inside the parent's slot (block centered
+//   when there is slack), parent centered at (first.cx + last.cx)/2. Rows are top-aligned:
+//   depth d sits at y = Σ over rows above of (max box height in row + levelGap).
+// branch = index of the depth-1 ancestor (top-level node) — drives the colour family;
+// depth-0 roots get branch -1 (single-root/virtual-root case).
+function layoutTree(roots, opts) {
+  opts = opts || {};
+  const boxW = opts.boxW || 200;
+  const gapX = opts.gapX != null ? opts.gapX : 26;
+  const levelGap = opts.levelGap != null ? opts.levelGap : 64;
+  const isOpen = opts.isOpen || (() => true);
+  const heightOf = opts.heightOf || (n => estimateBoxHeight(n, boxW));
+  const kids = n => (isOpen(n.id) && Array.isArray(n.children)) ? n.children.filter(c => c && c.id) : [];
+  const tops = (roots || []).filter(n => n && n.id);
+
+  const SW = new Map(), H = new Map(), rowH = [];
+  (function measure(ns, depth) {
+    for (const n of ns) {
+      const cs = kids(n);
+      measure(cs, depth + 1);
+      let total = 0;
+      cs.forEach((c, i) => { total += SW.get(c.id) + (i ? gapX : 0); });
+      SW.set(n.id, Math.max(boxW, total));
+      const h = heightOf(n, depth);
+      H.set(n.id, h);
+      rowH[depth] = Math.max(rowH[depth] || 0, h);
+    }
+  })(tops, 0);
+
+  const rowY = [];
+  for (let d = 0, y = 0; d < rowH.length; d++) { rowY[d] = y; y += rowH[d] + levelGap; }
+
+  const boxes = [], edges = [];
+  function place(n, x0, depth, branch) {
+    const cs = kids(n), sw = SW.get(n.id);
+    let cx;
+    if (!cs.length) cx = x0 + sw / 2;
+    else {
+      let total = 0;
+      cs.forEach((c, i) => { total += SW.get(c.id) + (i ? gapX : 0); });
+      let x = x0 + (sw - total) / 2;
+      const cxs = [];
+      cs.forEach((c, i) => {
+        cxs.push(place(c, x, depth + 1, depth === 0 ? i : branch));
+        x += SW.get(c.id) + gapX;
+        edges.push({ from: n.id, to: c.id });
+      });
+      cx = (cxs[0] + cxs[cxs.length - 1]) / 2;
+    }
+    boxes.push({ id: n.id, x: cx - boxW / 2, y: rowY[depth], w: boxW, h: H.get(n.id), cx, depth, sw, branch });
+    return cx;
+  }
+  let x = 0;
+  tops.forEach((r, i) => { place(r, x, 0, tops.length > 1 ? i : -1); x += SW.get(r.id) + gapX; });
+  return {
+    boxes, edges, rowY,
+    width: Math.max(0, x - gapX),
+    height: rowH.length ? rowY[rowH.length - 1] + rowH[rowH.length - 1] : 0
+  };
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { needsToItems, boardToItems, matchAlerts, parseDeep };
+  module.exports = { needsToItems, boardToItems, matchAlerts, parseDeep, estimateBoxHeight, layoutTree };
 }
 if (typeof document === 'undefined') return; // node test context — stop before browser app
 
@@ -81,6 +159,7 @@ if (typeof document === 'undefined') return; // node test context — stop befor
 const SRC = window.ATLAS_SRC || '/api/atlas';
 const PAGE = window.ATLAS_PAGE || { id: 'map', title: 'Atlas', icon: '🧭', dataFile: '', sibling: null };
 const LS_EXPAND = 'atlas-expand-' + PAGE.id;
+const LS_VIEW = 'atlas-view-' + PAGE.id;
 
 let DATA = null;
 const NODES = new Map();   // id → node
@@ -92,8 +171,20 @@ const BADGE = new Map();   // id → badge span
 let expanded = new Set();
 let selectedId = null;
 let query = '';
-let searchShow = new Set(), searchOpen = new Set();
+let searchShow = new Set(), searchOpen = new Set(), searchOwn = new Set();
 let ALERTS = {};           // id → [{src,text}]
+
+/* diagram view state */
+const ROOT_ID = '__atlas_root__';   // virtual root box (page title) — always open, not a data node
+const PALETTE = ['#e7c08b', '#4f9cf9', '#34c98e', '#a78bfa', '#f87171', '#2dd4bf', '#fb923c', '#f472b6', '#22d3ee', '#a3e635'];
+const DIAG_GAPX = 26, DIAG_LEVELGAP = 64;
+const DBOX = new Map();    // id → { box: .at-box div, badge: alert badge span }
+let viewMode = 'list';     // 'list' | 'diagram'
+let diagBuilt = false, fitDone = false;
+let diagEl, canvasEl, worldEl, drawerEl, drawerBody;
+let btnList, btnDiag;
+let lastLayout = null;
+let view = { x: 40, y: 24, s: 1 };  // pan/zoom transform of .at-world
 
 const el = (tag, cls, text) => {
   const e = document.createElement(tag);
@@ -135,6 +226,15 @@ function buildSkeleton() {
   clearBtn.addEventListener('click', () => { searchInput.value = ''; runSearch(''); });
   search.append(searchInput, clearBtn);
 
+  const viewGrp = el('div', 'at-view');
+  btnList = el('button', 'on', '☰ List');
+  btnList.type = 'button'; btnList.title = 'tree + detail panel';
+  btnList.addEventListener('click', () => setView('list'));
+  btnDiag = el('button', null, '🗂 Diagram');
+  btnDiag.type = 'button'; btnDiag.title = 'org-chart canvas — pan, zoom, click boxes';
+  btnDiag.addEventListener('click', () => setView('diagram'));
+  viewGrp.append(btnList, btnDiag);
+
   const links = el('nav', 'at-links');
   const back = el('a', null, '← Cockpit'); back.href = '/';
   links.appendChild(back);
@@ -143,7 +243,7 @@ function buildSkeleton() {
     sib.href = PAGE.sibling.href;
     links.appendChild(sib);
   }
-  head.append(brand, search, links);
+  head.append(brand, search, viewGrp, links);
 
   const legend = el('div', 'at-legend');
   const lg = (dotCls, label) => { const s = el('span', 'lg'); s.append(el('span', 'at-dot ' + dotCls), document.createTextNode(' ' + label)); return s; };
@@ -249,6 +349,7 @@ function toggleExpand(id) {
     saveExpand();
   }
   applyExpand();
+  if (viewMode === 'diagram') renderDiagram();
 }
 
 function expandAncestors(id) {
@@ -258,7 +359,11 @@ function expandAncestors(id) {
     else if (!expanded.has(p)) { expanded.add(p); changed = true; }
     p = PARENT.get(p);
   }
-  if (changed) { if (!query) saveExpand(); applyExpand(); }
+  if (changed) {
+    if (!query) saveExpand();
+    applyExpand();
+    if (viewMode === 'diagram') renderDiagram();
+  }
 }
 
 /* ---------- search ---------- */
@@ -277,11 +382,13 @@ function runSearch(q) {
   if (!q) {
     for (const w of NODEEL.values()) w.classList.remove('hide');
     applyExpand();
+    if (viewMode === 'diagram') renderDiagram();
     return;
   }
-  searchShow = new Set(); searchOpen = new Set();
+  searchShow = new Set(); searchOpen = new Set(); searchOwn = new Set();
   const walk = n => {
     const own = nodeSearchText(n).includes(q);
+    if (own) searchOwn.add(n.id);
     let childHit = false;
     for (const c of n.children || []) if (c && c.id && walk(c)) childHit = true;
     if (childHit) searchOpen.add(n.id);
@@ -291,6 +398,7 @@ function runSearch(q) {
   for (const n of DATA.tree) if (n && n.id) walk(n);
   for (const [id, w] of NODEEL) w.classList.toggle('hide', !searchShow.has(id));
   applyExpand();
+  if (viewMode === 'diagram') renderDiagram();
 }
 
 /* ---------- selection + keyboard ---------- */
@@ -305,8 +413,13 @@ function select(id, opts) {
   expandAncestors(id);
   try { history.replaceState(null, '', '#' + encodeURIComponent(id)); } catch {}
   renderDetail(n);
-  if (row && opts.scroll !== false) row.scrollIntoView({ block: 'nearest' });
-  if (opts.scroll && window.innerWidth < 900) detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (viewMode === 'diagram') {
+    for (const [bid, o] of DBOX) o.box.classList.toggle('sel', bid === id);
+    if (opts.drawer) openDrawer();
+  } else {
+    if (row && opts.scroll !== false) row.scrollIntoView({ block: 'nearest' });
+    if (opts.scroll && window.innerWidth < 900) detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function visibleIds() {
@@ -536,6 +649,250 @@ function renderAlertsSection(nodeId) {
   }
 }
 
+/* ---------- diagram view (org-chart canvas) ---------- */
+function hexToRgba(hex, a) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || ''));
+  if (!m) return 'rgba(155,176,208,' + a + ')';
+  const v = parseInt(m[1], 16);
+  return 'rgba(' + ((v >> 16) & 255) + ',' + ((v >> 8) & 255) + ',' + (v & 255) + ',' + a + ')';
+}
+
+function setView(mode, save) {
+  if (mode === 'diagram' && (!DATA || !Array.isArray(DATA.tree) || !DATA.tree.length)) mode = 'list';
+  viewMode = mode === 'diagram' ? 'diagram' : 'list';
+  if (save !== false) lsSet(LS_VIEW, viewMode);
+  if (btnList) btnList.classList.toggle('on', viewMode === 'list');
+  if (btnDiag) btnDiag.classList.toggle('on', viewMode === 'diagram');
+  if (!mainEl) return;
+  mainEl.classList.toggle('diagram', viewMode === 'diagram');
+  if (viewMode === 'diagram') {
+    ensureDiagram();
+    if (detailEl && drawerBody && detailEl.parentElement !== drawerBody) drawerBody.appendChild(detailEl);
+    renderDiagram();
+    if (!fitDone) { fitView(); fitDone = true; }
+  } else {
+    closeDrawer();
+    if (detailEl && detailEl.parentElement !== mainEl) mainEl.appendChild(detailEl);
+  }
+}
+
+function ensureDiagram() {
+  if (diagBuilt) return;
+  diagBuilt = true;
+
+  diagEl = el('section', 'at-diagram');
+  canvasEl = el('div', 'at-canvas');
+  worldEl = el('div', 'at-world');
+  canvasEl.appendChild(worldEl);
+
+  const ctl = el('div', 'at-cctl');
+  const mk = (t, title, fn) => {
+    const b = el('button', null, t);
+    b.type = 'button'; b.title = title;
+    b.addEventListener('click', fn);
+    return b;
+  };
+  ctl.append(
+    mk('⊹ Fit', 'fit the whole tree in view', fitView),
+    mk('+', 'zoom in', () => zoomCenter(1.25)),
+    mk('−', 'zoom out', () => zoomCenter(0.8))
+  );
+  canvasEl.appendChild(ctl);
+  diagEl.appendChild(canvasEl);
+  mainEl.appendChild(diagEl);
+
+  // slide-over detail drawer (hosts detailEl while in diagram view)
+  drawerEl = el('aside', 'at-drawer');
+  const dh = el('div', 'at-drawer-h');
+  dh.appendChild(el('span', 't', 'Detail'));
+  const x = el('button', 'at-drawer-x', '✕');
+  x.type = 'button'; x.title = 'close (Esc)';
+  x.addEventListener('click', closeDrawer);
+  dh.appendChild(x);
+  drawerBody = el('div', 'at-drawer-b');
+  drawerEl.append(dh, drawerBody);
+  document.body.appendChild(drawerEl);
+
+  // pan (pointer events cover mouse + touch; touch-action:none in CSS)
+  let panning = null;
+  canvasEl.addEventListener('pointerdown', e => {
+    if (e.target.closest('.at-box, .at-cctl, .at-kchip')) return;
+    panning = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ox: view.x, oy: view.y };
+    try { canvasEl.setPointerCapture(e.pointerId); } catch {}
+    canvasEl.classList.add('panning');
+  });
+  canvasEl.addEventListener('pointermove', e => {
+    if (!panning || e.pointerId !== panning.id) return;
+    view.x = panning.ox + (e.clientX - panning.sx);
+    view.y = panning.oy + (e.clientY - panning.sy);
+    applyView();
+  });
+  const endPan = e => {
+    if (panning && e.pointerId === panning.id) { panning = null; canvasEl.classList.remove('panning'); }
+  };
+  canvasEl.addEventListener('pointerup', endPan);
+  canvasEl.addEventListener('pointercancel', endPan);
+
+  // zoom toward cursor (wheel; trackpad pinch arrives as ctrlKey+wheel with small deltas)
+  canvasEl.addEventListener('wheel', e => {
+    e.preventDefault();
+    const r = canvasEl.getBoundingClientRect();
+    const f = Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0016));
+    zoomAt(e.clientX - r.left, e.clientY - r.top, f);
+  }, { passive: false });
+
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (e.target && /^(input|textarea|select)$/i.test(e.target.tagName)) return;
+    closeDrawer();
+  });
+
+  let rzT = null;
+  window.addEventListener('resize', () => {
+    if (viewMode !== 'diagram') return;
+    clearTimeout(rzT);
+    rzT = setTimeout(renderDiagram, 150);
+  });
+}
+
+function applyView() {
+  if (!worldEl) return;
+  worldEl.style.transform = 'translate(' + view.x + 'px,' + view.y + 'px) scale(' + view.s + ')';
+  canvasEl.style.backgroundPosition = view.x + 'px ' + view.y + 'px';
+}
+
+function zoomAt(mx, my, factor) {
+  const s2 = Math.max(0.3, Math.min(2.5, view.s * factor));
+  const k = s2 / view.s;
+  view.x = mx - k * (mx - view.x);
+  view.y = my - k * (my - view.y);
+  view.s = s2;
+  applyView();
+}
+
+function zoomCenter(factor) {
+  const r = canvasEl.getBoundingClientRect();
+  zoomAt(r.width / 2, r.height / 2, factor);
+}
+
+function fitView() {
+  if (!canvasEl || !lastLayout || !lastLayout.width || !lastLayout.height) return;
+  const r = canvasEl.getBoundingClientRect();
+  const pad = 50;
+  const s = Math.min((r.width - pad * 2) / lastLayout.width, (r.height - pad * 2) / lastLayout.height, 1);
+  view.s = Math.max(0.3, Math.min(2.5, s));
+  view.x = (r.width - lastLayout.width * view.s) / 2;
+  view.y = Math.max(24, (r.height - lastLayout.height * view.s) / 2);
+  applyView();
+}
+
+function branchColor(branch) { return PALETTE[((branch % PALETTE.length) + PALETTE.length) % PALETTE.length]; }
+
+function renderDiagram() {
+  if (!worldEl || !DATA || !Array.isArray(DATA.tree)) return;
+  const boxW = window.innerWidth < 720 ? 150 : 200;
+  const root = { id: ROOT_ID, label: DATA.title || PAGE.title || 'Atlas', icon: PAGE.icon || '', children: DATA.tree };
+  lastLayout = layoutTree([root], {
+    boxW, gapX: DIAG_GAPX, levelGap: DIAG_LEVELGAP,
+    isOpen: id => id === ROOT_ID || isOpen(id)
+  });
+
+  worldEl.textContent = '';
+  DBOX.clear();
+  const byId = new Map(lastLayout.boxes.map(b => [b.id, b]));
+
+  // edges — one SVG underlay, elbow connectors in the target's branch colour
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', 'at-edges');
+  svg.setAttribute('width', String(Math.ceil(lastLayout.width)));
+  svg.setAttribute('height', String(Math.ceil(lastLayout.height)));
+  for (const ed of lastLayout.edges) {
+    const a = byId.get(ed.from), b = byId.get(ed.to);
+    if (!a || !b) continue;
+    const midY = b.y - DIAG_LEVELGAP / 2;
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', 'M ' + a.cx + ' ' + (a.y + a.h) + ' L ' + a.cx + ' ' + midY + ' L ' + b.cx + ' ' + midY + ' L ' + b.cx + ' ' + b.y);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', hexToRgba(branchColor(b.branch < 0 ? 0 : b.branch), 0.4));
+    p.setAttribute('stroke-width', '2');
+    p.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(p);
+  }
+  worldEl.appendChild(svg);
+
+  // boxes — absolutely-positioned divs above the SVG
+  for (const b of lastLayout.boxes) {
+    const isRoot = b.id === ROOT_ID;
+    const n = isRoot ? root : NODES.get(b.id);
+    if (!n) continue;
+    const div = el('div', 'at-box' + (isRoot ? ' root' : b.depth === 1 ? ' top' : ' kid'));
+    div.style.left = b.x + 'px';
+    div.style.top = b.y + 'px';
+    div.style.width = b.w + 'px';
+    div.style.height = b.h + 'px';
+    if (!isRoot) {
+      const col = branchColor(b.branch < 0 ? 0 : b.branch);
+      if (b.depth === 1) { div.style.background = col; div.style.borderColor = col; }
+      else {
+        const a = b.depth === 2 ? 0.30 : b.depth === 3 ? 0.20 : 0.14;
+        div.style.background = hexToRgba(col, a);
+        div.style.borderColor = hexToRgba(col, Math.min(0.75, a + 0.32));
+      }
+    }
+    div.appendChild(el('span', 'at-box-ico', n.icon || '·'));
+    div.appendChild(el('span', 'at-box-lbl', n.label || n.id));
+    div.title = (n.label || n.id) + (n.status ? ' — ' + n.status : '');
+
+    if (!isRoot) {
+      const dot = el('span', 'at-dot ' + (n.status || 'todo'));
+      dot.title = n.status || 'todo';
+      div.appendChild(dot);
+      const badge = el('span', 'at-box-badge');
+      badge.hidden = true;
+      div.appendChild(badge);
+      const kn = Array.isArray(n.children) ? n.children.filter(c => c && c.id).length : 0;
+      if (kn && !isOpen(b.id)) {
+        const chip = el('button', 'at-kchip', '+' + kn);
+        chip.type = 'button';
+        chip.title = 'expand ' + kn + ' child' + (kn === 1 ? '' : 'ren');
+        chip.addEventListener('click', e => { e.stopPropagation(); toggleExpand(b.id); });
+        div.appendChild(chip);
+      }
+      if (query) {
+        if (searchOwn.has(b.id)) div.classList.add('glow');
+        else if (!searchShow.has(b.id)) div.classList.add('faded');
+      }
+      if (b.id === selectedId) div.classList.add('sel');
+      div.addEventListener('click', () => select(b.id, { scroll: false, drawer: true }));
+      div.addEventListener('dblclick', e => { e.preventDefault(); if (kn) toggleExpand(b.id); });
+      DBOX.set(b.id, { box: div, badge });
+    } else {
+      div.addEventListener('dblclick', fitView);
+    }
+    worldEl.appendChild(div);
+  }
+
+  worldEl.style.width = lastLayout.width + 'px';
+  worldEl.style.height = lastLayout.height + 'px';
+  applyView();
+  updateDiagramBadges();
+}
+
+function updateDiagramBadges() {
+  for (const [id, o] of DBOX) {
+    const hits = ALERTS[id];
+    if (hits && hits.length) {
+      o.badge.hidden = false;
+      o.badge.textContent = String(hits.length);
+      o.badge.title = hits.length + ' open board item(s) mention this';
+    } else { o.badge.hidden = true; o.badge.textContent = ''; }
+  }
+}
+
+function openDrawer() { if (drawerEl && viewMode === 'diagram') drawerEl.classList.add('open'); }
+function closeDrawer() { if (drawerEl) drawerEl.classList.remove('open'); }
+
 /* ---------- live alerts (needs + board, every 60s) ---------- */
 async function loadAlerts() {
   let needs = null, board = null;
@@ -550,6 +907,7 @@ async function loadAlerts() {
     if (hits && hits.length) { badge.hidden = false; badge.textContent = String(hits.length); badge.title = hits.length + ' open board item(s) mention this'; }
     else { badge.hidden = true; badge.textContent = ''; }
   }
+  updateDiagramBadges();
   if (selectedId) renderAlertsSection(selectedId);
   if (updatedEl && DATA) {
     updatedEl.textContent = (DATA.updated ? 'updated ' + DATA.updated : 'no updated stamp') +
@@ -588,13 +946,20 @@ async function boot() {
   // deep link via hash, else select the first root
   let initial = null;
   try { initial = decodeURIComponent((location.hash || '').slice(1)); } catch {}
-  if (initial && NODES.has(initial)) select(initial, { scroll: false });
+  const hadHash = !!(initial && NODES.has(initial));
+  if (hadHash) select(initial, { scroll: false });
   else if (DATA.tree[0] && DATA.tree[0].id) select(DATA.tree[0].id, { scroll: false });
+
+  // restore per-page view choice; deep links open the drawer in diagram view
+  if (lsGet(LS_VIEW, 'list') === 'diagram') {
+    setView('diagram', false);
+    if (hadHash) openDrawer();
+  }
 
   window.addEventListener('hashchange', () => {
     let id = null;
     try { id = decodeURIComponent((location.hash || '').slice(1)); } catch {}
-    if (id && NODES.has(id) && id !== selectedId) select(id, { scroll: false });
+    if (id && NODES.has(id) && id !== selectedId) select(id, { scroll: false, drawer: true });
   });
   document.addEventListener('keydown', onKey);
 
