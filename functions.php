@@ -2218,6 +2218,42 @@ add_action( 'after_switch_theme', 'timeless_flush_rewrites_on_activation' );
 /* Disable WordPress default sitemaps (wp-sitemap.xml) to avoid duplicates */
 add_filter( 'wp_sitemaps_enabled', '__return_false' );
 
+/* ─────────────────────────────────────────────
+   5c-2. LLMS.TXT, serve the theme's llms.txt at /llms.txt
+   ─────────────────────────────────────────────
+   WordPress never serves theme files at the site root, so without this
+   intercept https://timelessresurfacing.com.au/llms.txt 404s even though
+   the file ships inside the theme folder (SEO-audit P0, 2026-07-07).
+   Same early-intercept pattern as timeless_sitemap_early_intercept():
+   'parse_request' fires BEFORE template_redirect and before 404 routing,
+   and needs no rewrite-rule flush. Only the exact path /llms.txt is
+   intercepted; every other request falls through untouched. */
+function timeless_llms_txt_intercept() {
+    $uri  = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
+    $path = parse_url( $uri, PHP_URL_PATH );
+
+    if ( $path !== '/llms.txt' ) {
+        return;
+    }
+
+    $file = get_template_directory() . '/llms.txt';
+    if ( ! file_exists( $file ) ) {
+        return; // File not deployed → fall through to normal 404 handling
+    }
+
+    // Prevent any buffered output from corrupting the plain-text response
+    if ( ob_get_level() ) {
+        ob_end_clean();
+    }
+
+    status_header( 200 );
+    header( 'Content-Type: text/plain; charset=utf-8' );
+    header( 'X-Robots-Tag: noindex' );
+    readfile( $file );
+    exit;
+}
+add_action( 'parse_request', 'timeless_llms_txt_intercept' );
+
 /* Custom robots.txt, block crawl-budget-wasting URLs */
 function timeless_robots_txt( $output, $public ) {
     $output  = "User-agent: *\n";

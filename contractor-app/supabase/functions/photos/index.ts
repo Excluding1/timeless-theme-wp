@@ -9,6 +9,7 @@ import { createClient, type SupabaseClient } from 'https://esm.sh/@supabase/supa
 import { json, fail } from '../_shared/respond.ts';
 import { preflight } from '../_shared/cors.ts';
 import { attachPhotoToJob } from '../_shared/sm8Client.ts';
+import { rateLimited } from '../_shared/rateLimit.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const ANON = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
@@ -102,6 +103,9 @@ Deno.serve(async (req) => {
   const { data: sub } = await userClient.from('subs').select('id').limit(1).maybeSingle();
   if (!sub?.id) return fail(403, 'no_sub', origin);
   const subId = sub.id as string;
+
+  // Per-sub brake: a burst above ~30 uploads/min is a runaway retry loop, not a bathroom.
+  if (rateLimited(`ph:${subId}`, 30)) return fail(429, 'rate_limited', origin);
 
   const svc = createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
 

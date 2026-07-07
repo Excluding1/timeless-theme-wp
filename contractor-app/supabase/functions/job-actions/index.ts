@@ -9,6 +9,8 @@ import { createClient, type SupabaseClient } from 'https://esm.sh/@supabase/supa
 import { json, fail } from '../_shared/respond.ts';
 import { preflight } from '../_shared/cors.ts';
 import { updateJob } from '../_shared/sm8Client.ts';
+import { UUID_RE, parseAvailability, cleanReason } from '../_shared/validate.ts';
+import { rateLimited } from '../_shared/rateLimit.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const ANON = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
@@ -53,7 +55,7 @@ Deno.serve(async (req) => {
   const action = String(body.action ?? '');
   const id = String(body.id ?? '');
   const payload = (body.payload ?? {}) as Row;
-  if (!id) return fail(400, 'missing_id', origin);
+  if (!UUID_RE.test(id)) return fail(400, 'missing_id', origin); // non-uuid was an opaque DB error
 
   // Who is the sub? (user-JWT client -> RLS returns only their own subs row)
   const userClient = createClient(SUPABASE_URL, ANON, {
@@ -63,6 +65,9 @@ Deno.serve(async (req) => {
   const { data: sub } = await userClient.from('subs').select('id').limit(1).maybeSingle();
   if (!sub?.id) return fail(403, 'no_sub', origin);
   const subId = sub.id as string;
+
+  // Per-sub brake (best-effort, per-instance): no legitimate tradie fires 60 job actions a minute.
+  if (rateLimited(`ja:${subId}`, 60)) return fail(429, 'rate_limited', origin);
 
   // Service-role for the write — but only after we prove ownership + a legal transition.
   const svc = createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
@@ -99,16 +104,20 @@ Deno.serve(async (req) => {
       break;
     case 'decline':
       patch.status = 'declined'; patch.declined_at = nowIso();
-      patch.decline_reason = typeof payload.reason === 'string' ? payload.reason : null;
+      patch.decline_reason = cleanReason(payload.reason);
       allowedFrom = ['offered'];
       break;
-    case 'availability':
-      patch.sub_availability = payload.window ?? payload ?? null;
+    case 'availability': {
+      // STRICT shape only — the jsonb column must never become an unbounded blob store.
+      const window = parseAvailability(payload.window ?? payload);
+      if (!window) return fail(400, 'bad_availability', origin);
+      patch.sub_availability = window;
       allowedFrom = ['accepted'];
       break;
+    }
     case 'handback':
       patch.status = 'reoffered';
-      patch.decline_reason = typeof payload.reason === 'string' ? payload.reason : null;
+      patch.decline_reason = cleanReason(payload.reason);
       allowedFrom = ['accepted', 'in_progress'];
       break;
     case 'undo': // the 5s undo window after accept
@@ -119,9 +128,9 @@ Deno.serve(async (req) => {
     case 'problem': {
       patch.problem_open = true;
       // Keep the free-text note ("Something else" reports are useless without it).
-      const reason = typeof payload.reason === 'string' ? payload.reason : '';
-      const note = typeof payload.note === 'string' && payload.note.trim() ? ` — ${payload.note.trim()}` : '';
-      patch.problem_reason = (reason + note) || null;
+      const reason = cleanReason(payload.reason, 200) ?? '';
+      const note = cleanReason(payload.note, 500);
+      patch.problem_reason = (reason + (note ? ` — ${note}` : '')) || null;
       allowedFrom = ['accepted', 'in_progress'];
       break;
     }

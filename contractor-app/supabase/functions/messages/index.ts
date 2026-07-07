@@ -8,6 +8,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
 import { json, fail } from '../_shared/respond.ts';
 import { preflight } from '../_shared/cors.ts';
+import { rateLimited } from '../_shared/rateLimit.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const ANON = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
@@ -48,6 +49,9 @@ Deno.serve(async (req) => {
   const { data: sub } = await userClient.from('subs').select('id').limit(1).maybeSingle();
   if (!sub?.id) return fail(403, 'no_sub', origin);
   const subId = sub.id as string;
+
+  // Per-sub brake (the HARD send limits are the DB trigger: 10/hr + 30/day per job).
+  if (rateLimited(`msg:${subId}`, 60)) return fail(429, 'rate_limited', origin);
 
   const svc = createClient(SUPABASE_URL, SERVICE_ROLE, { auth: { persistSession: false } });
 
