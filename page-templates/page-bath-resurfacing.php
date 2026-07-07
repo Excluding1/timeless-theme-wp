@@ -450,7 +450,7 @@
  </div>
  <div>
  <h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3>
- <p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p>
+ <p class="text-xs text-secondary leading-relaxed">Workmanship covered. Fully insured with public liability.</p>
  </div>
  </div>
  <div class="flex items-start gap-3">
@@ -458,7 +458,7 @@
  <span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span>
  </div>
  <div>
- <h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3>
+ <h3 class="font-bold text-primary text-sm">No Mess Promise</h3>
  <p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p>
  </div>
  </div>

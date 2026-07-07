@@ -406,7 +406,7 @@
  </li>
  <li class="flex items-start gap-3">
  <span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- <div><p class="font-bold text-primary text-sm">up to 5-year warranty</p><p class="text-xs text-secondary">Professional-grade coating, fully guaranteed</p></div>
+ <div><p class="font-bold text-primary text-sm">up to 5-year warranty</p><p class="text-xs text-secondary">Professional-grade coating, covered by warranty</p></div>
  </li>
  </ul>
  </div>
@@ -538,11 +538,11 @@
  </div>
  <div class="flex items-start gap-3">
  <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div>
- <div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship guaranteed. Fully insured with public liability.</p></div>
+ <div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship covered. Fully insured with public liability.</p></div>
  </div>
  <div class="flex items-start gap-3">
  <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div>
- <div><h3 class="font-bold text-primary text-sm">No Mess Guarantee</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div>
+ <div><h3 class="font-bold text-primary text-sm">No Mess Promise</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, dust extraction, full cleanup. Cleaner than we found it.</p></div>
  </div>
  </div>
  </div>

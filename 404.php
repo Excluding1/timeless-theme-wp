@@ -20,9 +20,9 @@ get_header();
         <div class="mt-12 pt-8 border-t border-surface-container">
             <p class="text-sm text-secondary mb-4">Looking for one of these?</p>
             <div class="flex flex-wrap justify-center gap-3">
-                <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/services/shower-regrouting-sydney/' ) ); ?>">Shower Regrouting</a>
-                <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/services/bath-resurfacing-sydney/' ) ); ?>">Bath Resurfacing</a>
-                <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/services/tile-resurfacing-sydney/' ) ); ?>">Tile Resurfacing</a>
+                <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>">Shower Regrouting</a>
+                <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>">Bath Resurfacing</a>
+                <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>">Tile Resurfacing</a>
                 <a class="text-xs bg-surface-container-low px-4 py-2 rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all" href="<?php echo esc_url( home_url( '/gallery/' ) ); ?>">Before &amp; After Gallery</a>
             </div>
         </div>

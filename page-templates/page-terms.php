@@ -17,7 +17,7 @@
  <div class="max-w-3xl mx-auto px-6 sm:px-8">
 
  <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-2">Customer Terms of Service</h1>
- <p class="text-sm text-outline mb-6"><strong>Last updated:</strong> 5 May 2026</p>
+ <p class="text-sm text-outline mb-6"><strong>Last updated:</strong> 7 July 2026</p>
  <p class="text-secondary mb-10 leading-relaxed">These Terms of Service (&ldquo;<strong>Terms</strong>&rdquo;) govern the supply of services by Timeless Resurfacing to you. Please read them carefully. By accepting a quote from us, paying a deposit, or otherwise engaging us, you agree to these Terms.</p>
 
  <div class="space-y-10 text-secondary text-base leading-relaxed">
@@ -114,7 +114,7 @@
  <p class="mb-3">Bathroom condition, access, surface type, scope, and substrate vary significantly. Publishing a fixed price would either be misleading (the price wouldn&rsquo;t actually apply to your job) or inflated (so we could safely quote anyone). Instead we quote each job individually after seeing the photos.</p>
 
  <h3 class="text-lg font-bold text-primary mt-6 mb-2">5.3 Quote validity</h3>
- <p class="mb-3">Unless we say otherwise on the Quote itself, <strong>a Quote is valid for 14 calendar days</strong> from the date it is sent. After that, the Quote may be revised or withdrawn (for example, if our material costs have changed).</p>
+ <p class="mb-3">Unless we say otherwise on the Quote itself, <strong>a Quote is valid for 7 calendar days</strong> from the date it is sent. After that, the Quote may be revised or withdrawn (for example, if our material costs have changed).</p>
 
  <h3 class="text-lg font-bold text-primary mt-6 mb-2">5.4 What can change the price after a Quote is given</h3>
  <p class="mb-2">We aim to give you a fixed-price Quote. The Quote price may change only where:</p>
@@ -130,7 +130,7 @@
  <p class="mb-3">If any price-change trigger occurs, we will stop work, document the issue with photos, and provide you a written variation Quote. We will not proceed with work outside the original Quote until you have approved the variation in writing.</p>
 
  <h3 class="text-lg font-bold text-primary mt-6 mb-2">5.5 GST</h3>
- <p>We are currently <strong>below the GST registration threshold</strong> and our prices do not include GST. We expect to register for GST as our turnover grows, and will update our pricing and invoicing to reflect GST inclusion at that time. We will notify customers in advance of any pricing change related to GST registration.</p>
+ <p>We are <strong>registered for GST</strong>. All quoted prices are GST-inclusive, and invoices we issue are tax invoices showing the GST included.</p>
  </div>
 
  <!-- 6. BOOKING DEPOSIT PAYMENT -->

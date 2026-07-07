@@ -17,13 +17,13 @@
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
 
  <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-4">Warranty</h1>
- <p class="text-lg text-secondary mb-10">Every job, in writing. Different services have different warranty periods because materials genuinely have different lifespans. Here's exactly what you get.</p>
+ <p class="text-lg text-secondary mb-10">Every job covered. Different services have different warranty periods because materials genuinely have different lifespans. Here's exactly what you get.</p>
 
  <div class="space-y-12 text-secondary text-base leading-relaxed">
 
  <!-- HEADLINE STATEMENT -->
  <div class="reveal bg-primary text-white p-6 sm:p-8 rounded-xl">
- <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">Warranties up to 5 years, every service, in writing.</h2>
+ <h2 class="text-xl sm:text-2xl font-bold text-white mb-2">Warranties up to 5 years, every service.</h2>
  <p class="text-white/80 text-sm sm:text-base">No fine-print games, no "industry standard" weasel-wording. Below is the full matrix of what we cover, by service and by property type.</p>
  </div>
 

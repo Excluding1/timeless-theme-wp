@@ -2310,7 +2310,7 @@ function timeless_handle_quote_form() {
     }
 
     // Rate limiting, max 3 submissions per IP per hour
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     $rate_key = 'quote_rate_' . md5( $ip );
     $submissions = get_transient( $rate_key );
     if ( $submissions !== false && $submissions >= 3 ) {
@@ -2738,7 +2738,7 @@ if ( ! defined( 'DISALLOW_FILE_EDIT' ) ) {
 
 /** Limit login attempts, basic rate limiting via failed login tracking */
 function timeless_limit_login_attempts( $user, $username, $password ) {
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     $transient_key = 'login_attempts_' . md5( $ip );
     $attempts = get_transient( $transient_key );
 
@@ -2753,7 +2753,7 @@ function timeless_limit_login_attempts( $user, $username, $password ) {
 add_filter( 'authenticate', 'timeless_limit_login_attempts', 30, 3 );
 
 function timeless_track_failed_login( $username ) {
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     $transient_key = 'login_attempts_' . md5( $ip );
     $attempts = get_transient( $transient_key );
 
@@ -2767,7 +2767,7 @@ add_action( 'wp_login_failed', 'timeless_track_failed_login' );
 
 /** Reset failed login counter on successful login */
 function timeless_reset_login_attempts( $user_login, $user ) {
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     delete_transient( 'login_attempts_' . md5( $ip ) );
 }
 add_action( 'wp_login', 'timeless_reset_login_attempts', 10, 2 );
