@@ -77,8 +77,10 @@ not offer replacement services and do not know who the best point of contact wou
 
 **BEAT (their gaps = our edge):**
 - NO SMS ping when the quote sends (their biggest gap) → we send quote by EMAIL + SMS link ping.
-- 1-3 day quote promise → ours 24h. 7-day validity → ours 14 + win-back day 15.
+- 1-3 day quote promise → ours 24h.
 - Rejection dead-end → ours includes a referral pathway + future hook.
+- Validity: matched at 7 days (Allan adopted 2026-07-07 — urgency, no month-old chase-backs);
+  our extra edge = countdown nudge ~day 5 + structured win-back day 8/30/90.
 
 **AVOID (legal):**
 - Blanket "50% of quoted cost" cancellation fee after confirmation: ACL penalty doctrine + unfair
@@ -87,9 +89,12 @@ not offer replacement services and do not know who the best point of contact wou
   deposit-based and scaled to genuine loss (e.g. deposit refundable until booking confirmed;
   within 48h of job date, reasonable costs retained). Add to the lawyer engagement.
 
-**DECISION FOR ALLAN (pending):** adopt their deposit shape? Recommend: 50% deposit for jobs over
-$1,000; flat $200 for under. Balance on completion within 1 business day. (Matches money-lane;
-needs Allan yes + Cleo Rule-8 on the wording.)
+**DEPOSIT — CORRECTED 2026-07-07 (Allan caught this):** the 50%-deposit recommendation above was
+WRONG for us. NSW Home Building Act caps deposits at **10%** for residential building work — our
+bathroom jobs are squarely that (it's the same act behind our $5k licence ceiling). Surface Care's
+50% works only under a repair/commercial framing that does not fit us. **Ours stays 10%**, balance
+on completion within 1 business day. Lesson re-learned: never port a competitor term without the
+our-context check (feedback-audit-accuracy-over-parity).
 
 All proposed customer-facing copy = PENDING Rule-8 (both CEOs verify) before anything is pasted
 into GHL.

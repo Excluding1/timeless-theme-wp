@@ -1869,9 +1869,17 @@ Lawyer + insurance: formal dispute resolution
 **Hard rule:** Below margin floor ($300), we don't quote. Period.
 
 ### Quote validity
-- Quote valid for 14 days from sent
-- After 14 days, customer must request requote (we may adjust if material costs changed)
+- **Quote valid for 7 days from sent** (Allan decision 2026-07-07: creates urgency, avoids 30-day
+  chase-backs; matches Surface Care. History: 7 → 14 on 2026-06-12 → back to 7 on 2026-07-07.)
+- Expiry/win-back messaging fires day 8 (was day 15)
+- After 7 days, customer must request requote (we may adjust if material costs changed)
 - Spec'd in quote document so customer knows
+
+### Deposit + cancellation (reaffirmed 2026-07-07)
+- **Deposit = 10% MAX** — NSW Home Building Act cap for residential building work. NEVER copy
+  Surface Care's 50% (their benchtop-repair framing is not our bathroom context).
+- Cancellation: deposit-based per the Refund policy below — do NOT use a "50% of quoted cost"
+  cancellation fee (ACL unfair-contract-terms risk; question added to the lawyer brief scope).
 
 ### Refund policy (customer-facing)
 - Deposit non-refundable once job booked unless WE cancel (subcontractor unavailable, weather, our error)

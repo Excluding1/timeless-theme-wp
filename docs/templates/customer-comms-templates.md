@@ -15,9 +15,10 @@ These templates are **drafts derived from old Excel + Jordan-style psychology re
 3. **Custom field audit** — every `{{custom.X}}` placeholder must exist in GHL custom fields (per [ghl-pipeline-13-stage.md § Custom fields required](../specs/ghl-pipeline-13-stage.md))
 4. **Variable consistency** — use `{{contact.first_name}}`, `{{opportunity.monetary_value}}`, `{{custom.deposit_amount}}` etc consistently across all templates
 
-> ⚠️ **TIMING SUPERSESSION (2026-06-12 audit):** any "valid 7 days" / "expires day 7" wording in this file
-> (§2F Expired Quote etc.) is STALE — the locked rule is **14-day quote validity** (CEO.md Pricing §Quote
-> validity), so expiry messaging fires **day 15** (the win-back). The 72h/§2E email is NOT a W3 step — W3 is
+> ⚠️ **TIMING LOCK (updated 2026-07-07, Allan decision):** quote validity = **7 DAYS** (CEO.md Pricing
+> §Quote validity — reverses the 06-12 change to 14; reasons: urgency + no month-old chase-backs; matches
+> Surface Care). Expiry messaging fires **day 8**; a countdown nudge ("expires in N days") goes ~day 5.
+> Any remaining "14-day" wording in this file is stale. The 72h/§2E email is NOT a W3 step — W3 is
 > SMS-only (d1/d3/d7, Cleo-approved); email variants arrive with the post-DKIM email set.
 
 ### Spam Act 2003 classification
@@ -128,7 +129,7 @@ That's a fraction of the cost of a full reno. Lock in your date with a small ${{
 ```
 [HEADER — above the fold]
 Logo (left) + "Your Bathroom Quote" (centre)
-Subline: "Fixed price. No surprises. Valid 14 days."  <!-- 14 days per CEO.md quote-validity lock; was 7 -->
+Subline: "Fixed price. No surprises. Valid 7 days."  <!-- 7 days per CEO.md quote-validity lock (Allan 2026-07-07) -->
 
 [THEIR PHOTO]
 Display Photo 1 from their submission.
@@ -164,7 +165,7 @@ Yours is done for a fraction of that, in just one day."
 "Questions? Just reply to this email or text us on [phone]"
 
 Timeless Resurfacing | ABN [XXX XXX XXX] | [phone]
-"This quote is valid for 14 days from today"
+"This quote is valid for 7 days from today"
 Your rights under Australian Consumer Law are not affected.
 Unsubscribe | Privacy Policy
 ```
@@ -283,6 +284,75 @@ Sorry we couldn't help this time. If you need anything else down the track, we'r
 ```
 
 **Why this matters (auditor-customer-fairness lens):** Turning away unsuitable work builds long-term credibility. We'd rather lose a job than do bad work.
+
+---
+
+### 2H. Quote Delivery Email — landline/email-first customers (PROPOSED 2026-07-07, PENDING Rule-8 Cleo sign-off)
+**Type:** Transactional | **When:** customer has no mobile (landline) or asked for email; PDF quote attached.
+**Source:** Allan's live 2026-07-07 send (Surface Care structure) with three compliance corrections:
+"prepared" not "written"; cancellation term = deposit-based (their 50%-of-quote fee is an ACL
+unfair-terms risk — NEVER copy); deposit stays 10% (NSW HBA cap).
+
+```
+Subject: Timeless Resurfacing - {{custom.service_summary}} Quote at {{custom.job_address}}
+
+Hi {{contact.first_name}},
+
+Thank you for submitting your repair request with Timeless Resurfacing.
+
+We have prepared and attached your quotation as a PDF for review. If you'd like anything explained,
+call or text 0451 110 154 (or text-only 0485 056 656).
+
+Timeless Resurfacing Quote
+Our pricing for resurfacing the:
+{{custom.scope_lines}}
+As per the photos you provided, the quoted amount includes labour, materials, and travel time.
+
+The total cost of the work is {{custom.quote_total}} (inclusive of GST).
+
+To Confirm
+If you accept the quote, please reply to this email or text 0451 110 154 stating you are happy to
+proceed, and we will organise a date and time to complete the work.
+[Once the GHL confirmation document (2I) is live, replace the line above with:
+"please click and complete the quote confirmation link here: {{custom.confirmation_link}}"]
+
+Please note
+Quote Validity - Quotes are valid for seven days from the email sent date.
+Payment Terms - We require a 10% deposit to confirm your booking. The remainder is due upon job
+completion, within one business day.
+Cancellation - Your deposit is fully refundable until your booking is confirmed. After that, see
+our terms at timelessresurfacing.com.au/terms/.
+
+Allan P
+Mobile: 0451 110 154
+Quotation and Jobs Manager
+Timeless Resurfacing
+```
+
+---
+
+### 2I. Quote Confirmation Document (GHL Documents e-sign — PROPOSED 2026-07-07, PENDING Rule-8 + build)
+**Type:** Transactional | **Mechanism:** GHL Documents & Contracts template; link rides in 2A SMS + 2B/2H email.
+**Automation:** workflow trigger "Document Signed" → move opportunity to Quote Accepted + Slack ping +
+deposit request. (This is Surface Care's links.surfacescare.com.au/documents/v1/… mechanism — native GHL.)
+**Setup (Allan, one-time):** GHL → Documents & Contracts → new template per the structure below →
+workflow with the Document Signed trigger. Optional white-label domain links.timelessresurfacing.com.au
+(CNAME per GHL docs) — the default link domain works day one.
+
+Document structure (mirror of the captured Surface Care form, our terms):
+1. Header: logo · ABN · 0451 110 154 · admin@timelessresurfacing.com.au · timelessresurfacing.com.au
+2. "Quote Confirmation Form — Please look over the details, sign, and submit to confirm your quote."
+3. Client Details table: full name / property address / state / postcode / phone (merge fields)
+4. Scope + price restated (from the quote): service lines, inclusions sentence, "Total cost {{custom.quote_total}} inclusive of GST"
+5. Please note: 7-day validity · deposit 10% to confirm booking, balance on completion within one
+   business day · deposit refundable until booking confirmed (cancellation per /terms/) · surface
+   condition note (deep damage may remain visible where disclosed)
+6. Certification: "By signing this document, I certify the above information is accurate and correct.
+   I have read Timeless Resurfacing's Terms (timelessresurfacing.com.au/terms/) and warranty
+   information (timelessresurfacing.com.au/warranty/), which form part of this Quote Confirmation,
+   and agree to be bound by these conditions. I authorise the use of my personal information as
+   described in the Privacy Policy (timelessresurfacing.com.au/privacy/)."
+7. Signature + date field.
 
 ---
 
