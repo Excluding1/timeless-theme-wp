@@ -65,16 +65,18 @@ Every AI employee in this folder must have:
 
 | Spec | Status | Job |
 |---|---|---|
-| ⬜ quote-drafter.md | Pending | Form submit → draft 3-tier quote → post to Slack for human approval |
-| ⬜ photo-quality-reviewer.md | Pending | Review subcontractor completion photos against quality criteria, flag issues before customer sees |
-| ⬜ business-analyst.md | Pending | Monday morning KPI summary from GHL + Stripe + ad spend |
+| ✅ DELIVERED as the **quote web app** (docs/quote-app, 2026-07-07) | Built | Quote drafting exceeded the spec: options-aware local AI, quote↔tax-invoice↔signed-warranty (no Slack loop needed — Allan drives it directly) |
+| ✅ [photo-reviewer.md](photo-reviewer.md) | Spec built 2026-07-07 | INTAKE photo triage: vision pass per quote-request photo → surface/material/damage/red-flags → draft quote-app input line to Slack (never customer-facing). Completion-photo QA = later extension |
+| ✅ DELIVERED as **scripts/ceo-brief** (2026-07-07, live-tested) | Built | Monday 7am KPI brief from GHL → Slack (Surface Care flagship replica) |
+| ✅ DELIVERED as **scripts/pipeline-watchdog** (2026-07-07, live-tested) | Built | Every 30 min: speed-to-lead breaches, 24h-promise, follow-ups due, duplicates, stale cards — caught Rory/Lisa/mick on run #1 |
+| ✅ [social-agents-activation-runbook-2026-07-07.md](social-agents-activation-runbook-2026-07-07.md) | Our side complete | DM handler + website live chat + comment replier, GHL-native and paste-ready; blocked only on Allan's FB/IG connection (step 0) |
 
 ### Phase 6+ (when data layer mature)
 
 | Spec | Status | Job |
 |---|---|---|
-| ⬜ ad-watchdog.md | Pending | Daily 5am POAS check on Google Ads, flag profit-negative keywords |
-| ⬜ multi-household-detector.md | Pending | New form submit → check DB for prior jobs at same address → flag pricing-consistency risk |
+| ⬜ ad-watchdog.md | Pending (build the week ads start) | Daily 5am POAS check on Google Ads, flag profit-negative keywords |
+| ✅ folded into **pipeline-watchdog** (duplicate detection) | Built | New form submit → same phone/email/address across open cards → pricing-consistency flag |
 | ⬜ review-responder.md | Pending | Draft replies to Google/Facebook reviews for human approval |
 | ⬜ sub-recruitment-outreach.md | Pending | Hipages/Airtasker scrape → personalised DM drafts → Marko approval |
 | ⬜ dashboard-connector.md | Pending | Read/write Supabase dashboard via Slack slash commands |
