@@ -1,0 +1,1323 @@
+{
+  "updated": "2026-07-07",
+  "title": "Customer Journey & Operations",
+  "subtitle": "Every step lead → repeat, with what to do + what to tell the customer",
+  "tree": [
+    {
+      "id": "phase-1-lead-in",
+      "label": "1. Lead in",
+      "icon": "📥",
+      "status": "partial",
+      "channel": "Web / SMS / Phone / DM",
+      "summary": "Every way a lead arrives: website form (the main door, live), phone call, FB/IG DM, and the abandoned-form recovery. Goal of this phase: the lead exists in GHL stage 1 with photos, and they have heard from us inside 60 seconds (auto ack) or by voice.",
+      "watch": ["Quote Requested", "W1", "W2", "#quotes-in", "form submit", "abandoned"],
+      "confirmations": [
+        {
+          "q": "Is the front door live end to end?",
+          "state": "confirmed",
+          "a": "Yes. Certified x5: form → Cloudinary → W1 secret gate → GHL contact + opportunity at stage 1 → Slack #quotes-in. Site live since 2026-06-11.",
+          "hint": "COMPLETE-BUILD-PLAN Phase 0.2"
+        }
+      ],
+      "next": [
+        "Watch Slack #quotes-in. Every new lead = open the opp, look at the photos, start the 24-hour quote clock.",
+        "Call the lead within 60 seconds whenever you can (speed-to-lead node below). The ack SMS already went out automatically.",
+        "If the lead came by phone or DM with no form: get them onto the form so photos + details land in the pipeline, or create the contact + opp manually."
+      ],
+      "customer": "The system already told them: photos received, quote within 24 hours. Anything you add on top should be personal, not corporate.",
+      "docs": [
+        { "label": "Comms templates (canonical)", "path": "docs/templates/customer-comms-templates.md" },
+        { "label": "Build plan P1 (what is live)", "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md" }
+      ],
+      "deep": "Stage 1 Quote Requested is the W1 entry point. The form is a per-bathroom loop (payload carries bathroom_index + bathroom_count), photos go to Cloudinary, the webhook is gated by a shared secret, and W1 both sends the ack and disarms W2 so a completed form never gets an abandoned-recovery text (the Lisa bug class is dead). Phone and DM leads are manual paths that should converge on the same GHL opp so the whole downstream machine (W3 cadence, stage automation) works for them too.",
+      "children": [
+        {
+          "id": "lead-website-form-w1",
+          "label": "Website form → instant ack (W1)",
+          "icon": "🌐",
+          "status": "partial",
+          "stage": 1,
+          "channel": "SMS",
+          "summary": "Customer submits photos on timelessresurfacing.com.au → GHL opp at stage 1 → W1 fires the instant ack SMS from TimelessRsf. LIVE, but the live ack body still carries stale copy until Allan applies the pipeline 1.0 fix in GHL.",
+          "watch": ["W1", "Quote Requested", "instant ack", "#quotes-in", "bathroom_index"],
+          "confirmations": [
+            {
+              "q": "SMS sender?",
+              "state": "confirmed",
+              "a": "Twilio +61 485 056 656, sender name TimelessRsf.",
+              "hint": "Known-true state 2026-07-07"
+            },
+            {
+              "q": "Have you applied the W1 ack fix in GHL yet (pipeline 1.0)?",
+              "state": "ask",
+              "a": "",
+              "hint": "Until applied, the live ack says the banned word 'written' + wrong '24-48 hours'. Fix is GHL-only, ~30 min: replace body with the 1A copy below, send only when bathroom_index = 1 (or absent), branch body on bathroom_count ≥ 2. Rule-8 sign-off before publish."
+            },
+            {
+              "q": "Is the 24-hour quote promise locked?",
+              "state": "confirmed",
+              "a": "Yes: 'within 24 hours' everywhere in comms; site FAQs deliberately say 1 business day. 'Within 2 hours' was never shipped. Surface Care promises 1-3 days, so this is our edge, but only if we keep honouring it.",
+              "hint": "customer-comms §1A LIVE FIX note + mystery-shop report"
+            }
+          ],
+          "next": [
+            "Form submit → opp appears at stage 1 + Slack #quotes-in pings. Open the photos immediately.",
+            "W1 sends the ack automatically. You send nothing at this moment.",
+            "If the 1.0 fix is not applied yet: GHL → W1 workflow → paste the 1A body below → add condition bathroom_index = 1 → branch on bathroom_count → Rule-8 sign-off → publish.",
+            "Photos unclear → move opp to stage 2 Q&A and send the 1B photo-resend snippet (Quote phase).",
+            "Photos clear → go straight to pricing. The 24-hour clock started at submit.",
+            "Cannot quote inside 24 hours → send 1C delayed note BEFORE the promise expires, never after."
+          ],
+          "copy": [
+            {
+              "label": "1A Instant Acknowledgement (single bathroom)",
+              "text": "Thanks {{contact.first_name}}! We've got your bathroom photos and we're reviewing them now. You'll have your quote within 24 hours. 📱\n\n- Timeless Resurfacing"
+            },
+            {
+              "label": "1A Instant Acknowledgement (bathroom_count ≥ 2)",
+              "text": "Thanks {{contact.first_name}}! We've got the photos for your {{bathroom_count}} bathrooms and we're reviewing them now. You'll have your quotes within 24 hours. 📱\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "Nothing manual to say at this moment, the ack covers it. If they reply with a question, answer personally within 15 minutes in business hours, first name, direct answer, no corporate paste.",
+          "docs": [
+            { "label": "1A + live-fix note", "path": "docs/templates/customer-comms-templates.md" },
+            { "label": "Pipeline 1.0 card", "path": "cockpit/data/pipeline.json" }
+          ],
+          "deep": "How it works: the React form loops per bathroom (startNextBathroom → handleSubmit fires W1 each pass), so a 2-bathroom submission currently fires the ack twice ~minutes apart. The payload already carries bathroom_index and bathroom_count (QuoteForm.jsx:1140-1141), so the dedupe is pure GHL config: send only on bathroom_index = 1 (treat absent/null as 1 for legacy single-area submits), suppress on 2+, and branch the body on bathroom_count. Failure modes: Cloudinary upload failure (customer sees form error, no opp lands), webhook secret mismatch (opp never created, check Make/GHL logs), Slack ping missed (opp still exists, check the stage-1 column daily). W1 completion also disarms W2 and clears form-partial-pending, proven live on TEST3.",
+          "children": [
+            {
+              "id": "lead-multi-bathroom-rule",
+              "label": "Multi-bathroom rule: one opp per bathroom",
+              "icon": "🛁",
+              "status": "partial",
+              "channel": "GHL",
+              "summary": "Convention: one GHL opportunity per bathroom, linked by property; one invoice under $5,000 inc GST per bathroom (HBA rule); locked multi-bathroom discounts; exactly ONE ack per property.",
+              "watch": ["bathroom_count", "multi-bathroom", "HBA", "$5,000"],
+              "confirmations": [
+                {
+                  "q": "Discounts locked?",
+                  "state": "confirmed",
+                  "a": "Yes: 10% off the 2nd bathroom, 15% off the 3rd (pricing sheet Multi-Bathroom tab).",
+                  "hint": "Build plan direct answer, multi-quotes"
+                },
+                {
+                  "q": "Is the GHL one-opp-per-bathroom convention + quoter SOP built and e2e tested?",
+                  "state": "ask",
+                  "a": "",
+                  "hint": "Build plan 1.3c still open: 2-bathroom test should produce 2 opps, 2 quotes under $5k each, discount applied."
+                }
+              ],
+              "next": [
+                "Treat each bathroom as its own opportunity and its own quote, each invoice under $5,000 inc GST (HBA rule). Never merge bathrooms onto one invoice.",
+                "Apply the locked discounts: 10% off the second bathroom, 15% off the third. Note them on the quote so the customer sees the saving.",
+                "Send ONE ack and run ONE conversation per property. The per-bathroom split is internal structure, not customer-facing noise."
+              ],
+              "copy": [],
+              "customer": "We price each bathroom separately so every job stays inside home building contract rules, and you get a multi bathroom discount: 10 percent off the second and 15 percent off the third.",
+              "docs": [
+                { "label": "Build plan 1.3c", "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md" }
+              ],
+              "deep": "Why: NSW Home Building Act thresholds make separate sub-$5k invoices per bathroom the clean structure, and per-bathroom opps keep pipeline value and win-rate data honest. The form already collects multiple areas in one submission; what is missing (1.3c) is the GHL linking convention (property field), the quoter SOP, and one end-to-end test. Until that lands, do it by hand: duplicate the opp per bathroom, name them '<surname> - Bathroom 1/2', and link via the property field.",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "lead-phone-speed-to-lead",
+          "label": "Phone lead: the 60-second call",
+          "icon": "📞",
+          "status": "partial",
+          "stage": 1,
+          "channel": "Phone",
+          "summary": "Call every inbound lead within 60 seconds when humanly possible (Surface Care's single highest-leverage habit; 78% of leads choose the first responder). Script below is theirs, adapted to our 24-hour promise and deposit model.",
+          "watch": ["missed call", "#quotes-in", "speed to lead", "inbound call"],
+          "confirmations": [
+            {
+              "q": "Are you calling new leads within 60 seconds of the Slack ping?",
+              "state": "ask",
+              "a": "",
+              "hint": "Manual habit, nothing enforces it. Even a 5-minute callback beats every competitor."
+            },
+            {
+              "q": "Is missed-call text-back built?",
+              "state": "ask",
+              "a": "",
+              "hint": "Build plan 1.1p (W4) not built. Until then, text back manually from the GHL conversation when you miss a call."
+            }
+          ],
+          "next": [
+            "Slack #quotes-in pings → open the photos → dial within 60 seconds if you can.",
+            "Use the script: greet by name, prove you have SEEN their photos, explain the fix in one line, promise the quote within 24 hours, close on the deposit-locks-your-date mechanic.",
+            "Log everything they tell you into the opp notes (scope, urgency, access, tenant vs owner).",
+            "Need more photos after the call → move to stage 2 Q&A and send 1B.",
+            "Missed an inbound call → text back straight away from GHL (W4 automation pending, do it manually)."
+          ],
+          "copy": [
+            {
+              "label": "Speed-to-lead call script (adapted from Surface Care)",
+              "text": "Hi [first name], it's Allan from Timeless Resurfacing. You just sent us photos of your [bathroom / shower / bath], and I'm looking at them right now. I can see you've got [name the damage you can see, e.g. worn enamel on the bath and cracked grout in the shower]. Good news, that's exactly what we fix. We [one-line method, e.g. resurface the bath in place, no demolition, usually done in a day]. I'll put your exact quote together and text it to you within 24 hours, with the price and our next available days. If you're happy with it, a small 10 percent deposit locks your date in and the rest is only due after the job's done. While I've got you, is there anything else about the bathroom I should know?"
+            }
+          ],
+          "customer": "Lead with proof you have seen their photos and name the damage. Then the one promise: exact quote by text within 24 hours. Then the mechanic: small deposit locks the date, rest after the job.",
+          "docs": [
+            { "label": "Surface Care call script source", "path": "data/research/surfacecare-mystery-shop-2026-06-13.md" }
+          ],
+          "deep": "Surface Care calls every lead within 60 seconds (their transcripts L569-794): greet by name → 'I see you've got [damage from photos]' → explain repair method → quote promise → sign-off-and-book close. Adaptations for us: their 'couple of hours' quote promise becomes our locked 'within 24 hours' (never promise 2 hours); their e-sign document close becomes our reply-YES + deposit close until DKIM lands. The call also pre-answers the two questions that stall quotes later: access and exact scope. If the customer does not answer, do NOT leave the pipeline waiting on the phone, the SMS quote path continues regardless (their funnel went silent when the phone path died, ours must not).",
+          "children": []
+        },
+        {
+          "id": "lead-fb-ig-dm",
+          "label": "Facebook / Instagram DM lead",
+          "icon": "💬",
+          "status": "todo",
+          "channel": "DM",
+          "summary": "DM leads are manual today: reply personally, then push to the website form so photos + details land in the pipeline. Business pages + DM-handler AI are Phase 8 (deliberately last).",
+          "watch": ["DM", "Facebook", "Instagram", "social lead"],
+          "confirmations": [
+            {
+              "q": "Are FB/IG business pages actually live?",
+              "state": "ask",
+              "a": "",
+              "hint": "STATE marks page existence as unconfirmed; build plan 8d creates them. If someone DMs an existing personal page, the flow below still applies."
+            }
+          ],
+          "next": [
+            "Reply personally within 15 minutes in business hours. No auto-responder exists.",
+            "Push to the form: the goal is photos in the pipeline, not a chat quote. Send the site link.",
+            "If they refuse the form: ask for photos in the DM, then create the GHL contact + opp manually and attach the photos so the normal machine takes over.",
+            "Never quote a price inside the DM from memory. Price only via the quote app."
+          ],
+          "copy": [
+            {
+              "label": "DM reply (drive to form)",
+              "text": "Thanks for reaching out! The quickest way to get your exact price is our 2 minute photo quote at timelessresurfacing.com.au. Snap a couple of photos of the area and you'll have your quote within 24 hours. If it's easier, just send the photos here and I'll sort it for you."
+            }
+          ],
+          "customer": "Warm, fast, and route them to photos. The promise is the same everywhere: quote within 24 hours of photos.",
+          "docs": [
+            { "label": "Build plan Phase 8 (socials last)", "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md" }
+          ],
+          "deep": "Jordan runs a DM-handler agent that does conversational quote intake 24/7; ours is spec'd (docs/specs/ai-employees/) but deliberately Phase 8, after the core pipeline is finished. Until then the risk is DM leads living outside GHL: no W3 cadence, no expiry, no win-back. So the non-negotiable is manual entry into GHL for any DM lead that sends photos. Edge case: a DM lead who already submitted the form, check for an existing opp before creating a duplicate.",
+          "children": []
+        },
+        {
+          "id": "lead-w2-abandoned-recovery",
+          "label": "Abandoned form → W2 recovery",
+          "icon": "🔁",
+          "status": "live",
+          "channel": "SMS",
+          "summary": "Started the form but did not finish → W2 sends a recovery SMS automatically. Completing the form disarms W2 (misfire bug fixed + proven). Upgrade pending: resume deep-link + second reminder, the two things Surface Care does better here.",
+          "watch": ["W2", "abandoned", "form-partial", "recovery"],
+          "confirmations": [
+            {
+              "q": "Is W2 live and the misfire bug dead?",
+              "state": "confirmed",
+              "a": "Yes. W1 disarms W2 + clears form-partial-pending on completion; proven live on TEST3 (removed 37 seconds into the timer).",
+              "hint": "Build plan Phase 0.3"
+            },
+            {
+              "q": "Has a real partial actually recovered yet?",
+              "state": "ask",
+              "a": "",
+              "hint": "W2's DoD is 'one real partial recovers'. Watch for the first one."
+            }
+          ],
+          "next": [
+            "Nothing manual: W2 fires on its own when a form is started but not finished.",
+            "If a recovered lead completes the form, they enter stage 1 like any other lead. Treat them identically.",
+            "Upgrade when scheduled (adopted step 1.18): add a state-resuming deep-link (email + phone prefilled) and a second reminder like Surface Care sends. Decide cadence vs pester-risk first, their two-touch cadence is the model.",
+            "If someone replies to the recovery SMS with questions, answer personally and offer to take the photos right there in the thread."
+          ],
+          "copy": [],
+          "customer": "If they reply: no pressure, you were partway through getting your quote, want me to finish it with you here? Send a couple of photos of the area and I will take it from there.",
+          "docs": [
+            { "label": "Surface Care recovery cadence (the model)", "path": "data/research/surfacecare-mystery-shop-2026-06-13.md" }
+          ],
+          "deep": "The W2 body lives in GHL (not in the templates doc), so verify its copy against the banned-words rule when touching it. Surface Care's version (captured live 2026-06-13): two SMS from 'James' with a GHL survey deep-link that resumes the form with email + phone prefilled, 'You'll be asked for: Photos of the damage, Brief description'. Ours currently sends one message with no link, which is why step 1.18 (resume link + second reminder) was adopted. Abandoned-quote recovery was worth +30-40% leads in Jordan's numbers, this is cheap money.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "phase-2-quote",
+      "label": "2. Quote",
+      "icon": "🧾",
+      "status": "partial",
+      "channel": "Quote app + SMS",
+      "summary": "Photos in hand → review + Q&A → price in the quote app → margin gate → quote out by SMS within 24 hours. Email twin is gated on DKIM. Sub-quote stages 3-5 exist but stay empty until subs are onboarded.",
+      "watch": ["Q&A", "Quote Sent", "quote app", "margin", "24 hours"],
+      "confirmations": [
+        {
+          "q": "What is the quoting engine?",
+          "state": "confirmed",
+          "a": "The quote WEB app (docs/quote-app), finished v8: options-aware pricing, per-block price ledger, editable price book, generates quote + tax invoice + signed warranty.",
+          "hint": "Known-true state 2026-07-07"
+        }
+      ],
+      "next": [
+        "Review photos the moment the lead lands: quotable / need better photos / reject.",
+        "Price ONLY through the quote app, then run the margin gate before anything goes out.",
+        "Send the quote by SMS inside the 24-hour promise. If you will miss it, send 1C BEFORE the deadline."
+      ],
+      "customer": "Everything the customer hears in this phase reinforces one thing: fixed price including GST, valid 7 days, small deposit locks the date, rest after the job.",
+      "docs": [
+        { "label": "Quote app (the engine)", "path": "docs/quote-app" },
+        { "label": "Comms templates", "path": "docs/templates/customer-comms-templates.md" }
+      ],
+      "deep": "The 24-hour promise is the competitive edge over Surface Care's 1-3 days, and it is a promise that must be kept or pre-managed with 1C. Pipeline mechanics: stage 2 Q&A is a manual move when clarification is needed; stages 3-5 (sub-quote loop) are Phase-2 territory; stage 6 Quote Sent arms the W3 follow-up cadence.",
+      "children": [
+        {
+          "id": "quote-review-qa",
+          "label": "Review photos + Q&A (stage 2)",
+          "icon": "📸",
+          "status": "partial",
+          "stage": 2,
+          "channel": "SMS",
+          "summary": "Triage the photos: can you see size + condition well enough to price? If not, move to stage 2 and ask for the EXACT shot you need. Surface Care triages rejections from photos alone, no site visit, and so do we.",
+          "watch": ["Q&A", "photo resend", "stage 2", "blurry"],
+          "confirmations": [
+            {
+              "q": "Are the Q&A snippets + SLA convention set up in GHL?",
+              "state": "ask",
+              "a": "",
+              "hint": "Build plan 1.1r (stage-02 Q&A convention + snippets) and 1.3e (photo-resend snippet in GHL) are still open. Until then, paste 1B from here."
+            }
+          ],
+          "next": [
+            "Photos clear → skip stage 2 entirely, go price it.",
+            "Photos blurry / too dark / wrong angle → move opp to stage 2 Q&A, send 1B naming the exact shot ('a wider shot of the full shower from the doorway'), never a vague 'better photos please'.",
+            "Pre-1990 asbestos suspicion, structural cracks, full-reno scope, or out of area → go to the Rejection node (phase 3) instead of quoting.",
+            "Customer asks anything → reply personally within 15 minutes in business hours (7A rule).",
+            "Customer wants extra scope → send 7B, get the photo, revise in the quote app."
+          ],
+          "copy": [
+            {
+              "label": "1B Photo Resend (manual snippet)",
+              "text": "Hi {{contact.first_name}}, thanks for your bathroom photos!\n\nWe need a slightly better shot to give you an accurate quote. Could you resend:\n\n📸 [specific photo needed, e.g. \"a wider shot of the full shower from the doorway\"]\n\nTip: Stand back, daylight on, flash off. 👍\n\n- Timeless Resurfacing"
+            },
+            {
+              "label": "7B Scope change request (PENDING: check the 2-hour line against the locked 24-hour promise before pasting)",
+              "text": "Hi {{contact.first_name}}, no problem, we can adjust the quote for that.\n\nCould you send me:\n1. A photo of the [extra area/different scope]\n2. What you'd like done with it\n\nI'll come back with a revised quote within 2 hours. 👍\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "We need one clearer shot to price this accurately. Stand back so the whole area is in frame, daylight on, flash off.",
+          "docs": [
+            { "label": "1B + 7A/7B templates", "path": "docs/templates/customer-comms-templates.md" }
+          ],
+          "deep": "Being specific in 1B costs ~30 seconds and saves the lead. The stage-2 move matters for data: it shows where quotes stall. Edge cases: customer sends photos of a different bathroom than described (confirm which one is being quoted); tenant sends photos but the owner decides (ask who approves the work now, it changes who you quote to); photos reveal structural damage mid-Q&A (route to rejection with the referral pathway rather than quoting badly).",
+          "children": []
+        },
+        {
+          "id": "quote-sub-quote-loop",
+          "label": "Sub-quote loop (stages 3-5, Phase 2 only)",
+          "icon": "👷",
+          "status": "gated",
+          "stage": 3,
+          "channel": "GHL",
+          "summary": "Stages 3 Sub-quote Requested, 4 Sub-quote Not Received, 5 Sub-quote Received. EMPTY in Phase 1: no subs are onboarded, and none can sign until the Fair-Work legal gate clears. Quotes currently go straight 2 → 6.",
+          "watch": ["Sub-quote", "stage 3", "stage 4", "stage 5", "sub_assigned"],
+          "confirmations": [
+            {
+              "q": "Any external sub signed?",
+              "state": "ask",
+              "a": "",
+              "hint": "HARD GATE: no external sub signs until an AU employment lawyer clears s15AA. Marko self-performs meanwhile."
+            },
+            {
+              "q": "Ageing rules for when this activates?",
+              "state": "confirmed",
+              "a": "Stage 3 → 4 after 24h with no sub-quote (reminder); stage 4 → 48h escalates to Marko; at stage 5 Allan applies markup and sends.",
+              "hint": "CEO.md Override 14 v4 ageing rules"
+            }
+          ],
+          "next": [
+            "Today: skip these stages entirely. Price in the quote app and move 2 → 6.",
+            "When subs are live: route Quote Sent via 3 → 4 → 5 only if sub_assigned = true.",
+            "Stage 3: request the sub's price. No movement in 24h → stage 4 fires the chase. 48h → escalate to Marko.",
+            "Stage 5: sub price in → apply markup (margin gate still applies) → send the quote → stage 6."
+          ],
+          "copy": [],
+          "customer": "Nothing customer-facing happens in this loop. The customer only ever sees the finished quote.",
+          "docs": [
+            { "label": "Override 14 v4 (stage list)", "path": "docs/CEO.md" },
+            { "label": "Legal gate", "path": "docs/specs/legal-review-brief-sub-engagement-2026-06-05.md" }
+          ],
+          "deep": "Jordan runs these stages because his 70 subs price some jobs. Ours exist now (Jordan-exact 15) so the pipeline never needs restructuring, but they carry zero opps in Phase 1. The activation trigger is the first signed sub agreement, which itself sits behind the s15AA legal clearance. Do not delete or reuse these stages for anything else in the meantime.",
+          "children": []
+        },
+        {
+          "id": "quote-price-margin",
+          "label": "Price it: quote app + margin gate",
+          "icon": "🧮",
+          "status": "live",
+          "channel": "Quote app",
+          "summary": "Build the quote in the quote web app (itemised card style), then run the margin gate before it leaves the building. GST registered: all prices inc GST. 7-day validity, 10% deposit.",
+          "watch": ["price book", "margin", "T2", "T3", "quote app"],
+          "confirmations": [
+            {
+              "q": "GST?",
+              "state": "confirmed",
+              "a": "REGISTERED. Every price is quoted inc GST; Xero shows the split automatically.",
+              "hint": "STATE §1, 2026-06-12"
+            },
+            {
+              "q": "Margin frame?",
+              "state": "confirmed",
+              "a": "CORE services off the sheet T2/T3; ANCILLARY = sub cost ÷ 0.70. The business is ~25-44% margin, 44% only at disciplined sub rates. Never send below the floor (this gate caught the sheet's $560 T1 breach).",
+              "hint": "Pricing-margin calibration 2026-06-18"
+            },
+            {
+              "q": "Quote style rules?",
+              "state": "confirmed",
+              "a": "Itemised card, no default strip-back, explicit gloss white. Reference example: Isabella / AitkenRE TR-1024.",
+              "hint": "Session resume 2026-07-07"
+            }
+          ],
+          "next": [
+            "Open the quote app (docs/quote-app), pick the services + options, let it itemise and total inc GST.",
+            "Run the margin gate: CORE off T2/T3, ANCILLARY = sub cost divided by 0.70. Below floor → re-scope or reject, never discount into a loss.",
+            "Set 7-day validity and the 10% deposit figure. Multi-bathroom → separate quote per bathroom with the locked discounts.",
+            "Sanity-check against TR-1024 (Isabella) for format: itemised card, explicit finish (gloss white), no silent strip-back assumption.",
+            "No prices on the website, ever (confirmed decision). Price exists only in the quote."
+          ],
+          "copy": [],
+          "customer": "Your price is fixed and includes GST. It is itemised so you can see exactly what you are paying for, and it is valid for 7 days.",
+          "docs": [
+            { "label": "Quote app", "path": "docs/quote-app" },
+            { "label": "Margin evidence (Mick 2-bath analysis)", "path": "docs/research/job-analysis-mick-2bath-2026-06-17.md" }
+          ],
+          "deep": "The app is the single pricing source of truth: per-block price ledger, editable price book, and it also generates the tax invoice and the signed warranty for later stages, so quoting in it keeps the whole document chain consistent. The margin gate exists because the pricing sheet has known breaches (the $560 T1 basin case) and because the 55% sheet margin was proven fantasy, real margin is ~25-44% and the lever is procurement discipline. Reject-below-threshold is Jordan's practice too (he rejected $65k of bad tile work in one month).",
+          "children": []
+        },
+        {
+          "id": "quote-send",
+          "label": "Send the quote (stage 6, SMS now, email post-DKIM)",
+          "icon": "📤",
+          "status": "partial",
+          "stage": 6,
+          "channel": "SMS",
+          "summary": "Quote goes by SMS from the GHL conversation within 24 hours of submit. Move the opp to stage 6 Quote Sent, which arms the W3 cadence. The 2B email twin is GATED until DKIM flips.",
+          "watch": ["Quote Sent", "stage 6", "proposal", "DKIM"],
+          "confirmations": [
+            {
+              "q": "DKIM flipped yet?",
+              "state": "ask",
+              "a": "",
+              "hint": "Phase 2a: admin.google.com → Gmail → Authenticate → TXT in Cloudflare, + aliases + GHL sending domain. Until then quotes are SMS-only, no marketing/quote email goes out."
+            },
+            {
+              "q": "Quote validity?",
+              "state": "confirmed",
+              "a": "7 days, locked. Any 7-day wording in old templates is stale. Expiry messaging fires day 8.",
+              "hint": "customer-comms supersession note + CEO.md quote-validity lock"
+            },
+            {
+              "q": "Deposit?",
+              "state": "confirmed",
+              "a": "10% of the quote, via Stripe Payment Link. Balance after the job (Westpac EFT or Stripe pay-now on the Xero invoice). pay.com.au deferred.",
+              "hint": "Money-lane SOP + Decision 12 v2"
+            }
+          ],
+          "next": [
+            "Send the quote SMS within 24 hours of submit. While quoting manually, paste the quote app summary into the SMS (2A's {{documents.proposal_link}} assumes the GHL proposal document, which arrives with the e-accept flow).",
+            "Drag the opp to stage 6 Quote Sent the moment it goes out. This arms the W3 cadence and starts the 7-day validity clock.",
+            "Running late on the promise → send 1C BEFORE the 24 hours expires. A kept-then-broken promise is a trust collapse; a pre-warned delay is fine.",
+            "Post-DKIM: pair the 2A SMS with the 2B email (their own photo, the $15-30k reno anchor, 7-day validity footer) per build plan Phase 2b."
+          ],
+          "copy": [
+            {
+              "label": "2A Quote Delivery SMS",
+              "text": "Hi {{contact.first_name}}, your quote is ready 🎉\n\n{{custom.service_summary}}\nYour price: ${{opportunity.monetary_value}} inc GST\n\nThat's a fraction of the cost of a full reno. Lock in your date with a small ${{custom.deposit_amount}} deposit, pay the rest after the job's done:\n\n{{documents.proposal_link}}"
+            },
+            {
+              "label": "1C Quote Delayed (send BEFORE the promise expires)",
+              "text": "Hi {{contact.first_name}}, just a heads up, we're working through a few quotes ahead of yours and need a bit more time.\n\nYou'll have your quote by [time/today/tomorrow morning]. Sorry for the wait!\n\n- Timeless Resurfacing"
+            },
+            {
+              "label": "2B Quote Delivery Email (PENDING until DKIM; body structure, annotations trimmed)",
+              "text": "Subject: {{contact.first_name}}, your bathroom quote is ready, ${{opportunity.monetary_value}}\n\n[HEADER]\nLogo (left) + \"Your Bathroom Quote\" (centre)\nSubline: \"Fixed price. No surprises. Valid 7 days.\"\n\n[THEIR PHOTO]\nDisplay Photo 1 from their submission.\nCaption: \"Here's what you showed us 👇\"\n\n[QUOTE SUMMARY BOX]\nService: {{custom.service_summary}}\nArea: {{custom.area_selected}}\nLocation: {{custom.suburb}}\n\nYOUR PRICE: ${{opportunity.monetary_value}} inc GST\n\n[ VIEW FULL QUOTE & LOCK IN YOUR DATE → ]\n\n[COST ANCHOR]\n\"A full bathroom renovation typically costs $15,000 to $30,000.\nYours is done for a fraction of that, in just one day.\"\n\n[3 BULLETS]\n✅ All labour + professional-grade materials\n✅ Ready to use within 24-48 hours\n✅ Up to 5-year workmanship warranty (per service)\n\n[HOW IT WORKS]\n1️⃣ Pay a small 10% deposit (${{custom.deposit_amount}})\n2️⃣ Pick your preferred date\n3️⃣ We do the work, you pay the rest after\n\n[CTA BUTTON #2]\n[ LOCK IN YOUR DATE - ${{custom.deposit_amount}} DEPOSIT → ]\n\n[FOOTER]\n\"Questions? Just reply to this email or text us on [phone]\"\n\nTimeless Resurfacing | ABN [XXX XXX XXX] | [phone]\n\"This quote is valid for 7 days from today\"\nYour rights under Australian Consumer Law are not affected.\nUnsubscribe | Privacy Policy"
+            }
+          ],
+          "customer": "Your quote is ready. It is a fixed price including GST, valid for 7 days. A small 10 percent deposit locks your date in and the rest is only due after the job is done. Reply here with any questions.",
+          "docs": [
+            { "label": "2A/2B templates", "path": "docs/templates/customer-comms-templates.md" },
+            { "label": "DKIM task (Phase 2a)", "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md" }
+          ],
+          "deep": "Why SMS-first: DKIM is not flipped, so email deliverability is unproven and email sending stays OFF for anything customer-facing. The 2B email was already re-aligned (7-day validity, the banned word removed from the bullets), it ships with the Phase-2 email twin-set after DKIM, tested on Gmail + Outlook + mobile with SPF/DKIM/DMARC passing. Psychology in 2A/2B: anchoring against a $15-30k reno, small-deposit commitment ladder, pay-after-the-job risk reversal. Compliance: quote delivery is transactional, no STOP line needed; the email carries ABN, ACL line and unsubscribe anyway.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "phase-3-follow-up-acceptance",
+      "label": "3. Follow-up & acceptance",
+      "icon": "📨",
+      "status": "partial",
+      "channel": "SMS",
+      "summary": "From Quote Sent to a decision: automated nudges day 1 + day 3 (+ day-10 email), day-15 expiry + win-back, and the YES moment with a clean ACL acceptance trail. Includes the polite rejection path with a referral pathway.",
+      "watch": ["W3", "nudge", "expired", "Quote Accepted", "flag-quote-expired"],
+      "confirmations": [
+        {
+          "q": "What stops the nudges?",
+          "state": "confirmed",
+          "a": "Any customer reply stops the W3 cadence. A STOP reply opts them out of commercial messages entirely, honour it instantly.",
+          "hint": "W3 DoD: fires on a test opp, stops on reply"
+        }
+      ],
+      "next": [
+        "Let W3 do the chasing. Your job is answering replies fast and converting the YES.",
+        "Customer says yes in any wording → jump to the Acceptance node NOW, reply within minutes.",
+        "Day 14 with no deposit → quote expires; make sure the day-15 win-back actually sends (build 1.2 pending)."
+      ],
+      "customer": "Tone across this phase: helpful, never pushy. Every message either repeats the small-deposit mechanic or opens a door, none of them guilt the customer.",
+      "docs": [
+        { "label": "Comms templates §2", "path": "docs/templates/customer-comms-templates.md" }
+      ],
+      "deep": "Stage 6 → stage 7 Quote Accepted is the money transition. The follow-up engine (W3) is what makes the 24-hour quote promise pay off, Surface Care's funnel went silent when their phone path failed, ours keeps texting. Commercial messages in this phase legally require the STOP line (Spam Act); transactional ones do not.",
+      "children": [
+        {
+          "id": "fu-nudges",
+          "label": "Nudges: day 1 + day 3 (W3 cadence)",
+          "icon": "🔔",
+          "status": "partial",
+          "stage": 6,
+          "channel": "SMS",
+          "summary": "W3 fires automatically after Quote Sent: day-1 SMS, day-3 SMS, day-10 email, and stops on any reply. The LIVE bodies are Allan's T5/T6 (verified compliant 2026-06-13), do NOT overwrite them with the pack below.",
+          "watch": ["W3", "nudge", "day 1", "day 3", "no reply"],
+          "confirmations": [
+            {
+              "q": "Live cadence bodies?",
+              "state": "confirmed",
+              "a": "Allan's T5 (day 1) + T6 (day 3, correct 7-day validity) + the day-10 email (ABN, unsubscribe, no stale claims) are all compliant, verified 2026-06-13. The pack's day-7 SMS is an archived spare. DO NOT overwrite.",
+              "hint": "Pipeline 1.1: the 'paste the pack' task was based on a stale record"
+            },
+            {
+              "q": "Final W3 cadence test run?",
+              "state": "ask",
+              "a": "",
+              "hint": "Pipeline 1.1 remainder: the 2-minute-wait test (fires on a test opp, stops on reply) + one DKIM eyeball of the day-10 email (Gmail → Show original → SPF/DKIM/DMARC all PASS)."
+            }
+          ],
+          "next": [
+            "Wait 24h after the quote → if no reply, the day-1 nudge goes out automatically. Do not double-send it manually.",
+            "Wait 48-72h → the day-3 nudge fires (validity framing). Day 10 → the email touch.",
+            "Any reply → cadence stops; answer within 15 minutes in business hours and drive toward the YES.",
+            "Price pushback → value justification first, never discount on first ask (CEO pricing policy). WARNING: the drafted 7C snippet contains a banned word, redraft it before ever pasting it.",
+            "Run the pending cadence test (pipeline 1.1) so this is proven, then leave it alone."
+          ],
+          "copy": [
+            {
+              "label": "2C Nudge #1, 24h no deposit (approved pack reference; live GHL carries Allan's T5)",
+              "text": "Hey {{contact.first_name}}, just checking you saw your bathroom quote (${{opportunity.monetary_value}})?\n\nHere's the link again: {{documents.proposal_link}}\n\nThe deposit's only ${{custom.deposit_amount}} to lock in your date. The rest is after the job. Reply if you've got any Qs! 👍\n\nTimeless Resurfacing | Reply STOP to opt out"
+            },
+            {
+              "label": "2D Nudge #2, 48h no deposit (note: 'expires in 5 days' is CORRECT again under the 7-day validity (Allan decision 2026-07-07); live GHL carries Allan's T6)",
+              "text": "Hi {{contact.first_name}}, quick heads up, your ${{opportunity.monetary_value}} bathroom quote expires in 5 days.\n\nEvery week grout crumbles a bit more and mould spreads a bit further. The good news: we can have it sorted in a day.\n\n${{custom.deposit_amount}} deposit locks your spot: {{documents.proposal_link}}\n\nTimeless Resurfacing | Reply STOP to opt out"
+            },
+            {
+              "label": "2E 72hr email (PENDING: post-DKIM only; NOT a W3 step; testimonial must be a REAL customer)",
+              "text": "Subject: {{contact.first_name}}, your bathroom quote expires soon, here's what we did in {{custom.suburb}} last week\n\n[BEFORE/AFTER PHOTO PAIR]\nSide-by-side before/after of a SIMILAR completed job.\nCaption: \"Here's a {{custom.area_selected}} we did in [nearby suburb] last week\"\n\nHi {{contact.first_name}},\n\nJust a reminder, your bathroom quote (${{opportunity.monetary_value}}) expires in a few days.\n\nWe know it's easy to put off, but the longer grout stays cracked, the more moisture gets in. The fix takes less than a day.\n\n[CTA: VIEW YOUR QUOTE & LOCK IN YOUR DATE →]\n\n[TESTIMONIAL: one real customer quote, suburb-matched, or omit]\n\nUnsubscribe | Privacy Policy"
+            }
+          ],
+          "customer": "If they engage but hesitate: totally understand, the quote is locked for 7 days so there is no rush this week. The deposit is small, the rest is only after the job, and if anything in the quote is unclear I am happy to walk you through it or call.",
+          "docs": [
+            { "label": "2C/2D/2E templates", "path": "docs/templates/customer-comms-templates.md" },
+            { "label": "W3 status (pipeline 1.1)", "path": "cockpit/data/pipeline.json" }
+          ],
+          "deep": "Cadence design: max 2 SMS nudges then switch channel (research shows >3 rapid SMS triggers opt-outs), which is why the third touch is email and why it only exists post-DKIM. The 2D urgency is REAL (validity actually expires), never fabricate scarcity. W3 is SMS-only d1/d3 with the d10 email; the 2E '72hr' framing predates that lock and is kept only as the email-variant source. All nudges are COMMERCIAL under the Spam Act: STOP line mandatory, and a STOP must halt everything commercial forever.",
+          "children": []
+        },
+        {
+          "id": "fu-expiry-day15",
+          "label": "Day-8 expiry + win-back",
+          "icon": "⏳",
+          "status": "todo",
+          "channel": "SMS",
+          "summary": "At day 14 the quote expires: the workflow marks Lost + tags flag-quote-expired, but currently sends NOTHING. Build pipeline 1.2 (15 min) so day 8 sends exactly one polite win-back, then silence.",
+          "watch": ["flag-quote-expired", "Lost", "day 8", "win-back"],
+          "confirmations": [
+            {
+              "q": "Validity + expiry timing?",
+              "state": "confirmed",
+              "a": "7-day quote validity (Allan decision 2026-07-07, reverses the June 14-day change); expiry messaging fires day 8, countdown nudge ~day 5.",
+              "hint": "customer-comms supersession note 2026-06-12"
+            },
+            {
+              "q": "Is the day-15 win-back SMS step built in GHL?",
+              "state": "ask",
+              "a": "",
+              "hint": "Pipeline 1.2: after the 'Tag flag-quote-expired' step → Wait 1 day → Send SMS (approved win-back, ends 'Reply STOP to opt out') → End. Allan eyeballed the gap: today the customer hears nothing."
+            }
+          ],
+          "next": [
+            "Build it: GHL → the expiry workflow → click + after 'Tag flag-quote-expired' → Wait 1 day → Send SMS → paste 2F → End. Test: expired test opp gets exactly one win-back, then silence.",
+            "Customer replies QUOTE → review the photos still on file → send a fresh quote via the quote app → move the opp back to stage 1.",
+            "Do not chase beyond this one message; the 30/90-day win-backs (phase 6 of this tree) take over later."
+          ],
+          "copy": [
+            {
+              "label": "2F Expired quote win-back (fires day 8 under the 7-day validity)",
+              "text": "Hi {{contact.first_name}}, your bathroom quote has expired, no stress at all.\n\nIf things change, just reply \"QUOTE\" and we'll send a fresh one. 👋\n\nTimeless Resurfacing | Reply STOP to opt out"
+            }
+          ],
+          "customer": "Your quote has expired, no stress at all. If things change just reply QUOTE and we will send a fresh one.",
+          "docs": [
+            { "label": "2F template", "path": "docs/templates/customer-comms-templates.md" },
+            { "label": "Build card 1.2", "path": "cockpit/data/pipeline.json" }
+          ],
+          "deep": "Why day 8 and why so soft: the validity is a real commercial boundary (prices can change), but guilt-tripping an expired lead poisons the 15-20% who convert within 6 months. 'Reply QUOTE' is a zero-effort re-engagement handle. Mechanically, re-quoting means a FRESH quote through the app at current prices, never 'reactivating' the old number without re-checking margin.",
+          "children": []
+        },
+        {
+          "id": "fu-acceptance",
+          "label": "Acceptance: the YES moment (stage 7)",
+          "icon": "☑️",
+          "status": "live",
+          "stage": 7,
+          "channel": "SMS + Stripe",
+          "summary": "HOW THE CUSTOMER ACCEPTS, exactly: today they reply YES (or any clear yes wording) to the quote SMS. Allan replies with M1 (deposit link) within minutes. Acceptance is legally sealed when the deposit is paid with the quote + terms visible first. Post-DKIM: e-accept on the GHL quote document replaces the YES text.",
+          "watch": ["Quote Accepted", "stage 7", "deposit", "YES", "Stripe"],
+          "confirmations": [
+            {
+              "q": "What counts as acceptance right now?",
+              "state": "confirmed",
+              "a": "A clear yes reply to the quote SMS starts it; the DEPOSIT PAYMENT completes it (acceptance = the payment event, with scope + total restated in M1 first). The full SMS thread is the acceptance trail.",
+              "hint": "Build plan 1.3g V1 (quote-acceptance flow, ACL)"
+            },
+            {
+              "q": "Is the terms line added to M1 and the terms page final?",
+              "state": "ask",
+              "a": "",
+              "hint": "1.3g wants M1 to carry 'By paying the deposit you accept the quote as described and our terms: {{terms_link}}'. page-terms.php is still WIP (Phase 2e), so the line cannot ship until terms are live."
+            },
+            {
+              "q": "Deposit figure?",
+              "state": "confirmed",
+              "a": "10% of the quoted total inc GST. Non-refundable once the job is booked + resourced; ALWAYS refunded if we cancel.",
+              "hint": "Money-lane SOP + CEO refund ladder"
+            }
+          ],
+          "next": [
+            "Customer replies YES → answer with M1 within minutes while they are hot. M1 restates scope + total + 10% deposit + rest-after-the-job, link at the end of the line.",
+            "Before sending M1, create the Stripe Payment Link (money lane §2): Payment Links → + New → product 'Deposit - <first name> <suburb> - <service>' (that name is your reconciliation breadcrumb) → price = the 10% figure → AUD → confirmation message 'Deposit received. Allan will text you to lock in your day.'",
+            "Drag the opp to stage 7 Quote Accepted the moment they say yes; drag to stage 10 Prepayment Invoice Sent when M1 goes out.",
+            "ACL trail: keep the entire conversation (quote, their YES, M1, Stripe receipt). Never delete or fork the thread. Once the terms page is final, add the 1.3g terms line to M1.",
+            "Post-DKIM V2: the quote goes as a GHL document with e-accept; the signed acceptance record + Slack sign-off ping replace the YES text as the trail (Jordan's pattern).",
+            "If the yes is conditional ('yes but can you do Saturday'), lock the condition in writing in the same thread before sending the deposit link."
+          ],
+          "copy": [
+            {
+              "label": "M1 Deposit ask (Cleo-approved; send from the GHL conversation)",
+              "text": "Great choice {{first_name}}. For {{service_summary}}, the total is {{total_price}} including GST, with a 10% deposit of {{deposit_amount}} to lock in your day. The rest is only due after the job is done, and as soon as the deposit is in I will text you our next available days. Secure card link: {{stripe_link}}"
+            }
+          ],
+          "customer": "To go ahead, just reply YES to this quote. I will send you a secure card link for the 10 percent deposit, and the rest is only due after the job is done. As soon as the deposit is in I will text you our next available days.",
+          "docs": [
+            { "label": "Money lane §1-2 + M1", "path": "docs/sop/money-lane-first-jobs.md" },
+            { "label": "Acceptance flow spec (1.3g)", "path": "docs/specs/COMPLETE-BUILD-PLAN-2026-06-12.md" }
+          ],
+          "deep": "Why acceptance = the payment event: an SMS 'yes' alone is ambiguous evidence; a paid deposit against a message that restates scope and total, with terms visible, is a clean contract formation trail under ACL. That is why M1 deliberately restates everything (Cleo amendment) instead of just dropping a link. Failure modes: customer pays a stale link amount after a scope change (kill old links when re-quoting); customer says yes then goes quiet without paying (stage 10 cadence handles it, 24h/72h/7d); two decision-makers (get the payer on the thread before M1). Jordan's equivalent: GHL document e-accept + Slack fires on every sign-off, we adopt that form post-DKIM.",
+          "children": []
+        },
+        {
+          "id": "fu-rejection",
+          "label": "Rejection: decline with a referral pathway",
+          "icon": "⛔",
+          "status": "partial",
+          "channel": "SMS",
+          "summary": "When we cannot or should not take the job (asbestos-era suspicion, structural, full-reno scope, out of area): decline politely AND point them somewhere real. Surface Care's dead-end rejection is their weakest moment; ours banks goodwill.",
+          "watch": ["rejection", "Lost", "asbestos", "out of area", "structural"],
+          "confirmations": [
+            {
+              "q": "Rejection criteria?",
+              "state": "confirmed",
+              "a": "Pre-1990 asbestos suspect, scope outside our services, $10K+ full-reno territory, structural damage, unworkable state, out of service area.",
+              "hint": "customer-comms 2G + mystery-shop triage validation"
+            },
+            {
+              "q": "Are the rejection/out-of-area snippets loaded in GHL?",
+              "state": "ask",
+              "a": "",
+              "hint": "Build plan 1.3e (snippets in GHL, 2-click send) still open. Paste from here meanwhile."
+            }
+          ],
+          "next": [
+            "Send 2G, then ADD one referral line pointing to a licensed bathroom renovator or hipages (our deliberate improvement on Surface Care's 'we do not know who to refer you to').",
+            "Mark the opp Lost with the reason recorded (asbestos / structural / out-of-area / scope). This data shapes future service pages.",
+            "Out-of-area variant: say it plainly and kindly, we cannot service the area at a reasonable cost, and suggest a local search.",
+            "Never quote badly rather than reject. We would rather lose a job than do bad work, that is the fairness lens on record."
+          ],
+          "copy": [
+            {
+              "label": "2G Rejection (add a referral line after it)",
+              "text": "Hi {{contact.first_name}}, thanks for sending through your bathroom photos.\n\nAfter reviewing them, this one needs a different approach. We'd recommend a licensed bathroom renovator for a full assessment.\n\nSorry we couldn't help this time. If you need anything else down the track, we're here! 👋\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "Be straight and kind: this one needs a different approach than what we do, a licensed bathroom renovator is the right call, and a site like hipages can match you with one in your area. No charge for the look, and we are here if you need us down the track.",
+          "docs": [
+            { "label": "2G template", "path": "docs/templates/customer-comms-templates.md" },
+            { "label": "Surface Care's dead-end (what we beat)", "path": "data/research/surfacecare-mystery-shop-2026-06-13.md" }
+          ],
+          "deep": "Photo-triage rejection with no site visit is validated by Surface Care's live behaviour (their 'Shermaine Lo, Quotations Manager' persona rejects structural work from photos alone). Their gap: 'we do not know who the best point of contact would be' leaves the customer stranded, so ours always includes a pathway. Open question on record for Allan: whether to keep rejections Allan-voiced or add an ops persona for negative news (Jordan shields the founder). Until decided, rejections stay Allan-voiced per Decision 7.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "phase-4-booking-prep",
+      "label": "4. Booking & prep",
+      "icon": "✅",
+      "status": "partial",
+      "channel": "SMS + Stripe + SM8",
+      "summary": "From YES to a locked date: deposit in (stage 10), the one sacred drag to stage 11 (fires the live SM8 pipeline), dispatch with zero contact leak, booking confirm (stage 14) and the day-before reminder. Site inspection (stages 8-9) only when photos cannot settle it.",
+      "watch": ["Prepayment", "Job in ServiceM8", "Job Booked", "#new-jobs", "deposit paid"],
+      "confirmations": [
+        {
+          "q": "The one rule that can never break?",
+          "state": "confirmed",
+          "a": "NEVER drag an opp to stage 11 before its deposit is PAID. That drag fires the live Make → SM8 pipeline (real job, Sheet row, #new-jobs ping).",
+          "hint": "Build plan hard gate + money-lane stage map"
+        }
+      ],
+      "next": [
+        "Deposit paid (Stripe ping) → drag to stage 11 → SM8 job exists → agree the date → M2 confirm → stage 14.",
+        "Everything the customer receives in this phase comes from GHL/Twilio, never from the sub or SM8's customer SMS."
+      ],
+      "customer": "The story the customer experiences: paid a small deposit, got the date options fast, got a clean confirmation with date + arrival window, got a reminder the day before. Zero chasing on their side.",
+      "docs": [
+        { "label": "Money lane SOP", "path": "docs/sop/money-lane-first-jobs.md" },
+        { "label": "Make Scenario 1 state", "path": "docs/specs/make-scenario-1-STATE-2026-06-04.md" }
+      ],
+      "deep": "Stage flow through this phase: 7 Quote Accepted → (8/9 site inspection if needed) → 10 Prepayment Invoice Sent → deposit paid → 11 Job in ServiceM8 (automation fires) → date agreed → 14 Job Booked. Stages 12 Job on Hold and 13 Job Issue are the parking bays when things stall or break. The no-contact rule shapes everything here: the SM8 job carries name + address only, so every customer touch fires from our side.",
+      "children": [
+        {
+          "id": "book-site-inspection",
+          "label": "Site inspection when needed (stages 8-9)",
+          "icon": "🔎",
+          "status": "partial",
+          "stage": 8,
+          "channel": "Phone / SMS",
+          "summary": "Most jobs are photo-quoted with NO site visit (our model and Surface Care's). Use stage 8 Organise Site Inspection / stage 9 Site Inspection Organised only when photos genuinely cannot settle scope.",
+          "watch": ["Site Inspection", "stage 8", "stage 9", "inspection"],
+          "confirmations": [
+            {
+              "q": "Ageing rules?",
+              "state": "confirmed",
+              "a": "Stage 8: 24h customer chase if no appointment locked. Stage 9: countdown to the inspection date, then move to stage 10.",
+              "hint": "CEO.md Override 14 v4 ageing rules"
+            }
+          ],
+          "next": [
+            "Default = skip: photo quote → accept → deposit. Enter stage 8 only for suspected substrate damage, ambiguous scope, or access questions photos cannot answer.",
+            "Stage 8: propose 2 concrete time options by SMS/phone. No lock within 24h → chase.",
+            "Appointment locked → stage 9, and confirm it in the thread (date, time, who is coming).",
+            "After the visit: scope changed → revise in the quote app (7B pattern) and re-send; scope confirmed → straight to the deposit ask (M1)."
+          ],
+          "copy": [],
+          "customer": "Usually your photos are all we need. In this case we want to see one thing in person before locking the price, it takes about 15 minutes and your quote stays fixed once we have looked.",
+          "docs": [
+            { "label": "Override 14 v4 stages", "path": "docs/CEO.md" }
+          ],
+          "deep": "Keeping inspections rare is a margin decision: no-site-visit quoting is the whole reason photo triage exists ('photos + quote back fast, no site visits needed' is also the PM-segment pitch). When one happens, it must not restart the clock silently, tell the customer exactly what changes and when they get the final word. If the inspection kills the job (structural), exit via the Rejection node with the referral pathway.",
+          "children": []
+        },
+        {
+          "id": "book-deposit-stage10",
+          "label": "Deposit in (stage 10 Prepayment Invoice Sent)",
+          "icon": "💳",
+          "status": "live",
+          "stage": 10,
+          "channel": "SMS + Stripe",
+          "summary": "M1 sent = stage 10. Stripe pings when the deposit pays; the job proceeds on that notification (bank settlement follows in 2-3 days). Chase cadence if unpaid: 24h / 72h / day 7.",
+          "watch": ["Prepayment Invoice Sent", "stage 10", "Stripe", "deposit"],
+          "confirmations": [
+            {
+              "q": "Payment mechanism?",
+              "state": "confirmed",
+              "a": "Stripe Payment Link per job (named 'Deposit - <name> <suburb> - <service>' as the reconciliation breadcrumb). Balance later via Xero invoice with Stripe pay-now + Westpac EFT. pay.com.au deferred.",
+              "hint": "Money-lane §2 + Decision 12 v2"
+            },
+            {
+              "q": "Refund rules on the deposit?",
+              "state": "confirmed",
+              "a": "Non-refundable once the job is booked + resourced; ALWAYS refunded if WE cancel. Refunds via Stripe within 3 business days of approval.",
+              "hint": "CEO.md refund ladder"
+            }
+          ],
+          "next": [
+            "M1 goes out → drag the opp to stage 10.",
+            "Stripe app/email pings on payment → proceed immediately, do not wait for bank settlement.",
+            "No deposit after 24h → one gentle chase; 72h → second; day 7 → final. That is the whole cadence, nothing in between.",
+            "Deposit lands → text the next available days right away (the M1 promise) and agree the date with Marko before confirming anything to the customer.",
+            "Scope changed after M1 → kill the old payment link before sending a new one so a stale amount can never be paid."
+          ],
+          "copy": [],
+          "customer": "The secure card link is in my last text and takes about a minute. As soon as the deposit is in I will text you our next available days.",
+          "docs": [
+            { "label": "Stripe link steps (money lane §2)", "path": "docs/sop/money-lane-first-jobs.md" }
+          ],
+          "deep": "The deposit is the acceptance event (ACL trail) AND the gate on the automation: nothing downstream fires until money is in. Stage-10 ageing (24h/72h/7d) is the pipeline spec cadence; keep chases inside business hours. Reconciliation: the product name on the Payment Link is deliberately the breadcrumb that ties the Stripe payout to the job when the Westpac feed rows land 2-3 days later.",
+          "children": []
+        },
+        {
+          "id": "book-stage11-sm8",
+          "label": "The sacred drag: stage 11 → SM8 job (Make Scenario 1)",
+          "icon": "⚙️",
+          "status": "live",
+          "stage": 11,
+          "channel": "GHL",
+          "summary": "Deposit paid → drag the opp to stage 11 Job in ServiceM8. That ONE drag fires the live Make pipeline: SM8 job created (right category, ACT queue, name + address ONLY), Sheet log row, #new-jobs ping. Dedup on opp_id blocks double-fires.",
+          "watch": ["Job in ServiceM8", "stage 11", "#new-jobs", "#automation-errors", "Make"],
+          "confirmations": [
+            {
+              "q": "Is the automation live and safe?",
+              "state": "confirmed",
+              "a": "Yes. Scenario 1 live + certified x5: webhook secret gate, atomic dedup on opp_id (data store), strip-contact (name + address only), Sheets job log, Slack ping. Scenario 3 back-sync (SM8 Completed → stage 15) also live and idempotent.",
+              "hint": "make-scenario-1-STATE + build plan Phase 0.2/0.4"
+            },
+            {
+              "q": "Pre-deposit drag?",
+              "state": "confirmed",
+              "a": "FORBIDDEN. Deposit-paid is the gate; never drag to 11 before money is in. There is no undo that un-creates the SM8 job.",
+              "hint": "Money-lane stage map warning"
+            }
+          ],
+          "next": [
+            "Confirm the Stripe deposit ping → drag to stage 11. Then verify: SM8 job exists, Sheet row written, #new-jobs pinged.",
+            "No SM8 job within 2 hours → check Make history + #automation-errors, escalate to Marko. Do NOT re-drag to retry; the opp_id dedup will block it anyway, fix the cause instead.",
+            "Photos on the SM8 job are a pending build (Cloudinary → SM8 attach); until then Marko views photos via GHL/Cloudinary.",
+            "Client record find-or-create is deferred (invoicing-only impact); Marko attaches the client at invoice time for the first jobs."
+          ],
+          "copy": [],
+          "customer": "Nothing customer-facing fires at this moment. The customer's next message is the booking confirmation once the date is agreed.",
+          "docs": [
+            { "label": "Scenario 1 build state", "path": "docs/specs/make-scenario-1-STATE-2026-06-04.md" },
+            { "label": "No-contact decision", "path": "docs/specs/decision-sm8-keep-vs-build-2026-06-05.md" }
+          ],
+          "deep": "Chain: GHL stage-11 webhook (secret-gated) → Map Category (6 UUIDs, label-tolerant switch) → Create SM8 Job (Work Order, ACT queue, job_description = name + address only) → Sheets job-log row. The Add Job Contact module was deliberately DROPPED (no-contact rule): customer phone/email never lands in SM8, which is why all customer SMS fire from GHL/Twilio. Failure modes: webhook double-fire (blocked by the opp_id data store with sequential processing), SM8 400 on duplicate client names (find-or-create deferred by design), silent scenario-off (heartbeat monitor is a pending build, so eyeball #new-jobs after every drag).",
+          "children": []
+        },
+        {
+          "id": "book-dispatch-nocontact",
+          "label": "Dispatch the tech (zero contact leak)",
+          "icon": "👷",
+          "status": "partial",
+          "channel": "SM8 / app",
+          "summary": "Jobs 1-3: Marko self-performs. Later: offers go through OUR contractor app (accept/decline logged, never auto-assign). The sub sees NAME + ADDRESS only, never the customer's phone or email. External subs remain gated on the Fair-Work legal clearance.",
+          "watch": ["dispatch", "contractor app", "offer", "decline", "no-contact"],
+          "confirmations": [
+            {
+              "q": "No-contact rule?",
+              "state": "confirmed",
+              "a": "LOCKED: subs get name + address only. All customer comms fire from GHL/Twilio. Anti-poaching: the customer relationship is the #1 asset.",
+              "hint": "Override 16 §4 / decision-sm8-keep-vs-build"
+            },
+            {
+              "q": "Who does the work right now?",
+              "state": "confirmed",
+              "a": "Marko self-performs jobs 1-3. No external sub can sign until the s15AA legal gate clears.",
+              "hint": "Money-lane + legal gate memory"
+            },
+            {
+              "q": "Contractor app state?",
+              "state": "confirmed",
+              "a": "Phases 1-4 deployed: read path, per-sub auth + RLS, accept/decline/handback/complete, SM8 write-back, contact-leak CI. Push notifications (Phase 5) + E2E hardening (Phase 6) pending.",
+              "hint": "Build plan Phase 0.4 + Phase 4b/4c"
+            }
+          ],
+          "next": [
+            "Now: agree the date with Marko first, then confirm with the customer (M2). He works off the SM8 job.",
+            "Later: offer the job in the contractor app to the RIGHT sub first (skills/suburb/availability match, Phase 4h). A decline re-routes to the next sub, never penalise or re-assign.",
+            "Day-of coordination: the sub never texts the customer. Access problems → Marko relays now; masked proxy number at scale (Phase 2 of the booking-comms plan).",
+            "Never add the customer's phone/email anywhere the sub can see: not the SM8 job, not the app, not a diary note."
+          ],
+          "copy": [],
+          "customer": "Our technician gets your address and first name only. All messages and calls run through us on this number, so you always deal with Timeless directly.",
+          "docs": [
+            { "label": "Contractor app blueprint", "path": "docs/specs/contractor-app-blueprint-2026-06-05.md" },
+            { "label": "Sub-engagement model (locked)", "path": "docs/specs/decision-sm8-keep-vs-build-2026-06-05.md" }
+          ],
+          "deep": "Architecture: sub app → our Supabase backend (sole SM8 key-holder, per-sub JWT + RLS, contact-field filter) → SM8. The logged accept/decline is both the dispatch mechanic and Fair-Work evidence (genuine right of refusal). SM8 itself CANNOT hide client contact details from an assigned staff user (no such permission exists), which is exactly why subs are app users, not SM8 staff, and why the strip-contact change removed phone/email from the job body. Fair-Work guardrails: offer-language not orders, no auto-assign, never penalise declines, subs invoice us, own ABN + $10M PL before any offer.",
+          "children": []
+        },
+        {
+          "id": "book-sms-booking-link",
+          "label": "SM8 SMS Booking Link (self-serve date pick) — planned",
+          "icon": "📅",
+          "status": "todo",
+          "channel": "SMS",
+          "summary": "The planned booking mechanic (per the booking research): on acceptance, office sends a single-use SM8 SMS Booking Link filtered to the assigned tech's availability → customer self-picks a slot → auto-schedules, with auto confirmations + reminders. Zero build, zero leak when configured right.",
+          "watch": ["booking link", "online booking", "SM8 automation", "self-serve"],
+          "confirmations": [
+            {
+              "q": "Is SM8 Online Booking + the Automation add-on configured (services, durations, tech eligibility)?",
+              "state": "ask",
+              "a": "",
+              "hint": "Phase 1 of the booking plan: both add-ons are free; configure services with durations + which tech can do what, then the SMS Booking Link becomes available from the job."
+            },
+            {
+              "q": "Sub security role locked down?",
+              "state": "ask",
+              "a": "",
+              "hint": "Required with this plan: unassigned-jobs OFF, SMS/Email buttons OFF, dispatch board OFF, and keep any mobile number off the job (client/billing contact only, blanked via API after booking)."
+            },
+            {
+              "q": "SMS costs?",
+              "state": "confirmed",
+              "a": "SM8 SMS bundled: Starter $29/100, Growing $79/300, Premium $149/1000, overage A$0.10; booking link / confirmation / reminder = 1 credit each. No GHL seats needed for subs.",
+              "hint": "Booking research report"
+            }
+          ],
+          "next": [
+            "Until configured: dates are agreed by text from GHL (Allan proposes days after the deposit, per M1).",
+            "To turn on (Phase 1, this can be done in a day): enable Online Booking Services with durations + tech eligibility → on acceptance send the SMS Booking Link filtered to the assigned tech → customer picks → SM8 auto-schedules → auto confirmation + reminder fire.",
+            "Keep GHL as the message source of record: log the booked slot back into the GHL opp (stage 14 + job_date/job_time fields) so the confirm + day-before workflows can merge them.",
+            "Phase 2 (2-4 dev days, inside the contractor app): masked relay chat so customer and sub can message without either seeing a number."
+          ],
+          "copy": [],
+          "customer": "I will text you a booking link where you can pick the day and time that suits you. It only shows times our technician is actually free, and you will get an automatic confirmation once you pick.",
+          "docs": [
+            { "label": "Booking mechanics research", "path": "docs/media-archiver" }
+          ],
+          "deep": "Why this design: Surface Care books via SM8's built-in flows (two-way branded SMS from the job card + booking links), but their way leaks the customer number to the tech by design, fine for them, fatal for our no-contact rule. Our Phase 1 keeps their convenience (self-serve slot pick filtered to real availability, auto reminders) while the security-role lockdown + strip-contact keep the number out of the sub's hands. Residual risk: any mobile stored on a job contact is visible to an assigned staff user, so the mitigation is keeping numbers on the client/billing contact only and blanking the job-contact mobile via the jobcontact API after the booking confirms.",
+          "children": []
+        },
+        {
+          "id": "book-confirm-stage14",
+          "label": "Booking confirmed (stage 14 Job Booked)",
+          "icon": "✅",
+          "status": "partial",
+          "stage": 14,
+          "channel": "SMS",
+          "summary": "Date agreed → send M2 from the GHL conversation → drag to stage 14 Job Booked. Automation (stage-14 entry auto-sends the confirm) is pipeline 1.3, not built yet, M2 is manual until then.",
+          "watch": ["Job Booked", "stage 14", "booking confirm", "job_date"],
+          "confirmations": [
+            {
+              "q": "Booking-confirm workflow built?",
+              "state": "ask",
+              "a": "",
+              "hint": "Pipeline 1.3 (45 min): stage-14 entry sends the confirmation from the appointment fields. Until then send M2 manually."
+            },
+            {
+              "q": "Custom fields to fill?",
+              "state": "confirmed",
+              "a": "job_date (Date), job_time (text), job_address (text). Fill them at booking so 3A/3B workflow merges resolve later.",
+              "hint": "customer-comms required-fields table"
+            }
+          ],
+          "next": [
+            "Agree the date with Marko/tech FIRST, then the customer. Never confirm a date the tech has not committed to.",
+            "Send M2 with date + arrival window → drag the opp to stage 14.",
+            "Fill job_date / job_time / job_address on the opp at the same time.",
+            "Customer needs to change the date → no drama, rebook, resend M2, update the fields. Repeated no-shows → the $100 callout SOP (workflow 1.1m, spec pending)."
+          ],
+          "copy": [
+            {
+              "label": "M2 Booking confirm (manual, Allan-voiced, live pack)",
+              "text": "Locked in {{first_name}}. Your {{service_summary}} is booked for {{date}}, arrival between {{window}}. It takes about {{duration}} on the day and the area is ready to use 24 hours after we finish. Deposit received, balance only due after the job. Anything changes, just reply here. Allan"
+            },
+            {
+              "label": "3A Booking Confirmed (GHL workflow version, for the 1.3 build)",
+              "text": "Hi {{contact.first_name}}, you're booked in! ✅\n\n📅 {{custom.job_date}}\n⏰ {{custom.job_time}}\n📍 {{custom.job_address}}\n\nOur technician will text you 30 minutes before arrival. If anything changes, just reply to this text.\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "You are locked in for the agreed date with an arrival window. The deposit is received and the balance is only due after the job. If anything changes, just reply to the thread.",
+          "docs": [
+            { "label": "M2 (money lane §3)", "path": "docs/sop/money-lane-first-jobs.md" },
+            { "label": "3A template", "path": "docs/templates/customer-comms-templates.md" }
+          ],
+          "deep": "M2 deliberately restates the cure-time expectation ('ready to use 24 hours after we finish') so job-day friction is pre-answered. Duration + window come from the job recipe; for a basin job the day-of ask is small (benchtop + under-sink cupboard). The 3A variant exists for the automated version, note its 'technician will text you 30 minutes before arrival' line commits us to the on-my-way text, which is fired by US (GHL/Twilio), never by the sub directly.",
+          "children": []
+        },
+        {
+          "id": "book-day-before",
+          "label": "Day-before reminder",
+          "icon": "🔔",
+          "status": "partial",
+          "channel": "SMS",
+          "summary": "The afternoon before the job: M3 (manual now). Automation = pipeline 1.4, blocked on agreeing the GHL appointment-field convention so the trigger has a real date to count from. Reminders cut no-shows 30-50%.",
+          "watch": ["day-before", "reminder", "tomorrow", "prep"],
+          "confirmations": [
+            {
+              "q": "Day-before workflow built?",
+              "state": "ask",
+              "a": "",
+              "hint": "Pipeline 1.4 (1 hr) needs the calendar/appointment field convention agreed first. Manual M3 until then."
+            }
+          ],
+          "next": [
+            "Afternoon before the job → send M3 with the arrival window + the specific prep ask for the job type.",
+            "Prep asks by job: basin = clear the benchtop + under-sink cupboard; bath/shower = clear personal items from the area; all jobs = ventilation access helps.",
+            "Customer replies with a change → rebook calmly, update stage 14 fields, re-confirm.",
+            "No reply needed to proceed, the reminder is one-way unless they raise something."
+          ],
+          "copy": [
+            {
+              "label": "M3 Day-before (manual, Allan-voiced, live pack)",
+              "text": "Hi {{first_name}}, quick reminder we are coming tomorrow, arriving between {{window}}, for your {{service_summary}}. If you can, please clear the area (for a basin job, just the benchtop and the cupboard underneath). If anything has changed reply here. See you tomorrow. Allan"
+            },
+            {
+              "label": "3B Day-Before Reminder (GHL workflow version, for the 1.4 build)",
+              "text": "Hey {{contact.first_name}}, quick reminder, your bathroom service is tomorrow!\n\n📅 {{custom.job_date}} at {{custom.job_time}}\n\nPlease make sure the bathroom area is cleared of personal items. Our tech will text you 30 min before they arrive. 👍\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "Quick reminder we are coming tomorrow within the arrival window. Please clear the work area if you can. Anything changed, just reply.",
+          "docs": [
+            { "label": "M3 (money lane §3)", "path": "docs/sop/money-lane-first-jobs.md" },
+            { "label": "3B template", "path": "docs/templates/customer-comms-templates.md" }
+          ],
+          "deep": "This message earns its keep twice: it prevents no-shows and it pre-clears the workspace so the tech starts on time (a cleared bathroom saves 15-30 min). Transactional under the Spam Act, no STOP line. Edge case: tenant-occupied rentals, confirm WHO will be home and who holds the key the day before, not the morning of.",
+          "children": []
+        },
+        {
+          "id": "book-hold-issue",
+          "label": "Parking bays: Job on Hold / Job Issue (stages 12-13)",
+          "icon": "🚨",
+          "status": "partial",
+          "stage": 12,
+          "channel": "GHL + Slack",
+          "summary": "Stage 12 Job on Hold = stalled jobs (strata approval, landlord authority, asbestos assessment, margin review) with a 14-day force-decision. Stage 13 Job Issue = something broke; alert + same-day customer call. Day-of cancellation has its own script (7D).",
+          "watch": ["Job on Hold", "Job Issue", "stage 12", "stage 13", "#job-issues"],
+          "confirmations": [
+            {
+              "q": "Hold discipline?",
+              "state": "confirmed",
+              "a": "14-day force-decision on stage 12 (Decision 2): by day 14 the job either moves forward or exits with a clean message.",
+              "hint": "Override 14 v4 stage table"
+            },
+            {
+              "q": "Hold-reason taxonomy + issue routing built?",
+              "state": "ask",
+              "a": "",
+              "hint": "Pipeline/spec 1.1s (hold-reason field: strata / landlord / asbestos / margin) and 1.1n (issue routing to #job-issues) are still open. Track reasons manually in notes meanwhile."
+            }
+          ],
+          "next": [
+            "Job stalls on an external approval → stage 12, note the reason, set a 14-day decision date, tell the customer exactly what we are waiting on.",
+            "On-site problem (asbestos found, substrate failure, access) → stage 13, ping #job-issues, call the customer the same day with the plan.",
+            "Sub/tech cancels day-of → send 7D immediately with a real reschedule option + a small goodwill gesture. Never blame the sub publicly, always say we.",
+            "Hold passes day 14 → force the decision: reschedule, re-scope, or exit politely via the rejection path."
+          ],
+          "copy": [
+            {
+              "label": "7D Day-of reschedule (sub cancelled; customer never hears whose fault)",
+              "text": "Hi {{contact.first_name}}, quick update, we need to reschedule your bathroom service today. We're really sorry about the short notice.\n\nEarliest reschedule we can offer: [next available]. Free to chat through options on [phone].\n\nAs a thank-you for the inconvenience, we'll [free silicone reseal at 6mo / $50 off / etc, small goodwill].\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "If a job stalls: here is exactly what we are waiting on, here is when we will next update you, and your deposit is safe. If we ever cancel on you, we reschedule you first and the deposit is always refundable if we caused it.",
+          "docs": [
+            { "label": "7D template", "path": "docs/templates/customer-comms-templates.md" },
+            { "label": "Sub-risk playbook (scenario 2)", "path": "docs/sop/sub-risk-scenarios-playbook.md" }
+          ],
+          "deep": "Stage 12 exists so stalled jobs never rot invisibly in Booked; the 14-day force-decision is the anti-zombie rule. Stage 13 is the SOS lane: its job is speed of honesty, the customer hears from us before they notice something is wrong. The 7D goodwill gesture is deliberately small and concrete (free reseal / $50 off), enough to mark respect without training discounts. Deposit handling on our cancellation: always refundable, per the locked ladder.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "phase-5-job-day-payment",
+      "label": "5. Job day → payment",
+      "icon": "🔧",
+      "status": "partial",
+      "channel": "SMS + Xero + Stripe",
+      "summary": "On-my-way text → job done → cure-time note (M4) → back-sync flips stage 15 → Xero invoice by SMS the same evening (M5) WITH the signed warranty PDF → paid + reconciled. Overdue runs M6/M7/M8, max three touches.",
+      "watch": ["Job Complete", "stage 15", "invoice", "balance", "Payment Status"],
+      "confirmations": [
+        {
+          "q": "How does stage 15 get set?",
+          "state": "confirmed",
+          "a": "Automatically: Marko/tech marks the SM8 job Completed → Scenario 3 back-sync moves the opp to stage 15 (idempotent). Do NOT drag it by hand.",
+          "hint": "Build plan Phase 0.4 + money-lane stage map"
+        },
+        {
+          "q": "Where does payment state live?",
+          "state": "confirmed",
+          "a": "NOT in pipeline stages: the old Job Invoiced / Job Paid stages were deleted. Finance lives in the Payment Status custom field (not_invoiced / invoiced / paid / overdue) + the Accounts pipeline (Phase 3 build).",
+          "hint": "Override 14 v4"
+        }
+      ],
+      "next": [
+        "Morning of: on-my-way text. After completion: M4 within the hour, invoice + warranty the same evening, reminders only on the fixed cadence."
+      ],
+      "customer": "The finish should feel as managed as the start: a heads-up before arrival, a care note at handover, a clean invoice with the deposit already deducted, and the warranty document in hand.",
+      "docs": [
+        { "label": "Money lane §3-5 (M3.5-M8)", "path": "docs/sop/money-lane-first-jobs.md" }
+      ],
+      "deep": "The whole phase is manual by design for the first jobs (no new automation mid-job); every step later gets replaced by a workflow only after its DoD test passes. The invoice chain: Xero invoice for the FULL price inc GST, deposit recorded against it (Stripe Clearing Account), balance = price minus deposit, due 7 days, Stripe pay-now on. HBA guard: every invoice under $5,000 inc GST.",
+      "children": [
+        {
+          "id": "job-on-my-way",
+          "label": "On-my-way text (30 min out)",
+          "icon": "🚗",
+          "status": "partial",
+          "channel": "SMS",
+          "summary": "The single most impactful wow moment in the whole journey, and most tradies never send it. Fired by US from the GHL conversation (M3.5 Allan-voiced now, 3C the workflow version later), never by the sub.",
+          "watch": ["on my way", "on-the-way", "arrival", "30 minutes"],
+          "confirmations": [
+            {
+              "q": "Who sends it?",
+              "state": "confirmed",
+              "a": "We do, from GHL/Twilio. The sub never texts the customer (no-contact rule). At most the office triggers SM8's on-the-way action, but GHL is the channel of record.",
+              "hint": "No-contact rule + booking research Phase 1"
+            }
+          ],
+          "next": [
+            "Morning of the job, about 30 minutes before arrival: send M3.5 (or 3C).",
+            "Marko texts Allan when he leaves → Allan fires the message. At scale this becomes a one-tap office action.",
+            "Running late → send an updated ETA the moment you know, never let the window lapse silently."
+          ],
+          "copy": [
+            {
+              "label": "M3.5 On-the-way (Allan-voiced, live pack, optional but worth it)",
+              "text": "Morning {{first_name}}, Allan here. We are on the way and expect to arrive around {{eta}}. See you soon."
+            },
+            {
+              "label": "3C On-My-Way (workflow version)",
+              "text": "Hi {{contact.first_name}}, your technician is on the way, arriving in about 30 minutes! 🚗\n\n- Timeless Resurfacing"
+            }
+          ],
+          "customer": "We are on the way and expect to arrive around the time given. Nothing needed from you except access to the area.",
+          "docs": [
+            { "label": "M3.5 + 3C", "path": "docs/sop/money-lane-first-jobs.md" }
+          ],
+          "deep": "3A already promised this text ('our technician will text you 30 minutes before arrival'), so skipping it is a broken promise, not just a missed nicety. Mechanics while manual: the tech tells the office they are rolling, the office sends. The trust payoff compounds into the review ask later the same day.",
+          "children": []
+        },
+        {
+          "id": "job-complete-stage15",
+          "label": "Job complete: cure note + invoice + warranty (stage 15)",
+          "icon": "🏅",
+          "status": "partial",
+          "stage": 15,
+          "channel": "SMS + Xero",
+          "summary": "Tech marks the SM8 job Completed → stage 15 flips automatically. Send M4 (cure-time) within the hour, then the Xero invoice by SMS (M5) the same evening WITH the signed warranty PDF from the quote app. Email stays off until DKIM.",
+          "watch": ["Job Complete", "stage 15", "back-sync", "invoice", "warranty"],
+          "confirmations": [
+            {
+              "q": "Warranty document?",
+              "state": "confirmed",
+              "a": "The quote app generates the signed warranty PDF. It is handed/sent WITH the final invoice. Per-material terms hold: grout 2yr / silicone 1yr / resurface up to 5yr, 'Up to 5-Year' only with qualifying text.",
+              "hint": "Quote app v8 + STATE §15 warranty rules"
+            },
+            {
+              "q": "Invoice mechanics?",
+              "state": "confirmed",
+              "a": "Xero invoice, FULL price inc GST (GST registered, tax-inclusive line), deposit recorded against it (Stripe Clearing Account), due 7 days, Stripe pay-now ON, sent as the online invoice link by SMS. Every invoice under $5,000 inc GST.",
+              "hint": "Money-lane §4"
+            },
+            {
+              "q": "Westpac bank feed in Xero verified active?",
+              "state": "ask",
+              "a": "",
+              "hint": "STATE §2 flags it unverified; reconciliation depends on it. Check before the first real balance payment lands."
+            }
+          ],
+          "next": [
+            "SM8 job marked Completed → confirm the opp landed on stage 15 by itself (back-sync). Do not drag.",
+            "Send M4 within 30-60 minutes of completion while the wow is fresh. Match the cure window to what was said on the day: 24h basin, 24 to 48h bath/shower.",
+            "Same evening: build the Xero invoice per money-lane §4 (contact from GHL, plain-words scope line, full price inc GST, deposit recorded, due 7 days, Stripe pay-now on) → approve → copy the online invoice link.",
+            "Send M5 by SMS with the link, and attach/send the signed warranty PDF from the quote app in the same conversation.",
+            "Set Payment Status = invoiced on the opp. When the balance pays: reconcile both Stripe rows against the invoice, set Payment Status = paid."
+          ],
+          "copy": [
+            {
+              "label": "M4 Done + cure note (Allan-voiced; bath/shower variant says '24 to 48 hours')",
+              "text": "All done {{first_name}}! One care note: please give the new surface 24 hours before using it, then it is good to go. I will text your invoice shortly. Thanks for trusting us with the job. Allan"
+            },
+            {
+              "label": "M5 Invoice (Allan-voiced, live pack)",
+              "text": "Hi {{first_name}}, here is your invoice for the completed job. You can pay by card through the link or bank transfer using the details on it. The deposit you paid is already deducted. Any questions just reply. Thanks again, Allan: {{xero_invoice_link}}"
+            },
+            {
+              "label": "3D Job Complete + Balance (workflow version, needs invoice_link/balance fields)",
+              "text": "All done, {{contact.first_name}}! Your bathroom's looking fresh ✨\n\nHere's your invoice for the remaining balance:\n${{custom.balance_amount}} - {{custom.invoice_link}}\n\nPay online, by phone ([phone]), or bank transfer (BSB [XX] ACC [XX] Ref: {{document.number}}).\n\nThanks for choosing Timeless Resurfacing! 🙏"
+            }
+          ],
+          "customer": "All done. Give the new surface 24 hours before using it (24 to 48 for a bath or shower), then it is good to go. Your invoice is coming by text with the deposit already deducted, and your warranty document comes with it.",
+          "docs": [
+            { "label": "Invoice SOP (money lane §4)", "path": "docs/sop/money-lane-first-jobs.md" },
+            { "label": "Warranty generator (quote app)", "path": "docs/quote-app" },
+            { "label": "Aftercare cards", "path": "docs/templates/customer-aftercare-cards.md" }
+          ],
+          "deep": "Sequencing matters: cure note first (care), invoice same evening (momentum), warranty WITH the invoice (value lands with the ask). The physical aftercare card left on-site is the companion to M4. Cure-time aftercare automation is pipeline 1.5 (stage-15 trigger, variant by category); the emailed warranty-certificate workflow is 1.1j and explicitly POST-DKIM. Photo consent: the before/after pair is marketing gold, but nothing gets published without the photo_consent_marketing ask (Phase 2f), a one-line ask at completion is the plan.",
+          "children": []
+        },
+        {
+          "id": "job-payment-chase",
+          "label": "Balance + overdue cadence (M6 / M7 / M8)",
+          "icon": "💰",
+          "status": "partial",
+          "channel": "SMS",
+          "summary": "Most customers forget, not avoid: one reminder collects 80%+ of balances. Fixed maximum cadence: day 7 M6 (friendly), day 14 M7 (firmer, Accounts-voiced), day 30 M8 (final, only if formal recovery is genuinely intended). Business hours only.",
+          "watch": ["overdue", "balance", "payment reminder", "Payment Status", "invoice"],
+          "confirmations": [
+            {
+              "q": "Cadence limits?",
+              "state": "confirmed",
+              "a": "M6 day 7 / M7 day 14 / M8 day 30 is the MAXIMUM, no extra messages between steps. RG 96 binds us as a creditor: business hours, identify yourself, offer a dispute path, no pressure beyond facts.",
+              "hint": "Money-lane §5"
+            },
+            {
+              "q": "Voice rules?",
+              "state": "confirmed",
+              "a": "M1-M6 Allan-voiced. M7 + M8 send as 'Accounts, Timeless Resurfacing' role voice (never an invented name) and move to EMAIL once DKIM is live (Decision 13).",
+              "hint": "Money-lane Decision 13"
+            },
+            {
+              "q": "M8 rule?",
+              "state": "confirmed",
+              "a": "Send M8 only if formal recovery is genuinely intended, empty threats are misleading conduct under RG 96. After M8 + 7 days: formal letter of demand, then NCAT/small claims (NSW, under $20k). Unpaid >30 days also opens the demand-letter path; >45 days a SOPA payment claim.",
+              "hint": "Money-lane §5 + sub-sopa-protections"
+            }
+          ],
+          "next": [
+            "Day 7 unpaid → M6, friendly, card link restated.",
+            "Day 14 → M7, firmer, offer to sort any issue, Accounts voice.",
+            "Day 30 → M8 final notice ONLY if you will actually pursue recovery. Then + 7 days: letter of demand (sub-risk playbook §10 template), then NCAT.",
+            "Keep every reminder free of any upsell, promo, review ask or marketing link, that is what keeps them transactional (no STOP line needed).",
+            "Any dispute raised → stop the cadence, resolve on the merits (refund ladder if justified), restart only if unresolved and owed.",
+            "Later: this whole cadence moves to Accounts-pipeline auto-age workflows (Phase 3), do not build it mid-job."
+          ],
+          "copy": [
+            {
+              "label": "3E Payment Reminder (workflow version, 48h gentle)",
+              "text": "Hi {{contact.first_name}}, just a gentle reminder, your bathroom service balance of ${{custom.balance_amount}} is outstanding.\n\nPay here: {{custom.invoice_link}}\n\nAny questions, just reply. 👍\n\n- Timeless Resurfacing"
+            },
+            {
+              "label": "M6 Day 7 (Allan-voiced)",
+              "text": "Hi {{first_name}}, Allan here. Friendly nudge that your invoice is still open. The card link takes about a minute, and if anything on the invoice looks wrong tell me and I will fix it: {{xero_invoice_link}}"
+            },
+            {
+              "label": "M7 Day 14 (Accounts voice per Decision 13)",
+              "text": "Hi {{first_name}}, your invoice from {{job_date}} is now two weeks overdue. If something is holding things up, reply and we will sort it together. Otherwise I would appreciate it being settled this week. Allan: {{xero_invoice_link}}"
+            },
+            {
+              "label": "M8 Day 30 final (only if formal recovery genuinely intended)",
+              "text": "Hi {{first_name}}, final reminder about the unpaid invoice from {{job_date}}. If it is not paid or a plan agreed in the next 7 days I will need to start formal recovery, which I would much rather avoid. Reply here and we can still sort it out. Allan"
+            }
+          ],
+          "customer": "Always face-saving: most people just forgot. The card link takes a minute, and if anything on the invoice looks wrong tell me and I will fix it.",
+          "docs": [
+            { "label": "Overdue cadence + RG 96 notes", "path": "docs/sop/money-lane-first-jobs.md" },
+            { "label": "SOPA path", "path": "docs/sop/sub-sopa-protections.md" }
+          ],
+          "deep": "Payment reminders for a completed service are transactional, not marketing, PROVIDED they carry zero sales content (ACMA enforcement treats an upsell line as converting the whole message). The M7/M8 wording predates Decision 13's Accounts voice, so when they move to email the sign-off changes from 'Allan' to 'Accounts, Timeless Resurfacing' without changing substance. Chargebacks: respond inside Stripe's deadline with the quote thread, customer photos, completion photos, invoice, and booking confirmation, never ignore one.",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "after",
+      "label": "6. After: reviews, referrals, win-back",
+      "icon": "🌟",
+      "status": "todo",
+      "channel": "SMS + Email",
+      "summary": "The growth engine: NPS 2 hours after completion, Google review ask to EVERY customer (no gating), personal callback for detractors, $50 referral at day 7, PM nurture, and the 30/90-day win-backs. All templates ready; workflows W10/W11 not yet built.",
+      "watch": ["nps", "review", "referral", "win-back", "google"],
+      "confirmations": [
+        {"q": "Review policy", "state": "confirmed", "a": "Ask EVERY customer regardless of NPS score. No review-gating (ACCC-compliant, Decision 4 Option A). Detractors get a callback AND still get the review invite."},
+        {"q": "Referral offer", "state": "confirmed", "a": "$50 gift card when a referred friend books and mentions their name (template 4D, day 7, NPS 7+)."},
+        {"q": "google_review_link custom field created in GHL?", "state": "ask", "a": "", "hint": "Google Business Profile, Write a review, copy the URL into a GHL custom field. 4B cannot fire without it."},
+        {"q": "W10 (NPS + review) and W11 (referral) built in GHL?", "state": "ask", "a": "", "hint": "Build plan items 1.9-1.11. Manual sends work fine until then."}
+      ],
+      "next": [
+        "2 hours after job complete: send 4A NPS ask (manual until W10 exists)",
+        "Whatever the score: send 4B review ask; if score 1-6 call them within 60 minutes FIRST, then the invite still goes",
+        "Day 7 after completion (score 7+): send 4D referral offer",
+        "Quote declined or expired: 2F day 8, then 6A SMS day 30, then 6B email day 90"
+      ],
+      "customer": "After the review ask, if they hesitate: it takes 30 seconds, a star rating and one sentence is perfect, and it genuinely helps other homeowners find us.",
+      "docs": [
+        {"label": "Comms templates §4-6", "path": "docs/templates/customer-comms-templates.md"},
+        {"label": "Review strategy + vetoed tactics", "path": "docs/CEO.md"}
+      ],
+      "deep": "Why this phase IS the marketing budget: a review flywheel plus referrals at $50 beats $100-300 paid CAC, and 25-30% of Surface Care's revenue is repeat/PM business. Sequence per customer: 4A NPS at +2h (reply 1-10) routes promoter/passive/detractor tags; 4B Google review to ALL (never gated); 4C internal Slack alert on 1-6 with Allan calling inside 60 minutes (service-recovery paradox: a recovered detractor often becomes a promoter, an ignored one becomes a 1-star); 4D $50 referral at day 7 for 7+. Lost quotes: 2F day 8 leaves the door open, 6A day 30 offers a fresh price, 6B day 90 is the last automated touch. PM contacts (like AitkenRE) move to the Section-5 nurture instead of win-back.",
+      "children": [
+        {
+          "id": "after-nps",
+          "label": "NPS ask (4A, +2 hours)",
+          "icon": "📊",
+          "status": "todo",
+          "channel": "SMS",
+          "summary": "Two hours after Job Complete: one question, reply 1-10. Routes everything after it.",
+          "copy": [
+            {"label": "4A NPS Request (W10, canonical)", "text": "Hi {{contact.first_name}}, quick question, how'd we go today?\n\nReply with a number from 1-10 (10 = amazing). 📊\n\n- Timeless Resurfacing"}
+          ],
+          "next": ["Score 9-10: tag nps_promoter, send 4B now, 4D at day 7", "Score 7-8: tag nps_passive, send 4B (no referral)", "Score 1-6: 4C internal alert, Allan calls within 60 min, 4B still goes after the call"],
+          "docs": [{"label": "4A + routing", "path": "docs/templates/customer-comms-templates.md"}],
+          "children": []
+        },
+        {
+          "id": "after-review",
+          "label": "Google review ask (4B, ALL customers)",
+          "icon": "⭐",
+          "status": "todo",
+          "channel": "SMS",
+          "summary": "Fires after NPS regardless of score. No gating, ever (ACCC).",
+          "copy": [
+            {"label": "4B Google Review Request (canonical)", "text": "That's awesome, thanks {{contact.first_name}}! 🎉\n\nWould you mind leaving us a quick Google review? It really helps other homeowners find us.\n\nTap here: {{custom.google_review_link}}\n\n(Takes 30 seconds, just a star rating and a sentence is perfect!) ⭐\n\n- Timeless Resurfacing | Reply STOP to opt out"}
+          ],
+          "confirmations": [
+            {"q": "google_review_link field populated?", "state": "ask", "a": "", "hint": "GBP, Write a review, copy URL."}
+          ],
+          "docs": [{"label": "4B", "path": "docs/templates/customer-comms-templates.md"}],
+          "children": []
+        },
+        {
+          "id": "after-detractor",
+          "label": "Detractor recovery (4C, internal only)",
+          "icon": "🚨",
+          "status": "todo",
+          "channel": "Slack + phone",
+          "summary": "NPS 1-6: internal alert, Allan calls within 60 minutes. Never an automated customer-facing reply to a low score.",
+          "copy": [
+            {"label": "4C Internal Slack alert (never customer-facing)", "text": "🚨 Low NPS alert\nContact: {{contact.first_name}} {{contact.last_name}}\nPhone: {{contact.phone}}\nJob: {{custom.service_summary}}\nNPS score: [their reply]\n\nAction: Call within 60 minutes. Listen. Fix if possible. Offer subcontractor return at no cost."}
+          ],
+          "customer": "On the call: listen first, do not defend. Offer to come back and fix it at no cost. A fixed problem plus a photographed fix is how a 1-star becomes a 5-star.",
+          "docs": [{"label": "4C + service-recovery paradox", "path": "docs/templates/customer-comms-templates.md"}],
+          "children": []
+        },
+        {
+          "id": "after-referral",
+          "label": "$50 referral (4D, day 7)",
+          "icon": "🎁",
+          "status": "todo",
+          "channel": "SMS",
+          "summary": "Day 7 after completion, NPS 7+ only. $50 gift card when the referred friend books.",
+          "copy": [
+            {"label": "4D Referral Request (W11, canonical)", "text": "Hey {{contact.first_name}}, hope you're still loving the bathroom! 🛁\n\nKnow anyone who needs their bathroom freshened up? If they mention your name when they book, we'll send you a $50 gift card as a thank you. 🎁\n\nJust have them text us on [phone] or go to [website]. Cheers!\n\n- Timeless Resurfacing | Reply STOP to opt out"}
+          ],
+          "next": ["When a referred lead books: tag referred_by_[firstname-suburb] and pay the $50 promptly, the payout IS the marketing"],
+          "docs": [{"label": "4D", "path": "docs/templates/customer-comms-templates.md"}],
+          "children": []
+        },
+        {
+          "id": "after-nurture",
+          "label": "PM / builder nurture (5A-5D)",
+          "icon": "🏢",
+          "status": "todo",
+          "channel": "Email",
+          "summary": "Property managers and builders are 25-30% of the model's revenue. AitkenRE (TR-1024) is our first live PM relationship: if they accept, they enter this lane, not win-back.",
+          "next": ["After a PM's first completed job: ask about their maintenance panel + offer the bulk arrangement (10% off 3+ properties/month per CEO.md)"],
+          "docs": [{"label": "Templates 5A-5D (Phase-10 growth)", "path": "docs/templates/customer-comms-templates.md"}],
+          "children": []
+        },
+        {
+          "id": "after-winback",
+          "label": "Win-back: day 30 SMS + day 90 email",
+          "icon": "🔁",
+          "status": "todo",
+          "channel": "SMS + Email",
+          "summary": "For quotes that expired (day 8) or were declined. Lisa Vruwink is the first live case: win-back due ~6 Aug 2026.",
+          "copy": [
+            {"label": "6A 30-day win-back SMS (canonical)", "text": "Hey {{contact.first_name}}, it's Timeless Resurfacing. We quoted your bathroom a month ago.\n\nStill thinking about it? Your price may have changed. Reply \"QUOTE\" for a fresh one. No obligation. 📱\n\nReply STOP to opt out"},
+            {"label": "6B 90-day win-back email (PENDING: body says 'quote within 2 hours', stale vs the locked 24-hour promise, fix before use)", "text": "Subject: {{contact.first_name}}, your bathroom hasn't fixed itself yet 😉\n\nHi {{contact.first_name}},\n\nWe quoted your {{custom.area_selected}} work back in [month]. If it's still on your list, we're still here.\n\nSame deal: send us photos, get a quote within 2 hours, no obligation.\n\n[CTA: GET A FRESH QUOTE →]\n\nCheers,\nTimeless Resurfacing\n\nUnsubscribe"}
+          ],
+          "next": ["Reply QUOTE: review the photos still on file, send a fresh quote, move back to stage 1"],
+          "docs": [{"label": "6A/6B", "path": "docs/templates/customer-comms-templates.md"}],
+          "children": []
+        }
+      ]
+    }
+  ]
+}
