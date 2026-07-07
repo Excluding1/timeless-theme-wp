@@ -25,6 +25,7 @@ function toAssignment(a: Row, j: Row) {
       reference_photos: [],
       required_photos: Array.isArray(j.required_photos) ? j.required_photos : [],
       work_days: 1,
+      chat_enabled: j.chat_enabled !== false,
     },
     sub_pay: { amount: Number(a.sub_pay_amount ?? 0), currency: 'AUD' },
     part_label: a.part_label ?? null,
@@ -34,6 +35,8 @@ function toAssignment(a: Row, j: Row) {
     current_day: 1,
     problem: a.problem_open ? { reason: (a.problem_reason as string) ?? '', status: 'open' } : null,
     decline_reason: a.decline_reason ?? null,
+    eta_minutes: a.eta_minutes ?? null,
+    eta_sent_at: a.eta_sent_at ?? null,
   };
 }
 

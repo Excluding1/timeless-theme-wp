@@ -2,7 +2,7 @@
 // Supabase client implements the SAME interface later -> "wire Supabase" = one new
 // file (supabaseApi.ts) + flip the export at the bottom. Pages/stores import `api`, never a concrete impl.
 import type {
-  Assignment, AvailabilityWindow, SubProfile, PhotoKind,
+  Assignment, AvailabilityWindow, SubProfile, PhotoKind, JobMessage,
 } from '../types';
 
 export type AcceptResult = { ok: boolean; undo_window_seconds: number };
@@ -24,6 +24,15 @@ export type PhotoPayload = {
   contentType: string;
 };
 
+/** Thrown by chat sends so the UI can phrase the guard kindly. */
+export type ChatErrorCode = 'contact_blocked' | 'rate_limited' | 'chat_disabled' | 'send_failed';
+export class ChatError extends Error {
+  code: ChatErrorCode;
+  constructor(code: ChatErrorCode) { super(code); this.code = code; this.name = 'ChatError'; }
+}
+
+export type Thread = { messages: JobMessage[]; unread: number };
+
 export interface ContractorApi {
   getAvailableJobs(): Promise<Assignment[]>;
   getBookedJobs(): Promise<Assignment[]>;
@@ -36,8 +45,12 @@ export interface ContractorApi {
   registerPhoto(id: string, photo: PhotoPayload): Promise<{ ok: boolean; photo_id: string }>;
   completeJob(id: string): Promise<Ok>;
   reportProblem(id: string, problem: ProblemPayload): Promise<Ok>;
-  messageOffice(id: string, text: string): Promise<Ok>;   // non-urgent note to the office; never pauses (Fair-Work safe)
   getProfile(): Promise<SubProfile>;
+  // ── Job chat (masked relay — the office/GHL sits between sub and customer) ──
+  listMessages(id: string): Promise<Thread>;                    // id = assignment id
+  sendMessage(id: string, body: string): Promise<Ok>;           // throws ChatError on guard refusal
+  sendEta(id: string, minutes: number): Promise<Ok>;            // "On my way" — writes ETA + the message
+  markMessagesRead(id: string): Promise<Ok>;
 }
 
 // ---- Active implementation: the real backend when configured (VITE_SUPABASE_*), else mock data. ----

@@ -15,6 +15,7 @@ import {
   Lock,
 } from 'lucide-react';
 import { useAppStore } from '../lib/store';
+import { api } from '../lib/api';
 import { Button, Badge } from '../components/ui';
 import { BottomSheet } from '../components/BottomSheet';
 import { useSnackbar } from '../components/Snackbar';
@@ -24,6 +25,7 @@ import {
   isLiveOffer,
   isNoLongerAvailable,
   requiredPhotoCount,
+  etaArrival,
   type Assignment,
   type AvailabilityWindow,
 } from '../types';
@@ -42,7 +44,6 @@ export function JobDetail() {
     declineJob,
     submitAvailability,
     completeJob,
-    messageOffice,
     photosForJob,
     isOffline,
     error,
@@ -56,8 +57,7 @@ export function JobDetail() {
   const [showDeclineSheet, setShowDeclineSheet] = useState(false);
   const [showAvailabilitySheet, setShowAvailabilitySheet] = useState(false);
   const [showCompleteSheet, setShowCompleteSheet] = useState(false);
-  const [showMessageSheet, setShowMessageSheet] = useState(false);
-  const [messageText, setMessageText] = useState('');
+  const [unread, setUnread] = useState(0);
 
   const [busy, setBusy] = useState(false);
   const [declineReason, setDeclineReason] = useState('');
@@ -83,6 +83,17 @@ export function JobDetail() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- `detail` is written by fetchJobDetail; including it loops.
   }, [id, fetchJobDetail]);
+
+  // Unread chat badge — quiet fetch; chat only exists once the job is held.
+  useEffect(() => {
+    if (!id || !assignment) return;
+    if (assignment.status !== 'accepted' && assignment.status !== 'in_progress') return;
+    let active = true;
+    void api.listMessages(id)
+      .then((t) => { if (active) setUnread(t.unread); })
+      .catch(() => { /* badge is best-effort */ });
+    return () => { active = false; };
+  }, [id, assignment]);
 
   // Just accepted (from the confirm screen) -> open the availability picker once,
   // unless the sub is mid-Undo.
@@ -197,20 +208,7 @@ export function JobDetail() {
     }
   };
 
-  const handleMessageOffice = async () => {
-    if (busy) return;
-    setBusy(true);
-    try {
-      await messageOffice(assignment.id, messageText.trim());
-      setShowMessageSheet(false);
-      setMessageText('');
-      snackbar.show('Sent to the office ✓');
-    } catch {
-      snackbar.show('Could not send — please try again.');
-    } finally {
-      setBusy(false);
-    }
-  };
+  const arrival = etaArrival(assignment);
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-surface)] pb-28">
@@ -305,6 +303,14 @@ export function JobDetail() {
                 </span>
               </div>
 
+              {/* On-my-way status chip (set from the chat's ETA flow) */}
+              {arrival && booked && (
+                <div className="mb-4 inline-flex items-center gap-2 px-3 py-2 rounded-full bg-[var(--color-accent)]/25 text-[var(--color-primary)] text-xs font-bold">
+                  <Navigation className="w-3.5 h-3.5" />
+                  On the way — arriving ~{format(arrival, 'h:mm a')}
+                </div>
+              )}
+
               {/* Multi-day indicator */}
               {isMultiDay && booked && (
                 <div className="mb-4 flex items-center gap-2 text-sm font-bold text-[var(--color-primary)]">
@@ -396,9 +402,28 @@ export function JobDetail() {
             )}
 
             {awaitingTime && (
-              <Button size="lg" onClick={() => setShowAvailabilitySheet(true)} disabled={isOffline}>
-                {assignment.availability ? 'Update availability' : 'Submit availability'}
-              </Button>
+              <div className="flex flex-col space-y-3">
+                <Button size="lg" onClick={() => setShowAvailabilitySheet(true)} disabled={isOffline}>
+                  {assignment.availability ? 'Update availability' : 'Submit availability'}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="md"
+                  className="gap-2 relative"
+                  onClick={() => navigate(`/job/${assignment.id}/chat`)}
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Messages</span>
+                  {unread > 0 && (
+                    <span
+                      aria-label={`${unread} unread messages`}
+                      className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-[var(--color-error)] text-white text-[10px] font-black flex items-center justify-center"
+                    >
+                      {unread}
+                    </span>
+                  )}
+                </Button>
+              </div>
             )}
 
             {booked && (
@@ -456,11 +481,19 @@ export function JobDetail() {
                   <Button
                     variant="ghost"
                     size="md"
-                    className="flex-1 gap-2"
-                    onClick={() => setShowMessageSheet(true)}
+                    className="flex-1 gap-2 relative"
+                    onClick={() => navigate(`/job/${assignment.id}/chat`)}
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>Message office</span>
+                    <span>Messages</span>
+                    {unread > 0 && (
+                      <span
+                        aria-label={`${unread} unread messages`}
+                        className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-[var(--color-error)] text-white text-[10px] font-black flex items-center justify-center"
+                      >
+                        {unread}
+                      </span>
+                    )}
                   </Button>
                   {/* Hand back — distinct from Decline; for an accepted job (Fair-Work A6). */}
                   <Button
@@ -565,41 +598,6 @@ export function JobDetail() {
         </div>
       </BottomSheet>
 
-      {/* Message the office — non-urgent note (e.g. running late). Does NOT pause the job. */}
-      <BottomSheet isOpen={showMessageSheet} onClose={() => setShowMessageSheet(false)}>
-        <h3 className="text-lg font-bold text-center mb-2">Message the office</h3>
-        <p className="text-sm text-[var(--color-secondary)] mb-5 text-center">
-          A quick note to the office — like running late or a question. For anything that stops the job,
-          use "I have a problem" instead.
-        </p>
-        <div className="flex flex-wrap gap-2 mb-4 justify-center">
-          {['Running late', 'On my way', 'Quick question'].map((chip) => (
-            <button
-              key={chip}
-              type="button"
-              onClick={() => setMessageText(chip)}
-              className="px-4 min-h-[44px] rounded-full border border-gray-200 text-xs font-bold text-[var(--color-secondary)] bg-white hover:bg-gray-50"
-            >
-              {chip}
-            </button>
-          ))}
-        </div>
-        <textarea
-          value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
-          placeholder="Type your message to the office…"
-          aria-label="Message to the office"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 mb-6 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] min-h-[100px] text-base"
-        />
-        <div className="flex flex-col gap-3">
-          <Button size="lg" onClick={handleMessageOffice} disabled={busy || !messageText.trim()}>
-            {busy ? 'Sending…' : 'Send to office'}
-          </Button>
-          <Button size="lg" variant="ghost" onClick={() => setShowMessageSheet(false)} disabled={busy}>
-            Cancel
-          </Button>
-        </div>
-      </BottomSheet>
     </div>
   );
 }

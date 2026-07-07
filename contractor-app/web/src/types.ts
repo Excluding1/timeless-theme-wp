@@ -37,6 +37,19 @@ export type Job = {                 // <- job_mirror
   reference_photos: string[];       // job photos from the quote
   required_photos: PhotoRequirement[]; // PER-SKU + per-day
   work_days: 1 | 2;                 // multi-day (full-bathroom = 2)
+  chat_enabled: boolean;            // office kill switch for the relay thread
+};
+
+// ── Job chat (masked relay: office/GHL sits between the sub and the customer) ──
+export type MessageSender = 'customer' | 'sub' | 'office';
+
+export type JobMessage = {          // <- job_messages
+  id: string;
+  sender: MessageSender;
+  kind: 'chat' | 'eta';
+  body: string;
+  created_at: string;
+  read_at?: string | null;
 };
 
 export type AvailabilityWindow = {
@@ -61,7 +74,19 @@ export type Assignment = {          // <- job_assignments
   current_day?: 1 | 2;              // multi-day progress
   problem?: AssignmentProblem | null; // present + open => "Paused"
   decline_reason?: string | null;   // optional, never required
+  eta_minutes?: number | null;      // "On my way" — how far out the sub said they were
+  eta_sent_at?: string | null;      // when they said it (arrival ≈ eta_sent_at + eta_minutes)
 };
+
+/** Estimated arrival Date while an "On my way" ETA is still meaningful (up to 30min grace), else null. */
+export function etaArrival(a: Pick<Assignment, 'eta_minutes' | 'eta_sent_at'>): Date | null {
+  if (!a.eta_minutes || !a.eta_sent_at) return null;
+  const sent = new Date(a.eta_sent_at).getTime();
+  if (Number.isNaN(sent)) return null;
+  const arrival = sent + a.eta_minutes * 60_000;
+  if (Date.now() > arrival + 30 * 60_000) return null; // stale — stop showing it
+  return new Date(arrival);
+}
 
 export type CapturedPhoto = {       // <- photos
   id: string;

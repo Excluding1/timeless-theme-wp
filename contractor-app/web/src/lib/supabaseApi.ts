@@ -1,7 +1,8 @@
 // supabaseApi — the real ContractorApi: reads via the `my-jobs` Edge Function, writes via `job-actions`,
 // both carrying the sub's JWT so the database RLS scopes everything to them. Swap-in for mockApi.
-import type { ContractorApi, AcceptResult, Ok, ProblemPayload, PhotoPayload } from './api';
-import type { Assignment, AvailabilityWindow, SubProfile } from '../types';
+import type { ContractorApi, AcceptResult, Ok, ProblemPayload, PhotoPayload, Thread, ChatErrorCode } from './api';
+import { ChatError } from './api';
+import type { Assignment, AvailabilityWindow, SubProfile, JobMessage } from '../types';
 import { supabase, FUNCTIONS_URL, ANON_KEY } from './supabase';
 import { blobToBase64 } from './image';
 
@@ -56,11 +57,6 @@ export const supabaseApi: ContractorApi = {
   completeJob: (id) => act('complete', id),
   reportProblem: (id, problem: ProblemPayload) => act('problem', id, { reason: problem.reason, note: problem.note }),
 
-  // Phase 5: route to Marko (Slack/SMS). Accepted now so the UX flows; not yet persisted/routed.
-  async messageOffice(): Promise<Ok> {
-    return { ok: true };
-  },
-
   // Phase 4 (real): upload the bytes to the `photos` Edge Function -> private Storage bucket ->
   // photos row -> durable SM8 2-step attach. The blob also stays in IndexedDB, so a failure here
   // is retried by the store's drain loop — a photo is never lost.
@@ -91,4 +87,43 @@ export const supabaseApi: ContractorApi = {
     const j = await res.json();
     return j.profile as SubProfile;
   },
+
+  // ── Job chat (the `messages` Edge Function; guard refusals surface as ChatError codes) ──
+  async listMessages(id: string): Promise<Thread> {
+    const res = await chatAct('list', id);
+    const j = await res.json();
+    if (!res.ok) throw new Error('messages_failed');
+    return { messages: (j.messages ?? []) as JobMessage[], unread: Number(j.unread ?? 0) };
+  },
+  async sendMessage(id: string, body: string): Promise<Ok> {
+    const res = await chatAct('send', id, { body });
+    if (!res.ok) throw new ChatError(await chatErrorCode(res));
+    return { ok: true };
+  },
+  async sendEta(id: string, minutes: number): Promise<Ok> {
+    const res = await chatAct('eta', id, { minutes });
+    if (!res.ok) throw new ChatError(await chatErrorCode(res));
+    return { ok: true };
+  },
+  async markMessagesRead(id: string): Promise<Ok> {
+    await chatAct('read', id).catch(() => null);
+    return { ok: true }; // best-effort — an unread badge is never worth an error banner
+  },
 };
+
+async function chatAct(action: string, assignmentId: string, extra?: Record<string, unknown>): Promise<Response> {
+  return await fetch(`${FUNCTIONS_URL}/messages`, {
+    method: 'POST',
+    headers: await headers(),
+    body: JSON.stringify({ action, assignment_id: assignmentId, ...extra }),
+  });
+}
+
+async function chatErrorCode(res: Response): Promise<ChatErrorCode> {
+  try {
+    const j = await res.json();
+    const code = String(j.error ?? '');
+    if (code === 'contact_blocked' || code === 'rate_limited' || code === 'chat_disabled') return code;
+  } catch { /* fall through */ }
+  return 'send_failed';
+}

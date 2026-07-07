@@ -10,4 +10,7 @@ verify_jwt = false   # auth = SM8 shared secret (ServiceM8 cannot send a Supabas
 verify_jwt = false   # auth = ADMIN_PROBE_TOKEN (internal probe only)
 
 [functions.reconcile]
-verify_jwt = false   # auth = service-role via pg_cron (Phase 5)
+verify_jwt = false   # auth = ADMIN_PROBE_TOKEN via pg_cron
+
+[functions.messages-inbound]
+verify_jwt = false   # auth = RELAY_WEBHOOK_SECRET (Make cannot send a Supabase JWT)

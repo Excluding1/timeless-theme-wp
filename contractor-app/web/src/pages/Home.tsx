@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { MapPin, WifiOff, AlertTriangle, ImageOff } from 'lucide-react';
+import { MapPin, WifiOff, AlertTriangle, ImageOff, Navigation } from 'lucide-react';
 import { useAppStore } from '../lib/store';
 import { Card, Badge } from '../components/ui';
 import { Button } from '../components/ui';
 import { formatCurrency } from '../lib/utils';
-import { jobUiLabel, type Assignment, type JobUiLabel } from '../types';
+import { jobUiLabel, etaArrival, type Assignment, type JobUiLabel } from '../types';
 
 type Tab = 'available' | 'booked';
 
@@ -75,10 +75,21 @@ function JobCard({ assignment, tab }: { assignment: Assignment; tab: Tab }) {
         </p>
 
         {tab === 'booked' && (
-          <div className="mb-3 text-xs font-medium text-[var(--color-primary)]">
-            {assignment.scheduled_at
-              ? format(new Date(assignment.scheduled_at), "EEE d MMM • h:mm a")
-              : 'Awaiting time'}
+          <div className="mb-3 text-xs font-medium text-[var(--color-primary)] flex items-center gap-2 flex-wrap">
+            <span>
+              {assignment.scheduled_at
+                ? format(new Date(assignment.scheduled_at), "EEE d MMM • h:mm a")
+                : 'Awaiting time'}
+            </span>
+            {(() => {
+              const arrival = etaArrival(assignment);
+              return arrival ? (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--color-accent)]/25 text-[var(--color-primary)] text-[10px] font-bold">
+                  <Navigation className="w-3 h-3" />
+                  On the way · ~{format(arrival, 'h:mm a')}
+                </span>
+              ) : null;
+            })()}
           </div>
         )}
 

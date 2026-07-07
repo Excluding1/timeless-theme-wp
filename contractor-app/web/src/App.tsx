@@ -7,6 +7,7 @@ import { SignIn } from './pages/SignIn';
 import { Home } from './pages/Home';
 import { JobDetail } from './pages/JobDetail';
 import { JobAcceptConfirm } from './pages/JobAcceptConfirm';
+import { JobChat } from './pages/JobChat';
 import { CapturePhotos } from './pages/CapturePhotos';
 import { ReportProblem } from './pages/ReportProblem';
 import { HandBack } from './pages/HandBack';
@@ -65,6 +66,7 @@ function AppRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/job/:id" element={<JobDetail />} />
           <Route path="/job/:id/confirm-accept" element={<JobAcceptConfirm />} />
+          <Route path="/job/:id/chat" element={<JobChat />} />
           <Route path="/job/:id/photos" element={<CapturePhotos />} />
           <Route path="/job/:id/problem" element={<ReportProblem />} />
           <Route path="/job/:id/handback" element={<HandBack />} />

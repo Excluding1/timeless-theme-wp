@@ -1,7 +1,8 @@
 // Mock implementation of ContractorApi (PRD §10). Replaced by a real Supabase
 // client at backend phase. NO customer phone/email anywhere — by design.
-import type { ContractorApi, ProblemPayload } from './api';
-import type { Assignment, SubProfile } from '../types';
+import type { ContractorApi, ProblemPayload, Thread } from './api';
+import { ChatError } from './api';
+import type { Assignment, JobMessage, SubProfile } from '../types';
 
 const MOCK_DELAY = 600;
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -34,6 +35,7 @@ const assignments: Assignment[] = [
       ],
       required_photos: [{ sku: 'BTH-01', label: 'Bath', before: 3, during: 2, after: 4 }],
       work_days: 1,
+      chat_enabled: true,
     },
   },
   {
@@ -52,6 +54,7 @@ const assignments: Assignment[] = [
       reference_photos: ['https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80'],
       required_photos: [{ sku: 'RSC-02', label: 'Floor regrout', before: 3, during: 2, after: 4 }],
       work_days: 1,
+      chat_enabled: true,
     },
   },
   {
@@ -76,6 +79,7 @@ const assignments: Assignment[] = [
         { sku: 'BTH-01', label: 'Bath resurface', before: 3, during: 2, after: 4, day: 2 },
       ],
       work_days: 2,
+      chat_enabled: true,
     },
   },
   {
@@ -96,6 +100,7 @@ const assignments: Assignment[] = [
       reference_photos: [],
       required_photos: [{ sku: 'SIL-01', label: 'Silicone', before: 2, during: 1, after: 3 }],
       work_days: 1,
+      chat_enabled: true,
     },
   },
   {
@@ -120,6 +125,7 @@ const assignments: Assignment[] = [
         { sku: 'BTH-01', label: 'Bath resurface', before: 3, during: 2, after: 4, day: 2 },
       ],
       work_days: 2,
+      chat_enabled: true,
     },
   },
 ];
@@ -188,12 +194,56 @@ export const mockApi: ContractorApi = {
     if (a) a.problem = { reason: problem.reason, note: problem.note, status: 'open' }; // -> Paused
     return { ok: true };
   },
-  async messageOffice() {
-    await delay(MOCK_DELAY);
-    return { ok: true }; // notifies the office (Marko); no job-state change
-  },
   async getProfile() {
     await delay(MOCK_DELAY);
     return PROFILE;
   },
+
+  // ── Job chat (mock thread; mirrors the backend guards so the UX is honest in demo mode) ──
+  async listMessages(id): Promise<Thread> {
+    await delay(250);
+    const msgs = threads.get(id) ?? seedThread(id);
+    return { messages: [...msgs], unread: msgs.filter((m) => m.sender === 'customer' && !m.read_at).length };
+  },
+  async sendMessage(id, body) {
+    await delay(MOCK_DELAY);
+    if (MOCK_CONTACT_RE.test(body)) throw new ChatError('contact_blocked');
+    const msgs = threads.get(id) ?? seedThread(id);
+    const recent = msgs.filter((m) => m.sender === 'sub' && Date.now() - new Date(m.created_at).getTime() < 3600_000);
+    if (recent.length >= 10) throw new ChatError('rate_limited');
+    msgs.push({ id: crypto.randomUUID(), sender: 'sub', kind: 'chat', body, created_at: new Date().toISOString() });
+    return { ok: true };
+  },
+  async sendEta(id, minutes) {
+    await delay(MOCK_DELAY);
+    const a = find(id);
+    if (a) { a.eta_minutes = minutes; a.eta_sent_at = new Date().toISOString(); }
+    const msgs = threads.get(id) ?? seedThread(id);
+    msgs.push({
+      id: crypto.randomUUID(), sender: 'sub', kind: 'eta',
+      body: `On my way — arriving in about ${minutes} minutes.`, created_at: new Date().toISOString(),
+    });
+    return { ok: true };
+  },
+  async markMessagesRead(id) {
+    const msgs = threads.get(id);
+    if (msgs) for (const m of msgs) if (m.sender === 'customer' && !m.read_at) m.read_at = new Date().toISOString();
+    return { ok: true };
+  },
 };
+
+// Same shape as the DB guard: email, or an 8+ digit run with common separators.
+const MOCK_CONTACT_RE = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})|(\d([\s.()/-]?\d){7,})/;
+
+const threads = new Map<string, JobMessage[]>();
+function seedThread(id: string): JobMessage[] {
+  const msgs: JobMessage[] = id === 'assign-3'
+    ? [{
+        id: crypto.randomUUID(), sender: 'customer', kind: 'chat',
+        body: 'Hi — just checking you can still make it tomorrow morning?',
+        created_at: new Date(Date.now() - 40 * 60_000).toISOString(), read_at: null,
+      }]
+    : [];
+  threads.set(id, msgs);
+  return msgs;
+}
