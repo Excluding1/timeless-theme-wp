@@ -32,6 +32,17 @@ Cadence: weekly (Friday), after any big build, or on request.
 - Never stage 11 before deposit. Secrets never committed/deployed; rotation list until done.
 - Warranty ladder consistency (5yr/2yr/12mo + 6mo rental) across site, PDFs, quotes.
 
+## Standing triggers (check EVERY run — fire = move the item onto the board)
+| Trigger condition | Fires |
+|---|---|
+| 2-3 partner subs signed to the rate card | **Sub-quote-before-customer-quote loop** (pipeline stages 3-5 go live; every quote gets a real cost under it) |
+| Phase 5 reached OR agent fleet API-limited | **BigQuery data layer** (~$50/mo; sync GHL out nightly; agents query the warehouse — Jordan's architecture) |
+| Money lane automated AND ~20 bathroom jobs done | **Service-line expansion test** (landing page + $5-10/day ads for benchtop/stone repair; fulfil by subcontracting competitors first — James's validation playbook) |
+| Allan admin > ~2h/day OR > ~10 leads/day | **VA hire** (record-yourself-a-week replacement method) |
+| 10 completed jobs with time+cost data | **Profit-per-hour ranking** (which services to push in ads) |
+| Cash buffer $25-30k + 6-8 booked jobs/wk × 4wks | **Employee Phase E1** (Marko trains — employee-transition-plan) |
+Details: docs/research/transcript-strategy-ideas-2026-07-07.md.
+
 ## Inputs it may not skip
 STATE.md · cockpit data · memory MEMORY.md index · git status/log · the pass-bar in
 MASTER-FINALIZATION-MAP (12 conditions) — the overseer's "FINALISED?" verdict is always judged

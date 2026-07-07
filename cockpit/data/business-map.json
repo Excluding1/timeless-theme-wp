@@ -36,7 +36,8 @@
       "next": [
         "Give the margin decision (~25-30% blended) so every quote and forecast uses one number",
         "Confirm or remove the 4.9-star claim",
-        "Restart the weekly Friday review: 15 minutes over the cockpit Monday-brief numbers once the brief bot ships"
+        "Restart the weekly Friday review: 15 minutes over the cockpit Monday-brief numbers once the brief bot ships",
+        "TRIGGER (admin >2h/day or >10 leads/day): VA hire via the record-yourself-a-week replacement method"
       ],
       "docs": [
         {
@@ -151,7 +152,8 @@
       "next": [
         "Get the Google Business Profile fully live with the Mick before/after photos",
         "Post the first 3 organic pieces on IG/FB: Mick before/after, the warranty explainer, the 'we answer in 60 seconds' promise",
-        "When ads start (Phase 8, after money lane): search-only, one campaign per theme, one ad group per service, one dedicated landing page per ad group, measure to the job level from day one (Jordan's exact rules)"
+        "When ads start (Phase 8, after money lane): search-only, one campaign per theme, one ad group per service, one dedicated landing page per ad group, measure to the job level from day one (Jordan's exact rules)",
+        "TRIGGER (money lane automated + ~20 jobs): service-line expansion test — landing page + $5-10/day ads for benchtop/stone repair, fulfil via subcontracting first (James playbook)"
       ],
       "docs": [
         {
@@ -348,7 +350,8 @@
       "next": [
         "Enable SM8 Online Booking + Automation add-ons and define the 6 service categories with durations",
         "Dry-run the full dispatch once end-to-end with Marko as the field worker before the next real job",
-        "Photo discipline: before/during/after on every job (feeds warranty, gallery, GBP, socials and the future photo-harvest automation)"
+        "Photo discipline: before/during/after on every job (feeds warranty, gallery, GBP, socials and the future photo-harvest automation)",
+        "TRIGGER (2-3 partner subs signed): switch on the sub-quote-before-customer-quote loop (pipeline stages 3-5) so every quote carries a real cost"
       ],
       "docs": [
         {
@@ -542,7 +545,8 @@
       "next": [
         "Work the money lane manually (M1-M8 SOP) for the first jobs; automate with Scenarios 4+5 after the R1/R2 answers (which Stripe/Xero event carries the opp id)",
         "Set the deposit policy and put it in the quote acceptance message",
-        "After 10 jobs: build the unit-economics dashboard (revenue, sub cost, margin per job) exactly like Jordan's Looker board"
+        "After 10 jobs: build the unit-economics dashboard (revenue, sub cost, margin per job) exactly like Jordan's Looker board",
+        "TRIGGER (10 jobs of time+cost data): rank services by profit-per-HOUR and push the winners in ads (Adam Hall)"
       ],
       "docs": [
         {
@@ -716,7 +720,8 @@
         "Flip DKIM (15 min) then ship the email twin-set of every SMS template",
         "Rotate the 7 exposed credentials (Phase 6a) and untrack the dashboard .env",
         "Build the Monday CEO brief bot (the #1 Surface Care agent): GHL data + Slack webhook, spec in ai-employees",
-        "Keep BigQuery on the roadmap: Jordan syncs everything out of GHL (~$50/mo) so AI can query the business"
+        "Keep BigQuery on the roadmap: Jordan syncs everything out of GHL (~$50/mo) so AI can query the business",
+        "TRIGGER (Phase 5 / agents API-limited): BigQuery data layer ~$50/mo — sync GHL out nightly, agents query the warehouse"
       ],
       "docs": [
         {
