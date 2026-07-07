@@ -43,6 +43,18 @@
   .need{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #0e2748}
   .need input{margin-top:3px;accent-color:var(--gold);cursor:pointer}.need.done span{text-decoration:line-through;color:var(--muted)}
   .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap} input.nm{background:#04122e;color:#eaf1ff;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;flex:1}
+  /* scoreboard (leading indicators) */
+  .sb-row{display:flex;gap:10px;flex-wrap:wrap}
+  .sb-cell{flex:1;min-width:104px;background:#04122e;border:1px solid var(--line);border-radius:10px;padding:9px 10px;text-align:center}
+  .sb-lbl{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+  .sb-num{font-size:30px;font-weight:800;color:var(--gold);line-height:1.25}
+  .sb-cell .btn{margin-top:2px;padding:4px 16px;font-size:13px}
+  .sb-undo{display:block;margin-top:5px;font-size:11px;color:var(--muted);text-decoration:none;cursor:pointer}.sb-undo:hover{color:var(--err)}
+  table.sb-table{width:100%;margin-top:10px;border-collapse:collapse;font-size:12px}
+  .sb-table th{color:var(--muted);font-weight:700;text-align:right;padding:3px 6px;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+  .sb-table td{padding:3px 6px;text-align:right;border-bottom:1px solid #0e2748;color:#cfe0ff}
+  .sb-table th:first-child,.sb-table td:first-child{text-align:left}
+  .sb-table tr.cur td{color:var(--gold);font-weight:700}
   /* board */
   .phase{color:var(--gold);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:16px 0 6px}
   .tk{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
@@ -148,6 +160,11 @@
       <div id="needs"><div class="empty">loading…</div></div>
       <div class="row" style="margin-top:8px"><input class="nm" id="newneed" placeholder="add something you owe me / a question"><button class="btn" onclick="addNeed()">add</button></div>
     </div></div>
+    <div class="panel"><h2>📈 Scoreboard (this week) <span id="sbweek" style="color:#5e79a8;font-weight:400;text-transform:none;letter-spacing:0"></span></h2><div class="body">
+      <div class="sb-row" id="sbCounters"></div>
+      <table class="sb-table" id="sbTable"></table>
+      <div style="margin-top:6px;font-size:11px;color:var(--muted)">Adam Hall's rule: manage the leading indicators (inputs you control), not revenue.</div>
+    </div></div>
     <div class="row" style="margin:0 0 12px"><a class="btn" href="/quote" target="_blank">Quote App ↗</a><a class="btn alt" href="/tech-stack" target="_blank">Tech-Stack ↗</a></div>
     <details id="actlog"><summary>▸ Activity log — what Clifford &amp; Cleo are doing (tap to expand)</summary>
       <div class="grid2"><div class="panel" style="margin:8px 0 0"><h2>Clifford</h2><div class="body" id="feed"></div></div><div class="panel" style="margin:8px 0 0"><h2 class="cleo">Cleo</h2><div class="body" id="cfeed"></div></div></div>
@@ -242,6 +259,59 @@ function renderNeeds(){
 async function saveNeeds(){ try{await fetch('/api/needs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(NEEDS)});}catch{} }
 function toggleNeed(i){ NEEDS.items[i].done=!NEEDS.items[i].done; renderNeeds(); buildSummary(); saveNeeds(); }
 function addNeed(){ const v=$('newneed').value.trim(); if(!v)return; (NEEDS.items=NEEDS.items||[]).push({t:v,done:false}); $('newneed').value=''; renderNeeds(); buildSummary(); saveNeeds(); }
+
+// ---------- SCOREBOARD (leading indicators — Adam Hall: manage inputs, not revenue) ----------
+let SB={updated:null,weeks:{}};
+const SB_METRICS=[['quotes_sent','Quotes sent'],['sub_calls','Sub calls'],['follow_ups','Follow-ups']];
+/* isoWeekKey(d) → "2026-W28" — ISO-8601 week of the LOCAL date d (default: today).
+ * ISO weeks start Monday and belong to the year containing their Thursday, so:
+ * 1) shift d to the Thursday of its week ((getDay()+6)%7 maps Mon=0…Sun=6),
+ * 2) find the Thursday of week 1 (Jan 4 is always in ISO week 1),
+ * 3) week no. = whole weeks between the two Thursdays + 1 (Math.round absorbs DST). */
+function isoWeekKey(d){
+  d=d||new Date();
+  const t=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  t.setDate(t.getDate()+3-((t.getDay()+6)%7));
+  const wk1=new Date(t.getFullYear(),0,4);
+  wk1.setDate(wk1.getDate()+3-((wk1.getDay()+6)%7));
+  return t.getFullYear()+'-W'+String(1+Math.round((t-wk1)/604800000)).padStart(2,'0');
+}
+function sbWeek(k){ const w=(SB.weeks||{})[k]||{}; return SB_METRICS.map(([key])=>w[key]||0); }
+function sbBump(key,delta){
+  const wk=isoWeekKey(); SB.weeks=SB.weeks||{};
+  const w=SB.weeks[wk]=SB.weeks[wk]||{quotes_sent:0,sub_calls:0,follow_ups:0}; // auto-rollover: new week created zeroed on first +1
+  w[key]=Math.max(0,(w[key]||0)+delta);
+  renderScoreboard();
+  fetch('/api/scoreboard',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(SB)}).catch(()=>{});
+}
+async function loadScoreboard(){ try{SB=await(await fetch('/api/scoreboard')).json();}catch{SB={weeks:{}};} renderScoreboard(); }
+function renderScoreboard(){
+  const box=$('sbCounters'); if(!box)return;
+  const wk=isoWeekKey(); $('sbweek').textContent=wk+(SB.updated?' · saved '+SB.updated:'');
+  const cur=(SB.weeks||{})[wk]||{};
+  box.textContent='';
+  SB_METRICS.forEach(([key,label])=>{
+    const cell=document.createElement('div'); cell.className='sb-cell';
+    const l=document.createElement('div'); l.className='sb-lbl'; l.textContent=label;
+    const n=document.createElement('div'); n.className='sb-num'; n.textContent=String(cur[key]||0);
+    const b=document.createElement('button'); b.className='btn'; b.type='button'; b.textContent='+1'; b.onclick=()=>sbBump(key,1);
+    const u=document.createElement('a'); u.className='sb-undo'; u.href='#'; u.textContent='undo −1';
+    u.onclick=e=>{e.preventDefault();sbBump(key,-1);};
+    cell.append(l,n,b,u); box.appendChild(cell);
+  });
+  const tbl=$('sbTable'); tbl.textContent='';
+  const hr=document.createElement('tr');
+  ['Week','Quotes','Sub calls','Follow-ups'].forEach(h=>{const th=document.createElement('th');th.textContent=h;hr.appendChild(th);});
+  tbl.appendChild(hr);
+  for(let i=0;i<4;i++){ // last 4 weeks, current first
+    const d=new Date(); d.setDate(d.getDate()-7*i);
+    const k=isoWeekKey(d), tr=document.createElement('tr'); if(i===0)tr.className='cur';
+    const td=document.createElement('td'); td.textContent=k+(i===0?' ← now':''); tr.appendChild(td);
+    sbWeek(k).forEach(v=>{const c=document.createElement('td');c.textContent=String(v);tr.appendChild(c);});
+    tbl.appendChild(tr);
+  }
+}
+loadScoreboard();
 
 // ---------- PIPELINE (the Task Board, rebuilt 2026-06-12) ----------
 let PIPE={phases:[]};
