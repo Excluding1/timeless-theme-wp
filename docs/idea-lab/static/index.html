@@ -20,21 +20,28 @@
     <div class="row spread wrap">
       <h2>Sources</h2>
       <div class="row wrap">
-        <label class="sub">Show HN: last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
-          ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> points</label>
-        <button id="fetchHn" class="small">Fetch Show HN</button>
-        <button id="fetchPh" class="small ghost">Fetch Product Hunt</button>
+        <label class="sub">last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
+          ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> pts</label>
+        <button id="fetchHn" class="small">Show HN</button>
+        <button id="fetchRd" class="small">Reddit</button>
+        <button id="fetchSs" class="small">Starter Story</button>
+        <button id="fetchPh" class="small ghost">Product Hunt</button>
       </div>
     </div>
-    <p class="hint" id="fetchStatus">Hacker News “Show HN” (official API) and Product Hunt (public feed).
-      Each fetched idea gets a traction score; hit Analyze for the full AI scorecard + persona panel.</p>
+    <p class="hint" id="fetchStatus">Show HN (official API) · Starter Story (your local video archive) ·
+      Product Hunt (public feed) · Reddit (best-effort — Reddit rate-limits scripts; the Claude research
+      pass covers Reddit/Google Trends/TikTok reliably once you log into the Claude CLI).
+      Analyze runs polish → scorecard → persona panel; Full pipeline adds the execution plan.</p>
     <div class="row wrap">
       <select id="originFilter">
         <option value="">All sources</option>
         <option value="hn">Show HN</option>
+        <option value="rd">Reddit</option>
+        <option value="ss">Starter Story</option>
         <option value="ph">Product Hunt</option>
         <option value="custom">My ideas</option>
       </select>
+      <select id="categoryFilter"><option value="">All categories</option></select>
       <input id="search" placeholder="Search ideas…" spellcheck="false">
       <label class="sub">Panel size
         <select id="panelSize">

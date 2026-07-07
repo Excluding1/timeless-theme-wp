@@ -78,6 +78,99 @@ def fetch_show_hn(days=30, min_points=20, pages=3):
     return added
 
 
+SUBREDDITS = ["SaaS", "Entrepreneur", "smallbusiness", "sidehustle", "sweatystartup",
+              "indiehackers"]
+
+
+_BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+               "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
+
+def fetch_reddit(days=30, min_score=20):
+    """Top posts from business/startup subreddits (public read-only JSON).
+
+    www.reddit.com 403s non-browser clients; old.reddit.com serves the same JSON."""
+    added = 0
+    window = "month" if days <= 31 else "year"
+    for sub in SUBREDDITS:
+        try:
+            req = urllib.request.Request(
+                f"https://old.reddit.com/r/{sub}/top.json?t={window}&limit=50",
+                headers={"User-Agent": _BROWSER_UA})
+            with urllib.request.urlopen(req, timeout=25) as r:
+                data = json.load(r)
+        except Exception:
+            continue  # one blocked subreddit shouldn't kill the fetch
+        for child in (data.get("data") or {}).get("children") or []:
+            p = child.get("data") or {}
+            if (p.get("score") or 0) < min_score or p.get("stickied"):
+                continue
+            title = (p.get("title") or "").strip()
+            if not title:
+                continue
+            desc = re.sub(r"\s+", " ", (p.get("selftext") or "")).strip()[:2000]
+            posted = None
+            if p.get("created_utc"):
+                posted = datetime.fromtimestamp(p["created_utc"]).isoformat()
+            db.upsert_idea({
+                "id": f"rd:{p.get('id')}",
+                "origin": "rd",
+                "title": f"[r/{sub}] {title}"[:300],
+                "description": desc,
+                "url": "https://www.reddit.com" + (p.get("permalink") or ""),
+                "points": p.get("score") or 0,
+                "comments": p.get("num_comments") or 0,
+                "posted_at": posted,
+                "traction": _traction(p.get("score"), p.get("num_comments"), posted),
+            })
+            added += 1
+    return added
+
+
+MEDIA_ARCHIVER_DB = db.BASE_DIR.parent / "media-archiver" / "data" / "archive.db"
+
+
+def fetch_starterstory_local(username="starterstory"):
+    """Ingest business ideas from the locally-archived Starter Story videos
+    (the media-archiver's own downloads: titles, captions, transcript excerpts).
+    Re-run any time — it picks up newly transcribed videos."""
+    import sqlite3
+    if not MEDIA_ARCHIVER_DB.exists():
+        raise RuntimeError("media-archiver database not found — sync @starterstory there first")
+    con = sqlite3.connect(f"file:{MEDIA_ARCHIVER_DB}?mode=ro", uri=True)
+    con.row_factory = sqlite3.Row
+    rows = con.execute(
+        "SELECT id, title, caption, transcript, url, upload_date, view_count "
+        "FROM videos WHERE username=? AND (caption IS NOT NULL OR transcript IS NOT NULL)",
+        (username,)).fetchall()
+    con.close()
+    added = 0
+    for r in rows:
+        desc = (r["caption"] or "").strip()
+        tr = (r["transcript"] or "").strip()
+        if tr:  # a short excerpt is enough signal for the analyst
+            desc = (desc + " | Transcript excerpt: " + re.sub(r"\s+", " ", tr)[:900]).strip(" |")
+        if not desc and not (r["title"] or "").strip():
+            continue
+        posted = None
+        if r["upload_date"] and len(r["upload_date"]) == 8:
+            d = r["upload_date"]
+            posted = f"{d[:4]}-{d[4:6]}-{d[6:]}T00:00:00"
+        db.upsert_idea({
+            "id": f"ss:{r['id']}",
+            "origin": "ss",
+            "title": (r["title"] or "Starter Story video").strip()[:300],
+            "description": desc[:2000],
+            "url": r["url"],
+            "points": r["view_count"],
+            "comments": None,
+            "posted_at": posted,
+            "traction": _traction((r["view_count"] or 0) // 100, 0, posted),
+        })
+        added += 1
+    return added
+
+
 def fetch_product_hunt():
     """Latest Product Hunt launches from the public RSS feed."""
     raw = _get("https://www.producthunt.com/feed")

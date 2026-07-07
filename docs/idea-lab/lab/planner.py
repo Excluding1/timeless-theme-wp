@@ -120,9 +120,14 @@ Write the final plan as clean Markdown with EXACTLY these sections:
 ## Marketing plan         (channels in priority order, first actions, rough budget)
 ## 90-day roadmap         (week-by-week steps)
 ## Costs & break-even
+## Outlook: 1 / 5 / 10 years   (realistic P50 revenue/cost/team trajectory + what kills it)
 ## Metrics to watch
 ## Risks & mitigations
-Keep it under ~1200 words. Concrete numbers wherever possible.
+## Pipeline diagram
+For the diagram, output a fenced ```mermaid code block: `flowchart LR` covering the full
+journey (build -> first customer -> channel -> conversion -> delivery -> retention/expansion),
+under 14 nodes, labels under 5 words.
+Keep it under ~1400 words. Concrete numbers wherever possible.
 Reply with ONLY the Markdown (no JSON, no preamble)."""
 
 
@@ -164,6 +169,13 @@ def start_pipeline(idea_id, panel_size):
 
         def _go():
             try:
+                # stage 1: polish the rough idea into its strongest form, then grade THAT
+                analyst._set(phase="polishing the idea")
+                try:
+                    analyst.polish_core(idea)
+                    idea.update(db.idea(idea["id"]) or {})
+                except analyst.LLMError:
+                    pass  # graded from the raw idea if polishing fails — better than aborting
                 analyst._analyze_core(aid, idea, panel_size)
                 _plan_core(pid, idea)
                 analyst._set(state="done", phase="done")

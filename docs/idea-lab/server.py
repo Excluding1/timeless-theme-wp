@@ -72,7 +72,7 @@ def engine_refresh():
 
 @app.post("/api/fetch/{source}")
 def fetch(source: str, body: dict = Body(default={})):
-    if source not in ("hn", "ph"):
+    if source not in ("hn", "ph", "rd", "ss"):
         raise HTTPException(400, "Unknown source")
     try:
         days = max(1, min(365, int(float(body.get("days") or 30))))
@@ -85,6 +85,10 @@ def fetch(source: str, body: dict = Body(default={})):
     try:
         if source == "hn":
             n = sources.fetch_show_hn(days=days, min_points=min_points)
+        elif source == "rd":
+            n = sources.fetch_reddit(days=days, min_score=min_points)
+        elif source == "ss":
+            n = sources.fetch_starterstory_local()
         else:
             n = sources.fetch_product_hunt()
     except Exception as e:
@@ -92,9 +96,25 @@ def fetch(source: str, body: dict = Body(default={})):
     return {"ok": True, "fetched": n}
 
 
+@app.post("/api/polish/{idea_id:path}")
+def polish(idea_id: str):
+    idea = db.idea(idea_id)
+    if not idea:
+        raise HTTPException(404, "Unknown idea")
+    j = analyst.job_status()
+    if j and j["state"] == "running":
+        raise HTTPException(409, "A job is already running — wait for it.")
+    try:
+        spec = analyst.polish_core(idea)
+    except analyst.LLMError as e:
+        raise HTTPException(502, str(e))
+    return {"ok": True, "polished": spec}
+
+
 @app.get("/api/ideas")
-def ideas(origin: str = None, q: str = None):
-    return {"ideas": db.ideas(origin or None, q or None)}
+def ideas(origin: str = None, q: str = None, category: str = None):
+    return {"ideas": db.ideas(origin or None, q or None, category=category or None),
+            "categories": db.categories()}
 
 
 @app.post("/api/ideas")

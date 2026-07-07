@@ -295,6 +295,53 @@ def _idea_block(idea_row):
     )
 
 
+CATEGORIES = ("saas", "ai", "agency", "physical-service", "ecommerce", "content",
+              "marketplace", "game", "fintech", "other")
+
+
+def _polish_prompt(idea_row):
+    return f"""You are a ruthless product strategist. Take this ROUGH business idea and polish it
+into its strongest realistic form — fix obvious gaps, sharpen the value proposition, add the
+missing features a finished version would clearly need, and pick the most viable business model.
+Do NOT change what the idea fundamentally is; improve it. Today is {date.today().isoformat()}.
+
+{_idea_block(idea_row)}
+
+Reply with ONLY this JSON:
+{{
+ "polished_title": "<sharp one-liner for the finished version>",
+ "refined_description": "<5-8 sentences: what the polished product is, for whom, how it makes money>",
+ "category": "<one of: {', '.join(CATEGORIES)}>",
+ "key_features": ["<the 4-7 features the finished version needs>"],
+ "improvements_made": ["<what you fixed/added vs the rough idea>"]
+}}"""
+
+
+def polish_core(idea_row):
+    """Refine a rough idea into its strongest form; store on the idea. Returns the spec."""
+    spec = _llm_json(_polish_prompt(idea_row))
+    if not isinstance(spec, dict) or not spec.get("refined_description"):
+        raise LLMError("polish reply was not a usable JSON spec")
+    cat = spec.get("category")
+    db.set_idea_polish(idea_row["id"], spec, cat if cat in CATEGORIES else "other")
+    return spec
+
+
+def _spec_block(idea_row):
+    """Prefer the polished spec for grading — it grades potential, not pitch quality."""
+    pol = idea_row.get("polished")
+    if pol:
+        try:
+            spec = json.loads(pol) if isinstance(pol, str) else pol
+            feats = "; ".join(spec.get("key_features") or [])
+            return (_idea_block(idea_row) +
+                    f"\nPOLISHED SPEC (grade THIS version): {spec.get('polished_title')}\n"
+                    f"{spec.get('refined_description')}\nKey features: {feats}")
+        except (TypeError, ValueError, json.JSONDecodeError):
+            pass
+    return _idea_block(idea_row)
+
+
 def _scorecard_prompt(idea_row):
     factor_lines = "\n".join(
         f'- "{k}" (weight {w}): {d}' for k, w, d in FACTORS
@@ -308,7 +355,7 @@ a data analyst, and an experienced bootstrapped founder. Today is {date.today().
 Evaluate this business idea/product using your market knowledge. Be skeptical of hype;
 reward evidence.
 
-{_idea_block(idea_row)}
+{_spec_block(idea_row)}
 {metrics}
 
 Score each factor 0-10 (10 = excellent for a new entrant building this TODAY):
@@ -321,7 +368,13 @@ Reply with ONLY this JSON (no prose, no markdown):
  "verdict": "<one of: strong|promising|average|weak|avoid>",
  "thesis": "<3-4 sentence analyst thesis: what this is, who pays, why it wins or dies>",
  "risks": ["<top risk>", "<second>", "<third>"],
- "wedge": "<the single sharpest go-to-market wedge you'd recommend>"
+ "wedge": "<the single sharpest go-to-market wedge you'd recommend>",
+ "estimates": {{
+   "build_hours": <realistic founder-hours to a sellable MVP>,
+   "monthly_cost_usd": <realistic running cost/month at small scale>,
+   "mrr_12mo_usd": <realistic (P50, not hype) monthly revenue at month 12>,
+   "year1_profit_usd": <realistic profit across year 1, can be negative>
+ }}
 }}"""
 
 
@@ -330,7 +383,7 @@ def _panel_prompt(idea_row, personas):
     return f"""Role-play each persona below INDEPENDENTLY and honestly react to this product idea.
 Cynicism is allowed — most people ignore most products. Today is {date.today().isoformat()}.
 
-{_idea_block(idea_row)}
+{_spec_block(idea_row)}
 
 PERSONAS:
 {plist}
@@ -420,9 +473,25 @@ def _analyze_core(aid, idea_row, panel_size):
             raw["score"] = val
         composite += val / 10.0 * weight
     verdict = card.get("verdict") if card.get("verdict") in VERDICTS else "average"
+
+    # Effort ROI: year-1 profit vs what it costs YOU to build & run it.
+    # Effort cost = build hours at a $60/h founder opportunity cost + a year of running
+    # costs. Shown with its components — it's an estimate, not an oracle.
+    est_in = card.get("estimates") if isinstance(card.get("estimates"), dict) else {}
+    est = {
+        "build_hours": max(1.0, _to_num(est_in.get("build_hours"), 0)),
+        "monthly_cost_usd": max(0.0, _to_num(est_in.get("monthly_cost_usd"), 0)),
+        "mrr_12mo_usd": _to_num(est_in.get("mrr_12mo_usd"), 0),
+        "year1_profit_usd": _to_num(est_in.get("year1_profit_usd"), 0),
+    }
+    effort_cost = est["build_hours"] * 60 + est["monthly_cost_usd"] * 12
+    est["effort_cost_usd"] = round(effort_cost, 0)
+    effort_roi = round(est["year1_profit_usd"] / max(effort_cost, 1.0), 2)
+
     db.update_analysis(aid, scores=scores, composite=round(composite, 1),
                        verdict=verdict, thesis=card.get("thesis") or "",
-                       risks=card.get("risks") or [], wedge=card.get("wedge") or "")
+                       risks=card.get("risks") or [], wedge=card.get("wedge") or "",
+                       estimates=est, effort_roi=effort_roi)
 
     # persona panel, batched 10 per LLM call
     panel_size = max(0, min(100, int(panel_size)))

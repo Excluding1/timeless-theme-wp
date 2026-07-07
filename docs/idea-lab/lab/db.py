@@ -60,6 +60,14 @@ CREATE INDEX IF NOT EXISTS idx_plans_idea ON plans(idea_id);
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
 """
 
+# guarded ALTERs for databases created before a column existed
+MIGRATIONS = [
+    "ALTER TABLE ideas ADD COLUMN category TEXT",
+    "ALTER TABLE ideas ADD COLUMN polished TEXT",       # JSON refined spec
+    "ALTER TABLE analyses ADD COLUMN estimates TEXT",   # JSON cost/revenue estimates
+    "ALTER TABLE analyses ADD COLUMN effort_roi REAL",  # year-1 profit / effort cost
+]
+
 _lock = threading.RLock()
 _conn = None
 
@@ -72,6 +80,11 @@ def _db():
             _conn = sqlite3.connect(DB_PATH, check_same_thread=False)
             _conn.row_factory = sqlite3.Row
             _conn.executescript(SCHEMA)
+            for mig in MIGRATIONS:
+                try:
+                    _conn.execute(mig)
+                except sqlite3.OperationalError:
+                    pass  # column already exists
             _conn.commit()
         return _conn
 
@@ -109,9 +122,9 @@ def upsert_idea(idea):
             )
 
 
-def ideas(origin=None, q=None, limit=300):
+def ideas(origin=None, q=None, limit=300, category=None):
     # score/verdict from the latest COMPLETED analysis; activity status from the latest of any
-    sql = ("SELECT i.*, a.composite, a.verdict, r.status AS an_status FROM ideas i "
+    sql = ("SELECT i.*, a.composite, a.verdict, a.effort_roi, r.status AS an_status FROM ideas i "
            "LEFT JOIN analyses a ON a.id = (SELECT id FROM analyses WHERE idea_id=i.id "
            "AND status='done' ORDER BY id DESC LIMIT 1) "
            "LEFT JOIN analyses r ON r.id = (SELECT id FROM analyses WHERE idea_id=i.id "
@@ -120,6 +133,9 @@ def ideas(origin=None, q=None, limit=300):
     if origin:
         where.append("i.origin=?")
         params.append(origin)
+    if category:
+        where.append("i.category=?")
+        params.append(category)
     if q:
         esc = q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
         where.append("(i.title LIKE ? ESCAPE '\\' OR i.description LIKE ? ESCAPE '\\')")
@@ -147,9 +163,27 @@ def new_analysis(idea_id, panel_size):
         return cur.lastrowid
 
 
+def set_idea_polish(idea_id, polished, category=None):
+    with _lock:
+        con = _db()
+        with con:
+            con.execute("UPDATE ideas SET polished=?, category=COALESCE(?, category) WHERE id=?",
+                        (json.dumps(polished) if isinstance(polished, (dict, list)) else polished,
+                         category, idea_id))
+
+
+def categories():
+    with _lock:
+        rows = _db().execute(
+            "SELECT category, COUNT(*) n FROM ideas WHERE category IS NOT NULL "
+            "GROUP BY category ORDER BY n DESC").fetchall()
+        return [{"category": r["category"], "n": r["n"]} for r in rows]
+
+
 def update_analysis(aid, **fields):
     allowed = {"status", "error", "composite", "verdict", "thesis", "wedge", "scores",
-               "risks", "adoption", "pay_rate", "price_med", "objections", "panel"}
+               "risks", "adoption", "pay_rate", "price_med", "objections", "panel",
+               "estimates", "effort_roi"}
     cols = [k for k in fields if k in allowed]
     if not cols:
         return

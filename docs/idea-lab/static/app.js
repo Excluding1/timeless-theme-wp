@@ -81,12 +81,26 @@ function renderJob() {
 async function loadIdeas() {
   const p = new URLSearchParams();
   if ($("originFilter").value) p.set("origin", $("originFilter").value);
+  if ($("categoryFilter").value) p.set("category", $("categoryFilter").value);
   if ($("search").value.trim()) p.set("q", $("search").value.trim());
-  try { state.ideas = (await api("/api/ideas?" + p)).ideas; } catch (_) { return; }
+  let r;
+  try { r = await api("/api/ideas?" + p); } catch (_) { return; }
+  state.ideas = r.ideas;
+  renderCategories(r.categories || []);
   renderIdeas();
 }
 
-const ORIGIN = { hn: "Show HN", ph: "Product Hunt", custom: "Mine" };
+function renderCategories(cats) {
+  const sel = $("categoryFilter");
+  const cur = sel.value;
+  sel.replaceChildren(el("option", { value: "", text: "All categories" }));
+  for (const c of cats) {
+    sel.append(el("option", { value: c.category, text: `${c.category} (${c.n})` }));
+  }
+  sel.value = cur;
+}
+
+const ORIGIN = { hn: "Show HN", ph: "Product Hunt", rd: "Reddit", ss: "Starter Story", custom: "Mine" };
 
 function safeUrl(u) {
   return u && /^https?:\/\//i.test(u) ? u : null;
@@ -106,9 +120,14 @@ function renderIdeas() {
         ),
         i.description ? el("div", { class: "idesc", text: i.description.slice(0, 220) }) : null,
         el("div", { class: "imeta" },
-          el("span", { text: i.points != null ? `▲ ${i.points} · ${i.comments} comments` : "" }),
+          el("span", { text: i.points != null ? `▲ ${i.points}${i.comments != null ? ` · ${i.comments} comments` : ""}` : "" }),
           el("span", { text: i.traction ? `traction ${i.traction}` : "" }),
+          i.category ? el("span", { class: "obadge", text: i.category }) : null,
+          i.polished ? el("span", { class: "polished", text: "✦ polished", title: "Graded from the polished version of this idea" }) : null,
           i.composite != null ? el("span", { class: "score " + vclass(i.verdict), text: `AI ${i.composite}/100 · ${i.verdict}` }) : null,
+          i.effort_roi != null ? el("span", { class: "score " + (i.effort_roi >= 2 ? "good" : i.effort_roi >= 0.8 ? "mid" : "bad"),
+            title: "Effort ROI: estimated year-1 profit ÷ (build hours × $60 + a year of running costs)",
+            text: `ROI ${i.effort_roi}×` }) : null,
         ),
       ),
       el("button", { class: "small", text: i.an_status === "running" ? "…" : (i.composite != null ? "Re-analyze" : "Analyze"),
@@ -202,6 +221,15 @@ function renderAnalyses() {
         }
         details.append(grid);
       }
+      if (a.estimates) {
+        const e = typeof a.estimates === "string" ? JSON.parse(a.estimates) : a.estimates;
+        details.append(el("p", { class: "panelstats" },
+          el("strong", { text: `Effort ROI ${a.effort_roi != null ? a.effort_roi + "×" : "—"}: ` }),
+          el("span", { text: `~${Math.round(e.build_hours)}h build · $${Math.round(e.monthly_cost_usd)}/mo costs` +
+            ` · est. $${Math.round(e.mrr_12mo_usd)}/mo revenue by month 12` +
+            ` · year-1 profit $${Math.round(e.year1_profit_usd)} vs ~$${Math.round(e.effort_cost_usd)} of your effort` }),
+        ));
+      }
       if (a.adoption != null) {
         details.append(el("p", { class: "panelstats" },
           el("strong", { text: "Panel: " }),
@@ -269,13 +297,43 @@ function renderPlans() {
         }
         details.append(grid);
       }
-      details.append(el("pre", { class: "plantext", text: p.final_plan || "" }));
+      // pull the mermaid pipeline diagram out and render it visually (text fallback)
+      const fp = p.final_plan || "";
+      const m = fp.match(/```mermaid\s*([\s\S]*?)```/);
+      details.append(el("pre", { class: "plantext", text: fp.replace(/```mermaid[\s\S]*?```/, "(pipeline diagram rendered below)") }));
+      if (m) {
+        const dia = el("div", { class: "diagram" });
+        details.append(el("strong", { text: "Pipeline diagram" }), dia);
+        renderMermaid(dia, m[1].trim());
+      }
     } else if (p.error) {
       details.append(el("p", { class: "err", text: p.error }));
     }
     head.addEventListener("click", () => { details.hidden = !details.hidden; });
     box.append(el("div", { class: "analysis" }, head, details));
   }
+}
+
+/* ---------- mermaid (lazy-loaded; text fallback if offline) ---------- */
+
+let mermaidLoading = null;
+function renderMermaid(target, code) {
+  const fallback = () => target.replaceChildren(el("pre", { class: "plantext", text: code }));
+  if (!mermaidLoading) {
+    mermaidLoading = new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js";
+      s.onload = () => { window.mermaid.initialize({ startOnLoad: false, theme: "dark" }); resolve(); };
+      s.onerror = reject;
+      document.head.append(s);
+    });
+  }
+  mermaidLoading.then(async () => {
+    try {
+      const { svg } = await window.mermaid.render("mm" + Math.random().toString(36).slice(2), code);
+      target.innerHTML = svg;   // mermaid's own sanitized SVG output
+    } catch (_) { fallback(); }
+  }).catch(fallback);
 }
 
 /* ---------- idea tester ---------- */
@@ -308,17 +366,24 @@ function wireSources() {
       loadIdeas();
     } catch (e) { $("fetchStatus").textContent = "Error: " + e.message; }
   });
-  $("fetchPh").addEventListener("click", async () => {
-    $("fetchStatus").textContent = "Fetching Product Hunt…";
-    try {
-      const r = await api("/api/fetch/ph", { method: "POST", body: "{}" });
-      $("fetchStatus").textContent = `Fetched ${r.fetched} Product Hunt launches.`;
-      loadIdeas();
-    } catch (e) { $("fetchStatus").textContent = "Error: " + e.message; }
-  });
+  const simpleFetch = (id, source, label) => {
+    $(id).addEventListener("click", async () => {
+      $("fetchStatus").textContent = `Fetching ${label}…`;
+      try {
+        const r = await api(`/api/fetch/${source}`, { method: "POST",
+          body: JSON.stringify({ days: Number($("hnDays").value), min_points: Number($("hnPoints").value) }) });
+        $("fetchStatus").textContent = `Fetched ${r.fetched} from ${label}.`;
+        loadIdeas();
+      } catch (e) { $("fetchStatus").textContent = "Error: " + e.message; }
+    });
+  };
+  simpleFetch("fetchPh", "ph", "Product Hunt");
+  simpleFetch("fetchRd", "rd", "Reddit");
+  simpleFetch("fetchSs", "ss", "your Starter Story archive");
   let t;
   $("search").addEventListener("input", () => { clearTimeout(t); t = setTimeout(loadIdeas, 300); });
   $("originFilter").addEventListener("change", loadIdeas);
+  $("categoryFilter").addEventListener("change", loadIdeas);
 }
 
 wireSources();
