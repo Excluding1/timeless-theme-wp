@@ -71,9 +71,10 @@ function parseDeep(text) {
   return out;
 }
 
-// Diagram-view box height estimate used by layoutTree. Must track the .at-box CSS metrics:
-// 10px vertical padding ×2 + 1.5px border ×2 + 20px icon line + 2px gap = 45px chrome,
-// plus 17px per label line (CSS clamps at 3 lines). Conservative chars-per-line so we
+// Default box-height estimate for layoutTree (kept stable for the node tests — the browser
+// diagram passes the blueprint-skin diagBoxHeight via opts.heightOf instead). Original
+// metrics: 10px vertical padding ×2 + 1.5px border ×2 + 20px icon line + 2px gap = 45px
+// chrome, plus 17px per label line (max 3). Conservative chars-per-line so we
 // over-estimate wrap (extra whitespace beats clipped text).
 function estimateBoxHeight(node, boxW) {
   const cpl = Math.max(8, Math.floor(((boxW || 200) - 27) / 7.5));
@@ -415,6 +416,8 @@ function select(id, opts) {
   renderDetail(n);
   if (viewMode === 'diagram') {
     for (const [bid, o] of DBOX) o.box.classList.toggle('sel', bid === id);
+    const sel = DBOX.get(id);
+    if (sel && drawerEl) drawerEl.style.setProperty('--drawer-accent', sel.box.style.getPropertyValue('--hue') || 'var(--gold)');
     if (opts.drawer) openDrawer();
   } else {
     if (row && opts.scroll !== false) row.scrollIntoView({ block: 'nearest' });
@@ -788,20 +791,77 @@ function fitView() {
 
 function branchColor(branch) { return PALETTE[((branch % PALETTE.length) + PALETTE.length) % PALETTE.length]; }
 
+/* --- blueprint skin helpers (diagram view only) --- */
+
+// First sentence of a summary — the grey byline inside diagram boxes.
+function firstSentence(s) {
+  s = String(s || '').trim();
+  const m = s.match(/^.*?[.!?](?=\s|$)/);
+  return (m ? m[0] : s).trim();
+}
+
+// Chip labels above Basic Latin/Latin-1 (emoji, pictographs) render bigger and un-bolded.
+function isEmojiLabel(s) { return (String(s).codePointAt(0) || 0) > 0x2100; }
+
+// Word-wrap-aware line count at a given chars-per-line (mono type, whole words wrap;
+// over-long words break mid-word like CSS word-break:break-word).
+function wrapLines(text, cpl) {
+  let lines = 1, len = 0;
+  for (const w of String(text || '').trim().split(/\s+/).filter(Boolean)) {
+    if (!len) len = w.length;
+    else if (len + 1 + w.length <= cpl) len += 1 + w.length;
+    else { lines++; len = w.length; }
+    if (len > cpl) { lines += Math.ceil(len / cpl) - 1; len = len % cpl || cpl; }
+  }
+  return lines;
+}
+
+// Diagram-view box height for the blueprint skin — passed to layoutTree via opts.heightOf
+// (estimateBoxHeight stays as the pure default for tests; this one knows about the caps
+// header + divider, grey summary line(s), and the tool-chip rows). MUST track the .at-box
+// metrics in atlas.css. Conservative chars-per-line so we over-estimate wrap (extra
+// whitespace beats clipped text).
+function diagBoxHeight(node, boxW, depth) {
+  const label = String((node && (node.label || node.id)) || '');
+  const sum = depth === 0 ? String((node && node.sub) || '') : firstSentence(node && node.summary);
+  const nChips = (depth > 0 && node && Array.isArray(node.chips)) ? node.chips.filter(c => c && c.label).length : 0;
+  let chipH = 0;
+  if (nChips) {
+    const perRow = Math.max(1, Math.floor((boxW - 22) / 27));
+    const rows = Math.ceil(nChips / perRow);
+    chipH = 8 + rows * 22 + (rows - 1) * 5;
+  }
+  if (depth === 0) { // root masthead: 14/19 caps title (≤4 lines) + divider + 10.5/14 subtitle (≤2)
+    const tl = Math.min(4, wrapLines(label, Math.max(5, Math.floor((boxW - 59) / 10.3))));
+    const sl = sum ? Math.min(2, Math.ceil(sum.length / Math.max(8, Math.floor((boxW - 35) / 6.6)))) : 0;
+    return 44 + tl * 19 + sl * 14;
+  }
+  if (depth === 1) { // department: 13/17 caps header (≤2) + divider + 11/15 summary (≤2) + chips
+    const hl = Math.min(2, wrapLines(label, Math.max(6, Math.floor((boxW - 49) / 9.2))));
+    const sl = sum ? Math.min(2, Math.ceil(sum.length / Math.max(8, Math.floor((boxW - 27) / 6.9)))) : 0;
+    return 35 + hl * 17 + sl * 15 + chipH;
+  }
+  // child: 12/16 label (≤2 lines) + one-line summary + chips
+  const ll = Math.min(2, wrapLines(label, Math.max(8, Math.floor((boxW - 47) / 7.6))));
+  return 22 + ll * 16 + (sum ? 18 : 0) + chipH;
+}
+
 function renderDiagram() {
   if (!worldEl || !DATA || !Array.isArray(DATA.tree)) return;
   const boxW = window.innerWidth < 720 ? 150 : 200;
-  const root = { id: ROOT_ID, label: DATA.title || PAGE.title || 'Atlas', icon: PAGE.icon || '', children: DATA.tree };
+  const root = { id: ROOT_ID, label: DATA.title || PAGE.title || 'Atlas', icon: PAGE.icon || '', sub: DATA.subtitle || '', children: DATA.tree };
   lastLayout = layoutTree([root], {
     boxW, gapX: DIAG_GAPX, levelGap: DIAG_LEVELGAP,
-    isOpen: id => id === ROOT_ID || isOpen(id)
+    isOpen: id => id === ROOT_ID || isOpen(id),
+    heightOf: (n, d) => diagBoxHeight(n, boxW, d)
   });
 
   worldEl.textContent = '';
   DBOX.clear();
   const byId = new Map(lastLayout.boxes.map(b => [b.id, b]));
 
-  // edges — one SVG underlay, elbow connectors in the target's branch colour
+  // edges — one SVG underlay, thin white-grey elbow connectors (blueprint style: colour
+  // lives only in the department glow + chips, never in the lines)
   const NS = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('class', 'at-edges');
@@ -814,8 +874,8 @@ function renderDiagram() {
     const p = document.createElementNS(NS, 'path');
     p.setAttribute('d', 'M ' + a.cx + ' ' + (a.y + a.h) + ' L ' + a.cx + ' ' + midY + ' L ' + b.cx + ' ' + midY + ' L ' + b.cx + ' ' + b.y);
     p.setAttribute('fill', 'none');
-    p.setAttribute('stroke', hexToRgba(branchColor(b.branch < 0 ? 0 : b.branch), 0.4));
-    p.setAttribute('stroke-width', '2');
+    p.setAttribute('stroke', 'rgba(255,255,255,.22)');
+    p.setAttribute('stroke-width', '1.5');
     p.setAttribute('stroke-linecap', 'round');
     svg.appendChild(p);
   }
@@ -832,16 +892,32 @@ function renderDiagram() {
     div.style.width = b.w + 'px';
     div.style.height = b.h + 'px';
     if (!isRoot) {
+      // hue = branch colour, used ONLY for the soft glow, status-dot ring, sel glow and
+      // drawer accent — boxes themselves stay outlined monochrome (blueprint style)
       const col = branchColor(b.branch < 0 ? 0 : b.branch);
-      if (b.depth === 1) { div.style.background = col; div.style.borderColor = col; }
-      else {
-        const a = b.depth === 2 ? 0.30 : b.depth === 3 ? 0.20 : 0.14;
-        div.style.background = hexToRgba(col, a);
-        div.style.borderColor = hexToRgba(col, Math.min(0.75, a + 0.32));
-      }
+      div.style.setProperty('--hue', col);
+      div.style.setProperty('--glowS', hexToRgba(col, 0.5));
+      div.style.setProperty('--ring', hexToRgba(col, 0.35));
+      if (b.depth === 1) div.style.setProperty('--glow', hexToRgba(col, 0.16));
     }
-    div.appendChild(el('span', 'at-box-ico', n.icon || '·'));
-    div.appendChild(el('span', 'at-box-lbl', n.label || n.id));
+    const head = el('div', 'at-box-h');
+    head.appendChild(el('span', 'at-box-ico', n.icon || '·'));
+    head.appendChild(el('span', 'at-box-lbl', n.label || n.id));
+    div.appendChild(head);
+    const sum = isRoot ? String(root.sub || '') : firstSentence(n.summary);
+    if (sum) div.appendChild(el('div', 'at-box-sum', sum));
+    // tool chips — app-sticker tiles at the bottom of the box (nodes without chips skip this)
+    if (!isRoot && Array.isArray(n.chips) && n.chips.length) {
+      const row = el('div', 'at-box-chips');
+      for (const c of n.chips) {
+        if (!c || !c.label) continue;
+        const t = el('span', 'at-tool' + (isEmojiLabel(c.label) ? ' emoji' : ''), String(c.label));
+        if (c.bg) t.style.background = String(c.bg);
+        if (c.name) t.title = String(c.name);
+        row.appendChild(t);
+      }
+      if (row.childNodes.length) div.appendChild(row);
+    }
     div.title = (n.label || n.id) + (n.status ? ' — ' + n.status : '');
 
     if (!isRoot) {

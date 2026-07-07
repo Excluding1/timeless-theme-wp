@@ -151,53 +151,81 @@ body{background:var(--navy);color:var(--ink);font:14px/1.5 -apple-system,Inter,S
 .at-view button:hover{color:var(--gold)}
 .at-view button.on{background:rgba(231,192,139,.16);color:var(--gold)}
 
-/* ---------- diagram view: canvas + world ---------- */
+/* ---------- diagram view: blueprint canvas (the mr.notion board) ---------- */
 .at-diagram{display:none}
 .at-main.diagram{display:block}
 .at-main.diagram .at-tree,.at-main.diagram .at-detail{display:none}
 .at-main.diagram .at-diagram{display:block}
 .at-canvas{position:relative;overflow:hidden;height:calc(100vh - 175px);min-height:420px;
-  border:1px solid var(--line);border-radius:12px;background-color:#03102a;cursor:grab;touch-action:none;
-  background-image:radial-gradient(rgba(155,176,208,.16) 1px,transparent 1.6px);background-size:24px 24px}
+  border:1px solid rgba(255,255,255,.12);border-radius:12px;background-color:#0a0a0c;cursor:grab;touch-action:none;
+  background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.5px);background-size:22px 22px}
 .at-canvas.panning{cursor:grabbing}
 .at-world{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
 .at-edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 
-/* diagram boxes — height is set inline by the layout (estimateBoxHeight must track these
-   metrics: 10px v-padding, 1.5px border, 20px icon line + 2px gap, 17px label lines ×3 max) */
-.at-box{position:absolute;border-radius:12px;border:1.5px solid transparent;padding:10px 12px;
-  cursor:pointer;user-select:none;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.35);
-  transition:box-shadow .15s ease,opacity .2s ease}
-.at-box:hover{box-shadow:0 6px 16px rgba(0,0,0,.55)}
-.at-box .at-box-ico{display:block;font-size:16px;line-height:20px;margin-bottom:2px}
-.at-box .at-box-lbl{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;
-  overflow:hidden;font-size:12.5px;line-height:17px;font-weight:700;word-break:break-word}
-.at-box.top,.at-box.top .at-box-lbl{color:#041534}
-.at-box.root{background:linear-gradient(135deg,#0a2350,#041534);border-color:var(--gold);color:var(--gold);
-  text-align:center;cursor:default;box-shadow:0 0 22px rgba(231,192,139,.28)}
-.at-box.root .at-box-lbl{font-size:13px;line-height:17px}
-.at-box .at-dot{position:absolute;top:8px;right:8px;width:9px;height:9px}
-.at-box.top .at-dot{box-shadow:0 0 0 2px rgba(4,21,52,.35)}
-.at-box-badge{position:absolute;top:-8px;left:-8px;background:var(--err);color:#fff;font-size:10px;
-  font-weight:800;border-radius:10px;padding:1px 6px;min-width:17px;text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.45)}
-.at-kchip{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:#0a2350;
-  border:1px solid var(--line);color:var(--soft);font-size:10px;font-weight:800;border-radius:10px;
-  padding:1px 8px;cursor:pointer;white-space:nowrap}
-.at-kchip:hover{background:var(--gold);color:#041534;border-color:var(--gold)}
-.at-box.faded{opacity:.25}
-.at-box.glow{box-shadow:0 0 0 2px var(--gold),0 0 20px rgba(231,192,139,.65)}
-.at-box.sel{box-shadow:0 0 0 2.5px #fff,0 8px 20px rgba(0,0,0,.55);z-index:2}
+/* diagram boxes — blueprint style: dark outlined boxes, mono type, colour only in the
+   department glow + chips. Height is set inline by the layout (diagBoxHeight in atlas.js
+   must track these metrics: paddings, borders, line heights, header divider, chip rows).
+   --hue/--glow/--glowS/--ring are set per box by renderDiagram from the branch palette. */
+.at-box{position:absolute;border-radius:12px;border:1px solid rgba(255,255,255,.28);background:#0f0f12;
+  padding:10px 12px;cursor:pointer;user-select:none;color:#fff;
+  font-family:ui-monospace,Menlo,monospace;
+  box-shadow:0 0 24px var(--glow,transparent);
+  transition:box-shadow .15s ease,border-color .15s ease,opacity .2s ease}
+.at-box:hover{border-color:rgba(255,255,255,.6)}
+.at-box-h{display:flex;align-items:flex-start;gap:6px;padding-right:12px}
+.at-box-ico{flex:0 0 auto;font-size:12px;line-height:16px}
+.at-box-lbl{flex:1;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;
+  overflow:hidden;font-size:12px;line-height:16px;font-weight:700;word-break:break-word;color:#fff}
+.at-box-sum{color:rgba(255,255,255,.55);font-size:10.5px;line-height:14px;margin-top:4px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* top-level departments: white 1.5px outline, ALL-CAPS header with a divider, 2-line byline */
+.at-box.top{border:1.5px solid rgba(255,255,255,.85)}
+.at-box.top .at-box-h{border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:5px;margin-bottom:6px}
+.at-box.top .at-box-ico{font-size:13px;line-height:17px}
+.at-box.top .at-box-lbl{font-size:13px;line-height:17px;text-transform:uppercase;letter-spacing:.08em}
+.at-box.top .at-box-sum{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;
+  -webkit-line-clamp:2;line-clamp:2;font-size:11px;line-height:15px;margin-top:0}
+/* root masthead: large outlined box, caps mono title + grey subtitle */
+.at-box.root{border:1.5px solid rgba(255,255,255,.9);padding:14px 16px;cursor:default;
+  box-shadow:0 0 30px rgba(255,255,255,.10)}
+.at-box.root .at-box-h{border-bottom:1px solid rgba(255,255,255,.6);padding-bottom:6px;margin-bottom:6px}
+.at-box.root .at-box-ico{font-size:14px;line-height:19px}
+.at-box.root .at-box-lbl{font-size:14px;line-height:19px;text-transform:uppercase;letter-spacing:.1em;
+  -webkit-line-clamp:4;line-clamp:4}
+.at-box.root .at-box-sum{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;
+  -webkit-line-clamp:2;line-clamp:2;margin-top:0}
+/* tool chips — app-sticker tiles (white border = the sticker look) */
+.at-box-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.at-tool{width:22px;height:22px;flex:0 0 auto;border-radius:6px;border:1.5px solid #fff;
+  display:inline-flex;align-items:center;justify-content:center;background:#26262c;
+  font:700 9.5px/1 ui-monospace,Menlo,monospace;color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.5);cursor:help}
+.at-tool.emoji{font-size:12px;font-weight:400}
+/* status dot: 7px with a faint hue ring */
+.at-box .at-dot{position:absolute;top:9px;right:9px;width:7px;height:7px;
+  box-shadow:0 0 0 2px var(--ring,rgba(255,255,255,.18))}
+/* alert badge: red, slightly smaller, white border */
+.at-box-badge{position:absolute;top:-8px;left:-8px;background:var(--err);color:#fff;font-size:9.5px;
+  font-weight:800;border-radius:9px;padding:1px 5px;min-width:16px;text-align:center;
+  border:1.5px solid #fff;font-family:ui-monospace,Menlo,monospace;box-shadow:0 2px 6px rgba(0,0,0,.6)}
+/* "+N" collapsed chip: outlined mono pill */
+.at-kchip{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:#0f0f12;
+  border:1px solid rgba(255,255,255,.5);color:rgba(255,255,255,.85);font:800 9.5px/1.6 ui-monospace,Menlo,monospace;
+  border-radius:999px;padding:1px 8px;cursor:pointer;white-space:nowrap}
+.at-kchip:hover{background:#fff;color:#0a0a0c;border-color:#fff}
+.at-box.faded{opacity:.18}
+.at-box.glow{border-color:var(--gold);box-shadow:0 0 0 1.5px var(--gold),0 0 22px rgba(231,192,139,.5)}
+.at-box.sel{border-color:#fff;box-shadow:0 0 0 1.5px #fff,0 0 34px var(--glowS,rgba(255,255,255,.3));z-index:2}
 
 /* canvas controls */
 .at-cctl{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:5}
-.at-cctl button{background:rgba(10,35,80,.92);border:1px solid var(--line);color:var(--soft);
-  border-radius:8px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer;min-width:32px}
-.at-cctl button:hover{color:var(--gold);border-color:var(--gold)}
+.at-cctl button{background:rgba(15,15,18,.92);border:1px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85);
+  border-radius:8px;padding:6px 11px;font:800 12px ui-monospace,Menlo,monospace;cursor:pointer;min-width:32px}
+.at-cctl button:hover{color:#fff;border-color:#fff}
 
 /* detail drawer (diagram view) */
 .at-drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,94vw);background:var(--panel);
-  border-left:2px solid var(--gold);z-index:60;transform:translateX(103%);transition:transform .25s ease;
+  border-left:2px solid var(--drawer-accent,var(--gold));z-index:60;transform:translateX(103%);transition:transform .25s ease;
   display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(0,0,0,.5)}
 .at-drawer.open{transform:translateX(0)}
 .at-drawer-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto;
