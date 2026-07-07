@@ -4,19 +4,12 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
 import { json, fail } from '../_shared/respond.ts';
 import { preflight } from '../_shared/cors.ts';
+import { suburbFrom } from '../_shared/address.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const ANON = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
 
 type Row = Record<string, unknown>;
-
-/** "42 Wallaby Way, Surry Hills NSW 2010, Australia" -> "Surry Hills" (best-effort, display only). */
-function suburbFrom(address: string | null): string {
-  if (!address) return '';
-  const parts = address.split(',').map((s) => s.trim());
-  if (parts.length < 2) return '';
-  return parts[1].replace(/\b(NSW|VIC|QLD|SA|WA|TAS|ACT|NT)\b.*$/i, '').trim();
-}
 
 function toAssignment(a: Row, j: Row) {
   return {

@@ -5,6 +5,7 @@ import type { ProblemPayload } from './api';
 import { playSound, type SoundId } from './sound';
 import { supabase, supabaseConfigured } from './supabase';
 import { putPhoto, getAllPhotos, getPhoto, updatePhotoStatusDb } from './photoDb';
+import { unsubscribePush } from './push';
 
 // Single source of truth: the store calls `api` and caches the result.
 // No optimistic dual-array. Lists/detail are caches; mutations re-fetch from `api`.
@@ -70,8 +71,10 @@ export const useAppStore = create<AppState>((set, get) => ({
   error: null,
 
   setAuth: (v) => {
-    if (supabaseConfigured) { if (!v) void supabase.auth.signOut(); }
-    else { localStorage.setItem('tj_auth', v ? '1' : '0'); }
+    if (supabaseConfigured) {
+      // Revoke this device's push subscription BEFORE the session dies (it needs the JWT).
+      if (!v) void unsubscribePush().finally(() => void supabase.auth.signOut());
+    } else { localStorage.setItem('tj_auth', v ? '1' : '0'); }
     set({ isAuthenticated: v });
   },
   setOffline: (v) => set({ isOffline: v }),

@@ -7,6 +7,8 @@ import { createClient, type SupabaseClient } from 'https://esm.sh/@supabase/supa
 import { json, fail } from '../_shared/respond.ts';
 import { secureCompare } from '../_shared/secure.ts';
 import { isValidUuid, updateJob, attachPhotoToJob } from '../_shared/sm8Client.ts';
+import { suburbFrom } from '../_shared/address.ts';
+import { sendPush, type PushPayload, type PushRow } from '../_shared/webpush.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
@@ -88,6 +90,117 @@ Deno.serve(async (req) => {
     }
   }
 
-  // TODO Phase 5: re-arm a dead SM8 object-webhook subscription (72h auto-cancel) + poll stale job_mirror.
-  return json({ ok: true, due: due?.length ?? 0, sent, failed, skipped });
+  // ── Phase 5: push-notification sweep (no-op unless VAPID secrets are configured). ──
+  const pushed = await notifySweep(db);
+
+  // TODO: re-arm a dead SM8 object-webhook subscription (72h auto-cancel) + poll stale job_mirror.
+  return json({ ok: true, due: due?.length ?? 0, sent, failed, skipped, pushed });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Push sweep. Runs on every reconcile tick (pg_cron ~1/min): notify each sub of
+//   (a) NEW OFFERS  — status 'offered', offer_notified_at null
+//   (b) BOOKINGS    — status 'accepted', scheduled_at set, booking_notified_at null
+// Marked BEFORE sending (at-most-once: a broken push service must never spam a phone on every tick).
+// CONTACT RULE: payloads carry suburb + category only — never customer name/address/phone/email.
+// ─────────────────────────────────────────────────────────────────────────────
+type NotifyRow = {
+  id: string;
+  sub_id: string;
+  scheduled_at?: string | null;
+  job: { job_address: string | null; job_category: string | null } | null;
+};
+
+async function subscriptionsFor(db: SupabaseClient, subIds: string[]): Promise<Map<string, PushRow[]>> {
+  const map = new Map<string, PushRow[]>();
+  if (subIds.length === 0) return map;
+  const { data } = await db.from('push_subscriptions')
+    .select('id, sub_id, endpoint, p256dh, auth')
+    .in('sub_id', subIds)
+    .is('revoked_at', null);
+  for (const r of data ?? []) {
+    const key = String(r.sub_id);
+    const list = map.get(key) ?? [];
+    list.push({ id: String(r.id), endpoint: String(r.endpoint), p256dh: String(r.p256dh), auth: String(r.auth) });
+    map.set(key, list);
+  }
+  return map;
+}
+
+async function revokeGone(db: SupabaseClient, gone: string[]): Promise<void> {
+  if (gone.length === 0) return;
+  await db.from('push_subscriptions')
+    .update({ revoked_at: nowIso() })
+    .in('id', gone);
+}
+
+async function notifySweep(db: SupabaseClient): Promise<number> {
+  let pushed = 0;
+  try {
+    // (a) new offers
+    const { data: offers } = await db.from('job_assignments')
+      .select('id, sub_id, job:job_mirror(job_address, job_category)')
+      .eq('status', 'offered')
+      .is('offer_notified_at', null)
+      .limit(50);
+    // (b) confirmed bookings
+    const { data: bookings } = await db.from('job_assignments')
+      .select('id, sub_id, scheduled_at, job:job_mirror(job_address, job_category)')
+      .eq('status', 'accepted')
+      .not('scheduled_at', 'is', null)
+      .is('booking_notified_at', null)
+      .limit(50);
+
+    const offerRows = (offers ?? []) as unknown as NotifyRow[];
+    const bookingRows = (bookings ?? []) as unknown as NotifyRow[];
+    if (offerRows.length === 0 && bookingRows.length === 0) return 0;
+
+    // Mark FIRST (at-most-once), then send.
+    if (offerRows.length > 0) {
+      await db.from('job_assignments').update({ offer_notified_at: nowIso() })
+        .in('id', offerRows.map((r) => r.id));
+    }
+    if (bookingRows.length > 0) {
+      await db.from('job_assignments').update({ booking_notified_at: nowIso() })
+        .in('id', bookingRows.map((r) => r.id));
+    }
+
+    const subsMap = await subscriptionsFor(db, [
+      ...new Set([...offerRows, ...bookingRows].map((r) => r.sub_id)),
+    ]);
+    const allGone: string[] = [];
+
+    for (const r of offerRows) {
+      const where = suburbFrom(r.job?.job_address ?? null);
+      const payload: PushPayload = {
+        title: 'New job available',
+        body: [where, r.job?.job_category].filter(Boolean).join(' · ') || 'Open the app to see it',
+        url: '/',
+        tag: `offer-${r.id}`,
+      };
+      const { sent: n, gone } = await sendPush(subsMap.get(r.sub_id) ?? [], payload);
+      pushed += n; allGone.push(...gone);
+    }
+
+    for (const r of bookingRows) {
+      const where = suburbFrom(r.job?.job_address ?? null);
+      const when = r.scheduled_at
+        ? new Date(r.scheduled_at).toLocaleString('en-AU', {
+            timeZone: 'Australia/Sydney', weekday: 'short', day: 'numeric', month: 'short',
+            hour: 'numeric', minute: '2-digit',
+          })
+        : '';
+      const payload: PushPayload = {
+        title: 'Job time confirmed',
+        body: [where, when].filter(Boolean).join(' — ') || 'Open the app for details',
+        url: `/job/${r.id}`,
+        tag: `booking-${r.id}`,
+      };
+      const { sent: n, gone } = await sendPush(subsMap.get(r.sub_id) ?? [], payload);
+      pushed += n; allGone.push(...gone);
+    }
+
+    await revokeGone(db, [...new Set(allGone)]);
+  } catch { /* sweep is best-effort; the next tick retries anything unmarked */ }
+  return pushed;
+}

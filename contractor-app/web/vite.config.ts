@@ -9,7 +9,14 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
+      // Phase 5: custom SW (src/sw.ts) — generateSW can't host push handlers.
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'sw.ts',
       registerType: 'autoUpdate',
+      injectManifest: {
+        globPatterns: ['**/*.{js,css,html,svg,woff2}'],
+      },
       includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
         name: 'Timeless Jobs',
@@ -24,20 +31,6 @@ export default defineConfig({
           { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
           { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
           { src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml' },
-        ],
-      },
-      workbox: {
-        navigateFallback: '/index.html',
-        globPatterns: ['**/*.{js,css,html,svg,woff2}'],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'google-fonts',
-              expiration: { maxEntries: 20, maxAgeSeconds: 31536000 },
-            },
-          },
         ],
       },
     }),

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAppStore } from './lib/store';
+import { ensurePushSubscription, pushSupported } from './lib/push';
 import { Layout } from './components/Layout';
 import { SignIn } from './pages/SignIn';
 import { Home } from './pages/Home';
@@ -27,17 +28,27 @@ function AppRoutes() {
     }
   }, [isAuthenticated]);
 
+  // Already granted on this device? Keep the subscription registered + attached to this login.
+  useEffect(() => {
+    if (isAuthenticated && pushSupported() && Notification.permission === 'granted') {
+      void ensurePushSubscription();
+    }
+  }, [isAuthenticated]);
+
   const dismissPush = () => {
     localStorage.setItem('push-prompted', 'true');
     setShowPushPrompt(false);
   };
 
-  // Real OS permission request. Actual push *delivery* (PushManager + VAPID + a backend
-  // sender) is wired in the backend phase; until then SMS covers every job, so the copy says so.
+  // Real OS permission request + real delivery: on grant we subscribe (PushManager + VAPID)
+  // and register the device with the backend. SMS fallback still covers every job either way.
   const enableNotifications = async () => {
     try {
       if ('Notification' in window && Notification.permission === 'default') {
         await Notification.requestPermission();
+      }
+      if ('Notification' in window && Notification.permission === 'granted') {
+        await ensurePushSubscription();
       }
     } catch {
       /* permission API unavailable — SMS still reaches them */
