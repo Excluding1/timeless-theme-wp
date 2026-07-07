@@ -23,6 +23,8 @@ const CONFIG_DIR = path.join(DATA_DIR, 'config');
 const TASKS_FILE = path.join(DATA_DIR, 'tasks.json');
 const NEEDS_FILE = path.join(DATA_DIR, 'needs.json');
 const PIPELINE_FILE = path.join(DATA_DIR, 'pipeline.json');
+const ATLAS_FILE = path.join(DATA_DIR, 'business-map.json');
+const JOURNEY_FILE = path.join(DATA_DIR, 'journey.json');
 
 const trunc = (s, n) => { s = String(s == null ? '' : s); return s.length > n ? s.slice(0, n) + '…' : s; };
 
@@ -156,6 +158,12 @@ http.createServer(async (req, res) => {
     if (url === '/api/config' && m === 'POST') { const b = JSON.parse((await readBody(req)) || '{}'); return json(res, { ok: true, name: saveConfig(b.name, b.content) }); }
     if (url === '/api/sprint') return json(res, { md: tasksFromMd() });
     if (url === '/tech-stack') return sendFile(res, TECH_STACK, 'text/html; charset=utf-8');
+    if (url === '/map') return sendFile(res, path.join(PUBLIC, 'business-map.html'), 'text/html; charset=utf-8');
+    if (url === '/journey') return sendFile(res, path.join(PUBLIC, 'journey.html'), 'text/html; charset=utf-8');
+    if (url === '/atlas.js') return sendFile(res, path.join(PUBLIC, 'atlas.js'), 'application/javascript');
+    if (url === '/atlas.css') return sendFile(res, path.join(PUBLIC, 'atlas.css'), 'text/css');
+    if (url === '/api/atlas') { try { return json(res, JSON.parse(fs.readFileSync(ATLAS_FILE, 'utf8'))); } catch { return json(res, { updated: null, tree: [] }); } }
+    if (url === '/api/journey') { try { return json(res, JSON.parse(fs.readFileSync(JOURNEY_FILE, 'utf8'))); } catch { return json(res, { updated: null, tree: [] }); } }
     if (url === '/quote' || url === '/quote/') return sendFile(res, path.join(QUOTE_DIR, 'index.html'), 'text/html; charset=utf-8');
     if (/^\/(quote-form\.(js|css)|favicon\.svg|icons\.svg)$/.test(url) || url.startsWith('/images/')) { const qp = path.join(QUOTE_DIR, url.replace(/^\//, '')); return sendFile(res, qp, MIME[path.extname(qp)] || 'application/octet-stream'); }
     if (url === '/api/health') return json(res, { ok: true, now: Date.now() });
