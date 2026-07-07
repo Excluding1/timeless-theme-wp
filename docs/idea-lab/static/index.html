@@ -23,6 +23,7 @@
         <label class="sub">last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
           ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> pts</label>
         <button id="fetchAll">⚡ Fetch everything</button>
+        <button id="categorizeAll" class="small ghost" title="Tag every idea by type (app / physical / product / content …)">🏷 Categorize all</button>
         <button id="fetchHn" class="small ghost">Show HN</button>
         <button id="fetchRd" class="small ghost">Reddit</button>
         <button id="fetchSs" class="small ghost">Starter Story</button>
@@ -51,10 +52,17 @@
     <div class="row wrap">
       <select id="originFilter">
         <option value="">All sources</option>
+        <option value="ih">IndieHackers ($ revenue)</option>
         <option value="hn">Show HN</option>
+        <option value="ahn">Ask HN</option>
         <option value="rd">Reddit</option>
+        <option value="gh">GitHub</option>
+        <option value="dt">Dev.to</option>
+        <option value="lb">Lobsters</option>
+        <option value="v2">V2EX · China</option>
         <option value="ss">Starter Story</option>
         <option value="ph">Product Hunt</option>
+        <option value="gen">✦ Generated</option>
         <option value="custom">My ideas</option>
       </select>
       <select id="categoryFilter"><option value="">All categories</option></select>
@@ -71,6 +79,22 @@
     <div id="ideas"></div>
   </section>
 
+  <section class="card" id="generateCard">
+    <div class="row spread wrap">
+      <h2>✦ Generate fresh ideas</h2>
+      <div class="row wrap">
+        <input id="genTheme" placeholder="Optional theme (e.g. faceless YouTube, local trades, AI for accountants)" spellcheck="false">
+        <label class="sub">count <input id="genCount" type="number" value="10" min="1" max="20" class="tiny"></label>
+        <button id="generateBtn">Generate ideas</button>
+      </div>
+    </div>
+    <p class="hint">Original, non-obvious business ideas invented on the spot — each grounded in a real "why now",
+      with a target customer, revenue model and rough numbers. They drop into the list below (source
+      <strong>✦ Generated</strong>) so you can Analyze, run the full pipeline, or Simulate any of them.
+      Richer with live web research once the Claude CLI is logged in.</p>
+    <div id="genStatus" class="hint"></div>
+  </section>
+
   <section class="card">
     <h2>Idea Tester</h2>
     <p class="hint">Type your own business idea — same expert scorecard + persona panel as the scraped ones.</p>
@@ -84,18 +108,23 @@
 
   <section class="card" id="batchCard">
     <div class="row spread wrap">
-      <h2>Auto-run pipeline (batch)</h2>
+      <h2>Analyze all (batch)</h2>
       <div class="row wrap">
         <label class="sub">Top
-          <input id="batchLimit" type="number" value="10" min="1" max="200" class="tiny">
-          ideas by rank</label>
-        <button id="startBatch">▶ Run full pipeline on all of them</button>
+          <input id="batchLimit" type="number" value="10" min="1" max="500" class="tiny">
+          by rank</label>
+        <select id="batchMode">
+          <option value="analyze">Analyze (score + panel)</option>
+          <option value="pipeline" selected>Full pipeline (+ plan)</option>
+        </select>
+        <button id="startBatch">▶ Run on all of them</button>
         <button id="stopBatch" class="small ghost" hidden>Stop batch</button>
       </div>
     </div>
-    <p class="hint">Unattended: each idea gets polish → score + Effort ROI → persona panel →
-      judged 3-way plan tournament → final downloadable plan. Runs one at a time in the
-      background — leave it going and check back. (Far faster once the Claude CLI is logged in.)</p>
+    <p class="hint">Runs on whatever the list above is currently filtered to (source · category · search),
+      one at a time in the background — leave it going and check back. <em>Analyze</em> = polish → score +
+      Effort ROI → persona panel; <em>Full pipeline</em> also adds the judged 3-way plan tournament and a
+      downloadable plan. (Far faster once the Claude CLI is logged in.)</p>
     <div id="batchStatus" class="hint"></div>
   </section>
 
@@ -112,6 +141,17 @@
       final plan — stack, pricing, customers, marketing, week-by-week roadmap.</p>
     <div id="plans"></div>
     <p class="hint" id="plansEmpty" hidden>No plans yet — hit “Full pipeline” or “Plan” on an idea.</p>
+  </section>
+
+  <section class="card">
+    <h2>🎲 Business Simulations</h2>
+    <p class="hint">Each simulation runs the business 500 times over 10 years — random founder luck, growth and
+      churn, plus the events that actually make or break small businesses (a competitor, a cheap overseas
+      clone, a lawsuit, a viral moment, an acquisition offer). You get the probability of each outcome,
+      the P10/P50/P90 revenue path, a realistic exit value and rare-upside max, the biggest ways it dies,
+      and what to fix <em>before</em> you start. Hit <strong>Simulate</strong> on any idea above.</p>
+    <div id="sims"></div>
+    <p class="hint" id="simsEmpty" hidden>No simulations yet — hit “Simulate” on an idea.</p>
   </section>
 </main>
 

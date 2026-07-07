@@ -63,7 +63,18 @@ button.small { padding: 5px 12px; font-size: 13px; }
 .obadge.dt { background: #090909; color: #fff; }
 .obadge.lb { background: #ac130d; color: #fff; }
 .obadge.rd { background: #ff4500; color: #fff; }
+.obadge.v2 { background: #333; color: #6cf; }
+.obadge.ss { background: #111; color: #ffd24a; }
+.obadge.gen { background: var(--cyan); color: #062; }
+.obadge.feed, .obadge.vid { background: #2a2a3a; color: #b9c; }
 .obadge.custom { background: var(--accent); color: #120a24; }
+.obadge.cat { background: #20203a; color: #b9a6ff; text-transform: none; letter-spacing: 0; }
+
+.revbadge { font-size: 12px; font-weight: 800; color: var(--green); }
+.trendbadge { font-size: 11.5px; font-weight: 700; color: var(--muted); }
+.trendbadge.rising { color: var(--green); }
+.trendbadge.falling { color: var(--red); }
+.iactions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
 
 .score { font-weight: 700; }
 .score.big { font-size: 15px; white-space: nowrap; }
@@ -106,3 +117,23 @@ button.small { padding: 5px 12px; font-size: 13px; }
 a.button { text-decoration: none; background: linear-gradient(135deg, var(--accent), #7d5be0);
   color: #120a24; font-weight: 700; border-radius: 9px; padding: 5px 12px; font-size: 13px; }
 a.button:hover { filter: brightness(1.1); }
+
+/* ---------- simulator ---------- */
+.outcomes, .chartwrap { margin-top: 4px; }
+.obars { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+.obar { display: grid; grid-template-columns: 150px 1fr; gap: 10px; align-items: center; }
+.obarlabel { font-size: 12.5px; color: var(--text); }
+.obartrack { background: var(--card); border: 1px solid var(--line); border-radius: 6px; height: 14px; overflow: hidden; }
+.obarfill { height: 100%; border-radius: 6px 0 0 6px; }
+.obarfill.good { background: var(--green); }
+.obarfill.mid { background: var(--amber); }
+.obarfill.bad { background: var(--red); }
+.chartwrap { margin-top: 12px; }
+.revchart { width: 100%; max-width: 560px; display: block; margin-top: 6px; }
+.revchart .band { fill: rgba(180,140,255,.18); stroke: none; }
+.revchart .p50line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.revchart .axtx { fill: var(--muted); font-size: 10px; }
+.mdbox { border-top: 1px dashed var(--line); margin-top: 12px; padding-top: 10px; }
+.mdbox .mdh { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin: 10px 0 4px; }
+.mdbox .mdp { font-size: 13.5px; margin: 4px 0; }
+#genTheme { flex: 1; min-width: 220px; }

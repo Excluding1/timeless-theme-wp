@@ -11,7 +11,8 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from lab import analyst, batch, db, planner, sources
+from lab import (analyst, batch, categorize, db, ideagen, planner, simulator,
+                 sources, trends)
 
 BASE = Path(__file__).resolve().parent
 
@@ -64,21 +65,75 @@ def state():
         "engine": analyst.engine_info(),
         "fetch": sources.fetch_status(),
         "batch": batch.status(),
+        "categorize": categorize.status(),
+        "generate": ideagen.status(),
+        "simulate": simulator.status(),
     }
 
 
 @app.post("/api/batch")
 def start_batch(body: dict = Body(default={})):
     origin = body.get("origin")
-    limit = max(1, min(200, int(body.get("limit") or 10)))
+    category = body.get("category")
+    q = body.get("q")
+    mode = "analyze" if body.get("mode") == "analyze" else "pipeline"
+    limit = max(1, min(500, int(body.get("limit") or 10)))
     panel = int(body.get("panel_size") or db.get_setting("panel_size") or 10)
-    rows = db.ideas(origin or None, limit=limit)
+    rows = db.ideas(origin or None, q or None, limit=limit, category=category or None)
     ids = [r["id"] for r in rows][:limit]
     if not ids:
-        raise HTTPException(400, "No ideas to run — fetch some first.")
-    if not batch.start_batch(ids, panel):
+        raise HTTPException(400, "No ideas match — fetch or widen the filter first.")
+    if not batch.start_batch(ids, panel, mode=mode):
         raise HTTPException(409, "A batch is already running.")
-    return {"ok": True, "queued": len(ids)}
+    return {"ok": True, "queued": len(ids), "mode": mode}
+
+
+@app.post("/api/categorize")
+def categorize_all(body: dict = Body(default={})):
+    only_missing = body.get("only_missing", True) is not False
+    if not categorize.categorize_all_bg(only_missing=only_missing):
+        raise HTTPException(409, "Categorization already running.")
+    return {"ok": True}
+
+
+@app.post("/api/generate")
+def generate(body: dict = Body(default={})):
+    n = max(1, min(20, int(body.get("n") or 10)))
+    theme = (body.get("theme") or "").strip() or None
+    if not ideagen.start_generation(n, theme):
+        raise HTTPException(409, "Idea generation already running.")
+    return {"ok": True, "n": n}
+
+
+@app.post("/api/trends/{idea_id:path}")
+def refresh_trend(idea_id: str):
+    if not db.idea(idea_id):
+        raise HTTPException(404, "Unknown idea")
+    return {"ok": True, "trend": trends.refresh_idea(idea_id)}
+
+
+@app.post("/api/simulate/{idea_id:path}")
+def simulate(idea_id: str, body: dict = Body(default={})):
+    try:
+        sid = simulator.start_simulation(idea_id)
+    except analyst.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(404, str(e))
+    return {"ok": True, "simulation_id": sid}
+
+
+@app.get("/api/simulations")
+def list_simulations():
+    out = []
+    for s in db.simulations():
+        if s.get("summary"):
+            try:
+                s["summary"] = json.loads(s["summary"])
+            except (TypeError, json.JSONDecodeError):
+                pass
+        out.append(s)
+    return {"simulations": out}
 
 
 @app.post("/api/batch/stop")

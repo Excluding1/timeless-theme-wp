@@ -611,6 +611,15 @@ def fetch_all(progress=None):
             results["(junk removed)"] = pruned
     except Exception:
         pass
+    try:
+        from . import categorize
+        if progress:
+            progress("categorizing")
+        n = categorize.categorize_all(only_missing=True)
+        if n:
+            results["(categorized)"] = n
+    except Exception:
+        pass
     return results
 
 

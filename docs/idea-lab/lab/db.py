@@ -67,12 +67,25 @@ CREATE TABLE IF NOT EXISTS custom_sources (
     added_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
 );
 CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS simulations (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    idea_id    TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+    status     TEXT NOT NULL DEFAULT 'running',   -- running | done | error
+    error      TEXT,
+    trials     INTEGER,
+    summary    TEXT,        -- JSON numeric aggregates (percentiles, outcome odds, exit)
+    narrative  TEXT         -- markdown: data-analyst read + avoid/improve advice
+);
+CREATE INDEX IF NOT EXISTS idx_sims_idea ON simulations(idea_id);
 """
 
 # guarded ALTERs for databases created before a column existed
 MIGRATIONS = [
     "ALTER TABLE ideas ADD COLUMN category TEXT",
     "ALTER TABLE ideas ADD COLUMN polished TEXT",       # JSON refined spec
+    "ALTER TABLE ideas ADD COLUMN momentum REAL",       # Google Trends interest 0-100
+    "ALTER TABLE ideas ADD COLUMN trend_json TEXT",     # JSON {keyword,current,slope,direction}
     "ALTER TABLE analyses ADD COLUMN estimates TEXT",   # JSON cost/revenue estimates
     "ALTER TABLE analyses ADD COLUMN effort_roi REAL",  # year-1 profit / effort cost
 ]
@@ -151,7 +164,10 @@ def ideas(origin=None, q=None, limit=3000, category=None):
         params += [f"%{esc}%"] * 2
     if where:
         sql += " WHERE " + " AND ".join(where)
-    sql += " ORDER BY COALESCE(a.composite,-1) DESC, i.traction DESC LIMIT ?"
+    # analyzed ideas rank first (by AI score); within a tier, a rising Google-Trends
+    # momentum lifts an idea by boosting its traction weight — every variable counts.
+    sql += (" ORDER BY COALESCE(a.composite,-1) DESC, "
+            "(COALESCE(i.traction,0) * (1 + COALESCE(i.momentum,0)/100.0)) DESC LIMIT ?")
     params.append(limit)
     with _lock:
         return [dict(r) for r in _db().execute(sql, params).fetchall()]
@@ -341,3 +357,87 @@ def remove_custom_source(sid):
         con = _db()
         with con:
             con.execute("DELETE FROM custom_sources WHERE id=?", (sid,))
+
+
+def set_idea_category(idea_id, category):
+    with _lock:
+        con = _db()
+        with con:
+            con.execute("UPDATE ideas SET category=? WHERE id=?", (category, idea_id))
+
+
+def set_idea_trend(idea_id, momentum, trend):
+    with _lock:
+        con = _db()
+        with con:
+            con.execute("UPDATE ideas SET momentum=?, trend_json=? WHERE id=?",
+                        (momentum,
+                         json.dumps(trend) if isinstance(trend, (dict, list)) else trend,
+                         idea_id))
+
+
+def uncategorized_ideas(limit=100000):
+    """id/title/description for every idea missing a category (for the bulk classifier)."""
+    with _lock:
+        rows = _db().execute(
+            "SELECT id, title, description FROM ideas "
+            "WHERE category IS NULL OR category='' LIMIT ?", (limit,)).fetchall()
+        return [dict(r) for r in rows]
+
+
+def bulk_set_categories(pairs):
+    """pairs = [(idea_id, category), ...] — one transaction for the whole sweep."""
+    with _lock:
+        con = _db()
+        with con:
+            con.executemany("UPDATE ideas SET category=? WHERE id=?",
+                            [(c, i) for i, c in pairs])
+        return len(pairs)
+
+
+# ---------- simulations ----------
+
+def new_simulation(idea_id, trials):
+    with _lock:
+        con = _db()
+        with con:
+            cur = con.execute("INSERT INTO simulations(idea_id, trials) VALUES(?,?)",
+                              (idea_id, trials))
+        return cur.lastrowid
+
+
+def update_simulation(sid, **fields):
+    allowed = {"status", "error", "trials", "summary", "narrative"}
+    cols = [k for k in fields if k in allowed]
+    if not cols:
+        return
+    vals = [json.dumps(fields[c]) if isinstance(fields[c], (dict, list)) else fields[c]
+            for c in cols]
+    with _lock:
+        con = _db()
+        with con:
+            con.execute(f"UPDATE simulations SET {', '.join(c + '=?' for c in cols)} WHERE id=?",
+                        vals + [sid])
+
+
+def simulation(sid):
+    with _lock:
+        row = _db().execute("SELECT * FROM simulations WHERE id=?", (sid,)).fetchone()
+        return dict(row) if row else None
+
+
+def simulations(limit=50):
+    with _lock:
+        rows = _db().execute(
+            "SELECT s.*, i.title FROM simulations s JOIN ideas i ON i.id=s.idea_id "
+            "ORDER BY s.id DESC LIMIT ?", (limit,)).fetchall()
+        return [dict(r) for r in rows]
+
+
+def latest_analysis(idea_id):
+    """The most recent COMPLETED analysis for an idea (drives simulator priors)."""
+    with _lock:
+        row = _db().execute(
+            "SELECT * FROM analyses WHERE idea_id=? AND status='done' "
+            "ORDER BY id DESC LIMIT 1", (idea_id,)).fetchone()
+        return dict(row) if row else None
