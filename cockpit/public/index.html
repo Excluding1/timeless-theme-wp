@@ -5,74 +5,101 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Timeless · CEO Cockpit</title>
 <style>
-  :root{ --navy:#041534; --navy2:#0a2350; --gold:#e7c08b; --muted:#9bb0d0; --ok:#3ecf8e; --warn:#f0b429; --err:#ff6b6b; --line:#16335f; --panel:#071d40; --cleo:#54d6ff; }
-  *{box-sizing:border-box} html,body{margin:0;height:100%}
-  body{background:var(--navy);color:#eaf1ff;font:14px/1.5 -apple-system,Inter,Segoe UI,Roboto,sans-serif}
-  header{display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:2px solid var(--gold);background:linear-gradient(90deg,#041534,#0a2350)}
-  header .brand{font-weight:800;letter-spacing:.14em;font-size:15px} header .brand b{color:var(--gold)}
+  :root{ --navy:#041534; --navy2:#0a2350; --gold:#e7c08b; --muted:#9bb0d0; --ok:#3ecf8e; --warn:#f0b429; --err:#ff6b6b; --line:#16335f; --panel:#071d40; --cleo:#54d6ff; --purple:#a78bfa; --ink:#eaf1ff; --soft:#c8d8f5; --dim:#5e79a8; }
+  *{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:#16335f transparent} html,body{margin:0;height:100%}
+  body{background-color:var(--navy);color:var(--ink);font:14px/1.5 -apple-system,Inter,Segoe UI,Roboto,sans-serif;overflow-x:hidden;
+    background-image:radial-gradient(rgba(155,176,208,.07) 1px,transparent 1.6px);background-size:24px 24px}
+  ::-webkit-scrollbar{width:8px;height:8px} ::-webkit-scrollbar-thumb{background:#16335f;border-radius:8px} ::-webkit-scrollbar-track{background:transparent}
+  /* ---------- sticky header + pill nav ---------- */
+  #tophead{position:sticky;top:0;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 18px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#041534,#0a2350)}
+  header .brand{font-weight:800;letter-spacing:.13em;font-size:15px} header .brand b{color:var(--gold)}
   header .meta{font-size:12px;color:var(--muted);text-align:right}
-  #dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--err);margin-right:6px}#dot.on{background:var(--ok)}
-  nav{display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid var(--line);background:#061a3a;flex-wrap:wrap}
-  nav button{background:none;border:1px solid transparent;color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-weight:700;letter-spacing:.04em;font-size:12px}
-  nav button.active{background:var(--panel);color:var(--gold);border-color:var(--line)}
-  nav a.navlink{background:none;border:1px solid transparent;color:var(--muted);padding:7px 14px;border-radius:8px;font-weight:700;letter-spacing:.04em;font-size:12px;text-decoration:none}
-  nav a.navlink:hover{background:var(--panel);color:var(--gold);border-color:var(--line)}
-  .banner{margin:12px 18px;padding:11px 16px;background:rgba(231,192,139,.12);border:1px solid var(--gold);border-radius:10px;font-weight:600}
+  #dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--err);margin-right:6px}#dot.on{background:var(--ok);box-shadow:0 0 7px var(--ok)}
+  nav{display:flex;gap:6px;padding:9px 16px;border-bottom:2px solid var(--gold);background:#061a3a;flex-wrap:wrap;align-items:center}
+  nav button,nav a.navlink{display:inline-flex;align-items:center;gap:6px;background:#04122e;border:1px solid var(--line);color:var(--muted);padding:6px 13px;border-radius:999px;cursor:pointer;font-weight:700;letter-spacing:.03em;font-size:12px;text-decoration:none;font-family:inherit;transition:color .15s,border-color .15s,background .15s}
+  nav button:hover,nav a.navlink:hover{color:var(--gold);border-color:var(--gold)}
+  nav button.active{background:rgba(231,192,139,.16);color:var(--gold);border-color:var(--gold)}
+  .banner{margin:12px 18px;padding:11px 16px;background:rgba(231,192,139,.12);border:1px solid var(--gold);border-radius:12px;font-weight:600}
   .banner .lbl{color:var(--gold);font-weight:800;letter-spacing:.12em;font-size:11px;margin-right:8px}
-  .view{display:none;padding:0 18px 24px} .view.active{display:block}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:900px){.grid2{grid-template-columns:1fr}}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;max-height:60vh;overflow:hidden;margin-bottom:12px}
-  .panel h2{margin:0;padding:10px 14px;font-size:11px;letter-spacing:.14em;color:var(--gold);border-bottom:1px solid var(--line);text-transform:uppercase;display:flex;justify-content:space-between}
+  .view{display:none;padding:0 18px 28px} .view.active{display:block}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+  /* ---------- hero status strip ---------- */
+  .hero{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:2px 0 14px}
+  @media(max-width:900px){.hero{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease}
+  .tile:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.35)}
+  .tile.click{cursor:pointer}
+  .tile.err{border-color:var(--err);box-shadow:0 0 0 1px rgba(255,107,107,.3),0 0 18px rgba(255,107,107,.13)}
+  .tile.warn{border-color:rgba(240,180,41,.6)} .tile.ok{border-color:rgba(62,207,142,.6)}
+  .tile .tl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800;display:flex;gap:6px;align-items:center}
+  .tile .tl .tcount{margin-left:auto;background:rgba(231,192,139,.14);color:var(--gold);border-radius:10px;padding:1px 8px;font-size:10px;letter-spacing:.02em;text-transform:none;white-space:nowrap}
+  .tile .tv{font-size:24px;font-weight:800;color:#fff;margin-top:7px;line-height:1.15}
+  .tile.err .tv{color:var(--err)} .tile.ok .tv{color:var(--ok)} .tile.warn .tv{color:var(--warn)}
+  .tile .tv.sm{font-size:15px;display:flex;align-items:center;gap:8px}
+  .tile .ts{font-size:11px;color:var(--dim);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tile .tn{font-size:12.5px;color:var(--soft);margin-top:7px;line-height:1.5;max-height:57px;overflow:hidden}
+  .tw{display:flex;gap:14px;margin-top:7px;flex-wrap:wrap}
+  .tw b{display:block;font-size:24px;font-weight:800;color:var(--gold);line-height:1.1}
+  .tw span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+  .fdot{width:9px;height:9px;border-radius:50%;background:var(--warn);display:inline-block;flex:0 0 auto}
+  .fdot.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+  /* ---------- panels ---------- */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;max-height:60vh;overflow:hidden;margin-bottom:14px;box-shadow:0 3px 10px rgba(0,0,0,.22)}
+  .panel h2{margin:0;padding:11px 16px;font-size:11px;letter-spacing:.14em;color:var(--gold);border-bottom:1px solid var(--line);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;background:rgba(4,18,46,.45)}
   .panel h2 .cleo{color:var(--cleo)}
-  .panel .body{padding:10px 14px;overflow:auto}
-  .ev{padding:5px 0;border-bottom:1px solid #0e2748;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
-  .scard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:12px}
+  .panel .body{padding:12px 16px;overflow:auto}
+  .ev{padding:5px 8px;margin:2px 0;border-left:2px solid transparent;border-bottom:1px solid #0e2748;border-radius:0 6px 6px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
+  #feed .ev{border-left-color:rgba(231,192,139,.4)} #cfeed .ev{border-left-color:rgba(84,214,255,.4)}
+  .ev:hover{background:rgba(10,35,80,.5)}
+  .scard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+  .scard.cliff{border-left:3px solid var(--gold)} .scard.cleo2{border-left:3px solid var(--cleo)}
   .scard .shd{display:flex;align-items:center;gap:10px;margin-bottom:5px}
   .scard .who{font-weight:800;letter-spacing:.12em;font-size:12px}
   .sdot{width:9px;height:9px;border-radius:50%;background:var(--muted)}.sdot.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}
   .snow{font-size:14px;color:#dfeaff;line-height:1.4;min-height:20px}
-  details#actlog{margin-bottom:14px}details#actlog>summary{cursor:pointer;color:var(--muted);font-size:12px;padding:8px 4px}
-  .ev .w{font-weight:700;font-size:11px;margin-right:6px}.ev.you .w{color:var(--gold)}.ev.clifford .w{color:#7fb0ff}.ev.tool{color:var(--muted);font-size:13px}.ev.think{color:#86a0c8;font-style:italic;font-size:13px}
-  .ev .t{color:#5e79a8;font-size:10px;float:right}
+  details#actlog{margin-bottom:14px}details#actlog>summary{cursor:pointer;color:var(--muted);font-size:12px;padding:8px 4px}details#actlog>summary:hover{color:var(--gold)}
+  .ev .w{font-weight:700;font-size:11px;margin-right:6px}.ev.you .w{color:var(--gold)}.ev.clifford .w{color:#7fb0ff}
+  .ev.tool{color:var(--dim);font:11.5px/1.5 ui-monospace,Menlo,monospace}
+  .ev.think{color:#86a0c8;font-style:italic;font-size:12px}
+  .ev .t{color:#41598a;font-size:10px;float:right;margin-left:8px}
   ul.dots{margin:4px 0;padding-left:18px}ul.dots li{margin:4px 0}
   .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700}
   .badge.done{background:rgba(62,207,142,.15);color:var(--ok)}.badge.running{background:rgba(240,180,41,.15);color:var(--warn)}
   .badge.timedout,.badge.exited{background:rgba(255,107,107,.15);color:var(--err)}.badge.idle{background:var(--line);color:var(--muted)}
-  .btn{display:inline-block;text-align:center;margin-top:8px;padding:8px 12px;background:var(--gold);color:#041534;font-weight:800;border-radius:8px;text-decoration:none;border:none;cursor:pointer}
-  .btn.alt{background:var(--line);color:#cfe0ff}
-  .need{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:1px solid #0e2748}
+  .btn{display:inline-block;text-align:center;padding:8px 14px;background:var(--gold);color:#041534;font-weight:800;border-radius:9px;text-decoration:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;transition:filter .15s}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.alt{background:transparent;color:var(--soft);border:1px solid var(--line)}
+  .btn.alt:hover{filter:none;color:var(--gold);border-color:var(--gold)}
+  .btn.sm{padding:4px 12px;font-size:11px}
+  .need{display:flex;gap:9px;align-items:flex-start;padding:6px 8px;margin:0 -8px;border-radius:8px;border-bottom:1px solid #0e2748}
+  .need:hover{background:rgba(10,35,80,.5)}
   .need input{margin-top:3px;accent-color:var(--gold);cursor:pointer}.need.done span{text-decoration:line-through;color:var(--muted)}
-  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap} input.nm{background:#04122e;color:#eaf1ff;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;flex:1}
-  /* scoreboard (leading indicators) */
-  .sb-row{display:flex;gap:10px;flex-wrap:wrap}
-  .sb-cell{flex:1;min-width:104px;background:#04122e;border:1px solid var(--line);border-radius:10px;padding:9px 10px;text-align:center}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap} input.nm{background:#04122e;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:13px;flex:1;outline:none}
+  input.nm:focus{border-color:var(--gold)}
+  /* ---------- scoreboard (leading indicators) ---------- */
+  .sb-row{display:flex;gap:12px;flex-wrap:wrap}
+  .sb-cell{flex:1;min-width:110px;background:#04122e;border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center;transition:border-color .15s}
+  .sb-cell:hover{border-color:#2c5391}
   .sb-lbl{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-  .sb-num{font-size:30px;font-weight:800;color:var(--gold);line-height:1.25}
-  .sb-cell .btn{margin-top:2px;padding:4px 16px;font-size:13px}
-  .sb-undo{display:block;margin-top:5px;font-size:11px;color:var(--muted);text-decoration:none;cursor:pointer}.sb-undo:hover{color:var(--err)}
-  table.sb-table{width:100%;margin-top:10px;border-collapse:collapse;font-size:12px}
-  .sb-table th{color:var(--muted);font-weight:700;text-align:right;padding:3px 6px;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-  .sb-table td{padding:3px 6px;text-align:right;border-bottom:1px solid #0e2748;color:#cfe0ff}
+  .sb-num{font-size:32px;font-weight:800;color:var(--gold);line-height:1.25}
+  .sb-cell .btn{margin-top:4px;padding:4px 18px;font-size:13px;border-radius:999px}
+  .sb-undo{display:block;margin-top:6px;font-size:11px;color:var(--muted);text-decoration:none;cursor:pointer}.sb-undo:hover{color:var(--err)}
+  table.sb-table{width:100%;margin-top:12px;border-collapse:collapse;font-size:12px}
+  .sb-table th{color:var(--muted);font-weight:700;text-align:right;padding:4px 8px;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+  .sb-table td{padding:4px 8px;text-align:right;border-bottom:1px solid #0e2748;color:#cfe0ff}
+  .sb-table tr:nth-child(even) td{background:rgba(4,18,46,.55)}
   .sb-table th:first-child,.sb-table td:first-child{text-align:left}
   .sb-table tr.cur td{color:var(--gold);font-weight:700}
-  /* board */
-  .phase{color:var(--gold);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:16px 0 6px}
-  .tk{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
-  .tk .hd{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer}
-  .tk .hd .ic{font-weight:800;font-size:16px}.ic.c{color:var(--ok)}.ic.d{color:var(--warn)}.ic.p{color:var(--muted)}
-  .tk .hd .ti{flex:1;font-weight:600}.tk.done .ti{color:var(--muted)}.tk .prog{font-size:11px;color:var(--muted)}
   .bar{height:4px;background:#0e2748;border-radius:3px;margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--gold)}
-  .subs{padding:4px 14px 12px 40px;display:none}.tk.open .subs{display:block}
-  .sub{display:flex;gap:9px;align-items:flex-start;padding:5px 0}.sub input{margin-top:3px;accent-color:var(--gold);cursor:pointer}.sub.done span{text-decoration:line-through;color:var(--muted)}
-  .addsub{color:var(--muted);font-size:12px;cursor:pointer;margin-top:6px;display:inline-block}.addsub:hover{color:var(--gold)}
-  /* pipeline (the new Task Board — explainer-style vertical flow) */
+  /* ---------- pipeline (the Task Board — explainer-style vertical flow) ---------- */
   .pl-wrap{max-width:880px;margin:0 auto}
   .pl-head{padding:14px 4px 6px}
   .pl-head h1{margin:0 0 6px;font-size:20px;color:#fff}
   .pl-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
   .pl-prog{display:flex;gap:14px;align-items:center;margin:12px 0 4px;font-size:12px;color:var(--muted)}
   .pl-prog .bar{flex:1;height:6px;margin:0}
-  .pl-rule{margin:10px 0 18px;padding:10px 14px;border:1px solid var(--err);border-radius:10px;background:rgba(255,107,107,.08);font-size:12.5px;color:#ffd9d9;line-height:1.6}
+  .pl-rule{margin:10px 0 18px;padding:10px 14px;border:1px solid var(--err);border-radius:12px;background:rgba(255,107,107,.08);font-size:12.5px;color:#ffd9d9;line-height:1.6}
   .ph{margin:26px 0 0}
   .ph-hd{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--gold);padding-bottom:6px}
   .ph-hd h2{margin:0;font-size:16px;color:var(--gold);letter-spacing:.04em}
@@ -80,7 +107,8 @@
   .ph-goal{color:#c8d8f5;font-size:13px;line-height:1.65;margin:8px 0 14px}
   .step{position:relative;padding:0 0 0 34px}
   .step:before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--line)}
-  .nd{position:relative;margin:0 0 14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .nd{position:relative;margin:0 0 14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;transition:border-color .15s}
+  .nd:hover{border-color:#2c5391}
   .nd:before{content:'';position:absolute;left:-29px;top:14px;width:14px;height:14px;border-radius:50%;background:#0e2748;border:2px solid var(--muted)}
   .nd.done:before{background:var(--ok);border-color:var(--ok)}
   .nd.active:before{background:var(--warn);border-color:var(--warn);box-shadow:0 0 10px var(--warn)}
@@ -99,75 +127,76 @@
   .here{margin:-2px 0 10px -34px;padding-left:34px}
   .here span{display:inline-block;background:var(--gold);color:#041534;font-weight:900;font-size:11px;letter-spacing:.1em;padding:4px 12px;border-radius:8px}
   .nd .ck{margin-left:auto;accent-color:var(--gold);cursor:pointer;width:16px;height:16px}
-  /* config */
-  .cfg{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:12px}
-  .cfg .ch{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line)}
-  .cfg .ch .nm2{font-weight:800;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;font-size:12px}
-  .age{font-size:11px;color:var(--muted)}.age.stale{color:var(--err);font-weight:700}.age.warn{color:var(--warn)}
-  .cfg pre{margin:0;padding:12px 14px;white-space:pre-wrap;word-break:break-word;font:12px/1.5 ui-monospace,Menlo,monospace;color:#cfe0ff;max-height:280px;overflow:auto}
-  .cfg .edit{padding:10px 14px;border-top:1px solid var(--line);display:none}.cfg.editing .edit{display:block}
-  textarea{width:100%;min-height:170px;background:#04122e;color:#eaf1ff;border:1px solid var(--line);border-radius:8px;padding:10px;font:12px/1.5 ui-monospace,monospace}
+  /* ---------- agent / config cards ---------- */
+  .cfg{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,.22)}
+  .cfg .ch{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);background:rgba(4,18,46,.45)}
+  .cfg .nm2{font-weight:800;color:var(--ink);font-size:13px;display:flex;align-items:center;gap:8px;min-width:0}
+  .cfg .nm2 .cemo{font-size:16px} .cfg .csub{color:var(--dim);font-weight:600;font-size:11px}
+  .cfg .chr{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+  .chip-fresh{font-size:10px;font-weight:800;padding:2px 9px;border-radius:10px;letter-spacing:.04em;white-space:nowrap}
+  .chip-fresh.ok{background:rgba(62,207,142,.16);color:var(--ok)}
+  .chip-fresh.warn{background:rgba(240,180,41,.16);color:var(--warn)}
+  .chip-fresh.err{background:rgba(255,107,107,.16);color:var(--err)}
+  .cfg .md{padding:6px 16px 12px;max-height:320px;overflow:auto;font-size:12.5px;line-height:1.6;color:var(--soft)}
+  .cfg .md h3{margin:10px 0 4px;font-size:14px;color:#fff}
+  .cfg .md h4{margin:10px 0 4px;font-size:11.5px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+  .cfg .md p{margin:7px 0} .cfg .md ul{margin:6px 0;padding-left:20px} .cfg .md li{margin:3px 0}
+  .cfg .md strong{color:#fff} .cfg .md em{color:var(--dim)}
+  .cfg .edit{padding:12px 16px;border-top:1px solid var(--line);display:none}
+  .cfg.editing .edit{display:block} .cfg.editing .md{display:none}
+  textarea{width:100%;min-height:170px;background:#04122e;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:10px;font:12px/1.5 ui-monospace,Menlo,monospace;outline:none}
+  textarea:focus{border-color:var(--gold)}
   iframe{width:100%;height:560px;border:1px solid var(--line);border-radius:12px;background:#fff}
   .empty{color:var(--muted);font-style:italic;padding:8px 0}
-  /* crew / among-us map */
-  #map{position:relative;height:64vh;min-height:480px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 36%,#0c2a5a,#04102b 72%);background-image:radial-gradient(circle at 50% 36%,#0c2a5a,#04102b 72%),linear-gradient(rgba(70,120,200,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(70,120,200,.06) 1px,transparent 1px);background-size:auto,30px 30px,30px 30px}
-  .station{position:absolute;transform:translate(-50%,-50%);width:132px;height:86px;border:1px solid #2c5391;border-radius:14px;display:flex;align-items:flex-start;justify-content:center;color:#9fb6e0;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:7px;background:linear-gradient(180deg,rgba(44,83,145,.18),rgba(10,30,70,.10));box-shadow:inset 0 0 34px rgba(50,100,180,.10)}
-  .crew{position:absolute;transform:translate(-50%,-50%);transition:left .9s ease,top .9s ease;text-align:center;z-index:5}
-  .crewb{width:34px;height:42px;border-radius:17px 17px 12px 12px;position:relative;margin:0 auto;box-shadow:inset -6px -4px 0 rgba(0,0,0,.22),0 5px 9px rgba(0,0,0,.45)}
-  .crewb:before{content:'';position:absolute;top:9px;left:9px;right:-5px;height:14px;border-radius:9px;background:linear-gradient(180deg,#e2f1ff,#8fc6ff);box-shadow:inset 0 0 0 2px rgba(8,26,52,.30)}
-  .crewb:after{content:'';position:absolute;left:-5px;top:14px;width:10px;height:18px;border-radius:7px 4px 4px 7px;background:inherit;filter:brightness(.72)}
-  .crew .legs{display:flex;justify-content:center;gap:5px;margin-top:-3px;position:relative;z-index:-1}
-  .crew .legs i{width:9px;height:8px;border-radius:0 0 4px 4px;display:block;filter:brightness(.82)}
-  .crew.idle{opacity:.42;filter:grayscale(.6)} .crew.active .crewb{animation:bob 1.15s ease-in-out infinite}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-  .nm3{font-size:10px;font-weight:800;margin-top:3px;color:#dfe9ff;white-space:nowrap}
-  .say{position:absolute;bottom:46px;left:50%;transform:translateX(-50%);background:#fff;color:#0a1830;font-size:10px;padding:3px 7px;border-radius:8px;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-  .say:after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#fff}
-  .legend{position:absolute;bottom:8px;left:10px;font-size:11px;color:var(--muted)}
-  .rrow{display:flex;align-items:center;gap:11px;padding:9px 14px;border-bottom:1px solid #0e2748}.rrow:last-child{border:0}
+  /* ---------- crew map + roster ---------- */
+  .rrow{display:flex;align-items:center;gap:11px;padding:9px 16px;border-bottom:1px solid #0e2748}.rrow:last-child{border:0}.rrow:hover{background:rgba(10,35,80,.5)}
   .rdot{width:13px;height:13px;border-radius:50%;flex:0 0 13px;box-shadow:0 0 9px currentColor}
   .rname{font-weight:700;flex:0 0 92px;line-height:1.15}.rrole{display:block;font-weight:400;color:var(--muted);font-size:10px}
   .rstat{font-size:11px;font-weight:700;padding:2px 9px;border-radius:11px;flex:0 0 auto}.rstat.on{background:rgba(62,207,142,.16);color:var(--ok)}.rstat.off{background:var(--line);color:var(--muted)}
   .rtask{color:#cfe0ff;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .rlegend{padding:9px 14px;color:var(--muted);font-size:11px}
+  .rlegend{padding:9px 16px;color:var(--muted);font-size:11px}
 </style>
 </head>
 <body>
-  <header>
-    <div class="brand">TIMELESS <b>·</b> CEO COCKPIT</div>
-    <div class="meta"><span id="dot"></span><span id="sync">connecting…</span> · <span id="sess" style="color:#5e79a8"></span></div>
-  </header>
-  <nav>
-    <button data-v="live">● Live</button>
-    <button data-v="crew">🚀 Crew Map</button>
-    <button data-v="board" class="active">▼ Pipeline</button>
-    <button data-v="config">⚙ Tech-Stack Config</button>
-    <button data-v="stack">◰ Explainer</button>
-    <a class="navlink" href="/map">🗺 Business Map</a>
-    <a class="navlink" href="/journey">🚶 Customer Journey</a>
-  </nav>
+  <div id="tophead">
+    <header>
+      <div class="brand">⛵ TIMELESS <b>·</b> CEO COCKPIT</div>
+      <div class="meta"><span id="dot"></span><span id="sync">connecting…</span> · <span id="sess" style="color:#5e79a8"></span></div>
+    </header>
+    <nav>
+      <button data-v="live">📡 Live</button>
+      <button data-v="crew">🚀 Crew Map</button>
+      <button data-v="board" class="active">🗂 Pipeline</button>
+      <button data-v="config">🤖 Agents · Config</button>
+      <button data-v="stack">📚 Explainer</button>
+      <a class="navlink" href="/map">🗺 Map</a>
+      <a class="navlink" href="/journey">🚶 Journey</a>
+      <a class="navlink" href="/quote" target="_blank">🧾 Quote</a>
+    </nav>
+  </div>
 
   <div class="banner"><span class="lbl">▶ NEXT</span><span id="next">—</span></div>
 
   <!-- LIVE -->
   <section class="view" id="v-live">
+    <div class="hero" id="hero"></div>
     <div class="grid2">
-      <div class="scard"><div class="shd"><span class="who" style="color:var(--gold)">CLIFFORD</span><span class="sdot on"></span></div><div class="snow" id="cliffNow">—</div></div>
-      <div class="scard"><div class="shd"><span class="who" style="color:var(--cleo)">CLEO</span><span id="cleobadge" class="badge idle">idle</span></div><div class="snow" id="cleoNow">—</div></div>
+      <div class="scard cliff"><div class="shd"><span class="who" style="color:var(--gold)">CLIFFORD</span><span class="sdot on"></span></div><div class="snow" id="cliffNow">—</div></div>
+      <div class="scard cleo2"><div class="shd"><span class="who" style="color:var(--cleo)">CLEO</span><span id="cleobadge" class="badge idle">idle</span></div><div class="snow" id="cleoNow">—</div></div>
     </div>
-    <div class="panel"><h2>Summary <span id="sumage" style="color:#5e79a8;font-weight:400;text-transform:none;letter-spacing:0"></span></h2><div class="body"><ul class="dots" id="summary"><li class="empty">loading…</li></ul></div></div>
-    <div class="panel"><h2>⚑ What I still need from you <span id="needcount" style="color:var(--gold);float:right;text-transform:none;letter-spacing:0"></span></h2><div class="body">
+    <div class="panel"><h2>🧭 Summary <span id="sumage" style="color:#5e79a8;font-weight:400;text-transform:none;letter-spacing:0"></span></h2><div class="body"><ul class="dots" id="summary"><li class="empty">loading…</li></ul></div></div>
+    <div class="panel" id="needsPanel"><h2>⚑ What I still need from you <span id="needcount" style="color:var(--gold);text-transform:none;letter-spacing:0"></span></h2><div class="body">
       <div id="needs"><div class="empty">loading…</div></div>
-      <div class="row" style="margin-top:8px"><input class="nm" id="newneed" placeholder="add something you owe me / a question"><button class="btn" onclick="addNeed()">add</button></div>
+      <div class="row" style="margin-top:10px"><input class="nm" id="newneed" placeholder="add something you owe me / a question"><button class="btn" onclick="addNeed()">add</button></div>
     </div></div>
     <div class="panel"><h2>📈 Scoreboard (this week) <span id="sbweek" style="color:#5e79a8;font-weight:400;text-transform:none;letter-spacing:0"></span></h2><div class="body">
       <div class="sb-row" id="sbCounters"></div>
       <table class="sb-table" id="sbTable"></table>
-      <div style="margin-top:6px;font-size:11px;color:var(--muted)">Adam Hall's rule: manage the leading indicators (inputs you control), not revenue.</div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted)">Adam Hall's rule: manage the leading indicators (inputs you control), not revenue.</div>
     </div></div>
-    <div class="row" style="margin:0 0 12px"><a class="btn" href="/quote" target="_blank">Quote App ↗</a><a class="btn alt" href="/tech-stack" target="_blank">Tech-Stack ↗</a></div>
+    <div class="row" style="margin:0 0 14px"><a class="btn" href="/quote" target="_blank">🧾 Quote App ↗</a><a class="btn alt" href="/tech-stack" target="_blank">📚 Tech-Stack ↗</a></div>
     <details id="actlog"><summary>▸ Activity log — what Clifford &amp; Cleo are doing (tap to expand)</summary>
-      <div class="grid2"><div class="panel" style="margin:8px 0 0"><h2>Clifford</h2><div class="body" id="feed"></div></div><div class="panel" style="margin:8px 0 0"><h2 class="cleo">Cleo</h2><div class="body" id="cfeed"></div></div></div>
+      <div class="grid2"><div class="panel" style="margin:8px 0 0"><h2>🤖 Clifford</h2><div class="body" id="feed"></div></div><div class="panel" style="margin:8px 0 0"><h2 class="cleo">🛰 Cleo</h2><div class="body" id="cfeed"></div></div></div>
     </details>
   </section>
 
@@ -175,14 +204,14 @@
   <section class="view" id="v-crew">
     <p style="color:var(--muted);font-size:12px;margin:10px 0">Live crew map — who's working where. Clifford (gold) moves to whatever he's doing; Cleo (cyan) lights up when running; agents (green) appear when dispatched; idle = greyed in the Lobby.</p>
     <canvas id="cmap" width="960" height="560" style="width:100%;display:block;border:1px solid var(--line);border-radius:14px;image-rendering:pixelated"></canvas>
-    <div class="panel" style="margin-top:12px;max-height:none"><h2>Crew roster — who's doing what</h2><div class="body" id="roster" style="padding:0"><div class="empty" style="padding:10px 14px">loading…</div></div></div>
+    <div class="panel" style="margin-top:14px;max-height:none"><h2>👥 Crew roster — who's doing what</h2><div class="body" id="roster" style="padding:0"><div class="empty" style="padding:10px 16px">loading…</div></div></div>
   </section>
 
   <!-- PIPELINE (the Task Board, rebuilt 2026-06-12: explainer-style, strict vertical order; DEFAULT view) -->
   <section class="view active" id="v-board">
     <div class="pl-wrap">
       <div class="pl-head">
-        <h1>The Build Pipeline — work top to bottom, no jumping</h1>
+        <h1>🗂 The Build Pipeline — work top to bottom, no jumping</h1>
         <p id="plsrc"></p>
         <div class="pl-prog"><span id="plprog"></span><div class="bar"><i id="plbar" style="width:0%"></i></div></div>
         <div class="pl-rule" id="plrule"></div>
@@ -191,10 +220,10 @@
     </div>
   </section>
 
-  <!-- CONFIG -->
+  <!-- CONFIG / AGENT CARDS -->
   <section class="view" id="v-config">
-    <p style="color:var(--muted);font-size:12px">Paste each tool's real config so Clifford references the live setup. Each save stamps the date; cards flag ⚠ when &gt;14 days stale. <b>Never paste API keys / secrets.</b></p>
-    <div class="row" style="margin-bottom:10px"><input class="nm" id="newcfgname" placeholder="new section (e.g. stripe-xero)"><button class="btn" onclick="newConfig()">+ add section</button></div>
+    <p style="color:var(--muted);font-size:12px">Agent report cards (watchdog · CEO brief · overseer) float to the top; tool configs below. Paste each tool's real config so Clifford references the live setup. Each save stamps the date. <b>Never paste API keys / secrets.</b></p>
+    <div class="row" style="margin-bottom:12px"><input class="nm" id="newcfgname" placeholder="new section (e.g. stripe-xero)"><button class="btn" onclick="newConfig()">+ add section</button></div>
     <div id="config"><div class="empty">loading…</div></div>
   </section>
 
@@ -204,12 +233,12 @@
 <script>
 const $=id=>document.getElementById(id), esc=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const hhmmss=()=>new Date().toLocaleTimeString(), clk=ts=>{try{return new Date(ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}catch{return''}};
-let BOARD={tasks:[]}, NEEDS={items:[]}, SESS={}, CLEO={}, CFEED={};
+let BOARD={tasks:[]}, NEEDS={items:[]}, SESS={}, CLEO={}, CFEED={}, CFG=[];
 
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$('v-'+b.dataset.v).classList.add('active');
-  if(b.dataset.v==='board')loadBoard(); if(b.dataset.v==='config')loadConfig(); if(b.dataset.v==='crew')buildCrew();
+  if(b.dataset.v==='board')loadBoard(); if(b.dataset.v==='config')loadConfig(true); if(b.dataset.v==='crew')buildCrew();
 });
 
 // ---------- LIVE poll ----------
@@ -238,6 +267,42 @@ function ev(e){ const cls=e.kind==='tool'?'tool':e.kind==='think'?'think':(e.who
   const who=e.kind&&e.kind!=='text'?'':`<b>${e.who||''}:</b> `;
   return `<div class="ev ${cls}" title="${esc(e.text)}"><span class="t">${clk(e.ts)}</span>${who}${esc(cleanline(e.text))}</div>`; }
 poll();setInterval(poll,3000);loadBoard();
+loadConfig(true);setInterval(()=>loadConfig(false),60000);
+
+// ---------- HERO STATUS STRIP ----------
+function gotoNeeds(){ const p=$('needsPanel'); if(p)p.scrollIntoView({block:'start'}); } // instant — the 3s poll's feed autoscroll cancels smooth scrolling
+function renderHero(){
+  const box=$('hero'); if(!box)return;
+  // 🐶 watchdog — parse the watchdog-latest card
+  const w=CFG.find(c=>c.name==='watchdog-latest');
+  let wCls='',wVal='—',wSub='no card yet';
+  if(w){
+    const alerts=(w.content.match(/^\s*-\s/gm)||[]).length;
+    const crit=w.content.indexOf('🚨')>=0;
+    const clean=!alerts&&(/\b(clean|all\s*clear)\b/i.test(w.content)||w.content.indexOf('✅')>=0);
+    wCls=crit?'err':(clean?'ok':(alerts?'warn':''));
+    wVal=clean?'clean ✓':alerts+' alert'+(alerts===1?'':'s');
+    const tm=(w.content.match(/\b(\d{1,2}:\d{2})\b/)||[])[1];
+    wSub=tm?'checked '+tm:(w.stamp?'stamp '+w.stamp:'');
+  }
+  // 📈 this week
+  const cur=(SB.weeks||{})[isoWeekKey()]||{};
+  // 🎯 next action
+  const open=(NEEDS.items||[]).filter(i=>!i.done);
+  const nxt=open.length?String(open[0].t):'';
+  const ntxt=nxt?(nxt.length>90?nxt.slice(0,90)+'…':nxt):'Nothing outstanding 🎉';
+  // 🤖 agents — freshness dot: green if the watchdog card's stamp is today
+  const fresh=!!(w&&w.ageDays!=null&&w.ageDays<=0);
+  box.innerHTML=`
+    <div class="tile ${wCls}"><div class="tl">🐶 Watchdog</div><div class="tv">${esc(wVal)}</div><div class="ts">${esc(wSub)}</div></div>
+    <div class="tile"><div class="tl">📈 This week</div><div class="tw">
+      <div><b>${+cur.quotes_sent||0}</b><span>quotes</span></div>
+      <div><b>${+cur.sub_calls||0}</b><span>sub calls</span></div>
+      <div><b>${+cur.follow_ups||0}</b><span>follow-ups</span></div></div>
+      <div class="ts">${esc(isoWeekKey())}</div></div>
+    <div class="tile click" onclick="gotoNeeds()"><div class="tl">🎯 Next action <span class="tcount">${open.length} open</span></div><div class="tn">${esc(ntxt)}</div><div class="ts">tap to open the needs list ↓</div></div>
+    <div class="tile"><div class="tl">🤖 Agents</div><div class="tv sm"><span class="fdot ${fresh?'on':''}"></span>3 on duty</div><div class="ts">cockpit ✓ · watchdog 30-min · brief Mon 7am</div></div>`;
+}
 
 // ---------- SUMMARY ----------
 function buildSummary(){
@@ -255,6 +320,7 @@ function buildSummary(){
 function renderNeeds(){
   const it=NEEDS.items||[];
   $('needs').innerHTML=it.length?it.map((n,i)=>`<label class="need ${n.done?'done':''}"><input type="checkbox" ${n.done?'checked':''} onchange="toggleNeed(${i})"><span>${esc(n.t)}</span></label>`).join(''):'<div class="empty">Nothing outstanding 🎉</div>';
+  renderHero();
 }
 async function saveNeeds(){ try{await fetch('/api/needs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(NEEDS)});}catch{} }
 function toggleNeed(i){ NEEDS.items[i].done=!NEEDS.items[i].done; renderNeeds(); buildSummary(); saveNeeds(); }
@@ -310,6 +376,7 @@ function renderScoreboard(){
     sbWeek(k).forEach(v=>{const c=document.createElement('td');c.textContent=String(v);tr.appendChild(c);});
     tbl.appendChild(tr);
   }
+  renderHero();
 }
 loadScoreboard();
 
@@ -347,20 +414,72 @@ function renderPipeline(){
 async function savePipe(){ try{await fetch('/api/pipeline',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(PIPE)});}catch{} }
 function toggleStep(pi,ii){ const it=PIPE.phases[pi].items[ii]; it.status=(it.status==='done')?'todo':'done'; renderPipeline(); buildSummary(); savePipe(); }
 
-// ---------- CONFIG ----------
-async function loadConfig(){ let d;try{d=await(await fetch('/api/config')).json();}catch{d={items:[]};} renderConfig(d.items||[]); }
-function ageLabel(a){ if(a==null)return''; const c=a>14?'stale':a>7?'warn':''; const txt=a<=0?'updated today':'updated '+a+'d ago'; return `<span class="age ${c}">${txt}${a>14?' ⚠ refresh':''}</span>`; }
+// ---------- CONFIG / AGENT CARDS ----------
+// safe mini renderer: everything is esc()'d FIRST, then our own tags are layered on
+function inlineMd(s){
+  let h=esc(s);
+  h=h.replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
+  h=h.replace(/(^|[\s(])\*([^*\n]+?)\*(?=$|[\s).,;:!?])/g,'$1<strong>$2</strong>');
+  h=h.replace(/(^|[\s(])_([^_\n]+?)_(?=$|[\s).,;:!?])/g,'$1<em>$2</em>');
+  return h;
+}
+function mdHtml(raw){
+  const txt=String(raw||'').replace(/<!--[\s\S]*?-->/g,'');
+  const lines=txt.split('\n'); const out=[]; let list=null,para=[];
+  const fp=()=>{ if(para.length){out.push('<p>'+para.join('<br>')+'</p>');para=[];} };
+  const fl=()=>{ if(list){out.push('<ul>'+list.join('')+'</ul>');list=null;} };
+  for(let l of lines){
+    l=l.replace(/\s+$/,'');
+    if(/^Last updated:/i.test(l.trim())) continue; // shown as the freshness chip instead
+    if(!l.trim()){ fp(); fl(); continue; }
+    const h=l.match(/^(#{1,3})\s+(.*)/);
+    if(h){ fp(); fl(); const tag=h[1].length>1?'h4':'h3'; out.push('<'+tag+'>'+inlineMd(h[2])+'</'+tag+'>'); continue; }
+    const b=l.match(/^\s*[-•]\s+(.*)/);
+    if(b){ fp(); (list=list||[]).push('<li>'+inlineMd(b[1])+'</li>'); continue; }
+    fl(); para.push(inlineMd(l));
+  }
+  fp(); fl();
+  return out.join('')||'<p class="empty">(empty)</p>';
+}
+function cardMeta(name,content){
+  if(name==='watchdog-latest') return {emoji:'🐶',title:'Watchdog',accent:(content.indexOf('🚨')>=0?'var(--err)':'var(--gold)')};
+  if(name==='ceo-brief-latest') return {emoji:'📊',title:'CEO Brief',accent:'var(--cleo)'};
+  if(/^overseer-/.test(name)) return {emoji:'🧠',title:'Overseer report',sub:name.replace(/^overseer-/,''),accent:'var(--purple)'};
+  const known={ghl:{emoji:'🔗',title:'GoHighLevel'},make:{emoji:'⚙️',title:'Make.com'},servicem8:{emoji:'🛠️',title:'ServiceM8'}};
+  const k=known[name]||{emoji:'🗂️',title:name.replace(/-/g,' ')};
+  return {emoji:k.emoji,title:k.title,accent:'var(--line)'};
+}
+function freshChip(it){
+  const a=it.ageDays; if(a==null)return'';
+  const t=it.stamp?('stamp '+it.stamp):'from file date';
+  if(a<=0)return`<span class="chip-fresh ok" title="${esc(t)}">today</span>`;
+  if(a<=7)return`<span class="chip-fresh warn" title="${esc(t)}">${a}d ago</span>`;
+  return`<span class="chip-fresh err" title="${esc(t)}">${a}d ago ⚠</span>`;
+}
+async function loadConfig(force){
+  try{const d=await(await fetch('/api/config')).json();CFG=d.items||[];}catch{}
+  if(force||!document.querySelector('.cfg.editing')) renderConfig(CFG); // don't clobber an open editor on background refresh
+  renderHero();
+}
 function renderConfig(items){
-  $('config').innerHTML=items.length?items.map(it=>`
-    <div class="cfg" id="cfg-${esc(it.name)}">
-      <div class="ch"><span class="nm2">${esc(it.name)}</span><span>${ageLabel(it.ageDays)} <button class="btn alt" style="margin:0 0 0 8px;padding:4px 10px" onclick="editCfg('${esc(it.name)}')">edit</button></span></div>
-      <pre>${esc(it.content)}</pre>
-      <div class="edit"><textarea id="ta-${esc(it.name)}">${esc(it.content)}</textarea><div class="row"><button class="btn" onclick="saveCfg('${esc(it.name)}')">Save</button><button class="btn alt" onclick="document.getElementById('cfg-${esc(it.name)}').classList.remove('editing')">Cancel</button></div></div>
-    </div>`).join(''):'<div class="empty">No config sections yet — add one above.</div>';
+  const rank=n=>n==='watchdog-latest'?0:n==='ceo-brief-latest'?1:/^overseer-/.test(n)?2:3;
+  const sorted=(items||[]).slice().sort((a,b)=>rank(a.name)-rank(b.name)||a.name.localeCompare(b.name));
+  $('config').innerHTML=sorted.length?sorted.map(it=>{
+    const m=cardMeta(it.name,it.content);
+    return `
+    <div class="cfg" id="cfg-${esc(it.name)}" style="border-left-color:${m.accent}">
+      <div class="ch">
+        <span class="nm2"><span class="cemo">${m.emoji}</span>${esc(m.title)}${m.sub?` <span class="csub">${esc(m.sub)}</span>`:''}</span>
+        <span class="chr">${freshChip(it)}<button class="btn alt sm" onclick="editCfg('${esc(it.name)}')">edit</button></span>
+      </div>
+      <div class="md">${mdHtml(it.content)}</div>
+      <div class="edit"><textarea id="ta-${esc(it.name)}">${esc(it.content)}</textarea><div class="row" style="margin-top:8px"><button class="btn" onclick="saveCfg('${esc(it.name)}')">Save</button><button class="btn alt" onclick="document.getElementById('cfg-${esc(it.name)}').classList.remove('editing')">Cancel</button></div></div>
+    </div>`;
+  }).join(''):'<div class="empty">No config sections yet — add one above.</div>';
 }
 function editCfg(n){ document.getElementById('cfg-'+n).classList.toggle('editing'); }
-async function saveCfg(n){ const c=document.getElementById('ta-'+n).value; await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,content:c})}); loadConfig(); }
-function newConfig(){ const n=$('newcfgname').value.trim(); if(!n)return; fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,content:'# '+n+'\n\n(paste config here)'})}).then(()=>{$('newcfgname').value='';loadConfig();}); }
+async function saveCfg(n){ const c=document.getElementById('ta-'+n).value; await fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,content:c})}); document.getElementById('cfg-'+n).classList.remove('editing'); loadConfig(true); }
+function newConfig(){ const n=$('newcfgname').value.trim(); if(!n)return; fetch('/api/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,content:'# '+n+'\n\n(paste config here)'})}).then(()=>{$('newcfgname').value='';loadConfig(true);}); }
 
 // ---------- CREW MAP (canvas pixel engine) ----------
 function trunc(s,n){s=String(s||'');return s.length>n?s.slice(0,n)+'…':s;}
