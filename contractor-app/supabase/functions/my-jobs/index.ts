@@ -83,8 +83,14 @@ Deno.serve(async (req) => {
 
     let q = supabase.from('job_assignments').select('*, job:job_mirror(*)');
     if (view === 'booked') q = q.in('status', ['accepted', 'in_progress']);
-    else if (view === 'detail') q = q.eq('id', url.searchParams.get('id') ?? '');
-    else q = q.eq('status', 'offered'); // available
+    else if (view === 'detail') {
+      const id = url.searchParams.get('id') ?? '';
+      // Validate BEFORE querying: a non-UUID id is a Postgres cast error -> opaque 500. Make it a 404.
+      if (!/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(id)) {
+        return fail(404, 'not_found', origin);
+      }
+      q = q.eq('id', id);
+    } else q = q.eq('status', 'offered'); // available
     const { data, error } = await q;
     if (error) throw error;
 

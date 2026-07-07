@@ -9,15 +9,25 @@ interface SnackbarState {
   hide: () => void;
 }
 
+// Track the pending auto-hide so an OLD toast's timer can never dismiss a NEWER one
+// (an early dismissal here would silently shrink the 5s accept-Undo safety window).
+let hideTimer: ReturnType<typeof setTimeout> | undefined;
+
 export const useSnackbar = create<SnackbarState>((set) => ({
   message: null,
   show: (message, action, duration = 5000) => {
+    if (hideTimer) clearTimeout(hideTimer);
     set({ message, action });
-    setTimeout(() => {
+    hideTimer = setTimeout(() => {
+      hideTimer = undefined;
       set({ message: null, action: undefined });
     }, duration);
   },
-  hide: () => set({ message: null, action: undefined })
+  hide: () => {
+    if (hideTimer) clearTimeout(hideTimer);
+    hideTimer = undefined;
+    set({ message: null, action: undefined });
+  }
 }));
 
 export function SnackbarContainer() {

@@ -113,13 +113,18 @@ Deno.serve(async (req) => {
       break;
     case 'undo': // the 5s undo window after accept
       patch.status = 'offered'; patch.accepted_at = null;
+      patch.sub_availability = null; // don't carry stale availability into a future re-accept
       allowedFrom = ['accepted'];
       break;
-    case 'problem':
+    case 'problem': {
       patch.problem_open = true;
-      patch.problem_reason = typeof payload.reason === 'string' ? payload.reason : null;
+      // Keep the free-text note ("Something else" reports are useless without it).
+      const reason = typeof payload.reason === 'string' ? payload.reason : '';
+      const note = typeof payload.note === 'string' && payload.note.trim() ? ` — ${payload.note.trim()}` : '';
+      patch.problem_reason = (reason + note) || null;
       allowedFrom = ['accepted', 'in_progress'];
       break;
+    }
     default:
       return fail(400, 'unknown_action', origin);
   }

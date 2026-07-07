@@ -45,5 +45,5 @@ export default defineConfig({
   resolve: {
     alias: { '@': fileURLToPath(new URL('.', import.meta.url)) },
   },
-  server: { port: 3000, host: true },
+  server: { port: 5183, host: true }, // canonical contractor-app dev port (matches the backend CORS allowlist)
 });
