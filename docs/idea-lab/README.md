@@ -14,25 +14,33 @@ cd docs/idea-lab
 
 ## What it does
 
-1. **Sources** — **⚡ Fetch everything** pulls from every source at once, or fetch
-   individually. Built-ins (all official APIs / public feeds — they won't block you):
-   - **Show HN** & **Ask HN** (Hacker News, Algolia API) — launches + problem threads.
-   - **GitHub** — new fast-growing repos (dev-tool / OSS signal), official search API.
-   - **Dev.to** — startup/SaaS/indiehackers articles (official API).
+1. **Sources** — **⚡ Fetch everything** pulls from every source at once (targets
+   10k+ ideas), or fetch individually. Built-ins (all official APIs / public search
+   indexes — they won't block you):
+   - **IndieHackers** — the **33,000+ product directory WITH monthly revenue**,
+     follower and traffic numbers, via its public Algolia search index (the same
+     client-side key the IH site itself uses). Ranked revenue-first — the single best
+     "real businesses with real numbers" source.
+   - **Show HN**, **Ask HN**, **HN deep search** (Hacker News Algolia) — years of
+     launches by keyword + problem threads.
+   - **GitHub** — new fast-growing repos (official search API).
+   - **Dev.to** — startup/SaaS articles (official API).
    - **Lobsters** — tech launches (official JSON).
    - **Product Hunt** — daily launches (public feed).
-   - **Reddit** — top posts from r/SaaS, r/Entrepreneur, r/sweatystartup, r/smallbusiness,
-     r/sidehustle, r/indiehackers (best-effort — Reddit rate-limits scripts).
+   - **Kickstarter** — crowdfunded products across categories (public category RSS).
+   - **Reddit** — top posts from ~30 business/startup/product subreddits, paginated
+     and paced ~1 req/sec to stay inside the unauth limits.
    - **Starter Story** — imported from your **local media-archiver** video archive
      (titles, captions, transcript excerpts) — copyright-safe, no site scraping.
-   - Every idea gets a **traction score**; all de-duplicated; re-fetch any time.
+   - Every idea gets a **traction score** (IndieHackers ranks by real revenue);
+     all de-duplicated by id; re-fetch any time.
 
    **Add your own sources** (＋ Add source): paste any **RSS/Atom feed URL**, or
    **import any channel** you've archived in the media-archiver. So new sites/creators
    are added with no code.
 
-   *IndieHackers, Google Trends, TikTok trends and Chinese-market data aren't scraped
-   (no clean APIs / anti-bot walls / ToS). They're covered reliably by the **Claude
+   *Google Trends, TikTok trends and Chinese-market data aren't scraped directly
+   (no clean APIs / anti-bot walls). They're covered reliably by the **Claude
    research pass** — live web search inside every scorecard — once you log into the
    Claude CLI. That's the sanctioned, un-blockable way to reach them.*
 

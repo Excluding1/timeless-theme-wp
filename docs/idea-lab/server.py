@@ -157,6 +157,8 @@ def polish(idea_id: str):
 @app.get("/api/ideas")
 def ideas(origin: str = None, q: str = None, category: str = None):
     return {"ideas": db.ideas(origin or None, q or None, category=category or None),
+            "total": db.count_ideas(origin or None, q or None, category or None),
+            "source_counts": db.source_counts(),
             "categories": db.categories()}
 
 

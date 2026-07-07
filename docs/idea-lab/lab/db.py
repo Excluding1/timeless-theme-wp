@@ -156,6 +156,29 @@ def ideas(origin=None, q=None, limit=3000, category=None):
         return [dict(r) for r in _db().execute(sql, params).fetchall()]
 
 
+def count_ideas(origin=None, q=None, category=None):
+    sql = "SELECT COUNT(*) FROM ideas i"
+    where, params = [], []
+    if origin:
+        where.append("i.origin=?"); params.append(origin)
+    if category:
+        where.append("i.category=?"); params.append(category)
+    if q:
+        esc = q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+        where.append("(i.title LIKE ? ESCAPE '\\' OR i.description LIKE ? ESCAPE '\\')")
+        params += [f"%{esc}%"] * 2
+    if where:
+        sql += " WHERE " + " AND ".join(where)
+    with _lock:
+        return _db().execute(sql, params).fetchone()[0]
+
+
+def source_counts():
+    with _lock:
+        rows = _db().execute("SELECT origin, COUNT(*) n FROM ideas GROUP BY origin").fetchall()
+        return {r["origin"]: r["n"] for r in rows}
+
+
 def idea(idea_id):
     with _lock:
         row = _db().execute("SELECT * FROM ideas WHERE id=?", (idea_id,)).fetchone()

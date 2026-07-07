@@ -56,8 +56,13 @@ button.small { padding: 5px 12px; font-size: 13px; }
 .imeta { display: flex; gap: 12px; color: var(--muted); font-size: 12px; }
 .obadge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 6px;
   border-radius: 5px; background: var(--line); color: var(--muted); }
-.obadge.hn { background: #ff6600; color: #fff; }
+.obadge.hn, .obadge.ahn { background: #ff6600; color: #fff; }
 .obadge.ph { background: #da552f; color: #fff; }
+.obadge.ih { background: #0e2439; color: #4a9eff; }
+.obadge.gh { background: #24292e; color: #fff; }
+.obadge.dt { background: #090909; color: #fff; }
+.obadge.lb { background: #ac130d; color: #fff; }
+.obadge.rd { background: #ff4500; color: #fff; }
 .obadge.custom { background: var(--accent); color: #120a24; }
 
 .score { font-weight: 700; }

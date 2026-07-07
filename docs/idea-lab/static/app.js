@@ -101,6 +101,8 @@ async function loadIdeas() {
   let r;
   try { r = await api("/api/ideas?" + p); } catch (_) { return; }
   state.ideas = r.ideas;
+  state.ideaTotal = r.total != null ? r.total : r.ideas.length;
+  state.sourceCounts = r.source_counts || {};
   renderCategories(r.categories || []);
   renderIdeas();
 }
@@ -115,7 +117,9 @@ function renderCategories(cats) {
   sel.value = cur;
 }
 
-const ORIGIN = { hn: "Show HN", ph: "Product Hunt", rd: "Reddit", ss: "Starter Story", custom: "Mine" };
+const ORIGIN = { ih: "IndieHackers", hn: "Show HN", ahn: "Ask HN", ph: "Product Hunt",
+  gh: "GitHub", dt: "Dev.to", lb: "Lobsters", rd: "Reddit", ss: "Starter Story",
+  feed: "Feed", vid: "Video", custom: "Mine" };
 
 function safeUrl(u) {
   return u && /^https?:\/\//i.test(u) ? u : null;
@@ -156,9 +160,12 @@ function renderIdeas() {
   }
   if (!state.ideas.length) {
     box.append(el("p", { class: "hint", text: "Nothing yet — fetch a source above." }));
-  } else if (state.ideas.length > 120) {
+  } else if (state.ideaTotal > 120) {
+    const bySrc = Object.entries(state.sourceCounts || {})
+      .sort((a, b) => b[1] - a[1]).map(([k, v]) => `${ORIGIN[k] || k} ${v}`).join(" · ");
     box.append(el("p", { class: "hint",
-      text: `Showing 120 of ${state.ideas.length} — use search or the source filter to narrow.` }));
+      text: `Showing 120 of ${state.ideaTotal.toLocaleString()} ideas — filter or search to narrow.` }));
+    box.append(el("p", { class: "hint", text: bySrc }));
   }
 }
 

@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 import threading
+import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -83,52 +84,70 @@ def fetch_show_hn(days=30, min_points=20, pages=3):
     return added
 
 
-SUBREDDITS = ["SaaS", "Entrepreneur", "smallbusiness", "sidehustle", "sweatystartup",
-              "indiehackers"]
-
+# ~30 subreddits where people describe businesses, products, and problems.
+SUBREDDITS = [
+    "SaaS", "microsaas", "Entrepreneur", "EntrepreneurRideAlong", "smallbusiness",
+    "sidehustle", "sweatystartup", "indiehackers", "startups", "SideProject",
+    "roastmystartup", "juststart", "kickstarter", "nocode", "NoCodeSaaS", "Business_Ideas",
+    "growmybusiness", "advancedentrepreneur", "AlphaandBetaUsers", "SaaSMarketing",
+    "agency", "digitalnomad", "passive_income", "flipping", "Etsy", "ecommerce",
+    "FulfillmentByAmazon", "shopify", "youtubers", "NewTubers", "gamedev", "IMadeThis",
+]
 
 _BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
 
-def fetch_reddit(days=30, min_score=20):
-    """Top posts from business/startup subreddits (public read-only JSON).
-
-    www.reddit.com 403s non-browser clients; old.reddit.com serves the same JSON."""
-    added = 0
-    window = "month" if days <= 31 else "year"
-    for sub in SUBREDDITS:
+def _reddit_json(path):
+    """Fetch a reddit public JSON path, trying www then old, with a browser UA."""
+    for host in ("https://www.reddit.com", "https://old.reddit.com"):
         try:
-            req = urllib.request.Request(
-                f"https://old.reddit.com/r/{sub}/top.json?t={window}&limit=50",
-                headers={"User-Agent": _BROWSER_UA})
+            req = urllib.request.Request(host + path, headers={"User-Agent": _BROWSER_UA})
             with urllib.request.urlopen(req, timeout=25) as r:
-                data = json.load(r)
+                return json.load(r)
         except Exception:
-            continue  # one blocked subreddit shouldn't kill the fetch
-        for child in (data.get("data") or {}).get("children") or []:
-            p = child.get("data") or {}
-            if (p.get("score") or 0) < min_score or p.get("stickied"):
-                continue
-            title = (p.get("title") or "").strip()
-            if not title:
-                continue
-            desc = re.sub(r"\s+", " ", (p.get("selftext") or "")).strip()[:2000]
-            posted = None
-            if p.get("created_utc"):
-                posted = datetime.fromtimestamp(p["created_utc"]).isoformat()
-            db.upsert_idea({
-                "id": f"rd:{p.get('id')}",
-                "origin": "rd",
-                "title": f"[r/{sub}] {title}"[:300],
-                "description": desc,
-                "url": "https://www.reddit.com" + (p.get("permalink") or ""),
-                "points": p.get("score") or 0,
-                "comments": p.get("num_comments") or 0,
-                "posted_at": posted,
-                "traction": _traction(p.get("score"), p.get("num_comments"), posted),
-            })
-            added += 1
+            continue
+    return None
+
+
+def fetch_reddit(min_score=12, window="year", pages=3, subs=None):
+    """Top posts from many business/startup subreddits (public read-only JSON),
+    paginated and paced ~1 req/sec to stay within Reddit's unauth limits."""
+    added = 0
+    for sub in (subs or SUBREDDITS):
+        after = None
+        for _ in range(pages):
+            path = f"/r/{sub}/top.json?t={window}&limit=100"
+            if after:
+                path += f"&after={after}"
+            data = _reddit_json(path)
+            time.sleep(1.1)                     # polite pacing — never hammer
+            if not data:
+                break
+            children = (data.get("data") or {}).get("children") or []
+            for child in children:
+                p = child.get("data") or {}
+                if (p.get("score") or 0) < min_score or p.get("stickied"):
+                    continue
+                title = (p.get("title") or "").strip()
+                if not title:
+                    continue
+                desc = re.sub(r"\s+", " ", (p.get("selftext") or "")).strip()[:2000]
+                posted = None
+                if p.get("created_utc"):
+                    posted = datetime.fromtimestamp(p["created_utc"]).isoformat()
+                db.upsert_idea({
+                    "id": f"rd:{p.get('id')}", "origin": "rd",
+                    "title": f"[r/{sub}] {title}"[:300], "description": desc,
+                    "url": "https://www.reddit.com" + (p.get("permalink") or ""),
+                    "points": p.get("score") or 0, "comments": p.get("num_comments") or 0,
+                    "posted_at": posted,
+                    "traction": _traction(p.get("score"), p.get("num_comments"), posted),
+                })
+                added += 1
+            after = (data.get("data") or {}).get("after")
+            if not after:
+                break
     return added
 
 
@@ -161,6 +180,134 @@ def fetch_ask_hn(days=90, min_points=30, pages=2):
             added += 1
         if len(hits) < 100:
             break
+    return added
+
+
+def fetch_hn_search(queries=None, min_points=15, pages=8):
+    """Deep HN search across product/launch keywords — years of archive, high volume."""
+    queries = queries or ["Launch HN", "I built", "I made", "open source", "side project",
+                          "SaaS", "AI tool", "no-code", "marketplace", "API for"]
+    added = 0
+    for q in queries:
+        for page in range(pages):
+            qs = urllib.parse.urlencode({
+                "query": q, "tags": "story", "hitsPerPage": 100, "page": page,
+            })
+            try:
+                data = _getj(f"https://hn.algolia.com/api/v1/search?{qs}")  # relevance-ranked
+            except Exception:
+                break
+            hits = data.get("hits") or []
+            for h in hits:
+                title = (h.get("title") or "").strip()
+                if not title or (h.get("points") or 0) < min_points:
+                    continue
+                db.upsert_idea({
+                    "id": f"hn:{h.get('objectID')}", "origin": "hn",
+                    "title": title[:300],
+                    "description": re.sub(r"<[^>]+>|\s+", " ", h.get("story_text") or "").strip()[:2000],
+                    "url": h.get("url") or f"https://news.ycombinator.com/item?id={h.get('objectID')}",
+                    "points": h.get("points") or 0, "comments": h.get("num_comments") or 0,
+                    "posted_at": h.get("created_at"),
+                    "traction": _traction(h.get("points"), h.get("num_comments"), h.get("created_at")),
+                })
+                added += 1
+            if len(hits) < 100:
+                break
+    return added
+
+
+IH_APP = "N86T1R3OWZ"
+IH_KEY = "5140dac5e87f47346abbda1a34ee70c3"   # public search-only key (in IH's own page)
+
+
+# Algolia caps each query at 1000 retrievable records, so we sweep the index in
+# revenue bands fine enough that each band holds <1000 rows → we get them ALL.
+# Bands are ordered high→low so the highest-revenue (best) products land first.
+_IH_BANDS = [
+    "revenue>=1000000", "revenue>=250000 AND revenue<1000000",
+    "revenue>=100000 AND revenue<250000", "revenue>=50000 AND revenue<100000",
+    "revenue>=25000 AND revenue<50000", "revenue>=10000 AND revenue<25000",
+    "revenue>=5000 AND revenue<10000", "revenue>=2500 AND revenue<5000",
+    "revenue>=1000 AND revenue<2500", "revenue>=500 AND revenue<1000",
+    "revenue>=250 AND revenue<500", "revenue>=100 AND revenue<250",
+    "revenue>=50 AND revenue<100", "revenue>=20 AND revenue<50",
+    "revenue>=10 AND revenue<20", "revenue>=5 AND revenue<10",
+    "revenue>=1 AND revenue<5",
+]
+
+
+def _ih_query(filters, page):
+    url = f"https://{IH_APP.lower()}-dsn.algolia.net/1/indexes/products/query"
+    body = json.dumps({"query": "", "hitsPerPage": 100, "page": page,
+                       "filters": filters}).encode()
+    req = urllib.request.Request(url, data=body, headers={
+        "X-Algolia-Application-Id": IH_APP, "X-Algolia-API-Key": IH_KEY,
+        "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=25) as r:
+        return json.load(r)
+
+
+def fetch_indiehackers(include_zero_revenue=False):
+    """IndieHackers product directory via its public Algolia index. Sweeps every
+    revenue band to pull ALL ~10k products that report real monthly revenue
+    (plus followers + 30-day traffic) — the best 'real businesses, real numbers'
+    source. include_zero_revenue also pulls up to 1000 pre-revenue launches."""
+    bands = list(_IH_BANDS)
+    if include_zero_revenue:
+        bands.append("revenue=0")
+    added = 0
+    for filt in bands:
+        for page in range(10):   # 10×100 = the 1000-record Algolia cap per band
+            try:
+                data = _ih_query(filt, page)
+            except Exception:
+                break
+            hits = data.get("hits") or []
+            for h in hits:
+                name = (h.get("name") or "").strip()
+                if not name:
+                    continue
+                rev = h.get("revenue") or 0
+                # IndieHackers revenue is self-reported — troll/joke entries list
+                # quadrillions. Anything above ~$2M/mo is not credible for this
+                # dataset; don't let it dominate the ranking.
+                plausible = rev if 0 <= rev <= 2_000_000 else 0
+                rev_note = (f"${rev:,}/mo" if plausible else
+                            f"${rev:,}/mo (self-reported, implausible — ignored in ranking)")
+                tagline = (h.get("tagline") or "").strip()
+                desc = (h.get("description") or "").strip()
+                followers = h.get("numFollowers") or 0
+                uniques = h.get("last30DaysUniques") or 0
+                meta = f"Reported revenue: {rev_note} | {followers} followers | {uniques} monthly visitors"
+                full = f"{tagline}. {desc}".strip(". ")[:1700]
+                pid = h.get("productId") or h.get("objectID")
+                db.upsert_idea({
+                    "id": f"ih:{pid}", "origin": "ih",
+                    "title": (name + (f" — {tagline}" if tagline else ""))[:300],
+                    "description": (full + " || " + meta)[:2000],
+                    "url": h.get("websiteUrl") or f"https://www.indiehackers.com/product/{pid}",
+                    "points": int(plausible), "comments": followers, "posted_at": None,
+                    "traction": round(plausible / 10.0 + followers + uniques / 50.0, 1),
+                })
+                added += 1
+            if page + 1 >= (data.get("nbPages") or 0):
+                break
+    return added
+
+
+def fetch_kickstarter():
+    """Live crowdfunded products via Kickstarter's public category RSS feeds —
+    real products with real funding demand."""
+    cats = {"technology": 16, "design": 7, "games": 12, "food": 10}
+    added = 0
+    for name, cid in cats.items():
+        try:
+            added += fetch_rss(
+                f"https://www.kickstarter.com/discover/categories/{name}.rss",
+                name=f"Kickstarter/{name}", prefix=f"ks{cid}")
+        except Exception:
+            continue
     return added
 
 
@@ -344,20 +491,32 @@ def archive_channels():
 # ---------- registry + fetch-all ----------
 
 BUILTINS = [
+    {"id": "ih", "name": "IndieHackers", "desc": "33k+ products WITH revenue (public Algolia index)"},
     {"id": "hn", "name": "Show HN", "desc": "Hacker News launches (official API)"},
+    {"id": "hnq", "name": "HN deep search", "desc": "Years of HN launches by keyword"},
     {"id": "ahn", "name": "Ask HN", "desc": "HN problem/need threads"},
     {"id": "ph", "name": "Product Hunt", "desc": "Daily launches (public feed)"},
     {"id": "gh", "name": "GitHub", "desc": "New fast-growing repos (dev tools/OSS)"},
     {"id": "dt", "name": "Dev.to", "desc": "Startup/SaaS articles (official API)"},
     {"id": "lb", "name": "Lobsters", "desc": "Tech launches (official JSON)"},
-    {"id": "rd", "name": "Reddit", "desc": "Business subreddits (best-effort)"},
+    {"id": "ks", "name": "Kickstarter", "desc": "Crowdfunded products (category RSS)"},
+    {"id": "rd", "name": "Reddit", "desc": "~30 business subreddits (paced JSON)"},
     {"id": "ss", "name": "Starter Story", "desc": "Your local video archive"},
 ]
 
+# deep defaults for the "fetch everything" run — aim for volume
 _BUILTIN_FNS = {
-    "hn": lambda: fetch_show_hn(), "ahn": lambda: fetch_ask_hn(), "ph": lambda: fetch_product_hunt(),
-    "gh": lambda: fetch_github(), "dt": lambda: fetch_devto(), "lb": lambda: fetch_lobsters(),
-    "rd": lambda: fetch_reddit(), "ss": lambda: fetch_starterstory_local(),
+    "ih": lambda: fetch_indiehackers(),
+    "hn": lambda: fetch_show_hn(days=1460, min_points=8, pages=15),
+    "hnq": lambda: fetch_hn_search(),
+    "ahn": lambda: fetch_ask_hn(days=1460, min_points=15, pages=12),
+    "ph": lambda: fetch_product_hunt(),
+    "gh": lambda: fetch_github(),
+    "dt": lambda: fetch_devto(),
+    "lb": lambda: fetch_lobsters(),
+    "ks": lambda: fetch_kickstarter(),
+    "rd": lambda: fetch_reddit(),
+    "ss": lambda: fetch_starterstory_local(),
 }
 
 
