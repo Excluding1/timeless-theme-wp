@@ -15,6 +15,8 @@
   nav{display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid var(--line);background:#061a3a;flex-wrap:wrap}
   nav button{background:none;border:1px solid transparent;color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-weight:700;letter-spacing:.04em;font-size:12px}
   nav button.active{background:var(--panel);color:var(--gold);border-color:var(--line)}
+  nav a.navlink{background:none;border:1px solid transparent;color:var(--muted);padding:7px 14px;border-radius:8px;font-weight:700;letter-spacing:.04em;font-size:12px;text-decoration:none}
+  nav a.navlink:hover{background:var(--panel);color:var(--gold);border-color:var(--line)}
   .banner{margin:12px 18px;padding:11px 16px;background:rgba(231,192,139,.12);border:1px solid var(--gold);border-radius:10px;font-weight:600}
   .banner .lbl{color:var(--gold);font-weight:800;letter-spacing:.12em;font-size:11px;margin-right:8px}
   .view{display:none;padding:0 18px 24px} .view.active{display:block}
@@ -129,6 +131,8 @@
     <button data-v="board" class="active">▼ Pipeline</button>
     <button data-v="config">⚙ Tech-Stack Config</button>
     <button data-v="stack">◰ Explainer</button>
+    <a class="navlink" href="/map">🗺 Business Map</a>
+    <a class="navlink" href="/journey">🚶 Customer Journey</a>
   </nav>
 
   <div class="banner"><span class="lbl">▶ NEXT</span><span id="next">—</span></div>
