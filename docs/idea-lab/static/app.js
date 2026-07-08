@@ -40,12 +40,14 @@ async function poll() {
     state.categorize = s.categorize;
     state.generate = s.generate;
     state.simulate = s.simulate;
+    state.auto = s.auto;
     renderJob();
     renderEngine();
     renderFetch();
     renderBatch();
     renderGenerate();
     renderSimulate();
+    renderAuto();
     const key = s.job ? `${s.job.state}:${s.job.phase}` : "idle";
     const fkey = s.fetch ? `${s.fetch.running}:${s.fetch.phase}` : "";
     const gkey = s.generate ? `${s.generate.running}:${s.generate.phase}` : "";
@@ -72,6 +74,46 @@ function renderGenerate() {
   if (g.running) box.textContent = "Generating… " + (g.phase || "");
   else if (g.phase === "error") box.textContent = "Error: " + (g.error || "generation failed");
   else if (g.made) box.textContent = `Generated ${g.made} fresh ideas — filter source to “✦ Generated” below.`;
+}
+
+let autoUserEditing = 0;
+function renderAuto() {
+  const a = state.auto;
+  if (!a) return;
+  // don't stomp a checkbox/field the user is mid-interaction with
+  if (Date.now() - autoUserEditing > 1500) {
+    $("autoFetch").checked = !!a.fetch_enabled;
+    $("autoScore").checked = !!a.score_enabled;
+    if (document.activeElement !== $("autoHours")) $("autoHours").value = a.fetch_hours || 4;
+  }
+  const pct = a.total ? Math.round(100 * a.scored / a.total) : 0;
+  const parts = [];
+  parts.push(`Scored ${(a.scored || 0).toLocaleString()} / ${(a.total || 0).toLocaleString()} ideas (${pct}%)` +
+    (a.remaining ? ` · ${a.remaining.toLocaleString()} to go` : " · all done ✓"));
+  if (a.score_enabled && a.scoring_now) parts.push(`now scoring: ${a.scoring_now}`);
+  else if (!a.score_enabled) parts.push("auto-score off");
+  if (a.fetch_enabled) {
+    if (a.next_fetch_in_s != null) {
+      const h = Math.floor(a.next_fetch_in_s / 3600), m = Math.round((a.next_fetch_in_s % 3600) / 60);
+      parts.push(`next fetch in ${h ? h + "h " : ""}${m}m`);
+    } else parts.push("fetch scheduled");
+    if (a.last_fetch_at) parts.push(`last fetch ${a.last_fetch_at.replace("T", " ")}`);
+  } else parts.push("auto-fetch off");
+  $("autoStatus").textContent = parts.join(" · ");
+}
+
+async function postAuto(patch) {
+  try { await api("/api/auto", { method: "POST", body: JSON.stringify(patch) }); }
+  catch (e) { alert(e.message); }
+}
+
+function wireAuto() {
+  $("autoFetch").addEventListener("change", () => { autoUserEditing = Date.now();
+    postAuto({ auto_fetch: $("autoFetch").checked }); });
+  $("autoScore").addEventListener("change", () => { autoUserEditing = Date.now();
+    postAuto({ auto_score: $("autoScore").checked }); });
+  $("autoHours").addEventListener("change", () => { autoUserEditing = Date.now();
+    postAuto({ auto_fetch_hours: Number($("autoHours").value) || 4 }); });
 }
 
 function renderSimulate() {
@@ -815,6 +857,7 @@ wireSources();
 wireTester();
 wireBatch();
 wireGenerate();
+wireAuto();
 updateSortDirLabel();
 poll();
 loadIdeas();

@@ -10,7 +10,12 @@ DATA_DIR = BASE_DIR / "data"
 DB_PATH = DATA_DIR / "lab.db"
 
 DEFAULTS = {
-    "panel_size": "20",     # personas consulted per analysis (10/25/50/100)
+    "panel_size": "20",       # personas consulted per manual analysis (10/25/50/100)
+    "auto_fetch": "1",        # 1 = run a full fetch every auto_fetch_hours
+    "auto_fetch_hours": "4",  # interval between automatic fetches
+    "auto_score": "1",        # 1 = continuously score unscored ideas in the background
+    "auto_score_panel": "0",  # personas for auto-scoring (0 = scorecard only = fastest)
+    "last_fetch_at": "",      # ISO timestamp of the last automatic fetch (for status)
 }
 
 SCHEMA = """
@@ -215,6 +220,28 @@ def source_counts():
     with _lock:
         rows = _db().execute("SELECT origin, COUNT(*) n FROM ideas GROUP BY origin").fetchall()
         return {r["origin"]: r["n"] for r in rows}
+
+
+def scoring_progress():
+    """(scored, total) — how many ideas have a completed analysis."""
+    with _lock:
+        total = _db().execute("SELECT COUNT(*) FROM ideas").fetchone()[0]
+        scored = _db().execute(
+            "SELECT COUNT(DISTINCT idea_id) FROM analyses WHERE status='done'").fetchone()[0]
+        return scored, total
+
+
+def next_unscored_idea(max_attempts=2):
+    """The next idea with no completed analysis, highest-traction first. Ideas that
+    already have >= max_attempts analyses are skipped so a persistently-failing one
+    can't wedge the auto-scorer forever."""
+    with _lock:
+        row = _db().execute(
+            "SELECT i.id, i.title FROM ideas i "
+            "WHERE NOT EXISTS (SELECT 1 FROM analyses a WHERE a.idea_id=i.id AND a.status='done') "
+            "AND (SELECT COUNT(*) FROM analyses a2 WHERE a2.idea_id=i.id) < ? "
+            "ORDER BY i.traction DESC LIMIT 1", (max_attempts,)).fetchone()
+        return dict(row) if row else None
 
 
 def idea(idea_id):

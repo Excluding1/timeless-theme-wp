@@ -11,7 +11,7 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from lab import (analyst, batch, categorize, db, ideagen, planner, simulator,
+from lab import (analyst, auto, batch, categorize, db, ideagen, planner, simulator,
                  sources, trends)
 
 BASE = Path(__file__).resolve().parent
@@ -19,6 +19,7 @@ BASE = Path(__file__).resolve().parent
 app = FastAPI(title="Idea Lab")
 
 analyst.start_engine_detection()   # probe engines in the background at boot
+auto.start()                        # auto-fetch (every 4h) + auto-score loops
 
 
 def _int(val, default, lo=None, hi=None):
@@ -81,7 +82,24 @@ def state():
         "categorize": categorize.status(),
         "generate": ideagen.status(),
         "simulate": simulator.status(),
+        "auto": auto.status(),
     }
+
+
+@app.post("/api/auto")
+def set_auto(body: dict = Body(default={})):
+    clean = {}
+    if "auto_fetch" in body:
+        clean["auto_fetch"] = "1" if body.get("auto_fetch") else "0"
+    if "auto_score" in body:
+        clean["auto_score"] = "1" if body.get("auto_score") else "0"
+    if "auto_fetch_hours" in body:
+        clean["auto_fetch_hours"] = str(_int(body.get("auto_fetch_hours"), 4, 1, 168))
+    if "auto_score_panel" in body:
+        clean["auto_score_panel"] = str(_int(body.get("auto_score_panel"), 0, 0, 100))
+    for k, v in clean.items():
+        db.set_settings({k: v})
+    return {"ok": True, "auto": auto.status()}
 
 
 @app.post("/api/batch")

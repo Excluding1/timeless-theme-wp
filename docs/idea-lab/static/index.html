@@ -89,6 +89,22 @@
     <div id="ideas"></div>
   </section>
 
+  <section class="card" id="autoCard">
+    <div class="row spread wrap">
+      <h2>⚙ Automation</h2>
+      <div class="row wrap">
+        <label class="sub"><input type="checkbox" id="autoFetch"> Auto-fetch every
+          <input id="autoHours" type="number" value="4" min="1" max="168" class="tiny"> h</label>
+        <label class="sub"><input type="checkbox" id="autoScore"> Auto-score all ideas</label>
+      </div>
+    </div>
+    <p class="hint">Self-sustaining: auto-fetch re-pulls every source on a loop (de-duplicated — it only
+      refreshes and adds new items), and auto-score continuously scores every un-scored idea in the
+      background until the whole library is graded, resuming where it left off after any restart. Both
+      yield to anything you run manually.</p>
+    <div id="autoStatus" class="hint"></div>
+  </section>
+
   <section class="card" id="generateCard">
     <div class="row spread wrap">
       <h2>✦ Generate fresh ideas</h2>
