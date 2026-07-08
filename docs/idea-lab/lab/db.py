@@ -436,6 +436,13 @@ def set_idea_category(idea_id, category):
             con.execute("UPDATE ideas SET category=? WHERE id=?", (category, idea_id))
 
 
+def update_idea_description(idea_id, description):
+    with _lock:
+        con = _db()
+        with con:
+            con.execute("UPDATE ideas SET description=? WHERE id=?", (description, idea_id))
+
+
 def set_idea_trend(idea_id, momentum, trend):
     with _lock:
         con = _db()

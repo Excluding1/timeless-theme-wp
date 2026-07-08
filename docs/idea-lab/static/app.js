@@ -41,9 +41,11 @@ async function poll() {
     state.generate = s.generate;
     state.simulate = s.simulate;
     state.auto = s.auto;
+    state.extract = s.extract;
     renderJob();
     renderEngine();
     renderFetch();
+    renderExtract();
     renderBatch();
     renderGenerate();
     renderSimulate();
@@ -64,6 +66,18 @@ async function poll() {
     }
   } catch (_) {}
   setTimeout(poll, 2000);
+}
+
+function renderExtract() {
+  const e = state.extract;
+  if (!e) return;
+  const btn = $("extractBtn");
+  if (btn) btn.disabled = !!e.running;
+  if (e.running) {
+    $("fetchStatus").textContent = `Reading transcripts… ${e.done}/${e.total} videos · ${e.products} products found · ${e.phase || ""}`;
+  } else if (e.phase === "done" && e.products) {
+    $("fetchStatus").textContent = `Extracted ${e.products} real products from ${e.done} video transcripts.`;
+  }
 }
 
 function renderGenerate() {
@@ -797,6 +811,10 @@ function wireSources() {
   $("categorizeAll").addEventListener("click", async () => {
     $("fetchStatus").textContent = "Categorizing every idea by type…";
     try { await api("/api/categorize", { method: "POST", body: "{}" }); } catch (e) { alert(e.message); }
+  });
+  $("extractBtn").addEventListener("click", async () => {
+    $("fetchStatus").textContent = "Reading video transcripts for real products…";
+    try { await api("/api/extract", { method: "POST", body: "{}" }); } catch (e) { alert(e.message); }
   });
   $("toggleSources").addEventListener("click", () => {
     const m = $("sourceManager");

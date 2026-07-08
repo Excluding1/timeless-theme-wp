@@ -13,8 +13,8 @@ from fastapi.responses import HTMLResponse, PlainTextResponse
 
 import threading
 
-from lab import (analyst, auto, batch, categorize, db, ideagen, planner, rank,
-                 simulator, sources, trends)
+from lab import (analyst, auto, batch, categorize, db, extract, ideagen, planner,
+                 rank, simulator, sources, trends)
 
 BASE = Path(__file__).resolve().parent
 
@@ -87,7 +87,16 @@ def state():
         "generate": ideagen.status(),
         "simulate": simulator.status(),
         "auto": auto.status(),
+        "extract": extract.status(),
     }
+
+
+@app.post("/api/extract")
+def extract_products(body: dict = Body(default={})):
+    force = bool(body.get("force"))
+    if not extract.extract_all_bg(force=force):
+        raise HTTPException(409, "Extraction already running.")
+    return {"ok": True}
 
 
 @app.post("/api/auto")
