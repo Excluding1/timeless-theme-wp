@@ -6,6 +6,7 @@ import { playSound, type SoundId } from './sound';
 import { supabase, supabaseConfigured } from './supabase';
 import { putPhoto, getAllPhotos, getPhoto, updatePhotoStatusDb } from './photoDb';
 import { unsubscribePush } from './push';
+import { isDemo } from './demo';
 
 // Single source of truth: the store calls `api` and caches the result.
 // No optimistic dual-array. Lists/detail are caches; mutations re-fetch from `api`.
@@ -54,7 +55,9 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
-  isAuthenticated: supabaseConfigured ? false : localStorage.getItem('tj_auth') === '1',
+  // Demo mode is always "signed in" (no backend, no login). Otherwise the real Supabase
+  // session decides (resolved by the listener below); the mock fallback uses a local flag.
+  isAuthenticated: isDemo() ? true : supabaseConfigured ? false : localStorage.getItem('tj_auth') === '1',
   isOffline: !navigator.onLine,
   soundEnabled: localStorage.getItem('tj_sound_enabled') !== '0',
   soundId: ((localStorage.getItem('tj_sound_id') as SoundId) || 'chime'),
@@ -70,6 +73,11 @@ export const useAppStore = create<AppState>((set, get) => ({
   error: null,
 
   setAuth: (v) => {
+    if (isDemo()) {
+      // Demo: purely local — never touch Supabase or push (there's no backend).
+      set({ isAuthenticated: v });
+      return;
+    }
     if (supabaseConfigured) {
       // Revoke this device's push subscription BEFORE the session dies (it needs the JWT).
       if (!v) void unsubscribePush().finally(() => void supabase.auth.signOut());
@@ -215,7 +223,8 @@ if (typeof window !== 'undefined') {
   // iOS PWAs get no Background Sync — drain whenever the sub brings the app back to the foreground.
   window.addEventListener('focus', () => { if (navigator.onLine) void useAppStore.getState().drainPhotoQueue(); });
   // Real mode: the Supabase session is the source of truth for auth.
-  if (supabaseConfigured) {
+  // Demo mode skips this entirely so no network call ever reaches Supabase.
+  if (supabaseConfigured && !isDemo()) {
     void supabase.auth.getSession().then(({ data }) => useAppStore.setState({ isAuthenticated: !!data.session }));
     supabase.auth.onAuthStateChange((_e, session) => useAppStore.setState({ isAuthenticated: !!session }));
   }

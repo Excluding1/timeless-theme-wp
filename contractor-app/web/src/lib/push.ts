@@ -2,6 +2,7 @@
 // so nothing push-related is baked into the frontend build. Everything here degrades silently:
 // push is an enhancement — SMS fallback covers every offer regardless.
 import { supabase, supabaseConfigured, FUNCTIONS_URL, ANON_KEY } from './supabase';
+import { isDemo } from './demo';
 
 async function authHeaders(): Promise<Record<string, string> | null> {
   const { data } = await supabase.auth.getSession();
@@ -22,6 +23,8 @@ function urlBase64ToUint8Array(base64: string): Uint8Array {
 }
 
 export function pushSupported(): boolean {
+  // Demo mode has no backend/VAPID: the permission UI still shows, but subscription is a no-op.
+  if (isDemo()) return false;
   return supabaseConfigured && 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 }
 

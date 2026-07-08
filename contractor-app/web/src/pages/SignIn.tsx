@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui';
 import { useAppStore } from '../lib/store';
 import { supabase, supabaseConfigured } from '../lib/supabase';
+import { enableDemo, demoEntryUrl } from '../lib/demo';
 
 // Mock auth rule (PRD §6.1): empty fields or a fail@ address = bad credentials; anything else succeeds.
 function isBadCredentials(email: string, password: string): boolean {
@@ -53,6 +54,13 @@ export function SignIn() {
       setAuth(true);
       navigate('/');
     }, 800);
+  };
+
+  // Enter the offline demo sandbox. A full reload with ?demo=1 guarantees the api seam
+  // re-resolves to the in-memory mock even when a real Supabase backend is configured.
+  const startDemo = () => {
+    enableDemo();
+    window.location.assign(demoEntryUrl());
   };
 
   return (
@@ -123,6 +131,25 @@ export function SignIn() {
           {loading ? 'Signing in…' : 'Sign in'}
         </Button>
       </form>
+
+      {/* Demo / test mode — no login, no backend. Safe to click through the whole flow. */}
+      <div className="w-full max-w-sm mt-8">
+        <div className="flex items-center gap-3 text-white/40 text-[10px] uppercase tracking-widest font-bold mb-4">
+          <span className="flex-1 h-px bg-white/15" />
+          or
+          <span className="flex-1 h-px bg-white/15" />
+        </div>
+        <button
+          type="button"
+          onClick={startDemo}
+          className="w-full h-12 rounded-xl border border-[var(--color-accent)]/60 text-[var(--color-accent)] font-black uppercase tracking-widest text-xs hover:bg-white/5 transition-colors"
+        >
+          Explore demo mode
+        </button>
+        <p className="mt-3 text-[11px] text-white/50 text-center">
+          Try the full app with sample jobs — no account needed.
+        </p>
+      </div>
 
       {isOffline && (
         <p className="mt-8 text-sm font-medium text-white bg-white/10 px-4 py-3 rounded-xl max-w-sm">

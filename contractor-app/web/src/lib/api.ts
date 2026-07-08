@@ -54,7 +54,10 @@ export interface ContractorApi {
 }
 
 // ---- Active implementation: the real backend when configured (VITE_SUPABASE_*), else mock data. ----
+// Demo mode (?demo=1) always forces the in-memory mock, even when Supabase is configured, so the
+// whole flow runs offline with zero backend. Production (isDemo() === false) is completely untouched.
 import { mockApi } from './mockApi';
 import { supabaseApi } from './supabaseApi';
 import { supabaseConfigured } from './supabase';
-export const api: ContractorApi = supabaseConfigured ? supabaseApi : mockApi;
+import { isDemo } from './demo';
+export const api: ContractorApi = supabaseConfigured && !isDemo() ? supabaseApi : mockApi;

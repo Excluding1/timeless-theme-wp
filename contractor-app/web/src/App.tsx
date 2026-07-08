@@ -16,6 +16,7 @@ import { HowWeWork } from './pages/HowWeWork';
 import { BottomSheet } from './components/BottomSheet';
 import { Button } from './components/ui';
 import { InstallPrompt } from './components/InstallPrompt';
+import { DemoBanner } from './components/DemoBanner';
 import { Bell, MessageSquare } from 'lucide-react';
 
 function AppRoutes() {
@@ -59,6 +60,7 @@ function AppRoutes() {
 
   return (
     <>
+      <DemoBanner />
       <Routes>
         <Route path="/signin" element={!isAuthenticated ? <SignIn /> : <Navigate to="/" replace />} />
 
