@@ -659,6 +659,7 @@ function renderSims() {
       details.append(buildOutcomeBars(sum));
       details.append(buildRevenueChart(sum));
       details.append(buildExitStats(sum));
+      details.append(buildAssumptions(sum));
       if (sum.failure_modes && sum.failure_modes.length) {
         const ul = el("ul", { class: "objections" });
         for (const f of sum.failure_modes.slice(0, 6)) {
@@ -751,6 +752,21 @@ function buildExitStats(sum) {
     ));
   }
   return el("div", {}, el("strong", { text: "Money & exit" }), grid);
+}
+
+function buildAssumptions(sum) {
+  const a = sum.assumptions || {};
+  return el("div", { class: "assump" },
+    el("div", {}, el("strong", { text: "Model assumptions " }),
+      el("span", { class: "sub", text: a.used_analysis ? "(tuned from this idea's own analysis)" : "(category defaults — score the idea first to tune them)" })),
+    el("div", { class: "sub", text:
+      `≈ $${Math.round(a.price_per_customer_month)}/customer/mo · running $${Math.round(a.monthly_cost)}/mo · ` +
+      `build $${Math.round(a.upfront_build_cost)} · exit ${a.exit_multiple_arr}× ARR · ${sum.trials} runs` }),
+    el("div", { class: "disclaimer", text:
+      "How to read this: trust the SHAPE — the odds of each outcome and the most-likely path — over the exact dollars. " +
+      "The failure base-rates are calibrated to reality (most small businesses don't make it); the per-category priors are " +
+      "informed estimates, not a fitted forecast, so treat the numbers as a realistic scenario range, not a prediction." })
+  );
 }
 
 /* very small, safe markdown → DOM (headings, bullets, bold, paragraphs) */
