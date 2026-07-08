@@ -302,10 +302,15 @@ def _json_from(text):
                 elif ch == closer:
                     depth -= 1
                     if depth == 0:
-                        try:
-                            return json.loads(text[start:i + 1])
-                        except json.JSONDecodeError:
-                            break
+                        cand = text[start:i + 1]
+                        # try raw, then with raw control chars (a common LLM slip that
+                        # breaks the OUTER object and makes us fall to a nested one) neutralised
+                        for attempt in (cand, re.sub(r"[\x00-\x1f]+", " ", cand)):
+                            try:
+                                return json.loads(attempt)
+                            except json.JSONDecodeError:
+                                continue
+                        break
     raise LLMError(f"no parsable JSON in LLM output: {text[:200]}")
 
 
@@ -408,6 +413,8 @@ Score each factor 0-10 (10 = excellent for a new entrant building this TODAY):
 
 Reply with ONLY this JSON (no prose, no markdown):
 {{
+ "product_name": "<the ACTUAL product/business this is about, 2-6 words. If the source is a video or article (e.g. a clickbait title like 'He built a $1M business in a van'), name the UNDERLYING business/product, not the video. If it genuinely has no product, give the crisp concept.>",
+ "what_it_is": "<one plain sentence: what the product/business actually is and who it's for>",
  "scores": {{"<factor>": {{"score": <0-10>, "note": "<one sharp sentence>"}}, ...all 12...}},
  "composite": <0-100: the weighted sum — score/10 * weight, summed>,
  "verdict": "<one of: strong|promising|average|weak|avoid>",
@@ -501,11 +508,19 @@ def _run(aid, idea_row, panel_size):
 def _analyze_core(aid, idea_row, panel_size):
     """Scorecard + panel; raises on fatal error. Job state handled by callers."""
     _set(phase="scorecard (expert analyst)")
-    # live web research when the Claude engine is active (ignored on Codex)
-    card = _llm_json(_scorecard_prompt(idea_row), research=True)
-    if not isinstance(card, dict):
-        raise LLMError("scorecard reply was not a JSON object")
-    scores = card.get("scores") if isinstance(card.get("scores"), dict) else {}
+    # live web research when the Claude engine is active (ignored on Codex).
+    # Validate that we actually got the 12-factor scores object — a malformed reply
+    # that parses to the wrong JSON node must retry, never silently store all-zeros.
+    card = None
+    for _ in range(3):
+        c = _llm_json(_scorecard_prompt(idea_row), research=True)
+        if isinstance(c, dict) and isinstance(c.get("scores"), dict) and \
+                sum(1 for k, *_ in FACTORS if k in c["scores"]) >= 6:
+            card = c
+            break
+    if card is None:
+        raise LLMError("scorecard did not return a usable 12-factor scores object")
+    scores = card.get("scores")
     # recompute composite ourselves — never trust LLM arithmetic or value TYPES
     composite = 0.0
     for key, weight, _ in FACTORS:
@@ -537,6 +552,20 @@ def _analyze_core(aid, idea_row, panel_size):
                        verdict=verdict, thesis=card.get("thesis") or "",
                        risks=card.get("risks") or [], wedge=card.get("wedge") or "",
                        estimates=est, effort_roi=effort_roi)
+
+    # capture the real product name so the list shows the business, not a clickbait
+    # video/article title. Only overwrite a display name we don't already have from a
+    # full polish (which is richer). Stored in the same 'polished' slot the UI reads.
+    pname = str(card.get("product_name") or "").strip()
+    whatis = str(card.get("what_it_is") or "").strip()
+    if pname and not (idea_row.get("polished")):
+        try:
+            db.set_idea_polish(idea_row["id"],
+                               {"polished_title": pname[:120],
+                                "refined_description": whatis[:600],
+                                "from_scorecard": True})
+        except Exception:
+            pass
 
     # persona panel, batched 10 per LLM call
     panel_size = max(0, min(100, int(panel_size)))

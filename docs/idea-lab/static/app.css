@@ -53,6 +53,7 @@ button.small { padding: 5px 12px; font-size: 13px; }
 .ititle a { color: var(--text); text-decoration: none; }
 .ititle a:hover { color: var(--accent); }
 .idesc { color: var(--muted); font-size: 12.5px; }
+.origtitle { color: var(--muted); font-size: 11px; opacity: .7; font-style: italic; }
 .imeta { display: flex; gap: 12px; color: var(--muted); font-size: 12px; }
 .obadge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 2px 6px;
   border-radius: 5px; background: var(--line); color: var(--muted); }

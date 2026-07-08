@@ -232,6 +232,12 @@ function fmtMoney(n) {
   return "$" + Math.round(n);
 }
 
+function polOf(i) {
+  if (!i.polished) return null;
+  try { return typeof i.polished === "string" ? JSON.parse(i.polished) : i.polished; }
+  catch (_) { return null; }
+}
+
 function trendBadge(i) {
   if (i.momentum == null) return null;
   let dir = "flat", arrow = "→";
@@ -251,14 +257,22 @@ function renderIdeas() {
   box.replaceChildren();
   const busy = !!(state.job && state.job.state === "running");
   for (const i of state.ideas.slice(0, 120)) {
+    const pol = polOf(i);
+    const displayTitle = (pol && pol.polished_title) || i.title;
+    const displayDesc = (pol && pol.refined_description) || i.description;
+    // if we distilled a real product name that differs from the raw (clickbait) title,
+    // keep the original visible but muted, so nothing is hidden.
+    const showOrig = pol && pol.polished_title &&
+      pol.polished_title.toLowerCase().slice(0, 20) !== (i.title || "").toLowerCase().slice(0, 20);
     const row = el("div", { class: "idea" },
       el("div", { class: "col grow" },
         el("div", { class: "ititle" },
           el("span", { class: "obadge " + i.origin, text: ORIGIN[i.origin] || i.origin }),
-          safeUrl(i.url) ? el("a", { href: safeUrl(i.url), target: "_blank", rel: "noopener", text: " " + i.title })
-                         : el("span", { text: " " + i.title }),
+          safeUrl(i.url) ? el("a", { href: safeUrl(i.url), target: "_blank", rel: "noopener", text: " " + displayTitle })
+                         : el("span", { text: " " + displayTitle }),
         ),
-        i.description ? el("div", { class: "idesc", text: i.description.slice(0, 220) }) : null,
+        showOrig ? el("div", { class: "origtitle", text: "source: " + i.title.slice(0, 90) }) : null,
+        displayDesc ? el("div", { class: "idesc", text: displayDesc.slice(0, 220) }) : null,
         el("div", { class: "imeta" },
           i.origin === "ih" && i.points > 0
             ? el("span", { class: "revbadge", title: "Reported monthly revenue on IndieHackers",
@@ -269,7 +283,8 @@ function renderIdeas() {
           i.signal != null ? el("span", { class: "sigbadge", title: "Signal: instant heuristic rank (revenue + traction + momentum + engagement + source) — no AI needed",
             text: `◆ ${Math.round(i.signal)}` }) : null,
           trendBadge(i),
-          i.polished ? el("span", { class: "polished", text: "✦ polished", title: "Graded from the polished version of this idea" }) : null,
+          pol ? el("span", { class: "polished", text: pol.from_scorecard ? "◇ named" : "✦ polished",
+            title: pol.from_scorecard ? "Real product name distilled by the AI analyst" : "Graded from the polished version of this idea" }) : null,
           i.composite != null ? el("span", { class: "score " + vclass(i.verdict), text: `AI ${i.composite}/100 · ${i.verdict}` }) : null,
           i.effort_roi != null ? el("span", { class: "score " + (i.effort_roi >= 2 ? "good" : i.effort_roi >= 0.8 ? "mid" : "bad"),
             title: "Effort ROI: estimated year-1 profit ÷ (build hours × $60 + a year of running costs)",

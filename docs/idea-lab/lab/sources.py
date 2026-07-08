@@ -498,9 +498,30 @@ def fetch_rss(url, name=None, prefix=None):
     return added
 
 
+_PROMO_RX = re.compile(
+    r"(for more business ideas|sent to your inbox|check out|subscribe|link in bio|"
+    r"want to turn your idea|→|visit |follow (me|us)|dm me|comment below|like and)",
+    re.I)
+
+
+def _clean_promo(text):
+    """Strip URLs, hashtags and marketing call-to-actions from a video caption so
+    what's left is (hopefully) about the actual business, not 'link in bio'."""
+    if not text:
+        return ""
+    text = re.sub(r"https?://\S+", " ", text)
+    text = re.sub(r"#\w+", " ", text)
+    kept = [ln for ln in re.split(r"[\n]+", text) if ln.strip() and not _PROMO_RX.search(ln)]
+    return re.sub(r"\s+", " ", " ".join(kept)).strip()
+
+
 def fetch_archive_channel(platform, username):
-    """Ingest business ideas from ANY channel archived in the media-archiver
-    (titles, captions, transcript excerpts). Generalises the Starter Story import."""
+    """Ingest business ideas from ANY channel archived in the media-archiver.
+
+    Video titles are clickbait and captions are mostly promo, so the useful content
+    is the transcript (the actual interview). We lead the description with the
+    transcript and append only the de-promoted caption — giving the analyst real
+    substance to name and grade the underlying business from."""
     import sqlite3
     if not MEDIA_ARCHIVER_DB.exists():
         raise RuntimeError("media-archiver database not found — sync a channel there first")
@@ -514,10 +535,10 @@ def fetch_archive_channel(platform, username):
     con.close()
     added = 0
     for r in rows:
-        desc = (r["caption"] or "").strip()
-        tr = (r["transcript"] or "").strip()
-        if tr:
-            desc = (desc + " | Transcript excerpt: " + re.sub(r"\s+", " ", tr)[:900]).strip(" |")
+        tr = re.sub(r"\s+", " ", (r["transcript"] or "")).strip()
+        # the transcript IS the interview — the real substance. Prefer it outright;
+        # fall back to the de-promoted caption only when there's no transcript.
+        desc = tr[:1900] if tr else _clean_promo(r["caption"])
         if not desc and not (r["title"] or "").strip():
             continue
         posted = None
