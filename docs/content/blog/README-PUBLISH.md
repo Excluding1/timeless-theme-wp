@@ -1,5 +1,10 @@
 # Blog publish runbook, 10 minutes per post
 
+> **Update 2026-07-08 (engagement-visuals pass).** All 8 drafts in this folder were retrofitted with theme shortcodes at natural section breaks, and every broken image was resolved. Three things changed for publishing:
+> - **Do NOT paste any inline FAQ `<script type="application/ld+json">` block.** The theme now auto-generates FAQ schema from each post's visible "Frequently asked questions" H3/P pairs, so the old inline scripts were removed (they were leaking as visible JSON text on the page). Just paste the visible FAQ H2/H3/P text as normal.
+> - **The posts now contain shortcodes** such as `[compare_table ...]`, `[decision_flow ...]`, `[when_cards ...]`, `[process_step ...]` and `[stat_grid ...]`. Paste them exactly as written; WordPress renders them via `functions.php` into branded, responsive HTML/SVG. No extra action needed.
+> - **`[MEDIA-LIBRARY: ...]` placeholders are gone.** Where a real photo was never uploaded (Claremont Meadows before/after pairs, `painted-tiles-peeling.jpg`, `neil-prout-bathtub.jpg`), the broken figure was replaced with a relevant table/flow/stat visual plus an HTML `<!-- TODO: ... -->` comment naming the file. Those TODO spots still need the real photos uploaded to the Media Library before publishing; once uploaded, you can swap the stand-in visual back for the photo (or a `[before_after ...]` slider) if you prefer.
+
 How to publish the blog post drafts in this folder to timelessresurfacing.com.au.
 Posts 1-4 in publish order:
 
@@ -19,7 +24,7 @@ Publish post 1 first, then 2, 3, 4. Each post's own metadata (title tag, meta de
 - The blog is a **custom post type called `article`**, NOT the default WordPress "Posts". In wp-admin the menu item is labelled **"Blog"** (pencil icon, near the top of the left menu). Do not use Posts → Add New; posts created there will not appear at /blog/.
 - URLs: each article is served at **`/blog/{slug}/`** by `single-article.php`. The blog index is **https://timelessresurfacing.com.au/blog/** served by `archive-article.php`. Category archives work at `/blog/category/{slug}/`.
 - The `article` CPT uses the standard WordPress categories and tags, so the "Guides" category works normally.
-- The single template auto-builds a table of contents from the `<h2>` headings (shown when a post has 3 or more), auto-adds a quote CTA box in the sidebar, and auto-appends a full-width end-of-article CTA. Our pasted HTML also ends with its own small CTA section; that is intentional (in-content CTA plus the theme's closer). The theme also outputs BlogPosting JSON-LD automatically; the FAQPage JSON-LD in our pasted HTML sits alongside it.
+- The single template auto-builds a table of contents from the `<h2>` headings (shown when a post has 3 or more), auto-adds a quote CTA box in the sidebar, and auto-appends a full-width end-of-article CTA. Our pasted HTML also ends with its own small CTA section; that is intentional (in-content CTA plus the theme's closer). The theme also outputs BlogPosting JSON-LD automatically, and now auto-generates FAQPage JSON-LD from the visible FAQ H3/P questions, so the drafts no longer contain (and must not re-add) an inline FAQ `<script>` block.
 - `.entry-content` styles in `style.css` already handle h2/h3, lists, blockquotes, figures and captions. No extra styling needed.
 
 ## Step-by-step (per post)
@@ -35,15 +40,15 @@ docs/templates/quote-generator/photos/isabella-vanity.jpg   (not used in posts 1
 docs/templates/quote-generator/photos/painted-tiles-peeling.jpg
 ```
 
-Post 1 also references **Claremont Meadows before/after photos** as placeholders (`[MEDIA-LIBRARY: claremont-meadows-bath-before.jpg]` and `...-after.jpg`). Those are NOT in the repo photos folder. Pull them from the job records/phone and upload them too, or delete those two `<figure>` blocks from the post before publishing (the section reads fine without them).
+Posts 1 and 7 reference **Claremont Meadows before/after photos** that were never uploaded. Those `<figure>` blocks have been replaced with a `[stat_grid]` and an HTML `<!-- TODO: ... -->` comment naming the files. The posts publish fine as-is. To use real photos, pull them from the job records/phone, upload to the Media Library, and (optionally) swap the stat_grid back for a `[before_after before="URL" after="URL" alt="..."]` slider.
 
 ### 2. Create the article
 
 wp-admin → **Blog → Add New Article** (not Posts).
 
 1. **Title**: paste the "Post title (H1)" line from the file's metadata comment. The template renders this as the H1, so the pasted body correctly starts at `<h2>`.
-2. **Body**: add a single **Custom HTML block** (or switch the whole editor to the Code Editor via the ⋮ menu, top right) and paste the entire file contents from after the closing `-->` of the metadata comment to the end of the file, including the `<script type="application/ld+json">` block at the bottom. The FAQ schema ships inside the content this way and validates.
-3. **Media Library images**: in the pasted HTML, replace each `src="[MEDIA-LIBRARY: filename.jpg]"` with the real URL of the uploaded file (Media Library → click the image → copy "File URL", it looks like `https://timelessresurfacing.com.au/wp-content/uploads/2026/07/filename.jpg`). Posts 1, 2 and 4 each have Media Library placeholders; post 3 uses theme images only.
+2. **Body**: add a single **Custom HTML block** (or switch the whole editor to the Code Editor via the ⋮ menu, top right) and paste the entire file contents from after the closing `-->` of the metadata comment to the end of the file. This includes the `[shortcode]` markup, which the theme renders automatically. Do NOT add an inline FAQ `<script type="application/ld+json">` block: the theme now generates FAQ schema from the visible questions (see the 2026-07-08 note at the top).
+3. **Media Library images / TODO photos**: the drafts no longer contain `[MEDIA-LIBRARY: ...]` placeholders. Where a real photo is still pending, an HTML `<!-- TODO: ... -->` comment names the file and a relevant table/flow/stat visual stands in for it (posts 1, 2, 4 and 7). Publishing works as-is. When you upload a named photo (Media Library → click the image → copy "File URL", it looks like `https://timelessresurfacing.com.au/wp-content/uploads/2026/07/filename.jpg`), you may replace the stand-in visual with a `<figure>` using that URL, or a `[before_after ...]` slider for the Claremont before/after pairs.
 4. **Slug**: in the post sidebar under URL/Permalink, set the slug exactly as listed in the metadata comment. WordPress will default it from the title, which is wrong (too long), so set it manually.
 5. **Excerpt**: paste the "Meta description" line from the metadata comment into the Excerpt field. It shows on the /blog/ index cards and in the BlogPosting schema.
 6. **Category**: tick **Guides** (create it once via the Categories panel if it does not exist yet).
@@ -61,7 +66,8 @@ There is no Yoast/SEO plugin. Two theme functions in `functions.php` handle it:
 
 - Open `https://timelessresurfacing.com.au/blog/{slug}/` **in Incognito** (never logged in, per the Cloudflare cache rule).
 - Check the H1, the table of contents in the left sidebar, the images loading (no `[MEDIA-LIBRARY:...]` text visible), and the internal links.
-- View source → confirm the FAQPage `application/ld+json` block is present. Optionally paste the URL into Google's Rich Results Test.
+- View source → confirm a FAQPage `application/ld+json` block is present (now emitted by the theme from the visible FAQ questions, not from the pasted HTML) and that no raw JSON is visible in the page body. Optionally paste the URL into Google's Rich Results Test.
+- Confirm the shortcodes rendered (comparison tables, decision-flow SVGs, when-cards, process steps, stat grids) and that no literal `[compare_table ...]` / `[decision_flow ...]` text is visible.
 - Check the post shows on https://timelessresurfacing.com.au/blog/ with its featured image and excerpt.
 
 ### 5. Purge caches (after each publishing session)
