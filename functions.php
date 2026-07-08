@@ -183,6 +183,114 @@ function timeless_shortcode_stat_grid( $atts ) {
 }
 add_shortcode( 'stat_grid', 'timeless_shortcode_stat_grid' );
 
+/* [compare_table left="Resurfacing" right="Replacement" rows="Time|About a day|1 to 2 weeks;Mess|None|Full demolition"]
+   Two-option comparison table. Tables are highly AI-extractable and can win Google featured
+   snippets. Each row = "Label|Left value|Right value". Semantic <table> with scope for a11y. */
+function timeless_shortcode_compare_table( $atts ) {
+    $a = shortcode_atts( array( 'left' => 'Option A', 'right' => 'Option B', 'rows' => '', 'caption' => '' ), $atts );
+    if ( empty( $a['rows'] ) ) return '';
+    ob_start(); ?>
+    <figure class="my-8 not-prose overflow-x-auto">
+        <table class="w-full text-sm border-collapse bg-white rounded-xl overflow-hidden border border-surface-container">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <th scope="col" class="text-left p-3 font-semibold"></th>
+                    <th scope="col" class="text-left p-3 font-semibold"><?php echo esc_html( $a['left'] ); ?></th>
+                    <th scope="col" class="text-left p-3 font-semibold"><?php echo esc_html( $a['right'] ); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ( explode( ';', $a['rows'] ) as $row ) :
+                    $c = array_map( 'trim', explode( '|', $row ) );
+                    if ( empty( $c[0] ) ) continue; ?>
+                    <tr class="border-t border-surface-container">
+                        <th scope="row" class="p-3 font-semibold text-primary text-left"><?php echo esc_html( $c[0] ); ?></th>
+                        <td class="p-3 text-secondary"><?php echo esc_html( $c[1] ?? '' ); ?></td>
+                        <td class="p-3 text-secondary"><?php echo esc_html( $c[2] ?? '' ); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php if ( $a['caption'] ) : ?><figcaption class="text-xs text-secondary italic mt-2 text-center"><?php echo esc_html( $a['caption'] ); ?></figcaption><?php endif; ?>
+    </figure>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'compare_table', 'timeless_shortcode_compare_table' );
+
+/* [when_cards left_title="Resurface when" left="chips;stains;sound tub" right_title="Replace when" right="cracked through;rusted base"]
+   Two decision cards (green "do this when" / amber "the other option when"). Very digestible;
+   semicolon-separated bullet lists. */
+function timeless_shortcode_when_cards( $atts ) {
+    $a = shortcode_atts( array(
+        'left_title' => 'Resurface when', 'left' => '',
+        'right_title' => 'Replace when', 'right' => '',
+    ), $atts );
+    $mk = function( $title, $items, $accent, $icon ) {
+        $list = array_filter( array_map( 'trim', explode( ';', $items ) ) );
+        ob_start(); ?>
+        <div class="flex-1 bg-white rounded-xl p-5 border-t-4 <?php echo esc_attr( $accent ); ?> border border-surface-container">
+            <h4 class="font-bold text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;" aria-hidden="true"><?php echo esc_html( $icon ); ?></span><?php echo esc_html( $title ); ?></h4>
+            <ul class="space-y-1.5 text-sm text-secondary list-none pl-0">
+                <?php foreach ( $list as $li ) : ?><li class="flex gap-2"><span aria-hidden="true">•</span><span><?php echo esc_html( $li ); ?></span></li><?php endforeach; ?>
+            </ul>
+        </div>
+        <?php return ob_get_clean();
+    };
+    ob_start(); ?>
+    <div class="my-8 flex flex-col sm:flex-row gap-4 not-prose">
+        <?php
+        echo $mk( $a['left_title'], $a['left'], 'border-t-[#2e7d52]', 'check_circle' );
+        echo $mk( $a['right_title'], $a['right'], 'border-t-[#b45309]', 'swap_horiz' );
+        ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'when_cards', 'timeless_shortcode_when_cards' );
+
+/* [decision_flow question="Is the bath structurally sound?" yes="Resurface — about a day, a fraction of the cost" no="Replace — cracked through or rusted out"]
+   A small SVG decision flowchart. Uses real <text> labels (AI-readable) + role/title/desc for a11y.
+   Responsive via viewBox + max-width. Brand palette. */
+function timeless_shortcode_decision_flow( $atts ) {
+    $a = shortcode_atts( array(
+        'question' => '', 'yes' => '', 'no' => '',
+        'yes_label' => 'Yes', 'no_label' => 'No',
+    ), $atts );
+    if ( ! $a['question'] ) return '';
+    $wrap = function( $s, $len ) { // wrap text into <=2 tspan lines
+        $s = trim( $s );
+        if ( mb_strlen( $s ) <= $len ) return array( $s );
+        $words = explode( ' ', $s ); $l1 = ''; $l2 = '';
+        foreach ( $words as $w ) { if ( mb_strlen( $l1 . ' ' . $w ) <= $len && $l2 === '' ) $l1 = trim( $l1 . ' ' . $w ); else $l2 = trim( $l2 . ' ' . $w ); }
+        return array( $l1, $l2 );
+    };
+    $q = $wrap( $a['question'], 30 ); $y = $wrap( $a['yes'], 34 ); $n = $wrap( $a['no'], 34 );
+    $tspans = function( $lines, $x, $y0 ) { $out = ''; $n = count( $lines ); $start = $y0 - ( $n - 1 ) * 9;
+        foreach ( $lines as $i => $ln ) { $out .= '<tspan x="' . $x . '" y="' . ( $start + $i * 18 ) . '">' . esc_html( $ln ) . '</tspan>'; } return $out; };
+    ob_start(); ?>
+    <figure class="my-8 not-prose">
+        <svg viewBox="0 0 680 300" role="img" aria-label="<?php echo esc_attr( $a['question'] . ' If yes, ' . $a['yes'] . '. If no, ' . $a['no'] ); ?>" style="width:100%;max-width:640px;height:auto;margin:0 auto;display:block;font-family:Inter,system-ui,sans-serif">
+            <title><?php echo esc_html( $a['question'] ); ?></title>
+            <rect x="200" y="16" width="280" height="72" rx="12" fill="#041534"/>
+            <text fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle"><?php echo $tspans( $q, 340, 56 ); ?></text>
+            <path d="M300 88 L150 150" stroke="#2e7d52" stroke-width="2" fill="none"/>
+            <path d="M380 88 L530 150" stroke="#b45309" stroke-width="2" fill="none"/>
+            <rect x="210" y="118" width="46" height="22" rx="11" fill="#2e7d52"/>
+            <text x="233" y="133" fill="#fff" font-size="12" font-weight="700" text-anchor="middle"><?php echo esc_html( $a['yes_label'] ); ?></text>
+            <rect x="424" y="118" width="46" height="22" rx="11" fill="#b45309"/>
+            <text x="447" y="133" fill="#fff" font-size="12" font-weight="700" text-anchor="middle"><?php echo esc_html( $a['no_label'] ); ?></text>
+            <rect x="20" y="150" width="260" height="120" rx="12" fill="#eef6f1" stroke="#2e7d52" stroke-width="1.5"/>
+            <text fill="#1f5c3d" font-size="13.5" font-weight="600" text-anchor="middle"><?php echo $tspans( $y, 150, 210 ); ?></text>
+            <rect x="400" y="150" width="260" height="120" rx="12" fill="#fdf3e7" stroke="#b45309" stroke-width="1.5"/>
+            <text fill="#8a4708" font-size="13.5" font-weight="600" text-anchor="middle"><?php echo $tspans( $n, 530, 210 ); ?></text>
+        </svg>
+    </figure>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'decision_flow', 'timeless_shortcode_decision_flow' );
+
 /* ─────────────────────────────────────────────────────────────────
  * [timeless_quote_form], Embeds the React quote form anywhere.
  *
