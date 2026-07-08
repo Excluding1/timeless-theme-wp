@@ -13,14 +13,19 @@
 get_header();
 the_post();
 
-$author_name    = get_the_author();
+$author_name    = 'Timeless Resurfacing';  // consistent brand byline (was get_the_author() = "admin")
 $published_iso  = get_the_date( 'c' );
 $published_disp = get_the_date();
 $modified_iso   = get_the_modified_date( 'c' );
+$modified_disp  = get_the_modified_date();
+$show_modified  = get_the_modified_date( 'Y-m-d' ) !== get_the_date( 'Y-m-d' );
 $thumb_url      = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+$hero_img       = $thumb_url ? $thumb_url : get_template_directory_uri() . '/images/homepage/after.jpg';  // fallback so hero/OG never render bare
 $canonical      = get_permalink();
 $categories     = get_the_category();
 $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
+$word_count     = str_word_count( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ) );
+$reading_time   = max( 1, (int) round( $word_count / 200 ) );  // ~200 wpm, min 1
 ?>
 
 <script type="application/ld+json">
@@ -29,8 +34,11 @@ $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
  "@type": "BlogPosting",
  "headline": "<?php echo esc_js( get_the_title() ); ?>",
  "description": "<?php echo esc_js( get_the_excerpt() ); ?>",
- <?php if ( $thumb_url ) : ?>"image": "<?php echo esc_url( $thumb_url ); ?>",<?php endif; ?>
- "author": { "@type": "Organization", "name": "Timeless Resurfacing" },
+ "image": "<?php echo esc_url( $hero_img ); ?>",
+ "inLanguage": "en-AU",
+ <?php if ( $cat_name ) : ?>"articleSection": "<?php echo esc_js( $cat_name ); ?>",<?php endif; ?>
+ "wordCount": <?php echo (int) $word_count; ?>,
+ "author": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" },
  "publisher": {
  "@type": "Organization",
  "name": "Timeless Resurfacing",
@@ -40,6 +48,17 @@ $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
  "datePublished": "<?php echo esc_js( $published_iso ); ?>",
  "dateModified": "<?php echo esc_js( $modified_iso ); ?>",
  "mainEntityOfPage": "<?php echo esc_js( $canonical ); ?>"
+}
+</script>
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org", "@type": "BreadcrumbList",
+ "itemListElement": [
+ { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?php echo esc_url( home_url( '/' ) ); ?>" },
+ { "@type": "ListItem", "position": 2, "name": "Blog", "item": "<?php echo esc_url( home_url( '/blog/' ) ); ?>" },
+ { "@type": "ListItem", "position": 3, "name": "<?php echo esc_js( get_the_title() ); ?>", "item": "<?php echo esc_url( $canonical ); ?>" }
+ ]
 }
 </script>
 
@@ -69,19 +88,23 @@ $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
  <?php the_title(); ?>
  </h1>
 
- <div class="flex items-center gap-3 text-sm text-secondary mb-8">
+ <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-secondary mb-8">
  <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
  <time datetime="<?php echo esc_attr( $published_iso ); ?>"><?php echo esc_html( $published_disp ); ?></time>
+ <?php if ( $show_modified ) : ?>
+ <span class="text-secondary/50">·</span>
+ <time datetime="<?php echo esc_attr( $modified_iso ); ?>">Updated <?php echo esc_html( $modified_disp ); ?></time>
+ <?php endif; ?>
  <span class="text-secondary/50">·</span>
  <span class="material-symbols-outlined text-base" aria-hidden="true">person</span>
  <span><?php echo esc_html( $author_name ); ?></span>
+ <span class="text-secondary/50">·</span>
+ <span><?php echo (int) $reading_time; ?> min read</span>
  </div>
 
- <?php if ( $thumb_url ) : ?>
  <div class="rounded-2xl overflow-hidden shadow-md aspect-16/9 mb-8">
- <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover" loading="eager" />
+ <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover" loading="eager" />
  </div>
- <?php endif; ?>
 </header>
 
 <!-- ARTICLE BODY -->
@@ -145,6 +168,9 @@ $show_toc     = count( $toc_items ) >= 3;
 </div>
 </article>
 
+<!-- AUTHOR / CREDENTIALS (E-E-A-T) BOX -->
+<?php echo timeless_blog_author_box(); ?>
+
 <!-- END-OF-ARTICLE CTA: full-width prominent conversion section -->
 <?php echo timeless_blog_end_of_article_cta(); ?>
 
@@ -160,25 +186,42 @@ $show_toc     = count( $toc_items ) >= 3;
 
 <!-- RELATED ARTICLES -->
 <?php
-$related = get_posts( array(
-    'post_type'      => 'article',
-    'posts_per_page' => 3,
-    'post__not_in'   => array( get_the_ID() ),
-    'orderby'        => 'rand',
-) );
+// Related = same primary category first (topical relevance), then top up with
+// the most recent articles if fewer than 3 in-category are available.
+$primary_cat_id = ! empty( $categories ) ? $categories[0]->term_id : 0;
+$related        = array();
+if ( $primary_cat_id ) {
+    $related = get_posts( array(
+        'post_type'      => 'article',
+        'posts_per_page' => 3,
+        'post__not_in'   => array( get_the_ID() ),
+        'category'       => $primary_cat_id,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) );
+}
+if ( count( $related ) < 3 ) {
+    $exclude = array_merge( array( get_the_ID() ), wp_list_pluck( $related, 'ID' ) );
+    $related = array_merge( $related, get_posts( array(
+        'post_type'      => 'article',
+        'posts_per_page' => 3 - count( $related ),
+        'post__not_in'   => $exclude,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) ) );
+}
 if ( ! empty( $related ) ) : ?>
 <section class="py-12 sm:py-16 bg-white">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-8 text-center">More from the blog</h2>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
  <?php foreach ( $related as $post ) : setup_postdata( $post );
- $rthumb = get_the_post_thumbnail_url( $post->ID, 'medium' ); ?>
+ $rthumb = get_the_post_thumbnail_url( $post->ID, 'medium' );
+ $rimg   = $rthumb ? $rthumb : get_template_directory_uri() . '/images/homepage/after.jpg'; ?>
  <a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" class="bg-surface-container-low rounded-xl overflow-hidden hover:shadow-lg transition-all group">
- <?php if ( $rthumb ) : ?>
  <div class="aspect-16/9 overflow-hidden">
- <img src="<?php echo esc_url( $rthumb ); ?>" alt="<?php echo esc_attr( get_the_title( $post->ID ) ); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+ <img src="<?php echo esc_url( $rimg ); ?>" alt="<?php echo esc_attr( get_the_title( $post->ID ) ); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
  </div>
- <?php endif; ?>
  <div class="p-5">
  <h3 class="font-bold text-primary group-hover:text-primary-soft transition-colors mb-2"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h3>
  <p class="text-xs text-secondary"><?php echo esc_html( get_the_excerpt( $post->ID ) ); ?></p>

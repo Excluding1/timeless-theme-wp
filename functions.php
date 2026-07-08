@@ -490,6 +490,51 @@ function timeless_blog_end_of_article_cta() {
     return ob_get_clean();
 }
 
+/* Author / credentials (E-E-A-T) box. Rendered at the END of each single
+   article, before the full-width CTA. Real, rule-compliant trust signals
+   only, no "guarantee"/"written" wording; per-material warranty spans. */
+function timeless_blog_author_box() {
+    $abn = function_exists( 'timeless_abn' ) ? trim( timeless_abn() ) : '';
+    ob_start(); ?>
+    <aside class="max-w-3xl mx-auto px-6 sm:px-8 pb-14" aria-label="About Timeless Resurfacing">
+        <div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 border border-surface-container">
+            <div class="flex items-start gap-5">
+                <div class="shrink-0 w-14 h-14 rounded-full bg-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-3xl text-white" aria-hidden="true">verified</span>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary mb-1">About the author</p>
+                    <h2 class="text-lg font-extrabold text-primary tracking-tight mb-2">Timeless Resurfacing</h2>
+                    <p class="text-sm text-secondary leading-relaxed">
+                        Sydney bathroom resurfacing and shower regrouting specialists. We resurface baths, tiles, basins
+                        and vanities and re-grout showers across Greater Sydney, and we quote from photos within 24 hours.
+                    </p>
+                </div>
+            </div>
+            <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-sm text-primary">
+                <li class="flex items-start gap-2">
+                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
+                    <span>$10&nbsp;million public liability insurance</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
+                    <span>ABN-registered, GST-registered business<?php echo $abn ? ' (ABN ' . esc_html( $abn ) . ')' : ''; ?></span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
+                    <span>Per-material warranties: resurfacing up to 5&nbsp;years, grout 2&nbsp;years, silicone 12&nbsp;months</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
+                    <span>Fixed-price quotes from photos within 24&nbsp;hours</span>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <?php
+    return ob_get_clean();
+}
+
 /* ─────────────────────────────────────────────
    1e. AUTO TABLE OF CONTENTS FOR ARTICLES
    ─────────────────────────────────────────────
@@ -2118,19 +2163,148 @@ function timeless_seo_meta() {
     $url = preg_replace( '#^http://#', 'https://', $url );
     $url = trailingslashit( $url );
 
+    /* Blog articles (CPT 'article') get richer Open Graph: og:type=article,
+       the post's own featured image when set (else the shared fallback), and
+       article:* metadata. $img_is_fallback tracks whether the 1200x630 size
+       hints are still accurate (they aren't for an arbitrary featured image). */
+    $og_type        = 'website';
+    $img_is_fallback = true;
+    $article_meta   = '';
+    if ( is_singular( 'article' ) ) {
+        $og_type = 'article';
+        $pid     = get_queried_object_id();
+        $feat    = get_the_post_thumbnail_url( $pid, 'large' );
+        if ( $feat ) {
+            $img             = $feat;
+            $img_is_fallback = false;
+        }
+        $cats    = get_the_category( $pid );
+        $section = ! empty( $cats ) ? $cats[0]->name : 'Bathroom Resurfacing';
+        $article_meta .= '<meta property="article:published_time" content="' . esc_attr( get_the_date( 'c', $pid ) ) . '" />' . "\n";
+        $article_meta .= '<meta property="article:modified_time" content="' . esc_attr( get_the_modified_date( 'c', $pid ) ) . '" />' . "\n";
+        $article_meta .= '<meta property="article:author" content="Timeless Resurfacing" />' . "\n";
+        $article_meta .= '<meta property="article:section" content="' . esc_attr( $section ) . '" />' . "\n";
+    }
+
     echo '<meta name="description" content="' . esc_attr( $desc ) . '" />' . "\n";
     echo '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />' . "\n";
     echo '<link rel="alternate" hreflang="en-au" href="' . esc_url( $url ) . '" />' . "\n";
-    echo '<meta property="og:type" content="website" />' . "\n";
+    echo '<meta property="og:type" content="' . esc_attr( $og_type ) . '" />' . "\n";
     echo '<meta property="og:title" content="' . esc_attr( $title ) . '" />' . "\n";
     echo '<meta property="og:description" content="' . esc_attr( $desc ) . '" />' . "\n";
     echo '<meta property="og:url" content="' . esc_url( $url ) . '" />' . "\n";
     echo '<meta property="og:image" content="' . esc_url( $img ) . '" />' . "\n";
-    echo '<meta property="og:image:width" content="1200" />' . "\n";
-    echo '<meta property="og:image:height" content="630" />' . "\n";
+    if ( $img_is_fallback ) {
+        echo '<meta property="og:image:width" content="1200" />' . "\n";
+        echo '<meta property="og:image:height" content="630" />' . "\n";
+    }
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+    echo $article_meta;  // already escaped per-attribute above; empty on non-articles
 }
 add_action( 'wp_head', 'timeless_seo_meta', 2 );
+
+/* ─────────────────────────────────────────────
+   5c. FAQPage schema for blog articles (template-level)
+   ─────────────────────────────────────────────
+   Parses the CURRENT article's content for a "Frequently asked questions"
+   (or "FAQ") H2, then the H3 (question) + following P (answer) pairs beneath
+   it, and emits a valid schema.org FAQPage JSON-LD block. Generating the
+   schema from the rendered structure means the FAQ rich result works no
+   matter how the post is stored, and it no longer depends on a body-baked
+   <script> (which the importer now strips). Emits nothing when there is no
+   FAQ section, so non-FAQ posts stay clean.
+   ───────────────────────────────────────────── */
+function timeless_article_faq_schema() {
+    if ( ! is_singular( 'article' ) ) {
+        return;
+    }
+    $post = get_post( get_queried_object_id() );
+    if ( ! $post ) {
+        return;
+    }
+    $faqs = timeless_extract_article_faqs( $post->post_content );
+    if ( empty( $faqs ) ) {
+        return;
+    }
+
+    $entities = array();
+    foreach ( $faqs as $faq ) {
+        $entities[] = array(
+            '@type'          => 'Question',
+            'name'           => $faq['q'],
+            'acceptedAnswer' => array(
+                '@type' => 'Answer',
+                'text'  => $faq['a'],
+            ),
+        );
+    }
+    $schema = array(
+        '@context'   => 'https://schema.org',
+        '@type'      => 'FAQPage',
+        'mainEntity' => $entities,
+    );
+
+    echo "\n" . '<script type="application/ld+json">'
+        . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE )
+        . '</script>' . "\n";
+}
+add_action( 'wp_head', 'timeless_article_faq_schema', 3 );
+
+/* Parse raw article HTML for the FAQ section's question/answer pairs.
+   Returns array of [ 'q' => question, 'a' => answer ] (plain text), or an
+   empty array when the post has no FAQ heading. Matches FAQ headings that
+   CONTAIN the phrase (e.g. "Common questions about bathtub chip repair"), and
+   bounds the section at the following H2 so a closing CTA is never absorbed. */
+function timeless_extract_article_faqs( $content ) {
+    if ( ! is_string( $content ) || $content === '' ) {
+        return array();
+    }
+
+    // Index every H2 (with offsets) so we can bound the FAQ section by headings.
+    if ( ! preg_match_all( '/<h2\b[^>]*>(.*?)<\/h2>/is', $content, $h2s, PREG_OFFSET_CAPTURE ) ) {
+        return array();
+    }
+
+    // A heading opens the FAQ section if its text contains one of these phrases.
+    $faq_pattern = '/\b(?:frequently\s+asked\s+questions?|faqs?|common\s+questions?)\b/i';
+    $start       = null;
+    $end         = strlen( $content );
+    foreach ( $h2s[0] as $i => $whole ) {
+        if ( $start === null ) {
+            if ( preg_match( $faq_pattern, wp_strip_all_tags( $h2s[1][ $i ][0] ) ) ) {
+                $start = $whole[1] + strlen( $whole[0] );  // FAQ content starts after this H2
+            }
+        } else {
+            $end = $whole[1];  // the next H2 ends the FAQ section
+            break;
+        }
+    }
+    if ( $start === null ) {
+        return array();
+    }
+
+    $section = substr( $content, $start, $end - $start );
+
+    // Each Q/A = an H3 (question) followed by one or more paragraphs (answer).
+    if ( ! preg_match_all(
+        '/<h3\b[^>]*>(.+?)<\/h3>\s*((?:<p\b[^>]*>.*?<\/p>\s*)+)/is',
+        $section,
+        $pairs,
+        PREG_SET_ORDER
+    ) ) {
+        return array();
+    }
+
+    $faqs = array();
+    foreach ( $pairs as $pair ) {
+        $q = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $pair[1] ) ) );
+        $a = trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $pair[2] ) ) );
+        if ( $q !== '' && $a !== '' ) {
+            $faqs[] = array( 'q' => $q, 'a' => $a );
+        }
+    }
+    return $faqs;
+}
 
 /* ─────────────────────────────────────────────
    5b. ANALYTICS, GA4 + Microsoft Clarity (Customizer-driven)

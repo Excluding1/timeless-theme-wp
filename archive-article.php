@@ -143,16 +143,11 @@ $all_categories = get_categories( array(
  $cats  = get_the_category();
  $cat   = ! empty( $cats ) ? $cats[0] : null;
  ?>
+ <?php $card_img = $thumb ? $thumb : get_template_directory_uri() . '/images/homepage/after.jpg'; // fallback so cards never render bare ?>
  <a href="<?php the_permalink(); ?>" class="bg-surface-container-low rounded-xl overflow-hidden hover:shadow-lg transition-all group block">
- <?php if ( $thumb ) : ?>
  <div class="aspect-16/9 overflow-hidden">
- <img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+ <img src="<?php echo esc_url( $card_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
  </div>
- <?php else : ?>
- <div class="aspect-16/9 bg-linear-to-br from-primary/10 via-tertiary-fixed/30 to-primary/5 flex items-center justify-center">
- <span class="material-symbols-outlined text-5xl text-primary/40" aria-hidden="true">article</span>
- </div>
- <?php endif; ?>
  <div class="p-6">
  <?php if ( $cat ) : ?>
  <span class="inline-block py-0.5 px-2 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded-sm mb-3"><?php echo esc_html( $cat->name ); ?></span>
