@@ -505,9 +505,29 @@ def _run(aid, idea_row, panel_size):
                 _job.update(state="error", phase="worker exited unexpectedly")
 
 
-def _analyze_core(aid, idea_row, panel_size):
-    """Scorecard + panel; raises on fatal error. Job state handled by callers."""
-    _set(phase="scorecard (expert analyst)")
+def score_idea_sync(idea_id, panel_size):
+    """Score ONE idea start-to-finish WITHOUT touching the shared manual-job slot, so
+    the parallel auto-scorer can run many of these at once. Raises on failure."""
+    idea = db.idea(idea_id)
+    if not idea:
+        return
+    aid = db.new_analysis(idea_id, panel_size)
+    try:
+        _analyze_core(aid, idea, panel_size, set_phase=lambda **kw: None)
+    except Exception as e:
+        try:
+            db.update_analysis(aid, status="error", error=str(e)[:500])
+        except Exception:
+            pass
+        raise
+
+
+def _analyze_core(aid, idea_row, panel_size, set_phase=None):
+    """Scorecard + panel; raises on fatal error. Job state handled by callers.
+    set_phase(**kw) overrides how progress is reported (the parallel scorer passes a
+    no-op so concurrent workers don't fight over the single manual-job status)."""
+    sp = set_phase or (lambda **kw: _set(**kw))
+    sp(phase="scorecard (expert analyst)")
     # live web research when the Claude engine is active (ignored on Codex).
     # Validate that we actually got the 12-factor scores object — a malformed reply
     # that parses to the wrong JSON node must retry, never silently store all-zeros.
@@ -573,7 +593,7 @@ def _analyze_core(aid, idea_row, panel_size):
     results = []
     for i in range(0, len(picked), 10):
         batch = picked[i:i + 10]
-        _set(phase=f"persona panel ({min(i + 10, len(picked))}/{len(picked)})")
+        sp(phase=f"persona panel ({min(i + 10, len(picked))}/{len(picked)})")
         try:
             out = _llm_json(_panel_prompt(idea_row, batch))
             if isinstance(out, dict):   # model answered for a single persona

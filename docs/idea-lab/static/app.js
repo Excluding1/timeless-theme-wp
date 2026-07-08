@@ -50,6 +50,8 @@ async function poll() {
     renderGenerate();
     renderSimulate();
     renderAuto();
+    renderScoreProgress();
+    renderErrBanner();
     const key = s.job ? `${s.job.state}:${s.job.phase}` : "idle";
     const fkey = s.fetch ? `${s.fetch.running}:${s.fetch.phase}` : "";
     const gkey = s.generate ? `${s.generate.running}:${s.generate.phase}` : "";
@@ -66,6 +68,65 @@ async function poll() {
     }
   } catch (_) {}
   setTimeout(poll, 2000);
+}
+
+/* ---------- global progress bar + error banner ---------- */
+
+function fmtEta(remaining, ratePerMin) {
+  if (!ratePerMin || remaining <= 0) return "";
+  const mins = remaining / ratePerMin;
+  if (mins < 90) return `~${Math.round(mins)}m left`;
+  const h = mins / 60;
+  return h < 48 ? `~${Math.round(h)}h left` : `~${Math.round(h / 24)}d left`;
+}
+
+function renderScoreProgress() {
+  const a = state.auto;
+  const box = $("scoreProgress"), fill = $("scoreBarFill"), txt = $("scoreText");
+  if (!a || !a.total) { box.hidden = true; return; }
+  box.hidden = false;
+  const pct = a.total ? (100 * a.scored / a.total) : 0;
+  fill.style.width = Math.max(1, pct).toFixed(1) + "%";
+  const rate = a.rate_per_min || 0;
+  txt.textContent = `${a.scored.toLocaleString()} / ${a.total.toLocaleString()} scored` +
+    (a.score_enabled ? ` · ${rate}/min` + (rate ? ` · ${fmtEta(a.remaining, rate)}` : " · warming up…") : " · paused");
+}
+
+let errDismissed = "";
+function renderErrBanner() {
+  const b = $("errBanner");
+  const e = state.engine, a = state.auto;
+  let msg = "";
+  if (e && e.engine === "none") {
+    msg = "⚠ No AI engine connected — scoring, generating and simulating won't run. Log into the Claude CLI (Desktop helper) or install Codex.";
+  } else if (a && a.score_enabled && a.active === 0 && a.remaining > 0 && (a.rate_per_min || 0) === 0 && a.last_error) {
+    msg = "⚠ Scoring is erroring: " + a.last_error + " — try fewer parallel workers (Automation tab).";
+  }
+  if (!msg || errDismissed === msg) { b.hidden = true; return; }
+  b.replaceChildren(
+    el("span", { text: msg }),
+    el("button", { class: "x", text: "✕", onclick: () => { errDismissed = msg; b.hidden = true; } })
+  );
+  b.hidden = false;
+}
+
+/* ---------- tabs ---------- */
+
+function showTab(name) {
+  for (const btn of document.querySelectorAll(".tab-btn"))
+    btn.classList.toggle("active", btn.dataset.tab === name);
+  for (const pane of document.querySelectorAll(".tabpane"))
+    pane.hidden = pane.dataset.pane !== name;
+  try { localStorage.setItem("il_tab", name); } catch (_) {}
+}
+
+function wireTabs() {
+  for (const btn of document.querySelectorAll(".tab-btn"))
+    btn.addEventListener("click", () => showTab(btn.dataset.tab));
+  let start = "ideas";
+  try { start = localStorage.getItem("il_tab") || "ideas"; } catch (_) {}
+  if (!document.querySelector(`.tab-btn[data-tab="${start}"]`)) start = "ideas";
+  showTab(start);
 }
 
 function renderExtract() {
@@ -94,25 +155,39 @@ let autoUserEditing = 0;
 function renderAuto() {
   const a = state.auto;
   if (!a) return;
-  // don't stomp a checkbox/field the user is mid-interaction with
+  // don't stomp a control the user is mid-interaction with
   if (Date.now() - autoUserEditing > 1500) {
     $("autoFetch").checked = !!a.fetch_enabled;
     $("autoScore").checked = !!a.score_enabled;
     if (document.activeElement !== $("autoHours")) $("autoHours").value = a.fetch_hours || 4;
+    if (document.activeElement !== $("autoWorkers")) $("autoWorkers").value = a.workers || 8;
   }
-  const pct = a.total ? Math.round(100 * a.scored / a.total) : 0;
+  // prominent progress block (Automation tab)
+  const big = $("autoBig");
+  if (big) {
+    const pct = a.total ? (100 * a.scored / a.total) : 0;
+    big.replaceChildren(
+      el("div", { class: "bigrow" },
+        el("div", { class: "biglabel" },
+          el("b", { text: `${(a.scored || 0).toLocaleString()} / ${(a.total || 0).toLocaleString()}` }),
+          el("span", { class: "sub", text: " ideas scored" })),
+        el("div", { class: "bigstat", text: a.score_enabled
+          ? `${a.active || 0} scoring now · ${a.rate_per_min || 0}/min` + (a.rate_per_min ? ` · ${fmtEta(a.remaining, a.rate_per_min)}` : "")
+          : "paused" }),
+      ),
+      el("div", { class: "pbar big" }, el("div", { class: "pfill", style: `width:${Math.max(1, pct).toFixed(1)}%` })),
+    );
+  }
   const parts = [];
-  parts.push(`Scored ${(a.scored || 0).toLocaleString()} / ${(a.total || 0).toLocaleString()} ideas (${pct}%)` +
-    (a.remaining ? ` · ${a.remaining.toLocaleString()} to go` : " · all done ✓"));
-  if (a.score_enabled && a.scoring_now) parts.push(`now scoring: ${a.scoring_now}`);
-  else if (!a.score_enabled) parts.push("auto-score off");
+  if (a.failed) parts.push(`${a.failed} failed`);
+  if (a.last_error) parts.push("last error — " + a.last_error);
   if (a.fetch_enabled) {
     if (a.next_fetch_in_s != null) {
       const h = Math.floor(a.next_fetch_in_s / 3600), m = Math.round((a.next_fetch_in_s % 3600) / 60);
       parts.push(`next fetch in ${h ? h + "h " : ""}${m}m`);
-    } else parts.push("fetch scheduled");
+    }
     if (a.last_fetch_at) parts.push(`last fetch ${a.last_fetch_at.replace("T", " ")}`);
-  } else parts.push("auto-fetch off");
+  }
   $("autoStatus").textContent = parts.join(" · ");
 }
 
@@ -128,6 +203,8 @@ function wireAuto() {
     postAuto({ auto_score: $("autoScore").checked }); });
   $("autoHours").addEventListener("change", () => { autoUserEditing = Date.now();
     postAuto({ auto_fetch_hours: Number($("autoHours").value) || 4 }); });
+  $("autoWorkers").addEventListener("change", () => { autoUserEditing = Date.now();
+    postAuto({ auto_score_workers: Number($("autoWorkers").value) || 8 }); });
 }
 
 function renderSimulate() {
@@ -888,6 +965,7 @@ async function loadSources() {
   }
 }
 
+wireTabs();
 wireSources();
 wireTester();
 wireBatch();

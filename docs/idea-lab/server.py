@@ -110,6 +110,8 @@ def set_auto(body: dict = Body(default={})):
         clean["auto_fetch_hours"] = str(_int(body.get("auto_fetch_hours"), 4, 1, 168))
     if "auto_score_panel" in body:
         clean["auto_score_panel"] = str(_int(body.get("auto_score_panel"), 0, 0, 100))
+    if "auto_score_workers" in body:
+        clean["auto_score_workers"] = str(_int(body.get("auto_score_workers"), 8, 1, 20))
     for k, v in clean.items():
         db.set_settings({k: v})
     return {"ok": True, "auto": auto.status()}

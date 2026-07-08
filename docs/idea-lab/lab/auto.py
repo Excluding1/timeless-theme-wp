@@ -16,19 +16,27 @@ Two daemon loops start with the server and make Idea Lab self-sustaining:
 Both are controlled by settings (auto_fetch / auto_score on-off, auto_fetch_hours,
 auto_score_panel) and expose a status snapshot for the UI.
 """
+import collections
 import threading
 import time
 import traceback
 from datetime import datetime
 
-from . import analyst, batch, db, sources
+from . import analyst, db, sources
+
+MAX_WORKERS = 20        # hard ceiling on parallel scoring subprocesses
 
 _state = {
     "fetch_enabled": True, "score_enabled": True,
     "fetch_hours": 4.0, "last_fetch_at": "", "next_fetch_in_s": None,
-    "scoring_now": "", "scored": 0, "total": 0, "remaining": 0,
+    "scored": 0, "total": 0, "remaining": 0,
+    "workers": 8, "active": 0, "rate_per_min": 0, "failed": 0,
+    "last_error": "", "scoring_now": [],
 }
 _lock = threading.Lock()
+_claimed = set()                       # idea ids currently being scored (in flight)
+_done_ts = collections.deque(maxlen=400)  # completion timestamps for the rate meter
+_active_titles = {}                    # worker_index -> title currently scoring
 _started = False
 
 
@@ -50,31 +58,22 @@ def _panel():
         return 0
 
 
+def _worker_count():
+    try:
+        return max(1, min(MAX_WORKERS, int(float(db.get_setting("auto_score_workers") or 8))))
+    except (TypeError, ValueError):
+        return 8
+
+
 def status():
     with _lock:
-        return dict(_state)
-
-
-def _busy():
-    """True if any manual analysis/pipeline OR the manual batch is running — the
-    auto-scorer must never fight them for the single job slot."""
-    j = analyst.job_status()
-    if j and j.get("state") == "running":
-        return True
-    try:
-        return bool(batch.status().get("running"))
-    except Exception:
-        return False
-
-
-def _wait_idle(timeout=1800):
-    waited = 0
-    while waited < timeout:
-        j = analyst.job_status()
-        if not j or j.get("state") != "running":
-            return
-        time.sleep(4)
-        waited += 4
+        s = dict(_state)
+        s["scoring_now"] = [t for t in _active_titles.values() if t][:8]
+        s["active"] = len(s["scoring_now"])
+        # rate = completions in the last 60s
+        cutoff = time.time() - 60
+        s["rate_per_min"] = sum(1 for t in _done_ts if t >= cutoff)
+        return s
 
 
 def _auto_fetch_loop():
@@ -122,7 +121,65 @@ def _auto_fetch_loop():
             time.sleep(120)
 
 
-def _auto_score_loop():
+_candidates = collections.deque()      # buffer of unscored ideas to hand to workers
+
+
+def _claim_next():
+    """Return the next unscored idea to score, marking it in-flight. Refills the
+    candidate buffer from the DB (best-signal first) when it runs low. Thread-safe."""
+    with _lock:
+        while _candidates:
+            row = _candidates.popleft()
+            if row["id"] not in _claimed:
+                _claimed.add(row["id"])
+                return row
+    # buffer empty — refill outside the buffer-pop loop
+    fresh = db.next_unscored_ideas(limit=80)
+    with _lock:
+        for row in fresh:
+            if row["id"] not in _claimed:
+                _candidates.append(row)
+        while _candidates:
+            row = _candidates.popleft()
+            if row["id"] not in _claimed:
+                _claimed.add(row["id"])
+                return row
+    return None
+
+
+def _score_worker(idx):
+    """One parallel scoring worker. Idle unless auto-score is on AND this worker's
+    index is within the current worker-count setting (so the count is tunable live)."""
+    while True:
+        try:
+            if not _flag("auto_score") or idx >= _worker_count():
+                _active_titles.pop(idx, None)
+                time.sleep(5)
+                continue
+            row = _claim_next()
+            if not row:
+                _active_titles.pop(idx, None)
+                time.sleep(15)              # nothing to score — wait for new ideas
+                continue
+            _active_titles[idx] = row["title"][:70]
+            try:
+                analyst.score_idea_sync(row["id"], _panel())
+                _done_ts.append(time.time())
+            except Exception as e:
+                with _lock:
+                    _state["failed"] += 1
+                    _state["last_error"] = f"{row['title'][:40]}: {str(e)[:120]}"
+            finally:
+                with _lock:
+                    _claimed.discard(row["id"])
+                _active_titles.pop(idx, None)
+        except Exception:
+            traceback.print_exc()
+            time.sleep(10)
+
+
+def _progress_monitor():
+    """Refresh the scored/total counters + enabled flags for the UI every few sec."""
     while True:
         try:
             scored, total = db.scoring_progress()
@@ -130,33 +187,10 @@ def _auto_score_loop():
                 _state["scored"], _state["total"] = scored, total
                 _state["remaining"] = max(0, total - scored)
                 _state["score_enabled"] = _flag("auto_score")
-            if not _flag("auto_score"):
-                with _lock:
-                    _state["scoring_now"] = ""
-                time.sleep(30)
-                continue
-            if _busy():                                # yield to manual work / batch
-                with _lock:
-                    _state["scoring_now"] = ""
-                time.sleep(12)
-                continue
-            row = db.next_unscored_idea()
-            if not row:                                # everything scored — idle until new ideas arrive
-                with _lock:
-                    _state["scoring_now"] = ""
-                time.sleep(120)
-                continue
-            with _lock:
-                _state["scoring_now"] = row["title"][:70]
-            try:
-                analyst.start_analysis(row["id"], _panel())
-            except analyst.Busy:
-                time.sleep(8)
-                continue
-            _wait_idle()
+                _state["workers"] = _worker_count()
         except Exception:
             traceback.print_exc()
-            time.sleep(30)
+        time.sleep(4)
 
 
 def start():
@@ -167,4 +201,6 @@ def start():
         _started = True
         _state["last_fetch_at"] = db.get_setting("last_fetch_at") or ""
     threading.Thread(target=_auto_fetch_loop, daemon=True).start()
-    threading.Thread(target=_auto_score_loop, daemon=True).start()
+    threading.Thread(target=_progress_monitor, daemon=True).start()
+    for i in range(MAX_WORKERS):            # spawn the full pool; each self-gates on the count
+        threading.Thread(target=_score_worker, args=(i,), daemon=True).start()

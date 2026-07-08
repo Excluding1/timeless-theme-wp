@@ -9,177 +9,211 @@
 <body>
 <header>
   <div class="logo"><span class="tick">◆</span> Idea Lab <span class="sub">scrape · rank · stress-test · plan</span></div>
-  <div class="row">
+  <div class="statuswrap">
+    <div id="scoreProgress" class="progress" title="How many ideas have an AI score">
+      <div class="pbar"><div id="scoreBarFill" class="pfill"></div></div>
+      <span id="scoreText" class="ptext"></span>
+    </div>
     <span id="engineBadge" class="chip" title=""></span>
     <span id="jobBadge" class="chip" hidden></span>
   </div>
 </header>
 
+<div id="errBanner" class="errbanner" hidden></div>
+
+<nav class="tabs" id="tabs">
+  <button class="tab-btn active" data-tab="ideas">💡 Ideas</button>
+  <button class="tab-btn" data-tab="generate">✦ Generate</button>
+  <button class="tab-btn" data-tab="auto">⚙ Automation</button>
+  <button class="tab-btn" data-tab="analyses">📊 Analyses</button>
+  <button class="tab-btn" data-tab="plans">🗺 Plans</button>
+  <button class="tab-btn" data-tab="sims">🎲 Simulations</button>
+  <button class="tab-btn" data-tab="sources">🔌 Sources</button>
+</nav>
+
 <main>
-  <section class="card">
-    <div class="row spread wrap">
-      <h2>Sources</h2>
-      <div class="row wrap">
-        <label class="sub">last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
-          ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> pts</label>
-        <button id="fetchAll">⚡ Fetch everything</button>
-        <button id="categorizeAll" class="small ghost" title="Tag every idea by type (app / physical / product / content …)">🏷 Categorize all</button>
-        <button id="extractBtn" class="small ghost" title="Read every archived video transcript and pull out the real product(s) — splitting a video into several ideas if it covers multiple businesses">🎬 Products from transcripts</button>
+  <!-- ================= IDEAS ================= -->
+  <section class="tabpane" data-pane="ideas">
+    <div class="card">
+      <div class="row wrap toolbar">
+        <select id="originFilter">
+          <option value="">All sources</option>
+          <option value="ih">IndieHackers ($ revenue)</option>
+          <option value="hn">Show HN</option>
+          <option value="ahn">Ask HN</option>
+          <option value="rd">Reddit</option>
+          <option value="gh">GitHub</option>
+          <option value="dt">Dev.to</option>
+          <option value="lb">Lobsters</option>
+          <option value="v2">V2EX · China</option>
+          <option value="ss">Starter Story</option>
+          <option value="ph">Product Hunt</option>
+          <option value="gen">✦ Generated</option>
+          <option value="custom">My ideas</option>
+        </select>
+        <select id="categoryFilter"><option value="">All categories</option></select>
+        <select id="sortBy" title="Sort the whole list (not just the visible page)">
+          <option value="rank">Sort: Best (rank)</option>
+          <option value="signal">Signal (instant, no-AI)</option>
+          <option value="score">AI score</option>
+          <option value="roi">Effort ROI</option>
+          <option value="revenue">Revenue ($/mo)</option>
+          <option value="momentum">Trend momentum</option>
+          <option value="traction">Traction</option>
+          <option value="recent">Newest</option>
+        </select>
+        <button id="sortDir" class="small ghost" title="Toggle ascending / descending">↓ High→Low</button>
+        <input id="search" placeholder="Search ideas…" spellcheck="false">
+        <label class="sub">Panel
+          <select id="panelSize">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </label>
+      </div>
+      <div id="ideas"></div>
+    </div>
+  </section>
+
+  <!-- ================= GENERATE / TEST ================= -->
+  <section class="tabpane" data-pane="generate" hidden>
+    <div class="card" id="generateCard">
+      <div class="row spread wrap">
+        <h2>✦ Generate fresh ideas</h2>
+        <div class="row wrap">
+          <input id="genTheme" placeholder="Optional theme (e.g. faceless YouTube, local trades, AI for accountants)" spellcheck="false">
+          <label class="sub">count <input id="genCount" type="number" value="10" min="1" max="20" class="tiny"></label>
+          <button id="generateBtn">Generate ideas</button>
+        </div>
+      </div>
+      <p class="hint">Original, non-obvious business ideas invented on the spot — each grounded in a real "why now",
+        with a target customer, revenue model and rough numbers. They drop into <strong>Ideas</strong> (source
+        ✦ Generated) so you can Analyze, run the full pipeline, or Simulate any of them.</p>
+      <div id="genStatus" class="hint"></div>
+    </div>
+
+    <div class="card">
+      <h2>Test your own idea</h2>
+      <p class="hint">Type a business idea — same expert scorecard + persona panel as the scraped ones.</p>
+      <input id="ideaTitle" placeholder="One-line idea (e.g. AI quote-follow-up bot for trade businesses)" spellcheck="false">
+      <textarea id="ideaDesc" rows="3" placeholder="A few sentences: who it's for, what it does, how it makes money…"></textarea>
+      <div class="row">
+        <button id="testIdea">Analyze my idea</button>
+        <span id="testStatus" class="hint"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AUTOMATION ================= -->
+  <section class="tabpane" data-pane="auto" hidden>
+    <div class="card" id="autoCard">
+      <h2>⚙ Automation — self-running</h2>
+      <div class="autogrid">
+        <label class="toggle"><input type="checkbox" id="autoScore"> <b>Auto-score everything</b></label>
+        <label class="sub">in parallel:
+          <input id="autoWorkers" type="number" value="8" min="1" max="20" class="tiny"> at once</label>
+        <label class="toggle"><input type="checkbox" id="autoFetch"> <b>Auto-fetch new ideas</b></label>
+        <label class="sub">every <input id="autoHours" type="number" value="4" min="1" max="168" class="tiny"> h</label>
+      </div>
+      <div id="autoBig" class="autobig"></div>
+      <p class="hint">Scoring runs many ideas at once until the whole library is graded, resuming after any
+        restart and skipping done ones. More workers = faster, but too many can hit the AI's rate limit
+        (watch the error line). Fetch re-pulls every source on a loop, de-duplicated. Both keep running
+        as long as this window is open.</p>
+      <div id="autoStatus" class="hint"></div>
+    </div>
+
+    <div class="card" id="batchCard">
+      <div class="row spread wrap">
+        <h2>Manual batch (current filter)</h2>
+        <div class="row wrap">
+          <label class="sub">Top <input id="batchLimit" type="number" value="10" min="1" max="500" class="tiny"> by rank</label>
+          <select id="batchMode">
+            <option value="analyze">Analyze (score + panel)</option>
+            <option value="pipeline" selected>Full pipeline (+ plan)</option>
+          </select>
+          <button id="startBatch">▶ Run</button>
+          <button id="stopBatch" class="small ghost" hidden>Stop</button>
+        </div>
+      </div>
+      <p class="hint">Runs the full pipeline (incl. the judged plan) on whatever the Ideas list is filtered to.
+        For plans specifically — auto-score only does the scorecard.</p>
+      <div id="batchStatus" class="hint"></div>
+    </div>
+  </section>
+
+  <!-- ================= ANALYSES ================= -->
+  <section class="tabpane" data-pane="analyses" hidden>
+    <div class="card">
+      <h2>Analyses</h2>
+      <div id="analyses"></div>
+      <p class="hint" id="analysesEmpty" hidden>No analyses yet — scoring is running; check back, or hit Analyze on an idea.</p>
+    </div>
+  </section>
+
+  <!-- ================= PLANS ================= -->
+  <section class="tabpane" data-pane="plans" hidden>
+    <div class="card">
+      <h2>Execution Plans</h2>
+      <p class="hint">Each plan is a judged tournament: 3 candidate strategies (lean / product-led /
+        sales-led vertical) scored blind by 3 judges, then synthesized into one final plan.</p>
+      <div id="plans"></div>
+      <p class="hint" id="plansEmpty" hidden>No plans yet — run “Full pipeline” on an idea, or a manual batch.</p>
+    </div>
+  </section>
+
+  <!-- ================= SIMULATIONS ================= -->
+  <section class="tabpane" data-pane="sims" hidden>
+    <div class="card">
+      <h2>🎲 Business Simulations</h2>
+      <p class="hint">Each simulation runs the business 500× over 10 years — random founder luck, growth and
+        churn, plus real make-or-break events (a competitor, a cheap clone, a lawsuit, a viral moment, an
+        acquisition offer). You get outcome odds, the P10/P50/P90 revenue path, a realistic exit value, the
+        biggest ways it dies, and what to fix <em>before</em> you start. Hit <strong>Simulate</strong> on any idea.</p>
+      <div id="sims"></div>
+      <p class="hint" id="simsEmpty" hidden>No simulations yet — hit “🎲 Simulate” on an idea.</p>
+    </div>
+  </section>
+
+  <!-- ================= SOURCES ================= -->
+  <section class="tabpane" data-pane="sources" hidden>
+    <div class="card">
+      <div class="row spread wrap">
+        <h2>Sources</h2>
+        <div class="row wrap">
+          <label class="sub">last <input id="hnDays" type="number" value="30" min="1" class="tiny"> days,
+            ≥ <input id="hnPoints" type="number" value="20" min="0" class="tiny"> pts</label>
+          <button id="fetchAll">⚡ Fetch everything</button>
+        </div>
+      </div>
+      <div class="row wrap" style="margin-top:10px">
+        <button id="categorizeAll" class="small ghost" title="Tag every idea by type">🏷 Categorize all</button>
+        <button id="extractBtn" class="small ghost" title="Read every archived video transcript and pull out the real product(s), splitting multi-business videos">🎬 Products from transcripts</button>
         <button id="fetchHn" class="small ghost">Show HN</button>
         <button id="fetchRd" class="small ghost">Reddit</button>
         <button id="fetchSs" class="small ghost">Starter Story</button>
         <button id="fetchPh" class="small ghost">Product Hunt</button>
         <button id="toggleSources" class="small ghost">＋ Add source</button>
       </div>
-    </div>
-    <div id="sourceManager" class="submgr" hidden>
-      <div class="row wrap">
-        <input id="rssUrl" placeholder="Paste any RSS / Atom feed URL to add as a source" spellcheck="false">
-        <input id="rssName" class="tiny-name" placeholder="name (optional)" spellcheck="false">
-        <button id="addRss" class="small">Add feed</button>
+      <div id="sourceManager" class="submgr" hidden>
+        <div class="row wrap">
+          <input id="rssUrl" placeholder="Paste any RSS / Atom feed URL to add as a source" spellcheck="false">
+          <input id="rssName" class="tiny-name" placeholder="name (optional)" spellcheck="false">
+          <button id="addRss" class="small">Add feed</button>
+        </div>
+        <div class="row wrap">
+          <label class="sub">Import a channel from your video archive:</label>
+          <select id="archiveSel"></select>
+          <button id="importChannel" class="small">Import</button>
+        </div>
+        <div id="builtinList" class="hint"></div>
+        <div id="customList"></div>
       </div>
-      <div class="row wrap">
-        <label class="sub">Import a channel from your video archive:</label>
-        <select id="archiveSel"></select>
-        <button id="importChannel" class="small">Import</button>
-      </div>
-      <div id="builtinList" class="hint"></div>
-      <div id="customList"></div>
+      <p class="hint" id="fetchStatus">Show HN · IndieHackers (real revenue) · Reddit · V2EX (China) · EU feeds ·
+        Starter Story (your local video archive). De-duplicated — re-fetching only refreshes and adds new items.</p>
     </div>
-    <p class="hint" id="fetchStatus">Show HN (official API) · Starter Story (your local video archive) ·
-      Product Hunt (public feed) · Reddit (best-effort — Reddit rate-limits scripts; the Claude research
-      pass covers Reddit/Google Trends/TikTok reliably once you log into the Claude CLI).
-      Analyze runs polish → scorecard → persona panel; Full pipeline adds the execution plan.</p>
-    <div class="row wrap">
-      <select id="originFilter">
-        <option value="">All sources</option>
-        <option value="ih">IndieHackers ($ revenue)</option>
-        <option value="hn">Show HN</option>
-        <option value="ahn">Ask HN</option>
-        <option value="rd">Reddit</option>
-        <option value="gh">GitHub</option>
-        <option value="dt">Dev.to</option>
-        <option value="lb">Lobsters</option>
-        <option value="v2">V2EX · China</option>
-        <option value="ss">Starter Story</option>
-        <option value="ph">Product Hunt</option>
-        <option value="gen">✦ Generated</option>
-        <option value="custom">My ideas</option>
-      </select>
-      <select id="categoryFilter"><option value="">All categories</option></select>
-      <select id="sortBy" title="Sort the whole list (not just the visible page)">
-        <option value="rank">Sort: Best (rank)</option>
-        <option value="signal">Signal (instant, no-AI)</option>
-        <option value="score">AI score</option>
-        <option value="roi">Effort ROI</option>
-        <option value="revenue">Revenue ($/mo)</option>
-        <option value="momentum">Trend momentum</option>
-        <option value="traction">Traction</option>
-        <option value="recent">Newest</option>
-      </select>
-      <button id="sortDir" class="small ghost" title="Toggle ascending / descending">↓ High→Low</button>
-      <input id="search" placeholder="Search ideas…" spellcheck="false">
-      <label class="sub">Panel size
-        <select id="panelSize">
-          <option value="10">10 personas</option>
-          <option value="20" selected>20 personas</option>
-          <option value="50">50 personas</option>
-          <option value="100">100 personas</option>
-        </select>
-      </label>
-    </div>
-    <div id="ideas"></div>
-  </section>
-
-  <section class="card" id="autoCard">
-    <div class="row spread wrap">
-      <h2>⚙ Automation</h2>
-      <div class="row wrap">
-        <label class="sub"><input type="checkbox" id="autoFetch"> Auto-fetch every
-          <input id="autoHours" type="number" value="4" min="1" max="168" class="tiny"> h</label>
-        <label class="sub"><input type="checkbox" id="autoScore"> Auto-score all ideas</label>
-      </div>
-    </div>
-    <p class="hint">Self-sustaining: auto-fetch re-pulls every source on a loop (de-duplicated — it only
-      refreshes and adds new items), and auto-score continuously scores every un-scored idea in the
-      background until the whole library is graded, resuming where it left off after any restart. Both
-      yield to anything you run manually.</p>
-    <div id="autoStatus" class="hint"></div>
-  </section>
-
-  <section class="card" id="generateCard">
-    <div class="row spread wrap">
-      <h2>✦ Generate fresh ideas</h2>
-      <div class="row wrap">
-        <input id="genTheme" placeholder="Optional theme (e.g. faceless YouTube, local trades, AI for accountants)" spellcheck="false">
-        <label class="sub">count <input id="genCount" type="number" value="10" min="1" max="20" class="tiny"></label>
-        <button id="generateBtn">Generate ideas</button>
-      </div>
-    </div>
-    <p class="hint">Original, non-obvious business ideas invented on the spot — each grounded in a real "why now",
-      with a target customer, revenue model and rough numbers. They drop into the list below (source
-      <strong>✦ Generated</strong>) so you can Analyze, run the full pipeline, or Simulate any of them.
-      Richer with live web research once the Claude CLI is logged in.</p>
-    <div id="genStatus" class="hint"></div>
-  </section>
-
-  <section class="card">
-    <h2>Idea Tester</h2>
-    <p class="hint">Type your own business idea — same expert scorecard + persona panel as the scraped ones.</p>
-    <input id="ideaTitle" placeholder="One-line idea (e.g. AI quote-follow-up bot for trade businesses)" spellcheck="false">
-    <textarea id="ideaDesc" rows="3" placeholder="A few sentences: who it's for, what it does, how it makes money…"></textarea>
-    <div class="row">
-      <button id="testIdea">Analyze my idea</button>
-      <span id="testStatus" class="hint"></span>
-    </div>
-  </section>
-
-  <section class="card" id="batchCard">
-    <div class="row spread wrap">
-      <h2>Analyze all (batch)</h2>
-      <div class="row wrap">
-        <label class="sub">Top
-          <input id="batchLimit" type="number" value="10" min="1" max="500" class="tiny">
-          by rank</label>
-        <select id="batchMode">
-          <option value="analyze">Analyze (score + panel)</option>
-          <option value="pipeline" selected>Full pipeline (+ plan)</option>
-        </select>
-        <button id="startBatch">▶ Run on all of them</button>
-        <button id="stopBatch" class="small ghost" hidden>Stop batch</button>
-      </div>
-    </div>
-    <p class="hint">Runs on whatever the list above is currently filtered to (source · category · search),
-      one at a time in the background — leave it going and check back. <em>Analyze</em> = polish → score +
-      Effort ROI → persona panel; <em>Full pipeline</em> also adds the judged 3-way plan tournament and a
-      downloadable plan. (Far faster once the Claude CLI is logged in.)</p>
-    <div id="batchStatus" class="hint"></div>
-  </section>
-
-  <section class="card">
-    <h2>Analyses</h2>
-    <div id="analyses"></div>
-    <p class="hint" id="analysesEmpty" hidden>No analyses yet — hit Analyze on an idea above.</p>
-  </section>
-
-  <section class="card">
-    <h2>Execution Plans</h2>
-    <p class="hint">Each plan is a judged tournament: 3 candidate strategies (lean / product-led /
-      sales-led vertical) scored blind by 3 independent judge lenses, then synthesized into one
-      final plan — stack, pricing, customers, marketing, week-by-week roadmap.</p>
-    <div id="plans"></div>
-    <p class="hint" id="plansEmpty" hidden>No plans yet — hit “Full pipeline” or “Plan” on an idea.</p>
-  </section>
-
-  <section class="card">
-    <h2>🎲 Business Simulations</h2>
-    <p class="hint">Each simulation runs the business 500 times over 10 years — random founder luck, growth and
-      churn, plus the events that actually make or break small businesses (a competitor, a cheap overseas
-      clone, a lawsuit, a viral moment, an acquisition offer). You get the probability of each outcome,
-      the P10/P50/P90 revenue path, a realistic exit value and rare-upside max, the biggest ways it dies,
-      and what to fix <em>before</em> you start. Hit <strong>Simulate</strong> on any idea above.</p>
-    <div id="sims"></div>
-    <p class="hint" id="simsEmpty" hidden>No simulations yet — hit “Simulate” on an idea.</p>
   </section>
 </main>
 

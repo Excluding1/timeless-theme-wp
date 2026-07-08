@@ -15,6 +15,7 @@ DEFAULTS = {
     "auto_fetch_hours": "4",  # interval between automatic fetches
     "auto_score": "1",        # 1 = continuously score unscored ideas in the background
     "auto_score_panel": "0",  # personas for auto-scoring (0 = scorecard only = fastest)
+    "auto_score_workers": "8",  # how many ideas to score IN PARALLEL (1-20)
     "last_fetch_at": "",      # ISO timestamp of the last automatic fetch (for status)
 }
 
@@ -246,6 +247,19 @@ def next_unscored_idea(max_attempts=2):
             "ORDER BY COALESCE(i.signal,0) DESC, COALESCE(i.traction,0) DESC LIMIT 1",
             (max_attempts,)).fetchone()
         return dict(row) if row else None
+
+
+def next_unscored_ideas(limit=50, max_attempts=2):
+    """A batch of the best-signal unscored ideas, for the parallel scorer to claim
+    from (workers filter out ids already in flight)."""
+    with _lock:
+        rows = _db().execute(
+            "SELECT i.id, i.title FROM ideas i "
+            "WHERE NOT EXISTS (SELECT 1 FROM analyses a WHERE a.idea_id=i.id AND a.status='done') "
+            "AND (SELECT COUNT(*) FROM analyses a2 WHERE a2.idea_id=i.id) < ? "
+            "ORDER BY COALESCE(i.signal,0) DESC, COALESCE(i.traction,0) DESC LIMIT ?",
+            (max_attempts, limit)).fetchall()
+        return [dict(r) for r in rows]
 
 
 def all_ideas_for_signal():
