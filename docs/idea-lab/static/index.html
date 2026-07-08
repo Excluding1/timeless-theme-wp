@@ -66,6 +66,16 @@
         <option value="custom">My ideas</option>
       </select>
       <select id="categoryFilter"><option value="">All categories</option></select>
+      <select id="sortBy" title="Sort the whole list (not just the visible page)">
+        <option value="rank">Sort: Best (rank)</option>
+        <option value="score">AI score</option>
+        <option value="roi">Effort ROI</option>
+        <option value="revenue">Revenue ($/mo)</option>
+        <option value="momentum">Trend momentum</option>
+        <option value="traction">Traction</option>
+        <option value="recent">Newest</option>
+      </select>
+      <button id="sortDir" class="small ghost" title="Toggle ascending / descending">↓ High→Low</button>
       <input id="search" placeholder="Search ideas…" spellcheck="false">
       <label class="sub">Panel size
         <select id="panelSize">

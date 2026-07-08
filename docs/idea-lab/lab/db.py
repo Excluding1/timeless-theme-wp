@@ -144,7 +144,20 @@ def upsert_idea(idea):
             )
 
 
-def ideas(origin=None, q=None, limit=3000, category=None):
+# Whitelisted sort columns (never interpolate raw user input into SQL). Each maps a
+# UI sort key to a column expression; NULLs are always pushed last so "lowest ROI"
+# shows the worst *scored* ideas, not the unscored ones.
+_SORT_COL = {
+    "score":    "a.composite",
+    "roi":      "a.effort_roi",
+    "revenue":  "CASE WHEN i.origin='ih' THEN i.points END",
+    "momentum": "i.momentum",
+    "traction": "i.traction",
+    "recent":   "i.fetched_at",
+}
+
+
+def ideas(origin=None, q=None, limit=3000, category=None, sort="rank", direction="desc"):
     # score/verdict from the latest COMPLETED analysis; activity status from the latest of any
     sql = ("SELECT i.*, a.composite, a.verdict, a.effort_roi, r.status AS an_status FROM ideas i "
            "LEFT JOIN analyses a ON a.id = (SELECT id FROM analyses WHERE idea_id=i.id "
@@ -164,10 +177,18 @@ def ideas(origin=None, q=None, limit=3000, category=None):
         params += [f"%{esc}%"] * 2
     if where:
         sql += " WHERE " + " AND ".join(where)
-    # analyzed ideas rank first (by AI score); within a tier, a rising Google-Trends
-    # momentum lifts an idea by boosting its traction weight — every variable counts.
-    sql += (" ORDER BY COALESCE(a.composite,-1) DESC, "
-            "(COALESCE(i.traction,0) * (1 + COALESCE(i.momentum,0)/100.0)) DESC LIMIT ?")
+    d = "ASC" if str(direction).lower() == "asc" else "DESC"
+    if sort in _SORT_COL:
+        col = _SORT_COL[sort]
+        # non-null values first (IS NULL ASC), then by the chosen field/direction,
+        # then a stable traction tiebreaker.
+        order = f"({col}) IS NULL ASC, ({col}) {d}, i.traction DESC"
+    else:
+        # default "rank": analyzed ideas first (by AI score); within a tier a rising
+        # Google-Trends momentum lifts an idea by boosting its traction weight.
+        order = ("COALESCE(a.composite,-1) DESC, "
+                 "(COALESCE(i.traction,0) * (1 + COALESCE(i.momentum,0)/100.0)) DESC")
+    sql += f" ORDER BY {order} LIMIT ?"
     params.append(limit)
     with _lock:
         return [dict(r) for r in _db().execute(sql, params).fetchall()]

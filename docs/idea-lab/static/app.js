@@ -3,7 +3,8 @@
 
 const $ = (id) => document.getElementById(id);
 
-const state = { ideas: [], analyses: [], plans: [], job: null, lastJob: "", engine: null };
+const state = { ideas: [], analyses: [], plans: [], job: null, lastJob: "", engine: null,
+  sort: "rank", dir: "desc" };
 
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
@@ -156,6 +157,8 @@ async function loadIdeas() {
   if ($("originFilter").value) p.set("origin", $("originFilter").value);
   if ($("categoryFilter").value) p.set("category", $("categoryFilter").value);
   if ($("search").value.trim()) p.set("q", $("search").value.trim());
+  p.set("sort", state.sort || "rank");
+  p.set("direction", state.dir || "desc");
   let r;
   try { r = await api("/api/ideas?" + p); } catch (_) { return; }
   state.ideas = r.ideas;
@@ -765,6 +768,26 @@ function wireSources() {
   $("search").addEventListener("input", () => { clearTimeout(t); t = setTimeout(loadIdeas, 300); });
   $("originFilter").addEventListener("change", loadIdeas);
   $("categoryFilter").addEventListener("change", loadIdeas);
+  $("sortBy").addEventListener("change", () => {
+    state.sort = $("sortBy").value;
+    // A freshly-picked field always starts high→low (best/newest/highest first);
+    // the user can then toggle to ascending. Least-surprising default.
+    state.dir = "desc";
+    updateSortDirLabel();
+    loadIdeas();
+  });
+  $("sortDir").addEventListener("click", () => {
+    state.dir = state.dir === "desc" ? "asc" : "desc";
+    updateSortDirLabel();
+    loadIdeas();
+  });
+}
+
+function updateSortDirLabel() {
+  const btn = $("sortDir");
+  const rank = state.sort === "rank";
+  btn.disabled = rank;                         // "Best (rank)" has its own fixed order
+  btn.textContent = state.dir === "desc" ? "↓ High→Low" : "↑ Low→High";
 }
 
 async function loadSources() {
@@ -792,6 +815,7 @@ wireSources();
 wireTester();
 wireBatch();
 wireGenerate();
+updateSortDirLabel();
 poll();
 loadIdeas();
 loadAnalyses();
