@@ -266,6 +266,8 @@ function renderIdeas() {
             : el("span", { text: i.points != null ? `▲ ${i.points}${i.comments != null ? ` · ${i.comments} comments` : ""}` : "" }),
           el("span", { text: i.traction ? `traction ${i.traction}` : "" }),
           i.category ? el("span", { class: "obadge cat", text: i.category }) : null,
+          i.signal != null ? el("span", { class: "sigbadge", title: "Signal: instant heuristic rank (revenue + traction + momentum + engagement + source) — no AI needed",
+            text: `◆ ${Math.round(i.signal)}` }) : null,
           trendBadge(i),
           i.polished ? el("span", { class: "polished", text: "✦ polished", title: "Graded from the polished version of this idea" }) : null,
           i.composite != null ? el("span", { class: "score " + vclass(i.verdict), text: `AI ${i.composite}/100 · ${i.verdict}` }) : null,

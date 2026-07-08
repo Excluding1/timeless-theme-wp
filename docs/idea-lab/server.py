@@ -11,8 +11,10 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from lab import (analyst, auto, batch, categorize, db, ideagen, planner, simulator,
-                 sources, trends)
+import threading
+
+from lab import (analyst, auto, batch, categorize, db, ideagen, planner, rank,
+                 simulator, sources, trends)
 
 BASE = Path(__file__).resolve().parent
 
@@ -20,6 +22,8 @@ app = FastAPI(title="Idea Lab")
 
 analyst.start_engine_detection()   # probe engines in the background at boot
 auto.start()                        # auto-fetch (every 4h) + auto-score loops
+# populate the instant Signal rank for every idea at boot (pure Python, no LLM)
+threading.Thread(target=lambda: rank.compute_all(), daemon=True).start()
 
 
 def _int(val, default, lo=None, hi=None):
@@ -218,6 +222,11 @@ def fetch_all():
 @app.post("/api/prune")
 def prune():
     return {"ok": True, "removed": sources.prune_junk()}
+
+
+@app.post("/api/rank")
+def recompute_signal():
+    return {"ok": True, "ranked": rank.compute_all()}
 
 
 @app.post("/api/engine/refresh")

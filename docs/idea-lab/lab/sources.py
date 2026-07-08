@@ -640,6 +640,13 @@ def fetch_all(progress=None):
             results["(categorized)"] = n
     except Exception:
         pass
+    try:
+        from . import rank
+        if progress:
+            progress("ranking (signal)")
+        results["(signal-ranked)"] = rank.compute_all()
+    except Exception:
+        pass
     return results
 
 

@@ -91,6 +91,7 @@ MIGRATIONS = [
     "ALTER TABLE ideas ADD COLUMN polished TEXT",       # JSON refined spec
     "ALTER TABLE ideas ADD COLUMN momentum REAL",       # Google Trends interest 0-100
     "ALTER TABLE ideas ADD COLUMN trend_json TEXT",     # JSON {keyword,current,slope,direction}
+    "ALTER TABLE ideas ADD COLUMN signal REAL",         # instant heuristic rank 0-100 (no LLM)
     "ALTER TABLE analyses ADD COLUMN estimates TEXT",   # JSON cost/revenue estimates
     "ALTER TABLE analyses ADD COLUMN effort_roi REAL",  # year-1 profit / effort cost
 ]
@@ -155,6 +156,7 @@ def upsert_idea(idea):
 _SORT_COL = {
     "score":    "a.composite",
     "roi":      "a.effort_roi",
+    "signal":   "i.signal",
     "revenue":  "CASE WHEN i.origin='ih' THEN i.points END",
     "momentum": "i.momentum",
     "traction": "i.traction",
@@ -189,10 +191,11 @@ def ideas(origin=None, q=None, limit=3000, category=None, sort="rank", direction
         # then a stable traction tiebreaker.
         order = f"({col}) IS NULL ASC, ({col}) {d}, i.traction DESC"
     else:
-        # default "rank": analyzed ideas first (by AI score); within a tier a rising
-        # Google-Trends momentum lifts an idea by boosting its traction weight.
-        order = ("COALESCE(a.composite,-1) DESC, "
-                 "(COALESCE(i.traction,0) * (1 + COALESCE(i.momentum,0)/100.0)) DESC")
+        # default "rank": AI-scored ideas first (by composite); everything not yet
+        # scored falls back to the instant Signal score, then traction — so the list
+        # is well-ordered even before the LLM has touched most of it.
+        order = ("COALESCE(a.composite,-1) DESC, COALESCE(i.signal,0) DESC, "
+                 "COALESCE(i.traction,0) DESC")
     sql += f" ORDER BY {order} LIMIT ?"
     params.append(limit)
     with _lock:
@@ -232,16 +235,35 @@ def scoring_progress():
 
 
 def next_unscored_idea(max_attempts=2):
-    """The next idea with no completed analysis, highest-traction first. Ideas that
-    already have >= max_attempts analyses are skipped so a persistently-failing one
-    can't wedge the auto-scorer forever."""
+    """The next idea with no completed analysis, BEST Signal score first (so the most
+    promising ideas get AI-scored soonest). Ideas that already have >= max_attempts
+    analyses are skipped so a persistently-failing one can't wedge the auto-scorer."""
     with _lock:
         row = _db().execute(
             "SELECT i.id, i.title FROM ideas i "
             "WHERE NOT EXISTS (SELECT 1 FROM analyses a WHERE a.idea_id=i.id AND a.status='done') "
             "AND (SELECT COUNT(*) FROM analyses a2 WHERE a2.idea_id=i.id) < ? "
-            "ORDER BY i.traction DESC LIMIT 1", (max_attempts,)).fetchone()
+            "ORDER BY COALESCE(i.signal,0) DESC, COALESCE(i.traction,0) DESC LIMIT 1",
+            (max_attempts,)).fetchone()
         return dict(row) if row else None
+
+
+def all_ideas_for_signal():
+    """Minimal columns for recomputing every idea's Signal score (no LLM)."""
+    with _lock:
+        rows = _db().execute(
+            "SELECT id, origin, points, comments, traction, momentum FROM ideas").fetchall()
+        return [dict(r) for r in rows]
+
+
+def bulk_set_signal(pairs):
+    """pairs = [(idea_id, signal), ...] — one transaction for the whole recompute."""
+    with _lock:
+        con = _db()
+        with con:
+            con.executemany("UPDATE ideas SET signal=? WHERE id=?",
+                            [(s, i) for i, s in pairs])
+        return len(pairs)
 
 
 def idea(idea_id):

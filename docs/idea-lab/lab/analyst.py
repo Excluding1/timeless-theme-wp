@@ -72,12 +72,14 @@ def start_engine_detection():
 
 
 def _auto_upgrade_loop():
-    """Once running on the Codex fallback, keep quietly re-checking so that the
-    moment the user logs into the Claude CLI, the app upgrades itself — no button."""
+    """Perpetual keepalive so Claude is 'always connected': while NOT on Claude, probe
+    every 90s and upgrade the instant the user logs into the CLI — no button. It never
+    stops: if Claude later drops (session expiry, marked back to codex by a failed call),
+    this loop reconnects automatically as soon as the CLI works again."""
     while True:
         time.sleep(90)
         if _engine_state.get("engine") == "claude":
-            return                       # already best engine — stop checking
+            continue                     # connected — keep monitoring, don't stop
         claude_bin = next((c for c in CLAUDE_CANDIDATES if c and Path(c).exists()), None)
         if not claude_bin:
             continue
@@ -230,7 +232,17 @@ def _run_llm(prompt, research=False):
                                   text=True, timeout=LLM_TIMEOUT, cwd=str(BASE_DIR))
             text = (proc.stdout or "").strip()
             if proc.returncode != 0 or not text:
-                raise LLMError(f"claude exited {proc.returncode}: {(proc.stderr or '')[-300:]}")
+                err = (proc.stderr or "")
+                low = err.lower()
+                # session dropped (logout / token expiry) → fall back to Codex and let the
+                # keepalive loop reconnect the moment the CLI works again ("always connected").
+                if any(k in low for k in ("not logged in", "log in", "login", "unauthor",
+                                          "401", "authentication")):
+                    _engine_state.update(
+                        engine="codex" if shutil.which("codex") else "none",
+                        detail="Claude session dropped — using Codex; auto-reconnecting when available")
+                    return _run_llm(prompt, research=research)   # retry immediately on the fallback
+                raise LLMError(f"claude exited {proc.returncode}: {err[-300:]}")
             return text
         except subprocess.TimeoutExpired:
             raise LLMError(f"claude timed out after {LLM_TIMEOUT}s")

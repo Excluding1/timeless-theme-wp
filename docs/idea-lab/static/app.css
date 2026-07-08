@@ -71,6 +71,7 @@ button.small { padding: 5px 12px; font-size: 13px; }
 .obadge.cat { background: #20203a; color: #b9a6ff; text-transform: none; letter-spacing: 0; }
 
 .revbadge { font-size: 12px; font-weight: 800; color: var(--green); }
+.sigbadge { font-size: 11.5px; font-weight: 800; color: var(--cyan); }
 .trendbadge { font-size: 11.5px; font-weight: 700; color: var(--muted); }
 .trendbadge.rising { color: var(--green); }
 .trendbadge.falling { color: var(--red); }
