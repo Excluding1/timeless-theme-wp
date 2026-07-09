@@ -111,7 +111,9 @@ def set_auto(body: dict = Body(default={})):
     if "auto_score_panel" in body:
         clean["auto_score_panel"] = str(_int(body.get("auto_score_panel"), 0, 0, 100))
     if "auto_score_workers" in body:
-        clean["auto_score_workers"] = str(_int(body.get("auto_score_workers"), 8, 1, 20))
+        clean["auto_score_workers"] = str(_int(body.get("auto_score_workers"), 12, 1, 40))
+    if "auto_score_batch" in body:
+        clean["auto_score_batch"] = str(_int(body.get("auto_score_batch"), 6, 1, 12))
     for k, v in clean.items():
         db.set_settings({k: v})
     return {"ok": True, "auto": auto.status()}
@@ -288,9 +290,10 @@ def polish(idea_id: str):
 
 @app.get("/api/ideas")
 def ideas(origin: str = None, q: str = None, category: str = None,
-          sort: str = "rank", direction: str = "desc"):
+          sort: str = "rank", direction: str = "desc", online: int = 0):
     return {"ideas": db.ideas(origin or None, q or None, category=category or None,
-                              sort=sort or "rank", direction=direction or "desc"),
+                              sort=sort or "rank", direction=direction or "desc",
+                              online=bool(online)),
             "total": db.count_ideas(origin or None, q or None, category or None),
             "source_counts": db.source_counts(),
             "categories": db.categories()}

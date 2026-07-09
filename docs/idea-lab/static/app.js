@@ -160,7 +160,8 @@ function renderAuto() {
     $("autoFetch").checked = !!a.fetch_enabled;
     $("autoScore").checked = !!a.score_enabled;
     if (document.activeElement !== $("autoHours")) $("autoHours").value = a.fetch_hours || 4;
-    if (document.activeElement !== $("autoWorkers")) $("autoWorkers").value = a.workers || 8;
+    if (document.activeElement !== $("autoWorkers")) $("autoWorkers").value = a.workers || 12;
+    if (a.batch != null && document.activeElement !== $("autoBatch")) $("autoBatch").value = a.batch;
   }
   // prominent progress block (Automation tab)
   const big = $("autoBig");
@@ -204,7 +205,9 @@ function wireAuto() {
   $("autoHours").addEventListener("change", () => { autoUserEditing = Date.now();
     postAuto({ auto_fetch_hours: Number($("autoHours").value) || 4 }); });
   $("autoWorkers").addEventListener("change", () => { autoUserEditing = Date.now();
-    postAuto({ auto_score_workers: Number($("autoWorkers").value) || 8 }); });
+    postAuto({ auto_score_workers: Number($("autoWorkers").value) || 12 }); });
+  $("autoBatch").addEventListener("change", () => { autoUserEditing = Date.now();
+    postAuto({ auto_score_batch: Number($("autoBatch").value) || 6 }); });
 }
 
 function renderSimulate() {
@@ -292,6 +295,7 @@ async function loadIdeas() {
   if ($("search").value.trim()) p.set("q", $("search").value.trim());
   p.set("sort", state.sort || "rank");
   p.set("direction", state.dir || "desc");
+  if ($("onlineOnly") && $("onlineOnly").checked) p.set("online", "1");
   let r;
   try { r = await api("/api/ideas?" + p); } catch (_) { return; }
   state.ideas = r.ideas;
@@ -350,6 +354,7 @@ function renderIdeas() {
   for (const i of state.ideas.slice(0, 120)) {
     const pol = polOf(i);
     const displayTitle = (pol && pol.polished_title) || i.title;
+    const label = pol && pol.label;
     const displayDesc = (pol && pol.refined_description) || i.description;
     // if we distilled a real product name that differs from the raw (clickbait) title,
     // keep the original visible but muted, so nothing is hidden.
@@ -361,16 +366,23 @@ function renderIdeas() {
           el("span", { class: "obadge " + i.origin, text: ORIGIN[i.origin] || i.origin }),
           safeUrl(i.url) ? el("a", { href: safeUrl(i.url), target: "_blank", rel: "noopener", text: " " + displayTitle })
                          : el("span", { text: " " + displayTitle }),
+          label ? el("span", { class: "ilabel", text: "— " + label }) : null,
         ),
         showOrig ? el("div", { class: "origtitle", text: "source: " + i.title.slice(0, 90) }) : null,
-        displayDesc ? el("div", { class: "idesc", text: displayDesc.slice(0, 220) }) : null,
+        (displayDesc && (!label || displayDesc.slice(0, 40) !== label.slice(0, 40)))
+          ? el("div", { class: "idesc", text: displayDesc.slice(0, 220) }) : null,
         el("div", { class: "imeta" },
           i.origin === "ih" && i.points > 0
             ? el("span", { class: "revbadge", title: "Reported monthly revenue on IndieHackers",
                 text: `💰 ${fmtMoney(i.points)}/mo` })
             : el("span", { text: i.points != null ? `▲ ${i.points}${i.comments != null ? ` · ${i.comments} comments` : ""}` : "" }),
-          el("span", { text: i.traction ? `traction ${i.traction}` : "" }),
           i.category ? el("span", { class: "obadge cat", text: i.category }) : null,
+          i.hands_off != null ? el("span", { class: "hobadge " + (i.hands_off >= 66 ? "good" : i.hands_off >= 40 ? "mid" : "bad"),
+            title: "Autonomy: how hands-off it can run (higher = more automated / passive, less day-to-day management)",
+            text: `🤖 ${Math.round(i.hands_off)}` }) : null,
+          i.is_online === 1 ? el("span", { class: "onbadge", title: "Online / software / SaaS-type — no premises or inventory", text: "🌐 online" }) : null,
+          (i.startup_capital != null && i.startup_capital > 0)
+            ? el("span", { class: "capbadge", title: "Rough starting capital", text: `start ${fmtMoney(i.startup_capital)}` }) : null,
           i.signal != null ? el("span", { class: "sigbadge", title: "Signal: instant heuristic rank (revenue + traction + momentum + engagement + source) — no AI needed",
             text: `◆ ${Math.round(i.signal)}` }) : null,
           trendBadge(i),
@@ -938,6 +950,7 @@ function wireSources() {
   $("search").addEventListener("input", () => { clearTimeout(t); t = setTimeout(loadIdeas, 300); });
   $("originFilter").addEventListener("change", loadIdeas);
   $("categoryFilter").addEventListener("change", loadIdeas);
+  $("onlineOnly").addEventListener("change", loadIdeas);
   $("sortBy").addEventListener("change", () => {
     state.sort = $("sortBy").value;
     // A freshly-picked field always starts high→low (best/newest/highest first);

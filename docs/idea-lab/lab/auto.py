@@ -24,7 +24,7 @@ from datetime import datetime
 
 from . import analyst, db, sources
 
-MAX_WORKERS = 20        # hard ceiling on parallel scoring subprocesses
+MAX_WORKERS = 40        # hard ceiling on parallel scoring subprocesses
 
 _state = {
     "fetch_enabled": True, "score_enabled": True,
@@ -60,9 +60,16 @@ def _panel():
 
 def _worker_count():
     try:
-        return max(1, min(MAX_WORKERS, int(float(db.get_setting("auto_score_workers") or 8))))
+        return max(1, min(MAX_WORKERS, int(float(db.get_setting("auto_score_workers") or 12))))
     except (TypeError, ValueError):
-        return 8
+        return 12
+
+
+def _batch_size():
+    try:
+        return max(1, min(12, int(float(db.get_setting("auto_score_batch") or 6))))
+    except (TypeError, ValueError):
+        return 6
 
 
 def status():
@@ -73,6 +80,7 @@ def status():
         # rate = completions in the last 60s
         cutoff = time.time() - 60
         s["rate_per_min"] = sum(1 for t in _done_ts if t >= cutoff)
+        s["batch"] = _batch_size()
         return s
 
 
@@ -124,54 +132,63 @@ def _auto_fetch_loop():
 _candidates = collections.deque()      # buffer of unscored ideas to hand to workers
 
 
-def _claim_next():
-    """Return the next unscored idea to score, marking it in-flight. Refills the
-    candidate buffer from the DB (best-signal first) when it runs low. Thread-safe."""
+def _claim_batch(n):
+    """Claim up to n unscored ideas (best-signal first), marking them in-flight.
+    Refills the candidate buffer from the DB when low. Thread-safe."""
+    claimed = []
     with _lock:
-        while _candidates:
+        while _candidates and len(claimed) < n:
             row = _candidates.popleft()
             if row["id"] not in _claimed:
                 _claimed.add(row["id"])
-                return row
-    # buffer empty — refill outside the buffer-pop loop
-    fresh = db.next_unscored_ideas(limit=80)
-    with _lock:
-        for row in fresh:
-            if row["id"] not in _claimed:
-                _candidates.append(row)
-        while _candidates:
-            row = _candidates.popleft()
-            if row["id"] not in _claimed:
-                _claimed.add(row["id"])
-                return row
-    return None
+                claimed.append(row)
+    if len(claimed) < n:
+        fresh = db.next_unscored_ideas(limit=max(120, n * 8))
+        with _lock:
+            for row in fresh:
+                if row["id"] not in _claimed and row["id"] not in {c["id"] for c in claimed}:
+                    _candidates.append(row)
+            while _candidates and len(claimed) < n:
+                row = _candidates.popleft()
+                if row["id"] not in _claimed:
+                    _claimed.add(row["id"])
+                    claimed.append(row)
+    return claimed
 
 
 def _score_worker(idx):
     """One parallel scoring worker. Idle unless auto-score is on AND this worker's
-    index is within the current worker-count setting (so the count is tunable live)."""
+    index is within the current worker-count setting. Scores a BATCH per LLM call
+    (batch size 1 = deep 12-factor; >1 = fast batch) for much higher throughput."""
     while True:
         try:
             if not _flag("auto_score") or idx >= _worker_count():
                 _active_titles.pop(idx, None)
                 time.sleep(5)
                 continue
-            row = _claim_next()
-            if not row:
+            bsize = _batch_size()
+            rows = _claim_batch(bsize)
+            if not rows:
                 _active_titles.pop(idx, None)
                 time.sleep(15)              # nothing to score — wait for new ideas
                 continue
-            _active_titles[idx] = row["title"][:70]
+            _active_titles[idx] = (rows[0]["title"][:60] + (f" +{len(rows) - 1}" if len(rows) > 1 else ""))
             try:
-                analyst.score_idea_sync(row["id"], _panel())
-                _done_ts.append(time.time())
+                if bsize <= 1:
+                    analyst.score_idea_sync(rows[0]["id"], _panel())
+                    _done_ts.append(time.time())
+                else:
+                    n = analyst.score_batch_sync(rows)
+                    for _ in range(n):
+                        _done_ts.append(time.time())
             except Exception as e:
                 with _lock:
                     _state["failed"] += 1
-                    _state["last_error"] = f"{row['title'][:40]}: {str(e)[:120]}"
+                    _state["last_error"] = f"{rows[0]['title'][:36]}: {str(e)[:110]}"
             finally:
                 with _lock:
-                    _claimed.discard(row["id"])
+                    for row in rows:
+                        _claimed.discard(row["id"])
                 _active_titles.pop(idx, None)
         except Exception:
             traceback.print_exc()

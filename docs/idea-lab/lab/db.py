@@ -15,7 +15,8 @@ DEFAULTS = {
     "auto_fetch_hours": "4",  # interval between automatic fetches
     "auto_score": "1",        # 1 = continuously score unscored ideas in the background
     "auto_score_panel": "0",  # personas for auto-scoring (0 = scorecard only = fastest)
-    "auto_score_workers": "8",  # how many ideas to score IN PARALLEL (1-20)
+    "auto_score_workers": "12",  # how many parallel scoring workers (1-40)
+    "auto_score_batch": "6",     # ideas scored per LLM call (1 = deep 12-factor, >1 = fast batch)
     "last_fetch_at": "",      # ISO timestamp of the last automatic fetch (for status)
 }
 
@@ -95,6 +96,9 @@ MIGRATIONS = [
     "ALTER TABLE ideas ADD COLUMN signal REAL",         # instant heuristic rank 0-100 (no LLM)
     "ALTER TABLE analyses ADD COLUMN estimates TEXT",   # JSON cost/revenue estimates
     "ALTER TABLE analyses ADD COLUMN effort_roi REAL",  # year-1 profit / effort cost
+    "ALTER TABLE analyses ADD COLUMN hands_off REAL",       # 0-100: runs autonomously / passive-friendly
+    "ALTER TABLE analyses ADD COLUMN startup_capital REAL", # rough $ to start
+    "ALTER TABLE analyses ADD COLUMN is_online INTEGER",    # 1 = online/SaaS-type, 0 = physical
 ]
 
 _lock = threading.RLock()
@@ -157,6 +161,9 @@ def upsert_idea(idea):
 _SORT_COL = {
     "score":    "a.composite",
     "roi":      "a.effort_roi",
+    # "autonomy winner": reward hands-off AND viability together, so trivially-automated
+    # novelty junk (high hands_off, low score) doesn't float to the top.
+    "hands_off": "(a.hands_off * a.composite)",
     "signal":   "i.signal",
     "revenue":  "CASE WHEN i.origin='ih' THEN i.points END",
     "momentum": "i.momentum",
@@ -165,9 +172,11 @@ _SORT_COL = {
 }
 
 
-def ideas(origin=None, q=None, limit=3000, category=None, sort="rank", direction="desc"):
+def ideas(origin=None, q=None, limit=3000, category=None, sort="rank", direction="desc",
+          online=False):
     # score/verdict from the latest COMPLETED analysis; activity status from the latest of any
-    sql = ("SELECT i.*, a.composite, a.verdict, a.effort_roi, r.status AS an_status FROM ideas i "
+    sql = ("SELECT i.*, a.composite, a.verdict, a.effort_roi, a.hands_off, a.is_online, "
+           "a.startup_capital, r.status AS an_status FROM ideas i "
            "LEFT JOIN analyses a ON a.id = (SELECT id FROM analyses WHERE idea_id=i.id "
            "AND status='done' ORDER BY id DESC LIMIT 1) "
            "LEFT JOIN analyses r ON r.id = (SELECT id FROM analyses WHERE idea_id=i.id "
@@ -179,6 +188,8 @@ def ideas(origin=None, q=None, limit=3000, category=None, sort="rank", direction
     if category:
         where.append("i.category=?")
         params.append(category)
+    if online:
+        where.append("a.is_online=1")
     if q:
         esc = q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
         where.append("(i.title LIKE ? ESCAPE '\\' OR i.description LIKE ? ESCAPE '\\')")
@@ -355,7 +366,7 @@ def categories():
 def update_analysis(aid, **fields):
     allowed = {"status", "error", "composite", "verdict", "thesis", "wedge", "scores",
                "risks", "adoption", "pay_rate", "price_med", "objections", "panel",
-               "estimates", "effort_roi"}
+               "estimates", "effort_roi", "hands_off", "startup_capital", "is_online"}
     cols = [k for k in fields if k in allowed]
     if not cols:
         return

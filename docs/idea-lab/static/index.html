@@ -56,6 +56,7 @@
           <option value="rank">Sort: Best (rank)</option>
           <option value="signal">Signal (instant, no-AI)</option>
           <option value="score">AI score</option>
+          <option value="hands_off">Autonomy (hands-off)</option>
           <option value="roi">Effort ROI</option>
           <option value="revenue">Revenue ($/mo)</option>
           <option value="momentum">Trend momentum</option>
@@ -63,6 +64,8 @@
           <option value="recent">Newest</option>
         </select>
         <button id="sortDir" class="small ghost" title="Toggle ascending / descending">↓ High→Low</button>
+        <label class="sub chk" title="Only online / software / SaaS-type businesses (no physical premises or inventory)">
+          <input type="checkbox" id="onlineOnly"> 🌐 Online only</label>
         <input id="search" placeholder="Search ideas…" spellcheck="false">
         <label class="sub">Panel
           <select id="panelSize">
@@ -113,7 +116,8 @@
       <div class="autogrid">
         <label class="toggle"><input type="checkbox" id="autoScore"> <b>Auto-score everything</b></label>
         <label class="sub">in parallel:
-          <input id="autoWorkers" type="number" value="8" min="1" max="20" class="tiny"> at once</label>
+          <input id="autoWorkers" type="number" value="12" min="1" max="40" class="tiny"> workers ·
+          <input id="autoBatch" type="number" value="6" min="1" max="12" class="tiny"> per call</label>
         <label class="toggle"><input type="checkbox" id="autoFetch"> <b>Auto-fetch new ideas</b></label>
         <label class="sub">every <input id="autoHours" type="number" value="4" min="1" max="168" class="tiny"> h</label>
       </div>
