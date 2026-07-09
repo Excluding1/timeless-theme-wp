@@ -99,6 +99,7 @@ MIGRATIONS = [
     "ALTER TABLE analyses ADD COLUMN hands_off REAL",       # 0-100: runs autonomously / passive-friendly
     "ALTER TABLE analyses ADD COLUMN startup_capital REAL", # rough $ to start
     "ALTER TABLE analyses ADD COLUMN is_online INTEGER",    # 1 = online/SaaS-type, 0 = physical
+    "ALTER TABLE simulations ADD COLUMN route TEXT",        # best-route diagram + smart moves (markdown)
 ]
 
 _lock = threading.RLock()
@@ -355,6 +356,34 @@ def set_idea_polish(idea_id, polished, category=None):
                          category, idea_id))
 
 
+def category_stats():
+    """Per-category landscape for the idea engine: how crowded, how strong on average,
+    and the biggest proven revenue example in it."""
+    with _lock:
+        rows = _db().execute(
+            "SELECT i.category, COUNT(*) n, "
+            "ROUND(AVG(COALESCE(i.signal,0)),1) avg_signal, "
+            "ROUND(AVG(a.composite),1) avg_score, "
+            "MAX(CASE WHEN i.origin='ih' THEN i.points ELSE 0 END) top_rev "
+            "FROM ideas i LEFT JOIN analyses a ON a.id=("
+            "  SELECT id FROM analyses WHERE idea_id=i.id AND status='done' ORDER BY id DESC LIMIT 1) "
+            "WHERE i.category IS NOT NULL AND i.category != '' "
+            "GROUP BY i.category ORDER BY n DESC").fetchall()
+        return [dict(r) for r in rows]
+
+
+def top_scored(limit=12, online_only=False):
+    """The highest AI-scored real businesses — exemplars for the idea engine."""
+    sql = ("SELECT i.title, i.polished, i.category, a.composite, a.hands_off, a.is_online "
+           "FROM analyses a JOIN ideas i ON i.id=a.idea_id "
+           "WHERE a.status='done' AND a.composite IS NOT NULL")
+    if online_only:
+        sql += " AND a.is_online=1"
+    sql += " ORDER BY a.composite DESC LIMIT ?"
+    with _lock:
+        return [dict(r) for r in _db().execute(sql, (limit,)).fetchall()]
+
+
 def categories():
     with _lock:
         rows = _db().execute(
@@ -509,7 +538,7 @@ def new_simulation(idea_id, trials):
 
 
 def update_simulation(sid, **fields):
-    allowed = {"status", "error", "trials", "summary", "narrative"}
+    allowed = {"status", "error", "trials", "summary", "narrative", "route"}
     cols = [k for k in fields if k in allowed]
     if not cols:
         return

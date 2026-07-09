@@ -332,6 +332,34 @@ prediction — validate the key assumptions with real customers.*
 Reply with ONLY the Markdown."""
 
 
+def _route_prompt(idea, summary):
+    odds = summary.get("odds", {})
+    return f"""You are a sharp, slightly cheeky startup strategist. A 500-run Monte Carlo of this
+business just finished — most runs failed ({odds.get('failed', '?')}%), the wins were concentrated.
+Your job: chart the SINGLE best realistic route from zero to a good outcome — the path that the
+winning runs would most likely have taken — and be smart about it, not generic.
+
+{analyst._idea_block(idea)}
+
+Simulation odds: {json.dumps(odds)}. Category: {summary.get('category')}.
+Median months to profit: {summary.get('median_months_to_profit')}. Assumptions: {json.dumps(summary.get('assumptions', {}))}.
+
+Write clean Markdown with EXACTLY these sections:
+## Best realistic route
+A fenced ```mermaid ``` block: `flowchart LR` of the smartest path (unfair wedge -> first 10 customers
+-> cheapest working channel -> the differentiator -> monetise -> the ONE expansion that compounds ->
+realistic exit). Under 12 nodes, labels under 5 words, concrete not generic.
+## Why this route beats the default
+2-3 sentences on why this path dodges the top failure mode from the sim.
+## Smart / cheeky moves
+3-4 NON-obvious, specific plays a clever founder would use here — unconventional wedges, a pricing
+trick, a distribution hack, a "wedge then widen" pivot, arbitrage, or a way to make it more hands-off.
+Not textbook advice; things most people miss.
+## The one bet
+The single highest-leverage decision this whole route hinges on.
+Keep it under ~450 words. Reply with ONLY the Markdown."""
+
+
 # ---------- orchestration (one simulation at a time) ----------
 
 _state = {"running": False, "idea_id": None, "title": "", "phase": "", "sim_id": None}
@@ -375,7 +403,14 @@ def _run(sid, idea, trials):
         except analyst.LLMError as e:
             narrative = ("_(The numeric simulation succeeded; the written analysis needs an LLM "
                          f"engine — {e}. Log into the Claude CLI or Codex for the narrative.)_")
-        db.update_simulation(sid, narrative=narrative, status="done")
+        db.update_simulation(sid, narrative=narrative)
+        with _lock:
+            _state["phase"] = "charting the best route"
+        try:
+            route = analyst._run_llm(_route_prompt(idea, summary))
+        except analyst.LLMError:
+            route = ""
+        db.update_simulation(sid, route=route, status="done")
         with _lock:
             _state["phase"] = "done"
     except Exception as e:

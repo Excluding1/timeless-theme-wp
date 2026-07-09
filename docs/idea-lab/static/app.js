@@ -386,8 +386,8 @@ function renderIdeas() {
           i.signal != null ? el("span", { class: "sigbadge", title: "Signal: instant heuristic rank (revenue + traction + momentum + engagement + source) — no AI needed",
             text: `◆ ${Math.round(i.signal)}` }) : null,
           trendBadge(i),
-          pol ? el("span", { class: "polished", text: pol.from_scorecard ? "◇ named" : "✦ polished",
-            title: pol.from_scorecard ? "Real product name distilled by the AI analyst" : "Graded from the polished version of this idea" }) : null,
+          pol ? el("span", { class: "polished", text: pol.from_generator ? "✦ engine" : pol.from_scorecard ? "◇ named" : "✦ polished",
+            title: pol.from_generator ? "Invented by the idea engine" : pol.from_scorecard ? "Real product name distilled by the AI analyst" : "Graded from the polished version of this idea" }) : null,
           i.composite != null ? el("span", { class: "score " + vclass(i.verdict), text: `AI ${i.composite}/100 · ${i.verdict}` }) : null,
           i.effort_roi != null ? el("span", { class: "score " + (i.effort_roi >= 2 ? "good" : i.effort_roi >= 0.8 ? "mid" : "bad"),
             title: "Effort ROI: estimated year-1 profit ÷ (build hours × $60 + a year of running costs)",
@@ -685,6 +685,15 @@ function renderSims() {
           ul.append(el("li", { text: `${sh.pct_of_all}% of runs saw ${sh.label}` }));
         }
         details.append(el("div", {}, el("strong", { text: "Shocks it will likely face (plan for these)" }), ul));
+      }
+      if (s.route) {
+        const m = s.route.match(/```mermaid\s*([\s\S]*?)```/);
+        const box = el("div", { class: "mdbox" });
+        box.append(el("h4", { class: "mdh", text: "🧭 Best realistic route" }));
+        if (m) { const dia = el("div", { class: "diagram" }); box.append(dia); renderMermaid(dia, m[1].trim()); }
+        const textPart = s.route.replace(/```mermaid[\s\S]*?```/, "").replace(/^\s*##\s*Best realistic route\s*/im, "");
+        box.append(...mdToNodes(textPart));
+        details.append(box);
       }
       if (s.narrative) details.append(el("div", { class: "mdbox" }, ...mdToNodes(s.narrative)));
     } else if (s.error) {

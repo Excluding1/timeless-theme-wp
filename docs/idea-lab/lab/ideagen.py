@@ -22,32 +22,77 @@ def status():
         return dict(_state)
 
 
+def _briefing():
+    """A compact live market map from the whole corpus, so the engine invents into
+    whitespace instead of repeating what's already crowded."""
+    try:
+        stats = db.category_stats()
+    except Exception:
+        stats = []
+    if not stats:
+        return ""
+    stats.sort(key=lambda s: -(s.get("n") or 0))
+    lines = []
+    for s in stats[:12]:
+        rev = s.get("top_rev") or 0
+        revs = f", biggest proven ${int(rev):,}/mo" if 0 < rev <= 2_000_000 else ""
+        lines.append(f"  - {s['category']}: {s['n']} ideas already, avg quality "
+                     f"{s.get('avg_score') or '?'}/100{revs}")
+    exemplars = []
+    try:
+        for t in db.top_scored(10):
+            pol = t.get("polished")
+            name = None
+            if pol:
+                try:
+                    name = (json.loads(pol) if isinstance(pol, str) else pol).get("polished_title")
+                except Exception:
+                    name = None
+            exemplars.append(f"  - {(name or t['title'])[:48]} ({t.get('category')}, {t.get('composite')}/100)")
+    except Exception:
+        pass
+    out = ("CURRENT LANDSCAPE (what's already in the database — higher count = more crowded):\n"
+           + "\n".join(lines))
+    if exemplars:
+        out += "\n\nTOP-SCORING EXISTING BUSINESSES (don't copy these — beat or avoid them):\n" + "\n".join(exemplars)
+    return out
+
+
 def _prompt(n, theme):
-    focus = (f"\nConstraint: every idea must fit this theme/niche — {theme}." if theme else "")
-    return f"""You are a panel of three sharp operators — a bootstrapped founder, a seed VC,
-and a market analyst — brainstorming brand-new business ideas worth building starting TODAY
-({date.today().isoformat()}). Be serious, specific, and NON-obvious: no "Uber for X" clichés,
-no vague "AI platform". Each idea should be something a small team could realistically start,
-grounded in a real, current shift (tech, regulation, behaviour, cost curve).{focus}
+    focus = (f"\nHARD CONSTRAINT: every idea must fit this theme/niche — {theme}." if theme else "")
+    brief = _briefing()
+    brief_block = (f"\n\n{brief}\n\nUse this map: aim at UNDER-served or fast-shifting spaces, "
+                   "and where a category is already crowded, only enter with a sharp differentiator "
+                   "or a specific vertical no one owns.") if brief else ""
+    return f"""You are a panel of three sharp operators — a bootstrapped founder, a contrarian seed VC,
+and a market analyst — inventing brand-new businesses worth starting TODAY ({date.today().isoformat()}).
+Be serious, specific, and NON-obvious. NO clichés ("Uber for X", vague "AI platform"), NO copy-paste of
+existing companies — each must be a UNIQUE, differentiated, defensible play, ideally exploiting a gap,
+a new regulation, a platform shift, or a trend that's rising but not yet crowded.{focus}{brief_block}
 
-Span a range of TYPES across the {n} ideas: software/SaaS, AI vertical tools, physical/local
-services, real products (ecommerce/hardware), content/media (incl. faceless YouTube), and
-marketplaces — don't return {n} variations of one thing.
+Bias toward businesses that can run LEAN and fairly HANDS-OFF: low starting capital, online/software
+where possible, automatable, few staff — unless the theme demands otherwise. Still span a RANGE of types
+across the {n} ideas (SaaS, AI vertical, productized service/agency, real product, content/faceless media,
+marketplace) — don't return {n} clones of one thing.
 
-For EACH idea give real substance. Reply with ONLY a JSON array of exactly {n} objects:
+For EACH idea reply in a JSON array of exactly {n} objects:
 [{{
- "title": "<crisp product name + one-line what-it-is>",
- "description": "<5-7 sentences: the specific customer, the painful problem, how it works, the wedge, and the revenue model. Concrete, not hype.>",
+ "title": "<the brand/business name — inventive, memorable, 1-4 words>",
+ "label": "<the what-it-IS tag, e.g. 'Telegram ad agency', 'AI lease-audit SaaS' — 2-6 words>",
+ "description": "<5-7 sentences: the exact customer, the painful problem, how it works, the wedge, the revenue model. Concrete.>",
  "category": "<one of: saas, ai, ecommerce, physical-service, content, marketplace, game, fintech, agency, hardware, dev-tool, other>",
- "why_now": "<the specific shift that makes this viable in {date.today().year}>",
+ "differentiation": "<why THIS is different from what already exists — the specific angle no one owns>",
+ "unfair_advantage": "<the moat/edge that makes it defensible (data, distribution, niche depth, speed, community)>",
+ "why_now": "<the specific {date.today().year} shift that opens this window>",
  "target_customer": "<the exact first customer>",
- "revenue_model": "<how it makes money, with a rough price point>",
- "est_first_year_revenue_usd": <realistic P50 number, not a fantasy>,
- "build_difficulty": "<low|medium|high>",
- "example_or_analog": "<a real company/product that proves the shape of the market, if any>"
+ "revenue_model": "<how it makes money + a rough price point>",
+ "hands_off": <0-100: how autonomously it can run once built>,
+ "is_online": <true if online/software/SaaS-type, false if physical>,
+ "startup_capital_usd": <rough $ to start>,
+ "est_first_year_revenue_usd": <realistic P50, not a fantasy>
 }}, ...]
-Make them creative and distinct. Quality over safety — these should feel like ideas a smart
-founder would actually get excited about."""
+Make them genuinely clever — ideas a smart founder would get excited about and that a competitor
+couldn't trivially copy."""
 
 
 def generate(n=10, theme=None):
@@ -58,7 +103,7 @@ def generate(n=10, theme=None):
         spec = spec.get("ideas") if isinstance(spec.get("ideas"), list) else [spec]
     if not isinstance(spec, list):
         raise analyst.LLMError("generator did not return a list of ideas")
-    made = []
+    made, rows = [], []
     for item in spec:
         if not isinstance(item, dict):
             continue
@@ -66,27 +111,37 @@ def generate(n=10, theme=None):
         if not title:
             continue
         desc = str(item.get("description") or "").strip()
+        label = str(item.get("label") or "").strip()
         extras = []
-        for k in ("why_now", "target_customer", "revenue_model", "example_or_analog"):
+        for k in ("differentiation", "unfair_advantage", "why_now", "target_customer", "revenue_model"):
             if item.get(k):
                 extras.append(f"{k.replace('_', ' ').title()}: {item[k]}")
         if item.get("est_first_year_revenue_usd"):
             extras.append(f"Est. year-1 revenue: ${item['est_first_year_revenue_usd']}")
-        if item.get("build_difficulty"):
-            extras.append(f"Build difficulty: {item['build_difficulty']}")
         full = (desc + ("  ||  " + " · ".join(extras) if extras else ""))[:2000]
         cat = str(item.get("category") or "").strip().lower()
         if cat not in categorize._LABELS:
-            cat = categorize.classify(title, desc)
+            cat = categorize.classify(title, desc + " " + label)
         iid = "gen:" + hashlib.sha1(f"{title}\x1f{date.today().isoformat()}".encode()).hexdigest()[:16]
         db.upsert_idea({
             "id": iid, "origin": "gen", "title": title[:300], "description": full,
-            "url": None, "points": None, "comments": None, "posted_at": None, "traction": 5.0,
+            "url": None, "points": None, "comments": None, "posted_at": None, "traction": 6.0,
         })
         db.set_idea_category(iid, cat)
+        # keep the engine's brand name + what-it-is label as the display spec
+        db.set_idea_polish(iid, {"polished_title": title[:120], "label": label[:80],
+                                 "refined_description": label[:600], "from_generator": True}, cat)
         made.append({"id": iid, "title": title, "category": cat})
+        # "polished" marker so the batch scorer keeps the engine's brand name + label
+        rows.append({"id": iid, "title": title, "description": full, "polished": "1"})
     if not made:
         raise analyst.LLMError("generator returned no usable ideas")
+    # score the fresh ideas right away so they appear graded (with autonomy) not blank
+    for i in range(0, len(rows), 6):
+        try:
+            analyst.score_batch_sync(rows[i:i + 6])
+        except Exception:
+            pass
     return made
 
 
