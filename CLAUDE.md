@@ -88,8 +88,9 @@ zip -rq ../timeless-theme-2.zip . \
   ".secrets/*" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
   "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" "contractor-app/*" \
   "src/*" "postcss.config.js" "package.json" "package-lock.json" \
-  "memory/*" "*.log" "*.zip" "*.map"
+  "memory/*" "*.log" "*.zip" "*.map" "images/blog/*"
 ```
+(`images/blog/` = AI-illustrative blog images for the wp-now localhost preview ONLY — live posts get them via the Media Library, so they must not ship in the theme.)
 
 **Includes:** all theme PHP, `images/` (incl. responsive variants), `assets/main.min.css` (compiled Tailwind), `assets/quote-form/` (React form build, untracked but required for homepage shortcode), `js/main.js`, `style.css`.
 
