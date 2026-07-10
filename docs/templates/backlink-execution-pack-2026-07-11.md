@@ -160,6 +160,38 @@ If any URL has moved, search "<name> add business" — never pay; every one of t
 | Sponsorship email (D) sent | ☐ | | |
 | SourceBottle profile (E) | ☐ | | |
 
+## Places that WILL publish us — verified safe list (added 2026-07-11)
+
+Allan asked: "is there a marketplace to swap links / a trades blog that lets us post?"
+**Marketplaces and swap networks: NO — that's the exact link-scheme pattern Google penalises.**
+And the "Write For Us + Bathroom" sites that come up in search (I Luv Aussie, Lookout Australia,
+Shout N Australia, New Home Decore, etc.) are pay-to-post link farms in disguise — gmail contact
+addresses, no real readers, usually a $30-80 "editorial fee". Links from them range from worthless
+to harmful. **Do not touch them.**
+
+The legit self-serve platforms (no asking, no waiting — we just show up):
+
+| Platform | What we do there | Link value |
+|---|---|---|
+| **Houzz AU** — houzz.com.au (free business account) | Profile in the "Bathroom Designers & Renovators" directory + upload the before/after portfolio + collect reviews there too | Real directory link on a high-authority home-niche site; 2,242 AU bathroom pros are already there and we're not |
+| **Bunnings Workshop** — workshop.bunnings.com.au | Answer 2-3 DIY questions/week about grout, mould, tired baths as the friendly expert (profile carries the business name + link) | AU's biggest home community; threads rank on Google for YEARS and AI assistants quote them; brand + traffic |
+| **Whirlpool forums** — whirlpool.net.au (Home Improvement) | Same genuine-answers play; strict no-self-promo culture, let the profile do the linking | AU institution, very high trust |
+| **homeone.com.au forums** | Renovation Q&A, same approach | AU home-building niche |
+| **Reddit** — r/AusRenovation, r/sydney | Genuinely useful answers only; never drop links unprompted | nofollow, but Google surfaces Reddit heavily now and AI answers cite it |
+| **Medium + LinkedIn Articles** | Republish each blog post a week after it goes live on our site, with "originally published at timelessresurfacing.com.au" | Distribution + brand + AI-engine visibility (nofollow) |
+| **SourceBottle** (already item E above) | Journalist call-outs | The only realistic path to real news-site links |
+
+The honest playbook for forums/communities: **be the most helpful bathroom answer in the thread,
+every time, and never pitch.** The profile link + repetition does the work. 15 min, twice a week.
+
+### Does every link have to be Sydney/AU + trades niche?
+No. Value order (all legit links count, these just count MORE):
+1. **AU + home/trades topic** (supplier, Houzz, Bunnings, hipages) — both signals. Best.
+2. **AU general** (local news, club sponsorship, chamber, directories) — powers the LOCAL pack.
+3. **Global home-niche** (international home blogs referencing our guides) — topical authority.
+4. **Global general** (Medium, LinkedIn) — small, but a natural profile has these too.
+A profile that is 100% one type looks manufactured; the mix above is what "natural" looks like.
+
 ## Measurement (the honest scoreboard)
 - **Google Search Console → Links** (needs GSC setup — still the #1 blocked task).
 - **Ahrefs Webmaster Tools** (free for your own domain): referring-domains count monthly.
