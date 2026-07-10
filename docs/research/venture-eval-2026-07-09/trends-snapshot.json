@@ -1,0 +1,72 @@
+{
+ "Permitly": {
+  "kw": "building permit",
+  "current": 50,
+  "avg": 69.7,
+  "slope": 0.216,
+  "dir": "rising"
+ },
+ "ClauseLens": {
+  "kw": "lease review",
+  "current": 19,
+  "avg": 41.6,
+  "slope": 0.379,
+  "dir": "rising"
+ },
+ "GrantGraph": {
+  "kw": "small business grants",
+  "current": 33,
+  "avg": 64.3,
+  "slope": 0.086,
+  "dir": "rising"
+ },
+ "SpecSniff": {
+  "kw": "product comparison",
+  "current": 3,
+  "avg": 19.1,
+  "slope": -0.252,
+  "dir": "falling"
+ },
+ "DisputeDesk": {
+  "kw": "refund letter",
+  "current": 39,
+  "avg": 56.1,
+  "slope": 0.343,
+  "dir": "rising"
+ },
+ "NicheStack": {
+  "kw": "how much does it cost",
+  "current": 76,
+  "avg": 75.3,
+  "slope": 0.083,
+  "dir": "rising"
+ },
+ "ComplyCue": {
+  "kw": "compliance tracker",
+  "current": 19,
+  "avg": 43.3,
+  "slope": 0.301,
+  "dir": "rising"
+ },
+ "MenuMint": {
+  "kw": "restaurant menu online",
+  "current": 31,
+  "avg": 42.0,
+  "slope": 0.497,
+  "dir": "rising"
+ },
+ "TrialTrack": {
+  "kw": "clinical trials near me",
+  "current": 15,
+  "avg": 25.6,
+  "slope": 0.396,
+  "dir": "rising"
+ },
+ "DupeFinder": {
+  "kw": "dupes",
+  "current": 67,
+  "avg": 73.3,
+  "slope": 0.056,
+  "dir": "rising"
+ }
+}
