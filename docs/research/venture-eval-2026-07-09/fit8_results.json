@@ -1,0 +1,58 @@
+{
+ "SaunaTally": {
+  "fit": 55.0,
+  "verdict": "reshape",
+  "reason": "Strong consumer pull for the running-cost calculator but zero consumer willingness-to-pay and a chicken-and-eg",
+  "seg": "DTC sauna brands (featured/Pro placement) \u2014 but only once au",
+  "complaint": "Spec data is brand-reported, not independently tested \u2014 so '"
+ },
+ "FleetDOT": {
+  "fit": 58.0,
+  "verdict": "reshape",
+  "reason": "Real pain and a genuine wedge (Clearinghouse + new-authority hand-holding) exist, but $49/mo with per-filing n",
+  "seg": "DIY small fleet owner (5-15 trucks, multi-state IFTA)",
+  "complaint": "$49/mo feels steep vs a free calendar; the free tier already"
+ },
+ "RentalReady": {
+  "fit": 58.0,
+  "verdict": "reshape",
+  "reason": "Real pull for the one-off $29 report among VIC/interstate self-managers, but the $19/mo monitoring churns hard",
+  "seg": "VIC self-managing landlords preparing a new lease (highest-r",
+  "complaint": "$19/mo monitoring is a solution looking for a problem \u2014 laws"
+ },
+ "VanWatt": {
+  "fit": 62.0,
+  "verdict": "reshape",
+  "reason": "Real pull from first-time van/RV/shed builders and genuine willingness to pay, but the $19 gate sits where the",
+  "seg": "DIY vanlifer (first build)",
+  "complaint": "$19 paywall lands exactly where the free tool already gave t"
+ },
+ "TowSafe": {
+  "fit": 62.0,
+  "verdict": "reshape",
+  "reason": "Real anxiety-driven willingness to pay exists among worried owners, nervous buyers, and trade \u2014 but only if yo",
+  "seg": "Worried existing owners (fine/insurance anxiety)",
+  "complaint": "Spec-database accuracy is the whole ballgame \u2014 one wrong var"
+ },
+ "TradeSchoolROI": {
+  "fit": 68.0,
+  "verdict": "reshape",
+  "reason": "Real trust-driven pull from funded switchers and schools, but it only survives if ranking integrity is structu",
+  "seg": "Schools / advertisers (featured + pay-per-lead)",
+  "complaint": "Data staleness / wage credibility \u2014 old report years and a s"
+ },
+ "GuardianKit": {
+  "fit": 61.0,
+  "verdict": "reshape",
+  "reason": "Real pull exists from in-state uncontested crisis filers and screened attorney leads, but the $49 'forms the c",
+  "seg": "Crisis-mode DIY adult children (uncontested, in-state, has a",
+  "complaint": "'Why pay $49 for PDFs the court gives away free?' \u2014 value of"
+ },
+ "CareInspect": {
+  "fit": 62.0,
+  "verdict": "reshape",
+  "reason": "Real, differentiated demand exists (SEO + B2B leads + a genuine data gap in AL) but the value collapses in exa",
+  "seg": "Clinically-literate family caregivers (nurses/doctors)",
+  "complaint": "Coverage gaps & stale data \u2014 'no data on file', missing enfo"
+ }
+}

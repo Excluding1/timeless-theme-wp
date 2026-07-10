@@ -1,0 +1,92 @@
+[
+ {
+  "name": "CareInspect",
+  "m12_p50": 6533,
+  "m24_p50": 11804,
+  "m24_p90": 30889,
+  "dead12_pct": 0.7,
+  "hit5k24_pct": 77.5,
+  "be_med": 8,
+  "p50_profit36": 298227
+ },
+ {
+  "name": "GuardianKit",
+  "m12_p50": 2438,
+  "m24_p50": 3729,
+  "m24_p90": 10434,
+  "dead12_pct": 3.0,
+  "hit5k24_pct": 38.9,
+  "be_med": 8,
+  "p50_profit36": 94024
+ },
+ {
+  "name": "TradeSchoolROI",
+  "m12_p50": 4536,
+  "m24_p50": 6371,
+  "m24_p90": 15516,
+  "dead12_pct": 1.7,
+  "hit5k24_pct": 59.8,
+  "be_med": 8,
+  "p50_profit36": 160313
+ },
+ {
+  "name": "TowSafe",
+  "m12_p50": 2690,
+  "m24_p50": 3912,
+  "m24_p90": 11094,
+  "dead12_pct": 4.5,
+  "hit5k24_pct": 39.9,
+  "be_med": 9,
+  "p50_profit36": 96621
+ },
+ {
+  "name": "VanWatt",
+  "m12_p50": 937,
+  "m24_p50": 1555,
+  "m24_p90": 4750,
+  "dead12_pct": 9.2,
+  "hit5k24_pct": 8.5,
+  "be_med": 10,
+  "p50_profit36": 38859
+ },
+ {
+  "name": "RentalReady",
+  "m12_p50": 1145,
+  "m24_p50": 2348,
+  "m24_p90": 6250,
+  "dead12_pct": 5.9,
+  "hit5k24_pct": 17.2,
+  "be_med": 9,
+  "p50_profit36": 57725
+ },
+ {
+  "name": "FleetDOT",
+  "m12_p50": 416,
+  "m24_p50": 1436,
+  "m24_p90": 5224,
+  "dead12_pct": 23.9,
+  "hit5k24_pct": 10.7,
+  "be_med": 13,
+  "p50_profit36": 33202
+ },
+ {
+  "name": "SaunaTally",
+  "m12_p50": 978,
+  "m24_p50": 1425,
+  "m24_p90": 4950,
+  "dead12_pct": 8.6,
+  "hit5k24_pct": 9.8,
+  "be_med": 10,
+  "p50_profit36": 35581
+ },
+ {
+  "name": "Permitly-ref",
+  "m12_p50": 1166,
+  "m24_p50": 2674,
+  "m24_p90": 10007,
+  "dead12_pct": 5.6,
+  "hit5k24_pct": 29.1,
+  "be_med": 10,
+  "p50_profit36": 66844
+ }
+]

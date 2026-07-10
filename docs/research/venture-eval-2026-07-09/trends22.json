@@ -1,0 +1,100 @@
+{
+ "ADUAtlas": {
+  "kw": "adu requirements",
+  "err": "HTTP Error 429: unknown"
+ },
+ "DebtStatute": {
+  "kw": "statute of limitations debt",
+  "err": "HTTP Error 429: unknown"
+ },
+ "RateAppeal": {
+  "kw": "property tax appeal",
+  "err": "HTTP Error 429: unknown"
+ },
+ "TintLegal": {
+  "kw": "window tint laws",
+  "current": 43,
+  "slope": -0.008,
+  "dir": "flat"
+ },
+ "ZoneScout": {
+  "kw": "school district map",
+  "err": "HTTP Error 429: unknown"
+ },
+ "TradeSchoolROI": {
+  "kw": "trade school",
+  "current": 33,
+  "slope": 0.192,
+  "dir": "rising"
+ },
+ "VanWatt": {
+  "kw": "off grid solar",
+  "current": 50,
+  "slope": 0.346,
+  "dir": "rising"
+ },
+ "TowSafe": {
+  "kw": "towing capacity",
+  "err": "na"
+ },
+ "CredEval": {
+  "kw": "foreign credential evaluation",
+  "err": "HTTP Error 429: unknown"
+ },
+ "CareInspect": {
+  "kw": "assisted living violations",
+  "err": "na"
+ },
+ "WageStamp": {
+  "kw": "prevailing wage rates",
+  "err": "HTTP Error 429: unknown"
+ },
+ "DrugPrice": {
+  "kw": "340b pricing",
+  "err": "HTTP Error 429: unknown"
+ },
+ "RentalReady": {
+  "kw": "rental minimum standards",
+  "err": "na"
+ },
+ "PassRate": {
+  "kw": "nclex pass rates",
+  "err": "HTTP Error 429: unknown"
+ },
+ "SaunaTally": {
+  "kw": "home sauna",
+  "current": 27,
+  "slope": 0.331,
+  "dir": "rising"
+ },
+ "PrevailingRate": {
+  "kw": "davis bacon wages",
+  "err": "HTTP Error 429: unknown"
+ },
+ "FleetDOT": {
+  "kw": "dot compliance",
+  "current": 38,
+  "slope": 0.274,
+  "dir": "rising"
+ },
+ "ComplyBuild": {
+  "kw": "ncc building code changes",
+  "err": "HTTP Error 429: unknown"
+ },
+ "GuardianKit": {
+  "kw": "guardianship forms",
+  "err": "na"
+ },
+ "PoolCert": {
+  "kw": "pool fence regulations",
+  "err": "HTTP Error 429: unknown"
+ },
+ "ChargeTariff": {
+  "kw": "cost to charge electric car",
+  "err": "HTTP Error 429: unknown"
+ },
+ "ClauseWatch": {
+  "kw": "medical device regulations",
+  "err": "HTTP Error 429: unknown"
+ }
+}
