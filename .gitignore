@@ -60,3 +60,6 @@ images/**/*-[0-9]*w.png.webp
 /deno.lock
 contractor-app/supabase/.temp/
 docs/quote-app/config.js
+
+# AI-generated blog images (illustrative only) — stay OUT of git; live copies go via Media Library
+images/blog/

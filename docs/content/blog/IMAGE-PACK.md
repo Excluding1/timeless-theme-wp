@@ -1,6 +1,12 @@
 # Blog image generation pack (2026-07-10)
 
-**Tool: Gemini** (best photorealistic interiors right now, free). ChatGPT works too — same
+**✅ DONE 2026-07-11 — all 12 generated via ChatGPT (Allan's Plus subscription, no API cost).**
+Saved with exact filenames (1672x941, 16:9) in `~/Downloads/blog-images/` and mirrored to
+`images/blog/` (gitignored, localhost preview only). All 8 heroes are set as featured images
+on the wp-now localhost (:8881/blog/). For LIVE: upload from `~/Downloads/blog-images/` to the
+Media Library per the workflow below — the live posts must use Media Library URLs, not theme paths.
+
+**Tool: ChatGPT** (Allan's pick — best realism results). Gemini works too — same
 prompts. Higgsfield = video, not stills. Generate at the largest size offered, landscape.
 
 ## The two rules
