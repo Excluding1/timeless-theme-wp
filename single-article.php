@@ -32,7 +32,8 @@ if ( $thumb_url ) {
     $thumb_id     = get_post_thumbnail_id();
     $hero_caption = $thumb_id ? (string) wp_get_attachment_caption( $thumb_id ) : '';
 } else {
-    $hero_caption = 'Recent Timeless job, Sydney';
+    // never imply a stock/illustrative image is a real job (customer-fairness rule)
+    $hero_caption = 'Bathroom resurfacing in a Sydney home';
 }
 ?>
 
