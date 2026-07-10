@@ -386,7 +386,9 @@ function timeless_shortcode_inline_cta( $atts ) {
     ob_start(); ?>
     <div class="my-8 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 not-prose" style="background:#f2f4f8;">
         <p class="flex-1 text-sm font-medium" style="color:#041534;margin:0;"><?php echo esc_html( $a['text'] ); ?></p>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center justify-center gap-2 bg-primary text-white text-sm font-bold py-2.5 px-5 rounded-lg hover:shadow-lg transition-all shrink-0 whitespace-nowrap">
+        <?php // On articles the real quote form sits at the end of the page (#article-quote); elsewhere fall back to /contact/
+        $cta_href = is_singular( 'article' ) ? '#article-quote' : home_url( '/contact/' ); ?>
+        <a href="<?php echo esc_url( $cta_href ); ?>" class="inline-flex items-center justify-center gap-2 bg-primary text-white text-sm font-bold py-2.5 px-5 rounded-lg hover:shadow-lg transition-all shrink-0 whitespace-nowrap">
             <?php echo esc_html( $a['button'] ); ?>
             <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
         </a>
@@ -572,7 +574,7 @@ function timeless_blog_end_of_article_cta() {
     $tel_disp = function_exists( 'timeless_phone' ) ? timeless_phone() : '0451 110 154';
     $tel_link = function_exists( 'timeless_phone_link' ) ? timeless_phone_link() : '+61451110154';
     ob_start(); ?>
-    <section class="py-16 sm:py-20 bg-primary text-white relative overflow-hidden">
+    <section id="article-quote" class="py-16 sm:py-20 bg-primary text-white relative overflow-hidden">
         <!-- Decorative gradient overlay -->
         <div class="absolute inset-0 bg-linear-to-br from-primary via-primary to-[#0a2d52] opacity-90" aria-hidden="true"></div>
         <div class="relative max-w-4xl mx-auto px-6 sm:px-8 text-center">
@@ -584,19 +586,19 @@ function timeless_blog_end_of_article_cta() {
                 Cracks, chips, or stains can lead to bigger problems, repairing them quickly keeps your bathroom looking its best.
                 We offer fast, cost-effective resurfacing that restores surfaces without the cost or disruption of full replacements.
             </p>
-            <p class="text-sm sm:text-base text-white/70 leading-relaxed max-w-xl mx-auto mb-8">
+            <p class="text-sm sm:text-base text-white/70 leading-relaxed max-w-xl mx-auto mb-10">
                 Send 3-4 photos of your bathroom. We'll reply with a fixed-price quote within 1 business day. No call-out fee, no obligation.
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="<?php echo $contact; ?>" class="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-surface-container-low transition-colors">
-                    Get Your Free Quote Today
-                    <span class="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span>
-                </a>
-                <a href="tel:<?php echo esc_attr( $tel_link ); ?>" class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white/10 transition-colors">
-                    <span class="material-symbols-outlined text-lg" aria-hidden="true">call</span>
-                    Call <?php echo esc_html( $tel_disp ); ?>
-                </a>
+            <!-- The real quote form, same GHL-wired React embed as the homepage -->
+            <div class="max-w-xl mx-auto text-left">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
+                </div>
             </div>
+            <p class="mt-6 text-sm text-white/70">
+                Prefer to talk?
+                <a href="tel:<?php echo esc_attr( $tel_link ); ?>" class="font-bold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white transition-colors">Call <?php echo esc_html( $tel_disp ); ?></a>
+            </p>
         </div>
     </section>
     <?php
@@ -625,34 +627,16 @@ function timeless_blog_author_box() {
                 <div class="min-w-0">
                     <p class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary mb-1">About the author</p>
                     <h2 class="text-lg font-extrabold text-primary tracking-tight mb-1">Allan P</h2>
-                    <p class="text-xs font-semibold text-secondary mb-2">Quotation and Jobs Manager, Timeless Resurfacing</p>
-                    <p class="text-sm text-secondary leading-relaxed">
-                        Sydney bathroom resurfacing and shower regrouting specialists. We resurface baths, tiles, basins
-                        and vanities and re-grout showers across Greater Sydney, and we quote from photos within 24 hours.
+                    <p class="text-xs font-semibold text-secondary mb-3">Quotation and Jobs Manager, Timeless Resurfacing</p>
+                    <p class="text-sm text-secondary leading-relaxed mb-3">
+                        Every guide comes from jobs we have actually done in Sydney homes. We resurface baths, tiles,
+                        basins and vanities and re-grout showers across Greater Sydney, quoting from photos within 24 hours.
+                    </p>
+                    <p class="text-xs text-secondary/80">
+                        Fully insured ($10M public liability)<?php echo $abn ? ' · ABN ' . esc_html( $abn ) : ''; ?> · Last reviewed <?php echo esc_html( $reviewed ); ?>
                     </p>
                 </div>
             </div>
-            <ul class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-sm text-primary">
-                <li class="flex items-start gap-2">
-                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
-                    <span>$10&nbsp;million public liability insurance</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
-                    <span>ABN-registered, GST-registered business<?php echo $abn ? ' (ABN ' . esc_html( $abn ) . ')' : ''; ?></span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
-                    <span>Per-material warranties: resurfacing up to 5&nbsp;years, grout 2&nbsp;years, silicone 12&nbsp;months</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <span class="material-symbols-outlined text-base text-primary/70 mt-0.5" aria-hidden="true">check_circle</span>
-                    <span>Fixed-price quotes from photos within 24&nbsp;hours</span>
-                </li>
-            </ul>
-            <p class="mt-5 pt-5 text-sm text-secondary leading-relaxed" style="border-top:1px solid #e7e8ed;">
-                Every guide comes from jobs we have actually done in Sydney homes. Last reviewed <?php echo esc_html( $reviewed ); ?>.
-            </p>
         </div>
     </aside>
     <?php
