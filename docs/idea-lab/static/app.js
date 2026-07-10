@@ -42,6 +42,10 @@ async function poll() {
     state.simulate = s.simulate;
     state.auto = s.auto;
     state.extract = s.extract;
+    state.fit = s.fit;
+    state.foundry = s.foundry;
+    renderFitStatus();
+    renderFoundry();
     renderJob();
     renderEngine();
     renderFetch();
@@ -57,14 +61,20 @@ async function poll() {
     const gkey = s.generate ? `${s.generate.running}:${s.generate.phase}` : "";
     const ckey = s.categorize ? `${s.categorize.running}:${s.categorize.done}` : "";
     const skey = s.simulate ? `${s.simulate.running}:${s.simulate.phase}` : "";
+    const tkey = s.fit ? `${s.fit.running}:${s.fit.phase}` : "";
+    const vkey = s.foundry ? `${s.foundry.running}:${s.foundry.phase}` : "";
     if (key !== state.lastJob || fkey !== state.lastFetch || gkey !== state.lastGen ||
-        ckey !== state.lastCat || skey !== state.lastSim) {
+        ckey !== state.lastCat || skey !== state.lastSim || tkey !== state.lastFit ||
+        vkey !== state.lastFoundry) {
       state.lastJob = key; state.lastFetch = fkey; state.lastGen = gkey;
-      state.lastCat = ckey; state.lastSim = skey;
+      state.lastCat = ckey; state.lastSim = skey; state.lastFit = tkey;
+      state.lastFoundry = vkey;
       loadIdeas();
       loadAnalyses();
       loadPlans();
       loadSims();
+      loadFits();
+      loadVentures();
     }
   } catch (_) {}
   setTimeout(poll, 2000);
@@ -401,9 +411,9 @@ function renderIdeas() {
         el("button", { class: "small ghost", text: "Full pipeline", title: "Analyze + full execution plan in one run",
           disabled: busy ? "" : null,
           onclick: () => pipeline(i.id) }),
-        el("button", { class: "small ghost", text: "🎲 Simulate", title: "Run the 500× business simulation start→exit",
-          disabled: (state.simulate && state.simulate.running) ? "" : null,
-          onclick: () => simulate(i.id) }),
+        el("button", { class: "small ghost", text: "🧪 Fit test", title: "Fake PRD + 12 realistic customers try it: who pays, complaints, fixes, build/reshape/skip",
+          disabled: (state.fit && state.fit.running) ? "" : null,
+          onclick: () => fitTest(i.id) }),
         el("button", { class: "small ghost", text: "📈", title: "Fetch Google Trends momentum for this idea",
           onclick: (e) => refreshTrend(i.id, e.target) }),
         el("button", { class: "small ghost", text: "Similar", title: "Find related ideas",
@@ -481,7 +491,14 @@ async function simulate(id) {
   try {
     await api("/api/simulate/" + encodeURIComponent(id), { method: "POST", body: "{}" });
     state.lastSim = "";
-    document.getElementById("sims").scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (e) { alert(e.message); }
+}
+
+async function fitTest(id) {
+  try {
+    await api("/api/fit/" + encodeURIComponent(id), { method: "POST", body: "{}" });
+    state.lastFit = "";
+    showTab("sims");
   } catch (e) { alert(e.message); }
 }
 
@@ -790,6 +807,136 @@ function buildAssumptions(sum) {
   );
 }
 
+/* ---------- product-fit tests ---------- */
+
+function renderFitStatus() {
+  const f = state.fit;
+  const host = $("fits");
+  if (!host) return;
+  let p = $("fitRunning");
+  if (!p) { p = el("p", { class: "hint", id: "fitRunning" }); host.parentNode.insertBefore(p, host); }
+  p.textContent = f && f.running ? `Testing “${f.title}” — ${f.phase}…` : "";
+  p.hidden = !(f && f.running);
+}
+
+async function loadFits() {
+  try { state.fits = (await api("/api/fits")).fits; } catch (_) { return; }
+  renderFits();
+}
+
+function renderFits() {
+  const box = $("fits");
+  if (!box) return;
+  box.replaceChildren();
+  $("fitsEmpty").hidden = (state.fits || []).length > 0;
+  for (const f of state.fits || []) {
+    const res = f.result && typeof f.result === "object" ? f.result : null;
+    const vcls = { build: "good", reshape: "mid", skip: "bad" }[f.verdict] || "mid";
+    const head = el("div", { class: "row spread ahead" },
+      el("div", {},
+        el("strong", { text: f.title }),
+        el("span", { class: "hint", text: `  ${f.created_at}` })),
+      f.status === "done"
+        ? el("span", { class: "score big " + vcls, text: `${f.fit_score}/100 · ${f.verdict}` })
+        : el("span", { class: "chip " + (f.status === "running" ? "running" : "error"), text: f.status }));
+    const details = el("div", { class: "adetails", hidden: "" });
+    if (f.status === "done" && res) {
+      if (res.verdict_reason) details.append(el("p", { class: "thesis", text: res.verdict_reason }));
+      const facts = [
+        ["Segments that buy", (res.segments_that_buy || []).join(" · ")],
+        ["Killer feature", res.killer_feature],
+        ["Most-requested missing", res.missing_feature],
+        ["Why skeptics stay with competitors", res.competitor_pull],
+      ];
+      const grid = el("div", { class: "fgrid" });
+      for (const [k, v] of facts) if (v) grid.append(el("div", { class: "factor" },
+        el("div", { class: "fname", text: k }), el("div", { class: "fnote", text: v })));
+      details.append(grid);
+      if (res.top_complaints && res.top_complaints.length) {
+        const ul = el("ul", { class: "objections" });
+        for (const c of res.top_complaints) ul.append(el("li", {},
+          el("strong", { text: c.complaint + " " }), el("span", { text: "→ fix: " + (c.fix || "") })));
+        details.append(el("div", {}, el("strong", { text: "Complaints → fixes (do these before building)" }), ul));
+      }
+      if (res.customers && res.customers.length) {
+        const ul = el("ul", { class: "objections" });
+        for (const c of res.customers.slice(0, 12)) ul.append(el("li", {},
+          el("strong", { text: `${c.who} ` }),
+          el("span", { class: c.pays ? "good" : "sub", text: c.pays ? `pays ${c.price_ok || ""} ` : (c.adopts ? "uses, won't pay " : "passes ") }),
+          el("em", { text: `“${c.complaint || ""}”` })));
+        details.append(el("div", {}, el("strong", { text: "The 12 simulated customers" }), ul));
+      }
+      if (f.prd && typeof f.prd === "object") {
+        details.append(el("p", { class: "sub", text: "PRD tested: " + (f.prd.one_liner || "") +
+          " · features: " + (f.prd.core_features || []).slice(0, 6).join(", ") }));
+      }
+    } else if (f.error) {
+      details.append(el("p", { class: "err", text: f.error }));
+    }
+    head.addEventListener("click", () => { details.hidden = !details.hidden; });
+    box.append(el("div", { class: "analysis" }, head, details));
+  }
+}
+
+/* ---------- foundry ventures ---------- */
+
+function renderFoundry() {
+  const f = state.foundry;
+  if (!f || !$("foundryStatus")) return;
+  $("foundryBtn").disabled = !!f.running;
+  $("foundryStatus").textContent = f.running ? `Working… ${f.phase} (${f.made} PRDs done)` :
+    f.phase === "error" ? "Error: " + (f.error || "run failed") :
+    f.made ? `Done — ${f.made} ventures with PRDs below.` : "";
+}
+
+async function loadVentures() {
+  try { state.ventures = (await api("/api/ventures")).ventures; } catch (_) { return; }
+  renderVentures();
+}
+
+function renderVentures() {
+  const box = $("ventures");
+  if (!box) return;
+  box.replaceChildren();
+  $("venturesEmpty").hidden = (state.ventures || []).length > 0;
+  for (const v of state.ventures || []) {
+    const s = v.spec && typeof v.spec === "object" ? v.spec : {};
+    const head = el("div", { class: "row spread ahead" },
+      el("div", {},
+        el("strong", { text: s.name || "venture" }),
+        el("span", { class: "ilabel", text: s.label ? " — " + s.label : "" }),
+        el("div", { class: "sub", text: `${s.position || ""} · ${s.why_now || ""}`.slice(0, 120) })),
+      el("div", { class: "row" },
+        s.est_mo_revenue_12mo ? el("span", { class: "revbadge", text: `~${fmtMoney(s.est_mo_revenue_12mo)}/mo` }) : null,
+        v.status === "done" && v.prd
+          ? el("a", { class: "button small", href: `/api/ventures/${v.id}/download`, text: "⬇ PRD",
+              onclick: (e) => e.stopPropagation() })
+          : el("span", { class: "chip " + (v.status === "running" ? "running" : "error"), text: v.status })));
+    const details = el("div", { class: "adetails", hidden: "" });
+    const facts = [["Angle", s.angle], ["First customer", s.customer], ["Pricing", s.pricing],
+      ["SEO territory", s.seo_territory], ["Inspired by (proven)", s.inspired_by]];
+    const grid = el("div", { class: "fgrid" });
+    for (const [k, val] of facts) if (val) grid.append(el("div", { class: "factor" },
+      el("div", { class: "fname", text: k }), el("div", { class: "fnote", text: val })));
+    details.append(grid);
+    if (v.prd) details.append(el("pre", { class: "plantext", text: v.prd }));
+    head.addEventListener("click", () => { details.hidden = !details.hidden; });
+    box.append(el("div", { class: "analysis" }, head, details));
+  }
+}
+
+function wireFoundry() {
+  $("foundryBtn").addEventListener("click", async () => {
+    const n = Number($("foundryCount").value) || 10;
+    if (!confirm(`Mine the corpus and produce ${n} ventures with full PRDs?\n(~${n + 1} AI calls total — one shortlist + one PRD each.)`)) return;
+    try {
+      await api("/api/foundry", { method: "POST",
+        body: JSON.stringify({ n, theme: $("foundryTheme").value.trim() || null }) });
+      state.lastFoundry = "";
+    } catch (e) { alert(e.message); }
+  });
+}
+
 /* very small, safe markdown → DOM (headings, bullets, bold, paragraphs) */
 function mdToNodes(md) {
   const out = [];
@@ -1009,9 +1156,12 @@ wireTester();
 wireBatch();
 wireGenerate();
 wireAuto();
+wireFoundry();
 updateSortDirLabel();
 poll();
 loadIdeas();
 loadAnalyses();
 loadPlans();
 loadSims();
+loadFits();
+loadVentures();

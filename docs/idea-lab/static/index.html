@@ -26,8 +26,9 @@
   <button class="tab-btn" data-tab="generate">✦ Generate</button>
   <button class="tab-btn" data-tab="auto">⚙ Automation</button>
   <button class="tab-btn" data-tab="analyses">📊 Analyses</button>
+  <button class="tab-btn" data-tab="foundry">🏭 Foundry</button>
   <button class="tab-btn" data-tab="plans">🗺 Plans</button>
-  <button class="tab-btn" data-tab="sims">🎲 Simulations</button>
+  <button class="tab-btn" data-tab="sims">🧪 Product Fit</button>
   <button class="tab-btn" data-tab="sources">🔌 Sources</button>
 </nav>
 
@@ -168,16 +169,47 @@
     </div>
   </section>
 
-  <!-- ================= SIMULATIONS ================= -->
+  <!-- ================= FOUNDRY ================= -->
+  <section class="tabpane" data-pane="foundry" hidden>
+    <div class="card">
+      <div class="row spread wrap">
+        <h2>🏭 Foundry — ventures we build</h2>
+        <div class="row wrap">
+          <input id="foundryTheme" placeholder="Optional theme (e.g. AI for accountants, pet niche…)" spellcheck="false">
+          <label class="sub">count <input id="foundryCount" type="number" value="10" min="3" max="15" class="tiny"></label>
+          <button id="foundryBtn">Find my ventures</button>
+        </div>
+      </div>
+      <p class="hint">The business-LLM: it mines everything the 18k-idea corpus teaches (what really makes money,
+        proven pricing, crowded vs open space) and proposes ventures an AI coding agent can FULLY build —
+        online, low-capital, near hands-off, SEO/AEO-rankable — each positioned as a
+        <strong>differentiator</strong> or <strong>cost-leader</strong> with a why-now. Every venture gets a full
+        build-ready PRD (features, pages, stack, pricing, keyword map, launch checklist) you can download and
+        start building. Run a <strong>🧪 Fit test</strong> on a venture before committing.</p>
+      <div id="foundryStatus" class="hint"></div>
+      <div id="ventures"></div>
+      <p class="hint" id="venturesEmpty" hidden>No ventures yet — hit “Find my ventures”.</p>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCT FIT ================= -->
   <section class="tabpane" data-pane="sims" hidden>
     <div class="card">
-      <h2>🎲 Business Simulations</h2>
-      <p class="hint">Each simulation runs the business 500× over 10 years — random founder luck, growth and
-        churn, plus real make-or-break events (a competitor, a cheap clone, a lawsuit, a viral moment, an
-        acquisition offer). You get outcome odds, the P10/P50/P90 revenue path, a realistic exit value, the
-        biggest ways it dies, and what to fix <em>before</em> you start. Hit <strong>Simulate</strong> on any idea.</p>
+      <h2>🧪 Product-Fit Tests</h2>
+      <p class="hint">The realistic test: a lean fake PRD is drafted, then 12 realistic target customers
+        “use” the product — you see which segments would actually pay, the killer feature, Reddit-style
+        complaints with the concrete fix for each, why skeptics stay with competitors, and a blunt
+        <strong>build / reshape / skip</strong> verdict. Two AI calls per test — cheap. Hit
+        <strong>🧪 Fit test</strong> on any idea or venture.</p>
+      <div id="fits"></div>
+      <p class="hint" id="fitsEmpty" hidden>No fit tests yet — hit “🧪 Fit test” on an idea.</p>
+    </div>
+    <div class="card">
+      <h2>🎲 Legacy simulations</h2>
+      <p class="hint">The old 500-run Monte Carlo (10-year odds). Kept for reference — the fit test above is
+        the recommended pre-build check.</p>
       <div id="sims"></div>
-      <p class="hint" id="simsEmpty" hidden>No simulations yet — hit “🎲 Simulate” on an idea.</p>
+      <p class="hint" id="simsEmpty" hidden>No simulations.</p>
     </div>
   </section>
 

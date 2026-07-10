@@ -13,8 +13,8 @@ from fastapi.responses import HTMLResponse, PlainTextResponse
 
 import threading
 
-from lab import (analyst, auto, batch, categorize, db, extract, ideagen, planner,
-                 rank, simulator, sources, trends)
+from lab import (analyst, auto, batch, categorize, db, extract, foundry, ideagen,
+                 planner, pmf, rank, simulator, sources, trends)
 
 BASE = Path(__file__).resolve().parent
 
@@ -88,7 +88,71 @@ def state():
         "simulate": simulator.status(),
         "auto": auto.status(),
         "extract": extract.status(),
+        "fit": pmf.status(),
+        "foundry": foundry.status(),
     }
+
+
+@app.post("/api/fit/{idea_id:path}")
+def fit_test(idea_id: str):
+    try:
+        pmf.start_fit_test(idea_id)
+    except analyst.Busy as e:
+        raise HTTPException(409, str(e))
+    except ValueError as e:
+        raise HTTPException(404, str(e))
+    return {"ok": True}
+
+
+@app.get("/api/fits")
+def list_fits():
+    out = []
+    for f in db.fit_tests():
+        for k in ("prd", "result"):
+            if f.get(k):
+                try:
+                    f[k] = json.loads(f[k])
+                except (TypeError, json.JSONDecodeError):
+                    pass
+        out.append(f)
+    return {"fits": out}
+
+
+@app.post("/api/foundry")
+def run_foundry(body: dict = Body(default={})):
+    n = _int(body.get("n"), 10, 3, 15)
+    theme = (body.get("theme") or "").strip() or None
+    if not foundry.start(n, theme):
+        raise HTTPException(409, "Foundry already running.")
+    return {"ok": True, "n": n}
+
+
+@app.get("/api/ventures")
+def list_ventures():
+    out = []
+    for v in db.ventures():
+        if v.get("spec"):
+            try:
+                v["spec"] = json.loads(v["spec"])
+            except (TypeError, json.JSONDecodeError):
+                pass
+        out.append(v)
+    return {"ventures": out}
+
+
+@app.get("/api/ventures/{vid}/download")
+def download_venture(vid: int):
+    v = db.venture(vid)
+    if not v or not v.get("prd"):
+        raise HTTPException(404, "No PRD for that venture")
+    name = "venture"
+    try:
+        name = json.loads(v["spec"]).get("name") or name
+    except (TypeError, json.JSONDecodeError):
+        pass
+    safe = "".join(c if c.isalnum() or c in "-_" else "-" for c in name)[:40]
+    return PlainTextResponse(v["prd"], media_type="text/markdown",
+                             headers={"Content-Disposition": f'attachment; filename="PRD-{safe}.md"'})
 
 
 @app.post("/api/extract")
@@ -294,7 +358,7 @@ def ideas(origin: str = None, q: str = None, category: str = None,
     return {"ideas": db.ideas(origin or None, q or None, category=category or None,
                               sort=sort or "rank", direction=direction or "desc",
                               online=bool(online)),
-            "total": db.count_ideas(origin or None, q or None, category or None),
+            "total": db.count_ideas(origin or None, q or None, category or None, online=bool(online)),
             "source_counts": db.source_counts(),
             "categories": db.categories()}
 

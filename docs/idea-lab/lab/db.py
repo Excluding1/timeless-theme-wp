@@ -85,6 +85,26 @@ CREATE TABLE IF NOT EXISTS simulations (
     narrative  TEXT         -- markdown: data-analyst read + avoid/improve advice
 );
 CREATE INDEX IF NOT EXISTS idx_sims_idea ON simulations(idea_id);
+CREATE TABLE IF NOT EXISTS fit_tests (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    idea_id    TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+    status     TEXT NOT NULL DEFAULT 'running',   -- running | done | error
+    error      TEXT,
+    prd        TEXT,        -- JSON lean PRD
+    result     TEXT,        -- JSON market-test result (customers, complaints, fixes)
+    fit_score  REAL,
+    verdict    TEXT         -- build | reshape | skip
+);
+CREATE INDEX IF NOT EXISTS idx_fit_idea ON fit_tests(idea_id);
+CREATE TABLE IF NOT EXISTS ventures (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+    status     TEXT NOT NULL DEFAULT 'running',   -- running | done | error
+    error      TEXT,
+    spec       TEXT,        -- JSON shortlist entry (name/label/position/angle/seo…)
+    prd        TEXT         -- full build-ready PRD markdown
+);
 """
 
 # guarded ALTERs for databases created before a column existed
@@ -215,13 +235,18 @@ def ideas(origin=None, q=None, limit=3000, category=None, sort="rank", direction
         return [dict(r) for r in _db().execute(sql, params).fetchall()]
 
 
-def count_ideas(origin=None, q=None, category=None):
-    sql = "SELECT COUNT(*) FROM ideas i"
+def count_ideas(origin=None, q=None, category=None, online=False):
+    # join the latest done analysis only when we need to filter on it (online)
+    sql = ("SELECT COUNT(*) FROM ideas i LEFT JOIN analyses a ON a.id=("
+           "SELECT id FROM analyses WHERE idea_id=i.id AND status='done' ORDER BY id DESC LIMIT 1)"
+           if online else "SELECT COUNT(*) FROM ideas i")
     where, params = [], []
     if origin:
         where.append("i.origin=?"); params.append(origin)
     if category:
         where.append("i.category=?"); params.append(category)
+    if online:
+        where.append("a.is_online=1")
     if q:
         esc = q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
         where.append("(i.title LIKE ? ESCAPE '\\' OR i.description LIKE ? ESCAPE '\\')")
@@ -563,6 +588,93 @@ def simulations(limit=50):
             "SELECT s.*, i.title FROM simulations s JOIN ideas i ON i.id=s.idea_id "
             "ORDER BY s.id DESC LIMIT ?", (limit,)).fetchall()
         return [dict(r) for r in rows]
+
+
+# ---------- fit tests + ventures ----------
+
+def new_fit_test(idea_id):
+    with _lock:
+        con = _db()
+        with con:
+            return con.execute("INSERT INTO fit_tests(idea_id) VALUES(?)", (idea_id,)).lastrowid
+
+
+def update_fit_test(tid, **fields):
+    allowed = {"status", "error", "prd", "result", "fit_score", "verdict"}
+    cols = [k for k in fields if k in allowed]
+    if not cols:
+        return
+    vals = [json.dumps(fields[c]) if isinstance(fields[c], (dict, list)) else fields[c]
+            for c in cols]
+    with _lock:
+        con = _db()
+        with con:
+            con.execute(f"UPDATE fit_tests SET {', '.join(c + '=?' for c in cols)} WHERE id=?",
+                        vals + [tid])
+
+
+def fit_tests(limit=50):
+    with _lock:
+        rows = _db().execute(
+            "SELECT f.*, i.title FROM fit_tests f JOIN ideas i ON i.id=f.idea_id "
+            "ORDER BY f.id DESC LIMIT ?", (limit,)).fetchall()
+        return [dict(r) for r in rows]
+
+
+def new_venture(spec):
+    with _lock:
+        con = _db()
+        with con:
+            return con.execute("INSERT INTO ventures(spec) VALUES(?)",
+                               (json.dumps(spec),)).lastrowid
+
+
+def update_venture(vid, **fields):
+    allowed = {"status", "error", "spec", "prd"}
+    cols = [k for k in fields if k in allowed]
+    if not cols:
+        return
+    vals = [json.dumps(fields[c]) if isinstance(fields[c], (dict, list)) else fields[c]
+            for c in cols]
+    with _lock:
+        con = _db()
+        with con:
+            con.execute(f"UPDATE ventures SET {', '.join(c + '=?' for c in cols)} WHERE id=?",
+                        vals + [vid])
+
+
+def ventures(limit=60):
+    with _lock:
+        return [dict(r) for r in _db().execute(
+            "SELECT * FROM ventures ORDER BY id DESC LIMIT ?", (limit,)).fetchall()]
+
+
+def venture(vid):
+    with _lock:
+        row = _db().execute("SELECT * FROM ventures WHERE id=?", (vid,)).fetchone()
+        return dict(row) if row else None
+
+
+def revenue_exemplars(limit=14):
+    """Top REAL-revenue businesses with their what-it-is label — the ground truth
+    the Foundry learns pricing/mechanics from. Pure SQL."""
+    with _lock:
+        rows = _db().execute(
+            "SELECT title, polished, category, points rev FROM ideas "
+            "WHERE origin='ih' AND points > 0 AND points <= 2000000 "
+            "ORDER BY points DESC LIMIT ?", (limit,)).fetchall()
+    out = []
+    for r in rows:
+        name, label = r["title"], ""
+        if r["polished"]:
+            try:
+                p = json.loads(r["polished"])
+                name = p.get("polished_title") or name
+                label = p.get("label") or p.get("refined_description") or ""
+            except (TypeError, json.JSONDecodeError):
+                pass
+        out.append({"name": name, "label": label, "category": r["category"], "rev": r["rev"]})
+    return out
 
 
 def latest_analysis(idea_id):
