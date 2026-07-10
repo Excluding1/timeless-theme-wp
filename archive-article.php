@@ -137,6 +137,41 @@ $all_categories = get_categories( array(
 <section class="py-12 sm:py-16 bg-white">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <?php if ( have_posts() ) : ?>
+
+ <?php
+ // FEATURED LATEST POST — full-width card (image left / text right) above
+ // the grid, page 1 only. Consumes the first post of the loop so the grid
+ // below starts at the second.
+ if ( ! is_paged() ) :
+     the_post();
+     $fthumb = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+     $fimg   = $fthumb ? $fthumb : get_template_directory_uri() . '/images/homepage/after.jpg';
+     $fcats  = get_the_category();
+     $fcat   = ! empty( $fcats ) ? $fcats[0] : null;
+ ?>
+ <a href="<?php the_permalink(); ?>" class="grid grid-cols-1 md:grid-cols-2 bg-surface-container-low rounded-2xl overflow-hidden hover:shadow-lg transition-all group mb-10">
+ <div class="relative overflow-hidden" style="min-height:240px;">
+ <img src="<?php echo esc_url( $fimg ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" loading="eager" />
+ </div>
+ <div class="p-8 sm:p-10 flex flex-col justify-center">
+ <div class="flex items-center gap-2 mb-4">
+ <span class="inline-block py-0.5 px-2 text-[0.6rem] font-bold tracking-widest uppercase rounded-sm" style="background:#e7c08b;color:#041534;">Latest</span>
+ <?php if ( $fcat ) : ?>
+ <span class="inline-block py-0.5 px-2 bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase rounded-sm"><?php echo esc_html( $fcat->name ); ?></span>
+ <?php endif; ?>
+ </div>
+ <h2 class="text-2xl sm:text-3xl font-extrabold text-primary group-hover:text-primary-soft transition-colors tracking-tighter leading-tight mb-3"><?php the_title(); ?></h2>
+ <p class="text-sm sm:text-base text-secondary leading-relaxed mb-4"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 32 ) ); ?></p>
+ <div class="flex items-center gap-2 text-xs text-secondary">
+ <span class="material-symbols-outlined text-sm" aria-hidden="true">schedule</span>
+ <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+ <span class="text-secondary/50">·</span>
+ <span><?php echo (int) timeless_article_reading_time(); ?> min read</span>
+ </div>
+ </div>
+ </a>
+ <?php endif; ?>
+
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
  <?php while ( have_posts() ) : the_post();
  $thumb = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
@@ -157,6 +192,8 @@ $all_categories = get_categories( array(
  <div class="flex items-center gap-2 text-xs text-secondary">
  <span class="material-symbols-outlined text-sm" aria-hidden="true">schedule</span>
  <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+ <span class="text-secondary/50">·</span>
+ <span><?php echo (int) timeless_article_reading_time(); ?> min read</span>
  </div>
  </div>
  </a>

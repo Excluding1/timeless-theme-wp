@@ -13,7 +13,6 @@
 get_header();
 the_post();
 
-$author_name    = 'Timeless Resurfacing';  // consistent brand byline (was get_the_author() = "admin")
 $published_iso  = get_the_date( 'c' );
 $published_disp = get_the_date();
 $modified_iso   = get_the_modified_date( 'c' );
@@ -26,6 +25,15 @@ $categories     = get_the_category();
 $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
 $word_count     = str_word_count( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ) );
 $reading_time   = max( 1, (int) round( $word_count / 200 ) );  // ~200 wpm, min 1
+
+// Hero caption: real featured image → its Media Library caption (may be empty);
+// fallback theme image → honest generic caption.
+if ( $thumb_url ) {
+    $thumb_id     = get_post_thumbnail_id();
+    $hero_caption = $thumb_id ? (string) wp_get_attachment_caption( $thumb_id ) : '';
+} else {
+    $hero_caption = 'Recent Timeless job, Sydney';
+}
 ?>
 
 <script type="application/ld+json">
@@ -38,7 +46,7 @@ $reading_time   = max( 1, (int) round( $word_count / 200 ) );  // ~200 wpm, min 
  "inLanguage": "en-AU",
  <?php if ( $cat_name ) : ?>"articleSection": "<?php echo esc_js( $cat_name ); ?>",<?php endif; ?>
  "wordCount": <?php echo (int) $word_count; ?>,
- "author": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" },
+ "author": { "@type": "Person", "name": "Allan P", "jobTitle": "Quotation and Jobs Manager", "worksFor": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" } },
  "publisher": {
  "@type": "Organization",
  "name": "Timeless Resurfacing",
@@ -84,27 +92,32 @@ $reading_time   = max( 1, (int) round( $word_count / 200 ) );  // ~200 wpm, min 
  <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4"><?php echo esc_html( $cat_name ); ?></span>
  <?php endif; ?>
 
- <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tighter leading-[1.05] mb-6">
+ <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter leading-[1.05] mb-6">
  <?php the_title(); ?>
  </h1>
 
- <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-secondary mb-8">
- <span class="material-symbols-outlined text-base" aria-hidden="true">schedule</span>
- <time datetime="<?php echo esc_attr( $published_iso ); ?>"><?php echo esc_html( $published_disp ); ?></time>
+ <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-secondary mb-8">
+ <!-- TODO: real headshot — swap this initials avatar for a photo of Allan once one exists -->
+ <span class="inline-flex items-center justify-center rounded-full shrink-0" style="width:32px;height:32px;background:#041534;color:#e7c08b;font-weight:800;font-size:0.85rem;" aria-hidden="true">A</span>
+ <span>By <b class="text-primary">Allan P</b>, Quotation and Jobs Manager</span>
+ <span class="text-secondary/50">·</span>
  <?php if ( $show_modified ) : ?>
- <span class="text-secondary/50">·</span>
  <time datetime="<?php echo esc_attr( $modified_iso ); ?>">Updated <?php echo esc_html( $modified_disp ); ?></time>
+ <?php else : ?>
+ <time datetime="<?php echo esc_attr( $published_iso ); ?>">Updated <?php echo esc_html( $published_disp ); ?></time>
  <?php endif; ?>
- <span class="text-secondary/50">·</span>
- <span class="material-symbols-outlined text-base" aria-hidden="true">person</span>
- <span><?php echo esc_html( $author_name ); ?></span>
  <span class="text-secondary/50">·</span>
  <span><?php echo (int) $reading_time; ?> min read</span>
  </div>
 
- <div class="rounded-2xl overflow-hidden shadow-md aspect-16/9 mb-8">
+ <figure class="mb-8">
+ <div class="rounded-2xl overflow-hidden shadow-md aspect-16/9">
  <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover" loading="eager" />
  </div>
+ <?php if ( $hero_caption ) : ?>
+ <figcaption class="text-xs text-secondary italic mt-2"><?php echo esc_html( $hero_caption ); ?></figcaption>
+ <?php endif; ?>
+ </figure>
 </header>
 
 <!-- ARTICLE BODY -->
@@ -113,6 +126,19 @@ $reading_time   = max( 1, (int) round( $word_count / 200 ) );  // ~200 wpm, min 
 $content_html = apply_filters( 'the_content', get_the_content() );
 $toc_items    = $GLOBALS['timeless_toc_items'] ?? array();
 $show_toc     = count( $toc_items ) >= 3;
+
+// Number the TOC items ("01" gold prefix) to match the CSS chapter counter
+// on the article H2s. The FAQ heading is skipped in both places so numbers
+// stay in sync (same exclusion as style.css + the .faq-section JS).
+$toc_n = 0;
+foreach ( $toc_items as $k => $item ) {
+    if ( preg_match( '/frequently asked|faq|common questions/i', $item['text'] ) ) {
+        $toc_items[ $k ]['num'] = '';
+    } else {
+        $toc_n++;
+        $toc_items[ $k ]['num'] = str_pad( (string) $toc_n, 2, '0', STR_PAD_LEFT );
+    }
+}
 ?>
 <div class="px-6 sm:px-8 max-w-7xl mx-auto pb-16">
  <?php if ( $show_toc ) : ?>
@@ -131,7 +157,7 @@ $show_toc     = count( $toc_items ) >= 3;
  </summary>
  <ul class="mt-4 space-y-2">
  <?php foreach ( $toc_items as $item ) : ?>
- <li><a href="#<?php echo esc_attr( $item['slug'] ); ?>" class="text-sm text-secondary hover:text-primary block py-1 leading-snug"><?php echo esc_html( $item['text'] ); ?></a></li>
+ <li><a href="#<?php echo esc_attr( $item['slug'] ); ?>" class="text-sm text-secondary hover:text-primary block py-1 leading-snug"><?php if ( $item['num'] ) : ?><span class="toc-num"><?php echo esc_html( $item['num'] ); ?></span><?php endif; ?><?php echo esc_html( $item['text'] ); ?></a></li>
  <?php endforeach; ?>
  </ul>
  </details>
@@ -144,8 +170,8 @@ $show_toc     = count( $toc_items ) >= 3;
  <ul class="space-y-2.5 border-l-2 border-surface-container">
  <?php foreach ( $toc_items as $item ) : ?>
  <li>
- <a href="#<?php echo esc_attr( $item['slug'] ); ?>" class="text-sm text-secondary hover:text-primary block pl-4 -ml-0.5 border-l-2 border-transparent hover:border-primary leading-snug py-1 transition-colors">
- <?php echo esc_html( $item['text'] ); ?>
+ <a href="#<?php echo esc_attr( $item['slug'] ); ?>" class="toc-link text-sm text-secondary hover:text-primary block pl-4 -ml-0.5 border-l-2 border-transparent hover:border-primary leading-snug py-1 transition-colors">
+ <?php if ( $item['num'] ) : ?><span class="toc-num"><?php echo esc_html( $item['num'] ); ?></span><?php endif; ?><?php echo esc_html( $item['text'] ); ?>
  </a>
  </li>
  <?php endforeach; ?>
@@ -225,6 +251,10 @@ if ( ! empty( $related ) ) : ?>
  <div class="p-5">
  <h3 class="font-bold text-primary group-hover:text-primary-soft transition-colors mb-2"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h3>
  <p class="text-xs text-secondary"><?php echo esc_html( get_the_excerpt( $post->ID ) ); ?></p>
+ <p class="text-xs text-secondary mt-3 flex items-center gap-1">
+ <span class="material-symbols-outlined text-sm" aria-hidden="true">schedule</span>
+ <?php echo (int) timeless_article_reading_time( $post->ID ); ?> min read
+ </p>
  </div>
  </a>
  <?php endforeach; wp_reset_postdata(); ?>

@@ -659,4 +659,58 @@ document.addEventListener('DOMContentLoaded', function () {
         sync();
     });
 
+    /* ── Blog article: FAQ section wrapper + TOC scroll-spy ──
+       1) Tags the FAQ H2 and everything after it (until the next H2) with
+          .faq-section so style.css can render open-by-default Q&A rows —
+          content stays crawlable, no accordion.
+       2) IntersectionObserver over the article's H2 anchors toggles
+          .toc-active (gold border + bold navy, see style.css) on the
+          matching sidebar TOC link.
+       Both guarded so pages without an article/TOC do nothing. */
+    (function () {
+        var content = document.querySelector('.entry-content');
+        if (!content) return;
+
+        // 1) FAQ wrapper
+        var faqRe = /frequently asked|faq|common questions/i;
+        var h2s = content.querySelectorAll('h2');
+        for (var i = 0; i < h2s.length; i++) {
+            if (faqRe.test(h2s[i].textContent || '')) {
+                var node = h2s[i];
+                node.classList.add('faq-section');
+                node = node.nextElementSibling;
+                while (node && node.tagName !== 'H2') {
+                    node.classList.add('faq-section');
+                    node = node.nextElementSibling;
+                }
+                break; // only the first FAQ block
+            }
+        }
+
+        // 2) TOC scroll-spy
+        var headings = content.querySelectorAll('h2[id]');
+        var tocLinks = document.querySelectorAll('.toc-link');
+        if (!headings.length || !tocLinks.length || !('IntersectionObserver' in window)) return;
+
+        function setActive(id) {
+            tocLinks.forEach(function (a) {
+                a.classList.toggle('toc-active', a.getAttribute('href') === '#' + id);
+            });
+        }
+
+        var visible = {};
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                visible[entry.target.id] = entry.isIntersecting;
+            });
+            // Highlight the first heading currently in the reading band;
+            // if none is (between sections), keep the previous highlight.
+            for (var j = 0; j < headings.length; j++) {
+                if (visible[headings[j].id]) { setActive(headings[j].id); return; }
+            }
+        }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+
+        headings.forEach(function (h) { spy.observe(h); });
+    })();
+
 });

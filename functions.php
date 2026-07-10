@@ -103,20 +103,36 @@ function timeless_shortcode_before_after( $atts ) {
 }
 add_shortcode( 'before_after', 'timeless_shortcode_before_after' );
 
-/* [icon_callout icon="check_circle" title="..." content="..."], themed callout */
+/* [icon_callout type="tip|warning|fact" icon="..." title="..." content="..."], themed callout.
+   Three variants, each with a small uppercase label above the title:
+     tip     — gold wash, lightbulb, "PRO TIP"
+     warning — red wash, warning, "WATCH OUT"
+     fact    — original neutral style, verified, "GOOD TO KNOW"
+   Backwards-compatible: no type = fact. An explicit icon="" attr overrides
+   the variant icon. Variant colors are inline styles (arbitrary values may
+   not exist in the compiled Tailwind set). */
 function timeless_shortcode_icon_callout( $atts, $content = null ) {
     $a = shortcode_atts( array(
-        'icon'    => 'check_circle',
+        'icon'    => '',
         'title'   => '',
         'content' => '',
+        'type'    => 'fact',
     ), $atts );
+    $types = array(
+        'tip'     => array( 'icon' => 'lightbulb', 'label' => 'Pro tip',      'bg' => 'rgba(231,192,139,.12)', 'border' => '#e7c08b', 'accent' => '#7a5c10' ),
+        'warning' => array( 'icon' => 'warning',   'label' => 'Watch out',    'bg' => 'rgba(186,26,26,.05)',   'border' => '#ba1a1a', 'accent' => '#ba1a1a' ),
+        'fact'    => array( 'icon' => 'verified',  'label' => 'Good to know', 'bg' => '#f7f9fb',               'border' => '#041534', 'accent' => '#041534' ),
+    );
+    $t    = $types[ strtolower( $a['type'] ) ] ?? $types['fact'];
+    $icon = $a['icon'] ?: $t['icon'];
     $body = $a['content'] ?: $content;
     ob_start(); ?>
-    <div class="my-6 bg-surface-container-low rounded-xl p-6 flex items-start gap-4 border-l-4 border-primary">
-        <span class="material-symbols-outlined text-3xl text-primary shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true"><?php echo esc_html( $a['icon'] ); ?></span>
+    <div class="my-6 rounded-xl p-6 flex items-start gap-4" style="background:<?php echo esc_attr( $t['bg'] ); ?>;border-left:4px solid <?php echo esc_attr( $t['border'] ); ?>;">
+        <span class="material-symbols-outlined text-3xl shrink-0" style="font-variation-settings:'FILL' 1;color:<?php echo esc_attr( $t['accent'] ); ?>;" aria-hidden="true"><?php echo esc_html( $icon ); ?></span>
         <div class="flex-1">
+            <p class="text-[0.65rem] font-bold uppercase tracking-widest mb-1" style="color:<?php echo esc_attr( $t['accent'] ); ?>;"><?php echo esc_html( $t['label'] ); ?></p>
             <?php if ( $a['title'] ) : ?>
-                <h4 class="font-bold text-primary mb-2 text-lg"><?php echo esc_html( $a['title'] ); ?></h4>
+                <h4 class="font-bold text-primary mb-2 text-lg" style="margin-top:0;"><?php echo esc_html( $a['title'] ); ?></h4>
             <?php endif; ?>
             <div class="text-sm text-secondary leading-relaxed"><?php echo wp_kses_post( $body ); ?></div>
         </div>
@@ -290,6 +306,103 @@ function timeless_shortcode_decision_flow( $atts ) {
     return ob_get_clean();
 }
 add_shortcode( 'decision_flow', 'timeless_shortcode_decision_flow' );
+
+/* [key_takeaways items="bullet one;bullet two;bullet three"]
+   Navy summary box for the very top of an article: gold uppercase
+   "THE SHORT ANSWER" label with a bolt icon + white bullets with gold
+   markers. Semicolon-separated items (same convention as stat_grid /
+   when_cards). Override the label via label="" if ever needed. */
+function timeless_shortcode_key_takeaways( $atts ) {
+    $a = shortcode_atts( array(
+        'items' => '',
+        'label' => 'The short answer',
+    ), $atts );
+    $items = array_filter( array_map( 'trim', explode( ';', $a['items'] ) ) );
+    if ( empty( $items ) ) return '';
+    ob_start(); ?>
+    <div class="my-8 rounded-2xl p-6 sm:p-8 not-prose" style="background:#041534;">
+        <p class="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-widest mb-4" style="color:#e7c08b;">
+            <span class="material-symbols-outlined text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true">bolt</span>
+            <?php echo esc_html( $a['label'] ); ?>
+        </p>
+        <ul class="space-y-2.5 list-none pl-0" style="margin:0;padding-left:0;list-style:none;">
+            <?php foreach ( $items as $li ) : ?>
+            <li class="flex gap-3 leading-relaxed" style="color:rgba(255,255,255,.9);">
+                <span aria-hidden="true" style="color:#e7c08b;font-weight:800;">&bull;</span>
+                <span><?php echo esc_html( $li ); ?></span>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'key_takeaways', 'timeless_shortcode_key_takeaways' );
+
+/* [price_range low="" typical="" high="" note=""] — 3-cell stat strip.
+   ⚠️ BUILT BUT INTENTIONALLY UNUSED: site policy is NO prices in content
+   (confirmed decisions). Do not add this to posts unless that policy
+   changes; it exists so a future pricing decision needs no theme change. */
+function timeless_shortcode_price_range( $atts ) {
+    $a = shortcode_atts( array(
+        'low'     => '',
+        'typical' => '',
+        'high'    => '',
+        'note'    => '',
+    ), $atts );
+    if ( '' === $a['low'] && '' === $a['typical'] && '' === $a['high'] ) return '';
+    $cells = array(
+        array( 'Low', $a['low'], false ),
+        array( 'Typical', $a['typical'], true ),
+        array( 'High', $a['high'], false ),
+    );
+    ob_start(); ?>
+    <div class="my-8 not-prose">
+        <div class="grid grid-cols-3 gap-3">
+            <?php foreach ( $cells as $c ) : if ( '' === $c[1] ) continue; ?>
+            <div class="bg-white rounded-xl p-4 text-center border border-surface-container" <?php echo $c[2] ? 'style="border-color:#041534;box-shadow:0 4px 12px rgba(4,21,52,.08);"' : ''; ?>>
+                <p class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary mb-1"><?php echo esc_html( $c[0] ); ?></p>
+                <p class="text-xl sm:text-2xl font-extrabold text-primary leading-tight"><?php echo esc_html( $c[1] ); ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php if ( $a['note'] ) : ?>
+            <p class="text-xs text-secondary italic mt-2 text-center"><?php echo esc_html( $a['note'] ); ?></p>
+        <?php endif; ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'price_range', 'timeless_shortcode_price_range' );
+
+/* [inline_cta text="..." button="..."] — soft mid-article CTA row.
+   Light surface bg, one line of copy + navy button to /contact/. Meant to
+   sit at a natural break after the 2nd or 3rd section of a post. */
+function timeless_shortcode_inline_cta( $atts ) {
+    $a = shortcode_atts( array(
+        'text'   => 'Not sure if yours can be resurfaced? Send us 2 photos and get a fixed quote in 24 hours.',
+        'button' => 'Get a free quote',
+    ), $atts );
+    ob_start(); ?>
+    <div class="my-8 rounded-xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 not-prose" style="background:#f2f4f8;">
+        <p class="flex-1 text-sm font-medium" style="color:#041534;margin:0;"><?php echo esc_html( $a['text'] ); ?></p>
+        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="inline-flex items-center justify-center gap-2 bg-primary text-white text-sm font-bold py-2.5 px-5 rounded-lg hover:shadow-lg transition-all shrink-0 whitespace-nowrap">
+            <?php echo esc_html( $a['button'] ); ?>
+            <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+        </a>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'inline_cta', 'timeless_shortcode_inline_cta' );
+
+/* Reading time for an article (~200 wpm, min 1). Shared by single hero,
+   related-post cards and the archive cards. */
+function timeless_article_reading_time( $post_id = 0 ) {
+    $post_id = $post_id ? $post_id : get_the_ID();
+    $words   = str_word_count( wp_strip_all_tags( strip_shortcodes( (string) get_post_field( 'post_content', $post_id ) ) ) );
+    return max( 1, (int) round( $words / 200 ) );
+}
 
 /* ─────────────────────────────────────────────────────────────────
  * [timeless_quote_form], Embeds the React quote form anywhere.
@@ -495,16 +608,20 @@ function timeless_blog_end_of_article_cta() {
    only, no "guarantee"/"written" wording; per-material warranty spans. */
 function timeless_blog_author_box() {
     $abn = function_exists( 'timeless_abn' ) ? trim( timeless_abn() ) : '';
+    // Last reviewed = modified date (falls back to published if never modified)
+    $reviewed = get_the_modified_date() ? get_the_modified_date() : get_the_date();
     ob_start(); ?>
-    <aside class="max-w-3xl mx-auto px-6 sm:px-8 pb-14" aria-label="About Timeless Resurfacing">
+    <aside class="max-w-3xl mx-auto px-6 sm:px-8 pb-14" aria-label="About the author">
         <div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 border border-surface-container">
             <div class="flex items-start gap-5">
-                <div class="shrink-0 w-14 h-14 rounded-full bg-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined text-3xl text-white" aria-hidden="true">verified</span>
+                <!-- TODO: real headshot — swap this initials avatar for a photo of Allan once one exists -->
+                <div class="shrink-0 w-14 h-14 rounded-full flex items-center justify-center" style="background:#041534;" aria-hidden="true">
+                    <span style="color:#e7c08b;font-weight:800;font-size:1.35rem;">A</span>
                 </div>
                 <div class="min-w-0">
                     <p class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary mb-1">About the author</p>
-                    <h2 class="text-lg font-extrabold text-primary tracking-tight mb-2">Timeless Resurfacing</h2>
+                    <h2 class="text-lg font-extrabold text-primary tracking-tight mb-1">Allan P</h2>
+                    <p class="text-xs font-semibold text-secondary mb-2">Quotation and Jobs Manager, Timeless Resurfacing</p>
                     <p class="text-sm text-secondary leading-relaxed">
                         Sydney bathroom resurfacing and shower regrouting specialists. We resurface baths, tiles, basins
                         and vanities and re-grout showers across Greater Sydney, and we quote from photos within 24 hours.
@@ -529,6 +646,9 @@ function timeless_blog_author_box() {
                     <span>Fixed-price quotes from photos within 24&nbsp;hours</span>
                 </li>
             </ul>
+            <p class="mt-5 pt-5 text-sm text-secondary leading-relaxed" style="border-top:1px solid #e7e8ed;">
+                Every guide comes from jobs we have actually done in Sydney homes. Last reviewed <?php echo esc_html( $reviewed ); ?>.
+            </p>
         </div>
     </aside>
     <?php

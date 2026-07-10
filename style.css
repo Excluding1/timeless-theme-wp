@@ -218,12 +218,18 @@ html, body {
    posts with native blocks (paragraph, image, list, quote) + custom shortcodes
    ([before_after], [icon_callout], [process_step], [stat_grid]).
 
-   Typography rhythm tuned for long-form reading: 17px body, generous
-   line-height, comfortable max-width. */
+   Typography rhythm tuned for long-form reading: 18px near-navy body
+   (17px on small screens), generous line-height, chapter-style H2 breaks
+   with gold auto-numbering via CSS counter. Gray #595e6d stays for META
+   ONLY — body text is near-navy for contrast. */
 .entry-content {
-    font-size: 17px;
-    line-height: 1.7;
-    color: rgb(89, 94, 109);  /* secondary text */
+    font-size: 18px;
+    line-height: 1.75;
+    color: #2a3142;  /* near-navy body (NOT the meta gray) */
+    counter-reset: h2ctr;
+}
+@media (max-width: 640px) {
+    .entry-content { font-size: 17px; }
 }
 .entry-content > * { margin-bottom: 1.25rem; }
 .entry-content > *:last-child { margin-bottom: 0; }
@@ -231,22 +237,47 @@ html, body {
 .entry-content p { margin-bottom: 1.25rem; }
 .entry-content p:last-child { margin-bottom: 0; }
 
+.entry-content strong { color: #041534; }
+
 .entry-content h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     line-height: 1.2;
     font-weight: 800;
-    color: rgb(4, 21, 52);  /* primary */
+    color: #041534;  /* primary */
     letter-spacing: -0.02em;
-    margin-top: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid #e7e8ed;
     margin-bottom: 1rem;
     /* Offset for sticky nav when jumped to via TOC anchor */
     scroll-margin-top: 5rem;
 }
+.entry-content h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+/* Gold chapter numbering ("01", "02", …). The FAQ heading is excluded by id —
+   ids are auto-generated from heading text by timeless_inject_heading_anchors(),
+   so both common FAQ heading phrasings are skipped and the counter stays
+   consecutive for real chapters. */
+.entry-content h2:not([id^="frequently-asked"]):not([id^="common-questions"]) {
+    counter-increment: h2ctr;
+}
+.entry-content h2:not([id^="frequently-asked"]):not([id^="common-questions"])::before {
+    content: "0" counter(h2ctr);
+    display: block;
+    color: #e7c08b;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.35rem;
+}
 .entry-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     line-height: 1.3;
     font-weight: 700;
-    color: rgb(4, 21, 52);
+    color: #041534;
     letter-spacing: -0.01em;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
@@ -272,11 +303,12 @@ html, body {
 .entry-content a {
     color: rgb(4, 21, 52);
     text-decoration: underline;
+    text-decoration-color: #e7c08b;  /* gold underline */
+    text-decoration-thickness: 2px;
     text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
-    transition: color 0.15s ease;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
-.entry-content a:hover { color: rgb(90, 103, 137); }
+.entry-content a:hover { color: rgb(90, 103, 137); text-decoration-color: #041534; }
 
 .entry-content blockquote {
     border-left: 4px solid rgb(231, 192, 139);  /* accent gold */
@@ -359,6 +391,40 @@ html, body {
     border-radius: 0.5rem;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+}
+
+/* ── Blog: FAQ section (open-by-default, crawlable — no accordion) ──
+   js/main.js finds the FAQ H2 (text matches /frequently asked|faq|common
+   questions/i) and adds .faq-section to it and every following sibling up
+   to the next H2. Each H3 question becomes a bordered row; answers keep
+   normal body style. */
+.entry-content h3.faq-section {
+    padding: 1rem 0;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    border-top: 1px solid #e7e8ed;
+    color: #041534;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+.entry-content h3.faq-section + p.faq-section { margin-bottom: 1rem; }
+
+/* ── Blog: TOC scroll-spy + numbering ──
+   .toc-link gets .toc-active from the IntersectionObserver in js/main.js
+   when its section is in view. .toc-num is the gold "01" mono prefix the
+   template prints before each TOC item. */
+.toc-link.toc-active {
+    color: #041534 !important;
+    font-weight: 700;
+    border-left-color: #e7c08b !important;
+}
+.toc-num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #e7c08b;
+    letter-spacing: 0.08em;
+    margin-right: 0.4rem;
 }
 
 /* Pagination on archive page */
