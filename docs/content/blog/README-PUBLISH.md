@@ -1,5 +1,17 @@
 # Blog publish runbook, 10 minutes per post
 
+> **⚡ Update 2026-07-11 — AUTOMATED path now exists (recommended).** `scripts/publish-blogs.py`
+> pushes these posts straight to the live site via the WordPress REST API — no theme upload,
+> no copy-paste. Posts live in the WordPress DATABASE, not the theme zip: publishing content
+> never re-deploys the website and never changes existing URLs (zero SEO risk). One-time setup:
+> wp-admin → Users → Profile → Application Passwords → create "clifford-publisher" → save as
+> `.secrets/wp-app-password.key` (format `USERNAME:xxxx xxxx xxxx...`, chmod 600). Then:
+> `python3 scripts/publish-blogs.py --images ~/Downloads/blog-images` uploads everything as
+> **DRAFTS** (+ heroes to the Media Library, auto-set as featured images); add `--publish` only
+> after the Rule-8 pass. Manual paste path below still works and is unchanged.
+> Hero images: all 12 AI-illustrative images are generated (`~/Downloads/blog-images/`) — the
+> table below predates them; the current hero per post is the `HERO_MAP` in the script.
+
 > **Update 2026-07-08 (engagement-visuals pass).** All 8 drafts in this folder were retrofitted with theme shortcodes at natural section breaks, and every broken image was resolved. Three things changed for publishing:
 > - **Do NOT paste any inline FAQ `<script type="application/ld+json">` block.** The theme now auto-generates FAQ schema from each post's visible "Frequently asked questions" H3/P pairs, so the old inline scripts were removed (they were leaking as visible JSON text on the page). Just paste the visible FAQ H2/H3/P text as normal.
 > - **The posts now contain shortcodes** such as `[compare_table ...]`, `[decision_flow ...]`, `[when_cards ...]`, `[process_step ...]` and `[stat_grid ...]`. Paste them exactly as written; WordPress renders them via `functions.php` into branded, responsive HTML/SVG. No extra action needed.

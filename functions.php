@@ -614,10 +614,14 @@ function timeless_blog_author_box() {
     <aside class="max-w-3xl mx-auto px-6 sm:px-8 pb-14" aria-label="About the author">
         <div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 border border-surface-container">
             <div class="flex items-start gap-5">
-                <!-- TODO: real headshot — swap this initials avatar for a photo of Allan once one exists -->
+                <!-- TODO: real headshot — swap this illustrated avatar for a photo of Allan once one exists -->
+                <?php if ( file_exists( get_template_directory() . '/images/about/author-avatar.png' ) ) : ?>
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/images/about/author-avatar.png' ); ?>" alt="" class="shrink-0 w-14 h-14 rounded-full object-cover" style="border:2px solid #e7c08b;" aria-hidden="true" />
+                <?php else : ?>
                 <div class="shrink-0 w-14 h-14 rounded-full flex items-center justify-center" style="background:#041534;" aria-hidden="true">
                     <span style="color:#e7c08b;font-weight:800;font-size:1.35rem;">A</span>
                 </div>
+                <?php endif; ?>
                 <div class="min-w-0">
                     <p class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary mb-1">About the author</p>
                     <h2 class="text-lg font-extrabold text-primary tracking-tight mb-1">Allan P</h2>
