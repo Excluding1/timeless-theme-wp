@@ -310,6 +310,12 @@ html, body {
 }
 .entry-content a:hover { color: rgb(90, 103, 137); text-decoration-color: #041534; }
 
+/* Button-style links inside article content (e.g. the [inline_cta] button) must keep
+   their own colors — without this, the text-link rule above wins on specificity and
+   renders navy text on the navy button (invisible). */
+.entry-content a.bg-primary,
+.entry-content a.bg-primary:hover { color: #fff; text-decoration: none; }
+
 .entry-content blockquote {
     border-left: 4px solid rgb(231, 192, 139);  /* accent gold */
     padding: 1rem 1.5rem;

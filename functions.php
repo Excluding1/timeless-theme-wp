@@ -292,9 +292,12 @@ function timeless_shortcode_decision_flow( $atts ) {
             <text fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle"><?php echo $tspans( $q, 340, 56 ); ?></text>
             <path d="M300 88 L150 150" stroke="#2e7d52" stroke-width="2" fill="none"/>
             <path d="M380 88 L530 150" stroke="#b45309" stroke-width="2" fill="none"/>
-            <rect x="210" y="118" width="46" height="22" rx="11" fill="#2e7d52"/>
+            <?php // pill width scales with the label so longer words ("Drummy") don't overflow
+            $yw = max( 46, mb_strlen( $a['yes_label'] ) * 7.5 + 18 );
+            $nw = max( 46, mb_strlen( $a['no_label'] ) * 7.5 + 18 ); ?>
+            <rect x="<?php echo 233 - $yw / 2; ?>" y="118" width="<?php echo $yw; ?>" height="22" rx="11" fill="#2e7d52"/>
             <text x="233" y="133" fill="#fff" font-size="12" font-weight="700" text-anchor="middle"><?php echo esc_html( $a['yes_label'] ); ?></text>
-            <rect x="424" y="118" width="46" height="22" rx="11" fill="#b45309"/>
+            <rect x="<?php echo 447 - $nw / 2; ?>" y="118" width="<?php echo $nw; ?>" height="22" rx="11" fill="#b45309"/>
             <text x="447" y="133" fill="#fff" font-size="12" font-weight="700" text-anchor="middle"><?php echo esc_html( $a['no_label'] ); ?></text>
             <rect x="20" y="150" width="260" height="120" rx="12" fill="#eef6f1" stroke="#2e7d52" stroke-width="1.5"/>
             <text fill="#1f5c3d" font-size="13.5" font-weight="600" text-anchor="middle"><?php echo $tspans( $y, 150, 210 ); ?></text>
