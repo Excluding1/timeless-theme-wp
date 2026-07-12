@@ -1,40 +1,48 @@
-/* Quote Inbox front-end — one readable card per quote request. No dependencies. */
+/* Quote Inbox front-end — one decision-ready card per quote request. No dependencies. */
 const $ = s => document.querySelector(s);
 let QUOTES = [];        // all quotes from server
-let VIEW = [];          // filtered list
+let VIEW = [];          // filtered + searched list
 let idx = 0;            // current card in VIEW
-let filter = 'new';     // new | qa | all | reviewed
-let lb = { photos: [], i: 0 };
+let filter = 'new';
+let query = '';
+let lb = { photos: [], i: 0, lastFocus: null };
 
 const FILTERS = [
   { key: 'new', label: 'New', test: q => q.stage === 'Quote Requested' && !q.reviewed },
   { key: 'qa', label: 'Q&A', test: q => q.stage === 'Q&A' && !q.reviewed },
-  { key: 'all', label: 'All open', test: () => true },
+  { key: 'open', label: 'All open', test: q => q.status === 'open' },
   { key: 'reviewed', label: 'Reviewed', test: q => q.reviewed },
 ];
 
-function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-function money(n){ return n==null ? null : '$' + Number(n).toLocaleString('en-AU'); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function money(n){ return n==null ? null : (n<0?'−$':'$') + Math.abs(Number(n)).toLocaleString('en-AU'); }
 function ago(iso){
   if(!iso) return '';
   const d = (Date.now() - new Date(iso)) / 1000;
+  if (isNaN(d)) return '';
   if (d < 3600) return Math.max(1,Math.round(d/60)) + 'm ago';
   if (d < 86400) return Math.round(d/3600) + 'h ago';
   return Math.round(d/86400) + 'd ago';
 }
 function titleCase(s){ return String(s||'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase()); }
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),1600); }
 
-async function load(){
-  $('#stage').innerHTML = '<div class="status">Loading quotes from GoHighLevel…</div>';
+async function load(preserve){
+  const keepId = preserve ? (VIEW[idx] && VIEW[idx].id) : null;
+  const keepFilter = preserve ? filter : 'new';
+  if(!preserve) $('#stage').innerHTML = '<div class="skel"></div>';
   try{
     const r = await fetch('/api/quotes');
     const d = await r.json();
     if (d.error) throw new Error(d.error);
     QUOTES = d.quotes || [];
-    renderTabs();
-    applyFilter('new');
+    filter = keepFilter;
+    applyFilter(filter, keepId);
   }catch(e){
-    $('#stage').innerHTML = `<div class="status">Couldn't load quotes.<br><b>${esc(e.message)}</b><br><br>Is the token in <code>.secrets/ghl-pit.key</code>?</div>`;
+    $('#counter').style.display='none'; $('#nav').style.display='none'; $('#hint').style.display='none';
+    $('#stage').innerHTML = `<div class="status">Couldn't reach GoHighLevel right now.<br><b>${esc(e.message)}</b><br>
+      <button class="retry" id="retry">Try again</button></div>`;
+    $('#retry').onclick = ()=>load();
   }
 }
 
@@ -46,20 +54,25 @@ function renderTabs(){
   document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>applyFilter(t.dataset.k));
 }
 
-function applyFilter(k){
+function applyFilter(k, keepId){
   filter = k;
-  const f = FILTERS.find(x=>x.key===k);
-  VIEW = QUOTES.filter(f.test);
-  idx = 0;
+  const f = FILTERS.find(x=>x.key===k) || FILTERS[0];
+  VIEW = QUOTES.filter(f.test).filter(matchQuery);
+  idx = keepId ? Math.max(0, VIEW.findIndex(q=>q.id===keepId)) : 0;
   renderTabs();
   render();
+}
+function matchQuery(q){
+  if(!query) return true;
+  const s = (q.customer+' '+q.address).toLowerCase();
+  return s.includes(query);
 }
 
 function render(){
   if(!VIEW.length){
-    $('#stage').innerHTML = `<div class="status">Nothing in <b>${FILTERS.find(f=>f.key===filter).label}</b>.<br>🎉 All caught up.</div>`;
-    $('#counter').style.display='none'; $('#nav').style.display='none';
-    $('#actions').style.display='none'; $('#hint').style.display='none';
+    const msg = query ? `No matches for “${esc(query)}”.` : `Nothing in <b>${FILTERS.find(f=>f.key===filter).label}</b>.<br>🎉 All caught up.`;
+    $('#stage').innerHTML = `<div class="status">${msg}</div>`;
+    $('#counter').style.display='none'; $('#nav').style.display='none'; $('#hint').style.display='none';
     return;
   }
   idx = Math.max(0, Math.min(idx, VIEW.length-1));
@@ -68,52 +81,70 @@ function render(){
   $('#pos').textContent = `${idx+1} of ${VIEW.length}`;
   $('#sub').textContent = q.reviewed ? 'Reviewed' : (q.stage||'');
   $('#stage').innerHTML = card(q);
-  document.querySelectorAll('.shot').forEach((el,i)=>el.onclick=()=>openLb(q.photos,i));
+  wireCard(q);
   $('#nav').style.display='flex';
   $('#prev').disabled = idx===0;
   $('#next').disabled = idx===VIEW.length-1;
   $('#hint').style.display='block';
-  const a = $('#actions'); a.style.display='flex';
-  $('#bCall').style.display = q.phone ? 'flex':'none';
-  $('#bCall').textContent = q.phone ? `📞 Call ${q.customer.split(' ')[0]}` : '';
-  const done = $('#bDone');
-  done.textContent = q.reviewed ? '✓ Reviewed' : 'Mark reviewed';
-  done.classList.toggle('is', q.reviewed);
 }
 
 function card(q){
-  const facts = [];
-  const push=(k,v)=>{ if(v!=null && v!=='' && v!=='not_asked' && v!=='n/a') facts.push([k,v]); };
-  push('Bathrooms', q.bathroomCount && (q.bathroomIndex? `#${q.bathroomIndex} of ${q.bathroomCount}` : q.bathroomCount));
-  push('Property', titleCase(q.propertyType));
-  push('Full bathroom', q.fullBathroomMode==='yes'?'Yes':(q.fullBathroomMode==='no'?'No':''));
-  push('Basin finish', titleCase(q.basinFinish));
-  push('Lift access', titleCase(q.liftAccess));
-  push('Ventilation', titleCase(q.ventilation));
-  push('Built before 1990', titleCase(q.builtBefore1990));
-  push('Pricing tier', q.tier);
+  // header badges — the quoting-decision trio up top: tier · bathrooms · photos · estimate
+  const badges = [];
+  if(q.stage==='Quote Requested' && !q.reviewed) badges.push('<span class="badge new">New request</span>');
+  else if(q.reviewed) badges.push('<span class="badge rev">Reviewed</span>');
+  else badges.push(`<span class="badge">${esc(q.stage)}</span>`);
+  if(q.tier) badges.push(`<span class="badge tier">Tier ${esc(q.tier)}</span>`);
+  if(q.bathroomCount) badges.push(`<span class="badge">${esc(q.bathroomCount)} bathroom${q.bathroomCount==1?'':'s'}</span>`);
+  const nShots = q.photosByArea.reduce((n,g)=>n+g.photos.length,0);
+  if(nShots) badges.push(`<span class="badge">📷 ${nShots} photo${nShots==1?'':'s'}</span>`);
+  if(q.quoteMin!=null||q.quoteMax!=null) badges.push(`<span class="badge gold">Est ${money(q.quoteMin)||'?'}–${money(q.quoteMax)||'?'}</span>`);
+  if(q.phone) badges.push(`<span class="badge">📞 ${esc(q.phone)}</span>`);
 
-  const qminmax = (q.quoteMin!=null||q.quoteMax!=null)
-    ? `<span class="badge gold">Est ${money(q.quoteMin)||'?'}–${money(q.quoteMax)||'?'}</span>` : '';
-  const stageBadge = q.reviewed ? '<span class="badge rev">Reviewed</span>'
-    : (q.stage==='Quote Requested' ? '<span class="badge new">New request</span>' : `<span class="badge">${esc(q.stage)}</span>`);
-  const brokenBadge = q._brokenFields && q._brokenFields.length
-    ? `<span class="badge warn" title="These per-area fields didn't save correctly in GHL: ${esc(q._brokenFields.join(', '))}">⚠ area detail incomplete</span>` : '';
+  // scope panel (Resolved Line Items) + priced modifiers
+  let scope = '';
+  if(q.lineItems.length){
+    scope = `<div class="section"><p class="label">Job scope</p><div class="scope">${
+      q.lineItems.map(li=>`<div class="li"><span class="area">${esc(li.area)}</span><span class="svc">${esc(li.service)}${li.description?`<span class="d">${esc(li.description)}</span>`:''}</span></div>`).join('')
+    }</div>${modifiers(q)}</div>`;
+  } else if(q.servicesSummary && !q.servicesSummary.includes('[object')){
+    scope = `<div class="section"><p class="label">What they want</p><div class="scope"><div class="li"><span class="svc">${esc(q.servicesSummary)}</span></div></div>${modifiers(q)}</div>`;
+  }
 
-  const areas = q.selectedAreas && !String(q.selectedAreas).includes('[object')
-    ? `<div class="section"><p class="label">Areas selected</p><div class="summary">${esc(q.selectedAreas)}</div></div>` : '';
+  // lost-photos loud warning
+  const lost = q.photosLost ? `<div class="section"><div class="lost">⚠ ${q.photosLost} photo${q.photosLost>1?'s were':' was'} uploaded but lost before reaching us (a known full-bathroom form bug). Call the customer and ask them to text the photos, or book an inspection.</div></div>` : '';
 
-  const desc = q.description.length
-    ? q.description.map(esc).join('\n\n')
-    : null;
+  // risk / missing-info checklist
+  const flags = q.flags.length ? `<div class="section"><p class="label">Before you quote</p><div class="flags">${
+    q.flags.map(f=>`<div class="flag ${f.sev==='high'?'high':''}"><span class="ic">${f.sev==='high'?'▲':'•'}</span><span>${esc(f.text)}</span></div>`).join('')
+  }</div></div>` : '';
 
-  const summary = q.servicesSummary && !q.servicesSummary.includes('[object')
-    ? `<div class="section"><p class="label">What they want done</p><div class="summary">${esc(q.servicesSummary)}</div></div>` : '';
+  // customer's own words
+  const desc = q.description.length ? q.description.map(esc).join('\n\n') : null;
+  const reqBlock = `<div class="section"><p class="label">Customer's request${desc?`<button class="copy" data-copy="req">Copy</button>`:''}</p>
+    ${desc?`<div class="req">${desc}</div>`:`<div class="req empty">No written description — see the scope and photos.</div>`}</div>`;
 
-  const photos = q.photos.length
-    ? `<div class="gallery">${q.photos.map((p,i)=>`
-        <div class="shot"><img loading="lazy" src="${esc(p.thumb)}" alt="photo ${i+1}"/>${p.heic?'<span class="tag">HEIC→JPG</span>':''}</div>`).join('')}</div>`
-    : `<div class="nophoto">No photos uploaded${q.photosUploaded==='no'?' (customer skipped)':''} — worth a call to see the bathroom.</div>`;
+  // photos grouped by area
+  let photos;
+  if(nShots){
+    const multi = q.photosByArea.length>1;
+    photos = q.photosByArea.map(g=>`<div class="areagroup">${multi?`<p class="ah">${esc(g.label)} · ${g.photos.length}</p>`:''}
+      <div class="gallery">${g.photos.map((p,i)=>`<button class="shot" data-full="${esc(p.full)}" data-area="${esc(g.area)}" aria-label="${esc(g.label)} photo ${i+1}"><img loading="lazy" src="${esc(p.thumb)}" alt="${esc(g.label)} photo ${i+1}"/>${p.heic?'<span class="tag">HEIC→JPG</span>':''}</button>`).join('')}</div></div>`).join('');
+  } else if(!q.photosLost){
+    photos = `<div class="nophoto">No photos uploaded${q.photosUploaded==='no'?' (customer skipped)':''} — worth a call.</div>`;
+  } else photos = '';
+  const photoSection = (nShots||(!q.photosLost)) ? `<div class="section"><p class="label">Photos${nShots?` (${nShots})`:''}</p>${photos}</div>` : '';
+
+  // extra facts
+  const facts=[];
+  const raw=(k,v,sk=[])=>{ v=(v==null?'':String(v)).trim(); if(!v||sk.includes(v.toLowerCase())||['not_asked','n/a','no','none',''].includes(v.toLowerCase())) return; facts.push([k,titleCase(v)]); };
+  raw('Basin finish', q.basinFinish, ['standard']);
+  raw('Epoxy', q.epoxyMode==='epoxy'?'Epoxy upgrade':'');
+  raw('Full bathroom scope', q.fullBathroomScope);
+  raw('Previously resurfaced', q.prevResurfaced==='yes'?'Yes':'');
+  const factsBlock = facts.length ? `<div class="section"><p class="label">Extra detail</p><div class="facts">${facts.map(([k,v])=>`<div class="fact"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>`).join('')}</div></div>` : '';
+
+  const mapHref = q.address ? `https://maps.google.com/?q=${encodeURIComponent(q.address)}` : null;
 
   return `
   <div class="card">
@@ -121,80 +152,84 @@ function card(q){
       <div class="crow">
         <div class="who">
           <h2>${esc(q.customer)}</h2>
-          <div class="addr">📍 ${esc(q.address)||'No address given'}</div>
+          ${mapHref?`<a class="addr" href="${esc(mapHref)}" target="_blank" rel="noopener">📍 ${esc(q.address)}</a>`:`<span class="addr">📍 No address given</span>`}
         </div>
         <span class="when">${ago(q.createdAt)}</span>
       </div>
-      <div class="badges">
-        ${stageBadge}${qminmax}
-        ${q.bathroomCount?`<span class="badge">${esc(q.bathroomCount)} bathroom${q.bathroomCount==1?'':'s'}</span>`:''}
-        ${q.phone?`<span class="badge">📞 ${esc(q.phone)}</span>`:'<span class="badge warn">no phone</span>'}
-        ${brokenBadge}
-      </div>
+      <div class="badges">${badges.join('')}</div>
     </div>
     <div class="cbody">
-      <div class="section">
-        <p class="label">Customer's request</p>
-        ${desc ? `<div class="req">${desc}</div>` : `<div class="req empty">No written description — see photos and the summary below.</div>`}
-      </div>
-      ${summary}
-      ${areas}
-      <div class="section">
-        <p class="label">Photos${q.photos.length?` (${q.photos.length})`:''}</p>
-        ${photos}
-      </div>
-      <div class="section">
-        <p class="label">Details</p>
-        <div class="facts">
-          ${facts.map(([k,v])=>`<div class="fact"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>`).join('') || '<span class="nophoto">No extra details captured.</span>'}
-        </div>
-      </div>
+      ${lost}${flags}${scope}${reqBlock}${photoSection}${factsBlock}
+    </div>
+    <div class="footer-actions">
+      ${q.phone?`<a class="btn call" id="bCall" href="tel:${esc(q.phone.replace(/\s/g,''))}">📞 <span class="full">Call </span>${esc((q.customer||'').split(' ')[0]||'customer')}</a>`:''}
+      <a class="btn ghl" id="bGhl" href="${esc(q.ghlUrl)}" target="_blank" rel="noopener">Open in GHL</a>
+      <button class="btn done${q.reviewed?' is':''}" id="bDone">${q.reviewed?'✓ Reviewed':'Mark reviewed'}</button>
     </div>
   </div>`;
 }
 
-/* ---- actions ---- */
+function modifiers(q){
+  const chips=[];
+  for(const m of q.modifiers) chips.push(`<span class="mod ${m.delta<0?'minus':''}">${esc(m.label)}${m.delta!=null?`<span class="delta">${money(m.delta)}</span>`:''}</span>`);
+  if(q.multiBathDiscount && !q.modifiers.some(m=>/multi/i.test(m.label))) chips.push(`<span class="mod minus">Multi-bathroom<span class="delta">${money(-Math.abs(q.multiBathDiscount))}</span></span>`);
+  return chips.length?`<div class="mods">${chips.join('')}</div>`:'';
+}
+
+function wireCard(q){
+  document.querySelectorAll('.shot').forEach(el=>{
+    el.onclick=()=>{
+      const area=el.dataset.area;
+      const group=q.photosByArea.find(g=>g.area===area)||{photos:[]};
+      const flat=q.photosByArea.flatMap(g=>g.photos);
+      openLb(flat, flat.findIndex(p=>p.full===el.dataset.full));
+    };
+  });
+  const copyBtn=document.querySelector('.copy[data-copy="req"]');
+  if(copyBtn) copyBtn.onclick=()=>{ navigator.clipboard.writeText(q.description.join('\n\n')).then(()=>toast('Request copied')); };
+  const done=$('#bDone'); if(done) done.onclick=()=>toggleReviewed();
+}
+
+/* ---- navigation ---- */
 function move(d){ idx=Math.max(0,Math.min(VIEW.length-1,idx+d)); render(); window.scrollTo({top:0,behavior:'smooth'}); }
 async function toggleReviewed(){
-  const q=VIEW[idx]; const nowReviewed=!q.reviewed;
-  q.reviewed=nowReviewed;
-  const orig=QUOTES.find(x=>x.id===q.id); if(orig) orig.reviewed=nowReviewed;
-  try{ await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:q.id,reviewed:nowReviewed})}); }catch{}
+  const q=VIEW[idx]; const now=!q.reviewed;
+  q.reviewed=now;
+  const orig=QUOTES.find(x=>x.id===q.id); if(orig) orig.reviewed=now;
+  try{ await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:q.id,reviewed:now})}); }
+  catch{ toast('Saved locally only'); }
   renderTabs();
-  // after marking reviewed from a working queue, jump to next unreviewed
-  if(nowReviewed && filter!=='all' && filter!=='reviewed'){ VIEW=VIEW.filter(x=>x.id!==q.id); if(idx>=VIEW.length) idx=VIEW.length-1; render(); }
+  if(now && filter!=='open' && filter!=='reviewed'){ VIEW=VIEW.filter(x=>x.id!==q.id); if(idx>=VIEW.length) idx=VIEW.length-1; render(); toast('Reviewed · next'); }
   else render();
 }
-function callCustomer(){ const q=VIEW[idx]; if(q.phone) location.href='tel:'+q.phone.replace(/\s/g,''); }
-function openGhl(){ const q=VIEW[idx]; window.open(q.ghlUrl,'_blank'); }
+function callCustomer(){ const q=VIEW[idx]; if(q&&q.phone) location.href='tel:'+q.phone.replace(/\s/g,''); }
+function openGhl(){ const q=VIEW[idx]; if(q) window.open(q.ghlUrl,'_blank','noopener'); }
 
 /* ---- lightbox ---- */
-function openLb(photos,i){ lb={photos,i}; renderLb(); $('#lb').classList.add('open'); }
-function renderLb(){
-  const p=lb.photos[lb.i]; if(!p)return;
-  $('#lbimg').src=p.full; $('#lbdl').href=p.raw;
-  $('#lbcount').textContent=`${lb.i+1} / ${lb.photos.length}`;
-}
-$('#lbx').onclick=()=>$('#lb').classList.remove('open');
+function openLb(photos,i){ lb={photos,i:Math.max(0,i),lastFocus:document.activeElement}; renderLb(); const el=$('#lb'); el.classList.add('open'); $('#lbx').focus(); }
+function closeLb(){ $('#lb').classList.remove('open'); if(lb.lastFocus&&lb.lastFocus.focus) lb.lastFocus.focus(); }
+function renderLb(){ const p=lb.photos[lb.i]; if(!p)return; $('#lbimg').src=p.full; $('#lbdl').href=p.raw; $('#lbcount').textContent=`${lb.i+1} / ${lb.photos.length}`; }
+$('#lbx').onclick=closeLb;
 $('#lbprev').onclick=()=>{ lb.i=(lb.i-1+lb.photos.length)%lb.photos.length; renderLb(); };
 $('#lbnext').onclick=()=>{ lb.i=(lb.i+1)%lb.photos.length; renderLb(); };
-$('#lb').onclick=e=>{ if(e.target.id==='lb') $('#lb').classList.remove('open'); };
+$('#lb').onclick=e=>{ if(e.target.id==='lb') closeLb(); };
 
 $('#prev').onclick=()=>move(-1);
 $('#next').onclick=()=>move(1);
-$('#bCall').onclick=callCustomer;
-$('#bGhl').onclick=openGhl;
-$('#bDone').onclick=toggleReviewed;
-$('#refresh').onclick=load;
+$('#refresh').onclick=()=>load(true);
+const qInput=$('#q');
+qInput.oninput=()=>{ query=qInput.value.trim().toLowerCase(); applyFilter(filter); };
 
 /* keyboard */
 document.addEventListener('keydown',e=>{
   if($('#lb').classList.contains('open')){
-    if(e.key==='Escape')$('#lb').classList.remove('open');
+    if(e.key==='Escape')closeLb();
     if(e.key==='ArrowLeft')$('#lbprev').click();
     if(e.key==='ArrowRight')$('#lbnext').click();
     return;
   }
+  if(document.activeElement===qInput){ if(e.key==='Escape'){qInput.blur();} return; }
+  if(e.key==='/'){ e.preventDefault(); qInput.focus(); return; }
   if(e.key==='ArrowLeft')move(-1);
   if(e.key==='ArrowRight')move(1);
   if(e.key.toLowerCase()==='c')callCustomer();
@@ -202,13 +237,13 @@ document.addEventListener('keydown',e=>{
   if(e.key.toLowerCase()==='g')openGhl();
 });
 
-/* touch swipe on the card */
+/* touch swipe on the card (not while lightbox open) */
 let tx=0,ty=0;
 document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
 document.addEventListener('touchend',e=>{
   if($('#lb').classList.contains('open'))return;
   const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
-  if(Math.abs(dx)>70 && Math.abs(dx)>Math.abs(dy)*1.5) move(dx<0?1:-1);
+  if(Math.abs(dx)>70 && Math.abs(dx)>Math.abs(dy)*1.6) move(dx<0?1:-1);
 },{passive:true});
 
 load();
