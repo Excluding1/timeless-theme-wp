@@ -86,7 +86,7 @@ cd /Users/excluding/Downloads/timeless-theme-wp
 zip -rq ../timeless-theme-2.zip . \
   -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
   ".secrets/*" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
-  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" "contractor-app/*" \
+  "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" "contractor-app/*" "quote-inbox/*" \
   "src/*" "postcss.config.js" "package.json" "package-lock.json" \
   "memory/*" "*.log" "*.zip" "*.map" "images/blog/*"
 ```

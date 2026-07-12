@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Timeless · Quote Inbox</title>
+<style>
+  :root{
+    --navy:#041534; --navy2:#0a2d52; --gold:#e7c08b; --ink:#1f2733; --muted:#5b6472;
+    --line:#e6e9ef; --bg:#eef1f6; --card:#fff; --good:#1f7a4d; --warn:#b45309; --danger:#ba1a1a;
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  /* top bar */
+  header{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  header h1{font-size:17px;margin:0;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+  header .dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+  .tabs{display:flex;gap:6px;margin-left:6px;flex-wrap:wrap}
+  .tab{border:0;background:rgba(255,255,255,.10);color:#cdd6e6;font-weight:700;font-size:13px;padding:6px 13px;border-radius:999px;cursor:pointer}
+  .tab.active{background:var(--gold);color:var(--navy)}
+  .tab .n{opacity:.7;font-weight:800;margin-left:5px}
+  .spacer{flex:1}
+  .refresh{border:0;background:rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:13px;padding:7px 13px;border-radius:10px;cursor:pointer;display:flex;gap:6px;align-items:center}
+  .refresh:hover{background:rgba(255,255,255,.22)}
+  /* layout */
+  .wrap{max-width:760px;margin:0 auto;padding:22px 16px 120px}
+  .status{color:var(--muted);text-align:center;padding:60px 20px;font-size:15px}
+  .status b{color:var(--ink)}
+  /* progress row */
+  .counter{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:2px 2px 16px;color:var(--muted);font-size:13.5px;font-weight:600}
+  .counter .pos{color:var(--ink)}
+  /* card */
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:0 10px 34px rgba(12,22,44,.10);overflow:hidden;border:1px solid var(--line)}
+  .chead{padding:22px 24px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbfcfe,#fff)}
+  .crow{display:flex;align-items:flex-start;gap:14px}
+  .who{flex:1;min-width:0}
+  .who h2{margin:0 0 3px;font-size:23px;letter-spacing:-.02em;color:var(--navy);font-weight:800;overflow-wrap:anywhere}
+  .addr{color:var(--muted);font-size:14.5px;display:flex;align-items:center;gap:6px;overflow-wrap:anywhere}
+  .badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+  .badge{font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:#eef2f8;color:#33415a}
+  .badge.gold{background:rgba(231,192,139,.24);color:#7a5c10}
+  .badge.new{background:#e7f2ec;color:var(--good)}
+  .badge.rev{background:#eceef2;color:#7a8290}
+  .badge.warn{background:#fdf1e6;color:var(--warn)}
+  .when{font-size:12.5px;color:#8791a0;white-space:nowrap;font-weight:600}
+  /* body */
+  .cbody{padding:20px 24px 8px}
+  .section{margin-bottom:20px}
+  .label{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#93a0b4;margin:0 0 8px}
+  .req{font-size:16.5px;line-height:1.6;color:#222b38;white-space:pre-wrap;overflow-wrap:anywhere}
+  .req.empty{color:#a2abb8;font-style:italic;font-size:15px}
+  .summary{background:#f6f8fb;border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14.5px;color:#3a4555;overflow-wrap:anywhere}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+  @media(max-width:520px){.facts{grid-template-columns:1fr}}
+  .fact{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;border-bottom:1px dashed var(--line);padding-bottom:7px}
+  .fact .k{color:var(--muted)}
+  .fact .v{font-weight:700;color:var(--ink);text-align:right}
+  /* photos */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .shot{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#dfe4ec;cursor:zoom-in;border:1px solid var(--line)}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block}
+  .shot .tag{position:absolute;left:7px;bottom:7px;background:rgba(4,21,52,.82);color:#fff;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .nophoto{color:#a2abb8;font-style:italic;font-size:14.5px}
+  /* actions */
+  .actions{position:sticky;bottom:0;display:flex;gap:10px;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(238,241,246,0),var(--bg) 32%);max-width:760px;margin:0 auto}
+  .btn{flex:1;border:0;border-radius:14px;padding:15px 12px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .05s,filter .15s}
+  .btn:active{transform:translateY(1px)}
+  .btn.call{background:var(--good);color:#fff}
+  .btn.ghl{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+  .btn.done{background:var(--navy);color:#fff}
+  .btn.done.is{background:#e7f2ec;color:var(--good);border:1.5px solid #bfe0cd}
+  .nav{display:flex;gap:10px;margin-top:14px}
+  .nav button{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px;font-weight:800;color:var(--navy);cursor:pointer;font-size:14px}
+  .nav button:disabled{opacity:.4;cursor:default}
+  .hint{text-align:center;color:#9aa4b2;font-size:12px;margin-top:12px}
+  kbd{background:#e2e7ef;border-radius:5px;padding:1px 6px;font:inherit;font-size:11px;font-weight:700;color:#55617a}
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(6,12,26,.94);z-index:60;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:20px}
+  .lb.open{display:flex}
+  .lb img{max-width:96vw;max-height:82vh;border-radius:10px;object-fit:contain}
+  .lb .x{position:absolute;top:16px;right:20px;color:#fff;font-size:30px;cursor:pointer;background:0;border:0;line-height:1}
+  .lb .lbnav{color:#cdd6e6;font-size:14px;font-weight:600;display:flex;gap:22px;align-items:center}
+  .lb .lbnav a{cursor:pointer;background:rgba(255,255,255,.12);padding:9px 16px;border-radius:10px;font-weight:800}
+  .lb .lbnav a.dl{background:var(--gold);color:var(--navy)}
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="dot"></span> Quote Inbox</h1>
+  <div class="tabs" id="tabs"></div>
+  <div class="spacer"></div>
+  <button class="refresh" id="refresh">↻ Refresh</button>
+</header>
+
+<div class="wrap">
+  <div class="counter" id="counter" style="display:none">
+    <span class="pos" id="pos"></span>
+    <span id="sub"></span>
+  </div>
+  <div id="stage"><div class="status">Loading quotes…</div></div>
+  <div class="nav" id="nav" style="display:none">
+    <button id="prev">← Previous</button>
+    <button id="next">Next →</button>
+  </div>
+  <div class="hint" id="hint" style="display:none">
+    <kbd>←</kbd> <kbd>→</kbd> move · <kbd>C</kbd> call · <kbd>R</kbd> reviewed · <kbd>G</kbd> open in GHL
+  </div>
+</div>
+
+<div class="actions" id="actions" style="display:none">
+  <button class="btn call" id="bCall">📞 Call</button>
+  <button class="btn ghl" id="bGhl">Open in GHL</button>
+  <button class="btn done" id="bDone">Mark reviewed</button>
+</div>
+
+<div class="lb" id="lb">
+  <button class="x" id="lbx">×</button>
+  <img id="lbimg" alt="quote photo" />
+  <div class="lbnav">
+    <a id="lbprev">‹ Prev</a>
+    <span id="lbcount"></span>
+    <a id="lbnext">Next ›</a>
+    <a class="dl" id="lbdl" target="_blank">Download</a>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

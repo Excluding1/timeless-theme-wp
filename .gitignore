@@ -63,3 +63,4 @@ docs/quote-app/config.js
 
 # AI-generated blog images (illustrative only) — stay OUT of git; live copies go via Media Library
 images/blog/
+quote-inbox/data/reviewed.json
