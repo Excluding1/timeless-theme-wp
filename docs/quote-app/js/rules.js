@@ -7,10 +7,30 @@
   var R = TQ.rules = {};
 
   R.money = function (x) {
-    return Number(x).toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    var n = Number(x);
+    if (!isFinite(n)) n = 0;                    // never print "NaN" on a customer document
+    return n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   R.round2 = function (x) { return Math.round(x * 100) / 100; };
+
+  /* Parse a currency string to a number. Strips thousands separators and keeps a SINGLE decimal.
+     Critical: "1.540" (dot used as a thousands separator) must become 1540, NOT 1.54 — the old
+     parseFloat-after-stripping printed $1.54 on a customer quote. Rules:
+       "1,540"->1540 · "1,540.50"->1540.5 · "1.540"->1540 · "2250."->2250 · "1.50"->1.5 */
+  R.parseAmount = function (str) {
+    var s = String(str == null ? '' : str).replace(/[^0-9.,]/g, '').replace(/,/g, '');
+    if (!s) return 0;
+    var parts = s.split('.');
+    if (parts.length > 2) {                      // several dots: all but the last are thousands seps
+      var last = parts.pop();
+      s = parts.join('') + (last.length && last.length <= 2 ? '.' + last : last);
+    } else if (parts.length === 2 && parts[1].length === 3 && parts[0].length <= 3) {
+      s = parts[0] + parts[1];                   // "1.540" -> "1540" (dot as thousands separator)
+    }
+    var n = parseFloat(s);
+    return isFinite(n) ? n : 0;
+  };
 
   /* GST portion inside a GST-inclusive total */
   R.gstOf = function (total) { return R.round2(total / 11); };
@@ -19,7 +39,7 @@
     var t = 0;
     (lines || []).forEach(function (l) {
       var a = l.amount;
-      if (typeof a === 'number' && isFinite(a)) t += a;
+      if (typeof a === 'number' && isFinite(a)) t += R.round2(a);   // round each line before summing (no cent drift)
     });
     return R.round2(t);
   };
@@ -28,11 +48,19 @@
     /* the headline total = the first option's total (options are alternatives, not additive) */
     var o = (doc.options || [])[0];
     if (!o) return 0;
-    if (o.mode === 'feature') {
-      var n = parseFloat(String(o.price || '').replace(/[^0-9.]/g, ''));
-      return isFinite(n) ? n : 0;
-    }
+    if (o.mode === 'feature') return R.parseAmount(o.price);
     return R.optionTotal(o.lines);
+  };
+
+  /* the LARGEST option total — options are alternatives the customer chooses between, so the
+     compliance threshold ($5k licence/contract) must consider the priciest one they could accept */
+  R.docTotalMax = function (doc) {
+    var max = 0;
+    (doc.options || []).forEach(function (o) {
+      var t = o.mode === 'feature' ? R.parseAmount(o.price) : R.optionTotal(o.lines);
+      if (t > max) max = t;
+    });
+    return max;
   };
 
   /* Replace em-dashes (and stray en-dashes not inside number ranges) per the house style. */
@@ -79,9 +107,12 @@
       (o.lines || []).forEach(function (l) { check('Option ' + (i + 1) + ' line', l.desc); });
       (o.items || []).forEach(function (it) { check('Option ' + (i + 1) + ' bullet', it); });
     });
-    (doc.warranty || []).forEach(function (w) {
-      if (/\bguarantee/i.test(w)) warnings.push('Warranty: use "warranty", never "guarantee"');
-    });
+    /* every customer-facing text path gets the SAME banned-word/em-dash gate, not just some */
+    (doc.warranty || []).forEach(function (w) { check('Warranty line', w); });
+    (doc.expect || []).forEach(function (e) { check('What-to-expect line', e); });
+    (doc.warrantySpecial || []).forEach(function (s) { check('Warranty special condition', s); });
+    if (doc.customer) { check('Access note', doc.customer.access); }
+    if (doc.photoCaption) check('Photo caption', doc.photoCaption);
     if (!doc.customer || !doc.customer.name) warnings.push('No customer name set');
     if ((doc.options || []).length === 0) warnings.push('No options / line items yet');
     (doc.options || []).forEach(function (o, i) {
@@ -97,13 +128,45 @@
     if (doc.docType === 'invoice' && (doc.options || []).length > 1) {
       warnings.push('An invoice should bill ONE agreed scope: remove the extra option(s) (quotes can have options, invoices should not)');
     }
-    var total = R.docTotal(doc);
-    if (total > 5000) {
+    var maxOpt = R.docTotalMax(doc);   // the priciest option they could accept, not just option 1
+    if (maxOpt > 5000) {
       warnings.push(settings && settings.licenceNo
-        ? 'Job over $5,000 inc GST: NSW requires a written small-jobs contract at this value (the quote acceptance block + licence number can serve for $5k-$20k)'
-        : 'Job over $5,000 inc GST: NSW requires a contractor licence + a written contract for residential work at this value, check before sending');
+        ? 'A job option is over $5,000 inc GST: NSW requires a written small-jobs contract at this value (the quote acceptance block + licence number can serve for $5k-$20k)'
+        : 'A job option is over $5,000 inc GST: NSW requires a contractor licence + a written contract for residential work at this value, check before sending');
+    }
+    if (settings && Number(settings.depositPct) > 10) {
+      warnings.push('Deposit is set to ' + Number(settings.depositPct) + '%: NSW caps residential deposits at 10%');
+    }
+    if ((Number(doc.depositPaid) || 0) > R.docTotal(doc)) {
+      warnings.push('Deposit received is more than the total: the balance would be negative');
     }
     return warnings;
+  };
+
+  /* BLOCKING preflight before a customer PDF is downloaded. Warnings alone were only advisory,
+     so a wrong invoice could still be sent. Returns { fatal:[], warn:[] }:
+       fatal = would send something wrong or non-compliant → block the download
+       warn  = worth a look → proceed only on explicit confirm. */
+  R.preflight = function (doc, settings) {
+    var fatal = [], warn = [];
+    var isInvoice = doc.docType === 'invoice';
+    var nOpts = (doc.options || []).length;
+    R.validate(doc, settings).forEach(function (w) {
+      if (/banned word|em-dash/.test(w)) fatal.push(w);   // a banned word on paper can't be un-sent
+    });
+    if (isInvoice && nOpts > 1) fatal.push('This invoice has ' + nOpts + ' options. An invoice must bill ONE agreed scope, or it shows work it does not charge for. Remove the extra option(s).');
+    if (!doc.customer || !doc.customer.name) fatal.push('No customer name set.');
+    if (isInvoice && !doc.docNo) fatal.push('This invoice has no number. Save it first to assign one.');
+    if (settings && Number(settings.depositPct) > 10) fatal.push('Deposit is ' + Number(settings.depositPct) + '% — NSW caps residential deposits at 10%. Lower it in Settings before sending.');
+    var total = R.docTotal(doc), dep = Number(doc.depositPaid) || 0;
+    if (dep > total) fatal.push('Deposit received ($' + R.money(dep) + ') is more than the total ($' + R.money(total) + '); the balance would be negative.');
+    if (R.docTotalMax(doc) > 5000 && !(settings && settings.licenceNo)) warn.push('A job option is over $5,000 inc GST: NSW needs a contractor licence + written contract at this value. Check before sending.');
+    (doc.options || []).forEach(function (o, i) {
+      if (o.mode !== 'feature') (o.lines || []).forEach(function (l) {
+        if (l.amount === 0) warn.push('Option ' + (i + 1) + ' has a $0.00 line — set its price or remove it.');
+      });
+    });
+    return { fatal: fatal, warn: warn };
   };
 
   /* House defaults */

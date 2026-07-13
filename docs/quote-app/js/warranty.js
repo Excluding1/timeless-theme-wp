@@ -58,12 +58,36 @@
     return ids;
   }
 
+  /* family -> the footer warranty bullet for a quote/invoice (grouped, not per-service, so a
+     3-line resurface job shows ONE resurfacing warranty line, not three). Periods are the house
+     matrix; nothing here claims 5 years for grout/silicone. */
+  var FOOTER = {
+    resurf: 'Up to 5-year workmanship warranty on resurfacing (with proper care)',
+    tiling: 'Up to 5-year workmanship warranty on new tiling and tile repairs',
+    grout: '2-year warranty on regrouting',
+    silicone: '12-month warranty on silicone'
+  };
+
   TQ.warranty = {
     /* the service/period table printed on the certificate */
     services: function (doc) {
       var out = [];
       catIds(doc).forEach(function (id) { if (ROWS[id]) out.push({ label: ROWS[id][0], period: ROWS[id][1] }); });
-      if (!out.length) out.push({ label: 'Workmanship on the services invoiced', period: 'Up to 5 years' });
+      /* custom job with no recognised material: never over-claim — default to the shortest
+         period we offer (12 months); the operator can raise it before signing if warranted */
+      if (!out.length) out.push({ label: 'Workmanship on the services carried out', period: '12 months' });
+      return out;
+    },
+
+    /* the "Warranty & cover" bullets for the quote/invoice footer, derived from the actual
+       services so a grout- or silicone-only job never inherits a blanket "Up to 5-year" claim.
+       Always ends with the insurance line. */
+    footer: function (doc) {
+      var fams = {}, out = [];
+      catIds(doc).forEach(function (id) { if (FAMILY[id]) fams[FAMILY[id]] = 1; });
+      ['resurf', 'tiling', 'grout', 'silicone'].forEach(function (f) { if (fams[f]) out.push(FOOTER[f]); });
+      if (!out.length) out.push('Workmanship warranty on the work carried out');   // custom job: neutral, no period claim
+      out.push('$10M public liability insurance');
       return out;
     },
 
@@ -89,7 +113,10 @@
         special: (doc.warrantySpecial && doc.warrantySpecial.length)
           ? doc.warrantySpecial
           : TQ.warranty.composeSpecial(doc),
-        operator: settings.phone
+        /* "YOUR OPERATOR" is the person standing behind the work, not a phone number:
+           prefer whoever signed, then the first configured operator, then the business name */
+        operator: (doc.warrantySigner || settings.lastSigner ||
+          String(settings.operators || '').split(',')[0].trim() || settings.businessName || '')
       };
     }
   };

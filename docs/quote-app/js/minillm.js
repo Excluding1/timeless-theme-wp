@@ -306,7 +306,7 @@
           var u = Number(it.unit_amount);
           if (it.qty > 50 || srcDigits.indexOf(String(it.qty)) === -1) {
             warnings.push('AI used a quantity of ' + it.qty + ' for "' + desc + '" that is not in your notes, ignored it');
-          } else if (consume(block, u) || consume(head, u)) {
+          } else if (consume(block, u) || (g === 0 && consume(head, u))) {
             amt = Math.round(it.qty * u * 100) / 100; priced = true;
             desc += ' (' + it.qty + ' x $' + u + ')';        // make the maths visible for review
           } else {
@@ -314,7 +314,9 @@
           }
         } else if (it.amount != null && isFinite(Number(it.amount))) {
           var a = Number(it.amount);
-          if (consume(block, a) || consume(head, a)) { amt = a; priced = true; }
+          /* only a SHARED (group 0) line may draw from the head/shared price pool; an option
+             line drawing from head would let a fabricated Option B line steal Option A's price */
+          if (consume(block, a) || (g === 0 && consume(head, a))) { amt = a; priced = true; }
           else warnings.push('AI read $' + a + ' for "' + desc + '" but that is not a price in this option, ignored it');
         }
         if (amt === null) {

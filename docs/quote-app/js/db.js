@@ -155,7 +155,9 @@
       /* v3 (Allan, 2026-07-05): numbering is TR-1022 style (no year), GST registration is settled */
       if (!s._v3) {
         if (out.docPrefix === '' || out.docPrefix === 'TR-2026-') out.docPrefix = 'TR-';
-        if ((out.nextDocNo >= 704 && out.nextDocNo <= 800) || (out.nextDocNo >= 1043 && out.nextDocNo <= 1100)) out.nextDocNo = 1022;
+        /* only rewind the genuine pre-v2 TEST counter (704-800); NEVER reset a 1043+ counter —
+           that would re-issue already-used TR- numbers on a business that has quoted past 1042 */
+        if (out.nextDocNo >= 704 && out.nextDocNo <= 800) out.nextDocNo = 1022;
         out.gstRegistered = true;
         out._v3 = true;
       }

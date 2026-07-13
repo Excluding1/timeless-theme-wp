@@ -31,9 +31,19 @@
     return (Number(x) < 0 ? '-' : '') + p.join('.');
   }
   function gstOf(total) { return Math.round(total / 11 * 100) / 100; }
+  /* currency parser (self-contained copy of rules.parseAmount): "1.540" -> 1540, not 1.54 */
+  function featPrice(str) {
+    var s = String(str == null ? '' : str).replace(/[^0-9.,]/g, '').replace(/,/g, '');
+    if (!s) return 0;
+    var parts = s.split('.');
+    if (parts.length > 2) { var last = parts.pop(); s = parts.join('') + (last.length && last.length <= 2 ? '.' + last : last); }
+    else if (parts.length === 2 && parts[1].length === 3 && parts[0].length <= 3) { s = parts[0] + parts[1]; }
+    var n = parseFloat(s); return isFinite(n) ? n : 0;
+  }
   function optionTotal(lines) {
     var t = 0;
-    (lines || []).forEach(function (l) { if (typeof l.amount === 'number' && isFinite(l.amount)) t += l.amount; });
+    /* round each line to cents BEFORE summing so the printed lines always add up to the printed total */
+    (lines || []).forEach(function (l) { if (typeof l.amount === 'number' && isFinite(l.amount)) t += Math.round(l.amount * 100) / 100; });
     return Math.round(t * 100) / 100;
   }
 
@@ -68,7 +78,18 @@
       var words = para.split(/\s+/).filter(Boolean);
       if (!words.length) { out.push(''); return; }
       var line = '';
+      /* hard-break a single token wider than the column (long email / URL / run-on address)
+         so it can't overflow the page margin */
+      function breakLong(w) {
+        while (font.widthOfTextAtSize(w, size) > maxW && w.length > 1) {
+          var i = w.length;
+          while (i > 1 && font.widthOfTextAtSize(w.slice(0, i), size) > maxW) i--;
+          out.push(w.slice(0, i)); w = w.slice(i);
+        }
+        return w;
+      }
       words.forEach(function (w) {
+        if (font.widthOfTextAtSize(w, size) > maxW) { if (line) { out.push(line); line = ''; } w = breakLong(w); }
         var probe = line ? line + ' ' + w : w;
         if (font.widthOfTextAtSize(probe, size) <= maxW || !line) line = probe;
         else { out.push(line); line = w; }
@@ -385,10 +406,16 @@
         var amtW = 34 * MM, descW = CW - amtW - 8;
         var multi = (doc.options || []).length > 1;
         var firstTot = null;
+        function drawTotalRow(label, valStr, lblSize) {
+          var lw = fonts.din.widthOfTextAtSize(label, lblSize);
+          page.drawText(label, { x: LM + descW - lw, y: y - lblSize * 0.88, size: lblSize, font: fonts.din, color: NAVY });
+          var vw = fonts.din.widthOfTextAtSize(valStr, lblSize);
+          page.drawText(valStr, { x: LM + CW - vw, y: y - lblSize * 0.88, size: lblSize, font: fonts.din, color: NAVY });
+        }
         (doc.options || []).forEach(function (o, oi) {
+          var oTot = o.mode === 'feature' ? featPrice(o.price) : optionTotal(o.lines);
           var oLines = o.mode === 'feature'
-            ? [{ desc: o.title + (o.items && o.items.length ? ': ' + o.items.join('; ') : ''),
-                 amount: parseFloat(String(o.price || '').replace(/[^0-9.]/g, '')) || 0 }]
+            ? [{ desc: o.title + (o.items && o.items.length ? ': ' + o.items.join('; ') : ''), amount: oTot }]
             : (o.lines || []);
           if (multi && o.mode !== 'feature' && o.title) {
             tableEnsure(18);
@@ -414,23 +441,39 @@
               if (rows.length) { addPage(); tableHead(); } else y -= 5;
             }
           });
-          if (firstTot === null) {
-            firstTot = o.mode === 'feature'
-              ? (parseFloat(String(o.price || '').replace(/[^0-9.]/g, '')) || 0)
-              : optionTotal(o.lines);
+          /* MULTI-OPTION: print THIS option's own total right here, so each alternative shows
+             what it costs (a single grand total from option A alone would understate/mislead). */
+          if (multi) {
+            tableEnsure(30);
+            y -= 2; hr(y, 0.5, LINE); y -= 0.5 + 7;
+            var oLbl = (o.title ? o.title + ' total' : 'Option ' + String.fromCharCode(65 + oi) + ' total') + ' (inc GST)';
+            drawTotalRow(oLbl, '$' + money(oTot), 12);
+            y -= 15;
+            if (gstShown) {
+              var og = 'Includes GST of $' + money(gstOf(oTot));
+              var ogw = fonts.helv.widthOfTextAtSize(og, 8.8);
+              page.drawText(og, { x: LM + CW - ogw, y: y - 8.8 * 0.88, size: 8.8, font: fonts.helv, color: MUTED });
+              y -= 13;
+            }
+            y -= 6;
           }
+          if (firstTot === null) firstTot = oTot;
         });
 
-        /* totals block */
+        /* single-option totals block (invoices are single-option by preflight; single-option
+           quotes get the headline total + deposit here). Multi-option quotes already showed a
+           per-option total above, so we only add a one-line "these are alternatives" note. */
         var tot = firstTot || 0;
+        if (multi) {
+          tableEnsure(20);
+          var note = 'The options above are alternatives — the price shown is per option, choose one.';
+          var nw = fonts.helv.widthOfTextAtSize(note, 9);
+          page.drawText(note, { x: LM + CW - nw, y: y - 9 * 0.88, size: 9, font: fonts.helv, color: MUTED });
+          y -= 6;
+        } else {
         tableEnsure(70);
         y -= 2; hr(y, 0.8, LINE); y -= 0.8 + 8;
-        var lbl = 'Total (inc GST)';
-        var lw = fonts.din.widthOfTextAtSize(lbl, 14);
-        page.drawText(lbl, { x: LM + descW - lw, y: y - 14 * 0.88, size: 14, font: fonts.din, color: NAVY });
-        var tt = '$' + money(tot);
-        var tw = fonts.din.widthOfTextAtSize(tt, 14);
-        page.drawText(tt, { x: LM + CW - tw, y: y - 14 * 0.88, size: 14, font: fonts.din, color: NAVY });
+        drawTotalRow('Total (inc GST)', '$' + money(tot), 14);
         y -= 18;
         if (gstShown) {
           var g = 'Total price includes GST of $' + money(gstOf(tot));   // ATO wording, GST = total / 11
@@ -440,10 +483,13 @@
         }
         if (Number(doc.depositPaid) > 0) {
           var dep = Number(doc.depositPaid);
-          var rows2 = [
-            ['Deposit received', '-' + money(dep), fonts.helv, 9.5, INK, 14],
-            ['Balance due', '$' + money(Math.round((tot - dep) * 100) / 100), fonts.din, 13.5, NAVY, 17]
-          ];
+          var bal = Math.round((tot - dep) * 100) / 100;
+          /* never print a negative balance (deposit>total is blocked at download; this guards the
+             live preview): show a credit instead */
+          var balRow = bal < 0
+            ? ['Credit (overpaid)', '$' + money(-bal), fonts.din, 13.5, NAVY, 17]
+            : ['Balance due', '$' + money(bal), fonts.din, 13.5, NAVY, 17];
+          var rows2 = [['Deposit received', '-' + money(dep), fonts.helv, 9.5, INK, 14], balRow];
           rows2.forEach(function (r) {
             var lw2 = r[2].widthOfTextAtSize(r[0], r[3]);
             page.drawText(r[0], { x: LM + descW - lw2, y: y - r[3] * 0.88, size: r[3], font: r[2], color: r[4] });
@@ -452,6 +498,7 @@
             y -= r[5];
           });
         }
+        } /* end single-option totals */
         y -= 6;
       }
 

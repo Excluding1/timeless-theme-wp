@@ -42,8 +42,7 @@
     var s = String(str == null ? '' : str).trim();
     if (!s) return 0;
     if (/^(included|include|free|no charge)$/i.test(s)) return 'included';
-    var n = parseFloat(s.replace(/[$,\s]/g, ''));
-    return isFinite(n) ? n : 0;
+    return R.parseAmount(s);   // shared currency parser: "1.540" -> 1540, not 1.54
   }
   function amountStr(a) { return typeof a === 'number' ? (a ? String(a) : '') : String(a || ''); }
   function dataUrlToBytes(dataUrl) {
@@ -76,7 +75,10 @@
       jobIntro: '', photos: [], photoIndex: -1,
       options: [{ title: '', mode: 'itemised', lines: [{ desc: '', amount: 0 }], totalLabel: '' }],
       optionsNote: '',
-      warranty: R.WARRANTY_5YR.slice(),
+      /* start with a material-NEUTRAL warranty (no blanket "5 year"); it is auto-composed from
+         the actual services in readForm() once lines exist, unless the operator edits it */
+      warranty: (TQ.warranty ? TQ.warranty.footer({ options: [] }) : ['Workmanship warranty on the work carried out', '$10M public liability insurance']),
+      _warrantyAuto: '',
       expect: R.EXPECT_PRESETS.day.slice(),
       footerBottom: true,
       costEstimate: null   // internal job score: estimated cost to deliver, never printed
@@ -93,6 +95,9 @@
     });
     doc.warranty = (doc.warranty || []).map(R.sanitize);
     doc.expect = (doc.expect || []).map(R.sanitize);
+    doc.warrantySpecial = (doc.warrantySpecial || []).map(R.sanitize);   // reaches the signed warranty PDF
+    if (doc.customer) doc.customer.access = R.sanitize(doc.customer.access);
+    if (doc.photoCaption) doc.photoCaption = R.sanitize(doc.photoCaption);
     return doc;
   }
 
@@ -192,7 +197,7 @@
     $$('[data-nav]', app).forEach(function (b) {
       b.onclick = async function () {
         var n = b.getAttribute('data-nav');
-        if (n === 'new') { S.doc = newDoc(); S.view = 'editor'; render(); }
+        if (n === 'new') { S.doc = newDoc(); S.dirty = false; S.view = 'editor'; render(); }
         else if (n === 'list') { S.view = 'list'; await refreshList(); render(); }
         else { S.settings = await TQ.db.getSettings(); S.view = 'settings'; render(); }
       };
@@ -285,7 +290,7 @@
         var id = b.closest('tr').getAttribute('data-id');
         var act = b.getAttribute('data-act');
         try {
-          if (act === 'edit') { S.doc = await TQ.db.getQuote(id); S.view = 'editor'; render(); }
+          if (act === 'edit') { S.doc = await TQ.db.getQuote(id); S.dirty = false; S.view = 'editor'; render(); }
           else if (act === 'pdf') { var d = await TQ.db.getQuote(id); await downloadPdf(d); }
           else if (act === 'warr') { var dw = await TQ.db.getQuote(id); await downloadWarranty(dw); }
           else if (act === 'dup') {
@@ -489,7 +494,19 @@
     d.jobIntro = $('#jobintro').value.trim();
     readOptionInputs();
     d.optionsNote = $('#optnote').value.trim();
-    d.warranty = $('#warr').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    /* warranty footer: keep it AUTO-synced to the actual services (per-material periods, never a
+       blanket 5-year on a grout/silicone job) until the operator edits the box, then leave it. */
+    var warrRaw = $('#warr').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    if (d._warrantyEdited) {
+      d.warranty = warrRaw;
+    } else if ((d._warrantyAuto || '') !== '' && warrRaw.join('\n') !== d._warrantyAuto) {
+      d.warranty = warrRaw; d._warrantyEdited = true;                 // operator customised it
+    } else if (TQ.warranty) {
+      d.warranty = TQ.warranty.footer(d);                            // recompose from services
+      d._warrantyAuto = d.warranty.join('\n');
+    } else {
+      d.warranty = warrRaw;
+    }
     d.expect = $('#expect').value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     d.footerBottom = $('#footbottom').checked;
     var ac = $('#acceptsec'); if (ac) d.acceptSection = ac.checked;
@@ -625,7 +642,11 @@
     if (!app._tqInputBound) {
       app._tqInputBound = true;
       app.addEventListener('input', function (e) {
-        if (S.view === 'editor' && e.target.closest('.form')) { readForm(); schedulePreview(); }
+        if (S.view === 'editor' && e.target.closest('.form')) { S.dirty = true; readForm(); schedulePreview(); }
+      });
+      /* don't let a refresh / accidental nav silently discard a half-built quote */
+      window.addEventListener('beforeunload', function (e) {
+        if (S.dirty) { e.preventDefault(); e.returnValue = ''; return ''; }
       });
     }
 
@@ -640,7 +661,10 @@
       if (out.options && out.options.length) d.options = out.options;
       if (out.jobIntro) d.jobIntro = out.jobIntro;
       if (out.expect && out.expect.length) d.expect = out.expect;
-      if (out.warranty && out.warranty.length) d.warranty = out.warranty;
+      /* warranty is derived from the drafted services (single source of truth), and stays
+         auto-synced afterwards unless the operator edits the box */
+      if (TQ.warranty) { d.warranty = TQ.warranty.footer(d); d._warrantyAuto = d.warranty.join('\n'); d._warrantyEdited = false; }
+      else if (out.warranty && out.warranty.length) d.warranty = out.warranty;
       var aitxt = $('#aitext').value;
       render();
       $('#aitext').value = aitxt;
@@ -824,11 +848,20 @@
           $('#docno').value = S.doc.docNo;
         }
         await TQ.db.saveQuote(S.doc);
+        S.dirty = false;   // saved: safe to leave
         toast('Saved ' + (S.doc.docType === 'invoice' ? 'invoice' : 'quote') + ' ' + S.doc.docNo + (TQ.db.mode === 'cloud' ? ' (cloud)' : ' (this browser)'));
       } catch (e) { toast(String(e.message || e), true); }
     };
     $('#download').onclick = async function () {
       readForm();
+      /* blocking preflight: a wrong invoice / banned word / over-cap deposit can't be un-sent */
+      var pf = R.preflight(S.doc, S.settings);
+      if (pf.fatal.length) {
+        showValidation();
+        toast('Fix before downloading:\n• ' + pf.fatal.join('\n• '), true);
+        return;
+      }
+      if (pf.warn.length && !window.confirm('Before you send:\n\n• ' + pf.warn.join('\n• ') + '\n\nDownload anyway?')) return;
       try { await downloadPdf(S.doc); } catch (e) { toast('PDF failed: ' + (e.message || e), true); }
     };
     $('#copymsg').onclick = async function () {
@@ -974,7 +1007,13 @@
       s.phone = $('#s_phone').value; s.email = $('#s_email').value; s.website = $('#s_web').value;
       s.tagline = $('#s_tag').value; s.bankName = $('#s_bank').value; s.bsb = $('#s_bsb').value;
       var opsEl = $('#s_ops'); if (opsEl) s.operators = opsEl.value;
-      s.account = $('#s_acc').value; s.depositPct = Number($('#s_dep').value) || 10;
+      s.account = $('#s_acc').value;
+      /* NSW Home Building Act caps a residential deposit at 10%: clamp so the quote can never
+         print a higher figure */
+      var depPct = Number($('#s_dep').value);
+      if (!isFinite(depPct) || depPct <= 0) depPct = 10;
+      if (depPct > 10) { depPct = 10; toast('Deposit capped at 10% (NSW residential limit)'); }
+      s.depositPct = depPct;
       var mf = $('#s_mfloor'); if (mf) s.marginFloorPct = isFinite(parseFloat(mf.value)) ? parseFloat(mf.value) : 25;
       s.validityDays = Number($('#s_valid').value) || 7; s.invoiceDueDays = Number($('#s_due').value) || 7;
       s.nextDocNo = Number($('#s_next').value) || s.nextDocNo; s.docPrefix = $('#s_prefix').value;

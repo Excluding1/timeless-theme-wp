@@ -185,8 +185,18 @@
         desc = best.desc;
         /* one price covering two DIFFERENT primary services is worth a human look
            (span-based: keyword-count differences between entries must not hide it) */
-        if (typeof amount === 'number' && primarySpans(text, hits).length > 1) {
-          warnings.push(optLabel + 'one price ($' + amount + ') seems to cover several main jobs ("' + text + '"), split or check that line');
+        if (typeof amount === 'number') {
+          var spans = primarySpans(text, hits);
+          if (spans.length > 1) {
+            warnings.push(optLabel + 'one price ($' + amount + ') seems to cover several main jobs ("' + text + '"), the price was put on "' + best.desc + '" and the others added at the price-book default, check the split');
+            /* don't let the OTHER named primary services silently vanish: emit each as its own
+               default-priced line (was: whole run collapsed to the single best match) */
+            var book = cat(), byId = {};
+            book.forEach(function (c) { byId[c.id] = c; });
+            spans.forEach(function (sp) {
+              if (sp.id !== best.id && byId[sp.id]) pushLine(byId[sp.id], byId[sp.id].desc, null);
+            });
+          }
         }
       } else {
         desc = tidyText(text);
@@ -198,6 +208,12 @@
 
     segs.forEach(function (seg) {
       var amt = findAmount(seg, !!matchCatalogue(seg));
+      /* two priced-looking numbers in one segment: findAmount keeps the trailing one and the
+         other would vanish silently — flag it so the human checks which applies */
+      if (typeof amt === 'number') {
+        var nums = String(seg).match(/\$\s?\d[\d,]*(?:\.\d{1,2})?|(?:^|\s)\d{3,5}(?:\.\d{1,2})?(?=\s|[.,;!]|$)/g) || [];
+        if (nums.length > 1) warnings.push(optLabel + 'two prices found in one line ("' + seg.trim() + '"), used $' + amt + ', check which applies');
+      }
       var text = seg
         .replace(/\$?\s?\d[\d,]*(?:\.\d{1,2})?/g, ' ')
         .replace(INCLUDED_RE, ' ')
