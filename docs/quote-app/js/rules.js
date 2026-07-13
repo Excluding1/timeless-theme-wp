@@ -46,7 +46,17 @@
     return t;
   };
 
-  var BANNED = /\b(written|guarantee[ds]?|certificate|in writing)\b/i;
+  /* Customer-facing copy must never reveal that we may source the work out, nor read like an
+     internal work order. The outsourcing nouns and hiring framing below are banned so they can
+     never survive the AI guardrails or reach a PDF (the customer sees the WORK, never who does it). */
+  var BANNED = new RegExp(
+    '\\b(' +
+      'written|guarantee[ds]?|certificate|in writing' +          // existing house rules
+      '|subbie[s]?|sub-?contractor[s]?' +                        // outsourcing nouns (any context)
+      '|(?:looking for|seeking|need(?:ing)?|hiring|after|find(?:ing)?)\\s+' +
+        '(?:a\\s+|an\\s+|some\\s*one\\s*|the\\s+)?' +
+        '(?:subbie|sub-?contractor|tradie|trades?person|operator|someone|worker)' +   // hiring framing
+    ')\\b', 'i');
 
   R.bannedIn = function (text) {
     var m = String(text || '').match(BANNED);

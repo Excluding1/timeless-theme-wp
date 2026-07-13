@@ -157,8 +157,11 @@
       var system =
         'You edit customer-facing copy for an Australian bathroom resurfacing business. ' +
         'Rewrite the ' + kind + ' so it reads warmly and professionally in Australian English. ' +
+        'Describe ONLY the work being done for the customer. This text is read by the CUSTOMER, ' +
+        'so never mention subcontractors, subbies, hiring, sourcing, or who will carry out the work, ' +
+        'and never phrase it as an internal job brief or a request for a tradesperson. ' +
         'STRICT RULES: keep every fact; never add services, prices, numbers, dates or claims; ' +
-        'never use the words "written", "guarantee", "certificate" or em dashes; ' +
+        'never use the words "written", "guarantee", "certificate", "subbie", "subcontractor" or em dashes; ' +
         'maximum ' + (maxSentences || 3) + ' sentences; reply with the rewritten text only, no preamble.';
       var user = kind.toUpperCase() + ':\n' + text +
         (facts ? '\n\nTHE WORK (do not add anything beyond this):\n- ' + facts : '');
@@ -222,7 +225,9 @@
 
       var system =
         'You turn an Australian bathroom-resurfacing tradesperson\'s rough notes into structured quote data.\n' +
-        'Reply with STRICT JSON only. No prose, no markdown, no code fences.\n\n' +
+        'Reply with STRICT JSON only. No prose, no markdown, no code fences.\n' +
+        'Each "desc" names the WORK for the customer (e.g. "drain cover replacement"); never write who does it, ' +
+        'and never use the words subbie, subcontractor, tradie or "looking for".\n\n' +
         'SHAPE:\n' +
         '{"customer":{"name":"","address":"","phone":"","email":"","access":""},"available_from":"",' +
         '"items":[{"service_id":"","desc":"","amount":0,"option_group":0,"source_key":"","variant_label":"","area":"","qty":null,"unit_amount":null,"included":false}]}\n\n' +

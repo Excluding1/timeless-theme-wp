@@ -53,12 +53,17 @@
      at the END of the segment (a leading bare number reads as a quantity: "12 sqm",
      "10 wall tiles"); 2 digits allowed when the segment itself names a service
      ("missing tile 90"). */
+  /* an explicit price connector ("for/is/at/costs/=/:") right before a trailing number is clear
+     price intent — honour it even for a CUSTOM item not in the price book and even at 2 digits,
+     so "drain cover replacement for 50" becomes a $50 line instead of being dropped. */
+  var PRICE_CONNECTOR = /\b(?:for|is|are|at|cost|costs|costing|priced?|price|=|@)\s*\$?\s?(\d{2,5}(?:\.\d{1,2})?)\s*[.,;!]?\s*$/i;
   function findAmount(seg, segHasService) {
     if (INCLUDED_RE.test(seg) && !/\d/.test(seg)) return 'included';
     var m = seg.match(/\$\s?(\d{1,3}(?:,\d{3})+|\d+(?:\.\d{1,2})?)/);
     if (!m) {
       m = seg.match(/(?:^|\s|=|:)(\d{3,5}(?:\.\d{1,2})?)\s*[.,;!]?\s*$/);       // bare number at segment END only
       if (!m && segHasService) m = seg.match(/(?:^|\s|=|:)(\d{2,5})\s*[.,;!]?\s*$/);
+      if (!m) m = seg.match(PRICE_CONNECTOR);                                    // "... for 50" = an explicit price
     }
     if (!m) return null;
     var raw = m[1];
