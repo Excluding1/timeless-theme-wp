@@ -106,9 +106,11 @@
 
     /* everything the PDF needs */
     buildModel: function (doc, settings) {
+      var c = doc.customer || {};
       return {
-        customer: (doc.customer && doc.customer.name) || '',
-        address: (doc.customer && doc.customer.address) || '',
+        /* show the company AND the contact person (Attn) on the certificate, like the quote's TO */
+        customer: (c.name || '') + (c.attn ? '\nAttn: ' + c.attn : ''),
+        address: c.address || '',
         date: new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }),
         invNo: doc.docNo || '',
         forWork: TQ.warranty.services(doc),
