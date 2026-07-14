@@ -79,6 +79,7 @@
          the actual services in readForm() once lines exist, unless the operator edits it */
       warranty: (TQ.warranty ? TQ.warranty.footer({ options: [] }) : ['Workmanship warranty on the work carried out', '$10M public liability insurance']),
       _warrantyAuto: '',
+      warrantyRows: [],   // per-job override of the warranty service/period table (empty = auto)
       expect: R.EXPECT_PRESETS.day.slice(),
       footerBottom: true,
       costEstimate: null   // internal job score: estimated cost to deliver, never printed
@@ -96,6 +97,7 @@
     doc.warranty = (doc.warranty || []).map(R.sanitize);
     doc.expect = (doc.expect || []).map(R.sanitize);
     doc.warrantySpecial = (doc.warrantySpecial || []).map(R.sanitize);   // reaches the signed warranty PDF
+    doc.warrantyRows = (doc.warrantyRows || []).map(function (r) { return { label: R.sanitize(r.label), period: R.sanitize(r.period) }; });
     if (doc.customer) { doc.customer.access = R.sanitize(doc.customer.access); doc.customer.attn = R.sanitize(doc.customer.attn); }
     if (doc.photoCaption) doc.photoCaption = R.sanitize(doc.photoCaption);
     return doc;
@@ -442,6 +444,7 @@
 
       '<section><h3>Warranty (send after the job is done and paid)</h3>' +
       '<p class="hint">Downloads a signed single-page warranty PDF matching the services on this document, modelled on the operator card with our brand and the Australian Consumer Law text. Clicking below opens a popup to pick who is signing and sign it fresh, then it downloads. Send it WITH the final invoice at completion (the law requires the warranty be given at the time of supply, a website link alone is not enough). Special conditions below are drafted from the job, edit freely.</p>' +
+      '<label>Warranty items (one per line: Service = Period)<textarea id="wrows" rows="3">' + esc(TQ.warranty.services(d).map(function (r) { return r.label + ' = ' + r.period; }).join('\n')) + '</textarea></label>' +
       '<label>Special conditions (one per line)<textarea id="wspecial" rows="3">' + esc((d.warrantySpecial && d.warrantySpecial.length ? d.warrantySpecial : TQ.warranty.composeSpecial(d)).join('\n')) + '</textarea></label>' +
       '<div class="actions"><button id="wdownload">Download warranty PDF</button>' +
       '<button id="wpolish" title="Tidies the special conditions with the local AI. Keeps every instruction and number; never invents anything.">✨ Tidy conditions</button>' +
@@ -521,6 +524,21 @@
     d.footerBottom = $('#footbottom').checked;
     var ac = $('#acceptsec'); if (ac) d.acceptSection = ac.checked;
     var ws = $('#wspecial'); if (ws) d.warrantySpecial = ws.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    /* editable warranty items: "Service = Period" per line. Stays auto-synced to the job's
+       materials until the operator edits the box, then their custom table wins. */
+    var wr = $('#wrows');
+    if (wr) {
+      var autoStr = TQ.warranty.autoServices(d).map(function (r) { return r.label + ' = ' + r.period; }).join('\n');
+      var boxStr = wr.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean).join('\n');
+      if (!boxStr || boxStr === autoStr) {
+        d.warrantyRows = [];   // untouched -> keep following the house matrix
+      } else {
+        d.warrantyRows = boxStr.split('\n').map(function (ln) {
+          var i = ln.indexOf('=');
+          return i === -1 ? { label: ln.trim(), period: '' } : { label: ln.slice(0, i).trim(), period: ln.slice(i + 1).trim() };
+        }).filter(function (r) { return r.label; });
+      }
+    }
     var ce = $('#costest');
     if (ce) {
       var cv = parseFloat(ce.value);

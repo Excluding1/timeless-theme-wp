@@ -71,14 +71,21 @@
   };
 
   TQ.warranty = {
-    /* the service/period table printed on the certificate */
-    services: function (doc) {
+    /* the service/period table auto-derived from the job's materials (house matrix) */
+    autoServices: function (doc) {
       var out = [];
       catIds(doc).forEach(function (id) { if (ROWS[id]) out.push({ label: ROWS[id][0], period: ROWS[id][1] }); });
       /* custom job with no recognised material: never over-claim — default to the shortest
          period we offer (12 months); the operator can raise it before signing if warranted */
       if (!out.length) out.push({ label: 'Workmanship on the services carried out', period: '12 months' });
       return out;
+    },
+
+    /* the service/period table printed on the certificate: a per-job custom table (doc.warrantyRows)
+       wins if the operator has edited it, otherwise the auto-derived matrix */
+    services: function (doc) {
+      if (doc && doc.warrantyRows && doc.warrantyRows.length) return doc.warrantyRows;
+      return TQ.warranty.autoServices(doc);
     },
 
     /* the "Warranty & cover" bullets for the quote/invoice footer, derived from the actual
