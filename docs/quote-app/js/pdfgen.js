@@ -523,9 +523,9 @@
         var bookHead = isInvoice ? 'Payment' : 'To book';
         var bookBody = isInvoice
           ? ((doc.dueDate ? 'Payment is due by ' + doc.dueDate + '.' :
-              'Payment is due within ' + (settings.invoiceDueDays || 7) + ' days of the invoice date.') +
+              'Payment is due within 1 business day of job completion.') +
              ' Please use ' + (doc.docNo || 'the invoice number') + ' as the payment reference.')
-          : ('A ' + (settings.depositPct || 10) + '% deposit secures your date. ' +
+          : ('A ' + (settings.depositPct || 10) + '% deposit is required to book your job in. ' +
              (doc.validUntil ? 'Valid until ' + doc.validUntil : 'Valid for ' + (settings.validityDays || 7) + ' days') +
              (gstShown ? '; prices inc GST' : '') + '. Reply to this quote or call ' + settings.phone + ' to go ahead.');
         var payLines = [settings.bankName, 'BSB ' + settings.bsb + '   Acc ' + settings.account];

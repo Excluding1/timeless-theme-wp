@@ -308,10 +308,11 @@
           }
           else if (act === 'inv') {
             var d2 = await TQ.db.getQuote(id);
-            d2.id = ''; d2.quoteRef = d2.docNo; d2.docNo = ''; d2.docType = 'invoice'; d2.status = 'draft';
-            d2.date = todayStr(); d2.dueDate = plusDaysStr(S.settings.invoiceDueDays);
-            d2.validUntil = '';
-            S.doc = d2; S.view = 'editor'; render(); toast('Invoice drafted from the quote, review and save');
+            /* the invoice KEEPS the quote's number (Allan: take it from the quote), so the job is
+               one number end to end; it's a new record but shares the TR- number */
+            d2.id = ''; d2.quoteRef = ''; d2.docType = 'invoice'; d2.status = 'draft';
+            d2.date = todayStr(); d2.dueDate = ''; d2.validUntil = '';   // payment wording is completion-based, no fixed date
+            S.doc = d2; S.view = 'editor'; render(); toast('Invoice drafted from the quote (same number), review and save');
           }
           else if (act === 'del') {
             if (!confirm('Delete this document? This cannot be undone.')) return;
@@ -885,7 +886,7 @@
         var bal = R.docTotal(d) - (Number(d.depositPaid) || 0);
         msg = 'Hi ' + first + ', your invoice ' + d.docNo + ' for ' + total + ' (inc GST) is attached.' +
           (Number(d.depositPaid) > 0 ? ' With your deposit received, the balance due is $' + R.money(bal) + '.' : '') +
-          (d.dueDate ? ' Payment is due by ' + d.dueDate + '.' : '') +
+          (d.dueDate ? ' Payment is due by ' + d.dueDate + '.' : ' Payment is due within 1 business day of job completion.') +
           ' Pay to ' + s.bankName + ', BSB ' + s.bsb + ', Acc ' + s.account + ', reference ' + d.docNo + '.' +
           ' Thanks again, ' + s.businessName + ' ' + s.phone;
       } else {
