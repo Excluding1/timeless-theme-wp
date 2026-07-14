@@ -28,7 +28,7 @@
   /* special-condition bullets contributed per service family */
   var SPECIAL = {
     resurf: [
-      'Allow the surface to cure before use: 24 to 48 hours after the final coat, and closer to 48 hours in cold or winter weather as it takes longer to set. Using it before it has cured can mark the finish.',
+      'Allow the surface to cure before use: we recommend a full 48 hours after the final coat to be safe (24 hours is the minimum, but 48 is best, especially in cold or winter weather as it sets slower). Using it before it has cured can mark the finish.',
       'The resurfaced item must be kept completely dry when not in use.',
       'Do not use the bath to store water.',
       'Strong coloured dyes, hair dye, bath bombs and similar products may stain the surface.'

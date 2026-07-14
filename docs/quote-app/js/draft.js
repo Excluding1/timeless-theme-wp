@@ -530,7 +530,7 @@
       ordered.forEach(function (c) {
         (c.expectLines || []).forEach(function (e) { if (expect.indexOf(e) === -1) expect.push(e); });
       });
-      if (ordered.some(function (c) { return c.cure; })) expect.push('Ready to use 24 to 48 hours after the final coat (allow the full 48 hours in cold or winter weather)');
+      if (ordered.some(function (c) { return c.cure; })) expect.push('Ready to use a full 48 hours after the final coat to be safe (24 hours minimum, allow the full 48 especially in cold or winter weather)');
       if (expect.length) { expect.push('Fixed price, no hidden fees'); out.expect = expect; }
 
       var warr = [];
