@@ -200,7 +200,7 @@
         if (photoImg) {
           var s = Math.min(maxW / photoImg.width, maxH / photoImg.height);
           photoW = photoImg.width * s; photoH = photoImg.height * s;
-          if (doc.photoCaption) capH = 3 + wrap(doc.photoCaption, fonts.helv, 7.5, 58 * MM).length * 10;
+          if (doc.photoCaption) capH = 3 + wrap(doc.photoCaption, fonts.helv, 7.5, photoW).length * 10;
         }
         var textW = photoImg ? 116 * MM : CW;
         var th = 0;
@@ -212,7 +212,7 @@
         if (photoImg) {
           var px = LM + CW - photoW;
           page.drawImage(photoImg, { x: px, y: y - photoH, width: photoW, height: photoH });
-          if (doc.photoCaption) block(doc.photoCaption, LM + CW - 58 * MM, 58 * MM, y - photoH - 5, fonts.helv, 7.5, 10, MUTED, 'center');
+          if (doc.photoCaption) block(doc.photoCaption, px, photoW, y - photoH - 5, fonts.helv, 7.5, 10, MUTED, 'center');
         }
         y -= Math.max(th, ph) + 8;
       }
