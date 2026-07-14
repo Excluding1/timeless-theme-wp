@@ -143,26 +143,33 @@
       (S.banner ? '<div class="banner">' + esc(S.banner) + '</div>' : '');
   }
 
-  /* inline sign-in popup (no digging in Settings). Resolves true on success. */
-  function signInModal() {
+  /* inline sign-in popup (no digging in Settings). Resolves true on success.
+     required=true => a mandatory gate: no Cancel, no click-away, only a successful sign-in closes it. */
+  function signInModal(required) {
     return new Promise(function (resolve) {
       var back = document.createElement('div');
       back.className = 'modalback';
       back.innerHTML =
         '<div class="modal">' +
         '<h3>Sign in</h3>' +
-        '<p class="hint">Sign in to sync your quotes with your team across devices.</p>' +
+        '<p class="hint">' + (required
+          ? 'Please sign in to use the quote app.'
+          : 'Sign in to sync your quotes with your team across devices.') + '</p>' +
         '<label>Email <input id="siEmail" type="email" autocomplete="username"></label>' +
         '<label class="mt">Password <input id="siPass" type="password" autocomplete="current-password"></label>' +
         '<div id="siErr" class="sierr"></div>' +
-        '<div class="actions"><span style="flex:1"></span><button id="siCancel">Cancel</button><button id="siOk" class="primary">Sign in</button></div>' +
+        '<div class="actions"><span style="flex:1"></span>' +
+        (required ? '' : '<button id="siCancel">Cancel</button>') +
+        '<button id="siOk" class="primary">Sign in</button></div>' +
         '</div>';
       document.body.appendChild(back);
       var email = back.querySelector('#siEmail'), pass = back.querySelector('#siPass'), err = back.querySelector('#siErr'), ok = back.querySelector('#siOk');
       email.focus();
       function close(v) { back.remove(); resolve(v); }
-      back.querySelector('#siCancel').onclick = function () { close(false); };
-      back.onclick = function (e) { if (e.target === back) close(false); };
+      if (!required) {
+        back.querySelector('#siCancel').onclick = function () { close(false); };
+        back.onclick = function (e) { if (e.target === back) close(false); };
+      }
       async function go() {
         if (!email.value.trim() || !pass.value) { err.textContent = 'Enter your email and password.'; return; }
         ok.disabled = true; ok.textContent = 'Signing in…'; err.textContent = '';
@@ -1153,6 +1160,13 @@
   /* ---------------- boot ---------------- */
   (async function boot() {
     var st = await TQ.db.init();
+    /* MANDATORY sign-in: when this deployment is wired to Supabase (config.js present) and there
+       is no active session, block the app behind a no-bypass login. A saved session persists, so
+       this only appears when genuinely signed out. Pure-local installs (no connection) are unaffected. */
+    if (TQ.db.conn && !st.user) {
+      while (!(await TQ.db.userEmail())) { await signInModal(true); }
+      st = { user: await TQ.db.userEmail() };
+    }
     if (st.user) S.userEmail = st.user;                    // already-signed-in session
     S.settings = await TQ.db.getSettings();
     TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
