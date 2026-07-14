@@ -186,7 +186,8 @@
           .filter(Boolean).forEach(function (l) { fy += block(l, LM, colW - 8, top - fy, fonts.helv, 9.5, 14, INK); });
         var ty2 = 0;
         ty2 += block(doc.customer.name || '', LM + colW, colW - 8, top - ty2, fonts.helvB, 9.5, 14, INK);
-        [doc.customer.address, doc.customer.access, doc.customer.phone, doc.customer.email]
+        var attn = clean(doc.customer.attn || '');
+        [attn ? 'Attn: ' + attn : '', doc.customer.address, doc.customer.access, doc.customer.phone, doc.customer.email]
           .filter(Boolean).forEach(function (l) { ty2 += block(l, LM + colW, colW - 8, top - ty2, fonts.helv, 9.5, 14, INK); });
         y = top - Math.max(fy, ty2) - 7;
       }
@@ -379,7 +380,8 @@
         var lh = line('BILL TO', LM, top, fonts.din, 13, NAVY) + 5;
         var by = lh;
         by += block(doc.customer.name || '', LM, 95 * MM, top - by, fonts.helvB, 10, 14, INK);
-        [doc.customer.address, doc.customer.phone, doc.customer.email].filter(Boolean).forEach(function (t) {
+        var battn = clean(doc.customer.attn || '');
+        [battn ? 'Attn: ' + battn : '', doc.customer.address, doc.customer.phone, doc.customer.email].filter(Boolean).forEach(function (t) {
           by += block(t, LM, 95 * MM, top - by, fonts.helv, 9.5, 14, INK);
         });
         var metaPairs = [['INVOICE #', doc.docNo || ''], ['DATE', doc.date || '']];

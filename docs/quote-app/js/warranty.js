@@ -14,6 +14,7 @@
     'bath-resurface': ['Bath resurfacing', 'Up to 5 years'],
     'wall-resurface': ['Wall and bathtub-side resurfacing', 'Up to 5 years'],
     'vanity': ['Vanity resurfacing', 'Up to 5 years'],
+    'benchtop': ['Benchtop resurfacing', 'Up to 5 years'],
     'basin': ['Basin resurfacing', 'Up to 5 years'],
     'floor-tile-over': ['New floor tiles laid on top (workmanship)', 'Up to 5 years'],
     'wall-tiles-new': ['New wall tiles (workmanship)', 'Up to 5 years'],
@@ -42,7 +43,7 @@
     ]
   };
   var FAMILY = {
-    'bath-resurface': 'resurf', 'wall-resurface': 'resurf', 'vanity': 'resurf', 'basin': 'resurf',
+    'bath-resurface': 'resurf', 'wall-resurface': 'resurf', 'vanity': 'resurf', 'benchtop': 'resurf', 'basin': 'resurf',
     'floor-tile-over': 'tiling', 'wall-tiles-new': 'tiling', 'missing-tile': 'tiling',
     'shower-regrout': 'grout', 'mould-grout': 'grout', 'shower-leak': 'grout',
     'silicone': 'silicone'

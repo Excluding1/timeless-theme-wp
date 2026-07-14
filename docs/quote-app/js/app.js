@@ -71,7 +71,7 @@
       id: '', docType: 'quote', docNo: '', date: todayStr(), availableFrom: '',
       validUntil: plusDaysStr((S.settings && S.settings.validityDays) || 7),
       dueDate: '', depositPaid: 0, status: 'draft',
-      customer: { name: '', address: '', access: '', phone: '', email: '' },
+      customer: { name: '', attn: '', address: '', access: '', phone: '', email: '' },
       jobIntro: '', photos: [], photoIndex: -1,
       options: [{ title: '', mode: 'itemised', lines: [{ desc: '', amount: 0 }], totalLabel: '' }],
       optionsNote: '',
@@ -96,7 +96,7 @@
     doc.warranty = (doc.warranty || []).map(R.sanitize);
     doc.expect = (doc.expect || []).map(R.sanitize);
     doc.warrantySpecial = (doc.warrantySpecial || []).map(R.sanitize);   // reaches the signed warranty PDF
-    if (doc.customer) doc.customer.access = R.sanitize(doc.customer.access);
+    if (doc.customer) { doc.customer.access = R.sanitize(doc.customer.access); doc.customer.attn = R.sanitize(doc.customer.attn); }
     if (doc.photoCaption) doc.photoCaption = R.sanitize(doc.photoCaption);
     return doc;
   }
@@ -399,6 +399,7 @@
 
       '<section><h3>Customer</h3><div class="grid2">' +
       '<label>Name <input id="cname" value="' + esc(d.customer.name) + '"></label>' +
+      '<label>Attn / contact <input id="cattn" value="' + esc(d.customer.attn || '') + '" placeholder="e.g. real-estate agent, optional"></label>' +
       '<label>Address <input id="caddr" value="' + esc(d.customer.address) + '"></label>' +
       '<label>Access note <input id="caccess" value="' + esc(d.customer.access) + '" placeholder="(first-floor unit) — optional"></label>' +
       '<label>Phone <input id="cphone" value="' + esc(d.customer.phone) + '"></label>' +
@@ -494,6 +495,7 @@
     var dep = $('#deposit'); if (dep) d.depositPaid = parseFloat(dep.value) || 0;
     var qr = $('#quoteref'); if (qr) d.quoteRef = qr.value.trim();
     d.customer.name = $('#cname').value.trim();
+    var ca = $('#cattn'); if (ca) d.customer.attn = ca.value.trim();
     d.customer.address = $('#caddr').value.trim();
     d.customer.access = $('#caccess').value.trim();
     d.customer.phone = $('#cphone').value.trim();
@@ -661,6 +663,8 @@
     function applyDraftResult(out, method) {
       var d = S.doc;
       if (out.customer.name) d.customer.name = out.customer.name;
+      if (out.customer.attn) d.customer.attn = out.customer.attn;
+      if (out.customer.access) d.customer.access = out.customer.access;
       if (out.customer.address) d.customer.address = out.customer.address;
       if (out.customer.phone) d.customer.phone = out.customer.phone;
       if (out.customer.email) d.customer.email = out.customer.email;

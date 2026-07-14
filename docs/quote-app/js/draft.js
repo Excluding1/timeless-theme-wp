@@ -367,7 +367,7 @@
       var warnings = [];
       var src = String(text || '').trim();
       var out = {
-        customer: { name: '', address: '', access: '', phone: '', email: '' },
+        customer: { name: '', attn: '', address: '', access: '', phone: '', email: '' },
         jobIntro: '',
         options: [],
         warnings: warnings
@@ -379,6 +379,17 @@
       if (em) { out.customer.email = em[0]; src = src.replace(em[0], ' '); }
       var ph = src.match(PHONE_RE);
       if (ph) { out.customer.phone = ph[0].replace(/\s{2,}/g, ' ').trim(); src = src.replace(ph[0], ' '); }
+
+      /* real-estate / business format: "Attn:/Attention:/C/- NAME" is the contact person, and
+         "Property: ADDRESS" is the job address (the first line, e.g. "AitkenRE", is the company
+         name, already captured by the name logic below). */
+      var at = src.match(/(?:^|\n|\s)(?:attn|attention|c\/[\-o]|care of)\s*[:\-]?\s*([A-Za-z][a-zA-Z'’.\- ]{1,40}?)(?=[\n,;]|$)/i);
+      if (at) { out.customer.attn = at[1].trim().replace(/[.,\s]+$/, ''); src = src.replace(at[0], ' '); }
+      var pr = src.match(/property\s*[:\-]\s*([^\n]{5,90})/i);
+      if (pr) {
+        out.customer.address = titleCase(pr[1].trim().replace(/[.,\s]+$/, '')).replace(/\bNsw\b/, 'NSW');
+        src = src.replace(pr[0], ' ');
+      }
 
       var nm = src.match(/(?:name is|customer is|client is|for|quote for)\s+((?:[A-Z][a-zA-Z'’-]+)(?:\s+[A-Z][a-zA-Z'’-]+){0,2})\b/);
       if (nm) { out.customer.name = nm[1].trim(); src = src.replace(nm[0], ' '); }
