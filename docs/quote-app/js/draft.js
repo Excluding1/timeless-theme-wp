@@ -57,8 +57,13 @@
      price intent — honour it even for a CUSTOM item not in the price book and even at 2 digits,
      so "drain cover replacement for 50" becomes a $50 line instead of being dropped. */
   var PRICE_CONNECTOR = /\b(?:for|is|are|at|cost|costs|costing|priced?|price|=|@)\s*\$?\s?(\d{2,5}(?:\.\d{1,2})?)\s*[.,;!]?\s*$/i;
+  /* a REAL price in a segment: a $-amount, or a standalone 3-5 digit number (so a digit glued
+     into a word like "3-pack" or "600 grit" is not mistaken for a price) */
+  var HAS_PRICE = /\$\s?\d|(?:^|\s)\d{3,5}(?:\.\d{1,2})?(?=[\s.,;!]|$)/;
   function findAmount(seg, segHasService) {
-    if (INCLUDED_RE.test(seg) && !/\d/.test(seg)) return 'included';
+    /* "included / free / no charge" makes it a $0 line — this wins unless the segment also
+       carries an actual price (so "commercial 3-pack coating included" is correctly included) */
+    if (INCLUDED_RE.test(seg) && !HAS_PRICE.test(seg)) return 'included';
     var m = seg.match(/\$\s?(\d{1,3}(?:,\d{3})+|\d+(?:\.\d{1,2})?)/);
     if (!m) {
       m = seg.match(/(?:^|\s|=|:)(\d{3,5}(?:\.\d{1,2})?)\s*[.,;!]?\s*$/);       // bare number at segment END only
@@ -84,11 +89,20 @@
 
   function tidyText(s) {
     var t = TQ.rules.sanitize(String(s)
-      .replace(/\$?\s?\d[\d,]*(?:\.\d{1,2})?/g, ' ')
+      .replace(/\$\s?\d[\d,]*(?:\.\d{1,2})?|(?:^|\s)\d[\d,]*(?:\.\d{1,2})?(?=[\s.,;!]|$)/g, ' ')
       .replace(/\s{2,}/g, ' ')
       .replace(/^\W+|\W+$/g, '')
       .replace(/\s+(is|for|at|costs?|=|:)$/i, '')).trim();
     return t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
+  }
+
+  /* pull the trailing price / included token off a full line, leaving the description intact
+     (internal digits like "3-pack" are kept — only a price at the very END is removed) */
+  function stripTrailingPrice(ln) {
+    return TQ.rules.sanitize(String(ln)
+      .replace(/[\s,;:]*\$?\s?\d[\d,]*(?:\.\d{1,2})?\s*[.,;!]*\s*$/, '')   // "... 1050" / "...$1,050."
+      .replace(INCLUDED_RE, '')                                            // "... included"
+      .replace(/[\s,;:.\-]+$/, '')).trim();
   }
 
   /* ---- the run-binding engine: block text -> priced line items ---- */
@@ -97,6 +111,34 @@
     var orphans = [];   // prices that arrived with no words attached
     /* join comma-thousands BEFORE the comma splitter can shred them: 1,540 -> 1540 */
     var normalised = String(block).replace(/(\d),(?=\d{3}(?:\D|$))/g, '$1');
+
+    /* VERBATIM-LINE PASS: when the operator has PASTED an already-written quote, each
+       newline-separated line that reads as a full sentence (6+ words) and ends in a price or
+       "included" is kept EXACTLY as typed (commas, "and", "3-pack" all intact). Terse notes
+       fall through to the run-binding engine below. */
+    var leftover = [];
+    normalised.split(/\n/).forEach(function (raw) {
+      var ln = raw.trim();
+      if (!ln) return;
+      var amt = findAmount(ln, !!matchCatalogue(ln));
+      var words = ln.replace(/[^A-Za-z]+/g, ' ').split(/\s+/).filter(Boolean).length;   // alpha words only
+      /* only ONE price on the line => it's a single worded item; a line with several prices is
+         a terse multi-item note and must go through the run-binder (do not collapse it) */
+      var priceCount = (ln.match(/\$\s?\d[\d,]*(?:\.\d{1,2})?|(?:^|\s)\d{3,5}(?:\.\d{1,2})?(?=[\s.,;!]|$)/g) || []).length;
+      var verbatimOk = (amt === 'included' && priceCount === 0) || (typeof amt === 'number' && priceCount === 1);
+      if (verbatimOk && words >= 6) {
+        var d = stripTrailingPrice(ln);
+        d = d ? d.charAt(0).toUpperCase() + d.slice(1) : d;
+        if (d) {
+          var best = matchCatalogue(d);
+          if (!lines.some(function (l) { return l.desc === d; }))
+            lines.push({ desc: d, amount: amt, catId: best ? best.id : null, primary: !!(best && best.primary) });
+          return;
+        }
+      }
+      leftover.push(raw);
+    });
+    normalised = leftover.join('\n');
     var segs = normalised
       .split(/\n|(?:\s[-–—]+\s)|,|;|(?:\s\+\s)|\band\b|\balso\b|\bplus\b/i)
       .map(function (t) { return t.trim(); })
@@ -182,10 +224,15 @@
       var desc;
 
       if (best) {
-        desc = best.desc;
-        /* one price covering two DIFFERENT primary services is worth a human look
-           (span-based: keyword-count differences between entries must not hide it) */
-        if (typeof amount === 'number') {
+        /* keep the operator's OWN wording when they have written a full descriptive line (a
+           pasted, already-worded quote), instead of swapping in the shorter price-book text.
+           Terse notes ("bath resurface 1540") still get the polished book description. */
+        var userText = tidyText(text);
+        var richLine = userText && userText.split(/\s+/).length >= 6;
+        desc = richLine ? userText : best.desc;
+        /* one price covering two DIFFERENT primary services is worth a human look — but only
+           auto-split TERSE runs; a full sentence stays exactly as the operator wrote it */
+        if (typeof amount === 'number' && !richLine) {
           var spans = primarySpans(text, hits);
           if (spans.length > 1) {
             warnings.push(optLabel + 'one price ($' + amount + ') seems to cover several main jobs ("' + text + '"), the price was put on "' + best.desc + '" and the others added at the price-book default, check the split');
@@ -215,7 +262,7 @@
         if (nums.length > 1) warnings.push(optLabel + 'two prices found in one line ("' + seg.trim() + '"), used $' + amt + ', check which applies');
       }
       var text = seg
-        .replace(/\$?\s?\d[\d,]*(?:\.\d{1,2})?/g, ' ')
+        .replace(/\$\s?\d[\d,]*(?:\.\d{1,2})?|(?:^|\s)\d[\d,]*(?:\.\d{1,2})?(?=[\s.,;!]|$)/g, ' ')
         .replace(INCLUDED_RE, ' ')
         .replace(/\s{2,}/g, ' ').trim()
         .replace(/\s+(is|for|at|costs?|=|:)$/i, '')
