@@ -444,7 +444,7 @@
 
       '<section><h3>Warranty (send after the job is done and paid)</h3>' +
       '<p class="hint">Downloads a signed single-page warranty PDF matching the services on this document, modelled on the operator card with our brand and the Australian Consumer Law text. Clicking below opens a popup to pick who is signing and sign it fresh, then it downloads. Send it WITH the final invoice at completion (the law requires the warranty be given at the time of supply, a website link alone is not enough). Special conditions below are drafted from the job, edit freely.</p>' +
-      '<label>Warranty items (one per line: Service = Period)<textarea id="wrows" rows="3">' + esc(TQ.warranty.services(d).map(function (r) { return r.label + ' = ' + r.period; }).join('\n')) + '</textarea></label>' +
+      '<label>Warranty items <span class="opt">(optional — auto-filled from the job; only change these if you want a different service or period)</span><textarea id="wrows" rows="3">' + esc(TQ.warranty.services(d).map(function (r) { return r.label + ' = ' + r.period; }).join('\n')) + '</textarea></label>' +
       '<label>Special conditions (one per line)<textarea id="wspecial" rows="3">' + esc((d.warrantySpecial && d.warrantySpecial.length ? d.warrantySpecial : TQ.warranty.composeSpecial(d)).join('\n')) + '</textarea></label>' +
       '<div class="actions"><button id="wdownload">Download warranty PDF</button>' +
       '<button id="wpolish" title="Tidies the special conditions with the local AI. Keeps every instruction and number; never invents anything.">✨ Tidy conditions</button>' +
