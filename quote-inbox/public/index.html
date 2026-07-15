@@ -35,6 +35,22 @@
   .search input::placeholder{color:#9fb0cc}
   .refresh{border:0;background:rgba(255,255,255,.14);color:#fff;font-weight:700;font-size:13px;padding:8px 12px;border-radius:10px;cursor:pointer;flex:none}
   .refresh:hover{background:rgba(255,255,255,.24)}
+  .viewtoggle{display:flex;gap:2px;background:rgba(255,255,255,.10);border-radius:10px;padding:3px;flex:none}
+  .viewtoggle button{border:0;background:0;color:#cdd8ea;font-weight:700;font-size:13px;padding:6px 11px;border-radius:8px;cursor:pointer;white-space:nowrap}
+  .viewtoggle button.on{background:var(--gold);color:#3a2c08}
+  @media(max-width:640px){.viewtoggle button{padding:6px 9px;font-size:0}.viewtoggle button::first-letter{font-size:15px}}
+  /* list view */
+  .qlist{display:flex;flex-direction:column;gap:9px}
+  .qrow{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 15px;cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;transition:box-shadow .12s,border-color .12s}
+  .qrow:hover{box-shadow:0 4px 16px rgba(12,22,44,.10);border-color:#cfd6e2}
+  .qrow .thumb{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--panel);flex:none;border:1px solid var(--line)}
+  .qrow .thumb.none{display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:18px}
+  .qrow .main{flex:1;min-width:0}
+  .qrow .nm{font-weight:800;color:var(--ink);font-size:15.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .qrow .ad{color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .qrow .rmeta{display:flex;gap:6px;align-items:center;flex:none}
+  .qrow .when{color:var(--faint);font-size:12px;font-weight:600;white-space:nowrap}
+  .qrow .flag{color:var(--danger);font-size:13px}
   .tabs{display:flex;gap:6px;padding:0 14px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .tab{border:0;background:rgba(255,255,255,.10);color:#cdd8ea;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;flex:none}
   .tab.active{background:var(--gold);color:#3a2c08}
@@ -145,6 +161,10 @@
   <div class="htop">
     <h1><span class="dot"></span> Quote Inbox</h1>
     <label class="search">🔍<input id="q" type="search" placeholder="Search name or address…" autocomplete="off" /></label>
+    <div class="viewtoggle" id="viewtoggle">
+      <button data-mode="card" class="on" title="Card view (one at a time)">▤ Cards</button>
+      <button data-mode="list" title="List view (all at once)">☰ List</button>
+    </div>
     <button class="refresh" id="refresh" title="Refresh">↻</button>
   </div>
   <div class="tabs" id="tabs"></div>

@@ -5,6 +5,7 @@ let VIEW = [];          // filtered + searched list
 let idx = 0;            // current card in VIEW
 let filter = 'new';
 let query = '';
+let viewMode = localStorage.getItem('qi_view') || 'card';   // 'card' | 'list'
 let lb = { photos: [], i: 0, lastFocus: null };
 
 const FILTERS = [
@@ -69,12 +70,14 @@ function matchQuery(q){
 }
 
 function render(){
+  document.querySelectorAll('#viewtoggle button').forEach(b=>b.classList.toggle('on', b.dataset.mode===viewMode));
   if(!VIEW.length){
     const msg = query ? `No matches for “${esc(query)}”.` : `Nothing in <b>${FILTERS.find(f=>f.key===filter).label}</b>.<br>🎉 All caught up.`;
     $('#stage').innerHTML = `<div class="status">${msg}</div>`;
     $('#counter').style.display='none'; $('#nav').style.display='none'; $('#hint').style.display='none';
     return;
   }
+  if(viewMode==='list'){ renderList(); return; }
   idx = Math.max(0, Math.min(idx, VIEW.length-1));
   const q = VIEW[idx];
   $('#counter').style.display='flex';
@@ -86,6 +89,32 @@ function render(){
   $('#prev').disabled = idx===0;
   $('#next').disabled = idx===VIEW.length-1;
   $('#hint').style.display='block';
+}
+
+/* compact list of all quotes in the current filter; click a row to open its full card */
+function renderList(){
+  $('#counter').style.display='flex';
+  $('#pos').textContent = `${VIEW.length} ${VIEW.length===1?'quote':'quotes'}`;
+  $('#sub').textContent = FILTERS.find(f=>f.key===filter).label;
+  $('#nav').style.display='none';
+  $('#hint').style.display='none';
+  $('#stage').innerHTML = `<div class="qlist">${VIEW.map((q,i)=>{
+    const nShots = q.photosByArea.reduce((n,g)=>n+g.photos.length,0);
+    const thumb = nShots ? `<img class="thumb" loading="lazy" src="${esc(q.photosByArea[0].photos[0].thumb)}" alt="">` : `<span class="thumb none">📷</span>`;
+    const highFlags = (q.flags||[]).filter(f=>f.sev==='high').length + (q.photosLost?1:0);
+    const meta = [
+      q.reviewed?'<span class="badge rev">Reviewed</span>':(q.stage==='Quote Requested'?'<span class="badge new">New</span>':`<span class="badge">${esc(q.stage)}</span>`),
+      q.tier?`<span class="badge tier">${esc(q.tier)}</span>`:'',
+      nShots?`<span class="badge">📷 ${nShots}</span>`:'',
+      highFlags?`<span class="flag" title="${highFlags} thing(s) to check before quoting">▲ ${highFlags}</span>`:''
+    ].join(' ');
+    return `<button class="qrow" data-i="${i}">
+      ${thumb}
+      <span class="main"><span class="nm">${esc(q.customer)}</span><span class="ad">${esc(q.address||'No address')}</span></span>
+      <span class="rmeta">${meta}<span class="when">${ago(q.createdAt)}</span></span>
+    </button>`;
+  }).join('')}</div>`;
+  document.querySelectorAll('.qrow').forEach(el=>el.onclick=()=>{ idx=Number(el.dataset.i); viewMode='card'; localStorage.setItem('qi_view','card'); render(); window.scrollTo({top:0}); });
 }
 
 function card(q){
@@ -217,6 +246,7 @@ $('#lb').onclick=e=>{ if(e.target.id==='lb') closeLb(); };
 $('#prev').onclick=()=>move(-1);
 $('#next').onclick=()=>move(1);
 $('#refresh').onclick=()=>load(true);
+document.querySelectorAll('#viewtoggle button').forEach(b=>b.onclick=()=>{ viewMode=b.dataset.mode; localStorage.setItem('qi_view',viewMode); render(); });
 const qInput=$('#q');
 qInput.oninput=()=>{ query=qInput.value.trim().toLowerCase(); applyFilter(filter); };
 
