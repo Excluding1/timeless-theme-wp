@@ -364,7 +364,8 @@
          BENEATH the full total with the balance due, never instead of it. */
       function drawInvoice() {
         /* header: title left, mark right, seller identity under */
-        line(gstShown ? 'TAX INVOICE' : 'INVOICE', LM, y, fonts.din, 30, NAVY);
+        var invTitle = (gstShown ? 'TAX INVOICE' : 'INVOICE') + (doc.isDeposit ? '  ·  DEPOSIT' : '');
+        line(invTitle, LM, y, fonts.din, doc.isDeposit ? 24 : 30, NAVY);
         var mk = markImg || logoImg;
         var mkW = markImg ? 18 * MM : 45 * MM;
         var mkH = mkW * mk.height / mk.width;
@@ -522,9 +523,13 @@
         var c1 = 52 * MM, c2 = 68 * MM, c3 = 54 * MM;
         var bookHead = isInvoice ? 'Payment' : 'To book';
         var bookBody = isInvoice
-          ? ((doc.dueDate ? 'Payment is due by ' + doc.dueDate + '.' :
-              'Payment is due within 1 business day of job completion.') +
-             ' Please use ' + (doc.docNo || 'the invoice number') + ' as the payment reference.')
+          ? (doc.isDeposit
+             ? ('This ' + (doc.depositPct || 10) + '% deposit confirms your booking. The balance of $' +
+                money(Math.round(((doc.jobTotal || 0) - optionTotal(doc.options[0].lines)) * 100) / 100) +
+                ' is due within 1 business day of job completion. Please use ' + (doc.docNo || 'the invoice number') + ' as the payment reference.')
+             : ((doc.dueDate ? 'Payment is due by ' + doc.dueDate + '.' :
+                'Payment is due within 1 business day of job completion.') +
+                ' Please use ' + (doc.docNo || 'the invoice number') + ' as the payment reference.'))
           : ('A ' + (settings.depositPct || 10) + '% deposit is required to book your job in. ' +
              (doc.validUntil ? 'Valid until ' + doc.validUntil : 'Valid for ' + (settings.validityDays || 7) + ' days') +
              (gstShown ? '; prices inc GST' : '') + '. Reply to this quote or call ' + settings.phone + ' to go ahead.');

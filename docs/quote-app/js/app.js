@@ -277,6 +277,7 @@
           '<button data-act="pdf">PDF</button>' +
           '<button data-act="dup">Copy</button>' +
           (q.docType === 'quote' ? '<button data-act="inv">→ Invoice</button>' : '') +
+          (q.docType === 'quote' ? '<button data-act="dep" title="Tax invoice for the 10% booking deposit">→ Deposit invoice</button>' : '') +
           '<button data-act="warr" title="Download the signed warranty PDF for this job">Warranty</button>' +
           '<button data-act="del" class="danger">✕</button>' +
         '</td></tr>';
@@ -315,6 +316,24 @@
             d2.id = ''; d2.quoteRef = ''; d2.docType = 'invoice'; d2.status = 'draft';
             d2.date = todayStr(); d2.dueDate = ''; d2.validUntil = '';   // payment wording is completion-based, no fixed date
             S.doc = d2; S.view = 'editor'; render(); toast('Invoice drafted from the quote (same number), review and save');
+          }
+          else if (act === 'dep') {
+            /* DEPOSIT tax invoice: bills just the X% booking deposit; keeps the job's TR- number,
+               remembers the full job total so the PDF can note the balance due on completion */
+            var dq = await TQ.db.getQuote(id);
+            var jobTotal = R.docTotal(dq);
+            var pct = Number(S.settings.depositPct) || 10;
+            var depAmt = R.round2(jobTotal * pct / 100);
+            var summary = (dq.options && dq.options[0] && dq.options[0].title) ? dq.options[0].title.replace(/^option [a-c]:\s*/i, '') : 'the quoted works';
+            dq.id = ''; dq.quoteRef = ''; dq.docType = 'invoice'; dq.status = 'draft';
+            dq.isDeposit = true; dq.jobTotal = jobTotal; dq.depositPct = pct;
+            dq.date = todayStr(); dq.dueDate = ''; dq.validUntil = ''; dq.depositPaid = 0;
+            dq.jobIntro = ''; dq.optionsNote = '';
+            dq.options = [{ title: '', mode: 'itemised', totalLabel: 'Deposit due now (inc GST)', lines: [
+              { desc: pct + '% booking deposit for ' + summary + ' (balance due on completion)', amount: depAmt }
+            ] }];
+            S.doc = dq; S.view = 'editor'; render();
+            toast('Deposit invoice drafted (' + pct + '% = $' + R.money(depAmt) + '), same number, review and save');
           }
           else if (act === 'del') {
             if (!confirm('Delete this document? This cannot be undone.')) return;
