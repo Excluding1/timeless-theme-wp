@@ -386,7 +386,8 @@
           by += block(t, LM, 95 * MM, top - by, fonts.helv, 9.5, 14, INK);
         });
         var metaPairs = [['INVOICE #', doc.docNo || ''], ['DATE', doc.date || '']];
-        if (doc.dueDate) metaPairs.push(['DUE', doc.dueDate]);
+        if (doc.bookingDate) metaPairs.push(['BOOKING', doc.bookingDate]);
+        if (doc.dueDate && !doc.isDeposit) metaPairs.push(['DUE', doc.dueDate]);   // deposit timing is in the payment note
         if (doc.quoteRef) metaPairs.push(['QUOTE REF', doc.quoteRef]);
         var my = 0;
         metaPairs.forEach(function (p) {
@@ -524,7 +525,7 @@
         var bookHead = isInvoice ? 'Payment' : 'To book';
         var bookBody = isInvoice
           ? (doc.isDeposit
-             ? ('This ' + (doc.depositPct || 10) + '% deposit confirms your booking. The balance of $' +
+             ? ('This ' + (doc.depositPct || 10) + '% deposit confirms your booking' + (doc.bookingDate ? ' for ' + doc.bookingDate : '') + '. The balance of $' +
                 money(Math.round(((doc.jobTotal || 0) - optionTotal(doc.options[0].lines)) * 100) / 100) +
                 ' is due within 1 business day of job completion. Please use ' + (doc.docNo || 'the invoice number') + ' as the payment reference.')
              : ((doc.dueDate ? 'Payment is due by ' + doc.dueDate + '.' :

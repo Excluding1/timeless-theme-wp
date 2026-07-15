@@ -70,7 +70,7 @@
     return {
       id: '', docType: 'quote', docNo: '', date: todayStr(), availableFrom: '',
       validUntil: plusDaysStr((S.settings && S.settings.validityDays) || 7),
-      dueDate: '', depositPaid: 0, status: 'draft',
+      dueDate: '', bookingDate: '', depositPaid: 0, status: 'draft',
       customer: { name: '', attn: '', address: '', access: '', phone: '', email: '' },
       jobIntro: '', photos: [], photoIndex: -1,
       options: [{ title: '', mode: 'itemised', lines: [{ desc: '', amount: 0 }], totalLabel: '' }],
@@ -328,6 +328,7 @@
             dq.id = ''; dq.quoteRef = ''; dq.docType = 'invoice'; dq.status = 'draft';
             dq.isDeposit = true; dq.jobTotal = jobTotal; dq.depositPct = pct;
             dq.date = todayStr(); dq.dueDate = ''; dq.validUntil = ''; dq.depositPaid = 0;
+            dq.bookingDate = dq.availableFrom || dq.bookingDate || '';   // pre-fill if the quote had a start date; editable
             dq.jobIntro = ''; dq.optionsNote = '';
             dq.options = [{ title: '', mode: 'itemised', totalLabel: 'Deposit due now (inc GST)', lines: [
               { desc: pct + '% booking deposit for ' + summary + ' (balance due on completion)', amount: depAmt }
@@ -411,7 +412,8 @@
       '<label>Number <input id="docno" value="' + esc(d.docNo) + '" placeholder="auto on save"></label>' +
       '<label>Date <input id="docdate" value="' + esc(d.date) + '"></label>' +
       (isInv
-        ? '<label>Due date <input id="duedate" value="' + esc(d.dueDate || plusDaysStr(S.settings.invoiceDueDays)) + '"></label>'
+        ? '<label>Due date <input id="duedate" value="' + esc(d.dueDate || plusDaysStr(S.settings.invoiceDueDays)) + '"></label>' +
+          '<label>Booking date <span class="opt">(optional, shows on the invoice)</span> <input id="bookdate" value="' + esc(d.bookingDate || '') + '" placeholder="e.g. Tuesday 4 August"></label>'
         : '<label>Valid until <input id="validuntil" value="' + esc(d.validUntil || plusDaysStr(S.settings.validityDays)) + '"></label>' +
           '<label>Available from <input id="avail" value="' + esc(d.availableFrom || '') + '" placeholder="optional"></label>') +
       '</div>' +
@@ -515,6 +517,7 @@
     var av = $('#avail'); if (av) d.availableFrom = av.value.trim();
     var vu = $('#validuntil'); if (vu) d.validUntil = vu.value.trim();
     var du = $('#duedate'); if (du) d.dueDate = du.value.trim();
+    var bk = $('#bookdate'); if (bk) d.bookingDate = bk.value.trim();
     var dep = $('#deposit'); if (dep) d.depositPaid = parseFloat(dep.value) || 0;
     var qr = $('#quoteref'); if (qr) d.quoteRef = qr.value.trim();
     d.customer.name = $('#cname').value.trim();
