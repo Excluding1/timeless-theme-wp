@@ -242,14 +242,33 @@ actually pays, and whether signage/ads are worth funding.
 Allan: *"do we have a limit for this section — how many calls is too much, or if no response on text?"*
 We didn't. Every "try again" answer looped forever with no counter, so nothing ever forced a decision.
 
-**The evidence.** Velocify, across 3.5M leads: **93% of leads that convert are reached by the 6th
-call**, and a lead needing more than 7 calls is **45% less likely to convert**. But the average team
-quits after **1.3 attempts** — so the cap exists as much to stop us giving up early as to stop us
-pestering. Quote follow-ups on day 1 / 3 / 7 capture ~93% of all replies.
+### 9.1 First pass, then corrected down (Allan: *"is 6 tries too much?"*)
+
+The first version used **6**, from Velocify's 3.5M-lead study: 93% of leads that convert are reached
+by the 6th call. Allan pushed back and he was right. Three problems with importing that number:
+
+1. **Wrong industry.** Velocify's dataset is US mortgage, insurance and education — price-shopping
+   verticals where buyers submit to several providers and expect to be chased. A Sydney homeowner
+   asking about their bathroom is not shopping the same way.
+2. **Wrong unit.** Velocify counts *calls*. Six phone calls is pestering; four attempts mixing call
+   and text is not. Our stage-1 retry answers ("left a voicemail", "no answer, try again") are both
+   call-shaped, so a cap of 6 meant six calls.
+3. **The number propping up "more is better" is fake.** The much-quoted *"80% of sales happen
+   between the 5th and 12th contact"* is attributed to the **National Sales Executive Association**,
+   a body that does not exist. Much of the trades follow-up advice recommending 5–7 touches is
+   downstream of that fabrication, so we do not build on it.
+
+**Trades-specific guidance** (vendor content, not papers — see §9.3) converges on **3–4 attempts
+over 7 days** for a new enquiry and **2–3 over 10 days** for a quote that has gone quiet.
+
+**Corrected:** stage 1 drops **6 → 4**, and the channel-switch prompt now fires at attempt **2**
+instead of at the cap, where it can still change the outcome.
+
+### 9.2 The caps
 
 | Step | Cap | Wait between goes | Recorded if we stop |
 |---|---|---|---|
-| 1 · New — make contact | **6** | 0, 1, 2, 4, 6, 8 days | No answer after 6 tries |
+| 1 · New — make contact | **4** | 0, 1, 3, 6 days | No answer after 4 tries |
 | 2 · Qualified — chase photos | 3 | 1, 3, 5 | Never sent the photos |
 | 3 · Costing — chase a sub | 3 | 1, 2, 4 | Could not get a price |
 | 5 · Follow-up — chase the quote | **3** | 1, 3, 7 | No response to the quote ♻︎ |
@@ -259,11 +278,37 @@ pestering. Quote follow-ups on day 1 / 3 / 7 capture ~93% of all replies.
 
 Stage 8 (job day) and 11 (wrap up) are uncapped — one is a same-day status, the other is admin.
 
-**How it behaves.** The card shows *"2 of 6 tries used · next one due in 2 days"*. Each retry answer
-is labelled with which go it is. At the cap the counter turns red, a channel-switch hint appears
-(*"Two calls unanswered? Send a text instead"*), a one-tap **Stop here** button records the reason,
+**How it behaves.** The card shows *"2 of 4 tries used · next one due in 2 days"*. Each retry answer
+is labelled with which go it is. At the cap the counter turns red, a one-tap **Stop here** button records the reason,
 and the assistant promotes the lead to top priority telling you to stop rather than keep dialling.
 
 ♻︎ = marked **revivable**. 15–25% of non-converters convert on a later reactivation, so a "too
 expensive", "went elsewhere", "changed their mind" or a quote that just went quiet is flagged for a
 future revisit. A wrong number is not.
+
+### 9.3 Honest note on the evidence
+
+Allan asked for *"research tests or papers"*. There aren't any for this specific question:
+
+- **No peer-reviewed study exists** on optimal contact attempts for residential trades.
+- The only large empirical datasets are **Velocify** (3.5M leads — but mortgage/insurance/education)
+  and the **Lead Response Management** work, which measures response *time*, not attempt count.
+- Everything trades-specific is **vendor marketing content**, and some of it rests on the
+  fabricated National Sales Executive Association statistic.
+
+So the 4 is a judgement call, informed by the closest available evidence and deliberately set at the
+conservative end. It is a setting, not a law — if we ever have 30+ closed leads with attempt counts
+recorded, **our own data beats all of the above** and we should re-derive it from that.
+
+### 9.4 Australian rules that bear on this
+
+- Calling or texting someone **about the quote they themselves asked for** is a *factual /
+  transactional* message, not marketing. It sits outside the Spam Act's consent and unsubscribe
+  rules. Following up an enquiry is legitimate.
+- **But** ACMA has enforced against messages that are mostly factual yet carry any promotional
+  element — in the Ticketek matter a footer banner and social links made the whole message
+  commercial. So our follow-ups must stay strictly about **their job**: no service cross-sell, no
+  marketing links. The draft messages in the app already comply; keep them that way.
+- ACMA also says consent should **not be inferred from a one-off interaction**. Once a lead is
+  closed, continuing to contact them stops being "responding to their request" and starts looking
+  like marketing. That is another reason the cap and a clean close matter.

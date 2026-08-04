@@ -126,20 +126,34 @@
   function stageOf(n){ return STAGES.filter(function(s){return s.n===n;})[0]; }
 
   /* ---------- how many times we chase before we stop ----------
-     Velocify, on 3.5M leads: 93% of leads that convert are reached by the 6th call, and a lead
-     needing more than 7 calls is 45% LESS likely to convert. The average team quits after 1.3
-     attempts, so the cap is there to stop us quitting early as much as to stop us pestering.
-     Quote follow-ups use day 1 / 3 / 7, which captures ~93% of all replies.
+     Revised down 2026-08-04 after checking whether the widely-quoted numbers actually apply to us.
+
+     The famous figure is Velocify's: 93% of leads that convert are reached by the 6th call. But
+     that dataset is US mortgage, insurance and education -- price-shopping verticals where people
+     expect to be chased. Trades guidance lands lower: 3-4 attempts over 7 days for a new enquiry,
+     2-3 over 10 days for a quote that has gone quiet. The "5 to 12 contacts" figure often used to
+     argue for more is traced to a body called the National Sales Executive Association, which does
+     not exist -- so we do not build on it.
+
+     The real point is that 6 CALLS is pestering while 4 attempts mixing call and text is not.
+     So: fewer goes at the customer, and the app pushes a channel switch early instead of late.
+
        cap   = attempts before the app tells you to close it
        days  = how long to wait before each next attempt
+       nudge = fires partway through, not only at the cap
        close = the reason recorded when we give up                                          */
   var LIMITS = {
-    1:  { cap:6, days:[0,1,2,4,6,8],   close:'No answer after 6 tries',
-          hint:'Two calls unanswered? Send a text instead. Changing channel beats a 7th call.' },
+    1:  { cap:4, days:[0,1,3,6],       close:'No answer after 4 tries',
+          nudge:{ at:2, t:'Two goes with no answer. Switch channel — text them instead of calling. '+
+                          'A different channel beats another call.' },
+          hint:'Four attempts over a week is where trades advice stops. Close it rather than keep dialling.' },
     2:  { cap:3, days:[1,3,5],         close:'Never sent the photos' },
     3:  { cap:3, days:[1,2,4],         close:'Could not get a price',
           hint:'Third time chasing a sub. Price it yourself or use the other one.' },
-    5:  { cap:3, days:[1,3,7],         close:'No response to the quote', revive:1 },
+    5:  { cap:3, days:[1,3,7],         close:'No response to the quote', revive:1,
+          nudge:{ at:2, t:'Second nudge on the quote. Make the last one useful — offer to adjust the '+
+                          'scope or the price, do not just ask again.' },
+          hint:'Three follow-ups over ten days is the trades norm. Close it and keep them revivable.' },
     6:  { cap:3, days:[2,4,7],         close:'Deposit never paid' },
     7:  { cap:4, days:[3,7,14,21],     close:'Never found a date', revive:1 },
     10: { cap:4, days:[3,7,14,21],     close:'Never paid' }
@@ -358,9 +372,12 @@
     if(!isOpen(l)) return null;
     if(atCap(l)){
       var m = limitOf(l);
-      return { p:1, why:'Tried '+tries(l)+' times already, and past 6 attempts a lead is 45% less '+
-                        'likely to convert', do: m.hint ? 'Change approach or close it' : 'Close it off' };
+      return { p:1, why:'Tried '+tries(l)+' times already, which is where trades advice says to stop',
+               do: m.hint ? 'Change approach or close it' : 'Close it off' };
     }
+    var lm = limitOf(l);
+    if(lm && lm.nudge && tries(l) >= lm.nudge.at && isDue(l))
+      return { p:2, why:lm.nudge.t, do:'Try a different way' };
     if(isDue(l)) return { p:2, why:'The next follow-up was due '+
       (Math.abs(dueIn(l))<1 ? 'today' : Math.round(-dueIn(l))+' days ago'), do:'Chase it now' };
     if(l.stage===7 && !l.booking) return { p:2, why:'They have paid a deposit and are waiting on a date', do:'Book it in' };
@@ -718,7 +735,9 @@
                   : ' \u00b7 next one due in '+Math.ceil(d)+' day'+(Math.ceil(d)===1?'':'s'))+
           '</span></div>';
       }
-      if(capped && lim.hint) meter += '<div class="qhint">'+ic('target',13)+'<span>'+esc(lim.hint)+'</span></div>';
+      var say = capped ? (lim && lim.hint)
+              : (lim && lim.nudge && used >= lim.nudge.at) ? lim.nudge.t : '';
+      if(say) meter += '<div class="qhint">'+ic('target',13)+'<span>'+esc(say)+'</span></div>';
 
       main += '<div class="qcard"><div class="qstage">Step '+st.n+' of 11 · '+esc(st.name)+'</div>'+
         '<div class="qtext">'+esc(st.q)+'</div>'+meter+'<div class="opts">'+

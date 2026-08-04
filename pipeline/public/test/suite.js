@@ -204,19 +204,30 @@
        return d.every(function(x,i){ return i===0 || x >= d[i-1]; });
      }));
 
-  ok('first contact caps at 6, matching the 93%-reached-by-call-6 finding',
-     LIM['1'].cap === 6, 'cap is '+LIM['1'].cap);
+  ok('first contact caps at 4, matching trades guidance of 3-4 over 7 days '+
+     '(NOT the mortgage-industry 6)', LIM['1'].cap === 4, 'cap is '+LIM['1'].cap);
+  ok('no customer-facing step chases more than 4 times',
+     ['1','2','5','6'].every(function(k){ return LIM[k].cap <= 4; }),
+     ['1','2','5','6'].map(function(k){ return k+':'+LIM[k].cap; }).join(' '));
+  ok('the first contact run finishes inside a week',
+     LIM['1'].days[LIM['1'].days.length-1] <= 7, LIM['1'].days.join(','));
+  ok('a channel-switch nudge fires before the cap, not after',
+     LIM['1'].nudge && LIM['1'].nudge.at < LIM['1'].cap,
+     'nudge at '+(LIM['1'].nudge||{}).at+' of '+LIM['1'].cap);
   eq('quote follow-ups run day 1, 3 then 7', LIM['5'].days, [1,3,7]);
   ok('every cap records why we gave up',
      Object.keys(LIM).every(function(k){ return !!LIM[k].close; }));
 
   /* drive it: chase a lead until it caps */
-  var cl = JSON.parse(JSON.stringify(probe)); cl.id='tstcap'; cl.stage=1; cl.tries={}; 
+  var cl = JSON.parse(JSON.stringify(probe)); cl.id='tstcap'; cl.stage=1; cl.tries={};
   S.leads.push(cl);
   var again = P.stageOf(1).opts.filter(function(o){ return o.next===1; })[0];
-  for(var k=0;k<6;k++) P.apply(cl, again);
-  eq('six goes are counted', P.tries(cl), 6);
-  ok('the sixth go trips the cap', P.atCap(cl)===true);
+  P.apply(cl, again); P.apply(cl, again);
+  ok('two goes in, we are told to switch channel rather than call again',
+     P.tries(cl) === 2 && !P.atCap(cl));
+  P.apply(cl, again); P.apply(cl, again);
+  eq('four goes are counted', P.tries(cl), 4);
+  ok('the fourth go trips the cap', P.atCap(cl)===true);
   ok('the next attempt is scheduled, not left to memory', typeof cl.nextTouch === 'number');
   var capSug = P.suggest(cl);
   eq('a capped lead becomes the top priority', capSug.p, 1);
