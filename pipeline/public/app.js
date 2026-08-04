@@ -94,9 +94,9 @@
       { t:'Accepted', ic:'trophy', next:6, good:1 },
       { t:'No response, follow up again', ic:'rotate', next:5 },
       { t:'Wants changes to the quote', ic:'edit', next:3 },
-      { t:'Too expensive', ic:'dollar', next:'closed', reason:'Too expensive', bad:1 },
-      { t:'Went with someone else', ic:'flag', next:'closed', reason:'Went elsewhere', bad:1 },
-      { t:'Changed their mind', ic:'xCircle', next:'closed', reason:'Changed mind', bad:1 }]},
+      { t:'Too expensive', ic:'dollar', next:'closed', reason:'Too expensive', bad:1, revive:1 },
+      { t:'Went with someone else', ic:'flag', next:'closed', reason:'Went elsewhere', bad:1, revive:1 },
+      { t:'Changed their mind', ic:'xCircle', next:'closed', reason:'Changed mind', bad:1, revive:1 }]},
     { n:6, name:'Accepted', q:'Has the deposit been paid?', opts:[
       { t:'Deposit paid', ic:'checkCircle', next:7, good:1 },
       { t:'Still waiting on it', ic:'⏳', next:6 },
@@ -124,6 +124,34 @@
       { t:'Warranty claim raised', ic:'alert', next:8 }]}
   ];
   function stageOf(n){ return STAGES.filter(function(s){return s.n===n;})[0]; }
+
+  /* ---------- how many times we chase before we stop ----------
+     Velocify, on 3.5M leads: 93% of leads that convert are reached by the 6th call, and a lead
+     needing more than 7 calls is 45% LESS likely to convert. The average team quits after 1.3
+     attempts, so the cap is there to stop us quitting early as much as to stop us pestering.
+     Quote follow-ups use day 1 / 3 / 7, which captures ~93% of all replies.
+       cap   = attempts before the app tells you to close it
+       days  = how long to wait before each next attempt
+       close = the reason recorded when we give up                                          */
+  var LIMITS = {
+    1:  { cap:6, days:[0,1,2,4,6,8],   close:'No answer after 6 tries',
+          hint:'Two calls unanswered? Send a text instead. Changing channel beats a 7th call.' },
+    2:  { cap:3, days:[1,3,5],         close:'Never sent the photos' },
+    3:  { cap:3, days:[1,2,4],         close:'Could not get a price',
+          hint:'Third time chasing a sub. Price it yourself or use the other one.' },
+    5:  { cap:3, days:[1,3,7],         close:'No response to the quote', revive:1 },
+    6:  { cap:3, days:[2,4,7],         close:'Deposit never paid' },
+    7:  { cap:4, days:[3,7,14,21],     close:'Never found a date', revive:1 },
+    10: { cap:4, days:[3,7,14,21],     close:'Never paid' }
+  };
+  /* stage 8 is a same-day status and stage 11 is admin, so neither is capped */
+
+  function tries(l){ return (l.tries||{})[String(l.stage)] || 0; }
+  function limitOf(l){ return LIMITS[String(l.stage)]; }
+  function atCap(l){ var m = limitOf(l); return !!m && tries(l) >= m.cap; }
+  function ord(n){ var e=['th','st','nd','rd'], v=n%100; return n+(e[(v-20)%10]||e[v]||e[0]); }
+  function dueIn(l){ return l.nextTouch ? (l.nextTouch - Date.now())/DAY : null; }
+  function isDue(l){ return l.nextTouch != null && l.nextTouch <= Date.now(); }
 
   /* Two levels on purpose:
        PHASES     = the 5 milestones you see at a glance on the tracker
@@ -157,6 +185,13 @@
     referral:{ic:'star',label:'Referral'}, agent:{ic:'building',label:'Property manager'}
   };
   var AVCOL = ['#eff4ff|#2563eb','#ecfdf3|#16a34a','#fff7ed|#ea8a0c','#f5f3ff|#7c3aed','#fef2f2|#dc2626'];
+  /* Pick an avatar colour from any id, number or string. GoHighLevel opportunity ids are
+     strings, so `id % length` would give NaN the moment we wire it up. */
+  function avatarColour(id){
+    var h = 0, t = String(id == null ? '' : id);
+    for(var i=0;i<t.length;i++) h = (h*31 + t.charCodeAt(i)) >>> 0;
+    return AVCOL[h % AVCOL.length].split('|');
+  }
 
   /* ---------- demo data ----------
      Two records, not one. A CUSTOMER is the person or company (phone/email is the key,
@@ -321,6 +356,13 @@
     var d = Math.round(ageDays(l));
     if(l.type==='untriaged') return { p:1, why:'Brand new, nobody has looked at it yet', do:'Sort it' };
     if(!isOpen(l)) return null;
+    if(atCap(l)){
+      var m = limitOf(l);
+      return { p:1, why:'Tried '+tries(l)+' times already, and past 6 attempts a lead is 45% less '+
+                        'likely to convert', do: m.hint ? 'Change approach or close it' : 'Close it off' };
+    }
+    if(isDue(l)) return { p:2, why:'The next follow-up was due '+
+      (Math.abs(dueIn(l))<1 ? 'today' : Math.round(-dueIn(l))+' days ago'), do:'Chase it now' };
     if(l.stage===7 && !l.booking) return { p:2, why:'They have paid a deposit and are waiting on a date', do:'Book it in' };
     if(l.stage===10 && d>=2) return { p:3, why:'Job is done and the money is still out, '+d+' days', do:'Chase the payment' };
     if(l.stage===5 && d>=2) return { p:4, why:'Quote sent '+d+' days ago with no answer', do:'Follow up' };
@@ -443,7 +485,7 @@
 
   function customerCard(l){
     var s = SOURCES[l.src]||{ic:'•',label:''};
-    var col = AVCOL[l.id % AVCOL.length].split('|');
+    var col = avatarColour(l.id);
     var stale = isOpen(l) && ageDays(l)>5;
     var pill = l.type==='untriaged' ? '<span class="pill triage">New enquiry</span>'
       : l.type==='won' ? '<span class="pill won">Won</span>'
@@ -654,14 +696,34 @@
       /* Answers that end the job fold behind one row when there are several of them.
          We still capture WHY we lost it -- that is the most valuable field we record --
          but you are never looking at six choices on a phone. */
-      function obtn(o){ var i = st.opts.indexOf(o);
-        return '<button class="opt'+(o.good?' good':o.bad?' bad':'')+'" data-opt="'+i+'">'+
-               ic(o.ic)+'<span>'+esc(o.t)+'</span></button>'; }
+      var lim = limitOf(l), used = tries(l), capped = atCap(l);
+      function obtn(o){ var i = st.opts.indexOf(o), again = (o.next === st.n);
+        return '<button class="opt'+(o.good?' good':o.bad?' bad':'')+
+               (again && capped ? ' capped':'')+'" data-opt="'+i+'">'+
+               ic(o.ic)+'<span>'+esc(o.t)+
+               (again && lim ? '<em>'+ord(used+1)+' try</em>' : '')+'</span></button>'; }
       var keep = st.opts.filter(function(o){ return !o.bad; });
       var end  = st.opts.filter(function(o){ return  o.bad; });
       var fold = end.length > 1;
+      /* How many goes we have had, and when the next one is due. Without this the
+         "try again" answers loop forever and nobody ever decides to stop. */
+      var meter = '';
+      if(lim && used > 0){
+        var d = dueIn(l);
+        meter = '<div class="qtry'+(capped?' over':'')+'">'+ic(capped?'alert':'clock',13)+
+          '<span>'+used+' of '+lim.cap+' tries used'+
+          (capped ? ' \u2014 past the point where more helps'
+                  : d==null ? ''
+                  : d <= 0 ? ' \u00b7 next one is due now'
+                  : ' \u00b7 next one due in '+Math.ceil(d)+' day'+(Math.ceil(d)===1?'':'s'))+
+          '</span></div>';
+      }
+      if(capped && lim.hint) meter += '<div class="qhint">'+ic('target',13)+'<span>'+esc(lim.hint)+'</span></div>';
+
       main += '<div class="qcard"><div class="qstage">Step '+st.n+' of 11 · '+esc(st.name)+'</div>'+
-        '<div class="qtext">'+esc(st.q)+'</div><div class="opts">'+
+        '<div class="qtext">'+esc(st.q)+'</div>'+meter+'<div class="opts">'+
+        (capped ? '<button class="opt giveup" id="giveup">'+ic('xCircle')+
+                  '<span>Stop here \u2014 '+esc(lim.close.toLowerCase())+'</span></button>' : '')+
         (fold ? keep : st.opts).map(obtn).join('')+
         (fold ? '<button class="opt fold" id="showend">'+ic('xCircle')+
                 '<span>Not going ahead\u2026</span></button>'+
@@ -680,6 +742,10 @@
     $$('[data-opt]').forEach(function(b){ b.onclick=function(){ answer(l, stageOf(l.stage).opts[Number(b.dataset.opt)]); }; });
     if($('#showend')) $('#showend').onclick=function(){
       $('#endopts').classList.add('on'); this.remove(); };
+    if($('#giveup')) $('#giveup').onclick=function(){
+      var m = limitOf(l);
+      apply(l, { t:'Stopped after '+tries(l)+' tries', next:'closed',
+                 reason:m.close, revive:m.revive }); };
     if($('#reopen')) $('#reopen').onclick=function(){ l.type='job'; l.stage=l.stage||1; delete l.reason;
       logEvent(l,'Reopened'); save(); render(); };
     var pinOn=false;
@@ -711,10 +777,31 @@
   function apply(l,o){
     logEvent(l,o.t);
     if(o.pin) (l.notes=l.notes||[]).push({t:o.pin,by:S.me,at:Date.now(),pin:1});
-    if(o.next==='won') l.type='won';
-    else if(o.next==='closed'){ l.type='closed'; l.reason=o.reason||'Closed'; }
-    else l.stage=o.next;
+    if(o.next==='won'){ l.type='won'; delete l.nextTouch; }
+    else if(o.next==='closed'){
+      l.type='closed'; l.reason=o.reason||'Closed'; delete l.nextTouch;
+      /* a price-based or timing-based no is worth another go later; a wrong number is not */
+      if(o.revive) l.revivable = 1;
+    }
+    else {
+      var was = l.stage;
+      if(o.next === was){                       /* another go at the same step */
+        l.tries = l.tries || {};
+        l.tries[String(was)] = tries(l) + 1;
+      } else {
+        l.stage = o.next;                       /* moved on, so this step starts fresh */
+      }
+      scheduleTouch(l);
+    }
     save(); closeModal(); render();
+  }
+
+  /* When the next attempt is due, straight off the cadence for whatever step it is on now. */
+  function scheduleTouch(l){
+    var m = limitOf(l);
+    if(!m){ delete l.nextTouch; return; }
+    var n = Math.min(tries(l), m.days.length - 1);
+    l.nextTouch = Date.now() + m.days[n]*DAY;
   }
 
   function openModal(h){ $('#msheet').innerHTML=h; $('#modal').classList.add('on'); }
@@ -776,6 +863,7 @@
   window.PIPE = { S:S, STAGES:STAGES, PHASES:PHASES, SOURCES:SOURCES, KEY:KEY,
     stageOf:stageOf, phaseIdx:phaseIdx, cust:cust, jobsOf:jobsOf, history:history,
     suggest:suggest, risks:risks, apply:apply, triage:triage, seed:seed, reset:reset,
+    LIMITS:LIMITS, tries:tries, atCap:atCap, limitOf:limitOf, isDue:isDue, dueIn:dueIn,
     ageDays:ageDays, lastAt:lastAt, isOpen:isOpen, pct:pct, save:save, render:render };
 
   load(); render();

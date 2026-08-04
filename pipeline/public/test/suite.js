@@ -23,6 +23,10 @@
        JSON.stringify(got)===JSON.stringify(want) ? '' : 'got '+JSON.stringify(got)+', wanted '+JSON.stringify(want));
   }
 
+  /* Any throw below still has to put the demo back. The cap tests crashed once and the
+     next run inherited 19 jobs instead of 17, which is exactly the failure this prevents. */
+  window.addEventListener('error', function(){ try{ restoreState(); }catch(e){} }, { once:true });
+
   var S = P.S, STAGES = P.STAGES, PHASES = P.PHASES;
   var DOOR = { won:1, closed:1 };
 
@@ -178,6 +182,65 @@
      P.risks(m).some(function(r){ return /margin|thin|profit/i.test(r.t||r); }),
      JSON.stringify(P.risks(m)));
 
+  /* ---- attempt caps: the thing that stops a lead looping forever ---- */
+  G('B · Attempt caps');
+
+  var LIM = P.LIMITS;
+  ok('every answer that loops back to its own stage sits under a cap',
+     STAGES.every(function(st){
+       var loops = st.opts.some(function(o){ return o.next === st.n; });
+       /* 8 is a same-day status and 11 is admin, so neither needs one */
+       return !loops || LIM[String(st.n)] || st.n===8 || st.n===11;
+     }),
+     Object.keys(LIM).join(','));
+
+  ok('every cap has one wait time per attempt',
+     Object.keys(LIM).every(function(k){ return LIM[k].days.length === LIM[k].cap; }),
+     Object.keys(LIM).map(function(k){ return k+':'+LIM[k].cap+'/'+LIM[k].days.length; }).join(' '));
+
+  ok('waits get longer, never shorter, as attempts pile up',
+     Object.keys(LIM).every(function(k){
+       var d = LIM[k].days;
+       return d.every(function(x,i){ return i===0 || x >= d[i-1]; });
+     }));
+
+  ok('first contact caps at 6, matching the 93%-reached-by-call-6 finding',
+     LIM['1'].cap === 6, 'cap is '+LIM['1'].cap);
+  eq('quote follow-ups run day 1, 3 then 7', LIM['5'].days, [1,3,7]);
+  ok('every cap records why we gave up',
+     Object.keys(LIM).every(function(k){ return !!LIM[k].close; }));
+
+  /* drive it: chase a lead until it caps */
+  var cl = JSON.parse(JSON.stringify(probe)); cl.id='tstcap'; cl.stage=1; cl.tries={}; 
+  S.leads.push(cl);
+  var again = P.stageOf(1).opts.filter(function(o){ return o.next===1; })[0];
+  for(var k=0;k<6;k++) P.apply(cl, again);
+  eq('six goes are counted', P.tries(cl), 6);
+  ok('the sixth go trips the cap', P.atCap(cl)===true);
+  ok('the next attempt is scheduled, not left to memory', typeof cl.nextTouch === 'number');
+  var capSug = P.suggest(cl);
+  eq('a capped lead becomes the top priority', capSug.p, 1);
+  ok('the assistant tells you to stop rather than to keep dialling',
+     /close|change/i.test(capSug.do), capSug.do);
+
+  /* moving on resets the counter for the new step */
+  var mv = JSON.parse(JSON.stringify(probe)); mv.id='tstmv'; mv.stage=1; mv.tries={'1':4};
+  S.leads.push(mv);
+  P.apply(mv, P.stageOf(1).opts[0]);
+  eq('reaching them moves the lead on', mv.stage, 2);
+  eq('the new step starts from zero tries', P.tries(mv), 0);
+
+  /* giving up records the reason and whether it is worth another go later */
+  var gv = JSON.parse(JSON.stringify(probe)); gv.id='tstgv'; gv.stage=5; gv.tries={'5':3};
+  S.leads.push(gv);
+  P.apply(gv, { t:'Stopped', next:'closed', reason:LIM['5'].close, revive:LIM['5'].revive });
+  eq('giving up on a quote records the real reason', gv.reason, 'No response to the quote');
+  ok('a quote that went quiet is marked worth reviving', gv.revivable===1);
+  var tooExp = P.stageOf(5).opts.filter(function(o){ return o.reason==='Too expensive'; })[0];
+  ok('"too expensive" is revivable, since 15-25% of these convert later', !!tooExp.revive);
+  var wrongNo = P.stageOf(1).opts.filter(function(o){ return o.reason==='Wrong number'; })[0];
+  ok('a wrong number is not revivable', !wrongNo.revive);
+
   /* ======================================================== C. SIMULATION ==== */
   G('C · Simulation (500 leads)');
 
@@ -192,9 +255,13 @@
   }
   var N = 500, CAP = 60, taps = [], wonTaps = [], lostTaps = [], stuck = 0, won = 0, lost = 0, byStage = {};
   for(var i=0;i<N;i++){
-    var st = 1, t = 1, done = null;   // t starts at 1 for the triage tap
+    var st = 1, t = 1, done = null, seenAt = {};   // t starts at 1 for the triage tap
     while(t < CAP){
       var s2 = P.stageOf(st), o = pick(s2.opts);
+      /* honour the cap: once a step is exhausted the app makes you stop, so the sim must too */
+      var lm = P.LIMITS[String(st)];
+      if(lm && (seenAt[st]||0) >= lm.cap){ t++; done='closed'; break; }
+      if(o.next === st) seenAt[st] = (seenAt[st]||0)+1;
       t++;
       byStage[st] = (byStage[st]||0)+1;
       if(o.next==='won'){ done='won'; break; }
@@ -328,9 +395,7 @@
     window.__TEST_RESULT = { pass:pass, fail:fail.length, failures:fail, all:results };
   }
 
-  measure();
-
-  /* put the demo back exactly as it was, then prove it */
+  /* put the demo back before measuring, so section D looks at the real app */
   restoreState();
   G('E · The suite cleans up after itself');
   eq('job count is unchanged after the run', S.leads.length, BEFORE.jobs);
@@ -338,5 +403,6 @@
   ok('no test job was left behind',
      !S.leads.some(function(x){ return String(x.id).indexOf('tst') === 0; }));
 
+  measure();
   report();
 })();

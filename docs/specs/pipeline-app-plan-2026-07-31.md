@@ -234,3 +234,36 @@ actually pays, and whether signage/ads are worth funding.
 - **📌 Pinned fact** — permanently true about the property/customer, always visible:
   *"base cracked, cannot resurface"* · *"rear lane parking"*. Tagged by type so it becomes data.
 - A note that changes scope pushes the job **back to stage 3 (costing)** automatically.
+
+---
+
+## 9. Attempt caps (added 2026-08-04)
+
+Allan: *"do we have a limit for this section — how many calls is too much, or if no response on text?"*
+We didn't. Every "try again" answer looped forever with no counter, so nothing ever forced a decision.
+
+**The evidence.** Velocify, across 3.5M leads: **93% of leads that convert are reached by the 6th
+call**, and a lead needing more than 7 calls is **45% less likely to convert**. But the average team
+quits after **1.3 attempts** — so the cap exists as much to stop us giving up early as to stop us
+pestering. Quote follow-ups on day 1 / 3 / 7 capture ~93% of all replies.
+
+| Step | Cap | Wait between goes | Recorded if we stop |
+|---|---|---|---|
+| 1 · New — make contact | **6** | 0, 1, 2, 4, 6, 8 days | No answer after 6 tries |
+| 2 · Qualified — chase photos | 3 | 1, 3, 5 | Never sent the photos |
+| 3 · Costing — chase a sub | 3 | 1, 2, 4 | Could not get a price |
+| 5 · Follow-up — chase the quote | **3** | 1, 3, 7 | No response to the quote ♻︎ |
+| 6 · Accepted — chase deposit | 3 | 2, 4, 7 | Deposit never paid |
+| 7 · Booking — chase a date | 4 | 3, 7, 14, 21 | Never found a date ♻︎ |
+| 10 · Payment — chase money | 4 | 3, 7, 14, 21 | Never paid |
+
+Stage 8 (job day) and 11 (wrap up) are uncapped — one is a same-day status, the other is admin.
+
+**How it behaves.** The card shows *"2 of 6 tries used · next one due in 2 days"*. Each retry answer
+is labelled with which go it is. At the cap the counter turns red, a channel-switch hint appears
+(*"Two calls unanswered? Send a text instead"*), a one-tap **Stop here** button records the reason,
+and the assistant promotes the lead to top priority telling you to stop rather than keep dialling.
+
+♻︎ = marked **revivable**. 15–25% of non-converters convert on a later reactivation, so a "too
+expensive", "went elsewhere", "changed their mind" or a quote that just went quiet is flagged for a
+future revisit. A wrong number is not.
