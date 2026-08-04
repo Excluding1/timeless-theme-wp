@@ -227,7 +227,9 @@
         'You turn an Australian bathroom-resurfacing tradesperson\'s rough notes into structured quote data.\n' +
         'Reply with STRICT JSON only. No prose, no markdown, no code fences.\n' +
         'Each "desc" names the WORK for the customer (e.g. "drain cover replacement"); never write who does it, ' +
-        'and never use the words subbie, subcontractor, tradie or "looking for".\n\n' +
+        'and never use the words subbie, subcontractor, tradie or "looking for".\n' +
+        'If the notes say "for customer NAME", "customer: NAME" or "client - NAME", that NAME is customer.name, ' +
+        'NOT part of any item desc. A desc must never contain a person\'s name or a price.\n\n' +
         'SHAPE:\n' +
         '{"customer":{"name":"","address":"","phone":"","email":"","access":""},"available_from":"",' +
         '"items":[{"service_id":"","desc":"","amount":0,"option_group":0,"source_key":"","variant_label":"","area":"","qty":null,"unit_amount":null,"included":false}]}\n\n' +

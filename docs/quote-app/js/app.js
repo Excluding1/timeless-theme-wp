@@ -405,6 +405,14 @@
       '<button id="aidraftbtn" title="Uses the local AI to read messy notes and fill the form. Validated against your price book; it can never set a price you did not type.">✨ AI draft</button>' +
       '<button id="polishbtn" title="Rewrites the job wording and options note with the local AI. Runs entirely in your browser; prices, numbers and warranty are never touched.">✨ Polish wording</button>' +
       '<span id="llmstatus" class="muted" style="font-size:12px"></span></div>' +
+      (function () {
+        var tpls = (S.settings.jobMemory && S.settings.jobMemory.templates) || [];
+        if (!tpls.length) return '';
+        return '<div class="tplpick" style="margin-top:8px"><label class="muted" style="font-size:12px">↻ Reuse a past job ' +
+          '<select id="tplsel"><option value="">— your standard jobs —</option>' +
+          tpls.map(function (t, i) { return '<option value="' + i + '">' + esc(t.label) + ' — $' + t.total + (t.n > 1 ? ' · ' + t.n + '×' : '') + '</option>'; }).join('') +
+          '</select></label></div>';
+      })() +
       '<div id="aiwarn"></div></section>' +
 
       '<section><h3>Document</h3><div class="grid4">' +
@@ -726,7 +734,18 @@
     }
 
     $('#draftbtn').onclick = function () {
-      applyDraftResult(TQ.draft.parse($('#aitext').value), 'Drafted');
+      var out = TQ.draft.parse($('#aitext').value);
+      TQ.memory.applyLearnedPrices(out, S.settings.jobMemory);
+      applyDraftResult(out, 'Drafted');
+    };
+
+    /* reuse a standard past job as a template (no customer data comes across) */
+    var tplsel = $('#tplsel');
+    if (tplsel) tplsel.onchange = function () {
+      if (this.value === '') return;
+      var t = ((S.settings.jobMemory && S.settings.jobMemory.templates) || [])[Number(this.value)];
+      this.value = '';
+      if (t) applyDraftResult(TQ.memory.fromTemplate(t), 'Loaded a past job');
     };
 
     $('#aidraftbtn').onclick = async function () {
@@ -739,10 +758,11 @@
         await TQ.minillm.ensure(S.settings.webllmEnabled, function (t) { st.textContent = t; });
         st.textContent = 'Reading your notes… (' + TQ.minillm.detail + ')';
         var out = await TQ.minillm.extract(text);
-        if (out) { applyDraftResult(out, 'AI drafted'); toast('AI drafted from your notes, review it'); }
-        else { applyDraftResult(TQ.draft.parse(text), 'Drafted (AI unclear, used the offline draft)'); }
+        if (out) { TQ.memory.applyLearnedPrices(out, S.settings.jobMemory); applyDraftResult(out, 'AI drafted'); toast('AI drafted from your notes, review it'); }
+        else { var o2 = TQ.draft.parse(text); TQ.memory.applyLearnedPrices(o2, S.settings.jobMemory); applyDraftResult(o2, 'Drafted (AI unclear, used the offline draft)'); }
       } catch (e) {
-        applyDraftResult(TQ.draft.parse(text), 'Drafted (AI unavailable, used the offline draft)');
+        var o3 = TQ.draft.parse(text); TQ.memory.applyLearnedPrices(o3, S.settings.jobMemory);
+        applyDraftResult(o3, 'Drafted (AI unavailable, used the offline draft)');
         toast(String(e.message || e), true);
       } finally { S.aiBusy = false; }
     };
@@ -902,6 +922,8 @@
         await TQ.db.saveQuote(S.doc);
         S.dirty = false;   // saved: safe to leave
         toast('Saved ' + (S.doc.docType === 'invoice' ? 'invoice' : 'quote') + ' ' + S.doc.docNo + (TQ.db.mode === 'cloud' ? ' (cloud)' : ' (this browser)'));
+        /* self-improve: learn this job's real prices + standard-job template (no customer data) */
+        try { S.settings.jobMemory = TQ.memory.learn(S.doc, S.settings.jobMemory); await TQ.db.saveSettings(S.settings); } catch (me) { /* non-fatal */ }
       } catch (e) { toast(String(e.message || e), true); }
     };
     $('#download').onclick = async function () {
@@ -1215,6 +1237,14 @@
     if (st.user) S.userEmail = st.user;                    // already-signed-in session
     S.settings = await TQ.db.getSettings();
     TQ.userCatalogue = (S.settings.priceBook && S.settings.priceBook.length) ? TQ.mergeBook(S.settings.priceBook) : null;
+    /* one-time: seed the self-improving job memory from every quote already on file */
+    if (!S.settings.jobMemory) {
+      try {
+        var _all = (await TQ.db.exportAll()).quotes || [];
+        S.settings.jobMemory = TQ.memory.backfill(_all);
+        await TQ.db.saveSettings(S.settings);
+      } catch (be) { S.settings.jobMemory = TQ.memory.empty(); }
+    }
     await refreshList();
     render();
     loadAssets().catch(function (e) { toast('Could not load fonts/logo: ' + e.message, true); });

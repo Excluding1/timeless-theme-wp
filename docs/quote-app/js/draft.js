@@ -96,12 +96,17 @@
     return t ? t.charAt(0).toUpperCase() + t.slice(1) : t;
   }
 
-  /* pull the trailing price / included token off a full line, leaving the description intact
-     (internal digits like "3-pack" are kept — only a price at the very END is removed) */
+  /* pull the price / included token off a full line, leaving the description intact.
+     A $-amount is unambiguously a price, so it's removed wherever it sits ("...(top and sides)
+     $920 to white finish" -> the $920 goes). A BARE number is only removed at the very END, so
+     internal digits like "3-pack" or "600 grit" are kept. */
   function stripTrailingPrice(ln) {
     return TQ.rules.sanitize(String(ln)
-      .replace(/[\s,;:]*\$?\s?\d[\d,]*(?:\.\d{1,2})?\s*[.,;!]*\s*$/, '')   // "... 1050" / "...$1,050."
+      .replace(/[\s,;:]*\$\s?\d[\d,]*(?:\.\d{1,2})?/, ' ')                 // a $-amount ANYWHERE: "$1,050" / "$920"
+      .replace(/[\s,;:]*\d[\d,]*(?:\.\d{1,2})?\s*[.,;!]*\s*$/, '')         // or a bare number at the END: "... 1050"
       .replace(INCLUDED_RE, '')                                            // "... included"
+      .replace(/\s{2,}/g, ' ')
+      .replace(/\s+(?:is|for|at|to|costs?|=|:)\s*$/i, '')                  // dangling connector left after the price
       .replace(/[\s,;:.\-]+$/, '')).trim();
   }
 
@@ -285,7 +290,9 @@
         warnings.push(optLabel + 'found $' + a + ' in your text not attached to any item, add it manually');
       });
     }
-    lines.forEach(function (l) { delete l._defaulted; });
+    /* keep a stable "this price is the book default, not typed" flag so the job-memory layer can
+       swap in your usual price; TQ.memory.applyLearnedPrices strips it before the doc is saved */
+    lines.forEach(function (l) { l._book = !!l._defaulted; delete l._defaulted; });
 
     return lines;
   }
@@ -298,6 +305,8 @@
     src = String(src || '');
     var em = src.match(EMAIL_RE); if (em) src = src.replace(em[0], ' ');
     var ph = src.match(PHONE_RE); if (ph) src = src.replace(ph[0], ' ');
+    var cust = src.match(/\b(?:for\s+)?(?:the\s+)?(?:customer|client)\b\s*(?:is|are|named|[-:–—])\s*((?:[A-Z][a-zA-Z'’.\-]+)(?:\s+[A-Z][a-zA-Z'’.\-]+){0,2})/);
+    if (cust) src = src.replace(cust[0], ' ');
     var nm = src.match(/(?:name is|customer is|client is|for|quote for)\s+((?:[A-Z][a-zA-Z'’-]+)(?:\s+[A-Z][a-zA-Z'’-]+){0,2})\b/);
     if (nm) src = src.replace(nm[0], ' ');
     src = src.replace(/address is\s+.{5,90}?(?:(?:nsw|qld|vic|act|wa|sa|nt|tas)[,\s]*\d{4}|\d{4}|nsw|qld|vic|act|wa|sa|nt|tas)/i, ' ');
@@ -391,8 +400,17 @@
         src = src.replace(pr[0], ' ');
       }
 
-      var nm = src.match(/(?:name is|customer is|client is|for|quote for)\s+((?:[A-Z][a-zA-Z'’-]+)(?:\s+[A-Z][a-zA-Z'’-]+){0,2})\b/);
-      if (nm) { out.customer.name = nm[1].trim(); src = src.replace(nm[0], ' '); }
+      /* explicit customer/client LABEL, job-note / real-estate style: "for customer - Jack Drewe",
+         "customer: Jane Doe", "client is Bob", "for the client — Mary Ng". A connector
+         (is/are/named or - : – —) is required so "customer needs a quote" never captures a word,
+         and the whole match is stripped so the name can't land inside a line item. */
+      var cust = src.match(/\b(?:for\s+)?(?:the\s+)?(?:customer|client)\b\s*(?:is|are|named|[-:–—])\s*((?:[A-Z][a-zA-Z'’.\-]+)(?:\s+[A-Z][a-zA-Z'’.\-]+){0,2})/);
+      if (cust) { out.customer.name = cust[1].trim().replace(/[.,\s]+$/, ''); src = src.replace(cust[0], ' '); }
+
+      if (!out.customer.name) {
+        var nm = src.match(/(?:name is|customer is|client is|for|quote for)\s+((?:[A-Z][a-zA-Z'’-]+)(?:\s+[A-Z][a-zA-Z'’-]+){0,2})\b/);
+        if (nm) { out.customer.name = nm[1].trim(); src = src.replace(nm[0], ' '); }
+      }
       if (!out.customer.name) {
         var first = src.split(/\n/)[0].trim();
         var whole = first.match(/^[A-Z][a-zA-Z'’-]+(?:\s+[A-Z][a-zA-Z'’-]+){0,2}$/);

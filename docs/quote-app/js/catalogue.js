@@ -158,15 +158,15 @@
     {
       id: 'benchtop',
       keywords: ['benchtop', 'bench top', 'vanity top', 'countertop', 'counter top'],
-      desc: 'Vanity benchtop and built-in basin resurfaced to a smooth gloss finish',
+      desc: 'Vanity benchtop resurfaced to a smooth gloss finish',
       price: 1050,
       primary: true,
-      phrase: 'resurfacing of your vanity benchtop and its built-in basin',
-      process: 'For the benchtop we prep, etch and mask the surface, then apply a commercial 3-pack coating for one seamless gloss finish.',
+      phrase: 'resurfacing of your vanity benchtop',
+      process: 'For the benchtop we prep, etch and mask the surface, then apply a commercial 3-pack coating for a seamless gloss finish.',
       expectLines: ['About 3 to 5 hours on site for the benchtop'],
       warrantyLines: W_RESURF,
       cure: true,
-      intro: 'Resurfacing of your vanity benchtop and its built-in basin. We bring it back to a smooth gloss finish that looks and feels like new.'
+      intro: 'Resurfacing of your vanity benchtop. We bring it back to a smooth gloss finish that looks and feels like new.'
     },
     {
       id: 'basin',
