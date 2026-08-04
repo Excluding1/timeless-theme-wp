@@ -175,3 +175,62 @@ a subcontractor.
 Fix the wait (rate card), turn on the free thing you already pay for (missed-call text-back), then
 build one small hosted board where every customer has exactly one open question. That is the whole
 plan.
+
+
+---
+
+## 8. LOCKED design (Allan, 2026-07-31)
+
+**The principle:** a *filter questionnaire pipeline* whose only goal is that **every lead reaches a
+door.** There are two doors and both count as finished:
+
+| 🟢 Won | 🔴 Closed |
+|---|---|
+| done · paid · reviewed | not interested · too expensive · went elsewhere · not our work · no answer after 3 tries |
+
+A clean **"no" is a success.** It closes the loop, frees attention, and records *why* (which is the
+most valuable field in the app). The failure state is neither: a lead sitting in limbo. That is
+exactly what is broken today (Lisa 40 days, mick 35, Maria 18 — none won, none lost, just nowhere).
+
+**The health metric is therefore NOT conversion rate.** It is *how many leads are unresolved and
+how old is the oldest*. The home screen shows "6 need you today", not a dashboard.
+
+### 8.1 Triage comes before the pipeline
+Not every enquiry is a job. Forcing name/address on someone asking "do you do laundry tubs?" is
+pushy and loses them.
+
+```
+everything inbound → INBOX → triage
+                              ├── 🔧 a job       → enters the pipeline
+                              ├── ❓ a question   → answer, close (KEEP, don't delete)
+                              └── 🚫 not for us  → refer out, close
+```
+Questions are kept because (a) they may convert later — one tap promotes to a job, and (b) repeated
+questions reveal missing service pages (SEO).
+
+### 8.2 Progressive fields — only ask for what the NEXT step needs
+| To do this | Needs |
+|---|---|
+| Reply | phone **or** email |
+| Quote | what they want · photos · suburb |
+| Book | address · access |
+| Invoice | name · email |
+
+**Name is optional throughout; phone or email is the key.** Many leads start as just a number.
+Property age and owner/tenant are NOT manual checklist items — the quote form already captures them.
+
+### 8.3 Contacts for non-form leads
+GHL already auto-creates a contact from any inbound call or SMS. From there either **text them the
+quote form link** (cheapest — they fill in the whole profile and add photos themselves, the Surface
+Care move) or type details inline as you talk.
+
+### 8.4 Source is tracked on every lead
+quote form complete · quote form abandoned · missed call · answered call · inbound SMS · inbound
+email · referral (+ who) · GBP/social · property manager. After ~30 leads this shows which channel
+actually pays, and whether signage/ads are worth funding.
+
+### 8.5 Notes
+- **Quick note** — timestamped, stamped with who wrote it.
+- **📌 Pinned fact** — permanently true about the property/customer, always visible:
+  *"base cracked, cannot resurface"* · *"rear lane parking"*. Tagged by type so it becomes data.
+- A note that changes scope pushes the job **back to stage 3 (costing)** automatically.
