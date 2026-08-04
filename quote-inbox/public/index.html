@@ -131,6 +131,7 @@
   .btn.ghl{background:var(--panel);color:var(--ink);border:1.5px solid var(--line)}
   .btn.done{background:var(--navy);color:#fff}
   .btn.done.is{background:var(--good-bg);color:var(--good)}
+  .btn.pdf{background:var(--panel);color:var(--ink);border:1.5px solid var(--line);flex:none;padding-left:16px;padding-right:16px}
 
   .nav{display:flex;gap:10px;margin-top:14px}
   .nav button{flex:1;border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:11px;font-weight:800;color:var(--ink);cursor:pointer;font-size:14px}
@@ -154,6 +155,21 @@
   .lb .lbnav{display:flex;gap:16px;align-items:center;color:#cdd6e6;font-size:14px;font-weight:700}
   .lb .lbnav button,.lb .lbnav a{cursor:pointer;background:rgba(255,255,255,.14);padding:9px 16px;border-radius:10px;font-weight:800;color:#fff;border:0;text-decoration:none}
   .lb .lbnav a.dl{background:var(--gold);color:#3a2c08}
+
+  /* print / save-as-PDF: isolate the current request card into a clean one-pager */
+  @media print{
+    @page{ margin:14mm; }
+    header,#nav,#hint,#counter,#lb,#toast,.footer-actions,.copy{ display:none !important; }
+    body{ background:#fff !important; }
+    body::before{ content:"Timeless Resurfacing — Quote Request"; display:block; font:700 12px system-ui,sans-serif; color:#041534; margin:0 0 10px }
+    .wrap{ max-width:none; margin:0; padding:0 }
+    #stage{ height:auto !important }
+    .card{ box-shadow:none !important; border:0 !important; border-radius:0 !important; margin:0 !important }
+    .cbody{ overflow:visible !important; max-height:none !important }
+    .card,.section,.areagroup,.gallery,.shot,.flag,.li,.fact{ break-inside:avoid }
+    .gallery img{ max-height:58mm; width:auto }
+    a{ color:inherit !important; text-decoration:none !important }
+  }
 </style>
 </head>
 <body>

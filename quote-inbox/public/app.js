@@ -193,6 +193,7 @@ function card(q){
     <div class="footer-actions">
       ${q.phone?`<a class="btn call" id="bCall" href="tel:${esc(q.phone.replace(/\s/g,''))}">📞 <span class="full">Call </span>${esc((q.customer||'').split(' ')[0]||'customer')}</a>`:''}
       <a class="btn ghl" id="bGhl" href="${esc(q.ghlUrl)}" target="_blank" rel="noopener">Open in GHL</a>
+      <button class="btn pdf" id="bPdf" title="Save this request as a PDF">⇩ PDF</button>
       <button class="btn done${q.reviewed?' is':''}" id="bDone">${q.reviewed?'✓ Reviewed':'Mark reviewed'}</button>
     </div>
   </div>`;
@@ -217,6 +218,13 @@ function wireCard(q){
   const copyBtn=document.querySelector('.copy[data-copy="req"]');
   if(copyBtn) copyBtn.onclick=()=>{ navigator.clipboard.writeText(q.description.join('\n\n')).then(()=>toast('Request copied')); };
   const done=$('#bDone'); if(done) done.onclick=()=>toggleReviewed();
+  const pdf=$('#bPdf'); if(pdf) pdf.onclick=()=>{
+    // browsers use document.title as the default "Save as PDF" filename
+    const t=document.title;
+    document.title='Quote request - '+String(q.customer||'customer').replace(/[^\w \-]/g,'').trim();
+    window.print();
+    setTimeout(()=>{document.title=t;},800);
+  };
 }
 
 /* ---- navigation ---- */
