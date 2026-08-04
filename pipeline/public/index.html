@@ -86,16 +86,14 @@
   .tlabels span:last-child{text-align:right}
   .tlabels span.on{color:var(--ink);font-weight:700}
   .tline{position:relative;height:14px}
-  .tbase{position:absolute;top:6px;left:7px;right:7px;height:2px;background:var(--line);border-radius:2px}
-  .tfill{position:absolute;top:6px;left:7px;height:2px;border-radius:2px}
+  .tbase{position:absolute;top:6px;left:7px;right:7px;height:2px;background:#e4e4e7;border-radius:2px}
+  .tfill{position:absolute;top:6px;left:7px;height:2px;border-radius:2px;opacity:.9}
   .tdots{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center}
   .dot{width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--line);
        display:grid;place-items:center;flex:none}
-  .dot.done{border-color:currentColor}
-  .dot.done::after{content:'';width:14px;height:14px;border-radius:50%;background:currentColor;
-       -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' stroke='black' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/9px no-repeat;
-       mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M20 6L9 17l-5-5' stroke='black' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/9px no-repeat}
-  .dot.now{border-color:currentColor;border-width:3px;position:relative}
+  /* completed = a solid filled dot. A tick inside 14px reads as noise at this size. */
+  .dot.done{border-color:currentColor;background:currentColor}
+  .dot.now{border-color:currentColor;border-width:3.5px;position:relative;background:#fff}
   /* the live step breathes, so your eye lands on where each job actually is */
   .dot.now::before{content:'';position:absolute;inset:-6px;border-radius:50%;
        background:currentColor;opacity:.18;animation:tpulse 2s ease-out infinite}
@@ -197,6 +195,22 @@
   .cust:hover{box-shadow:none;border-color:#d4d4d8;background:#fdfdfd}
   .add{background:var(--ink);font-weight:600}
   .add:hover{background:#27272a}
+
+  /* repeat customer */
+  .pill.rep{background:#eef2ff;color:#4338ca;display:inline-flex;align-items:center;gap:4px}
+  .cbox h3{display:flex;align-items:center;gap:6px}
+  .cstat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+  .cstat div{background:#fafafa;border:1px solid var(--line);border-radius:9px;padding:9px;text-align:center}
+  .cstat b{display:block;font-size:15px;font-weight:700;letter-spacing:-.02em}
+  .cstat span{font-size:10.5px;color:var(--muted)}
+  .ojob{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);cursor:pointer}
+  .ojob:hover .ow{color:var(--blue)}
+  .ow{font-size:13px;font-weight:550}
+  .om{font-size:11.5px;color:var(--muted)}
+  .opill{margin-left:auto;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:999px;flex:none}
+  .opill.won{background:var(--greenbg);color:var(--green)}
+  .opill.lost{background:var(--greybg);color:var(--muted)}
+  .opill.open{background:var(--bluebg);color:var(--blue)}
 
   /* detail strip */
   .strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) auto;gap:0;

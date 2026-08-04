@@ -7,7 +7,7 @@
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
-  var KEY = 'tp_demo_v2';
+  var KEY = 'tp_demo_v3';
   var DAY = 864e5;
 
 
@@ -158,47 +158,100 @@
   };
   var AVCOL = ['#eff4ff|#2563eb','#ecfdf3|#16a34a','#fff7ed|#ea8a0c','#f5f3ff|#7c3aed','#fef2f2|#dc2626'];
 
-  /* ---------- demo data ---------- */
+  /* ---------- demo data ----------
+     Two records, not one. A CUSTOMER is the person or company (phone/email is the key,
+     history and pinned facts live here). A JOB is one piece of work and is what moves
+     through the 11 stages. One customer, many jobs. */
   function ago(d){ return Date.now() - d*DAY; }
-  function seed(){ return [
-    { id:1, src:'missed', name:'', phone:'0412 884 210', suburb:'', createdAt:ago(0.02), type:'untriaged', notes:[], events:[] },
-    { id:2, src:'sms', name:'Dave', phone:'0433 118 902', msg:'hey do you guys do laundry tubs as well?',
-      createdAt:ago(0.2), type:'untriaged', notes:[], events:[] },
-    { id:3, src:'form', name:'Ana Natividad', phone:'0408 771 233', suburb:'Ryde',
-      want:'Bath resurface, chips in the enamel', photos:4, createdAt:ago(0.4), type:'job', stage:1, owner:'Allan', notes:[], events:[] },
-    { id:4, src:'form', name:'Ben Harris', phone:'0421 665 019', suburb:'Castle Hill',
-      want:'Shower regrout, mould in the corners', photos:3, createdAt:ago(2.1), type:'job', stage:3, owner:'Allan',
-      notes:[{t:'Ultraglaze quoted 640, can start the 18th', by:'Allan', at:ago(1)}], events:[] },
-    { id:5, src:'referral', name:'Sophie Tran', phone:'0417 220 884', suburb:'Epping', refBy:'Isabella (AitkenRE)',
-      want:'Vanity + basin resurface', photos:5, createdAt:ago(3.2), type:'job', stage:5, quote:1450, cost:780, owner:'Allan',
-      notes:[{t:'Wants it before the open home on the 14th', by:'Allan', at:ago(2), pin:1}], events:[] },
-    { id:6, src:'form', name:'Laura Milne', phone:'0493 239 503', suburb:'Bonnet Bay',
-      want:'Shower walls resurface + regrout', photos:5, createdAt:ago(8.4), type:'job', stage:5, quote:2860, cost:1490, owner:'Allan', notes:[], events:[] },
-    { id:7, src:'partial', name:'Michelle', phone:'0455 907 118', suburb:'Penrith',
-      want:'Started the form, stopped at photos', createdAt:ago(5.6), type:'job', stage:1, owner:'Allan', notes:[], events:[] },
-    { id:8, src:'form', name:'Tomas Repka', phone:'0433 760 339', suburb:'Rhodes',
-      want:'2 bathrooms, mixer taps + Caesarstone', photos:6, createdAt:ago(15.2), type:'job', stage:5, quote:3300, cost:1980, owner:'Allan',
-      notes:[{t:'Most of this is plumbing, not our work. Only the silicone and drain are ours.', by:'Allan', at:ago(14), pin:1}], events:[] },
-    { id:9, src:'agent', name:'Ray White Marrickville', phone:'02 9558 1200', suburb:'Marrickville',
-      want:'Rental bath resurface before new tenant', photos:2, createdAt:ago(6.1), type:'job', stage:7, quote:1540, cost:880, owner:'Marko', notes:[], events:[] },
-    { id:10, src:'form', name:'Neil Prout', phone:'0402 118 664', suburb:'Hornsby', want:'Bath resurface', photos:4,
-      createdAt:ago(22), type:'job', stage:10, quote:1540, cost:880, booking:'Tue 22 Jul, Marko', owner:'Marko', notes:[], events:[] },
-    { id:11, src:'call', name:'Jo D', phone:'0466 330 771', suburb:'Marsfield', want:'Chip repair on a bathtub',
-      createdAt:ago(30), type:'job', stage:11, quote:380, cost:285, booking:'Mon 14 Jul, Ultraglaze', owner:'Marko', notes:[], events:[] },
-    { id:12, src:'form', name:'Lisa Vruwink', phone:'0499 771 305', suburb:'North Turramurra', want:'Full bathroom refresh',
-      photos:4, createdAt:ago(40), type:'job', stage:5, quote:2100, cost:1200, owner:'Allan', notes:[], events:[] },
-    { id:13, src:'form', name:'Mick Connolly', phone:'0455 221 907', suburb:'Claremont Meadows', want:'2 bathrooms, full resurface',
-      photos:12, createdAt:ago(52), type:'won', stage:11, quote:4200, cost:2400, booking:'Wed 18 Jun, Ultraglaze', owner:'Marko', notes:[], events:[] },
-    { id:14, src:'form', name:'Rory McVeigh', phone:'0400 118 224', suburb:'Queens Park', want:'Bath + wall resurface',
-      photos:11, createdAt:ago(35), type:'closed', reason:'Too expensive', stage:5, quote:2600, cost:1500, owner:'Allan', notes:[], events:[] }
-  ];}
+  function seed(){
+    var C = [
+      { id:101, name:'', phone:'0412 884 210', notes:[] },
+      { id:102, name:'Dave', phone:'0433 118 902', notes:[] },
+      { id:103, name:'Ana Natividad', phone:'0408 771 233', notes:[] },
+      { id:104, name:'Ben Harris', phone:'0421 665 019', notes:[] },
+      { id:105, name:'Sophie Tran', phone:'0417 220 884', notes:[
+        {t:'Wants it before the open home on the 14th', by:'Allan', at:ago(2), pin:1}] },
+      { id:106, name:'Laura Milne', phone:'0493 239 503', notes:[] },
+      { id:107, name:'Michelle', phone:'0455 907 118', notes:[] },
+      { id:108, name:'Tomas Repka', phone:'0433 760 339', notes:[
+        {t:'Most of this is plumbing, not our work. Only the silicone and drain are ours.', by:'Allan', at:ago(14), pin:1}] },
+      { id:109, name:'Ray White Marrickville', phone:'02 9558 1200', company:1, notes:[
+        {t:'Always invoice the agency, never the tenant', by:'Allan', at:ago(120), pin:1}] },
+      { id:110, name:'Neil Prout', phone:'0402 118 664', notes:[] },
+      { id:111, name:'Jo D', phone:'0466 330 771', notes:[] },
+      { id:112, name:'Lisa Vruwink', phone:'0499 771 305', notes:[] },
+      { id:113, name:'Mick Connolly', phone:'0455 221 907', notes:[
+        {t:'Rear lane access only, no parking out front', by:'Marko', at:ago(60), pin:1}] },
+      { id:114, name:'Rory McVeigh', phone:'0400 118 224', notes:[] }
+    ];
+    var J = [
+      { id:1, cid:101, src:'missed', createdAt:ago(0.02), type:'untriaged', notes:[], events:[] },
+      { id:2, cid:102, src:'sms', msg:'hey do you guys do laundry tubs as well?',
+        createdAt:ago(0.2), type:'untriaged', notes:[], events:[] },
+      { id:3, cid:103, src:'form', suburb:'Ryde', want:'Bath resurface, chips in the enamel',
+        photos:4, createdAt:ago(0.4), type:'job', stage:1, owner:'Allan', notes:[], events:[] },
+      { id:4, cid:104, src:'form', suburb:'Castle Hill', want:'Shower regrout, mould in the corners',
+        photos:3, createdAt:ago(2.1), type:'job', stage:3, owner:'Allan',
+        notes:[{t:'Ultraglaze quoted 640, can start the 18th', by:'Allan', at:ago(1)}], events:[] },
+      { id:5, cid:105, src:'referral', suburb:'Epping', refBy:'Isabella (AitkenRE)',
+        want:'Vanity + basin resurface', photos:5, createdAt:ago(3.2), type:'job', stage:5,
+        quote:1450, cost:780, owner:'Allan', notes:[], events:[] },
+      { id:6, cid:106, src:'form', suburb:'Bonnet Bay', want:'Shower walls resurface + regrout',
+        photos:5, createdAt:ago(8.4), type:'job', stage:5, quote:2860, cost:1490, owner:'Allan', notes:[], events:[] },
+      { id:7, cid:107, src:'partial', suburb:'Penrith', want:'Started the form, stopped at photos',
+        createdAt:ago(5.6), type:'job', stage:1, owner:'Allan', notes:[], events:[] },
+      { id:8, cid:108, src:'form', suburb:'Rhodes', want:'2 bathrooms, mixer taps + Caesarstone',
+        photos:6, createdAt:ago(15.2), type:'job', stage:5, quote:3300, cost:1980, owner:'Allan', notes:[], events:[] },
 
-  var S = { leads:[], page:'customers', open:null, q:'', filter:'open', me:'Allan', exp:{} };
+      /* Ray White: a repeat channel — three jobs across different properties */
+      { id:9, cid:109, src:'agent', suburb:'Marrickville', want:'Rental bath resurface, 14 Byrne St',
+        photos:2, createdAt:ago(6.1), type:'job', stage:7, quote:1540, cost:880, owner:'Marko', notes:[], events:[] },
+      { id:20, cid:109, src:'agent', suburb:'Marrickville', want:'Shower regrout, 3/88 Illawarra Rd',
+        photos:3, createdAt:ago(74), type:'won', stage:11, quote:1100, cost:640, owner:'Marko',
+        booking:'Thu 15 May, Ultraglaze', notes:[], events:[] },
+      { id:21, cid:109, src:'agent', suburb:'Dulwich Hill', want:'Vanity resurface, 12 Wardell Rd',
+        photos:2, createdAt:ago(140), type:'won', stage:11, quote:775, cost:430, owner:'Marko',
+        booking:'Mon 10 Mar, Marko', notes:[], events:[] },
 
-  function load(){ try{ var r=JSON.parse(localStorage.getItem(KEY)); if(r&&r.length){S.leads=r;return;} }catch(e){}
-                   S.leads=seed(); save(); }
-  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S.leads)); }catch(e){} }
-  function reset(){ localStorage.removeItem(KEY); S.leads=seed(); save(); S.open=null; S.page='customers'; render(); }
+      { id:10, cid:110, src:'form', suburb:'Hornsby', want:'Bath resurface', photos:4,
+        createdAt:ago(22), type:'job', stage:10, quote:1540, cost:880, booking:'Tue 22 Jul, Marko', owner:'Marko', notes:[], events:[] },
+      { id:11, cid:111, src:'call', suburb:'Marsfield', want:'Chip repair on a bathtub',
+        createdAt:ago(30), type:'job', stage:11, quote:380, cost:285, booking:'Mon 14 Jul, Ultraglaze', owner:'Marko', notes:[], events:[] },
+      { id:12, cid:112, src:'form', suburb:'North Turramurra', want:'Full bathroom refresh',
+        photos:4, createdAt:ago(40), type:'job', stage:5, quote:2100, cost:1200, owner:'Allan', notes:[], events:[] },
+
+      /* Mick: came back for a second bathroom — the repeat case */
+      { id:13, cid:113, src:'form', suburb:'Claremont Meadows', want:'2 bathrooms, full resurface',
+        photos:12, createdAt:ago(52), type:'won', stage:11, quote:4200, cost:2400,
+        booking:'Wed 18 Jun, Ultraglaze', owner:'Marko', notes:[], events:[] },
+      { id:22, cid:113, src:'call', suburb:'Claremont Meadows', want:'Ensuite this time, same finish',
+        createdAt:ago(0.6), type:'job', stage:2, owner:'Allan', notes:[], events:[] },
+
+      { id:14, cid:114, src:'form', suburb:'Queens Park', want:'Bath + wall resurface', photos:11,
+        createdAt:ago(35), type:'closed', reason:'Too expensive', stage:5, quote:2600, cost:1500, owner:'Allan', notes:[], events:[] }
+    ];
+    return { customers:C, jobs:J };
+  }
+
+  var S = { customers:[], leads:[], page:'customers', open:null, q:'', filter:'open', me:'Allan', exp:{} };
+  /* the customer behind a job, and every job that customer has had */
+  function cust(j){ return S.customers.filter(function(c){ return c.id===j.cid; })[0] || {}; }
+  function jobsOf(cid){ return S.leads.filter(function(j){ return j.cid===cid; }); }
+  function history(j){
+    var all = jobsOf(j.cid), done = all.filter(function(x){ return x.type==='won'; });
+    return { total: all.length, done: done.length, isRepeat: all.length > 1,
+             value: done.reduce(function(a,x){ return a+(x.quote||0); },0),
+             last: done.sort(function(a,b){ return b.createdAt-a.createdAt; })[0] };
+  }
+
+  function load(){
+    try{ var r=JSON.parse(localStorage.getItem(KEY));
+         if(r && r.jobs && r.customers){ S.leads=r.jobs; S.customers=r.customers; return; } }catch(e){}
+    var d=seed(); S.leads=d.jobs; S.customers=d.customers; save();
+  }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify({customers:S.customers, jobs:S.leads})); }catch(e){} }
+  function reset(){ localStorage.removeItem(KEY); var d=seed(); S.leads=d.jobs; S.customers=d.customers;
+                    save(); S.open=null; S.page='customers'; render(); }
 
   /* ---------- helpers ---------- */
   function lastAt(l){ var t=l.createdAt;
@@ -212,8 +265,8 @@
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
     return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
   function money(n){ return '$'+Number(n||0).toLocaleString(); }
-  function initials(l){ var n=(l.name||'').trim();
-    if(!n) return (l.phone||'?').replace(/\D/g,'').slice(-2);
+  function initials(l){ var c=cust(l), n=(c.name||'').trim();
+    if(!n) return (c.phone||'?').replace(/\D/g,'').slice(-2);
     var p=n.split(/\s+/); return ((p[0][0]||'')+(p[1]?p[1][0]:'')).toUpperCase(); }
   function logEvent(l,t){ (l.events=l.events||[]).push({t:t,by:S.me,at:Date.now()}); }
   function pct(l){ return l.type==='won'?100:Math.round(((l.stage||1)-1)/10*100); }
@@ -223,15 +276,15 @@
      Not just a board. It ranks what to do, says WHY, flags risk, and drafts the
      message so the next action is one tap away. */
   var DRAFTS = {
-    1: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", Allan from Timeless Resurfacing. Thanks for getting in touch about the "+(l.want||'bathroom')+". I'll have a price back to you within 24 to 48 hours."; },
-    2: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", could you send a couple more photos so I can price it accurately? A wide shot of the whole room and a close-up of the problem area is perfect."; },
-    3: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", just letting you know I'm getting the final costing sorted and will have your price across shortly."; },
-    5: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+', just checking you got the quote through. Happy to talk through any of it, or adjust the scope if that helps.'; },
-    6: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", great news. To lock the date in we just need the 10% deposit. I'll send the invoice through now."; },
-    7: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", I'm working out the earliest date we can get to you and will confirm shortly."; },
-    8: function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", just a reminder we're booked in "+(l.booking||'soon')+". Could you clear the bathroom beforehand so we can get straight into it?"; },
-    10:function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+', just a friendly reminder the invoice is still outstanding. Let me know if you need the details sent again.'; },
-    11:function(l){ return 'Hi'+(l.name?' '+l.name.split(' ')[0]:'')+", hope you're happy with how it turned out. If you've got a spare minute, a Google review really helps a small business like ours."; }
+    1: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", Allan from Timeless Resurfacing. Thanks for getting in touch about the "+(l.want||'bathroom')+". I'll have a price back to you within 24 to 48 hours."; },
+    2: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", could you send a couple more photos so I can price it accurately? A wide shot of the whole room and a close-up of the problem area is perfect."; },
+    3: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", just letting you know I'm getting the final costing sorted and will have your price across shortly."; },
+    5: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+', just checking you got the quote through. Happy to talk through any of it, or adjust the scope if that helps.'; },
+    6: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", great news. To lock the date in we just need the 10% deposit. I'll send the invoice through now."; },
+    7: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", I'm working out the earliest date we can get to you and will confirm shortly."; },
+    8: function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", just a reminder we're booked in "+(l.booking||'soon')+". Could you clear the bathroom beforehand so we can get straight into it?"; },
+    10:function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+', just a friendly reminder the invoice is still outstanding. Let me know if you need the details sent again.'; },
+    11:function(l){ return 'Hi'+(cust(l).name?' '+cust(l).name.split(' ')[0]:'')+", hope you're happy with how it turned out. If you've got a spare minute, a Google review really helps a small business like ours."; }
   };
 
   /* risk flags shown on the card */
@@ -257,6 +310,10 @@
     if(l.stage===10 && d>=2) return { p:3, why:'Job is done and the money is still out, '+d+' days', do:'Chase the payment' };
     if(l.stage===5 && d>=2) return { p:4, why:'Quote sent '+d+' days ago with no answer', do:'Follow up' };
     if(l.stage===3 && d>=2) return { p:5, why:'Waiting on a sub price for '+d+' days', do:'Chase the sub or price it yourself' };
+    if(l.stage===1 || l.stage===2){
+      var h2 = history(l);
+      if(h2.isRepeat) return { p:2, why:'Repeat customer, '+h2.done+' job'+(h2.done>1?'s':'')+' before worth '+money(h2.value), do:'Get straight to costing' };
+    }
     if(l.stage===1) return { p:6, why:'New enquiry, speed matters most here', do:'Make contact' };
     if(d>5) return { p:7, why:'Nothing has happened for '+d+' days', do:'Move it forward or close it' };
     return { p:9, why:'', do:(stageOf(l.stage)||{}).q||'' };
@@ -274,7 +331,7 @@
       '<div class="as">'+jobs.length+' need you. These '+top.length+' matter most right now.</div></div></div>'+
       top.map(function(x){
         return '<div class="ai" data-go="'+x.l.id+'">'+
-          '<div class="ain"><b>'+esc(x.l.name||x.l.phone||'Unknown')+'</b>'+
+          '<div class="ain"><b>'+esc(cust(x.l).name||cust(x.l).phone||'Unknown')+'</b>'+
           '<span class="aw">'+esc(x.s.why)+'</span></div>'+
           '<span class="ado">'+esc(x.s.do)+' ›</span></div>';
       }).join('')+'</div>';
@@ -307,7 +364,7 @@
       if(S.filter==='closed' && isOpen(l)===true) return false;
       if(S.filter==='closed' && l.type==='won') return false;
       if(S.filter==='stale' && (!isOpen(l)||ageDays(l)<=5)) return false;
-      if(q){ var hay=((l.name||'')+' '+(l.suburb||'')+' '+(l.want||'')+' '+(l.phone||'')).toLowerCase();
+      if(q){ var c=cust(l); var hay=((c.name||'')+' '+(l.suburb||'')+' '+(l.want||'')+' '+(c.phone||'')).toLowerCase();
              if(hay.indexOf(q)===-1) return false; }
       return true;
     }).sort(function(a,b){ return lastAt(b)-lastAt(a); });
@@ -380,10 +437,13 @@
     return '<div class="cust'+(stale?' stale':'')+'" data-id="'+l.id+'">'+
       '<div class="ctop">'+
         '<div class="cav" style="background:'+col[0]+';color:'+col[1]+'">'+esc(initials(l))+'</div>'+
-        '<div style="min-width:0"><div class="cname">'+esc(l.name||l.phone||'Unknown')+'</div>'+
+        '<div style="min-width:0"><div class="cname">'+esc(cust(l).name||cust(l).phone||'Unknown')+'</div>'+
         '<div class="cmeta">'+ic(s.ic,13)+'<span>'+esc(s.label)+(l.suburb?' · '+esc(l.suburb):'')+
           (l.want?' · '+esc(l.want):l.msg?' · “'+esc(l.msg)+'”':'')+'</span></div></div>'+
-        '<div class="cright"><span class="last'+(stale?' stale':'')+'">'+ageText(lastAt(l))+'</span>'+pill+'</div>'+
+        '<div class="cright">'+(function(){ var h=history(l);
+          return h.isRepeat ? '<span class="pill rep" title="'+h.done+' completed, $'+h.value.toLocaleString()+' lifetime">'+
+            ic('rotate',12)+'Repeat'+(h.done?' · '+h.done:'')+'</span>' : ''; })()+
+        '<span class="last'+(stale?' stale':'')+'">'+ageText(lastAt(l))+'</span>'+pill+'</div>'+
       '</div>'+
       trackerHTML(l)+
       '<div class="tstate">'+(l.type==='untriaged'
@@ -493,11 +553,26 @@
 
   function renderDetail(){
     var l = lead(); if(!l){ S.open=null; return render(); }
-    var s = SOURCES[l.src]||{}, pins=(l.notes||[]).filter(function(n){return n.pin;});
+    var s = SOURCES[l.src]||{}, pins=((cust(l).notes)||[]).filter(function(n){return n.pin;});
     var right = '';
 
+    var h = history(l);
+    if(h.isRepeat){
+      var others = jobsOf(l.cid).filter(function(x){ return x.id!==l.id; })
+        .sort(function(a,b){ return b.createdAt-a.createdAt; });
+      right += '<div class="box cbox"><h3>'+ic('rotate',13)+'Repeat customer</h3>'+
+        '<div class="cstat"><div><b>'+h.total+'</b><span>jobs</span></div>'+
+        '<div><b>'+h.done+'</b><span>completed</span></div>'+
+        '<div><b>'+money(h.value)+'</b><span>lifetime</span></div></div>'+
+        others.map(function(o){
+          return '<div class="ojob" data-job="'+o.id+'"><div><div class="ow">'+esc(o.want||'Job')+'</div>'+
+            '<div class="om">'+ageText(o.createdAt)+(o.quote?' · '+money(o.quote):'')+'</div></div>'+
+            '<span class="opill '+(o.type==='won'?'won':o.type==='closed'?'lost':'open')+'">'+
+            (o.type==='won'?'Won':o.type==='closed'?'Closed':'Open')+'</span></div>';
+        }).join('')+'</div>';
+    }
     right += '<div class="box"><h3>Details</h3>'+
-      [['Source',(s.label||'')],['Phone',l.phone||'—'],['Suburb',l.suburb||'—'],
+      [['Source',(s.label||'')],['Phone',cust(l).phone||'—'],['Suburb',l.suburb||'—'],
        ['Wants',l.want||l.msg||'—'],['Photos',l.photos?l.photos+' photos':'—'],
        ['Owner',l.owner||'Unassigned'],['Quote',l.quote?money(l.quote):'—'],
        ['Our cost',l.cost?money(l.cost):'—'],
@@ -522,7 +597,7 @@
     }
 
     var main = '<button class="backb" id="back">‹ Back to customers</button>'+
-      '<div class="mhead"><div><h1>'+esc(l.name||l.phone||'Unknown')+'</h1>'+
+      '<div class="mhead"><div><h1>'+esc(cust(l).name||cust(l).phone||'Unknown')+'</h1>'+
       '<p class="sub">'+esc(l.suburb||'')+(l.want?' · '+esc(l.want):'')+'</p></div></div>'+
       '<div class="cust" style="cursor:default">'+trackerHTML(l)+
       '<div class="tstate">'+(l.type==='untriaged'?'Not sorted yet'
@@ -574,6 +649,7 @@
       logEvent(l,'Reopened'); save(); render(); };
     var pinOn=false;
     if($('#npin')) $('#npin').onclick=function(){ pinOn=!pinOn; this.classList.toggle('on',pinOn); };
+    $$('[data-job]').forEach(function(o){ o.onclick=function(){ S.open=Number(o.dataset.job); render(); }; });
     if($('#dcopy')) $('#dcopy').onclick=function(){
       var t=$('#dtx'); t.select();
       navigator.clipboard.writeText(t.value).then(function(){
