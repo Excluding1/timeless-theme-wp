@@ -302,6 +302,21 @@
   }
 
   /* what should Allan do with this lead, and how urgent is it */
+  /* What to DO at each stage, in words that are not just the question repeated back.
+     The card above the question used to echo it, which read like a bug. */
+  var ACTION = {
+    1:['Make contact','New enquiry, speed matters most here'],
+    2:['Check what they sent','Work out if we can quote it from the photos'],
+    3:['Get the cost','Marko or a sub still needs to price it'],
+    4:['Send the quote','Priced and ready to go out'],
+    5:['Follow up on the quote','Quote is with them, waiting on an answer'],
+    6:['Chase the deposit','They accepted, the deposit is not in yet'],
+    7:['Book it in','Deposit paid, this needs a date'],
+    8:['Run the job','Booked in and coming up'],
+    9:['Send the invoice','Job is done, the invoice has not gone out'],
+    10:['Get paid','Invoice is out, the money is not in'],
+    11:['Wrap it up','Warranty and a review request, then it is finished']
+  };
   function suggest(l){
     var d = Math.round(ageDays(l));
     if(l.type==='untriaged') return { p:1, why:'Brand new, nobody has looked at it yet', do:'Sort it' };
@@ -316,7 +331,8 @@
     }
     if(l.stage===1) return { p:6, why:'New enquiry, speed matters most here', do:'Make contact' };
     if(d>5) return { p:7, why:'Nothing has happened for '+d+' days', do:'Move it forward or close it' };
-    return { p:9, why:'', do:(stageOf(l.stage)||{}).q||'' };
+    var a = ACTION[l.stage] || ['Move it forward',''];
+    return { p:9, why:a[1], do:a[0] };
   }
 
   function todayHTML(){
@@ -598,8 +614,10 @@
 
     var main = '<button class="backb" id="back">‹ Back to customers</button>'+
       '<div class="mhead"><div><h1>'+esc(cust(l).name||cust(l).phone||'Unknown')+'</h1>'+
-      '<p class="sub">'+esc(l.suburb||'')+(l.want?' · '+esc(l.want):'')+'</p></div></div>'+
-      '<div class="cust" style="cursor:default">'+trackerHTML(l)+
+      '<p class="sub">'+esc(l.suburb||'')+(l.want?' · '+esc(l.want):'')+'</p></div></div>';
+
+    /* Built now, appended last: progress is what you check, the question is what you answer. */
+    var prog = '<div class="cust progress" style="cursor:default">'+trackerHTML(l)+
       '<div class="tstate">'+(l.type==='untriaged'?'Not sorted yet'
         : l.type==='won'?'Complete · <b>100%</b>'
         : l.type==='closed'?'Closed · <b>'+esc(l.reason||'')+'</b>'
@@ -618,6 +636,7 @@
           '<button class="dcopy" id="dcopy">Copy message</button></div>' : '')+
         '</div>';
     }
+    /* everything above is context; everything below is the decision */
 
     if(l.type==='won'||l.type==='closed'){
       main += '<div class="endcard '+(l.type==='won'?'won':'closed')+'">'+
@@ -632,11 +651,25 @@
         '<button class="opt bad" data-tri="notus">'+ic('xCircle')+'<span>Not for us, refer out</span></button></div></div>';
     } else {
       var st = stageOf(l.stage);
+      /* Answers that end the job fold behind one row when there are several of them.
+         We still capture WHY we lost it -- that is the most valuable field we record --
+         but you are never looking at six choices on a phone. */
+      function obtn(o){ var i = st.opts.indexOf(o);
+        return '<button class="opt'+(o.good?' good':o.bad?' bad':'')+'" data-opt="'+i+'">'+
+               ic(o.ic)+'<span>'+esc(o.t)+'</span></button>'; }
+      var keep = st.opts.filter(function(o){ return !o.bad; });
+      var end  = st.opts.filter(function(o){ return  o.bad; });
+      var fold = end.length > 1;
       main += '<div class="qcard"><div class="qstage">Step '+st.n+' of 11 · '+esc(st.name)+'</div>'+
         '<div class="qtext">'+esc(st.q)+'</div><div class="opts">'+
-        st.opts.map(function(o,i){ return '<button class="opt'+(o.good?' good':o.bad?' bad':'')+
-          '" data-opt="'+i+'">'+ic(o.ic)+'<span>'+esc(o.t)+'</span></button>'; }).join('')+'</div></div>';
+        (fold ? keep : st.opts).map(obtn).join('')+
+        (fold ? '<button class="opt fold" id="showend">'+ic('xCircle')+
+                '<span>Not going ahead\u2026</span></button>'+
+                '<div class="badopts" id="endopts">'+end.map(obtn).join('')+'</div>' : '')+
+        '</div></div>';
     }
+
+    main += prog;   /* progress last: you answer first, then check where it sits */
 
     $('#main').innerHTML = '<div class="grid2"><div>'+main+'</div><div>'+right+'</div></div>';
     $('#rail').innerHTML = '';
@@ -645,6 +678,8 @@
     $('#back').onclick=function(){ S.open=null; render(); };
     $$('[data-tri]').forEach(function(b){ b.onclick=function(){ triage(l,b.dataset.tri); }; });
     $$('[data-opt]').forEach(function(b){ b.onclick=function(){ answer(l, stageOf(l.stage).opts[Number(b.dataset.opt)]); }; });
+    if($('#showend')) $('#showend').onclick=function(){
+      $('#endopts').classList.add('on'); this.remove(); };
     if($('#reopen')) $('#reopen').onclick=function(){ l.type='job'; l.stage=l.stage||1; delete l.reason;
       logEvent(l,'Reopened'); save(); render(); };
     var pinOn=false;
@@ -735,6 +770,13 @@
     if(S.page==='reports')   return renderPlaceholder('Reports','Win rate, margin per job, and why we lose.');
     if(S.page==='settings')  return renderPlaceholder('Settings','Subs, rate card, users and connections.');
   }
+
+  /* test hook — the suite in ../test/suite.js drives the REAL state machine
+     through these, so a passing test means the shipped code passed, not a copy. */
+  window.PIPE = { S:S, STAGES:STAGES, PHASES:PHASES, SOURCES:SOURCES, KEY:KEY,
+    stageOf:stageOf, phaseIdx:phaseIdx, cust:cust, jobsOf:jobsOf, history:history,
+    suggest:suggest, risks:risks, apply:apply, triage:triage, seed:seed, reset:reset,
+    ageDays:ageDays, lastAt:lastAt, isOpen:isOpen, pct:pct, save:save, render:render };
 
   load(); render();
 })();
