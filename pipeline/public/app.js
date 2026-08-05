@@ -400,16 +400,15 @@
     var q=S.q.toLowerCase();
     var rows = S.leads.filter(function(l){
       if(S.filter==='open' && !isOpen(l)) return false;
-      if(S.filter==='mine' && !(isOpen(l) && (l.owner||'')===S.me)) return false;
+      if(S.filter==='new' && l.type!=='untriaged') return false;
       if(S.filter==='won' && l.type!=='won') return false;
       if(S.filter==='closed' && l.type!=='closed') return false;
-      if(S.filter==='stale' && (!isOpen(l)||ageDays(l)<=5)) return false;
       if(q){ var c=cust(l); var hay=((c.name||'')+' '+(l.suburb||'')+' '+(l.want||'')+' '+(c.phone||'')).toLowerCase();
              if(hay.indexOf(q)===-1) return false; }
       return true;
     });
     /* open views rank by urgency — the queue IS the old "Start here" list */
-    if(S.filter==='open' || S.filter==='mine' || S.filter==='stale')
+    if(S.filter==='open' || S.filter==='new')
       return rows.sort(function(a,b){
         var sa=suggest(a)||{p:99}, sb=suggest(b)||{p:99};
         return sa.p - sb.p || ageDays(b) - ageDays(a); });
@@ -459,8 +458,7 @@
 
   function renderQueue(){
     var rows = filtered();
-    var TABS=[{k:'open',t:'Open'},{k:'mine',t:'Mine'},{k:'stale',t:'Gone quiet'},
-              {k:'won',t:'Won'},{k:'closed',t:'Closed'}];
+    var TABS=[{k:'new',t:'New'},{k:'open',t:'Open'},{k:'won',t:'Completed'},{k:'closed',t:'Closed'}];
     $('#app').innerHTML =
       '<div class="top"><div class="blogo">TR</div><div class="bname">Pipeline</div>'+
       '<div class="stats">'+statsLine()+'</div></div>'+
@@ -633,10 +631,11 @@
     $$('[data-chip]').forEach(function(a){ a.addEventListener('click', function(){ chipTap(l, a.dataset.chip); }); });
     if($('#showend')) $('#showend').onclick=function(){ $('#endopts').classList.add('on'); this.remove(); };
     if($('#giveup')) $('#giveup').onclick=function(){
-      var m = limitOf(l);
+      var m = limitOf(l); snap(l);
       apply(l, { t:'Stopped after '+tries(l)+' tries', next:'closed', reason:m.close, revive:m.revive }); };
-    if($('#reopen')) $('#reopen').onclick=function(){ l.type='job'; l.stage=l.stage||1;
-      delete l.reason; delete l.revivable; logEvent(l,'Reopened'); save(); render(); };
+    if($('#reopen')) $('#reopen').onclick=function(){ snap(l); l.type='job'; l.stage=l.stage||1;
+      delete l.reason; delete l.revivable; logEvent(l,'Reopened'); save(); render();
+      toastUndo('Reopened'); };
     var pinOn=false;
     if($('#npin')) $('#npin').onclick=function(){ pinOn=!pinOn; this.classList.toggle('on',pinOn); };
     $$('[data-job]').forEach(function(o){ o.onclick=function(){ S.open=o.dataset.job; render(); }; });
@@ -659,11 +658,36 @@
     clearTimeout(toast._h); toast._h=setTimeout(function(){ t.classList.remove('on'); },1800);
   }
 
+  /* Tapped the wrong answer? Every commit snapshots the lead (and its customer, for
+     pinned facts) first, and the toast carries Undo for 6 seconds. No confirm dialogs —
+     a confirm doubles every tap; undo costs nothing unless you actually erred. */
+  var UNDO = null;
+  function snap(l){
+    UNDO = { id:l.id, lead:JSON.parse(JSON.stringify(l)),
+             cust:JSON.parse(JSON.stringify(cust(l))) };
+  }
+  function undo(){
+    if(!UNDO) return;
+    var i, u=UNDO; UNDO=null;
+    for(i=0;i<S.leads.length;i++) if(S.leads[i].id===u.id) S.leads[i]=u.lead;
+    for(i=0;i<S.customers.length;i++) if(S.customers[i].id===u.cust.id) S.customers[i]=u.cust;
+    save(); render(); toast('Undone');
+  }
+  function toastUndo(msg){
+    var t=$('#toast');
+    t.innerHTML=ic('check',15)+' <span>'+esc(msg)+'</span><button id="undo">Undo</button>';
+    t.classList.add('on');
+    $('#undo').onclick=function(){ t.classList.remove('on'); undo(); };
+    clearTimeout(toast._h); toast._h=setTimeout(function(){ t.classList.remove('on'); },6000);
+  }
+
   function triage(l,k){
+    snap(l);
     if(k==='job'){ l.type='job'; l.stage=1; l.owner=l.owner||S.me; logEvent(l,'Marked as a job'); }
     if(k==='question'){ l.type='closed'; l.reason='Question answered'; logEvent(l,'Answered their question'); }
     if(k==='notus'){ l.type='closed'; l.reason='Not our work'; logEvent(l,'Referred out'); }
     save(); render();
+    toastUndo(k==='job' ? 'Started the pipeline' : 'Closed');
   }
 
   /* a Call/Text chip tap IS an attempt: it logs the channel, counts the try on retry-capped
@@ -681,6 +705,7 @@
   }
 
   function answer(l,o){
+    snap(l);   /* taken before any modal opens; unused if the modal is cancelled */
     if(o.needs==='numbers') return askNumbers(l,o);
     if(o.needs==='booking') return askBooking(l,o);
     if(o.needs==='jobdone') return askJobdone(l,o);
@@ -701,10 +726,12 @@
   function apply(l,o){
     logEvent(l,o.t);
     if(o.pin){ var c=cust(l); (c.notes=c.notes||[]).push({t:o.pin,by:S.me,at:Date.now(),pin:1}); }
-    if(o.next==='won'){ l.type='won'; delete l.nextTouch; }
+    var msg = o.t;
+    if(o.next==='won'){ l.type='won'; delete l.nextTouch; msg='Won'; }
     else if(o.next==='closed'){
       l.type='closed'; l.reason=o.reason||'Closed'; delete l.nextTouch;
       if(o.revive) l.revivable = 1;
+      msg='Closed — '+l.reason;
     }
     else {
       var was = l.stage;
@@ -717,11 +744,12 @@
         }
       } else {
         l.stage = o.next;
-        if(isOpen(l)) toast('Moved to '+stageOf(l.stage).name);
+        msg = 'Moved to '+stageOf(l.stage).name;
       }
       scheduleTouch(l);
     }
     save(); closeModal(); render();
+    toastUndo(msg);
   }
 
   function scheduleTouch(l){
@@ -796,6 +824,7 @@
     suggest:suggest, apply:apply, triage:triage, seed:seed, reset:reset,
     LIMITS:LIMITS, tries:tries, atCap:atCap, limitOf:limitOf, isDue:isDue, dueIn:dueIn,
     chipTap:chipTap, saveNumbers:saveNumbers, setMe:setMe, subWho:subWho, subOwed:subOwed, paySub:paySub,
+    snap:snap, undo:undo,
     ageDays:ageDays, lastAt:lastAt, isOpen:isOpen, save:save, render:render };
 
   load(); render();
