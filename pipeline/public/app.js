@@ -435,7 +435,7 @@
   }
 
   function rowHTML(l){
-    var col = avatarColour(l.id), c = cust(l);
+    var col = avatarColour(l.id), c = cust(l), src = SOURCES[l.src];
     var stale = isOpen(l) && ageDays(l)>5;
     var sg = isOpen(l) ? suggest(l) : null;
     var pill = l.type==='untriaged' ? '<span class="pill triage">New enquiry</span>'
@@ -445,7 +445,8 @@
       : '<span class="pill active">'+esc(stageOf(l.stage).name)+'</span>';
     var h = history(l);
     return '<div class="row'+(stale?' stale':'')+'" data-id="'+esc(l.id)+'">'+
-      '<div class="rav" style="background:'+col[0]+';color:'+col[1]+'">'+esc(initials(l))+'</div>'+
+      '<div class="ravwrap"><div class="rav" style="background:'+col[0]+';color:'+col[1]+'">'+esc(initials(l))+'</div>'+
+      (src ? '<span class="rsrc'+(l.src==='missed'?' missed':'')+'" title="'+esc(src.label)+'">'+ic(src.ic,10)+'</span>' : '')+'</div>'+
       '<div class="rmain"><div class="rname">'+esc(c.name||c.phone||'Unknown')+
         (l.suburb?' <span class="sub">· '+esc(l.suburb)+'</span>':'')+
         (h.isRepeat?' <span class="pill rep">'+ic('rotate',10)+'Repeat</span>':'')+'</div>'+

@@ -46,8 +46,14 @@
        border-radius:var(--r);padding:12px 14px;margin-bottom:8px;cursor:pointer;min-height:60px}
   .row:hover{border-color:#d7dde7;box-shadow:0 2px 8px rgba(16,24,40,.05)}
   .row.stale{border-color:#f3c7c7}
+  .ravwrap{position:relative;flex:none}
   .rav{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-weight:800;
        font-size:12.5px;flex:none}
+  /* where the lead came from: quote form, missed call, text, referral… */
+  .rsrc{position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:50%;
+        background:#fff;border:1px solid var(--line);display:grid;place-items:center;
+        color:var(--ink2);box-shadow:0 1px 2px rgba(16,24,40,.08)}
+  .rsrc.missed{color:var(--red);border-color:#f3c7c7}
   .rmain{min-width:0;flex:1}
   .rname{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .rname .sub{font-weight:400;color:var(--muted)}
@@ -79,7 +85,7 @@
   /* under 560px the row is name + why + pill; the dots return on the detail screen */
   @media (max-width:559px){
     .row{flex-wrap:wrap}
-    .rtrack{display:flex;width:100%;order:5;margin:2px 0 0 47px}
+    .rtrack{display:flex;width:100%;order:5;margin:4px 0 0 47px}
   }
   .empty{color:var(--muted);text-align:center;padding:30px 0}
   .resetb{border:1px solid var(--line);background:var(--card);font:inherit;font-size:12.5px;
