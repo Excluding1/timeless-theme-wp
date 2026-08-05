@@ -446,7 +446,7 @@
     var h = history(l);
     return '<div class="row'+(stale?' stale':'')+'" data-id="'+esc(l.id)+'">'+
       '<div class="ravwrap"><div class="rav" style="background:'+col[0]+';color:'+col[1]+'">'+esc(initials(l))+'</div>'+
-      (src ? '<span class="rsrc'+(l.src==='missed'?' missed':'')+'" title="'+esc(src.label)+'">'+ic(src.ic,10)+'</span>' : '')+'</div>'+
+      (src ? '<span class="rsrc'+(l.src==='missed'?' missed':l.src==='call'?' answered':'')+'" title="'+esc(src.label)+'">'+ic(src.ic,10)+'</span>' : '')+'</div>'+
       '<div class="rmain"><div class="rname">'+esc(c.name||c.phone||'Unknown')+
         (l.suburb?' <span class="sub">· '+esc(l.suburb)+'</span>':'')+
         (h.isRepeat?' <span class="pill rep">'+ic('rotate',10)+'Repeat</span>':'')+'</div>'+
