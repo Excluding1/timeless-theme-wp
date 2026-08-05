@@ -159,10 +159,18 @@
   ];
   function phaseIdx(st){ for(var i=0;i<PHASES.length;i++) if(st<=PHASES[i].to) return i; return 4; }
 
+  /* Two different facts, never mixed:
+       CHANNEL — how the lead arrived. Automatic: GHL knows a form fired, a call was
+                 answered or missed, an SMS is an SMS. This is the avatar badge.
+       ORIGIN  — why they came: a referral, a property manager, the van, Google.
+                 NOT automatable — a referral still ARRIVES via a call or text, so this
+                 is a fact you learn in conversation and tag once. Shown as a pill. */
   var SOURCES = {
     form:{ic:'file',label:'Quote form'}, partial:{ic:'fileAlert',label:'Form abandoned'},
     missed:{ic:'phoneMissed',label:'Missed call'}, call:{ic:'phone',label:'Phone call'},
-    sms:{ic:'msg',label:'Text message'}, email:{ic:'mail',label:'Email'},
+    sms:{ic:'msg',label:'Text message'}, email:{ic:'mail',label:'Email'}
+  };
+  var ORIGINS = {
     referral:{ic:'star',label:'Referral'}, agent:{ic:'building',label:'Property manager'}
   };
   var AVCOL = ['#eff4ff|#2563eb','#ecfdf3|#16a34a','#fff7ed|#ea8a0c','#f5f3ff|#7c3aed','#fef2f2|#dc2626'];
@@ -231,7 +239,7 @@
       { id:'j4', cid:'c104', src:'form', suburb:'Castle Hill', want:'Shower regrout, mould in the corners',
         photos:3, createdAt:ago(2.1), type:'job', stage:3, owner:'Allan',
         notes:[{t:'Ultraglaze quoted 640, can start the 18th', by:'Allan', at:ago(1)}], events:[] },
-      { id:'j5', cid:'c105', src:'referral', suburb:'Epping', refBy:'Isabella (AitkenRE)',
+      { id:'j5', cid:'c105', src:'call', origin:'referral', suburb:'Epping', refBy:'Isabella (AitkenRE)',
         want:'Vanity + basin resurface', photos:5, createdAt:ago(3.2), type:'job', stage:5,
         quote:1450, cost:780, owner:'Allan', notes:[], events:[] },
       { id:'j6', cid:'c106', src:'form', suburb:'Bonnet Bay', want:'Shower walls resurface + regrout',
@@ -242,12 +250,12 @@
         photos:6, createdAt:ago(15.2), type:'job', stage:5, quote:3300, cost:1980, owner:'Allan', notes:[], events:[] },
 
       /* Ray White: a repeat channel — three jobs across different properties */
-      { id:'j9', cid:'c109', src:'agent', suburb:'Marrickville', want:'Rental bath resurface, 14 Byrne St',
+      { id:'j9', cid:'c109', src:'email', origin:'agent', suburb:'Marrickville', want:'Rental bath resurface, 14 Byrne St',
         photos:2, createdAt:ago(6.1), type:'job', stage:7, quote:1540, cost:880, owner:'Marko', notes:[], events:[] },
-      { id:'j20', cid:'c109', src:'agent', suburb:'Marrickville', want:'Shower regrout, 3/88 Illawarra Rd',
+      { id:'j20', cid:'c109', src:'email', origin:'agent', suburb:'Marrickville', want:'Shower regrout, 3/88 Illawarra Rd',
         photos:3, createdAt:ago(74), type:'won', stage:11, quote:1100, cost:640, owner:'Marko',
         booking:'Thu 15 May, Ultraglaze', notes:[], events:[] },
-      { id:'j21', cid:'c109', src:'agent', suburb:'Dulwich Hill', want:'Vanity resurface, 12 Wardell Rd',
+      { id:'j21', cid:'c109', src:'email', origin:'agent', suburb:'Dulwich Hill', want:'Vanity resurface, 12 Wardell Rd',
         photos:2, createdAt:ago(140), type:'won', stage:11, quote:775, cost:430, owner:'Marko',
         booking:'Mon 10 Mar, Marko', notes:[], events:[] },
 
@@ -292,7 +300,10 @@
            /* migrations: ids to strings, retired stage 4 to the merged Quote screen */
            S.customers.forEach(function(c){ c.id=String(c.id); });
            S.leads.forEach(function(j){ j.id=String(j.id); j.cid=String(j.cid);
-             if(j.stage===4) j.stage=3; });
+             if(j.stage===4) j.stage=3;
+             /* referral/agent were channels once; they are origins now */
+             if(j.src==='referral'){ j.src='call'; j.origin=j.origin||'referral'; }
+             if(j.src==='agent'){ j.src='email'; j.origin=j.origin||'agent'; } });
            return; } }catch(e){}
     var d=seed(); S.leads=d.jobs; S.customers=d.customers; save();
   }
@@ -443,13 +454,14 @@
       : l.type==='closed' ? '<span class="pill lost">'+esc(l.reason||'Closed')+'</span>'
       : ageDays(l)<1 ? '<span class="pill new">New</span>'
       : '<span class="pill active">'+esc(stageOf(l.stage).name)+'</span>';
-    var h = history(l);
+    var h = history(l), org = ORIGINS[l.origin];
     return '<div class="row'+(stale?' stale':'')+'" data-id="'+esc(l.id)+'">'+
       '<div class="ravwrap"><div class="rav" style="background:'+col[0]+';color:'+col[1]+'">'+esc(initials(l))+'</div>'+
       (src ? '<span class="rsrc'+(l.src==='missed'?' missed':l.src==='call'?' answered':'')+'" title="'+esc(src.label)+'">'+ic(src.ic,10)+'</span>' : '')+'</div>'+
       '<div class="rmain"><div class="rname">'+esc(c.name||c.phone||'Unknown')+
         (l.suburb?' <span class="sub">· '+esc(l.suburb)+'</span>':'')+
-        (h.isRepeat?' <span class="pill rep">'+ic('rotate',10)+'Repeat</span>':'')+'</div>'+
+        (h.isRepeat?' <span class="pill rep">'+ic('rotate',10)+'Repeat</span>':'')+
+        (org?' <span class="pill org">'+ic(org.ic,10)+esc(org.label)+'</span>':'')+'</div>'+
       '<div class="rwhy'+(sg&&sg.p<=2?' hot':'')+'">'+
         esc(sg ? sg.why : (l.want||l.msg||''))+'</div></div>'+
       rowTrack(l)+
@@ -597,7 +609,9 @@
     }
     var margin = (l.quote&&l.cost) ? l.quote-l.cost : null;
     right += '<div class="box"><h3>Details</h3>'+
-      [['Source',(s.label||'—')],['Phone',cust(l).phone||'—'],['Suburb',l.suburb||'—'],
+      [['Came in by',(s.label||'—')],
+       ['Origin', l.origin ? (ORIGINS[l.origin]||{}).label + (l.refBy?' — '+l.refBy:'') : '—'],
+       ['Phone',cust(l).phone||'—'],['Suburb',l.suburb||'—'],
        ['Wants',l.want||l.msg||'—'],['Photos',l.photos?l.photos+' photos':'—'],
        ['Owner',l.owner||'Unassigned'],['Quote',l.quote?money(l.quote):'—'],
        ['Our cost',l.cost?money(l.cost)+(l.costBy?' ('+esc(l.costBy)+')':''):'—'],
