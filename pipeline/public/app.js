@@ -442,9 +442,7 @@
               {k:'won',t:'Won'},{k:'closed',t:'Closed'}];
     $('#app').innerHTML =
       '<div class="top"><div class="blogo">TR</div><div class="bname">Pipeline</div>'+
-      '<div class="stats">'+statsLine()+'</div>'+
-      '<div class="me">'+['Allan','Marko'].map(function(w){
-        return '<button data-me="'+w+'" class="'+(S.me===w?'on':'')+'">'+w+'</button>'; }).join('')+'</div></div>'+
+      '<div class="stats">'+statsLine()+'</div></div>'+
       '<div class="toolbar"><div class="search"><span class="mag">'+ic('search',15)+'</span>'+
       '<input id="q" placeholder="Search name, suburb or job…" value="'+esc(S.q)+'" /></div>'+
       TABS.map(function(t){ return '<button class="tbtn'+(S.filter===t.k?' on':'')+'" data-f="'+t.k+'">'+t.t+'</button>'; }).join('')+
@@ -455,7 +453,6 @@
     $('#q').oninput = function(){ S.q=this.value; var p=this.selectionStart; renderQueue();
       var n=$('#q'); n.focus(); n.setSelectionRange(p,p); };
     $$('.tbtn').forEach(function(b){ b.onclick=function(){ S.filter=b.dataset.f; renderQueue(); }; });
-    $$('[data-me]').forEach(function(b){ b.onclick=function(){ setMe(b.dataset.me); }; });
     $$('.row').forEach(function(r){ r.onclick=function(){ S.open=r.dataset.id; render(); }; });
     $('#reset').onclick=function(){ if(confirm('Reset the demo?')) reset(); };
   }
