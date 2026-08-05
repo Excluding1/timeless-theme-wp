@@ -217,6 +217,20 @@
   ok('pinned facts live on the customer, so they follow every future job',
      D.customers.some(function(c){ return (c.notes||[]).some(function(n){ return n.pin; }); }));
 
+  /* sub pay: money out is tracked, and only for sub jobs */
+  var sj = JSON.parse(JSON.stringify(probe)); sj.id='tstsp'; sj.stage=11; sj.cost=880;
+  sj.booking='Tue 12 Aug, Ultraglaze'; S.leads.push(sj);
+  ok('a job done by a sub knows who is owed', P.subWho(sj)==='Ultraglaze' && P.subOwed(sj)===true);
+  var mk = JSON.parse(JSON.stringify(probe)); mk.id='tstmk'; mk.stage=11; mk.cost=880;
+  mk.booking='Tue 12 Aug, Marko'; S.leads.push(mk);
+  ok('a Marko job never asks about sub pay', !P.subOwed(mk));
+  var spSug = P.suggest(sj);
+  ok('the assistant chases the sub payment', /owed/i.test(spSug.why), spSug.why);
+  P.paySub(sj);
+  ok('paying the sub logs the event and clears the debt',
+     sj.subPaid===1 && !P.subOwed(sj) &&
+     sj.events.some(function(e){ return /Paid Ultraglaze/.test(e.t); }));
+
   /* the assistant always has an answer */
   ok('the assistant has a next action for every open job',
      D.jobs.filter(P.isOpen).every(function(x){ var s2=P.suggest(x); return s2 && s2.do; }));

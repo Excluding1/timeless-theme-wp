@@ -115,7 +115,7 @@
       { t:'Not yet — chase it', ic:'rotate', next:10, sms:1 },
       { t:'Disputed', ic:'alert', next:10, fold:1 }]},
     { n:11, name:'Wrap up', q:'Warranty and review sent?', opts:[
-      { t:'Done', ic:'trophy', next:'won', good:1, sms:1 },
+      { t:'Done', ic:'trophy', next:'won', needs:'wrapdone', good:1, sms:1 },
       { t:'Warranty claim raised', ic:'alert', next:8, fold:1 }]}
   ];
   function stageOf(n){ return STAGES.filter(function(s){return s.n===n;})[0]; }
@@ -151,11 +151,11 @@
 
   /* the 5 milestones on the detail tracker */
   var PHASES = [
-    { k:'Lead',     from:1,  to:2,  c:'#7c3aed' },
-    { k:'Quoting',  from:3,  to:4,  c:'#2563eb' },
-    { k:'Decision', from:5,  to:6,  c:'#16a34a' },
-    { k:'Booked',   from:7,  to:7,  c:'#ea8a0c' },
-    { k:'Delivery', from:8,  to:11, c:'#0f766e' }
+    { k:'Lead',     ic:'user',     from:1,  to:2,  c:'#7c3aed' },
+    { k:'Quoting',  ic:'dollar',   from:3,  to:4,  c:'#2563eb' },
+    { k:'Decision', ic:'msg',      from:5,  to:6,  c:'#16a34a' },
+    { k:'Booked',   ic:'calendar', from:7,  to:7,  c:'#ea8a0c' },
+    { k:'Delivery', ic:'trophy',   from:8,  to:11, c:'#0f766e' }
   ];
   function phaseIdx(st){ for(var i=0;i<PHASES.length;i++) if(st<=PHASES[i].to) return i; return 4; }
 
@@ -348,6 +348,15 @@
   }
   function telHref(l){ return 'tel:'+(cust(l).phone||'').replace(/[^\d+]/g,''); }
 
+  /* ---------- sub pay: money OUT, tracked only when a sub did the job ---------- */
+  function subWho(l){
+    if(l.booking){ var w = l.booking.split(',').pop().trim(); if(w && w!=='Marko') return w; }
+    if(l.costBy && l.costBy!=='Marko') return 'the sub';
+    return null;
+  }
+  function subOwed(l){ return !!subWho(l) && !!l.cost && l.subPaid!==1; }
+  function paySub(l){ l.subPaid=1; logEvent(l,'Paid '+subWho(l)+' '+money(l.cost)); }
+
   /* ---------- the assistant: what to do next, and why ---------- */
   var ACTION = {
     1:['Make contact','New enquiry, speed matters most here'],
@@ -371,6 +380,7 @@
       return { p:2, why:lm.nudge.t, do:'Try a different way' };
     if(isDue(l)) return { p:2, why:'Follow-up was due '+
       (Math.abs(dueIn(l))<1 ? 'today' : Math.round(-dueIn(l))+' days ago'), do:'Chase it now' };
+    if(l.stage===11 && subOwed(l)) return { p:3, why:'Money is in but '+subWho(l)+' is still owed '+money(l.cost), do:'Pay the sub' };
     if(l.stage===7 && !l.booking) return { p:2, why:'Deposit paid, they are waiting on a date', do:'Book it in' };
     if(l.stage===10 && d>=2) return { p:3, why:'Job done, money still out, '+d+' days', do:'Chase the payment' };
     if(l.stage===5 && d>=2) return { p:4, why:'Quote sent '+d+' days ago, no answer', do:'Follow up' };
@@ -415,6 +425,16 @@
       (open.length ? ' · oldest '+oldest+'d' : '');
   }
 
+  function rowTrack(l){
+    if(!isOpen(l)) return '';
+    var pi = l.type==='untriaged' ? 0 : phaseIdx(l.stage||1);
+    return '<div class="rtrack">'+PHASES.map(function(p,i){
+      var cls = i<pi ? 'done' : i===pi ? 'now' : '';
+      return (i ? '<span class="rline'+(i<=pi?' on':'')+'" style="'+(i<=pi?'background:'+p.c:'')+'"></span>' : '')+
+        '<span class="rdot '+cls+'" style="'+(cls?'color:'+p.c:'')+'" title="'+p.k+'">'+ic(p.ic,11)+'</span>';
+    }).join('')+'</div>';
+  }
+
   function rowHTML(l){
     var col = avatarColour(l.id), c = cust(l);
     var stale = isOpen(l) && ageDays(l)>5;
@@ -432,6 +452,7 @@
         (h.isRepeat?' <span class="pill rep">'+ic('rotate',10)+'Repeat</span>':'')+'</div>'+
       '<div class="rwhy'+(sg&&sg.p<=2?' hot':'')+'">'+
         esc(sg ? sg.why : (l.want||l.msg||''))+'</div></div>'+
+      rowTrack(l)+
       '<div class="rside"><span class="rage'+(stale?' stale':'')+'">'+ageText(lastAt(l))+'</span>'+pill+'</div>'+
       '</div>';
   }
@@ -467,7 +488,7 @@
     var fill = doneAll ? 100 : (pi/(PHASES.length-1))*100;
     return '<div class="track">'+
       '<div class="tlabels">'+PHASES.map(function(p,i){
-        return '<span class="'+(i===pi?'on':'')+'">'+p.k+'</span>'; }).join('')+'</div>'+
+        return '<span class="'+(i===pi?'on':'')+'">'+ic(p.ic,12)+'<b>'+p.k+'</b></span>'; }).join('')+'</div>'+
       '<div class="tline"><div class="tbase"></div>'+
       '<div class="tfill" style="width:calc('+fill+'% - '+(fill?14:0)+'px);background:'+c+'"></div>'+
       '<div class="tdots">'+PHASES.map(function(p,i){
@@ -583,6 +604,7 @@
        ['Our cost',l.cost?money(l.cost)+(l.costBy?' ('+esc(l.costBy)+')':''):'—'],
        ['Margin', margin!=null?money(margin):'—', margin!=null&&margin<300],
        ['Booked',l.booking||'—'],['Referred by',l.refBy||'—']]
+      .concat(subWho(l)&&l.cost ? [['Sub paid', l.subPaid===1?'Yes':'Owed '+money(l.cost), l.subPaid!==1]] : [])
       .map(function(kv){ return '<div class="kv"><span class="k">'+kv[0]+'</span><span class="v'+
         (kv[2]?' warn':'')+'">'+esc(kv[1])+'</span></div>'; }).join('')+'</div>';
 
@@ -662,7 +684,18 @@
     if(o.needs==='numbers') return askNumbers(l,o);
     if(o.needs==='booking') return askBooking(l,o);
     if(o.needs==='jobdone') return askJobdone(l,o);
+    if(o.needs==='wrapdone') return askWrapdone(l,o);
     apply(l,o);
+  }
+
+  /* a job is not wrapped while we still owe the sub — one tap settles it */
+  function askWrapdone(l,o){
+    if(!subOwed(l)) return apply(l,o);
+    openModal('<h3>One thing first</h3><p>'+esc(subWho(l))+' is still owed '+money(l.cost)+' for this job.</p>'+
+      '<button class="mbtn" id="msp">Paid them — close the job</button>'+
+      '<button class="mbtn mcancel" id="mx">Not yet, leave it open</button>');
+    $('#msp').onclick=function(){ paySub(l); apply(l,o); };
+    $('#mx').onclick=function(){ closeModal(); toast('Left open until '+subWho(l)+' is paid'); };
   }
 
   function apply(l,o){
@@ -762,7 +795,7 @@
     stageOf:stageOf, phaseIdx:phaseIdx, cust:cust, jobsOf:jobsOf, history:history,
     suggest:suggest, apply:apply, triage:triage, seed:seed, reset:reset,
     LIMITS:LIMITS, tries:tries, atCap:atCap, limitOf:limitOf, isDue:isDue, dueIn:dueIn,
-    chipTap:chipTap, saveNumbers:saveNumbers, setMe:setMe,
+    chipTap:chipTap, saveNumbers:saveNumbers, setMe:setMe, subWho:subWho, subOwed:subOwed, paySub:paySub,
     ageDays:ageDays, lastAt:lastAt, isOpen:isOpen, save:save, render:render };
 
   load(); render();

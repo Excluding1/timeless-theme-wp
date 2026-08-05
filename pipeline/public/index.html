@@ -63,6 +63,24 @@
   .pill.won{background:var(--greenbg);color:var(--green)}
   .pill.lost{background:var(--greybg);color:var(--muted)}
   .pill.rep{background:var(--purplebg);color:var(--purple);display:inline-flex;align-items:center;gap:4px}
+  /* mini phase bar on rows: five icon dots, never words */
+  .rtrack{display:none;align-items:center;flex:none;margin-left:4px}
+  .rdot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;flex:none;
+        border:1.5px solid var(--line);background:#fff;color:#c4c8d0}
+  .rdot.done{border-color:currentColor;background:currentColor}
+  .rdot.done svg{color:#fff;stroke:#fff}
+  .rdot.now{border-color:currentColor;border-width:2px;position:relative}
+  /* the live phase breathes, same as on the detail tracker */
+  .rdot.now::before{content:'';position:absolute;inset:-5px;border-radius:50%;
+       background:currentColor;opacity:.18;animation:tpulse 2s ease-out infinite}
+  @media (prefers-reduced-motion:reduce){ .rdot.now::before{animation:none;opacity:.15} }
+  .rline{width:10px;height:2px;background:var(--line);flex:none}
+  @media (min-width:560px){ .rtrack{display:flex} }
+  /* under 560px the row is name + why + pill; the dots return on the detail screen */
+  @media (max-width:559px){
+    .row{flex-wrap:wrap}
+    .rtrack{display:flex;width:100%;order:5;margin:2px 0 0 47px}
+  }
   .empty{color:var(--muted);text-align:center;padding:30px 0}
   .resetb{border:1px solid var(--line);background:var(--card);font:inherit;font-size:12.5px;
           padding:8px 14px;min-height:44px;border-radius:8px;cursor:pointer;color:var(--muted);margin-top:18px}
@@ -134,9 +152,13 @@
   .prog{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
   .track{margin:2px 4px 0;position:relative}
   .tlabels{display:flex;justify-content:space-between;gap:6px;margin-bottom:9px}
-  .tlabels span{font-size:11.5px;color:var(--muted);flex:1;min-width:0;text-align:center}
-  .tlabels span:first-child{text-align:left}
-  .tlabels span:last-child{text-align:right}
+  .tlabels span{font-size:11.5px;color:var(--muted);flex:1;min-width:0;text-align:center;
+                display:inline-flex;align-items:center;justify-content:center;gap:4px}
+  .tlabels span b{font-weight:inherit}
+  .tlabels span.on b{font-weight:700}
+  @media (max-width:480px){ .tlabels span b{display:none} .tlabels span svg{width:15px;height:15px} }
+  .tlabels span:first-child{justify-content:flex-start}
+  .tlabels span:last-child{justify-content:flex-end}
   .tlabels span.on{color:var(--ink);font-weight:700}
   .tline{position:relative;height:14px}
   .tbase{position:absolute;top:6px;left:7px;right:7px;height:2px;background:#e4e4e7;border-radius:2px}
