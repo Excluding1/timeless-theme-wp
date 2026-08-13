@@ -450,7 +450,8 @@ function timeless_quote_form_shortcode( $atts = array() ) {
         <link rel="stylesheet" href="<?php echo esc_url( $css_url . '?v=' . $css_ver ); ?>" />
         <script>window.TIMELESS_FORM_BASE = <?php echo wp_json_encode( $base_url ); ?>;
         /* draft store (v1.5.2): lets the form swap a 1,800-char resume URL for a short code */
-        window.TIMELESS_AJAX = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;</script>
+        window.TIMELESS_AJAX = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;
+        window.TIMELESS_RESUME_PAGE = <?php echo wp_json_encode( home_url( '/finish-quote/' ) ); ?>;</script>
         <script type="module" defer src="<?php echo esc_url( $js_url . '?v=' . $js_ver ); ?>"></script>
     <?php endif;
     return ob_get_clean();

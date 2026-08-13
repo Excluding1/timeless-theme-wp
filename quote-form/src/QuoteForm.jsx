@@ -179,6 +179,13 @@ const ENABLE_MOBILE_HANDOFF = true;
    restores their LATEST progress rather than a step-1 snapshot.              */
 const AJAX_URL = (typeof window !== "undefined" && window.TIMELESS_AJAX) ? window.TIMELESS_AJAX : "";
 
+/* Where a resume link should LAND. Not the page they happened to start on: on /contact/
+   the form sits ~1,600px down behind phone cards and business hours, so someone tapping
+   "finish your quote" saw no form at all. /finish-quote/ is the form and nothing else. */
+const RESUME_PAGE = (typeof window !== "undefined" && window.TIMELESS_RESUME_PAGE)
+  ? window.TIMELESS_RESUME_PAGE
+  : (typeof window !== "undefined" ? window.location.origin + "/finish-quote/" : "");
+
 const saveDraftRemote = async (state, existingId) => {
   if (!AJAX_URL) return null;
   try {
@@ -813,6 +820,30 @@ export default function QuoteForm() {
       let d = (draftDepth(fromLink) >= draftDepth(fromLocal)) ? fromLink : fromLocal;
       if (!d) d = fromLocal || fromLink;
       if (shortId) draftId.current = shortId;
+
+      /* Someone arriving from a resume link tapped "finish your quote" — but the form can
+         sit well down the page (1,600px+ on /contact/), so they'd land on a wall of other
+         content and see no form at all. Bring it to them. Only for link arrivals: doing
+         this on an ordinary visit would hijack the page. */
+      if (fromLink) {
+        setTimeout(() => {
+          const mount = document.querySelector(".timeless-quote-form-mount") ||
+                        document.getElementById("quote-form-root");
+          if (!mount) return;
+          // clear any fixed/sticky bar so the top of the form isn't tucked underneath it
+          let offset = 0;
+          document.querySelectorAll("header, nav, .site-header").forEach((el) => {
+            const cs = getComputedStyle(el);
+            if ((cs.position === "fixed" || cs.position === "sticky") && el.getBoundingClientRect().top <= 0) {
+              offset = Math.max(offset, el.getBoundingClientRect().height);
+            }
+          });
+          const top = mount.getBoundingClientRect().top + window.scrollY - offset - 12;
+          const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+        }, 260);   // let the restored step paint first, so we scroll to its real position
+      }
+
       if (!d) return;
       if (typeof d.fn === "string") setFn(d.fn);
       if (typeof d.ln === "string") setLn(d.ln);
@@ -1183,8 +1214,8 @@ export default function QuoteForm() {
           // THE ONE TO USE IN SMS (v1.5.2): ~55 chars = one segment, and it resolves to
           // their LATEST progress because the stored draft is refreshed on every step.
           resume_link_sms: draftId.current
-            ? window.location.origin + window.location.pathname + "?r=" + draftId.current
-            : window.location.origin + window.location.pathname,
+            ? RESUME_PAGE + "?r=" + draftId.current
+            : RESUME_PAGE,
           ...tracking,
         },
       }),
@@ -2277,8 +2308,8 @@ export default function QuoteForm() {
            light. The short code renders a sparse, reliable QR. The long fragment stays as
            the fallback for anyone whose draft has not reached the store yet. */
         const handoffUrl = draftId.current
-          ? window.location.origin + window.location.pathname + "?r=" + draftId.current
-          : window.location.origin + window.location.pathname + "#qf=" + encodeHandoffState(buildPersistState());
+          ? RESUME_PAGE + "?r=" + draftId.current
+          : RESUME_PAGE + "#qf=" + encodeHandoffState(buildPersistState());
         const qrSvg = new QRCode({ content: handoffUrl, width: 200, height: 200, padding: 0, ecl: "M", join: true }).svg();
         return (
         <div onClick={() => setShowMobileModal(false)} style={{ position: "fixed", inset: 0, background: "rgba(4, 21, 52, 0.55)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
