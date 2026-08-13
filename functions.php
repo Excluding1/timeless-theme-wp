@@ -426,48 +426,6 @@ function timeless_article_reading_time( $post_id = 0 ) {
  * URL (so /images/areas/shower.jpg becomes
  * /wp-content/themes/.../assets/quote-form/images/areas/shower.jpg).
  * ───────────────────────────────────────────────────────────────── */
-/**
- * Turn a comma-separated suburb list into links, but ONLY for suburbs that actually have
- * a landing page. Added v1.5.2 after an audit found /areas/ listed every suburb as plain
- * text while ten real suburb pages sat with almost no internal links pointing at them —
- * which is how Google finds pages. Suburbs without a page stay as plain text, so we never
- * manufacture a 404.
- *
- * @param string $list  e.g. "Bondi, Coogee, Randwick"
- * @return string       HTML with the covered suburbs linked
- */
-function timeless_link_suburbs( $list ) {
-    static $have = null;
-    if ( $have === null ) {
-        $have = array();
-        $file = get_template_directory() . '/inc/suburb-data.php';
-        if ( file_exists( $file ) ) {
-            $data = include $file;
-            if ( is_array( $data ) ) {
-                foreach ( array_keys( $data ) as $slug ) {
-                    if ( get_page_by_path( 'services/bath-resurfacing/' . $slug ) ) {
-                        $have[ $slug ] = true;
-                    }
-                }
-            }
-        }
-    }
-
-    $out = array();
-    foreach ( array_map( 'trim', explode( ',', $list ) ) as $name ) {
-        if ( $name === '' ) { continue; }
-        $slug = sanitize_title( $name );
-        if ( isset( $have[ $slug ] ) ) {
-            $out[] = '<a href="' . esc_url( home_url( '/services/bath-resurfacing/' . $slug . '/' ) ) . '"'
-                   . ' class="underline decoration-dotted underline-offset-2 hover:text-primary">'
-                   . esc_html( $name ) . '</a>';
-        } else {
-            $out[] = esc_html( $name );
-        }
-    }
-    return implode( ', ', $out );
-}
-
 function timeless_quote_form_shortcode( $atts = array() ) {
     static $rendered_once = false;
     $atts = shortcode_atts( array(
@@ -1067,21 +1025,7 @@ function timeless_ensure_pages_exist() {
     // This pattern catches "new pages added in theme update" without waiting
     // for the 1-hour transient to expire.
     $needs_create_pages = ! get_page_by_path( 'sydney' );
-
-    /* Suburb sentinel. This used to check Parramatta only, which meant that once the
-       first batch existed, suburbs added in a later theme update were NEVER created —
-       the check passed and the generator never ran. It now sentinels on the LAST suburb
-       in the data file, so adding entries to inc/suburb-data.php is enough to make the
-       new pages materialise on the next wp-admin load. (v1.5.2) */
-    $needs_suburb_pages = false;
-    $suburb_file = get_template_directory() . '/inc/suburb-data.php';
-    if ( file_exists( $suburb_file ) ) {
-        $all_suburbs = include $suburb_file;
-        if ( is_array( $all_suburbs ) && $all_suburbs ) {
-            $last_slug = array_key_last( $all_suburbs );
-            $needs_suburb_pages = ! get_page_by_path( 'services/bath-resurfacing/' . $last_slug );
-        }
-    }
+    $needs_suburb_pages = ! get_page_by_path( 'services/bath-resurfacing/parramatta' );
 
     // Rate limit the EXPENSIVE check (full FAQs + create_pages) to once per hour
     if ( ! get_transient( 'timeless_pages_checked' ) ) {
