@@ -26,6 +26,10 @@ $services = include get_template_directory() . '/inc/service-data.php';
 $suburb  = $suburbs[ $suburb_slug ]  ?? null;
 $service = $services[ $service_slug ] ?? null;
 
+/* Nearby suburbs as readable prose — used by the hub intro and the FAQ below. */
+$nb      = isset( $suburb['neighborhoods'] ) ? (array) $suburb['neighborhoods'] : array();
+$nb_list = $nb ? timeless_comma_and( $nb ) : '';
+
 if ( ! $suburb || ! $service ) {
     wp_safe_redirect( home_url( '/services/' . $service_slug . '/' ) );
     exit;
@@ -156,6 +160,55 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  </div>
 </section>
 
+<!-- EVERYTHING WE DO IN THIS SUBURB -------------------------------------
+     Added v1.5.2. This is the change that turns a thin single-service page into a
+     suburb HUB. Torn down against Jim's Fencing and Prestige Bathroom Renovations
+     first: both winners run long, multi-service suburb pages (Jim's covers 9-11
+     service types per suburb) rather than one page per service per suburb. Doing it
+     the other way would mean 19 services x 24 suburbs = 456 near-identical pages,
+     which is textbook doorway territory.
+     Each card links out to the full service page, so the depth lives there and this
+     page stays the local entry point. -->
+<section class="py-12 sm:py-16 bg-white">
+ <div class="max-w-6xl mx-auto px-6 sm:px-8">
+  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3 text-center">What we do in <?php echo esc_html( $suburb['name'] ); ?></h2>
+  <p class="text-secondary text-center max-w-2xl mx-auto mb-10">Every service below is available across <?php echo esc_html( $suburb['name'] ); ?><?php echo $nb_list ? ' and ' . esc_html( $nb_list ) : ''; ?>. Quoted from photos, so there is no call-out fee to find out where you stand.</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+   <?php foreach ( timeless_services() as $slug => $svc ) :
+       $is_this = ( $slug === $service_slug ); ?>
+   <a href="<?php echo esc_url( home_url( '/services/' . $slug . '/' ) ); ?>"
+      class="block bg-surface-container-low rounded-xl p-5 hover:shadow-lg transition-all group<?php echo $is_this ? ' ring-2 ring-primary' : ''; ?>">
+    <div class="flex items-start justify-between gap-3 mb-2">
+     <h3 class="font-bold text-primary leading-snug"><?php echo esc_html( $svc[0] ); ?></h3>
+     <span class="material-symbols-outlined text-base text-primary shrink-0 group-hover:translate-x-0.5 transition-transform" aria-hidden="true">arrow_forward</span>
+    </div>
+    <p class="text-sm text-secondary leading-relaxed"><?php echo esc_html( $svc[1] ); ?></p>
+   </a>
+   <?php endforeach; ?>
+  </div>
+ </div>
+</section>
+
+<!-- WHERE WE ARE -----------------------------------------------------------
+     A map. The Australian tradie SEO guidance lists an embedded map as a
+     requirement for a location page, and NEITHER reference site has one — so it is
+     a cheap, real point of difference. OpenStreetMap, no API key, no tracking. -->
+<section class="py-12 sm:py-16 bg-surface-container-low">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8">
+  <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-6 text-center">Servicing <?php echo esc_html( $suburb['name'] ); ?> and surrounds</h2>
+  <div class="rounded-xl overflow-hidden border border-surface-container bg-white">
+   <iframe
+     title="Map of <?php echo esc_attr( $suburb['name'] ); ?>, NSW"
+     loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+     class="w-full block" height="340" style="border:0"
+     src="https://www.openstreetmap.org/export/embed.html?bbox=<?php
+        echo esc_attr( ( $suburb['lng'] - 0.045 ) . ',' . ( $suburb['lat'] - 0.032 ) . ',' . ( $suburb['lng'] + 0.045 ) . ',' . ( $suburb['lat'] + 0.032 ) );
+     ?>&amp;layer=mapnik&amp;marker=<?php echo esc_attr( $suburb['lat'] . ',' . $suburb['lng'] ); ?>"></iframe>
+  </div>
+  <p class="text-xs text-secondary text-center mt-3">We come to you &mdash; there is no shopfront to visit. <?php echo esc_html( $suburb['name'] ); ?> is about <?php echo esc_html( $suburb['distance_km'] ); ?>&nbsp;km from the middle of Sydney.</p>
+ </div>
+</section>
+
 <!-- SUBURB FAQ ------------------------------------------------------------
      Added v1.5.2. These pages previously had NO FAQ and no FAQPage schema, while
      every main service page carries five questions. That mattered twice over: it is
@@ -166,8 +219,6 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  <div class="max-w-3xl mx-auto px-6 sm:px-8">
   <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-8 text-center"><?php echo esc_html( $suburb['name'] ); ?> questions</h2>
   <?php
-  $nb = isset( $suburb['neighborhoods'] ) ? (array) $suburb['neighborhoods'] : array();
-  $nb_list = $nb ? timeless_comma_and( $nb ) : '';
   $suburb_faqs = array(
       array(
           'q' => 'Do you service ' . $suburb['name'] . '?',

@@ -436,6 +436,27 @@ function timeless_article_reading_time( $post_id = 0 ) {
  * @param string $list  e.g. "Bondi, Coogee, Randwick"
  * @return string       HTML with the covered suburbs linked
  */
+/**
+ * The canonical service list, previously only expressed as hardcoded links in the
+ * mega menu. Suburb hub pages need it too, and two copies would drift.
+ *
+ * @return array slug => [ name, blurb ]
+ */
+function timeless_services() {
+    return array(
+        'bath-resurfacing'       => array( 'Bath Resurfacing',       'Chipped, stained or yellowed baths brought back to a gloss white finish.' ),
+        'tile-resurfacing'       => array( 'Tile Resurfacing',       'Wall and floor tiles recoloured without ripping a single tile off the wall.' ),
+        'shower-regrouting'      => array( 'Shower Regrouting',      'Old grout cut out and replaced, which fixes the mould at the cause.' ),
+        'shower-leak-repair'     => array( 'Shower Sealing',         'Perished silicone replaced and leaks sealed before they reach the neighbours.' ),
+        'floor-tile-regrouting'  => array( 'Floor Tile Regrouting',  'Cracked and stained floor grout replaced through the bathroom and laundry.' ),
+        'vanity-refinishing'     => array( 'Vanity Refinishing',     'Benchtops and cabinet doors resprayed to a modern colour.' ),
+        'basin-restoration'      => array( 'Basin Restoration',      'Chips filled and the whole basin resurfaced to match.' ),
+        'chipped-bathtub-repair' => array( 'Chip Repair',            'Single chips and cracks in a bath or basin repaired in a couple of hours.' ),
+        'full-bathroom-makeover' => array( 'Full Bathroom Makeover', 'Everything above in one visit, for a bathroom that needs the lot.' ),
+        'property-manager-bathroom-services' => array( 'For Property Managers', 'Rental turnarounds quoted from photos, invoiced to the agency.' ),
+    );
+}
+
 /** "Dulwich Hill, Sydenham, Petersham and Tempe" — readable list for body copy. */
 function timeless_comma_and( $items ) {
     $items = array_values( array_filter( array_map( 'trim', (array) $items ) ) );
