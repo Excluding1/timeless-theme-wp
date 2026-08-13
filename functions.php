@@ -448,7 +448,9 @@ function timeless_quote_form_shortcode( $atts = array() ) {
         $css_ver  = file_exists( $css_path ) ? filemtime( $css_path ) : '1';
         ?>
         <link rel="stylesheet" href="<?php echo esc_url( $css_url . '?v=' . $css_ver ); ?>" />
-        <script>window.TIMELESS_FORM_BASE = <?php echo wp_json_encode( $base_url ); ?>;</script>
+        <script>window.TIMELESS_FORM_BASE = <?php echo wp_json_encode( $base_url ); ?>;
+        /* draft store (v1.5.2): lets the form swap a 1,800-char resume URL for a short code */
+        window.TIMELESS_AJAX = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;</script>
         <script type="module" defer src="<?php echo esc_url( $js_url . '?v=' . $js_ver ); ?>"></script>
     <?php endif;
     return ob_get_clean();
@@ -2819,6 +2821,84 @@ function timeless_handle_quote_form() {
 }
 add_action( 'wp_ajax_timeless_quote', 'timeless_handle_quote_form' );
 add_action( 'wp_ajax_nopriv_timeless_quote', 'timeless_handle_quote_form' );
+
+/* ─────────────────────────────────────────────────────────────────
+ * QUOTE-FORM DRAFT STORE (added v1.5.2, 2026-08-13)
+ *
+ * Why this exists: the "continue where you left off" link used to carry the whole
+ * draft inside the URL fragment (#qf=). That is perfect for the QR handoff — private,
+ * serverless, and a QR code holds kilobytes — but a real two-bathroom draft encodes to
+ * ~1,800 characters, which is 13 SMS segments and gets mangled by some handsets.
+ *
+ * So for SMS we store the draft here and hand out a SHORT code instead:
+ *     https://timelessresurfacing.com.au/contact/?r=a1b2c3d4e5f6      (~55 chars, 1 segment)
+ *
+ * Design notes:
+ *  - the code is 12 random hex chars from a CSPRNG, so drafts cannot be enumerated
+ *  - stored as a transient with a 30-day life, so cleanup is automatic — no cron, no table
+ *  - nothing is stored that the customer has not already sent us in the partial webhook
+ *  - saving is rate-limited per IP, and the payload is size-capped
+ * ───────────────────────────────────────────────────────────────── */
+
+define( 'TIMELESS_DRAFT_TTL', 30 * DAY_IN_SECONDS );
+define( 'TIMELESS_DRAFT_MAX_BYTES', 64000 );
+
+function timeless_draft_client_ip() {
+    // REMOTE_ADDR only — forwarded headers are spoofable and this gates a write.
+    return isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+}
+
+function timeless_handle_draft_save() {
+    $raw = isset( $_POST['draft'] ) ? wp_unslash( $_POST['draft'] ) : '';
+    if ( ! is_string( $raw ) || $raw === '' ) {
+        wp_send_json_error( array( 'message' => 'empty draft' ), 400 );
+    }
+    if ( strlen( $raw ) > TIMELESS_DRAFT_MAX_BYTES ) {
+        wp_send_json_error( array( 'message' => 'draft too large' ), 413 );
+    }
+    // Must be valid JSON, and an object — never store arbitrary text.
+    $decoded = json_decode( $raw, true );
+    if ( ! is_array( $decoded ) ) {
+        wp_send_json_error( array( 'message' => 'draft must be JSON' ), 400 );
+    }
+
+    // Rate limit: 40 saves per IP per hour. A customer stepping through the form saves
+    // ~5 times, so this is generous for people and tight for scripts.
+    $ip       = timeless_draft_client_ip();
+    $rate_key = 'tr_draft_rate_' . md5( $ip );
+    $saves    = get_transient( $rate_key );
+    if ( $saves !== false && (int) $saves >= 40 ) {
+        wp_send_json_error( array( 'message' => 'too many saves' ), 429 );
+    }
+    set_transient( $rate_key, ( $saves === false ? 1 : (int) $saves + 1 ), HOUR_IN_SECONDS );
+
+    // Reuse the code the browser already holds so the SMS link stays stable as they
+    // progress; only mint a new one when there is no valid existing code.
+    $id = isset( $_POST['id'] ) ? preg_replace( '/[^a-f0-9]/', '', (string) wp_unslash( $_POST['id'] ) ) : '';
+    if ( strlen( $id ) !== 12 ) {
+        $id = bin2hex( random_bytes( 6 ) );   // 48 bits of entropy, unguessable
+    }
+
+    set_transient( 'tr_draft_' . $id, wp_json_encode( $decoded ), TIMELESS_DRAFT_TTL );
+    wp_send_json_success( array( 'id' => $id ) );
+}
+add_action( 'wp_ajax_timeless_draft_save', 'timeless_handle_draft_save' );
+add_action( 'wp_ajax_nopriv_timeless_draft_save', 'timeless_handle_draft_save' );
+
+function timeless_handle_draft_load() {
+    $id = isset( $_GET['id'] ) ? preg_replace( '/[^a-f0-9]/', '', (string) wp_unslash( $_GET['id'] ) ) : '';
+    if ( strlen( $id ) !== 12 ) {
+        wp_send_json_error( array( 'message' => 'bad code' ), 400 );
+    }
+    $draft = get_transient( 'tr_draft_' . $id );
+    if ( $draft === false ) {
+        // Expired or never existed — the form falls back to whatever it has locally.
+        wp_send_json_error( array( 'message' => 'not found' ), 404 );
+    }
+    wp_send_json_success( array( 'draft' => json_decode( $draft, true ) ) );
+}
+add_action( 'wp_ajax_timeless_draft_load', 'timeless_handle_draft_load' );
+add_action( 'wp_ajax_nopriv_timeless_draft_load', 'timeless_handle_draft_load' );
 
 /** Pass AJAX URL and nonce to frontend JavaScript */
 function timeless_form_scripts() {

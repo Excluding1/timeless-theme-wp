@@ -169,6 +169,45 @@ function getFullBathroomSections(inv, services = {}, chipRepairOn = false) {
 // the customer adds them on the phone. QR is generated locally (qrcode-svg), no external API.
 const ENABLE_MOBILE_HANDOFF = true;
 
+/* ─── SHORT RESUME CODE (v1.5.2) ───────────────────────────────────────────
+   The #qf= fragment carries the whole draft, which is ideal for the QR handoff
+   (private, serverless, and a QR holds kilobytes) but a real two-bathroom draft
+   encodes to ~1,800 chars — 13 SMS segments, and some handsets mangle it.
+   So for SMS we park the draft on our own WordPress and text a short code:
+       /contact/?r=a1b2c3d4e5f6
+   The code is reused as the customer advances, so the link in their SMS always
+   restores their LATEST progress rather than a step-1 snapshot.              */
+const AJAX_URL = (typeof window !== "undefined" && window.TIMELESS_AJAX) ? window.TIMELESS_AJAX : "";
+
+const saveDraftRemote = async (state, existingId) => {
+  if (!AJAX_URL) return null;
+  try {
+    const body = new URLSearchParams();
+    body.set("action", "timeless_draft_save");
+    body.set("draft", JSON.stringify(state));
+    if (existingId) body.set("id", existingId);
+    const res = await fetch(AJAX_URL, { method: "POST", body });
+    if (!res.ok) return null;
+    const j = await res.json();
+    return (j && j.success && j.data && j.data.id) ? j.data.id : null;
+  } catch { return null; }
+};
+
+const loadDraftRemote = async (id) => {
+  if (!AJAX_URL || !id) return null;
+  try {
+    const res = await fetch(AJAX_URL + "?action=timeless_draft_load&id=" + encodeURIComponent(id));
+    if (!res.ok) return null;
+    const j = await res.json();
+    return (j && j.success && j.data && j.data.draft) ? j.data.draft : null;
+  } catch { return null; }
+};
+
+/* How far through the form a draft is — used to make sure a resume link can never
+   overwrite a fuller draft the customer already has on this device. */
+const STEP_ORDER = ["about", "where", "what", "services", "photos"];
+const draftDepth = (d) => (d && typeof d === "object") ? Math.max(0, STEP_ORDER.indexOf(d.step)) : -1;
+
 const encodeHandoffState = (state) => {
   const json = JSON.stringify(state);
   const b64 = btoa(unescape(encodeURIComponent(json)));
@@ -636,6 +675,21 @@ export default function QuoteForm() {
   // ~/.claude/.../memory/quote_form_requirements.md (D2). For now: UI only, no real session token.
   const [showMobileModal, setShowMobileModal] = useState(false);
   const [mobileModalTab, setMobileModalTab] = useState("qr"); // "qr" | "link"
+  /* Is there room for the desktop-only handoff button? Kept in state and subscribed to
+     the media query, because the old inline matchMedia() call was evaluated once at
+     render — so rotating a tablet, or a layout settling after first paint, left the
+     button permanently missing. */
+  const [roomForHandoff, setRoomForHandoff] = useState(
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 768px)").matches : false
+  );
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(min-width: 768px)");
+    const on = (e) => setRoomForHandoff(e.matches);
+    setRoomForHandoff(mq.matches);
+    if (mq.addEventListener) { mq.addEventListener("change", on); return () => mq.removeEventListener("change", on); }
+    mq.addListener(on); return () => mq.removeListener(on);   // older Safari
+  }, []);
   const [smsSent, setSmsSent] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
@@ -728,17 +782,38 @@ export default function QuoteForm() {
   const restoredOnce = useRef(false);
   useEffect(() => {
     if (restoredOnce.current) return; restoredOnce.current = true;
+    (async () => {
     try {
-      let d = null;
-      if (window.location.hash && window.location.hash.indexOf("#qf=") === 0) {
-        d = decodeHandoffState(window.location.hash.slice(4));
-        if (d) { try { window.history.replaceState(null, "", window.location.pathname + window.location.search); } catch (e) { /* ignore */ } }
+      /* Gather every draft we can see, then use whichever is FURTHEST ALONG.
+         This matters: the form autosaves locally on every keystroke, so a customer
+         who filled four steps on their phone and then taps our recovery SMS on that
+         same phone must not have their work replaced by an older link. Before
+         v1.5.2 the link always won, and could destroy their progress. */
+      let fromLink = null, fromLocal = null, shortId = "";
+
+      const params = new URLSearchParams(window.location.search);
+      const rid = (params.get("r") || "").replace(/[^a-f0-9]/g, "");
+      if (rid.length === 12) {
+        shortId = rid;
+        fromLink = await loadDraftRemote(rid);
       }
-      if (!d) {
+      if (!fromLink && window.location.hash && window.location.hash.indexOf("#qf=") === 0) {
+        fromLink = decodeHandoffState(window.location.hash.slice(4));
+      }
+      try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return;
-        d = JSON.parse(raw);
+        if (raw) fromLocal = JSON.parse(raw);
+      } catch { /* ignore */ }
+
+      /* Clean the URL either way, so a shared screen never leaks the draft. */
+      if (fromLink || shortId) {
+        try { window.history.replaceState(null, "", window.location.pathname); } catch (e) { /* ignore */ }
       }
+
+      let d = (draftDepth(fromLink) >= draftDepth(fromLocal)) ? fromLink : fromLocal;
+      if (!d) d = fromLocal || fromLink;
+      if (shortId) draftId.current = shortId;
+      if (!d) return;
       if (typeof d.fn === "string") setFn(d.fn);
       if (typeof d.ln === "string") setLn(d.ln);
       if (typeof d.ph === "string") setPh(d.ph);
@@ -776,7 +851,21 @@ export default function QuoteForm() {
       if (typeof d.psid === "string" && d.psid) propertySubmissionId.current = d.psid;
     } catch { /* ignore */ }
     finally { if (!propertySubmissionId.current) propertySubmissionId.current = newPsid(); }
+    })();
   }, []);
+  /* Push the draft to the store whenever the customer moves a step, reusing the same
+     short code. The SMS link therefore always opens their latest progress.
+     Deliberately NOT routed through the partial webhook: re-firing that would re-enter
+     W2 and double-text people (the Tomas Repka bug). This only writes to our own store. */
+  useEffect(() => {
+    if (!partialSent.current) return;        // nothing to resume until they're a known lead
+    const t = setTimeout(async () => {
+      const id = await saveDraftRemote(buildPersistState(), draftId.current);
+      if (id) draftId.current = id;
+    }, 800);
+    return () => clearTimeout(t);
+  }, [step]);
+
   const buildPersistState = () => ({
     psid: propertySubmissionId.current,
     fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm,
@@ -1059,9 +1148,14 @@ export default function QuoteForm() {
 
   /* ─── PARTIAL LEAD ─── */
   const partialSent = useRef(false);
-  const sendPartialLead = () => {
+  const draftId = useRef("");          // short resume code, reused as they progress
+  const sendPartialLead = async () => {
     if (partialSent.current) return;
     partialSent.current = true;
+    /* Park the draft first so the webhook can carry a SHORT resume link. If the store is
+       unreachable we still send the partial — the long #qf= link remains as the fallback. */
+    const savedId = await saveDraftRemote(buildPersistState(), draftId.current);
+    if (savedId) draftId.current = savedId;
     // Only send a phone when it's actually valid — email-onBlur can fire this with the
     // phone still empty/partial, and `+61` + garbage pollutes the CRM phone field.
     const phone = (noPhone || !phOk) ? "" : `+61${phNorm.replace(/^0/, "")}`;
@@ -1086,6 +1180,11 @@ export default function QuoteForm() {
           // is the bare form URL (same-device visitors auto-restore from localStorage anyway).
           resume_link: window.location.origin + window.location.pathname + "#qf=" + encodeHandoffState(buildPersistState()),
           resume_link_short: window.location.origin + window.location.pathname,
+          // THE ONE TO USE IN SMS (v1.5.2): ~55 chars = one segment, and it resolves to
+          // their LATEST progress because the stored draft is refreshed on every step.
+          resume_link_sms: draftId.current
+            ? window.location.origin + window.location.pathname + "?r=" + draftId.current
+            : window.location.origin + window.location.pathname,
           ...tracking,
         },
       }),
@@ -1979,7 +2078,7 @@ export default function QuoteForm() {
 
         {/* Continue-on-mobile button, gated behind ENABLE_MOBILE_HANDOFF feature flag because the QR + SMS
             backend (session-token + state-save API + Twilio/GHL SMS) is not yet wired. Cleo audit 2026-05-05. */}
-        {ENABLE_MOBILE_HANDOFF && typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches && (
+        {ENABLE_MOBILE_HANDOFF && roomForHandoff && (
           <button type="button" onClick={() => { setShowMobileModal(true); setSmsSent(false); setLinkCopied(false); }}
             style={{ width: "100%", padding: "10px 14px", marginBottom: 12, borderRadius: 10, border: `1.5px solid ${C.acc}`, background: `${C.acc}15`, color: C.accDk, fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
             <span style={{ fontSize: 16 }}>📱</span>
@@ -2172,7 +2271,14 @@ export default function QuoteForm() {
           never sent in HTTP requests or logs). QR generated locally via qrcode-svg. Photos excluded
           (File objects can't serialise) - the customer adds them on the phone, which is the point. */}
       {ENABLE_MOBILE_HANDOFF && showMobileModal && (() => {
-        const handoffUrl = window.location.origin + window.location.pathname + "#qf=" + encodeHandoffState(buildPersistState());
+        /* Prefer the SHORT code when we have one. Encoding the whole draft pushes a real
+           two-bathroom job to ~1,800 characters, which forces the QR to its maximum size
+           (177x177 modules) — dense enough to fail on an older phone camera in bathroom
+           light. The short code renders a sparse, reliable QR. The long fragment stays as
+           the fallback for anyone whose draft has not reached the store yet. */
+        const handoffUrl = draftId.current
+          ? window.location.origin + window.location.pathname + "?r=" + draftId.current
+          : window.location.origin + window.location.pathname + "#qf=" + encodeHandoffState(buildPersistState());
         const qrSvg = new QRCode({ content: handoffUrl, width: 200, height: 200, padding: 0, ecl: "M", join: true }).svg();
         return (
         <div onClick={() => setShowMobileModal(false)} style={{ position: "fixed", inset: 0, background: "rgba(4, 21, 52, 0.55)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
@@ -2205,7 +2311,7 @@ export default function QuoteForm() {
               </div>
             )}
 
-            <p style={{ fontSize: 10, color: C.sec, margin: "16px 0 0", lineHeight: 1.5, textAlign: "center" }}>Your answers travel inside the link itself, never through a server. Photos don&rsquo;t transfer, add them on your phone.</p>
+            <p style={{ fontSize: 10, color: C.sec, margin: "16px 0 0", lineHeight: 1.5, textAlign: "center" }}>Your answers are saved to your quote for 30 days so you can pick up where you left off. Photos don&rsquo;t transfer, add them on your phone.</p>
           </div>
         </div>
         );
