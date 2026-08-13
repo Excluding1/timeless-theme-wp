@@ -162,7 +162,7 @@ function card(q){
   } else if(!q.photosLost){
     photos = `<div class="nophoto">No photos uploaded${q.photosUploaded==='no'?' (customer skipped)':''} — worth a call.</div>`;
   } else photos = '';
-  const photoSection = (nShots||(!q.photosLost)) ? `<div class="section"><p class="label">Photos${nShots?` (${nShots})`:''}</p>${photos}</div>` : '';
+  const photoSection = (nShots||(!q.photosLost)) ? `<div class="section"><div class="photohead"><p class="label">Photos${nShots?` (${nShots})`:''}</p>${nShots?`<button class="zipbtn" id="bZip">⬇ Download all (.zip)</button>`:''}</div>${photos}</div>` : '';
 
   // extra facts
   const facts=[];
@@ -218,6 +218,23 @@ function wireCard(q){
   const copyBtn=document.querySelector('.copy[data-copy="req"]');
   if(copyBtn) copyBtn.onclick=()=>{ navigator.clipboard.writeText(q.description.join('\n\n')).then(()=>toast('Request copied')); };
   const done=$('#bDone'); if(done) done.onclick=()=>toggleReviewed();
+  const zipB=$('#bZip'); if(zipB) zipB.onclick=async()=>{
+    const urls=q.photosByArea.flatMap(g=>g.photos.map(p=>p.full));
+    zipB.disabled=true; zipB.textContent='Zipping…';
+    try{
+      const r=await fetch('/api/zip',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:'Photos - '+(q.customer||'customer'),urls})});
+      if(!r.ok) throw new Error((await r.json().catch(()=>({}))).error||('HTTP '+r.status));
+      const blob=await r.blob();
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download=('Photos - '+(q.customer||'customer')).replace(/[^\w \-]/g,'')+'.zip';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+      toast('ZIP downloaded');
+    }catch(e){ toast('ZIP failed: '+e.message); }
+    zipB.disabled=false; zipB.textContent='⬇ Download all (.zip)';
+  };
   const pdf=$('#bPdf'); if(pdf) pdf.onclick=()=>{
     // browsers use document.title as the default "Save as PDF" filename
     const t=document.title;

@@ -277,6 +277,93 @@ async function handleQuotes(res) {
   }
 }
 
+/* ── ZIP of every photo on a quote — rebuilt 2026-08-13 (lost in the repo incident) ──
+ * Hand-rolled ZIP (STORE only, CRC32), zero dependencies. Only Cloudinary URLs are
+ * fetched, and only server-side, so the browser never talks to Cloudinary directly. */
+const CRC_TABLE = (() => {
+  const t = new Int32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c;
+  }
+  return t;
+})();
+function crc32(buf) {
+  let c = -1;
+  for (let i = 0; i < buf.length; i++) c = CRC_TABLE[(c ^ buf[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ -1) >>> 0;
+}
+function makeZip(files) {          // files: [{name, data:Buffer}]
+  const locals = [], centrals = [];
+  let offset = 0;
+  for (const f of files) {
+    const nameB = Buffer.from(f.name, 'utf8');
+    const crc = crc32(f.data);
+    const head = Buffer.alloc(30);
+    head.writeUInt32LE(0x04034b50, 0); head.writeUInt16LE(20, 4);
+    head.writeUInt16LE(0x0800, 6);     head.writeUInt16LE(0, 8);   // UTF-8 names, STORE
+    head.writeUInt32LE(crc, 14);
+    head.writeUInt32LE(f.data.length, 18); head.writeUInt32LE(f.data.length, 22);
+    head.writeUInt16LE(nameB.length, 26);
+    locals.push(head, nameB, f.data);
+    const cen = Buffer.alloc(46);
+    cen.writeUInt32LE(0x02014b50, 0); cen.writeUInt16LE(20, 4); cen.writeUInt16LE(20, 6);
+    cen.writeUInt16LE(0x0800, 8);     cen.writeUInt16LE(0, 10);
+    cen.writeUInt32LE(crc, 16);
+    cen.writeUInt32LE(f.data.length, 20); cen.writeUInt32LE(f.data.length, 24);
+    cen.writeUInt16LE(nameB.length, 28);
+    cen.writeUInt32LE(offset, 42);
+    centrals.push(cen, nameB);
+    offset += 30 + nameB.length + f.data.length;
+  }
+  const cenSize = centrals.reduce((a, b) => a + b.length, 0);
+  const end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0);
+  end.writeUInt16LE(files.length, 8); end.writeUInt16LE(files.length, 10);
+  end.writeUInt32LE(cenSize, 12); end.writeUInt32LE(offset, 16);
+  return Buffer.concat([...locals, ...centrals, end]);
+}
+function fetchBin(url, redirects) {
+  return new Promise((resolve, reject) => {
+    if ((redirects || 0) > 3) return reject(new Error('too many redirects'));
+    https.get(url, { headers: { 'User-Agent': UA } }, r => {
+      if (r.statusCode >= 300 && r.statusCode < 400 && r.headers.location)
+        return resolve(fetchBin(r.headers.location, (redirects || 0) + 1));
+      if (r.statusCode !== 200) { r.resume(); return reject(new Error('HTTP ' + r.statusCode)); }
+      const chunks = [];
+      r.on('data', d => chunks.push(d));
+      r.on('end', () => resolve(Buffer.concat(chunks)));
+      r.on('error', reject);
+    }).on('error', reject);
+  });
+}
+async function handleZip(res, body) {
+  const { name, urls } = JSON.parse(body || '{}');
+  if (!Array.isArray(urls) || !urls.length || urls.length > 60) return json(res, 400, { error: 'bad urls' });
+  if (!urls.every(u => typeof u === 'string' && /^https:\/\/res\.cloudinary\.com\//.test(u)))
+    return json(res, 400, { error: 'cloudinary urls only' });
+  const files = [];
+  let i = 0;
+  for (const u of urls) {
+    i++;
+    try {
+      const data = await fetchBin(u);
+      const extM = u.match(/\.(jpe?g|png|webp|heic)(?=$|[?#])/i);
+      files.push({ name: `photo-${String(i).padStart(2, '0')}${extM ? '.' + extM[1].toLowerCase() : '.jpg'}`, data });
+    } catch (e) { console.warn('[zip] skipped', u.slice(0, 80), e.message); }
+  }
+  if (!files.length) return json(res, 502, { error: 'no photos could be fetched' });
+  const zip = makeZip(files);
+  const safe = String(name || 'photos').replace(/[^\w \-]/g, '').trim() || 'photos';
+  res.writeHead(200, {
+    'Content-Type': 'application/zip',
+    'Content-Disposition': `attachment; filename="${safe}.zip"`,
+    'Content-Length': zip.length,
+  });
+  res.end(zip);
+}
+
 function json(res, code, obj) {
   const body = JSON.stringify(obj);
   res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
@@ -301,6 +388,18 @@ const server = http.createServer((req, res) => {
   if (host && host !== 'localhost' && host !== '127.0.0.1') { res.writeHead(403); return res.end('local only'); }
 
   if (req.url.startsWith('/api/quotes')) return handleQuotes(res);
+
+  if (req.url.startsWith('/api/zip') && req.method === 'POST') {
+    let body = '';
+    let tooBig = false;
+    req.on('data', d => {
+      body += d;
+      if (body.length > 200000) { tooBig = true; req.destroy(); }
+    });
+    req.on('close', () => { if (tooBig && !res.headersSent) json(res, 413, { error: 'body too large' }); });
+    req.on('end', () => { handleZip(res, body).catch(e => { if (!res.headersSent) json(res, 500, { error: String(e.message || e) }); }); });
+    return;
+  }
 
   if (req.url.startsWith('/api/review') && req.method === 'POST') {
     let body = '';
