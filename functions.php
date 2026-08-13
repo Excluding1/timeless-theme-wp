@@ -451,7 +451,15 @@ function timeless_quote_form_shortcode( $atts = array() ) {
         <script>window.TIMELESS_FORM_BASE = <?php echo wp_json_encode( $base_url ); ?>;
         /* draft store (v1.5.2): lets the form swap a 1,800-char resume URL for a short code */
         window.TIMELESS_AJAX = <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ); ?>;
-        window.TIMELESS_RESUME_PAGE = <?php echo wp_json_encode( home_url( '/finish-quote/' ) ); ?>;</script>
+        <?php
+        /* Where resume links land. Both the SMS link AND the QR handoff point here, so if
+         * the Finish Your Quote page has not been created yet this would 404 and take the
+         * QR down with it. Fall back to the current page in that case: links stay long,
+         * but nothing breaks while the page is being set up. */
+        $tr_resume = get_page_by_path( 'finish-quote' );
+        $tr_resume_url = $tr_resume ? get_permalink( $tr_resume ) : ( is_singular() ? get_permalink() : home_url( '/contact/' ) );
+        ?>
+        window.TIMELESS_RESUME_PAGE = <?php echo wp_json_encode( $tr_resume_url ); ?>;</script>
         <script type="module" defer src="<?php echo esc_url( $js_url . '?v=' . $js_ver ); ?>"></script>
     <?php endif;
     return ob_get_clean();
@@ -2984,11 +2992,15 @@ function timeless_sweep_abandoned_drafts() {
         if ( ! is_array( $rec ) || ! isset( $rec['touched'] ) ) { continue; }
         if ( ! empty( $rec['notified'] ) || ! empty( $rec['done'] ) ) { continue; }
         if ( (int) $rec['touched'] > $cutoff ) { continue; }   // still active, clock resets on any save
-        if ( empty( $rec['phone'] ) ) { continue; }            // nothing to text
-
+        /* Plenty of people use the "I don't have a phone number" path and leave only an
+           email. They were being dropped entirely — no phone meant no follow-up of any
+           kind. Now we still fire, pass whichever contact details exist, and tell GHL
+           which channel is available so it can text OR email. */
         $phone = preg_replace( '/[^0-9]/', '', (string) $rec['phone'] );
-        if ( strlen( $phone ) < 9 ) { continue; }
-        $phone = '+61' . ltrim( $phone, '0' );
+        $has_phone = strlen( $phone ) >= 9;
+        $has_email = ! empty( $rec['email'] ) && is_email( $rec['email'] );
+        if ( ! $has_phone && ! $has_email ) { continue; }       // no way to reach them at all
+        $phone = $has_phone ? '+61' . ltrim( $phone, '0' ) : '';
 
         $resume = home_url( '/finish-quote/' ) . '?r=' . $id;
         $res = wp_remote_post( timeless_ghl_partial_webhook(), array(
@@ -3004,6 +3016,8 @@ function timeless_sweep_abandoned_drafts() {
                     'form_status'     => 'abandoned_confirmed',
                     'resume_link_sms' => $resume,
                     'idle_minutes'    => (int) round( ( time() - (int) $rec['touched'] ) / 60 ),
+                    // so W2 can branch: text if we have a mobile, otherwise email them
+                    'reach_by'        => $has_phone ? 'sms' : 'email',
                 ),
             ) ),
         ) );
