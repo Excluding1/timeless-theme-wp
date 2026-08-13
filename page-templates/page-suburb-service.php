@@ -134,7 +134,7 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  <div class="max-w-4xl mx-auto px-6 sm:px-8">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">Why <?php echo esc_html( $suburb['name'] ); ?> Bathrooms Need <?php echo esc_html( $service['name'] ); ?></h2>
  <p class="text-secondary leading-relaxed mb-4 text-center max-w-2xl mx-auto"><?php echo esc_html( $suburb['description'] ); ?></p>
- <p class="text-secondary leading-relaxed mb-4 text-center max-w-2xl mx-auto">Most homes here have <?php echo esc_html( $suburb['housing_era'] ); ?>. Original bathtubs in these properties typically show their age through chips, surface staining, dated colour, or a previous DIY paint job that's started peeling. <?php echo ucfirst( $service['short_name'] ); ?> brings them back without the cost or disruption of a full bathroom renovation.</p>
+ <p class="text-secondary leading-relaxed mb-4 text-center max-w-2xl mx-auto">The housing here is mostly <?php echo esc_html( strtolower( $suburb['housing_era'] ) ); ?>, and original bathtubs in those homes tend to show their age the same way &mdash; chips around the rim, surface staining that no longer scrubs out, a dated colour, or a previous DIY paint job that has started peeling. <?php echo esc_html( ucfirst( $service['short_name'] ) ); ?> brings them back without the cost or disruption of a full bathroom renovation.</p>
  </div>
 </section>
 
@@ -155,6 +155,69 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  </div>
  </div>
 </section>
+
+<!-- SUBURB FAQ ------------------------------------------------------------
+     Added v1.5.2. These pages previously had NO FAQ and no FAQPage schema, while
+     every main service page carries five questions. That mattered twice over: it is
+     the section people actually read before enquiring, and FAQ schema is what AI
+     assistants quote when someone asks "does anyone resurface baths in X".
+     The questions are genuinely suburb-specific, not the service page's copied over. -->
+<section class="py-12 sm:py-16 bg-white" id="faqs">
+ <div class="max-w-3xl mx-auto px-6 sm:px-8">
+  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-8 text-center"><?php echo esc_html( $suburb['name'] ); ?> questions</h2>
+  <?php
+  $nb = isset( $suburb['neighborhoods'] ) ? (array) $suburb['neighborhoods'] : array();
+  $nb_list = $nb ? timeless_comma_and( $nb ) : '';
+  $suburb_faqs = array(
+      array(
+          'q' => 'Do you service ' . $suburb['name'] . '?',
+          'a' => 'Yes. We cover ' . $suburb['name'] . ( $nb_list ? ' and the surrounding streets including ' . $nb_list : '' )
+                 . ', and there is no call-out fee for quoting.',
+      ),
+      array(
+          'q' => 'How much does ' . strtolower( $service['short_name'] ) . ' cost in ' . $suburb['name'] . '?',
+          'a' => 'The price depends on the size and condition of the bath, not on your suburb &mdash; we do not charge more for one area than another. Send three or four photos and we will have a fixed price back to you within one business day.',
+      ),
+      array(
+          'q' => 'How long will it take?',
+          'a' => 'Most baths are finished in five to eight hours, so it is a single visit. The bath is ready to use again the next day, once the coating has fully cured.',
+      ),
+      array(
+          'q' => 'Do I need to be home?',
+          'a' => 'Someone needs to let us in and be there at the end, but you do not have to stay for the whole job. For apartments we will also need to know about parking and lift access when you book.',
+      ),
+      array(
+          'q' => 'Is it worth resurfacing an older ' . $suburb['name'] . ' bathroom?',
+          'a' => 'Usually, yes. The housing here is largely ' . strtolower( $suburb['housing_era'] ) . ', and those baths are almost always sound underneath &mdash; it is the surface that has gone. Resurfacing fixes the surface for a fraction of a replacement. If the bath itself is cracked through or the base flexes, we will tell you straight that it needs replacing instead.',
+      ),
+  );
+  ?>
+  <div class="space-y-3">
+   <?php foreach ( $suburb_faqs as $f ) : ?>
+   <div class="faq-item border border-surface-container rounded-xl bg-white">
+    <button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)">
+     <h3 class="font-bold text-primary text-sm pr-4"><?php echo esc_html( $f['q'] ); ?></h3>
+     <span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span>
+    </button>
+    <div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4"><?php echo wp_kses_post( $f['a'] ); ?></p></div>
+   </div>
+   <?php endforeach; ?>
+  </div>
+ </div>
+</section>
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+<?php
+$parts = array();
+foreach ( $suburb_faqs as $f ) {
+    $parts[] = '{"@type":"Question","name":' . wp_json_encode( wp_strip_all_tags( html_entity_decode( $f['q'] ) ) )
+             . ',"acceptedAnswer":{"@type":"Answer","text":' . wp_json_encode( wp_strip_all_tags( html_entity_decode( $f['a'] ) ) ) . '}}';
+}
+echo implode( ",\n", $parts );
+?>
+]}
+</script>
+<script>window.toggleFaq = window.toggleFaq || function(btn){ var item = btn.parentElement; var isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(function(el){ el.classList.remove('open'); }); if(!isOpen) item.classList.add('open'); };</script>
 
 <!-- QUOTE FORM CTA -->
 <section id="quote" class="py-16 sm:py-20 bg-primary text-white">

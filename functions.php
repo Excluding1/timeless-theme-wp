@@ -436,6 +436,15 @@ function timeless_article_reading_time( $post_id = 0 ) {
  * @param string $list  e.g. "Bondi, Coogee, Randwick"
  * @return string       HTML with the covered suburbs linked
  */
+/** "Dulwich Hill, Sydenham, Petersham and Tempe" — readable list for body copy. */
+function timeless_comma_and( $items ) {
+    $items = array_values( array_filter( array_map( 'trim', (array) $items ) ) );
+    if ( ! $items ) { return ''; }
+    if ( count( $items ) === 1 ) { return $items[0]; }
+    $last = array_pop( $items );
+    return implode( ', ', $items ) . ' and ' . $last;
+}
+
 function timeless_link_suburbs( $list ) {
     static $have = null;
     if ( $have === null ) {
