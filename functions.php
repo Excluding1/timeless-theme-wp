@@ -2881,7 +2881,20 @@ function timeless_handle_draft_save() {
         $id = bin2hex( random_bytes( 6 ) );   // 48 bits of entropy, unguessable
     }
 
-    set_transient( 'tr_draft_' . $id, wp_json_encode( $decoded ), TIMELESS_DRAFT_TTL );
+    // Wrapped record, not the bare draft: the abandonment sweep needs to know when this
+    // was last touched, whether we've already texted about it, and whether they finished.
+    $prev = get_transient( 'tr_draft_' . $id );
+    $prev = $prev ? json_decode( $prev, true ) : array();
+    set_transient( 'tr_draft_' . $id, wp_json_encode( array(
+        'draft'    => $decoded,
+        'touched'  => time(),
+        'notified' => isset( $prev['notified'] ) ? (int) $prev['notified'] : 0,
+        'done'     => isset( $prev['done'] ) ? (int) $prev['done'] : 0,
+        'name'     => isset( $decoded['fn'] ) ? (string) $decoded['fn'] : '',
+        'surname'  => isset( $decoded['ln'] ) ? (string) $decoded['ln'] : '',
+        'phone'    => isset( $decoded['ph'] ) ? (string) $decoded['ph'] : '',
+        'email'    => isset( $decoded['em'] ) ? (string) $decoded['em'] : '',
+    ) ), TIMELESS_DRAFT_TTL );
     wp_send_json_success( array( 'id' => $id ) );
 }
 add_action( 'wp_ajax_timeless_draft_save', 'timeless_handle_draft_save' );
@@ -2892,15 +2905,133 @@ function timeless_handle_draft_load() {
     if ( strlen( $id ) !== 12 ) {
         wp_send_json_error( array( 'message' => 'bad code' ), 400 );
     }
-    $draft = get_transient( 'tr_draft_' . $id );
-    if ( $draft === false ) {
+    $rec = get_transient( 'tr_draft_' . $id );
+    if ( $rec === false ) {
         // Expired or never existed — the form falls back to whatever it has locally.
         wp_send_json_error( array( 'message' => 'not found' ), 404 );
     }
-    wp_send_json_success( array( 'draft' => json_decode( $draft, true ) ) );
+    $rec = json_decode( $rec, true );
+    // Records saved before the wrapper existed are the bare draft.
+    $draft = ( is_array( $rec ) && isset( $rec['draft'] ) ) ? $rec['draft'] : $rec;
+    wp_send_json_success( array( 'draft' => $draft ) );
 }
 add_action( 'wp_ajax_timeless_draft_load', 'timeless_handle_draft_load' );
 add_action( 'wp_ajax_nopriv_timeless_draft_load', 'timeless_handle_draft_load' );
+
+/* ─────────────────────────────────────────────────────────────────
+ * ABANDONED-DRAFT SWEEP (added v1.5.2)
+ *
+ * GoHighLevel only ever hears from us twice: once when a customer enters a phone
+ * number, and once if they finish. Every draft save in between goes to this server,
+ * so GHL cannot tell whether someone is still filling the form or has walked away.
+ * A fixed delay in GHL would therefore text people who are still typing.
+ *
+ * So the idle decision is made HERE, where the activity actually is:
+ *   - every save stamps `touched`
+ *   - this sweep runs every 10 minutes and looks for drafts gone quiet
+ *   - when one crosses the threshold it fires the SAME inbound webhook the form
+ *     uses, with form_status = "abandoned_confirmed", and marks it notified
+ *
+ * Because the clock is idle-based, a customer who comes back RESETS it — they can
+ * never be texted while they are still working. Threshold = 30 minutes to call it
+ * abandoned plus an hour before we say anything (Allan, 2026-08-13).
+ * ───────────────────────────────────────────────────────────────── */
+
+define( 'TIMELESS_ABANDON_IDLE', 90 * MINUTE_IN_SECONDS );  // 30 min to confirm + 60 min grace
+
+/* The gate token W2's first action checks. This is NOT a secret in any real sense — it
+ * already ships inside the public quote-form bundle, so anyone can read it from the site.
+ * It exists to stop idle noise hitting the workflow, not to authenticate. Override it in
+ * wp-config.php if it is ever rotated, so a rotation needs no theme deploy. */
+if ( ! defined( 'TIMELESS_GHL_SECRET' ) ) {
+    define( 'TIMELESS_GHL_SECRET', 'TR_secret_v2_ByJJ9B0FAy8oG95mlzclaKsZsCHYzZnqILo3z3pk4Mc' );
+}
+
+function timeless_ghl_partial_webhook() {
+    return 'https://services.leadconnectorhq.com/hooks/Uz8fQwDiUxAHVtlruspD/webhook-trigger/11247014-933d-4731-ba38-8990256113ca';
+}
+
+/** Marks a draft finished so the sweep never texts someone who already submitted. */
+function timeless_handle_draft_done() {
+    $id = isset( $_POST['id'] ) ? preg_replace( '/[^a-f0-9]/', '', (string) wp_unslash( $_POST['id'] ) ) : '';
+    if ( strlen( $id ) !== 12 ) { wp_send_json_error( array( 'message' => 'bad code' ), 400 ); }
+    $rec = get_transient( 'tr_draft_' . $id );
+    if ( $rec === false ) { wp_send_json_success( array( 'ok' => true ) ); }
+    $rec = json_decode( $rec, true );
+    if ( is_array( $rec ) ) {
+        $rec['done'] = 1;
+        set_transient( 'tr_draft_' . $id, wp_json_encode( $rec ), TIMELESS_DRAFT_TTL );
+    }
+    wp_send_json_success( array( 'ok' => true ) );
+}
+add_action( 'wp_ajax_timeless_draft_done', 'timeless_handle_draft_done' );
+add_action( 'wp_ajax_nopriv_timeless_draft_done', 'timeless_handle_draft_done' );
+
+function timeless_sweep_abandoned_drafts() {
+    global $wpdb;
+    $rows = $wpdb->get_results(
+        "SELECT option_name, option_value FROM {$wpdb->options}
+          WHERE option_name LIKE '_transient_tr_draft_%' LIMIT 500"
+    );
+    if ( ! $rows ) { return; }
+
+    $cutoff = time() - TIMELESS_ABANDON_IDLE;
+    $sent   = 0;
+
+    foreach ( $rows as $row ) {
+        $id  = substr( $row->option_name, strlen( '_transient_tr_draft_' ) );
+        $rec = json_decode( $row->option_value, true );
+        if ( ! is_array( $rec ) || ! isset( $rec['touched'] ) ) { continue; }
+        if ( ! empty( $rec['notified'] ) || ! empty( $rec['done'] ) ) { continue; }
+        if ( (int) $rec['touched'] > $cutoff ) { continue; }   // still active, clock resets on any save
+        if ( empty( $rec['phone'] ) ) { continue; }            // nothing to text
+
+        $phone = preg_replace( '/[^0-9]/', '', (string) $rec['phone'] );
+        if ( strlen( $phone ) < 9 ) { continue; }
+        $phone = '+61' . ltrim( $phone, '0' );
+
+        $resume = home_url( '/finish-quote/' ) . '?r=' . $id;
+        $res = wp_remote_post( timeless_ghl_partial_webhook(), array(
+            'timeout'  => 15,
+            'headers'  => array( 'Content-Type' => 'application/json' ),
+            'body'     => wp_json_encode( array(
+                'secret_token' => defined( 'TIMELESS_GHL_SECRET' ) ? TIMELESS_GHL_SECRET : '',
+                'firstName'    => $rec['name'],
+                'lastName'     => $rec['surname'],
+                'email'        => $rec['email'],
+                'phone'        => $phone,
+                'customData'   => array(
+                    'form_status'     => 'abandoned_confirmed',
+                    'resume_link_sms' => $resume,
+                    'idle_minutes'    => (int) round( ( time() - (int) $rec['touched'] ) / 60 ),
+                ),
+            ) ),
+        ) );
+
+        // Only mark notified on a real success, so a transient outage retries next sweep
+        // instead of silently swallowing the lead.
+        if ( ! is_wp_error( $res ) && (int) wp_remote_retrieve_response_code( $res ) < 300 ) {
+            $rec['notified'] = 1;
+            set_transient( 'tr_draft_' . $id, wp_json_encode( $rec ), TIMELESS_DRAFT_TTL );
+            $sent++;
+        }
+    }
+    if ( $sent ) { update_option( 'tr_draft_last_sweep', array( 'at' => time(), 'sent' => $sent ) ); }
+}
+add_action( 'timeless_draft_sweep', 'timeless_sweep_abandoned_drafts' );
+
+function timeless_schedule_draft_sweep() {
+    if ( ! wp_next_scheduled( 'timeless_draft_sweep' ) ) {
+        wp_schedule_event( time() + 600, 'timeless_ten_minutes', 'timeless_draft_sweep' );
+    }
+}
+add_action( 'init', 'timeless_schedule_draft_sweep' );
+
+function timeless_add_ten_minute_schedule( $schedules ) {
+    $schedules['timeless_ten_minutes'] = array( 'interval' => 600, 'display' => 'Every 10 minutes' );
+    return $schedules;
+}
+add_filter( 'cron_schedules', 'timeless_add_ten_minute_schedule' );
 
 /** Pass AJAX URL and nonce to frontend JavaScript */
 function timeless_form_scripts() {

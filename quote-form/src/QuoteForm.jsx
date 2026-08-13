@@ -1447,7 +1447,19 @@ export default function QuoteForm() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (res.ok) { succeeded = true; break; }
+        if (res.ok) {
+          succeeded = true;
+          /* Tell the draft store they finished, so the abandonment sweep can never text
+             someone who has already submitted. Fire-and-forget: a failure here must not
+             affect the submission the customer just made. */
+          if (AJAX_URL && draftId.current) {
+            const done = new URLSearchParams();
+            done.set("action", "timeless_draft_done");
+            done.set("id", draftId.current);
+            fetch(AJAX_URL, { method: "POST", body: done, keepalive: true }).catch(() => {});
+          }
+          break;
+        }
         if (res.status >= 400 && res.status < 500) {
           console.error("Webhook 4xx, not retrying:", res.status);
           break;
