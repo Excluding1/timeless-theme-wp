@@ -2863,12 +2863,13 @@ function timeless_handle_draft_save() {
         wp_send_json_error( array( 'message' => 'draft must be JSON' ), 400 );
     }
 
-    // Rate limit: 40 saves per IP per hour. A customer stepping through the form saves
-    // ~5 times, so this is generous for people and tight for scripts.
+    // Rate limit: 150 saves per IP per hour. The draft is now re-saved as they type
+    // (3s debounce, skipped when unchanged), so a thorough two-bathroom customer might
+    // save 30-50 times. 150 stays generous for people and tight for scripts.
     $ip       = timeless_draft_client_ip();
     $rate_key = 'tr_draft_rate_' . md5( $ip );
     $saves    = get_transient( $rate_key );
-    if ( $saves !== false && (int) $saves >= 40 ) {
+    if ( $saves !== false && (int) $saves >= 150 ) {
         wp_send_json_error( array( 'message' => 'too many saves' ), 429 );
     }
     set_transient( $rate_key, ( $saves === false ? 1 : (int) $saves + 1 ), HOUR_IN_SECONDS );

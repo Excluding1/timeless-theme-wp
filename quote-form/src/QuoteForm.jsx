@@ -884,18 +884,29 @@ export default function QuoteForm() {
     finally { if (!propertySubmissionId.current) propertySubmissionId.current = newPsid(); }
     })();
   }, []);
-  /* Push the draft to the store whenever the customer moves a step, reusing the same
-     short code. The SMS link therefore always opens their latest progress.
-     Deliberately NOT routed through the partial webhook: re-firing that would re-enter
-     W2 and double-text people (the Tomas Repka bug). This only writes to our own store. */
+  /* Keep the stored draft current as they work, reusing the same short code, so the link
+     in their SMS opens their LATEST answers — not just the last step boundary they crossed.
+     Saving on step changes alone lost anything typed mid-step, which is precisely where
+     people abandon.
+
+     Debounced at 3s (vs 500ms for the local copy) because this one crosses the network,
+     and skipped entirely when nothing actually changed. Deliberately NOT routed through
+     the partial webhook: re-firing that would re-enter W2 and double-text people (the
+     Tomas Repka bug). This only writes to our own store. */
+  const lastSaved = useRef("");
   useEffect(() => {
     if (!partialSent.current) return;        // nothing to resume until they're a known lead
     const t = setTimeout(async () => {
-      const id = await saveDraftRemote(buildPersistState(), draftId.current);
-      if (id) draftId.current = id;
-    }, 800);
+      const snapshot = JSON.stringify(buildPersistState());
+      if (snapshot === lastSaved.current) return;     // nothing new to store
+      const id = await saveDraftRemote(JSON.parse(snapshot), draftId.current);
+      if (id) { draftId.current = id; lastSaved.current = snapshot; }
+    }, 3000);
     return () => clearTimeout(t);
-  }, [step]);
+  }, [fn, ln, ph, em, addr, noPhone, cust, co, tenAuth, llEm, addrOk, prop, lift, bathroomCount,
+      bathroomIndex, builtBefore1990, selectedAreas, fullBathroomMode, fullScope,
+      fullBathroomInventory, fullAreaServices, notSureMode, notSureText, areaServices, epoxyMode,
+      chipRepairAddon, basinFinish, basinCustomSurfaces, notes, prevResurfaced, hasVentilation, step]);
 
   const buildPersistState = () => ({
     psid: propertySubmissionId.current,
