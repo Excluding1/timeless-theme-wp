@@ -200,14 +200,19 @@ const saveDraftRemote = async (state, existingId) => {
   } catch { return null; }
 };
 
+/* Returns { draft, status } where status is ok | submitted | expired | error, so the
+   form can tell the difference between "here are your answers", "you already sent this
+   one" and "that link is too old" — three very different things to show someone. */
 const loadDraftRemote = async (id) => {
-  if (!AJAX_URL || !id) return null;
+  if (!AJAX_URL || !id) return { draft: null, status: "error" };
   try {
     const res = await fetch(AJAX_URL + "?action=timeless_draft_load&id=" + encodeURIComponent(id));
-    if (!res.ok) return null;
-    const j = await res.json();
-    return (j && j.success && j.data && j.data.draft) ? j.data.draft : null;
-  } catch { return null; }
+    const j = await res.json().catch(() => null);
+    if (!res.ok) return { draft: null, status: (j && j.data && j.data.status) || "expired" };
+    const draft = (j && j.success && j.data) ? j.data.draft : null;
+    const status = (j && j.data && j.data.status) || (draft ? "ok" : "error");
+    return { draft, status };
+  } catch { return { draft: null, status: "error" }; }
 };
 
 /* How far through the form a draft is — used to make sure a resume link can never
@@ -681,6 +686,7 @@ export default function QuoteForm() {
   // "Continue on mobile" modal, skeletal Phase 2 feature. Backend wiring documented in
   // ~/.claude/.../memory/quote_form_requirements.md (D2). For now: UI only, no real session token.
   const [showMobileModal, setShowMobileModal] = useState(false);
+  const [linkNote, setLinkNote] = useState("");   // "" | "submitted" | "expired"
   const [mobileModalTab, setMobileModalTab] = useState("qr"); // "qr" | "link"
   /* Is there room for the desktop-only handoff button? Kept in state and subscribed to
      the media query, because the old inline matchMedia() call was evaluated once at
@@ -802,7 +808,11 @@ export default function QuoteForm() {
       const rid = (params.get("r") || "").replace(/[^a-f0-9]/g, "");
       if (rid.length === 12) {
         shortId = rid;
-        fromLink = await loadDraftRemote(rid);
+        const loaded = await loadDraftRemote(rid);
+        fromLink = loaded.draft;
+        /* Tell them what happened rather than showing a mysteriously blank form. */
+        if (loaded.status === "submitted") { setLinkNote("submitted"); shortId = ""; }
+        else if (loaded.status === "expired") { setLinkNote("expired"); shortId = ""; }
       }
       if (!fromLink && window.location.hash && window.location.hash.indexOf("#qf=") === 0) {
         fromLink = decodeHandoffState(window.location.hash.slice(4));
@@ -1578,6 +1588,18 @@ export default function QuoteForm() {
   return (
     <div style={{ fontFamily: "'Inter',system-ui,sans-serif", maxWidth: 480, margin: "0 auto", padding: "0 20px 12px" }}>
       <Trust />
+      {/* A resume link that can't restore must say why. A silently blank form after
+          tapping "finish your quote" reads as broken and loses the lead twice. */}
+      {linkNote && (
+        <div style={{ background: linkNote === "submitted" ? C.greenBg : C.surfLow,
+                      border: `1px solid ${linkNote === "submitted" ? C.green : C.brd}`,
+                      borderRadius: 10, padding: "11px 13px", margin: "4px 0 12px",
+                      fontSize: 13, lineHeight: 1.5, color: C.pri }}>
+          {linkNote === "submitted"
+            ? "You've already sent this one through — we'll be in touch. Need something else quoted? Start fresh below."
+            : "That link has expired, so we couldn't bring your answers back. It only takes a minute to fill in again."}
+        </div>
+      )}
       <StepBar n={stepNum} total={totalSteps} label={stepLabel} />
       {step !== "about" && <Back onClick={back} />}
       {/* Multi-bathroom context banner, shows whenever the customer is past bathroom 1

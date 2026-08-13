@@ -2915,13 +2915,23 @@ function timeless_handle_draft_load() {
     }
     $rec = get_transient( 'tr_draft_' . $id );
     if ( $rec === false ) {
-        // Expired or never existed — the form falls back to whatever it has locally.
-        wp_send_json_error( array( 'message' => 'not found' ), 404 );
+        // Older than the 30-day life, or never existed. The form falls back to whatever it
+        // has locally and, if that is empty too, says so rather than showing a blank page.
+        wp_send_json_error( array( 'message' => 'not found', 'status' => 'expired' ), 404 );
     }
     $rec = json_decode( $rec, true );
+
+    /* Already submitted? Don't hand the draft back. Otherwise someone who booked in and
+       later taps the old link (SMS threads live forever) gets their finished quote
+       refilled and can send a duplicate — or worse, is confused into thinking their new
+       enquiry is about the old job. They get a clean form instead. */
+    if ( is_array( $rec ) && ! empty( $rec['done'] ) ) {
+        wp_send_json_success( array( 'draft' => null, 'status' => 'submitted' ) );
+    }
+
     // Records saved before the wrapper existed are the bare draft.
     $draft = ( is_array( $rec ) && isset( $rec['draft'] ) ) ? $rec['draft'] : $rec;
-    wp_send_json_success( array( 'draft' => $draft ) );
+    wp_send_json_success( array( 'draft' => $draft, 'status' => 'ok' ) );
 }
 add_action( 'wp_ajax_timeless_draft_load', 'timeless_handle_draft_load' );
 add_action( 'wp_ajax_nopriv_timeless_draft_load', 'timeless_handle_draft_load' );
