@@ -236,7 +236,17 @@ $sections = array(
 ?>
 <?php foreach ( $sections as $i => $sec ) : ?>
 <section class="py-12 sm:py-16 <?php echo $i % 2 === 0 ? 'bg-white' : 'bg-surface-container-low'; ?>">
- <div class="max-w-3xl mx-auto px-6 sm:px-8">
+ <div class="max-w-6xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+  <!-- image alternates side each section, copying Jim's two-column pattern
+       (their page runs 59 column blocks and 60 images; ours had one) -->
+  <div class="<?php echo $i % 2 === 0 ? 'md:order-2' : 'md:order-1'; ?>">
+   <div class="rounded-xl overflow-hidden shadow-xl" style="aspect-ratio:4/3;">
+    <img src="<?php echo esc_url( get_template_directory_uri() . '/images/services/' . $sec['slug'] . '/hero.jpg' ); ?>"
+         alt="<?php echo esc_attr( $sec['head'] ); ?>" loading="lazy"
+         class="w-full h-full object-cover" width="640" height="480" />
+   </div>
+  </div>
+  <div class="<?php echo $i % 2 === 0 ? 'md:order-1' : 'md:order-2'; ?>">
   <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-5"><?php echo esc_html( $sec['head'] ); ?></h2>
   <?php foreach ( $sec['body'] as $para ) : ?>
   <p class="text-secondary leading-relaxed mb-4"><?php echo esc_html( $para ); ?></p>
@@ -247,6 +257,7 @@ $sections = array(
   <div class="flex flex-wrap items-center gap-4 mt-6">
    <a href="#quote" class="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-all">Get a quote</a>
    <a href="<?php echo esc_url( home_url( '/services/' . $sec['slug'] . '/' ) ); ?>" class="text-primary font-bold text-sm hover:text-primary-soft transition-colors">Full <?php echo esc_html( strtolower( timeless_services()[ $sec['slug'] ][0] ) ); ?> details &rarr;</a>
+  </div>
   </div>
  </div>
 </section>
