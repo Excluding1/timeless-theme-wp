@@ -78,7 +78,7 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
    <div>
-    <span class="inline-block bg-tertiary-fixed-dim/25 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded mb-5"><?php echo esc_html( $suburb['region'] ); ?> &middot; <?php echo esc_html( $suburb['postcode'] ); ?></span>
+    <span class="inline-block bg-surface-container-low text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded mb-5"><?php echo esc_html( $suburb['region'] ); ?> &middot; <?php echo esc_html( $suburb['postcode'] ); ?></span>
 
     <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-5">Bathroom Resurfacing in <?php echo esc_html( $name ); ?></h1>
 
@@ -109,8 +109,8 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
     </div>
 
     <div class="flex flex-col sm:flex-row gap-3 mb-4">
-     <a href="#quote" class="bg-primary text-white px-7 py-3.5 rounded-lg font-bold text-center hover:opacity-90 transition-all">Get Your Free Quote</a>
-     <a href="tel:<?php echo esc_attr( timeless_phone_link() ); ?>" class="border border-surface-container bg-white px-7 py-3.5 rounded-lg font-bold text-primary text-center hover:bg-surface-container-low transition-all">Call <?php echo esc_html( timeless_phone() ); ?></a>
+     <a href="#quote" class="bg-primary text-white px-8 py-4 rounded-lg font-bold text-center hover:shadow-xl transition-all">Get Your Free Quote</a>
+     <a href="tel:<?php echo esc_attr( timeless_phone_link() ); ?>" class="border border-surface-container bg-white px-8 py-4 rounded-lg font-bold text-primary text-center hover:shadow-lg transition-all">Call <?php echo esc_html( timeless_phone() ); ?></a>
     </div>
     <p class="text-xs text-secondary">Send photos &rarr; fixed price within one business day. No call-out fee, no obligation.</p>
    </div>
@@ -301,12 +301,12 @@ $sections = array(
   <?php if ( ! empty( $job_lists[ $sec['slug'] ] ) ) : ?>
   <div class="bg-surface-container-low rounded-xl p-5 mt-6">
    <p class="text-xs font-bold uppercase tracking-widest text-secondary mb-3"><?php echo esc_html( strtok( $sec['head'], ' ' ) ); ?> jobs we do in <?php echo esc_html( $name ); ?></p>
-   <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2">
+   <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-2">
     <?php foreach ( $job_lists[ $sec['slug'] ] as $job ) : ?>
     <li class="flex items-start gap-2 text-sm text-secondary">
      <span class="material-symbols-outlined text-base text-primary shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
      <?php if ( $job[1] ) : ?>
-      <a href="<?php echo esc_url( home_url( '/services/' . $job[1] . '/' ) ); ?>" class="hover:text-primary underline decoration-dotted underline-offset-2"><?php echo esc_html( $job[0] ); ?></a>
+      <a href="<?php echo esc_url( home_url( '/services/' . $job[1] . '/' ) ); ?>" class="hover:text-primary underline"><?php echo esc_html( $job[0] ); ?></a>
      <?php else : ?>
       <span><?php echo esc_html( $job[0] ); ?></span>
      <?php endif; ?>
