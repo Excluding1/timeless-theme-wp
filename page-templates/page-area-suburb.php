@@ -135,17 +135,32 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
  </div>
 </section>
 
-<!-- WHY HERE — the section their Blacktown/Pymble pages name-swap and we don't -->
+<!-- WHY HERE — now uses the theme's own when_cards + icon_callout components
+     instead of three centred paragraphs. Those components already exist in
+     functions.php and are what make the service pages look designed. -->
 <section class="py-12 sm:py-16 bg-white">
- <div class="max-w-3xl mx-auto px-6 sm:px-8">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8">
   <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-5 text-center">Why <?php echo esc_html( $name ); ?> bathrooms end up looking tired</h2>
-  <p class="text-secondary leading-relaxed mb-4"><?php echo esc_html( $suburb['description'] ); ?></p>
-  <p class="text-secondary leading-relaxed mb-4">The housing here is mostly <?php echo esc_html( $era ); ?>, and bathrooms of that vintage tend to fail in the same few ways: chips around the bath rim, staining that no longer scrubs out, grout gone dark and porous, silicone lifting in the corners, and a colour that dates the whole room. None of that means the bathroom is finished &mdash; underneath, the bath and tiles are usually sound.</p>
-  <p class="text-secondary leading-relaxed"><?php
-    echo $coastal
-      ? esc_html( 'Being near the water does not help. Salt in the air is hard on finishes and fixtures, and bathrooms in ' . $name . ' often show wear earlier than the same bathroom would a few suburbs inland. Resurfacing puts a fresh, sealed surface back on without touching the structure behind it.' )
-      : esc_html( 'Resurfacing works because the problem is the surface, not the structure. We repair, prepare and recoat what is already there, which is why it takes a day instead of three weeks and costs a fraction of a full renovation.' );
-  ?></p>
+  <p class="text-secondary leading-relaxed mb-4 max-w-2xl mx-auto text-center"><?php echo esc_html( $suburb['description'] ); ?></p>
+  <p class="text-secondary leading-relaxed mb-8 max-w-2xl mx-auto text-center">The housing here is mostly <?php echo esc_html( $era ); ?>, and bathrooms of that vintage fail in the same few ways. Underneath, the bath and tiles are almost always still sound.</p>
+
+  <?php echo do_shortcode( '[when_cards left_title="Resurfacing suits you when" left="' .
+    'The bath is chipped, stained or yellowed but not cracked through;' .
+    'Tiles are sound but the colour dates the room;' .
+    'Grout is dark, porous and comes back mouldy after every clean;' .
+    'Silicone has lifted or split at the edges;' .
+    'You want it done in a day, not over three weeks' .
+    '" right_title="You need a replacement when" right="' .
+    'The bath is cracked right through or the base flexes underfoot;' .
+    'Tiles are drummy or falling off the wall;' .
+    'Water has been getting behind the tiles long enough to damage the wall;' .
+    'The waterproofing membrane underneath has failed;' .
+    'You are moving plumbing or changing the layout' .
+    '"]' ); ?>
+
+  <div class="mt-8">
+   <?php echo do_shortcode( '[icon_callout type="fact" title="Why it works"]Resurfacing fixes the surface, not the structure. We repair, prepare and recoat what is already there &mdash; which is why it takes a day instead of three weeks and costs a fraction of a full renovation. If we look at your photos and think you need a replacement rather than a resurface, we will say so.[/icon_callout]' ); ?>
+  </div>
  </div>
 </section>
 
@@ -159,6 +174,7 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
 $sections = array(
  array(
   'slug'  => 'bath-resurfacing',
+  'callout' => array( 'tip', "Before you book", "Send a wide shot of the whole bath plus a close-up of the worst damage. Nine times out of ten that is enough for a fixed price without anyone visiting." ),
   'head'  => 'Bath Resurfacing in ' . $name,
   'body'  => array(
     'A bath is usually the first thing people notice in an older bathroom, and the first thing that dates it. Chips around the rim, a surface that has gone chalky, staining that no longer comes out however hard it is scrubbed, or the yellowing that comes with age on an enamel tub &mdash; none of it means the bath is finished.',
@@ -168,6 +184,7 @@ $sections = array(
  ),
  array(
   'slug'  => 'tile-resurfacing',
+  'callout' => array( 'fact', "Walls and floors age differently", "Wall tiles typically hold their finish for a decade or more. Floors take foot traffic, so we quote them separately and tell you what to realistically expect." ),
   'head'  => 'Tile Resurfacing for ' . $name . ' Bathrooms',
   'body'  => array(
     'Tiles are the other half of what makes a bathroom look old. The tiles themselves are usually perfectly sound &mdash; they are just a colour nobody has chosen on purpose since the eighties, or they have gone dull and picked up staining that cleaning will not shift.',
@@ -177,6 +194,7 @@ $sections = array(
  ),
  array(
   'slug'  => 'shower-regrouting',
+  'callout' => array( 'warning', "Cleaning will not fix mouldy grout", "Once grout goes porous the mould is growing inside it. Scrubbing removes what you can see and it comes back within a fortnight. The grout has to come out." ),
   'head'  => 'Shower Regrouting in ' . $name,
   'body'  => array(
     'Mouldy grout is not a cleaning problem. Once grout has gone porous, the mould is growing inside it, which is why it comes back a fortnight after every scrub. The only real fix is to take the old grout out and put new grout in.',
@@ -186,6 +204,7 @@ $sections = array(
  ),
  array(
   'slug'  => 'shower-leak-repair',
+  'callout' => array( 'warning', "A stain on the ceiling below is urgent", "If water is showing on a ceiling under a bathroom, something has been leaking for a while. Worth a photo today rather than next month." ),
   'head'  => 'Shower Sealing and Leak Repair in ' . $name,
   'body'  => array(
     'Silicone has a life span, and it is shorter than most people expect. When it lifts, splits or goes black at the edges, water starts finding its way behind the tiles and into the wall or the floor below. In an apartment that becomes the neighbour\'s problem too, which is when it gets expensive.',
@@ -195,6 +214,7 @@ $sections = array(
  ),
  array(
   'slug'  => 'vanity-refinishing',
+  'callout' => array( 'tip', "The cheapest visible win", "A resprayed benchtop and resurfaced basin usually costs the least of anything we do, and changes how the whole room reads." ),
   'head'  => 'Vanity and Basin Work in ' . $name,
   'body'  => array(
     'Vanity benchtops take more punishment than anything else in a bathroom &mdash; heat, cosmetics, hair products, water sitting around the basin. Laminate swells at the edges, older stone dulls, and the colour dates faster than the rest of the room.',
@@ -204,6 +224,7 @@ $sections = array(
  ),
  array(
   'slug'  => 'full-bathroom-makeover',
+  'callout' => array( 'fact', "Why the package is cheaper", "Most of the cost in any single job is setup, masking and travel. Doing everything in one booking means paying for that once instead of four times." ),
   'head'  => 'Full Bathroom Makeovers in ' . $name,
   'body'  => array(
     'When the bath, the tiles, the vanity and the grout are all tired at once, doing them separately over a few years costs more than doing them together. The full package covers everything in a single booking, and because we are already set up on site the combined price is well under the sum of the parts.',
@@ -220,6 +241,9 @@ $sections = array(
   <?php foreach ( $sec['body'] as $para ) : ?>
   <p class="text-secondary leading-relaxed mb-4"><?php echo esc_html( $para ); ?></p>
   <?php endforeach; ?>
+  <?php if ( ! empty( $sec['callout'] ) ) : ?>
+  <div class="mt-6"><?php echo do_shortcode( '[icon_callout type="' . $sec['callout'][0] . '" title="' . esc_attr( $sec['callout'][1] ) . '"]' . $sec['callout'][2] . '[/icon_callout]' ); ?></div>
+  <?php endif; ?>
   <div class="flex flex-wrap items-center gap-4 mt-6">
    <a href="#quote" class="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-all">Get a quote</a>
    <a href="<?php echo esc_url( home_url( '/services/' . $sec['slug'] . '/' ) ); ?>" class="text-primary font-bold text-sm hover:text-primary-soft transition-colors">Full <?php echo esc_html( strtolower( timeless_services()[ $sec['slug'] ][0] ) ); ?> details &rarr;</a>
