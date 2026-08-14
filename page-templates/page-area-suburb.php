@@ -149,19 +149,98 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
  </div>
 </section>
 
-<!-- ALL SERVICES — Allan's ask: the homepage cards, on every suburb page -->
-<section class="py-12 sm:py-16 bg-surface-container-low">
- <div class="max-w-7xl mx-auto px-6 sm:px-8">
-  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3 text-center">What we do in <?php echo esc_html( $name ); ?></h2>
-  <p class="text-secondary text-center max-w-2xl mx-auto mb-10">Every service below is available across <?php echo esc_html( $name ); ?><?php echo $nb_list ? ' and ' . esc_html( $nb_list ) : ''; ?>, quoted from photos.</p>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-   <?php foreach ( timeless_services() as $svc_slug => $svc ) : ?>
-   <a href="<?php echo esc_url( home_url( '/services/' . $svc_slug . '/' ) ); ?>" class="block bg-white rounded-xl p-5 hover:shadow-lg transition-all group">
-    <div class="flex items-start justify-between gap-3 mb-2">
-     <h3 class="font-bold text-primary leading-snug"><?php echo esc_html( $svc[0] ); ?></h3>
-     <span class="material-symbols-outlined text-base text-primary shrink-0 group-hover:translate-x-0.5 transition-transform" aria-hidden="true">arrow_forward</span>
-    </div>
-    <p class="text-sm text-secondary leading-relaxed"><?php echo esc_html( $svc[1] ); ?></p>
+<!-- SERVICE SECTIONS ------------------------------------------------------
+     Structure lifted from Jim's Cronulla page. They do NOT use a card grid: every
+     service gets its own written section, ~200 words, with the suburb in the heading
+     and its own quote CTA underneath. That is how one page covers the whole service
+     range AND reaches 3,500 words without 19 separate suburb pages.
+     Each section links through to the full service page, which keeps the depth there. -->
+<?php
+$sections = array(
+ array(
+  'slug'  => 'bath-resurfacing',
+  'head'  => 'Bath Resurfacing in ' . $name,
+  'body'  => array(
+    'A bath is usually the first thing people notice in an older bathroom, and the first thing that dates it. Chips around the rim, a surface that has gone chalky, staining that no longer comes out however hard it is scrubbed, or the yellowing that comes with age on an enamel tub &mdash; none of it means the bath is finished.',
+    'We repair the damage, prepare the surface properly, and spray on a commercial-grade coating that cures to a hard gloss white. It is the preparation that decides how long it lasts, which is why we do not cut that part short. Porcelain, enamel, cast iron, acrylic and fibreglass are all fine; natural stone is the one exception.',
+    'Most baths in ' . $name . ' are done in five to eight hours, in a single visit, with no demolition and no plumber. You leave it 24 hours before using it, and a full 48 in winter while the coating cures.',
+  ),
+ ),
+ array(
+  'slug'  => 'tile-resurfacing',
+  'head'  => 'Tile Resurfacing for ' . $name . ' Bathrooms',
+  'body'  => array(
+    'Tiles are the other half of what makes a bathroom look old. The tiles themselves are usually perfectly sound &mdash; they are just a colour nobody has chosen on purpose since the eighties, or they have gone dull and picked up staining that cleaning will not shift.',
+    'Resurfacing recolours the tile surface without removing a single tile off the wall. That matters in ' . $name . ' particularly, where ' . $era . ' often means the tiles are bedded in a way that makes removal messy, expensive and disruptive to whatever is behind them.',
+    'The finish is a durable architectural coating, not paint, and it goes on walls and floors alike. Walls typically hold up for a decade or more; floors see more traffic so we quote them on that basis and tell you honestly what to expect.',
+  ),
+ ),
+ array(
+  'slug'  => 'shower-regrouting',
+  'head'  => 'Shower Regrouting in ' . $name,
+  'body'  => array(
+    'Mouldy grout is not a cleaning problem. Once grout has gone porous, the mould is growing inside it, which is why it comes back a fortnight after every scrub. The only real fix is to take the old grout out and put new grout in.',
+    'We cut out every joint, clean the tile edges back, and regrout the whole shower. You can have cement grout, which is the affordable option and wants resealing every year or two, or epoxy, which is waterproof, stain-proof, never needs sealing and carries a five-year warranty. We will tell you which one your shower actually needs rather than defaulting to the dearer one.',
+    'If water has been getting behind the tiles for a while, regrouting alone may not be enough &mdash; we would rather find that at the quote stage than halfway through the job, so send photos of the corners and the base as well as the wall.',
+  ),
+ ),
+ array(
+  'slug'  => 'shower-leak-repair',
+  'head'  => 'Shower Sealing and Leak Repair in ' . $name,
+  'body'  => array(
+    'Silicone has a life span, and it is shorter than most people expect. When it lifts, splits or goes black at the edges, water starts finding its way behind the tiles and into the wall or the floor below. In an apartment that becomes the neighbour\'s problem too, which is when it gets expensive.',
+    'We strip out the old silicone completely, clean and dry the joint, and reseal with a mould-resistant sanitary silicone. Where the leak is coming from a failed waterproofing membrane rather than the seal, we will say so plainly &mdash; that is a different job and pretending otherwise would waste your money.',
+    'It is a short job and a cheap one relative to what a slow leak costs if it is left. If you have a water stain appearing on a ceiling below a bathroom in ' . $name . ', that is worth a photo today rather than next month.',
+  ),
+ ),
+ array(
+  'slug'  => 'vanity-refinishing',
+  'head'  => 'Vanity and Basin Work in ' . $name,
+  'body'  => array(
+    'Vanity benchtops take more punishment than anything else in a bathroom &mdash; heat, cosmetics, hair products, water sitting around the basin. Laminate swells at the edges, older stone dulls, and the colour dates faster than the rest of the room.',
+    'We respray benchtops and cabinet doors in a modern colour, including stone-fleck and satin finishes if you want something other than plain white. Basins get chips filled and the whole bowl resurfaced so the repair does not sit there as a visible patch.',
+    'This is often the cheapest thing that makes the biggest visible difference, particularly in ' . $era . ' where the vanity is the one piece that looks most obviously of its era.',
+  ),
+ ),
+ array(
+  'slug'  => 'full-bathroom-makeover',
+  'head'  => 'Full Bathroom Makeovers in ' . $name,
+  'body'  => array(
+    'When the bath, the tiles, the vanity and the grout are all tired at once, doing them separately over a few years costs more than doing them together. The full package covers everything in a single booking, and because we are already set up on site the combined price is well under the sum of the parts.',
+    'It is the option that most often replaces a renovation. A full bathroom renovation in Sydney runs into tens of thousands and takes weeks with trades in and out of the house. This is a fraction of that, usually one to two days, and nothing gets demolished.',
+    'It suits ' . $name . ' particularly well given the ' . $era . ' here &mdash; those bathrooms are almost always structurally fine and simply look their age. If yours genuinely needs replacing, we will tell you that instead of taking the job.',
+  ),
+ ),
+);
+?>
+<?php foreach ( $sections as $i => $sec ) : ?>
+<section class="py-12 sm:py-16 <?php echo $i % 2 === 0 ? 'bg-white' : 'bg-surface-container-low'; ?>">
+ <div class="max-w-3xl mx-auto px-6 sm:px-8">
+  <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-5"><?php echo esc_html( $sec['head'] ); ?></h2>
+  <?php foreach ( $sec['body'] as $para ) : ?>
+  <p class="text-secondary leading-relaxed mb-4"><?php echo esc_html( $para ); ?></p>
+  <?php endforeach; ?>
+  <div class="flex flex-wrap items-center gap-4 mt-6">
+   <a href="#quote" class="bg-primary text-white px-6 py-3 rounded-lg font-bold text-sm hover:opacity-90 transition-all">Get a quote</a>
+   <a href="<?php echo esc_url( home_url( '/services/' . $sec['slug'] . '/' ) ); ?>" class="text-primary font-bold text-sm hover:text-primary-soft transition-colors">Full <?php echo esc_html( strtolower( timeless_services()[ $sec['slug'] ][0] ) ); ?> details &rarr;</a>
+  </div>
+ </div>
+</section>
+<?php endforeach; ?>
+
+<!-- EVERYTHING ELSE WE DO — the remaining services, compact -->
+<section class="py-12 sm:py-16 bg-white">
+ <div class="max-w-6xl mx-auto px-6 sm:px-8">
+  <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3 text-center">Everything else we do in <?php echo esc_html( $name ); ?></h2>
+  <p class="text-secondary text-center max-w-2xl mx-auto mb-8">All quoted from photos, with no call-out fee.</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+   <?php
+   $done = wp_list_pluck( $sections, 'slug' );
+   foreach ( timeless_services() as $svc_slug => $svc ) :
+     if ( in_array( $svc_slug, $done, true ) ) { continue; } ?>
+   <a href="<?php echo esc_url( home_url( '/services/' . $svc_slug . '/' ) ); ?>" class="block bg-surface-container-low rounded-xl p-5 hover:shadow-lg transition-all">
+    <h3 class="font-bold text-primary text-sm mb-1.5"><?php echo esc_html( $svc[0] ); ?></h3>
+    <p class="text-xs text-secondary leading-relaxed"><?php echo esc_html( $svc[1] ); ?></p>
    </a>
    <?php endforeach; ?>
   </div>
