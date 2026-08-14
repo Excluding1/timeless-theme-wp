@@ -171,6 +171,47 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
      range AND reaches 3,500 words without 19 separate suburb pages.
      Each section links through to the full service page, which keeps the depth there. -->
 <?php
+$job_lists = array(
+  'bath-resurfacing' => array(
+    array( "Chip repair", 'chipped-bathtub-repair' ),
+    array( "Hairline crack repair", 'chipped-bathtub-repair' ),
+    array( "Full bath resurface", '' ),
+    array( "Rust and stain removal", 'stained-bathtub-resurfacing' ),
+    array( "Peeling DIY paint stripped back", 'peeling-bathtub-resurfacing' ),
+    array( "Waste and overflow covers replaced", '' ),
+    array( "Colour change to gloss white", '' ),
+  ),
+  'tile-resurfacing' => array(
+    array( "Wall tile colour change", '' ),
+    array( "Floor tile resurfacing", 'floor-tile-regrouting' ),
+    array( "Stained or dulled tiles", '' ),
+    array( "Feature tile removal without demolition", '' ),
+  ),
+  'shower-regrouting' => array(
+    array( "Mouldy grout removed and replaced", 'mouldy-shower-grout' ),
+    array( "Cracked and crumbling grout", 'cracked-grout-repair' ),
+    array( "Epoxy grout upgrade", 'epoxy-grout-upgrade' ),
+    array( "Full shower regrout", '' ),
+  ),
+  'shower-leak-repair' => array(
+    array( "Perished silicone replaced", 'mouldy-silicone-replacement' ),
+    array( "Shower base to wall joints resealed", '' ),
+    array( "Leak into the room below investigated", '' ),
+    array( "Screen and door seals", '' ),
+  ),
+  'vanity-refinishing' => array(
+    array( "Benchtop respray", 'vanity-respray' ),
+    array( "Cabinet door respray", '' ),
+    array( "Basin chip repair", 'basin-chip-repair' ),
+    array( "Full basin resurface", '' ),
+  ),
+  'full-bathroom-makeover' => array(
+    array( "Bath, tiles, vanity and grout in one booking", '' ),
+    array( "Rental turnaround between tenants", '' ),
+    array( "Whole-room colour change", '' ),
+    array( "Pre-sale refresh", '' ),
+  ),
+);
 $sections = array(
  array(
   'slug'  => 'bath-resurfacing',
@@ -257,6 +298,23 @@ $sections = array(
   <?php foreach ( $sec['body'] as $para ) : ?>
   <p class="text-secondary leading-relaxed mb-4"><?php echo esc_html( $para ); ?></p>
   <?php endforeach; ?>
+  <?php if ( ! empty( $job_lists[ $sec['slug'] ] ) ) : ?>
+  <div class="bg-surface-container-low rounded-xl p-5 mt-6">
+   <p class="text-xs font-bold uppercase tracking-widest text-secondary mb-3"><?php echo esc_html( strtok( $sec['head'], ' ' ) ); ?> jobs we do in <?php echo esc_html( $name ); ?></p>
+   <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2">
+    <?php foreach ( $job_lists[ $sec['slug'] ] as $job ) : ?>
+    <li class="flex items-start gap-2 text-sm text-secondary">
+     <span class="material-symbols-outlined text-base text-primary shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
+     <?php if ( $job[1] ) : ?>
+      <a href="<?php echo esc_url( home_url( '/services/' . $job[1] . '/' ) ); ?>" class="hover:text-primary underline decoration-dotted underline-offset-2"><?php echo esc_html( $job[0] ); ?></a>
+     <?php else : ?>
+      <span><?php echo esc_html( $job[0] ); ?></span>
+     <?php endif; ?>
+    </li>
+    <?php endforeach; ?>
+   </ul>
+  </div>
+  <?php endif; ?>
   <?php if ( ! empty( $sec['callout'] ) ) : ?>
   <div class="mt-6"><?php echo do_shortcode( '[icon_callout type="' . $sec['callout'][0] . '" title="' . esc_attr( $sec['callout'][1] ) . '"]' . $sec['callout'][2] . '[/icon_callout]' ); ?></div>
   <?php endif; ?>
