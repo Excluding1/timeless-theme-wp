@@ -63,36 +63,75 @@ $coastal  = (bool) preg_match( '/beach|coastal|Northern Beaches|Illawarra|Centra
     "geo":{"@type":"GeoCoordinates","latitude":<?php echo esc_js( $suburb['lat'] ); ?>,"longitude":<?php echo esc_js( $suburb['lng'] ); ?>}}}
 </script>
 
-<!-- HERO -->
-<section class="pt-4 pb-12 sm:pb-16 bg-surface">
+<!-- HERO — structure copied from the working service-page hero (contained rounded
+     image with aspect ratio, stats as bordered cards, buttons in their own row).
+     My first pass invented its own markup and the image bled past the container. -->
+<section class="pt-4 pb-10 sm:pb-16 bg-surface">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
   <nav class="text-xs text-secondary mb-5" aria-label="Breadcrumb">
-   <a class="hover:text-primary" href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a> /
-   <a class="hover:text-primary" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>">Service Areas</a> /
+   <a class="hover:text-primary" href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+   <span class="mx-1">/</span>
+   <a class="hover:text-primary" href="<?php echo esc_url( home_url( '/areas/' ) ); ?>">Service Areas</a>
+   <span class="mx-1">/</span>
    <span class="text-primary font-semibold"><?php echo esc_html( $name ); ?></span>
   </nav>
-  <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
    <div>
     <span class="inline-block bg-tertiary-fixed-dim/25 text-primary text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded mb-5"><?php echo esc_html( $suburb['region'] ); ?> &middot; <?php echo esc_html( $suburb['postcode'] ); ?></span>
-    <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter leading-[0.98] mb-5">Bathroom Resurfacing in <span class="text-primary-soft"><?php echo esc_html( $name ); ?></span></h1>
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-primary tracking-tighter leading-[0.95] mb-5">Bathroom Resurfacing in <?php echo esc_html( $name ); ?></h1>
+
     <p class="text-secondary leading-relaxed mb-4">Tired bathroom in <?php echo esc_html( $name ); ?>? We resurface baths, tiles, vanities and basins, and replace old grout and silicone &mdash; usually in a single day, with no demolition and no plumber. You keep the bathroom you have; it just stops looking like it needs replacing.</p>
+
+    <!-- image sits here on mobile, between the copy and the stats -->
+    <div class="md:hidden mb-6">
+     <div class="rounded-xl overflow-hidden shadow-2xl" style="aspect-ratio:4/3;">
+      <img src="<?php echo esc_url( get_template_directory_uri() . '/images/homepage/after.jpg' ); ?>" alt="Resurfaced bathroom in a Sydney home" class="w-full h-full object-cover" width="720" height="540" />
+     </div>
+    </div>
+
     <p class="text-secondary leading-relaxed mb-6">We cover <?php echo esc_html( $name ); ?><?php echo $nb_list ? ' and nearby ' . esc_html( $nb_list ) : ''; ?>. Send a few photos and you will have a fixed price back within one business day &mdash; there is no call-out fee to find out where you stand.</p>
-    <div class="flex flex-wrap gap-6 mb-7">
-     <div><div class="text-2xl font-extrabold text-primary">1 day</div><div class="text-xs text-secondary">Most jobs</div></div>
-     <div><div class="text-2xl font-extrabold text-primary">Up to 80%</div><div class="text-xs text-secondary">vs replacing</div></div>
-     <div><div class="text-2xl font-extrabold text-primary"><?php echo esc_html( $suburb['distance_km'] ); ?> km</div><div class="text-xs text-secondary">From the CBD</div></div>
+
+    <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+     <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+      <div class="text-xl sm:text-2xl font-extrabold text-primary">1 Day</div>
+      <div class="text-xs text-secondary mt-0.5">Most jobs</div>
+     </div>
+     <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+      <div class="text-xl sm:text-2xl font-extrabold text-primary">Up to 80%</div>
+      <div class="text-xs text-secondary mt-0.5">vs replacing</div>
+     </div>
+     <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
+      <div class="text-xl sm:text-2xl font-extrabold text-primary"><?php echo esc_html( $suburb['distance_km'] ); ?> km</div>
+      <div class="text-xs text-secondary mt-0.5">From the CBD</div>
+     </div>
     </div>
-    <div class="flex flex-wrap gap-3">
-     <a href="#quote" class="bg-primary text-white px-7 py-3.5 rounded-lg font-bold hover:opacity-90 transition-all">Get Your Free Quote</a>
-     <a href="tel:<?php echo esc_attr( timeless_phone_link() ); ?>" class="border border-surface-container px-7 py-3.5 rounded-lg font-bold text-primary hover:bg-surface-container-low transition-all">Call <?php echo esc_html( timeless_phone() ); ?></a>
+
+    <div class="flex flex-col sm:flex-row gap-3 mb-4">
+     <a href="#quote" class="bg-primary text-white px-7 py-3.5 rounded-lg font-bold text-center hover:opacity-90 transition-all">Get Your Free Quote</a>
+     <a href="tel:<?php echo esc_attr( timeless_phone_link() ); ?>" class="border border-surface-container bg-white px-7 py-3.5 rounded-lg font-bold text-primary text-center hover:bg-surface-container-low transition-all">Call <?php echo esc_html( timeless_phone() ); ?></a>
     </div>
+    <p class="text-xs text-secondary">Send photos &rarr; fixed price within one business day. No call-out fee, no obligation.</p>
    </div>
-   <div class="rounded-2xl overflow-hidden">
-    <img src="<?php echo esc_url( get_template_directory_uri() . '/images/homepage/after.jpg' ); ?>"
-         alt="Resurfaced bathroom in a Sydney home" width="720" height="480" loading="eager"
-         class="w-full h-full object-cover" />
+
+   <!-- desktop image column -->
+   <div class="hidden md:block">
+    <div class="rounded-xl overflow-hidden shadow-2xl" style="aspect-ratio:4/3;">
+     <img src="<?php echo esc_url( get_template_directory_uri() . '/images/homepage/after.jpg' ); ?>" alt="Resurfaced bathroom in a Sydney home" class="w-full h-full object-cover" width="720" height="540" loading="eager" />
+    </div>
    </div>
   </div>
+ </div>
+</section>
+
+<!-- TRUST BAR — every other page has one; its absence is part of why this looked bare -->
+<section class="bg-primary text-white py-4">
+ <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+  <div class="text-xs sm:text-sm font-semibold">Experienced &amp; Insured</div>
+  <div class="text-xs sm:text-sm font-semibold">$10M Public Liability</div>
+  <div class="text-xs sm:text-sm font-semibold">Up to 5-Year Warranty</div>
+  <div class="text-xs sm:text-sm font-semibold">Servicing <?php echo esc_html( $name ); ?></div>
  </div>
 </section>
 
