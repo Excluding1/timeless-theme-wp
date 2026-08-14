@@ -1074,6 +1074,23 @@ function timeless_legacy_url_redirect() {
 add_action( 'template_redirect', 'timeless_legacy_url_redirect', 1 );
 
 /**
+ * Suburb pages moved from /services/bath-resurfacing/{suburb}/ to /areas/{suburb}/
+ * in v1.5.2, when they became multi-service hubs rather than one-service pages.
+ * 301 so the old URLs keep whatever authority they had instead of 404ing.
+ */
+function timeless_suburb_url_redirect() {
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ( preg_match( '#^/services/bath-resurfacing/([a-z0-9-]+)/?(\?.*)?$#', $uri, $m ) ) {
+        $subs = include get_template_directory() . '/inc/suburb-data.php';
+        if ( isset( $subs[ $m[1] ] ) ) {
+            wp_redirect( home_url( '/areas/' . $m[1] . '/' ), 301 );
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'timeless_suburb_url_redirect', 1 );
+
+/**
  * Self-healing: also run page creation on admin_init.
  *
  * Why: `after_switch_theme` doesn't fire when the user "Replace current
