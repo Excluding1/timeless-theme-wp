@@ -82,7 +82,7 @@
  Your entire bathroom looks tired. The&nbsp;bath&nbsp;is stained, tiles are dated, grout is cracked. You&rsquo;ve&nbsp;been&nbsp;quoted $25,000-$50,000 for a full renovation. There&rsquo;s&nbsp;a&nbsp;smarter way. One&nbsp;team,&nbsp;one visit, done in days.
  </p>
  <!-- Service badge pills -->
- <div class="flex flex-wrap gap-2 mb-6">
+ <div class="pill-row gap-2 mb-6">
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">bathtub</span> Bath</span>
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">grid_view</span> Tiles</span>
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Grout</span>
@@ -139,104 +139,74 @@
 <!-- ═══════════════════════════════════════════════════
  WHAT'S INCLUDED. 2x3 grid of service tiles
  ═══════════════════════════════════════════════════ -->
+<style>
+ /* Swipe indicator for the included-services track. Plain CSS, not Tailwind:
+    js/main.js drives .vs-bar[data-for] site-wide, only the styling is local. */
+ .vs-bar{display:none;}
+ @media (max-width:639px){
+  .vs-bar{display:block;position:relative;overflow:hidden;width:72px;height:4px;border-radius:9999px;background:#dbe1e8;margin:0 auto;}
+  .vs-thumb{position:absolute;left:0;top:0;height:100%;width:50%;border-radius:9999px;background:#041534;}
+  #inc-services-scroll::-webkit-scrollbar{display:none;}
+ }
+</style>
 <section class="py-16 sm:py-20 bg-white">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <div class="text-center mb-12">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What&rsquo;s Included</h2>
  <p class="text-secondary max-w-2xl mx-auto">Six services, one team, one price. Everything your bathroom needs to look brand new.</p>
  </div>
- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
- <!-- Tile 1 -->
- <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">bathtub</span>
+ <div id="inc-services-scroll" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pt-2 px-1 pb-4 pr-6 sm:pr-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:pb-0" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+  <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png 800w" sizes="96px" alt="Bath Resurfacing" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Bath Resurfacing</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Fresh high gloss white coating.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png 800w" sizes="96px" alt="Tile Resurfacing" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Tile Resurfacing</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Wall tiles recoated in fresh high gloss white.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting-400w.jpg 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg 800w" sizes="96px" alt="Full Regrouting" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Full Regrouting</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">All old grout removed and replaced.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png 800w" sizes="96px" alt="Silicone Replacement" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Silicone Replacement</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">All junctions stripped and resealed.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png 800w" sizes="96px" alt="Vanity Respray" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Vanity Respray</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Cabinet resprayed in a modern colour.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png 800w" sizes="96px" alt="Basin Restoration" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Basin Restoration</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Resurfaced to match the new bathroom.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
  </div>
- <div class="flex-1">
- <div class="flex items-center gap-2 mb-2">
- <h3 class="font-bold text-primary">Bath Resurfacing</h3>
- <span class="material-symbols-outlined text-lg text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- </div>
- <p class="text-sm text-secondary leading-relaxed">Fresh high-gloss white coating</p>
- </div>
- </div>
- </div>
- <!-- Tile 2 -->
- <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">grid_view</span>
- </div>
- <div class="flex-1">
- <div class="flex items-center gap-2 mb-2">
- <h3 class="font-bold text-primary">Tile Resurfacing</h3>
- <span class="material-symbols-outlined text-lg text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- </div>
- <p class="text-sm text-secondary leading-relaxed">Wall tiles recoated in fresh high-gloss white</p>
- </div>
- </div>
- </div>
- <!-- Tile 3 -->
- <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">plumbing</span>
- </div>
- <div class="flex-1">
- <div class="flex items-center gap-2 mb-2">
- <h3 class="font-bold text-primary">Full Regrouting</h3>
- <span class="material-symbols-outlined text-lg text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- </div>
- <p class="text-sm text-secondary leading-relaxed">All old grout removed and replaced</p>
- </div>
- </div>
- </div>
- <!-- Tile 4 -->
- <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">water_drop</span>
- </div>
- <div class="flex-1">
- <div class="flex items-center gap-2 mb-2">
- <h3 class="font-bold text-primary">Silicone Replacement</h3>
- <span class="material-symbols-outlined text-lg text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- </div>
- <p class="text-sm text-secondary leading-relaxed">All junctions stripped and resealed</p>
- </div>
- </div>
- </div>
- <!-- Tile 5 -->
- <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">countertops</span>
- </div>
- <div class="flex-1">
- <div class="flex items-center gap-2 mb-2">
- <h3 class="font-bold text-primary">Vanity Respray</h3>
- <span class="material-symbols-outlined text-lg text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- </div>
- <p class="text-sm text-secondary leading-relaxed">Cabinet resprayed in a modern colour</p>
- </div>
- </div>
- </div>
- <!-- Tile 6 -->
- <div class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg transition-all">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">wash</span>
- </div>
- <div class="flex-1">
- <div class="flex items-center gap-2 mb-2">
- <h3 class="font-bold text-primary">Basin Restoration</h3>
- <span class="material-symbols-outlined text-lg text-emerald-600" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span>
- </div>
- <p class="text-sm text-secondary leading-relaxed">Resurfaced to match the new bathroom</p>
- </div>
- </div>
- </div>
- </div>
+  <p class="text-center text-xs text-secondary mt-3 sm:hidden">Swipe to see everything included &rarr;</p>
+  <div class="vs-bar" data-for="#inc-services-scroll" aria-hidden="true" style="margin-top:8px;"><span class="vs-thumb"></span></div>
  </div>
 </section>
 

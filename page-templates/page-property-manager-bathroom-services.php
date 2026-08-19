@@ -82,7 +82,7 @@
  The bathroom is the #1 reason tenants complain and buyers walk away. We&nbsp;fix&nbsp;rental bathrooms fast. 1-3 days. with fixed-price quotes from photos so you can approve without site visits.
  </p>
  <!-- Service badge pills -->
- <div class="flex flex-wrap gap-2 mb-6">
+ <div class="pill-row gap-2 mb-6">
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">plumbing</span> Regrout</span>
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">format_paint</span> Resurface</span>
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">water_drop</span> Seal</span>

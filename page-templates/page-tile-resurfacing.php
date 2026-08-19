@@ -177,7 +177,7 @@
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
  <p class="text-secondary">Whatever&rsquo;s wrong with your tiles, we&rsquo;ve seen it and fixed it. Here&rsquo;s what we fix, how we do it, and what the results look like.</p>
  <!-- Surfaces we cover -->
- <div class="flex flex-wrap justify-center gap-3 mt-8">
+ <div class="pill-row pill-row--center gap-3 mt-8">
  <span class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-low rounded-full text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">shower</span> Shower Walls</span>
  <span class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-low rounded-full text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">grid_view</span> Floor Tiles</span>
  <span class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-low rounded-full text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">dashboard</span> Splashbacks</span>

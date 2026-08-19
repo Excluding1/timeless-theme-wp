@@ -476,3 +476,36 @@ html, body {
 /* Nav logo: standard clickable-logo affordance */
 #main-nav a > img { transition: opacity 0.2s ease; }
 #main-nav a:hover > img { opacity: 0.8; }
+
+
+/* ── PILL ROWS ────────────────────────────────────────────────────────────────
+   Rows of small feature chips ("Shower Walls", "Floor Tiles", ...). On a phone
+   five or six of them wrap into three ragged rows and eat half the viewport, so
+   below 640px they become a single horizontally scrollable line instead. From
+   640px up the behaviour is unchanged: wrap and centre.
+
+   Lives here rather than in Tailwind because sm:justify-center is not in the
+   compiled CSS, and this file is not processed by the purge.
+   ──────────────────────────────────────────────────────────────────────────── */
+.pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.pill-row.pill-row--center { justify-content: center; }
+
+@media (max-width: 639px) {
+    .pill-row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 6px;
+    }
+    .pill-row::-webkit-scrollbar { display: none; }
+    .pill-row > * {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+}
