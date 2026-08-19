@@ -117,7 +117,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Sydney CBD &amp; Inner City</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Surry Hills, Darlinghurst, Redfern, Glebe, Ultimo, Pyrmont</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Surry Hills, Darlinghurst, Redfern, Glebe, Ultimo, Pyrmont' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for CBD <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -127,7 +127,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Eastern Suburbs</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Bondi, Coogee, Randwick, Maroubra, Double Bay, Woollahra</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Bondi, Coogee, Randwick, Maroubra, Double Bay, Woollahra' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Eastern Suburbs <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -137,7 +137,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Inner West</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Newtown, Marrickville, Leichhardt, Ashfield, Dulwich Hill, Enmore</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Newtown, Marrickville, Leichhardt, Ashfield, Dulwich Hill, Enmore' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Inner West <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -147,7 +147,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">North Shore</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Chatswood, Lane Cove, Mosman, Neutral Bay, Cremorne, Willoughby</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Chatswood, Lane Cove, Mosman, Neutral Bay, Cremorne, Willoughby' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for North Shore <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -157,7 +157,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Northern Beaches</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Manly, Dee Why, Brookvale, Mona Vale, Narrabeen, Freshwater</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Manly, Dee Why, Brookvale, Mona Vale, Narrabeen, Freshwater' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Northern Beaches <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -167,7 +167,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Sutherland Shire</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Cronulla, Miranda, Caringbah, Engadine, Sutherland, Sylvania</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Cronulla, Miranda, Caringbah, Engadine, Sutherland, Sylvania' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Sutherland Shire <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -188,7 +188,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Parramatta &amp; Greater Parramatta</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Parramatta, Rydalmere, Granville, Merrylands, Harris Park</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Parramatta, Rydalmere, Granville, Merrylands, Harris Park' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Parramatta <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -198,7 +198,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Hills District</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Castle Hill, Baulkham Hills, Bella Vista, Kellyville, Rouse Hill' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Hills District <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -208,7 +208,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Blacktown, Penrith &amp; Blue Mountains</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Blacktown, Mt Druitt, Penrith, Springwood, Katoomba</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Blacktown, Mt Druitt, Penrith, Springwood, Katoomba' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Western Sydney <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -229,7 +229,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Wollongong &amp; Illawarra</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Wollongong, Shellharbour, Kiama, Thirroul, Corrimal</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Wollongong, Shellharbour, Kiama, Thirroul, Corrimal' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Wollongong <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -239,7 +239,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Central Coast</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Gosford, Terrigal, Erina, Tuggerah, Woy Woy, Avoca Beach</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Gosford, Terrigal, Erina, Tuggerah, Woy Woy, Avoca Beach' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Central Coast <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
@@ -249,7 +249,7 @@
  <span class="material-symbols-outlined text-2xl text-primary shrink-0 mt-0.5" aria-hidden="true">location_on</span>
  <div class="flex-1">
  <h3 class="font-bold text-primary mb-1">Campbelltown &amp; Macarthur</h3>
- <p class="text-xs text-secondary leading-relaxed mb-3">Campbelltown, Camden, Narellan, Ingleburn, Picton</p>
+ <p class="text-xs text-secondary leading-relaxed mb-3"><?php echo timeless_link_suburbs( 'Campbelltown, Camden, Narellan, Ingleburn, Picton' ); ?></p>
  <a href="<?php echo esc_url( home_url( '/#quote' ) ); ?>" class="text-xs font-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">Get Quote for Macarthur <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></a>
  </div>
  </div>
