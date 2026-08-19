@@ -3256,7 +3256,11 @@ function timeless_render_chat_widget() {
     </div>
     <?php
 }
-add_action( 'wp_footer', 'timeless_render_chat_widget', 5 );
+/* CHAT WIDGET DISABLED site-wide, Allan 2026-08-20. He never used it and does not want
+   another contact channel competing with the phone number, the email and the quote form.
+   The render and script functions are left intact so this is a one-line revert if that
+   changes; only the wp_footer hooks are removed. */
+// add_action( 'wp_footer', 'timeless_render_chat_widget', 5 );
 
 /**
  * Inline JS for the chat widget, open/close behaviour + real AJAX submission.
@@ -3379,7 +3383,11 @@ function timeless_chat_widget_script() {
     </script>
     <?php
 }
-add_action( 'wp_footer', 'timeless_chat_widget_script', 10 );
+/* CHAT WIDGET DISABLED site-wide, Allan 2026-08-20. He never used it and does not want
+   another contact channel competing with the phone number, the email and the quote form.
+   The render and script functions are left intact so this is a one-line revert if that
+   changes; only the wp_footer hooks are removed. */
+// add_action( 'wp_footer', 'timeless_chat_widget_script', 10 );
 
 /* ─────────────────────────────────────────────
    9. SECURITY HARDENING, Anti brute-force + lockdown

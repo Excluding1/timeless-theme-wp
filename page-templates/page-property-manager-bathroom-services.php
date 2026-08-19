@@ -89,19 +89,20 @@
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">countertops</span> Respray</span>
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">wash</span> Restore</span>
  </div>
- <p class="text-3xl font-extrabold text-white mb-6">Quote from photos <span class="text-sm font-normal text-white/60">No call-out fee</span></p>
+ <p class="text-2xl sm:text-3xl font-extrabold text-white mb-1">Quote from photos</p>
+ <p class="text-sm font-normal text-white/60 mb-6">No call-out fee</p>
  <!-- Stats row -->
- <div class="flex flex-wrap items-center gap-4 mb-8">
- <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">1-3 Days</p>
+ <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-8">
+ <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-2 sm:px-3 py-3 border border-white/10">
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">1-3 Days</p>
  <p class="text-[0.65rem] text-white/60 font-medium">Completion</p>
  </div>
- <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">Quick Quote</p>
- <p class="text-[0.65rem] text-white/60 font-medium">from photos</p>
+ <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-2 sm:px-3 py-3 border border-white/10">
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">24hr</p>
+ <p class="text-[0.65rem] text-white/60 font-medium">Quote back</p>
  </div>
- <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">12mo</p>
+ <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-2 sm:px-3 py-3 border border-white/10">
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">12mo</p>
  <p class="text-[0.65rem] text-white/60 font-medium">Rental warranty</p>
  </div>
  </div>

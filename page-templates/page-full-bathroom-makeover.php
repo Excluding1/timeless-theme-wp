@@ -91,17 +91,17 @@
  <span class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-xs text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">wash</span> Basin</span>
  </div>
  <!-- Stats row -->
- <div class="flex flex-wrap items-center gap-4 mb-8">
- <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">2-3 Days</p>
+ <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-8">
+ <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-2 sm:px-3 py-3 border border-white/10">
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">2-3 Days</p>
  <p class="text-[0.65rem] text-white/60 font-medium">Complete makeover</p>
  </div>
- <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">Save up to 80%</p>
+ <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-2 sm:px-3 py-3 border border-white/10">
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">Save up to 80%</p>
  <p class="text-[0.65rem] text-white/60 font-medium">vs renovation</p>
  </div>
- <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">5yr</p>
+ <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-2 sm:px-3 py-3 border border-white/10">
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-white leading-tight">5yr</p>
  <p class="text-[0.65rem] text-white/60 font-medium">Warranty</p>
  </div>
  </div>
