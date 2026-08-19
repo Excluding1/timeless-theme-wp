@@ -18,6 +18,11 @@ module.exports = {
         './page-templates/*.php',
         './js/*.js',
         './inc/*.php',
+        // Blog posts render through shortcodes whose classes appear nowhere else in the
+        // theme. Without this the purge strips when_cards' borders, key_takeaways' list
+        // resets and decision_flow entirely, and every article ships broken. The HTML in
+        // docs/ never deploys; it is scanned only so the classes survive into main.min.css.
+        './docs/content/blog/*.html',
     ],
 
     /**
