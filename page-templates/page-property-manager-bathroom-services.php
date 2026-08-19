@@ -101,8 +101,8 @@
  <p class="text-[0.65rem] text-white/60 font-medium">from photos</p>
  </div>
  <div class="text-center bg-white/10 backdrop-blur-xs rounded-lg px-5 py-3 border border-white/10">
- <p class="text-2xl font-extrabold text-white">Up to 5yr</p>
- <p class="text-[0.65rem] text-white/60 font-medium">Warranty</p>
+ <p class="text-2xl font-extrabold text-white">12mo</p>
+ <p class="text-[0.65rem] text-white/60 font-medium">Rental warranty</p>
  </div>
  </div>
  <div class="flex flex-col sm:flex-row gap-3">
@@ -117,7 +117,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">12-Month Rental Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">speed</span><span class="text-xs font-bold">Fast Turnaround</span></div>
  </div>
 </section>
@@ -433,6 +433,50 @@
  <div class="flex items-center justify-center gap-2"><div class="flex text-amber-400 text-lg" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><span class="sr-only">5 out of 5 stars</span><span class="text-sm font-bold text-primary">4.9</span><span class="text-xs text-secondary">Google Rating</span></div>
  </div>
  <?php timeless_render_google_reviews(); ?>
+ </div>
+</section>
+
+<!-- RENTAL WARRANTY, EXPLAINED.
+     This page's entire audience is landlords and agencies, so the rental carve-out has to
+     live ON the page, not only behind a link to /warranty/. "Up to 5 years" is literally
+     true but no reader of THIS page can ever reach 5 years, and a qualifier the reader has
+     to go looking for does not cure a headline they act on. Allan's call, 2026-08-20.
+     Uses the theme's own [when_cards] shortcode -- no new Tailwind classes. -->
+<section class="py-16 sm:py-20 bg-white">
+ <div class="max-w-3xl mx-auto px-6 sm:px-8">
+  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">The 12-Month Rental Warranty, Explained</h2>
+  <p class="text-secondary text-center mb-8">Why tenanted bathrooms carry different cover &mdash; and why it is not a resurfacing problem.</p>
+
+  <p class="text-secondary leading-relaxed mb-4">Tenanted bathrooms see harder, less predictable use, and nobody inspects them between visits. So resurfacing in a rental carries <strong class="text-primary">12 months</strong> of workmanship cover rather than the 5 years we give an owner-occupier.</p>
+
+  <p class="text-secondary leading-relaxed mb-4">Those aren&rsquo;t resurfacing problems &mdash; they&rsquo;re bathroom problems. A brand-new acrylic bath chips the same way when a bottle lands on it, dulls the same way under Gumption or steel wool, and marks the same way under a suction-cup mat. Replacing the bath doesn&rsquo;t remove any of those risks. It just costs several times more to find that out.</p>
+
+  <p class="text-secondary leading-relaxed mb-2">What the warranty covers is our workmanship &mdash; and application defects surface early. Peeling, bubbling and adhesion failure show in the first 30&ndash;60 days, well inside the 12 months.</p>
+
+  <div class="grid md:grid-cols-2 gap-6 my-8">
+   <div class="bg-surface-container-low rounded-xl p-6 border border-surface-container">
+    <h3 class="text-xl font-bold text-green-600 mb-3">Covered for 12 months</h3>
+    <ul class="list-disc pl-6 space-y-2 text-sm text-secondary">
+     <li>Peeling or lifting under normal use</li>
+     <li>Bubbling or blistering in the coating</li>
+     <li>Adhesion failure &mdash; the coating separating from the surface</li>
+     <li>Any defect traceable to how the job was done</li>
+    </ul>
+   </div>
+   <div class="bg-surface-container-low rounded-xl p-6 border border-surface-container">
+    <h3 class="text-xl font-bold text-error mb-3">Not covered &mdash; same as a new bath</h3>
+    <ul class="list-disc pl-6 space-y-2 text-sm text-secondary">
+     <li>Chips from dropped bottles or tools</li>
+     <li>Dulling from abrasive pastes, steel wool or neat bleach</li>
+     <li>Suction-cup mats &mdash; trapped water lifts any finish</li>
+     <li>Tenant wilful damage</li>
+    </ul>
+   </div>
+  </div>
+
+  <p class="text-secondary leading-relaxed">Two things make claims rare. We leave an aftercare card in the bathroom on every job, so whoever moves in knows what not to use on it. And photograph the finish at handover &mdash; it settles any later argument about whether the damage predated the tenancy.</p>
+
+  <p class="text-xs text-secondary mt-6">Owner-occupied bathrooms carry up to 5 years on resurfacing. Full terms per service on our <a class="text-primary font-semibold hover:underline" href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>">warranty page</a>. Your rights under the Australian Consumer Law are unaffected.</p>
  </div>
 </section>
 

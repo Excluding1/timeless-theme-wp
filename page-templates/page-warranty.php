@@ -99,7 +99,7 @@
  <h2 class="text-xl font-bold text-primary mb-3">Why the numbers differ</h2>
  <p class="mb-3">A blanket warranty across every service is dishonest because the materials don't behave the same way:</p>
  <ul class="list-disc pl-6 space-y-2">
- <li><strong>Resurfacing</strong>. Application defects (peeling, bubbling, adhesion failure) show in the first 30-60 days. The 5-year private home warranty (6 months rental) covers any genuine workmanship issue across the realistic life of the coating. Source: AU resurfacing supplier industry-standard.</li>
+ <li><strong>Resurfacing</strong>. Application defects (peeling, bubbling, adhesion failure) show in the first 30-60 days. The 5-year private home warranty (12 months rental) covers any genuine workmanship issue across the realistic life of the coating. Source: AU resurfacing supplier industry-standard.</li>
  <li><strong>Cement regrouting</strong>. Cement grout naturally lasts 5-7 years before reaching end-of-life. Our 2-year warranty covers craftsmanship defects (cracks, falling out) within the early portion of that life.</li>
  <li><strong>Epoxy regrouting</strong>. Epoxy grout is the premium option and genuinely lasts 20+ years. Our 5-year warranty matches the upper tier of the AU industry.</li>
  <li><strong>Silicone</strong>. Silicone is a consumable. Even premium silicone fails in 1-3 years from mould, water exposure, and natural compression. We recommend annual replacement and warrant only the install for 12 months.</li>
@@ -146,7 +146,7 @@
  <li><strong>Cement regrouting</strong>: 6 months</li>
  <li><strong>Epoxy regrouting</strong>: 12 months</li>
  <li><strong>Silicone</strong>: 90 days defect-only</li>
- <li><strong>Resurfacing services</strong>: 6 months</li>
+ <li><strong>Resurfacing services</strong>: 12 months</li>
  </ul>
  <p class="mb-3">This covers any failure caused by our workmanship, bond loss, lifting, gaps, peeling. It excludes wear, harsh-cleaner damage, and impact from third parties, which are the rental-specific risks tenants control. Most landlords find this fair: epoxy backed for a full year, cement double the standard supplier defect window, and silicone treated honestly as the consumable it is.</p>
  <p class="text-sm text-secondary italic">Your statutory rights under the Australian Consumer Law are unaffected.</p>
