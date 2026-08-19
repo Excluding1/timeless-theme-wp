@@ -89,7 +89,7 @@
  </div>
  <div class="hidden sm:block h-10 w-px bg-surface-container"></div>
  <div class="text-center">
- <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">2yr</p>
+ <p class="text-base sm:text-3xl font-extrabold text-primary whitespace-nowrap">5yr</p>
  <p class="text-xs text-secondary">Warranty</p>
  </div>
  </div>

@@ -6,7 +6,7 @@
  "@context": "https://schema.org",
  "@type": "Service",
  "name": "Shower Sealing Sydney",
- "description": "Professional shower sealing and silicone replacement in Sydney. Fix leaking showers, replace mouldy silicone, prevent water damage. Same-day service, up to 5-year warranty.",
+ "description": "Professional shower sealing and silicone replacement in Sydney. Fix leaking showers, replace mouldy silicone, prevent water damage. Same-day service, silicone 1-year warranty, epoxy regrouting 5-year.",
  "provider": {
  "@type": "HomeAndConstructionBusiness",
  "name": "Timeless Resurfacing",
@@ -102,7 +102,7 @@
  <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Service</p>
  </div>
  <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
- <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">Up to 5yr</p>
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold text-primary leading-tight">1&ndash;5yr</p>
  <p class="text-[0.6rem] sm:text-[0.65rem] text-secondary font-medium mt-1">Warranty</p>
  </div>
  </div>
@@ -152,7 +152,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Silicone 1yr &middot; Epoxy 5yr</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
  </div>
 </section>
@@ -354,7 +354,7 @@
  <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
  <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
  <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most showers sealed in 3-4 hours.</p></div></div>
- <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship covered. Fully insured with public liability.</p></div></div>
+ <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Silicone 1yr &middot; Epoxy 5yr</h3><p class="text-xs text-secondary leading-relaxed">Workmanship covered. Fully insured with public liability.</p></div></div>
  <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Promise</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, full cleanup. Cleaner than we found it.</p></div></div>
  </div>
  </div>

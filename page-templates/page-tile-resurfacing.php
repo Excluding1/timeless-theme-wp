@@ -6,7 +6,7 @@
  "@context": "https://schema.org",
  "@type": "Service",
  "name": "Tile Resurfacing Sydney",
- "description": "Professional tile resurfacing with commercial-grade coating. 1-2 day service, up to 3-year workmanship warranty.",
+ "description": "Professional tile resurfacing with commercial-grade coating. 1-2 day service, up to 5-year workmanship warranty on wall tiles and 1 year on floor tiles.",
  "provider": {
  "@type": "HomeAndConstructionBusiness",
  "name": "Timeless Resurfacing",
@@ -36,7 +36,7 @@
  "mainEntity": [
  { "@type": "Question", "name": "How much does tile resurfacing cost in Sydney?", "acceptedAnswer": { "@type": "Answer", "text": "Every tile resurfacing job is priced based on size, condition, and scope. We provide fixed-price quotes based on your photos. No hidden fees, no surprises." } },
  { "@type": "Question", "name": "What tiles can you resurface?", "acceptedAnswer": { "@type": "Answer", "text": "We resurface ceramic, porcelain, textured, patterned, and mosaic tiles. Send us photos and we'll confirm suitability and pricing." } },
- { "@type": "Question", "name": "How long does tile resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "Wall tiles last up to 10+ years with proper care. Floor tiles last 5-7 years due to foot traffic. Every job backed by our up to 3-year workmanship warranty." } },
+ { "@type": "Question", "name": "How long does tile resurfacing last?", "acceptedAnswer": { "@type": "Answer", "text": "Wall tiles last up to 10+ years with proper care. Floor tiles last 5-7 years due to foot traffic. Every job backed by our up to 5-year workmanship warranty on wall tiles and 1 year on floor tiles." } },
  { "@type": "Question", "name": "What colour will my resurfaced tiles be?", "acceptedAnswer": { "@type": "Answer", "text": "Standard finish is high-gloss white. The cleanest, most modern look for bathroom walls. Light custom tints (cream, off-white) available by request." } },
  { "@type": "Question", "name": "Does tile resurfacing cover grout lines?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The coating covers tiles and grout for a seamless, easy-to-clean finish. We can mask grout lines if you prefer a traditional tile look." } }
  ]
@@ -102,8 +102,8 @@
  <p class="text-[0.65rem] text-secondary font-medium">Most jobs</p>
  </div>
  <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
- <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">3yr</p>
- <p class="text-[0.65rem] text-secondary font-medium">Coating warranty</p>
+ <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">5yr</p>
+ <p class="text-[0.65rem] text-secondary font-medium">Walls &middot; floors 1yr</p>
  </div>
  </div>
 <div class="flex flex-col sm:flex-row gap-3 mb-4">
@@ -477,7 +477,7 @@
  <div class="space-y-2">
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does it cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every job is different. Send us photos and we&rsquo;ll have a fixed-price quote back within 1 business day. No hidden fees, no obligation.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What tiles can you resurface?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Ceramic, porcelain, textured, patterned, and mosaic tiles. Send us photos and we&rsquo;ll confirm suitability.</p></div></div>
- <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Wall tiles last up to 10+ years. Floor tiles last 5-7 years due to foot traffic. Every job backed by our up to 3-year workmanship warranty.</p></div></div>
+ <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How long does it last?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Wall tiles last up to 10+ years. Floor tiles last 5-7 years due to foot traffic. Every job backed by our up to 5-year workmanship warranty on wall tiles and 1 year on floor tiles.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">What colour will my tiles be?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Standard finish is high-gloss white. Clean, modern, and matches every bathroom. Light custom tints (cream, off-white) available by request.</p></div></div>
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">Does it cover grout lines?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Yes. The coating covers tiles and grout for a seamless finish. We can mask grout lines if you prefer a traditional tile look.</p></div></div>
  </div>

@@ -104,7 +104,7 @@
  <p class="text-[0.65rem] text-secondary font-medium">Most jobs</p>
  </div>
  <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
- <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">3yr</p>
+ <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">5yr</p>
  <p class="text-[0.65rem] text-secondary font-medium">Resurface warranty</p>
  </div>
  </div>

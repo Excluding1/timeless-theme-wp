@@ -100,7 +100,7 @@
  <p class="text-[0.6rem] sm:text-[0.65rem] text-white/60 font-medium mt-1">Quick turnaround</p>
  </div>
  <div class="text-center bg-white/10 rounded-lg px-2 sm:px-3 py-3">
- <p class="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">3yr</p>
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">5yr</p>
  <p class="text-[0.6rem] sm:text-[0.65rem] text-white/60 font-medium mt-1">Restoration warranty</p>
  </div>
  </div>

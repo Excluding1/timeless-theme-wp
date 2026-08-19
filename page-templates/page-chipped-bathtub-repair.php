@@ -6,7 +6,7 @@
  "@context": "https://schema.org",
  "@type": "Service",
  "name": "Chip Repair Sydney",
- "description": "Professional bathtub and basin chip repair in Sydney. Invisible colour-matched repairs using two-part epoxy. Most repairs done in 1-2 hours, up to 5-year warranty.",
+ "description": "Professional bathtub and basin chip repair in Sydney. Invisible colour-matched repairs using two-part epoxy. Most repairs done in 1-2 hours, 1-year warranty.",
  "provider": {
  "@type": "HomeAndConstructionBusiness",
  "name": "Timeless Resurfacing",
@@ -91,7 +91,7 @@
  <p class="text-[0.6rem] sm:text-[0.65rem] text-white/60 font-medium mt-1">Colour matched</p>
  </div>
  <div class="text-center bg-white/10 rounded-lg px-2 sm:px-3 py-3">
- <p class="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">Up to 5yr</p>
+ <p class="text-base sm:text-xl lg:text-2xl font-extrabold leading-tight">1yr</p>
  <p class="text-[0.6rem] sm:text-[0.65rem] text-white/60 font-medium mt-1">Warranty</p>
  </div>
  </div>
@@ -128,7 +128,7 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-2 gap-3 sm:grid-cols-none sm:flex sm:flex-wrap sm:justify-between items-center sm:gap-4">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">1-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
  </div>
 </section>
@@ -286,7 +286,7 @@
  <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Fixed-Price Quote</p><p class="text-xs text-secondary">Send photos for your price</p></div></li>
  <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Done in 1-2 hours</p><p class="text-xs text-secondary">Most repairs completed same day</p></div></li>
  <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Invisible repair</p><p class="text-xs text-secondary">Colour-matched, sanded flush, sealed</p></div></li>
- <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">Up to 5-year warranty</p><p class="text-xs text-secondary">Professional-grade repair, covered by warranty</p></div></li>
+ <li class="flex items-start gap-3"><span class="material-symbols-outlined text-green-600 text-lg mt-0.5 shrink-0" style="font-variation-settings:'FILL' 1;" aria-hidden="true">check_circle</span><div><p class="font-bold text-primary text-sm">1-year warranty</p><p class="text-xs text-secondary">Professional-grade repair, covered by warranty</p></div></li>
  </ul>
  </div>
  </div>
@@ -368,7 +368,7 @@
  <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6">
  <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">bolt</span></div><div><h3 class="font-bold text-primary text-sm">Free Quote in Hours</h3><p class="text-xs text-secondary leading-relaxed">Send photos, get a fixed price back. No home visit needed.</p></div></div>
  <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">schedule</span></div><div><h3 class="font-bold text-primary text-sm">Same-Day Service</h3><p class="text-xs text-secondary leading-relaxed">Most chips repaired in 1-2 hours.</p></div></div>
- <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">Up to 5-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship covered. Fully insured with public liability.</p></div></div>
+ <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">verified_user</span></div><div><h3 class="font-bold text-primary text-sm">1-Year Warranty</h3><p class="text-xs text-secondary leading-relaxed">Workmanship covered. Fully insured with public liability.</p></div></div>
  <div class="flex items-start gap-3"><div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5"><span class="material-symbols-outlined text-lg text-primary" aria-hidden="true">cleaning_services</span></div><div><h3 class="font-bold text-primary text-sm">No Mess Promise</h3><p class="text-xs text-secondary leading-relaxed">Drop sheets, full cleanup. Cleaner than we found it.</p></div></div>
  </div>
  </div>
