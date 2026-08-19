@@ -139,14 +139,25 @@
 <!-- ═══════════════════════════════════════════════════
  SERVICES FOR PROPERTY MANAGERS. 7 service cards
  ═══════════════════════════════════════════════════ -->
+<style>
+ /* Swipe indicator for the services track. These classes are NOT in the compiled
+    Tailwind, they are plain CSS that front-page.php also declares inline. js/main.js
+    drives .vs-bar[data-for] on every page, so only the styling had to come across. */
+ .vs-bar{display:none;}
+ @media (max-width:639px){
+  .vs-bar{display:block;position:relative;overflow:hidden;width:72px;height:4px;border-radius:9999px;background:#dbe1e8;margin:0 auto;}
+  .vs-thumb{position:absolute;left:0;top:0;height:100%;width:50%;border-radius:9999px;background:#041534;}
+  #pm-services-scroll::-webkit-scrollbar{display:none;}
+ }
+</style>
 <section class="py-16 sm:py-20 bg-surface-container-low">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <div class="text-center mb-12">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Services for Property Managers</h2>
  <p class="text-secondary max-w-2xl mx-auto">Every bathroom problem you encounter. we fix it. Fast, fixed-price, no fuss.</p>
  </div>
- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+ <div id="pm-services-scroll" class="flex gap-4 overflow-x-auto snap-x snap-mandatory pt-2 px-1 pb-4 pr-6 sm:pr-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:pb-0" style="-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+  <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
    <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting-400w.jpg 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg 800w" sizes="96px" alt="Shower Regrouting" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
    </div>
@@ -154,7 +165,7 @@
    <p class="text-secondary text-sm leading-relaxed mb-3">Full grout removal and replacement. Stops leaks, eliminates mould.</p>
    <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
   </a>
-  <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+  <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
    <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png 800w" sizes="96px" alt="Bath Resurfacing" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
    </div>
@@ -162,7 +173,7 @@
    <p class="text-secondary text-sm leading-relaxed mb-3">Restore chipped, stained or worn bathtubs to like new condition.</p>
    <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
   </a>
-  <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+  <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
    <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png 800w" sizes="96px" alt="Tile Resurfacing" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
    </div>
@@ -170,7 +181,7 @@
    <p class="text-secondary text-sm leading-relaxed mb-3">Recoat dated wall tiles in a fresh high gloss white finish.</p>
    <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
   </a>
-  <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+  <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
    <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png 800w" sizes="96px" alt="Vanity Respray" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
    </div>
@@ -178,7 +189,7 @@
    <p class="text-secondary text-sm leading-relaxed mb-3">Cabinet resprayed in a modern colour. Transforms the whole bathroom.</p>
    <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
   </a>
-  <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+  <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
    <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png 800w" sizes="96px" alt="Basin Restoration" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
    </div>
@@ -186,7 +197,7 @@
    <p class="text-secondary text-sm leading-relaxed mb-3">Resurface chipped or stained basins. Cheaper than replacement.</p>
    <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
   </a>
-  <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+  <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 block bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
    <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
     <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png 800w" sizes="96px" alt="Silicone Replacement" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
    </div>
@@ -195,7 +206,7 @@
    <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
   </a>
 
-<a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
+<a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover/') ); ?>" class="w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none snap-start shrink-0 sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-on-tertiary-fixed" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span>
@@ -211,6 +222,9 @@
  </a>
  </div>
  </div>
+  <p class="text-center text-xs text-secondary mt-3 sm:hidden">Swipe to see more services &rarr;</p>
+  <div class="vs-bar" data-for="#pm-services-scroll" aria-hidden="true" style="margin-top:8px;"><span class="vs-thumb"></span></div>
+
 </section>
 
 <!-- ═══════════════════════════════════════════════════

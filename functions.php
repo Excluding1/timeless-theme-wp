@@ -1873,7 +1873,14 @@ function timeless_get_google_reviews() {
     }
 
     $data = array(
-        'reviews'      => array_slice( $reviews_normalized, 0, 6 ),
+        /* 4 and 5 stars only. Allan's call 2026-08-20. The AGGREGATE below is NOT
+           filtered -- it stays Google's true rating and count, because cherry-picking the
+           headline number would be a misrepresentation. Only which individual reviews we
+           choose to display is filtered, which is ordinary editorial selection. */
+        'reviews'      => array_slice(
+            array_values( array_filter( $reviews_normalized, function ( $r ) {
+                return (int) ( $r['rating'] ?? 0 ) >= 4;
+            } ) ), 0, 6 ),
         'rating'       => isset( $body['rating'] ) ? floatval( $body['rating'] ) : 0,
         'total'        => isset( $body['userRatingCount'] ) ? intval( $body['userRatingCount'] ) : 0,
         'business_url' => isset( $body['googleMapsUri'] ) ? esc_url_raw( $body['googleMapsUri'] ) : '',
@@ -1943,6 +1950,10 @@ function timeless_parse_static_reviews() {
         );
     }
 
+    // Same 4-and-5-star rule as the live API path, so both sources behave identically.
+    $reviews = array_values( array_filter( $reviews, function ( $r ) {
+        return (int) ( $r['rating'] ?? 0 ) >= 4;
+    } ) );
     return array_slice( $reviews, 0, 6 );  // Show up to 6
 }
 
