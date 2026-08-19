@@ -93,15 +93,15 @@
  </div>
  </div>
  <div class="grid grid-cols-3 gap-3 sm:flex sm:items-center sm:gap-6 mb-6">
- <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
+ <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
  <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">Up to 80%</p>
  <p class="text-[0.65rem] text-secondary font-medium">Cheaper than reno</p>
  </div>
- <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
+ <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
  <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">1-2 Days</p>
  <p class="text-[0.65rem] text-secondary font-medium">Most jobs</p>
  </div>
- <div class="text-center bg-surface-container-low rounded-lg px-4 py-3">
+ <div class="text-center bg-surface-container-low rounded-lg px-2 sm:px-3 py-3">
  <p class="text-base sm:text-2xl font-extrabold text-primary whitespace-nowrap">5yr</p>
  <p class="text-[0.65rem] text-secondary font-medium">Walls &middot; floors 1yr</p>
  </div>
