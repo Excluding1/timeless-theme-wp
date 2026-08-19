@@ -283,37 +283,61 @@
  </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
- WHY PROPERTY MANAGERS CHOOSE US. 4 value props
- ═══════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════
+     WHY PROPERTY MANAGERS CHOOSE US. Two-column, image left / copy right.
+     Was a 4-card icon grid, which made three consecutive sections (Common
+     Scenarios, this, How It Works) render as the same template three times
+     in a row. Column ORDER is set by markup order, not md:order-*, because
+     those utilities are not in the compiled CSS.
+     ══════════════════════════════════════════════════════════════════ -->
 <section class="py-16 sm:py-20 bg-white">
- <div class="max-w-7xl mx-auto px-6 sm:px-8">
- <div class="text-center mb-12">
- <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Why Property Managers Choose Us</h2>
- <p class="text-secondary max-w-2xl mx-auto">We&rsquo;re built for the way you work. fast approvals, minimal involvement, reliable results.</p>
- </div>
- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
- <div class="bg-surface-container-low rounded-xl p-6 text-center reveal border border-surface-container hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out">
- <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">speed</span>
- <h3 class="font-bold text-primary mb-2">Fast Turnaround</h3>
- <p class="text-sm text-secondary leading-relaxed">Minimise vacancy days. Most jobs completed in 1-3 days with minimal disruption to adjacent tenants.</p>
- </div>
- <div class="bg-surface-container-low rounded-xl p-6 text-center reveal border border-surface-container hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out">
- <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">photo_camera</span>
- <h3 class="font-bold text-primary mb-2">Fixed-Price from Photos</h3>
- <p class="text-sm text-secondary leading-relaxed">No call-out fee. Send photos, get a fixed-price quote within 24 hours. Approve without a site visit.</p>
- </div>
- <div class="bg-surface-container-low rounded-xl p-6 text-center reveal border border-surface-container hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out">
- <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">compare</span>
- <h3 class="font-bold text-primary mb-2">Before &amp; After Documentation</h3>
- <p class="text-sm text-secondary leading-relaxed">Professional before and after photos for condition reports, tenant communications, and listing assets.</p>
- </div>
- <div class="bg-surface-container-low rounded-xl p-6 text-center reveal border border-surface-container hover:shadow-lg hover:scale-105 transition-all duration-300 ease-out">
- <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">handshake</span>
- <h3 class="font-bold text-primary mb-2">Volume Arrangements</h3>
- <p class="text-sm text-secondary leading-relaxed">Ongoing relationships welcome. Competitive pricing for regular work across your portfolio.</p>
- </div>
- </div>
+ <div class="max-w-7xl mx-auto px-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+  <div>
+   <div class="rounded-xl overflow-hidden shadow-2xl" style="aspect-ratio:4/3;">
+    <img src="<?php echo esc_url( get_template_directory_uri() . '/images/services/property-manager/handover.jpg' ); ?>"
+         alt="Resurfaced rental bathroom photographed at handover, ready for the next tenant"
+         class="w-full h-full object-cover" width="720" height="540" loading="lazy" />
+   </div>
+  </div>
+
+  <div>
+   <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Why Managers Choose Us</span>
+   <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Built For The Way You Work</h2>
+   <p class="text-secondary leading-relaxed mb-6">Fast approvals, minimal involvement, reliable results. You approve a price and we handle the rest.</p>
+
+   <div class="space-y-5">
+    <div class="flex items-start gap-3">
+     <span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" aria-hidden="true">speed</span>
+     <div>
+      <h3 class="font-bold text-primary text-sm mb-1">Fast Turnaround</h3>
+      <p class="text-sm text-secondary leading-relaxed">Minimise vacancy days. Most jobs completed in 1 to 3 days with minimal disruption to adjacent tenants.</p>
+     </div>
+    </div>
+    <div class="flex items-start gap-3">
+     <span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" aria-hidden="true">photo_camera</span>
+     <div>
+      <h3 class="font-bold text-primary text-sm mb-1">Fixed Price From Photos</h3>
+      <p class="text-sm text-secondary leading-relaxed">No call-out fee. Send photos, get a fixed price quote within 24 hours, approve without a site visit.</p>
+     </div>
+    </div>
+    <div class="flex items-start gap-3">
+     <span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" aria-hidden="true">compare</span>
+     <div>
+      <h3 class="font-bold text-primary text-sm mb-1">Before And After Documentation</h3>
+      <p class="text-sm text-secondary leading-relaxed">Professional before and after photos for condition reports, tenant communications, and listing assets.</p>
+     </div>
+    </div>
+    <div class="flex items-start gap-3">
+     <span class="material-symbols-outlined text-tertiary-fixed-dim shrink-0" aria-hidden="true">handshake</span>
+     <div>
+      <h3 class="font-bold text-primary text-sm mb-1">Volume Arrangements</h3>
+      <p class="text-sm text-secondary leading-relaxed">Ongoing relationships welcome. Competitive pricing for regular work across your portfolio.</p>
+     </div>
+    </div>
+   </div>
+  </div>
+
  </div>
 </section>
 
@@ -439,44 +463,46 @@
 <!-- RENTAL WARRANTY, EXPLAINED.
      This page's entire audience is landlords and agencies, so the rental carve-out has to
      live ON the page, not only behind a link to /warranty/. "Up to 5 years" is literally
-     true but no reader of THIS page can ever reach 5 years, and a qualifier the reader has
-     to go looking for does not cure a headline they act on. Allan's call, 2026-08-20.
-     Uses the theme's own [when_cards] shortcode -- no new Tailwind classes. -->
+     true but no reader of THIS page can ever reach 5 years, and a qualifier they have to
+     go looking for does not cure a headline they act on. Allan's call, 2026-08-20.
+     Hand-built, NOT [when_cards]: seven of that shortcode's classes are absent from the
+     compiled CSS because it has only ever been used in the unpublished blog posts. -->
 <section class="py-16 sm:py-20 bg-white">
  <div class="max-w-3xl mx-auto px-6 sm:px-8">
   <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">The 12-Month Rental Warranty, Explained</h2>
-  <p class="text-secondary text-center mb-8">Why tenanted bathrooms carry different cover &mdash; and why it is not a resurfacing problem.</p>
+  <p class="text-secondary text-center mb-10">Why tenanted bathrooms carry different cover, and why it is not a resurfacing problem.</p>
 
-  <p class="text-secondary leading-relaxed mb-4">Tenanted bathrooms see harder, less predictable use, and nobody inspects them between visits. So resurfacing in a rental carries <strong class="text-primary">12 months</strong> of workmanship cover rather than the 5 years we give an owner-occupier.</p>
+  <p class="text-secondary leading-relaxed mb-4">Tenanted bathrooms see harder, less predictable use, and nobody inspects them between visits. So resurfacing in a rental carries <strong class="text-primary">12 months</strong> of workmanship cover rather than the 5 years we give an owner occupier.</p>
 
-  <p class="text-secondary leading-relaxed mb-4">Those aren&rsquo;t resurfacing problems &mdash; they&rsquo;re bathroom problems. A brand-new acrylic bath chips the same way when a bottle lands on it, dulls the same way under Gumption or steel wool, and marks the same way under a suction-cup mat. Replacing the bath doesn&rsquo;t remove any of those risks. It just costs several times more to find that out.</p>
+  <p class="text-secondary leading-relaxed mb-4">That is not a limitation of resurfacing. It is how bathrooms work. A brand new acrylic bath chips the same way when a bottle lands on it, dulls the same way under Gumption or steel wool, and marks the same way under a mat with suction cups. Replacing the bath removes none of those risks. It just costs several times more to find that out.</p>
 
-  <p class="text-secondary leading-relaxed mb-2">What the warranty covers is our workmanship &mdash; and application defects surface early. Peeling, bubbling and adhesion failure show in the first 30&ndash;60 days, well inside the 12 months.</p>
+  <p class="text-secondary leading-relaxed">What the warranty covers is our workmanship, and application defects surface early. Peeling, bubbling and adhesion failure show in the first 30 to 60 days, well inside the 12 months.</p>
 
-  <div class="grid md:grid-cols-2 gap-6 my-8">
-   <div class="bg-surface-container-low rounded-xl p-6 border border-surface-container">
-    <h3 class="text-xl font-bold text-green-600 mb-3">Covered for 12 months</h3>
+  <div class="grid md:grid-cols-2 gap-6 items-stretch my-8">
+   <div class="h-full bg-surface-container-low rounded-xl p-6 border-l-4 border-primary">
+    <p class="text-xs font-semibold uppercase tracking-wide text-green-700 mb-3">Covered for 12 months</p>
     <ul class="list-disc pl-6 space-y-2 text-sm text-secondary">
      <li>Peeling or lifting under normal use</li>
      <li>Bubbling or blistering in the coating</li>
-     <li>Adhesion failure &mdash; the coating separating from the surface</li>
+     <li>Adhesion failure, the coating separating from the surface</li>
      <li>Any defect traceable to how the job was done</li>
     </ul>
    </div>
-   <div class="bg-surface-container-low rounded-xl p-6 border border-surface-container">
-    <h3 class="text-xl font-bold text-error mb-3">Not covered &mdash; same as a new bath</h3>
+   <div class="h-full bg-surface-container-low rounded-xl p-6 border-l-4 border-surface-container">
+    <p class="text-xs font-semibold uppercase tracking-wide text-primary mb-3">Not covered</p>
     <ul class="list-disc pl-6 space-y-2 text-sm text-secondary">
      <li>Chips from dropped bottles or tools</li>
      <li>Dulling from abrasive pastes, steel wool or neat bleach</li>
-     <li>Suction-cup mats &mdash; trapped water lifts any finish</li>
+     <li>Mats with suction cups, trapped water lifts any finish</li>
      <li>Tenant wilful damage</li>
     </ul>
+    <p class="text-xs text-secondary mt-4 opacity-70">Every one of these damages a brand new bath the same way.</p>
    </div>
   </div>
 
-  <p class="text-secondary leading-relaxed">Two things make claims rare. We leave an aftercare card in the bathroom on every job, so whoever moves in knows what not to use on it. And photograph the finish at handover &mdash; it settles any later argument about whether the damage predated the tenancy.</p>
+  <p class="text-secondary leading-relaxed">Two things make claims rare. We leave an aftercare card in the bathroom on every job, so whoever moves in knows what not to use on it. And photograph the finish at handover, which settles any later argument about whether the damage predated the tenancy.</p>
 
-  <p class="text-xs text-secondary mt-6">Owner-occupied bathrooms carry up to 5 years on resurfacing. Full terms per service on our <a class="text-primary font-semibold hover:underline" href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>">warranty page</a>. Your rights under the Australian Consumer Law are unaffected.</p>
+  <p class="text-xs text-secondary mt-6">Owner occupied bathrooms carry up to 5 years on resurfacing. Full terms per service on our <a class="text-primary font-semibold hover:underline" href="<?php echo esc_url( home_url( '/warranty/' ) ); ?>">warranty page</a>. Your rights under the Australian Consumer Law are unaffected.</p>
  </div>
 </section>
 
