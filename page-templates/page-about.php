@@ -191,7 +191,7 @@
  <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Google Rating</p>
  </div>
  <div class="reveal">
- <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">3<span class="text-tertiary-fixed-dim">yr</span></p>
+ <p class="text-4xl sm:text-5xl font-extrabold tracking-tighter mb-2">5<span class="text-tertiary-fixed-dim">yr</span></p>
  <p class="text-xs sm:text-sm font-bold text-on-primary-container uppercase tracking-widest">Up to 5-Year Warranty</p>
  </div>
  <div class="reveal">
