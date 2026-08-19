@@ -509,3 +509,57 @@ html, body {
         white-space: nowrap;
     }
 }
+
+
+/* ── PROCESS STEPS ────────────────────────────────────────────────────────────
+   [process_step] renders one numbered step per shortcode call, so consecutive
+   steps were four disconnected circles floating in whitespace with nothing
+   tying them together. A dashed rule now runs from each circle down to the
+   next, which is what makes a sequence read as a sequence.
+
+   Drawn with :has(+ .tr-step) so the last step in a run has no trailing line,
+   without needing the shortcode to know how many steps follow it.
+
+   Lives here, not in Tailwind: the connector needs a pseudo-element and exact
+   geometry tied to the 48px circle, and style.css is not touched by the purge.
+   ──────────────────────────────────────────────────────────────────────────── */
+.tr-step {
+    position: relative;
+    padding-bottom: 28px;
+}
+.tr-step:last-of-type { padding-bottom: 0; }
+
+/* the connector: starts just under the circle, runs to the next step's circle */
+.tr-step:has(~ .tr-step)::before {
+    content: "";
+    position: absolute;
+    left: 23px;                 /* centre of the 48px circle, minus 1px border */
+    top: 56px;                  /* circle is 48px tall, clear it plus a gap */
+    bottom: 4px;
+    border-left: 2px dashed #e7c08b;
+    opacity: 0.7;
+}
+
+/* the number sits on the connector, so it needs to cover it */
+.tr-step > div:first-child { position: relative; z-index: 1; }
+
+@media (max-width: 639px) {
+    .tr-step { padding-bottom: 22px; gap: 12px; }
+    .tr-step:has(~ .tr-step)::before { left: 19px; top: 48px; }
+    .tr-step .w-12 { width: 40px; height: 40px; }
+    .tr-step .w-10 { width: 34px; height: 34px; }
+}
+
+
+/* ── DECISION FLOW ────────────────────────────────────────────────────────────
+   [decision_flow] stacks its two answers on a phone and sits them side by side
+   from 640px. The divider has to move from the bottom edge to the middle at that
+   breakpoint, and sm:border-r / sm:border-b-0 are not in the compiled Tailwind,
+   so the rule lives here.
+   ──────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 640px) {
+    .tr-decision > div:first-child {
+        border-bottom: 0 !important;
+        border-right: 1px solid #e4e4e7;
+    }
+}

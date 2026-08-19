@@ -152,7 +152,7 @@ function timeless_shortcode_process_step( $atts, $content = null ) {
     ), $atts );
     $body = $a['content'] ?: $content;
     ob_start(); ?>
-    <div class="my-6 flex gap-4">
+    <div class="tr-step flex gap-4">
         <div class="flex flex-col items-center shrink-0">
             <div class="w-12 h-12 rounded-full bg-white shadow-xs flex items-center justify-center">
                 <div class="w-10 h-10 rounded-full bg-[#e7c08b]/20 flex items-center justify-center">
@@ -274,36 +274,36 @@ function timeless_shortcode_decision_flow( $atts ) {
         'yes_label' => 'Yes', 'no_label' => 'No',
     ), $atts );
     if ( ! $a['question'] ) return '';
-    $wrap = function( $s, $len ) { // wrap text into <=2 tspan lines
-        $s = trim( $s );
-        if ( mb_strlen( $s ) <= $len ) return array( $s );
-        $words = explode( ' ', $s ); $l1 = ''; $l2 = '';
-        foreach ( $words as $w ) { if ( mb_strlen( $l1 . ' ' . $w ) <= $len && $l2 === '' ) $l1 = trim( $l1 . ' ' . $w ); else $l2 = trim( $l2 . ' ' . $w ); }
-        return array( $l1, $l2 );
-    };
-    $q = $wrap( $a['question'], 30 ); $y = $wrap( $a['yes'], 34 ); $n = $wrap( $a['no'], 34 );
-    $tspans = function( $lines, $x, $y0 ) { $out = ''; $n = count( $lines ); $start = $y0 - ( $n - 1 ) * 9;
-        foreach ( $lines as $i => $ln ) { $out .= '<tspan x="' . $x . '" y="' . ( $start + $i * 18 ) . '">' . esc_html( $ln ) . '</tspan>'; } return $out; };
+    /* Rebuilt 2026-08-20. Was a hand-drawn SVG flowchart: a navy box with two diagonal
+       lines running to two rounded rectangles. Three things made it read as generic AI
+       filler rather than part of this site:
+         - text was wrapped by counting characters into at most two <tspan> lines, so any
+           answer longer than ~34 characters simply overflowed its box;
+         - the canvas was a fixed 680x300 viewBox, so on a phone the type shrank to
+           roughly 7px while the diagram kept its desktop proportions;
+         - the palette was #2e7d52 / #b45309, which appears nowhere else in the theme.
+       It is now built from the same parts as the rest of the site: the navy header of
+       compare_table, the card border of when_cards, and real HTML that wraps, reflows
+       and stays legible at any width. The divider is inline CSS because sm:border-r and
+       sm:border-b-0 are not in the compiled Tailwind. */
     ob_start(); ?>
-    <figure class="my-8 not-prose">
-        <svg viewBox="0 0 680 300" role="img" aria-label="<?php echo esc_attr( $a['question'] . ' If yes, ' . $a['yes'] . '. If no, ' . $a['no'] ); ?>" style="width:100%;max-width:640px;height:auto;margin:0 auto;display:block;font-family:Inter,system-ui,sans-serif">
-            <title><?php echo esc_html( $a['question'] ); ?></title>
-            <rect x="200" y="16" width="280" height="72" rx="12" fill="#041534"/>
-            <text fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle"><?php echo $tspans( $q, 340, 56 ); ?></text>
-            <path d="M300 88 L150 150" stroke="#2e7d52" stroke-width="2" fill="none"/>
-            <path d="M380 88 L530 150" stroke="#b45309" stroke-width="2" fill="none"/>
-            <?php // pill width scales with the label so longer words ("Drummy") don't overflow
-            $yw = max( 46, mb_strlen( $a['yes_label'] ) * 7.5 + 18 );
-            $nw = max( 46, mb_strlen( $a['no_label'] ) * 7.5 + 18 ); ?>
-            <rect x="<?php echo 233 - $yw / 2; ?>" y="118" width="<?php echo $yw; ?>" height="22" rx="11" fill="#2e7d52"/>
-            <text x="233" y="133" fill="#fff" font-size="12" font-weight="700" text-anchor="middle"><?php echo esc_html( $a['yes_label'] ); ?></text>
-            <rect x="<?php echo 447 - $nw / 2; ?>" y="118" width="<?php echo $nw; ?>" height="22" rx="11" fill="#b45309"/>
-            <text x="447" y="133" fill="#fff" font-size="12" font-weight="700" text-anchor="middle"><?php echo esc_html( $a['no_label'] ); ?></text>
-            <rect x="20" y="150" width="260" height="120" rx="12" fill="#eef6f1" stroke="#2e7d52" stroke-width="1.5"/>
-            <text fill="#1f5c3d" font-size="13.5" font-weight="600" text-anchor="middle"><?php echo $tspans( $y, 150, 210 ); ?></text>
-            <rect x="400" y="150" width="260" height="120" rx="12" fill="#fdf3e7" stroke="#b45309" stroke-width="1.5"/>
-            <text fill="#8a4708" font-size="13.5" font-weight="600" text-anchor="middle"><?php echo $tspans( $n, 530, 210 ); ?></text>
-        </svg>
+    <figure class="my-8">
+        <div class="rounded-xl overflow-hidden border border-surface-container bg-white">
+            <div class="bg-primary text-white p-4 text-center">
+                <p class="text-xs uppercase tracking-widest opacity-70 mb-1">Quick decision</p>
+                <p class="font-bold text-base"><?php echo esc_html( $a['question'] ); ?></p>
+            </div>
+            <div class="tr-decision grid sm:grid-cols-2">
+                <div class="p-5" style="border-bottom:1px solid #e4e4e7">
+                    <span class="inline-block text-xs font-bold uppercase tracking-wide text-green-700 mb-2"><?php echo esc_html( $a['yes_label'] ); ?></span>
+                    <p class="text-sm text-secondary leading-relaxed"><?php echo esc_html( $a['yes'] ); ?></p>
+                </div>
+                <div class="p-5">
+                    <span class="inline-block text-xs font-bold uppercase tracking-wide text-error mb-2"><?php echo esc_html( $a['no_label'] ); ?></span>
+                    <p class="text-sm text-secondary leading-relaxed"><?php echo esc_html( $a['no'] ); ?></p>
+                </div>
+            </div>
+        </div>
     </figure>
     <?php
     return ob_get_clean();
@@ -643,7 +643,7 @@ function timeless_blog_author_box() {
                 <div class="min-w-0">
                     <p class="text-[0.65rem] font-bold uppercase tracking-widest text-secondary mb-1">About the author</p>
                     <h2 class="text-lg font-extrabold text-primary tracking-tight mb-1">Allan P</h2>
-                    <p class="text-xs font-semibold text-secondary mb-3">Quotation and Jobs Manager, Timeless Resurfacing</p>
+                    <p class="text-xs font-semibold text-secondary mb-3">Quotation and Jobs Manager &middot; Bathroom Resurfacing Specialist, Timeless Resurfacing</p>
                     <p class="text-sm text-secondary leading-relaxed mb-3">
                         Every guide comes from jobs we have actually done in Sydney homes. We resurface baths, tiles,
                         basins and vanities and re-grout showers across Greater Sydney, quoting from photos within 24 hours.

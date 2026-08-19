@@ -103,7 +103,14 @@ $all_categories = get_categories( array(
  </div>
 </section>
 
-<!-- CATEGORY FILTER PILLS -->
+<!-- CATEGORY FILTER PILLS - REMOVED 2026-08-20 (Allan).
+     A sticky bar of six category pills sat above the article list while most of those
+     categories held zero posts, so it read as an empty filing system rather than a
+     filter. It only earns its place once there are enough articles per category to be
+     worth narrowing. The original markup is preserved below, commented, so it is a
+     paste-back rather than a rebuild when that day comes.
+
+<!- - CATEGORY FILTER PILLS - ->
 <?php if ( ! empty( $all_categories ) ) : ?>
 <section class="py-6 bg-surface border-b border-surface-container sticky top-16 z-30 backdrop-blur-sm bg-surface/95">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
@@ -128,6 +135,8 @@ $all_categories = get_categories( array(
  </nav>
  </div>
 </section>
+-->
+
 <?php endif; ?>
 
 

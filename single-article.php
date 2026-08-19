@@ -47,7 +47,7 @@ if ( $thumb_url ) {
  "inLanguage": "en-AU",
  <?php if ( $cat_name ) : ?>"articleSection": "<?php echo esc_js( $cat_name ); ?>",<?php endif; ?>
  "wordCount": <?php echo (int) $word_count; ?>,
- "author": { "@type": "Person", "name": "Allan P", "jobTitle": "Quotation and Jobs Manager", "worksFor": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" } },
+ "author": { "@type": "Person", "name": "Allan P", "jobTitle": "Quotation and Jobs Manager, Bathroom Resurfacing Specialist", "worksFor": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" } },
  "publisher": {
  "@type": "Organization",
  "name": "Timeless Resurfacing",
@@ -105,7 +105,7 @@ if ( $thumb_url ) {
  <?php else : ?>
  <span class="inline-flex items-center justify-center rounded-full shrink-0 mr-1" style="width:40px;height:40px;background:#041534;color:#e7c08b;font-weight:800;font-size:0.95rem;" aria-hidden="true">A</span>
  <?php endif; ?>
- <span>By <b class="text-primary">Allan P</b>, Quotation and Jobs Manager</span>
+ <span>By <b class="text-primary">Allan P</b>, Quotation and Jobs Manager &middot; Bathroom Resurfacing Specialist</span>
  <span class="text-secondary/50">·</span>
  <?php if ( $show_modified ) : ?>
  <time datetime="<?php echo esc_attr( $modified_iso ); ?>">Updated <?php echo esc_html( $modified_disp ); ?></time>
