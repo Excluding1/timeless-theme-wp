@@ -149,7 +149,7 @@ foreach ( $toc_items as $k => $item ) {
 <div class="px-6 sm:px-8 max-w-7xl mx-auto pb-16">
  <?php if ( $show_toc ) : ?>
  <!-- 2-column layout: TOC sidebar + article content -->
- <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-12">
+ <div class="tr-article-grid grid grid-cols-1 gap-8 lg:gap-12">
  <!-- TOC + CTA Sidebar -->
  <aside class="lg:sticky lg:top-24 lg:self-start order-2 lg:order-1 space-y-6">
  <!-- Mobile: collapsible TOC -->

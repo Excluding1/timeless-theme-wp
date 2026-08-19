@@ -71,6 +71,41 @@ add_action( 'init', 'timeless_register_article_cpt' );
    ───────────────────────────────────────────── */
 
 /* [before_after before="url" after="url" alt="..."], interactive slider */
+/**
+ * Inline SVG icons for the blog shortcodes.
+ *
+ * WHY THIS EXISTS. Material Symbols is self-hosted as a ~10KB SUBSET containing only the
+ * glyphs the main site pages use. The blog shortcodes call icons that are not in that
+ * subset (lightbulb, swap_horiz, bolt, drag_indicator...), so the @font-face has no glyph,
+ * the browser falls back, and the LIGATURE NAME renders as literal text: readers saw the
+ * word "lightbulb" sitting next to "PRO TIP", and "swap_horiz" next to "Replace when".
+ *
+ * Patching the subset would fix today and break again the first time a new icon is used,
+ * silently, in published content. Inline SVG cannot regress: no font to load, no subset to
+ * keep in sync, renders identically everywhere, and the markup is crawlable.
+ *
+ * @param string $name  icon key
+ * @param string $class Tailwind classes for sizing/colour (currentColor is inherited)
+ * @param string $style optional inline style
+ */
+function timeless_icon( $name, $class = '', $style = '' ) {
+    $paths = array(
+        'lightbulb'       => 'M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z',
+        'verified'        => 'M23 12l-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z',
+        'warning'         => 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z',
+        'bolt'            => 'M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z',
+        'arrow_forward'   => 'M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z',
+        'swap_horiz'      => 'M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z',
+        'check_circle'    => 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+        'drag_indicator'  => 'M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
+    );
+    $d = $paths[ $name ] ?? $paths['check_circle'];
+    return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"'
+        . ( $class ? ' class="' . esc_attr( $class ) . '"' : '' )
+        . ( $style ? ' style="' . esc_attr( $style ) . '"' : '' )
+        . '><path d="' . $d . '"/></svg>';
+}
+
 function timeless_shortcode_before_after( $atts ) {
     $a = shortcode_atts( array(
         'before' => '',
@@ -92,7 +127,7 @@ function timeless_shortcode_before_after( $atts ) {
         </div>
         <div class="ba-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left:50%;transform:translateX(-50%);cursor:ew-resize;">
             <div class="absolute top-1/2 left-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center" style="transform:translate(-50%,-50%);">
-                <span class="material-symbols-outlined text-primary" aria-hidden="true">drag_indicator</span>
+                <?php echo timeless_icon( 'drag_indicator', 'text-primary', 'width:20px;height:20px' ); ?>
             </div>
         </div>
         <span class="absolute top-3 left-3 bg-white/90 text-primary text-xs font-bold px-2 py-1 rounded">BEFORE</span>
@@ -128,7 +163,7 @@ function timeless_shortcode_icon_callout( $atts, $content = null ) {
     $body = $a['content'] ?: $content;
     ob_start(); ?>
     <div class="my-6 rounded-xl p-6 flex items-start gap-4" style="background:<?php echo esc_attr( $t['bg'] ); ?>;border-left:4px solid <?php echo esc_attr( $t['border'] ); ?>;">
-        <span class="material-symbols-outlined text-3xl shrink-0" style="font-variation-settings:'FILL' 1;color:<?php echo esc_attr( $t['accent'] ); ?>;" aria-hidden="true"><?php echo esc_html( $icon ); ?></span>
+        <?php echo timeless_icon( $icon, 'shrink-0', 'width:30px;height:30px;color:' . esc_attr( $t['accent'] ) ); ?>
         <div class="flex-1">
             <p class="text-[0.65rem] font-bold uppercase tracking-widest mb-1" style="color:<?php echo esc_attr( $t['accent'] ); ?>;"><?php echo esc_html( $t['label'] ); ?></p>
             <?php if ( $a['title'] ) : ?>
@@ -246,7 +281,7 @@ function timeless_shortcode_when_cards( $atts ) {
         $list = array_filter( array_map( 'trim', explode( ';', $items ) ) );
         ob_start(); ?>
         <div class="flex-1 bg-white rounded-xl p-5 border-t-4 <?php echo esc_attr( $accent ); ?> border border-surface-container">
-            <h4 class="font-bold text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-xl" style="font-variation-settings:'FILL' 1;" aria-hidden="true"><?php echo esc_html( $icon ); ?></span><?php echo esc_html( $title ); ?></h4>
+            <h4 class="font-bold text-primary mb-3 flex items-center gap-2"><?php echo timeless_icon( $icon, '', 'width:20px;height:20px;flex-shrink:0' ); ?><?php echo esc_html( $title ); ?></h4>
             <ul class="space-y-1.5 text-sm text-secondary list-none pl-0">
                 <?php foreach ( $list as $li ) : ?><li class="flex gap-2"><span aria-hidden="true">•</span><span><?php echo esc_html( $li ); ?></span></li><?php endforeach; ?>
             </ul>
@@ -325,7 +360,7 @@ function timeless_shortcode_key_takeaways( $atts ) {
     ob_start(); ?>
     <div class="my-8 rounded-2xl p-6 sm:p-8 not-prose" style="background:#041534;">
         <p class="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-widest mb-4" style="color:#e7c08b;">
-            <span class="material-symbols-outlined text-base" style="font-variation-settings:'FILL' 1;" aria-hidden="true">bolt</span>
+            <?php echo timeless_icon( 'bolt', '', 'width:16px;height:16px' ); ?>
             <?php echo esc_html( $a['label'] ); ?>
         </p>
         <ul class="space-y-2.5 list-none pl-0" style="margin:0;padding-left:0;list-style:none;">
@@ -393,7 +428,7 @@ function timeless_shortcode_inline_cta( $atts ) {
         $cta_href = is_singular( 'article' ) ? '#article-quote' : home_url( '/contact/' ); ?>
         <a href="<?php echo esc_url( $cta_href ); ?>" class="inline-flex items-center justify-center gap-2 bg-primary text-white text-sm font-bold py-2.5 px-5 rounded-lg hover:shadow-lg transition-all shrink-0 whitespace-nowrap">
             <?php echo esc_html( $a['button'] ); ?>
-            <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+            <?php echo timeless_icon( 'arrow_forward', '', 'width:16px;height:16px' ); ?>
         </a>
     </div>
     <?php
@@ -575,7 +610,7 @@ function timeless_blog_search_widget() {
                    class="w-full bg-white border border-surface-container rounded-lg px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-hidden" />
             <input type="hidden" name="post_type" value="article" />
             <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 text-primary p-1 hover:opacity-70" aria-label="Submit search">
-                <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span>
+                <?php echo timeless_icon( 'arrow_forward', '', 'width:16px;height:16px' ); ?>
             </button>
         </div>
     </form>

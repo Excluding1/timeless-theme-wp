@@ -563,3 +563,33 @@ html, body {
         border-right: 1px solid #e4e4e7;
     }
 }
+
+
+/* ── ARTICLE LAYOUT ───────────────────────────────────────────────────────────
+   The article body was pushed right of centre. The grid was [280px 1fr], so the
+   content column took ALL remaining width (888px at 1440) while the prose inside
+   it was capped at max-w-3xl (768px) and sat left-aligned within that column.
+   Net effect: the text block's centre landed ~104px right of the page centre, so
+   it read as lopsided against a centred hero image above it.
+
+   Fixed by giving the grid a third, empty column the same width as the table of
+   contents. The prose column is now a fixed 768px with equal gutters either side,
+   which puts the text on the true page centre and leaves the contents list sitting
+   directly to its left rather than floating out in the margin.
+
+   Lives here because lg:grid-cols-[280px_768px_280px] is an arbitrary value that
+   is not in the compiled Tailwind.
+   ──────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 1024px) {
+    .tr-article-grid {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 768px) 260px;
+        justify-content: center;
+    }
+    /* The empty third column exists only to balance the contents list. It needs an
+       explicit order: the real children carry lg:order-1 / lg:order-2, and a pseudo
+       element defaults to order 0, so without this it claims the FIRST column and
+       pushes the prose into the 260px gutter. */
+    .tr-article-grid::after { content: ""; order: 3; }
+    .tr-article-grid > .entry-content { max-width: 768px; }
+}
