@@ -123,7 +123,7 @@
 </section>
 
 <!-- TRUST LOGO BAR -->
-<section class="py-8 sm:py-10 bg-surface-container-low/50">
+<section class="py-8 sm:py-10 bg-white/50">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <p class="text-center text-sm text-secondary mb-6">Trusted by Hundreds of Australians, from Homeowners to Major Brands</p>
  </div>
@@ -139,87 +139,63 @@
 <!-- ═══════════════════════════════════════════════════
  SERVICES FOR PROPERTY MANAGERS. 7 service cards
  ═══════════════════════════════════════════════════ -->
-<section class="py-16 sm:py-20 bg-white">
+<section class="py-16 sm:py-20 bg-surface-container-low">
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <div class="text-center mb-12">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Services for Property Managers</h2>
  <p class="text-secondary max-w-2xl mx-auto">Every bathroom problem you encounter. we fix it. Fast, fixed-price, no fuss.</p>
  </div>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
- <!-- Service 1 -->
- <a href="<?php echo esc_url( home_url('/services/shower-regrouting/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">plumbing</span>
- </div>
- <div class="flex-1">
- <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Shower Regrouting</h3>
- <p class="text-sm text-secondary leading-relaxed">Full grout removal and replacement. Stops leaks, eliminates mould.</p>
- </div>
- </div>
- </a>
- <!-- Service 2 -->
- <a href="<?php echo esc_url( home_url('/services/bath-resurfacing/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">bathtub</span>
- </div>
- <div class="flex-1">
- <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Bath Resurfacing</h3>
- <p class="text-sm text-secondary leading-relaxed">Restore chipped, stained, or worn bathtubs to like-new condition.</p>
- </div>
- </div>
- </a>
- <!-- Service 3 -->
- <a href="<?php echo esc_url( home_url('/services/tile-resurfacing/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">grid_view</span>
- </div>
- <div class="flex-1">
- <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Tile Resurfacing</h3>
- <p class="text-sm text-secondary leading-relaxed">Recoat dated wall tiles in a fresh high-gloss white finish.</p>
- </div>
- </div>
- </a>
- <!-- Service 4 -->
- <a href="<?php echo esc_url( home_url('/services/vanity-refinishing/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">countertops</span>
- </div>
- <div class="flex-1">
- <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Vanity Respray</h3>
- <p class="text-sm text-secondary leading-relaxed">Cabinet resprayed in a modern colour. Transforms the whole bathroom aesthetic.</p>
- </div>
- </div>
- </a>
- <!-- Service 5 -->
- <a href="<?php echo esc_url( home_url('/services/basin-restoration/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">wash</span>
- </div>
- <div class="flex-1">
- <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Basin Restoration</h3>
- <p class="text-sm text-secondary leading-relaxed">Resurface chipped or stained basins. Cheaper than replacement.</p>
- </div>
- </div>
- </a>
- <!-- Service 6 -->
- <a href="<?php echo esc_url( home_url('/services/shower-leak-repair/') ); ?>" class="bg-surface-container-low rounded-xl p-6 reveal border border-surface-container hover:shadow-lg hover:border-primary/20 transition-all group">
- <div class="flex items-start gap-4">
- <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
- <span class="material-symbols-outlined text-2xl text-primary" aria-hidden="true">water_drop</span>
- </div>
- <div class="flex-1">
- <h3 class="font-bold text-primary mb-1 group-hover:text-primary-soft transition-colors">Silicone Replacement</h3>
- <p class="text-sm text-secondary leading-relaxed">Strip and reseal all junctions. Fixes leaks and mouldy silicone.</p>
- </div>
- </div>
- </a>
- <!-- Service 7. Full package, highlighted -->
- <a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
+  <a href="<?php echo esc_url( home_url( '/services/shower-regrouting/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting-400w.jpg 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-regrouting.jpg 800w" sizes="96px" alt="Shower Regrouting" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Shower Regrouting</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Full grout removal and replacement. Stops leaks, eliminates mould.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/bath-resurfacing/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/bath-resurfacing.png 800w" sizes="96px" alt="Bath Resurfacing" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Bath Resurfacing</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Restore chipped, stained or worn bathtubs to like new condition.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/tile-resurfacing/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/tile-resurfacing.png 800w" sizes="96px" alt="Tile Resurfacing" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Tile Resurfacing</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Recoat dated wall tiles in a fresh high gloss white finish.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/vanity-refinishing/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/vanity-resurfacing.png 800w" sizes="96px" alt="Vanity Respray" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Vanity Respray</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Cabinet resprayed in a modern colour. Transforms the whole bathroom.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/basin-restoration/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/basin-resurfacing.png 800w" sizes="96px" alt="Basin Restoration" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Basin Restoration</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Resurface chipped or stained basins. Cheaper than replacement.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+  <a href="<?php echo esc_url( home_url( '/services/shower-leak-repair/' ) ); ?>" class="bg-white rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all group text-center">
+   <div class="w-24 h-24 rounded-full bg-emerald-50 mx-auto mb-4 relative overflow-hidden">
+    <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing-400w.png 400w, <?php echo get_template_directory_uri(); ?>/images/homepage/shower-sealing.png 800w" sizes="96px" alt="Silicone Replacement" class="w-full h-full object-cover" width="96" height="96" loading="lazy" />
+   </div>
+   <h3 class="text-lg font-bold text-primary mb-2">Silicone Replacement</h3>
+   <p class="text-secondary text-sm leading-relaxed mb-3">Strip and reseal all junctions. Fixes leaks and mouldy silicone.</p>
+   <span class="text-xs font-bold text-primary flex items-center justify-center gap-1 group-hover:gap-2 transition-all">Learn More <span class="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span>
+  </a>
+
+<a href="<?php echo esc_url( home_url('/services/full-bathroom-makeover/') ); ?>" class="sm:col-span-2 lg:col-span-3 bg-primary/3 rounded-xl p-6 reveal border-2 border-primary ring-1 ring-primary/10 hover:shadow-lg transition-all group">
  <div class="flex items-start gap-4">
  <div class="w-12 h-12 rounded-xl bg-tertiary-fixed/30 flex items-center justify-center shrink-0">
  <span class="material-symbols-outlined text-2xl text-on-tertiary-fixed" style="font-variation-settings:'FILL' 1;" aria-hidden="true">star</span>
