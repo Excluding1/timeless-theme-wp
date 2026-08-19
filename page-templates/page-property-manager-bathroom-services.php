@@ -469,8 +469,10 @@
      compiled CSS because it has only ever been used in the unpublished blog posts. -->
 <section class="py-16 sm:py-20 bg-white">
  <div class="max-w-3xl mx-auto px-6 sm:px-8">
-  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4 text-center">The 12-Month Rental Warranty, Explained</h2>
-  <p class="text-secondary text-center mb-10">Why tenanted bathrooms carry different cover, and why it is not a resurfacing problem.</p>
+  <div class="max-w-2xl mx-auto text-center mb-10">
+   <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">How The Rental Warranty Works</h2>
+   <p class="text-secondary leading-relaxed">Why tenanted bathrooms carry different cover, and why it is not a resurfacing problem.</p>
+  </div>
 
   <p class="text-secondary leading-relaxed mb-4">Tenanted bathrooms see harder, less predictable use, and nobody inspects them between visits. So resurfacing in a rental carries <strong class="text-primary">12 months</strong> of workmanship cover rather than the 5 years we give an owner occupier.</p>
 
