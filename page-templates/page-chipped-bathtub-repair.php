@@ -389,10 +389,10 @@
 <section class="py-14 sm:py-16 bg-surface-container-low" id="faqs">
  <div class="max-w-6xl mx-auto px-6 sm:px-8">
  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
- <div>
+ <div class="text-center lg:text-left">
  <h2 class="text-2xl sm:text-3xl font-extrabold text-primary tracking-tighter mb-3">Questions? We&rsquo;ve Got Answers</h2>
  <p class="text-sm text-secondary leading-relaxed mb-6">Not sure if your chip needs a repair or a full resurface? Wondering about the process? These are the questions we hear most. If yours isn&rsquo;t here, send us a message. No pressure.</p>
- <a href="#quote" class="flex w-fit items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+ <a href="#quote" class="inline-flex w-fit mx-auto lg:mx-0 items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:shadow-lg transition-all">Ask Us Anything <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
  </div>
  <div class="space-y-2">
  <div class="faq-item border border-surface-container rounded-xl bg-white"><button class="w-full flex justify-between items-center p-4 text-left" onclick="toggleFaq(this)"><h3 class="font-bold text-primary text-sm pr-4">How much does chip repair cost?</h3><span class="material-symbols-outlined faq-chevron text-primary text-xl" aria-hidden="true">expand_more</span></button><div class="faq-answer px-4"><p class="text-sm text-secondary leading-relaxed pb-4">Every chip is different. The cost depends on how many chips, their size, and what material the bath or basin is made from. Send us photos and we&rsquo;ll have a fixed-price quote back within 1 business day.</p></div></div>
