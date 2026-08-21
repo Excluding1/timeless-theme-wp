@@ -61,6 +61,13 @@ images/**/*-[0-9]*w.png.webp
 contractor-app/supabase/.temp/
 docs/quote-app/config.js
 
+# Task Hub credentials. docs/task-hub/ became tracked on 2026-08-22 (its server.js
+# had been lost precisely because the directory was untracked), and config.js there
+# holds the Supabase project URL + anon key. Ignore it so restoring the app never
+# commits the keys with it.
+docs/task-hub/config.js
+docs/task-hub/reminders.json
+
 # AI-generated blog images (illustrative only) — stay OUT of git; live copies go via Media Library
 images/blog/
 quote-inbox/data/reviewed.json
