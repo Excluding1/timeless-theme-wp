@@ -74,7 +74,7 @@ if ( $thumb_url ) {
 <main id="main-content">
 
 <!-- BREADCRUMB -->
-<div class="pt-24 pb-2 px-6 sm:px-8 max-w-4xl mx-auto">
+<div class="pt-24 pb-2 px-6 sm:px-8 max-w-5xl mx-auto">
  <nav class="text-xs text-secondary" aria-label="Breadcrumb">
  <ol class="flex items-center gap-1">
  <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="hover:text-primary transition-colors">Home</a></li>
@@ -88,7 +88,7 @@ if ( $thumb_url ) {
 
 <!-- HERO -->
 <article>
-<header class="pt-4 pb-12 px-6 sm:px-8 max-w-4xl mx-auto">
+<header class="pt-4 pb-12 px-6 sm:px-8 max-w-5xl mx-auto">
  <?php if ( $cat_name ) : ?>
  <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4"><?php echo esc_html( $cat_name ); ?></span>
  <?php endif; ?>
@@ -146,7 +146,7 @@ foreach ( $toc_items as $k => $item ) {
     }
 }
 ?>
-<div class="px-6 sm:px-8 max-w-7xl mx-auto pb-16">
+<div class="tr-article-wrap px-6 sm:px-8 mx-auto pb-16">
  <?php if ( $show_toc ) : ?>
  <!-- 2-column layout: TOC sidebar + article content -->
  <div class="tr-article-grid grid grid-cols-1 gap-8 lg:gap-12">
@@ -187,13 +187,13 @@ foreach ( $toc_items as $k => $item ) {
  <?php echo timeless_blog_quote_cta_box(); ?>
  </aside>
  <!-- Content -->
- <div class="entry-content order-1 lg:order-2 max-w-3xl">
+ <div class="entry-content order-1 lg:order-2">
  <?php echo $content_html; ?>
  </div>
  </div>
  <?php else : ?>
  <!-- Single-column layout: no TOC -->
- <div class="entry-content max-w-3xl mx-auto">
+ <div class="entry-content max-w-5xl mx-auto">
  <?php echo $content_html; ?>
  </div>
  <?php endif; ?>
