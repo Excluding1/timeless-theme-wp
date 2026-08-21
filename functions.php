@@ -2662,11 +2662,22 @@ function timeless_output_sitemap() {
         if ( empty( $url ) ) continue;
         if ( (int) $page->ID === (int) get_option( 'page_on_front' ) ) continue;
 
-        // Higher priority for service pages
-        if ( strpos( $slug, 'sydney' ) !== false ) {
+        /*
+         * Priority ladder.
+         *
+         * Service pages are detected by their URL PATH, not by a 'sydney' substring
+         * in the slug. The old test was written when the templates were named
+         * page-*-sydney.php; the live URLs are /services/<slug>/ with no suffix, so
+         * it matched nothing and all 19 money pages were emitted at 0.5/yearly,
+         * the same weight as the privacy policy.
+         */
+        $path       = trim( (string) wp_parse_url( $url, PHP_URL_PATH ), '/' );
+        $is_service = ( strpos( $path, 'services/' ) === 0 && $path !== 'services' );
+
+        if ( $is_service || $slug === 'sydney' ) {
             $priority = '0.8';
             $freq     = 'monthly';
-        } elseif ( in_array( $slug, array( 'about', 'contact', 'gallery', 'faqs', 'areas' ), true ) ) {
+        } elseif ( in_array( $slug, array( 'about', 'contact', 'gallery', 'faqs', 'areas', 'services' ), true ) ) {
             $priority = '0.7';
             $freq     = 'monthly';
         } else {
@@ -2680,6 +2691,49 @@ function timeless_output_sitemap() {
         echo '<changefreq>' . esc_html( $freq ) . '</changefreq>';
         echo '<priority>' . esc_html( $priority ) . '</priority>';
         echo '</url>' . "\n";
+    }
+
+    /*
+     * Blog archive + articles.
+     *
+     * The loop above only walks post_type 'page', so every published article was
+     * absent from the sitemap and Google had no discovery path to /blog/ at all.
+     * Articles are the freshness signal for the whole domain, so the archive gets
+     * weekly/0.8 and each post monthly/0.7.
+     */
+    $blog_url = get_post_type_archive_link( 'article' );
+
+    if ( $blog_url ) {
+        $articles = get_posts( array(
+            'post_type'   => 'article',
+            'post_status' => 'publish',
+            'numberposts' => -1,
+            'orderby'     => 'date',
+            'order'       => 'DESC',
+        ) );
+
+        // lastmod for the archive = the most recently touched post on it
+        $blog_modified = $articles ? get_the_modified_date( 'Y-m-d', $articles[0] ) : current_time( 'Y-m-d' );
+
+        echo '<url>';
+        echo '<loc>' . esc_url( $blog_url ) . '</loc>';
+        echo '<lastmod>' . esc_html( $blog_modified ) . '</lastmod>';
+        echo '<changefreq>weekly</changefreq>';
+        echo '<priority>0.8</priority>';
+        echo '</url>' . "\n";
+
+        foreach ( $articles as $article ) {
+            $a_url = get_permalink( $article );
+
+            if ( empty( $a_url ) ) continue;
+
+            echo '<url>';
+            echo '<loc>' . esc_url( $a_url ) . '</loc>';
+            echo '<lastmod>' . esc_html( get_the_modified_date( 'Y-m-d', $article ) ) . '</lastmod>';
+            echo '<changefreq>monthly</changefreq>';
+            echo '<priority>0.7</priority>';
+            echo '</url>' . "\n";
+        }
     }
 
     echo '</urlset>';
