@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-07",
+  "updated": "2026-08-21",
   "note": "CANONICAL human roadmap = docs/specs/FINALIZATION-ROADMAP-2026-06-07.md (this board mirrors it). Sub-tasks filled in as we tackle each task (Allan helps with UI/layout specifics, Clifford finalises). Edit via cockpit or here.",
   "tasks": [
     {
@@ -353,6 +353,63 @@
         },
         {
           "title": "Start outreach calls (not started)",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "website-v2",
+      "title": "Website v2 — content + SEO pass (Jul–Aug 2026)",
+      "phase": "Now",
+      "status": "doing",
+      "note": "Added 2026-08-22 by Clifford. The board had no record of any July/August site work.",
+      "subtasks": [
+        {
+          "title": "Warranty ladder corrected per material across the theme (grout 2yr / silicone 1yr / resurface up-to-5yr / epoxy 5yr)",
+          "done": true
+        },
+        {
+          "title": "Rental resurfacing warranty set to 12 months, disclosed only on /warranty/ and the property-manager page",
+          "done": true
+        },
+        {
+          "title": "Property-manager page rebuilt (layout, reviews, mobile service cards)",
+          "done": true
+        },
+        {
+          "title": "Mobile responsiveness pass — service cards, chip-repair, tile-resurfacing scroll rows",
+          "done": true
+        },
+        {
+          "title": "Suburb pages reverted to the live state and backed up for a later, slower rollout",
+          "done": true
+        },
+        {
+          "title": "Chat widget removed site-wide (Allan never used it)",
+          "done": true
+        },
+        {
+          "title": "llms.txt now served at /llms.txt — the SEO doc's P0 is closed (verified live, 200)",
+          "done": true
+        },
+        {
+          "title": "Sitemap: articles + /blog/ were missing entirely; 19 service pages were at priority 0.5 — both fixed",
+          "done": true
+        },
+        {
+          "title": "Blog article 1 of 10 (property-manager guide) — perfect before writing article 2",
+          "done": false
+        },
+        {
+          "title": "Deploy v1.5.2 to live (repo 1.5.2, live 1.5.1 — also restores CSS filemtime cache-busting)",
+          "done": false
+        },
+        {
+          "title": "/services/ hub page renders 1 word on live but 19 breadcrumbs point at it",
+          "done": false
+        },
+        {
+          "title": "Blog images: pack exists but must be uploaded to the live Media Library before publishing",
           "done": false
         }
       ]
