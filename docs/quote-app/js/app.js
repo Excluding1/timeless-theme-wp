@@ -1062,7 +1062,7 @@
 
       '<section><h3>Warranty signing</h3>' +
       '<p class="hint">Each warranty is signed fresh in a popup when you download it. Set the people who can sign (comma separated) so they show as quick-pick buttons.</p>' +
-      '<label>Who can sign <input id="s_ops" value="' + esc(s.operators || '') + '" placeholder="Allan, Marko"></label>' +
+      '<label>Who can sign <input id="s_ops" value="' + esc(s.operators || '') + '" placeholder="Allan, Sam"></label>' +
       '<p class="hint mt">Optional: draw a saved signature that the popup can load with one tap (for whoever wants to reuse theirs instead of signing every time).</p>' +
       '<canvas id="sigpad" width="440" height="130"></canvas>' +
       '<div class="actions"><button id="sigclear">Clear</button><button id="sigsave" class="primary">Save signature</button>' +

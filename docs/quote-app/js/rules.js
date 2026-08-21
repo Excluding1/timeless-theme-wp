@@ -225,7 +225,7 @@
     bankName: 'Timeless Resurfacing',
     bsb: '032146',
     account: '025303',
-    operators: 'Allan, Marko',   // the people who sign warranties (quick-pick in the sign popup)
+    operators: 'Allan, Sam',   // the people who sign warranties (quick-pick in the sign popup)
     lastSigner: '',
     depositPct: 10,
     marginFloorPct: 25,      // job-score gate: margin under this = THIN (internal, never printed)

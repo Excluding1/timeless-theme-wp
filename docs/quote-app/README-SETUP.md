@@ -33,7 +33,7 @@ invoice-form layout modelled on the business's original invoice and the ATO's re
   up to 5yr / grout 2yr / silicone 12mo), auto-composed special conditions + care + exclusions
   (incl. tile-over specifics), the **exact ACL reg 90(4) mandatory text** verbatim, and a claims
   address. **Signing:** clicking Warranty opens a popup where you pick who is signing (Allan /
-  Marko, editable in Settings → Warranty signing) and sign fresh on the spot; the signer's name
+  Sam, editable in Settings → Warranty signing) and sign fresh on the spot; the signer's name
   prints on the PDF. A saved signature is optional (one-tap reuse in the popup). Add a
   **business/postal address** in Settings (the warranty rules require a claims address).
   Legally it must be given WITH the final invoice at completion, not just linked — the app
