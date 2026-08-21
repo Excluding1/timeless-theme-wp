@@ -656,13 +656,43 @@ html, body {
     margin: 0 auto;
 }
 .tr-stat {
+    position: relative;
+    overflow: hidden;
     background: #fff;
     border: 1px solid #e4e4e7;
     border-radius: 14px;
-    padding: 26px 16px 22px;
+    padding: 24px 16px 40px;      /* extra bottom room so the wave never crowds the label */
     text-align: center;
     transition: box-shadow .2s ease, transform .2s ease;
 }
+/* Icon badge: the gold at 14% over white, so it reads as a tint rather than a second
+   colour. Inline SVG, so it does not depend on the Material Symbols subset. */
+.tr-stat-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(231, 192, 139, .18);
+    color: #b08d4f;
+    margin-bottom: 14px;
+}
+/* The wave. Sits behind the text, bleeds to the card edges, and is deliberately faint:
+   it is a base for the card to sit on, not a graphic competing with the number. */
+.tr-stat-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 34px;
+    display: block;
+    fill: rgba(4, 21, 52, .05);
+    pointer-events: none;
+    z-index: 0;
+}
+.tr-stat > p, .tr-stat > .tr-stat-rule, .tr-stat > .tr-stat-badge { position: relative; z-index: 1; }
 .tr-stat:hover {
     box-shadow: 0 10px 24px rgba(4, 21, 52, .07);
     transform: translateY(-2px);
@@ -690,7 +720,9 @@ html, body {
     margin: 0;
 }
 @media (max-width: 639px) {
-    .tr-stat { padding: 20px 12px 18px; }
+    .tr-stat { padding: 18px 10px 34px; }
+    .tr-stat-badge { width: 42px; height: 42px; margin-bottom: 10px; }
+    .tr-stat-wave { height: 26px; }
     .tr-stat-value { font-size: 21px; }
     .tr-stat-title { font-size: 22px; }
     .tr-stat-eyebrow::before, .tr-stat-eyebrow::after { width: 26px; }

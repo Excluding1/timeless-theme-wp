@@ -98,6 +98,10 @@ function timeless_icon( $name, $class = '', $style = '' ) {
         'swap_horiz'      => 'M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z',
         'check_circle'    => 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
         'drag_indicator'  => 'M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
+        // stat-grid icons
+        'bathtub'         => 'M7 7c0-1.1.9-2 2-2s2 .9 2 2c0 .37-.1.72-.28 1.02l1.26 1.26 1.06-1.06a2.5 2.5 0 0 1 3.54 0l.7.7-1.06 1.06-.7-.7a1 1 0 0 0-1.42 0l-1.06 1.06L20 15H4v-2h9.17l-3.9-3.9A2.98 2.98 0 0 1 7 7zM4 17h16v1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-1z',
+        'schedule'        => 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z',
+        'home_repair'     => 'M12 3 2 12h3v8h6v-5h2v5h6v-8h3L12 3zm0 2.7 5 4.5V18h-2v-5H9v5H7v-7.8l5-4.5z',
     );
     $d = $paths[ $name ] ?? $paths['check_circle'];
     return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"'
@@ -249,11 +253,18 @@ function timeless_shortcode_stat_grid( $atts ) {
                 $parts = explode( '|', $item );
                 $value = trim( $parts[0] ?? '' );
                 $label = trim( $parts[1] ?? '' );
+                $icon  = trim( $parts[2] ?? '' );   // optional third field: value|label|icon
                 if ( ! $value ) continue; ?>
                 <div class="tr-stat">
+                    <?php if ( $icon ) : ?>
+                        <span class="tr-stat-badge"><?php echo timeless_icon( $icon, '', 'width:26px;height:26px' ); ?></span>
+                    <?php endif; ?>
                     <p class="tr-stat-value"><?php echo esc_html( $value ); ?></p>
                     <span class="tr-stat-rule" aria-hidden="true"></span>
                     <p class="tr-stat-label"><?php echo esc_html( $label ); ?></p>
+                    <svg class="tr-stat-wave" viewBox="0 0 240 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <path d="M0 22c34-14 62 12 96 4s52-22 88-14c22 5 40 2 56-4v32H0z"/>
+                    </svg>
                 </div>
             <?php endforeach; ?>
         </div>
