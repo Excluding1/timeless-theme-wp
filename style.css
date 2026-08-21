@@ -273,14 +273,28 @@ html, body {
     letter-spacing: 0.12em;
     margin-bottom: 0.35rem;
 }
+/* H2 vs H3 were 28px/800 and 22px/700 in the same navy: six pixels and one weight step
+   apart, which at a glance read as the same level. H2 already carries a strong signature
+   (gold chapter number + full-width top rule), so H3 gets its own using the same accent
+   applied differently: a short gold bar down its left edge. Size drops to 1.25rem to open
+   the gap, and the bar means the two never have to be told apart by size alone. */
 .entry-content h3 {
-    font-size: 1.375rem;
-    line-height: 1.3;
+    font-size: 1.25rem;
+    line-height: 1.35;
     font-weight: 700;
     color: #041534;
     letter-spacing: -0.01em;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
+    margin-top: 2.25rem;
+    margin-bottom: 0.6rem;
+    padding-left: 0.85rem;
+    border-left: 3px solid #e7c08b;
+}
+/* FAQ questions are h3 too but sit inside their own accordion chrome, so the bar would
+   double up on an existing border. */
+.entry-content h3.faq-section,
+.entry-content .faq-item h3 {
+    padding-left: 0;
+    border-left: 0;
 }
 .entry-content h4 {
     font-size: 1.25rem;
@@ -592,4 +606,92 @@ html, body {
        pushes the prose into the 260px gutter. */
     .tr-article-grid::after { content: ""; order: 3; }
     .tr-article-grid > .entry-content { max-width: 768px; }
+}
+
+
+/* ── STAT GRID ────────────────────────────────────────────────────────────────
+   The bare version was a white card with a big number and a caption, and nothing
+   telling the eye it mattered. Three structural additions, all in navy and gold:
+
+   1. a rule-flanked eyebrow, so the block announces itself rather than appearing
+   2. a gold hairline between figure and caption, so the two read as one unit
+   3. real padding and a soft lift on hover
+
+   Plain CSS rather than Tailwind: the flanking rules are pseudo-elements and the
+   hairline is a fixed 32px, neither of which the compiled utilities cover.
+   ──────────────────────────────────────────────────────────────────────────── */
+.tr-stat-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #b08d4f;
+    margin: 0 0 10px;
+}
+.tr-stat-eyebrow::before,
+.tr-stat-eyebrow::after {
+    content: "";
+    height: 1px;
+    width: 46px;
+    background: #e7c08b;
+    opacity: 0.7;
+}
+.tr-stat-title {
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #041534;
+    margin: 0 0 8px;
+}
+.tr-stat-intro {
+    font-size: 15px;
+    line-height: 1.55;
+    color: #595e6d;
+    max-width: 34rem;
+    margin: 0 auto;
+}
+.tr-stat {
+    background: #fff;
+    border: 1px solid #e4e4e7;
+    border-radius: 14px;
+    padding: 26px 16px 22px;
+    text-align: center;
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+.tr-stat:hover {
+    box-shadow: 0 10px 24px rgba(4, 21, 52, .07);
+    transform: translateY(-2px);
+}
+.tr-stat-value {
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 800;
+    color: #041534;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+.tr-stat-rule {
+    display: block;
+    width: 32px;
+    height: 3px;
+    border-radius: 2px;
+    background: #e7c08b;
+    margin: 12px auto;
+}
+.tr-stat-label {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #595e6d;
+    margin: 0;
+}
+@media (max-width: 639px) {
+    .tr-stat { padding: 20px 12px 18px; }
+    .tr-stat-value { font-size: 21px; }
+    .tr-stat-title { font-size: 22px; }
+    .tr-stat-eyebrow::before, .tr-stat-eyebrow::after { width: 26px; }
 }

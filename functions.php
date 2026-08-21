@@ -213,21 +213,50 @@ add_shortcode( 'process_step', 'timeless_shortcode_process_step' );
 /* [stat_grid] for reusable stat blocks like the homepage hero counters
    Usage: [stat_grid stats="1 Day|Most jobs;Up to 80%|Save vs new;3yr|Warranty"] */
 function timeless_shortcode_stat_grid( $atts ) {
-    $a = shortcode_atts( array( 'stats' => '' ), $atts );
+    $a = shortcode_atts( array(
+        'stats'   => '',
+        'eyebrow' => '',   // small rule-flanked label above the grid
+        'title'   => '',   // display heading
+        'intro'   => '',   // one supporting line under the heading
+    ), $atts );
     if ( empty( $a['stats'] ) ) return '';
-    $items = explode( ';', $a['stats'] );
+    /* Rebuilt 2026-08-22. Was a bare card with a number in it and nothing else: no
+       framing, no hierarchy, no reason for the eye to stop. The additions are all
+       structural rather than decorative -- an optional rule-flanked eyebrow and heading
+       so the block announces what it is, a gold hairline under each figure so the number
+       and its caption read as one unit instead of two stacked lines, and real padding.
+       Palette stays navy and gold; the layout idea came from a reference, the styling is
+       the theme's own. Uses .tr-stat in style.css because the flanking rules need
+       pseudo-elements. */
+    $items = array_filter( array_map( 'trim', explode( ';', $a['stats'] ) ) );
     ob_start(); ?>
-    <div class="my-8 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-        <?php foreach ( $items as $item ) :
-            $parts = explode( '|', $item );
-            $value = $parts[0] ?? '';
-            $label = $parts[1] ?? '';
-            if ( ! $value ) continue; ?>
-            <div class="bg-white rounded-xl p-4 text-center border border-surface-container">
-                <p class="text-2xl sm:text-3xl font-extrabold text-primary leading-tight"><?php echo esc_html( trim( $value ) ); ?></p>
-                <p class="text-xs text-secondary mt-1"><?php echo esc_html( trim( $label ) ); ?></p>
+    <div class="my-10">
+        <?php if ( $a['eyebrow'] || $a['title'] || $a['intro'] ) : ?>
+            <div class="text-center mb-8">
+                <?php if ( $a['eyebrow'] ) : ?>
+                    <p class="tr-stat-eyebrow"><?php echo esc_html( $a['eyebrow'] ); ?></p>
+                <?php endif; ?>
+                <?php if ( $a['title'] ) : ?>
+                    <p class="tr-stat-title"><?php echo esc_html( $a['title'] ); ?></p>
+                <?php endif; ?>
+                <?php if ( $a['intro'] ) : ?>
+                    <p class="tr-stat-intro"><?php echo esc_html( $a['intro'] ); ?></p>
+                <?php endif; ?>
             </div>
-        <?php endforeach; ?>
+        <?php endif; ?>
+        <div class="tr-stat-grid grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <?php foreach ( $items as $item ) :
+                $parts = explode( '|', $item );
+                $value = trim( $parts[0] ?? '' );
+                $label = trim( $parts[1] ?? '' );
+                if ( ! $value ) continue; ?>
+                <div class="tr-stat">
+                    <p class="tr-stat-value"><?php echo esc_html( $value ); ?></p>
+                    <span class="tr-stat-rule" aria-hidden="true"></span>
+                    <p class="tr-stat-label"><?php echo esc_html( $label ); ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
     <?php
     return ob_get_clean();
