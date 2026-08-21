@@ -688,7 +688,11 @@ html, body {
     width: 100%;
     height: 34px;
     display: block;
-    fill: rgba(4, 21, 52, .05);
+    /* Gold rather than navy. Navy at a visible opacity reads as a grey smudge or a
+       stray shadow on a white card; the gold tint echoes the icon badge and the rule
+       above it, so the wave looks like brand decoration instead of a rendering fault.
+       Raised from 5% navy after it turned out to be almost invisible on screen. */
+    fill: rgba(231, 192, 139, .30);
     pointer-events: none;
     z-index: 0;
 }
@@ -726,4 +730,15 @@ html, body {
     .tr-stat-value { font-size: 21px; }
     .tr-stat-title { font-size: 22px; }
     .tr-stat-eyebrow::before, .tr-stat-eyebrow::after { width: 26px; }
+
+    /* The grid is 2-up on phones, so an odd number of cards left the last one
+       stranded alone at half width on its own row, at a different height to the
+       pair above it. Measured on the rental article at 375px: cards 1 and 2 at
+       228px on row one, card 3 alone at 247px on row two. Let a trailing odd card
+       take the full width instead, which fills the row and reads as deliberate.
+       :last-child:nth-child(odd) only matches when the TOTAL count is odd, so an
+       even set is left alone. */
+    .tr-stat-grid > .tr-stat:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
 }
