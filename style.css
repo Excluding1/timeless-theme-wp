@@ -580,16 +580,10 @@ html, body {
    Lives here because lg:grid-cols-[280px_768px_280px] is an arbitrary value that
    is not in the compiled Tailwind.
    ──────────────────────────────────────────────────────────────────────────── */
-/* The wrapper was max-w-7xl (1280px). With a 230px contents list and gutters on both
-   sides that left the prose only 660px, which read as squished against a 1024px header.
-   The wrapper now sizes to the grid instead of capping it. */
-.tr-article-wrap { max-width: 1440px; }
-
 @media (min-width: 1024px) {
     .tr-article-grid {
         display: grid;
-        grid-template-columns: 210px minmax(0, 900px) 210px;
-        column-gap: 36px;
+        grid-template-columns: 260px minmax(0, 768px) 260px;
         justify-content: center;
     }
     /* The empty third column exists only to balance the contents list. It needs an
@@ -597,5 +591,5 @@ html, body {
        element defaults to order 0, so without this it claims the FIRST column and
        pushes the prose into the 260px gutter. */
     .tr-article-grid::after { content: ""; order: 3; }
-    .tr-article-grid > .entry-content { max-width: 900px; }
+    .tr-article-grid > .entry-content { max-width: 768px; }
 }
