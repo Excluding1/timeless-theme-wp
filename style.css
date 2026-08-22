@@ -351,6 +351,12 @@ html, body {
 
 .entry-content img {
     max-width: 100%;
+    /* Cap the height as well as the width. A portrait photo (a real job shot taken on a
+       phone is usually 3:4) would otherwise render 832 x 1106 in this column, taller than
+       most viewports, and push the article off the screen. Landscape images are nowhere
+       near this ceiling, so it only ever bites on tall ones. */
+    max-height: 68vh;
+    width: auto;
     height: auto;
     border-radius: 0.75rem;
     box-shadow: 0 4px 12px rgba(4, 21, 52, 0.08);
