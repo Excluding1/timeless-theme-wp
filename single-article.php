@@ -122,7 +122,35 @@ if ( $thumb_url ) {
 
  <figure class="mb-8">
  <div class="rounded-2xl overflow-hidden shadow-md aspect-16/9">
- <img src="<?php echo esc_url( $hero_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover" loading="eager" />
+ <?php
+ /*
+  * srcset, not a lone src. This figure lives in max-w-4xl minus px-8, so it is
+  * 832 CSS px at desktop; a 2x screen therefore wants ~1664 physical px. The old
+  * markup hardcoded the 1024 variant, delivering 62% of that, which read as soft
+  * or "480p" on any retina display. sizes tells the browser the real CSS width so
+  * it pulls the 1672 original on 2x and stays on the 62KB 1024 file at 1x.
+  *
+  * fetchpriority=high because this is the LCP element on every article.
+  */
+ $hero_id = get_post_thumbnail_id();
+
+ if ( $hero_id ) {
+     echo wp_get_attachment_image( $hero_id, 'full', false, array(
+         'class'         => 'w-full h-full object-cover',
+         'alt'           => get_the_title(),
+         'loading'       => 'eager',
+         'fetchpriority' => 'high',
+         'decoding'      => 'async',
+         'sizes'         => '(max-width: 896px) 100vw, 832px',
+     ) );
+ } else {
+     printf(
+         '<img src="%s" alt="%s" class="w-full h-full object-cover" loading="eager" fetchpriority="high" />',
+         esc_url( $hero_img ),
+         esc_attr( get_the_title() )
+     );
+ }
+ ?>
  </div>
  <?php if ( $hero_caption ) : ?>
  <figcaption class="text-xs text-secondary italic mt-2"><?php echo esc_html( $hero_caption ); ?></figcaption>
