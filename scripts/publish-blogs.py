@@ -243,11 +243,20 @@ def main():
         status = "publish" if args.publish else "draft"
         stamp = None
         if args.spacing_days:
-            # Newest post lands today; each earlier one steps back --spacing-days.
+            # UTC, not this machine's clock. The live site runs on UTC (gmt_offset 0) while
+            # the Mac is AEST, so dates generated locally arrived 10 hours ahead of the site's
+            # own time. On 2026-08-23 that put the newest post in WordPress's future and it
+            # was silently SCHEDULED rather than published — four articles went live and the
+            # fifth quietly did not, which is exactly the kind of failure nobody notices.
+            #
+            # An hour back from the top of the current UTC hour, so the newest post is always
+            # unambiguously in the past no matter what time of day this runs. The old code
+            # pinned 09:30 to "read more naturally", which breaks for anyone publishing
+            # before 09:30.
             back = (last - order_index(p["slug"])) * args.spacing_days
-            when = datetime.datetime.now() - datetime.timedelta(days=back)
-            # Mid-morning reads more naturally than whatever minute the script ran.
-            stamp = when.replace(hour=9, minute=30, second=0, microsecond=0).isoformat()
+            when = (datetime.datetime.utcnow().replace(minute=0, second=0, microsecond=0)
+                    - datetime.timedelta(hours=1, days=back))
+            stamp = when.isoformat()
         if args.dry_run:
             print(f"DRY: would upsert '{p['slug']}' as {status}" +
                   (f" dated {stamp[:10]}" if stamp else "") +
@@ -259,7 +268,10 @@ def main():
         payload = {"title": p["title"], "slug": p["slug"], "content": body,
                    "excerpt": p["excerpt"], "status": status}
         if stamp:
+            # Send both. WordPress decides future-vs-publish on date_gmt; sending only
+            # `date` lets it derive a gmt value that can land in the future.
             payload["date"] = stamp
+            payload["date_gmt"] = stamp
         if args.images and p["slug"] in HERO_MAP:
             hero = Path(args.images).expanduser() / HERO_MAP[p["slug"]]
             if hero.exists():
@@ -270,9 +282,13 @@ def main():
         if existing:
             out = api(args.site, f"article/{existing['id']}", "POST", payload)
             print(f"UPDATED {p['slug']} (id {out['id']}, status {out['status']})")
+            if out["status"] == "future":
+                print(f"  !! {p['slug']} is SCHEDULED, not published — its date is in the site's future")
         else:
             out = api(args.site, "article", "POST", payload)
             print(f"CREATED {p['slug']} (id {out['id']}, status {out['status']})")
+            if out["status"] == "future":
+                print(f"  !! {p['slug']} is SCHEDULED, not published — its date is in the site's future")
     print("\nRemember: purge SpeedyCache + Cloudflare after publishing.")
 
 
