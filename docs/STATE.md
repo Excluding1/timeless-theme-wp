@@ -211,6 +211,14 @@
 | 2 | **McGrath PM (tenant job)** (PM name ❓) | Inbound call from McGrath property manager | Tenant's bathroom job (details ❓) | ❓ Status unknown (Allan mentioned 2026-06-11) | Allan: capture PM name/office, property, service needed, outcome. If it converts: first agency job → ask written logo/testimonial permission after completion. |
 | 3 | **Mick (2-bathroom job)** | — | 2-bathroom resurface | ✅ **COMPLETED via sub — revenue real** | Done. Full margin/cost analysis: [docs/research/job-analysis-mick-2bath-2026-06-17.md](research/job-analysis-mick-2bath-2026-06-17.md) (~43% T2 / ~34% T3 actuals). |
 | 4 | **Isabella Comber / AitkenRE** | Real estate agency (AitkenRE) | Benchtop + basin resurface | 🟡 **Quote TR-1024 sent 2026-07-07** — $1,050 inc GST, awaiting response | Follow up if no reply; quote produced via docs/quote-app. |
+| 5 | **Strathfield 2-bathroom job** (customer name ❓) | Phone enquiry | 2-bathroom resurface, "exactly the same type of job" as #3 | ✅ **COMPLETED** (Allan confirmed 2026-08-22) | Allan: capture customer name, date, address, actual costs, and whether before/after photos exist. Used as the case study in the /blog/bathroom-resurfacing-rental-property/ article. |
+
+> ⚠️ **THIS TABLE IS INCOMPLETE — phone-booked jobs were never written up** (Allan, 2026-08-22, when row 5
+> surfaced). Until it is reconciled, do NOT treat "1 completed job" as the true count, and do not use this
+> table alone to rule out a job having happened. Everything downstream reads from here: revenue and margin
+> figures, the "first customer" claims, and which case studies we are entitled to publish. Worth one sitting
+> with Allan and Marko to list every completed job from memory before more of them fade.
+
 
 **Special considerations for this customer:**
 - Strip-back surcharge applies (Excel Modifier — Rejection #9 territory)
