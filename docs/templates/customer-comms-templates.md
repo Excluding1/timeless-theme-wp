@@ -169,9 +169,30 @@ is potentially two texts, roughly 4h and 5.5h apart. Fix by filtering the trigge
 - `abandoned_confirmed` = server sweep, only after 90 minutes of genuine silence, and it is the
   path that always carries `property_address`
 
-**Recommended:** filter W2 to `abandoned_confirmed` only, and drop the Wait to 0-30 minutes,
-since the sweep has already waited 90. One text, about an hour and a half after they leave,
-from the path with the better data.
+**The timing is already decided, and the GHL side contradicts it.** Allan set it on 2026-08-13
+and it is written into the code: **30 minutes to call a quote abandoned, plus an hour of grace
+before we say anything. 90 minutes total.** `TIMELESS_ABANDON_IDLE = 90 * MINUTE_IN_SECONDS`.
+
+The clock is **idle-based**, which is the part that matters: every save stamps `touched`, so a
+customer who comes back resets it. Nobody can be texted while they are still working on it.
+
+W2's **"Wait 4 hours"** predates that decision. It came from the May GHL spec, which copied
+Surface Care's 4-5 hour abandoned-cart timing before we had a server-side idle clock of our own.
+Leaving it stacks on top of the sweep: 90 minutes + 4 hours = **5.5 hours**, which is not what
+was agreed and is long enough that the moment has passed.
+
+**Set W2 to:**
+
+| Step | Change |
+|---|---|
+| Trigger filter | `customData.form_status` **is** `abandoned_confirmed` — the sweep path only. The browser path (`partial`) fires the instant someone tabs away, before the 30-minute confirm has happened |
+| Wait 4 hours | **Remove it, or set to 0.** The 90 minutes has already been served server-side, on an idle clock the browser cannot see |
+| Send SMS T2 | New body above |
+
+Everything else in the workflow — security gate, create/update contact, the tag — stays as it is.
+
+Net result: **one text, 90 minutes after they genuinely go quiet**, from the path that always
+carries the property address.
 
 **Honest limit:** this is reasoning, not measurement. Nobody has A/B tested it. The number worth
 watching once it runs is what share of abandoned quotes come back and complete.
