@@ -109,6 +109,59 @@ Edge codes:
 
 ---
 
+## Measured demand, Australia, 5 years of weekly Google Trends
+
+Pulled 2026-08-22 via the Trends API (technique in `memory/reference-google-trends-api-technique.md`),
+Australia, `today 5-y`. Trends gives relative indices, not absolute volume, so terms were
+run in overlapping tiers and chained onto one scale anchored to "bathroom renovation".
+
+**The chaining was cross-checked**: "shower leak repair" was estimated twice through two
+independent paths and the two agreed within 3%.
+
+| Index | Term |
+|--:|---|
+| 39.6 | bathroom renovation *(anchor)* |
+| **15.6** | **leaking shower** |
+| **6.7** | **waterproofing shower** |
+| 3.4 | mould in bathroom |
+| 1.6 | regrout shower |
+| 0.5 | shower sealing |
+| 0.25 | shower grout mould |
+| 0.16 | bathtub repair |
+| 0.08 | shower leak repair |
+| 0.06 | bath chip repair |
+| 0.0 | bathtub crack repair |
+| 0.0 | bathroom mould removal |
+
+### What this changes
+
+**The leak cluster is the biggest opportunity, not mould.** "leaking shower" is 4.6x
+"mould in bathroom" and 10x "regrout shower". The §C brief called mould "huge Sydney
+search behaviour"; the data does not support that ranking. Post 8 (leaking shower) is
+the volume play, with the caveat its own brief already flagged: a competitor-dense SERP.
+
+**"waterproofing shower" at 6.7 is the surprise.** Twice the demand of mould, adjacent
+to our shower-sealing and leak work, and it appears in none of the eight briefs. Worth a
+brief of its own.
+
+**Crack and chip repair register at essentially zero.** That is not a reason to skip
+them, but it is a reason to write them for the right purpose. Trends returns 0 for terms
+below its measurement floor, which means "too small to measure", not "nobody searches".
+Those searchers are few and extremely close to buying, and both
+`/services/chipped-bathtub-repair/` and `/services/basin-chip-repair/` currently have no
+article feeding them. **Write 15 and 20 as conversion pages, not traffic pages, and do
+not judge them on sessions.**
+
+### Honest limits of this data
+
+- Relative, not absolute. It ranks demand; it does not size it.
+- National, not Sydney. Geo AU was used because state-level splits get noisy at these
+  volumes.
+- Head terms only. A near-zero head term can still have a healthy long tail, which is
+  exactly the crack-repair case.
+
+---
+
 ## Sequencing
 
 Not top to bottom. In order of what each one buys us:
