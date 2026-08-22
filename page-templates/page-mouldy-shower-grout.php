@@ -120,6 +120,9 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why Your Grout Goes Mouldy</h2>
  <p class="text-secondary max-w-3xl mb-10">Understanding why mould keeps coming back is the first step to fixing it for good. The short answer: your grout is porous, your shower is wet, and surface cleaning doesn't reach the roots of the mould.</p>
+ <!-- Feeder to the long-form guide. Without this the article's only inbound path is the
+      /blog/ archive, which is how article one ended up effectively orphaned. -->
+ <p class="text-secondary max-w-3xl mb-10 text-sm">For the longer version, including what the Bureau of Meteorology's humidity record says about why Sydney showers regrow mould faster, read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/mouldy-shower-grout-fix/' ) ); ?>">Mouldy Shower Grout: Clean It, Regrout It, or Reseal It?</a></p>
 
  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
