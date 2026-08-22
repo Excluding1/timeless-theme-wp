@@ -1771,6 +1771,31 @@ function timeless_customizer( $wp_customize ) {
         'description' => __( 'Public link to the Google Business Profile (in the profile: Share, or the maps/review link, e.g. <code>https://maps.app.goo.gl/...</code> or <code>https://g.page/...</code>).<br><br>This is what states, in the LocalBusiness schema, that this website and that listing are the same business. Without it Google and AI assistants have to infer it. Leave blank and nothing is emitted.', 'timeless' ),
     ) );
 
+    /* Facebook and Instagram. Read into the LocalBusiness sameAs alongside the GBP URL.
+       These had a reader in timeless_gbp_jsonld() but no controls, so they were unreachable
+       dead code until 2026-08-23. */
+    $wp_customize->add_setting( 'timeless_facebook_url', array(
+        'default'           => 'https://www.facebook.com/profile.php?id=61591270018516',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'timeless_facebook_url', array(
+        'label'       => __( 'Facebook page URL', 'timeless' ),
+        'description' => __( 'Feeds the LocalBusiness sameAs. Leave blank to omit.', 'timeless' ),
+        'section'     => 'timeless_reviews',
+        'type'        => 'url',
+    ) );
+
+    $wp_customize->add_setting( 'timeless_instagram_url', array(
+        'default'           => 'https://www.instagram.com/timelessresurfacing/',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'timeless_instagram_url', array(
+        'label'       => __( 'Instagram profile URL', 'timeless' ),
+        'description' => __( 'Feeds the LocalBusiness sameAs. Leave blank to omit.', 'timeless' ),
+        'section'     => 'timeless_reviews',
+        'type'        => 'url',
+    ) );
+
     $wp_customize->add_setting( 'timeless_google_api_key', array(
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
@@ -2138,8 +2163,16 @@ function timeless_gbp_jsonld( $with_map = true ) {
         $urls[] = $gbp;
     }
 
-    foreach ( array( 'timeless_facebook_url', 'timeless_instagram_url' ) as $mod ) {
-        $u = trim( (string) get_theme_mod( $mod, '' ) );
+    /* Defaults are baked in, not blank. Customizer values live PER THEME FOLDER and are
+       lost whenever an upload installs a suffixed copy (the 2026-06-11 lesson), which would
+       silently empty sameAs and undo the entity consolidation. A Customizer entry still
+       overrides these. Supplied by Allan 2026-08-23, both verified reachable. */
+    $social_defaults = array(
+        'timeless_facebook_url'  => 'https://www.facebook.com/profile.php?id=61591270018516',
+        'timeless_instagram_url' => 'https://www.instagram.com/timelessresurfacing/',
+    );
+    foreach ( $social_defaults as $mod => $fallback ) {
+        $u = trim( (string) get_theme_mod( $mod, $fallback ) );
         if ( $u && filter_var( $u, FILTER_VALIDATE_URL ) ) {
             $urls[] = $u;
         }

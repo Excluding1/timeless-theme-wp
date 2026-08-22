@@ -187,8 +187,8 @@
 | Google Business Profile | ✅ Active | **10 Google reviews live** (Allan 2026-08-22; was 5+ on 2026-06-11 — supports the site's 4.9★ claims; verify the actual average ≈4.9 and consider wiring the real count into the guarded `timeless_get_google_reviews()` schema) |
 | GBP photos (real jobs) | ❌ | None — first job not done yet |
 | GBP regular posts | ❌ | Not started — start Week 2 |
-| Facebook Business page | ✅ Created | Created ~early Jul 2026. No advertising yet. |
-| Instagram business account | ✅ Created | Created ~early Jul 2026. No advertising yet. |
+| Facebook Business page | ✅ **https://www.facebook.com/profile.php?id=61591270018516** | Supplied by Allan 2026-08-23, verified reachable. Wired into LocalBusiness `sameAs` with the URL **baked in as a code default**, not Customizer-only, so it survives a suffixed-theme upload. No advertising yet. |
+| Instagram business account | ✅ **https://www.instagram.com/timelessresurfacing/** | Supplied by Allan 2026-08-23, verified reachable. Same treatment as Facebook: in `sameAs`, default baked into code. No advertising yet. |
 | TikTok business account | ❌ Not created | (research tooling exists: docs/tiktok-archiver + docs/media-archiver) |
 | Logo files | ❓ | CEO to ask format/locations |
 | Brand colour palette documented | ✅ | In CLAUDE.md — Navy `#041534`, Gold `#e7c08b` |
