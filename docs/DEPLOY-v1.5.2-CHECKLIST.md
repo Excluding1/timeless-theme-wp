@@ -6,16 +6,16 @@ nothing later depends on something earlier being skipped.
 
 ---
 
-## A. Blocked on Allan (nothing ships until these land)
+## A. Blocked on Allan — three things, all small
 
 | # | Item | Why it blocks | Time |
 |--:|---|---|---|
-| A1 | **WordPress Application Password** → `.secrets/wp-app-password.key` | `publish-blogs.py` pushes articles over the REST API. Without it every article is a manual copy-paste into wp-admin, five times. wp-admin → Users → Profile → Application Passwords → name it `clifford-publisher` → save as `USERNAME:xxxx xxxx ...`, chmod 600. | 5 min |
-| A2 | **Ruling on the rental warranty number** | The site currently publishes **6 months** in the warranty matrix and **12 months** in the landlord section of the same page, plus a third number on the tile page. I will not guess which is real on a warranty page. One word from you and it is a single sweep across four files. | 2 min to decide |
-| A3 | **Provenance of the three real photos** in article 3 | They were in Downloads with Cloudinary-style names, so they may be customer quote-form uploads. They are anonymous surface close-ups and captioned as damage types, never as our job — but if they came in for quoting rather than marketing, they need permission. | 2 min |
-| A4 | **Push the branch** | 118 commits exist only on this Mac. Task Hub's `server.js` already vanished off this disk once. | 1 command |
+| A1 | **WordPress Application Password** → `.secrets/wp-app-password.key` | `publish-blogs.py` pushes the articles over the REST API. Without it, five articles get pasted by hand into wp-admin. wp-admin → Users → Profile → Application Passwords → name it `clifford-publisher` → save as `USERNAME:xxxx xxxx ...`, chmod 600 | 5 min |
+| A2 | **Which rental warranty number is real** | The site publishes **6 months** in the warranty matrix and **12 months** in the landlord section of the same page, plus a third figure on the tile page. I will not guess on a warranty page. One word and it is a single sweep across four files | 2 min |
+| A3 | **Provenance of the three real photos** in article 3 | Anonymous surface close-ups, captioned as damage types and never as our job. But if they came in through the quote form rather than for marketing, they need permission | 2 min |
 
----
+**Not blocking, but worth a decision:** the branch is **130 commits ahead** and exists only on
+this Mac. One command fixes it.
 
 ## B. Covers — all five done
 
@@ -112,3 +112,35 @@ Recorded so they do not get lost while attention moves to the customer-journey w
   doing that work. A revenue gap, not a copy gap.
 - **The customer table is incomplete** — phone-booked jobs were never written up. Worth one
   sitting listing every completed job from memory before more of them fade.
+
+---
+
+## G. Is the website work done? (2026-08-23)
+
+**Yes, for everything I can finish without Allan.** Setting aside the service-page rewrite and
+future articles, which Allan has parked for next time, what is left is three of his decisions
+and one deploy.
+
+**Finished this run**
+- Five articles at 95 / 100 / 96 / 100 / 100, all Rule 8 passed, all five covers made, real
+  job photos replacing AI renders, real author avatar on the byline
+- `/services/` hub built — it was a 1-word page that 19 breadcrumbs pointed at
+- `/services/shower-resurfacing/` noindexed and dropped from the sitemap until it has content
+- Sitemap fixed: articles and `/blog/` were missing entirely, 19 service pages were at priority 0.5
+- Curated title tags, GBP schema, `[bar_chart]`, blog CSS, responsive images
+- Mid-page CTA rebuilt and made responsive, legible and centred on mobile
+- Posted and Updated separated in the byline; publisher spaces posts 3 days apart
+- Auditor now blocks the 24-hour cure error that shipped in three articles
+
+**Left, in order**
+1. Allan: app password, warranty ruling, photo permission (§A)
+2. Push the branch
+3. Deploy v1.5.2 (§C), purge both caches, verify in incognito
+4. Publish the articles (§E)
+5. Confirm Search Console — without it the blog's effect is unmeasurable
+
+**Parked by Allan for next time:** service-page rewrite, articles 6-10, the 66 suburb pages on
+`suburb-pages-wip`, and the nine remaining AI body images in articles 1-3.
+
+**Still open but not website work:** the 15 citations, Bing Places, Apple Business Connect, the
+review engine and GBP photos. All in `docs/SEO-ANALYSIS-STATUS-2026-08-23.md`.
