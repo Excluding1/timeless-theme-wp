@@ -236,6 +236,9 @@
  <div class="text-center mb-12">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">Common Scenarios</h2>
  <p class="text-secondary max-w-2xl mx-auto">We see these every week. Here&rsquo;s how we solve them fast.</p>
+ <!-- Feeder link to the long-form guide. The article links here already; without this the
+      link was one-way and the guide's only inbound path was the /blog/ archive. -->
+ <p class="text-secondary max-w-2xl mx-auto mt-4 text-sm">For the long version, including what fits inside a single vacancy window and what the NSW bond data says about bathroom condition, read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/bathroom-resurfacing-rental-property/' ) ); ?>">The Property Manager&rsquo;s Guide to Bathroom Resurfacing Between Tenants</a>.</p>
  </div>
  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
  <!-- Scenario 1 -->
