@@ -3696,6 +3696,13 @@ function timeless_sweep_abandoned_drafts() {
                 'phone'        => $phone,
                 'customData'   => array(
                     'form_status'     => 'abandoned_confirmed',
+                    /* The property address, which the draft has held all along and the payload
+                       never sent. It is the single most persuasive thing an abandoned-quote SMS
+                       can carry: a stranger's text with a link reads as a scam, and "your quote
+                       for 12 Smith St" is proof no scammer could fake. Surface Care lead with
+                       it (mystery shop, June 2026) and they are right to. Trimmed, because a
+                       full address eats SMS characters and the street line is enough. */
+                    'property_address' => (string) ( $rec['addr'] ?? '' ),
                     'resume_link_sms' => $resume,
                     'idle_minutes'    => (int) round( ( time() - (int) $rec['touched'] ) / 60 ),
                     // so W2 can branch: text if we have a mobile, otherwise email them

@@ -121,16 +121,35 @@ deleted the sweep now falls back to `/contact/`, but the recovery experience deg
 that page alone.
 
 ```
-Hey {{contact.first_name}}, it's Timeless Resurfacing. Your quote request is saved but not finished.
+Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. Your quote for {{inboundWebhookRequest.customData.property_address}} is saved but not finished.
 
-Pick up exactly where you left off: {{inboundWebhookRequest.customData.resume_link_sms}}
+Pick up where you left off: {{inboundWebhookRequest.customData.resume_link_sms}}
 
-You'll just need:
-- Photos of the damage
-- A quick description
-
-Then your quote lands within 24 hours. 📱
+All that's left is a couple of photos and a quick description of what needs fixing. Then I'll have your quote back within 24 hours.
 ```
+
+**Why this shape, and what was weighed (2026-08-23).** Allan's instinct was that shorter reads
+more genuine, and he is right about *tone* but the "shorter is better" rule does not hold for
+this particular message.
+
+The problem an abandoned-quote SMS has to solve is **legitimacy, not length**. A text from an
+unknown number containing a link is exactly what a scam looks like, and Australians are heavily
+primed on that. Cutting context makes the message *more* deletable, not less.
+
+What actually earns the tap is the **property address**. "Your quote for 12 Smith St" is proof
+no scammer could fake, and it is the strongest thing in Surface Care's version — stronger than
+their structure. We had it in the draft all along and simply were not sending it; now both
+webhook paths do.
+
+Kept from Surface Care: a **named human** ("Allan here" beats "it's Timeless Resurfacing"), the
+address, and the short list of what is left. The list is not padding — they abandoned because it
+felt like effort, and naming two small things directly answers that.
+
+Dropped: *"We noticed you have not completed"* — mildly accusatory and robotic, and it spends
+characters describing the situation rather than removing the obstacle.
+
+**Honest limit:** this is reasoning, not measurement. Nobody has A/B tested it. The one number
+worth watching once it runs is what share of abandoned quotes come back and complete.
 
 **GHL wiring (Allan):** W2's SMS step → insert the merge field for the inbound webhook payload's
 `customData.resume_link_sms` (use GHL's merge-field picker on the trigger data; the exact token

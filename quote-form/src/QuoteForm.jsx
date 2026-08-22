@@ -1234,6 +1234,10 @@ export default function QuoteForm() {
           resume_link_short: window.location.origin + window.location.pathname,
           // THE ONE TO USE IN SMS (v1.5.2): ~55 chars = one segment, and it resolves to
           // their LATEST progress because the stored draft is refreshed on every step.
+          // The address, so the abandoned-quote SMS can prove it is real. The server
+          // sweep sends this too; both paths must match or the merge field is empty
+          // depending on which one fired.
+          property_address: addr || "",
           resume_link_sms: draftId.current
             ? RESUME_PAGE + "?r=" + draftId.current
             : RESUME_PAGE,
