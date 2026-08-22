@@ -84,6 +84,14 @@ body  = g(r'<div class="entry-content.*?>(.*)</div>\s*</article>')
 h2s   = [html.unescape(re.sub(r'<[^>]+>', '', x)) for x in re.findall(r'<h2[^>]*>(.*?)</h2>', body, re.S)]
 clean = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ',
         re.sub(r'<(script|style|svg).*?</\1>', '', body, flags=re.S))))
+
+# Prose only, for the readability measure. Tables and card lists carry no sentence-ending
+# punctuation, so a whole table reads to the splitter as one 120-word sentence and the
+# average sentence length becomes meaningless. Measure what a person actually reads as
+# prose, and judge the components on their own terms.
+prose_html = re.sub(r'<(table|ul|ol|figure).*?</\1>', ' ', body, flags=re.S)
+prose_html = re.sub(r'<(script|style|svg).*?</\1>', '', prose_html, flags=re.S)
+prose = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', prose_html)))
 words = clean.split()
 low   = clean.lower()
 
@@ -147,7 +155,7 @@ print(f"    {'ok  ' if ok else 'FAIL'}  author byline")
 ok = 'dateModified' in t
 pts += 3 if ok else 0
 print(f"    {'ok  ' if ok else 'FAIL'}  dateModified in schema")
-sent = [s for s in re.split(r'(?<=[.!?]) ', clean) if s.split()]
+sent = [s for s in re.split(r'(?<=[.!?]) ', prose) if s.split()]
 avg = sum(len(s.split()) for s in sent) / max(1, len(sent))
 longs = sum(1 for s in sent if len(s.split()) > 30)
 ok = avg <= 22 and longs / max(1, len(sent)) <= 0.20
