@@ -102,11 +102,13 @@ if ( $thumb_url ) {
  </h1>
 
  <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-secondary mb-8">
- <?php /* Illustrated avatar. Swap for a real photo of Allan when one exists. Kept as a PHP
-    comment, not an HTML one: an HTML comment here is downloaded by every reader. */ ?>
+ <?php /* Author avatar. Deliberately shipped at 80x80 and no larger: it displays at 40px,
+    so 80 is exactly 2x retina, and a small file is the only real protection against
+    someone grabbing a big copy to reverse-search. Allan's call, 2026-08-23. If this is
+    ever regenerated, do NOT upload a full-resolution version alongside it. */ ?>
  <?php $avatar = get_template_directory() . '/images/about/author-avatar.png'; ?>
  <?php if ( file_exists( $avatar ) ) : ?>
- <img src="<?php echo esc_url( get_template_directory_uri() . '/images/about/author-avatar.png' ); ?>" alt="" class="rounded-full shrink-0 mr-1 object-cover" style="width:40px;height:40px;border:2px solid #e7c08b;" aria-hidden="true" />
+ <img src="<?php echo esc_url( get_template_directory_uri() . '/images/about/author-avatar.png' ); ?>" alt="" class="rounded-full shrink-0 mr-1 object-cover" style="width:40px;height:40px;border:2px solid #e7c08b;" aria-hidden="true" / width="80" height="80" loading="lazy" decoding="async">
  <?php else : ?>
  <span class="inline-flex items-center justify-center rounded-full shrink-0 mr-1" style="width:40px;height:40px;background:#041534;color:#e7c08b;font-weight:800;font-size:0.95rem;" aria-hidden="true">A</span>
  <?php endif; ?>
