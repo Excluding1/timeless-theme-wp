@@ -49,8 +49,8 @@ $all_categories = get_categories( array(
 {
  "@context": "https://schema.org",
  "@type": "CollectionPage",
- "name": "<?php echo esc_js( $page_title ); ?>",
- "description": "<?php echo esc_js( $page_description ); ?>",
+ "name": <?php echo wp_json_encode( $page_title ); ?>,
+ "description": <?php echo wp_json_encode( $page_description ); ?>,
  "url": "<?php echo esc_url( $is_category || $is_tag ? get_term_link( $current_category ) : home_url( '/blog/' ) ); ?>",
  "publisher": {
  "@type": "Organization",
@@ -67,7 +67,7 @@ $all_categories = get_categories( array(
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?php echo esc_url( home_url( '/' ) ); ?>" },
  { "@type": "ListItem", "position": 2, "name": "Blog", "item": "<?php echo esc_url( home_url( '/blog/' ) ); ?>" }
  <?php if ( $is_category || $is_tag ) : ?>
- ,{ "@type": "ListItem", "position": 3, "name": "<?php echo esc_js( $page_title ); ?>", "item": "<?php echo esc_url( get_term_link( $current_category ) ); ?>" }
+ ,{ "@type": "ListItem", "position": 3, "name": <?php echo wp_json_encode( $page_title ); ?>, "item": "<?php echo esc_url( get_term_link( $current_category ) ); ?>" }
  <?php endif; ?>
  ]
 }

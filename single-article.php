@@ -45,11 +45,11 @@ if ( $thumb_url ) {
 {
  "@context": "https://schema.org",
  "@type": "BlogPosting",
- "headline": "<?php echo esc_js( get_the_title() ); ?>",
- "description": "<?php echo esc_js( get_the_excerpt() ); ?>",
+ "headline": <?php echo wp_json_encode( get_the_title() ); ?>,
+ "description": <?php echo wp_json_encode( get_the_excerpt() ); ?>,
  "image": "<?php echo esc_url( $schema_img ); ?>",
  "inLanguage": "en-AU",
- <?php if ( $cat_name ) : ?>"articleSection": "<?php echo esc_js( $cat_name ); ?>",<?php endif; ?>
+ <?php if ( $cat_name ) : ?>"articleSection": <?php echo wp_json_encode( $cat_name ); ?>,<?php endif; ?>
  "wordCount": <?php echo (int) $word_count; ?>,
  "author": { "@type": "Person", "name": "Allan P", "jobTitle": "Quotation and Jobs Manager, Bathroom Resurfacing Specialist", "worksFor": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" } },
  "publisher": {
@@ -58,9 +58,9 @@ if ( $thumb_url ) {
  "url": "https://timelessresurfacing.com.au",
  "logo": { "@type": "ImageObject", "url": "<?php echo esc_url( get_template_directory_uri() . '/assets/favicon/favicon-96x96.png' ); ?>" }
  },
- "datePublished": "<?php echo esc_js( $published_iso ); ?>",
- "dateModified": "<?php echo esc_js( $modified_iso ); ?>",
- "mainEntityOfPage": "<?php echo esc_js( $canonical ); ?>"
+ "datePublished": <?php echo wp_json_encode( $published_iso ); ?>,
+ "dateModified": <?php echo wp_json_encode( $modified_iso ); ?>,
+ "mainEntityOfPage": <?php echo wp_json_encode( $canonical ); ?>
 }
 </script>
 
@@ -70,7 +70,7 @@ if ( $thumb_url ) {
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?php echo esc_url( home_url( '/' ) ); ?>" },
  { "@type": "ListItem", "position": 2, "name": "Blog", "item": "<?php echo esc_url( home_url( '/blog/' ) ); ?>" },
- { "@type": "ListItem", "position": 3, "name": "<?php echo esc_js( get_the_title() ); ?>", "item": "<?php echo esc_url( $canonical ); ?>" }
+ { "@type": "ListItem", "position": 3, "name": <?php echo wp_json_encode( get_the_title() ); ?>, "item": "<?php echo esc_url( $canonical ); ?>" }
  ]
 }
 </script>

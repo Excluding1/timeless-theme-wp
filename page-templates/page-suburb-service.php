@@ -45,17 +45,17 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
 {
  "@context": "https://schema.org",
  "@type": "Service",
- "name": "<?php echo esc_js( $h1 ); ?>",
- "description": "<?php echo esc_js( 'Professional ' . $service['short_name'] . ' service for ' . $suburb['name'] . ' homes. ' . $service['description'] ); ?>",
+ "name": <?php echo wp_json_encode( $h1 ); ?>,
+ "description": <?php echo wp_json_encode( 'Professional ' . $service['short_name'] . ' service for ' . $suburb['name'] . ' homes. ' . $service['description'] ); ?>,
  "provider": {
  "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",
- "address": { "@type": "PostalAddress", "addressLocality": "<?php echo esc_js( $suburb['name'] ); ?>", "postalCode": "<?php echo esc_js( $suburb['postcode'] ); ?>", "addressRegion": "NSW", "addressCountry": "AU" }<?php echo timeless_aggregate_rating_jsonld(); ?>
+ "address": { "@type": "PostalAddress", "addressLocality": <?php echo wp_json_encode( $suburb['name'] ); ?>, "postalCode": <?php echo wp_json_encode( $suburb['postcode'] ); ?>, "addressRegion": "NSW", "addressCountry": "AU" }<?php echo timeless_aggregate_rating_jsonld(); ?>
  },
- "areaServed": { "@type": "Place", "name": "<?php echo esc_js( $suburb['name'] ); ?>", "geo": { "@type": "GeoCoordinates", "latitude": <?php echo floatval( $suburb['lat'] ); ?>, "longitude": <?php echo floatval( $suburb['lng'] ); ?> } },
- "serviceType": "<?php echo esc_js( $service['name'] ); ?>"
+ "areaServed": { "@type": "Place", "name": <?php echo wp_json_encode( $suburb['name'] ); ?>, "geo": { "@type": "GeoCoordinates", "latitude": <?php echo floatval( $suburb['lat'] ); ?>, "longitude": <?php echo floatval( $suburb['lng'] ); ?> } },
+ "serviceType": <?php echo wp_json_encode( $service['name'] ); ?>
 }
 </script>
 
@@ -65,8 +65,8 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  "itemListElement": [
  { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?php echo esc_url( home_url( '/' ) ); ?>" },
  { "@type": "ListItem", "position": 2, "name": "Services", "item": "<?php echo esc_url( home_url( '/services/' ) ); ?>" },
- { "@type": "ListItem", "position": 3, "name": "<?php echo esc_js( $service['name'] ); ?>", "item": "<?php echo esc_url( $parent_url ); ?>" },
- { "@type": "ListItem", "position": 4, "name": "<?php echo esc_js( $suburb['name'] ); ?>", "item": "<?php echo esc_url( $canonical ); ?>" }
+ { "@type": "ListItem", "position": 3, "name": <?php echo wp_json_encode( $service['name'] ); ?>, "item": "<?php echo esc_url( $parent_url ); ?>" },
+ { "@type": "ListItem", "position": 4, "name": <?php echo wp_json_encode( $suburb['name'] ); ?>, "item": "<?php echo esc_url( $canonical ); ?>" }
  ]
 }
 </script>
