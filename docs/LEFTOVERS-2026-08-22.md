@@ -157,6 +157,26 @@ already flags, now with exact locations.
 Article 4 was written so it does not add a fifth version: it states the wall-tile owner-occupied
 figure only, and sends floor and rental terms to the warranty page.
 
+### 4.8 ⚠️ Lifespan figures disagree between the blog and the tile service page
+
+Allan gave the lifespan as **"up to 10 to 15+ years with proper care"** on 2026-08-23, and it
+is now in articles 4 and 5. Two of the three places agree; one does not:
+
+| Where | Says |
+|---|---|
+| `page-bath-resurfacing.php` | a resurfaced bath "typically lasts **10 to 15 years** with normal household use" ✅ matches |
+| Blog articles 4 and 5 | **10 to 15+ years** with proper care ✅ matches |
+| `page-tile-resurfacing.php` | wall tiles last "up to **10+ years**", floor tiles "**5-7 years**" ⚠️ narrower |
+
+Not wrong, but narrower than what we now say on the blog, and the same drift pattern as the
+warranty numbers. **Allan's call** whether the tile page moves up to 10-15+ on walls, or the
+blog comes back to 10+ for tiles specifically. One sweep either way.
+
+Also worth recording as a copy rule, because I had them conflated: **lifespan and workmanship
+cover are two different numbers.** How long the work lasts is 10-15+ years. What we cover is
+up to 5 years in an owner-occupied home, for bond loss, lifting and peeling rather than for
+wear. The compare table in article 4 had them in a single row until Allan split them.
+
 ## 5. Standing items this audit did not resolve
 
 Carried from STATE.md and the cockpit board, still open:
