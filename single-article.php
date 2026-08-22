@@ -92,7 +92,7 @@ if ( $thumb_url ) {
 
 <!-- HERO -->
 <article>
-<header class="pt-4 pb-12 px-6 sm:px-8 max-w-4xl mx-auto">
+<header class="pt-4 pb-12 px-6 sm:px-8 max-w-4xl mx-auto article-header">
  <?php if ( $cat_name ) : ?>
  <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.7rem] font-bold tracking-widest uppercase rounded-sm mb-4"><?php echo esc_html( $cat_name ); ?></span>
  <?php endif; ?>
@@ -101,7 +101,7 @@ if ( $thumb_url ) {
  <?php the_title(); ?>
  </h1>
 
- <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-secondary mb-8">
+ <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-secondary mb-8">
  <!-- TODO: real headshot — swap this illustrated avatar for a photo of Allan once one exists -->
  <?php $avatar = get_template_directory() . '/images/about/author-avatar.png'; ?>
  <?php if ( file_exists( $avatar ) ) : ?>

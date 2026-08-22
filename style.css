@@ -349,6 +349,28 @@ html, body {
     font-weight: 600;
 }
 
+/* ARTICLE HEADER
+   Centred title block, left-aligned body. The split is deliberate: a centred title over
+   a full-width hero reads as an editorial cover, but centred BODY copy gives the eye no
+   consistent left edge to return to at the start of each line, which slows reading and
+   is the single most common way a long-form page looks amateur. So this rule is scoped
+   to the header and must never be widened to .entry-content.
+
+   The figure is excluded so the hero image stays full-bleed rather than being treated
+   as an inline centred element. */
+.article-header {
+    text-align: center;
+}
+.article-header figure,
+.article-header figcaption {
+    text-align: center;
+}
+.article-header > span:first-child {
+    /* the category chip is inline-block, so centring comes from the parent */
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* BEFORE/AFTER SLIDER HANDLE
    The divider was a 4px white line with Tailwind's shadow-lg. The shadow computed to
    fully transparent (a purge casualty, same class of bug as the chart bars), so on a
