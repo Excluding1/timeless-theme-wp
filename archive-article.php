@@ -160,7 +160,22 @@ $all_categories = get_categories( array(
  ?>
  <a href="<?php the_permalink(); ?>" class="grid grid-cols-1 md:grid-cols-2 bg-surface-container-low rounded-2xl overflow-hidden hover:shadow-lg transition-all group mb-10">
  <div class="relative overflow-hidden" style="min-height:240px;">
+ <?php
+ /* srcset, not a lone src. These cards were serving one fixed size with no srcset at
+    all, so a 2x screen got roughly half the pixels it asked for and the covers looked
+    soft next to the article heroes. The featured card image is half the max-w-7xl
+    container from md up, full width below. */
+ if ( has_post_thumbnail() ) {
+     echo wp_get_attachment_image( get_post_thumbnail_id(), 'full', false, array(
+         'class'    => 'absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform',
+         'alt'      => get_the_title(),
+         'loading'  => 'eager',
+         'decoding' => 'async',
+         'sizes'    => '(min-width: 768px) 608px, 100vw',
+     ) );
+ } else { ?>
  <img src="<?php echo esc_url( $fimg ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform" loading="eager" />
+ <?php } ?>
  </div>
  <div class="p-8 sm:p-10 flex flex-col justify-center">
  <div class="flex items-center gap-2 mb-4">
@@ -190,7 +205,18 @@ $all_categories = get_categories( array(
  <?php $card_img = $thumb ? $thumb : get_template_directory_uri() . '/images/homepage/after.jpg'; // fallback so cards never render bare ?>
  <a href="<?php the_permalink(); ?>" class="bg-surface-container-low rounded-xl overflow-hidden hover:shadow-lg transition-all group block">
  <div class="aspect-16/9 overflow-hidden">
+ <?php
+ if ( has_post_thumbnail() ) {
+     echo wp_get_attachment_image( get_post_thumbnail_id(), 'full', false, array(
+         'class'    => 'w-full h-full object-cover group-hover:scale-105 transition-transform',
+         'alt'      => get_the_title(),
+         'loading'  => 'lazy',
+         'decoding' => 'async',
+         'sizes'    => '(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw',
+     ) );
+ } else { ?>
  <img src="<?php echo esc_url( $card_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+ <?php } ?>
  </div>
  <div class="p-6">
  <?php if ( $cat ) : ?>

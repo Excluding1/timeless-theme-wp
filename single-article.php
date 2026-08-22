@@ -284,7 +284,18 @@ if ( ! empty( $related ) ) : ?>
  $rimg   = $rthumb ? $rthumb : get_template_directory_uri() . '/images/homepage/after.jpg'; ?>
  <a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>" class="bg-surface-container-low rounded-xl overflow-hidden hover:shadow-lg transition-all group">
  <div class="aspect-16/9 overflow-hidden">
+ <?php
+ if ( has_post_thumbnail( $post->ID ) ) {
+     echo wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), 'full', false, array(
+         'class'    => 'w-full h-full object-cover group-hover:scale-105 transition-transform',
+         'alt'      => get_the_title( $post->ID ),
+         'loading'  => 'lazy',
+         'decoding' => 'async',
+         'sizes'    => '(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw',
+     ) );
+ } else { ?>
  <img src="<?php echo esc_url( $rimg ); ?>" alt="<?php echo esc_attr( get_the_title( $post->ID ) ); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" />
+ <?php } ?>
  </div>
  <div class="p-5">
  <h3 class="font-bold text-primary group-hover:text-primary-soft transition-colors mb-2"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h3>
