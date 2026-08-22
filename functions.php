@@ -827,7 +827,8 @@ function timeless_blog_author_box() {
     <aside class="max-w-3xl mx-auto px-6 sm:px-8 pb-14" aria-label="About the author">
         <div class="bg-surface-container-low rounded-2xl p-6 sm:p-8 border border-surface-container">
             <div class="flex items-start gap-5">
-                <!-- TODO: real headshot — swap this illustrated avatar for a photo of Allan once one exists -->
+                <?php /* Illustrated avatar. Swap for a real photo of Allan when one exists. Kept as a PHP
+                   comment, not an HTML one: an HTML comment here is downloaded by every reader. */ ?>
                 <?php if ( file_exists( get_template_directory() . '/images/about/author-avatar.png' ) ) : ?>
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/images/about/author-avatar.png' ); ?>" alt="" class="shrink-0 w-14 h-14 rounded-full object-cover" style="border:2px solid #e7c08b;" aria-hidden="true" />
                 <?php else : ?>

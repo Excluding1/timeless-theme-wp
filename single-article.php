@@ -102,7 +102,8 @@ if ( $thumb_url ) {
  </h1>
 
  <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-secondary mb-8">
- <!-- TODO: real headshot — swap this illustrated avatar for a photo of Allan once one exists -->
+ <?php /* Illustrated avatar. Swap for a real photo of Allan when one exists. Kept as a PHP
+    comment, not an HTML one: an HTML comment here is downloaded by every reader. */ ?>
  <?php $avatar = get_template_directory() . '/images/about/author-avatar.png'; ?>
  <?php if ( file_exists( $avatar ) ) : ?>
  <img src="<?php echo esc_url( get_template_directory_uri() . '/images/about/author-avatar.png' ); ?>" alt="" class="rounded-full shrink-0 mr-1 object-cover" style="width:40px;height:40px;border:2px solid #e7c08b;" aria-hidden="true" />

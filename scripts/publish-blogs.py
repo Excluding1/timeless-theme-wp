@@ -82,6 +82,14 @@ def parse_post(path: Path):
     d = re.search(r"Meta description:\s*(.+?)\s*\(\d+ chars\)", meta)
     # strip any leaked JSON-LD (theme emits schema at template level)
     body = re.sub(r"<script\b[^>]*application/ld\+json.*?</script>", "", body, flags=re.S | re.I)
+    # Strip EVERY html comment from the body. The front-matter block above is already
+    # removed, but in-body notes are not: Cleo's Rule 8 pass on 2026-08-22 found
+    # "<!-- TODO Allan: real process photo -->" and a TODO naming the case-study
+    # suburb in an image filename, both being served on the rendered page. Editorial
+    # notes belong in the repo, never in what a customer's browser downloads. Done
+    # here rather than per-article so no future note can leak by being forgotten.
+    body = re.sub(r"<!--.*?-->", "", body, flags=re.S)
+    body = re.sub(r"\n{3,}", "\n\n", body)
     return {"slug": slug, "title": t.group(1).strip(), "content": body.strip(),
             "excerpt": d.group(1).strip() if d else ""}
 
