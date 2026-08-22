@@ -3649,6 +3649,21 @@ function timeless_handle_draft_done() {
 add_action( 'wp_ajax_timeless_draft_done', 'timeless_handle_draft_done' );
 add_action( 'wp_ajax_nopriv_timeless_draft_done', 'timeless_handle_draft_done' );
 
+
+/**
+ * What the abandoned-quote SMS calls the job.
+ *
+ * The address is the most persuasive thing the message carries, but `addr` starts empty and
+ * someone can abandon before ever reaching the address step. Sending a raw empty string makes
+ * the sentence read "I can see the quote for didn't get finished off", which is worse than
+ * having no address at all. GHL merge fields cannot do a conditional, so the fallback belongs
+ * here where we know whether we have one.
+ */
+function timeless_property_ref( $addr ) {
+    $addr = trim( wp_strip_all_tags( (string) $addr ) );
+    return $addr !== '' ? $addr : 'your bathroom';
+}
+
 function timeless_sweep_abandoned_drafts() {
     global $wpdb;
     $rows = $wpdb->get_results(
@@ -3702,7 +3717,7 @@ function timeless_sweep_abandoned_drafts() {
                        for 12 Smith St" is proof no scammer could fake. Surface Care lead with
                        it (mystery shop, June 2026) and they are right to. Trimmed, because a
                        full address eats SMS characters and the street line is enough. */
-                    'property_address' => (string) ( $rec['addr'] ?? '' ),
+                    'property_address' => timeless_property_ref( $rec['addr'] ?? '' ),
                     'resume_link_sms' => $resume,
                     'idle_minutes'    => (int) round( ( time() - (int) $rec['touched'] ) / 60 ),
                     // so W2 can branch: text if we have a mobile, otherwise email them

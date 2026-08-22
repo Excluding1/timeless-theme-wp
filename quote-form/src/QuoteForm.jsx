@@ -1237,7 +1237,9 @@ export default function QuoteForm() {
           // The address, so the abandoned-quote SMS can prove it is real. The server
           // sweep sends this too; both paths must match or the merge field is empty
           // depending on which one fired.
-          property_address: addr || "",
+          // Falls back the same way the server sweep does, so the sentence always reads
+          // whichever path fired. Someone can abandon before ever reaching the address step.
+          property_address: (addr || "").trim() || "your bathroom",
           resume_link_sms: draftId.current
             ? RESUME_PAGE + "?r=" + draftId.current
             : RESUME_PAGE,

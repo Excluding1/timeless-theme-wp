@@ -20,6 +20,44 @@ which is called out where it matters.
 
 ---
 
+## Step 0 — the two things that will silently stop this working
+
+Audited before writing the steps, because "fix once and it works" means finding these now.
+
+### 0a. WP-Cron will not fire reliably. Add a real one.
+
+The 90-minute sweep is a WordPress cron event, and **WP-Cron only runs when PHP runs**.
+Cloudflare serves this site's HTML from cache (`cf-cache-status: HIT`, `max-age=3600`), so most
+visits never reach PHP at all. Form activity does — `admin-ajax.php` is `DYNAMIC` — but the
+sweep needs to fire *90 minutes after activity stops*, which is exactly when nothing is hitting
+the origin.
+
+Left alone, the text arrives late or whenever the next uncached request happens to land.
+
+**Fix, in cPanel → Cron Jobs, every 10 minutes:**
+
+```
+curl -s https://timelessresurfacing.com.au/wp-cron.php?doing_wp_cron > /dev/null
+```
+
+`wp-cron.php` returns 200, so this works today. A free UptimeRobot check every 5 minutes on the
+same URL does the same job if cPanel cron is awkward.
+
+### 0b. `abandoned_confirmed` is not a valid option on the GHL dropdown
+
+`form_status` is specced as a **Dropdown** with `partial`, `complete`, `waitlist`
+(`ghl_setup_spec_v2_2026-05-05.md:196`). The sweep sends **`abandoned_confirmed`**, which is not
+one of them.
+
+The trigger *filter* reads the raw webhook payload and will be fine. The risk is the
+**Create/Update Contact** step, if it maps `form_status` into that custom field — an unknown
+option can be rejected or silently dropped.
+
+**Fix:** Settings → Custom Fields → `form_status` → add **`abandoned_confirmed`** as a fourth
+option before touching the workflow.
+
+---
+
 ## Step 1 — teach GHL the payload shape
 
 GHL only offers a field in the merge-field picker once it has seen it. Open the **W2 Trigger —
@@ -42,8 +80,9 @@ Partial Form Fill** step and use its sample-payload / test-request box. Paste th
 }
 ```
 
-The real `secret_token` is in `.secrets/` — ask Clifford rather than guessing, the security gate
-rejects a wrong one and you will think the webhook is broken.
+The real token is **`TR_secret_v2_ByJJ9B0FAy8oG95mlzclaKsZsCHYzZnqILo3z3pk4Mc`** — it matches the
+gate in the workflow ("If secret_token is TR_secret_v2_By…"). A wrong one is rejected silently
+and looks exactly like a broken webhook.
 
 ⚠️ Use the trigger's **sample/test** box, not a live send. A live send creates a real contact and
 starts a real timer.
@@ -91,8 +130,13 @@ Just after a couple of photos and a quick note on what needs doing, then I'll ge
 **Insert both tokens with the merge-field picker**, not by typing. Pick them from the inbound
 webhook request data; GHL's exact token text differs between accounts and a typed one renders empty.
 
-**Until the next theme deploy**, `property_address` will be blank and the sentence reads badly.
-Use this version in the meantime and add the address afterwards:
+**The empty-address case is handled.** Someone can abandon before ever reaching the address
+step, which would have produced *"I can see the quote for didn't get finished off"*. Both paths
+now fall back to **"your bathroom"**, so the sentence always reads. GHL merge fields cannot do a
+conditional, so this belongs server-side and does.
+
+**Until the next theme deploy**, `property_address` does not arrive at all and the merge field
+renders empty. Use this version in the meantime and add the address afterwards:
 
 ```
 Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. I can see your bathroom quote didn't get finished off, here's the link back to where you got up to: {{resume_link_sms}}
