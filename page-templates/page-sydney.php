@@ -248,12 +248,18 @@ get_header(); ?>
 <!-- MID-PAGE CTA
      Rebuilt 2026-08-23. Was a flat navy band with centred text. Now left-aligned with an
      eyebrow pill and a tighter hierarchy, per Allan's reference.
-     A photo background was tried and removed: a bathroom does not read in a band this wide
-     and this short, because object-cover crops a 4:3 photo down to a slice. The reference
-     worked because a driveway IS a wide subject shot wide. If we want the photo back, the
-     band needs to get taller or we need a genuinely wide shot of a finished bathroom. -->
-<section class="py-12 sm:py-16 bg-primary">
- <div class="max-w-7xl mx-auto px-6 sm:px-8">
+     Photo background, and the reason it took five goes. Single-subject shots do not survive
+     this crop: a bath from above, a bath along its length and a shower wall all came out as
+     abstract white curves, because object-cover reduces a 4:3 photo to a slice. What works is
+     a WHOLE ROOM, which is what Allan's reference did with a whole driveway. The source is a
+     portrait bathroom, pre-cropped here to a 1.96:1 band across the fixture line so CSS is
+     not left to mangle it. If it is ever swapped: whole room, pre-cropped wide.
+     NOTE: this is an aspirational/stock bathroom, not one of our jobs. Fine for a decorative
+     CTA background, but swap it for a real finished bathroom when we have a wide one. -->
+<section class="relative overflow-hidden py-14 sm:py-20 bg-primary">
+ <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg-800w.jpg 800w, <?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg.jpg 1790w" sizes="100vw" alt="" width="1790" height="912" loading="lazy" class="absolute inset-0 w-full h-full object-cover" style="object-position:58% 66%;" aria-hidden="true" />
+ <div class="absolute inset-0" style="background:linear-gradient(90deg,rgba(4,21,52,.97) 0%,rgba(4,21,52,.93) 40%,rgba(4,21,52,.28) 100%);" aria-hidden="true"></div>
+ <div class="relative max-w-7xl mx-auto px-6 sm:px-8">
   <div class="max-w-xl">
    <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase mb-4">Free &amp; no obligation</span>
    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tighter leading-[1.1] mb-3">Ready for a quote?</h2>
