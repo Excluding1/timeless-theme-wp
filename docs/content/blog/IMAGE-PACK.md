@@ -9,6 +9,34 @@ Media Library per the workflow below — the live posts must use Media Library U
 **Tool: ChatGPT** (Allan's pick — best realism results). Gemini works too — same
 prompts. Higgsfield = video, not stills. Generate at the largest size offered, landscape.
 
+
+## ⚠️ Real photos beat the AI pack, and Allan can tell (2026-08-23)
+
+Allan looked at an AI pack image in article 5 and said it "looks so fake". He was right, and
+the fix he gave is the more useful half: **use the real before/after photos already on the
+site.** We have 68 of them across `images/gallery/`, all from actual jobs, and they were
+sitting unused while AI renders carried captions like *"what a properly stripped, prepared
+and resurfaced finish looks like"* — which reads as our work and is not.
+
+Then he rejected my first real replacement too, for a better reason: I had picked a bath
+shedding coating in dramatic sheets. He sent an ordinary worn white bath instead — surface
+gone through to grey patches in the middle where people stand, yellowing round the waste —
+and said it was **"more aligned with people and more common and relatable"**. That is the
+sharper editorial instinct. The dramatic photo shows the extreme case; the ordinary one shows
+what the reader will recognise in their own bathroom, which is the whole job of the image.
+
+**The rules that follow:**
+1. A real job photo beats an AI illustration every time an equivalent exists.
+2. Pick the **typical** case over the **worst** case. The reader has to see their own bathroom.
+3. An AI image may never carry a caption implying it is our work. If the caption says "ours",
+   the photo has to be.
+4. Covers stay illustrated — that is a deliberate, disclosed style choice, and different from
+   passing a render off as a photograph of a job.
+
+**Remaining AI images in the body copy, to swap as real equivalents are picked:**
+rental-property 2 · mouldy-shower-grout 3 · cracked-bath-basin 3 · paint-tiles 1 · peeling 0.
+
+---
 ## COVER ILLUSTRATIONS (added 2026-08-22) — the per-article hero
 
 The 12 photographs below stay as they are, for use INSIDE the posts. What sits at the

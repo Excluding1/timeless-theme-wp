@@ -479,6 +479,14 @@
         {
           "title": "Google Search Console + GA4 + Bing — still not set up, blog effect unmeasurable without them",
           "done": false
+        },
+        {
+          "title": "Article 5 now uses only real photos — Allan flagged the AI pack as looking fake",
+          "done": true
+        },
+        {
+          "title": "Swap the remaining 9 AI body images for real gallery photos (rental 2, mould 3, crack 3, tiles 1)",
+          "done": false
         }
       ]
     }
