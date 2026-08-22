@@ -222,6 +222,8 @@ function timeless_shortcode_stat_grid( $atts ) {
         'eyebrow' => '',   // small rule-flanked label above the grid
         'title'   => '',   // display heading
         'intro'   => '',   // one supporting line under the heading
+        'cols'    => '',   // 2-4; defaults to the item count so a set never strands a card
+        'compact' => '',   // yes = smaller cards, for a supporting block rather than a hero stat
     ), $atts );
     if ( empty( $a['stats'] ) ) return '';
     /* Rebuilt 2026-08-22. Was a bare card with a number in it and nothing else: no
@@ -248,7 +250,15 @@ function timeless_shortcode_stat_grid( $atts ) {
                 <?php endif; ?>
             </div>
         <?php endif; ?>
-        <div class="tr-stat-grid grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <?php
+            /* Columns come from style.css via data-cols, not from Tailwind classes.
+               Two reasons: a generated class such as sm:grid-cols-4 would be purged out
+               of the compiled build and silently collapse the grid, and the hardwired
+               3 columns left a 4-item set as 3 + 1 with the last card stranded alone. */
+            $cols    = is_numeric( $a['cols'] ) ? max( 2, min( 4, (int) $a['cols'] ) ) : min( 4, max( 2, count( $items ) ) );
+            $compact = in_array( strtolower( (string) $a['compact'] ), array( 'yes', 'true', '1' ), true );
+            ?>
+        <div class="tr-stat-grid<?php echo $compact ? ' is-compact' : ''; ?>" data-cols="<?php echo (int) $cols; ?>">
             <?php foreach ( $items as $item ) :
                 $parts = explode( '|', $item );
                 $value = trim( $parts[0] ?? '' );
@@ -308,6 +318,116 @@ function timeless_shortcode_compare_table( $atts ) {
     return ob_get_clean();
 }
 add_shortcode( 'compare_table', 'timeless_shortcode_compare_table' );
+
+/* [bar_chart eyebrow="ABS Census 2021" title="Rental share by suburb" unit="%"
+              bars="Parramatta|74.9;Liverpool|69.6" highlight="Sydney average" caption="..."]
+
+   A bar chart that is a REAL <table> underneath, with the bars drawn as CSS widths
+   inside the value cell.
+
+   Why not an SVG chart, or a JS charting library: a picture of a number cannot be read
+   by anything. Google's AI Overviews, Perplexity and screen readers all extract tables,
+   and the whole point of this article's data section is to be the source that gets
+   quoted. A table also prints, survives CSS being unavailable, needs no build step
+   (theme rule), and costs no JavaScript. So the markup is semantic and the bar is
+   decoration layered on top, never the other way round.
+
+   Bar widths are inline styles on purpose: Tailwind is compiled and purged here, so a
+   generated class such as w-[74.9%] would be stripped and every bar would render at
+   zero width. The palette lives in .tr-bar-* in style.css for the same reason.
+
+   highlight = one label drawn in gold instead of navy, for the reference line (an
+   average, a threshold) so the comparison has an anchor.
+   max       = scale ceiling. Defaults to the largest value, or 100 when unit is %,
+               so percentage charts are never silently rescaled to exaggerate a gap. */
+function timeless_shortcode_bar_chart( $atts ) {
+    $a = shortcode_atts( array(
+        'eyebrow'   => '',
+        'title'     => '',
+        'intro'     => '',
+        'bars'      => '',
+        'unit'      => '',
+        'highlight' => '',
+        'max'       => '',
+        'label_col' => 'Area',
+        'value_col' => 'Value',
+        'caption'   => '',
+    ), $atts );
+
+    if ( empty( $a['bars'] ) ) {
+        return '';
+    }
+
+    $rows = array();
+    foreach ( explode( ';', $a['bars'] ) as $bar ) {
+        $parts = array_map( 'trim', explode( '|', $bar ) );
+        if ( $parts[0] === '' || ! isset( $parts[1] ) || ! is_numeric( $parts[1] ) ) {
+            continue;
+        }
+        $rows[] = array( 'label' => $parts[0], 'value' => (float) $parts[1] );
+    }
+
+    if ( ! $rows ) {
+        return '';
+    }
+
+    $values = wp_list_pluck( $rows, 'value' );
+    if ( is_numeric( $a['max'] ) && (float) $a['max'] > 0 ) {
+        $max = (float) $a['max'];
+    } elseif ( $a['unit'] === '%' ) {
+        $max = 100.0;
+    } else {
+        $max = max( $values );
+    }
+    if ( $max <= 0 ) {
+        $max = 1.0;
+    }
+
+    ob_start(); ?>
+    <figure class="tr-bar-figure my-10 not-prose">
+        <?php if ( $a['eyebrow'] || $a['title'] || $a['intro'] ) : ?>
+            <div class="tr-bar-head">
+                <?php if ( $a['eyebrow'] ) : ?><p class="tr-stat-eyebrow"><?php echo esc_html( $a['eyebrow'] ); ?></p><?php endif; ?>
+                <?php if ( $a['title'] ) : ?><p class="tr-stat-title"><?php echo esc_html( $a['title'] ); ?></p><?php endif; ?>
+                <?php if ( $a['intro'] ) : ?><p class="tr-stat-intro"><?php echo esc_html( $a['intro'] ); ?></p><?php endif; ?>
+            </div>
+        <?php endif; ?>
+
+        <table class="tr-bar-table">
+            <thead>
+                <tr>
+                    <th scope="col"><?php echo esc_html( $a['label_col'] ); ?></th>
+                    <th scope="col"><?php echo esc_html( $a['value_col'] ); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ( $rows as $row ) :
+                    $pct    = max( 0, min( 100, ( $row['value'] / $max ) * 100 ) );
+                    $is_hl  = ( $a['highlight'] !== '' && $row['label'] === $a['highlight'] );
+                    // Trailing zeros look like false precision on a whole number.
+                    $display = rtrim( rtrim( number_format( $row['value'], 1 ), '0' ), '.' ) . $a['unit'];
+                    ?>
+                    <tr<?php echo $is_hl ? ' class="is-reference"' : ''; ?>>
+                        <th scope="row"><?php echo esc_html( $row['label'] ); ?></th>
+                        <td>
+                            <span class="tr-bar-track" aria-hidden="true">
+                                <span class="tr-bar-fill" style="width:<?php echo esc_attr( round( $pct, 2 ) ); ?>%"></span>
+                            </span>
+                            <span class="tr-bar-value"><?php echo esc_html( $display ); ?></span>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <?php if ( $a['caption'] ) : ?>
+            <figcaption class="tr-bar-caption"><?php echo esc_html( $a['caption'] ); ?></figcaption>
+        <?php endif; ?>
+    </figure>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'bar_chart', 'timeless_shortcode_bar_chart' );
 
 /* [when_cards left_title="Resurface when" left="chips;stains;sound tub" right_title="Replace when" right="cracked through;rusted base"]
    Two decision cards (green "do this when" / amber "the other option when"). Very digestible;

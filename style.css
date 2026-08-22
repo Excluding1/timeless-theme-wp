@@ -742,3 +742,131 @@ html, body {
         grid-column: 1 / -1;
     }
 }
+
+/* ── BAR CHART ────────────────────────────────────────────────────────────────
+   Styling for [bar_chart]. Lives here, not in Tailwind, because Tailwind is
+   compiled and purged in this theme: a class that appears nowhere else is
+   stripped from the build, and a chart whose bars are all zero-width is worse
+   than no chart. The bar widths themselves are inline styles for the same
+   reason. The underlying markup is a real <table>; everything below is
+   decoration layered on top of it, so the data survives with CSS off. */
+/* Stat-grid columns. Owned here, not by Tailwind utility classes, because a
+   generated class such as sm:grid-cols-4 is purged out of the compiled build and
+   the grid silently collapses. data-cols is written by the shortcode from the
+   number of items, so a set never leaves a card stranded on its own row. */
+.tr-stat-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 640px) {
+    .tr-stat-grid[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tr-stat-grid[data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tr-stat-grid[data-cols="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Compact variant: a supporting block of figures rather than the hero stat. Same
+   card, dialled down, so the two sizes still read as one family. */
+.tr-stat-grid.is-compact { gap: 12px; }
+.tr-stat-grid.is-compact .tr-stat { padding: 16px 12px 26px; }
+.tr-stat-grid.is-compact .tr-stat-badge { width: 38px; height: 38px; margin-bottom: 8px; }
+.tr-stat-grid.is-compact .tr-stat-badge svg { width: 19px !important; height: 19px !important; }
+.tr-stat-grid.is-compact .tr-stat-value { font-size: 22px; }
+.tr-stat-grid.is-compact .tr-stat-rule { width: 22px; margin: 8px auto; }
+.tr-stat-grid.is-compact .tr-stat-label { font-size: 12px; }
+.tr-stat-grid.is-compact .tr-stat-wave { height: 22px; }
+@media (max-width: 639px) {
+    .tr-stat-grid.is-compact .tr-stat { padding: 13px 8px 22px; }
+    .tr-stat-grid.is-compact .tr-stat-value { font-size: 18px; }
+    .tr-stat-grid.is-compact .tr-stat-label { font-size: 11px; }
+    .tr-stat-grid.is-compact .tr-stat-wave { height: 18px; }
+}
+
+.tr-bar-figure {
+    background: #ffffff;
+    border: 1px solid #e6eaef;
+    border-radius: 16px;
+    padding: 26px 24px 20px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.tr-bar-head { text-align: center; margin-bottom: 20px; }
+
+.tr-bar-table { width: 100%; border-collapse: collapse; }
+/* The header row is for screen readers and for anything parsing the table.
+   Sighted readers already have the figure's own title above it. */
+.tr-bar-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tr-bar-table th[scope="row"] {
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: #041534;
+    padding: 7px 14px 7px 0;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+}
+.tr-bar-table td {
+    padding: 7px 0;
+    vertical-align: middle;
+    width: 99%;
+    white-space: nowrap;   /* the value belongs beside its bar, never wrapped under it */
+}
+
+.tr-bar-track {
+    display: inline-block;
+    vertical-align: middle;
+    /* Must leave room for .tr-bar-value, which is 58px wide plus 10px of padding.
+       At the original 62px the row totalled 100% + 6px and the value wrapped onto
+       its own line under the bar, which doubled the row height and broke the scan
+       down the value column. */
+    width: calc(100% - 74px);
+    height: 18px;
+    background: #eef2f6;
+    border-radius: 9px;
+    overflow: hidden;
+}
+.tr-bar-fill {
+    display: block;
+    height: 100%;
+    background: #041534;
+    border-radius: 9px;
+    min-width: 3px;   /* a very small value still shows as a mark, not nothing */
+}
+.tr-bar-value {
+    display: inline-block;
+    vertical-align: middle;
+    width: 58px;
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #041534;
+    font-variant-numeric: tabular-nums;   /* digits line up down the column */
+}
+/* The reference row (an average, a threshold) is gold so the other bars have
+   something to be compared against rather than just being ranked. */
+.tr-bar-table tr.is-reference th[scope="row"] { color: #8a6a2f; }
+.tr-bar-table tr.is-reference .tr-bar-fill { background: #e7c08b; }
+.tr-bar-table tr.is-reference .tr-bar-value { color: #8a6a2f; }
+
+.tr-bar-caption {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #595e6d;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #eef2f6;
+}
+
+@media (max-width: 639px) {
+    .tr-bar-figure { padding: 20px 16px 16px; }
+    .tr-bar-table th[scope="row"] {
+        display: block;
+        padding: 0 0 3px;
+        white-space: normal;
+        width: auto;
+    }
+    .tr-bar-table td { display: block; padding: 0 0 12px; width: auto; }
+    .tr-bar-track { width: calc(100% - 64px); }
+    .tr-bar-value { width: 50px; }
+}
