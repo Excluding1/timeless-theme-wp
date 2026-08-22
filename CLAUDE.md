@@ -84,7 +84,7 @@ cd /Users/excluding/Downloads/timeless-theme-wp
 # install folder from the zip name; a mismatched name installs a NEW suffixed copy instead of
 # offering "Replace current with uploaded" (the 2026-06-11 lesson).
 zip -rq ../timeless-theme-2.zip . \
-  -x ".git/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
+  -x ".git/*" ".github/*" ".gitignore" "HANDOFF.md" "CLAUDE.md" ".DS_Store" \
   ".secrets/*" ".claude/*" "docs/*" "data/*" "quote-form/*" "assets/brand/internal/*" ".playwright-mcp/*" \
   "node_modules/*" "dashboard/*" "daemon/*" "scripts/*" "cockpit/*" "contractor-app/*" "quote-inbox/*" \
   "pipeline/*" \
