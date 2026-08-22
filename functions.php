@@ -2597,15 +2597,15 @@ remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
  */
 function timeless_seo_title_map() {
     return array(
-        'bathroom-resurfacing-rental-property'         => 'Bathroom Resurfacing for Rental Properties | Sydney PM Guide',
+        'bathroom-resurfacing-rental-property'         => 'Bathroom Resurfacing for Rentals: A Property Manager\'s Guide',
         'cracked-bath-basin-repair'                    => 'Cracked Bathtub or Basin Repair: How It Actually Works',
         'can-you-paint-bathroom-tiles'                 => 'Can You Paint Bathroom Tiles? What Happens After a Year',
         'bathtub-chip-repair'                          => 'Bathtub Chip Repair Sydney: Fix a Chip Without Resurfacing',
-        'how-long-does-bath-resurfacing-last'          => 'How Long Does Bath Resurfacing Last? Sydney Guide',
+        'how-long-does-bath-resurfacing-last'          => 'How Long Does Bath Resurfacing Last? And Why Some Fail Early',
         'leaking-shower-repair-without-removing-tiles' => 'Leaking Shower Repair Without Removing Tiles | Sydney',
         'mouldy-shower-grout-fix'                      => 'Mouldy Shower Grout: Clean, Regrout or Reseal? Sydney Guide',
         'regrout-or-retile-shower'                     => 'Regrout or Retile Shower? How to Tell What You Need',
-        'resurface-or-replace-bathtub'                 => 'Resurface or Replace Bathtub? Honest Sydney Guide',
+        'resurface-or-replace-bathtub'                 => 'Resurface or Replace a Bathtub? When Each One Is Right',
         'why-is-my-bathtub-peeling'                    => 'Why Is My Bathtub Peeling? Causes and the Right Fix',
 
         /* Hub pages */
