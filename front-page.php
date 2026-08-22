@@ -237,9 +237,9 @@ get_header(); ?>
      CTA background, but swap it for a real finished bathroom when we have a wide one. -->
 <section class="relative overflow-hidden py-14 sm:py-20 bg-primary">
  <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg-800w.jpg 800w, <?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg.jpg 1790w" sizes="100vw" alt="" width="1790" height="912" loading="lazy" class="absolute inset-0 w-full h-full object-cover" style="object-position:58% 66%;" aria-hidden="true" />
- <div class="absolute inset-0" style="background:linear-gradient(90deg,rgba(4,21,52,.97) 0%,rgba(4,21,52,.93) 40%,rgba(4,21,52,.28) 100%);" aria-hidden="true"></div>
+ <div class="absolute inset-0 tr-cta-scrim" aria-hidden="true"></div>
  <div class="relative max-w-7xl mx-auto px-6 sm:px-8">
-  <div class="max-w-xl">
+  <div class="max-w-xl mx-auto md:mx-0 text-center md:text-left">
    <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase mb-4">Free &amp; no obligation</span>
    <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tighter leading-[1.1] mb-3">Ready for a quote?</h2>
    <p class="text-on-primary-container text-sm sm:text-base leading-relaxed mb-6 max-w-lg">Send a few photos and get a fixed-price quote back within 24 hours. We will tell you plainly if resurfacing is the wrong call for your bathroom.</p>

@@ -932,3 +932,21 @@ html, body {
     .tr-bar-track { width: calc(100% - 64px); }
     .tr-bar-value { width: 50px; }
 }
+
+/* ─────────────────────────────────────────────
+   MID-PAGE CTA SCRIM
+   ─────────────────────────────────────────────
+   The band sits over a photo of a whole bathroom. On desktop the scrim is
+   left-weighted so the room shows to the right of the copy. On mobile the copy
+   runs the full width, so a left-weighted gradient leaves body text sitting on
+   the bright part of the photo, which is exactly what Allan flagged. Mobile
+   therefore gets a near-solid scrim and centred copy.
+   Inline styles cannot carry a media query, which is why this lives here. */
+.tr-cta-scrim {
+    background: linear-gradient(180deg, rgba(4,21,52,.95) 0%, rgba(4,21,52,.91) 100%);
+}
+@media (min-width: 768px) {
+    .tr-cta-scrim {
+        background: linear-gradient(90deg, rgba(4,21,52,.97) 0%, rgba(4,21,52,.93) 40%, rgba(4,21,52,.28) 100%);
+    }
+}

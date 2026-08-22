@@ -53,6 +53,26 @@ overlapping essays.
 
 ---
 
+## Checking mobile: use the browser, not headless (added 2026-08-23)
+
+Headless Chrome at `--window-size=390,...` does **not** give you a 390px layout. It laid out
+at roughly 500px and captured the left 390, which looks exactly like content overflowing and
+being clipped. I spent three rounds "fixing" a mobile bug that did not exist.
+
+Measure with the Browser pane instead, which is a real viewport:
+
+```js
+// resize_window {preset:"mobile"} first, then:
+JSON.stringify({vw:innerWidth, docW:document.documentElement.scrollWidth,
+                btnCentre:(a.left+a.right)/2, viewportCentre:innerWidth/2})
+```
+
+`docW === vw` means no overflow. `btnCentre ≈ viewportCentre` means it is genuinely centred.
+Headless is still fine for full-page desktop captures, where the width is wide enough that the
+discrepancy does not bite.
+
+---
+
 ## Phase 0.5 — Check the idea is still unwritten (added 2026-08-22)
 
 Before writing anything, grep the existing drafts for the idea's argument, not just its title:
