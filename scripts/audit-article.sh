@@ -56,11 +56,36 @@ import re, sys, io
 t = io.open(sys.argv[1], encoding="utf-8").read()
 sys.stdout.write(re.sub(r"<!--.*?-->", "", t, flags=re.S))
 PYEOF
+# Cure-time guard. A resurfaced bath cures in 48-72 hours; 24 hours is the silicone and
+# fresh-grout figure. That confusion shipped in THREE separate articles before Cleo caught
+# it each time, and a customer acting on 24 hours ruins the coating and starts a warranty
+# argument. Flags a 24-hour claim sitting within 200 characters of resurfacing language.
+CURE=$(python3 - "$BODY" <<'PYEOF'
+import re, sys, io
+t = io.open(sys.argv[1], encoding="utf-8").read()
+t = re.sub(r"<[^>]+>", " ", t)
+t = re.sub(r"\s+", " ", t)
+hits = 0
+for m in re.finditer(r"\b24[- ]hours?\b", t, re.I):
+    near = t[max(0, m.start()-110):m.end()+110].lower()
+    # Must actually be a curing claim...
+    if not re.search(r"cure|curing|before use|before anyone uses|ready to use", near):
+        continue
+    # ...about a resurfaced/coated surface...
+    if not re.search(r"resurfac|coating|coat\b|refinish", near):
+        continue
+    # ...and NOT the silicone/grout figure (24h is correct there) or our reply promise.
+    if re.search(r"silicone|grout|quote|photos|respond|reply|get back", near):
+        continue
+    hits += 1
+print(hits)
+PYEOF
+)
 EM=$(grep -o "—" "$BODY" | wc -l | tr -d ' ')
 CON=$(grep -ci "contractor" "$BODY" | tr -d ' ')
 DOL=$(grep -oE '\$[0-9,]+' "$BODY" | wc -l | tr -d ' ')
 GUA=$(grep -ci "guarantee" "$BODY" | tr -d ' ')
-for pair in "em dashes:$EM" "contractor:$CON" "guarantee:$GUA"; do
+for pair in "em dashes:$EM" "contractor:$CON" "guarantee:$GUA" "24h cure claim:$CURE"; do
     n="${pair##*:}"; l="${pair%%:*}"
     [ "$n" = "0" ] && printf "    ok    %-16s 0\n" "$l" || printf "    FAIL  %-16s %s\n" "$l" "$n"
 done
@@ -73,7 +98,7 @@ else
     printf "    CHECK %-16s %s — must be cited data, never our pricing:\n" "dollar figures" "$DOL"
     grep -oE '\$[0-9,]+' "$SRC" | sort -u | sed 's/^/            /'
 fi
-HOUSE_FAILS=$(( (EM>0) + (CON>0) + (GUA>0) ))
+HOUSE_FAILS=$(( (EM>0) + (CON>0) + (GUA>0) + (CURE>0) ))
 echo
 
 # ── everything measurable off the rendered page ───────────────────────────────
