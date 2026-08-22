@@ -53,7 +53,7 @@ if ( $thumb_url ) {
  "wordCount": <?php echo (int) $word_count; ?>,
  "author": { "@type": "Person", "name": "Allan P", "jobTitle": "Quotation and Jobs Manager, Bathroom Resurfacing Specialist", "worksFor": { "@type": "Organization", "name": "Timeless Resurfacing", "url": "https://timelessresurfacing.com.au" } },
  "publisher": {
- "@type": "Organization",
+ "@type": "Organization",<?php echo timeless_gbp_jsonld( false ); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "logo": { "@type": "ImageObject", "url": "<?php echo esc_url( get_template_directory_uri() . '/assets/favicon/favicon-96x96.png' ); ?>" }

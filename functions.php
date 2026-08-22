@@ -2129,7 +2129,7 @@ function timeless_get_google_reviews() {
  * all 26 hardcoded business-schema blocks. Returns '' when nothing is configured: an
  * empty sameAs is worse than no sameAs.
  */
-function timeless_gbp_jsonld() {
+function timeless_gbp_jsonld( $with_map = true ) {
     $urls = array();
 
     $gbp = trim( (string) get_theme_mod( 'timeless_gbp_url', '' ) );
@@ -2155,7 +2155,9 @@ function timeless_gbp_jsonld() {
 
     $out = ' "sameAs": [' . implode( ', ', $quoted ) . ']';
 
-    if ( $gbp ) {
+    // hasMap belongs on a Place or LocalBusiness. Callers embedding this inside a plain
+    // Organization (the BlogPosting publisher) pass false and get sameAs only.
+    if ( $gbp && $with_map ) {
         $out .= ', "hasMap": "' . esc_url( $gbp ) . '"';
     }
 
