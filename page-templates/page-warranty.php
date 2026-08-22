@@ -45,27 +45,27 @@
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Bath resurfacing</td>
  <td class="p-3">5 years</td>
- <td class="p-3">6 months</td>
+ <td class="p-3">12 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Tile resurfacing, walls</td>
  <td class="p-3">5 years</td>
- <td class="p-3">6 months</td>
+ <td class="p-3">12 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Tile resurfacing, floors</td>
  <td class="p-3">5 years</td>
- <td class="p-3">6 months</td>
+ <td class="p-3">12 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Vanity resurfacing</td>
  <td class="p-3">5 years</td>
- <td class="p-3">6 months</td>
+ <td class="p-3">12 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Kitchen benchtop resurfacing</td>
  <td class="p-3">5 years</td>
- <td class="p-3">6 months</td>
+ <td class="p-3">12 months</td>
  </tr>
  <tr class="border-b border-slate-200">
  <td class="p-3 font-medium text-primary">Cement regrouting</td>

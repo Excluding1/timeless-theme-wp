@@ -35,6 +35,19 @@ SECRET = REPO / ".secrets/wp-app-password.key"
 # 2026-08-22. Index here = position in the run; the spacing is --spacing-days apart,
 # counting BACKWARDS from today so the newest post is today and the rest are dated
 # behind it. Anything absent from this list falls to the end of the order.
+# ONLY these ship. The folder holds ten HTML files; five are finished and Rule-8 passed,
+# the rest are unaudited July drafts. Globbing the folder would have published all ten,
+# including drafts nobody has read. Allan's instruction, 2026-08-23: post these five and
+# nothing else. Adding a slug here is a deliberate act — do it only after the article
+# scores >=85 with no BLOCKED line and has had a Rule 8 pass.
+READY = [
+    "bathroom-resurfacing-rental-property",
+    "mouldy-shower-grout-fix",
+    "cracked-bath-basin-repair",
+    "can-you-paint-bathroom-tiles",
+    "why-is-my-bathtub-peeling",
+]
+
 PUBLISH_ORDER = [
     "bathroom-resurfacing-rental-property",
     "mouldy-shower-grout-fix",
@@ -139,16 +152,40 @@ def main():
     ap.add_argument("--slug", help="only this post")
     ap.add_argument("--publish", action="store_true", help="status=publish (default: draft)")
     ap.add_argument("--images", help="folder of hero images to upload + set as featured")
+    ap.add_argument("--all", action="store_true",
+                    help="ignore the READY list and process every file in the folder")
     ap.add_argument("--spacing-days", type=int, default=3,
                     help="days between consecutive posts' publish dates (default 3, 0 = leave dates alone)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
     posts = [p for f in sorted(BLOG_DIR.glob("*.html")) if (p := parse_post(f))]
+
+    # Gate on READY before anything else, unless --all is passed explicitly.
+    if not args.all:
+        held = sorted({p["slug"] for p in posts} - set(READY))
+        posts = [p for p in posts if p["slug"] in READY]
+        if held:
+            print(f"HELD BACK ({len(held)} not in READY): " + ", ".join(held))
+
     if args.slug:
+        if not args.all and args.slug not in READY:
+            die(f"'{args.slug}' is not in READY. Add it there first, or pass --all.")
         posts = [p for p in posts if p["slug"] == args.slug]
     if not posts:
         die("no posts matched")
+
+    # Guard against a half-finished READY list silently publishing fewer than expected.
+    missing = sorted(set(READY) - {p["slug"] for p in posts})
+    if missing and not args.slug:
+        die("READY names articles with no source file: " + ", ".join(missing))
+
+    seen = {}
+    for p in posts:
+        if p["slug"] in seen:
+            die(f"duplicate slug in the folder: {p['slug']}")
+        seen[p["slug"]] = True
+    print(f"PUBLISHING {len(posts)} article(s)\n")
 
     def order_index(slug):
         return PUBLISH_ORDER.index(slug) if slug in PUBLISH_ORDER else len(PUBLISH_ORDER)

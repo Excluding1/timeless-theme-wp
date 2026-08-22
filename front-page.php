@@ -48,7 +48,7 @@ get_header(); ?>
  { "@type": "Question", "name": "Do you check for asbestos?", "acceptedAnswer": { "@type": "Answer", "text": "If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed." } },
  { "@type": "Question", "name": "What areas do you service?", "acceptedAnswer": { "@type": "Answer", "text": "Entire Greater Sydney. Inner West, Eastern Suburbs, North Shore, Northern Beaches, Western Sydney, Sutherland Shire, Hills District. Plus Wollongong, Central Coast, Blue Mountains." } },
  { "@type": "Question", "name": "Can you resurface coloured tiles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Works on all tile types including coloured, textured, patterned, and mosaic. We transform outdated tiles into clean, modern finishes." } },
- { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Workmanship warranties up to 5 years. Bath and tile resurfacing: 5 years private home / 6 months rental. Epoxy regrouting: 5 years. Cement regrouting: 2 years. Silicone replacement: 12 months (wear item, annual replacement recommended). Rental property warranties differ. Your rights under the Australian Consumer Law are unaffected." } }
+ { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Workmanship warranties up to 5 years. Bath and tile resurfacing: 5 years private home / 12 months rental. Epoxy regrouting: 5 years. Cement regrouting: 2 years. Silicone replacement: 12 months (wear item, annual replacement recommended). Rental property warranties differ. Your rights under the Australian Consumer Law are unaffected." } }
  ]
 }
 </script>

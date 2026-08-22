@@ -384,10 +384,10 @@
  </tr>
  </thead>
  <tbody class="divide-y divide-surface-container">
- <tr><td class="py-2 pr-4 font-semibold">Bath resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">6 months</td></tr>
- <tr><td class="py-2 pr-4 font-semibold">Wall-tile resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">6 months</td></tr>
- <tr><td class="py-2 pr-4 font-semibold">Floor resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">6 months</td></tr>
- <tr><td class="py-2 pr-4 font-semibold">Vanity / basin resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">6 months</td></tr>
+ <tr><td class="py-2 pr-4 font-semibold">Bath resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">12 months</td></tr>
+ <tr><td class="py-2 pr-4 font-semibold">Wall-tile resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">12 months</td></tr>
+ <tr><td class="py-2 pr-4 font-semibold">Floor resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">12 months</td></tr>
+ <tr><td class="py-2 pr-4 font-semibold">Vanity / basin resurfacing (Hawk system)</td><td class="py-2 pr-4">Up to 5 years</td><td class="py-2">12 months</td></tr>
  <tr><td class="py-2 pr-4 font-semibold">Cement regrouting</td><td class="py-2 pr-4">2 years</td><td class="py-2">6 months</td></tr>
  <tr><td class="py-2 pr-4 font-semibold">Epoxy regrouting</td><td class="py-2 pr-4">5 years</td><td class="py-2">12 months</td></tr>
  <tr><td class="py-2 pr-4 font-semibold">Silicone replacement</td><td class="py-2 pr-4">12 months</td><td class="py-2">90 days (defect-only)</td></tr>
