@@ -2394,14 +2394,38 @@ function timeless_seo_meta() {
        hints are still accurate (they aren't for an arbitrary featured image). */
     $og_type        = 'website';
     $img_is_fallback = true;
+    $img_w           = null;   // real dimensions, filled in below when a featured image exists
+    $img_h           = null;
     $article_meta   = '';
     if ( is_singular( 'article' ) ) {
         $og_type = 'article';
-        $pid     = get_queried_object_id();
-        $feat    = get_the_post_thumbnail_url( $pid, 'large' );
+        $pid = get_queried_object_id();
+
+        /*
+         * FULL size, not 'large'. twitter:card below is summary_large_image and
+         * og wants at least 1200x630; WordPress's 'large' is 1024x576, so every
+         * article was declaring a big-card format while supplying an image too
+         * small to fill it, and the networks fall back to a small thumbnail.
+         * Blog images ship at 1672x941 (docs/content/blog/IMAGE-PACK.md), which
+         * clears the minimum. 'large' stays as the fallback for any older post
+         * whose original is genuinely smaller.
+         */
+        $feat = get_the_post_thumbnail_url( $pid, 'full' );
+        if ( ! $feat ) {
+            $feat = get_the_post_thumbnail_url( $pid, 'large' );
+        }
+
         if ( $feat ) {
             $img             = $feat;
             $img_is_fallback = false;
+
+            // Real dimensions when we have them: the networks skip a fetch, and a
+            // card cannot render at the wrong aspect while the image is still loading.
+            $meta = wp_get_attachment_metadata( get_post_thumbnail_id( $pid ) );
+            if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+                $img_w = (int) $meta['width'];
+                $img_h = (int) $meta['height'];
+            }
         }
         $cats    = get_the_category( $pid );
         $section = ! empty( $cats ) ? $cats[0]->name : 'Bathroom Resurfacing';
@@ -2419,7 +2443,10 @@ function timeless_seo_meta() {
     echo '<meta property="og:description" content="' . esc_attr( $desc ) . '" />' . "\n";
     echo '<meta property="og:url" content="' . esc_url( $url ) . '" />' . "\n";
     echo '<meta property="og:image" content="' . esc_url( $img ) . '" />' . "\n";
-    if ( $img_is_fallback ) {
+    if ( ! empty( $img_w ) && ! empty( $img_h ) ) {
+        echo '<meta property="og:image:width" content="' . (int) $img_w . '" />' . "\n";
+        echo '<meta property="og:image:height" content="' . (int) $img_h . '" />' . "\n";
+    } elseif ( $img_is_fallback ) {
         echo '<meta property="og:image:width" content="1200" />' . "\n";
         echo '<meta property="og:image:height" content="630" />' . "\n";
     }

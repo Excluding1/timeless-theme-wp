@@ -20,6 +20,10 @@ $modified_disp  = get_the_modified_date();
 $show_modified  = get_the_modified_date( 'Y-m-d' ) !== get_the_date( 'Y-m-d' );
 $thumb_url      = get_the_post_thumbnail_url( get_the_ID(), 'large' );
 $hero_img       = $thumb_url ? $thumb_url : get_template_directory_uri() . '/images/homepage/after.jpg';  // fallback so hero/OG never render bare
+// Schema wants the biggest version, the visible hero does not. Google recommends
+// article images at least 1200px wide; 'large' is 1024, so the two are split here
+// rather than reusing $hero_img for both and shipping an undersized schema image.
+$schema_img     = get_the_post_thumbnail_url( get_the_ID(), 'full' ) ?: $hero_img;
 $canonical      = get_permalink();
 $categories     = get_the_category();
 $cat_name       = ! empty( $categories ) ? $categories[0]->name : '';
@@ -43,7 +47,7 @@ if ( $thumb_url ) {
  "@type": "BlogPosting",
  "headline": "<?php echo esc_js( get_the_title() ); ?>",
  "description": "<?php echo esc_js( get_the_excerpt() ); ?>",
- "image": "<?php echo esc_url( $hero_img ); ?>",
+ "image": "<?php echo esc_url( $schema_img ); ?>",
  "inLanguage": "en-AU",
  <?php if ( $cat_name ) : ?>"articleSection": "<?php echo esc_js( $cat_name ); ?>",<?php endif; ?>
  "wordCount": <?php echo (int) $word_count; ?>,
