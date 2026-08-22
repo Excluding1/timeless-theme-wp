@@ -397,8 +397,8 @@
           "done": true
         },
         {
-          "title": "Blog article 1 of 10 (property-manager guide) — perfect before writing article 2",
-          "done": false
+          "title": "Blog articles 1-5 DONE — 95/100/96/100/100, all Rule 8 passed",
+          "done": true
         },
         {
           "title": "Deploy v1.5.2 to live (repo 1.5.2, live 1.5.1 — also restores CSS filemtime cache-busting)",
@@ -406,7 +406,7 @@
         },
         {
           "title": "/services/ hub page renders 1 word on live but 19 breadcrumbs point at it",
-          "done": false
+          "done": true
         },
         {
           "title": "Blog images: pack exists but must be uploaded to the live Media Library before publishing",
@@ -450,6 +450,34 @@
         },
         {
           "title": "104 commits unpushed on feature/day8-react-form-ghl-wire-2026-05-20 - no offsite backup",
+          "done": false
+        },
+        {
+          "title": "Article 5 cover — Chrome extension wedged through 3 recovery cycles; prompt is in docs/DEPLOY-v1.5.2-CHECKLIST.md §B",
+          "done": false
+        },
+        {
+          "title": "Staggered publish dates built into publish-blogs.py (--spacing-days, default 3)",
+          "done": true
+        },
+        {
+          "title": "Auditor now blocks the 24h-cure error that shipped in 3 separate articles",
+          "done": true
+        },
+        {
+          "title": "DEPLOY CHECKLIST written: docs/DEPLOY-v1.5.2-CHECKLIST.md",
+          "done": true
+        },
+        {
+          "title": "ALLAN: rule on the rental warranty number — site publishes 6mo AND 12mo on the same page",
+          "done": false
+        },
+        {
+          "title": "ALLAN: confirm provenance of the 3 real photos in article 3",
+          "done": false
+        },
+        {
+          "title": "Google Search Console + GA4 + Bing — still not set up, blog effect unmeasurable without them",
           "done": false
         }
       ]
