@@ -121,35 +121,34 @@ deleted the sweep now falls back to `/contact/`, but the recovery experience deg
 that page alone.
 
 ```
-Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. Your quote for {{inboundWebhookRequest.customData.property_address}} is saved but not finished.
+Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. I can see the quote for {{inboundWebhookRequest.customData.property_address}} didn't get finished off, here's the link back to where you got up to: {{inboundWebhookRequest.customData.resume_link_sms}}
 
-Pick up where you left off: {{inboundWebhookRequest.customData.resume_link_sms}}
-
-All that's left is a couple of photos and a quick description of what needs fixing. Then I'll have your quote back within 24 hours.
+Just after a couple of photos and a quick note on what needs doing, then I'll have your quote back to you within 24 hours.
 ```
 
-**Why this shape, and what was weighed (2026-08-23).** Allan's instinct was that shorter reads
-more genuine, and he is right about *tone* but the "shorter is better" rule does not hold for
-this particular message.
+**Why this and not the tidier version (2026-08-23).** Allan read the previous draft and said it
+still sounded like a bot. He was right, and it is worth naming exactly what gave it away,
+because these are the same three tells every time:
 
-The problem an abandoned-quote SMS has to solve is **legitimacy, not length**. A text from an
-unknown number containing a link is exactly what a scam looks like, and Australians are heavily
-primed on that. Cutting context makes the message *more* deletable, not less.
+1. **"is saved but not finished"** is database language. A person says *didn't get finished off*.
+   Software describes state; people describe what happened.
+2. **"Pick up where you left off"** is on a thousand SaaS emails. The moment a phrase is
+   optimised enough to be reused everywhere, it stops reading as written by anyone.
+3. **Three tidy paragraphs, each doing one job.** Real texts do not have architecture. The
+   structure itself is the tell, before a single word is read.
 
-What actually earns the tap is the **property address**. "Your quote for 12 Smith St" is proof
-no scammer could fake, and it is the strongest thing in Surface Care's version — stronger than
-their structure. We had it in the draft all along and simply were not sending it; now both
-webhook paths do.
+The fix is not to strip information out. The address and the two-item list are the parts doing
+the persuading, and both stay. It is to let the sentences run together the way someone typing on
+a phone would, and to make the observation first-person: *I can see*, not *we noticed*.
 
-Kept from Surface Care: a **named human** ("Allan here" beats "it's Timeless Resurfacing"), the
-address, and the short list of what is left. The list is not padding — they abandoned because it
-felt like effort, and naming two small things directly answers that.
+**On timing.** Allan's own draft said "24 to 48hrs". Kept at **within 24 hours**, because that
+is what the site, llms.txt, every service page and all five blog articles promise — 43 places
+against zero. The 24-48 figures elsewhere on the site are all CURE times, a different thing.
+Changing the quote promise is a business decision, and if it becomes 48 it has to change
+everywhere at once, not just in one SMS.
 
-Dropped: *"We noticed you have not completed"* — mildly accusatory and robotic, and it spends
-characters describing the situation rather than removing the obstacle.
-
-**Honest limit:** this is reasoning, not measurement. Nobody has A/B tested it. The one number
-worth watching once it runs is what share of abandoned quotes come back and complete.
+**Honest limit:** this is reasoning, not measurement. Nobody has A/B tested it. The number worth
+watching once it runs is what share of abandoned quotes come back and complete.
 
 **GHL wiring (Allan):** W2's SMS step → insert the merge field for the inbound webhook payload's
 `customData.resume_link_sms` (use GHL's merge-field picker on the trigger data; the exact token
