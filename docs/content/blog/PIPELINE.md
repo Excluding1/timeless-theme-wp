@@ -53,6 +53,28 @@ overlapping essays.
 
 ---
 
+## Phase 0.5 — Check the idea is still unwritten (added 2026-08-22)
+
+Before writing anything, grep the existing drafts for the idea's argument, not just its title:
+
+```bash
+grep -l -i "<keyword from the idea>" docs/content/blog/*.html
+grep -oE "<h2>[^<]+</h2>" docs/content/blog/*.html | grep -i "<the idea>"
+```
+
+Why: on 2026-08-22 the ranked list's #4 and #5 were both already written, as H2 sections inside
+an earlier draft of a different article. Nothing in the list knew. I noticed the collision,
+quietly wrote a substitute article instead, and Allan caught it.
+
+Two rules come out of that:
+
+1. **If an existing draft already owns the argument, mark the idea ABSORBED and re-rank.**
+   Do not write the second article — it cannibalises the first.
+2. **Never substitute silently.** If the ranked next idea is dead, say so and argue for the
+   replacement before writing it. A ranked list only works if departures are visible.
+
+---
+
 ## Phase 1 — draft
 
 Follow the brief's H2 outline. House rules, all of which are enforced by the checks in

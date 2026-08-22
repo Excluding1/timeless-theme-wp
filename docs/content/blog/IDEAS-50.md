@@ -186,11 +186,13 @@ compounds. Test any new idea yourself with `./scripts/keyword-demand.sh "your te
 
 | # | Idea | Demand | Why it sits here |
 |--:|---|---|---|
-| **1** | **7. Property Manager's Guide** | 0.0% | ✅ **DONE, 95/100.** Awaiting photos + Rule 8. B2B, converts, near-zero competition. |
-| **2** | **6. Mouldy shower grout** | 8.5% | 🔨 **IN PROGRESS.** BOM data pulled, 12/12 answers, 1,805 words. Finish it. |
-| **3** | **15. How a chip or crack is actually repaired** | 0.1% | 🔨 **NEXT.** Method captured from real quotes. Low traffic, high intent, feeds two service pages that have no article. |
-| 4 | 49. DIY bath resurfacing kits: what they do and do not do | **72.9%** | Rides "tile paint", the single biggest term measured and **66x our own service name**. These are people about to make the mistake we fix. |
-| 5 | 24. Peeling DIY bath paint: undoing a Bunnings-kit job | **72.9%** | Same cluster, later moment. We already hold a real photo of exactly this. |
+| **1** | **7. Property Manager's Guide** | 0.0% | ✅ **PUBLISHED-READY, 95/100.** Rule 8 passed. Article 1. |
+| **2** | **6. Mouldy shower grout** | 8.5% | ✅ **PUBLISHED-READY, 100/100.** Rule 8 passed. Article 2. |
+| **3** | **15. How a chip or crack is actually repaired** | 0.1% | ✅ **PUBLISHED-READY, 93/100.** Rule 8 passed, Allan's corrections + 3 real photos in. Article 3. |
+| **4** | **56. Can you paint bathroom tiles** | **72.9%** | ✅ **PUBLISHED-READY, 97/100.** Rule 8 passed. Article 4. ⚠️ **This idea was NOT on the original list — see the collision note below.** It is the only article that attacks "tile paint" on TILES rather than on baths. |
+| **5** | **4. Why is my bathtub peeling** | **72.9%** | 🔨 **DRAFTED, held back.** Article 5. **Absorbs ideas 49 and 24** — see below. |
+| ~~4~~ | ~~49. DIY bath resurfacing kits: what they do and do not do~~ | 72.9% | ❌ **ABSORBED into article 5.** Its H2 "DIY kit vs professional coating: why the difference shows at 12 months" IS this idea. Writing it separately would cannibalise article 5. |
+| ~~5~~ | ~~24. Peeling DIY bath paint: undoing a Bunnings-kit job~~ | 72.9% | ❌ **ABSORBED into article 5.** Its H2s "Why you cannot just paint over it" and "The proper fix: strip, prep, resurface" ARE this idea. |
 | 6 | 8. Leaking shower without removing a tile | **39.5%** | Third-biggest term. Brief warns the SERP is competitor-dense, so it needs the method angle to win. |
 | 7 | 9. Epoxy grout vs cement grout | **35.0%** | Big term, published absorption figures to cite, and it sells the upgrade. |
 | 8 | 40. Internal bathrooms with no window | **61.6%** | Rides "bathroom exhaust fan". Reuses the BOM pull. Genuinely a Sydney apartment problem. |
@@ -256,6 +258,31 @@ the exact moment they are deciding whether to do it themselves.
 Caveat, stated honestly: most "tile paint" searchers want Bunnings, not a tradie. We are
 not competing for the transaction, we are competing for the **question underneath it**,
 which is "will this actually work?". That is a page we can win and they cannot.
+
+---
+
+## ⚠️ Collision note — why the top of this list went stale (2026-08-22)
+
+Allan pulled me up for writing an article that was not on this list. He was right, and the
+reason is worth recording because it will happen again.
+
+The list was ranked before `why-is-my-bathtub-peeling` was drafted. That draft turned out to
+contain **both** of the ideas ranked 4 and 5 — kit-versus-professional, and undoing a
+Bunnings-kit job — as its own H2 sections. So by the time the queue reached rank 4, ranks 4
+and 5 had already been written, inside a different article, and nothing in the list knew it.
+
+Faced with that, I wrote a tiles article instead. The topic choice was defensible: the measured
+term is literally "tile paint", article 5 owns the BATH story and never mentions tiles, and the
+two therefore do not cannibalise. **What was not defensible was making the substitution
+silently.** A ranked list only works if departures from it are argued, not quietly taken.
+
+**The rule this adds:** before writing the next article, grep the existing drafts for the idea's
+H2s. If an existing draft already owns the argument, mark the idea absorbed and re-rank —
+do not write the second article, and do not silently write a third thing instead.
+
+**Next up is rank 6, idea 8 — leaking shower without removing a tile, 39.5%.** A July draft
+exists at `leaking-shower-repair-without-removing-tiles.html` and has never been audited
+against the current pipeline.
 
 ---
 
