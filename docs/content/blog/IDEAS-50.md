@@ -177,6 +177,88 @@ only asset is that it exists.
 
 ---
 
+## THE RANKED ORDER — write them in this sequence
+
+Ranked 2026-08-22 on measured demand, intent match, edge strength and whether it
+compounds. Test any new idea yourself with `./scripts/keyword-demand.sh "your term"`.
+
+**1 to 3 are fixed**: done, in progress, and Allan's pick with the method already captured.
+
+| # | Idea | Demand | Why it sits here |
+|--:|---|---|---|
+| **1** | **7. Property Manager's Guide** | 0.0% | ✅ **DONE, 95/100.** Awaiting photos + Rule 8. B2B, converts, near-zero competition. |
+| **2** | **6. Mouldy shower grout** | 8.5% | 🔨 **IN PROGRESS.** BOM data pulled, 12/12 answers, 1,805 words. Finish it. |
+| **3** | **15. How a chip or crack is actually repaired** | 0.1% | 🔨 **NEXT.** Method captured from real quotes. Low traffic, high intent, feeds two service pages that have no article. |
+| 4 | 49. DIY bath resurfacing kits: what they do and do not do | **72.9%** | Rides "tile paint", the single biggest term measured and **66x our own service name**. These are people about to make the mistake we fix. |
+| 5 | 24. Peeling DIY bath paint: undoing a Bunnings-kit job | **72.9%** | Same cluster, later moment. We already hold a real photo of exactly this. |
+| 6 | 8. Leaking shower without removing a tile | **39.5%** | Third-biggest term. Brief warns the SERP is competitor-dense, so it needs the method angle to win. |
+| 7 | 9. Epoxy grout vs cement grout | **35.0%** | Big term, published absorption figures to cite, and it sells the upgrade. |
+| 8 | 40. Internal bathrooms with no window | **61.6%** | Rides "bathroom exhaust fan". Reuses the BOM pull. Genuinely a Sydney apartment problem. |
+| 9 | 38. Why Sydney bathrooms grow mould faster | 8.5% | Third use of the same BOM dataset. Pure local authority. |
+| 10 | 51. The shower refresh, whole cubicle at once | 17.1% | Bundle piece near "waterproofing shower". Sells the biggest job we do. |
+| 11 | 3. Regrout or retile your shower | 4.0% | Brief notes a cost guide already ranks top-6 here, so the SERP rewards content. |
+| 12 | 43. End-of-lease damage: wear and tear or a claim? | — | Reuses the bond dataset. B2B, converts, nobody covers it. |
+| 13 | 52. Floor tiles vs wall tiles | 0.2% | Low volume, **outstanding** edge. Allan's rule, and it is the answer to a question buyers ask constantly. |
+| 14 | 47. Ten questions to ask before hiring a resurfacer | — | The anti-cowboy piece. Read immediately before choosing. |
+| 15 | 27. The preparation step nobody sees | — | Explains why cheap jobs fail. Feeds every service page. |
+| 16 | 2. How long does bath resurfacing last | — | The #1 trust objection in the trade. |
+| 17 | 4. Why is my bathtub peeling | — | Problem-aware, real photo on file, direct service feeder. |
+| 18 | 17. Black mould on shower silicone | — | Splits from the mould article; competitors merge the two and get it wrong. |
+| 19 | 36. Reading a resurfacing warranty | — | ACL-safe differentiator. Nobody explains "up to". |
+| 20 | 28. Why we do not spray-coat a tiled shower floor | — | Honesty piece from a documented decision. Highly citable. |
+| 21 | 5. Bathtub chip repair | 0.1% | Small-job entry point that becomes whole-bath work. |
+| 22 | 42. Hard water in Western Sydney | 3.4% | Local, real data available. |
+| 23 | 1. Resurface or replace (rebuilt) | — | **Parked.** Only after it stops repeating article 1. |
+| 24 | 25. What happens during a resurface, hour by hour | — | Process transparency, strong for AI citation. |
+| 25 | 44. Airbnb bathrooms between guests | 9.6% | Real adjacent demand, B2B, nobody serves it. |
+| 26 | 33. What cleaners are safe on a resurfaced bath | — | Retention, and a warranty-support piece. |
+| 27 | 12. Renovation vs resurfacing, week by week | — | Commercial comparison, needs a genuine timeline. |
+| 28 | 20. Hairline cracks in an acrylic bath | 0.0% | The flex-under-the-base point. Pairs with 15. |
+| 29 | 16. Cracked grout in the shower | — | Feeds `/services/cracked-grout-repair/`. |
+| 30 | 11. Should you resurface before selling? | — | Local, needs days-on-market data to be worth writing. |
+| 31 | 34. Why rubber bath mats ruin a resurfaced tub | — | Almost nobody warns about this. Small but genuinely useful. |
+| 32 | 26. What shower regrouting involves | — | Process piece for the pillar. |
+| 33 | 31. Curing time: the first 24 hours | — | Warranty support, prevents callbacks. |
+| 34 | 10. Resurfacing vs retiling a floor | — | Write it **from** rule 52, not around it. |
+| 35 | 55. Replacing a vanity or benchtop instead | — | ⚠️ Blocked: no service page offers this yet. |
+| 36 | 21. Water pooling in the shower base | — | Diagnostic, feeds leak repair. |
+| 37 | 18. Rust stains: surface or the end of the tub? | — | Honest diagnostic. |
+| 38 | 48. Why the cheapest quote usually costs more | — | Pairs with 47. |
+| 39 | 13. Is bath resurfacing worth it? | 1.1% | Our service term is tiny; write it for closers, not traffic. |
+| 40 | 30. How we quote from photos | — | Explains the workflow that already converts. |
+| 41 | 22. Yellowed bathtub | — | Diagnostic. |
+| 42 | 35. How often should silicone be replaced | — | Aftercare, feeds silicone service. |
+| 43 | 53. Can you tile over existing tiles? | 0.2% | Subset of 52; write only if 52 does well. |
+| 44 | 23. Loose or drummy floor tiles | — | Honest "we cannot fix this" piece. |
+| 45 | 29. Two-pack coatings explained | — | Technical credibility. |
+| 46 | 32. Anti-slip on a resurfaced base | — | Safety duty, matters more than its volume. |
+| 47 | 39. 1960s to 1990s Sydney bathrooms | — | Charming, local, slow burn. |
+| 48 | 19. Why your bath feels rough or chalky | — | Narrow diagnostic. |
+| 49 | 45. Portfolio bathroom refreshes | — | B2B, needs a real portfolio client first. |
+| 50 | 54. Restoring shower glass | 0.3% | Adjacent, low demand. |
+| 51 | 14. Vanity respray or new vanity | — | Overlaps 55; blocked by the same service gap. |
+| 52 | 37. The five-minute monthly routine | — | Thin on its own; fold into 33. |
+| 53 | 46. What a building manager should check | — | Commercial, no channel yet. |
+| 54 | 41. Strata bathrooms | 0.4% | Low demand, and needs care to avoid giving legal advice. |
+| 55 | 50. Colour changing a bath or tiles | — | Nice-to-have. |
+
+### The finding that should change strategy
+
+**"tile paint" measures 72.9% of "bathroom renovation". Our own service term,
+"bathroom resurfacing", measures 1.1%. The DIY alternative is 66 times bigger than the
+professional one.**
+
+Almost nobody searches for what we sell. They search for the cheap fix they are about
+to try, the problem they already have, or the renovation they are trying to avoid. That
+is why ideas 4 and 5 jumped the queue: they meet the largest audience in the market at
+the exact moment they are deciding whether to do it themselves.
+
+Caveat, stated honestly: most "tile paint" searchers want Bunnings, not a tradie. We are
+not competing for the transaction, we are competing for the **question underneath it**,
+which is "will this actually work?". That is a page we can win and they cannot.
+
+---
+
 ## Measured demand, Australia, 5 years of weekly Google Trends
 
 Pulled 2026-08-22 via the Trends API (technique in `memory/reference-google-trends-api-technique.md`),
