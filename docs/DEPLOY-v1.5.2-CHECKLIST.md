@@ -17,23 +17,16 @@ nothing later depends on something earlier being skipped.
 
 ---
 
-## B. The one job I could not finish
+## B. Covers — all five done
 
-**Article 5's cover.** The Chrome extension wedged through three full recovery cycles. The
-pipeline says to expect one recovery per cover; this went past that. Everything else on
-article 5 is done. Run this in ChatGPT yourself and drop the PNG anywhere in Downloads:
+`cover-rental-property` · `cover-mould` · `cover-crack` · `cover-paint-tiles` ·
+`cover-peeling-bathtub`. All 1672x941, JPEG q88, in `images/blog/`, and every filename in
+`publish-blogs.py`'s HERO_MAP resolves to a file that exists.
 
-> A flat 2D editorial illustration for a blog article header, 16:9 landscape. A person
-> leaning over the edge of a bath, looking at a patch where the white coating has lifted
-> and curled away from the surface, with a circular inset floating nearby showing the same
-> bath stripped back and freshly resurfaced. Deep navy and warm gold, soft off-white,
-> muted grey-blue. Calm and premium, the way a good fintech blog illustrates a story.
-> No text anywhere.
-
-Save as `images/blog/cover-peeling-bathtub.jpg`, 1672x941 — `publish-blogs.py` already
-expects that filename.
-
----
+The last one took four attempts across the evening — the Chrome extension wedged three
+times and then recovered. The pipeline already says to expect one recovery per cover; the
+correction to make is that the recovery sometimes needs repeating, and giving up after two
+tries was my error rather than the tool's.
 
 ## C. Deploy sequence, in order
 

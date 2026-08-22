@@ -453,8 +453,8 @@
           "done": false
         },
         {
-          "title": "Article 5 cover — Chrome extension wedged through 3 recovery cycles; prompt is in docs/DEPLOY-v1.5.2-CHECKLIST.md §B",
-          "done": false
+          "title": "All five article covers done (rental, mould, crack, paint-tiles, peeling)",
+          "done": true
         },
         {
           "title": "Staggered publish dates built into publish-blogs.py (--spacing-days, default 3)",

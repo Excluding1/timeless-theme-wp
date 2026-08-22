@@ -56,6 +56,7 @@ belong in the body.
 | `cover-mould.jpg` | mouldy-shower-grout-fix | Person with a brush at a mouldy corner, two circular insets. Established the inset device the set now uses. |
 | `cover-crack.jpg` | cracked-bath-basin-repair | Person crouched at a bath, fingertip on a crack across the tub floor, two gold-ringed insets showing a chip and a crazed patch. **Replaced 2026-08-22** after a first attempt came back photoreal — a six-panel photographic grid. It was a good image and the wrong one: covers 1 and 2 are flat illustration, and one photoreal cover in the archive grid breaks the set. Naming a person *doing* something in the prompt is what keeps the model in illustration mode; a prompt that is only a list of objects drifts photoreal. |
 | `cover-paint-tiles.jpg` | can-you-paint-bathroom-tiles | Person rolling paint onto tile, gold-ringed inset showing the same wall peeling a year later. Article 4's whole argument in one image. Its featured image had been pointing at `failed-tile-paint.jpg`, the same photo used in the body, so the hero and the first figure were the same picture. |
+| `cover-peeling-bathtub.jpg` | why-is-my-bathtub-peeling | Person leaning over a bath at a patch where the coating has curled away, gold-ringed inset showing the same bath resurfaced. Took four attempts across the evening — the extension wedged three times before recovering. |
 
 ---
 
