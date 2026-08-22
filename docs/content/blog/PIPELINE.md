@@ -96,9 +96,25 @@ Read [`IMAGE-PACK.md`](IMAGE-PACK.md) first. In short:
 sips -s format jpeg -s formatOptions 88 in.png --out images/blog/cover-x.jpg
 ```
 
-**Driving ChatGPT through the Chrome extension:** it fails on a stale tab group. Create
-a fresh group, expect the first screenshot to time out, take a second one, and it
-works. Download via the image's own editor view, not the share dialog.
+**Driving ChatGPT through the Chrome extension.** It is fragile, and the fix is timing,
+not retries. Allan's rule, and it works:
+
+1. Navigate, then **wait a full 15 seconds** before touching the page. Batch the waits,
+   and take the screenshot in a SEPARATE call. Screenshotting 5 seconds in fails, and
+   each failed attempt seems to make the next one worse.
+2. When it locks up anyway, close the tab so the group auto-removes, recreate the group,
+   and navigate again with the same long wait.
+3. It reliably breaks again after each generated image, so expect to recover once per
+   cover rather than fighting it.
+
+**Expect the first generation to error.** "Something went wrong. Please try again" has
+appeared on every cover so far, and the image still generates below the error. Click
+Retry if there is no card, otherwise just carry on.
+
+**Download via the image's own editor view**, not the share dialog: click the image to
+open it, then the download icon in the top toolbar. The share dialog's Download works
+but takes longer to land, and checking the filesystem too early looks like a failure
+when it is not.
 
 ---
 
