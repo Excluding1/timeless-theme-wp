@@ -153,6 +153,8 @@
  <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded-sm mb-3">Our Services</span>
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Repair</h2>
  <p class="text-secondary">From a single chip to multiple cracks across the surface. Here&rsquo;s what we fix and how we do it.</p>
+ <!-- Feeder to the crack/method guide; without it the article is orphaned. -->
+ <p class="text-secondary max-w-3xl mb-10 text-sm">Wondering what actually happens during the repair, or whether a crack can be fixed at all? Read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/cracked-bath-basin-repair/' ) ); ?>">Cracked Bath or Basin: How the Repair Actually Works</a>.</p>
  <!-- Surfaces we repair -->
  <div class="pill-row pill-row--center gap-3 mt-8">
  <span class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-low rounded-full text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">bathtub</span> Bathtubs</span>

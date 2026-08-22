@@ -119,6 +119,8 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Types of Basin Damage We Fix</h2>
  <p class="text-secondary max-w-3xl mb-10">Whether your basin is ceramic, porcelain, acrylic or stone-composite, we've seen and repaired every kind of damage. Here are the most common issues we fix.</p>
+ <!-- Feeder to the crack/method guide; without it the article is orphaned. -->
+ <p class="text-secondary max-w-3xl mb-10 text-sm">Wondering what actually happens during the repair, or whether a crack can be fixed at all? Read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/cracked-bath-basin-repair/' ) ); ?>">Cracked Bath or Basin: How the Repair Actually Works</a>.</p>
 
  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <div class="bg-surface-container-low rounded-xl p-6 reveal">

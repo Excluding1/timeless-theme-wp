@@ -205,7 +205,9 @@ internal = sorted(set(re.findall(r'href="(/[a-z0-9/-]+/)"', body)))
 svc = [i for i in internal if i.startswith('/services/')]
 pts += 6 if len(svc) >= 2 else (3 if svc else 0)
 print(f"    {'ok  ' if len(svc)>=2 else 'WARN'}  {len(internal)} internal links, {len(svc)} to service pages")
-ok = '#quote' in body or '/contact/' in body
+# The theme's own in-article CTA anchors at #article-quote, not #quote, so the
+# original check failed a page that had a perfectly good CTA.
+ok = '#article-quote' in body or '#quote' in body or '/contact/' in body
 pts += 4 if ok else 0
 print(f"    {'ok  ' if ok else 'FAIL'}  quote CTA present")
 ok = 'BreadcrumbList' in t
