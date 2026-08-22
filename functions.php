@@ -129,8 +129,8 @@ function timeless_shortcode_before_after( $atts ) {
                 <img src="<?php echo esc_url( $a['before'] ); ?>" alt="<?php echo esc_attr( $a['alt'] . ', before' ); ?>" class="w-full h-full object-cover absolute inset-0" />
             </div>
         </div>
-        <div class="ba-handle absolute top-0 bottom-0 w-1 bg-white shadow-lg" style="left:50%;transform:translateX(-50%);cursor:ew-resize;">
-            <div class="absolute top-1/2 left-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center" style="transform:translate(-50%,-50%);">
+        <div class="ba-handle absolute top-0 bottom-0" style="left:50%;transform:translateX(-50%);cursor:ew-resize;">
+            <div class="ba-knob absolute top-1/2 left-1/2 flex items-center justify-center" style="transform:translate(-50%,-50%);">
                 <?php echo timeless_icon( 'drag_indicator', 'text-primary', 'width:20px;height:20px' ); ?>
             </div>
         </div>

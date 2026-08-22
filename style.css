@@ -349,6 +349,34 @@ html, body {
     font-weight: 600;
 }
 
+/* BEFORE/AFTER SLIDER HANDLE
+   The divider was a 4px white line with Tailwind's shadow-lg. The shadow computed to
+   fully transparent (a purge casualty, same class of bug as the chart bars), so on a
+   pale tiled photo the line had nothing to separate it from the image and the whole
+   slider read as one continuous picture. Allan flagged exactly that.
+
+   Owned here, not by utility classes, and given a dark outline as well as a light fill
+   so it reads on a white bathroom and a dark one alike. */
+.ba-handle {
+    width: 3px;
+    background: #ffffff;
+    box-shadow: 0 0 0 1px rgba(4, 21, 52, .55), 0 2px 10px rgba(4, 21, 52, .35);
+    z-index: 5;
+}
+.ba-knob {
+    width: 42px;
+    height: 42px;
+    border-radius: 9999px;
+    background: #ffffff;
+    box-shadow: 0 0 0 2px rgba(4, 21, 52, .55), 0 3px 14px rgba(4, 21, 52, .40);
+}
+/* The label chips need the same treatment: white-on-pale was barely legible. */
+.ba-slider > span { box-shadow: 0 1px 6px rgba(4, 21, 52, .35); }
+
+@media (max-width: 639px) {
+    .ba-knob { width: 34px; height: 34px; }
+}
+
 .entry-content img {
     max-width: 100%;
     /* Cap the height as well as the width. A portrait photo (a real job shot taken on a
