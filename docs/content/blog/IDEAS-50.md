@@ -109,6 +109,74 @@ Edge codes:
 
 ---
 
+## H. Added 2026-08-22 from Allan — scope we sell but do not write about
+
+Allan flagged two things the list was missing. Both are strong, and one is a business
+issue rather than a content one.
+
+| # | Title | Primary keyword | Intent | Edge |
+|--:|---|---|---|---|
+| 51 | The Shower Refresh: What Changes When You Do the Whole Cubicle at Once | shower refresh | commercial | **METHOD · GAP** — bundle piece: wall tiles resurfaced, floor tiled over, glass restored, silicone renewed, grout replaced |
+| 52 | Floor Tiles vs Wall Tiles: Why We Resurface One and Tile Over the Other | tile over bathroom floor tiles | informational | **METHOD · GAP** — see the rule below |
+| 53 | Can You Tile Over Existing Bathroom Tiles? | tile over existing tiles | informational | METHOD |
+| 54 | Restoring Shower Glass: When It Cleans Up and When It Is Etched | cleaning shower glass hard water | problem | GAP |
+| 55 | Replacing a Vanity, Benchtop or Basin Instead of Resurfacing It | bathroom vanity replacement sydney | commercial | **PROOF** — we have done this; see the scope note |
+
+### The floor-versus-wall rule (Allan, 2026-08-22)
+
+First-hand technical reasoning, and the whole reason idea 52 wins:
+
+> **Wall tiles: resurface.** They are not walked on, so the coating is never asked to
+> survive point loads.
+>
+> **Floor tiles: tile over, do not resurface.** Especially small tiles. Small format
+> means far more grout lines per square metre, and a floor is stepped on constantly, so
+> those lines crack. Tiling over gives a new, continuous surface instead of a coating
+> sitting on top of a grid that is already moving.
+
+Nobody writing about tile resurfacing explains this, because explaining it means telling
+a customer not to buy the thing you sell on the floor. That is exactly why it is
+credible and exactly why an AI answer would quote it. **Confirm against industry
+practice before publishing**, per the same rule applied to the crack method.
+
+It also has a knock-on: idea 10 (resurfacing vs retiling a floor) and idea 23 (drummy
+floor tiles) should both be written from this rule rather than around it.
+
+### ⚠️ Scope note, not a content note
+
+Allan: *"we don't list it but we installed a benchtop and vanity and basin for a
+customer too before, so we can do some renovation."*
+
+**None of the 20 live service pages offer vanity, benchtop or basin installation.** If
+we do that work and have done it for a paying customer, the site is under-selling the
+business, and idea 55 has nowhere to send a reader who wants it. That is a service-page
+gap and a revenue question before it is a blog question. Raise it with Allan rather than
+quietly writing an article that promises something the site cannot take a booking for.
+
+---
+
+## What actually compounds
+
+Allan's framing, and it is the right one: a few a week, chosen so they build on each
+other rather than accumulate.
+
+Three things make an article compound:
+
+1. **It feeds and is fed by a service page.** Traffic that arrives has somewhere to go,
+   and the service page gains a relevance signal. An article with no service page behind
+   it is a dead end.
+2. **It shares a cluster with its neighbours.** Six articles about showers that link to
+   each other are worth more than six about unrelated things, because the topical
+   authority is what lifts the money pages.
+3. **It carries something reusable.** The bond-refund dataset serves articles 7 and 43.
+   The BOM humidity pull serves 6, 38 and 40. The crack method serves 15 and 20. Pull
+   the data once, use it three times.
+
+What does NOT compound: a high-volume page on a topic we do not sell, and a page whose
+only asset is that it exists.
+
+---
+
 ## Measured demand, Australia, 5 years of weekly Google Trends
 
 Pulled 2026-08-22 via the Trends API (technique in `memory/reference-google-trends-api-technique.md`),
