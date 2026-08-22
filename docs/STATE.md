@@ -178,7 +178,7 @@
 | Item | Status | Details |
 |---|---|---|
 | **Google Business Profile URL** | ✅ **https://maps.app.goo.gl/UehVcakarPjYkpKw5** | Supplied by Allan 2026-08-22, verified to resolve to `google.com/maps/place/Timeless+Resurfacing/`. Wired into the LocalBusiness schema as `sameAs` + `hasMap` via Customizer → Google Reviews → "Google Business Profile URL" (`timeless_gbp_url`). ⚠️ **Customizer values are stored PER THEME FOLDER** (CLAUDE.md deploy note), so this must be re-entered after any upload that installs a suffixed theme copy. Recorded here so it survives that. |
-| Google Business Profile | ✅ Active | **5+ Google reviews live** (Allan 2026-06-11 — supports the site's 4.9★ claims; verify the actual average ≈4.9 and consider wiring the real count into the guarded `timeless_get_google_reviews()` schema) |
+| Google Business Profile | ✅ Active | **10 Google reviews live** (Allan 2026-08-22; was 5+ on 2026-06-11 — supports the site's 4.9★ claims; verify the actual average ≈4.9 and consider wiring the real count into the guarded `timeless_get_google_reviews()` schema) |
 | GBP photos (real jobs) | ❌ | None — first job not done yet |
 | GBP regular posts | ❌ | Not started — start Week 2 |
 | Facebook Business page | ✅ Created | Created ~early Jul 2026. No advertising yet. |
