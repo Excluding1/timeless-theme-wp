@@ -3566,6 +3566,10 @@ function timeless_handle_draft_save() {
         'surname'  => isset( $decoded['ln'] ) ? (string) $decoded['ln'] : '',
         'phone'    => isset( $decoded['ph'] ) ? (string) $decoded['ph'] : '',
         'email'    => isset( $decoded['em'] ) ? (string) $decoded['em'] : '',
+        // Promoted for the same reason as the four above: the sweep reads the wrapper, not
+        // the nested draft. Without this the abandoned-quote SMS silently loses the address
+        // for everyone — and because the copy falls back to "your bathroom", it looks fine.
+        'addr'     => isset( $decoded['addr'] ) ? (string) $decoded['addr'] : '',
     ) ), TIMELESS_DRAFT_TTL );
     wp_send_json_success( array( 'id' => $id ) );
 }
@@ -3672,11 +3676,13 @@ function timeless_sweep_abandoned_drafts() {
     );
     if ( ! $rows ) { return; }
 
-    $cutoff = time() - TIMELESS_ABANDON_IDLE;
-    $sent   = 0;
+    $cutoff  = time() - TIMELESS_ABANDON_IDLE;
+    $sent    = 0;
+    $scanned = 0;
 
     foreach ( $rows as $row ) {
         $id  = substr( $row->option_name, strlen( '_transient_tr_draft_' ) );
+        $scanned++;
         $rec = json_decode( $row->option_value, true );
         if ( ! is_array( $rec ) || ! isset( $rec['touched'] ) ) { continue; }
         if ( ! empty( $rec['notified'] ) || ! empty( $rec['done'] ) ) { continue; }
@@ -3709,6 +3715,13 @@ function timeless_sweep_abandoned_drafts() {
                 'lastName'     => $rec['surname'],
                 'email'        => $rec['email'],
                 'phone'        => $phone,
+                /* Duplicated at top level on purpose. GHL surfaces inbound-webhook fields
+                   under inboundWebhookRequest.body.* in some accounts and .customData.* in
+                   others, and a merge field that resolves to nothing sends a text with a gap
+                   where the link should be. Cheap insurance; pick whichever the picker offers. */
+                'resume_link_sms'  => $resume,
+                'property_address' => timeless_property_ref( $rec['addr'] ?? ( $rec['draft']['addr'] ?? '' ) ),
+                'form_status'      => 'abandoned_confirmed',
                 'customData'   => array(
                     'form_status'     => 'abandoned_confirmed',
                     /* The property address, which the draft has held all along and the payload
@@ -3717,7 +3730,11 @@ function timeless_sweep_abandoned_drafts() {
                        for 12 Smith St" is proof no scammer could fake. Surface Care lead with
                        it (mystery shop, June 2026) and they are right to. Trimmed, because a
                        full address eats SMS characters and the street line is enough. */
-                    'property_address' => timeless_property_ref( $rec['addr'] ?? '' ),
+                    /* Falls back through the nested draft for records saved before `addr`
+                       was promoted, so existing drafts are not stranded on the generic copy. */
+                    'property_address' => timeless_property_ref(
+                        $rec['addr'] ?? ( $rec['draft']['addr'] ?? '' )
+                    ),
                     'resume_link_sms' => $resume,
                     'idle_minutes'    => (int) round( ( time() - (int) $rec['touched'] ) / 60 ),
                     // so W2 can branch: text if we have a mobile, otherwise email them
@@ -3734,7 +3751,14 @@ function timeless_sweep_abandoned_drafts() {
             $sent++;
         }
     }
-    if ( $sent ) { update_option( 'tr_draft_last_sweep', array( 'at' => time(), 'sent' => $sent ) ); }
+    /* Heartbeat on EVERY run, not only when something sends. Without this, "no text arrived"
+       cannot be told apart from "cron never ran" — which is the single most likely failure
+       given Cloudflare caches the HTML and WP-Cron only fires when PHP does. */
+    update_option( 'tr_draft_last_sweep', array(
+        'at'      => time(),
+        'scanned' => $scanned,
+        'sent'    => $sent,
+    ), false );
 }
 add_action( 'timeless_draft_sweep', 'timeless_sweep_abandoned_drafts' );
 

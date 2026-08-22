@@ -89,22 +89,26 @@ starts a real timer.
 
 ---
 
-## Step 2 — filter the trigger
+## Step 2 — gate the SMS, do NOT filter the trigger
 
-The problem: **both** abandon paths POST to this same webhook.
+My first version of this said to filter the trigger on `abandoned_confirmed`. **That was wrong**
+and Cleo caught it. W2 also owns **Create/Update Contact (partial)** and the
+**`form-partial-pending`** tag. Filtering at the trigger means browser `partial` events never
+enter the workflow at all, so people who abandon early stop being captured as contacts entirely.
+That trades a duplicate text for a lost lead, which is the worse bug.
 
-| `form_status` | Path | When |
-|---|---|---|
-| `partial` | Browser | The instant someone tabs away — before the 30-minute confirm |
-| `abandoned_confirmed` | Server sweep | After 90 minutes of genuine silence |
+**Leave the trigger unfiltered.** Add an **If/Else** step *after* the tag and *before* the SMS:
 
-Without a filter the same person can get **two texts**.
+> **`customData.form_status`** — is — **`abandoned_confirmed`**
+> - **Yes** → continue to the SMS
+> - **No** → END
 
-On the trigger, add a filter:
+Now every partial still creates and tags a contact, and only the 90-minute sweep sends a text.
 
-> **`customData.form_status` — is — `abandoned_confirmed`**
-
----
+**Recommended second condition on the same branch**, as belt and braces: also require that the
+contact does **not** carry the completed/submitted tag. The form marks a draft finished with a
+fire-and-forget request after submitting; if that request is blocked or lost, the draft still
+looks abandoned and someone who finished could get a text.
 
 ## Step 3 — delete the Wait
 
@@ -127,8 +131,13 @@ Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. I can see the q
 Just after a couple of photos and a quick note on what needs doing, then I'll get your quote sorted as soon as possible.
 ```
 
-**Insert both tokens with the merge-field picker**, not by typing. Pick them from the inbound
-webhook request data; GHL's exact token text differs between accounts and a typed one renders empty.
+**Insert both tokens with the merge-field picker**, not by typing. GHL's exact path differs
+between accounts — some expose `inboundWebhookRequest.body.customData.*`, some
+`inboundWebhookRequest.customData.*` — and a typed token that resolves to nothing sends a text
+with a gap where the link should be.
+
+Both fields are now sent **twice**, at the top level and inside `customData`, so whichever the
+picker offers will resolve. If you see both, take the top-level one.
 
 **The empty-address case is handled.** Someone can abandon before ever reaching the address
 step, which would have produced *"I can see the quote for didn't get finished off"*. Both paths
@@ -173,7 +182,9 @@ as they are. Save and publish.
 | No text at all | Trigger filter typo, or the security gate rejected a wrong `secret_token` |
 | Text arrives but link is blank | `resume_link_sms` typed rather than picked from the field list |
 | Text arrives with a gap where the address should be | Expected until the theme deploy |
-| Two texts | The trigger filter is not saved |
+| Two texts | The If/Else condition is not saved, or sits after the SMS instead of before it |
+| Address says "your bathroom" for someone who entered one | Draft saved before this fix; only affects drafts created before the deploy |
+| Nothing at all, and you want to know why | Check `tr_draft_last_sweep` in wp_options. It now records `at`, `scanned` and `sent` on **every** run, so "cron never fired" and "cron ran, found nothing" look different |
 
 ---
 
