@@ -9,6 +9,53 @@ Media Library per the workflow below — the live posts must use Media Library U
 **Tool: ChatGPT** (Allan's pick — best realism results). Gemini works too — same
 prompts. Higgsfield = video, not stills. Generate at the largest size offered, landscape.
 
+## COVER ILLUSTRATIONS (added 2026-08-22) — the per-article hero
+
+The 12 photographs below stay as they are, for use INSIDE the posts. What sits at the
+TOP of each post is now a generated **flat 2D editorial illustration**, one per article.
+
+**Why the change.** Allan: with a shared photographic look, ten posts read as ten
+versions of the same page in the archive grid and in social previews, which costs
+click-through. The cover is the one image that has to be unmistakably about THIS
+article. Clifford's counter-argument, that illustration would read as more
+AI-generated rather than less, was tested and was wrong: see `cover-rental-property.jpg`.
+
+**Keep only two constraints across all ten covers.** Everything else varies per
+article, on purpose. Over-specified prompts come back technically compliant and
+lifeless, so resist adding rules:
+  1. **Navy and gold palette** (with soft off-white and muted grey-blue). This is what
+     stops ten covers looking like ten different websites.
+  2. **No text anywhere.** Text in a hero image is invisible to search, breaks on
+     translation, and image models render it badly.
+
+**Prompt shape** — subject, palette, one taste reference. That is all:
+
+> A flat 2D editorial illustration for a blog article header, 16:9. [THE ARTICLE'S
+> SPECIFIC SUBJECT, as a scene with a person doing something]. Deep navy and warm gold,
+> soft off-white, muted grey-blue. Calm and premium, the way a good fintech blog
+> illustrates a story. No text anywhere.
+
+If a cover comes back looking like vector clip art, the one useful nudge is
+*"less vector clip art, more editorial illustration"*. Do not add another paragraph of
+constraints; that is what produces the lifeless version.
+
+**Naming and size.** `cover-<article-slug-fragment>.jpg`, 1672x941, same as the photos.
+ChatGPT returns PNG at roughly 1.5 MB; convert with
+`sips -s format jpeg -s formatOptions 88 in.png --out cover-x.jpg` (~300 KB, in line
+with the rest of the pack). Upload to the Media Library and set as the post's Featured
+Image; the theme uses it for the hero, og:image and the schema image.
+
+**The cover REPLACES the photo hero, it does not stack above it.** Two full-width
+images at the top push the first real sentence below the fold. The article's photos
+belong in the body.
+
+### Covers generated so far
+| File | Post | Notes |
+|---|---|---|
+| `cover-rental-property.jpg` | bathroom-resurfacing-rental-property | Property manager photographing a worn bath. ChatGPT failed once and succeeded on retry. |
+
+---
+
 ## The two rules
 1. **AI images are ILLUSTRATIVE only.** They show *a* tired bath or *a* mouldy shower — never
    "our work". Captions in the posts are already written to be truthful either way. **Never**
