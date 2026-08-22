@@ -46,10 +46,20 @@ echo
 
 # ── house rules ───────────────────────────────────────────────────────────────
 echo "  HOUSE RULES"
-EM=$(grep -o "—" "$SRC" | wc -l | tr -d ' ')
-CON=$(grep -ci "contractor" "$SRC" | tr -d ' ')
-DOL=$(grep -oE '\$[0-9,]+' "$SRC" | wc -l | tr -d ' ')
-GUA=$(grep -ci "guarantee" "$SRC" | tr -d ' ')
+# Count against the BODY ONLY, never the file. HTML comments — the front-matter block and
+# any in-body editorial note — are stripped by publish-blogs.py and never reach a reader,
+# so policing them here is a false positive. It blocked a publishable article on
+# 2026-08-22 over two em dashes that existed only in a note to ourselves.
+BODY="$TMP/body.html"
+python3 - "$SRC" > "$BODY" <<'PYEOF'
+import re, sys, io
+t = io.open(sys.argv[1], encoding="utf-8").read()
+sys.stdout.write(re.sub(r"<!--.*?-->", "", t, flags=re.S))
+PYEOF
+EM=$(grep -o "—" "$BODY" | wc -l | tr -d ' ')
+CON=$(grep -ci "contractor" "$BODY" | tr -d ' ')
+DOL=$(grep -oE '\$[0-9,]+' "$BODY" | wc -l | tr -d ' ')
+GUA=$(grep -ci "guarantee" "$BODY" | tr -d ' ')
 for pair in "em dashes:$EM" "contractor:$CON" "guarantee:$GUA"; do
     n="${pair##*:}"; l="${pair%%:*}"
     [ "$n" = "0" ] && printf "    ok    %-16s 0\n" "$l" || printf "    FAIL  %-16s %s\n" "$l" "$n"
