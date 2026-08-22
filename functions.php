@@ -3676,7 +3676,15 @@ function timeless_sweep_abandoned_drafts() {
         if ( ! $has_phone && ! $has_email ) { continue; }       // no way to reach them at all
         $phone = $has_phone ? '+61' . ltrim( $phone, '0' ) : '';
 
-        $resume = home_url( '/finish-quote/' ) . '?r=' . $id;
+        /* The resume link lands on /finish-quote/, which is a real WordPress page and can
+           therefore be deleted by a human. If it is missing, a resume SMS would send people
+           to a 404 — the one link in the whole funnel that must work. Fall back to the
+           contact page, which at least carries the form. Found live 2026-08-23: the page did
+           not exist at all and every resume link would have 404'd. */
+        $tr_fq  = get_page_by_path( 'finish-quote' );
+        $resume = $tr_fq
+            ? add_query_arg( 'r', $id, get_permalink( $tr_fq ) )
+            : add_query_arg( 'r', $id, home_url( '/contact/' ) );
         $res = wp_remote_post( timeless_ghl_partial_webhook(), array(
             'timeout'  => 15,
             'headers'  => array( 'Content-Type' => 'application/json' ),

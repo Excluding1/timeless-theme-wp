@@ -92,20 +92,38 @@ You'll have your quote by [time/today/tomorrow morning]. Sorry for the wait!
 
 ---
 
-### 1D. W2 abandoned-form SMS — WITH RESUME LINK (PROPOSED 2026-07-07, PENDING Rule-8 Cleo sign-off)
+### 1D. W2 abandoned-form SMS — WITH RESUME LINK ✅ **UNBLOCKED AND VERIFIED LIVE 2026-08-23**
 **Type:** Transactional recovery | **Workflow:** W2 (replaces the current no-link body — the June
 mystery shop found Surface Care prefills a resume link; ours said "we can reopen it" with nothing
 to tap). **Form side SHIPPED 2026-07-07:** the partial webhook payload now carries
 `resume_link` (a `#qf=` deep link that restores the whole draft on ANY device — private: URL
 fragments never reach servers or logs) and `resume_link_short` (bare form URL; same-device
-visitors auto-restore from localStorage). ⚠️ LIVE only after the next theme deploy ships the
-rebuilt `assets/quote-form` bundle — do not update W2 in GHL before that, the merge field would
-render empty.
+visitors auto-restore from localStorage). **✅ That blocker is cleared.** v1.5.2 shipped 2026-08-23 and the live bundle carries the
+draft store. Verified end to end on the real site: draft saves and returns an id, the resume
+URL is **63 characters** (one SMS segment, not the 1,800-char `#qf=` version), `/finish-quote/`
+returns 200, it is `noindex`, the form mounts on it, it has no nav to escape through, and the
+draft restores.
+
+**Use `resume_link_sms`, not `resume_link`.** Both webhook paths now send it:
+
+| Path | Fires | `form_status` | Link |
+|---|---|---|---|
+| Browser, on abandon | immediately | `partial` | `resume_link_sms` — short, when a draft id exists |
+| Server sweep, every 10 min | after 90 min idle | `abandoned_confirmed` | `resume_link_sms` — short, always |
+
+`resume_link` still exists but is the ~1,800-character `#qf=` deep link: **13 SMS segments and
+mangled by some handsets**. Do not put it in an SMS. It is there for email, where length is free
+and it restores on any device.
+
+⚠️ One thing had to be created by hand: `/finish-quote/` did not exist as a WordPress page at
+all, so every resume link would have 404'd. Created 2026-08-23 (page id 287). If it is ever
+deleted the sweep now falls back to `/contact/`, but the recovery experience degrades — leave
+that page alone.
 
 ```
 Hey {{contact.first_name}}, it's Timeless Resurfacing. Your quote request is saved but not finished.
 
-Pick up exactly where you left off: {{inboundWebhookRequest.customData.resume_link}}
+Pick up exactly where you left off: {{inboundWebhookRequest.customData.resume_link_sms}}
 
 You'll just need:
 - Photos of the damage
@@ -115,8 +133,12 @@ Then your quote lands within 24 hours. 📱
 ```
 
 **GHL wiring (Allan):** W2's SMS step → insert the merge field for the inbound webhook payload's
-`customData.resume_link` (use GHL's merge-field picker on the trigger data; exact token name shows
-there). Second reminder (+22h, per board 1.18) reuses the same field.
+`customData.resume_link_sms` (use GHL's merge-field picker on the trigger data; the exact token
+name shows there). Second reminder (+22h, per board 1.18) reuses the same field.
+
+**Branching:** `customData.reach_by` is `sms` or `email`, so W2 can text when a mobile exists and
+email when it does not. Before this, a lead with no phone was dropped entirely and got no
+follow-up of any kind.
 
 ---
 
