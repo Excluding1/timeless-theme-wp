@@ -120,6 +120,8 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">What Is Tile Resurfacing?</h2>
  <p class="text-secondary max-w-3xl mb-4">Tile resurfacing is a professional recoating process. We spray a durable, multi-layer coating over your existing tiles to give them a fresh high-gloss white finish. No demolition, no retiling, no waterproofing needed.</p>
+ <!-- Feeder to the tile-paint guide, which targets the highest-demand term we measured. -->
+ <p class="text-secondary max-w-3xl mb-10 text-sm">Considering a tile paint kit first? Read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/can-you-paint-bathroom-tiles/' ) ); ?>">Can You Paint Bathroom Tiles? What Actually Happens After a Year</a>.</p>
  <p class="text-secondary max-w-3xl mb-10">Tradies sometimes call it tile reglazing or tile recoating. It's the same process: your old tiles stay in place, and we apply a hard-wearing two-part coating that bonds to the tile surface and cures to a smooth, factory-like finish.</p>
 
  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

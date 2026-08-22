@@ -2517,6 +2517,7 @@ function timeless_seo_title_map() {
     return array(
         'bathroom-resurfacing-rental-property'         => 'Bathroom Resurfacing for Rental Properties | Sydney PM Guide',
         'cracked-bath-basin-repair'                    => 'Cracked Bathtub or Basin Repair: How It Actually Works',
+        'can-you-paint-bathroom-tiles'                 => 'Can You Paint Bathroom Tiles? What Happens After a Year',
         'bathtub-chip-repair'                          => 'Bathtub Chip Repair Sydney: Fix a Chip Without Resurfacing',
         'how-long-does-bath-resurfacing-last'          => 'How Long Does Bath Resurfacing Last? Sydney Guide',
         'leaking-shower-repair-without-removing-tiles' => 'Leaking Shower Repair Without Removing Tiles | Sydney',
@@ -2598,6 +2599,7 @@ function timeless_seo_meta() {
         'mouldy-shower-grout-fix'                      => 'Surface mould cleans off. Mould that returns in weeks lives inside the grout or silicone and needs replacing. An honest fix guide from Sydney regrouters.',
         'bathroom-resurfacing-rental-property'         => 'Tired rental bathroom? Resurfacing turns it around in days, not the weeks a renovation takes. A property manager\'s guide to scoping it by photo.',
         'cracked-bath-basin-repair'                    => 'A crack in an acrylic bath is a flexing base, not a surface fault. How the repair actually works, why DIY kits fail, and when a crack cannot be fixed.',
+        'can-you-paint-bathroom-tiles'                 => 'Tile paint looks good for a season. In a wet area it lifts in sheets, and stripping it costs more than the original job. What works instead.',
         'leaking-shower-repair-without-removing-tiles' => 'Most shower leaks start at grout and silicone, not the membrane, and can be fixed without lifting a tile. How to tell the difference before a rip-out.',
     );
 

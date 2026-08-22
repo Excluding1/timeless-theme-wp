@@ -176,6 +176,8 @@
  <span class="inline-block py-1 px-3 bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase rounded-sm mb-3">Our Services</span>
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-3">What We Fix</h2>
  <p class="text-secondary">Whatever&rsquo;s wrong with your tiles, we&rsquo;ve seen it and fixed it. Here&rsquo;s what we fix, how we do it, and what the results look like.</p>
+ <!-- Feeder to the tile-paint guide, which targets the highest-demand term we measured. -->
+ <p class="text-secondary max-w-3xl mb-10 text-sm">Considering a tile paint kit first? Read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/can-you-paint-bathroom-tiles/' ) ); ?>">Can You Paint Bathroom Tiles? What Actually Happens After a Year</a>.</p>
  <!-- Surfaces we cover -->
  <div class="pill-row pill-row--center gap-3 mt-8">
  <span class="flex items-center gap-1.5 px-4 py-2 bg-surface-container-low rounded-full text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm text-tertiary-fixed-dim" aria-hidden="true">shower</span> Shower Walls</span>
