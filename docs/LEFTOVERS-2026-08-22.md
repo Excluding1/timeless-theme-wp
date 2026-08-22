@@ -26,7 +26,7 @@ article 3.
 | 1 | `bathroom-resurfacing-rental-property` | **95**/100 | published | `cover-rental-property.jpg` | Media Library upload, then publish. Rule 8 ✅ (fixes applied) |
 | 2 | `mouldy-shower-grout-fix` | **100**/100 | published | `cover-mould.jpg` | Media Library upload, then publish. Rule 8 ✅ (fixes applied) |
 | 3 | `cracked-bath-basin-repair` | **93**/100 | published | `cover-crack.jpg`, plus `cover-crack-v2` awaiting Allan's pick | Allan sign-off; provenance confirmation on the 3 real photos; a before/after pair is the last 7 points |
-| 4 | `can-you-paint-bathroom-tiles` | not scored | held back | ❌ none | released by article 3 sign-off, then cover + audit + Rule 8 |
+| 4 | `can-you-paint-bathroom-tiles` | **97**/100 | published | ❌ none | cover only. Rule 8 ✅ (fixes applied) |
 | 5 | `why-is-my-bathtub-peeling` | not scored | held back | ❌ none | same |
 
 Parked: `resurface-or-replace-bathtub` (flagship, overlaps article 3's case study — revisit after 5).
@@ -133,6 +133,29 @@ every comment from the body rather than trusting anyone to remember.
 Articles 4 and 5 have NOT had a Rule 8 pass. Do not pass `--publish` on them before one.
 
 ---
+
+### 4.7 ⚠️ The site publishes two different rental warranty periods
+
+Surfaced by Cleo's Rule 8 pass on article 4, then verified in the theme. Three live surfaces
+disagree, and one page disagrees with itself:
+
+| Where | What it says |
+|---|---|
+| `page-warranty.php` matrix (top of the page) | Rental resurfacing — bath, wall tile, floor tile, vanity, benchtop — **6 months** |
+| `page-warranty.php` landlord section (same page, further down) | "Resurfacing services: **12 months**" |
+| `page-terms.php` warranty table | Bath / wall-tile / floor / vanity resurfacing — **6 months** rental |
+| `page-tile-resurfacing.php` | Floor tiles **1 year** (the warranty matrix says 5 years owner-occupied) |
+
+Commit `804f78e` moved rental resurfacing from 6 to 12 months and updated the landlord section,
+but the matrix on the same page, the terms table, and the tile page were never brought with it.
+
+**Not fixed, deliberately.** I do not know which number is the real policy, and inventing one on
+a warranty page is the wrong kind of guess. Allan rules on the true figures, then it is one sweep
+across four files. This is the "warranty copy audit — NOT a bulk replace" item that CLAUDE.md
+already flags, now with exact locations.
+
+Article 4 was written so it does not add a fifth version: it states the wall-tile owner-occupied
+figure only, and sends floor and rental terms to the warranty page.
 
 ## 5. Standing items this audit did not resolve
 
