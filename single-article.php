@@ -112,10 +112,14 @@ if ( $thumb_url ) {
  <?php endif; ?>
  <span>By <b class="text-primary">Allan P</b>, Quotation and Jobs Manager &middot; Bathroom Resurfacing Specialist</span>
  <span class="text-secondary/50">·</span>
+ <?php /* Posted and Updated are different facts and used to be conflated here: an
+    unedited post showed its PUBLISH date labelled "Updated", which is simply untrue and
+    also throws away the freshness signal a real dateModified carries. Published always
+    shows; updated only appears when the post has actually been edited since. */ ?>
+ <time datetime="<?php echo esc_attr( $published_iso ); ?>" itemprop="datePublished">Posted <?php echo esc_html( $published_disp ); ?></time>
  <?php if ( $show_modified ) : ?>
- <time datetime="<?php echo esc_attr( $modified_iso ); ?>">Updated <?php echo esc_html( $modified_disp ); ?></time>
- <?php else : ?>
- <time datetime="<?php echo esc_attr( $published_iso ); ?>">Updated <?php echo esc_html( $published_disp ); ?></time>
+ <span class="text-secondary/50">·</span>
+ <time datetime="<?php echo esc_attr( $modified_iso ); ?>" itemprop="dateModified">Updated <?php echo esc_html( $modified_disp ); ?></time>
  <?php endif; ?>
  <span class="text-secondary/50">·</span>
  <span><?php echo (int) $reading_time; ?> min read</span>
