@@ -225,18 +225,19 @@ get_header(); ?>
 </section>
 
 <!-- MID-PAGE CTA
-     Rebuilt 2026-08-23. Was a flat navy band with centred text. Now a real job photo
-     behind a left-weighted scrim, so the band shows the work instead of just asking for
-     the click. Background is one of ours, not stock: a resurfaced wall-tile bathroom. -->
-<section class="relative overflow-hidden">
- <img src="<?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg.jpg" srcset="<?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg-800w.jpg 800w, <?php echo get_template_directory_uri(); ?>/images/homepage/cta-bg.jpg 1400w" sizes="100vw" alt="" width="1400" height="933" loading="lazy" class="absolute inset-0 w-full h-full object-cover" aria-hidden="true" />
- <div class="absolute inset-0" style="background:linear-gradient(90deg,rgba(4,21,52,.96) 0%,rgba(4,21,52,.88) 38%,rgba(4,21,52,.30) 100%);" aria-hidden="true"></div>
- <div class="relative max-w-7xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+     Rebuilt 2026-08-23. Was a flat navy band with centred text. Now left-aligned with an
+     eyebrow pill and a tighter hierarchy, per Allan's reference.
+     A photo background was tried and removed: a bathroom does not read in a band this wide
+     and this short, because object-cover crops a 4:3 photo down to a slice. The reference
+     worked because a driveway IS a wide subject shot wide. If we want the photo back, the
+     band needs to get taller or we need a genuinely wide shot of a finished bathroom. -->
+<section class="py-12 sm:py-16 bg-primary">
+ <div class="max-w-7xl mx-auto px-6 sm:px-8">
   <div class="max-w-xl">
-   <span class="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[0.65rem] font-bold tracking-widest uppercase mb-5">Free &amp; no obligation</span>
-   <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tighter leading-[1.05] mb-4">Ready for a quote?</h2>
-   <p class="text-on-primary-container text-base sm:text-lg leading-relaxed mb-8">Send a few photos and get a fixed-price quote back within 24 hours. We will tell you plainly if resurfacing is the wrong call for your bathroom.</p>
-   <a href="#quote" class="inline-flex items-center gap-2 px-7 py-4 border-2 border-white/50 text-white font-bold rounded-lg hover:bg-white hover:text-primary hover:border-white transition-all">Get your free quote <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
+   <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[0.6rem] font-bold tracking-widest uppercase mb-4">Free &amp; no obligation</span>
+   <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tighter leading-[1.1] mb-3">Ready for a quote?</h2>
+   <p class="text-on-primary-container text-sm sm:text-base leading-relaxed mb-6 max-w-lg">Send a few photos and get a fixed-price quote back within 24 hours. We will tell you plainly if resurfacing is the wrong call for your bathroom.</p>
+   <a href="#quote" class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-primary font-bold rounded-lg hover:shadow-xl transition-all">Get your free quote <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
   </div>
  </div>
 </section>
