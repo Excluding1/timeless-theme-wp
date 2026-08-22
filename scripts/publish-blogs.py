@@ -50,6 +50,7 @@ PUBLISH_ORDER = [
 
 HERO_MAP = {
     "cracked-bath-basin-repair": "cover-crack.jpg",
+    "can-you-paint-bathroom-tiles": "cover-paint-tiles.jpg",
     "resurface-or-replace-bathtub": "cover-resurface-or-replace.jpg",
     "how-long-does-bath-resurfacing-last": "hero-how-long-resurfacing-lasts.jpg",
     "regrout-or-retile-shower": "hero-regrout-or-retile.jpg",
