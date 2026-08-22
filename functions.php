@@ -2441,6 +2441,58 @@ remove_filter( 'wp_robots', 'wp_robots_max_image_preview_large' );
 /* ─────────────────────────────────────────────
    5b. SEO, Meta descriptions + Open Graph tags
    ───────────────────────────────────────────── */
+/**
+ * Curated <title> per post, keyed by slug.
+ *
+ * WordPress builds the title tag from the post's H1 plus the site name, which for a
+ * blog article runs long: "The Property Manager's Guide to Bathroom Resurfacing
+ * Between Tenants | Timeless Resurfacing" is 91 characters and Google cuts it around
+ * 60, so the brand and half the promise disappear. Each article already had a shorter,
+ * search-shaped title written in its source file, but nothing carried it onto the page.
+ *
+ * These are complete titles: the site name is deliberately NOT appended, because every
+ * one of them is already at or near the 60-character budget and the suffix is what got
+ * truncated anyway. Same slug-keyed shape as $desc_map below it.
+ */
+function timeless_seo_title_map() {
+    return array(
+        'bathroom-resurfacing-rental-property'         => 'Bathroom Resurfacing for Rental Properties | Sydney PM Guide',
+        'bathtub-chip-repair'                          => 'Bathtub Chip Repair Sydney: Fix a Chip Without Resurfacing',
+        'how-long-does-bath-resurfacing-last'          => 'How Long Does Bath Resurfacing Last? Sydney Guide',
+        'leaking-shower-repair-without-removing-tiles' => 'Leaking Shower Repair Without Removing Tiles | Sydney',
+        'mouldy-shower-grout-fix'                      => 'Mouldy Shower Grout: Clean, Regrout or Reseal? Sydney Guide',
+        'regrout-or-retile-shower'                     => 'Regrout or Retile Shower? How to Tell What You Need',
+        'resurface-or-replace-bathtub'                 => 'Resurface or Replace Bathtub? Honest Sydney Guide',
+        'why-is-my-bathtub-peeling'                    => 'Why Is My Bathtub Peeling? Causes and the Right Fix',
+    );
+}
+
+/** The curated title for whatever is being viewed, or '' when there isn't one. */
+function timeless_seo_title() {
+    if ( ! is_singular() ) {
+        return '';
+    }
+    $map  = timeless_seo_title_map();
+    $slug = get_post_field( 'post_name', get_post() );
+    return isset( $map[ $slug ] ) ? $map[ $slug ] : '';
+}
+
+/**
+ * Apply it to the real <title>. add_theme_support('title-tag') owns that element, so
+ * og:title alone would leave the two disagreeing, and it is the <title> that Google
+ * shows. Site name and tagline are dropped when a curated title is used: it is already
+ * a whole title, and appending the suffix is what pushed these past the cut-off.
+ */
+function timeless_seo_document_title( $parts ) {
+    $curated = timeless_seo_title();
+    if ( $curated ) {
+        $parts['title'] = $curated;
+        unset( $parts['site'], $parts['tagline'] );
+    }
+    return $parts;
+}
+add_filter( 'document_title_parts', 'timeless_seo_document_title' );
+
 function timeless_seo_meta() {
     $site = 'Timeless Resurfacing';
     $tpl  = get_template_directory_uri();
@@ -2492,7 +2544,8 @@ function timeless_seo_meta() {
         $title = 'Bathroom Resurfacing Sydney | ' . $site;
         $desc  = 'Sydney\'s specialist bathroom resurfacing and shower regrouting service. One-day transformations, 80–90% cheaper than renovation. Free quotes.';
     } elseif ( is_singular() ) {
-        $title = get_the_title() . ' | ' . $site;
+        $curated = timeless_seo_title();
+        $title   = $curated ? $curated : get_the_title() . ' | ' . $site;
         $slug  = get_post_field( 'post_name', get_post() );
         $desc  = isset( $desc_map[ $slug ] ) ? $desc_map[ $slug ] : get_the_title() . ', professional bathroom resurfacing in Sydney. Free quotes. ' . $site;
     } else {
