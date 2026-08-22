@@ -53,6 +53,8 @@ belong in the body.
 | File | Post | Notes |
 |---|---|---|
 | `cover-rental-property.jpg` | bathroom-resurfacing-rental-property | Property manager photographing a worn bath. ChatGPT failed once and succeeded on retry. |
+| `cover-mould.jpg` | mouldy-shower-grout-fix | Person with a brush at a mouldy corner, two circular insets. Established the inset device the set now uses. |
+| `cover-crack.jpg` | cracked-bath-basin-repair | Person crouched at a bath, fingertip on a crack across the tub floor, two gold-ringed insets showing a chip and a crazed patch. **Replaced 2026-08-22** after a first attempt came back photoreal — a six-panel photographic grid. It was a good image and the wrong one: covers 1 and 2 are flat illustration, and one photoreal cover in the archive grid breaks the set. Naming a person *doing* something in the prompt is what keeps the model in illustration mode; a prompt that is only a list of objects drifts photoreal. |
 
 ---
 
