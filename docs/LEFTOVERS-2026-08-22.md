@@ -21,13 +21,13 @@ Rule Allan set on 2026-08-22: **one article at a time, his confirmation is the g
 and 5 are written but deliberately held back from even the localhost preview until he signs off
 article 3.
 
-| # | Slug | Audit | Local :8881 | Cover | Blocking |
+| # | Slug | Audit | Local :8881 | Cover | What is left |
 |---|---|---|---|---|---|
-| 1 | `bathroom-resurfacing-rental-property` | **95**/100 | published | `cover-rental-property.jpg` | nothing — ready |
-| 2 | `mouldy-shower-grout-fix` | **100**/100 | published | `cover-mould.jpg` | nothing — ready |
-| 3 | `cracked-bath-basin-repair` | **93**/100 | published | `cover-crack.jpg` ⚠️ | Allan wants a *different* cover (grid of damage types); 7 real photos not yet on disk |
-| 4 | `can-you-paint-bathroom-tiles` | not scored (not rendered) | held back | ❌ none | article 3 sign-off, then cover |
-| 5 | `why-is-my-bathtub-peeling` | not scored (not rendered) | held back | ❌ none | article 3 sign-off, then cover |
+| 1 | `bathroom-resurfacing-rental-property` | **95**/100 | published | `cover-rental-property.jpg` | Media Library upload, then publish. Rule 8 ✅ (fixes applied) |
+| 2 | `mouldy-shower-grout-fix` | **100**/100 | published | `cover-mould.jpg` | Media Library upload, then publish. Rule 8 ✅ (fixes applied) |
+| 3 | `cracked-bath-basin-repair` | **93**/100 | published | `cover-crack.jpg`, plus `cover-crack-v2` awaiting Allan's pick | Allan sign-off; provenance confirmation on the 3 real photos; a before/after pair is the last 7 points |
+| 4 | `can-you-paint-bathroom-tiles` | not scored | held back | ❌ none | released by article 3 sign-off, then cover + audit + Rule 8 |
+| 5 | `why-is-my-bathtub-peeling` | not scored | held back | ❌ none | same |
 
 Parked: `resurface-or-replace-bathtub` (flagship, overlaps article 3's case study — revisit after 5).
 Older July drafts still in the folder and never re-audited: `bathtub-chip-repair`,
@@ -107,10 +107,30 @@ early-July business. They are not wrong so much as unaware of six weeks.
 | Idea Lab | 8319 | ⏸ not running (on-demand) |
 | Tradie lead tracker | 4321 | ⏸ not running (on-demand, separate venture) |
 
-### 4.6 Rule 8 has not been run on any article
-Every one of the five is customer-facing copy. **Rule 8 requires both CEOs to grep canonical
-independently before anything is published.** Cleo has not seen a single article. The publisher
-script defaults to DRAFT precisely so this gate stays enforceable — do not pass `--publish` before it.
+### 4.6 Rule 8 — RUN on articles 1-3, and it earned its keep
+Cleo read the three articles against canonical independently on 2026-08-22 and found four real
+errors, all now fixed (commit `c78d3f5`):
+
+- The rental article told landlords they get **"up to 5 years on resurfacing"**. Rental
+  resurfacing is **12 months**. It said so correctly in one section and contradicted itself in
+  two others, including the FAQ answering exactly that question.
+- Bath cure time was given as **"roughly 24 hours"** in two places. `BTH-01` and the live care
+  page both say **48 to 72**. 24 hours is the silicone and fresh-grout number. A tenant using a
+  bath a day early is how a coating fails and a warranty argument starts.
+- The mould article described an **epoxy** regrout then said regrouting is covered for 2 years.
+  Epoxy is **5**; cement is 2. We were understating our own work. It also called epoxy a
+  permanent fix; our care page says more mould-resistant, not mould-proof.
+- Article 3 promised **"chips of any size, on any fixture"**. `CHR-01` stops at 30mm and cannot
+  repair a chip through an acrylic shell. It also gave only the resurfacing warranty when a spot
+  repair carries 1 year.
+
+Two of Cleo's findings did not survive checking: the Decina citation is used only for "acrylic
+baths need full support", which is what Decina says, and the front-matter comments never reach
+the browser. What *did* leak was in-body `<!-- TODO -->` comments, one naming the case-study
+suburb in a filename, plus a headshot TODO in the theme itself. `publish-blogs.py` now strips
+every comment from the body rather than trusting anyone to remember.
+
+Articles 4 and 5 have NOT had a Rule 8 pass. Do not pass `--publish` on them before one.
 
 ---
 
