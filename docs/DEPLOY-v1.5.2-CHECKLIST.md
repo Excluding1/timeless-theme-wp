@@ -30,7 +30,10 @@ tries was my error rather than the tool's.
 
 ## C. Deploy sequence, in order
 
-1. **Build the zip** exactly per CLAUDE.md, named `timeless-theme-2.zip`. The name must
+1. **Build the zip** exactly per CLAUDE.md, named `timeless-theme-2.zip`. Verified 2026-08-23:
+   40.6 MB, and `.secrets`, `docs/`, `scripts/`, `cockpit/`, `node_modules`, `images/blog/`,
+   `src/` and `package.json` are all absent. `.github/*` was leaking three workflow files and
+   is now in the exclusion list. The name must
    match the ACTIVE theme folder or WordPress installs a suffixed copy and leaves the old
    theme running (the 2026-06-11 lesson).
 2. **Upload** → Appearance → Themes → Upload → *Replace current with uploaded*.
