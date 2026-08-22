@@ -8,7 +8,7 @@
  "name": "Mouldy Silicone Replacement Sydney",
  "description": "Professional mouldy silicone removal and replacement service in Sydney bathrooms. Complete strip and reseal of all shower silicone junctions with premium wet-area sealant. Same-day service available.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

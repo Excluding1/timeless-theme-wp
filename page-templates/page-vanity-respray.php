@@ -8,7 +8,7 @@
  "name": "Vanity & Cabinet Respray Sydney",
  "description": "Professional bathroom vanity and cabinet respraying service in Sydney. Automotive-grade two-part coatings spray-applied for a factory-smooth finish on laminate, timber, MDF and melamine vanities. Completed in 1 day.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

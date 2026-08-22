@@ -8,7 +8,7 @@
  "name": "Basin Chip & Crack Repair Sydney",
  "description": "Professional basin chip and crack repair service in Sydney. We fix chipped, cracked and damaged bathroom basins in ceramic, porcelain, acrylic and stone-composite materials. Most repairs completed in 2-4 hours.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

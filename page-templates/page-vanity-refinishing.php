@@ -8,7 +8,7 @@
  "name": "Vanity Refinishing Sydney",
  "description": "Professional vanity refinishing in Sydney. Benchtop resurfacing, cabinet resprays, stone-fleck granite finishes. Done in a day, up to 5-year warranty, up to 80% cheaper than replacement.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

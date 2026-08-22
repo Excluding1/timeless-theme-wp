@@ -8,7 +8,7 @@
  "name": "Mouldy Shower Grout Removal & Regrouting Sydney",
  "description": "Professional mouldy shower grout removal and regrouting service in Sydney. Complete removal of old contaminated grout and replacement with premium mould-resistant cement or epoxy grout. Most jobs completed in 1 day.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

@@ -8,7 +8,7 @@
  "name": "Chip Repair Sydney",
  "description": "Professional bathtub and basin chip repair in Sydney. Invisible colour-matched repairs using two-part epoxy. Most repairs done in 1-2 hours, 1-year warranty.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

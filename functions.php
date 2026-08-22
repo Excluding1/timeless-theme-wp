@@ -1759,6 +1759,17 @@ function timeless_customizer( $wp_customize ) {
         'description' => __( 'Self-hosted Google Places API integration. No third-party widgets, no paywall. <br><br><strong>Setup (one-time, ~10 min):</strong><br>1. Visit <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>, create a project, enable "Places API" (free tier: 100K requests/month).<br>2. Create an API key under "Credentials". Restrict it to your domain for security.<br>3. Find your Place ID at <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener noreferrer">Google\'s Place ID Finder</a> by searching for your business.<br>4. Paste both below.<br><br>Reviews refresh every 24 hours via WordPress transients (cached, no per-request API calls).', 'timeless' ),
     ) );
 
+    $wp_customize->add_setting( 'timeless_gbp_url', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'timeless_gbp_url', array(
+        'label'       => __( 'Google Business Profile URL', 'timeless' ),
+        'section'     => 'timeless_google_reviews',
+        'type'        => 'url',
+        'description' => __( 'Public link to the Google Business Profile (in the profile: Share, or the maps/review link, e.g. <code>https://maps.app.goo.gl/...</code> or <code>https://g.page/...</code>).<br><br>This is what states, in the LocalBusiness schema, that this website and that listing are the same business. Without it Google and AI assistants have to infer it. Leave blank and nothing is emitted.', 'timeless' ),
+    ) );
+
     $wp_customize->add_setting( 'timeless_google_api_key', array(
         'default'           => '',
         'sanitize_callback' => 'sanitize_text_field',
@@ -2105,6 +2116,52 @@ function timeless_get_google_reviews() {
  * @param string $position 'last' (default) emits leading comma. 'middle' emits trailing comma.
  * @return string JSON-LD fragment, or empty string if no real review data.
  */
+/**
+ * Ties the website entity to the Google Business Profile via sameAs + hasMap.
+ *
+ * The LocalBusiness schema already carries name, address, geo, phone and rating, but
+ * nothing in it said that this site and that Business Profile are the SAME entity.
+ * Entity consolidation is what gets a local business quoted in AI answers, and the SEO
+ * strategy's GEO section (research/seo-strategy-2026-07-08.md B9.2) ranks identical
+ * data across site schema, GBP, Bing and citations second only to llms.txt.
+ *
+ * Emitted as a fragment immediately after the @type line, which is a valid position in
+ * all 26 hardcoded business-schema blocks. Returns '' when nothing is configured: an
+ * empty sameAs is worse than no sameAs.
+ */
+function timeless_gbp_jsonld() {
+    $urls = array();
+
+    $gbp = trim( (string) get_theme_mod( 'timeless_gbp_url', '' ) );
+    if ( $gbp && filter_var( $gbp, FILTER_VALIDATE_URL ) ) {
+        $urls[] = $gbp;
+    }
+
+    foreach ( array( 'timeless_facebook_url', 'timeless_instagram_url' ) as $mod ) {
+        $u = trim( (string) get_theme_mod( $mod, '' ) );
+        if ( $u && filter_var( $u, FILTER_VALIDATE_URL ) ) {
+            $urls[] = $u;
+        }
+    }
+
+    if ( ! $urls ) {
+        return '';
+    }
+
+    $quoted = array();
+    foreach ( $urls as $u ) {
+        $quoted[] = '"' . esc_url( $u ) . '"';
+    }
+
+    $out = ' "sameAs": [' . implode( ', ', $quoted ) . ']';
+
+    if ( $gbp ) {
+        $out .= ', "hasMap": "' . esc_url( $gbp ) . '"';
+    }
+
+    return $out . ',';
+}
+
 function timeless_aggregate_rating_jsonld( $position = 'last' ) {
     $data = timeless_get_google_reviews();
     if ( ! $data || empty( $data['total'] ) || empty( $data['rating'] ) ) {

@@ -13,7 +13,7 @@
  "@type": "Service",
  "name": "Bathroom Resurfacing",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au"
  }

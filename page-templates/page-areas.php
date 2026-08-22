@@ -10,7 +10,7 @@
  "description": "Professional bathroom resurfacing, shower regrouting, bath restoration, tile resurfacing, vanity refinishing, basin restoration, and shower leak repair across Sydney and NSW.",
  "url": "<?php echo esc_url( home_url( '/areas/' ) ); ?>",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

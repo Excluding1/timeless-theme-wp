@@ -8,7 +8,7 @@
  "name": "Stained & Discoloured Bathtub Resurfacing Sydney",
  "description": "Professional resurfacing service for stained, yellowed and discoloured bathtubs in Sydney. Factory-smooth finish applied over your existing bath in just 1 day. No demolition or plumber required.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

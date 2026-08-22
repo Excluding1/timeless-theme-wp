@@ -8,7 +8,7 @@
  "name": "Shower Sealing Sydney",
  "description": "Professional shower sealing and silicone replacement in Sydney. Fix leaking showers, replace mouldy silicone, prevent water damage. Same-day service, silicone 1-year warranty, epoxy regrouting 5-year.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

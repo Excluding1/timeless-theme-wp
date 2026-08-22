@@ -8,7 +8,7 @@
  "name": "Tile Resurfacing Sydney",
  "description": "Professional tile resurfacing with commercial-grade coating. 1-2 day service, up to 5-year workmanship warranty on wall tiles and 1 year on floor tiles.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

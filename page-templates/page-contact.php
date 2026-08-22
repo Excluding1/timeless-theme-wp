@@ -5,7 +5,7 @@
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "description": "Sydney's specialist bathroom resurfacing and shower regrouting service.",
  "url": "https://timelessresurfacing.com.au",

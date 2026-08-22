@@ -8,7 +8,7 @@
  "name": "Bathroom Tile Resurfacing Sydney",
  "description": "Professional bathroom tile resurfacing service in Sydney. We spray a durable two-part coating over your existing tiles to give them a fresh high-gloss white finish. No demolition, no retiling. Completed in 1-2 days.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

@@ -8,7 +8,7 @@
  "name": "Epoxy Grout Upgrade & Waterproof Regrouting Sydney",
  "description": "Professional epoxy grout upgrade service in Sydney. Complete removal of old cement grout and replacement with 100% waterproof epoxy grout. Stain-proof, mould-resistant, lasts 15-20 years. Most jobs completed in 1 day.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

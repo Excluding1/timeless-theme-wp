@@ -8,7 +8,7 @@
  "name": "Floor Tile Regrouting Sydney",
  "description": "Professional floor tile regrouting in Sydney. Bathroom, laundry, and kitchen floor grout removal and replacement. Epoxy and cement options. Same-day service. Epoxy: 5-year warranty. Cement: 2-year warranty.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

@@ -8,7 +8,7 @@
  "name": "Full Bathroom Makeover Sydney",
  "description": "Complete bathroom makeover service in Sydney. Includes bath resurfacing, tile resurfacing, full regrouting, silicone replacement, vanity respray and basin restoration. Most jobs completed in 2-3 days.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

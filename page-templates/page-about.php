@@ -10,7 +10,7 @@
  "description": "Learn about Timeless Resurfacing. Two Sydney locals transforming bathrooms across NSW with professional resurfacing and regrouting.",
  "url": "<?php echo esc_url( home_url( '/about/' ) ); ?>",
  "mainEntity": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "description": "Sydney's specialist bathroom resurfacing and shower regrouting service.",
  "url": "https://timelessresurfacing.com.au",

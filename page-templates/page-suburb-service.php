@@ -48,7 +48,7 @@ $neighborhoods_natural = count( $suburb['neighborhoods'] )
  "name": "<?php echo esc_js( $h1 ); ?>",
  "description": "<?php echo esc_js( 'Professional ' . $service['short_name'] . ' service for ' . $suburb['name'] . ' homes. ' . $service['description'] ); ?>",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",

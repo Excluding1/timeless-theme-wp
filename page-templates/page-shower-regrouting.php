@@ -8,7 +8,7 @@
  "name": "Shower Regrouting Sydney",
  "description": "Professional shower regrouting in Sydney. Full grout removal and replacement with epoxy or cement grout. Same-day service. Epoxy: 5-year warranty. Cement: 2-year warranty.",
  "provider": {
- "@type": "HomeAndConstructionBusiness",
+ "@type": "HomeAndConstructionBusiness",<?php echo timeless_gbp_jsonld(); ?>
  "name": "Timeless Resurfacing",
  "url": "https://timelessresurfacing.com.au",
  "telephone": "<?php echo timeless_phone_link(); ?>",
