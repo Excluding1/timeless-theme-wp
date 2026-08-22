@@ -282,7 +282,7 @@
  <div class="bg-surface-container-low rounded-xl p-8 text-center reveal">
  <span class="material-symbols-outlined text-3xl text-primary mb-3 block" aria-hidden="true">verified_user</span>
  <h3 class="font-bold text-primary mb-2">2-Year Warranty</h3>
- <p class="text-sm text-secondary leading-relaxed">Every regrouting and repair job backed by our 2-year workmanship warranty. Fully insured with public liability cover.</p>
+ <p class="text-sm text-secondary leading-relaxed">Every regrouting and repair job backed by our 2-year workmanship warranty. Insured for $10 million public liability cover.</p>
  </div>
  </div>
  </div>

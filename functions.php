@@ -1498,6 +1498,10 @@ function timeless_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'timeless_scripts' );
 
+/* Never hooked until 2026-08-23. The block existed but rendered on zero pages, which is
+   why every service page was sitting on one or two internal links. */
+add_action( 'get_footer', 'timeless_related_services' );
+
 /**
  * Material Symbols ligature → codepoint replacement (output buffer filter).
  *
@@ -2527,6 +2531,63 @@ function timeless_page_renders_empty( $post_id = 0 ) {
 }
 
 /* ─────────────────────────────────────────────
+   4a. BASELINE SCHEMA FOR PAGES WITHOUT THEIR OWN
+   ─────────────────────────────────────────────
+   Every page type carries JSON-LD except the four legal/info pages, which had none at all
+   (found by scripts/audit-site.py, 2026-08-23). They are long, genuinely useful pages —
+   /terms/ alone is 4,400 words — and they were invisible as structured data.
+
+   Deliberately a plain WebPage plus a breadcrumb and a publisher. Not HowTo, not FAQPage:
+   claiming a richer type than the page actually is would be the wrong kind of clever.
+   Keyed on an explicit slug list, so it can never collide with a template that already
+   emits its own schema. ───────────────────────────────────────────── */
+function timeless_baseline_page_schema() {
+    if ( ! is_page() ) {
+        return;
+    }
+    $slug = get_post_field( 'post_name', get_queried_object_id() );
+    if ( ! in_array( $slug, array( 'warranty', 'terms', 'privacy', 'care-instructions' ), true ) ) {
+        return;
+    }
+
+    $graph = array(
+        array(
+            '@type'       => 'WebPage',
+            'name'        => wp_strip_all_tags( get_the_title() ),
+            'url'         => get_permalink(),
+            'description' => function_exists( 'timeless_seo_desc_for_slug' )
+                                ? timeless_seo_desc_for_slug( $slug )
+                                : wp_strip_all_tags( get_the_excerpt() ),
+            'inLanguage'  => 'en-AU',
+            'isPartOf'    => array(
+                '@type' => 'WebSite',
+                'name'  => 'Timeless Resurfacing',
+                'url'   => home_url( '/' ),
+            ),
+            'publisher'   => array(
+                '@type' => 'Organization',
+                'name'  => 'Timeless Resurfacing',
+                'url'   => home_url( '/' ),
+            ),
+            'dateModified' => get_the_modified_date( 'c' ),
+        ),
+        array(
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => array(
+                array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url( '/' ) ),
+                array( '@type' => 'ListItem', 'position' => 2, 'name' => wp_strip_all_tags( get_the_title() ), 'item' => get_permalink() ),
+            ),
+        ),
+    );
+
+    $doc = array( '@context' => 'https://schema.org', '@graph' => $graph );
+    echo "\n" . '<script type="application/ld+json">' . "\n"
+        . wp_json_encode( $doc, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "\n"
+        . '</script>' . "\n";
+}
+add_action( 'wp_head', 'timeless_baseline_page_schema', 20 );
+
+/* ─────────────────────────────────────────────
    4b. TEMPLATE ROUTING FOR HUB PAGES
    ─────────────────────────────────────────────
    /services/ is the breadcrumb parent of all 19 service pages (each one names it
@@ -2682,30 +2743,31 @@ function timeless_seo_meta() {
         'shower-regrouting'              => 'Professional shower regrouting in Sydney. Full grout removal and waterproof epoxy replacement. Same-day service, free quotes.',
         'bath-resurfacing'               => 'Bath resurfacing Sydney. Restore chipped or stained bathtubs to factory-new condition. One-day service, 80-90% cheaper than replacement.',
         'tile-resurfacing'               => 'Tile resurfacing Sydney. Transform outdated bathroom tiles with durable high-gloss finish. No demolition, one-day turnaround.',
-        'vanity-refinishing'             => 'Vanity refinishing Sydney. Benchtop resurfacing and cabinet respray with 900+ colour options. Same-day service.',
-        'basin-restoration'              => 'Basin restoration Sydney. Expert chip repair and full resurface for porcelain, acrylic, and cast iron basins.',
-        'shower-leak-repair'             => 'Shower sealing and leak repair Sydney. Silicone replacement and waterproof epoxy regrouting to stop leaks permanently.',
-        'epoxy-grout-upgrade'            => 'Epoxy grout upgrade Sydney. Waterproof, mould-resistant grout for showers, bathrooms, and wet areas.',
-        'floor-tile-regrouting'          => 'Floor tile regrouting Sydney. Bathroom and laundry floor grout removal and replacement. Anti-slip finish available.',
-        'chipped-bathtub-repair'         => 'Chipped bathtub repair Sydney. Professional chip repair for baths and basins. Same-day fix, invisible results.',
+        'vanity-refinishing'             => 'Vanity refinishing Sydney. Benchtops and cabinet doors resurfaced in 900+ colours, usually in a single day and without replacing the unit. Free quote.',
+        'basin-restoration'              => 'Basin restoration Sydney. Chip repair and full resurfacing for porcelain, acrylic and cast iron basins, without replacing the basin. Free 24-hour quote.',
+        'shower-leak-repair'             => 'Shower leak repair Sydney without removing tiles. Most leaks start at the grout and silicone, not the membrane. Free quote from your photos in 24 hours.',
+        'epoxy-grout-upgrade'            => 'Epoxy grout upgrade Sydney. Waterproof, mould-resistant grout for showers and wet areas, with a 5-year workmanship warranty. Free quote in 24 hours.',
+        'floor-tile-regrouting'          => 'Floor tile regrouting Sydney. Bathroom and laundry floor grout raked out and replaced, with an anti-slip finish available. Free quote within 24 hours.',
+        'chipped-bathtub-repair'         => 'Chipped bathtub repair Sydney. Chips filled, sanded and colour-matched so the repair blends into the surface. Most done in hours. Free 24-hour quote.',
         'full-bathroom-makeover'         => 'Full bathroom makeover Sydney. Complete resurface package. Bath, tiles, basin, and grout. 1-2 days, fraction of renovation cost.',
         'property-manager-bathroom-services' => 'Property manager bathroom services Sydney. Multi-unit turnarounds, rental refreshes, and strata work. Volume pricing available.',
-        'stained-bathtub-resurfacing'    => 'Stained bathtub resurfacing Sydney. Remove yellow, brown, and rust stains permanently with professional recoating.',
-        'peeling-bathtub-resurfacing'    => 'Peeling bathtub resurfacing Sydney. Fix failed DIY kits and peeling coatings with professional two-part acrylic system.',
+        'stained-bathtub-resurfacing'    => 'Stained bathtub resurfacing Sydney. Yellowing, rust marks and staining that will not clean off, fixed by recoating rather than replacing the bath.',
+        'peeling-bathtub-resurfacing'    => 'Peeling bathtub resurfacing Sydney. Failed DIY kits and lifting coatings stripped back and recoated properly with a two-pack system. Free 24-hour quote.',
         'bathroom-tile-resurfacing'      => 'Bathroom tile resurfacing Sydney. Fresh high-gloss white finish over your existing tiles. No demolition, 1-2 day service.',
         'shower-resurfacing'             => 'Shower tile resurfacing Sydney. Modernise dated shower tile colour without demolition. Walls only or walls + floor. Fixed-price quote from photos.',
-        'mouldy-shower-grout'            => 'Mouldy shower grout removal Sydney. Strip black mould grout and replace with waterproof epoxy. Stops mould permanently.',
-        'cracked-grout-repair'           => 'Cracked grout repair Sydney. Fix crumbling, cracked shower and bathroom grout before water damage occurs.',
-        'mouldy-silicone-replacement'    => 'Mouldy silicone replacement Sydney. Remove old black silicone and reseal with premium anti-mould silicone.',
-        'basin-chip-repair'              => 'Basin chip repair Sydney. Invisible repairs for chipped porcelain and ceramic basins. Same-day service.',
-        'vanity-respray'                 => 'Vanity respray Sydney. Cabinet door and drawer front respray with 2-pack polyurethane. 900+ colours.',
+        'mouldy-shower-grout'            => 'Mouldy shower grout Sydney. When mould keeps returning it is living inside the grout, not on it. Raked out and replaced in epoxy. Free 24-hour quote.',
+        'cracked-grout-repair'           => 'Cracked grout repair Sydney. Crumbling and cracked shower grout cut out and replaced before water gets behind the tiles. Free quote within 24 hours.',
+        'mouldy-silicone-replacement'    => 'Mouldy silicone replacement Sydney. Blackened, perished silicone cut out and resealed with a mould-inhibiting product. Free quote within 24 hours.',
+        'basin-chip-repair'              => 'Basin chip repair Sydney. Chipped porcelain and ceramic basins filled, colour-matched and blended so the repair disappears. Free quote within 24 hours.',
+        'vanity-respray'                 => 'Vanity respray Sydney. Cabinet doors and drawer fronts resprayed in 2-pack polyurethane, 900+ colours, no replacement needed. Free quote in 24 hours.',
         'about'    => 'About Timeless Resurfacing. Sydney\'s bathroom resurfacing specialists. Fully insured, experienced team, warranties up to 5 years.',
         'contact'  => 'Contact Timeless Resurfacing for a free bathroom resurfacing quote in Sydney. Send photos, get a fixed-price quote within 1 business day.',
-        'gallery'  => 'Before and after bathroom resurfacing photos across Sydney. Real transformations by Timeless Resurfacing.',
-        'areas'    => 'Bathroom resurfacing service areas across Greater Sydney, Wollongong, Central Coast, and Blue Mountains.',
+        'gallery'  => 'Before and after bathroom resurfacing photos from real Sydney jobs. Baths, tiles, vanities and regrouting, all done without demolition or replacement.',
+        'areas'    => 'Bathroom resurfacing and regrouting across Greater Sydney, the Blue Mountains, Central Coast and Wollongong. Find your suburb and get a quote in 24 hours.',
         'faqs'     => 'Frequently asked questions about bathroom resurfacing in Sydney. Cost, timing, durability, warranty, and process explained.',
-        'privacy'  => 'Privacy policy for Timeless Resurfacing. How we collect, use, and protect your personal information.',
+        'privacy'  => 'Privacy policy for Timeless Resurfacing, the Sydney bathroom resurfacing specialists. How we collect, use, store and protect your personal information.',
         'warranty' => 'Timeless Resurfacing warranty terms by service. Bath resurfacing 5 years, epoxy regrouting 5 years, cement regrouting 2 years. ACL-compliant.',
+        'finish-quote' => 'Pick up where you left off and finish your bathroom resurfacing quote. Add your photos and details, and we will send an itemised quote within 24 hours.',
         'services' => 'Every bathroom resurfacing, regrouting and repair service we offer across Sydney, and how to tell which one your bathroom actually needs.',
         'care-instructions' => 'How to care for your resurfaced bathroom. Cure times, cleaning products to use and avoid, Sydney climate-specific advice, lifespan expectations.',
         // Blog articles (CPT 'article' at /blog/{slug}/). is_singular() + post_name matching below
@@ -2729,13 +2791,25 @@ function timeless_seo_meta() {
         $curated = timeless_seo_title();
         $title   = $curated ? $curated : get_the_title() . ' | ' . $site;
         $slug  = get_post_field( 'post_name', get_post() );
-        $desc  = isset( $desc_map[ $slug ] ) ? $desc_map[ $slug ] : get_the_title() . ', professional bathroom resurfacing in Sydney. Free quotes. ' . $site;
+        /* Fallback for any page not in the map. The old one produced 100-111 characters,
+           under Google's useful range, on every suburb page and on /finish-quote/. This lands
+           between 120 and 160 for every real title length on the site. */
+        $desc  = isset( $desc_map[ $slug ] )
+            ? $desc_map[ $slug ]
+            : get_the_title() . '. Bathroom resurfacing and regrouting done without demolition, most jobs in a single day. Send photos for a free quote within 24 hours.';
     } else {
         $title = wp_title( '|', false, 'right' ) . $site;
         $desc  = 'Professional bathroom resurfacing and shower regrouting across Greater Sydney. Free photo-based quotes. ' . $site;
     }
 
-    $desc = substr( $desc, 0, 160 );
+    /* Trim on a word boundary rather than mid-word at exactly 160. */
+    if ( strlen( $desc ) > 160 ) {
+        $desc = substr( $desc, 0, 160 );
+        $cut  = strrpos( $desc, ' ' );
+        if ( $cut > 120 ) {
+            $desc = rtrim( substr( $desc, 0, $cut ), " ,.;:" );
+        }
+    }
 
     /* Build canonical-matching URL (HTTPS, trailing slash, no query params) */
     $url = is_front_page() ? home_url( '/' ) : get_permalink();
@@ -3249,23 +3323,60 @@ function timeless_related_services() {
     if ( ! is_singular( 'page' ) ) return;
     $slug = get_post_field( 'post_name', get_post() );
 
+    /* All 19 service pages, not the six this list originally held. The block picks three
+       siblings for each, chosen so the pairing is useful to a reader rather than random:
+       a problem page points at the service that fixes it, and a service points at its
+       nearest neighbours. */
     $services = array(
-        'shower-regrouting'     => array( 'label' => 'Shower Regrouting',  'icon' => 'shower' ),
-        'bath-resurfacing'      => array( 'label' => 'Bath Resurfacing',   'icon' => 'bathtub' ),
-        'tile-resurfacing'      => array( 'label' => 'Tile Resurfacing',   'icon' => 'grid_view' ),
-        'vanity-refinishing'    => array( 'label' => 'Vanity Refinishing', 'icon' => 'countertops' ),
-        'basin-restoration'     => array( 'label' => 'Basin Restoration',  'icon' => 'faucet' ),
-        'shower-leak-repair'    => array( 'label' => 'Shower Sealing',     'icon' => 'water_damage' ),
+        'shower-regrouting'                  => array( 'label' => 'Shower Regrouting',      'icon' => 'shower' ),
+        'bath-resurfacing'                   => array( 'label' => 'Bath Resurfacing',       'icon' => 'bathtub' ),
+        'tile-resurfacing'                   => array( 'label' => 'Tile Resurfacing',       'icon' => 'grid_view' ),
+        'bathroom-tile-resurfacing'          => array( 'label' => 'Bathroom Tile Resurfacing', 'icon' => 'grid_view' ),
+        'vanity-refinishing'                 => array( 'label' => 'Vanity Refinishing',     'icon' => 'countertops' ),
+        'vanity-respray'                     => array( 'label' => 'Vanity Respray',         'icon' => 'format_paint' ),
+        'basin-restoration'                  => array( 'label' => 'Basin Restoration',      'icon' => 'wash' ),
+        'basin-chip-repair'                  => array( 'label' => 'Basin Chip Repair',      'icon' => 'healing' ),
+        'shower-leak-repair'                 => array( 'label' => 'Shower Leak Repair',     'icon' => 'water_damage' ),
+        'floor-tile-regrouting'              => array( 'label' => 'Floor Tile Regrouting',  'icon' => 'grid_on' ),
+        'epoxy-grout-upgrade'                => array( 'label' => 'Epoxy Grout Upgrade',    'icon' => 'science' ),
+        'cracked-grout-repair'               => array( 'label' => 'Cracked Grout Repair',   'icon' => 'construction' ),
+        'mouldy-shower-grout'                => array( 'label' => 'Mouldy Shower Grout',    'icon' => 'cleaning_services' ),
+        'mouldy-silicone-replacement'        => array( 'label' => 'Mouldy Silicone Replacement', 'icon' => 'sanitizer' ),
+        'chipped-bathtub-repair'             => array( 'label' => 'Chipped Bath Repair',    'icon' => 'healing' ),
+        'stained-bathtub-resurfacing'        => array( 'label' => 'Stained Bath Resurfacing','icon' => 'bathtub' ),
+        'peeling-bathtub-resurfacing'        => array( 'label' => 'Peeling Bath Resurfacing','icon' => 'layers' ),
+        'full-bathroom-makeover'             => array( 'label' => 'Full Bathroom Makeover', 'icon' => 'home_repair_service' ),
+        'property-manager-bathroom-services' => array( 'label' => 'For Property Managers',  'icon' => 'apartment' ),
+    );
+
+    /* Which three each page points at. Chosen for usefulness, not alphabetically. */
+    $related = array(
+        'shower-regrouting'                  => array( 'mouldy-shower-grout', 'epoxy-grout-upgrade', 'shower-leak-repair' ),
+        'bath-resurfacing'                   => array( 'chipped-bathtub-repair', 'peeling-bathtub-resurfacing', 'stained-bathtub-resurfacing' ),
+        'tile-resurfacing'                   => array( 'bathroom-tile-resurfacing', 'floor-tile-regrouting', 'full-bathroom-makeover' ),
+        'bathroom-tile-resurfacing'          => array( 'tile-resurfacing', 'shower-regrouting', 'full-bathroom-makeover' ),
+        'vanity-refinishing'                 => array( 'vanity-respray', 'basin-restoration', 'full-bathroom-makeover' ),
+        'vanity-respray'                     => array( 'vanity-refinishing', 'basin-restoration', 'tile-resurfacing' ),
+        'basin-restoration'                  => array( 'basin-chip-repair', 'vanity-refinishing', 'bath-resurfacing' ),
+        'basin-chip-repair'                  => array( 'basin-restoration', 'chipped-bathtub-repair', 'bath-resurfacing' ),
+        'shower-leak-repair'                 => array( 'shower-regrouting', 'mouldy-silicone-replacement', 'epoxy-grout-upgrade' ),
+        'floor-tile-regrouting'              => array( 'shower-regrouting', 'cracked-grout-repair', 'tile-resurfacing' ),
+        'epoxy-grout-upgrade'                => array( 'shower-regrouting', 'mouldy-shower-grout', 'floor-tile-regrouting' ),
+        'cracked-grout-repair'               => array( 'shower-regrouting', 'floor-tile-regrouting', 'shower-leak-repair' ),
+        'mouldy-shower-grout'                => array( 'shower-regrouting', 'mouldy-silicone-replacement', 'epoxy-grout-upgrade' ),
+        'mouldy-silicone-replacement'        => array( 'mouldy-shower-grout', 'shower-leak-repair', 'shower-regrouting' ),
+        'chipped-bathtub-repair'             => array( 'bath-resurfacing', 'basin-chip-repair', 'stained-bathtub-resurfacing' ),
+        'stained-bathtub-resurfacing'        => array( 'bath-resurfacing', 'peeling-bathtub-resurfacing', 'chipped-bathtub-repair' ),
+        'peeling-bathtub-resurfacing'        => array( 'bath-resurfacing', 'stained-bathtub-resurfacing', 'chipped-bathtub-repair' ),
+        'full-bathroom-makeover'             => array( 'bath-resurfacing', 'tile-resurfacing', 'shower-regrouting' ),
+        'property-manager-bathroom-services' => array( 'bath-resurfacing', 'full-bathroom-makeover', 'shower-regrouting' ),
     );
 
     // Only render on service pages, check if current slug is a service
     if ( ! isset( $services[ $slug ] ) ) return;
 
     // Remove current page from list
-    unset( $services[ $slug ] );
-    // Pick 3 random related services
-    $keys = array_rand( $services, min( 3, count( $services ) ) );
-    if ( ! is_array( $keys ) ) $keys = array( $keys );
+    $keys = isset( $related[ $slug ] ) ? $related[ $slug ] : array_slice( array_keys( array_diff_key( $services, array( $slug => 1 ) ) ), 0, 3 );
 
     echo '<section class="py-12 sm:py-16 bg-surface-container-low">';
     echo '<div class="max-w-7xl mx-auto px-6 sm:px-8">';

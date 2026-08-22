@@ -59,7 +59,7 @@ get_header(); ?>
  { "@type": "Question", "name": "Do you check for asbestos?", "acceptedAnswer": { "@type": "Answer", "text": "If your home was built before 1990, NSW regulations may require an asbestos assessment. We advise during quoting if a check is needed." } },
  { "@type": "Question", "name": "What areas do you service?", "acceptedAnswer": { "@type": "Answer", "text": "Entire Greater Sydney. Inner West, Eastern Suburbs, North Shore, Northern Beaches, Western Sydney, Sutherland Shire, Hills District. Plus Wollongong, Central Coast, Blue Mountains." } },
  { "@type": "Question", "name": "Can you resurface coloured tiles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Works on all tile types including coloured, textured, patterned, and mosaic. We transform outdated tiles into clean, modern finishes." } },
- { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Workmanship warranty on every job covering peeling, bubbling, and adhesion failure. Warranty terms vary by service type. Up to 5 years for resurfacing. Fully insured with public liability." } }
+ { "@type": "Question", "name": "What warranty do you provide?", "acceptedAnswer": { "@type": "Answer", "text": "Workmanship warranty on every job covering peeling, bubbling, and adhesion failure. Warranty terms vary by service type. Up to 5 years for resurfacing. Insured for $10 million public liability." } }
  ]
 }
 </script>
@@ -144,11 +144,11 @@ get_header(); ?>
  <div class="max-w-7xl mx-auto px-6 sm:px-8" id="chipbar">
  <div id="chipbar-inner">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">$10M Public Liability</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
  <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
- <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+ <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">$10M Public Liability</span></div>
  <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">schedule</span><span class="text-xs font-bold">Same-Day Service</span></div>
  </div>

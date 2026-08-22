@@ -133,11 +133,11 @@ get_header(); ?>
  <div class="max-w-7xl mx-auto px-6 sm:px-8" id="chipbar">
  <div id="chipbar-inner">
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
- <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+ <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">$10M Public Liability</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="flex items-start sm:items-center gap-2"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">receipt_long</span><span class="text-xs font-bold">ABN-Registered</span></div>
  <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified_user</span><span class="text-xs font-bold">Experienced &amp; Insured</span></div>
- <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">Public Liability Insured</span></div>
+ <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">security</span><span class="text-xs font-bold">$10M Public Liability</span></div>
  <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">verified</span><span class="text-xs font-bold">Up to 5-Year Warranty</span></div>
  <div class="chip-dup flex items-start sm:items-center gap-2" aria-hidden="true"><span class="material-symbols-outlined text-tertiary-fixed-dim" aria-hidden="true">receipt_long</span><span class="text-xs font-bold">ABN-Registered</span></div>
  </div>
