@@ -123,8 +123,14 @@
 | 404 page | ✅ | Custom 404.php | 2026-05-01 |
 | Quote form embed location | ✅ 13 pages | Homepage + sydney + 11 service pages via `[timeless_quote_form]` shortcode | 2026-06-11 |
 | Mobile responsive | ✅ Tested | Per past audits | 2026-05-01 |
+| **/services/ hub** | ⏳ Fixed in repo, NOT live | Live rendered a **1-word `<main>`** while all 19 service pages named it as position 2 of their BreadcrumbList — verified by curl 2026-08-22. There was no `page-services.php`. Now a real 816-word hub (`page-templates/page-services.php`, routed in code via `timeless_hub_template_routing` so it survives suffixed-theme-copy uploads). Ships with v1.5.2. | 2026-08-22 |
+| **/services/shower-resurfacing/** | ⚠️ Empty page, indexed | 200 with a **2-word `<main>`**, and emitted in sitemap.xml at priority 0.8. It has a meta description in `$desc_map` so it was clearly meant to be built. Interim: `timeless_page_renders_empty()` now noindexes it and drops it from the sitemap. **Still needs real content** — "shower resurfacing" is a genuine search term. | 2026-08-22 |
+| Blog articles live | ❌ **ZERO published** | /blog/ returns 200 and renders the archive shell, but no article is published and sitemap.xml carries no /blog/ URL. 5 finished drafts (3 at 95/100/93) sit in `docs/content/blog/`. Publishing needs `.secrets/wp-app-password.key` (Allan) — see `docs/LEFTOVERS-2026-08-22.md`. | 2026-08-22 |
+| Thin-page sweep (all 42 sitemap URLs) | ⚠️ | Measured `<main>` word counts live 2026-08-22. Two empty (above). Thin: /contact/ 128w, /gallery/ 208w, /areas/ 301w, and the **10 bath-resurfacing suburb pages at ~275w each** — below the 700–900w anti-doorway floor set in `docs/research/seo-strategy-2026-07-08.md` §B2. Ten near-identical short pages is the pattern Google's scaled-content policy targets on a young domain. Not yet actioned. | 2026-08-22 |
 
 ---
+
+<!-- Updated by Clifford 2026-08-22: added the live thin/empty-page findings from the 42-URL sitemap sweep, and the /services/ hub fix. -->
 
 ## 5. Quote Form (React)
 

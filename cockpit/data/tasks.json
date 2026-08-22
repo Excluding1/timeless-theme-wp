@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21",
+  "updated": "2026-08-22",
   "note": "CANONICAL human roadmap = docs/specs/FINALIZATION-ROADMAP-2026-06-07.md (this board mirrors it). Sub-tasks filled in as we tackle each task (Allan helps with UI/layout specifics, Clifford finalises). Edit via cockpit or here.",
   "tasks": [
     {
@@ -362,7 +362,7 @@
       "title": "Website v2 — content + SEO pass (Jul–Aug 2026)",
       "phase": "Now",
       "status": "doing",
-      "note": "Added 2026-08-22 by Clifford. The board had no record of any July/August site work.",
+      "note": "Added 2026-08-22 by Clifford. The board had no record of any July/August site work. Refreshed 2026-08-22 PM after the full repo + live-site audit; findings in docs/LEFTOVERS-2026-08-22.md.",
       "subtasks": [
         {
           "title": "Warranty ladder corrected per material across the theme (grout 2yr / silicone 1yr / resurface up-to-5yr / epoxy 5yr)",
@@ -410,6 +410,46 @@
         },
         {
           "title": "Blog images: pack exists but must be uploaded to the live Media Library before publishing",
+          "done": false
+        },
+        {
+          "title": "/services/ hub built — was a 1-word page that 19 breadcrumbs pointed at (page-services.php, routed in code)",
+          "done": true
+        },
+        {
+          "title": "Empty pages now noindex + dropped from sitemap (/services/shower-resurfacing/ was indexed at priority 0.8)",
+          "done": true
+        },
+        {
+          "title": "Blog articles 1-3 finished: 95 / 100 / 93 on the audit script",
+          "done": true
+        },
+        {
+          "title": "BLOCKED ON ALLAN: .secrets/wp-app-password.key so publish-blogs.py can push articles to live",
+          "done": false
+        },
+        {
+          "title": "BLOCKED ON ALLAN: 7 real photos for article 3 -> ~/Downloads/timeless-photos/",
+          "done": false
+        },
+        {
+          "title": "Rule 8 (Cleo independent canonical check) on articles 1-3 before any --publish",
+          "done": false
+        },
+        {
+          "title": "Covers for articles 4 and 5, and a replacement cover for article 3",
+          "done": false
+        },
+        {
+          "title": "/services/shower-resurfacing/ still needs real content (real search term, has a meta description already)",
+          "done": false
+        },
+        {
+          "title": "10 bath-resurfacing suburb pages are ~275 words each - below the 700-900w anti-doorway floor",
+          "done": false
+        },
+        {
+          "title": "104 commits unpushed on feature/day8-react-form-ghl-wire-2026-05-20 - no offsite backup",
           "done": false
         }
       ]
