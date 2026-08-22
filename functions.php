@@ -2460,6 +2460,87 @@ function timeless_email() {
     return sanitize_email( get_theme_mod( 'timeless_email', 'info@timelessresurfacing.com.au' ) );
 }
 
+/**
+ * True when a page would render an empty body: no post_content, no page template
+ * assigned, and not picked up by the hub router above.
+ *
+ * Found live 2026-08-22: /services/ and /services/shower-resurfacing/ were both in
+ * sitemap.xml at 200, rendering a 1-word and a 2-word <main>. Empty indexed URLs are
+ * a quality signal against the whole domain, and /services/shower-resurfacing/ was
+ * advertised at priority 0.8 — the same weight as a finished money page.
+ *
+ * Deliberately keyed on emptiness rather than a hard-coded slug list, because a
+ * hard-coded list silently rots the next time someone adds a page in wp-admin and
+ * does not write it. The 19 service pages have empty post_content too, but they DO
+ * carry a page template, so they never match.
+ */
+function timeless_page_renders_empty( $post_id = 0 ) {
+    $post_id = $post_id ? (int) $post_id : (int) get_queried_object_id();
+    $post    = get_post( $post_id );
+
+    if ( ! $post || 'page' !== $post->post_type ) {
+        return false;
+    }
+    if ( '' !== trim( wp_strip_all_tags( (string) $post->post_content ) ) ) {
+        return false;
+    }
+    if ( '' !== (string) get_page_template_slug( $post_id ) ) {
+        return false;
+    }
+
+    $routed = timeless_hub_routed_slugs();
+    return ! in_array( $post->post_name, $routed, true );
+}
+
+/* ─────────────────────────────────────────────
+   4b. TEMPLATE ROUTING FOR HUB PAGES
+   ─────────────────────────────────────────────
+   /services/ is the breadcrumb parent of all 19 service pages (each one names it
+   as position 2 in its BreadcrumbList JSON-LD), but the WordPress page behind it
+   had no template assigned, so it rendered an empty <main> and sat in the sitemap
+   as a one-word indexed page (verified live 2026-08-22).
+
+   Assigning the template through wp-admin would fix it too, but Customizer and
+   page-meta settings are stored per theme folder and have been lost to suffixed
+   theme copies before (CLAUDE.md deploy note), so routing it in code means the
+   hub cannot silently revert to blank on the next upload. An explicitly assigned
+   template still wins — this only fills in when none is set.
+   ───────────────────────────────────────────── */
+/** slug => template file, for pages served by a template without an editor assignment. */
+function timeless_hub_routes() {
+    return array(
+        'services' => 'page-templates/page-services.php',
+    );
+}
+
+/** Just the slugs, for the empty-page test. */
+function timeless_hub_routed_slugs() {
+    return array_keys( timeless_hub_routes() );
+}
+
+function timeless_hub_template_routing( $template ) {
+    if ( ! is_page() ) {
+        return $template;
+    }
+
+    $assigned = get_page_template_slug( get_queried_object_id() );
+    if ( ! empty( $assigned ) ) {
+        return $template; // Editor's choice always wins.
+    }
+
+    $routes = timeless_hub_routes();
+    $slug   = get_post_field( 'post_name', get_queried_object_id() );
+    if ( isset( $routes[ $slug ] ) ) {
+        $candidate = locate_template( $routes[ $slug ] );
+        if ( $candidate ) {
+            return $candidate;
+        }
+    }
+
+    return $template;
+}
+add_filter( 'template_include', 'timeless_hub_template_routing' );
+
 /* ─────────────────────────────────────────────
    5. SEO, Remove WordPress clutter + hide server fingerprinting
    ───────────────────────────────────────────── */
@@ -2525,6 +2606,9 @@ function timeless_seo_title_map() {
         'regrout-or-retile-shower'                     => 'Regrout or Retile Shower? How to Tell What You Need',
         'resurface-or-replace-bathtub'                 => 'Resurface or Replace Bathtub? Honest Sydney Guide',
         'why-is-my-bathtub-peeling'                    => 'Why Is My Bathtub Peeling? Causes and the Right Fix',
+
+        /* Hub pages */
+        'services'                                     => 'Bathroom Resurfacing Services Sydney | Baths, Tiles, Regrouting',
     );
 }
 
@@ -2588,6 +2672,7 @@ function timeless_seo_meta() {
         'faqs'     => 'Frequently asked questions about bathroom resurfacing in Sydney. Cost, timing, durability, warranty, and process explained.',
         'privacy'  => 'Privacy policy for Timeless Resurfacing. How we collect, use, and protect your personal information.',
         'warranty' => 'Timeless Resurfacing warranty terms by service. Bath resurfacing 5 years, epoxy regrouting 5 years, cement regrouting 2 years. ACL-compliant.',
+        'services' => 'Every bathroom resurfacing, regrouting and repair service we offer across Sydney, and how to tell which one your bathroom actually needs.',
         'care-instructions' => 'How to care for your resurfaced bathroom. Cure times, cleaning products to use and avoid, Sydney climate-specific advice, lifespan expectations.',
         // Blog articles (CPT 'article' at /blog/{slug}/). is_singular() + post_name matching below
         // covers articles too, so plain slug keys work. Source: docs/content/blog/*.html headers.
@@ -2672,7 +2757,12 @@ function timeless_seo_meta() {
     }
 
     echo '<meta name="description" content="' . esc_attr( $desc ) . '" />' . "\n";
-    echo '<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />' . "\n";
+    /* A page with nothing on it should not be in the index at all. follow is kept so
+       any links the theme wraps around it still pass through. */
+    $robots = ( is_page() && timeless_page_renders_empty() )
+        ? 'noindex, follow'
+        : 'index, follow, max-snippet:-1, max-image-preview:large';
+    echo '<meta name="robots" content="' . esc_attr( $robots ) . '" />' . "\n";
     echo '<link rel="alternate" hreflang="en-au" href="' . esc_url( $url ) . '" />' . "\n";
     echo '<meta property="og:type" content="' . esc_attr( $og_type ) . '" />' . "\n";
     echo '<meta property="og:title" content="' . esc_attr( $title ) . '" />' . "\n";
@@ -2924,6 +3014,15 @@ function timeless_output_sitemap() {
         // Skip if URL is empty or if this is the front page (already added above)
         if ( empty( $url ) ) continue;
         if ( (int) $page->ID === (int) get_option( 'page_on_front' ) ) continue;
+
+        /*
+         * Skip pages that render nothing. /services/shower-resurfacing/ was being
+         * emitted at priority 0.8 while serving a 2-word body (found live
+         * 2026-08-22). Submitting an empty URL and calling it a high-priority page
+         * is worse than not submitting it — the page still resolves for anyone
+         * holding the link, it just stops being advertised until it has content.
+         */
+        if ( timeless_page_renders_empty( $page->ID ) ) continue;
 
         /*
          * Priority ladder.
