@@ -22,21 +22,41 @@ Safety: posts are created as DRAFT unless --publish is passed, so Rule 8
 (both-CEO verification of customer-facing copy) stays enforceable — nothing
 goes public without an explicit flag.
 """
-import argparse, base64, json, mimetypes, re, sys, urllib.request, urllib.parse
+import argparse, base64, datetime, json, mimetypes, re, sys, urllib.request, urllib.parse
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 BLOG_DIR = REPO / "docs/content/blog"
 SECRET = REPO / ".secrets/wp-app-password.key"
 
+# Publish order. Posts go live spaced days apart, not all at once: ten articles
+# stamped with the same timestamp reads as a content dump to a reader and to Google,
+# and it wastes the freshness signal that a steady cadence buys. Allan's call,
+# 2026-08-22. Index here = position in the run; the spacing is --spacing-days apart,
+# counting BACKWARDS from today so the newest post is today and the rest are dated
+# behind it. Anything absent from this list falls to the end of the order.
+PUBLISH_ORDER = [
+    "bathroom-resurfacing-rental-property",
+    "mouldy-shower-grout-fix",
+    "cracked-bath-basin-repair",
+    "can-you-paint-bathroom-tiles",
+    "why-is-my-bathtub-peeling",
+    "leaking-shower-repair-without-removing-tiles",
+    "regrout-or-retile-shower",
+    "how-long-does-bath-resurfacing-last",
+    "bathtub-chip-repair",
+    "resurface-or-replace-bathtub",
+]
+
 HERO_MAP = {
-    "resurface-or-replace-bathtub": "hero-resurface-or-replace.jpg",
+    "cracked-bath-basin-repair": "cover-crack.jpg",
+    "resurface-or-replace-bathtub": "cover-resurface-or-replace.jpg",
     "how-long-does-bath-resurfacing-last": "hero-how-long-resurfacing-lasts.jpg",
     "regrout-or-retile-shower": "hero-regrout-or-retile.jpg",
-    "why-is-my-bathtub-peeling": "hero-peeling-bathtub.jpg",
+    "why-is-my-bathtub-peeling": "cover-peeling-bathtub.jpg",
     "bathtub-chip-repair": "hero-chip-repair.jpg",
-    "mouldy-shower-grout-fix": "hero-mouldy-grout.jpg",
-    "bathroom-resurfacing-rental-property": "hero-rental-property.jpg",
+    "mouldy-shower-grout-fix": "cover-mould.jpg",
+    "bathroom-resurfacing-rental-property": "cover-rental-property.jpg",
     "leaking-shower-repair-without-removing-tiles": "hero-leaking-shower.jpg",
 }
 
@@ -118,6 +138,8 @@ def main():
     ap.add_argument("--slug", help="only this post")
     ap.add_argument("--publish", action="store_true", help="status=publish (default: draft)")
     ap.add_argument("--images", help="folder of hero images to upload + set as featured")
+    ap.add_argument("--spacing-days", type=int, default=3,
+                    help="days between consecutive posts' publish dates (default 3, 0 = leave dates alone)")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -127,14 +149,30 @@ def main():
     if not posts:
         die("no posts matched")
 
+    def order_index(slug):
+        return PUBLISH_ORDER.index(slug) if slug in PUBLISH_ORDER else len(PUBLISH_ORDER)
+
+    posts.sort(key=lambda x: order_index(x["slug"]))
+    last = max((order_index(x["slug"]) for x in posts), default=0)
+
     for p in posts:
         status = "publish" if args.publish else "draft"
+        stamp = None
+        if args.spacing_days:
+            # Newest post lands today; each earlier one steps back --spacing-days.
+            back = (last - order_index(p["slug"])) * args.spacing_days
+            when = datetime.datetime.now() - datetime.timedelta(days=back)
+            # Mid-morning reads more naturally than whatever minute the script ran.
+            stamp = when.replace(hour=9, minute=30, second=0, microsecond=0).isoformat()
         if args.dry_run:
             print(f"DRY: would upsert '{p['slug']}' as {status}" +
+                  (f" dated {stamp[:10]}" if stamp else "") +
                   (f" + hero {HERO_MAP.get(p['slug'])}" if args.images and p['slug'] in HERO_MAP else ""))
             continue
         payload = {"title": p["title"], "slug": p["slug"], "content": p["content"],
                    "excerpt": p["excerpt"], "status": status}
+        if stamp:
+            payload["date"] = stamp
         if args.images and p["slug"] in HERO_MAP:
             hero = Path(args.images).expanduser() / HERO_MAP[p["slug"]]
             if hero.exists():
