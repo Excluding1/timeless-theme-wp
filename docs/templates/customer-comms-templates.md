@@ -123,7 +123,7 @@ that page alone.
 ```
 Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. I can see the quote for {{inboundWebhookRequest.customData.property_address}} didn't get finished off, here's the link back to where you got up to: {{inboundWebhookRequest.customData.resume_link_sms}}
 
-Just after a couple of photos and a quick note on what needs doing, then I'll have your quote back to you within 24 hours.
+Just after a couple of photos and a quick note on what needs doing, then I'll get your quote sorted as soon as possible.
 ```
 
 **Why this and not the tidier version (2026-08-23).** Allan read the previous draft and said it
@@ -141,11 +141,11 @@ The fix is not to strip information out. The address and the two-item list are t
 the persuading, and both stay. It is to let the sentences run together the way someone typing on
 a phone would, and to make the observation first-person: *I can see*, not *we noticed*.
 
-**On timing.** Allan's own draft said "24 to 48hrs". Kept at **within 24 hours**, because that
-is what the site, llms.txt, every service page and all five blog articles promise — 43 places
-against zero. The 24-48 figures elsewhere on the site are all CURE times, a different thing.
-Changing the quote promise is a business decision, and if it becomes 48 it has to change
-everywhere at once, not just in one SMS.
+**On timing.** No number, per Allan. He is right and it solves a problem rather than dodging
+one: the site promises "within 24 hours" in 43 places and his own draft said 24-48, so putting
+either figure in the SMS meant picking a side of a contradiction we had not resolved. "As soon
+as possible" is honest, cannot drift out of step with the site, and is what Surface Care say in
+the same message. The 24-hour promise still stands everywhere it is already made.
 
 **Honest limit:** this is reasoning, not measurement. Nobody has A/B tested it. The number worth
 watching once it runs is what share of abandoned quotes come back and complete.
