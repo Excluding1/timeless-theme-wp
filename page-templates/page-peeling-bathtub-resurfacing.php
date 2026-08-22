@@ -123,6 +123,8 @@
  <div class="max-w-7xl mx-auto px-6 sm:px-8">
  <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tighter mb-4">Why Your Bath Is Peeling</h2>
  <p class="text-secondary max-w-3xl mb-10">Bath coatings don't just peel for no reason. Understanding the cause helps you see why the old coating must come off completely before a new one can go on.</p>
+ <!-- Feeder to the diagnostic guide; without it the article is orphaned. -->
+ <p class="text-secondary max-w-3xl mb-10 text-sm">Want to know what actually caused it before you decide? Read <a class="text-primary font-semibold underline underline-offset-4 hover:text-primary-soft transition-colors" href="<?php echo esc_url( home_url( '/blog/why-is-my-bathtub-peeling/' ) ); ?>">Why Is My Bathtub Peeling? Causes and the Right Fix</a>.</p>
 
  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
  <div class="bg-surface-container-low rounded-xl p-6 reveal">
