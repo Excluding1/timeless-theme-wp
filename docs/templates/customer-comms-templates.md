@@ -147,6 +147,32 @@ either figure in the SMS meant picking a side of a contradiction we had not reso
 as possible" is honest, cannot drift out of step with the site, and is what Surface Care say in
 the same message. The 24-hour promise still stands everywhere it is already made.
 
+**On the opt-out line (Allan's call, 2026-08-23).** Dropped. The old body ended "Reply YES and
+I'll reopen it. Reply STOP to opt out." Both go:
+
+- *Reply YES* was the pre-resume-link workaround. Asking someone to send a text before they get
+  a link is friction we no longer need, and it was the whole reason for building the link.
+- *Reply STOP* — Allan's read, backed by other operators running the same model, is that someone
+  who filled in the form and gave their mobile has already consented to be contacted about that
+  quote. The transactional argument is genuinely strong: this message does nothing but help
+  finish a job they started. Worth recording that STOP still WORKS regardless — Twilio and the
+  carriers honour it whether or not the text mentions it, so the facility exists either way.
+  Clifford's conservative read was to keep the six words; Allan's call stands and the risk is low.
+
+**⚠️ W2 can fire twice for one person.** Both abandon paths POST to the SAME inbound webhook
+(`...11247014-933d-4731-ba38-8990256113ca`): the browser fires the moment someone leaves, and
+the server sweep fires again after 90 minutes idle. With W2's current "Wait 4 hours" step that
+is potentially two texts, roughly 4h and 5.5h apart. Fix by filtering the trigger on
+`customData.form_status`:
+
+- `partial` = browser, immediate, fires even if they were only pausing
+- `abandoned_confirmed` = server sweep, only after 90 minutes of genuine silence, and it is the
+  path that always carries `property_address`
+
+**Recommended:** filter W2 to `abandoned_confirmed` only, and drop the Wait to 0-30 minutes,
+since the sweep has already waited 90. One text, about an hour and a half after they leave,
+from the path with the better data.
+
 **Honest limit:** this is reasoning, not measurement. Nobody has A/B tested it. The number worth
 watching once it runs is what share of abandoned quotes come back and complete.
 
