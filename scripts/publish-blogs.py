@@ -146,6 +146,51 @@ def upload_media(site, filepath: Path, slug):
     return media["id"], "uploaded"
 
 
+
+# Body images. --images only ever uploaded the HERO covers, so every <img> and every
+# before_after slider inside an article pointed at /wp-content/uploads/2026/07/... on the
+# assumption someone had put them there by hand. On 2026-08-23 a dry run against live found
+# all 24 of them returning 404. Uploading and then REWRITING the body to the URL WordPress
+# actually returns is the only version that cannot drift: WP files uploads by the current
+# month, so a hard-coded 2026/07 path is wrong the moment the month turns.
+IMG_SEARCH = ["images/blog", "images/gallery", "images/services", "images/homepage",
+              "images/about", "docs/templates/quote-generator/photos"]
+
+def find_local_image(name):
+    for d in IMG_SEARCH:
+        for path in (REPO / d).rglob(name):
+            return path
+    return None
+
+
+def upload_body_images(site, post, cache):
+    """Upload every image the body references and rewrite it to the live URL."""
+    body = post["content"]
+    names = set(re.findall(r'(?:src|before|after)="[^"]*/wp-content/uploads/[^"]*?/([^"/]+\.(?:jpg|jpeg|png|webp))"', body))
+    if not names:
+        return body, []
+    report = []
+    for name in sorted(names):
+        if name in cache:
+            url = cache[name]; how = "reused"
+        else:
+            local = find_local_image(name)
+            if not local:
+                report.append((name, "NOT FOUND ON DISK — left as-is"))
+                continue
+            existing = find_by_slug(site, "media", local.stem)
+            if existing:
+                url = existing["source_url"]; how = "already on site"
+            else:
+                ctype = mimetypes.guess_type(local.name)[0] or "image/jpeg"
+                media = api(site, "media", "POST", raw=local.read_bytes(), ctype=ctype, filename=local.name)
+                url = media["source_url"]; how = "uploaded"
+            cache[name] = url
+        body = re.sub(r'([^"]*/wp-content/uploads/[^"]*?)' + re.escape(name), url, body)
+        report.append((name, how))
+    return body, report
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", default="https://timelessresurfacing.com.au")
@@ -186,6 +231,7 @@ def main():
             die(f"duplicate slug in the folder: {p['slug']}")
         seen[p["slug"]] = True
     print(f"PUBLISHING {len(posts)} article(s)\n")
+    media_cache = {}
 
     def order_index(slug):
         return PUBLISH_ORDER.index(slug) if slug in PUBLISH_ORDER else len(PUBLISH_ORDER)
@@ -207,7 +253,10 @@ def main():
                   (f" dated {stamp[:10]}" if stamp else "") +
                   (f" + hero {HERO_MAP.get(p['slug'])}" if args.images and p['slug'] in HERO_MAP else ""))
             continue
-        payload = {"title": p["title"], "slug": p["slug"], "content": p["content"],
+        body, img_report = upload_body_images(args.site, p, media_cache)
+        for name, how in img_report:
+            print(f"  img {name}: {how}")
+        payload = {"title": p["title"], "slug": p["slug"], "content": body,
                    "excerpt": p["excerpt"], "status": status}
         if stamp:
             payload["date"] = stamp
