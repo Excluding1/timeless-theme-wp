@@ -352,16 +352,17 @@
 
 
 
-<!-- QUOTE CTA -->
-<section class="py-16 sm:py-20 bg-white" id="quote">
- <div class="max-w-4xl mx-auto px-6 sm:px-8">
- <div class="bg-primary rounded-2xl overflow-hidden shadow-2xl p-8 sm:p-12 text-center">
- <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-3">Get Your Free Quote in 60 Seconds</h2>
- <p class="text-on-primary-container text-sm sm:text-base mb-8 max-w-xl mx-auto">Send us 3-4 photos of your bathroom tiles and we'll have a fixed-price quote back to you within 1 business day. No obligation, no call-out fee.</p>
- <div class="flex flex-col sm:flex-row gap-4 justify-center">
- <a class="px-10 py-4 bg-tertiary-fixed-dim text-primary font-bold rounded-lg text-center hover:shadow-xl transition-all text-base" href="#quote">Get Your Free Quote</a>
- <a href="tel:<?php echo timeless_phone_link(); ?>" class="px-10 py-4 bg-white/10 text-white font-bold rounded-lg text-center hover:bg-white/20 transition-all flex items-center justify-center gap-2 text-base"><span class="material-symbols-outlined text-lg" aria-hidden="true">call</span> Or Call Us</a>
+<!-- QUOTE FORM -->
+<!-- QUOTE FORM, homepage-style section (badge + heading + clean card), unified per Allan 2026-06-11 -->
+<section class="py-16 sm:py-24 bg-surface-container-low" id="quote">
+ <div class="max-w-4xl mx-auto px-6 sm:px-8 text-center mb-8">
+ <span class="inline-block py-1 px-3 bg-primary text-white text-xs font-bold tracking-widest uppercase rounded-sm mb-4">Request A Quote</span>
+ <h2 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight mb-4">Get Your Free Quote Today!</h2>
+ <p class="text-secondary text-base sm:text-lg leading-relaxed" style="text-wrap:pretty;">Send us a quick photo and a few details and we&rsquo;ll send you a fixed-price quote within 24 hours.<br />No&nbsp;pressure. No&nbsp;hidden&nbsp;fees. Just&nbsp;your&nbsp;bathroom, renewed.</p>
  </div>
+ <div class="max-w-xl mx-auto px-6 sm:px-8">
+ <div class="bg-white rounded-2xl overflow-hidden shadow-2xl">
+ <div class="p-2 sm:p-4"><?php echo do_shortcode( '[timeless_quote_form]' ); ?></div>
  </div>
  </div>
 </section>
