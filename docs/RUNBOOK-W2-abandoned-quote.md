@@ -34,14 +34,34 @@ the origin.
 
 Left alone, the text arrives late or whenever the next uncached request happens to land.
 
-**Fix, in cPanel → Cron Jobs, every 10 minutes:**
+**Fix, in cPanel → Cron Jobs, every 10 minutes** (`*/10` `*` `*` `*` `*` — every one of the five
+time fields needs a value, cPanel rejects blanks):
 
 ```
-curl -s https://timelessresurfacing.com.au/wp-cron.php?doing_wp_cron > /dev/null
+curl -s "https://timelessresurfacing.com.au/wp-cron.php?doing_wp_cron=$(date +\%s)" > /dev/null 2>&1
 ```
 
-`wp-cron.php` returns 200, so this works today. A free UptimeRobot check every 5 minutes on the
-same URL does the same job if cPanel cron is awkward.
+⚠️ **The `=$(date +\%s)` is not optional.** Measured 2026-08-23: Cloudflare caches `wp-cron.php`
+itself — three consecutive requests to the bare URL returned `cf-cache-status: HIT`, `age: 121`.
+A cron hitting the bare URL fires every 10 minutes, gets an empty cached response, and **PHP never
+runs**. cPanel reports success the whole time. The unique timestamp makes every request a distinct
+URL, which returns `MISS` and reaches the origin — verified.
+
+The backslash in `+\%s` is required: in a crontab a bare `%` means "newline" and truncates the
+command. `2>&1` stops cPanel emailing you every 10 minutes.
+
+A free UptimeRobot check every 5 minutes does the same job if cPanel cron is awkward — but it must
+carry the same cache-busting query string.
+
+**Verify it is genuinely running** (added in theme v1.5.3):
+
+```
+curl -s "https://timelessresurfacing.com.au/wp-admin/admin-ajax.php?action=timeless_sweep_status&k=<TIMELESS_GHL_SECRET>"
+```
+
+Returns `last_run_utc`, `seconds_ago`, `scanned`, `sent`, `next_due_utc`. If `seconds_ago` keeps
+climbing past ~600, the cron is not reaching PHP. This exists so that "no text arrived" can be told
+apart from "GHL is misconfigured" — without it the two are indistinguishable from outside.
 
 ### 0b. `abandoned_confirmed` is not a valid option on the GHL dropdown
 

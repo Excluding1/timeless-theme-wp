@@ -112,9 +112,14 @@ Mac: `Cmd + Shift + R`, or open in Incognito.
 
 ### 7. Verify
 - View page source → search `main.js?ver=` → should be a timestamp, NOT `1.0.0` (filemtime cache-bust working)
-- View page source → search `main.min.css?ver=` → should also be a timestamp
+- View page source → search `main.min.css?ver=` → on LIVE this reads the **theme version** (e.g. `1.5.3`), not a timestamp. The theme enqueues it with `filemtime()`, but a plugin on the live host rewrites *stylesheet* versions to the theme version (JS keeps its timestamp). Verified 2026-08-23.
+  ⚠️ **Consequence: bump `Version:` in `style.css` on EVERY deploy that touches CSS.** Without a bump the CSS query string never changes and browsers keep the old stylesheet, even though the file on the server is new. To confirm the upload actually delivered assets, hash-compare instead of trusting the version string:
+  ```bash
+  curl -s "https://timelessresurfacing.com.au/wp-content/themes/<ACTIVE-FOLDER>/assets/main.min.css" | shasum
+  shasum assets/main.min.css
+  ```
 - Service page → Section 2B before/after slider has visible white circle handle + arrow SVG
-- wp-admin → Themes → Theme Details → version reads `1.5.0`
+- wp-admin → Themes → Theme Details → version reads the version you just shipped (currently `1.5.3`)
 
 ### Common deploy regressions to avoid (learned 2026-05-05)
 | Mistake | Symptom | Prevention |
