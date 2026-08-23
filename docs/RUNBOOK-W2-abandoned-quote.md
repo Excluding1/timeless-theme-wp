@@ -157,6 +157,21 @@ contact does **not** carry the completed/submitted tag. The form marks a draft f
 fire-and-forget request after submitting; if that request is blocked or lost, the draft still
 looks abandoned and someone who finished could get a text.
 
+⏳ **DEFERRED 2026-08-23 — still open.** Built and shipped without it, because the completed tag's
+exact name was not confirmed and guessing it in is worse than leaving it out.
+
+⚠️ **Do NOT use `form-partial-pending` for this.** That is the tag W2 applies one step earlier, so
+every contact reaching the condition already carries it. `Does not include form-partial-pending`
+is therefore always false, and ANDed with the `form_status` check it blocks **every** text —
+tried 2026-08-23 and caught before publishing. The tag needed here is the one **W1** applies on a
+completed submission.
+
+**To close this:** open W1, read the tag it applies on submit, then add to the `Abandoned` branch:
+> **Tags** — *Does not include* — &lt;that completed tag&gt;
+
+The GHL operator list has no "is equal to"; equality is **`Is`**. Available operators are Is,
+Is not, Contains, Does not contain, Is any of, Is none of, Is not empty, Is empty.
+
 ## Step 3 — delete the Wait
 
 Delete **"Wait 4 hours (abandoned cart timer)"** entirely.
