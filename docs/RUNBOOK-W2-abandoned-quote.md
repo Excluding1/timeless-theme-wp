@@ -38,14 +38,32 @@ Left alone, the text arrives late or whenever the next uncached request happens 
 time fields needs a value, cPanel rejects blanks):
 
 ```
-curl -s "https://timelessresurfacing.com.au/wp-cron.php?doing_wp_cron=$(date +\%s)" > /dev/null 2>&1
+curl -s "https://timelessresurfacing.com.au/wp-cron.php?doing_wp_cron&cb=$(date +\%s)" > /dev/null 2>&1
 ```
 
-⚠️ **The `=$(date +\%s)` is not optional.** Measured 2026-08-23: Cloudflare caches `wp-cron.php`
+⚠️ **The cache-buster must be a SEPARATE parameter (`cb`), never a value on `doing_wp_cron`.** Measured 2026-08-23: Cloudflare caches `wp-cron.php`
 itself — three consecutive requests to the bare URL returned `cf-cache-status: HIT`, `age: 121`.
 A cron hitting the bare URL fires every 10 minutes, gets an empty cached response, and **PHP never
 runs**. cPanel reports success the whole time. The unique timestamp makes every request a distinct
 URL, which returns `MISS` and reaches the origin — verified.
+
+**Why `cb` and not `doing_wp_cron=<timestamp>`** (corrected 2026-08-23 after shipping it wrong):
+`wp-cron.php` treats a NON-EMPTY `doing_wp_cron` as a lock key handed over by WordPress itself,
+and exits unless it matches the `doing_cron` transient:
+
+```php
+} else {
+    $doing_wp_cron = $_GET['doing_wp_cron'];   // our value
+}
+if ( $doing_cron_transient !== $doing_wp_cron ) {
+    return;                                    // an external value can never match
+}
+```
+(WordPress core, `wp-cron.php` lines 94-113.)
+
+So `?doing_wp_cron=1755914400` returns HTTP 200, misses Cloudflare, reaches PHP — **and runs
+nothing.** The parameter must stay present-but-empty so core takes the "called from external
+script" branch and grabs its own lock. Put the cache-buster in any other parameter name.
 
 The backslash in `+\%s` is required: in a crontab a bare `%` means "newline" and truncates the
 command. `2>&1` stops cPanel emailing you every 10 minutes.
