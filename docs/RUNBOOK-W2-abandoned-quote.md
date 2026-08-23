@@ -81,6 +81,15 @@ Returns `last_run_utc`, `seconds_ago`, `scanned`, `sent`, `next_due_utc`. If `se
 climbing past ~600, the cron is not reaching PHP. This exists so that "no text arrived" can be told
 apart from "GHL is misconfigured" — without it the two are indistinguishable from outside.
 
+⚠️ **The check perturbs the thing it measures.** `admin-ajax.php` is uncached, so reading the
+heartbeat is itself a PHP request, and WordPress spawns due cron events on any PHP request. Measured
+2026-08-23: a heartbeat read at 02:32:32 produced a sweep at 02:32:33. A run appearing *right after*
+your check therefore proves nothing about the cron — it may just be your own request.
+
+**To judge the cron honestly:** read the heartbeat once, note `next_due_utc`, then leave the site
+completely alone until a few minutes past that time and read again. If `last_run_utc` has not moved
+past `next_due_utc` without you having touched anything, the cron is not working.
+
 ### 0b. `abandoned_confirmed` is not a valid option on the GHL dropdown
 
 `form_status` is specced as a **Dropdown** with `partial`, `complete`, `waitlist`
