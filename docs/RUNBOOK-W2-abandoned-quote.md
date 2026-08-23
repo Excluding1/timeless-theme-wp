@@ -1,8 +1,8 @@
 # W2 — abandoned-quote SMS: the fix, step by step
 
 **For Allan, 2026-08-23.** Everything on the website side is live and verified. What is left is
-three edits inside GHL. Nothing here needs a theme deploy **except** the property-address line,
-which is called out where it matters.
+three edits inside GHL. Nothing here needs a theme deploy — the address line shipped in v1.5.3
+on 2026-08-23.
 
 ---
 
@@ -16,7 +16,7 @@ which is called out where it matters.
 | Idle clock | ✅ 90 minutes (30 to confirm + 60 grace), resets if they come back |
 | Sweep | ✅ runs every 10 minutes |
 | Webhook payload | ✅ carries `resume_link_sms`, `form_status`, `reach_by` |
-| `property_address` | ⏳ **needs the next theme deploy** |
+| `property_address` | ✅ live — verified on the live site 2026-08-23 (`'12 Smith St, Penrith NSW 2750'` stored and returned) |
 
 ---
 
@@ -191,14 +191,8 @@ step, which would have produced *"I can see the quote for didn't get finished of
 now fall back to **"your bathroom"**, so the sentence always reads. GHL merge fields cannot do a
 conditional, so this belongs server-side and does.
 
-**Until the next theme deploy**, `property_address` does not arrive at all and the merge field
-renders empty. Use this version in the meantime and add the address afterwards:
-
-```
-Hi {{contact.first_name}}, Allan here from Timeless Resurfacing. I can see your bathroom quote didn't get finished off, here's the link back to where you got up to: {{resume_link_sms}}
-
-Just after a couple of photos and a quick note on what needs doing, then I'll get your quote sorted as soon as possible.
-```
+**The theme deploy that carries `property_address` is done** (v1.5.3, 2026-08-23). Use the version
+above with the address in it — no interim wording needed.
 
 The old body goes entirely. *"Reply YES and I'll reopen it"* was the workaround from before
 resume links existed — asking someone to send a text before they get a link is friction we built
@@ -228,7 +222,7 @@ as they are. Save and publish.
 |---|---|
 | No text at all | Trigger filter typo, or the security gate rejected a wrong `secret_token` |
 | Text arrives but link is blank | `resume_link_sms` typed rather than picked from the field list |
-| Text arrives with a gap where the address should be | Expected until the theme deploy |
+| Text arrives with a gap where the address should be | `property_address` typed rather than picked from the field list |
 | Two texts | The If/Else condition is not saved, or sits after the SMS instead of before it |
 | Address says "your bathroom" for someone who entered one | Draft saved before this fix; only affects drafts created before the deploy |
 | Nothing at all, and you want to know why | Check `tr_draft_last_sweep` in wp_options. It now records `at`, `scanned` and `sent` on **every** run, so "cron never fired" and "cron ran, found nothing" look different |
