@@ -3653,6 +3653,34 @@ function timeless_handle_draft_done() {
 add_action( 'wp_ajax_timeless_draft_done', 'timeless_handle_draft_done' );
 add_action( 'wp_ajax_nopriv_timeless_draft_done', 'timeless_handle_draft_done' );
 
+/**
+ * Read-only sweep heartbeat, so "no text arrived" can actually be diagnosed.
+ *
+ * Cloudflare caches wp-cron.php (verified 2026-08-23: cf-cache-status HIT, age 121),
+ * so the likeliest failure is a cron that fires every 10 min and never reaches PHP.
+ * Without a heartbeat that is indistinguishable from a GHL misconfiguration.
+ * Secret-gated; returns counts and timestamps only, never customer data.
+ */
+function timeless_handle_sweep_status() {
+    $key = isset( $_GET['k'] ) ? (string) wp_unslash( $_GET['k'] ) : '';
+    if ( ! defined( 'TIMELESS_GHL_SECRET' ) || ! hash_equals( TIMELESS_GHL_SECRET, $key ) ) {
+        wp_send_json_error( array( 'message' => 'nope' ), 403 );
+    }
+    $hb   = get_option( 'tr_draft_last_sweep', array() );
+    $next = wp_next_scheduled( 'timeless_draft_sweep' );
+    $at   = isset( $hb['at'] ) ? (int) $hb['at'] : 0;
+    wp_send_json_success( array(
+        'last_run_utc' => $at ? gmdate( 'Y-m-d H:i:s', $at ) : 'never',
+        'seconds_ago'  => $at ? time() - $at : null,
+        'scanned'      => isset( $hb['scanned'] ) ? (int) $hb['scanned'] : null,
+        'sent'         => isset( $hb['sent'] ) ? (int) $hb['sent'] : null,
+        'next_due_utc' => $next ? gmdate( 'Y-m-d H:i:s', $next ) : 'NOT SCHEDULED',
+        'idle_minutes' => (int) ( TIMELESS_ABANDON_IDLE / 60 ),
+    ) );
+}
+add_action( 'wp_ajax_timeless_sweep_status', 'timeless_handle_sweep_status' );
+add_action( 'wp_ajax_nopriv_timeless_sweep_status', 'timeless_handle_sweep_status' );
+
 
 /**
  * What the abandoned-quote SMS calls the job.
