@@ -90,18 +90,18 @@ your check therefore proves nothing about the cron — it may just be your own r
 completely alone until a few minutes past that time and read again. If `last_run_utc` has not moved
 past `next_due_utc` without you having touched anything, the cron is not working.
 
-### 0b. `abandoned_confirmed` is not a valid option on the GHL dropdown
+### 0b. ~~`abandoned_confirmed` is not a valid option on the GHL dropdown~~ — NOT AN ISSUE
 
-`form_status` is specced as a **Dropdown** with `partial`, `complete`, `waitlist`
-(`ghl_setup_spec_v2_2026-05-05.md:196`). The sweep sends **`abandoned_confirmed`**, which is not
-one of them.
+**Checked in GHL 2026-08-23 and withdrawn.** The May spec
+(`ghl_setup_spec_v2_2026-05-05.md:196`) specced `form_status` as a **Dropdown** with `partial` /
+`complete` / `waitlist`, and this step said to add `abandoned_confirmed` as a fourth option.
 
-The trigger *filter* reads the raw webhook payload and will be fine. The risk is the
-**Create/Update Contact** step, if it maps `form_status` into that custom field — an unknown
-option can be rejected or silently dropped.
+The field was actually built as a **Single line** text field on the **Opportunity** object
+(key `opportunity.form_status`, folder "Quote & Job Data"). A text field accepts any string, so
+`abandoned_confirmed` needs no setup and nothing can silently reject it.
 
-**Fix:** Settings → Custom Fields → `form_status` → add **`abandoned_confirmed`** as a fourth
-option before touching the workflow.
+**Do nothing here.** Lesson: the spec described the intended build, not the build. Verify custom
+fields in the GHL UI before writing steps against them.
 
 ---
 
