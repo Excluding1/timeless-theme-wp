@@ -3743,27 +3743,22 @@ function timeless_sweep_abandoned_drafts() {
                 'lastName'     => $rec['surname'],
                 'email'        => $rec['email'],
                 'phone'        => $phone,
-                /* Duplicated at top level on purpose. GHL surfaces inbound-webhook fields
-                   under inboundWebhookRequest.body.* in some accounts and .customData.* in
-                   others, and a merge field that resolves to nothing sends a text with a gap
-                   where the link should be. Cheap insurance; pick whichever the picker offers. */
-                'resume_link_sms'  => $resume,
-                'property_address' => timeless_property_ref( $rec['addr'] ?? ( $rec['draft']['addr'] ?? '' ) ),
+                /* SENT ONCE, UNDER A NAME USED NOWHERE ELSE IN THE PAYLOAD.
+                   These were previously duplicated at top level AND inside customData, as
+                   insurance against GHL exposing inbound-webhook fields on different paths
+                   in different accounts. The insurance was the bug: the live SMS rendered
+                   "the quote for [object Object] ... here's the link: [object Object]"
+                   (Allan, 2026-08-24). A key GHL sees at two levels can resolve to the
+                   container rather than the value, and a container stringifies to
+                   [object Object]. A key that appears exactly once has nothing to collide
+                   with, whichever path the picker offers.
+                   The `sms_` prefix keeps them distinct from the form's own
+                   `property_address` field, which W1 already writes on real submissions. */
+                'sms_address'  => timeless_property_ref( $rec['addr'] ?? ( $rec['draft']['addr'] ?? '' ) ),
+                'sms_link'     => $resume,
                 'form_status'      => 'abandoned_confirmed',
                 'customData'   => array(
                     'form_status'     => 'abandoned_confirmed',
-                    /* The property address, which the draft has held all along and the payload
-                       never sent. It is the single most persuasive thing an abandoned-quote SMS
-                       can carry: a stranger's text with a link reads as a scam, and "your quote
-                       for 12 Smith St" is proof no scammer could fake. Surface Care lead with
-                       it (mystery shop, June 2026) and they are right to. Trimmed, because a
-                       full address eats SMS characters and the street line is enough. */
-                    /* Falls back through the nested draft for records saved before `addr`
-                       was promoted, so existing drafts are not stranded on the generic copy. */
-                    'property_address' => timeless_property_ref(
-                        $rec['addr'] ?? ( $rec['draft']['addr'] ?? '' )
-                    ),
-                    'resume_link_sms' => $resume,
                     'idle_minutes'    => (int) round( ( time() - (int) $rec['touched'] ) / 60 ),
                     // so W2 can branch: text if we have a mobile, otherwise email them
                     'reach_by'        => $has_phone ? 'sms' : 'email',
